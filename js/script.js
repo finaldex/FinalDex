@@ -456,7 +456,8 @@ function callPopUp(x, arr, type, style) {
             img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
             img.title = name;
             img.setAttribute("value",int);
-			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+			img.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+            img.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 
 			if(getIntID(int,"") == x) {
 				li.classList.add("select");
@@ -546,7 +547,8 @@ function callPopUp(x, arr, type, style) {
 						var img2 = document.createElement("img");
 						if(result[u][json[q]] != undefined) {
 							img2.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+result[u][json[q]]+".png";
-							img2.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+							img2.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+                            img2.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 						}
 						p.appendChild(img2);
 					}
@@ -570,7 +572,8 @@ function callPopUp(x, arr, type, style) {
 			if(type == "Held Item") {
 				li.setAttribute("name", json.length);
 			}
-			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+			img.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+            img.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 			if(getIntID(int,"") == x) {
 				img.classList.add("select");
 			}
@@ -584,7 +587,8 @@ function callPopUp(x, arr, type, style) {
 				var pimg = document.createElement("img");
 				if(result[u][json[q]] != undefined) {
 					pimg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(result[u][json[q]])+".png";
-                    pimg.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
+                    pimg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Misc/FinalDex/Error.png';this.setAttribute('srced','');}");
+                    pimg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 					pimg.title = result[u][json[q]];
 					if(json[q].includes("_")) {
 						span2.innerText = json[q].split("_")[0];
@@ -2412,7 +2416,8 @@ function storeInBox(data) {
     var shadow = document.createElement("span");
     var img = document.createElement("img");
     img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(i,"Box")+".png";
-    img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+    img.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+    img.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
     img.setAttribute("value",i);
     box.appendChild(li)
     li.appendChild(shadow)
