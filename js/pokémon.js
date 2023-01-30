@@ -174,7 +174,8 @@ var createPokémon = function() {
         teamImg.setAttribute("value","");
         teamImg.setAttribute("title","");
         teamImg.addEventListener("click", modalData);
-        teamImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+        teamImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+        teamImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 
         teamGrab.innerText = "⋮⋮⋮";
         teamStatsButton.innerText = "⟲";
@@ -238,7 +239,8 @@ var createPokémon = function() {
 
             var teamHeldItemImage = document.createElement("img");
             teamHeldItemImage.src = "";
-            teamHeldItemImage.setAttribute("onerror","this.src='./media/Images/Misc/FinalDex/Error.png'");
+            teamHeldItemImage.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Misc/FinalDex/Error.png';this.setAttribute('srced','');}");
+            teamHeldItemImage.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
             teamHeldItemImage.setAttribute("name","Item");
             teamHeldItemImage.setAttribute("title","");
             teamImgOuter.appendChild(teamHeldItemImage);
@@ -1314,7 +1316,8 @@ function createContain(condition) {
                     contentNationalID.classList.add("contain-nationalID");
                     contentNationalID.innerText = "#"+ID;
                     contentImg.classList.add("contain-img");
-                    contentImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+                    contentImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+                    contentImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
                     contentName.classList.add("contain-name");
                     if(formName != undefined) {
                         contentName.innerText = formName;
