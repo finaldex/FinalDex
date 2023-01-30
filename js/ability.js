@@ -203,7 +203,8 @@ var createAbility = function() {
 					abilityAside4SidebarLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
 					abilityAside4SidebarLiImg.setAttribute("title", name);
 					abilityAside4SidebarLiImg.setAttribute("value",int);
-					abilityAside4SidebarLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+					abilityAside4SidebarLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+					abilityAside4SidebarLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 					abilityAside4SidebarLi.appendChild(abilityAside4SidebarLiImgOuter);
 					abilityAside4SidebarLiImgOuter.appendChild(abilityAside4SidebarLiImg);
 					abilityAside4SidebarLiImg.addEventListener("click", modalData);
