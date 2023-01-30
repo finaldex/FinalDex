@@ -37,7 +37,8 @@ var createData = function(id, i) {
 			dataFormInput.value = u;
 			dataFormLabel.setAttribute("for","data-form-selector-"+u);
 			dataFormImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(u,"Box")+".png";
-			dataFormImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+			dataFormImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+			dataFormImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 			dataForm.appendChild(dataFormInput);
 			dataForm.appendChild(dataFormLabel);
 			dataFormLabel.appendChild(dataFormImg);
@@ -124,7 +125,8 @@ var createData = function(id, i) {
 	dataAside1.classList.add("data-aside1");
 	dataAside1DivPortrait.classList.add("data-portrait");
 	dataAside1DivPortraitContent.classList.add("data-portrait-content");
-	dataAside1Portrait.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+	dataAside1Portrait.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+	dataAside1Portrait.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 	dataAside1Portrait.setAttribute("id","data-portrait-img-"+id);
 	dataAside1StatsEVSelector.classList.add("data-baseev-selector");
 	dataAside1DivIdNameOuter.classList.add("data-idname-outer");
@@ -356,7 +358,8 @@ var createData = function(id, i) {
         dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
         dataPreviousNational.title = "#"+(parseInt(getIntID(d,"")) - 1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
         dataPreviousNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",(parseInt(getIntID(d,"")) - 1)),"Box")+".png";
-        dataPreviousNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+        dataPreviousNationalImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+		dataPreviousNationalImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
         
         dataPrevious.appendChild(dataPreviousNational);
         dataPreviousNational.appendChild(dataPreviousNationalImg);
@@ -374,7 +377,8 @@ var createData = function(id, i) {
         dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,""))+1)));
         dataNextNational.title = "#"+(parseInt(getIntID(d,""))+1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,""))+1))]["Pokémon"];
         dataNextNationalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",(parseInt(getIntID(d,""))+1)),"Box")+".png";
-        dataNextNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+        dataNextNationalImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+		dataNextNationalImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
         
         dataNext.appendChild(dataNextNational);
         dataNextNational.appendChild(dataNextNationalImg);
@@ -398,7 +402,8 @@ var createData = function(id, i) {
 	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
 	          dataPreviousRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",previousID)]["Pokémon"];
 	          dataPreviousRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",previousID),"Box")+".png";
-	          dataPreviousRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+	          dataPreviousRegionalImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+			  dataPreviousRegionalImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 	          
 	          dataPrevious.appendChild(dataPreviousRegional);
 	          dataPreviousRegional.appendChild(dataPreviousRegionalImg);
@@ -415,7 +420,8 @@ var createData = function(id, i) {
 	          dataNextRegional.setAttribute("value",getIntID("",nextID));
 	          dataNextRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",nextID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",nextID)]["Pokémon"];
 	          dataNextRegionalImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getIntID("",nextID),"Box")+".png";
-	          dataNextRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+	          dataNextRegionalImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+			  dataNextRegionalImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 	          
 	          dataNext.appendChild(dataNextRegional);
 	          dataNextRegional.appendChild(dataNextRegionalImg);
@@ -711,7 +717,8 @@ function loadData() {
                 evoImg.src = './media/Images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(int,"Box")+'.png'
                 evoImg.title = evoArr[q][u]["Pokémon"];
 
-                evoImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/III-V/0.png'");
+                evoImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+				evoImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
                 if (getPokémonID(evoArr[q][u]["Pokémon"]) == undefined) {
                     evoNationalID.innerText = "#"+getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"]))));
                 }
@@ -981,7 +988,7 @@ function loadData() {
                 
 
                         if(finaldataLocationPokémon[q]["Note"] != undefined) {
-                            pokPok.setAttribute("title",finaldataLocationPokémon[q]["Note"])
+                            pokEncounter.setAttribute("title",finaldataLocationPokémon[q]["Note"])
                         }
                         pokLi.appendChild(pokPok);
                         pokPok.appendChild(pokPokLvl);
@@ -1185,7 +1192,7 @@ function loadData() {
                                     pokPokImg.setAttribute("value",getPokémonInt(finaldataLocationPokémon[q]["Pokémon"]));
 
                                     if(finaldataLocationPokémon[q]["Note"] != undefined) {
-                                        pokPokImg.setAttribute("title",finaldataLocationPokémon[q]["Note"])
+                                        pokEncounter.setAttribute("title",finaldataLocationPokémon[q]["Note"])
                                     }
                                     pokLi.appendChild(pokPok);
                                     pokPok.appendChild(pokPokIsAlly);
