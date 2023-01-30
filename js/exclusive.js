@@ -80,7 +80,8 @@ var createExclusive = function() {
 					var ExclusiveImg = document.createElement("img");
 					ExclusiveImg.src = "./media/Images/Pokémon/Box/PNG/" + MEDIAPath_Pokémon_Box + "/" + getPokémonMediaPath(getPokémonInt(finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]),"Box") + ".png";
 					ExclusiveImg.setAttribute("title", finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]);
-					ExclusiveImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+					ExclusiveImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+					ExclusiveImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 					exclusiveAside3PokContent.appendChild(Exclusive);
 					Exclusive.appendChild(ExclusiveImg);
 				}
@@ -118,7 +119,8 @@ var createExclusive = function() {
 					var ExclusiveImg = document.createElement("img");
 					ExclusiveImg.src = "./media/Images/Item/Bag/" + MEDIAPath_ExclusiveItem[i] + "/" + finaldataExclusiveItem[q][JSONPath_ExclusiveItem[i]] + ".png";
 					ExclusiveImg.setAttribute("title", finaldataExclusiveItem[q][JSONPath_ExclusiveItem[i]]);
-					ExclusiveImg.setAttribute("onerror", "this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png'");
+					ExclusiveImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+					ExclusiveImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 					exclusiveAside3ItemContent.appendChild(Exclusive);
 					Exclusive.appendChild(ExclusiveImg);
 				}
