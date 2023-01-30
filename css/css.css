@@ -5,6 +5,8 @@ html {
 	scroll-behavior: smooth;
 }
 
+
+
 .filtered {
 	display:none !important;
 }
@@ -2913,7 +2915,6 @@ body {
 	background: var(--color14);
 	text-align: center;
 	font-size: 14px;
-	overflow:hidden;
 }
 
 #data-navigation {
@@ -9260,29 +9261,31 @@ img[function]:hover,
 
 .data-area-content li > span[name="Location"] h4 {
 	font-weight: normal;
-
-}
-.data-area-content li > span[name="Location"][title] h3 {
-	text-decoration:underline;
-	text-decoration-style: solid;
-}
-.data-area-content li > span[name="Location"][title]:hover h3 {
-	text-decoration-style: dashed;
+	text-decoration: none !important;
 }
 
-.data-area-content li > span[name="Rate"][title]  {
+
+.data-area-content li > span[title]  {
 	cursor:help;
 }
-
-
-
-.data-area-content li > span[name="Rate"][title] h4 {
+.data-area-content li > span[title] > * {
 	text-decoration:underline;
 	text-decoration-style: solid;
 }
-.data-area-content li > span[name="Rate"][title]:hover h4 {
+.data-area-content li > span[title]:hover > * {
 	text-decoration-style: dashed;
 }
+.data-area-content li > span[title] > * {
+	text-decoration:underline;
+	text-decoration-style: solid;
+}
+.data-area-content li > span[title]:hover > * {
+	text-decoration-style: dashed;
+}
+
+
+
+
 
 .data-area-content li > span[name="Rate"] h4 {
 	display: flex;
@@ -9654,4 +9657,21 @@ body[game="Ultra Moon"] .mapify-hover {
 }
 .move-sidebar-description-hmtm p:hover {
 	font-weight:bold;
+}
+
+
+[title] {
+	position: relative !important;
+	overflow:unset !important;
+}
+[title]:focus::after {
+	content: attr(title);
+	position:absolute;
+	top: 90%;
+	color: #000;
+	background: #fff;
+	border: 1px solid;
+	width:fit-content;
+	padding: 3px;
+	z-index: 100000;
 }
