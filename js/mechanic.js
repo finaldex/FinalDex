@@ -57,7 +57,8 @@ var createMechanic = function() {
 	mechanicAside4Icon.classList.add("mechanic-descriptionicon");
 	mechanicAside4IconImage.src = "";
 	mechanicAside4IconImage.setAttribute("id", "mechanic-descriptioniconimg");
-	mechanicAside4IconImage.setAttribute("onerror", "this.src='./media/Images/Misc/FinalDex/Catching.png'");
+	mechanicAside4IconImage.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Misc/FinalDex/Catching.png';this.setAttribute('srced','');}");
+	mechanicAside4IconImage.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
 	document.querySelector("#contain").appendChild(mechanicOuter);
 	mechanicOuter.appendChild(mechanicAside1);
 	mechanicAside1.appendChild(mechanicAside1OptionsTitleOuter);
