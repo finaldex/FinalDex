@@ -216,10 +216,8 @@ function requestLoad(i,url) {
 				finaldataGame.push(Metadata["Reference"][q]);
 			}
 
-			var urlgame = "file:///C:/Users/Avaris/Web/Github/FinalDex/Game.html"
-			var urlid = location.href.replaceAll("%20"," ")
-			var urlselect = urlid.replaceAll(urlgame+"#","");
-			GameID = getGameName("",urlselect);
+			var urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","");
+			GameID = getGameName("",urlid);
 			define();
 
 			for(var q = 0; q < Metadata["Type Chart_" + JSONPath_Typechart].length; q++) {
