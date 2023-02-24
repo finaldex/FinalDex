@@ -1,66 +1,59 @@
 var createItem = function() {
 	var itemOuter = document.createElement("div");
-	var itemAside1 = document.createElement("aside");
-	var itemAside1OptionsTitleOuter = document.createElement("div");
-	var itemAside1OptionsPocketOuter = document.createElement("div");
-	var itemAside1OptionsSearchOuter = document.createElement("div");
-	var itemAside1OptionsSearch = document.createElement("input");
-	var itemAside1OptionsSearchExit = document.createElement("span");
-	var itemAside1OptionsOuter = document.createElement("div");
-	var itemAside1Options = document.createElement("div");
-	var itemAside2 = document.createElement("aside");
-	var itemAside2Title = document.createElement("span");
-	var itemAside2TitleID = document.createElement("h4");
-	var itemAside2TitleName = document.createElement("h1");
-	var itemAside2Debut = document.createElement("span");
-	var itemAside2DebutText = document.createElement("h4");
-	var itemAside3 = document.createElement("aside");
-	var itemAside3Description = document.createElement("div");
-	var itemAside4 = document.createElement("aside");
-	itemOuter.setAttribute("id", "item-outer");
-	itemOuter.setAttribute("name", "Items");
-	itemAside1.setAttribute("id", "item-aside1");
-	itemAside1OptionsTitleOuter.setAttribute("id", "item-options-title");
-	itemAside1OptionsSearchOuter.setAttribute("id", "item-options-search");
-	itemAside1OptionsPocketOuter.setAttribute("id", "item-options-pocket");
-	itemAside1OptionsSearch.setAttribute("type", "text");
-	itemAside1OptionsSearch.setAttribute("id", "item-search");
-	itemAside1OptionsSearch.setAttribute("placeholder", "Search Items...");
-	itemAside1OptionsSearch.setAttribute("onfocus", "this.placeholder=''");
-	itemAside1OptionsSearch.setAttribute("onblur", "this.placeholder='Search Items...'");
-	itemAside1OptionsSearch.setAttribute("autocomplete", "off");
-	itemAside1OptionsSearchExit.setAttribute("id", "item-search-exit");
-	itemAside1OptionsOuter.setAttribute("id", "item-options-outer");
-	itemAside1Options.setAttribute("id", "item-options");
-	itemAside2.setAttribute("id", "item-aside2");
-	itemAside2Title.classList.add("item-title");
-	itemAside2TitleID.innerText = "#";
-	itemAside2TitleName.innerText = "Items";
-	itemAside2Debut.classList.add("item-debut");
-	itemAside3.setAttribute("id", "item-aside3");
-	itemAside3Description.classList.add("item-description");
-	itemAside4.setAttribute("id", "item-aside4");
+	var itemSectionList = document.createElement("section");
+	var itemSectionListOptionsTitleOuter = document.createElement("div");
+	var itemSectionListOptionsPocketOuter = document.createElement("div");
+	var itemSectionListOptionsSearchOuter = document.createElement("div");
+	var itemSectionListOptionsSearch = document.createElement("input");
+	var itemSectionListOptionsSearchExit = document.createElement("span");
+	var itemSectionListOptionsOuter = document.createElement("div");
+	var itemSectionListOptions = document.createElement("ol");
+	var itemSectionHeader = document.createElement("section");
+	var itemSectionHeaderTitle = document.createElement("span");
+	var itemSectionHeaderTitleID = document.createElement("h4");
+	var itemSectionHeaderTitleName = document.createElement("h3");
+	var itemSectionHeaderDebut = document.createElement("span");
+	var itemSectionHeaderDebutText = document.createElement("h5");
+	var itemSectionContent = document.createElement("section");
+	var itemSectionContentDescription = document.createElement("div");
+	var itemSectionSidebar = document.createElement("section");
+	itemOuter.setAttribute("id", "item");
+	itemOuter.setAttribute("value","items");
+	itemSectionListOptionsSearch.setAttribute("type", "text");
+	itemSectionListOptionsSearch.setAttribute("placeholder", "Search Items...");
+	itemSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
+	itemSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Items...'");
+	itemSectionListOptionsSearch.setAttribute("autocomplete", "off");
+	itemSectionListOptionsSearchExit.setAttribute("name","exit");
+	itemSectionHeaderTitleID.innerText = "#";
+	itemSectionHeaderTitleName.innerText = "Items";
 	document.querySelector("#contain").appendChild(itemOuter);
-	itemOuter.appendChild(itemAside1);
-	itemAside1.appendChild(itemAside1OptionsTitleOuter);
-	itemAside1OptionsTitleOuter.appendChild(itemAside1OptionsSearchOuter);
-	itemAside1OptionsSearchOuter.appendChild(itemAside1OptionsSearchExit);
-	itemAside1OptionsSearchOuter.appendChild(itemAside1OptionsSearch);
-	itemAside1OptionsTitleOuter.appendChild(itemAside1OptionsPocketOuter);
-	itemAside1.appendChild(itemAside1OptionsOuter);
-	itemAside1OptionsOuter.appendChild(itemAside1Options);
-	itemOuter.appendChild(itemAside2);
-	itemAside2.appendChild(itemAside2Title);
-	itemAside2Title.appendChild(itemAside2TitleID);
-	itemAside2Title.appendChild(itemAside2TitleName);
-	itemAside2.appendChild(itemAside2Debut);
-	itemAside2Debut.appendChild(itemAside2DebutText);
-	itemOuter.appendChild(itemAside3);
-	itemAside3.appendChild(itemAside3Description);
-	itemOuter.appendChild(itemAside4);
+	itemOuter.appendChild(itemSectionList);
+	itemSectionList.appendChild(itemSectionListOptionsTitleOuter);
+	itemSectionListOptionsTitleOuter.appendChild(itemSectionListOptionsSearchOuter);
+	itemSectionListOptionsSearchOuter.appendChild(itemSectionListOptionsSearchExit);
+	itemSectionListOptionsSearchOuter.appendChild(itemSectionListOptionsSearch);
+	itemSectionListOptionsTitleOuter.appendChild(itemSectionListOptionsPocketOuter);
+	itemSectionList.appendChild(itemSectionListOptionsOuter);
+	itemSectionListOptionsOuter.appendChild(itemSectionListOptions);
+	itemOuter.appendChild(itemSectionHeader);
+	itemSectionHeader.appendChild(itemSectionHeaderTitle);
+	itemSectionHeaderTitle.appendChild(itemSectionHeaderTitleID);
+	itemSectionHeaderTitle.appendChild(itemSectionHeaderTitleName);
+	itemSectionHeader.appendChild(itemSectionHeaderDebut);
+	itemSectionHeaderDebut.appendChild(itemSectionHeaderDebutText);
+	itemOuter.appendChild(itemSectionContent);
+	itemSectionContent.appendChild(itemSectionContentDescription);
+	itemOuter.appendChild(itemSectionSidebar);
+	itemSectionContentDescription.setAttribute("name","description")
 
-	itemAside1OptionsSearch.addEventListener("keyup", function() {search("Item");});
-	itemAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Item");});
+	itemSectionList.setAttribute("name","list");
+	itemSectionHeader.setAttribute("name","header");
+	itemSectionContent.setAttribute("name","content");
+	itemSectionSidebar.setAttribute("name","sidebar");
+
+	itemSectionListOptionsSearch.addEventListener("keyup", function() {search("Item");});
+	itemSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Item");});
 
 	var pockets = [];
 	for (var q = 0; q < finaldataItems.length; q++) {
@@ -73,122 +66,144 @@ var createItem = function() {
 	pockets = [...new Set(pockets)];
 	
 	for (var q = 0; q < pockets.length; q++) {
-		var itemAside1OptionsPocketInput = document.createElement("input");
-		var itemAside1OptionsPocketLabel = document.createElement("label");
-		var itemAside1OptionsPocketLabelImage = document.createElement("img");
-		var itemAside1OptionsPocketLabelText = document.createElement("p");
-		itemAside1OptionsPocketInput.setAttribute("type","checkbox");
-		itemAside1OptionsPocketInput.setAttribute("name","item-options-pocket");
-		itemAside1OptionsPocketInput.setAttribute("id","item-options-pocket-"+q);
-		itemAside1OptionsPocketInput.setAttribute("alt",pockets[q].toLowerCase());
-		itemAside1OptionsPocketInput.value = pockets[q];
-		itemAside1OptionsPocketLabel.setAttribute("for","item-options-pocket-"+q);
-		itemAside1OptionsPocketLabelImage.src = "./media/Images/Item/Pocket/Icon/"+MEDIAPath_Item_Pocket+"/"+pockets[q]+".png";
-		itemAside1OptionsPocketLabelImage.title = pockets[q]+" Pocket";
-		itemAside1OptionsPocketLabelImage.setAttribute("onerror",'this.style.display = "none";this.nextElementSibling.style.display = "unset";')
-		itemAside1OptionsPocketLabelText.innerText = pockets[q];
-		itemAside1OptionsPocketOuter.appendChild(itemAside1OptionsPocketInput)
-		itemAside1OptionsPocketOuter.appendChild(itemAside1OptionsPocketLabel)
-		itemAside1OptionsPocketLabel.appendChild(itemAside1OptionsPocketLabelImage)
-		itemAside1OptionsPocketLabel.appendChild(itemAside1OptionsPocketLabelText)
-		itemAside1OptionsPocketInput.addEventListener("change",itemPockets);
-		//itemAside1OptionsPocketInput.addEventListener("click", function() {preventCheckboxZero(itemAside1OptionsPocketOuter);});
-		itemAside1OptionsPocketInput.click();
+		var itemSectionListOptionsPocketInput = document.createElement("input");
+		var itemSectionListOptionsPocketLabel = document.createElement("label");
+		var itemSectionListOptionsPocketLabelImage = document.createElement("img");
+		var itemSectionListOptionsPocketLabelText = document.createElement("p");
+		itemSectionListOptionsPocketInput.setAttribute("type","checkbox");
+		itemSectionListOptionsPocketInput.setAttribute("name","item-options-pocket");
+		itemSectionListOptionsPocketInput.setAttribute("id","item-options-pocket-"+q);
+		itemSectionListOptionsPocketInput.setAttribute("alt",pockets[q].toLowerCase());
+		itemSectionListOptionsPocketInput.value = pockets[q];
+		itemSectionListOptionsPocketLabel.setAttribute("for","item-options-pocket-"+q);
+		itemSectionListOptionsPocketLabelImage.src = "./media/Images/Item/Pocket/Icon/"+MEDIAPath_Item_Pocket+"/"+pockets[q]+".png";
+		itemSectionListOptionsPocketLabelImage.title = pockets[q]+" Pocket";
+		itemSectionListOptionsPocketLabelImage.setAttribute("onerror",'this.style.display = "none";this.nextElementSibling.style.display = "unset";')
+		itemSectionListOptionsPocketLabelText.innerText = pockets[q];
+		itemSectionListOptionsPocketOuter.appendChild(itemSectionListOptionsPocketInput)
+		itemSectionListOptionsPocketOuter.appendChild(itemSectionListOptionsPocketLabel)
+		itemSectionListOptionsPocketLabel.appendChild(itemSectionListOptionsPocketLabelImage)
+		itemSectionListOptionsPocketLabel.appendChild(itemSectionListOptionsPocketLabelText)
+		itemSectionListOptionsPocketInput.addEventListener("change",itemPockets);
+		//itemSectionListOptionsPocketInput.addEventListener("click", function() {preventCheckboxZero(itemSectionListOptionsPocketOuter);});
+		itemSectionListOptionsPocketInput.click();
 	}
 
-    var itemAside2Game = document.createElement("span");
-    var itemAside2GameImage = document.createElement("img");
-    itemAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
-    itemAside2GameImage.setAttribute("onerror","this.display='none'");
-    itemAside2.appendChild(itemAside2Game);
-    itemAside2Game.appendChild(itemAside2GameImage);
+    var itemSectionHeaderGame = document.createElement("span");
+    var itemSectionHeaderGameImage = document.createElement("img");
+    itemSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    itemSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
+    itemSectionHeader.appendChild(itemSectionHeaderGame);
+    itemSectionHeaderGame.appendChild(itemSectionHeaderGameImage);
 
-	var itemAside4Sidebar = document.createElement("div");
-	var itemAside4SidebarTitle = document.createElement("div");
-	var itemAside4SidebarTitleText = document.createElement("h2");
+	var itemSectionSidebarSidebar = document.createElement("div");
+	var itemSectionSidebarSidebarMapOuter = document.createElement("div");
+	var itemSectionSidebarSidebarMapInner = document.createElement("div");
+	var itemSectionSidebarSidebarMapImage = document.createElement("img");
+	var itemSectionSidebarSidebarMap = document.createElement("map");
+	var itemSectionSidebarSidebarMapFullscreen = document.createElement("figure");
+	var itemSectionSidebarSidebarMapFullscreenText = document.createElement("h5");
 
-	var itemAside4SidebarUl = document.createElement("ul");
-	var itemAside4SidebarPrice = document.createElement("div");
+	var itemSectionSidebarSidebarMapZoomIn = document.createElement("figure");
+	var itemSectionSidebarSidebarMapZoomInText = document.createElement("h3");
 
-	itemAside4Sidebar.classList.add("item-sidebar");
-	itemAside4SidebarTitle.classList.add("item-sidebar-title");
-	itemAside4SidebarTitleText.innerText = "Acquisition";
-	itemAside4SidebarPrice.classList.add("item-sidebar-price");
-	itemAside4.appendChild(itemAside4Sidebar);
-	itemAside4Sidebar.appendChild(itemAside4SidebarTitle);
-	itemAside4SidebarTitle.appendChild(itemAside4SidebarTitleText);
-	itemAside4Sidebar.appendChild(itemAside4SidebarUl);
-	itemAside4Sidebar.appendChild(itemAside4SidebarPrice);
+	var itemSectionSidebarSidebarMapZoomOut = document.createElement("figure");
+	var itemSectionSidebarSidebarMapZoomOutText = document.createElement("h3");
+
+	var itemSectionSidebarSidebarUl = document.createElement("ul");
+
+	itemSectionSidebarSidebarMapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png"
+
+	itemSectionSidebarSidebarMapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
+	itemSectionSidebarSidebarMapImage.setAttribute("usemap","#"+MEDIAPath_Map+"-item");
+
+	itemSectionSidebarSidebarMapZoomIn.setAttribute("name","zoom");
+	itemSectionSidebarSidebarMapZoomOut.setAttribute("name","reset");
+	itemSectionSidebarSidebarMapFullscreen.setAttribute("name","fullscreen");
+	itemSectionSidebarSidebarMapZoomIn.setAttribute("type","scale");
+	itemSectionSidebarSidebarMapZoomOut.setAttribute("type","scale");
+	itemSectionSidebarSidebarMapZoomOutText.innerText = "-";
+	itemSectionSidebarSidebarMapZoomInText.innerText = "+";
+	itemSectionSidebarSidebarMapFullscreenText.innerText = "⛶";
+
+	itemSectionSidebarSidebarMap.setAttribute("name",MEDIAPath_Map+"-item");
+	itemSectionSidebarSidebarMap.setAttribute("id",MEDIAPath_Map+"-item");
+
+	itemSectionSidebar.appendChild(itemSectionSidebarSidebar);
+	itemSectionSidebarSidebar.appendChild(itemSectionSidebarSidebarMapOuter);
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapInner);
+	itemSectionSidebarSidebarMapInner.appendChild(itemSectionSidebarSidebarMapImage);
+	itemSectionSidebarSidebarMapInner.appendChild(itemSectionSidebarSidebarMap);
+	itemSectionSidebarSidebar.appendChild(itemSectionSidebarSidebarUl);
+
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapZoomOut)
+	itemSectionSidebarSidebarMapZoomOut.appendChild(itemSectionSidebarSidebarMapZoomOutText)
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapZoomIn)
+	itemSectionSidebarSidebarMapZoomIn.appendChild(itemSectionSidebarSidebarMapZoomInText)
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapFullscreen)
+	itemSectionSidebarSidebarMapFullscreen.appendChild(itemSectionSidebarSidebarMapFullscreenText)
+
+	itemSectionSidebarSidebarMapInner.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([itemSectionSidebarSidebarMapImage],0)}});
+
+	itemSectionSidebarSidebarMapFullscreen.addEventListener("click", function(){fullscreenIMG([itemSectionSidebarSidebarMapImage],0)})
+
+	itemSectionSidebarSidebarMapInner.addEventListener("click", function() {zoom(itemSectionSidebarSidebarMapInner,"pause",undefined)});
+	itemSectionSidebarSidebarMapZoomIn.addEventListener("click",function() {zoom(itemSectionSidebarSidebarMapInner,"in",false)});
+	itemSectionSidebarSidebarMapZoomOut.addEventListener("click",function() {zoom(itemSectionSidebarSidebarMapInner,"out",true)});
+	itemSectionSidebarSidebarMapInner.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){zoom(itemSectionSidebarSidebarMapInner,"in",false)}else if(!delta.includes("-")){zoom(itemSectionSidebarSidebarMapInner,"out",true)}});
+	itemSectionSidebarSidebarMapInner.addEventListener("mouseleave", function() {zoom(itemSectionSidebarSidebarMapInner,"out",undefined)});
+	itemSectionSidebarSidebarMapInner.addEventListener("mouseenter", function() {zoom(itemSectionSidebarSidebarMapInner,"in",undefined)});
+	itemSectionSidebarSidebarMapInner.addEventListener("mousemove", function() {zoom(itemSectionSidebarSidebarMapInner,"pan",undefined)});
 
 
 
-	var itemAside4SidebarValue = document.createElement("span");
-	var itemAside4SidebarValueTitle = document.createElement("h4");
-	var itemAside4SidebarValueTextOuter = document.createElement("span");
-	var itemAside4SidebarValueText = document.createElement("p");
-	var itemAside4SidebarValueCurrencyImg = document.createElement("img");
-	itemAside4SidebarValueTitle.innerText = "Value";
-	itemAside4SidebarValue.setAttribute("name","Value");
-	itemAside4SidebarPrice.appendChild(itemAside4SidebarValue);
-	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTitle);
-	itemAside4SidebarValue.appendChild(itemAside4SidebarValueTextOuter);
-	itemAside4SidebarValueTextOuter.appendChild(itemAside4SidebarValueCurrencyImg);
-	itemAside4SidebarValueTextOuter.appendChild(itemAside4SidebarValueText);
-
-
-	var firstiteration = true;
 	for(var q = 0; q < finaldataItems.length; q++) {
 		if (finaldataItems[q]["Name_"+JSONPath_Items] != undefined && finaldataItems[q]["Pocket_"+JSONPath_Items] != "Unknown") {
-			var itemAside1OptionsInput = document.createElement("input");
-			var itemAside1OptionsLabel = document.createElement("label");
-			var itemAside1OptionsLabelText = document.createElement("p");
-			itemAside1OptionsInput.setAttribute("type", "radio");
-			itemAside1OptionsInput.setAttribute("name", "item-options");
-			itemAside1OptionsInput.setAttribute("id", "item-options-" + q);
-			itemAside1OptionsInput.setAttribute("autocomplete", "off");
-			itemAside1OptionsInput.value = q;
-			itemAside1OptionsLabel.setAttribute("for", "item-options-" + q);
-			itemAside1OptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
+			var itemSectionListOptionsInput = document.createElement("input");
+			var itemSectionListOptionsLabel = document.createElement("label");
+			var itemSectionListOptionsLabelText = document.createElement("p");
+			itemSectionListOptionsInput.setAttribute("type", "radio");
+			itemSectionListOptionsInput.setAttribute("name", "item-options");
+			itemSectionListOptionsInput.setAttribute("id", "item-options-" + q);
+			itemSectionListOptionsInput.setAttribute("autocomplete", "off");
+			itemSectionListOptionsInput.value = q;
+			itemSectionListOptionsLabel.setAttribute("for", "item-options-" + q);
+			itemSectionListOptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
 			if (finaldataItems[q]["Pocket_"+JSONPath_Items] != undefined) {
-				itemAside1OptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket_"+JSONPath_Items].toLowerCase());
+				itemSectionListOptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket_"+JSONPath_Items].toLowerCase());
 			}
-			itemAside1OptionsLabel.setAttribute("name", "medium");
+			itemSectionListOptionsLabel.setAttribute("type","medium");
 			if (finaldataItems[q]["Icon_"+JSONPath_Items] != undefined) {
-				var itemAside1OptionsLabelImageOuter = document.createElement("span");
-				var itemAside1OptionsLabelImage = document.createElement("img");
-				itemAside1OptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon_"+JSONPath_Items]+".png";
-				itemAside1OptionsLabelImage.setAttribute("onerror","this.style.display='none';");
-				itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelImageOuter);
-				itemAside1OptionsLabelImageOuter.appendChild(itemAside1OptionsLabelImage);
+				var itemSectionListOptionsLabelImageOuter = document.createElement("span");
+				var itemSectionListOptionsLabelImage = document.createElement("img");
+				itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon_"+JSONPath_Items]+".png";
+				itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
+				itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
+				itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
 			}
 			if (getMachineMove(finaldataItems[q]["Name_"+JSONPath_Items]) != undefined) {
-				itemAside1OptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items]+" ("+getMachineMove(finaldataItems[q]["Name_"+JSONPath_Items])+")";
+				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items]+" ("+getMachineMove(finaldataItems[q]["Name_"+JSONPath_Items])+")";
 			}
 			else {
-				itemAside1OptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
+				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
 			}
-			itemAside1Options.appendChild(itemAside1OptionsInput);
-			itemAside1Options.appendChild(itemAside1OptionsLabel);
+			itemSectionListOptions.appendChild(itemSectionListOptionsInput);
+			itemSectionListOptions.appendChild(itemSectionListOptionsLabel);
 
-			itemAside1OptionsLabel.appendChild(itemAside1OptionsLabelText);
-			itemAside1OptionsInput.addEventListener("click", itemOptionsSelector);
+			itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelText);
+			itemSectionListOptionsInput.addEventListener("click", itemOptionsSelector);
 
-			itemAside1OptionsLabel.setAttribute("tabindex",q+10);
-			itemAside1OptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;itemOptionsSelector(event.target.previousElementSibling.value);}}});
+			itemSectionListOptionsLabel.setAttribute("tabindex",q+10);
+			itemSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;itemOptionsSelector(event.target.previousElementSibling.value);}}});
 
-
-			if (firstiteration == true) {
-				itemAside1OptionsInput.click();
-			}
-			firstiteration = false;
 		}
 
 	}
 
 
-	itemAside1OptionsSearch.title = searchOptionsTitle(itemAside1Options);
+	itemSectionListOptionsSearch.title = searchOptionsTitle(itemSectionListOptions);
 
-	var searchLis = document.querySelectorAll("#item-options > label");
+	var searchLis = document.querySelectorAll("#contain > div#item > section[name='list'] ol > label");
     searchItemAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
         for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -211,20 +226,21 @@ var createItem = function() {
 		}
 		var item = finaldataItems[i]["Name_"+JSONPath_Items];
 
-		itemAside2TitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
-		itemAside2TitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
+		itemSectionHeaderTitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
+		itemSectionHeaderTitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
 
-		var destexts = itemAside3Description.querySelectorAll(":scope > p");
+
+		var destexts = itemSectionContentDescription.querySelectorAll(":scope > p");
 		for(var q = 0; q < destexts.length; q++) {
 			destexts[q].remove();
 		}
 
 		if (getMachineMove(item) != undefined) {
-			var itemAside3DescriptionText = document.createElement("p");
-			itemAside3DescriptionText.innerHTML = item+" contains the move <span name='Move'>"+getMachineMove(item)+"</span>.";
-			itemAside3Description.appendChild(itemAside3DescriptionText);
-			itemAside3DescriptionText.querySelector(":scope span").addEventListener("click",dataRedirect);
-			itemAside3DescriptionText.querySelector(":scope span").setAttribute("function","dataRedirect");
+			var itemSectionContentDescriptionText = document.createElement("p");
+			itemSectionContentDescriptionText.innerHTML = item+" contains the move <b type='invert' name='move'>"+getMachineMove(item)+"</b>.";
+			itemSectionContentDescription.appendChild(itemSectionContentDescriptionText);
+			itemSectionContentDescriptionText.querySelector(":scope b").addEventListener("click",dataRedirect);
+			itemSectionContentDescriptionText.querySelector(":scope b").setAttribute("function","dataRedirect");
 		}
 		else {
 			for(var q = 0; q < finaldataItemsDescription.length; q++) {
@@ -235,11 +251,11 @@ var createItem = function() {
 							check = finaldataItemsDescription[q]["Index"] == finaldataItems[i]["Index_"+JSONPath_Items];
 						}
 						if (check) {
-							var itemAside3DescriptionText = document.createElement("p");
-							itemAside3DescriptionText.innerText = finaldataItemsDescription[q]["Description"];
-							itemAside3Description.appendChild(itemAside3DescriptionText);
+							var itemSectionContentDescriptionText = document.createElement("p");
+							itemSectionContentDescriptionText.innerText = finaldataItemsDescription[q]["Description"];
+							itemSectionContentDescription.appendChild(itemSectionContentDescriptionText);
 							if(finaldataItemsDescription[q]["Version"] != undefined) {
-								itemAside3DescriptionText.title = finaldataItemsDescription[q]["Version"];
+								itemSectionContentDescriptionText.title = finaldataItemsDescription[q]["Version"];
 							}
 						}
 					}
@@ -247,7 +263,7 @@ var createItem = function() {
 			}
 		}
 
-		var lis = itemAside4SidebarUl.querySelectorAll(":scope li");
+		var lis = itemSectionSidebarSidebarUl.querySelectorAll(":scope li");
 		
 		for(var q = 0; q < lis.length; q++) {
 			lis[q].remove();
@@ -259,44 +275,51 @@ var createItem = function() {
 			for(var u = 0; u < JSONPath_HeldItemPercentage.length; u++) {
 				if(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem] == item) {
 
-					var itemAside4SidebarLi = document.createElement("li");
-					itemAside4SidebarLi.setAttribute("name","Held");
-					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
+					var itemSectionSidebarSidebarLi = document.createElement("li");
+					itemSectionSidebarSidebarLi.setAttribute("name","held");
+					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 
-					var itemAside4SidebarPokémon = document.createElement("span");
-					itemAside4SidebarPokémon.setAttribute("name","Pokémon");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarPokémon);
-
-				
-					var itemAside4SidebarPokémonImg = document.createElement("img");
-					itemAside4SidebarPokémonImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(q,"Box")+".png";
-					itemAside4SidebarPokémonImg.title = getPokémonName(q);
-					itemAside4SidebarPokémonImg.setAttribute("value",q);
-					itemAside4SidebarPokémon.appendChild(itemAside4SidebarPokémonImg);
-					itemAside4SidebarPokémonImg.addEventListener("click",modalData)
-
-
-
-					var itemAside4SidebarDescription = document.createElement("span");
-					itemAside4SidebarDescription.setAttribute("name","Description");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
-
-			
-					var itemAside4SidebarDescriptionText = document.createElement("p");
-					itemAside4SidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+".";
-					itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
-					itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
+					var itemSectionSidebarSidebarPokémon = document.createElement("span");
+					itemSectionSidebarSidebarPokémon.setAttribute("name","pokémon");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarPokémon);
 					
 
-					var itemAside4SidebarItem = document.createElement("span");
-					itemAside4SidebarItem.setAttribute("name","Item");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+				
+					var itemSectionSidebarSidebarPokémonImg = document.createElement("img");
+					itemSectionSidebarSidebarPokémonImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(q,"Box")+".png";
+					itemSectionSidebarSidebarPokémonImg.title = getPokémonName(q);
+					itemSectionSidebarSidebarPokémon.appendChild(itemSectionSidebarSidebarPokémonImg);
 
-					var itemAside4SidebarItemImg = document.createElement("img");
-					itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
-					itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none";')
-					itemAside4SidebarItemImg.title = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
-					itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+					var itemSectionSidebarSidebarPokémonText = document.createElement("small");
+					itemSectionSidebarSidebarPokémonText.innerText = getPokémonName(q);
+					itemSectionSidebarSidebarPokémon.appendChild(itemSectionSidebarSidebarPokémonText);
+
+					itemSectionSidebarSidebarPokémon.setAttribute("value",q);
+					itemSectionSidebarSidebarPokémon.setAttribute("function","modalData");
+					itemSectionSidebarSidebarPokémon.addEventListener("click",modalData);
+
+
+
+					var itemSectionSidebarSidebarDescription = document.createElement("span");
+					itemSectionSidebarSidebarDescription.setAttribute("name","description");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
+
+			
+					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+					itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+".";
+					itemSectionSidebarSidebarDescriptionText.setAttribute("title","Location Description");
+					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
+					
+
+					var itemSectionSidebarSidebarItem = document.createElement("span");
+					itemSectionSidebarSidebarItem.setAttribute("name","item");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
+
+					var itemSectionSidebarSidebarItemImg = document.createElement("img");
+					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
+					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none";')
+					itemSectionSidebarSidebarItemImg.title = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
+					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 		
 				}
 			}
@@ -310,9 +333,9 @@ var createItem = function() {
 		for(var q = 0; q < finaldataLocationItems.length; q++) {
 			if (getApplicable(finaldataLocationItems[q]["Game"])) {
 				if(finaldataLocationItems[q]["Item"] == item) {
-					var itemAside4SidebarLi = document.createElement("li");
-					itemAside4SidebarLi.setAttribute("name","Location")
-					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
+					var itemSectionSidebarSidebarLi = document.createElement("li");
+					itemSectionSidebarSidebarLi.setAttribute("name","location")
+					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 
 					var quantity = finaldataLocationItems[q]["Quantity"];
 
@@ -323,46 +346,48 @@ var createItem = function() {
 						quantity = 10;
 					}
 
-					var itemAside4SidebarLocation = document.createElement("span");
-					var itemAside4SidebarLocationText = document.createElement("h3");
-					itemAside4SidebarLocation.setAttribute("name","Location");
-					itemAside4SidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
-					itemAside4SidebarLocationText.setAttribute("name","Map")
-					itemAside4SidebarLocationText.setAttribute("title","Location");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarLocation);
-					itemAside4SidebarLocation.appendChild(itemAside4SidebarLocationText);
+					var itemSectionSidebarSidebarLocation = document.createElement("span");
+					var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
+					var itemSectionSidebarSidebarLocationText = document.createElement("h5");
+					itemSectionSidebarSidebarLocation.setAttribute("name","location");
+					itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
+					itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
+					itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
+					itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarLocationTrigger);
+					itemSectionSidebarSidebarLocationTrigger.appendChild(itemSectionSidebarSidebarLocationText);
 
-					itemAside4SidebarLocationText.addEventListener("click",dataRedirect)
-					itemAside4SidebarLocationText.setAttribute("function","dataRedirect");
+					itemSectionSidebarSidebarLocationTrigger.addEventListener("click",dataRedirect)
+					itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
 
 
 					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
-						var itemAside4SidebarAreaText = document.createElement("h5");
-						itemAside4SidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
-						itemAside4SidebarLocation.appendChild(itemAside4SidebarAreaText);
+						var itemSectionSidebarSidebarAreaText = document.createElement("small");
+						itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
+						itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
 					}
 
 
 
 					if (finaldataLocationItems[q]["Description"] != undefined) {
-						var itemAside4SidebarDescription = document.createElement("span");
-						itemAside4SidebarDescription.setAttribute("name","Description");
-						itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
-						var itemAside4SidebarDescriptionText = document.createElement("p");
-						itemAside4SidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
-						itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
-						itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
+						var itemSectionSidebarSidebarDescription = document.createElement("span");
+						itemSectionSidebarSidebarDescription.setAttribute("name","description");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
+						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+						itemSectionSidebarSidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
+						itemSectionSidebarSidebarDescriptionText.setAttribute("title","Location Description");
+						itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 					}
 
-					var itemAside4SidebarRequirementOuter = document.createElement("span");
-					itemAside4SidebarRequirementOuter.setAttribute("name","Requirement");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarRequirementOuter);
+					var itemSectionSidebarSidebarRequirementOuter = document.createElement("span");
+					itemSectionSidebarSidebarRequirementOuter.setAttribute("name","requirement");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarRequirementOuter);
 
 					if (finaldataLocationItems[q]["Field"] != undefined) {
 	
-						var itemAside4SidebarRequirementTitle = document.createElement("h5");
-						itemAside4SidebarRequirementTitle.innerText = "Requires:";
-						itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarRequirementTitle);
+						var itemSectionSidebarSidebarRequirementTitle = document.createElement("small");
+						itemSectionSidebarSidebarRequirementTitle.innerText = "Requires:";
+						itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarRequirementTitle);
 
 
 						if (finaldataLocationItems[q]["Field"].includes("/")) {
@@ -378,27 +403,27 @@ var createItem = function() {
 									itm = finaldataLocationItems[q]["Field"].split("/")[y];
 								}
 
-								var itemAside4SidebarField = document.createElement("span");
-								var itemAside4SidebarFieldText = document.createElement("p");
-								itemAside4SidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split("/")[y];
-								itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarField);
+								var itemSectionSidebarSidebarField = document.createElement("span");
+								var itemSectionSidebarSidebarFieldText = document.createElement("p");
+								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split("/")[y];
+								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
-									var itemAside4SidebarFieldImage = document.createElement("img");
-									itemAside4SidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-									itemAside4SidebarFieldImage.title = finaldataLocationItems[q]["Field"].split("/")[y];
-									itemAside4SidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
-									itemAside4SidebarField.appendChild(itemAside4SidebarFieldImage);
+									var itemSectionSidebarSidebarFieldImage = document.createElement("img");
+									itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split("/")[y];
+									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
 	
-									itemAside4SidebarField.setAttribute("name","Item");
-									itemAside4SidebarField.setAttribute("value",itm);
-									itemAside4SidebarField.addEventListener("click",dataRedirect);
-									itemAside4SidebarField.setAttribute("function","dataRedirect");
+									itemSectionSidebarSidebarField.setAttribute("name","item");
+									itemSectionSidebarSidebarField.setAttribute("value",itm);
+									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 								}
-								itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
+								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
 								if (y != finaldataLocationItems[q]["Field"].split("/").length - 1) {
-									var itemAside4SidebarFieldSpace = document.createElement("p");
-									itemAside4SidebarFieldSpace.innerText = " or ";
-									itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarFieldSpace)
+									var itemSectionSidebarSidebarFieldSpace = document.createElement("p");
+									itemSectionSidebarSidebarFieldSpace.innerText = " or ";
+									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarFieldSpace)
 								}
 							}
 						}
@@ -415,23 +440,23 @@ var createItem = function() {
 									itm = finaldataLocationItems[q]["Field"].split(",")[y];
 								}
 
-								var itemAside4SidebarField = document.createElement("span");
-								var itemAside4SidebarFieldText = document.createElement("p");
-								itemAside4SidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split(",")[y];
-								itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarField);
+								var itemSectionSidebarSidebarField = document.createElement("span");
+								var itemSectionSidebarSidebarFieldText = document.createElement("p");
+								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split(",")[y];
+								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
-									var itemAside4SidebarFieldImage = document.createElement("img");
-									itemAside4SidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-									itemAside4SidebarFieldImage.title = finaldataLocationItems[q]["Field"].split(",")[y];
-									itemAside4SidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
-									itemAside4SidebarField.appendChild(itemAside4SidebarFieldImage);
+									var itemSectionSidebarSidebarFieldImage = document.createElement("img");
+									itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split(",")[y];
+									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
 	
-									itemAside4SidebarField.setAttribute("name","Item");
-									itemAside4SidebarField.setAttribute("value",itm);
-									itemAside4SidebarField.addEventListener("click",dataRedirect);
-									itemAside4SidebarField.setAttribute("function","dataRedirect");
+									itemSectionSidebarSidebarField.setAttribute("name","item");
+									itemSectionSidebarSidebarField.setAttribute("value",itm);
+									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 								}
-								itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
+								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
 							}
 						}
 						else {
@@ -446,61 +471,62 @@ var createItem = function() {
 								itm = finaldataLocationItems[q]["Field"];
 							}
 
-							var itemAside4SidebarField = document.createElement("span");
-							var itemAside4SidebarFieldText = document.createElement("p");
-							itemAside4SidebarFieldText.innerText = finaldataLocationItems[q]["Field"];
-							itemAside4SidebarRequirementOuter.appendChild(itemAside4SidebarField);
+							var itemSectionSidebarSidebarField = document.createElement("span");
+							var itemSectionSidebarSidebarFieldText = document.createElement("p");
+							itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"];
+							itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 							if (itemIcon != undefined) {
-								var itemAside4SidebarFieldImage = document.createElement("img");
-								itemAside4SidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-								itemAside4SidebarFieldImage.title = finaldataLocationItems[q]["Field"];
-								itemAside4SidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
-								itemAside4SidebarFieldImage.setAttribute("name","Item");
-								itemAside4SidebarField.appendChild(itemAside4SidebarFieldImage);
+								var itemSectionSidebarSidebarFieldImage = document.createElement("img");
+								itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+								itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"];
+								itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+								itemSectionSidebarSidebarFieldImage.setAttribute("name","item");
+								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
 
-								itemAside4SidebarField.setAttribute("name","Item");
-								itemAside4SidebarField.setAttribute("value",itm);
-								itemAside4SidebarField.addEventListener("click",dataRedirect);
-								itemAside4SidebarField.setAttribute("function","dataRedirect");
+								itemSectionSidebarSidebarField.setAttribute("name","item");
+								itemSectionSidebarSidebarField.setAttribute("value",itm);
+								itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+								itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 							}
-							itemAside4SidebarField.appendChild(itemAside4SidebarFieldText);
+							itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
 
 						}
 					}
 
-					var itemAside4SidebarItem = document.createElement("span");
-					itemAside4SidebarItem.setAttribute("name","Item");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+					var itemSectionSidebarSidebarItem = document.createElement("span");
+					itemSectionSidebarSidebarItem.setAttribute("name","item");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 					for(var u = 0; u < quantity; u++) {
-						var itemAside4SidebarItemImg = document.createElement("img");
-						itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
-						itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
-						itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+						var itemSectionSidebarSidebarItemImg = document.createElement("img");
+						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
+						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
+						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 					}
 
 					if (quantity != 1) { 
-						itemAside4SidebarItem.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+						itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
 					}
 					else {
-						itemAside4SidebarItem.title = finaldataLocationItems[q]["Item"];
+						itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Item"];
 					}
 
 
 
 
-					var itemAside4SidebarItemText = document.createElement("p");
+					var itemSectionSidebarSidebarItemText = document.createElement("h6");
 					if (quantity != 1) { 
-						itemAside4SidebarItemText.innerHTML = finaldataLocationItems[q]["Quantity"]+"x <br>"+finaldataLocationItems[q]["Item"];
+						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Quantity"]+"x <br>"+finaldataLocationItems[q]["Item"];
 					}
 					else {
-						itemAside4SidebarItemText.innerHTML = finaldataLocationItems[q]["Item"];
+						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Item"];
 					}
-					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
+					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
+					itemSectionSidebarSidebarItemText.style.display = "none";
 
 					if (finaldataLocationItems[q]["Hidden"] == "Hidden") {
-						itemAside4SidebarLi.classList.add("hidden");
-						itemAside4SidebarItem.title += " (Hidden)";
+						itemSectionSidebarSidebarLi.classList.add("hide");
+						itemSectionSidebarSidebarItem.title += " (Hidden)";
 					}
 
 			
@@ -513,35 +539,35 @@ var createItem = function() {
 		for(var q = 0; q < finaldataLocationPickup.length; q++) {
 			if (getApplicable(finaldataLocationPickup[q]["Game"])) {
 				if(finaldataLocationPickup[q]["Item"] == item) {
-					var itemAside4SidebarLi = document.createElement("li");
-					itemAside4SidebarLi.setAttribute("name","Pickup");
-					itemAside4SidebarUl.appendChild(itemAside4SidebarLi);
+					var itemSectionSidebarSidebarLi = document.createElement("li");
+					itemSectionSidebarSidebarLi.setAttribute("name","pickup");
+					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 
 			
-					var itemAside4SidebarPickup = document.createElement("span");
-					var itemAside4SidebarPickupTitle = document.createElement("h5");
-					var itemAside4SidebarPickupText = document.createElement("h3");
-					itemAside4SidebarPickup.setAttribute("name","Ability");
-					itemAside4SidebarPickupTitle.innerText = "Ability";
-					itemAside4SidebarPickupText.innerText = "Pickup";
-					itemAside4SidebarPickupText.title = "Pickup";
-					itemAside4SidebarPickupText.setAttribute("name","Ability");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarPickup);
-					itemAside4SidebarPickup.appendChild(itemAside4SidebarPickupTitle);
-					itemAside4SidebarPickup.appendChild(itemAside4SidebarPickupText);
+					var itemSectionSidebarSidebarPickup = document.createElement("span");
+					var itemSectionSidebarSidebarPickupTitle = document.createElement("small");
+					var itemSectionSidebarSidebarPickupText = document.createElement("h5");
+					itemSectionSidebarSidebarPickup.setAttribute("name","ability");
+					itemSectionSidebarSidebarPickupTitle.innerText = "Ability";
+					itemSectionSidebarSidebarPickupText.innerText = "Pickup";
+					itemSectionSidebarSidebarPickupText.title = "Pickup";
+					itemSectionSidebarSidebarPickupText.setAttribute("name","ability");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarPickup);
+					itemSectionSidebarSidebarPickup.appendChild(itemSectionSidebarSidebarPickupTitle);
+					itemSectionSidebarSidebarPickup.appendChild(itemSectionSidebarSidebarPickupText);
 
 
-					itemAside4SidebarPickupText.addEventListener("click",dataRedirect)
-					itemAside4SidebarPickupText.setAttribute("function","dataRedirect");
+					itemSectionSidebarSidebarPickupText.addEventListener("click",dataRedirect)
+					itemSectionSidebarSidebarPickupText.setAttribute("function","dataRedirect");
 
 	
 
-					var itemAside4SidebarDescription = document.createElement("span");
-					itemAside4SidebarDescription.setAttribute("name","Description");
-					itemAside4SidebarLi.appendChild(itemAside4SidebarDescription);
-					var itemAside4SidebarDescriptionText = document.createElement("p");
-					itemAside4SidebarDescriptionText.setAttribute("title","Location Description");
-					itemAside4SidebarDescription.appendChild(itemAside4SidebarDescriptionText);
+					var itemSectionSidebarSidebarDescription = document.createElement("span");
+					itemSectionSidebarSidebarDescription.setAttribute("name","description");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
+					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+					itemSectionSidebarSidebarDescriptionText.setAttribute("title","Location Description");
+					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 
 
 					var PickupText;
@@ -559,33 +585,34 @@ var createItem = function() {
 						PickupRate = finaldataLocationPickup[q]["Rate"];
 					}
 					if (finaldataLocationPickup[q]["Location"] != undefined) {
-						PickupLocation = 'at <span name="Map" title="'+finaldataLocationPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationPickup[q]["Location"]+'</span>';
+						PickupLocation = 'at <b name="map" title="'+finaldataLocationPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationPickup[q]["Location"]+'</b>';
 					}
 					if (finaldataLocationPickup[q]["Additional"] != undefined) {
 						PickupAdditional = 'on '+finaldataLocationPickup[q]["Additional"];
 					}
 
-					PickupText = PickupRate+' chance to be found by a '+PickupLevel+' Pokémon '+PickupAdditional+' '+PickupLocation+' with the ability <span name="Ability" title="Pickup" onclick="dataRedirect()">Pickup</span>';
+					PickupText = PickupRate+' chance to be found by a '+PickupLevel+' Pokémon '+PickupAdditional+' '+PickupLocation+' with the ability <b name="ability" title="Pickup" onclick="dataRedirect()">Pickup</b>';
 
 					PickupText = PickupText.replaceAll("  "," ");
 
-					itemAside4SidebarDescriptionText.innerHTML = PickupText;
+					itemSectionSidebarSidebarDescriptionText.innerHTML = PickupText+".";
 
 
-					var itemAside4SidebarItem = document.createElement("span");
-					itemAside4SidebarItem.setAttribute("name","Item");
-					itemAside4SidebarItem.title = finaldataLocationPickup[q]["Item"];
-					itemAside4SidebarLi.appendChild(itemAside4SidebarItem);
+					var itemSectionSidebarSidebarItem = document.createElement("span");
+					itemSectionSidebarSidebarItem.setAttribute("name","item");
+					itemSectionSidebarSidebarItem.title = finaldataLocationPickup[q]["Item"];
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 			
-					var itemAside4SidebarItemImg = document.createElement("img");
-					itemAside4SidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationPickup[q]["Item"])+".png";
-					itemAside4SidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
-					itemAside4SidebarItem.appendChild(itemAside4SidebarItemImg);
+					var itemSectionSidebarSidebarItemImg = document.createElement("img");
+					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationPickup[q]["Item"])+".png";
+					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
+					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 
-					var itemAside4SidebarItemText = document.createElement("p");
-					itemAside4SidebarItemText.innerText = finaldataLocationItems[q]["Item"];
-					itemAside4SidebarItem.appendChild(itemAside4SidebarItemText);
+					var itemSectionSidebarSidebarItemText = document.createElement("p");
+					itemSectionSidebarSidebarItemText.innerText = finaldataLocationPickup[q]["Item"];
+					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
+					itemSectionSidebarSidebarItemText.style.display = "none";
 
 					
 				}
@@ -594,39 +621,26 @@ var createItem = function() {
 
 
 
-		itemAside4SidebarValueCurrencyImg.src = "";
-		itemAside4SidebarValueCurrencyImg.title = "";
-		itemAside4SidebarValueCurrencyImg.style.display = "none";
-		itemAside4SidebarValueText.innerText = "N/A";
-		itemAside4SidebarValueText.removeAttribute("title");
-
-		for(var q = 0; q < finaldataItemsPrice.length; q++) {
-			if (finaldataItemsPrice[q]["Item"] == item) {
-				if (getApplicable(finaldataItemsPrice[q]["Game"])) {
-					if (finaldataItemsPrice[q]["Sell Amount"] != undefined) {
-						if (finaldataItemsPrice[q]["Sell Currency"] != undefined) {
-							itemAside4SidebarValueCurrencyImg.src = './media/Images/Misc/Currency/'+MEDIAPath_Currency+'/'+finaldataItemsPrice[q]["Sell Currency"]+'.png';
-							itemAside4SidebarValueCurrencyImg.style.display = "unset";
-							itemAside4SidebarValueCurrencyImg.title = finaldataItemsPrice[q]["Sell Currency"];
-						}
-
-						itemAside4SidebarValueText.innerText = finaldataItemsPrice[q]["Sell Amount"];
-						
-						if(finaldataItemsPrice[q]["Sell Additional"] != undefined) {
-							itemAside4SidebarValueText.setAttribute("title",finaldataItemsPrice[q]["Sell Additional"]);
-						}
-					}
-				}
-			}
+		var itemMapOuter = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div");
+		var itemMap = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div img[usemap]");
+		var locs = document.querySelectorAll("#contain div > section[name='sidebar'] > div > ul li span[name='location'] > * > *");
+		var locations = [];
+		for(var q = 0; q < locs.length; q++) {
+			locations.push(locs[q].innerText);
 		}
-
-		
-		
-
-
-
-
+	
+		if (itemMap.classList.contains("mapify")) {
+			if (itemMap.naturalWidth == 0) {
+				itemMap.addEventListener("load", event => {
+					mapBlink(itemMapOuter,locations);
+				});
+			}
+			else {
+				mapBlink(itemMapOuter,locations);
+			}	
+		}
 
 
 	}
+
 };
