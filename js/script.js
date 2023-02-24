@@ -4393,16 +4393,18 @@ function getLocationFromArea(area) {
 
     var result = [];
     for (var i = 0; i < arr.length; i++) {
-        if (arr[i][JSONPath_LocationConnection+"_"+"Location"] != undefined) {
-            if (arr[i][JSONPath_LocationConnection+"_"+"Name"] == area) {
-                if (arr[i][JSONPath_LocationConnection+"_"+"Location"].includes(",")) {
-                    var arr2 = arr[i][JSONPath_LocationConnection+"_"+"Location"].split(",");
-                    for (var q = 0; q < arr2.length; q++) {
-                        result.push(arr2[q])
+        if (getApplicable(arr[i]["Game"])) {
+            if (arr[i]["Location"] != undefined) {
+                if (arr[i]["Name"] == area) {
+                    if (arr[i]["Location"].includes(",")) {
+                        var arr2 = arr[i]["Location"].split(",");
+                        for (var q = 0; q < arr2.length; q++) {
+                            result.push(arr2[q])
+                        }
                     }
-                }
-                else {
-                    return [arr[i][JSONPath_LocationConnection+"_"+"Location"]]
+                    else {
+                        return [arr[i]["Location"]]
+                    }
                 }
             }
         }
@@ -4418,18 +4420,20 @@ function getAreasFromLocation(location) {
     var result = [];
 
     for (var i = 0; i < arr.length; i++) {
-        if (arr[i][JSONPath_LocationConnection+"_"+"Location"] != undefined) {
-            if (arr[i][JSONPath_LocationConnection+"_"+"Location"].includes(",")) {
-                var arr2 = arr[i][JSONPath_LocationConnection+"_"+"Location"].split(",");
-                for (var q = 0; q < arr2.length; q++) {
-                    if (arr2[q] == location) {
-                        result.push(arr[i][JSONPath_LocationConnection+"_"+"Name"])
+        if (getApplicable(arr[i]["Game"])) {
+            if (arr[i]["Location"] != undefined) {
+                if (arr[i]["Location"].includes(",")) {
+                    var arr2 = arr[i]["Location"].split(",");
+                    for (var q = 0; q < arr2.length; q++) {
+                        if (arr2[q] == location) {
+                            result.push(arr[i]["Name"])
+                        }
                     }
                 }
-            }
-            else {
-                if (arr[i][JSONPath_LocationConnection+"_"+"Location"] == location) {
-                    result.push(arr[i][JSONPath_LocationConnection+"_"+"Name"])
+                else {
+                    if (arr[i]["Location"] == location) {
+                        result.push(arr[i]["Name"])
+                    }
                 }
             }
         }
