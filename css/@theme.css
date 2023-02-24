@@ -46,20 +46,24 @@
 [data-theme="dark"] .gamedata-modal-background div {
 	filter: brightness(0) saturate(100%) invert(10%) sepia(9%) saturate(19%) hue-rotate(314deg) brightness(99%) contrast(87%);
 }
-[data-theme="dark"] #pokémon-outer > div main img {
+[data-theme="dark"] #pokémon > div main img {
     filter: invert(1);
 }
-[data-theme="dark"] #pokémon-outer > div input:checked + label main img {
+[data-theme="dark"] #pokémon > div input:checked + label main img {
     filter: invert(1) brightness(90%) opacity(100%);
 }
 
-[data-theme="dark"] #pokémon-outer > div li main span::after {
+[data-theme="dark"] #pokémon > div li main span::after {
 	filter: brightness(0.8);
 }
-[data-theme="dark"] #pokémon-outer > div li main span {
+[data-theme="dark"] #pokémon > div li main span {
 	background: var(--color10);
 }
 
 [data-theme="dark"] #map-description-trainer-top-title h5 img {
 	filter:invert(1);
+}
+
+[data-theme="dark"] #console p {
+	background: rgba(0,0,0,0.5);
 }
