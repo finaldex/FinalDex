@@ -2,15 +2,20 @@ var createData = function(id, i) {
 	var i;
 	var id;
 	var dataDiv = document.createElement("div");
-	var dataDivOverlay = document.createElement("div");
+	var dataDivOverlay = document.createElement("span");
 	var dataDivContent = document.createElement("div");
-	var dataNavigation = document.createElement("section");
-	var dataAside2MapContain = document.createElement("div");
-	var dataAside2MapFullscreen = document.createElement("span");
-	var dataAside2Map = document.createElement("div");
-	var dataAside2MapImage = document.createElement("img");
-	var dataAside2MapMark = document.createElement("div");
-	var dataAside2MapMarkImage = document.createElement("img");
+	var dataNavigation = document.createElement("nav");
+	var dataSectionMainMapContain = document.createElement("div");
+	var dataSectionMainMapZoomIn = document.createElement("figure");
+	var dataSectionMainMapZoomInText = document.createElement("h3");
+	var dataSectionMainMapZoomOut = document.createElement("figure");
+	var dataSectionMainMapZoomOutText = document.createElement("h2");
+	var dataSectionMainMapFullscreen = document.createElement("figure");
+	var dataSectionMainMapFullscreenText = document.createElement("h5");
+	var dataSectionMainMapOuter = document.createElement("div");
+	var dataSectionMainMapImage = document.createElement("img");
+	var dataSectionMainMap = document.createElement("map");
+
 	var dataForm = document.createElement("section");
 	var variant = [];
 	for(var u = 0; u < finaldataPokémon.length; u++) {
@@ -52,205 +57,212 @@ var createData = function(id, i) {
 
 	icount = [];
 
-	var dataAside1 = document.createElement("aside");
-	var dataAside1DivPortrait = document.createElement("div");
-	var dataAside1DivPortraitContent = document.createElement("div");
-	var dataAside1Portrait = document.createElement("img");
-	var dataAside1StatsEVSelector = document.createElement("div");
-	var dataAside1DivIdNameOuter = document.createElement("div");
-	var dataAside1DivIdName = document.createElement("p");
-	var dataAside1DivIdNameBreak = document.createElement("br");
-	var dataAside1IDNational = document.createElement("span");
-	var dataAside1Name = document.createElement("p");
-	var dataAside1DebutCategoryOuter = document.createElement("div");
-	var dataAside1DebutCategory = document.createElement("p");
-	var dataAside1DebutCategoryBreak = document.createElement("br");
-	var dataAside1Debut = document.createElement("span");
-	var dataAside1Category = document.createElement("span");
-	var dataAside1Type = document.createElement("div");
-	var dataAside2 = document.createElement("aside");
-	var dataAside2 = document.createElement("aside");
-	var dataAside2Metadata = document.createElement("div");
-	var dataAside2MetadataStats = document.createElement("div");
-	var dataAside2DescriptionOuter = document.createElement("div");
-	var dataAside2Description = document.createElement("p");
-	var dataAside2MetadataSidebarOuter = document.createElement("div");
-	var dataAside2MetadataSidebar = document.createElement("div");
-	var dataAside2MetadataSidebarRow1 = document.createElement("div");
-	var dataAside2MetadataSidebarRow2 = document.createElement("div");
-	var dataAside2MetadataSidebarRow3 = document.createElement("div");
-	var dataAside2MetadataSidebarRow4 = document.createElement("div");
-	var dataAside2MetadataSidebarCatchRateOuter = document.createElement("span");
-	var dataAside2MetadataSidebarCatchRateToggle = document.createElement("span");
-	var dataAside2MetadataSidebarCatchRateContent = document.createElement("p");
-	var dataAside2MetadataSidebarCatchRateTitle = document.createElement("h5");
-	var dataAside2MetadataSidebarCatchRate = document.createElement("h3");
-	var dataAside2MetadataSidebarLevelRateOuter = document.createElement("span");
-	var dataAside2MetadataSidebarLevelRateToggle = document.createElement("span");
-	var dataAside2MetadataSidebarLevelRateContent = document.createElement("p");
-	var dataAside2MetadataSidebarLevelRateTitle = document.createElement("h5");
-	var dataAside2MetadataSidebarLevelRate = document.createElement("h3");
-	var dataAside2MetadataSidebarExpYieldOuter = document.createElement("span");
-	var dataAside2MetadataSidebarExpYieldToggle = document.createElement("span");
-	var dataAside2MetadataSidebarExpYieldContent = document.createElement("p");
-	var dataAside2MetadataSidebarExpYieldTitle = document.createElement("h5");
-	var dataAside2MetadataSidebarExpYield = document.createElement("h3");
-	var dataAside2AreaDiv = document.createElement("div");
-	var dataAside2Area = document.createElement("ul");
-	dataDiv.setAttribute("id","data-modal"+id);
-	dataDiv.classList.add("data-modal-outer");
-	dataDivOverlay.classList.add("data-modal-overlay");
-	dataDivContent.classList.add("data-modal");
-	dataNavigation.setAttribute("id","data-navigation");
+	dataForm.setAttribute("name","form");
+
+	dataSectionMainMapZoomInText.innerText = "+";
+	dataSectionMainMapZoomIn.setAttribute("name","zoom");
+	dataSectionMainMapZoomIn.setAttribute("type","scale");
+
+	dataSectionMainMapZoomOutText.innerText = "-";
+	dataSectionMainMapZoomOut.setAttribute("name","reset");
+	dataSectionMainMapZoomOut.setAttribute("type","scale");
+
+	dataSectionMainMapFullscreenText.innerText = "⛶";
+	dataSectionMainMapFullscreen.setAttribute("name","fullscreen");
+
+	var dataSectionHeader = document.createElement("section");
+	var dataSectionHeaderDivPortrait = document.createElement("div");
+	var dataSectionHeaderDivPortraitContent = document.createElement("div");
+	var dataSectionHeaderPortrait = document.createElement("img");
+	var dataSectionHeaderStatsEVSelector = document.createElement("ol");
+	var dataSectionHeaderDivIdNameOuter = document.createElement("div");
+	var dataSectionHeaderDivIdName = document.createElement("div");
+	var dataSectionHeaderIDNational = document.createElement("h5");
+	var dataSectionHeaderName = document.createElement("h3");
+	var dataSectionHeaderDebutCategoryOuter = document.createElement("div");
+	var dataSectionHeaderDebutCategory = document.createElement("span");
+
+	var dataSectionHeaderDebut = document.createElement("p");
+	var dataSectionHeaderCategory = document.createElement("p");
+	var dataSectionHeaderType = document.createElement("div");
+	var dataSectionMain = document.createElement("section");
+	var dataSectionMainMetadata = document.createElement("div");
+	var dataSectionMainMetadataStats = document.createElement("div");
+	var dataSectionMainDescriptionOuter = document.createElement("div");
+	var dataSectionMainDescription = document.createElement("p");
+	var dataSectionMainMetadataSidebarOuter = document.createElement("div");
+	var dataSectionMainMetadataSidebar = document.createElement("div");
+	var dataSectionMainMetadataSidebarRow1 = document.createElement("div");
+	var dataSectionMainMetadataSidebarRow2 = document.createElement("div");
+	var dataSectionMainMetadataSidebarRow3 = document.createElement("div");
+	var dataSectionMainMetadataSidebarRow4 = document.createElement("div");
+	var dataSectionMainMetadataSidebarCatchRateOuter = document.createElement("span");
+	var dataSectionMainMetadataSidebarCatchRateToggle = document.createElement("b");
+	dataSectionMainMetadataSidebarCatchRateToggle.setAttribute("type","invert");
+	var dataSectionMainMetadataSidebarCatchRateTitle = document.createElement("h6");
+	var dataSectionMainMetadataSidebarCatchRate = document.createElement("h5");
+	var dataSectionMainMetadataSidebarLevelRateOuter = document.createElement("span");
+	var dataSectionMainMetadataSidebarLevelRateToggle = document.createElement("b");
+	dataSectionMainMetadataSidebarLevelRateToggle.setAttribute("type","invert");
+	var dataSectionMainMetadataSidebarLevelRateTitle = document.createElement("h6");
+	var dataSectionMainMetadataSidebarLevelRate = document.createElement("h5");
+	var dataSectionMainMetadataSidebarExpYieldOuter = document.createElement("span");
+	var dataSectionMainMetadataSidebarExpYieldToggle = document.createElement("b");
+	dataSectionMainMetadataSidebarExpYieldToggle.setAttribute("type","invert");
+	var dataSectionMainMetadataSidebarExpYieldTitle = document.createElement("h6");
+	var dataSectionMainMetadataSidebarExpYield = document.createElement("h5");
+	var dataSectionMainAreaDiv = document.createElement("div");
+	var dataSectionMainArea = document.createElement("ul");
+	dataSectionMain.setAttribute("name","main");
+	dataSectionHeader.setAttribute("name","header");
+
+	dataDiv.setAttribute("value",id);
+
+	dataSectionHeaderDivPortrait.setAttribute("name","portrait");
+	dataSectionHeaderDivIdNameOuter.setAttribute("name","idname");
+	dataSectionHeaderDebutCategoryOuter.setAttribute("name","debutcategorytype");
+	dataSectionHeaderName.setAttribute("name","name");
+
+	dataSectionHeaderCategory.setAttribute("name","category");
+	dataSectionHeaderDebut.setAttribute("name","debut");
+
 	dataDivOverlay.addEventListener("click", modalData);
-	dataForm.classList.add("data-form");
+	dataDivOverlay.setAttribute("function","modalData");
+
 	var navz = ["metadata","learnset","area"];
 	var navztitles = ["Data","Learnset","Area"];
 	for(var q = 0; q < navz.length; q++) {
 		var dataNavigationInput = document.createElement("input");
 		var dataNavigationLabel = document.createElement("label");
+		var dataNavigationLabelText = document.createElement("h6");
 		dataNavigationInput.setAttribute("type","radio");
 		dataNavigationInput.setAttribute("name","data-navigation"+id);
 		dataNavigationInput.setAttribute("id","data-navigation-"+navz[q]+id);
-		dataNavigationInput.classList.add("data-navigation-"+navz[q]);
-		dataNavigationInput.setAttribute("value", q+1);
+		dataNavigationInput.setAttribute("value", q);
 		if(q == 0) {
 			dataNavigationInput.setAttribute("checked","");
 		}
 		dataNavigationLabel.setAttribute("for","data-navigation-"+navz[q]+id);
-		dataNavigationLabel.innerText = navztitles[q];
+		dataNavigationLabelText.innerText = navztitles[q];
 		dataNavigation.appendChild(dataNavigationInput);
 		dataNavigation.appendChild(dataNavigationLabel);
+		dataNavigationLabel.appendChild(dataNavigationLabelText);
+		
+		dataNavigationInput.addEventListener("click", showMetadataLearnsetArea);
 	}
-	dataAside1.classList.add("data-aside1");
-	dataAside1DivPortrait.classList.add("data-portrait");
-	dataAside1DivPortraitContent.classList.add("data-portrait-content");
-	dataAside1Portrait.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-	dataAside1Portrait.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
-	dataAside1Portrait.setAttribute("id","data-portrait-img-"+id);
-	dataAside1StatsEVSelector.classList.add("data-baseev-selector");
-	dataAside1DivIdNameOuter.classList.add("data-idname-outer");
-	dataAside1DivIdName.classList.add("data-idname");
-	dataAside1IDNational.classList.add("data-nationalID");
-	dataAside1IDNational.innerText = "#"+id;
-	dataAside1Name.classList.add("data-name");
-	dataAside1DebutCategoryOuter.classList.add("data-debutcategorytype-outer");
-	dataAside1DebutCategory.classList.add("data-debutcategory");
-	dataAside1Debut.classList.add("data-debut");
-	dataAside1Category.classList.add("data-category");
-	dataAside1Type.classList.add("data-type");
-	var dataAside1TypePrimaryOuter = document.createElement("span");
-	var dataAside1TypePrimary = document.createElement("span");
-	var dataAside1TypePrimaryImg = document.createElement("img");
-	var dataAside1TypePrimaryText = document.createElement("h3");
-	dataAside1TypePrimaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
-	dataAside1TypePrimaryImg.setAttribute("dataname","value");
-	dataAside1Type.appendChild(dataAside1TypePrimaryOuter);
-	dataAside1TypePrimaryOuter.appendChild(dataAside1TypePrimary);
-	dataAside1TypePrimary.appendChild(dataAside1TypePrimaryImg);
-	dataAside1TypePrimary.appendChild(dataAside1TypePrimaryText);
-	var dataAside1TypeSecondaryOuter = document.createElement("span");
-	var dataAside1TypeSecondary = document.createElement("span");
-	var dataAside1TypeSecondaryImg = document.createElement("img");
-	var dataAside1TypeSecondaryText = document.createElement("h3");
-	dataAside1TypeSecondaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
-	dataAside1TypeSecondaryImg.setAttribute("dataname","value");
-	dataAside1Type.appendChild(dataAside1TypeSecondaryOuter);
-	dataAside1TypeSecondaryOuter.appendChild(dataAside1TypeSecondary);
-	dataAside1TypeSecondary.appendChild(dataAside1TypeSecondaryImg);
-	dataAside1TypeSecondary.appendChild(dataAside1TypeSecondaryText);
-	dataAside2.classList.add("data-aside2");
-	dataAside2MapContain.setAttribute("id","data-map-contain");
-	dataAside2MapFullscreen.classList.add("data-fullscreen");
-	dataAside2Map.setAttribute("id","data-map");
-	dataAside2Map.setAttribute("name", Region+"-"+MEDIAPath_Map);
-	dataAside2MapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
-	dataAside2MapImage.onload = function() {
-		dataAside2MapImage.setAttribute("width", dataAside2MapImage.width+"px");
-		dataAside2MapImage.setAttribute("height", dataAside2MapImage.height+"px");
-	};
-	dataAside2MapImage.classList.add("data-img-main");
-	dataAside2MapImage.setAttribute("name", Region+"-"+MEDIAPath_Map);
-	dataAside2MapMark.classList.add("data-img-mark-outer");
-	dataAside2MapMarkImage.classList.add("data-img-mark");
-	dataAside2Metadata.classList.add("data");
-	dataAside2Metadata.setAttribute("id","data"+id);
-	dataAside2DescriptionOuter.classList.add("data-description");
-	dataAside2DescriptionOuter.classList.add("scroll");
-	dataAside2MetadataSidebarOuter.setAttribute("id","data-sidebar-outer");
-	dataAside2MetadataSidebar.setAttribute("id","data-sidebar");
-	dataAside2MetadataSidebar.setAttribute("name", Generation+"-"+GameID);
-	dataAside2MetadataStats.classList.add("data-stats");
-	dataAside2MetadataSidebarCatchRateOuter.classList.add("data-sidebar-catchrate");
-	dataAside2MetadataSidebarCatchRateOuter.setAttribute("name","Catch Rate");
-	dataAside2MetadataSidebarCatchRateToggle.classList.add("data-sidebar-catchrate-toggle");
-	dataAside2MetadataSidebarCatchRateContent.classList.add("data-sidebar-catchrate-content");
-	dataAside2MetadataSidebarCatchRateTitle.innerText = "Catch Rate";
-	dataAside2MetadataSidebarCatchRate.setAttribute("id","data-sidebar-catchrate");
-	dataAside2MetadataSidebarCatchRate.setAttribute("dataname","value");
-	dataAside2MetadataSidebarCatchRate.setAttribute("value","");
-	dataAside2MetadataSidebarLevelRateOuter.classList.add("data-sidebar-levelrate");
-	dataAside2MetadataSidebarLevelRateOuter.setAttribute("name","Leveling Rate");
-	dataAside2MetadataSidebarLevelRateToggle.classList.add("data-sidebar-levelrate-toggle");
-	dataAside2MetadataSidebarLevelRateContent.classList.add("data-sidebar-levelrate-content");
-	dataAside2MetadataSidebarLevelRateTitle.innerText = "Leveling Rate";
-	dataAside2MetadataSidebarLevelRate.setAttribute("id","data-sidebar-levelrate");
-	dataAside2MetadataSidebarLevelRate.setAttribute("dataname","value");
-	dataAside2MetadataSidebarLevelRate.setAttribute("value","");
-	dataAside2MetadataSidebarExpYieldOuter.classList.add("data-sidebar-expyield");
-	dataAside2MetadataSidebarExpYieldOuter.setAttribute("name","Experience Yield");
-	dataAside2MetadataSidebarExpYieldToggle.classList.add("data-sidebar-expyield-toggle");
-	dataAside2MetadataSidebarExpYieldContent.classList.add("data-sidebar-expyield-content");
-	dataAside2MetadataSidebarExpYieldTitle.innerText = "Experience Yield";
-	dataAside2MetadataSidebarExpYield.setAttribute("id","data-sidebar-expyield");
-	dataAside2MetadataSidebarExpYield.setAttribute("dataname","value");
-	dataAside2MetadataSidebarExpYield.setAttribute("value","");
-	dataAside2AreaDiv.classList.add("data-area");
-	dataAside2AreaDiv.setAttribute("id","data-area"+id);
-	dataAside2Area.classList.add("data-area-content");
+
+	dataSectionHeaderPortrait.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+	dataSectionHeaderPortrait.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+
+	dataSectionHeaderIDNational.innerText = "#"+id;
+	dataSectionHeaderIDNational.setAttribute("name","national");
+	var dataSectionHeaderTypePrimaryOuter = document.createElement("span");
+	var dataSectionHeaderTypePrimary = document.createElement("b");
+	dataSectionHeaderTypePrimary.setAttribute("type","invert");
+	var dataSectionHeaderTypePrimaryImg = document.createElement("img");
+	var dataSectionHeaderTypePrimaryText = document.createElement("h5");
+	dataSectionHeaderTypePrimaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
+	dataSectionHeaderTypePrimaryImg.setAttribute("dataname","value");
+	dataSectionHeaderType.appendChild(dataSectionHeaderTypePrimaryOuter);
+	dataSectionHeaderTypePrimaryOuter.appendChild(dataSectionHeaderTypePrimary);
+	dataSectionHeaderTypePrimary.appendChild(dataSectionHeaderTypePrimaryImg);
+	dataSectionHeaderTypePrimary.appendChild(dataSectionHeaderTypePrimaryText);
+	var dataSectionHeaderTypeSecondaryOuter = document.createElement("span");
+	var dataSectionHeaderTypeSecondary = document.createElement("b");
+	dataSectionHeaderTypeSecondary.setAttribute("type","invert");
+	var dataSectionHeaderTypeSecondaryImg = document.createElement("img");
+	var dataSectionHeaderTypeSecondaryText = document.createElement("h5");
+	dataSectionHeaderTypeSecondaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
+	dataSectionHeaderTypeSecondaryImg.setAttribute("dataname","value");
+	dataSectionHeaderType.appendChild(dataSectionHeaderTypeSecondaryOuter);
+	dataSectionHeaderTypeSecondaryOuter.appendChild(dataSectionHeaderTypeSecondary);
+	dataSectionHeaderTypeSecondary.appendChild(dataSectionHeaderTypeSecondaryImg);
+	dataSectionHeaderTypeSecondary.appendChild(dataSectionHeaderTypeSecondaryText);
+
+
+	dataSectionMainMapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
+	dataSectionMainMapImage.setAttribute("usemap", "#"+MEDIAPath_Map+"-"+id);
+	
+	dataSectionMainMap.setAttribute("name", MEDIAPath_Map+"-"+id);
+	dataSectionMainMap.setAttribute("id", MEDIAPath_Map+"-"+id);
+	dataSectionMainDescriptionOuter.classList.add("scroll");
+	dataSectionMainDescriptionOuter.setAttribute("name","description");
+
+	dataSectionMainMetadataSidebarCatchRateOuter.setAttribute("name","catchrate");
+	dataSectionMainMetadataSidebarCatchRateTitle.innerText = "Catch Rate";
+
+	dataSectionMainMetadataSidebarCatchRate.setAttribute("dataname","value");
+	dataSectionMainMetadataSidebarCatchRate.setAttribute("value","");
+	dataSectionMainMetadataSidebarLevelRateOuter.setAttribute("name","levelingrate");
+	dataSectionMainMetadataSidebarLevelRateTitle.innerText = "Leveling Rate";
+
+	dataSectionMainMetadataSidebarLevelRate.setAttribute("dataname","value");
+	dataSectionMainMetadataSidebarLevelRate.setAttribute("value","");
+	dataSectionMainMetadataSidebarExpYieldOuter.setAttribute("name","experienceyield");
+	dataSectionMainMetadataSidebarExpYieldTitle.innerText = "Experience Yield";
+
+	dataSectionMainMetadataSidebarExpYield.setAttribute("dataname","value");
+	dataSectionMainMetadataSidebarExpYield.setAttribute("value","");
+
 
 	for(q = 0; q < JSONPath_Pokédex.length; q++) {
-		var dataAside1IDRegional = document.createElement("span");
-		dataAside1IDRegional.classList.add("data-regionalID-"+[q+1]);
+		var z = q+1;
+		var dataSectionHeaderIDRegional = document.createElement("h5");
 		if(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]] != null) {
-			dataAside1IDRegional.innerText = "#"+finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
+			dataSectionHeaderIDRegional.innerText = "#"+finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
 		}
-		dataAside1DivIdName.appendChild(dataAside1IDRegional);
+		dataSectionHeaderIDRegional.setAttribute("name","regional"+z)
+		dataSectionHeaderDivIdName.appendChild(dataSectionHeaderIDRegional);
 	}
 	if(Ability.length >= 1) {
-		var dataAside2MetadataSidebarRow1 = document.createElement("div");
-		var dataAside2MetadataSidebarAbilityOuter = document.createElement("span");
-		dataAside2MetadataSidebarAbilityOuter.classList.add("data-sidebar-ability");
-		dataAside2MetadataSidebarAbilityOuter.setAttribute("name", Generation);
-		dataAside2MetadataSidebar.appendChild(dataAside2MetadataSidebarRow1);
-		dataAside2MetadataSidebarRow1.appendChild(dataAside2MetadataSidebarAbilityOuter);
-		var dataAside2MetadataSidebarAbilityPrimarySecondaryOuter = document.createElement("span");
-		dataAside2MetadataSidebarAbilityOuter.appendChild(dataAside2MetadataSidebarAbilityPrimarySecondaryOuter);
-		var dataAside2MetadataSidebarAbilityPrimary = document.createElement("h5");
-		dataAside2MetadataSidebarAbilityPrimary.setAttribute("id","data-sidebar-ability-primary");
-		dataAside2MetadataSidebarAbilityPrimary.setAttribute("title","Primary Ability");
-		dataAside2MetadataSidebarAbilityPrimary.setAttribute("dataname","value");
-		dataAside2MetadataSidebarAbilityPrimary.innerText = "Primary Ability";
-		dataAside2MetadataSidebarAbilityPrimarySecondaryOuter.appendChild(dataAside2MetadataSidebarAbilityPrimary);
-		var dataAside2MetadataSidebarAbilitySecondary = document.createElement("h5");
-		dataAside2MetadataSidebarAbilitySecondary.setAttribute("id","data-sidebar-ability-secondary");
-		dataAside2MetadataSidebarAbilitySecondary.setAttribute("title","Secondary Ability");
-		dataAside2MetadataSidebarAbilitySecondary.setAttribute("dataname","value");
-		dataAside2MetadataSidebarAbilitySecondary.innerText = "Secondary Ability";
-		dataAside2MetadataSidebarAbilityPrimarySecondaryOuter.appendChild(dataAside2MetadataSidebarAbilitySecondary);
+		var dataSectionMainMetadataSidebarRow1 = document.createElement("div");
+		var dataSectionMainMetadataSidebarAbilityOuter = document.createElement("span");
+		dataSectionMainMetadataSidebarAbilityOuter.setAttribute("name", "ability");
+		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow1);
+		dataSectionMainMetadataSidebarRow1.appendChild(dataSectionMainMetadataSidebarAbilityOuter);
+		
+		var dataSectionMainMetadataSidebarAbilityPrimarySecondaryOuter = document.createElement("span");
+		dataSectionMainMetadataSidebarAbilityOuter.appendChild(dataSectionMainMetadataSidebarAbilityPrimarySecondaryOuter);
+
+		var dataSectionMainMetadataSidebarAbilityPrimaryContent = document.createElement("span");
+		var dataSectionMainMetadataSidebarAbilityPrimary = document.createElement("b");
+		dataSectionMainMetadataSidebarAbilityPrimary.setAttribute("type","invert");
+		var dataSectionMainMetadataSidebarAbilityPrimaryText = document.createElement("small");
+		dataSectionMainMetadataSidebarAbilityPrimary.setAttribute("title","Primary Ability");
+		dataSectionMainMetadataSidebarAbilityPrimary.setAttribute("dataname","value");
+		dataSectionMainMetadataSidebarAbilityPrimaryText.innerText = "Primary Ability";
+		dataSectionMainMetadataSidebarAbilityPrimarySecondaryOuter.appendChild(dataSectionMainMetadataSidebarAbilityPrimaryContent);
+		dataSectionMainMetadataSidebarAbilityPrimaryContent.appendChild(dataSectionMainMetadataSidebarAbilityPrimary);
+		dataSectionMainMetadataSidebarAbilityPrimary.appendChild(dataSectionMainMetadataSidebarAbilityPrimaryText);
+
+		var dataSectionMainMetadataSidebarAbilitySecondaryContent = document.createElement("span");
+		var dataSectionMainMetadataSidebarAbilitySecondary = document.createElement("b");
+		dataSectionMainMetadataSidebarAbilitySecondary.setAttribute("type","invert");
+		var dataSectionMainMetadataSidebarAbilitySecondaryText = document.createElement("small");
+		dataSectionMainMetadataSidebarAbilitySecondary.setAttribute("title","Secondary Ability");
+		dataSectionMainMetadataSidebarAbilitySecondary.setAttribute("dataname","value");
+		dataSectionMainMetadataSidebarAbilitySecondaryText.innerText = "Secondary Ability";
+		dataSectionMainMetadataSidebarAbilityPrimarySecondaryOuter.appendChild(dataSectionMainMetadataSidebarAbilitySecondaryContent);
+		dataSectionMainMetadataSidebarAbilitySecondaryContent.appendChild(dataSectionMainMetadataSidebarAbilitySecondary);
+		dataSectionMainMetadataSidebarAbilitySecondary.appendChild(dataSectionMainMetadataSidebarAbilitySecondaryText);
+
 		if(Ability.length >= 3) {
-			var dataAside2MetadataSidebarAbilityHiddenOuter = document.createElement("span");
-			var dataAside2MetadataSidebarAbilityHidden = document.createElement("h5");
-			dataAside2MetadataSidebarAbilityHidden.setAttribute("id","data-sidebar-ability-hidden");
-			dataAside2MetadataSidebarAbilityHidden.setAttribute("title","Hidden Ability");
-			dataAside2MetadataSidebarAbilityHidden.setAttribute("dataname","value");
-			dataAside2MetadataSidebarAbilityHidden.innerText = "Hidden Ability";
-			dataAside2MetadataSidebarAbilityOuter.appendChild(dataAside2MetadataSidebarAbilityHiddenOuter);
-			dataAside2MetadataSidebarAbilityHiddenOuter.appendChild(dataAside2MetadataSidebarAbilityHidden);
+			var dataSectionMainMetadataSidebarAbilityHiddenOuter = document.createElement("span");
+			var dataSectionMainMetadataSidebarAbilityHiddenContent = document.createElement("span");
+			var dataSectionMainMetadataSidebarAbilityHidden = document.createElement("b");
+			dataSectionMainMetadataSidebarAbilityHidden.setAttribute("type","invert");
+			var dataSectionMainMetadataSidebarAbilityHiddenText = document.createElement("small");
+			dataSectionMainMetadataSidebarAbilityHidden.setAttribute("title","Hidden Ability");
+			dataSectionMainMetadataSidebarAbilityHidden.setAttribute("dataname","value");
+			dataSectionMainMetadataSidebarAbilityHiddenText.innerText = "Hidden Ability";
+			dataSectionMainMetadataSidebarAbilityOuter.appendChild(dataSectionMainMetadataSidebarAbilityHiddenOuter);
+			dataSectionMainMetadataSidebarAbilityHiddenOuter.appendChild(dataSectionMainMetadataSidebarAbilityHiddenContent);
+			dataSectionMainMetadataSidebarAbilityHiddenContent.appendChild(dataSectionMainMetadataSidebarAbilityHidden);
+			dataSectionMainMetadataSidebarAbilityHidden.appendChild(dataSectionMainMetadataSidebarAbilityHiddenText);
 		}
 	}
-	dataAside2MetadataSidebar.appendChild(dataAside2MetadataSidebarRow2);
-	dataAside2MetadataSidebarRow2.appendChild(dataAside2MetadataSidebarCatchRateOuter);
+	dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow2);
+	dataSectionMainMetadataSidebarRow2.appendChild(dataSectionMainMetadataSidebarCatchRateOuter);
 	var EggCycleStep;
 	if((Generation >= 2 && Generation <= 3) || Generation == 7) {
 		EggCycleStep = "256";
@@ -262,98 +274,96 @@ var createData = function(id, i) {
 		EggCycleStep = "257";
 	}
 	if(Egg == true) {
-		var dataAside2MetadataSidebarHatchRateOuter = document.createElement("span");
-		var dataAside2MetadataSidebarHatchRateToggle = document.createElement("span");
-		var dataAside2MetadataSidebarHatchRateContent = document.createElement("p");
-		var dataAside2MetadataSidebarHatchRateTitle = document.createElement("h5");
-		var dataAside2MetadataSidebarHatchRate = document.createElement("h3");
-		dataAside2MetadataSidebarHatchRateOuter.classList.add("data-sidebar-hatchrate");
-		dataAside2MetadataSidebarHatchRateOuter.setAttribute("name","Hatch Rate");
-		dataAside2MetadataSidebarHatchRateToggle.classList.add("data-sidebar-hatchrate-toggle");
-		dataAside2MetadataSidebarHatchRateContent.classList.add("data-sidebar-hatchrate-content");
-		dataAside2MetadataSidebarHatchRateTitle.innerText = "Hatch Rate";
-		dataAside2MetadataSidebarHatchRate.setAttribute("id","data-sidebar-hatchrate");
-		dataAside2MetadataSidebarHatchRate.setAttribute("dataname","value");
-		dataAside2MetadataSidebarHatchRate.setAttribute("value","");
-		dataAside2MetadataSidebarRow2.appendChild(dataAside2MetadataSidebarHatchRateOuter);
-		dataAside2MetadataSidebarHatchRateOuter.appendChild(dataAside2MetadataSidebarHatchRateToggle);
-		dataAside2MetadataSidebarHatchRateToggle.appendChild(dataAside2MetadataSidebarHatchRateContent);
-		dataAside2MetadataSidebarHatchRateContent.appendChild(dataAside2MetadataSidebarHatchRateTitle);
-		dataAside2MetadataSidebarHatchRateContent.appendChild(dataAside2MetadataSidebarHatchRate);
+		var dataSectionMainMetadataSidebarHatchRateOuter = document.createElement("span");
+		var dataSectionMainMetadataSidebarHatchRateToggle = document.createElement("b");
+		dataSectionMainMetadataSidebarHatchRateToggle.setAttribute("type","invert");
+		var dataSectionMainMetadataSidebarHatchRateTitle = document.createElement("h6");
+		var dataSectionMainMetadataSidebarHatchRate = document.createElement("h5");
+		dataSectionMainMetadataSidebarHatchRateOuter.setAttribute("name","hatchrate");
+		dataSectionMainMetadataSidebarHatchRateTitle.innerText = "Hatch Rate";
+		dataSectionMainMetadataSidebarHatchRate.setAttribute("dataname","value");
+		dataSectionMainMetadataSidebarHatchRate.setAttribute("value","");
+		dataSectionMainMetadataSidebarRow2.appendChild(dataSectionMainMetadataSidebarHatchRateOuter);
+		dataSectionMainMetadataSidebarHatchRateOuter.appendChild(dataSectionMainMetadataSidebarHatchRateToggle);
+		dataSectionMainMetadataSidebarHatchRateToggle.appendChild(dataSectionMainMetadataSidebarHatchRateTitle);
+		dataSectionMainMetadataSidebarHatchRateToggle.appendChild(dataSectionMainMetadataSidebarHatchRate);
 	}
 	if(Gender == true) {
-		dataAside2MetadataSidebar.appendChild(dataAside2MetadataSidebarRow3);
-		var dataAside2MetadataSidebarGenderRatioOuter = document.createElement("span");
-		var dataAside2MetadataSidebarGenderRatioTitle = document.createElement("h5");
-		var dataAside2MetadataSidebarGenderRatioBar = document.createElement("span");
-		var dataAside2MetadataSidebarGenderRatioToggle = document.createElement("span");
-		var dataAside2MetadataSidebarGenderRatioMale = document.createElement("span");
-		var dataAside2MetadataSidebarGenderRatioFemale = document.createElement("span");
-		var dataAside2MetadataSidebarGenderRatioGenderless = document.createElement("span");
-		dataAside2MetadataSidebarGenderRatioOuter.classList.add("data-sidebar-genderratio");
-		dataAside2MetadataSidebarGenderRatioOuter.setAttribute("name","Gender Ratio");
-		dataAside2MetadataSidebarGenderRatioTitle.innerText = "Gender ratio";
-		dataAside2MetadataSidebarGenderRatioBar.classList.add("data-sidebar-genderratio-bar");
-		dataAside2MetadataSidebarGenderRatioToggle.classList.add("data-sidebar-genderratio-toggle");
-		dataAside2MetadataSidebarGenderRatioToggle.setAttribute("dataname","value");
-		dataAside2MetadataSidebarGenderRatioMale.setAttribute("name","male");
-		dataAside2MetadataSidebarGenderRatioFemale.setAttribute("name","female");
-		dataAside2MetadataSidebarGenderRatioGenderless.setAttribute("name","genderless");
-		dataAside2MetadataSidebarGenderRatioGenderless.setAttribute("title","");
-		dataAside2MetadataSidebarGenderRatioBar.style.display = "none";
-		dataAside2MetadataSidebarGenderRatioOuter.appendChild(dataAside2MetadataSidebarGenderRatioTitle);
-		dataAside2MetadataSidebarGenderRatioOuter.appendChild(dataAside2MetadataSidebarGenderRatioBar);
-		dataAside2MetadataSidebarGenderRatioBar.appendChild(dataAside2MetadataSidebarGenderRatioToggle);
-		dataAside2MetadataSidebarGenderRatioToggle.appendChild(dataAside2MetadataSidebarGenderRatioMale);
-		dataAside2MetadataSidebarGenderRatioToggle.appendChild(dataAside2MetadataSidebarGenderRatioFemale);
-		dataAside2MetadataSidebarGenderRatioToggle.appendChild(dataAside2MetadataSidebarGenderRatioGenderless);
-		dataAside2MetadataSidebarRow3.appendChild(dataAside2MetadataSidebarGenderRatioOuter);
+		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow3);
+		var dataSectionMainMetadataSidebarGenderRatioOuter = document.createElement("span");
+		var dataSectionMainMetadataSidebarGenderRatioTitle = document.createElement("h6");
+		var dataSectionMainMetadataSidebarGenderRatioBar = document.createElement("span");
+		var dataSectionMainMetadataSidebarGenderRatioToggle = document.createElement("b");
+		dataSectionMainMetadataSidebarGenderRatioToggle.setAttribute("type","invert");
+		var dataSectionMainMetadataSidebarGenderRatioMale = document.createElement("span");
+		var dataSectionMainMetadataSidebarGenderRatioFemale = document.createElement("span");
+		var dataSectionMainMetadataSidebarGenderRatioGenderless = document.createElement("span");
+		dataSectionMainMetadataSidebarGenderRatioOuter.setAttribute("name","genderratio");
+		dataSectionMainMetadataSidebarGenderRatioTitle.innerText = "Gender ratio";
+		dataSectionMainMetadataSidebarGenderRatioToggle.setAttribute("dataname","value");
+		dataSectionMainMetadataSidebarGenderRatioMale.setAttribute("name","male");
+		dataSectionMainMetadataSidebarGenderRatioFemale.setAttribute("name","female");
+		dataSectionMainMetadataSidebarGenderRatioGenderless.setAttribute("name","genderless");
+		dataSectionMainMetadataSidebarGenderRatioGenderless.setAttribute("title","");
+		dataSectionMainMetadataSidebarGenderRatioToggle.style.display = "none";
+		dataSectionMainMetadataSidebarGenderRatioOuter.appendChild(dataSectionMainMetadataSidebarGenderRatioBar);
+		dataSectionMainMetadataSidebarGenderRatioBar.appendChild(dataSectionMainMetadataSidebarGenderRatioTitle);
+		dataSectionMainMetadataSidebarGenderRatioBar.appendChild(dataSectionMainMetadataSidebarGenderRatioToggle);
+		dataSectionMainMetadataSidebarGenderRatioToggle.appendChild(dataSectionMainMetadataSidebarGenderRatioMale);
+		dataSectionMainMetadataSidebarGenderRatioToggle.appendChild(dataSectionMainMetadataSidebarGenderRatioFemale);
+		dataSectionMainMetadataSidebarGenderRatioToggle.appendChild(dataSectionMainMetadataSidebarGenderRatioGenderless);
+		dataSectionMainMetadataSidebarRow3.appendChild(dataSectionMainMetadataSidebarGenderRatioOuter);
 	}
 	if(Egg == true) {
-		var dataAside2MetadataSidebarEggGroupOuter = document.createElement("span");
-		var dataAside2MetadataSidebarEggGroupTitle = document.createElement("h5");
-		var dataAside2MetadataSidebarEggGroupPrimarySecondaryOuter = document.createElement("span");
-		var dataAside2MetadataSidebarEggGroupPrimaryOuter = document.createElement("span");
-		var dataAside2MetadataSidebarEggGroupPrimary = document.createElement("b");
-		var dataAside2MetadataSidebarEggGroupSecondaryOuter = document.createElement("span");
-		var dataAside2MetadataSidebarEggGroupSecondary = document.createElement("b");
-		dataAside2MetadataSidebarEggGroupOuter.classList.add("data-sidebar-egggroup");
-		dataAside2MetadataSidebarEggGroupOuter.setAttribute("name","Egg Group");
-		dataAside2MetadataSidebarEggGroupTitle.innerText = "Egg Group";
-		dataAside2MetadataSidebarEggGroupPrimaryOuter.setAttribute("name","Primary");
-		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("id","data-sidebar-egggroup1");
-		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("title","Primary Egg Group");
-		dataAside2MetadataSidebarEggGroupPrimary.setAttribute("dataname","value");
-		dataAside2MetadataSidebarEggGroupSecondaryOuter.setAttribute("name","Secondary");
-		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("id","data-sidebar-egggroup2");
-		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("title","Secondary Egg Group");
-		dataAside2MetadataSidebarEggGroupSecondary.setAttribute("dataname","value");
-		dataAside2MetadataSidebarEggGroupPrimaryOuter.style.display = "none";
-		dataAside2MetadataSidebarEggGroupSecondaryOuter.style.display = "none";
-		dataAside2MetadataSidebarRow3.appendChild(dataAside2MetadataSidebarEggGroupOuter);
-		dataAside2MetadataSidebarEggGroupOuter.appendChild(dataAside2MetadataSidebarEggGroupTitle);
-		dataAside2MetadataSidebarEggGroupOuter.appendChild(dataAside2MetadataSidebarEggGroupPrimarySecondaryOuter);
-		dataAside2MetadataSidebarEggGroupPrimarySecondaryOuter.appendChild(dataAside2MetadataSidebarEggGroupPrimaryOuter);
-		dataAside2MetadataSidebarEggGroupPrimaryOuter.appendChild(dataAside2MetadataSidebarEggGroupPrimary);
-		dataAside2MetadataSidebarEggGroupPrimarySecondaryOuter.appendChild(dataAside2MetadataSidebarEggGroupSecondaryOuter);
-		dataAside2MetadataSidebarEggGroupSecondaryOuter.appendChild(dataAside2MetadataSidebarEggGroupSecondary);
+		var dataSectionMainMetadataSidebarEggGroupOuter = document.createElement("span");
+		var dataSectionMainMetadataSidebarEggGroupContent = document.createElement("span");
+		var dataSectionMainMetadataSidebarEggGroupTitle = document.createElement("h6");
+		var dataSectionMainMetadataSidebarEggGroupPrimarySecondaryOuter = document.createElement("span");
+		var dataSectionMainMetadataSidebarEggGroupPrimaryOuter = document.createElement("span");
+		var dataSectionMainMetadataSidebarEggGroupPrimary = document.createElement("b");
+		dataSectionMainMetadataSidebarEggGroupPrimary.setAttribute("type","invert");
+		var dataSectionMainMetadataSidebarEggGroupPrimaryText = document.createElement("small");
+		var dataSectionMainMetadataSidebarEggGroupSecondaryOuter = document.createElement("span");
+		var dataSectionMainMetadataSidebarEggGroupSecondary = document.createElement("b");
+		dataSectionMainMetadataSidebarEggGroupSecondary.setAttribute("type","invert");
+		var dataSectionMainMetadataSidebarEggGroupSecondaryText = document.createElement("small");
+		dataSectionMainMetadataSidebarEggGroupOuter.setAttribute("name","egggroup");
+		dataSectionMainMetadataSidebarEggGroupTitle.innerText = "Egg Group";
+		dataSectionMainMetadataSidebarEggGroupPrimaryOuter.setAttribute("name","primary");
+		dataSectionMainMetadataSidebarEggGroupPrimary.setAttribute("title","Primary Egg Group");
+		dataSectionMainMetadataSidebarEggGroupPrimaryText.setAttribute("dataname","value");
+		dataSectionMainMetadataSidebarEggGroupSecondaryOuter.setAttribute("name","secondary");
+		dataSectionMainMetadataSidebarEggGroupSecondary.setAttribute("title","Secondary Egg Group");
+		dataSectionMainMetadataSidebarEggGroupSecondaryText.setAttribute("dataname","value");
+		dataSectionMainMetadataSidebarEggGroupPrimaryOuter.style.display = "none";
+		dataSectionMainMetadataSidebarEggGroupSecondaryOuter.style.display = "none";
+		dataSectionMainMetadataSidebarRow3.appendChild(dataSectionMainMetadataSidebarEggGroupOuter);
+		dataSectionMainMetadataSidebarEggGroupOuter.appendChild(dataSectionMainMetadataSidebarEggGroupContent);
+		dataSectionMainMetadataSidebarEggGroupContent.appendChild(dataSectionMainMetadataSidebarEggGroupTitle);
+		dataSectionMainMetadataSidebarEggGroupContent.appendChild(dataSectionMainMetadataSidebarEggGroupPrimarySecondaryOuter);
+		dataSectionMainMetadataSidebarEggGroupPrimarySecondaryOuter.appendChild(dataSectionMainMetadataSidebarEggGroupPrimaryOuter);
+		dataSectionMainMetadataSidebarEggGroupPrimaryOuter.appendChild(dataSectionMainMetadataSidebarEggGroupPrimary);
+		dataSectionMainMetadataSidebarEggGroupPrimary.appendChild(dataSectionMainMetadataSidebarEggGroupPrimaryText);
+		dataSectionMainMetadataSidebarEggGroupPrimarySecondaryOuter.appendChild(dataSectionMainMetadataSidebarEggGroupSecondaryOuter);
+		dataSectionMainMetadataSidebarEggGroupSecondaryOuter.appendChild(dataSectionMainMetadataSidebarEggGroupSecondary);
+		dataSectionMainMetadataSidebarEggGroupSecondary.appendChild(dataSectionMainMetadataSidebarEggGroupSecondaryText);
 	}
-	dataAside2MetadataSidebar.appendChild(dataAside2MetadataSidebarRow4);
+	dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow4);
 
       var d = getDefaultInt(i);
 
-      var dataPrevious = document.createElement("div");
-      var dataNext = document.createElement("div");
-      dataPrevious.classList.add("data-previous");
-      dataNext.classList.add("data-next");
+      var dataPrevious = document.createElement("aside");
+      var dataNext = document.createElement("aside");
+	  dataPrevious.setAttribute("name","previous");
+	  dataNext.setAttribute("name","next");
       dataDivContent.appendChild(dataPrevious);
       dataDivContent.appendChild(dataNext);
 
 	  if ((parseInt(getIntID(d,"")) - 1) > 0) {
-        var dataPreviousNational = document.createElement("button");
+        var dataPreviousNational = document.createElement("b");
+		dataPreviousNational.setAttribute("type","invert");
         var dataPreviousNationalImg = document.createElement("img");
         
-        dataPreviousNational.setAttribute("id","data-previous-national");
         dataPreviousNational.setAttribute("name","national");
         dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
         dataPreviousNational.title = "#"+(parseInt(getIntID(d,"")) - 1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
@@ -369,10 +379,10 @@ var createData = function(id, i) {
 	  }
 
 	  if (finaldataPokémon[getIntID("",(parseInt(getIntID(d,""))+1))][JSONPath_Reference] == "true") {
-        var dataNextNational = document.createElement("button");
+        var dataNextNational = document.createElement("b");
+		dataNextNational.setAttribute("type","invert");
         var dataNextNationalImg = document.createElement("img");
         
-        dataNextNational.setAttribute("id","data-next-national");
         dataNextNational.setAttribute("name","national");
         dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,""))+1)));
         dataNextNational.title = "#"+(parseInt(getIntID(d,""))+1)+"\n"+finaldataPokémon[getIntID("",(parseInt(getIntID(d,""))+1))]["Pokémon"];
@@ -394,10 +404,10 @@ var createData = function(id, i) {
 	      var nextID = getRegionalID("+",getIntID(d,""),JSONPath_Pokédex[q]);
 
 	      if (previousID != undefined) {
-	          var dataPreviousRegional = document.createElement("button");
+	          var dataPreviousRegional = document.createElement("b");
+			  dataPreviousRegional.setAttribute("type","invert");
 	          var dataPreviousRegionalImg = document.createElement("img");
 	  
-	          dataPreviousRegional.setAttribute("id","data-previous-regional"+y);
 	          dataPreviousRegional.setAttribute("name","regional"+y);
 	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
 	          dataPreviousRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",previousID)]["Pokémon"];
@@ -412,10 +422,10 @@ var createData = function(id, i) {
 			  dataPreviousRegional.setAttribute("function","modalData");
 	      }
 	      if (nextID != undefined) {
-	          var dataNextRegional = document.createElement("button");
+	          var dataNextRegional = document.createElement("b");
+			  dataNextRegional.setAttribute("type","invert");
 	          var dataNextRegionalImg = document.createElement("img");
 	  
-	          dataNextRegional.setAttribute("id","data-next-regional"+y); 
 	          dataNextRegional.setAttribute("name","regional"+y);
 	          dataNextRegional.setAttribute("value",getIntID("",nextID));
 	          dataNextRegional.title = "#"+finaldataPokémonPokédexID[getIntID("",nextID)][JSONPath_Pokédex[q]]+"\n"+finaldataPokémon[getIntID("",nextID)]["Pokémon"];
@@ -436,210 +446,240 @@ var createData = function(id, i) {
 	dataDiv.appendChild(dataDivOverlay);
 	dataDiv.appendChild(dataDivContent);
 	dataDivContent.appendChild(dataForm);
-	dataDivContent.appendChild(dataAside1);
-	dataAside1.appendChild(dataAside1DivPortrait);
-	dataAside1DivPortrait.appendChild(dataAside1DivPortraitContent);
-	dataAside1DivPortraitContent.appendChild(dataAside1Portrait);
-	dataAside2MetadataStats.appendChild(dataAside1StatsEVSelector);
-	dataAside1.appendChild(dataAside1DivIdNameOuter);
-	dataAside1DivIdNameOuter.appendChild(dataAside1DivIdName);
-	dataAside1DivIdName.appendChild(dataAside1IDNational);
-	dataAside1DivIdName.appendChild(dataAside1DivIdNameBreak);
-	dataAside1DivIdName.appendChild(dataAside1Name);
-	dataAside1.appendChild(dataAside1DebutCategoryOuter);
-	dataAside1DebutCategoryOuter.appendChild(dataAside1DebutCategory);
-	dataAside1DebutCategory.appendChild(dataAside1Category);
-	dataAside1DebutCategory.appendChild(dataAside1DebutCategoryBreak);
-	dataAside1DebutCategory.appendChild(dataAside1Debut);
-	dataAside1DebutCategoryOuter.appendChild(dataAside1Type);
-	dataDivContent.appendChild(dataAside2);
-	dataAside2AreaDiv.appendChild(dataAside2MapContain);
-	dataAside2MapContain.appendChild(dataAside2MapFullscreen);
-	dataAside2MapContain.appendChild(dataAside2Map);
-	dataAside2Map.appendChild(dataAside2MapImage);
-	dataAside2Map.appendChild(dataAside2MapMark);
-	dataAside2MapMark.appendChild(dataAside2MapMarkImage);
-	dataDivContent.appendChild(dataAside2);
-	dataAside2.appendChild(dataNavigation);
-	dataAside2.appendChild(dataAside2Metadata);
-	dataAside2Metadata.appendChild(dataAside2DescriptionOuter);
-	dataAside2DescriptionOuter.appendChild(dataAside2Description);
-	dataAside2MetadataSidebarOuter.appendChild(dataAside2MetadataStats);
+	dataDivContent.appendChild(dataSectionHeader);
+	dataSectionHeader.appendChild(dataSectionHeaderDivPortrait);
+	dataSectionHeaderDivPortrait.appendChild(dataSectionHeaderDivPortraitContent);
+	dataSectionHeaderDivPortraitContent.appendChild(dataSectionHeaderPortrait);
+	dataSectionMainMetadataStats.appendChild(dataSectionHeaderStatsEVSelector);
+	dataSectionHeader.appendChild(dataSectionHeaderDivIdNameOuter);
+	dataSectionHeaderDivIdNameOuter.appendChild(dataSectionHeaderDivIdName);
+	dataSectionHeaderDivIdName.appendChild(dataSectionHeaderIDNational);
+	dataSectionHeaderDivIdName.appendChild(dataSectionHeaderName);
+	dataSectionHeader.appendChild(dataSectionHeaderDebutCategoryOuter);
+	dataSectionHeaderDebutCategoryOuter.appendChild(dataSectionHeaderDebutCategory);
+	dataSectionHeaderDebutCategory.appendChild(dataSectionHeaderCategory);
+	dataSectionHeaderDebutCategory.appendChild(dataSectionHeaderDebut);
+	dataSectionHeaderDebutCategoryOuter.appendChild(dataSectionHeaderType);
+	dataDivContent.appendChild(dataSectionMain);
+	dataSectionMainAreaDiv.appendChild(dataSectionMainMapContain);
+	dataSectionMainMapContain.appendChild(dataSectionMainMapZoomOut);
+	dataSectionMainMapZoomOut.appendChild(dataSectionMainMapZoomOutText);
+	dataSectionMainMapContain.appendChild(dataSectionMainMapZoomIn);
+	dataSectionMainMapZoomIn.appendChild(dataSectionMainMapZoomInText);
+	dataSectionMainMapContain.appendChild(dataSectionMainMapFullscreen);
+	dataSectionMainMapFullscreen.appendChild(dataSectionMainMapFullscreenText);
+	dataSectionMainMapContain.appendChild(dataSectionMainMapOuter);
+	dataSectionMainMapOuter.appendChild(dataSectionMainMapImage);
+	dataSectionMainMapOuter.appendChild(dataSectionMainMap);
+	dataDivContent.appendChild(dataSectionMain);
+	dataSectionMain.appendChild(dataNavigation);
+	dataSectionMain.appendChild(dataSectionMainMetadata);
+	dataSectionMainMetadata.appendChild(dataSectionMainDescriptionOuter);
+	dataSectionMainDescriptionOuter.appendChild(dataSectionMainDescription);
+	dataSectionMainMetadataSidebarOuter.appendChild(dataSectionMainMetadataStats);
 
-	dataAside2MapFullscreen.addEventListener("click", function() {fullscreenIMG([dataAside2MapImage],0)});
-	dataAside2Map.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([dataAside2MapImage],0)}});
+	dataSectionMainMapFullscreen.addEventListener("click", function() {fullscreenIMG([dataSectionMainMapImage],0)});
+	dataSectionMainMap.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([dataSectionMainMapImage],0)}});
+	
+	dataSectionMainMapOuter.addEventListener("click", function() {zoom(dataSectionMainMapOuter,"pause",undefined)});
+	dataSectionMainMapZoomIn.addEventListener("click",function() {zoom(dataSectionMainMapOuter,"in",false)});
+	dataSectionMainMapZoomOut.addEventListener("click",function() {zoom(dataSectionMainMapOuter,"out",true)});
+	dataSectionMainMapOuter.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){zoom(dataSectionMainMapOuter,"in",false)}else if(!delta.includes("-")){zoom(dataSectionMainMapOuter,"out",true)}});
+	dataSectionMainMapOuter.addEventListener("mouseleave", function() {zoom(dataSectionMainMapOuter,"out",undefined)});
+	dataSectionMainMapOuter.addEventListener("mouseenter", function() {zoom(dataSectionMainMapOuter,"in",undefined)});
+	dataSectionMainMapOuter.addEventListener("mousemove", function() {zoom(dataSectionMainMapOuter,"pan",undefined)});
+
+	dataSectionMainMetadataSidebarOuter.setAttribute("name","sidebar");
 
 
-	var dataAside2MetadataPopup = document.createElement("div");
-	var dataAside2MetadataPopupOuter = document.createElement("div");
-	var dataAside2MetadataPopupSpan1 = document.createElement("span");
-	var dataAside2MetadataPopupSpan1ID = document.createElement("h4");
-	var dataAside2MetadataPopupSpan1Icon = document.createElement("img");
-	var dataAside2MetadataPopupSpan2 = document.createElement("span");
-	var dataAside2MetadataPopupSpan2Title = document.createElement("h2");
-	var dataAside2MetadataPopupSpan2Description = document.createElement("p");
-	var dataAside2MetadataPopupTitleExit1 = document.createElement("button");
-	var dataAside2MetadataPopupTitleExit2 = document.createElement("button");
-	var dataAside2MetadataPopupListOuter = document.createElement("div");
-	var dataAside2MetadataPopupList = document.createElement("ul");
-	dataAside2MetadataPopup.classList.add("data-popup");
-	dataAside2MetadataPopupListOuter.setAttribute("name","list");
-	dataAside2MetadataPopupSpan1Icon.setAttribute("onerror","this.style.display='none'")
-	dataAside2MetadataPopupTitleExit1.innerHTML = "<p>«</p>";
-	dataAside2MetadataPopupTitleExit1.setAttribute("name","up");
-	dataAside2MetadataPopupTitleExit2.innerHTML = "<p>»</p>";
-	dataAside2MetadataPopupTitleExit2.setAttribute("name","down");
-	dataAside2Metadata.appendChild(dataAside2MetadataPopup);
-	dataAside2MetadataPopup.appendChild(dataAside2MetadataPopupOuter);
-	dataAside2MetadataPopupOuter.appendChild(dataAside2MetadataPopupSpan1);
-	dataAside2MetadataPopupSpan1.appendChild(dataAside2MetadataPopupSpan1ID);
-	dataAside2MetadataPopupSpan1.appendChild(dataAside2MetadataPopupSpan1Icon);
-	dataAside2MetadataPopupOuter.appendChild(dataAside2MetadataPopupSpan2);
-	dataAside2MetadataPopupSpan2.appendChild(dataAside2MetadataPopupSpan2Title);
-	dataAside2MetadataPopupSpan2.appendChild(dataAside2MetadataPopupSpan2Description);
-	dataAside2MetadataPopupOuter.appendChild(dataAside2MetadataPopupTitleExit1);
-	dataAside2MetadataPopupOuter.appendChild(dataAside2MetadataPopupTitleExit2);
-	dataAside2MetadataPopup.appendChild(dataAside2MetadataPopupListOuter);
-	dataAside2MetadataPopupListOuter.appendChild(dataAside2MetadataPopupList);
-	dataAside2Metadata.appendChild(dataAside2MetadataSidebarOuter);
-	dataAside2MetadataSidebarOuter.appendChild(dataAside2MetadataSidebar);
-	dataAside2MetadataSidebarCatchRateOuter.appendChild(dataAside2MetadataSidebarCatchRateToggle);
-	dataAside2MetadataSidebarCatchRateToggle.appendChild(dataAside2MetadataSidebarCatchRateContent);
-	dataAside2MetadataSidebarCatchRateContent.appendChild(dataAside2MetadataSidebarCatchRateTitle);
-	dataAside2MetadataSidebarCatchRateContent.appendChild(dataAside2MetadataSidebarCatchRate);
-	dataAside2MetadataSidebarRow4.appendChild(dataAside2MetadataSidebarExpYieldOuter);
-	dataAside2MetadataSidebarExpYieldOuter.appendChild(dataAside2MetadataSidebarExpYieldToggle);
-	dataAside2MetadataSidebarExpYieldToggle.appendChild(dataAside2MetadataSidebarExpYieldContent);
-	dataAside2MetadataSidebarExpYieldContent.appendChild(dataAside2MetadataSidebarExpYieldTitle);
-	dataAside2MetadataSidebarExpYieldContent.appendChild(dataAside2MetadataSidebarExpYield);
-	dataAside2MetadataSidebarRow4.appendChild(dataAside2MetadataSidebarLevelRateOuter);
-	dataAside2MetadataSidebarLevelRateOuter.appendChild(dataAside2MetadataSidebarLevelRateToggle);
-	dataAside2MetadataSidebarLevelRateToggle.appendChild(dataAside2MetadataSidebarLevelRateContent);
-	dataAside2MetadataSidebarLevelRateContent.appendChild(dataAside2MetadataSidebarLevelRateTitle);
-	dataAside2MetadataSidebarLevelRateContent.appendChild(dataAside2MetadataSidebarLevelRate);
+	var dataSectionMainMetadataPopup = document.createElement("div");
+	var dataSectionMainMetadataPopupOuter = document.createElement("div");
+	var dataSectionMainMetadataPopupSpan1 = document.createElement("span");
+	var dataSectionMainMetadataPopupSpan1ID = document.createElement("h6");
+	var dataSectionMainMetadataPopupSpan1Icon = document.createElement("img");
+	var dataSectionMainMetadataPopupSpan2 = document.createElement("span");
+	var dataSectionMainMetadataPopupSpan2Title = document.createElement("h4");
+	var dataSectionMainMetadataPopupSpan2Description = document.createElement("p");
+	var dataSectionMainMetadataPopupTitleExitUp = document.createElement("figure");
+	var dataSectionMainMetadataPopupTitleExitUpText = document.createElement("h3");
+	var dataSectionMainMetadataPopupTitleExitDown = document.createElement("figure");
+	var dataSectionMainMetadataPopupTitleExitDownText = document.createElement("h3");
+	var dataSectionMainMetadataPopupListOuter = document.createElement("div");
+	var dataSectionMainMetadataPopupList = document.createElement("ul");
+	dataSectionMainMetadataPopupListOuter.setAttribute("name","list");
+	dataSectionMainMetadataPopupSpan1Icon.setAttribute("onerror","this.style.display='none'");
+	dataSectionMainMetadataPopupTitleExitUp.setAttribute("name","up");
+	dataSectionMainMetadataPopupTitleExitUpText.innerHTML = "«";
+	dataSectionMainMetadataPopupTitleExitDown.setAttribute("name","down");
+	dataSectionMainMetadataPopupTitleExitDownText.innerHTML = "»";
+	dataSectionMainMetadata.appendChild(dataSectionMainMetadataPopup);
+	dataSectionMainMetadataPopup.appendChild(dataSectionMainMetadataPopupOuter);
+	dataSectionMainMetadataPopupOuter.appendChild(dataSectionMainMetadataPopupSpan1);
+	dataSectionMainMetadataPopupSpan1.appendChild(dataSectionMainMetadataPopupSpan1ID);
+	dataSectionMainMetadataPopupSpan1.appendChild(dataSectionMainMetadataPopupSpan1Icon);
+	dataSectionMainMetadataPopupOuter.appendChild(dataSectionMainMetadataPopupSpan2);
+	dataSectionMainMetadataPopupSpan2.appendChild(dataSectionMainMetadataPopupSpan2Title);
+	dataSectionMainMetadataPopupSpan2.appendChild(dataSectionMainMetadataPopupSpan2Description);
+	dataSectionMainMetadataPopupOuter.appendChild(dataSectionMainMetadataPopupTitleExitUp);
+	dataSectionMainMetadataPopupTitleExitUp.appendChild(dataSectionMainMetadataPopupTitleExitUpText);
+	dataSectionMainMetadataPopupOuter.appendChild(dataSectionMainMetadataPopupTitleExitDown);
+	dataSectionMainMetadataPopupTitleExitDown.appendChild(dataSectionMainMetadataPopupTitleExitDownText);
+	dataSectionMainMetadataPopup.appendChild(dataSectionMainMetadataPopupListOuter);
+	dataSectionMainMetadataPopupListOuter.appendChild(dataSectionMainMetadataPopupList);
+	dataSectionMainMetadata.appendChild(dataSectionMainMetadataSidebarOuter);
+	dataSectionMainMetadataSidebarOuter.appendChild(dataSectionMainMetadataSidebar);
+	dataSectionMainMetadataSidebarCatchRateOuter.appendChild(dataSectionMainMetadataSidebarCatchRateToggle);
+	dataSectionMainMetadataSidebarCatchRateToggle.appendChild(dataSectionMainMetadataSidebarCatchRateTitle);
+	dataSectionMainMetadataSidebarCatchRateToggle.appendChild(dataSectionMainMetadataSidebarCatchRate);
+	dataSectionMainMetadataSidebarRow4.appendChild(dataSectionMainMetadataSidebarExpYieldOuter);
+	dataSectionMainMetadataSidebarExpYieldOuter.appendChild(dataSectionMainMetadataSidebarExpYieldToggle);
+	dataSectionMainMetadataSidebarExpYieldToggle.appendChild(dataSectionMainMetadataSidebarExpYieldTitle);
+	dataSectionMainMetadataSidebarExpYieldToggle.appendChild(dataSectionMainMetadataSidebarExpYield);
+	dataSectionMainMetadataSidebarRow4.appendChild(dataSectionMainMetadataSidebarLevelRateOuter);
+	dataSectionMainMetadataSidebarLevelRateOuter.appendChild(dataSectionMainMetadataSidebarLevelRateToggle);
+	dataSectionMainMetadataSidebarLevelRateToggle.appendChild(dataSectionMainMetadataSidebarLevelRateTitle);
+	dataSectionMainMetadataSidebarLevelRateToggle.appendChild(dataSectionMainMetadataSidebarLevelRate);
+
+	dataSectionMainMetadataPopup.setAttribute("name","popup");
+
+
 	var baseev = ["Base Stats","EV Yield"];
 	for(var q = 0; q < baseev.length; q++) {
-		var dataAside1StatsEVSelectorInput = document.createElement("input");
-		var dataAside1StatsEVSelectorLabel = document.createElement("label");
-		dataAside1StatsEVSelectorInput.setAttribute("type","radio");
-		dataAside1StatsEVSelectorInput.setAttribute("name","data-baseev-"+id);
-		dataAside1StatsEVSelectorInput.setAttribute("id","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
-		dataAside1StatsEVSelectorInput.setAttribute("alt", baseev[q].toLowerCase().replace(" ",""));
-		dataAside1StatsEVSelectorInput.setAttribute("value", q);
-		dataAside1StatsEVSelectorInput.setAttribute("onclick","var x=this.alt.replace('/','').replace(' ','');var nodes=this.parentElement.parentElement.querySelectorAll(':scope > ul[name]');var node=this.parentElement.parentElement.querySelector(':scope > ul[name='+x+']');for(var i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
-		dataAside1StatsEVSelectorLabel.setAttribute("for","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
-		dataAside1StatsEVSelectorLabel.innerText = baseev[q];
-		dataAside1StatsEVSelector.appendChild(dataAside1StatsEVSelectorInput);
-		dataAside1StatsEVSelector.appendChild(dataAside1StatsEVSelectorLabel);
+		var dataSectionHeaderStatsEVSelectorInput = document.createElement("input");
+		var dataSectionHeaderStatsEVSelectorLabel = document.createElement("label");
+		var dataSectionHeaderStatsEVSelectorLabelText = document.createElement("h6");
+		dataSectionHeaderStatsEVSelectorInput.setAttribute("type","radio");
+		dataSectionHeaderStatsEVSelectorInput.setAttribute("name","data-baseev-"+id);
+		dataSectionHeaderStatsEVSelectorInput.setAttribute("id","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
+		dataSectionHeaderStatsEVSelectorInput.setAttribute("alt", baseev[q].toLowerCase().replace(" ",""));
+		dataSectionHeaderStatsEVSelectorInput.setAttribute("value", q);
+		dataSectionHeaderStatsEVSelectorInput.setAttribute("onclick","var x=this.alt.replace('/','').replace(' ','');var nodes=this.parentElement.parentElement.querySelectorAll(':scope > ul[name]');var node=this.parentElement.parentElement.querySelector(':scope > ul[name='+x+']');for(var i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
+		dataSectionHeaderStatsEVSelectorLabel.setAttribute("for","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
+		dataSectionHeaderStatsEVSelectorLabelText.innerText = baseev[q];
+		dataSectionHeaderStatsEVSelector.appendChild(dataSectionHeaderStatsEVSelectorInput);
+		dataSectionHeaderStatsEVSelector.appendChild(dataSectionHeaderStatsEVSelectorLabel);
+		dataSectionHeaderStatsEVSelectorLabel.appendChild(dataSectionHeaderStatsEVSelectorLabelText);
 		if(q == 0) {
-			dataAside1StatsEVSelectorInput.setAttribute("checked","");
+			dataSectionHeaderStatsEVSelectorInput.setAttribute("checked","");
 		}
-		var dataAside1StatsEVUl = document.createElement("ul");
-		dataAside1StatsEVUl.setAttribute("name", baseev[q].toLowerCase().replace(" ",""));
-		dataAside2MetadataStats.appendChild(dataAside1StatsEVUl);
+		var dataSectionHeaderStatsEVUl = document.createElement("ul");
+		dataSectionHeaderStatsEVUl.setAttribute("name", baseev[q].toLowerCase().replace(" ",""));
+		dataSectionMainMetadataStats.appendChild(dataSectionHeaderStatsEVUl);
 		for(var u = 0; u < Stats.length; u++) {
-			var dataAside1StatEV = document.createElement("div");
-			var dataAside1StatEVValue = document.createElement("li");
-			var dataAside1StatsEVSpan = document.createElement("span");
-			dataAside1StatEV.setAttribute("name", Stats[u].toLowerCase().replace(" ","").replace(".",""));
-			dataAside1StatEV.innerText = Stats[u];
-			dataAside1StatEV.setAttribute("dataname","value");
-			dataAside1StatEVValue.classList.add(baseev[q].toLowerCase().replace(" ","")+"-"+Stats[u].toLowerCase().replace(" ","").replace(".",""));
-			dataAside1StatsEVSpan.setAttribute("dataname","value");
-			dataAside1StatsEVSpan.setAttribute("value","");
-			dataAside1StatsEVUl.appendChild(dataAside1StatEV);
-			dataAside1StatsEVUl.appendChild(dataAside1StatEVValue);
-			dataAside1StatEVValue.appendChild(dataAside1StatsEVSpan);
+			var dataSectionHeaderStatEV = document.createElement("b");
+			dataSectionHeaderStatEV.setAttribute("type","invert");
+			var dataSectionHeaderStatEVText = document.createElement("h6");
+			var dataSectionHeaderStatEVValue = document.createElement("li");
+			var dataSectionHeaderStatsEVSpan = document.createElement("b");
+			dataSectionHeaderStatsEVSpan.setAttribute("type","invert");
+			var dataSectionHeaderStatsEVSpanText = document.createElement("p");
+			dataSectionHeaderStatEV.setAttribute("name", Stats[u].toLowerCase().replace(" ","").replace(".",""));
+			dataSectionHeaderStatEVText.innerText = Stats[u];
+			dataSectionHeaderStatEVText.setAttribute("dataname","value");
+			dataSectionHeaderStatEVValue.setAttribute("name",Stats[u].toLowerCase().replaceAll(".","").replaceAll(" ",""));
+			dataSectionHeaderStatsEVSpanText.setAttribute("dataname","value");
+			dataSectionHeaderStatsEVSpan.setAttribute("value","");
+			dataSectionHeaderStatsEVUl.appendChild(dataSectionHeaderStatEV);
+			dataSectionHeaderStatEV.appendChild(dataSectionHeaderStatEVText);
+			dataSectionHeaderStatsEVUl.appendChild(dataSectionHeaderStatEVValue);
+			dataSectionHeaderStatEVValue.appendChild(dataSectionHeaderStatsEVSpan);
+			dataSectionHeaderStatsEVSpan.appendChild(dataSectionHeaderStatsEVSpanText);
 		}
 	}
-	var dataAside2LearnsetDiv = document.createElement("div");
-	var dataAside2Learnset = document.createElement("div");
-	dataAside2LearnsetDiv.classList.add("data-learnset");
-	dataAside2LearnsetDiv.setAttribute("id","data-learnset"+id);
-	dataAside2Learnset.classList.add("data-learnset-content");
-	dataAside2.appendChild(dataAside2LearnsetDiv);
-	dataAside2LearnsetDiv.appendChild(dataAside2Learnset);
-	var dataAside2LearnsetOuter = document.createElement("div");
-	var dataAside2LearnsetUl = document.createElement("ul");
-	var dataAside2LearnsetTitle = document.createElement("h5");
-	var dataAside2LearnsetTitleLi = document.createElement("li");
-	dataAside2LearnsetOuter.setAttribute("id","data-learnset-option");
-	dataAside2LearnsetOuter.classList.add("data-learnset-option");
-	dataAside2Learnset.appendChild(dataAside2LearnsetOuter);
-	dataAside2LearnsetOuter.appendChild(dataAside2LearnsetTitle);
-	dataAside2LearnsetTitle.appendChild(dataAside2LearnsetTitleLi);
-	dataAside2LearnsetOuter.appendChild(dataAside2LearnsetUl);
+	var dataSectionMainLearnsetDiv = document.createElement("div");
+	var dataSectionMainLearnset = document.createElement("div");
+	dataSectionMain.appendChild(dataSectionMainLearnsetDiv);
+	dataSectionMainLearnsetDiv.appendChild(dataSectionMainLearnset);
+	var dataSectionMainLearnsetOuter = document.createElement("div");
+	var dataSectionMainLearnsetUl = document.createElement("ul");
+	var dataSectionMainLearnsetTitle = document.createElement("ol");
+
+	dataSectionMainLearnset.appendChild(dataSectionMainLearnsetOuter);
+	dataSectionMainLearnsetOuter.appendChild(dataSectionMainLearnsetTitle);
+	dataSectionMainLearnsetOuter.appendChild(dataSectionMainLearnsetUl);
+
+
+
+	dataSectionMainMetadata.setAttribute("name","metadata");
+	dataSectionMainLearnsetDiv.setAttribute("name","learnset");
+	dataSectionMainAreaDiv.setAttribute("name","area");
+
+
+
 	var categoriez = ["Source","Move","Type","Category","Power","Accuracy","PP", ];
 	for(u = 0; u < categoriez.length; u++) {
-		var dataAside2LearnsetTitleLiText = document.createElement("p");
-		dataAside2LearnsetTitleLiText.innerText = categoriez[u];
-		dataAside2LearnsetTitleLi.appendChild(dataAside2LearnsetTitleLiText);
+		var dataSectionMainLearnsetTitleLi = document.createElement("li");
+		var dataSectionMainLearnsetTitleLiText = document.createElement("p");
+		dataSectionMainLearnsetTitleLiText.innerText = categoriez[u];
+		dataSectionMainLearnsetTitle.appendChild(dataSectionMainLearnsetTitleLi);
+		dataSectionMainLearnsetTitleLi.appendChild(dataSectionMainLearnsetTitleLiText);
 	}
-	dataAside2.appendChild(dataAside2AreaDiv);
-	dataAside2AreaDiv.appendChild(dataAside2Area);
+
+
+	dataSectionMain.appendChild(dataSectionMainAreaDiv);
+	dataSectionMainAreaDiv.appendChild(dataSectionMainArea);
 	if(HeldItem == true) {
-		var dataAside2MetadataSidebarRow5 = document.createElement("div");
-		var dataAside2MetadataSidebarHeldItemOuter = document.createElement("span");
-		var dataAside2MetadataSidebarHeldItemTitle = document.createElement("h5");
-		dataAside2MetadataSidebarHeldItemOuter.classList.add("data-sidebar-helditem");
-		dataAside2MetadataSidebarHeldItemOuter.setAttribute("name","Held Item");
-		dataAside2MetadataSidebarHeldItemTitle.innerText = "Held Item";
-		dataAside2MetadataSidebar.appendChild(dataAside2MetadataSidebarRow5);
-		dataAside2MetadataSidebarRow5.appendChild(dataAside2MetadataSidebarHeldItemOuter);
-		dataAside2MetadataSidebarHeldItemOuter.appendChild(dataAside2MetadataSidebarHeldItemTitle);
-		var dataAside2MetadataSidebarHeldItem = document.createElement("div");
-		dataAside2MetadataSidebarHeldItem.classList.add("data-sidebar-helditem-img-outer");
-		dataAside2MetadataSidebarHeldItemOuter.appendChild(dataAside2MetadataSidebarHeldItem);
+		var dataSectionMainMetadataSidebarRow5 = document.createElement("div");
+		var dataSectionMainMetadataSidebarHeldItemOuter = document.createElement("span");
+		var dataSectionMainMetadataSidebarHeldItemTitle = document.createElement("h5");
+		dataSectionMainMetadataSidebarHeldItemOuter.setAttribute("name","helditem");
+		dataSectionMainMetadataSidebarHeldItemTitle.innerText = "Held Item";
+		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow5);
+		dataSectionMainMetadataSidebarRow5.appendChild(dataSectionMainMetadataSidebarHeldItemOuter);
+		dataSectionMainMetadataSidebarHeldItemOuter.appendChild(dataSectionMainMetadataSidebarHeldItemTitle);
+		var dataSectionMainMetadataSidebarHeldItem = document.createElement("div");
+		dataSectionMainMetadataSidebarHeldItemOuter.appendChild(dataSectionMainMetadataSidebarHeldItem);
 		for(q = 0; q < JSONPath_HeldItemPercentage.length; q++) {
-			var dataAside2MetadataSidebarHeldItemIcon = document.createElement("span");
-			var dataAside2MetadataSidebarHeldItemImg = document.createElement("img");
-			var dataAside2MetadataSidebarHeldItemText = document.createElement("h5");
-			dataAside2MetadataSidebarHeldItemIcon.setAttribute("name", JSONPath_HeldItemPercentage[q]);
-			dataAside2MetadataSidebarHeldItemIcon.setAttribute("dataname","value");
-			dataAside2MetadataSidebarHeldItemImg.src = "";
-			dataAside2MetadataSidebarHeldItemImg.title = "";
-			dataAside2MetadataSidebarHeldItemImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
-			dataAside2MetadataSidebarHeldItemText.innerText = "";
-			dataAside2MetadataSidebarHeldItem.appendChild(dataAside2MetadataSidebarHeldItemIcon);
-			dataAside2MetadataSidebarHeldItemIcon.appendChild(dataAside2MetadataSidebarHeldItemImg);
-			dataAside2MetadataSidebarHeldItemIcon.appendChild(dataAside2MetadataSidebarHeldItemText);
+			var dataSectionMainMetadataSidebarHeldItemIcon = document.createElement("b");
+			var dataSectionMainMetadataSidebarHeldItemImg = document.createElement("img");
+			var dataSectionMainMetadataSidebarHeldItemText = document.createElement("small");
+			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("name", JSONPath_HeldItemPercentage[q]);
+			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("dataname","value");
+			dataSectionMainMetadataSidebarHeldItemImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
+			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("type","invert");
+			dataSectionMainMetadataSidebarHeldItem.appendChild(dataSectionMainMetadataSidebarHeldItemIcon);
+			dataSectionMainMetadataSidebarHeldItemIcon.appendChild(dataSectionMainMetadataSidebarHeldItemImg);
+			dataSectionMainMetadataSidebarHeldItemIcon.appendChild(dataSectionMainMetadataSidebarHeldItemText);
 
 		}
 	}
-    dataAside1TypePrimaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
-	dataAside1TypeSecondaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+    dataSectionHeaderTypePrimaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+	dataSectionHeaderTypeSecondaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
 
-	dataAside1TypePrimaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
-	dataAside1TypeSecondaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+	dataSectionHeaderTypePrimaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+	dataSectionHeaderTypeSecondaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
 	
 	if(Ability.length >= 1) {
-		dataAside2MetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
-		dataAside2MetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
+		dataSectionMainMetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
+		dataSectionMainMetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
 		if(Ability.length >= 3) {
-			dataAside2MetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
+			dataSectionMainMetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
 		}
 	}
 	if(Egg == true) {
-		dataAside2MetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
-		dataAside2MetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+		dataSectionMainMetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+		dataSectionMainMetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
 	}
-	dataAside2MetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonCatchRate,"Catch Rate","Single");});
+	dataSectionMainMetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonCatchRate,"Catch Rate","Single");});
 	if(Egg == true) {
-		dataAside2MetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonHatchRate,"Hatch Rate","Single");});
+		dataSectionMainMetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonHatchRate,"Hatch Rate","Single");});
 	}
     if(Gender == true) {
-        dataAside2MetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp(id, finaldataPokémonGenderRatio,"Gender Ratio","Custom2");});
+        dataSectionMainMetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp(id, finaldataPokémonGenderRatio,"Gender Ratio","Custom2");});
     }
-	dataAside2MetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield,"Experience Yield","Custom1");});
-	dataAside2MetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate,"Leveling Rate","Single");});
-	var helditm = document.querySelectorAll("#data-modal"+id+" .data-sidebar-helditem-img-outer > span");
+	dataSectionMainMetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield,"Experience Yield","Custom1");});
+	dataSectionMainMetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate,"Leveling Rate","Single");});
+
+
+	
+	var helditm = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] span[name='helditem'] > div > b");
 	for(q = 0; q < helditm.length; q++) {
 		helditm[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonHeldItem,"Held Item","Single");});
 	}
-	dataAside2MetadataPopupTitleExit1.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, false);});
-	dataAside2MetadataPopupTitleExit2.querySelector(":scope > p").addEventListener("click", function() {OpenExitPopUp(id, true);});
-	showMetadataLearnsetArea();
-	var baseEV = document.querySelectorAll("#data-modal"+id+" .data-stats > ul li span");
+	dataSectionMainMetadataPopupTitleExitUp.addEventListener("click", function() {OpenExitPopUp(id, false);});
+	dataSectionMainMetadataPopupTitleExitDown.addEventListener("click", function() {OpenExitPopUp(id, true);});
+
+	var baseEV = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > li > b");
 	for(q = 0; q < baseEV.length; q++) {
 		if(baseEV[q].parentElement.parentElement.getAttribute("name") == "basestats") {
 			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats,"Base Stats","Multiple");});
@@ -647,7 +687,7 @@ var createData = function(id, i) {
 			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield,"EV Yield","Multiple");});
 		}
 	}
-	var baseEVTotal = document.querySelectorAll("#data-modal"+id+" .data-stats > ul div");
+	var baseEVTotal = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > b");
 	for(q = 0; q < baseEVTotal.length; q++) {
 		if(baseEVTotal[q].parentElement.getAttribute("name") == "basestats") {
 			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats,"Base Stats","Total");});
@@ -662,28 +702,30 @@ function loadData() {
 	var target = event.currentTarget;
 	var i = target.getAttribute("value");
 	var id = getIntID(i,"");
-    var base = document.querySelector("#data-modal"+id);
-	var portrait = base.querySelector(":scope .data-portrait");
-	var category = base.querySelector(":scope .data-category");
-	var debut = base.querySelector(":scope .data-debut");
-	var name = base.querySelector(":scope .data-name");
-	var type = base.querySelector(":scope .data-type");
-	var description = base.querySelector(":scope .data-description");
-	var basestats = base.querySelector(":scope .data-stats ul[name='basestats']");
-	var evyield = base.querySelector(":scope .data-stats ul[name='evyield']");
-	var ability = base.querySelector(":scope .data-sidebar-ability");
-	var catchrate = base.querySelector(":scope .data-sidebar-catchrate");
-	var hatchrate = base.querySelector(":scope .data-sidebar-hatchrate");
-	var genderratio = base.querySelector(":scope .data-sidebar-genderratio");
-	var egggroup = base.querySelector(":scope .data-sidebar-egggroup");
-	var expyield = base.querySelector(":scope .data-sidebar-expyield");
-	var levelrate = base.querySelector(":scope .data-sidebar-levelrate");
-	var helditem = base.querySelector(":scope .data-sidebar-helditem");
-    var area = base.querySelector(":scope .data-area ul");
-    var evolution = base.querySelector(":scope .data-modal");
+    var base = document.querySelector("#data > div[value='"+id+"']");
+	var portrait = base.querySelector(":scope section[name='header'] *[name='portrait']");
+	var category = base.querySelector(":scope section[name='header'] *[name='category']");
+	var debut = base.querySelector(":scope section[name='header'] *[name='debut']");
+	var name = base.querySelector(":scope section[name='header'] *[name='idname'] *[name='name']");
+	var type = base.querySelector(":scope section[name='header'] *[name='debutcategorytype'] > *:last-child");
+	var description = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='description']");
+	var basestats = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] ul[name='basestats']");
+	var evyield = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] ul[name='evyield']");
+	var ability = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='ability']");
+	var catchrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='catchrate']");
+	var hatchrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='hatchrate']");
+	var genderratio = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='genderratio']");
+	var egggroup = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='egggroup']");
+	var expyield = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='experienceyield']");
+	var levelrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='levelingrate']");
+	var helditem = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='helditem']");
+    var area = base.querySelector(":scope section[name='main'] div[name='area'] ul");
+    var evolutionbase = base.querySelector(":scope > div");
 
-    if (evolution != undefined) {
-        var evos = evolution.querySelectorAll(":scope .data-evolution");
+
+
+    if (evolutionbase != undefined) {
+        var evos = evolutionbase.querySelectorAll(":scope aside[name='evolution']");
         for(var q = 0; q < evos.length; q++) {
             evos[q].remove();
         }
@@ -699,19 +741,21 @@ function loadData() {
                 var int = getPokémonInt(evoArr[q][u]["Pokémon"]);
 
                 var x = u + 1;
-                var evo = document.createElement("div");
+                var evo = document.createElement("aside");
                 var evoContent = document.createElement("div");
-                var evoToggle = document.createElement("button");
+                var evoToggle = document.createElement("figure");
                 var evoImg = document.createElement("img");
-                var evoMain = document.createElement("main");
-                var evoButton = document.createElement("button");
-                var evoDescription = document.createElement("p");
+                var evoMain = document.createElement("div");
+                var evoButton = document.createElement("b");
+				evoButton.setAttribute("type","invert");
+                var evoDescription = document.createElement("span");
+				var evoDescriptionText = document.createElement("small");
                 var evoID = document.createElement("span");
-                var evoNationalID = document.createElement("h6");
-                var evoName = document.createElement("h4");
+                var evoNationalID = document.createElement("small");
+                var evoName = document.createElement("h6");
 
-                evo.classList.add("data-evolution");
-                evo.setAttribute("name",evoArrName[q]+"-"+x+"/"+evoArr[q].length)
+                evo.setAttribute("type",evoArrName[q]+"-"+x+"/"+evoArr[q].length);
+				evo.setAttribute("name","evolution");
          
                 evoButton.setAttribute("value",getPokémonInt(evoArr[q][u]["Pokémon"]));
                 evoImg.src = './media/Images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(int,"Box")+'.png'
@@ -727,11 +771,10 @@ function loadData() {
                 }
                 
                 evoNationalID.setAttribute("name","national");
-                evoNationalID.setAttribute("value",0);
                 evoName.innerText = evoArr[q][u]["Pokémon"];
 
 
-                evolution.appendChild(evo);
+                evolutionbase.appendChild(evo);
                 evo.appendChild(evoContent);
                 if (q == 0){
                     evoContent.appendChild(evoMain);
@@ -740,10 +783,10 @@ function loadData() {
 
       
                     if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
-                        evoDescription.innerHTML = formatEvolutionText(i,getOffspringData(evoArr[q][u]["Integer"]),"Previous")
+                        evoDescriptionText.innerHTML = formatEvolutionText(i,getOffspringData(evoArr[q][u]["Integer"]),"Previous")
                     }
                     else {
-                        evoDescription.innerHTML = formatEvolutionText(i,evoArr[q][u],"Previous");
+                        evoDescriptionText.innerHTML = formatEvolutionText(i,evoArr[q][u],"Previous");
                     }
 
                 }
@@ -751,48 +794,53 @@ function loadData() {
                     evoContent.appendChild(evoToggle);
                     evoContent.appendChild(evoMain);
                     evoToggle.setAttribute("onclick","this.nextElementSibling.classList.toggle('active')");
-                    evoDescription.innerHTML = formatEvolutionText(i,evoArr[q][u],"Next");
+                    evoDescriptionText.innerHTML = formatEvolutionText(i,evoArr[q][u],"Next");
                 }
 
                 evoToggle.appendChild(evoImg);
                 evoMain.appendChild(evoButton);
                 evoMain.appendChild(evoDescription);
+				evoDescription.appendChild(evoDescriptionText);
                 evoButton.appendChild(evoID);
                 evoID.appendChild(evoNationalID);
                 evoButton.appendChild(evoName);
                 evoButton.addEventListener("click",modalData);
                 evoButton.setAttribute("function","modalData");
 
-                var eggSpan = evoDescription.querySelectorAll(':scope span[name*="egg"]');
+                var eggSpan = evoDescription.querySelectorAll(':scope b[name*="egg"]');
                 for(y = 0; y < eggSpan.length; y++) {
                     eggSpan[y].setAttribute("dataname","value")
                     eggSpan[y].addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
                 }
 
-                var pokSpan = evoDescription.querySelectorAll(':scope span[name="Pokémon"]');
+                var pokSpan = evoDescription.querySelectorAll(':scope b[name="pokémon"]');
                 for(y = 0; y < pokSpan.length; y++) {
                     pokSpan[y].setAttribute("value",getPokémonInt(pokSpan[y].innerText))
                     pokSpan[y].addEventListener("click", modalData);
+					pokSpan[y].setAttribute("function","modalData");
                 }
 
-                var itmSpan = evoDescription.querySelectorAll(':scope span[name="Item"]');
+                var itmSpan = evoDescription.querySelectorAll(':scope b[name="item"]');
                 for(y = 0; y < itmSpan.length; y++) {
                     itmSpan[y].addEventListener("click", dataRedirect);
+					itmSpan[y].setAttribute("function","dataRedirect");
                 }
 
 
                 for(y = 0; y < JSONPath_Pokédex.length; y++) {
                     var z = y+1;
                     var ID = getRegionalID("=",getPokémonID(evoArr[q][u]["Pokémon"]),JSONPath_Pokédex[y]);
-                    var evoRegionalID = document.createElement("h6");
+                    var evoRegionalID = document.createElement("small");
                     if (ID != undefined) {
                         evoRegionalID.innerText = "#"+ID;
                     }
-                    else if (getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])))) != undefined) {
+                    else if (getRegionalID("=",getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])))),JSONPath_Pokédex[y]) != undefined) {
                         evoRegionalID.innerText = "#"+getRegionalID("=",getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])))),JSONPath_Pokédex[y]);
                     }
-                    evoRegionalID.setAttribute("name","regional");
-                    evoRegionalID.setAttribute("value",z);
+					else {
+						evoRegionalID.innerText = "#";
+					}
+                    evoRegionalID.setAttribute("name","regional"+z);
                     evoID.appendChild(evoRegionalID);
                 }
 
@@ -815,23 +863,24 @@ function loadData() {
 
             
 
-                    var pokLocation = document.createElement("span");
-                    pokLocation.setAttribute("name","Location");
+                    var pokLocation = document.createElement("b");
+					pokLocation.setAttribute("type","invert");
+                    pokLocation.setAttribute("name","location");
                     if (finaldataLocationPokémon[q]["Title"] != undefined) {
                         pokLocation.setAttribute("title",finaldataLocationPokémon[q]["Title"]);
                     }
                     pokLi.appendChild(pokLocation);
 
                     if (finaldataLocationPokémon[q]["Location"] != undefined) {
-                        var pokLocationText = document.createElement("h3");
+                        var pokLocationText = document.createElement("h6");
                         pokLocationText.innerText = finaldataLocationPokémon[q]["Location"];
-                        pokLocationText.setAttribute("name","Map");
+                        pokLocationText.setAttribute("name","map");
                         pokLocation.appendChild(pokLocationText);
-                        pokLocationText.addEventListener("click",dataRedirect)
-                        pokLocationText.setAttribute("function","dataRedirect");
+                        pokLocation.addEventListener("click",dataRedirect)
+                        pokLocation.setAttribute("function","dataRedirect");
 
                         if (finaldataLocationPokémon[q]["Area"] != undefined && finaldataLocationPokémon[q]["Area"] != finaldataLocationPokémon[q]["Location"]) {
-                            var pokAreaText = document.createElement("h4");
+                            var pokAreaText = document.createElement("small");
                             pokAreaText.innerText = finaldataLocationPokémon[q]["Area"];
                             pokLocation.appendChild(pokAreaText);
                         }
@@ -842,7 +891,7 @@ function loadData() {
 
     
                     var pokRate = document.createElement("span");
-                    pokRate.setAttribute("name","Rate");
+                    pokRate.setAttribute("name","rate");
                     if (finaldataLocationPokémon[q]["Criteria"] != undefined) {
                         pokRate.setAttribute("title",finaldataLocationPokémon[q]["Criteria"]);
                     }
@@ -850,13 +899,13 @@ function loadData() {
                     pokLi.appendChild(pokRate);
 
                     if (finaldataLocationPokémon[q]["Rate"] != undefined) {
-                        var pokRateText = document.createElement("h4");
-                        pokRateText.innerHTML = finaldataLocationPokémon[q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="Spring">Spring</pre>').replaceAll("au:",'<pre name="Autumn">Autumn</pre>').replaceAll("su:",'<pre name="Summer">Summer</pre>').replaceAll("wi:",'<pre name="Winter">Winter</pre>').replaceAll("mon:",'<pre name="Monday">Monday</pre>').replaceAll("tue:",'<pre name="Tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="Wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="Thursday">Thursday</pre>').replaceAll("fri:",'<pre name="Friday">Friday</pre>').replaceAll("sat:",'<pre name="Saturday">Saturday</pre>').replaceAll("sun:",'<pre name="Sunday">Sunday</pre>');
+                        var pokRateText = document.createElement("h6");
+                        pokRateText.innerHTML = finaldataLocationPokémon[q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("mon:",'<pre name="monday">Monday</pre>').replaceAll("tue:",'<pre name="tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="thursday">Thursday</pre>').replaceAll("fri:",'<pre name="friday">Friday</pre>').replaceAll("sat:",'<pre name="saturday">Saturday</pre>').replaceAll("sun:",'<pre name="sunday">Sunday</pre>');
                         pokRate.appendChild(pokRateText);
                     }
 
                     var pokEncounter = document.createElement("span");
-                    pokEncounter.setAttribute("name","Encounter");
+                    pokEncounter.setAttribute("name","encounter");
                     pokLi.appendChild(pokEncounter);
 
 
@@ -877,8 +926,15 @@ function loadData() {
                         var pokEncounterInner = document.createElement("span");
                         pokEncounter.appendChild(pokEncounterInner);
                         
-                        var pokEncounterText = document.createElement("h4");
+                        var pokEncounterText = document.createElement("span");
                         pokEncounter.appendChild(pokEncounterText);
+
+
+
+
+
+
+				
 
                         var encounterTxtArr = [];
                         for(var u = 0; u < encounters.length; u++) {
@@ -897,7 +953,7 @@ function loadData() {
                             }
 
                         
-                            if (enctitle[u] != "Tile" || enctitle.length == 1) {
+							if (enctitle[u] != "Tile" || enctitle.length == 1) {
                                 encounterTxtArr.push(encounters[u])
                             }
     
@@ -906,40 +962,39 @@ function loadData() {
                         }
 
 
-						for(var t = 0; t < encounterTxtArr.length; t++) {
-							var pokEncounterTxt = document.createElement("span");
-							pokEncounterTxt.innerText = encounterTxtArr[t]
-							pokEncounterText.appendChild(pokEncounterTxt);
+			
 
-							pokEncounterTxt.innerText = pokEncounterTxt.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
+				
 
 
-							var rgs;
-							if (Region.includes(",")) {
-								rgs = Region.split(",")
-							}
-							else {
-								rgs = [Region];
-							}
-							for(var r = 0; r < rgs.length; r++) {
-								encounterTxtArr[t] = encounterTxtArr[t].replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
-							}
 
-
-							if (encounterTxtArr[t] == "Headbutt" || encounterTxtArr[t] == "Rock Smash") {
-								pokEncounterTxt.setAttribute("name","Move");
-								pokEncounterTxt.setAttribute("value",encounterTxtArr[t]);
-								pokEncounterTxt.addEventListener("click", dataRedirect);
-								pokEncounterTxt.setAttribute("function","dataRedirect");
-							}
-							if (encounterTxtArr[t] == "Surfing") {
-								pokEncounterTxt.setAttribute("name","Move");
-								pokEncounterTxt.setAttribute("value","Surf");
-								pokEncounterTxt.addEventListener("click", dataRedirect);
-								pokEncounterTxt.setAttribute("function","dataRedirect");
-							}
+						if (finaldataLocationPokémon[q]["Encounter"] != undefined && finaldataLocationPokémon[q]["Tile"] != undefined) {
+							pokEncounterText.innerHTML = "<small>"+finaldataLocationPokémon[q]["Encounter"]+" on "+finaldataLocationPokémon[q]["Tile"]+"</small>";
 						}
-                
+						else if (finaldataLocationPokémon[q]["Encounter"] != undefined && finaldataLocationPokémon[q]["Tile"] == undefined) {
+							pokEncounterText.innerHTML = "<small>"+finaldataLocationPokémon[q]["Encounter"]+"</small>";
+						}
+						else if (finaldataLocationPokémon[q]["Encounter"] == undefined && finaldataLocationPokémon[q]["Tile"] != undefined) {
+							pokEncounterText.innerHTML = "<small>"+finaldataLocationPokémon[q]["Tile"]+"</small>";
+						}
+
+
+						
+						if (finaldataLocationPokémon[q]["Encounter"] == "Headbutt" || finaldataLocationPokémon[q]["Encounter"] == "Rock Smash") {
+							pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Headbutt","Headbutt</small><small>").replaceAll("Rock Smash","Rock Smash</small><small>");
+							pokEncounterText.firstElementChild.setAttribute("name","move");
+							pokEncounterText.firstElementChild.setAttribute("value",finaldataLocationPokémon[q]["Encounter"]);
+							pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
+							pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+						}
+						else if (encounterTxtArr[t] == "Surfing") {
+							pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Surfing","Surfing</small><small>");
+							pokEncounterText.firstElementChild.setAttribute("name","move");
+							pokEncounterText.firstElementChild.setAttribute("value","Surf");
+							pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
+							pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+						}
+			
                         if (finaldataLocationPokémon[q]["Mechanic"] != undefined) {
                             var pokMechanicText = document.createElement("h3");
                             pokMechanicText.innerText = finaldataLocationPokémon[q]["Mechanic"];
@@ -950,7 +1005,7 @@ function loadData() {
                         if (Allies) {
                             var pokAllies = document.createElement("span");
                             var pokAllyHeader = document.createElement("h4");
-                            pokAllies.setAttribute("name","Allies");
+                            pokAllies.setAttribute("name","allies");
                             pokAllyHeader.innerText = "Allies";
                             pokLi.appendChild(pokAllies);
                             pokAllies.appendChild(pokAllyHeader);
@@ -976,10 +1031,10 @@ function loadData() {
                         }
                         */
                         var pokPok = document.createElement("span");
-                        var pokPokLvl = document.createElement("h5");
+                        var pokPokLvl = document.createElement("small");
                         var pokPokImg = document.createElement("img");
             
-                        pokPok.setAttribute("name","Pokémon");
+                        pokPok.setAttribute("name","pokémon");
                         pokPokLvl.innerText = "Lv. "+finaldataLocationPokémon[q]["Level"];
                         pokPokImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLocationPokémon[q]["Pokémon"]),"Box")+".png";
                
@@ -1020,8 +1075,9 @@ function loadData() {
 
                         
 
-                                var pokLocation = document.createElement("span");
-                                pokLocation.setAttribute("name","Location");
+                                var pokLocation = document.createElement("b");
+								pokLocation.setAttribute("type","invert");
+                                pokLocation.setAttribute("name","location");
                                 if (finaldataLocationPokémon[q]["Title"] != undefined) {
                                     pokLocation.setAttribute("title",finaldataLocationPokémon[q]["Title"]);
                                 }
@@ -1029,15 +1085,15 @@ function loadData() {
                                 pokLi.appendChild(pokLocation);
 
                                 if (finaldataLocationPokémon[q]["Location"] != undefined) {
-                                    var pokLocationText = document.createElement("h3");
+                                    var pokLocationText = document.createElement("h6");
                                     pokLocationText.innerText = finaldataLocationPokémon[q]["Location"];
-                                    pokLocationText.setAttribute("name","Map");
+                                    pokLocationText.setAttribute("name","map");
                                     pokLocation.appendChild(pokLocationText);
                                     pokLocationText.addEventListener("click",dataRedirect)
                                     pokLocationText.setAttribute("function","dataRedirect");
 
                                     if (finaldataLocationPokémon[q]["Area"] != undefined && finaldataLocationPokémon[q]["Area"] != finaldataLocationPokémon[q]["Location"]) {
-                                        var pokAreaText = document.createElement("h4");
+                                        var pokAreaText = document.createElement("small");
                                         pokAreaText.innerText = finaldataLocationPokémon[q]["Area"];
                                         pokLocation.appendChild(pokAreaText);
                                     }
@@ -1048,20 +1104,20 @@ function loadData() {
 
                 
                                 var pokRate = document.createElement("span");
-                                pokRate.setAttribute("name","Rate");
+                                pokRate.setAttribute("name","rate");
                                 if (finaldataLocationPokémon[q]["Criteria"] != undefined) {
                                     pokRate.setAttribute("title",finaldataLocationPokémon[q]["Criteria"]);
                                 }            
                                 pokLi.appendChild(pokRate);
 
                                 if (finaldataLocationPokémon[q]["Rate"] != undefined) {
-                                    var pokRateText = document.createElement("p");
-                                    pokRateText.innerHTML = finaldataLocationPokémon[q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="Spring">Spring</pre>').replaceAll("au:",'<pre name="Autumn">Autumn</pre>').replaceAll("su:",'<pre name="Summer">Summer</pre>').replaceAll("wi:",'<pre name="Winter">Winter</pre>').replaceAll("extremelyharshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Extremely Harsh Sunlight.png" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Hail.png" title="Hail">').replaceAll("harshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Harsh Sunlight.png" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Heavy Rain.png" title="Heavy Rain">').replaceAll("rain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Rain.png" title="Rain">').replaceAll("sandstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Sandstorm.png" title="Sandstorm">').replaceAll("strongwinds:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Strong Winds.png" title="Strong Winds">').replaceAll("fog:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Fog.png" title="Fog">').replaceAll("cloudy:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Cloudy.png" title="Cloudy">').replaceAll("clear:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Clear.png" title="Clear">').replaceAll("blizzard:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Blizzard.png" title="Blizzard">').replaceAll("snow:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Snow.png" title="Snow">').replaceAll("thunderstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"Thunderstorm/.png" title="Thunderstorm">');
+                                    var pokRateText = document.createElement("h6");
+                                    pokRateText.innerHTML = finaldataLocationPokémon[q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("extremelyharshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Extremely Harsh Sunlight.png" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Hail.png" title="Hail">').replaceAll("harshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Harsh Sunlight.png" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Heavy Rain.png" title="Heavy Rain">').replaceAll("rain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Rain.png" title="Rain">').replaceAll("sandstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Sandstorm.png" title="Sandstorm">').replaceAll("strongwinds:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Strong Winds.png" title="Strong Winds">').replaceAll("fog:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Fog.png" title="Fog">').replaceAll("cloudy:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Cloudy.png" title="Cloudy">').replaceAll("clear:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Clear.png" title="Clear">').replaceAll("blizzard:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Blizzard.png" title="Blizzard">').replaceAll("snow:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Snow.png" title="Snow">').replaceAll("thunderstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"Thunderstorm/.png" title="Thunderstorm">');
                                     pokRate.appendChild(pokRateText);
                                 }
 
                                 var pokEncounter = document.createElement("span");
-                                pokEncounter.setAttribute("name","Encounter");
+                                pokEncounter.setAttribute("name","encounter");
                                 pokLi.appendChild(pokEncounter);
 
 
@@ -1082,7 +1138,7 @@ function loadData() {
                                     var pokEncounterInner = document.createElement("span");
                                     pokEncounter.appendChild(pokEncounterInner);
                                     
-                                    var pokEncounterText = document.createElement("h4");
+                                    var pokEncounterText = document.createElement("span");
                                     pokEncounter.appendChild(pokEncounterText);
 
                                     var encounterTxtArr = [];
@@ -1110,42 +1166,31 @@ function loadData() {
                             
                                     }
 
+									if (finaldataLocationPokémon[q]["Encounter"] != undefined && finaldataLocationPokémon[q]["Tile"] != undefined) {
+										pokEncounterText.innerHTML = "<small>"+finaldataLocationPokémon[q]["Encounter"]+" on "+finaldataLocationPokémon[q]["Tile"]+"</small>";
+									}
+									else if (finaldataLocationPokémon[q]["Encounter"] != undefined && finaldataLocationPokémon[q]["Tile"] == undefined) {
+										pokEncounterText.innerHTML = "<small>"+finaldataLocationPokémon[q]["Encounter"]+"</small>";
+									}
+									else if (finaldataLocationPokémon[q]["Encounter"] == undefined && finaldataLocationPokémon[q]["Tile"] != undefined) {
+										pokEncounterText.innerHTML = "<small>"+finaldataLocationPokémon[q]["Tile"]+"</small>";
+									}
 
+									if (finaldataLocationPokémon[q]["Encounter"] == "Headbutt" || finaldataLocationPokémon[q]["Encounter"] == "Rock Smash") {
+										pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Headbutt","Headbutt</small><small>").replaceAll("Rock Smash","Rock Smash</small><small>");
+										pokEncounterText.firstElementChild.setAttribute("name","move");
+										pokEncounterText.firstElementChild.setAttribute("value",finaldataLocationPokémon[q]["Encounter"]);
+										pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
+										pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+									}
+									else if (encounterTxtArr[t] == "Surfing") {
+										pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Surfing","Surfing</small><small>");
+										pokEncounterText.firstElementChild.setAttribute("name","move");
+										pokEncounterText.firstElementChild.setAttribute("value","Surf");
+										pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
+										pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+									}
 
-
-                                    for(var u = 0; u < encounterTxtArr.length; u++) {
-                                        var pokEncounterTxt = document.createElement("span");
-                                        pokEncounterTxt.innerText = encounterTxtArr[u]
-                                        pokEncounterText.appendChild(pokEncounterTxt);
-
-										pokEncounterTxt.innerText = pokEncounterTxt.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
-
-                                        var rgs;
-                                        if (Region.includes(",")) {
-                                            rgs = Region.split(",")
-                                        }
-                                        else {
-                                            rgs = [Region];
-                                        }
-                                        for(var r = 0; r < rgs.length; r++) {
-                                            encounterTxtArr[u] = encounterTxtArr[u].replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","").replaceAll(" Autumn","").replaceAll(" Spring","").replaceAll(" Winter","").replaceAll(" Summer","");
-                                        }
-										encounterTxtArr[u] = encounterTxtArr[u].replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
-
-                                        if (encounterTxtArr[u] == "Headbutt") {
-                                            pokEncounterTxt.setAttribute("name","Move");
-                                            pokEncounterTxt.setAttribute("value","Headbutt");
-                                            pokEncounterTxt.addEventListener("click", dataRedirect);
-                                            pokEncounterTxt.setAttribute("function","dataRedirect");
-                                        }
-                                        if (encounterTxtArr[u] == "Surfing") {
-                                            pokEncounterTxt.setAttribute("name","Move");
-                                            pokEncounterTxt.setAttribute("value","Surf");
-                                            pokEncounterTxt.addEventListener("click", dataRedirect);
-                                            pokEncounterTxt.setAttribute("function","dataRedirect");
-                                        }
-                                    }
-                            
                                     if (finaldataLocationPokémon[q]["Mechanic"] != undefined) {
                                         var pokMechanicText = document.createElement("h3");
                                         pokMechanicText.innerText = finaldataLocationPokémon[q]["Mechanic"];
@@ -1154,7 +1199,7 @@ function loadData() {
                                     /*
                                     var pokAllies = document.createElement("span");
                                     var pokAllyHeader = document.createElement("h4");
-                                    pokAllies.setAttribute("name","Allies");
+                                    pokAllies.setAttribute("name","allies");
                                     pokAllyHeader.innerText = "Allies";
                                     pokLi.appendChild(pokAllies);
                                     pokAllies.appendChild(pokAllyHeader);
@@ -1185,7 +1230,7 @@ function loadData() {
                                     var pokPokLvl = document.createElement("h5");
                                     var pokPokImg = document.createElement("img");
                         
-                                    pokPok.setAttribute("name","Pokémon");
+                                    pokPok.setAttribute("name","pokémon");
                                     pokPokIsAlly.innerText = "Ally to "+finaldataLocationPokémon[q]["Pokémon"];
                                     pokPokLvl.innerText = "Lv. "+finaldataLocationPokémon[q]["Level"];
                                     pokPokImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLocationPokémon[q]["Pokémon"]),"Box")+".png";
@@ -1210,7 +1255,7 @@ function loadData() {
     }
 
 
-    var loc = area.querySelectorAll(":scope li span[name='Location'] > *[function]");
+    var loc = area.querySelectorAll(":scope li span[name='location'] > *[function]");
     var locs = [];
 
     for(var r = 0; r < loc.length; r++) {
@@ -1233,29 +1278,28 @@ function loadData() {
 	}
 	if(Ability.length >= 1) {
 		if(returnData(i,"Ability","")[0] != undefined) {
-			ability.querySelector(':scope *[title="Primary Ability"]').innerText = returnData(i,"Ability","")[0];
-			ability.querySelector(':scope *[title="Primary Ability"]').style.display = "flex";
+			ability.querySelector(':scope *[title="Primary Ability"] > *').innerText = returnData(i,"Ability","")[0];
+			ability.querySelector(':scope *[title="Primary Ability"]').parentElement.style.display = "flex";
 		} else {
-			ability.querySelector(':scope *[title="Primary Ability"]').style.display = "none";
+			ability.querySelector(':scope *[title="Primary Ability"]').parentElement.style.display = "none";
 		}
 		if(returnData(i,"Ability","")[1] != undefined) {
-			ability.querySelector(':scope *[title="Secondary Ability"]').innerText = returnData(i,"Ability","")[1];
-			ability.querySelector(':scope *[title="Secondary Ability"]').style.display = "flex";
+			ability.querySelector(':scope *[title="Secondary Ability"] > *').innerText = returnData(i,"Ability","")[1];
+			ability.querySelector(':scope *[title="Secondary Ability"]').parentElement.style.display = "flex";
 		} else {
-			ability.querySelector(':scope *[title="Secondary Ability"]').style.display = "none";
+			ability.querySelector(':scope *[title="Secondary Ability"]').parentElement.style.display = "none";
 		}
 		if(Ability.length >= 3) {
 			if(returnData(i,"Ability","")[2] != undefined) {
-				ability.querySelector(':scope *[title="Hidden Ability"]').innerText = returnData(i,"Ability","")[2];
-				ability.querySelector(':scope *[title="Hidden Ability"]').parentElement.style.display = "flex";
+				ability.querySelector(':scope *[title="Hidden Ability"] > *').innerText = returnData(i,"Ability","")[2];
+				ability.querySelector(':scope *[title="Hidden Ability"]').parentElement.parentElement.style.display = "flex";
 			} else {
-				ability.querySelector(':scope *[title="Hidden Ability"]').parentElement.style.display = "none";
+				ability.querySelector(':scope *[title="Hidden Ability"]').parentElement.parentElement.style.display = "none";
 			}
 		}
 	}
     if (Gender == true) {
-        genderratio.querySelector(':scope > span').style.display = "unset";
-
+		genderratio.querySelector(':scope b').style.removeProperty("display");
         if(returnData(i,"Gender Ratio","")[0] == "1" && returnData(i,"Gender Ratio","")[1] == "0") { // Always Male
             genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="male"]').setAttribute("title","100% Male");
             genderratio.querySelector(':scope *[dataname="value"]').querySelector(':scope > span[name="female"]').setAttribute("title","0% Female");
@@ -1315,18 +1359,18 @@ function loadData() {
         hatchrate.querySelector(':scope *[dataname="value"').setAttribute("value", returnData(i,"Hatch Rate","")[0]);
 
 		if(returnData(i,"Egg Group","")[0] != undefined) {
-			egggroup.querySelector(':scope span[name="Primary"]').style.display = "flex";
-			egggroup.querySelector(':scope span[name="Primary"]').querySelector(':scope *[dataname="value"').setAttribute("name","egg"+returnData(i,"Egg Group","")[0]);
-			egggroup.querySelector(':scope span[name="Primary"]').querySelector(':scope *[dataname="value"').innerText = returnData(i,"Egg Group","")[0];
+			egggroup.querySelector(':scope span[name="primary"]').style.display = "flex";
+			egggroup.querySelector(':scope span[name="primary"]').querySelector(':scope *[dataname="value"]').setAttribute("name","egg"+returnData(i,"Egg Group","")[0]);
+			egggroup.querySelector(':scope span[name="primary"]').querySelector(':scope *[dataname="value"]').innerText = returnData(i,"Egg Group","")[0];
 		} else {
-			egggroup.querySelector(':scope span[name="Primary"]').style.display = "none";
+			egggroup.querySelector(':scope span[name="primary"]').style.display = "none";
 		}
 		if(returnData(i,"Egg Group","")[1] != undefined) {
-			egggroup.querySelector(':scope span[name="Secondary"]').style.display = "flex";
-			egggroup.querySelector(':scope span[name="Secondary"]').querySelector(':scope *[dataname="value"').setAttribute("name","egg"+returnData(i,"Egg Group","")[1]);
-			egggroup.querySelector(':scope span[name="Secondary"]').querySelector(':scope *[dataname="value"').innerText = returnData(i,"Egg Group","")[1];
+			egggroup.querySelector(':scope span[name="secondary"]').style.display = "flex";
+			egggroup.querySelector(':scope span[name="secondary"]').querySelector(':scope *[dataname="value"]').setAttribute("name","egg"+returnData(i,"Egg Group","")[1]);
+			egggroup.querySelector(':scope span[name="secondary"]').querySelector(':scope *[dataname="value"]').innerText = returnData(i,"Egg Group","")[1];
 		} else {
-			egggroup.querySelector(':scope span[name="Secondary"]').style.display = "none";
+			egggroup.querySelector(':scope span[name="secondary"]').style.display = "none";
 		}
 	}
 	var baseev = ["Base Stats","EV Yield"];
@@ -1342,8 +1386,8 @@ function loadData() {
 				var json = JSONPath_EVYield;
 				var taq = evyield;
 			}
-			var temp1 = baseev[y].toLowerCase().replace(" ","").replace(".","");
-			var temp2 = Stats[q].toLowerCase().replace(" ","").replace(".","");
+
+			var temp = Stats[q].toLowerCase().replace(" ","").replace(".","");
 			for(var u = 0; u < finaldataPokémon.length; u++) {
 				if(finaldataPokémon[u][JSONPath_Reference] == "true") {
 					if(arr[u][Stats[q]+"_"+json] != undefined && arr[u][Stats[q]+"_"+json] != "") {
@@ -1351,9 +1395,11 @@ function loadData() {
 					}
 				}
 			}
-			taq.querySelector(':scope .'+temp1+'-'+temp2).querySelector(':scope *[dataname="value"]').innerHTML = returnData(i, baseev[y]+" "+Stats[q],"")[0]+"&nbsp;&nbsp;";
-			taq.querySelector(':scope .'+temp1+'-'+temp2).querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i, baseev[y]+" "+Stats[q],"")[0]);
-			taq.querySelector(':scope .'+temp1+'-'+temp2).querySelector(':scope *[dataname="value"]').style.width = returnData(i, baseev[y]+" "+Stats[q],"")[0] / Math.max.apply(Math, sts) * 100+"%";
+			var target = taq.querySelector(':scope li[name='+temp+']').querySelector(':scope *[dataname="value"]');
+			target.innerHTML = returnData(i, baseev[y]+" "+Stats[q],"")[0]+"&nbsp;&nbsp;";
+			target.setAttribute("value", returnData(i, baseev[y]+" "+Stats[q],"")[0]);
+			target.parentElement.style.width = returnData(i, baseev[y]+" "+Stats[q],"")[0] / Math.max.apply(Math, sts) * 100+"%";
+
 			sts = [];
 		}
 	}
@@ -1398,13 +1444,13 @@ function loadData() {
     if (HeldItem == true) {
         for(var q = 0; q < JSONPath_HeldItemPercentage.length; q++) {
             if(returnData(i,"Held Item","")[q] != undefined) {
-                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("value", returnData(i,"Held Item","")[q]);
-                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(returnData(i,"Held Item","")[q])+".png";
-                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').setAttribute("title", returnData(i,"Held Item","")[q]);
-                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "unset";
-                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] h5').innerText = returnData(i,"Held Item","")[q];
+                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("value", returnData(i,"Held Item","")[q]);
+                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] img').src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(returnData(i,"Held Item","")[q])+".png";
+                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("title",JSONPath_HeldItemPercentage[q]+"\n"+returnData(i,"Held Item","")[q]);
+                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "unset";
+                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] > *:last-child').innerText = returnData(i,"Held Item","")[q];
             } else {
-                helditem.querySelector(':scope > div span[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "none";
+                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "none";
             }
         }
         var heldcheck;
@@ -1429,10 +1475,11 @@ function loadData() {
         type.setAttribute("title","");
     }
 	if(returnData(i,"Type","")[0] != undefined) {
-		type.querySelector(":scope > span:first-child h3").style.display = "none";
+		
+		type.querySelector(":scope > span:first-child > * > *:last-child").style.display = "none";
 		type.querySelector(":scope > span:first-child").classList.add("active");
 		type.querySelector(":scope > span:first-child img").style.display = "inline";
-		type.querySelector(":scope > span:first-child h3").innerText = returnData(i,"Type","")[0];
+		type.querySelector(":scope > span:first-child > * > *:last-child").innerText = returnData(i,"Type","")[0];
 		type.querySelector(":scope > span:first-child img").setAttribute("src","./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnData(i,"Type","")[0]+".png");
         type.querySelector(":scope > span:first-child img").setAttribute("value", returnData(i,"Type","")[0]);
 	} else {
@@ -1440,10 +1487,10 @@ function loadData() {
 		type.querySelector(":scope > span:first-child img").style.display = "none";
 	}
 	if(returnData(i,"Type","")[1] != undefined) {
-		type.querySelector(":scope > span:last-child h3").style.display = "none";
+		type.querySelector(":scope > span:last-child > * > *:last-child").style.display = "none";
 		type.querySelector(":scope > span:last-child").classList.add("active");
 		type.querySelector(":scope > span:last-child img").style.display = "inline";
-		type.querySelector(":scope > span:last-child h3").innerText = returnData(i,"Type","")[1];
+		type.querySelector(":scope > span:last-child > * > *:last-child").innerText = returnData(i,"Type","")[1];
 		type.querySelector(":scope > span:last-child img").setAttribute("src","./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnData(i,"Type","")[1]+".png");
         type.querySelector(":scope > span:last-child img").setAttribute("value", returnData(i,"Type","")[1]);
 	} else {
@@ -1455,137 +1502,200 @@ function loadData() {
 	} else {
 		type.removeAttribute("name");
 	}
-	var dataAside2LearnsetUl = document.querySelector("#data-modal"+id+" .data-learnset-option > ul");
-	var dataAside2LearnsetHeader = document.querySelectorAll("#data-modal"+id+" .data-learnset-option > h5 li p");
-	var dataAside2LearnsetList = document.querySelectorAll("#data-modal"+id+" .data-learnset-option > ul li");
-	for(u = 0; u < dataAside2LearnsetList.length; u++) {
-		dataAside2LearnsetList[u].remove();
+	var dataSectionMainLearnsetUl = document.querySelector("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ul");
+	var dataSectionMainLearnsetHeader = document.querySelectorAll("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ol li > p");
+	var dataSectionMainLearnsetList = document.querySelectorAll("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ul li");
+	for(u = 0; u < dataSectionMainLearnsetList.length; u++) {
+		dataSectionMainLearnsetList[u].remove();
 	}
 
     var learnsetArr = returnMoveSet(this.value,"");
     
 	for (u = 0; u < learnsetArr.length; u++) {
-        var dataAside2LearnsetLi = document.createElement("li");
-        dataAside2LearnsetUl.appendChild(dataAside2LearnsetLi);
+        var dataSectionMainLearnsetLi = document.createElement("li");
+        dataSectionMainLearnsetUl.appendChild(dataSectionMainLearnsetLi);
 
-        for(y = 0; y < dataAside2LearnsetHeader.length; y++) {
-            var dataAside2LearnsetLiText = document.createElement("span");
-            dataAside2LearnsetLi.appendChild(dataAside2LearnsetLiText);
+        for(y = 0; y < dataSectionMainLearnsetHeader.length; y++) {
+	
+		
+			
+			
             if(y == 0) {
 
-                dataAside2LearnsetLiText.title = "via "+learnsetArr[u]["Type"];
-
                 if (learnsetArr[u]["Type"] == "Prior Evolution") {
-                    var dataAside2LearnsetLiHeader = document.createElement("h6");
-                    dataAside2LearnsetLiHeader.innerText = "Prior Evolution";
-                    dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiHeader);
+			
+
+					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+					var dataSectionMainLearnsetLiText = document.createElement("small");
+					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+                    
+                    dataSectionMainLearnsetLiText.innerText = "Prior Evolution";
+                    
 
                     if(learnsetArr[u]["Evolution"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Evolution"].split(",").length; p++) {
-                            var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]),"Box")+'.png');
-                            dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
-                            dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
-                            dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
-                            dataAside2LearnsetLiImg.addEventListener("click", modalData);
+                            var dataSectionMainLearnsetLiImg = document.createElement("img");
+                            dataSectionMainLearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]),"Box")+'.png');
+                            dataSectionMainLearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
+                            dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
+                            dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
+                            dataSectionMainLearnsetLiImg.addEventListener("click", modalData);
+							dataSectionMainLearnsetLiImg.setAttribute("function","modalData");
                         }
                     } else {
-                        var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Evolution"]),"Box")+'.png');
-                        dataAside2LearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
-                        dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
-                        dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
-                        dataAside2LearnsetLiImg.addEventListener("click", modalData);
+                        var dataSectionMainLearnsetLiImg = document.createElement("img");
+                        dataSectionMainLearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Evolution"]),"Box")+'.png');
+                        dataSectionMainLearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
+                        dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
+                        dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
+                        dataSectionMainLearnsetLiImg.addEventListener("click", modalData);
+						dataSectionMainLearnsetLiImg.setAttribute("function","modalData");
                     }
                 }
 
                 if (learnsetArr[u]["Type"] == "Level Up") {
-                    dataAside2LearnsetLiText.innerText = learnsetArr[u]["Factor"];
+					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+				
+                    dataSectionMainLearnsetLiText.innerText = learnsetArr[u]["Factor"];
                     if (learnsetArr[u]["Factor"] == "Evolution") {
-                        dataAside2LearnsetLiText.title = "via Evolution Trigger";
+                        dataSectionMainLearnsetLiText.title = "via Evolution Trigger";
                     }
                 }
                 else if (learnsetArr[u]["Type"] == "Machine") {
-                    dataAside2LearnsetLiText.innerText = learnsetArr[u]["Machine"];
+					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+                    dataSectionMainLearnsetLiText.innerText = learnsetArr[u]["Machine"];
                 }
                 else if (learnsetArr[u]["Type"] == "Breeding") {
+					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					var dataSectionMainLearnsetLiText = document.createElement("small");
+					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
-                    var dataAside2LearnsetLiHeader = document.createElement("h6");
-                    dataAside2LearnsetLiHeader.innerText = "via Breeding";
-                    dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiHeader);
+                    dataSectionMainLearnsetLiText.innerText = "via Breeding";
+                    
 
                     if(learnsetArr[u]["Parent"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Parent"].split(",").length; p++) {
-                            var dataAside2LearnsetLiImg = document.createElement("img");
-                            dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]),"Box")+'.png');
-                            dataAside2LearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"].split(",")[p]);
-                            dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]));
-                            dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
-                            dataAside2LearnsetLiImg.addEventListener("click", modalData);
+                            var dataSectionMainLearnsetLiImg = document.createElement("img");
+                            dataSectionMainLearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]),"Box")+'.png');
+                            dataSectionMainLearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"].split(",")[p]);
+                            dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]));
+                            dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
+                            dataSectionMainLearnsetLiImg.addEventListener("click", modalData);
+							dataSectionMainLearnsetLiImg.setAttribute("function","modalData");
                         }
                     } else {
-                        var dataAside2LearnsetLiImg = document.createElement("img");
-                        dataAside2LearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Parent"]),"Box")+'.png');
-                        dataAside2LearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"]);
-                        dataAside2LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"]));
-                        dataAside2LearnsetLiText.appendChild(dataAside2LearnsetLiImg);
-                        dataAside2LearnsetLiImg.addEventListener("click", modalData);
+                        var dataSectionMainLearnsetLiImg = document.createElement("img");
+                        dataSectionMainLearnsetLiImg.setAttribute("src", './Media/images/Pokémon/Box/PNG/'+MEDIAPath_Pokémon_Box+'/'+getPokémonMediaPath(getPokémonInt(learnsetArr[u]["Parent"]),"Box")+'.png');
+                        dataSectionMainLearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"]);
+                        dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"]));
+                        dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
+                        dataSectionMainLearnsetLiImg.addEventListener("click", modalData);
+						dataSectionMainLearnsetLiImg.setAttribute("function","modalData");
                     }
                 }
-                
+				dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
             }
             if(y == 1) {
-                dataAside2LearnsetLiText.title = "Move";
+				
                 if(learnsetArr[u]["Move"] == undefined) {
-                    dataAside2LearnsetLiText.innerHTML = "–";
+					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+                    dataSectionMainLearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = learnsetArr[u]["Move"];
-                    dataAside2LearnsetLiText.setAttribute("name","move");
-                    dataAside2LearnsetLiText.addEventListener("click", dataRedirect);
+					var dataSectionMainLearnsetLiTextOuter = document.createElement("b");
+					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+					
+					dataSectionMainLearnsetLiTextOuter.setAttribute("type","underline");
+                    dataSectionMainLearnsetLiText.innerText = learnsetArr[u]["Move"];
+                    dataSectionMainLearnsetLiText.setAttribute("name","move");
+                    dataSectionMainLearnsetLiText.addEventListener("click", dataRedirect);
+					dataSectionMainLearnsetLiText.setAttribute("function","dataRedirect");
                 }
+                dataSectionMainLearnsetLiText.title = "Move";
+
             }
             if(y == 2) {
-                dataAside2LearnsetLiText.title = "Type";
+				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+                dataSectionMainLearnsetLiText.title = "Type";
                 if(getMoveData(learnsetArr[u]["Move"],"Type") == undefined) {
-                    dataAside2LearnsetLiText.innerHTML = "–";
+                    dataSectionMainLearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Type");
+                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Type");
                 }
-                dataAside2LearnsetLiText.setAttribute("name", dataAside2LearnsetLiText.innerText);
+                dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
             }
             if(y == 3) {
-                dataAside2LearnsetLiText.title = "Category";
+				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+                dataSectionMainLearnsetLiText.title = "Category";
                 if(getMoveData(learnsetArr[u]["Move"],"Category") == undefined) {
-                    dataAside2LearnsetLiText.innerHTML = "–";
+                    dataSectionMainLearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Category");
+                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Category");
                 }
-                dataAside2LearnsetLiText.setAttribute("name", dataAside2LearnsetLiText.innerText);
+                dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
             }
             if(y == 4) {
-                dataAside2LearnsetLiText.title = "Power";
+				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+                dataSectionMainLearnsetLiText.title = "Power";
                 if(getMoveData(learnsetArr[u]["Move"],"Power") == undefined) {
-                    dataAside2LearnsetLiText.innerHTML = "–";
+                    dataSectionMainLearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Power");
+                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Power");
                 }
             }
             if(y == 5) {
-                dataAside2LearnsetLiText.title = "Accuracy";
+				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+                dataSectionMainLearnsetLiText.title = "Accuracy";
                 if(getMoveData(learnsetArr[u]["Move"],"Accuracy") == undefined) {
-                    dataAside2LearnsetLiText.innerHTML = "–";
+                    dataSectionMainLearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Accuracy");
+                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Accuracy");
                 }
             }
             if(y == 6) {
-                dataAside2LearnsetLiText.title = "PP";
+				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+                dataSectionMainLearnsetLiText.title = "PP";
                 if(getMoveData(learnsetArr[u]["Move"],"PP Min") == undefined) {
-                    dataAside2LearnsetLiText.innerHTML = "–";
+                    dataSectionMainLearnsetLiText.innerHTML = "–";
                 } else {
-                    dataAside2LearnsetLiText.innerHTML = getMoveData(learnsetArr[u]["Move"],"PP Min")+" <span>(max. "+getMoveData(learnsetArr[u]["Move"],"PP Max")+")</span>";
+                    dataSectionMainLearnsetLiText.innerHTML = getMoveData(learnsetArr[u]["Move"],"PP Min")+" <span>(max. "+getMoveData(learnsetArr[u]["Move"],"PP Max")+")</span>";
                 }
             }
+
         }
 		
 	}
@@ -1596,56 +1706,63 @@ function loadData() {
 
 
 $("body").click(function(event) {
-	if(!$(event.target).closest('.data-evolution[name*="previous"]').length && !$(event.target).is('.data-evolution[name*="previous"]')) {
-		$('.data-evolution[name*="previous"] main').removeClass("active");
+	if(!$(event.target).closest('#data aside[name="evolution"][type*="previous"]').length && !$(event.target).is('#data aside[name="evolution"][type*="previous"]')) {
+		$('#data aside[name="evolution"][type*="previous"] > div > div').removeClass("active");
 	}
-	if(!$(event.target).closest('.data-evolution[name*="next"]').length && !$(event.target).is('.data-evolution[name*="next"]')) {
-		$('.data-evolution[name*="next"] main').removeClass("active");
+	if(!$(event.target).closest('#data aside[name="evolution"][type*="next"]').length && !$(event.target).is('#data aside[name="evolution"][type*="next"]')) {
+		$('#data aside[name="evolution"][type*="next"] > div > div').removeClass("active");
 	}
 });
-var navChecker = [1];
+
+var navChecker = [0];
 
 function showMetadataLearnsetArea() {
-	var MetadataButton = document.querySelectorAll('#data-navigation input[value="1"]');
-	for(var i = 0; i < MetadataButton.length; i++) {
-		MetadataButton[i].addEventListener("click", function() {
-			this.parentElement.nextElementSibling.style.display = "flex";
-			this.parentElement.nextElementSibling.nextElementSibling.style.display = "none";
-			this.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.style.display = "none";
-			navChecker.fill(1);
-		});
+	
+	var int = this.getAttribute("name").replaceAll("data-navigation","");
+	var divs = document.querySelectorAll("#data > div[value='"+int+"'] section[name='main'] > div[name]");
+	var location = document.querySelectorAll("#data > div[value='"+int+"'] section[name='main'] > div[name='area'] ul li > *[name='location'] > *:first-child");
+	var mapOuter = document.querySelector("#data > div[value='"+int+"'] section[name='main'] > div[name='area'] > div > div");
+	var locations = [];
+	var img = mapOuter.querySelector(":scope img");
+
+	for(var i = 0; i < location.length; i++) {
+		locations.push(location[i].innerText)
 	}
-	var LearnsetButton = document.querySelectorAll('#data-navigation input[value="2"]');
-	for(var i = 0; i < LearnsetButton.length; i++) {
-		LearnsetButton[i].addEventListener("click", function() {
-			this.parentElement.nextElementSibling.style.display = "none";
-			this.parentElement.nextElementSibling.nextElementSibling.style.display = "flex";
-			this.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.style.display = "none";
-			navChecker.fill(2);
-		});
+
+	for(var i = 0; i < divs.length; i++) {
+		divs[i].style.display = "none";
 	}
-	var AreaButton = document.querySelectorAll('#data-navigation input[value="3"]');
-	for(var i = 0; i < AreaButton.length; i++) {
-		AreaButton[i].addEventListener("click", function() {
-			this.parentElement.nextElementSibling.style.display = "none";
-			this.parentElement.nextElementSibling.nextElementSibling.style.display = "none";
-			this.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.style.display = "flex";
-			navChecker.fill(3);
-		});
+	divs[this.value].style.removeProperty("display");
+
+	if (this.value == 2) {
+		if (img.naturalWidth != 0) {
+			mapifyMap(mapOuter);
+			mapBlink(mapOuter,locations);
+		}
+		else {
+			img.addEventListener("load", event => {
+				mapifyMap(mapOuter);
+				mapBlink(mapOuter,locations);
+			});
+		}
 	}
+
+
+	navChecker.fill(parseInt(this.value))
 }
 
-function navKeeper(id) {
-	var MetadataButton = document.querySelector("#data-modal"+id+' #data-navigation input[value="1"]');
-	var LearnsetButton = document.querySelector("#data-modal"+id+' #data-navigation input[value="2"]');
-	var AreaButton = document.querySelector("#data-modal"+id+' #data-navigation input[value="3"]');
-	if(navChecker == 1) {
+function navKeeper(id) { 
+
+	var MetadataButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='0']");
+	var LearnsetButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='1']");
+	var AreaButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='2']");
+	if(navChecker == 0) {
 		MetadataButton.click();
 	}
-	if(navChecker == 2) {
+	if(navChecker == 1) {
 		LearnsetButton.click();
 	}
-	if(navChecker == 3) {
+	if(navChecker == 2) {
 		AreaButton.click();
 	}
 }
@@ -1658,6 +1775,7 @@ function modalData() {
 	var def;
 	int = this.getAttribute("value");
 	def = true;
+
 	for(var i = 0; i < finaldataPokémon.length; i++) {
 		if(int != undefined) {
 			if(i == int) {
@@ -1668,8 +1786,7 @@ function modalData() {
 			}
 		}
 	}
-	var activeWindow;
-	activeWindow = document.querySelector(".data-modal-outer.open");
+	var activeWindow = document.querySelector("#data > div.open");
 	if(activeWindow != null) {
 		activeWindow.classList.remove("open");
 	}
@@ -1681,10 +1798,12 @@ function modalData() {
 		var formFirst;
 		maxWindowCount = 10;
 		windowCount = document.querySelectorAll("#data > div");
-		currentWindow = document.querySelector("#data-modal"+id);
+		currentWindow = document.querySelector("#data"+id);
 		if (windowCount.length >= maxWindowCount) {
 			for (var u = 0; u < windowCount.length; u++) {
-				windowCount[u].remove();
+				if (windowCount[u].getAttribute("value") != id) {
+					windowCount[u].remove();
+				}
 			}
 			console.log("Cleared some space")
 		}
@@ -1693,8 +1812,8 @@ function modalData() {
 		}
 
         if(int != undefined) {
-            formSpec = document.querySelector("#data-modal"+id+" .data-form > input[value='"+int+"'");
-            formFirst = document.querySelector("#data-modal"+id+" .data-form > input:first-child");
+            formSpec = document.querySelector("#data > div[value='"+id+"'] section[name='form'] > input[value='"+int+"'");
+            formFirst = document.querySelector("#data > div[value='"+id+"'] section[name='form'] > input:first-child");
             if(def == false) {
                 if(formSpec != null) {
                     formSpec.click();
@@ -1706,7 +1825,7 @@ function modalData() {
             }
         }
 
-		currentWindow = document.querySelector("#data-modal"+id);
+		currentWindow = document.querySelector("#data > div[value='"+id+"']");
 		if(currentWindow != null) {
 			currentWindow.classList.add("open");
 		}
