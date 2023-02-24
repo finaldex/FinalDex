@@ -503,7 +503,7 @@ function getPositionAbility(i,column) {
     var column;
     var i;
     var result;
-
+	
     for (var q = 0; q < arr.length; q++) {
         if (q == i) {
             if (arr[q][column+"_"+JSONPath_Ability] != undefined) {
@@ -762,32 +762,34 @@ var searchNotFirst = false;
 function search(type) {
     var type;
 	var tag;
+	var searchAttributes;
 
     if (type == "Pokémon") {
-        base = document.querySelector("#pokémon-outer > div ul");
-        searchAttributes = searchPokémonAttributes;
+        base = document.querySelector("#contain > div#"+type.toLowerCase()+" > div ul");
 		tag = "li";
     }
-    else if (type == "Move") {
-        base = document.querySelector("#move-options");
-        searchAttributes = searchMoveAttributes;
+	else {
+		base = document.querySelector("#contain > div#"+type.toLowerCase()+" section[name='list'] ol");
 		tag = "label";
+	}
+
+
+	if (type == "Pokémon") {
+        searchAttributes = searchPokémonAttributes;
+    }
+    else if (type == "Move") {
+        searchAttributes = searchMoveAttributes;
     }
     else if (type == "Ability") {
-        base = document.querySelector("#ability-options");
         searchAttributes = searchAbilityAttributes;
-		tag = "label";
     }
     else if (type == "Item") {
-        base = document.querySelector("#item-options");
         searchAttributes = searchItemAttributes;
-		tag = "label";
     }
     else if (type == "Map") {
-        base = document.querySelector("#map-options");
         searchAttributes = searchMapAttributes;
-		tag = "label";
     }
+
 
 	var tar = event.target;
     var searchValue = (tar.value).toLowerCase();
@@ -796,7 +798,6 @@ function search(type) {
     var searchGreater = [];
     var searchLower = [];
 	var searchVar = [];
-
 
     if (searchValue.includes("::") && searchAttributes.includes(searchValue.split("::")[0])) {
         searchPositive = searchValue.split("::");
@@ -936,20 +937,11 @@ function exitSearch(base) {
 	var tar = event.target;
 
     if (base == "Pokémon") {
-        base = document.querySelector("#pokémon-outer > div ul");
+		base = document.querySelector("#contain > div#"+base.toLowerCase()+" > div ul");
     }
-    if (base == "Move") {
-        base = document.querySelector("#move-options");
-    }
-    if (base == "Ability") {
-        base = document.querySelector("#ability-options");
-    }
-    if (base == "Item") {
-        base = document.querySelector("#item-options");
-    }
-    if (base == "Map") {
-        base = document.querySelector("#map-options");
-    }
+	else {
+		base = document.querySelector("#contain > div#"+base.toLowerCase()+" section[name='list'] ol");
+	}
     
     var items = base.querySelectorAll(":scope > *:not(input)");
     for (i = 0; i < items.length; i++) {
@@ -1240,7 +1232,7 @@ function formatEvolutionText(i,obj,type) {
 							}
 							if(check) {
 								if (breedRes[q][u]["Pokémon"] != getPokémonName(i)) {
-									breedName.push('<span name="Pokémon">'+breedRes[q][u]["Pokémon"]+'</span>');
+									breedName.push('<b type="invert" name="pokémon">'+breedRes[q][u]["Pokémon"]+'</b>');
 								}
 								else {
 									breedName.push(breedRes[q][u]["Pokémon"]);
@@ -1278,21 +1270,21 @@ function formatEvolutionText(i,obj,type) {
 				obj[name] = obj[name]+".";
 			}
 			if (name == "Gender" && obj[name] == "♂") {
-				obj[name] = '<span name="Male">'+obj[name]+"</span>";
+				obj[name] = '<span name="male">'+obj[name]+"</span>";
 			}
 			if (name == "Gender" && obj[name] == "♀") {
-				obj[name] = '<span name="Female">'+obj[name]+"</span>";
+				obj[name] = '<span name="female">'+obj[name]+"</span>";
 			}
 		}
 		var pokprev = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous");
 
 		if(pokprev.length > 0) {
-			var pokémon = '<span name="Pokémon">'+pokprev[0]["Pokémon"]+'</span>';
+			var pokémon = '<b type="invert" name="pokémon">'+pokprev[0]["Pokémon"]+'</b>';
 			if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
 				result = "Evolve "+pokémon+" "+obj["Gender"]+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
 			}
 			else if (obj["Method"] == "Item") {
-				result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
+				result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <b type="invert" name="item">'+obj["Factor"]+"</b> "+obj["Additional"];
 			}
 			else if(obj["Method"] == "Unique") {
 				result = "Evolve "+pokémon+" "+obj["Gender"]+obj["Factor"]+" "+obj["Additional"];
@@ -1323,10 +1315,10 @@ function formatEvolutionText(i,obj,type) {
 				obj[name] = obj[name]+".";
 			}
 			if (name == "Gender" && obj[name] == "♂") {
-				obj[name] = '<span name="Male">'+obj[name]+"</span>";
+				obj[name] = '<span name="male">'+obj[name]+"</span>";
 			}
 			if (name == "Gender" && obj[name] == "♀") {
-				obj[name] = '<span name="Female">'+obj[name]+"</span>";
+				obj[name] = '<span name="female">'+obj[name]+"</span>";
 			}
 		}
 
@@ -1337,7 +1329,7 @@ function formatEvolutionText(i,obj,type) {
 			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
 		}
 		else if (obj["Method"] == "Item") {
-			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <span name="Item">'+obj["Factor"]+"</span> "+obj["Additional"];
+			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <b type="invert" name="item">'+obj["Factor"]+"</b> "+obj["Additional"];
 		}
 		else if(obj["Method"] == "Unique") {
 			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+obj["Factor"]+" "+obj["Additional"];
@@ -1351,7 +1343,7 @@ function formatEvolutionText(i,obj,type) {
 
 	var eggGroups = ["Monster","Water 1","Bug","Flying","Field","Fairy","Grass","Human-Like","Water 3","Mineral","Amorphous","Water 2","Ditto","Dragon","Undiscovered"];
 	for (var q = 0; q < eggGroups.length; q++){
-		result = result.replaceAll(' '+eggGroups[q],' <span name="eggText'+eggGroups[q]+'">'+eggGroups[q]+'</span>');
+		result = result.replaceAll(' '+eggGroups[q],' <b type="invert" name="eggText'+eggGroups[q]+'">'+eggGroups[q]+'</b>');
 	}
 
 	return result;
