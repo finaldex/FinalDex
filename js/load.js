@@ -116,6 +116,7 @@ function requestLoad(i,url) {
 				for(var q = 0; q < Metadata["Point of Interest"].length; q++) {
 					finaldataLocationPointOfInterest.push(Metadata["Point of Interest"][q]);
 				}
+				console.log(Metadata["Reference"])
 				console.log(Metadata["Reference"][0][JSONPath_Location+"_"+"Name"])
 				console.log(Metadata)
 				console.log(finaldataLocation)
