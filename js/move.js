@@ -1,294 +1,291 @@
 var createMove = function() {
 	var moveOuter = document.createElement("div");
-	var moveAside1 = document.createElement("aside");
-	var moveAside1OptionsTitleOuter = document.createElement("div");
-	var moveAside1OptionsSearchOuter = document.createElement("div");
-	var moveAside1OptionsSearch = document.createElement("input");
-	var moveAside1OptionsSearchExit = document.createElement("span");
-	var moveAside1OptionsOuter = document.createElement("div");
-	var moveAside1Options = document.createElement("div");
-	var moveAside2 = document.createElement("aside");
-	var moveAside2Title = document.createElement("span");
-	var moveAside2TitleID = document.createElement("h4");
-	var moveAside2TitleName = document.createElement("h1");
-	var moveAside2Debut = document.createElement("span");
-	var moveAside2DebutText = document.createElement("h4");
-	var moveAside3 = document.createElement("aside");
-	var moveAside3Description = document.createElement("div");
-	var moveAside3DescriptionText = document.createElement("p");
-	var moveAside3EffectTitle = document.createElement("h3");
-	var moveAside3EffectText = document.createElement("p");
-	var moveAside4 = document.createElement("aside");
-	moveOuter.setAttribute("id", "move-outer");
-	moveOuter.setAttribute("name", "Moves");
-	moveAside1.setAttribute("id", "move-aside1");
-	moveAside1OptionsTitleOuter.setAttribute("id", "move-options-title");
-	moveAside1OptionsSearchOuter.setAttribute("id", "move-options-search");
-	moveAside1OptionsSearch.setAttribute("type", "text");
-	moveAside1OptionsSearch.setAttribute("id", "move-search");
-	moveAside1OptionsSearch.setAttribute("placeholder", "Search Moves...");
-	moveAside1OptionsSearch.setAttribute("onfocus", "this.placeholder=''");
-	moveAside1OptionsSearch.setAttribute("onblur", "this.placeholder='Search Moves...'");
-	moveAside1OptionsSearch.setAttribute("autocomplete", "off");
-	moveAside1OptionsSearchExit.setAttribute("id", "move-search-exit");
-	moveAside1OptionsOuter.setAttribute("id", "move-options-outer");
-	moveAside1Options.setAttribute("id", "move-options");
-	moveAside2.setAttribute("id", "move-aside2");
-	moveAside2Title.classList.add("move-title");
-	moveAside2TitleID.innerText = "#";
-	moveAside2TitleName.innerText = "-";
-	moveAside2Debut.classList.add("move-debut");
-	moveAside2DebutText.innerText = "-";
-	moveAside3.setAttribute("id", "move-aside3");
-	moveAside3Description.classList.add("move-description");
-	moveAside4.setAttribute("id", "move-aside4");
+	var moveSectionList = document.createElement("section");
+	var moveSectionListOptionsTitleOuter = document.createElement("div");
+	var moveSectionListOptionsSearchOuter = document.createElement("div");
+	var moveSectionListOptionsSearch = document.createElement("input");
+	var moveSectionListOptionsSearchExit = document.createElement("span");
+	var moveSectionListOptionsOuter = document.createElement("div");
+	var moveSectionListOptions = document.createElement("ol");
+	var moveSectionHeader = document.createElement("section");
+	var moveSectionHeaderTitle = document.createElement("span");
+	var moveSectionHeaderTitleID = document.createElement("h4");
+	var moveSectionHeaderTitleName = document.createElement("h3");
+	var moveSectionHeaderDebut = document.createElement("span");
+	var moveSectionHeaderDebutText = document.createElement("h5");
+	var moveSectionContent = document.createElement("section");
+	var moveSectionContentDescription = document.createElement("div");
+	var moveSectionContentDescriptionText = document.createElement("p");
+	var moveSectionContentMachineText = document.createElement("p");
+	var moveSectionContentTutorText = document.createElement("p");
+	var moveSectionContentEffectTitle = document.createElement("h3");
+	var moveSectionContentEffectText = document.createElement("p");
+	var moveSectionSidebar = document.createElement("section");
+	moveOuter.setAttribute("id", "move");
+	moveOuter.setAttribute("value","moves");
+	moveSectionContentDescription.setAttribute("name","description");
+
+
+	moveSectionListOptionsSearch.setAttribute("type", "text");
+
+	moveSectionListOptionsSearch.setAttribute("placeholder", "Search Moves...");
+	moveSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
+	moveSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Moves...'");
+	moveSectionListOptionsSearch.setAttribute("autocomplete", "off");
+	moveSectionListOptionsSearchExit.setAttribute("name","exit");
+	moveSectionHeaderTitleID.innerText = "#";
+	moveSectionHeaderTitleName.innerText = "-";
+	moveSectionHeaderDebutText.innerText = "-";
 	document.querySelector("#contain").appendChild(moveOuter);
-	moveOuter.appendChild(moveAside1);
-	moveAside1.appendChild(moveAside1OptionsTitleOuter);
-	moveAside1OptionsTitleOuter.appendChild(moveAside1OptionsSearchOuter);
-	moveAside1OptionsSearchOuter.appendChild(moveAside1OptionsSearchExit);
-	moveAside1OptionsSearchOuter.appendChild(moveAside1OptionsSearch);
-	moveAside1.appendChild(moveAside1OptionsOuter);
-	moveAside1OptionsOuter.appendChild(moveAside1Options);
-	moveOuter.appendChild(moveAside2);
-	moveAside2.appendChild(moveAside2Title);
-	moveAside2Title.appendChild(moveAside2TitleID);
-	moveAside2Title.appendChild(moveAside2TitleName);
-	moveAside2.appendChild(moveAside2Debut);
-	moveAside2Debut.appendChild(moveAside2DebutText);
-	moveOuter.appendChild(moveAside3);
-	moveAside3.appendChild(moveAside3Description);
-	moveAside3Description.appendChild(moveAside3DescriptionText);
-	moveAside3Description.appendChild(moveAside3EffectTitle);
-	moveAside3Description.appendChild(moveAside3EffectText);
-	moveOuter.appendChild(moveAside4);
+	moveOuter.appendChild(moveSectionList);
+	moveSectionList.appendChild(moveSectionListOptionsTitleOuter);
+	moveSectionListOptionsTitleOuter.appendChild(moveSectionListOptionsSearchOuter);
+	moveSectionListOptionsSearchOuter.appendChild(moveSectionListOptionsSearchExit);
+	moveSectionListOptionsSearchOuter.appendChild(moveSectionListOptionsSearch);
+	moveSectionList.appendChild(moveSectionListOptionsOuter);
+	moveSectionListOptionsOuter.appendChild(moveSectionListOptions);
+	moveOuter.appendChild(moveSectionHeader);
+	moveSectionHeader.appendChild(moveSectionHeaderTitle);
+	moveSectionHeaderTitle.appendChild(moveSectionHeaderTitleID);
+	moveSectionHeaderTitle.appendChild(moveSectionHeaderTitleName);
+	moveSectionHeader.appendChild(moveSectionHeaderDebut);
+	moveSectionHeaderDebut.appendChild(moveSectionHeaderDebutText);
+	moveOuter.appendChild(moveSectionContent);
+	moveSectionContent.appendChild(moveSectionContentDescription);
+	moveSectionContentDescription.appendChild(moveSectionContentDescriptionText);
+	moveSectionContentDescription.appendChild(moveSectionContentMachineText);
+	moveSectionContentDescription.appendChild(moveSectionContentTutorText);
+	moveSectionContentDescription.appendChild(moveSectionContentEffectTitle);
+	moveSectionContentDescription.appendChild(moveSectionContentEffectText);
+	moveOuter.appendChild(moveSectionSidebar);
 
-	moveAside1OptionsSearch.addEventListener("keyup", function() {search("Move");});
-	moveAside1OptionsSearchExit.addEventListener("click", function() {exitSearch("Move");});
+	moveSectionList.setAttribute("name","list");
+	moveSectionHeader.setAttribute("name","header");
+	moveSectionContent.setAttribute("name","content");
+	moveSectionSidebar.setAttribute("name","sidebar");
 
-    var moveAside2Game = document.createElement("span");
-    var moveAside2GameImage = document.createElement("img");
-    moveAside2GameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
-    moveAside2GameImage.setAttribute("onerror","this.display='none'");
-    moveAside2.appendChild(moveAside2Game);
-    moveAside2Game.appendChild(moveAside2GameImage);
+	moveSectionListOptionsSearch.addEventListener("keyup", function() {search("Move");});
+	moveSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Move");});
 
-	var moveAside3Sidebar = document.createElement("div");
-	var moveAside3SidebarLeft = document.createElement("div");
-	var moveAside3SidebarType = document.createElement("div");
-	var moveAside3SidebarTypeText = document.createElement("span");
-	var moveAside3SidebarTypeTextImg = document.createElement("img");
-	var moveAside3SidebarTypeTextText = document.createElement("h4");
-	var moveAside3SidebarTypeMove = document.createElement("span");
-	var moveAside3SidebarAttribute = document.createElement("div");
-	var moveAside3SidebarAttributePowerPoints = document.createElement("span");
-	var moveAside3SidebarAttributePowerPointsContent = document.createElement("span");
-	var moveAside3SidebarAttributePowerPointsTitle = document.createElement("h3");
-	var moveAside3SidebarAttributePowerPointsText = document.createElement("p");
-	var moveAside3SidebarAttributePower = document.createElement("span");
-	var moveAside3SidebarAttributePowerContent = document.createElement("span");
-	var moveAside3SidebarAttributePowerTitle = document.createElement("h3");
-	var moveAside3SidebarAttributePowerText = document.createElement("p");
-	var moveAside3SidebarAttributeAccuracy = document.createElement("span");
-	var moveAside3SidebarAttributeAccuracyContent = document.createElement("span");
-	var moveAside3SidebarAttributeAccuracyTitle = document.createElement("h3");
-	var moveAside3SidebarAttributeAccuracyText = document.createElement("p");
-	var moveAside3SidebarAttributePriority = document.createElement("span");
-	var moveAside3SidebarAttributePriorityContent = document.createElement("span");
-	var moveAside3SidebarAttributePriorityTitle = document.createElement("h3");
-	var moveAside3SidebarAttributePriorityText = document.createElement("p");
-	var moveAside3SidebarRight = document.createElement("div");
-	var moveAside3SidebarContact = document.createElement("div");
-	var moveAside3SidebarContactContent = document.createElement("span");
-	var moveAside3SidebarContactText = document.createElement("p");
-	moveAside3Sidebar.classList.add("move-sidebar");
-	moveAside3SidebarType.classList.add("move-sidebar-type");
-	moveAside3SidebarTypeTextImg.setAttribute("title", "");
-	moveAside3SidebarTypeTextText.innerText = "";
-	moveAside3SidebarAttribute.classList.add("move-sidebar-attribute");
-	moveAside3SidebarAttributePowerPointsTitle.innerText = "PP";
-	moveAside3SidebarAttributePowerPointsText.innerText = "";
-	moveAside3SidebarAttributePowerTitle.innerText = "Power";
-	moveAside3SidebarAttributePowerText.innerText = "";
-	moveAside3SidebarAttributeAccuracyTitle.innerText = "Accuracy";
-	moveAside3SidebarAttributeAccuracyText.innerText = "";
-	moveAside3SidebarAttributePriorityTitle.innerText = "Priority";
-	moveAside3SidebarAttributePriorityText.innerText = "";
-	moveAside3SidebarContact.classList.add("move-sidebar-contact");
-	moveAside3SidebarContactText.innerText = "";
-	moveAside3.appendChild(moveAside3Sidebar);
-	moveAside3Sidebar.appendChild(moveAside3SidebarLeft);
-	moveAside3Sidebar.appendChild(moveAside3SidebarRight);
-	moveAside3SidebarLeft.appendChild(moveAside3SidebarType);
-	moveAside3SidebarType.appendChild(moveAside3SidebarTypeText);
-	moveAside3SidebarTypeText.appendChild(moveAside3SidebarTypeTextImg);
-	moveAside3SidebarTypeText.appendChild(moveAside3SidebarTypeTextText);
-	moveAside3SidebarType.appendChild(moveAside3SidebarTypeMove);
-	moveAside3SidebarLeft.appendChild(moveAside3SidebarAttribute);
+    var moveSectionHeaderGame = document.createElement("span");
+    var moveSectionHeaderGameImage = document.createElement("img");
+    moveSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
+    moveSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
+    moveSectionHeader.appendChild(moveSectionHeaderGame);
+    moveSectionHeaderGame.appendChild(moveSectionHeaderGameImage);
 
-	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributePowerPoints);
-	moveAside3SidebarAttributePowerPoints.appendChild(moveAside3SidebarAttributePowerPointsContent);
-	moveAside3SidebarAttributePowerPointsContent.appendChild(moveAside3SidebarAttributePowerPointsTitle);
-	moveAside3SidebarAttributePowerPointsContent.appendChild(moveAside3SidebarAttributePowerPointsText);
+	var moveSectionContentMenu = document.createElement("div");
+	var moveSectionContentMenuLeft = document.createElement("div");
+	var moveSectionContentMenuType = document.createElement("div");
+	var moveSectionContentMenuTypeText = document.createElement("span");
+	var moveSectionContentMenuTypeTextImg = document.createElement("img");
+	var moveSectionContentMenuTypeTextText = document.createElement("h6");
+	var moveSectionContentMenuTypeMove = document.createElement("span");
+	var moveSectionContentMenuAttribute = document.createElement("div");
+	var moveSectionContentMenuAttributePowerPoints = document.createElement("span");
+	var moveSectionContentMenuAttributePowerPointsContent = document.createElement("span");
+	var moveSectionContentMenuAttributePowerPointsTitle = document.createElement("h4");
+	var moveSectionContentMenuAttributePowerPointsText = document.createElement("p");
+	var moveSectionContentMenuAttributePower = document.createElement("span");
+	var moveSectionContentMenuAttributePowerContent = document.createElement("span");
+	var moveSectionContentMenuAttributePowerTitle = document.createElement("h4");
+	var moveSectionContentMenuAttributePowerText = document.createElement("p");
+	var moveSectionContentMenuAttributeAccuracy = document.createElement("span");
+	var moveSectionContentMenuAttributeAccuracyContent = document.createElement("span");
+	var moveSectionContentMenuAttributeAccuracyTitle = document.createElement("h4");
+	var moveSectionContentMenuAttributeAccuracyText = document.createElement("p");
+	var moveSectionContentMenuAttributePriority = document.createElement("span");
+	var moveSectionContentMenuAttributePriorityContent = document.createElement("span");
+	var moveSectionContentMenuAttributePriorityTitle = document.createElement("h4");
+	var moveSectionContentMenuAttributePriorityText = document.createElement("p");
+	var moveSectionContentMenuRight = document.createElement("div");
+	var moveSectionContentMenuContact = document.createElement("div");
+	var moveSectionContentMenuContactContent = document.createElement("span");
+	var moveSectionContentMenuContactText = document.createElement("h5");
+	moveSectionContentMenuAttributePowerPointsTitle.innerText = "PP";
+	moveSectionContentMenuAttributePowerTitle.innerText = "Power";
+	moveSectionContentMenuAttributeAccuracyTitle.innerText = "Accuracy";
+	moveSectionContentMenuAttributePriorityTitle.innerText = "Priority";
+	moveSectionContentMenu.setAttribute("name","menu");
+	moveSectionContentMenuTypeText.setAttribute("name","type");
+	moveSectionContentMenuTypeMove.setAttribute("name","category");
+	moveSectionContentMenuAttributePowerPoints.setAttribute("name","pp");
+	moveSectionContentMenuAttributePower.setAttribute("name","power");
+	moveSectionContentMenuAttributeAccuracy.setAttribute("name","accuracy");
+	moveSectionContentMenuAttributePriority.setAttribute("name","priority");
 
-	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributePower);
-	moveAside3SidebarAttributePower.appendChild(moveAside3SidebarAttributePowerContent);
-	moveAside3SidebarAttributePowerContent.appendChild(moveAside3SidebarAttributePowerTitle);
-	moveAside3SidebarAttributePowerContent.appendChild(moveAside3SidebarAttributePowerText);
+	moveSectionContent.appendChild(moveSectionContentMenu);
+	moveSectionContentMenu.appendChild(moveSectionContentMenuLeft);
+	moveSectionContentMenu.appendChild(moveSectionContentMenuRight);
+	moveSectionContentMenuLeft.appendChild(moveSectionContentMenuType);
+	moveSectionContentMenuType.appendChild(moveSectionContentMenuTypeText);
+	moveSectionContentMenuTypeText.appendChild(moveSectionContentMenuTypeTextImg);
+	moveSectionContentMenuTypeText.appendChild(moveSectionContentMenuTypeTextText);
+	moveSectionContentMenuType.appendChild(moveSectionContentMenuTypeMove);
+	moveSectionContentMenuLeft.appendChild(moveSectionContentMenuAttribute);
 
-	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributeAccuracy);
-	moveAside3SidebarAttributeAccuracy.appendChild(moveAside3SidebarAttributeAccuracyContent);
-	moveAside3SidebarAttributeAccuracyContent.appendChild(moveAside3SidebarAttributeAccuracyTitle);
-	moveAside3SidebarAttributeAccuracyContent.appendChild(moveAside3SidebarAttributeAccuracyText);
+	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributePowerPoints);
+	moveSectionContentMenuAttributePowerPoints.appendChild(moveSectionContentMenuAttributePowerPointsContent);
+	moveSectionContentMenuAttributePowerPointsContent.appendChild(moveSectionContentMenuAttributePowerPointsTitle);
+	moveSectionContentMenuAttributePowerPointsContent.appendChild(moveSectionContentMenuAttributePowerPointsText);
 
-	moveAside3SidebarAttribute.appendChild(moveAside3SidebarAttributePriority);
-	moveAside3SidebarAttributePriority.appendChild(moveAside3SidebarAttributePriorityContent);
-	moveAside3SidebarAttributePriorityContent.appendChild(moveAside3SidebarAttributePriorityTitle);
-	moveAside3SidebarAttributePriorityContent.appendChild(moveAside3SidebarAttributePriorityText);
+	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributePower);
+	moveSectionContentMenuAttributePower.appendChild(moveSectionContentMenuAttributePowerContent);
+	moveSectionContentMenuAttributePowerContent.appendChild(moveSectionContentMenuAttributePowerTitle);
+	moveSectionContentMenuAttributePowerContent.appendChild(moveSectionContentMenuAttributePowerText);
 
-	moveAside3SidebarRight.appendChild(moveAside3SidebarContact);
-	moveAside3SidebarContact.appendChild(moveAside3SidebarContactContent);
-	moveAside3SidebarContactContent.appendChild(moveAside3SidebarContactText);
-	var moveAside4Learnset = document.createElement("div");
-	moveAside4Learnset.classList.add("move-learnset");
-	moveAside4.appendChild(moveAside4Learnset);
-	var moveAside4LearnsetTitle = document.createElement("div");
-	var moveAside4LearnsetTitleText = document.createElement("h2");
-	moveAside4LearnsetTitle.classList.add("move-sidebar-title");
-	moveAside4LearnsetTitleText.innerHTML = "Learnset";
-	moveAside4Learnset.appendChild(moveAside4LearnsetTitle);
-	moveAside4LearnsetTitle.appendChild(moveAside4LearnsetTitleText);
+	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributeAccuracy);
+	moveSectionContentMenuAttributeAccuracy.appendChild(moveSectionContentMenuAttributeAccuracyContent);
+	moveSectionContentMenuAttributeAccuracyContent.appendChild(moveSectionContentMenuAttributeAccuracyTitle);
+	moveSectionContentMenuAttributeAccuracyContent.appendChild(moveSectionContentMenuAttributeAccuracyText);
+
+	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributePriority);
+	moveSectionContentMenuAttributePriority.appendChild(moveSectionContentMenuAttributePriorityContent);
+	moveSectionContentMenuAttributePriorityContent.appendChild(moveSectionContentMenuAttributePriorityTitle);
+	moveSectionContentMenuAttributePriorityContent.appendChild(moveSectionContentMenuAttributePriorityText);
+
+	moveSectionContentMenuRight.appendChild(moveSectionContentMenuContact);
+	moveSectionContentMenuContact.appendChild(moveSectionContentMenuContactContent);
+	moveSectionContentMenuContactContent.appendChild(moveSectionContentMenuContactText);
+	var moveSectionSidebarLearnset = document.createElement("div");
+	moveSectionSidebar.appendChild(moveSectionSidebarLearnset);
+	var moveSectionSidebarLearnsetTitle = document.createElement("div");
+	var moveSectionSidebarLearnsetTitleText = document.createElement("h3");
+	moveSectionSidebarLearnsetTitleText.innerHTML = "Learnset";
+	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetTitle);
+	moveSectionSidebarLearnsetTitle.appendChild(moveSectionSidebarLearnsetTitleText);
 	
-	var moveAside4LearnsetContent = document.createElement("div");
-	var moveAside4LearnsetUl = document.createElement("ul");
-	moveAside4LearnsetContent.classList.add("move-learnset-content");
-	moveAside4Learnset.appendChild(moveAside4LearnsetContent);
-	moveAside4LearnsetContent.appendChild(moveAside4LearnsetUl);
-	var moveAside4LearnsetPartyBox = document.createElement("div");
-	moveAside4LearnsetPartyBox.classList.add("learnset-partybox");
-	moveAside4Learnset.appendChild(moveAside4LearnsetPartyBox);
+	
+	var moveSectionSidebarLearnsetUl = document.createElement("ul");
+	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetUl);
+	var moveSectionSidebarLearnsetPartyBox = document.createElement("div");
+	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetPartyBox);
 
 
 	var parbo = ["Party","Box"];
 	for(var q = 0; q < parbo.length; q++) {
-		var moveAside4LearnsetInput = document.createElement("input");
-		var moveAside4LearnsetLabel = document.createElement("label");
-		moveAside4LearnsetInput.setAttribute("type","checkbox");
-		moveAside4LearnsetInput.setAttribute("id","move-learnset-partybox-"+q);
-		moveAside4LearnsetInput.setAttribute("name","move-learnset-partybox");
-		moveAside4LearnsetLabel.setAttribute("for","move-learnset-partybox-"+q);
-		moveAside4LearnsetLabel.innerText = parbo[q];
-		moveAside4LearnsetLabel.title = "Show results from "+parbo[q];
-		moveAside4LearnsetPartyBox.appendChild(moveAside4LearnsetInput);
-		moveAside4LearnsetPartyBox.appendChild(moveAside4LearnsetLabel);
-		moveAside4LearnsetInput.addEventListener("change",movePartyBoxLearnset);
+		var moveSectionSidebarLearnsetInput = document.createElement("input");
+		var moveSectionSidebarLearnsetLabel = document.createElement("label");
+		var moveSectionSidebarLearnsetText = document.createElement("h5");
+		moveSectionSidebarLearnsetInput.setAttribute("type","checkbox");
+		moveSectionSidebarLearnsetInput.setAttribute("id","move-learnset-partybox-"+q);
+		moveSectionSidebarLearnsetInput.setAttribute("name","move-learnset-partybox");
+		moveSectionSidebarLearnsetLabel.setAttribute("for","move-learnset-partybox-"+q);
+		moveSectionSidebarLearnsetText.innerText = parbo[q];
+		moveSectionSidebarLearnsetLabel.title = "Show results from "+parbo[q];
+		moveSectionSidebarLearnsetPartyBox.appendChild(moveSectionSidebarLearnsetInput);
+		moveSectionSidebarLearnsetPartyBox.appendChild(moveSectionSidebarLearnsetLabel);
+		moveSectionSidebarLearnsetLabel.appendChild(moveSectionSidebarLearnsetText);
+		moveSectionSidebarLearnsetInput.addEventListener("change",movePartyBoxLearnset);
 	}
 
 
 	var firstmoveiteration;
 	for(var q = 0; q < finaldataMove.length; q++) {
 		if(finaldataMove[q][JSONPath_MoveReference] == "true") {
-			var moveAside1OptionsInput = document.createElement("input");
-			var moveAside1OptionsLabel = document.createElement("label");
-			moveAside1OptionsInput.setAttribute("type", "radio");
-			moveAside1OptionsInput.setAttribute("name", "move-options");
-			moveAside1OptionsInput.setAttribute("id", "move-options-"+q);
-			moveAside1OptionsInput.setAttribute("autocomplete", "off");
-			moveAside1OptionsInput.value = q;
-			moveAside1OptionsLabel.setAttribute("for", "move-options-"+q);
-			moveAside1OptionsLabel.setAttribute("name", "medium");
+			var moveSectionListOptionsInput = document.createElement("input");
+			var moveSectionListOptionsLabel = document.createElement("label");
+			var moveSectionListOptionsText = document.createElement("h5");
+			moveSectionListOptionsInput.setAttribute("type", "radio");
+			moveSectionListOptionsInput.setAttribute("name", "move-options");
+			moveSectionListOptionsInput.setAttribute("id", "move-options-"+q);
+			moveSectionListOptionsInput.setAttribute("autocomplete", "off");
+			moveSectionListOptionsInput.value = q;
+			moveSectionListOptionsLabel.setAttribute("for", "move-options-"+q);
+			moveSectionListOptionsLabel.setAttribute("type","medium");
 			if(finaldataMove[q]["Name"+"_"+JSONPath_MoveName] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-name", finaldataMove[q]["Name"+"_"+JSONPath_MoveName].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-name", finaldataMove[q]["Name"+"_"+JSONPath_MoveName].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-name", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-name", "none");
 			}
 			/*
 			var moveset = returnMoveLearnset(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"");
 			if (moveset.length > 0) {
-				moveAside1OptionsLabel.setAttribute("data-search-learnset", moveset.join(",").toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-learnset", moveset.join(",").toLowerCase());
 			}
 			else {
-				moveAside1OptionsLabel.setAttribute("data-search-learnset", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-learnset", "none");
 			}
 			*/
 
 			if(finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority] != undefined) {
 				
 				if (finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].includes("-")) {
-					moveAside1OptionsLabel.setAttribute("data-search-priority", "-"+finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].replaceAll("-",""));
+					moveSectionListOptionsLabel.setAttribute("data-search-priority", "-"+finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].replaceAll("-",""));
 				}
 				else if (finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].includes("+")) {
-					moveAside1OptionsLabel.setAttribute("data-search-priority", "+"+finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].replaceAll("+",""));
+					moveSectionListOptionsLabel.setAttribute("data-search-priority", "+"+finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority].replaceAll("+",""));
 				}
 				else {
-					moveAside1OptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority]);
+					moveSectionListOptionsLabel.setAttribute("data-search-priority", finaldataMovePriority[q]["Priority_"+JSONPath_MovePriority]);
 				}
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-priority", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-priority", "none");
 			}
 
 			if(finaldataMoveType[q]["Type_"+JSONPath_MoveType] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-type", finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-type", finaldataMoveType[q]["Type_"+JSONPath_MoveType].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-type", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-type", "none");
 			}
 			if(finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-category", finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-category", finaldataMoveCategory[q]["Category_"+JSONPath_MoveCategory].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-category", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-category", "none");
 			}
 			if(finaldataMovePP[q]["PP Min_"+JSONPath_MovePP] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-pp", finaldataMovePP[q]["PP Min_"+JSONPath_MovePP].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-pp", finaldataMovePP[q]["PP Min_"+JSONPath_MovePP].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-pp", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-pp", "none");
 			}
 			if(finaldataMovePower[q]["Power_"+JSONPath_MovePower] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-power", finaldataMovePower[q]["Power_"+JSONPath_MovePower].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-power", finaldataMovePower[q]["Power_"+JSONPath_MovePower].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-power", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-power", "none");
 			}
 			if(finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-accuracy", finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-accuracy", finaldataMoveAccuracy[q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-accuracy", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-accuracy", "none");
 			}
 	
 
 			if(finaldataMoveOtherMoves[q]["Contact"] == "Makes contact") {
-				moveAside1OptionsLabel.setAttribute("data-search-contact", "y");
+				moveSectionListOptionsLabel.setAttribute("data-search-contact", "y");
 			} else if(finaldataMoveOtherMoves[q]["Contact"] == "Does not make contact") {
-				moveAside1OptionsLabel.setAttribute("data-search-contact", "n");
+				moveSectionListOptionsLabel.setAttribute("data-search-contact", "n");
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-contact", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-contact", "none");
 			}
 
 			if(getTutorData(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
-				moveAside1OptionsLabel.setAttribute("data-search-tutor", "y");
+				moveSectionListOptionsLabel.setAttribute("data-search-tutor", "y");
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-tutor", "n");
+				moveSectionListOptionsLabel.setAttribute("data-search-tutor", "n");
 			}
 			if(finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine] != undefined) {
-				moveAside1OptionsLabel.setAttribute("data-search-machine", finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-search-machine", finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
 			} else {
-				moveAside1OptionsLabel.setAttribute("data-search-machine", "none");
+				moveSectionListOptionsLabel.setAttribute("data-search-machine", "none");
 			}
-			moveAside1OptionsLabel.innerText = finaldataMove[q]["Name"+"_"+JSONPath_MoveName];
-			moveAside1Options.appendChild(moveAside1OptionsInput);
-			moveAside1Options.appendChild(moveAside1OptionsLabel);
-			moveAside1OptionsLabel.setAttribute("tabindex",q+10);
-			moveAside1OptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;moveOptionsSelector(event.target.previousElementSibling.value);}}});
-			moveAside1OptionsInput.addEventListener("change", moveOptionsSelector);
+			moveSectionListOptionsText.innerText = finaldataMove[q]["Name"+"_"+JSONPath_MoveName];
+			moveSectionListOptions.appendChild(moveSectionListOptionsInput);
+			moveSectionListOptions.appendChild(moveSectionListOptionsLabel);
+			moveSectionListOptionsLabel.appendChild(moveSectionListOptionsText);
+			moveSectionListOptionsLabel.setAttribute("tabindex","1");
+			moveSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;moveOptionsSelector(event.target.previousElementSibling.value);}}});
+			moveSectionListOptionsInput.addEventListener("change", moveOptionsSelector);
 
 			if(firstmoveiteration != true) {
 				firstmoveiteration = true;
-				moveAside1OptionsLabel.click();
+				moveSectionListOptionsLabel.click();
 			}
 		}
 	}
 
-	moveAside1OptionsSearch.title = searchOptionsTitle(moveAside1Options);
+	moveSectionListOptionsSearch.title = searchOptionsTitle(moveSectionListOptions);
 
-	var searchLis = document.querySelectorAll("#move-options > label");
+	var searchLis = document.querySelectorAll("#contain > div#move > section[name='list'] ol > label");
     searchMoveAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
         for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -310,95 +307,126 @@ var createMove = function() {
 			i = this.value;
 		}
 		
-		moveAside2TitleName.innerText = finaldataMove[i]["Name"+"_"+JSONPath_MoveName];
-		moveAside2TitleID.innerText = "#"+finaldataMoveID[i]["ID"+"_"+JSONPath_MoveID];
+		moveSectionHeaderTitleName.innerText = finaldataMove[i]["Name"+"_"+JSONPath_MoveName];
+		moveSectionHeaderTitleID.innerText = "#"+finaldataMoveID[i]["ID"+"_"+JSONPath_MoveID];
 		if(finaldataMoveID[i]["ID Type"] != undefined) {
-			moveAside2TitleID.title = finaldataMoveID[i]["ID Type"]+" Index number";
+			moveSectionHeaderTitleID.title = finaldataMoveID[i]["ID Type"]+" Index number";
 		} else {
-			moveAside2TitleID.title = "Index number";
+			moveSectionHeaderTitleID.title = "Index number";
 		}
-		moveAside2DebutText.innerText = "Introduced in "+finaldataMove[i]["Debut"].split("-")[0];
+		moveSectionHeaderDebutText.innerText = "Introduced in "+finaldataMove[i]["Debut"].split("-")[0];
 		if (finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription] != undefined) {
-			moveAside3DescriptionText.innerText = finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription];
+			moveSectionContentDescriptionText.innerText = finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription];
 		}
-		moveAside3SidebarTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-		moveAside3SidebarTypeTextImg.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+finaldataMoveType[i]["Type_"+JSONPath_MoveType]+".png";
-		moveAside3SidebarTypeTextImg.setAttribute("title", finaldataMoveType[i]["Type_"+JSONPath_MoveType]);
+
+		if (finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine] != undefined) {
+			moveSectionContentMachineText.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" is <b type='invert' name='item' value='"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"' onclick='dataRedirect()' function='dataRedirect'>"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"</b>."
+			moveSectionContentMachineText.style.removeProperty("display");
+		}
+		else {
+			moveSectionContentMachineText.innerText = "";
+			moveSectionContentMachineText.style.display = "none";
+		}
+
+		
+	
+		if(getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
+			if (getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"].includes("Route")) {
+				moveSectionContentTutorText.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor on <b type='invert' name='map' value='"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."
+			}
+			else {
+				moveSectionContentTutorText.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."	
+			}
+			moveSectionContentTutorText.style.removeProperty("display");
+		}
+		else {
+			moveSectionContentTutorText.innerText = "";
+			moveSectionContentTutorText.style.display = "none";
+		}
+
+
+
+
+
+		moveSectionContentMenuTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
+		moveSectionContentMenuTypeTextImg.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+finaldataMoveType[i]["Type_"+JSONPath_MoveType]+".png";
+		moveSectionContentMenuTypeTextImg.setAttribute("title", finaldataMoveType[i]["Type_"+JSONPath_MoveType]);
+		
 		if(finaldataMoveType[i]["Type_"+JSONPath_MoveType] == undefined) {
-			moveAside3SidebarTypeTextImg.style.display = "none";
-			moveAside3SidebarTypeTextText.style.display = "block";
+			moveSectionContentMenuTypeTextImg.style.display = "none";
+			moveSectionContentMenuTypeTextText.style.display = "block";
 		} else {
-			moveAside3SidebarTypeTextImg.style.display = "block";
-			moveAside3SidebarTypeTextText.style.display = "none";
+			moveSectionContentMenuTypeTextImg.style.display = "block";
+			moveSectionContentMenuTypeTextText.style.display = "none";
 		}
-		moveAside3SidebarTypeTextText.innerText = finaldataMoveType[i]["Type_"+JSONPath_MoveType];
-		var cate = moveAside3SidebarTypeMove.querySelectorAll(":scope > *");
+		moveSectionContentMenuTypeTextText.innerText = finaldataMoveType[i]["Type_"+JSONPath_MoveType];
+		var cate = moveSectionContentMenuTypeMove.querySelectorAll(":scope > *");
 		for(var u = 0; u < cate.length; u++) {
 			cate[u].remove();
 		}
 		for(var u = 0; u < finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",").length; u++) {
-			var moveAside3SidebarTypeMoveImg = document.createElement("img");
-			moveAside3SidebarTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-			moveAside3SidebarTypeMoveImg.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u]+".png";
-			moveAside3SidebarTypeMoveImg.setAttribute("title", finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u]);
-			moveAside3SidebarTypeMove.appendChild(moveAside3SidebarTypeMoveImg);
-			var moveAside3SidebarTypeMoveText = document.createElement("h4");
-			moveAside3SidebarTypeMoveText.innerText = finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u];
-			moveAside3SidebarTypeMove.appendChild(moveAside3SidebarTypeMoveText);
+			var moveSectionContentMenuTypeMoveImg = document.createElement("img");
+			moveSectionContentMenuTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
+			moveSectionContentMenuTypeMoveImg.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u]+".png";
+			moveSectionContentMenuTypeMoveImg.setAttribute("title", finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u]);
+			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveImg);
+			var moveSectionContentMenuTypeMoveText = document.createElement("h6");
+			moveSectionContentMenuTypeMoveText.innerText = finaldataMoveCategory[i]["Category_"+JSONPath_MoveCategory].split(",")[u];
+			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveText);
+			moveSectionContentMenuTypeMoveText.style.display = "none";
+
 		}
 		if(finaldataMovePP[i]["PP Min_"+JSONPath_MovePP] == undefined) {
-			moveAside3SidebarAttributePowerPointsText.innerHTML = "–";
+			moveSectionContentMenuAttributePowerPointsText.innerHTML = "–";
 		} else if(finaldataMovePP[i]["PP Min_"+JSONPath_MovePP] != undefined && finaldataMovePP[i]["PP Max_"+JSONPath_MovePP] == undefined) {
-			moveAside3SidebarAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_"+JSONPath_MovePP];
+			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_"+JSONPath_MovePP];
 		} else {
-			moveAside3SidebarAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_"+JSONPath_MovePP]+" <span>(max. "+finaldataMovePP[i]["PP Max_"+JSONPath_MovePP]+")</span>";
+			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldataMovePP[i]["PP Min_"+JSONPath_MovePP]+" <span>(max. "+finaldataMovePP[i]["PP Max_"+JSONPath_MovePP]+")</span>";
 		}
 		if(finaldataMovePower[i]["Power_"+JSONPath_MovePower] == undefined) {
-			moveAside3SidebarAttributePowerText.innerText = "–";
+			moveSectionContentMenuAttributePowerText.innerText = "–";
 		} else {
-			moveAside3SidebarAttributePowerText.innerText = finaldataMovePower[i]["Power_"+JSONPath_MovePower];
+			moveSectionContentMenuAttributePowerText.innerText = finaldataMovePower[i]["Power_"+JSONPath_MovePower];
 		}
 		if(finaldataMoveAccuracy[i]["Accuracy_"+JSONPath_MoveAccuracy] == undefined) {
-			moveAside3SidebarAttributeAccuracyText.innerText = "–";
+			moveSectionContentMenuAttributeAccuracyText.innerText = "–";
 		} else {
-			moveAside3SidebarAttributeAccuracyText.innerText = finaldataMoveAccuracy[i]["Accuracy_"+JSONPath_MoveAccuracy];
+			moveSectionContentMenuAttributeAccuracyText.innerText = finaldataMoveAccuracy[i]["Accuracy_"+JSONPath_MoveAccuracy];
 		}
 		if(finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority] == undefined) {
-			moveAside3SidebarAttributePriorityText.innerText = "–";
+			moveSectionContentMenuAttributePriorityText.innerText = "–";
 		} else {
 			if (finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority] == "0" || finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority] == undefined) {
-				moveAside3SidebarAttributePriority.style.display = "none";
+				moveSectionContentMenuAttributePriority.style.display = "none";
 			}
 			else {
-				moveAside3SidebarAttributePriority.style.removeProperty("display");
+				moveSectionContentMenuAttributePriority.style.removeProperty("display");
 			}
 
 
 			if (finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].includes("-")) {
-				moveAside3SidebarAttributePriorityText.innerText = "-"+finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].replaceAll("-","");
+				moveSectionContentMenuAttributePriorityText.innerText = "-"+finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].replaceAll("-","");
 			}
 			else if (finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].includes("+")) {
-				moveAside3SidebarAttributePriorityText.innerText = "+"+finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].replaceAll("+","");
+				moveSectionContentMenuAttributePriorityText.innerText = "+"+finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority].replaceAll("+","");
 			}
 			else {
-				moveAside3SidebarAttributePriorityText.innerText = finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority];
+				moveSectionContentMenuAttributePriorityText.innerText = finaldataMovePriority[i]["Priority_"+JSONPath_MovePriority];
 			}
 		}
 		if(finaldataMoveOtherMoves[i]["Contact"] == "Makes contact") {
-			moveAside3SidebarContactText.innerHTML = "Makes <b>contact</b>";
+			moveSectionContentMenuContactText.innerHTML = "Makes contact";
 		} else if(finaldataMoveOtherMoves[i]["Contact"] == "Does not make contact") {
-			moveAside3SidebarContactText.innerHTML = "Does not make <b>contact</b>";
+			moveSectionContentMenuContactText.innerHTML = "Does not make contact";
 		}
 		if(finaldataMoveOtherMoves[i]["Contact"].includes("not") || finaldataMoveOtherMoves[i]["Contact"].includes("Not")) {
-			moveAside3SidebarContact.setAttribute("name", "negative");
+			moveSectionContentMenuContact.setAttribute("name", "negative");
 		} else {
-			moveAside3SidebarContact.setAttribute("name", "positive");
+			moveSectionContentMenuContact.setAttribute("name", "positive");
 		}
-		var divs = moveAside3SidebarRight.querySelectorAll(":scope > div");
+		var divs = moveSectionContentMenuRight.querySelectorAll(":scope > *");
 		for(var u = 0; u < divs.length; u++) {
-			if(divs[u].getAttribute("class") == "move-sidebar-description-hmtm" || divs[u].getAttribute("class") == "move-sidebar-description-tutor" || divs[u].getAttribute("class") == "move-sidebar-description-other") {
-				divs[u].remove();
-			}
+			divs[u].remove();
 		}
 		if(Generation == 1) {
 			var othermove = ["Mirror Move", "Sound-Based", "Outside Battle"];
@@ -414,133 +442,100 @@ var createMove = function() {
 		}
 		for(var u = 0; u < othermove.length; u++) {
 			if(finaldataMoveOtherMoves[i][othermove[u]] != undefined) {
-				var moveAside3SidebarOther = document.createElement("div");
-				var moveAside3SidebarOtherContent = document.createElement("span");
-				var moveAside3SidebarOtherText = document.createElement("p");
-				moveAside3SidebarOther.classList.add("move-sidebar-description-other");
+				var moveSectionContentMenuOther = document.createElement("div");
+				var moveSectionContentMenuOtherContent = document.createElement("span");
+				var moveSectionContentMenuOtherText = document.createElement("h5");
+
+				moveSectionContentMenuOther.setAttribute("name",othermove[u].toLowerCase());
 				for(var q = 0; q < othermove.length; q++) {
 			
 					if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by "+othermove[q]) {
 
 				
-						moveAside3SidebarOtherText.innerHTML = "Affected by ";
+						moveSectionContentMenuOtherText.innerHTML = "Affected by ";
 
 				
-						moveAside3SidebarOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
+						moveSectionContentMenuOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
 
 						if (othermove[q] != "Outside Battle" && othermove[q] != "Sound-Based") {
 							if (othermove[q] != "King's Rock") {
-								moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Move");
+								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","move");
 							}
 							else {
-								moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Item");
+								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","item");
 							}
-							moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
-							moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
+							moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+							moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
 						}
 						
 					} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by "+othermove[q]) {
 			
-						moveAside3SidebarOtherText.innerHTML = "Not affected by";
+						moveSectionContentMenuOtherText.innerHTML = "Not affected by";
 						
 					
-							moveAside3SidebarOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
+							moveSectionContentMenuOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
 
 							if (othermove[q] != "Outside Battle" && othermove[q] != "Sound-Based") {
 								if (othermove[q] != "King's Rock") {
-									moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Move");
+									moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","move");
 								}
 								else {
-									moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Item");
+									moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","item");
 								}
-								moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
-								moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
+								moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
 							}
 						
 					}
 				}
 				if(finaldataMoveOtherMoves[i][othermove[u]] == "Usable outside of battle") {
-					moveAside3SidebarOtherText.innerHTML = "Usable <b>outside of battle</b>";
+					moveSectionContentMenuOtherText.innerHTML = "Usable outside of battle";
 				} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Is a sound-based move") {
-					moveAside3SidebarOtherText.innerHTML = "Is a <b>sound-based</b> move";
+					moveSectionContentMenuOtherText.innerHTML = "Is a sound-based move";
 				} else if (finaldataMoveOtherMoves[i][othermove[u]] == "Affected by Magic Coat") {
-					moveAside3SidebarOtherText.innerHTML = "Affected by <b>Magic Coat</b>";
+					moveSectionContentMenuOtherText.innerHTML = "Affected by <b>Magic Coat</b>";
 				} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Affected by Magic Coat and Magic Bounce") {
-					moveAside3SidebarOtherText.innerHTML = "Affected by <b>Magic Coat</b> and <b>Magic Bounce</b>";
+					moveSectionContentMenuOtherText.innerHTML = "Affected by <b>Magic Coat</b> and <b>Magic Bounce</b>";
 
-					var applicables = moveAside3SidebarOtherText.querySelectorAll(":scope > b")
+					var applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
 					for(var r = 0; r < applicables.length; r++) {
-						applicables[r].setAttribute("name","Move");
+						applicables[r].setAttribute("name","move");
 						applicables[r].addEventListener("click",dataRedirect);
 						applicables[r].setAttribute("function","dataRedirect");
 					}
 				} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by Magic Coat") {
-					moveAside3SidebarOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
-					moveAside3SidebarOtherText.querySelector(":scope > b").setAttribute("name","Move");
-					moveAside3SidebarOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveSectionContentMenuOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
+					moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","move");
+					moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
 				}
 				else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by Magic Coat or Magic Bounce") { 
-					moveAside3SidebarOtherText.innerHTML = "Not affected by <b>Magic Coat</b> or <b>Magic Bounce</b>";
+					moveSectionContentMenuOtherText.innerHTML = "Not affected by <b>Magic Coat</b> or <b>Magic Bounce</b>";
 
-					var applicables = moveAside3SidebarOtherText.querySelectorAll(":scope > b")
+					var applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
 					for(var r = 0; r < applicables.length; r++) {
 						if (r == 0) {
-							applicables[r].setAttribute("name","Move");
+							applicables[r].setAttribute("name","move");
 						}
 						else {
-							applicables[r].setAttribute("name","Ability");
+							applicables[r].setAttribute("name","ability");
 						}
 						applicables[r].addEventListener("click",dataRedirect);
 						applicables[r].setAttribute("function","dataRedirect");
 					}
 				}
-				moveAside3SidebarRight.appendChild(moveAside3SidebarOther);
-				moveAside3SidebarOther.appendChild(moveAside3SidebarOtherContent);
-				moveAside3SidebarOtherContent.appendChild(moveAside3SidebarOtherText);
+				moveSectionContentMenuRight.appendChild(moveSectionContentMenuOther);
+				moveSectionContentMenuOther.appendChild(moveSectionContentMenuOtherContent);
+				moveSectionContentMenuOtherContent.appendChild(moveSectionContentMenuOtherText);
 				if(finaldataMoveOtherMoves[i][othermove[u]].includes("not") || finaldataMoveOtherMoves[i][othermove[u]].includes("Not")) {
-					moveAside3SidebarOther.setAttribute("name", "negative");
+					moveSectionContentMenuOtherContent.setAttribute("name", "negative");
 				} else {
-					moveAside3SidebarOther.setAttribute("name", "positive");
+					moveSectionContentMenuOtherContent.setAttribute("name", "positive");
 				}
 			}
 		}
-		if(finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine] != undefined) {
-			var moveAside3SidebarHMTM = document.createElement("div");
-			var moveAside3SidebarHMTMOuter = document.createElement("span");
-			var moveAside3SidebarHMTMContent = document.createElement("span");
-			var moveAside3SidebarHMTMTitle = document.createElement("h3");
-			var moveAside3SidebarHMTMText = document.createElement("p");
-			moveAside3SidebarHMTM.classList.add("move-sidebar-description-hmtm");
-			moveAside3SidebarHMTMTitle.innerText = "Machine";
-			moveAside3SidebarHMTMText.innerText = finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine];
-			moveAside3SidebarHMTMText.setAttribute("name","Item");
-			moveAside3SidebarRight.appendChild(moveAside3SidebarHMTM);
-			moveAside3SidebarHMTM.appendChild(moveAside3SidebarHMTMOuter);
-			moveAside3SidebarHMTMOuter.appendChild(moveAside3SidebarHMTMContent);
-			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMTitle);
-			moveAside3SidebarHMTMContent.appendChild(moveAside3SidebarHMTMText);
-			moveAside3SidebarHMTMText.addEventListener("click",dataRedirect)
-			moveAside3SidebarHMTMText.setAttribute("function","dataRedirect");
-		}
-		if(getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
-			var moveAside3SidebarTutor = document.createElement("div");
-			var moveAside3SidebarTutorOuter = document.createElement("span");
-			var moveAside3SidebarTutorContent = document.createElement("span");
-			var moveAside3SidebarTutorTitle = document.createElement("h3");
-			var moveAside3SidebarTutorText = document.createElement("p");
-			moveAside3SidebarTutor.classList.add("move-sidebar-description-tutor");
-			moveAside3SidebarTutorTitle.innerText = "Move Tutor";
-			moveAside3SidebarTutorText.innerText = getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"];
-			moveAside3SidebarTutorText.setAttribute("name","Map");
-			moveAside3SidebarRight.appendChild(moveAside3SidebarTutor);
-			moveAside3SidebarTutor.appendChild(moveAside3SidebarTutorOuter);
-			moveAside3SidebarTutorOuter.appendChild(moveAside3SidebarTutorContent);
-			moveAside3SidebarTutorContent.appendChild(moveAside3SidebarTutorTitle);
-			moveAside3SidebarTutorContent.appendChild(moveAside3SidebarTutorText);
-			moveAside3SidebarTutorText.addEventListener("click",dataRedirect);
-			moveAside3SidebarTutorText.setAttribute("function","dataRedirect");
-		}
-		var lis = moveAside4LearnsetUl.querySelectorAll(":scope > li");
+		
+	
+		var lis = moveSectionSidebarLearnsetUl.querySelectorAll(":scope > li");
 		for(var u = 0; u < lis.length; u++) {
 			lis[u].remove();
 		}
@@ -560,155 +555,180 @@ var createMove = function() {
 		});
 
 		for(var q = 0; q < learnsetlevelarr.length; q++) {
-			var moveAside4LearnsetLi = document.createElement("li");
-			moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
-			var moveAside4LearnsetLiImgOuter = document.createElement("div");
-			var moveAside4LearnsetLiImg = document.createElement("img");
-			var moveAside4LearnsetLiSourceOuter = document.createElement("span");
-			var moveAside4LearnsetLiSource = document.createElement("p");
-			moveAside4LearnsetLiSourceOuter.title = "Level Up";
-			moveAside4LearnsetLiSource.innerHTML = "Level Up: "+"<b>"+learnsetlevelarr[q]["Factor"]+"</b>";
-			moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(learnsetlevelarr[q]["Pokémon"]),"Box")+".png";
-			moveAside4LearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
-			moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Pokémon"]));
-			moveAside4LearnsetLiImg.addEventListener("click", modalData);
-			moveAside4LearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-			moveAside4LearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
-			moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
-			moveAside4LearnsetLiImgOuter.appendChild(moveAside4LearnsetLiImg);
-			moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiSourceOuter);
-			moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSource);
+			var moveSectionSidebarLearnsetLi = document.createElement("li");
+			moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
+			var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+			var moveSectionSidebarLearnsetLiImg = document.createElement("img");
+			var moveSectionSidebarLearnsetLiText = document.createElement("small");
+			var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+			var moveSectionSidebarLearnsetLiSource = document.createElement("h5");
+			moveSectionSidebarLearnsetLiSourceOuter.title = "Level Up";
+			moveSectionSidebarLearnsetLiSource.innerHTML = "Level Up: "+learnsetlevelarr[q]["Factor"];
+			moveSectionSidebarLearnsetLiText.innerText = learnsetlevelarr[q]["Pokémon"];
+			moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(learnsetlevelarr[q]["Pokémon"]),"Box")+".png";
+			moveSectionSidebarLearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
+			moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+			moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
+			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
+			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
+			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
+			moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSource);
+
+			moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Pokémon"]));
+			moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
+			moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
 		}
 		for(var q = 0; q < finaldataLearnsetEvolution.length; q++) {
 			if(finaldataLearnsetEvolution[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetEvolution[q]["Game"]) == true) {
-				var moveAside4LearnsetLi = document.createElement("li");
-				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
-				var moveAside4LearnsetLiImgOuter = document.createElement("div");
-				var moveAside4LearnsetLiImg = document.createElement("img");
-				var moveAside4LearnsetLiSourceOuter = document.createElement("span");
-				var moveAside4LearnsetLiSourceText = document.createElement("p");
-				var moveAside4LearnsetLiSourceImgOuter = document.createElement("span");
-				moveAside4LearnsetLiSourceOuter.title = "Prior Evolution";
-				moveAside4LearnsetLiSourceText.innerText = "Prior Evolution:";
+				var moveSectionSidebarLearnsetLi = document.createElement("li");
+				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
+				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				var moveSectionSidebarLearnsetLiText = document.createElement("small");
+				var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+				var moveSectionSidebarLearnsetLiSourceText = document.createElement("h6");
+				var moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
+				moveSectionSidebarLearnsetLiSourceOuter.title = "Prior Evolution";
+				moveSectionSidebarLearnsetLiSourceText.innerText = "Prior Evolution:";
 				if(finaldataLearnsetEvolution[q]["Evolution"].includes(",")) {
 					for(var r = 0; r < finaldataLearnsetEvolution[q]["Evolution"].split(",").length; r++) {
-						var moveAside4LearnsetLiSource = document.createElement("img");
-						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]),"Box")+".png";
-						moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"].split(",")[r];
-						moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]))
-						moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
-						moveAside4LearnsetLiSource.addEventListener("click", modalData);
+						var moveSectionSidebarLearnsetLiSource = document.createElement("img");
+						moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]),"Box")+".png";
+						moveSectionSidebarLearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"].split(",")[r];
+						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
+
+						moveSectionSidebarLearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"].split(",")[r]));
+						moveSectionSidebarLearnsetLiSource.addEventListener("click", modalData);
+						moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
 					}
 				} else if(finaldataLearnsetEvolution[q]["Evolution"] == "None") {
-					moveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetEvolution[q]["Evolution"];
+					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldataLearnsetEvolution[q]["Evolution"];
 				} else {
-					var moveAside4LearnsetLiSource = document.createElement("img");
-					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]),"Box")+".png";
-					moveAside4LearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"];
-					moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]))
-					moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
-					moveAside4LearnsetLiSource.addEventListener("click", modalData);
+					var moveSectionSidebarLearnsetLiSource = document.createElement("img");
+					moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]),"Box")+".png";
+					moveSectionSidebarLearnsetLiSource.title = finaldataLearnsetEvolution[q]["Evolution"];
+					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
+
+					moveSectionSidebarLearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Evolution"]));
+					moveSectionSidebarLearnsetLiSource.addEventListener("click", modalData);
+					moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
 				}
 		
 				
-				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]),"Box")+".png";
-				moveAside4LearnsetLiImg.title = finaldataLearnsetEvolution[q]["Pokémon"];
-				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]));
-				
+				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.title = finaldataLearnsetEvolution[q]["Pokémon"];
+				moveSectionSidebarLearnsetLiText.innerText = finaldataLearnsetEvolution[q]["Pokémon"];				
+				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+				moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
+				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
+				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceText);
+				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceImgOuter);
 
-				moveAside4LearnsetLiImg.addEventListener("click", modalData);
-				moveAside4LearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-				moveAside4LearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
-				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
-				moveAside4LearnsetLiImgOuter.appendChild(moveAside4LearnsetLiImg);
-				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiSourceOuter);
-				moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSourceText);
-				moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSourceImgOuter);
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]));
+				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
+
 			}
 		}
 		for(var q = 0; q < finaldataLearnsetMachine.length; q++) {
 			if(finaldataLearnsetMachine[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetMachine[q]["Game"]) == true) {
-				var moveAside4LearnsetLi = document.createElement("li");
-				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
-				var moveAside4LearnsetLiImgOuter = document.createElement("div");
-				var moveAside4LearnsetLiImg = document.createElement("img");
-				var moveAside4LearnsetLiSourceOuter = document.createElement("span");
-				var moveAside4LearnsetLiSource = document.createElement("p");
+				var moveSectionSidebarLearnsetLi = document.createElement("li");
+				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
+				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				var moveSectionSidebarLearnsetLiText = document.createElement("small");
+				var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+				var moveSectionSidebarLearnsetLiSource = document.createElement("h5");
 				if(finaldataLearnsetMachine[q]["Machine"].includes("HM")) {
-					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
-					moveAside4LearnsetLiSource.setAttribute("name","HM");
-					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
-					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
-					moveAside4LearnsetLiSource.setAttribute("function","dataRedirect");
+					moveSectionSidebarLearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
+					moveSectionSidebarLearnsetLiSource.setAttribute("name","hm");
+					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").setAttribute("name","item");
+					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveSectionSidebarLearnsetLiSource.setAttribute("function","dataRedirect");
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TM")) {
-					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
-					moveAside4LearnsetLiSource.setAttribute("name","TM");
-					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
-					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
-					moveAside4LearnsetLiSource.setAttribute("function","dataRedirect");
+					moveSectionSidebarLearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
+					moveSectionSidebarLearnsetLiSource.setAttribute("name","tm");
+					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").setAttribute("name","item");
+					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveSectionSidebarLearnsetLiSource.setAttribute("function","dataRedirect");
 				} else if(finaldataLearnsetMachine[q]["Machine"].includes("TR")) {
-					moveAside4LearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
-					moveAside4LearnsetLiSource.setAttribute("name","TR");
-					moveAside4LearnsetLiSource.querySelector(":scope > b").setAttribute("name","Item");
-					moveAside4LearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
-					moveAside4LearnsetLiSource.setAttribute("function","dataRedirect");
+					moveSectionSidebarLearnsetLiSource.innerHTML = "<b>"+finaldataLearnsetMachine[q]["Machine"]+"</b>";
+					moveSectionSidebarLearnsetLiSource.setAttribute("name","tr");
+					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").setAttribute("name","item");
+					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveSectionSidebarLearnsetLiSource.setAttribute("function","dataRedirect");
 				}
 				
 
-				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]),"Box")+".png";
-				moveAside4LearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
-				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]));
-				
-				moveAside4LearnsetLiImg.addEventListener("click", modalData);
-				moveAside4LearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-				moveAside4LearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
-				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
-				moveAside4LearnsetLiImgOuter.appendChild(moveAside4LearnsetLiImg);
-				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiSourceOuter);
-				moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSource);
+				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
+				moveSectionSidebarLearnsetLiText.innerText = finaldataLearnsetMachine[q]["Pokémon"];
+				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+				moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
+				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
+				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSource);
+
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]));
+				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
+
 			}
 		}
 		for(var q = 0; q < finaldataLearnsetBreed.length; q++) {
 			if(finaldataLearnsetBreed[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetBreed[q]["Game"]) == true) {
-				var moveAside4LearnsetLi = document.createElement("li");
-				moveAside4LearnsetUl.appendChild(moveAside4LearnsetLi);
-				var moveAside4LearnsetLiImgOuter = document.createElement("div");
-				var moveAside4LearnsetLiImg = document.createElement("img");
-				var moveAside4LearnsetLiSourceOuter = document.createElement("span");
-				var moveAside4LearnsetLiSourceText = document.createElement("p");
-				var moveAside4LearnsetLiSourceImgOuter = document.createElement("span");
-				moveAside4LearnsetLiSourceOuter.title = "Parent";
-				moveAside4LearnsetLiSourceText.innerText = "Parent:";
+				var moveSectionSidebarLearnsetLi = document.createElement("li");
+				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
+				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				var moveSectionSidebarLearnsetLiText = document.createElement("small");
+				var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+				var moveSectionSidebarLearnsetLiSourceText = document.createElement("h5");
+				var moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
+				moveSectionSidebarLearnsetLiSourceOuter.title = "Parent";
+				moveSectionSidebarLearnsetLiSourceText.innerText = "Parent:";
 				if(finaldataLearnsetBreed[q]["Parent"].includes(",")) {
 					for(var r = 0; r < finaldataLearnsetBreed[q]["Parent"].split(",").length; r++) {
-						var moveAside4LearnsetLiSource = document.createElement("img");
-						moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]),"Box")+".png";
-						moveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"].split(",")[r];
-						moveAside4LearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]))
-						moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
-						moveAside4LearnsetLiSource.addEventListener("click", modalData);
+						var moveSectionSidebarLearnsetLiSource = document.createElement("img");
+						moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]),"Box")+".png";
+						moveSectionSidebarLearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"].split(",")[r];
+						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
+
+						moveSectionSidebarLearnsetLiSource.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Parent"].split(",")[r]));
+						moveSectionSidebarLearnsetLiSource.addEventListener("click", modalData);
+						moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
 					}
 				} else if(finaldataLearnsetBreed[q]["Parent"] == "None") {
-					moveAside4LearnsetLiSourceImgOuter.innerText = finaldataLearnsetBreed[q]["Parent"];
+					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldataLearnsetBreed[q]["Parent"];
 				} else {
-					var moveAside4LearnsetLiSource = document.createElement("img");
-					moveAside4LearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Parent"]),"Box")+".png";
-					moveAside4LearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"];
-					moveAside4LearnsetLiSourceImgOuter.appendChild(moveAside4LearnsetLiSource);
+					var moveSectionSidebarLearnsetLiSource = document.createElement("img");
+					moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Parent"]),"Box")+".png";
+					moveSectionSidebarLearnsetLiSource.title = finaldataLearnsetBreed[q]["Parent"];
+					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 				}
 
-				moveAside4LearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]),"Box")+".png";
-				moveAside4LearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
-				moveAside4LearnsetLiImg.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]));
-				
-				moveAside4LearnsetLiImg.addEventListener("click", modalData);
-				moveAside4LearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-				moveAside4LearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
-				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiImgOuter);
-				moveAside4LearnsetLiImgOuter.appendChild(moveAside4LearnsetLiImg);
-				moveAside4LearnsetLi.appendChild(moveAside4LearnsetLiSourceOuter);
-				moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSourceText);
-				moveAside4LearnsetLiSourceOuter.appendChild(moveAside4LearnsetLiSourceImgOuter);
+				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
+				moveSectionSidebarLearnsetLiText.innerText = finaldataLearnsetBreed[q]["Pokémon"];
+
+				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+				moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
+				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
+				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceText);
+				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceImgOuter);
+
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldataLearnsetBreed[q]["Pokémon"]));
+				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
 			}
 		}
 
