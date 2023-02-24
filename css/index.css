@@ -1,0 +1,532 @@
+nav {
+    width: 100%;
+    height: 5vh;
+    position: unset;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #F0F0F0;
+    box-shadow: 0px 2px 1px #000;
+    z-index: 100;
+    position: relative;
+}
+
+#content {
+    height: 95vh;
+    position: relative;
+    display: block;
+    overflow: auto;
+}
+
+
+
+nav > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-family: Roboto;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    position: relative;
+}
+nav > div:first-child > img {
+    height:100%;
+}
+nav > div:first-child > * > * {
+    text-align: center;
+    transition: .2s ease font-size;
+}
+
+
+nav > div:first-child > * {
+    font-size: 0;
+    transition: .5s ease opacity;
+}
+nav.sticky > div:first-child > * {
+    font-size:initial;
+}
+
+
+nav > div:first-child > * {
+    font-weight: normal;
+    text-align: center;
+    display: block;
+}
+
+nav > div:first-child > * > p {
+    opacity: 0;
+    font-weight:bold;
+}
+
+nav.sticky > div:first-child > * > p {
+    font-size: 0;
+}
+nav.sticky > div:first-child:hover > * > p {
+    font-size: var(--sizeFontS);
+    opacity: 1;
+}
+
+nav > div:first-child > p {
+    background-image: url(./media/Images/Misc/FinalDex/FinalDex.png);
+    width: 95%;
+    height: 95%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 90%;
+    object-fit: scale-down;
+    cursor: pointer;
+}
+
+
+nav > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    text-align:center;
+}
+
+nav > div > b {
+    width: 100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+#hp {
+    display:none !important;
+}
+
+nav > div > div {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+}
+nav > div > div.active {
+    display: flex;
+}
+#Games > * > *,
+#FAQ > * > *,
+#Bug,
+#Metadata > * > *,
+#Sources > * > *,
+#Changelog > * > * {
+    transform: scaleX(-1);
+}
+#Games > * > * > *,
+#FAQ > * > * > *,
+#Bug > *,
+#Metadata > * > * > *,
+#Sources > * > * > *,
+#Changelog > * > * > * {
+    transform: scaleX(-1);
+}
+#Games > span header {
+    display: block;
+    transform: none;
+    font-family: Roboto;
+    padding: 20px 0;
+    text-shadow: -2px 1px white;
+}
+#Games > span {
+    flex-direction: column;
+}
+#Home,
+#Metadata,
+#FAQ,
+#Bug,
+#Changelog,
+#Sources {
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Roboto;
+    font-weight: bold;
+}
+#Games,
+#Metadata,
+#FAQ,
+#Bug,
+#Changelog,
+#Sources {
+    width:100%;
+    height: 95vh;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+#Games {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    justify-content: center;
+    height:unset;
+    
+}
+#Games > span {
+    padding: 100px 0;
+}
+
+#Games ul li {
+    display: flex;
+    width: 200px;
+    height: 100px;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 0 1px #000;
+    transition: 0.2s ease width;
+    transition-delay: 0.2s;
+    flex-direction: column;
+    margin: 10px;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--color10);
+    box-shadow: -3px 3px rgb(0 0 0 / 50%);
+    transition: .25s ease box-shadow, .25s ease transform;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+#Games ul li:hover,
+#Games ul li:focus {
+    box-shadow: -1px 1px rgb(0 0 0 / 50%);
+    transform: scaleX(-1) scale(0.98);
+}  
+
+
+#Games ul li > a {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#Games ul li a img {
+    object-fit: scale-down;
+    z-index: 5;
+    max-width: 90%;
+    max-height: 90%;
+    cursor: pointer;
+}
+#Games ul li > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+
+#Games ul li.miss {
+    background: radial-gradient(circle, var(--color8) 10%, transparent 11%),radial-gradient(circle at bottom left, var(--color8) 5%, transparent 6%),radial-gradient(circle at bottom right, var(--color8) 5%, transparent 6%),radial-gradient(circle at top left, var(--color8) 5%, transparent 6%),radial-gradient(circle at top right, var(--color8) 5%, transparent 6%);
+    background-size: 1em 1em;
+    background-color: var(--color10);
+}
+ 
+
+
+
+
+
+#Home {
+    flex-direction: column;
+    font-size: 20px;
+    position: relative;
+}
+
+#Home > h5 {
+    padding: 10px 0;
+    font-size: .8em;
+    text-shadow: 1px 1px black;
+    color: var(--color18);
+    text-align:center;
+}
+
+#Home > strong {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+#Home > strong:hover {
+    opacity: 0.8;
+}
+
+
+
+#Home > strong,
+nav > div:first-child > span > h2 {
+    background: -webkit-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: -moz-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: -ms-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: -o-linear-gradient(left, #3F3F3F, #7F7F7F);
+    background: linear-gradient(to right, #3F3F3F, #7F7F7F);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+
+#Home > span {
+    font-weight: normal;
+    font-size: 12px;
+    position: absolute;
+    bottom: 2px;
+    right: 15px;
+}
+
+#Games > span,
+#FAQ > span,
+#Bug > span,
+#Metadata > span,
+#Sources > span,
+#Changelog > span {
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#Games > span > ul,
+#FAQ > span > ul,
+#Bug > span > ul,
+#Metadata > span > ul,
+#Sources > span > ul,
+#Changelog > span > ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 90%;
+    width: min(max(100px, 90vw), 750px);
+}
+
+#Games > span > ul {
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+
+#Bug form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: space-around;
+}
+#Bug form span {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    max-height: 90%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#Metadata > span > ul ul,
+#Sources > span > ul ul {
+    padding: 5px 0;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+#FAQ > span > ul ul {
+    padding: 10px 0;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+#Metadata h3,
+#Sources h3,
+#FAQ h3 {
+    width: 95%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#Changelog h3 {
+    padding: 10px 0;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Changelog ul pre {
+    padding: 5px 0;
+}
+#Changelog ul > ul {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#Changelog li {
+    padding: 2px 0;
+    font-size: 0.8em;
+}
+#Changelog li:last-child {
+    list-style-type: none;
+}
+
+
+#Bug select {
+    padding: 10px 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    cursor: pointer;
+    display: block;
+    margin: 10px 30%;
+    width: 40%;
+    text-align: left;
+}
+#Bug textarea {
+    width: 80%;
+    padding: 10px 20px;
+    display: block;
+    min-height: 100px;
+    min-width: 100px;
+    max-width: 90%;
+    max-height: 50vh;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+#Bug select option[disabled] {
+    display: none;
+}
+#Bug select {
+    font-weight: normal;
+}
+#Bug option {
+    font-weight: bold;
+    font-size: 1em;
+}
+#Bug div {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+#Bug div:nth-child(2) {
+    opacity:0;
+    height: 0;
+    width: 0;
+}
+
+#Bug form span > div {
+    transition: 0.5s ease opacity 0s, 2s ease height 0.5s;
+}
+
+#Bug form span.hide > div:nth-child(1),
+#Bug form span.show > div:nth-child(2) {
+    opacity:0;
+    height: 0;
+    width: 0;
+}
+#Bug form span.hide > div:nth-child(2),
+#Bug form span.show > div:nth-child(1) {
+    opacity:1;
+    height: unset;
+    width: 100%;
+}
+#Bug form span.hide > div:last-child {
+    overflow:hidden;
+}
+
+#FAQ ul ul > li:first-child {
+    list-style-type: disc;
+}
+#FAQ ul ul > li:last-child {
+    font-weight:normal;
+    list-style-type: circle;
+}
+#Metadata ul ul ul > li {
+    list-style-type: none;
+}
+#Sources ul ul ul > li {
+    list-style-type: none;
+}
+#Changelog li,
+#Metadata ul ul > li,
+#Sources ul ul > li {
+    list-style-type: square;
+}
+
+
+body > span.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+body > span[name="num"] {
+    top: 50vh;
+    font-size: 1.5em;
+    font-family: Roboto;
+    right: 1vw;
+}
+#below {
+    position:relative;
+}
+
+#Games {
+    margin-top: 100px;
+}
+
+#below::before,
+#below {
+    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%);
+    background-size: 1em 1em;
+    background-color: var(--color19);
+
+}
+
+#below::before {
+    content: "";
+    display: block;
+    width: 100%;
+    clip-path: polygon(50% 0, 100% 100%, 0% 100%, 0 100%);
+    height: 100px;
+    position: absolute;
+    top: -99px;
+}
+.gform select {
+    padding: 10px 30px;
+    margin: 10px;
+}
