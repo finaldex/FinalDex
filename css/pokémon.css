@@ -1,0 +1,1420 @@
+#pokémon > div > ul {
+    text-align: center;
+}
+#pokémon > div ul li label > div caption,
+#pokémon > div ul li label > div p {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-weight: bold;
+}
+#pokémon > div li {
+	display: inline-block;
+	background: var(--contain);
+	border: 2px groove;
+	border-color: var(--border2) !important;
+	font-size: 25px;
+	width: 250px;
+	height: 250px;
+	margin: 3px 3px;
+	user-select: none;
+}
+#pokémon > div ul li label > div > *[name="popup"] {
+	position: absolute;
+    top: 15%;
+    right: 5%;
+    opacity: 0.2;
+    z-index: 1;
+    color: var(--font1);
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#pokémon > div ul li label > div > span[name="data"] img {
+	object-fit: scale-down;
+	width: 100%;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#pokémon > div li label {
+	display: block;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	cursor: default;
+}
+#pokémon > div ul li label > div {
+	height: 20%;
+	width: 100%;
+	position: relative;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	overflow-y: auto;
+}
+#pokémon > div ul li label > div figure[name="confirm"] {
+	width: 7%;
+    height: 35%;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    background: var(--color15);
+    box-shadow: 0 0 1px var(--border1);
+    border-radius: 100%;
+}
+#pokémon > div ul li label > div figure[name="confirm"]::after {
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 5%;
+    margin-left: -1px;
+    background: rgb(0, 255, 162);
+    background: linear-gradient(337deg, rgba(0, 255, 162, 1) 0%, rgba(27, 255, 172, 1) 16%, rgba(57, 255, 184, 1) 21%, rgba(27, 255, 172, 1) 26%, rgba(0, 204, 130, 1) 56%, rgba(0, 255, 162, 1) 100%);
+    border-radius: 100%;
+    opacity: 0;
+    transition: .5s ease opacity;
+    content: "";
+	filter:brightness(0.9);
+}
+#pokémon > div ul li label > div caption[name="national"] {
+	display: flex;
+}
+#pokémon > div li input:checked + label > div figure[name="confirm"]::after {
+	opacity: 1;
+}
+#pokémon > div li input:checked + label img {
+	filter: brightness(90%) opacity(100%);
+	transition-duration: 1s;
+	transition-property: filter;
+}
+#pokémon > div li input:checked + label p {
+	transition-duration: 1.5s;
+	transition-property: opacity;
+	opacity: 1;
+}
+#pokémon > div li input:checked + label button {
+	opacity: 0.3;
+	transition-duration: .3s;
+}
+#pokémon > div li input:checked + label button:hover {
+	opacity: 0.5;
+	transition-duration: 0s;
+}
+#pokémon > div ul li label > div > *[name="popup"]:active {
+    opacity: 0.6;
+    transform: unset;
+}
+
+
+#pokémon > div ul li label p {
+	opacity: 0;
+}
+#pokémon > div li label img  {
+	opacity: 1;
+	z-index: 1;
+	height: 60%;
+	width: 90%;
+	filter: brightness(0%) opacity(10%);
+	display: block;
+	margin: 0 5%;
+}
+#pokémon > div {
+	height: 90%;
+	width: calc(100vw - 100px);
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: relative;
+    float:right;
+}
+#pokémon nav {
+	width: 100%;
+	height: 10%;
+	position: relative;
+	box-shadow: 0 0 0 1px var(--border1);
+	z-index: 10;
+	background: var(--color15);
+}
+#pokémon > nav ul li {
+	float: left;
+	position: relative;
+	text-align: center;
+    display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#pokémon > nav ul li > span {
+	height: 100%;
+    width:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#pokémon nav ul {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+#pokémon nav ul li {
+	position: relative;
+}
+#pokémon > div > ul {
+	padding: 10px;
+}
+#pokémon > aside {
+    height: 90%;
+	/*width: 500px;*/
+    background: var(--color15);
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#pokémon > aside[name='settings'] > span[name="checkbox"] {
+	flex-direction: row;
+    justify-content: space-evenly;
+}
+#pokémon > aside[name='settings'] > span {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+	flex-wrap: wrap;
+	border-bottom: 1px solid; 
+	overflow: hidden;
+}
+#pokémon > aside[name='settings'] > span[name="variant"] > span:first-child {
+	height: 70%;
+}
+#pokémon > aside[name='settings'] > span[name="variant"] > span:last-child {
+	height: 30%;
+}
+#pokémon > aside[name='settings'] > span[name="variant"] > span {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+}
+#pokémon > aside[name='settings'] > span[name="variant"] {
+	height: 200%;
+}
+#pokémon > aside[name='settings'] > span[name="variant"] > div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+	width: 100%;
+}
+#pokémon > aside[name='settings'] span select.None {
+	color: rgba(0, 0, 0, 0.5);
+	/*font-style:italic;
+	text-shadow: 1px 1px rgb(0 0 0 / 10%);*/
+}
+#pokémon > aside[name='settings'] span select:not([disabled]) {
+	cursor:pointer;
+}
+#pokémon > aside[name='settings'] span select {
+	padding: 10px;
+    width: 80%;
+}
+#pokémon > aside[name='settings'] span select,
+#pokémon > aside[name='settings'] span option {
+	text-align: center;
+	font-family: 'Roboto';
+	font-weight: bold;
+}
+#pokémon > aside[name='settings'] span select,
+#pokémon > aside[name='settings'] span select * {
+	color:var(--fontDark);
+}
+#pokémon > aside[name='settings'] span[name="resize"] div {
+	display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+#pokémon > aside[name='settings'] {
+	background: var(--color15);
+    right: 0;
+	display: inline-flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    transition: .5s ease width, 0s ease opacity 1s;
+}
+#pokémon > aside[name='settings']:not(.open) {
+	width: 0;
+}
+#pokémon > aside[name='settings'].open {
+	width: 500px;
+}
+#pokémon > aside[name='settings'] > span {
+    transition: .5s ease opacity .5s;
+}
+#pokémon > aside[name='settings']:not(.open) > span {
+    opacity: 0;
+    transition: none;
+}
+#pokémon > aside[name='settings'].open > span {
+    opacity: 1;
+}
+#pokémon > aside section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    height: 100%;
+	position:relative;
+    width: 80%;
+}
+#pokémon > aside  {
+    transform-origin:left;
+}
+#pokémon > aside[name="team"] section[name] > span,
+#pokémon > aside[name="team"] section[name] {
+    width: 0vw;
+}
+#pokémon > aside[name="team"] section[name].open > span,
+#pokémon > aside[name="team"] section[name].switch > span {
+    width: unset;
+}
+#pokémon > aside[name="team"] section[name].open,
+#pokémon > aside[name="team"] section[name].switch {
+    width: min(max(300px, 20vw), 500px);
+}
+/*
+#pokémon > aside[name="team"] section[name] > * {
+    opacity: 0;
+    transition: .2s ease opacity .5s;
+}
+#pokémon > aside[name="team"] section[name].close > * {
+    opacity: 0;
+    transition: .2s ease opacity .5s;
+}
+#pokémon > aside[name="team"] section[name].switch > * {
+    opacity: 1;
+    transition: none;
+}
+#pokémon > aside[name="team"] section[name].open > * {
+    opacity: 1;
+    transition: .2s ease opacity .5s;
+}
+*/
+#pokémon > aside[name="team"] section.open {
+    transition:.5s ease width;
+}
+#pokémon > aside[name="team"] section.close {
+    transition: none;
+}
+#pokémon > aside[name="team"] section.switch {
+    transition: none;
+}
+#pokémon > aside section:not([name]) {
+    width: 100px;
+    border-left: 1px solid;
+	border-right: 1px solid;
+	display:flex
+}
+#pokémon > aside section:not([name]) label {
+    height: 50%;
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#pokémon > aside[name='settings'] > span[name="imagetype"] > span {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+	width: 50%;
+    flex-direction: column;
+}
+#pokémon > aside[name='settings'] > span[name="imagetype"] > span:first-child {
+	width: 60%;
+}
+#pokémon > aside[name='settings'] > span[name="imagetype"] > span:last-child {
+	width: 40%;
+}
+#pokémon > aside[name='settings'] > span[name="imagetype"] > span:last-child select {
+	padding: 5px;
+	margin: 2px 0;
+}
+#pokémon > aside section[name="party"] * {
+	color:var(--fontLight);
+}
+#pokémon > aside section > b {
+	width: 100%;
+	height: 100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	position:relative;
+}
+#pokémon > aside section > b span {
+	position: absolute;
+	pointer-events: none;
+}
+#pokémon > aside section > b * {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#pokémon > aside section > b:hover,
+#pokémon > aside section > b:active {
+    font-weight: bold;
+}
+#pokémon > aside section div {
+    width: 100%;
+	height: 16.66667%;
+    position: relative;
+	overflow:hidden;
+	background: var(--color17);
+	border: 1px solid;
+}
+#pokémon > aside div aside,
+#pokémon > aside section ul {
+	width: 100%;
+	height: 100%;
+}
+#pokémon > aside section[name="party"] div aside:first-child[name*="Electric,"] > span:first-child *,
+#pokémon > aside section[name="party"] div aside:first-child[name*="Electric,"] > span:first-child *::placeholder,
+#pokémon > aside section[name="party"] div aside:first-child[name*="Electric,"] > span:nth-child(2) *,
+#pokémon > aside section[name="party"] div aside:first-child[name*="Electric,"] > span:nth-child(2) *::placeholder,
+#pokémon > aside section[name="party"] div aside:first-child[name*="Ice,"] > span:first-child *,
+#pokémon > aside section[name="party"] div aside:first-child[name*="Ice,"] > span:first-child *::placeholder,
+#pokémon > aside section[name="party"] div aside:first-child[name*="Ice,"] > span:nth-child(2) *,
+#pokémon > aside section[name="party"] div aside:first-child[name*="Ice,"] > span:nth-child(2) *::placeholder  {
+	color:var(--fontDark);
+}
+#pokémon > aside section[name="party"] div aside:first-child[name="electric"] *,
+#pokémon > aside section[name="party"] div aside:first-child[name="electric"] *::placeholder,
+#pokémon > aside section[name="party"] div aside:first-child[name="ice"] *,
+#pokémon > aside section[name="party"] div aside:first-child[name="ice"] *::placeholder  {
+	color:var(--fontDark);
+}
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Electric"] > span[name] *,
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Electric"] > span[name] *::placeholder,
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Electric"] > span:last-child *,
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Electric"] > span:last-child *::placeholder,
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Ice"] > span[name] *,
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Ice"] > span[name] *::placeholder,
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Ice"] > span:last-child *,
+#pokémon > aside section[name="party"] div aside:first-child[name*=",Ice"] > span:last-child *::placeholder   {
+	color:var(--fontDark);
+}
+#pokémon > aside section[name="party"] div aside:first-child {
+	display: none;
+}
+#pokémon > aside section[name="party"] div aside:last-child {
+	background: linear-gradient(to right, Skyblue, var(--color_50));
+}
+#pokémon > aside section[name="party"] div aside:last-child b {
+	width: 100%;
+    height: 100%;
+    padding: 0;
+    font-size: 15vh;
+    font-family: fantasy;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.95;
+	cursor: pointer;
+}
+#pokémon > aside section[name="party"] div aside:last-child b:hover {
+	filter:brightness(0.8);
+}
+#pokémon > aside section[name="party"] div aside:last-child b:active {
+	transform:scale(0.9);
+}
+#pokémon > aside section[name="party"] div aside {
+    display: flex;
+}
+#pokémon > aside section[name="party"] div aside > button {
+	width: 100%;
+	height: 100%;
+}
+#pokémon > aside section[name="box"] > span {
+    position:absolute;
+    bottom: 10px;
+    left: 10px;
+    color:var(--colorRed);
+    overflow:hidden;
+}
+#pokémon > aside section[name="box"] {
+	background-color: var(--color16);
+	background-size: 10px 10px;
+	background-image: repeating-linear-gradient(45deg, var(--color15) 0, var(--color15) 1px, var(--color13) 0, var(--color13) 50%);
+}
+#pokémon > aside section[name="box"] ul {
+	display: flex;
+    flex-direction: row;
+    overflow: auto;
+    flex-wrap: wrap;
+    align-content: flex-start;
+	overflow:auto;
+}
+#pokémon > aside section[name="box"] > span {
+	position:absolute;
+	left: 10px;
+	bottom: 10px;
+}
+#pokémon > aside section[name="box"] > span figure {
+	width: 100%;
+	height: 100%;
+	object-fit: scale-down;
+    transition:.2s ease filter;
+}
+#pokémon > aside section[name="box"] > span figure:hover,
+#pokémon > aside section[name="box"] > span.ui-droppable-active figure {
+	animation: scale80 infinite 2s linear;
+}
+#pokémon > aside section[name="box"] > span figure:active,
+#pokémon > aside section[name="box"] > span.ui-droppable-hover.ui-droppable-active.ui-droppable figure {
+	filter: grayscale(0.8);
+    animation-play-state: paused;
+}
+#pokémon > aside section[name="box"] ul li {
+	position:relative;
+	padding: 5px;
+}
+#pokémon > aside section[name="box"] ul li span {
+	position: absolute;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    bottom: -10px;
+    border-radius: 100%;
+    transform: rotate3d(20, 0, 0, 300deg) scale(0.7);
+    opacity: 0.4;
+}
+#pokémon > aside section[name="box"] ul li img {
+	position:inherit;
+}
+#pokémon > div li img {
+    -webkit-user-drag: auto;
+}
+#pokémon > aside[name='team'] div button {
+    cursor: pointer;
+	transition: .25s ease opacity .25s, .1s linear;
+}
+#pokémon > aside[name='team'] div aside > span:first-child select,
+#pokémon > aside[name='team'] div aside > span:last-child select:last-child {
+	font-style: normal;
+}
+#pokémon > aside[name='team'] div aside > span:first-child select:focus,
+#pokémon > aside[name='team'] div aside > span:last-child select:last-child:focus {
+	background: none;
+    border: none;
+	color: var(--fontLight);
+	cursor: pointer;
+	font-style:normal;
+	outline:none;
+}
+#pokémon > aside[name='team'] div aside > span:first-child select > option:first-child,
+#pokémon > aside[name='team'] div aside > span:last-child select:last-child > option:first-child {
+	display: none;
+}
+#pokémon > aside[name='team'] div span b:first-child:active {
+	filter: unset;
+}
+#pokémon > aside[name='team'] div span:first-child b:last-child {
+	pointer-events: none;
+    font-weight: normal;
+    font-size: unset;
+}
+#pokémon > aside div span[name='settings'] button:first-child:active {
+	transform: rotate(-180deg);
+}
+#pokémon > aside div span[name='settings'] button:last-child:active {
+	filter: invert(1);
+}
+#pokémon > aside section[name="party"] div aside > span[name] {
+    width: 0;
+    opacity: 0;
+	transition: none;
+}
+#pokémon > aside section[name="party"] div aside > span[name].show {
+	width: 100%;
+    opacity: 1;
+}
+#pokémon > aside section[name="party"] div aside > span[name].showstart {
+	transition: 0.5s ease width, .25s ease opacity .5s;
+}
+#pokémon > aside section[name="party"] div aside > span[name].showmiddle {
+	transition: .75s ease opacity;
+}
+#pokémon > aside section[name="party"] div aside > span[name].showend {
+	transition: 0.5s ease width, .25s ease opacity;
+}
+#pokémon > aside section[name="party"] div aside > span {
+	width: 100%;
+    height: 100%;
+    position: relative;
+	display: inline-flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+#pokémon > aside section[name="party"] div aside > span:last-child select:nth-child(2):not(:last-child) {
+	text-shadow: rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px;
+	font-weight: bold;
+	font-family: fantasy;
+}
+#pokémon > aside section[name="party"] div aside > span:last-child {
+	align-content: flex-end;
+}
+#pokémon > aside section[name="party"] div aside > span:last-child {
+	align-content: flex-start;
+}
+#pokémon > aside section[name="party"] div aside > span:last-child,
+#pokémon > aside section[name="party"] div aside > span:first-child  {
+    height: 100%;
+    overflow: unset;
+	max-width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+	flex-direction: column;
+}
+#pokémon > aside div aside > span:first-child select:first-child {
+	filter: none;
+}
+#pokémon > aside div aside > span:first-child select:first-child:active {
+	filter: grayscale(1) brightness(2.5) invert(1);
+}
+#pokémon > aside img:not(.deselect) {
+    object-fit: scale-down;
+    -webkit-user-drag: auto;
+}
+#pokémon > aside section[name="party"] div span img[value] {
+	height: 100%;
+    width: 100%;
+    object-fit: scale-down;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+#pokémon > aside section[name="party"] div span img:not([value]) {
+	position: absolute;
+    left: 10%;
+    top: 5%;
+	z-index: 10;
+}
+#pokémon > aside section[name="party"] div aside > span > span {
+	position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction: column;
+}
+#pokémon > aside section[name="party"] div aside > span:nth-child(2) span:first-child[name="pokémon"] {
+	height: 85%;
+}
+#pokémon > aside section[name="party"] div aside > span:nth-child(2) span:nth-child(2)[name="pokémon"] {
+	height: 70%;
+}
+#pokémon > aside section[name="party"] div aside span[name="item"],
+#pokémon > aside section[name="party"] div aside span[name="name"] {
+	height: 15%;
+}
+#pokémon > aside section[name="party"] div [name="moves"] > span:nth-child(2) > span {
+	width: 100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	cursor: grab;
+}
+#pokémon > aside section[name="party"] div [name="moves"] > span:nth-child(2) > span:active {
+	cursor: grabbing;
+}
+#pokémon > aside section[name="party"] div span select {
+	width: 90%;
+    font-size:var(--sizeFontS)
+}
+#pokémon > aside section[name="party"] div span select[value="Held Item"],
+#pokémon > aside section[name="party"] div span select[value="Nature"] {
+	font-style: italic;
+}
+#pokémon > aside section[name="party"] div span select,
+#pokémon > aside section[name="party"] div span option {
+	text-align: center;
+}
+#pokémon > aside div aside > span input,
+#pokémon > aside div aside > span select,
+#pokémon > aside div aside > span select * {
+	background: none;
+    border: none;
+	cursor: pointer;
+	color: var(--fontLight);
+}
+#pokémon > aside div aside > span input:focus-within,
+#pokémon > aside div aside > span select:focus-within,
+#pokémon > aside div aside > span select:focus-within * {
+	background: var(--color_97);
+    border: unset;
+	color: var(--fontDark);
+	cursor: auto;
+	font-style:normal;
+}
+#pokémon > aside div aside > span input {
+    width: 90%;
+	text-align: center;
+}
+#pokémon > aside[name='team'] select {
+	font-style: italic;
+}
+#pokémon > aside[name='team'] span[name="nature"] select,
+#pokémon > aside[name='team'] span[name="ability"] select,
+#pokémon > aside section[name="party"] div aside > span:last-child select:nth-child(2) {
+	font-style: unset;
+}
+#pokémon > aside[name='team'] select option:checked {
+	font-weight: bold;
+}
+#pokémon > aside div aside > span input[type="number"]:not(:focus) {
+	-moz-appearance: textfield;
+}
+#pokémon > aside div aside > span select,
+#pokémon > aside div aside > span input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+	-moz-appearance: none;
+}
+#pokémon > aside div aside > span input:focus::-webkit-inner-spin-button {
+    -webkit-appearance: auto;
+	-moz-appearance: auto;
+}
+#pokémon > aside div aside > span input[type=number]::placeholder {
+	font-size: 90%;
+}
+#pokémon > aside div aside > span input::placeholder {
+    opacity: 1;
+    color: var(--fontLight);
+    font-style: italic;
+}
+#pokémon > aside div aside > span input:focus::placeholder {
+    opacity: 0;
+}
+#pokémon aside[name='settings'] span label {
+	padding: 20px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 1px var(--border1);
+	background: var(--color13);
+	color: var(--font2);
+	font-weight: bold;
+	position: relative;
+	transition: none;
+	cursor: pointer;
+	border: 1px solid black;
+	margin: 0 10px;
+}
+#pokémon aside[name='settings'] span input:checked + label {
+	background: var(--color11);
+	color: var(--font1);
+}
+#pokémon aside[name='settings'] span label > span {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	background: rgb(0, 255, 162);
+	background: linear-gradient(337deg, rgba(0, 255, 162, 1) 0%, rgba(27, 255, 172, 1) 16%, rgba(57, 255, 184, 1) 21%, rgba(27, 255, 172, 1) 26%, rgba(0, 204, 130, 1) 56%, rgba(0, 255, 162, 1) 100%);
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	opacity: 0;
+	transition: none;
+	filter: brightness(0.9);
+}
+#pokémon aside[name='settings'] span input:checked + label > span {
+	opacity: 1;
+	transition: opacity 0.5s ease;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2){
+	flex-direction:row;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child > input[value*="HP"],
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child > input[value*="Attack"],
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child > input[value*="Defense"],
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child > input[value*="Special"],
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child > input[value*="Sp. Atk"],
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child > input[value*="Sp. Def"],
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child > input[value*="Speed"] {
+    display: none;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span {
+	display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span {
+	width: 20%;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span[name="iv"],
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span[name="ev"] {
+	width: 25%;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child input {
+	cursor:help;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:first-child {
+	width: 30%;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:first-child input {
+	text-align:right;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:first-child input::placeholder {
+	font-style:normal;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span input[disabled] {
+	cursor: default;
+}
+#pokémon > aside section[name="party"] div aside > span[name="stats"] > span:nth-child(2) > span:last-child input {
+	font-weight: bold;
+    text-shadow: 1px 1px 1px var(--fontDark);
+}
+#pokémon > aside section[name="party"] div aside[name="ice"] > span[name="stats"] > span:nth-child(2) > span:last-child input,
+#pokémon > aside section[name="party"] div aside[name="electric"] > span[name="stats"] > span:nth-child(2) > span:last-child input,
+#pokémon > aside section[name="party"] div aside[name*=",Electric"] > span[name="stats"] > span:nth-child(2) > span:last-child input,
+#pokémon > aside section[name="party"] div aside[name*=",Ice"] > span[name="stats"] > span:nth-child(2) > span:last-child input  {
+	text-shadow: 1px 1px 1px var(--color_60);
+}
+#pokémon > aside section[name="party"] div aside > span:last-child > button {
+	transition: .25s ease;
+}
+#pokémon > aside section[name="party"] div aside > span:last-child > button:active {
+	transform: rotate(-90deg);
+}
+#pokémon > aside section[name="party"] div aside > span:last-child > select:last-child {
+	transition: .25s ease;
+}
+#pokémon > aside section[name="party"] div aside > span:last-child > select:active,
+#pokémon > aside section[name="party"] div aside > span:last-child > select:active * {
+	color: var(--fontDark) !important;
+}
+#pokémon > aside section[name="party"] span[name="Lonely"] input:nth-child(2),
+#pokémon > aside section[name="party"] span[name="Brave"] input:nth-child(2),
+#pokémon > aside section[name="party"] span[name="Adamant"] input:nth-child(2),
+#pokémon > aside section[name="party"] span[name="Naughty"] input:nth-child(2) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Bold"] input:nth-child(3),
+#pokémon > aside section[name="party"] span[name="Relaxed"] input:nth-child(3),
+#pokémon > aside section[name="party"] span[name="Impish"] input:nth-child(3),
+#pokémon > aside section[name="party"] span[name="Lax"] input:nth-child(3) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Modest"] input:nth-child(4),
+#pokémon > aside section[name="party"] span[name="Mild"] input:nth-child(4),
+#pokémon > aside section[name="party"] span[name="Quiet"] input:nth-child(4),
+#pokémon > aside section[name="party"] span[name="Rash"] input:nth-child(4) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Calm"] input:nth-child(5),
+#pokémon > aside section[name="party"] span[name="Gentle"] input:nth-child(5),
+#pokémon > aside section[name="party"] span[name="Sassy"] input:nth-child(5),
+#pokémon > aside section[name="party"] span[name="Careful"] input:nth-child(5) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Timid"] input:nth-child(6),
+#pokémon > aside section[name="party"] span[name="Hasty"] input:nth-child(6),
+#pokémon > aside section[name="party"] span[name="Jolly"] input:nth-child(6),
+#pokémon > aside section[name="party"] span[name="Naive"] input:nth-child(6) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Bold"] input:nth-child(2),
+#pokémon > aside section[name="party"] span[name="Timid"] input:nth-child(2),
+#pokémon > aside section[name="party"] span[name="Modest"] input:nth-child(2),
+#pokémon > aside section[name="party"] span[name="Calm"] input:nth-child(2) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Lonely"] input:nth-child(3),
+#pokémon > aside section[name="party"] span[name="Hasty"] input:nth-child(3),
+#pokémon > aside section[name="party"] span[name="Mild"] input:nth-child(3),
+#pokémon > aside section[name="party"] span[name="Gentle"] input:nth-child(3) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Adamant"] input:nth-child(4),
+#pokémon > aside section[name="party"] span[name="Impish"] input:nth-child(4),
+#pokémon > aside section[name="party"] span[name="Jolly"] input:nth-child(4),
+#pokémon > aside section[name="party"] span[name="Careful"] input:nth-child(4) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Naughty"] input:nth-child(5),
+#pokémon > aside section[name="party"] span[name="Lax"] input:nth-child(5),
+#pokémon > aside section[name="party"] span[name="Naive"] input:nth-child(5),
+#pokémon > aside section[name="party"] span[name="Rash"] input:nth-child(5) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] span[name="Brave"] input:nth-child(6),
+#pokémon > aside section[name="party"] span[name="Relaxed"] input:nth-child(6),
+#pokémon > aside section[name="party"] span[name="Quiet"] input:nth-child(6),
+#pokémon > aside section[name="party"] span[name="Sassy"] input:nth-child(6) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span:last-child {
+	width: 100%;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span > span {
+	height:100%;
+	width:100%;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label {
+	width: 100%;
+    display: flex;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name*="Met"] > span {
+    min-width: 30%;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label > span {
+	font-size: 80%;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label input[type="date"] {
+	color:transparent;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label input::-webkit-calendar-picker-indicator {
+	opacity: 0;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label input:focus::-webkit-calendar-picker-indicator {
+	opacity: 1;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name] select,
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name] input {
+	margin: 2px;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name] {
+	cursor: pointer;
+	margin: 5px 0;
+}
+#pokémon > aside section[name="party"] div aside[name="ice"] > span[name="additional"] > span label[name="date"] input,
+#pokémon > aside section[name="party"] div aside[name="electric"] > span[name="additional"] > span label[name="date"] input,
+#pokémon > aside section[name="party"] div aside[name*=",Electric"] > span[name="additional"] > span label[name="date"] input,
+#pokémon > aside section[name="party"] div aside[name*=",Ice"] > span[name="additional"] > span label[name="date"] input  {
+	color: var(--fontDark);
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name="date"] input {
+	color: transparent;
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name="date"] input:focus {
+    color: var(--fontDark);
+}
+#pokémon > aside section[name="party"] div aside > span[name="additional"] select {
+	font-style:normal;
+}
+#pokémon > aside section[name="party"] div aside h5 {
+	cursor: default;
+}
+#pokémon > aside section[name="party"] select option[disabled] {
+	display: none;
+}
+#imgtype {
+	display: inline-block;
+	width: 80%;
+	position: relative;
+	background: var(--color_90);
+}
+#imgtype * {
+	color: var(--fontDark);
+}
+#imgtype-toggle {
+	font-size: 11px;
+	font-weight: bold;
+	cursor: pointer;
+	width: 100%;
+	height: 40px;
+	text-align: left;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+#imgtype-toggle span {
+	font-size: 24px;
+	text-align: center;
+	pointer-events: none;
+	transform: rotate(0deg) scaleY(0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10%;
+}
+#imgtype-toggle p {
+	text-align: center;
+	width: 60%;
+	pointer-events: none;
+}
+#imgtype-toggle div {
+	width: 20%;
+	pointer-events: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#imgtype-toggle div img {
+	width: 100%;
+	height: 100%;
+	object-fit: scale-down;
+	image-rendering: -moz-crisp-edges;
+    /* Firefox */
+	image-rendering: -o-crisp-edges;
+    /* Opera */
+	image-rendering: -webkit-optimize-contrast;
+    /* Webkit (non-standard naming) */
+	image-rendering: crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;
+    /* IE (non-standard property) */
+	pointer-events: none;
+}
+.imgtype {
+	display: none;
+	position: absolute;
+	z-index: 100;
+	width: 100%;
+}
+#imgtype label {
+	box-shadow: 0 0 1px var(--border1);
+	display: flex;
+	align-items: center;
+	padding: 0 20%;
+	text-align: left;
+	height: 30px;
+	font-size: 10px;
+	background: var(--color_90);
+	cursor: pointer;
+	position: relative;
+}
+#imgtype input:checked ~ .imgtype-check {
+	background: #2196F3;
+}
+#imgtype label:hover {
+	background: var(--color_80);
+}
+#imgtype label img {
+	height: 50% !important;
+	right: 5%;
+	position: absolute;
+}
+#imgtype-toggle img[name="png"],
+#imgtype label img[name="png"] {
+	filter: invert(22%) sepia(49%) saturate(2508%) hue-rotate(335deg) brightness(96%) contrast(109%);
+}
+#imgtype-toggle img[name="gif"],
+#imgtype label img[name="gif"] {
+	filter: invert(46%) sepia(11%) saturate(2203%) hue-rotate(165deg) brightness(99%) contrast(88%);
+}
+.imgtype-check {
+	position: absolute;
+	height: 12px;
+	width: 12px;
+	background: var(--color_95);
+	border-radius: 50%;
+	left: 10px;
+	margin: 8px 0;
+}
+.imgtype-check:after {
+	content: "";
+	position: absolute;
+	display: block;
+	top: 3px;
+	left: 3px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--color_95);
+}
+.imgtype-show {
+	display: block;
+}
+#pokémon nav li[name='dexswitch'],
+#pokémon nav li[name='search'],
+#pokémon nav li[name='count'],
+#pokémon nav li[name='title'],
+#pokémon nav li[name="settings"] {
+	height: 100%;
+}
+#pokémon nav li[name='dexswitch'] {
+	width: 17.5%;
+}
+#pokémon nav li[name='search'] {
+	width: 50%;
+}
+#pokémon nav li[name='title'] {
+	width: 20%;
+}
+#pokémon nav li[name="settings"] {
+	width: 5%;
+}
+#pokémon nav li[name='count'] {
+	width: 7.5%;
+}
+#pokémon nav li[name='search'] > * {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+#pokémon nav li[name='search'] input {
+	width: 90%;
+	height: 40%;
+	padding: 0 1vw;
+}
+#pokémon nav li[name='dexswitch'] label[name="National Pokédex"] {
+	background: var(--colorRed);
+}
+#pokémon nav li[name='dexswitch'] label[name="National Pokédex"]:active {
+	background: #D90000;
+}
+#pokémon nav li[name='dexswitch'] label[name="Kanto Pokédex"] {
+	background: Tomato;
+}
+#pokémon nav li[name='dexswitch'] label[name="Kanto Pokédex"]:active {
+	background: #ff5233;
+}
+#pokémon nav li[name='dexswitch'] label[name="New Pokédex"] {
+	background: SlateGray;
+}
+#pokémon nav li[name='dexswitch'] label[name="New Pokédex"]:active {
+	background: #647382;
+}
+#pokémon nav li[name='dexswitch'] label[name="Hoenn Pokédex"] {
+	background: RoyalBlue;
+}
+#pokémon nav li[name='dexswitch'] label[name="Hoenn Pokédex"]:active {
+	background: #3862e0;
+}
+#pokémon nav li[name='dexswitch'] label[name="Sinnoh Pokédex"] {
+	background: MediumPurple;
+}
+#pokémon nav li[name='dexswitch'] label[name="Sinnoh Pokédex"]:active {
+	background: #855cd6;
+}
+#pokémon nav li[name='dexswitch'] label[name="Enhanced Sinnoh Pokédex"] {
+	background: RebeccaPurple;
+	line-height: 20px;
+}
+#pokémon nav li[name='dexswitch'] label[name="Enhanced Sinnoh Pokédex"]:active {
+	background: #592d86;
+}
+#pokémon nav li[name='dexswitch'] label[name="Johto Pokédex"] {
+	background: LightSlateGray;
+}
+#pokémon nav li[name='dexswitch'] label[name="Johto Pokédex"]:active {
+	background: #6e8091;
+}
+#pokémon nav li[name='dexswitch'] label[name="Unova Pokédex"] {
+	background: Gray;
+}
+#pokémon nav li[name='dexswitch'] label[name="Unova Pokédex"]:active {
+	background: #737373;
+}
+#pokémon nav li[name='dexswitch'] label[name="New Unova Pokédex"] {
+	background: DimGray;
+}
+#pokémon nav li[name='dexswitch'] label[name="New Unova Pokédex"]:active {
+	background: #595959;
+}
+#pokémon nav li[name='dexswitch'] label[name="Central Kalos Pokédex"] {
+	background: BurlyWood;
+	line-height: 20px;
+}
+#pokémon nav li[name='dexswitch'] label[name="Central Kalos Pokédex"]:active {
+	background: #d9ad73;
+}
+#pokémon nav li[name='dexswitch'] label[name="Coastal Kalos Pokédex"] {
+	background: CadetBlue;
+	line-height: 20px;
+}
+#pokémon nav li[name='dexswitch'] label[name="Coastal Kalos Pokédex"]:active {
+	background: #568e8f;
+}
+#pokémon nav li[name='dexswitch'] label[name="Mountain Kalos Pokédex"] {
+	background: Chocolate;
+	line-height: 20px;
+}
+#pokémon nav li[name='dexswitch'] label[name="Mountain Kalos Pokédex"]:active {
+	background: #c9641d;
+}
+#pokémon nav li[name='dexswitch'] label[name="Alola Pokédex"] {
+	background: MediumSeaGreen;
+}
+#pokémon nav li[name='dexswitch'] label[name="Alola Pokédex"]:active {
+	background: #39ac6d;
+}
+#pokémon nav li[name='dexswitch'] label[name="Melemele Pokédex"] {
+	background: Sandybrown;
+}
+#pokémon nav li[name='dexswitch'] label[name="Melemele Pokédex"]:active {
+	background: #f3a158;
+}
+#pokémon nav li[name='dexswitch'] label[name="Akala Pokédex"] {
+	background: LimeGreen;
+}
+#pokémon nav li[name='dexswitch'] label[name="Akala Pokédex"]:active {
+	background: #2db92d;
+}
+#pokémon nav li[name='dexswitch'] label[name="Ula'ula Pokédex"] {
+	background: SkyBlue;
+}
+#pokémon nav li[name='dexswitch'] label[name="Ula'ula Pokédex"]:active {
+	background: #7ccae9;
+}
+#pokémon nav li[name='dexswitch'] label[name="Poni Pokédex"] {
+	background: LightCoral;
+}
+#pokémon nav li[name='dexswitch'] label[name="Poni Pokédex"]:active {
+	background: #ef7676;
+}
+#pokémon nav li[name='dexswitch'] label[name="Galar Pokédex"] {
+	background: LightSkyBlue;
+}
+#pokémon nav li[name='dexswitch'] label[name="Galar Pokédex"]:active {
+	background: #6cc3f9;
+}
+#pokémon nav li[name='dexswitch'] label[name="Isle of Armor Pokédex"] {
+	background: IndianRed;
+}
+#pokémon nav li[name='dexswitch'] label[name="Isle of Armor Pokédex"]:active {
+	background: #c94f4f;
+}
+#pokémon nav li[name='dexswitch'] label[name="Crown Tundra Pokédex"] {
+	background: LightSteelBlue;
+}
+#pokémon nav li[name='dexswitch'] label[name="Crown Tundra Pokédex"]:active {
+	background: #a5bcd9;
+}
+#pokémon nav li[name='dexswitch'] label[name*="Strategy Memo"] {
+	background: DarkSeaGreen;
+	line-height: 20px;
+}
+#pokémon nav li[name='dexswitch'] label[name*="Strategy-Memo"]:active {
+	background: #80b380;
+}
+#pokémon nav li[name='dexswitch'] label {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 1px var(--border1);
+}
+#pokémon aside[name='settings'] span[name="resize"] p {
+	font-size: 15px;
+	text-align: center;
+	font-weight: bold;
+}
+#pokémon aside[name='settings'] span[name="resize"] input {
+	width: 80%;
+	cursor: grab;
+}
+#pokémon aside[name='settings'] span[name="resize"] input:active {
+	width: 80%;
+	cursor: grabbing;
+}
+#resetcheck {
+	width: 100%;
+	text-align: center;
+}
+#resetcheck {
+	cursor: pointer;
+	background: #E52222;
+	border-width: 1px;
+	border-style: solid;
+	text-transform: uppercase;
+	font-size: 11px;
+	font-weight: bold;
+	height: 35px;
+	width: 60%;
+	text-align: center;
+	color: var(--font2);
+}
+#resetcheck:hover {
+	filter: brightness(90%);
+}
+#resetcheck:active {
+	transform: scale(0.97);
+}
+#pokémon nav li[name='settings'] {
+	text-align: right;
+	display: block !important;
+}
+#pokémon nav li[name="settings"] > * {
+	filter: invert(29%) sepia(2%) saturate(0%) hue-rotate(335deg) brightness(94%) contrast(90%);
+    transition: 0.5s ease;
+    transform-origin: center;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+#pokémon nav li[name="settings"] > * > * {
+    line-height: 100%;
+    margin-left: 2px;
+}
+#pokémon nav li[name="settings"] > *.open {
+	transform: scale(0.8) rotate(90deg);
+}
+#pokémon nav li[name='title'] img {
+    width: 90%;
+	height: 100%;
+	max-width: 90%;
+	max-height: 70%;
+}
+#pokémon nav li[name='dexswitch'] label {
+	cursor: pointer;
+	text-align: center;
+	font-weight: bold;
+	color: var(--fontLight);
+	font-size: 18px;
+	text-transform: uppercase;
+}
+#pokémon nav li[name='count'],
+#pokémon nav li[name='count'] span {
+	font-family: "Bebas Neue";
+	text-align: center;
+    font-weight: normal;
+}
+#pokémon nav li[name='dexswitch'] > span > span {
+	width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: hidden;
+    /* transform: translate(-100%); */
+    border: 1px solid;
+}
+#pokémon nav li[name='dexswitch'] > span > span > span {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    transition: .25s ease;
+}
+#pokémon > aside[name='settings'] span[name="theme"] > div {
+	position: relative;
+	width: 60px;
+	height: 30px;
+	border-radius: 40px;
+	border-width: 1px;
+	border-style: solid;
+	background: var(--color_90);
+	overflow: hidden;
+	text-align: center;
+}
+#pokémon > aside[name='settings'] span[name="theme"] > div input {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	cursor: pointer;
+	opacity: 0;
+	z-index: 2;
+}
+#pokémon > aside[name='settings'] span[name="theme"] > div span {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	opacity: 1;
+	border-radius: 40px;
+	transition: 0.5s ease transform, 0.2s ease background, 0.2s ease opacity;
+}
+#pokémon > aside[name='settings'] span[name="theme"] > div span:after {
+	content: '';
+	position: absolute;
+	width: 58px;
+	height: 58px;
+	border-radius: 50%;
+	transition: 0.5s ease transform, 0.2s ease background, 0.2s ease opacity;
+	background-image: url("./../media/Images/Misc/FinalDex/Light.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 27px;
+	transform: translate(-43px, -15px);
+}
+#pokémon > aside[name='settings'] span[name="theme"] > div input:active + span {
+	opacity: 0.7;
+}
+#pokémon > aside[name='settings'] span[name="theme"] > div input:checked + span:after {
+	transform: translate(-17px, -15px);
+	background-image: url("./../media/Images/Misc/FinalDex/Dark.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px;
+}
+#pokémon > aside section:not([name]) input:checked + label {
+    background: var(--color10);
+    color: var(--font2);
+}
+#pokémon > aside section:not([name]) label .indicator {
+    height: 100%;
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
