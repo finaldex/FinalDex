@@ -1471,29 +1471,33 @@ var createMap = function() {
 		}
 		mapSectionContentAreaTitle.innerText = "Sub Area/Location";
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Name"] == location && finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"] != undefined) {
-				for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",").length; u++) {
-					var mapSectionContentAreaText = document.createElement("p");
-					mapSectionContentAreaTitle.innerText = "Location";
-					mapSectionContentAreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",")[u];
-					mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
-					mapSectionContentAreaText.setAttribute("name", "map");
-					mapSectionContentAreaText.addEventListener("click", dataRedirect);
-					mapSectionContentAreaText.setAttribute("function","dataRedirect");
-				}
-			}
-		}
-		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"] != undefined) {
-				for(var u = 0; u < finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",").length; u++) {
-					if(finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Location"].split(",")[u] == location) {
+			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
+				if(finaldataLocationConnection[q]["Name"] == location && finaldataLocationConnection[q]["Location"] != undefined) {
+					for(var u = 0; u < finaldataLocationConnection[q]["Location"].split(",").length; u++) {
 						var mapSectionContentAreaText = document.createElement("p");
-						mapSectionContentAreaTitle.innerText = "Sub Areas";
-						mapSectionContentAreaText.innerText = finaldataLocationConnection[q][JSONPath_LocationConnection+"_"+"Name"];
+						mapSectionContentAreaTitle.innerText = "Location";
+						mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Location"].split(",")[u];
 						mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
 						mapSectionContentAreaText.setAttribute("name", "map");
 						mapSectionContentAreaText.addEventListener("click", dataRedirect);
 						mapSectionContentAreaText.setAttribute("function","dataRedirect");
+					}
+				}
+			}
+		}
+		for(var q = 0; q < finaldataLocationConnection.length; q++) {
+			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
+				if(finaldataLocationConnection[q]["Location"] != undefined) {
+					for(var u = 0; u < finaldataLocationConnection[q]["Location"].split(",").length; u++) {
+						if(finaldataLocationConnection[q]["Location"].split(",")[u] == location) {
+							var mapSectionContentAreaText = document.createElement("p");
+							mapSectionContentAreaTitle.innerText = "Sub Areas";
+							mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Name"];
+							mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
+							mapSectionContentAreaText.setAttribute("name", "map");
+							mapSectionContentAreaText.addEventListener("click", dataRedirect);
+							mapSectionContentAreaText.setAttribute("function","dataRedirect");
+						}
 					}
 				}
 			}
@@ -1555,28 +1559,30 @@ var createMap = function() {
 		mapRight.firstElementChild.setAttribute("value","");
 
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			var name = finaldataLocationConnection[q][JSONPath_LocationConnection+"_Name"];
-			var north = finaldataLocationConnection[q][JSONPath_LocationConnection+"_North"];
-			var south = finaldataLocationConnection[q][JSONPath_LocationConnection+"_South"];
-			var west = finaldataLocationConnection[q][JSONPath_LocationConnection+"_West"];
-			var east = finaldataLocationConnection[q][JSONPath_LocationConnection+"_East"];
+			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
+				var name = finaldataLocationConnection[q]["Name"];
+				var north = finaldataLocationConnection[q]["North"];
+				var south = finaldataLocationConnection[q]["South"];
+				var west = finaldataLocationConnection[q]["West"];
+				var east = finaldataLocationConnection[q]["East"];
 
-			if(name == location) {
-				if (north != undefined) {
-					mapTop.setAttribute("title",north.replaceAll(",","\n"));
-					mapTop.firstElementChild.setAttribute("value",north);
-				}
-				if (south != undefined) {
-					mapBottom.setAttribute("title",south.replaceAll(",","\n"));
-					mapBottom.firstElementChild.setAttribute("value",south);
-				}
-				if (west != undefined) {
-					mapLeft.setAttribute("title",west.replaceAll(",","\n"));
-					mapLeft.firstElementChild.setAttribute("value",west);
-				}
-				if (east != undefined) {
-					mapRight.setAttribute("title",east.replaceAll(",","\n"));
-					mapRight.firstElementChild.setAttribute("value",east);
+				if(name == location) {
+					if (north != undefined) {
+						mapTop.setAttribute("title",north.replaceAll(",","\n"));
+						mapTop.firstElementChild.setAttribute("value",north);
+					}
+					if (south != undefined) {
+						mapBottom.setAttribute("title",south.replaceAll(",","\n"));
+						mapBottom.firstElementChild.setAttribute("value",south);
+					}
+					if (west != undefined) {
+						mapLeft.setAttribute("title",west.replaceAll(",","\n"));
+						mapLeft.firstElementChild.setAttribute("value",west);
+					}
+					if (east != undefined) {
+						mapRight.setAttribute("title",east.replaceAll(",","\n"));
+						mapRight.firstElementChild.setAttribute("value",east);
+					}
 				}
 			}
 		}
