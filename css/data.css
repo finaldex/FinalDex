@@ -1,0 +1,1704 @@
+
+
+#data > div {
+	position: fixed;
+	z-index: 20;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	opacity: 1;
+	visibility: hidden;
+	display: none;
+	transition: visibility .5s linear, opacity .5s ease;
+}
+
+#data > div.open {
+	visibility: visible;
+	opacity: 1;
+	display: block;
+}
+
+#data > div > span {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 21;
+	background: rgba(0, 0, 0, 0.7);
+	cursor: default;
+}
+
+#data > div > div {
+	position: relative;
+	z-index: 22;
+	max-width: 1000px;
+    width: 95vw;
+	height: 95%;
+	top: 2.5%;
+	box-shadow: 0 0 10px var(--border1);
+	margin: 0 auto;
+	background: var(--color14);
+	text-align: center;
+}
+
+
+#data > div section[name='main'] > div[name='area'] > div figure[name="fullscreen"]:active {
+	transform:scale(1.2);
+}
+
+
+
+
+
+
+#data > div nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#data > div nav label {
+	display: flex;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	z-index: 100;
+	background: var(--color16);
+}
+
+
+#data > div nav input:checked + label,
+#data > div nav label:active {
+	background: var(--color10);
+	color: var(--font2);
+}
+
+
+
+#data > div section[name='header'] {
+	width: 100%;
+	height: 15%;
+}
+#data > div section[name='header'] br {
+	content: " ";
+	line-height: 0;
+	height: 0;
+	display: block;
+}
+
+#data > div section[name='main'] {
+	width: 100%;
+	height: 77%;
+	position: relative;
+}
+
+
+
+
+#data > div section[name='main'] > div[name='area'] > div > span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#data > div section[name='main'] > div[name='area'] {
+	width: 80%;
+	margin: 0 auto;
+	height: 95%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+#data > div section[name='main'] > div[name='area'] ul {
+	display: block;
+	width: 100%;
+	height: 45%;
+	position: relative;
+	background: var(--color15);
+	/*box-shadow: 0 0 100px var(--color14);*/
+	border-left: 1px solid;
+	border-right: 1px solid;
+	overflow: auto;
+}
+
+#data > div section[name='main'] > div[name='area'] > div > div > img {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#data > div section[name='header'] > div:first-child {
+	float: left;
+	width: 15%;
+	margin-left: 10%;
+	height: 100%;
+	text-align: right;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#data > div section[name='header'] > div:first-child div > img {
+	height: 90%;
+	max-width: 70%;
+	pointer-events: none;
+}
+
+#data > div section[name='header'] > div[name="idname"] {
+	float: left;
+	text-align: left;
+	width: 30%;
+	height: 100%;
+	position: relative;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] {
+	float: left;
+	text-align: right;
+	width: 35%;
+	height: 100%;
+	position: relative;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] p {
+	padding: 10px;
+}
+
+#data > div section[name='header'] > div[name="idname"] > * {
+	position: absolute;
+	bottom: 5px;
+	left: 15px;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child h3 {
+	display: none;
+	text-align: left;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child[name="2"] span:first-child.active {
+	padding: 5px 0;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child > span.active {
+	display: block;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child > span {
+	display: none;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child span > b {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child span > b img {
+	max-width: 100px;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child span > b:hover h3 {
+	color: var(--font2);
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:last-child span > b:hover img {
+	filter: brightness(1.1);
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:first-child {
+	float: right;
+}
+
+
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:first-child > *:first-child {
+	padding: 0 10px;
+}
+#data > div section[name='header'] > div[name="debutcategorytype"] > *:first-child > *:last-child {
+	text-align: right;
+	padding: 5px 10px 10px;
+}
+
+
+
+#data > div section[name='main'] > div[name='area'] > div {
+	width: 100%;
+    height: 55%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    background: var(--color_5);
+    flex-wrap: wrap;
+	z-index: 10;
+}
+/*
+#data > div section[name='main'] > div[name='area'] > div > div {
+	height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+*/
+
+#data > div section[name='main'] > div[name='area'] > div > div {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    transition-property: transform;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#data > div section[name='main'] > div[name='area'] > div > div > img {
+	max-width: 100%;
+    max-height: 100%;
+}
+
+
+#data > div section[name='main'] > div[name='area'] > div figure {
+	position: absolute;
+	z-index: 1000;
+}
+
+
+#data > div section[name='main'] > div[name='area'] > div figure[name="zoom"] {
+	top: 10px;
+	right: 20px;
+}
+
+#data > div section[name='main'] > div[name='area'] > div figure[name="reset"] {
+	top: 10px;
+	left: 20px;
+}
+
+#data > div section[name='main'] > div[name='area'] > div figure[name="fullscreen"] {
+	bottom: 10px;
+	right: 10px;
+}
+
+
+
+
+
+
+
+#data > div section[name='main'] > div[name='metadata'] {
+	height: 95%;
+	display: flex;
+	align-items: center;
+	position: inherit;
+	width: 80%;
+	margin: 0 auto;
+	flex-wrap: wrap;
+	flex-direction: column;
+	position: relative;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='description'] p {
+	padding: 10px;
+	font-family: monospace;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='description'] p br {
+	content: " ";
+	line-height: 0;
+	height: 0;
+	display: block;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'],
+#data > div section[name='main'] > div[name='metadata'] > div[name='description'] {
+	background: var(--color15);
+	float: left;
+	width: 65%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='description'] {
+	height: 85%;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] {
+	box-shadow: 1px 1px 1px #000;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	background: var(--color17);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='description'] div:nth-child(2) {
+	padding: 10px;
+	text-align: left;
+	font-family: monospace;
+}
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] > span {
+	width: 80%;
+	display: flex;
+	margin: 2px 0;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] > span > span {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] > span > span b {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] > span > span b > *[name] {
+	padding: 1px 4px;
+    margin: 5px 0;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b:active {
+	color: var(--fontDark);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="eggHuman-Like"]:active,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="eggGrass"]:active,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="eggFairy"]:active,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="eggField"]:active,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="eggFlying"]:active,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="eggBug"]:active,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="eggWater 1"]:active {
+	color: var(--fontLight);
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name="egggroup"] b[name="undiscovered"]:active {
+	color: var(--fontLight);
+	background: var(--color18);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child > span:last-child {
+	font-weight: bold;
+	width: 100%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div {
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div:nth-child(4) {
+	display: none;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] {
+	height: 0px;
+    background: var(--color16);
+    width: 100%;
+	display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+	transition: none;
+    opacity: 0;
+    pointer-events: none;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'].open div[name="list"] {
+	/*max-height: var(--sizeHeightXL);*/
+	/*min-height: var(--sizeHeightS);*/
+    /*height: max-content;*/
+	height: var(--sizeHeightXL);
+	opacity: 1;
+	transition: .5s ease height, 0.5s ease 0.7s opacity;
+	pointer-events: unset;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child {
+	background: var(--color18);
+	height: 101px;
+	position: relative;
+}
+
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child > span {
+	height: 100%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child > span:first-child {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
+	width: 10%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child > span:first-child h4,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child > span:first-child img {
+	padding: 5px 0;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child > span:nth-child(2) {
+	width: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: column;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child > span:nth-child(2) p {
+	font-family: monospace;
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child figure {
+	height: 100%;
+	width: 10%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child figure > *{
+	font-weight:normal;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child figure:active > *{
+	font-weight:bold;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child figure > * {
+	transform: rotate(0.25turn);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'].close > div:first-child figure[name="up"] {
+	display: flex;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'].close > div:first-child figure[name="down"] {
+	display: none;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'].open > div:first-child figure[name="up"] {
+	display: none;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'].open > div:first-child figure[name="down"] {
+	display: flex;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child h2 {
+	text-align: center;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] > div:first-child h2 span[title] {
+	color:unset;
+	font-family:unset;
+	font-weight:unset;
+}
+
+
+#data > div section[name='main'] > div[name='area'] > div > div:not([name='pause']) {
+	cursor: crosshair;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup']:nth-child(4) {
+	display: none;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div input:checked + label {
+	background: var(--color12);
+	color: var(--font1);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul {
+	width: 100%;
+	height: 100%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul {
+	width: 100%;
+	overflow: auto;
+	background: var(--color16);
+}
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li button {
+	width: 20%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li {
+	display: table;
+	width: 100%;
+	border-bottom: 1px dotted;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="basestats"] li,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="evyield"] li,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="egggroup"] li {
+	border-bottom: 1px solid;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li {
+	background: var(--color16);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > span {
+	display: table-cell;
+	width: 10%;
+	vertical-align: middle;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li span p {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li p.select,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li p span.select {
+	font-weight: bold;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p {
+	display: table-cell;
+	vertical-align: middle;
+	width: 10%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Held Item"] li[name="4"] > p {
+	width: 25%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Ability"] li[name="3"] > p,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Held Item"] li[name="3"] > p {
+	width: 33%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title="Experience Yield"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title="Experience Yield Category"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li[name="2"] > p[title="Primary Ability"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li[name="2"] > p[title="Secondary Ability"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Catch Rate"] li > p,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Type"] li > p,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title="Egg Cycles"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title="Steps"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title="Primary Egg Group"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title="Secondary Egg Group"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Held Item"] li[name="2"] > p {
+	width: 50%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Gender Ratio"] li > p,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title="Leveling Rate"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Held Item"] li[name="1"] > p {
+	width: 100%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul:not([name="Gender Ratio"]) li p span {
+	display: block;
+	padding-top: 10px;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"]ul li img {
+	object-fit: scale-down;
+	padding: 5px 10px;
+}
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li.select {
+	filter: brightness(1.1);
+}
+
+[Generation="1"] #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='catchrate'],
+[Generation="7"][Game*="Lets Go"] #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='catchrate'] {
+	width: 100%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child {
+	height: 30%;
+	width: 100%;
+	background: var(--color17);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] {
+	background: var(--color16);
+	float: right;
+	width: 35%;
+	height: 100%;
+	flex-flow: wrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: inherit;
+}
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child {
+	width: 100%;
+	height: 70%;
+	display: flex;
+	flex-direction: column;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div {
+	background: var(--color16);
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: wrap;
+	flex-wrap: nowrap;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	box-shadow: -0.5px 0.5px 0.5px var(--border1);
+	position: relative;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name] {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    box-shadow: -0.5px 0.5px 0.5px var(--border1);
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name="helditem"] b > *:last-child {
+	padding: 5px 0;
+	display: none;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name="ability"] > span > span {
+	width: 100%;
+    height: 100%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name="ability"] > span > span > b {
+	position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name="ability"] > span:first-child > span {
+	box-shadow: -0.5px 0.5px 0.5px var(--border1);
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name="ability"] > span:first-child {
+	flex-direction: row;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name] > b,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name] > span,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name]:not([name="genderratio"]) > span > b {
+	position: relative;
+	display: inline-flex;
+    justify-content: center;
+    align-items: center;
+	flex-direction: column;
+	width:100%;
+	height:100%;
+
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name="genderratio"] > span > b {
+	display: block;
+	width: 100%;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:last-child > div > span[name="genderratio"] > span > b > span {
+	display: inline-block;
+    height: 10px;
+	box-shadow: -1px 0px 1px #000;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='helditem'] img {
+	display: none;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='helditem'] span > h5 {
+	display: none;
+    padding-top: 5px;
+}
+
+
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='egggroup'] > span[name='Primary'] > * {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='egggroup'] > span[name='Primary'] > * {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] > span > span > span {
+	height: 10px;
+	box-shadow: 0 0 0 1px var(--border1);
+	display: inline-block;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="100% Male"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="100% Female"] {
+	width: 80%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="87.5% Male"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="87.5% Female"] {
+	width: 70%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="75% Male"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="75% Female"] {
+	width: 60%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="50% Male"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="50% Female"] {
+	width: 40%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="25% Male"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="25% Female"] {
+	width: 20%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="12.5% Male"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="12.5% Female"] {
+	width: 10%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="0% Male"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="0% Female"] {
+	width: 0%;
+	display: none;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title="Genderless"] {
+	width: 80%;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[title=""] {
+	display: none;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[name="male"] {
+	background: LightSkyBlue;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[name="female"] {
+	background: LightPink;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] span[name='genderratio'] span[name="genderless"] {
+	background: var(--color_5);
+}
+
+
+
+
+
+
+
+#data > div section[name='main'] > div[name='learnset'] {
+	width: 80%;
+	margin: 0 auto;
+	height: 95%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+#data > div section[name='main'] > div[name='learnset'] > div {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background: var(--color15);
+	/*box-shadow: 0 0 100px var(--color14);*/
+	border-left: 1px solid;
+	border-right: 1px solid;
+}
+
+#data > div section[name='main'] > div[name='learnset'] > div > div {
+	height: 100%;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ol {
+	background: var(--color14);
+	display: flex;
+	width: 100%;
+	height: 5%;
+}
+
+
+
+#data > div section[name='main'] > div[name='learnset'] ol li {
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ol li:nth-child(1),
+#data > div section[name='main'] > div[name='learnset'] ol li:nth-child(5),
+#data > div section[name='main'] > div[name='learnset'] ol li:nth-child(7) {
+	width: 10%;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ol li:nth-child(3),
+#data > div section[name='main'] > div[name='learnset'] ol li:nth-child(4),
+#data > div section[name='main'] > div[name='learnset'] ol li:nth-child(6) {
+	width: 15%;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ol li:nth-child(2) {
+	width: 25%;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul {
+	display: block;
+	width: 100%;
+	height: 95%;
+	background: var(--color17);
+	overflow: auto;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul li {
+	width: 100%;
+	display: table;
+	background: var(--color17);
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul li > * {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	border: 1px solid;
+	padding: 5px 10px;
+	border-bottom: 1px dotted;
+	border-right: none;
+	border-top: none;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul li > * > * > * {
+	padding: 5px 0;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul li > *:nth-child(1),
+#data > div section[name='main'] > div[name='learnset'] ul li > *:nth-child(5),
+#data > div section[name='main'] > div[name='learnset'] ul li > *:nth-child(7) {
+	width: 10%;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul li > *:nth-child(3),
+#data > div section[name='main'] > div[name='learnset'] ul li > *:nth-child(4),
+#data > div section[name='main'] > div[name='learnset'] ul li > *:nth-child(6) {
+	width: 15%;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul li > *:nth-child(2) {
+	width: 25%;
+	text-align: left;
+}
+
+#data > div section[name='main'] > div[name='learnset'] ul li > *:first-child {
+	border-left: none;
+}
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ol {
+	display: flex;
+	width: 100%;
+	height: 20%;
+	align-items: center;
+	justify-content: space-evenly;
+	box-shadow: 0 0 1px var(--border1);
+	background: var(--color14);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ol > label {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ol > input:checked + label {
+	background: var(--color13);
+	font-weight: bold;
+}
+
+
+#data > div section[name='form'] {
+	width: 100%;
+	height: 8%;
+	display: flex;
+	align-items: center;
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+
+#data > div section[name='form'] input:checked + label,
+#data > div section[name='form'] label:active {
+	background: var(--color10);
+	color: var(--font2);
+}
+
+#data > div section[name='form'] label {
+	width: 100%;
+
+}
+
+
+
+#data > div section[name='form'] label {
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	z-index: 100;
+	background: var(--color16);
+	padding: 0 10px;
+}
+
+#data > div nav {
+	height: 5%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: inherit;
+	width: 80%;
+	margin: 0 auto;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li p img {
+	max-width: 50%;
+}
+
+
+
+
+
+
+
+
+
+#data > div section[name='main'] > div[name='area'] ul li {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 5px 0;
+    border-bottom: 1px dotted;
+	background: var(--color16);
+}
+
+
+#data > div section[name='main'] > div[name='area'] ul li > * {
+	width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    text-align: center;
+	flex-direction: column;
+}
+
+
+#data > div section[name='main'] > div[name='area'] ul li > span[name="location"] {
+	/*width: 50%;*/
+}
+#data > div section[name='main'] > div[name='area'] ul li > span[name="rate"] {
+	width: 80%;
+}
+#data > div section[name='main'] > div[name='area'] ul li > span[name="encounter"] {
+	/*width: 20%;*/
+}
+#data > div section[name='main'] > div[name='area'] ul li > span[name="pokémon"] {
+	/*width: 20%;*/
+}
+
+#data > div section[name='main'] > div[name='area'] ul li > span[name="encounter"] h3 {
+	padding-bottom: 5px;
+}
+
+#data > div section[name='main'] > div[name='area'] ul li > span[name="location"] h4 {
+	font-weight: normal;
+	text-decoration: none !important;
+}
+
+
+
+#data > div section[name='main'] > div[name='area'] ul li > *[title] > * {
+	text-decoration:underline;
+	text-decoration-style: solid;
+}
+#data > div section[name='main'] > div[name='area'] ul li > *[title]:hover > * {
+	text-decoration-style: dashed;
+}
+#data > div section[name='main'] > div[name='area'] ul li > *[title] > * {
+	text-decoration:underline;
+	text-decoration-style: solid;
+}
+#data > div section[name='main'] > div[name='area'] ul li > *[title]:hover > * {
+	text-decoration-style: dashed;
+}
+#data > div section[name='main'] > div[name='area'] ul li > *[title] {
+	cursor: help;
+}
+
+
+
+
+#data > div section[name='main'] > div[name='area'] ul li > span[name="rate"] h4 {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	flex-direction: column;
+}
+
+
+
+#data > div section[name='main'] > div[name='area'] ul li > span[name="pokémon"] h5 {
+	padding: 2px 0;
+}
+
+#data > div section[name='main'] > div[name='area'] ul li > span[name="rate"] p {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#data > div section[name='main'] > div[name='area'] ul li > span[name="rate"] pre {
+    font-weight: bold;
+}
+
+#data > div section[name='main'] > div[name='area'] ul li span img[title="Morning"] {
+	filter: invert(99%) sepia(85%) saturate(499%) hue-rotate(339deg) brightness(104%) contrast(106%);
+	max-width: 30px;
+}
+#data > div section[name='main'] > div[name='area'] ul li span img[title="Day"] {
+	filter: invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%);
+	max-width: 30px;
+}
+#data > div section[name='main'] > div[name='area'] ul li span img[title="Night"] {
+	filter: invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
+	max-width: 30px;
+}
+#data > div section[name='main'] > div[name='area'] ul li span[name="pokémon"][title] {
+	border-bottom: 1px dashed;
+    border-color: var(--color1) !important;
+}
+
+#data > div section[name='main'] > div[name='area'] ul li span[name="pokémon"][title]:hover {
+	border-bottom: 1px solid;
+}
+
+#data > div section[name='main'] > div[name='area'] ul li > span[name="allies"] {
+	display: block;
+}
+
+
+#data > div section[name='main'] > div[name='area'] ul li span[name="encounter"] img { 
+	max-width: 50px;
+}
+#data > div section[name='main'] > div[name='area'] ul li span[name="encounter"] img[title="Gift"] {
+	max-width: 10px;
+}
+#data > div section[name='main'] > div[name='area'] ul li span[name="encounter"] > *:first-child  { 
+	position:relative;
+	padding-bottom: 5px;
+	display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#data > div section[name='main'] > div[name='area'] ul li span[name="encounter"] > * > img:not(:first-child) { 
+	margin-left: 20px;
+    z-index: 10;
+	margin-bottom: -5px;
+}
+#data > div section[name='header'] > div[name="idname"] *[name*="regional"] {
+	display: none;
+}
+/*
+#data > div section[name='main'] > div[name='area'] > div > div {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+*/
+
+#data aside[name="evolution"][type*="1/1"] {
+	top: 45%;
+}
+
+#data aside[name="evolution"][type*="1/2"] {
+	top: 40%;
+}
+
+#data aside[name="evolution"][type*="2/2"] {
+	top: 50%;
+}
+
+#data aside[name="evolution"][type*="1/3"] {
+	top: 35%;
+}
+
+#data aside[name="evolution"][type*="2/3"] {
+	top: 45%;
+}
+
+#data aside[name="evolution"][type*="3/3"] {
+	top: 55%;
+}
+
+#data aside[name="evolution"][type*="1/4"] {
+	top: 30%;
+}
+
+#data aside[name="evolution"][type*="2/4"] {
+	top: 40%;
+}
+
+#data aside[name="evolution"][type*="3/4"] {
+	top: 50%;
+}
+
+#data aside[name="evolution"][type*="4/4"] {
+	top: 60%;
+}
+
+#data aside[name="evolution"][type*="1/5"] {
+	top: 25%;
+}
+
+#data aside[name="evolution"][type*="2/5"] {
+	top: 35%;
+}
+
+#data aside[name="evolution"][type*="3/5"] {
+	top: 45%;
+}
+
+#data aside[name="evolution"][type*="4/5"] {
+	top: 55%;
+}
+
+#data aside[name="evolution"][type*="5/5"] {
+	top: 65%;
+}
+
+#data aside[name="evolution"][type*="1/6"] {
+	top: 20%;
+}
+
+#data aside[name="evolution"][type*="2/6"] {
+	top: 30%;
+}
+
+#data aside[name="evolution"][type*="3/6"] {
+	top: 40%;
+}
+
+#data aside[name="evolution"][type*="4/6"] {
+	top: 50%;
+}
+
+#data aside[name="evolution"][type*="5/6"] {
+	top: 60%;
+}
+
+#data aside[name="evolution"][type*="6/6"] {
+	top: 70%;
+}
+
+#data aside[name="evolution"][type*="1/7"] {
+	top: 20%;
+}
+
+#data aside[name="evolution"][type*="2/7"] {
+	top: 30%;
+}
+
+#data aside[name="evolution"][type*="3/7"] {
+	top: 40%;
+}
+
+#data aside[name="evolution"][type*="4/7"] {
+	top: 50%;
+}
+
+#data aside[name="evolution"][type*="5/7"] {
+	top: 60%;
+}
+
+#data aside[name="evolution"][type*="6/7"] {
+	top: 70%;
+}
+
+#data aside[name="evolution"][type*="7/7"] {
+	top: 80%;
+}
+
+#data aside[name="evolution"][type*="1/8"] {
+	top: 15%;
+}
+
+#data aside[name="evolution"][type*="2/8"] {
+	top: 25%;
+}
+
+#data aside[name="evolution"][type*="3/8"] {
+	top: 35%;
+}
+
+#data aside[name="evolution"][type*="4/8"] {
+	top: 45%;
+}
+
+#data aside[name="evolution"][type*="5/8"] {
+	top: 55%;
+}
+
+#data aside[name="evolution"][type*="6/8"] {
+	top: 65%;
+}
+
+#data aside[name="evolution"][type*="7/8"] {
+	top: 75%;
+}
+
+#data aside[name="evolution"][type*="8/8"] {
+	top: 85%;
+}
+
+#data aside[name="evolution"][type*="previous"] {
+	left: 0;
+}
+
+#data aside[name="evolution"][type*="next"] {
+	right: 0;
+}
+
+#data aside[name="evolution"][type*="previous"] div > figure,
+#data aside[name="evolution"][type*="previous"] div > figure img {
+	border-top-right-radius: 9vh;
+	border-bottom-right-radius: 9vh;
+}
+
+#data aside[name="evolution"][type*="next"] div > figure,
+#data aside[name="evolution"][type*="next"] div > figure img {
+	border-top-left-radius: 9vh;
+	border-bottom-left-radius: 9vh;
+}
+
+
+
+
+
+#data aside[name="evolution"] {
+	position: absolute;
+	height: 10%;
+	z-index: 10000000000000000000;
+}
+
+#data aside[name="evolution"] br {
+	content: " ";
+	display: block;
+	padding: 2px 0;
+}
+
+#data aside[name="evolution"] > div {
+	position: relative;
+	height: 100%;
+	display: flex;
+    flex-direction: row;
+}
+
+#data aside[name="evolution"] > div > div {
+	display: inline-flex;
+    width: 0vw;
+    height: 100%;
+    text-align: center;
+    background: var(--color_60);
+    transition: width 0.5s ease;
+    font-size: 0;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: center;
+	flex-direction: column;
+	pointer-events: none;
+}
+
+#data aside[name="evolution"] > div > div > b {
+	border: none;
+	outline: none;
+	background: none;
+	height: 50%;
+}
+#data aside[name="evolution"] > div > div > b > * > * {
+	display: none;
+}
+
+
+#data aside[name="evolution"] > div > figure {
+	display: flex;
+    height: 100%;
+    width: 4vw;
+    background: var(--color_60);
+    justify-content: center;
+	flex-direction: column;
+}
+
+
+
+
+
+
+
+#data aside[name="evolution"] > div > div > b,
+#data aside[name="evolution"] > div > div > span {
+	transition: none;
+	opacity: 0;
+}
+
+#data aside[name="evolution"] > div > div.active {
+	width: 12vw;
+	font-size: unset;
+	transition: width 0.5s ease, font-size 0s ease 0.5s;
+	pointer-events: unset;
+}
+
+#data aside[name="evolution"] > div > div.active > b,
+#data aside[name="evolution"] > div > div.active > span {
+	transition: opacity 0.5s ease 0.5s;
+	opacity: 1;
+}
+
+
+
+#data aside[name="evolution"] > div > div.active > span  {
+	width: 100%;
+	height: 50%;
+	overflow:auto;
+}
+
+#data aside[name="evolution"] > div > div.active > span > * {
+	padding: 0 10px;
+	font-weight:normal;
+}
+
+
+
+
+#data aside[name="previous"],
+#data aside[name="next"] {
+	top: 8%;
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	z-index: 10;
+}
+
+
+
+#data aside[name="previous"] b,
+#data aside[name="next"] b{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	background: var(--color_60);
+}
+
+
+#data aside[name="previous"] {
+	left: 0;
+}
+#data aside[name="previous"] b {
+	border-bottom-right-radius: 50%;
+}
+
+#data aside[name="next"] {
+	right: 0;
+}
+
+
+#data aside[name="next"] b {
+	border-bottom-left-radius: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > div:last-child {
+	text-align: right;
+	height: 30%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	padding: 10px 0;
+	flex-direction: column;
+	position: relative;
+}
+
+#data > div section[name='header'] > div[name="debutcategorytype"] > div:last-child > span {
+	display: block;
+	position: relative;
+}
+
+
+#data > div section[name='header'] > div[name="portrait"] {
+	position: relative;
+}
+
+#data > div section[name='header'] > div[name="portrait"] > div {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child {
+	background: var(--color16);
+	overflow: hidden;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul {
+	display: none;
+	height: 80%;
+	flex-wrap: wrap;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul b,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul b > * {
+	font-weight: normal;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul b:hover,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul b:hover > * {
+	font-weight:bold;
+}
+
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul div,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul li {
+	display: inline-block;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul[name="basestats"] {
+	display: flex;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b {
+	padding: 2px 0;
+	text-align: center;
+	width: 30%;
+	box-shadow: 0 0 2px var(--border1);
+	color: var(--fontDark);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul li {
+	width: 70%;
+	position: relative;
+	box-shadow: 0 0 2px var(--border1);
+	text-align: left;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul li > * {
+	text-align: right;
+	display: block;
+	box-shadow: 0 0 1px var(--border1);
+	min-width: 30px;
+	color: var(--fontDark);
+	height: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-content: center;
+	align-items: center;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul > b {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul div:hover,
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul li > *:hover {
+	font-weight: bold;
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child > ul li > * {
+	filter: brightness(0.9) saturate(1.5);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="hp"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="hp"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="hp"] > * {
+	background: var(--statHP);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="attack"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="attack"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="attack"] > * {
+	background: var(--statAtk);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="defense"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="defense"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="defense"] > * {
+	background: var(--statDef);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="special"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="special"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="special"] > * {
+	background: var(--statSpecial);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="spatk"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spatk"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spatk"] > * {
+	background: var(--statSpAtk);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="spdef"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spdef"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spdef"] > * {
+	background: var(--statSpDef);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="speed"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="speed"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="speed"] > * {
+	background: var(--statSpeed);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="total"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="total"],
+#data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="total"] > * {
+	background: var(--color_65);
+	color: var(--fontLight) !important;
+}
