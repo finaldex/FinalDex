@@ -7,1082 +7,247 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
 
     <script src="./js/lib/jquery-1.10.2.js"></script>
-    <script src="./js/lib/mousewheel-3.1.13.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">-->
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue">-->
-
-    <link rel="stylesheet" href="./media/Fonts/Roboto.ttf">
-    <link rel="stylesheet" href="./media/Fonts/BebasNeue.ttf">
-<style>
-    body {
-        scroll-behavior: smooth;
-        background: repeating-linear-gradient(0deg, var(--background) 0px, var(--background) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em var(--background);
-    }
-
-    img {
-        -webkit-user-drag: none;
-	-khtml-user-drag: none;
-	-moz-user-drag: none;
-	-o-user-drag: none;
-    }
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    button {
-        background: none;
-        border: none;
-        user-select: none;
-    }
-    ::-webkit-scrollbar {
-	width: 15px;
-  }
-  ::-webkit-scrollbar-thumb {
-	  background: var(--color_50);
-  }
-  ::-webkit-scrollbar-track {
-	  background: var(--color_90);
-  }
-  ::-webkit-scrollbar-corner {
-	  background: rgba(255, 255, 255, 0);
-  }
-    #navigation {
-        width: 100%;
-        height: 5vh;
-        position: unset;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        background: #F0F0F0;
-        box-shadow: 0px 2px 1px #000;
-        z-index: 100;
-        position: relative;
-    }
-    
-  #content {
-    height: 95vh;
-    position: relative;
-    display: block;
-    overflow: auto;
-  }
-
-   
-    #navigation * {
-        text-transform: uppercase;
-        font-family: Roboto;
-        font-weight: bold;
-    }
-    #navigation > span {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 200px;
-        height: 50px;
-        font-family: Roboto;
-        text-decoration: none;
-        color: black;
-        font-size: 18px;
-        font-weight: bold;
-        position: relative;
-    }
-    #navigation > span > h1 {
-        text-align: center;
-        font-size: 0;
-        transition: .2s ease font-size;
-    }
-    #navigation.sticky > span > h1 {
-        font-size: 1.5em;
-    }
-    #navigation > span > h1 > span {
-        font-size: 0px;
-        font-weight: normal;
-        text-align: center;
-        transition: .5s ease opacity;
-        opacity: 0;
-        display: block;
-    }
-
-    #navigation.sticky > span:hover > h1 > span {
-        font-size: 10px;
-        opacity: 1;
-    }
-
-    #navigation > span > button {
-        background-image: url(./media/Images/Misc/FinalDex/FinalDex.png);
-        width: 95%;
-        height: 95%;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto 90%;
-        object-fit: scale-down;
-        cursor: pointer;
-    }
-    #navigation > span:hover > button {
-        filter:brightness(1.1);
-    }
-    #navigation > span:active > button {
-        background-image: url("./media/Images/Misc/FinalDex/FinalDex2.png");
-    }
-    #navigation > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
-   
-    #navigation > div > button {
-        cursor: pointer;
-        width: 100%;
-        height:100%;
-    }
-    #navigation > div > button:hover {
-        text-decoration: underline;
-    }
-    #navigation > div > button:active {
-        color: darkgray;
-        text-decoration: underline;
-    }
-    
-    
-    #navigation > div > div {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: absolute;
-        top: 100%;
-        width: 100%;
-    }
-    #navigation > div > div.active {
-        display: flex;
-    }
-    #Games > * > *,
-    #FAQ > * > *,
-    #Bug,
-    #Metadata > * > *,
-    #Sources > * > *,
-    #Changelog > * > * {
-        transform: scaleX(-1);
-    }
-    #Games > * > * > *,
-    #FAQ > * > * > *,
-    #Bug > *,
-    #Metadata > * > * > *,
-    #Sources > * > * > *,
-    #Changelog > * > * > * {
-        transform: scaleX(-1);
-    }
-    #Games > span h1 {
-        display: block;
-        transform: none;
-        font-family: Roboto;
-        font-size: 3em;
-        padding: 20px 0;
-        text-shadow: -2px 1px white;
-    }
-    #Games > span {
-        flex-direction: column;
-    }
-    #Home,
-    #Metadata,
-    #FAQ,
-    #Bug,
-    #Changelog,
-    #Sources {
-        width: 100%;
-        height: 95vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Roboto;
-        font-weight: bold;
-    }
-    /*
-    #Home,
-    #Metadata,
-    #FAQ,
-    #Bug,
-    #Changelog,
-    #Sources,
-    #Games {
-        box-shadow: 0px 4px 0px rgb(0 0 0 / 20%);
-        border-radius: 5%;
-    }
-    */
-    #Games,
-    #Metadata,
-    #FAQ,
-    #Bug,
-    #Changelog,
-    #Sources {
-        width:100%;
-        height: 95vh;
-        display: flex;
-        position: relative;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        align-content: center;
-    }
-    #Games {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row-reverse;
-        justify-content: center;
-        height:unset;
-        
-    }
-    #Games > span {
-        padding: 100px 0;
-    }
-
-    #Games button {
-        display: flex;
-        width: 200px;
-        height: 100px;
-        align-items: center;
-        position: relative;
-        box-shadow: 0 0 1px #000;
-        transition: 0.2s ease width;
-        transition-delay: 0.2s;
-        flex-direction: column;
-        margin: 10px;
-        justify-content: center;
-        overflow: hidden;
-        border-radius: 10px;
-        background: var(--color10);
-        box-shadow: -3px 3px rgb(0 0 0 / 50%);
-        transition: .25s ease;
-        border: 1px solid rgba(0, 0, 0, 0.5);
-    }
-
-    #Games button.active,
-    #Games button.inactive {
-        transition: 1s ease width;
-        transition-delay: 2s;
-        min-width: unset;
-    }
-  
-  
-
-    #Games button.active img:not([name]) {
-        animation: blinks 0.5s normal linear;
-        animation-delay: 0.5s;
-    }
-    #Games button > a {
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    a,
-    img {
-        -webkit-user-select: none; /* Safari 3.1+ */ -moz-user-select: none; /* Firefox 2+ */ -ms-user-select: none; /* IE 10+ */ user-select: none; /* Standard syntax */ user-drag: none;  -webkit-user-drag: none;
-    }
-    #Games button > a:active {
-        transform:scale(0.8);
-    }
-
-    #Games button img {
-        image-rendering: -moz-crisp-edges;
-        image-rendering: -o-crisp-edges;
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-        -ms-interpolation-mode: nearest-neighbor;
-    }
-    #Games button img:not([name="Art"]) {
-        object-fit: scale-down;
-        z-index: 5;
-        max-width: 90%;
-        max-height: 90%;
-        cursor: pointer;
-    }
-    #Games button img[name*="Art"] {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.5;
-    }
-    #Games button img[name*="Art-Extra"] {
-        opacity: 0.7;
-        z-index: 4;
-    }
-
-    #Games button.miss {
-        background: radial-gradient(circle, var(--color8) 10%, transparent 11%),radial-gradient(circle at bottom left, var(--color8) 5%, transparent 6%),radial-gradient(circle at bottom right, var(--color8) 5%, transparent 6%),radial-gradient(circle at top left, var(--color8) 5%, transparent 6%),radial-gradient(circle at top right, var(--color8) 5%, transparent 6%);
-        background-size: 1em 1em;
-        background-color: var(--color10);
-    }
-  
-    #Games button:not(.active,.progress,.inactive):hover,
-    #Games button:not(.active,.progress,.inactive):focus {
-        box-shadow: -1px 1px rgb(0 0 0 / 50%);
-        transform: scaleX(-1) scale(0.98);
-    }   
-
-    #Games button:not(.active) img:not([name*="Art"]):hover {
-        /*animation: opafade 1.5s infinite ease-in-out;*/
-    }
-
-    @keyframes opafade {
-        0% {
-            transform: scale(1);
-            filter:contrast(1.2);
-        }
-      
-        50% {
-            transform: scale(0.97);
-            filter:contrast(1);
-        }
-
-        100% {
-            transform: scale(1);
-            filter:contrast(1.2);
-        }
-    }
-  
-    @keyframes blinks {
-        0% {
-            filter: brightness(1) contrast(1);
-        }
-        50% {
-            filter: brightness(1.2) contrast(1.2);
-        }
-        100% {
-            filter: brightness(1) contrast(1);
-        }
-    }
-  
-
-#Home {
-    flex-direction: column;
-    font-size: 20px;
-    position: relative;
-}
-#Home > h5 {
-    padding: 10px 0;
-    /* font-weight: normal; */
-    font-size: .8em;
-    text-shadow: 1px 1px black;
-    color: var(--color18);
-    font-family: Roboto;
-}
-
-[onclick] {
-    cursor:pointer;
-}
-#Home > h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    font-size: 6em;
-}
-#Home > h1:hover {
-    opacity: 0.8;
-}
-
-#Home > h1,
-#navigation > span > h1 > p {
-    background: -webkit-linear-gradient(left, #3F3F3F, #7F7F7F);
-    background: -moz-linear-gradient(left, #3F3F3F, #7F7F7F);
-    background: -ms-linear-gradient(left, #3F3F3F, #7F7F7F);
-    background: -o-linear-gradient(left, #3F3F3F, #7F7F7F);
-    background: linear-gradient(to right, #3F3F3F, #7F7F7F);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-}
-#Home > span {
-    font-weight: normal;
-    font-size: 12px;
-    position: absolute;
-    bottom: 2px;
-    right: 15px;
-}
-#Games {
-    margin-top: 100px;
-}
-
-#Games > span::before,
-#Games > span,
-#FAQ > span,
-#Bug > span,
-#Metadata > span,
-#Sources > span,
-#Changelog > span  {
-
-    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%);
-    background-size: 1em 1em;
-    background-color: var(--color19);
-
-}
-
-#Games > span::before {
-    content: "";
-    display: block;
-    width: 100%;
-    clip-path: polygon(50% 0, 100% 100%, 0% 100%, 0 100%);
-    height: 100px;
-    position: absolute;
-    top: -99px;
-}
-
-#Games > span,
-#FAQ > span,
-#Bug > span,
-#Metadata > span,
-#Sources > span,
-#Changelog > span {
-    width:100%;
-    height:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-#Games > span > ul,
-#FAQ > span > ul,
-#Bug > span > ul,
-#Metadata > span > ul,
-#Sources > span > ul,
-#Changelog > span > ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 40%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 90%;
-}
-
-#Games > span > ul {
-    width: 80%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
-}
-
-
-#Bug form {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: space-around;
-}
-#Bug form span {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    max-height: 90%;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-#FAQ ul li:nth-child(2) {
-    font-weight:normal;
-    list-style-type: circle;
-}
-#Metadata > span > ul ul,
-#Sources > span > ul ul {
-    padding: 5px 0;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-}
-#FAQ > span > ul ul {
-    padding: 10px 0;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-}
-#Metadata h1,
-#Sources h1,
-#FAQ h1 {
-    width: 95%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-#Changelog h1 {
-    padding: 10px 0;
-    width: 95%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#Changelog ul pre {
-    padding: 5px 0;
-}
-#Changelog ul > ul {
-    width: 95%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-#Changelog li {
-    padding: 2px 0;
-    font-size: 0.8em;
-    list-style-type: square;
-}
-
-#Bug h1 {
-    width: 100%;
-    text-align: center;
-}
-#Bug select {
-    padding: 10px 30px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 2px;
-    cursor: pointer;
-    display: block;
-    margin: 10px 30%;
-    width: 40%;
-    text-align: left;
-}
-#Bug textarea {
-    width: 80%;
-    padding: 10px 20px;
-    display: block;
-    min-height: 100px;
-    min-width: 100px;
-    max-width: 90%;
-    max-height: 50vh;
-    margin-bottom: 10px;
-}
-
-
-#Bug div b {
-    padding: 10px 30px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 10px;
-    cursor: pointer;
-    display: block;
-    /* width: 20%; */
-    background: indianred;
-    font-size: 1em;
-    font-weight: bold;
-    margin: 10px 40%;
-    font-family: Roboto;
-    color: white;
-    border-color: black;
-    text-align: center;
-}
-#Bug div button {
-    padding: 10px 30px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 2px;
-    cursor: pointer;
-    display: block;
-    width: 20%;
-    background: skyblue;
-    font-size: 1em;
-    font-weight: bold;
-    margin: 10px 40%;
-    font-family: Roboto;
-    color:black;
-    border-color:black;
-}
-#Bug div b:active,
-#Bug div button:active {
-    transform:scale(0.95)
-}
-a:active {
-    color: -webkit-activelink;
-}
-a {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-#hp {
-    display: none !important;
-}
-#Bug select option[disabled] {
-    display: none;
-}
-#Bug select {
-    font-weight: normal;
-}
-#Bug option {
-    font-weight: bold;
-    font-size: 1em;
-}
-#Bug div {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-}
-#Bug div:nth-child(2) {
-    opacity:0;
-    height: 0;
-    width: 0;
-}
-
-#Bug form span > div {
-    transition: 0.5s ease opacity 0s, 2s ease height 0.5s;
-}
-
-#Bug form span.hide > div:nth-child(1),
-#Bug form span.show > div:nth-child(2) {
-    opacity:0;
-    height: 0;
-    width: 0;
-}
-#Bug form span.hide > div:nth-child(2),
-#Bug form span.show > div:nth-child(1) {
-    opacity:1;
-    height: unset;
-    width: 100%;
-}
-#Metadata ul ul ul {
-    font-size: 70%;
-}
-#Sources ul ul ul {
-    list-style-type: auto;
-    font-size: 70%;
-}
-
-
-body > span.hide {
-    opacity: 0;
-    pointer-events: none;
-}
-body > span[name="num"] {
-    top: 50vh;
-    font-size: 1.5em;
-    font-family: Roboto;
-    right: 1vw;
-}
-
-</style>
+    <link rel="stylesheet" type="text/css" href="./css/root.css">
+    <link rel="stylesheet" type="text/css" href="./css/default.css">
+    <link rel="stylesheet" type="text/css" href="./css/keyframe.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/@media.css">
 
 </head>
 
 <body>
+    <nav id="navigation">
+        <div onauxclick="if(event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><img src="./media/Images/Misc/FinalDex/FinalDex.png" /><span><p>Version 1.0.0</p><h3>FINALDEX</h3></span></div>
+        <div><b onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><p>Games</p></b></div>
+        <div><b onclick="document.getElementById('FAQ').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><p>FAQ</p></b></div>
+        <div><b onclick="document.getElementById('Bug').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><p>Submit a Bug</p></b></div>
+        <div><b onclick="document.getElementById('Metadata').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><p>Metadata</p></b></div>
+        <div><b onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><p>Sources</p></b></div>
+        <div><b onclick="document.getElementById('Changelog').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><p>Changelog</p></b></div>
+    </nav>
+    <div id="content">
+        <div id="Home">
+            <strong onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });">FinalDex</strong>
+            <h5>A complete online Pokédex with rich detailed data for all the Mainline Pokémon Games</h5>
+        </div>
+        <div id="below">
+            <div id="Games">
+                <span>
+                    <header>SELECT GAME</header>
+                    <ul></ul>
+                </span>
+            </div>
+            <div id="FAQ">
+                <span>
+                    <ul>
+                        <h3>Frequently Asked Questions</h3>
+                        <ul>
+                            <li><p>I found a bug and some missing and invalid metadata, where do i let you know about it?</p></li>
+                            <li><p>You can super easily submit bugs <a tabindex="-1" onclick="document.getElementById('Bug').scrollIntoView({ block: 'start',  behavior: 'smooth' });">here</a>.</p></li>
+                        </ul>
+                        <ul>
+                            <li><p>How does the metadata work for different versions of the Games?</p></li>
+                            <li><p>All Metadata corresponds to the lastest versions of the games (including DLC).</p></li>
+                        </ul>
+                        <ul>
+                            <li><p>How about different language versions of the games, like the Japanese Red/Green?</p></li>
+                            <li><p>All Metadata only corresponds to the English releases of the games.</p></li>
+                        </ul>
+                        <ul>
+                            <li><p>How does the metadata work for Pokémon Forms?</p></li>
+                            <li><p>All of the data listed in the Pokémon Form is applied only to that specific Form, any missing Fields equals to the default Forms value.</p></li>
+                        </ul>
+                        <ul>
+                            <li><p>How was all of the metadata imported?</p></li>
+                            <li><p>Data from various <a tabindex="-1" onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });">sources</a> was exported in to Google Sheets through scripts.</p></li>
+                        </ul>
+                        <ul>
+                            <li><p>Can i use this metadata for a project of mine?</p></li>
+                            <li><p>Sure, feel free to use it however you like.</p></li>
+                        </ul>
+                        <ul>
+                            <li><p>I have suggestions/questions/would like to express my opinions, where do i contact you?</p></li>
+                            <li><p>You can contact me directly <a tabindex="-1" href="mailto:xedlanif@gmail.com">here</a>.</p></li>
+                        </ul>
+                    </ul>
+                </span>
+            </div>
+            <div id="Bug">
+                <span>
+                    <ul>
+                        <form class="gform" method="POST" data-email="xedlanif@gmail.com" action="https://script.google.com/macros/s/AKfycbyub2AtKx9vn-bF7hBdb7KCnjfr1ZilNTE3vnnYaSYVh_4AM2VULcV1YGjcG55Dk2yt/exec">
+                            <span>
+                                <div>
+                                    <h3>Submit A Bug</h3>
+                                    <select id="Bug Type" name="Bug Type" onchange="this.style.fontWeight = 'bold';">
+                                        <option value="" disabled="" selected="">Select an option</option>
+                                        <option value="Metadata">Invalid Metadata</option>
+                                        <option value="Image">Image Error</option>
+                                        <option value="Compatibility">Compatibility Issue</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <textarea id="Message" name="Message" placeholder="Describe the issue" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Describe the issue'" autocomplete="off"></textarea>
+                                    <input id="hp" type="text" name="hp" value="">
+                                    <button type="small" class="button-success">Send</button>
+                                </div>
+                                <div>
+                                    <h3>Thank You</h3>
+                                    <figure type="rotate" onclick="event.target.parentElement.parentElement.classList.remove('hide');buttonAction(document.querySelector('.gform'),false)">↺</figure>
+                                </div>
+                            </span>
+                        </form>
+                    </ul>
+                </span>
+            </div>
+            <div id="Metadata">
+                <span>
+                    <ul>
+                        <h3>Metadata</h3>
+                        <ul>
+                            <li><p>Pokémon</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/17LnZd-Sm0Oc8Np2bIxnQYc_gkCMLLWwfkA8I6XojHvQ">Pokémon Metadata</a></p></li>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PcOs40UPqvoWuCr0pkjb2nx1NhRgyaF82bDwtFJhqk4">Pokémon Learnset Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    
+                        <ul>   
+                            <li><p>Locations</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PuIneyaNi8nYxxpGxFnUYToUTSYHZyUW2BDcDz94vys">Locations Metadata</a></p></li>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/15lMtz5WMlJ2NF1V41wIYRDXVYIbNIdIzjiXq80zK83w">Location Pokémon Metadata</a></p></li>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5H4">Location Items Metadata</a></p></li>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1lsPn9sXfHlxWhrMOnZb0shPAZAzEl3Kl2KMDOOMTR8M">Location Trainers Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    
+                        <ul>   
+                            <li><p>Moves</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1vmvr-1CKuT3EySejHUQvgjiZqpQ27nRXplWeOMbQ9C0">Moves Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    
+                        <ul>   
+                            <li><p>Abilities</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1i6PJyMg_DRDPIQ7ahhWYHXClgnJjfWZOjBuZ1smddOc">Abilities Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    
+                        <ul>   
+                            <li><p>Items</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/18yqu7HN2YIFAU--cvsJ0y8rZNL3hyv9TJW4cI4TUGAg">Items Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    
+                        <ul>   
+                            <li><p>Trainers</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PvbwQOKAL-_1re7xNxwQ_1HTHrTsU153N_7R2T1rrWc">Trainers Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    
+                        <ul>   
+                            <li><p>Mechanics</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1Zza0cQe7VCo-p7KI1RyYgPlLZ2JzyV-JMekyytjnBBM">Mechanics Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    
+                        <ul>   
+                            <li><p>Games</p></li>
+                            <ul>
+                                <li><p><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1UxHecxZc_g6RyLWF7KfzjJzJLRvvRgfYO1FqCv4lIsI">Games Metadata</a></p></li>
+                            </ul>
+                        </ul>
+                    </ul>
+                </span>
+            </div>
+            <div id="Sources">
+                <span>
+                    <ul>
+                        <h3>Sources</h3>
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></p></li>
+                            <ul>
+                                <li><p>Pokémon Metadata</p></li>
+                                <li><p>Location Metadata</p></li>
+                                <li><p>Move Metadata</p></li>
+                                <li><p>Item Metadata</p></li>
+                                <li><p>Sprites/Images</p></li>
+                            </ul>
+                        </ul>
 
-<section id="navigation">
-    <span onauxclick="if(event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'end',  behavior: 'smooth' });"><button></button><h1><span>Version 1.0.0</span><p>FINALDEX</p></h1></span>
-    <div><button onclick="document.getElementById('Games').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Games</button></div>
-    <div><button onclick="document.getElementById('FAQ').scrollIntoView({ block: 'end',  behavior: 'smooth' });">FAQ</button></div>
-    <div><button onclick="document.getElementById('Bug').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Submit a Bug</button></div>
-    <div><button onclick="document.getElementById('Metadata').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Metadata</button></div>
-    <div><button onclick="document.getElementById('Sources').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Sources</button></div>
-    <div><button onclick="document.getElementById('Changelog').scrollIntoView({ block: 'end',  behavior: 'smooth' });">Changelog</button></div>
-</section>
-<div id="content">
-    <div id="Home">
-        <h1 onclick="document.getElementById('Games').scrollIntoView({ block: 'end',  behavior: 'smooth' });">FinalDex</h1>
-        <h5>A complete online Pokédex with rich detailed data for all the Mainline Pokémon Games</h5>
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://veekun.com/">Veekun</a></p></li>
+                            <ul>
+                                <li><p>Sprites</p></li>
+                                <li><p>Icons</p></li>
+                            </ul>
+                        </ul>
+
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://www.pokemon.com/uk/pokedex">Pokémon</a></p></li>
+                            <ul>
+                                <li><p>Ken Sugimori Artwork</p></li>
+                            </ul>
+                        </ul>
+
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://projectpokemon.org/">Project Pokémon</a></p></li>
+                            <ul>
+                                <li><p>Animated 3DS Sprites</p></li>
+                            </ul>
+                        </ul>
+
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://www.pkparaiso.com/">PKParaiso</a></p></li>
+                            <ul>
+                                <li><p>Animated Switch Sprites</p></li>
+                            </ul>
+                        </ul>
+
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://www.serebii.net/">Serebii</a></p></li>
+                            <ul>
+                                <li><p>Mechanic Research</p></li>
+                            </ul>
+                        </ul>
+
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://github.com/etienne-martin/Mapify">Mapify by Etienne Martin</a></p></li>
+                            <ul>
+                                <li><p>Mapify jquery</p></li>
+                            </ul>
+                        </ul>
+
+                        <ul>
+                            <li><p><a tabindex="-1" target="_blank" href="https://www.reddit.com/r/pokemon/comments/k08x5m/after_two_months_of_nonstop_work_i_recreated_all/">/u/Red_O_Zone</a></p></li>
+                            <ul>
+                                <li><p>Red/Blue Sprites Recolor</p></li>
+                            </ul>
+                        </ul>
+
+                    </ul>
+                </span>
+            </div>
+            <div id="Changelog">
+                <span>
+                    <ul>
+                        <h3>Changelog</h3>
+                        <ul>
+                            <li><p>Version 1.0.0 // 29-01-2023</p></li>
+                            <li><code>Initial Release</code></li>
+                        </ul>
+                    </ul>
+                </span>
+            </div>
+        </div>
     </div>
-    <div id="Games">
-        <span>
-            <h1>SELECT GAME</h1>
-            <ul></ul>
-        </span>
-    </div>
-
-    <div id="FAQ">
-        <span>
-            <ul>
-                <h1>Frequently Asked Questions</h1>
-                <ul>
-                    <li>I found a bug and some missing and invalid metadata, where do i let you know about it?</li>
-                    <li>You can super easily submit bugs <a onclick="document.getElementById('Bug').scrollIntoView({ block: 'end',  behavior: 'smooth' });">here</a>.</li>
-                </ul>
-                <ul>
-                    <li>How does the metadata work for different versions of the Games?</li>
-                    <li>All Metadata corresponds to the lastest versions of the games (including DLC).</li>
-                </ul>
-                <ul>
-                    <li>How about different language versions of the games, like the Japanese Red/Green?</li>
-                    <li>All Metadata only corresponds to the English releases of the games.</li>
-                </ul>
-                <ul>
-                    <li>How does the metadata work for Pokémon Forms?</li>
-                    <li>All of the data listed in the Pokémon Form is applied only to that specific Form, any missing Fields equals to the default Forms value.</li>
-                </ul>
-                <ul>
-                    <li>How was all of the metadata imported?</li>
-                    <li>Data from various <a onclick="document.getElementById('Sources').scrollIntoView({ block: 'end',  behavior: 'smooth' });">sources</a> was exported in to Google Sheets through scripts.</li>
-                </ul>
-                <ul>
-                    <li>Can i use this metadata for a project of mine?</li>
-                    <li>Sure, feel free to use it however you like.</li>
-                </ul>
-            <!--
-                <ul>
-                    <li>Is there an API available for the data?</li>
-                    <li>Currently there is not.</li>
-                </ul>
-            -->
-                <ul>
-                    <li>I have suggestions/questions/would like to express my opinions, where do i contact you?</li>
-                    <li>You can contact me directly <a href="mailto:xedlanif@gmail.com">here</a>.</li>
-                </ul>
-            </ul>
-        </span>
-    </div>
-    <div id="Bug">
-        <span>
-            <ul>
-                <form class="gform" method="POST" data-email="xedlanif@gmail.com" action="https://script.google.com/macros/s/AKfycbyub2AtKx9vn-bF7hBdb7KCnjfr1ZilNTE3vnnYaSYVh_4AM2VULcV1YGjcG55Dk2yt/exec">
-                    <span>
-                        <div>
-                            <h1>Submit A Bug</h1>
-                            <select id="Bug Type" name="Bug Type" onchange="this.style.fontWeight = 'bold';">
-                                <option value="" disabled="" selected="">Select an option</option>
-                                <option value="Metadata">Invalid Metadata</option>
-                                <option value="Image">Image Error</option>
-                                <option value="Compatibility">Compatibility Issue</option>
-                                <option value="Other">Other</option>
-                            </select>
-                            <textarea id="Message" name="Message" placeholder="Describe the issue" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Describe the issue'" autocomplete="off"></textarea>
-                            <input id="hp" type="text" name="hp" value="">
-                            <button class="button-success">Send</button>
-                        </div>
-                        <div>
-                            <h1>Thank You</h1>
-                            <b onclick="event.target.parentElement.parentElement.classList.remove('hide');">Repeat</b>
-                        </div>
-                    </span>
-                </form>
-            </ul>
-        </span>
-    </div>
-    <div id="Metadata">
-        <span>
-            <ul>
-                <h1>Metadata</h1>
-                <ul>
-                    <li>Pokémon</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/17LnZd-Sm0Oc8Np2bIxnQYc_gkCMLLWwfkA8I6XojHvQ">Pokémon Metadata</a></li>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1PcOs40UPqvoWuCr0pkjb2nx1NhRgyaF82bDwtFJhqk4">Pokémon Learnset Metadata</a></li>
-                    </ul>
-                </ul>
-            
-                <ul>   
-                    <li>Locations</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1PuIneyaNi8nYxxpGxFnUYToUTSYHZyUW2BDcDz94vys">Locations Metadata</a></li>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/15lMtz5WMlJ2NF1V41wIYRDXVYIbNIdIzjiXq80zK83w">Location Pokémon Metadata</a></li>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5H4">Location Items Metadata</a></li>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1lsPn9sXfHlxWhrMOnZb0shPAZAzEl3Kl2KMDOOMTR8M">Location Trainers Metadata</a></li>
-                    </ul>
-                </ul>
-            
-                <ul>   
-                    <li>Moves</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1vmvr-1CKuT3EySejHUQvgjiZqpQ27nRXplWeOMbQ9C0">Moves Metadata</a></li>
-                    </ul>
-                </ul>
-            
-                <ul>   
-                    <li>Abilities</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1i6PJyMg_DRDPIQ7ahhWYHXClgnJjfWZOjBuZ1smddOc">Abilities Metadata</a></li>
-                    </ul>
-                </ul>
-            
-                <ul>   
-                    <li>Items</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/18yqu7HN2YIFAU--cvsJ0y8rZNL3hyv9TJW4cI4TUGAg">Items Metadata</a></li>
-                    </ul>
-                </ul>
-            
-                <ul>   
-                    <li>Trainers</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1PvbwQOKAL-_1re7xNxwQ_1HTHrTsU153N_7R2T1rrWc">Trainers Metadata</a></li>
-                    </ul>
-                </ul>
-            
-                <ul>   
-                    <li>Mechanics</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1Zza0cQe7VCo-p7KI1RyYgPlLZ2JzyV-JMekyytjnBBM">Mechanics Metadata</a></li>
-                    </ul>
-                </ul>
-            
-                <ul>   
-                    <li>Games</li>
-                    <ul>
-                        <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1UxHecxZc_g6RyLWF7KfzjJzJLRvvRgfYO1FqCv4lIsI">Games Metadata</a></li>
-                    </ul>
-                </ul>
-            </ul>
-        </span>
-    </div>
-    <div id="Sources">
-        <span>
-            <ul>
-                <h1>Sources</h1>
-                <ul>
-                    <li><a target="_blank" href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></li>
-                    <ul>
-                        <li>Pokémon Metadata</li>
-                        <li>Location Metadata</li>
-                        <li>Move Metadata</li>
-                        <li>Item Metadata</li>
-                        <li>Sprites/Images</li>
-                    </ul>
-                </ul>
-
-                <ul>
-                    <li><a target="_blank" href="https://veekun.com/">Veekun</a></li>
-                    <ul>
-                        <li>Sprites</li>
-                        <li>Icons</li>
-                    </ul>
-                </ul>
-
-                <ul>
-                    <li><a target="_blank" href="https://www.pokemon.com/uk/pokedex">Pokémon</a></li>
-                    <ul>
-                        <li>Ken Sugimori Artwork</li>
-                    </ul>
-                </ul>
-
-                <ul>
-                    <li><a target="_blank" href="https://projectpokemon.org/">Project Pokémon</a></li>
-                    <ul>
-                        <li>Animated 3DS Sprites</li>
-                    </ul>
-                </ul>
-
-                <ul>
-                    <li><a target="_blank" href="https://www.pkparaiso.com/">PKParaiso</a></li>
-                    <ul>
-                        <li>Animated Switch Sprites</li>
-                    </ul>
-                </ul>
-
-                <ul>
-                    <li><a target="_blank" href="https://www.serebii.net/">Serebii</a></li>
-                    <ul>
-                        <li>Mechanic Research</li>
-                    </ul>
-                </ul>
-
-                <ul>
-                    <li><a target="_blank" href="https://github.com/etienne-martin/Mapify">Mapify by Etienne Martin</a></li>
-                    <ul>
-                        <li>Mapify jquery</li>
-                    </ul>
-                </ul>
-
-                <ul>
-                    <li><a target="_blank" href="https://www.reddit.com/r/pokemon/comments/k08x5m/after_two_months_of_nonstop_work_i_recreated_all/">/u/Red_O_Zone</a></li>
-                    <ul>
-                        <li>Red/Blue Sprites Recolor</li>
-                    </ul>
-                </ul>
-
-            </ul>
-        </span>
-    </div>
-    <div id="Changelog">
-        <span>
-            <ul>
-                <h1>Changelog</h1>
-                <ul>
-                    <pre><li>Version 1.0.0 // 29-01-2023</li>Initial Release</pre>
-                </ul>
-            </ul>
-        </span>
-    </div>
-</div>
-<script>
-var wsrc = ["Home","Games","FAQ","Bug","Metadata","Sources","Changelog"]
-
-
-function build() {
-
-var GamesFull = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD: Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Let's Go, Pikachu!","Let's Go, Eevee!","Sword","Shield"];
-var GamesSimple = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield"];
-var GamesArt = ["Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","Hoenn_RS","Hoenn_RS","","Kanto_FRLG","Kanto_FRLG","Hoenn_E","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","JohtoKanto_HGSS","JohtoKanto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
-var GamesDescription = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
-
-
-
-
-
-for (var i = 0; i < GamesFull.length; i++) {
-    var x = i;
-    var btn = document.createElement("button");
-    btn.name = x;
-    btn.addEventListener("keyup",function(event){if(event.which === 13){console.log(event.target); event.target.querySelector(":scope a").click();}});
-    document.querySelector("#Games span ul").appendChild(btn)
-
-
-    if (GamesArt[i] != "") {
-        var art = document.createElement("img");
-        art.src = "./media/Images/Misc/Region/" + GamesArt[i] + ".png";
-        art.name = "Art";
-        btn.appendChild(art)
-    }
-    else {
-        btn.classList.add("miss");
-    }
-
-    var titlewrap = document.createElement("a");
-    var title = document.createElement("img");
-    title.src = "./media/Images/Misc/Title/Text/" + GamesSimple[i] + ".png";
-    titlewrap.setAttribute("href","./Game.html"+"#"+GamesFull[i]);
-    titlewrap.setAttribute("tabindex","-1");
-    btn.appendChild(titlewrap)
-    titlewrap.appendChild(title)
-
-}
-
-
-}
-
-
-
-
-
-build();
-
-
-
-
-$(window).on('beforeunload', function() {
-    $(window).scrollTop(0);
-});
-
-
-
-(function() {
-    // get all data in form and return object
-    function getFormData(form) {
-      var elements = form.elements;
-      var honeypot;
-  
-      var fields = Object.keys(elements).filter(function(k) {
-        if (elements[k].name === "hp") {
-          honeypot = elements[k].value;
-          return false;
-        }
-        return true;
-      }).map(function(k) {
-        if(elements[k].name !== undefined) {
-          return elements[k].name;
-        // special case for Edge's html collection
-        }else if(elements[k].length > 0){
-          return elements[k].item(0).name;
-        }
-      }).filter(function(item, pos, self) {
-        return self.indexOf(item) == pos && item;
-      });
-  
-      var formData = {};
-      fields.forEach(function(name){
-        var element = elements[name];
-        
-        // singular form elements just have one value
-        formData[name] = element.value;
-  
-        // when our element has multiple items, get their values
-        if (element.length) {
-          var data = [];
-          for (var i = 0; i < element.length; i++) {
-            var item = element.item(i);
-            if (item.checked || item.selected) {
-              data.push(item.value);
-            }
-          }
-          formData[name] = data.join(', ');
-        }
-      });
-      // add form-specific values into the data
-      formData.formDataNameOrder = JSON.stringify(fields);
-      formData.formGoogleSheetName = form.dataset.sheet || "reports"; // default sheet name
-      formData.formGoogleSendEmail
-        = form.dataset.email || ""; // no email by default
-  
-      return {data: formData, honeypot: honeypot};
-    }
-  
-    function handleFormSubmit(event) {  // handles form submit without any jquery
-      event.preventDefault();           // we are submitting via xhr below
-      var form = event.target;
-      var formData = getFormData(form);
-      var data = formData.data;
-  
-      // If a honeypot field is filled, assume it was done so by a spam bot.
-      if (formData.honeypot) {
-        return false;
-      }
-  
-      //disableAllButtons(form);
-      var url = form.action;
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', url);
-      // xhr.withCredentials = true;
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            form.reset();
-            var formElements = form.querySelector(".gform > span")
-            if (formElements) {
-              formElements.classList.add("hide");
-            }
-          }
-      };
-      // url encode form data for sending as post data
-      var encoded = Object.keys(data).map(function(k) {
-          return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
-      }).join('&');
-      xhr.send(encoded);
-    }
-    
-    function loaded() {
-      // bind to the submit event of our form
-      var forms = document.querySelectorAll("form.gform");
-      for (var i = 0; i < forms.length; i++) {
-        forms[i].addEventListener("submit", handleFormSubmit, false);
-      }
-    };
-    document.addEventListener("DOMContentLoaded", loaded, false);
-  
-    function disableAllButtons(form) {
-      var buttons = form.querySelectorAll(":scope div:nth-child(1) button");
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].disabled = true;
-      }
-    }
-})();
-
-
-
-</script>
-
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
