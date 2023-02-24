@@ -1,9 +1,6 @@
-
-
-
 function partyMemory(action) {
     var action;
-    var partySlots = document.querySelectorAll('#pokémon-outer > main[name="Team"] section[name="Party"] > div');
+    var partySlots = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div');
     if (action == "Save") {
         var partyMemory = [];
         for(var i = 0; i < partySlots.length; i++) {
@@ -91,10 +88,6 @@ function memory(action,name,suffix,element) {
 		tempStr = tempArr[0];
 	}
 
-	if(name.includes("imgtype") && !name.includes("path") && action == "Restore") {
-		//ImageType();
-	}
-
 	if (element != undefined) {
 		if (NodeList.prototype.isPrototypeOf(element) == true) {
 			for(var i = 0; i < element.length; i++) {
@@ -109,6 +102,7 @@ function memory(action,name,suffix,element) {
 			}
 		}
 		else {
+			
 			if (action == "Save") {
 				localStorage.setItem(tempStr,element.value);
 			}
