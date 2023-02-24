@@ -1,52 +1,49 @@
 var createExclusive = function() {
 	var exclusiveOuter = document.createElement("div");
-	var exclusiveAside1 = document.createElement("aside");
-	var exclusiveAside1OptionsTitleOuter = document.createElement("div");
-	var exclusiveAside1OptionsTitle = document.createElement("h2");
-	var exclusiveAside1OptionsOuter = document.createElement("div");
-	var exclusiveAside1Options = document.createElement("div");
-	var exclusiveAside2 = document.createElement("aside");
-	var exclusiveAside2Title = document.createElement("h1");
-	var exclusiveAside3 = document.createElement("aside");
-	var exclusiveAside3PokOuter = document.createElement("div");
-	var exclusiveAside3ItemOuter = document.createElement("div");
-	var exclusiveAside3FeatureOuter = document.createElement("div");
+	var exclusiveSection1 = document.createElement("section");
+	var exclusiveSection1OptionsTitleOuter = document.createElement("div");
+	var exclusiveSection1OptionsTitle = document.createElement("h2");
+	var exclusiveSection1OptionsOuter = document.createElement("div");
+	var exclusiveSection1Options = document.createElement("div");
+	var exclusiveSection2 = document.createElement("section");
+	var exclusiveSection2Title = document.createElement("h1");
+	var exclusiveSection3 = document.createElement("section");
+	var exclusiveSection3PokOuter = document.createElement("div");
+	var exclusiveSection3ItemOuter = document.createElement("div");
+	var exclusiveSection3FeatureOuter = document.createElement("div");
 	exclusiveOuter.setAttribute("id", "exclusive-outer");
-	exclusiveOuter.setAttribute("name", "Exclusives");
-	exclusiveAside1.setAttribute("id", "exclusive-aside1");
-	exclusiveAside1OptionsTitleOuter.setAttribute("id", "exclusive-options-title");
-	exclusiveAside1OptionsTitle.innerText = "Version Exclusive";
-	exclusiveAside1OptionsOuter.setAttribute("id", "exclusive-options-outer");
-	exclusiveAside1OptionsOuter.classList.add("scroll");
-	exclusiveAside1Options.setAttribute("id", "exclusive-options");
-	exclusiveAside2.setAttribute("id", "exclusive-aside2");
-	exclusiveAside2Title.innerText = "Exclusive Pokémon";
-	exclusiveAside3.setAttribute("id", "exclusive-aside3");
-	exclusiveAside3PokOuter.classList.add("exclusive-content-outer");
-	exclusiveAside3PokOuter.setAttribute("name", "0");
-	exclusiveAside3ItemOuter.classList.add("exclusive-content-outer");
-	exclusiveAside3ItemOuter.setAttribute("name", "1");
-	exclusiveAside3FeatureOuter.classList.add("exclusive-content-outer");
-	exclusiveAside3FeatureOuter.setAttribute("name", "2");
+	exclusiveOuter.setAttribute("value","exclusives");
+	exclusiveSection1.setAttribute("id", "exclusive-section1");
+	exclusiveSection1OptionsTitleOuter.setAttribute("id", "exclusive-options-title");
+	exclusiveSection1OptionsTitle.innerText = "Version Exclusive";
+	exclusiveSection1OptionsOuter.setAttribute("id", "exclusive-options-outer");
+	exclusiveSection1OptionsOuter.classList.add("scroll");
+	exclusiveSection1Options.setAttribute("id", "exclusive-options");
+	exclusiveSection2.setAttribute("id", "exclusive-section2");
+	exclusiveSection2Title.innerText = "Exclusive Pokémon";
+	exclusiveSection3.setAttribute("id", "exclusive-section3");
+	exclusiveSection3PokOuter.setAttribute("name", "0");
+	exclusiveSection3ItemOuter.setAttribute("name", "1");
+	exclusiveSection3FeatureOuter.setAttribute("name", "2");
 	document.querySelector("#contain").appendChild(exclusiveOuter);
-	exclusiveOuter.appendChild(exclusiveAside1);
-	exclusiveAside1.appendChild(exclusiveAside1OptionsTitleOuter);
-	exclusiveAside1OptionsTitleOuter.appendChild(exclusiveAside1OptionsTitle);
-	exclusiveAside1.appendChild(exclusiveAside1OptionsOuter);
-	exclusiveAside1OptionsOuter.appendChild(exclusiveAside1Options);
-	exclusiveOuter.appendChild(exclusiveAside2);
-	exclusiveAside2.appendChild(exclusiveAside2Title);
-	exclusiveOuter.appendChild(exclusiveAside3);
-	exclusiveAside3.appendChild(exclusiveAside3PokOuter);
-	exclusiveAside3.appendChild(exclusiveAside3ItemOuter);
-	exclusiveAside3.appendChild(exclusiveAside3FeatureOuter);
+	exclusiveOuter.appendChild(exclusiveSection1);
+	exclusiveSection1.appendChild(exclusiveSection1OptionsTitleOuter);
+	exclusiveSection1OptionsTitleOuter.appendChild(exclusiveSection1OptionsTitle);
+	exclusiveSection1.appendChild(exclusiveSection1OptionsOuter);
+	exclusiveSection1OptionsOuter.appendChild(exclusiveSection1Options);
+	exclusiveOuter.appendChild(exclusiveSection2);
+	exclusiveSection2.appendChild(exclusiveSection2Title);
+	exclusiveOuter.appendChild(exclusiveSection3);
+	exclusiveSection3.appendChild(exclusiveSection3PokOuter);
+	exclusiveSection3.appendChild(exclusiveSection3ItemOuter);
+	exclusiveSection3.appendChild(exclusiveSection3FeatureOuter);
 
-    var exclusiveAside2Game = document.createElement("span");
-    var exclusiveAside2GameImage = document.createElement("img");
-    exclusiveAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
-    exclusiveAside2GameImage.setAttribute("onerror","this.display='none'");
-    exclusiveAside2.appendChild(exclusiveAside2Game);
-    exclusiveAside2Game.appendChild(exclusiveAside2GameImage);
+    var exclusiveSection2Game = document.createElement("span");
+    var exclusiveSection2GameImage = document.createElement("img");
+    exclusiveSection2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    exclusiveSection2GameImage.setAttribute("onerror","this.display='none'");
+    exclusiveSection2.appendChild(exclusiveSection2Game);
+    exclusiveSection2Game.appendChild(exclusiveSection2GameImage);
 
 	var exclusiveOptions = [];
 	var ExclusivePokémonExist = "";
@@ -60,20 +57,17 @@ var createExclusive = function() {
 	if(ExclusivePokémonExist.includes("true")) {
 		exclusiveOptions.push("Pokémon");
 		for(var i = 0; i < JSONPath_ExclusivePokémon.length; i++) {
-			var exclusiveAside3Pok = document.createElement("div");
-			var exclusiveAside3PokTitle = document.createElement("div");
-			var exclusiveAside3PokTitleImg = document.createElement("img");
-			var exclusiveAside3PokContent = document.createElement("ul");
-			exclusiveAside3Pok.classList.add("exclusive-pok");
-			exclusiveAside3PokTitle.classList.add("exclusive-pok-title");
-			exclusiveAside3PokTitleImg.src = "./media/Images/Misc/Title/Text/" + getFullGameName(JSONPath_ExclusivePokémon[i]).replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
-			exclusiveAside3PokTitleImg.title = "Pokémon Exclusive to " + getFullGameName(JSONPath_ExclusivePokémon[i]);
-			exclusiveAside3PokContent.classList.add("exclusive-pok-content");
-			exclusiveAside3PokContent.classList.add("scroll");
-			exclusiveAside3PokOuter.appendChild(exclusiveAside3Pok);
-			exclusiveAside3Pok.appendChild(exclusiveAside3PokTitle);
-			exclusiveAside3PokTitle.appendChild(exclusiveAside3PokTitleImg);
-			exclusiveAside3Pok.appendChild(exclusiveAside3PokContent);
+			var exclusiveSection3Pok = document.createElement("div");
+			var exclusiveSection3PokTitle = document.createElement("div");
+			var exclusiveSection3PokTitleImg = document.createElement("img");
+			var exclusiveSection3PokContent = document.createElement("ul");
+			exclusiveSection3PokTitleImg.src = "./media/Images/Misc/Title/Text/" + getFullGameName(JSONPath_ExclusivePokémon[i]).replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+			exclusiveSection3PokTitleImg.title = "Pokémon Exclusive to " + getFullGameName(JSONPath_ExclusivePokémon[i]);
+			exclusiveSection3PokContent.classList.add("scroll");
+			exclusiveSection3PokOuter.appendChild(exclusiveSection3Pok);
+			exclusiveSection3Pok.appendChild(exclusiveSection3PokTitle);
+			exclusiveSection3PokTitle.appendChild(exclusiveSection3PokTitleImg);
+			exclusiveSection3Pok.appendChild(exclusiveSection3PokContent);
 			for(var q = 0; q < finaldataExclusivePokémon.length; q++) {
 				if(finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]] != undefined) {
 					var Exclusive = document.createElement("li");
@@ -82,7 +76,7 @@ var createExclusive = function() {
 					ExclusiveImg.setAttribute("title", finaldataExclusivePokémon[q][JSONPath_ExclusivePokémon[i]]);
 					ExclusiveImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
 					ExclusiveImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
-					exclusiveAside3PokContent.appendChild(Exclusive);
+					exclusiveSection3PokContent.appendChild(Exclusive);
 					Exclusive.appendChild(ExclusiveImg);
 				}
 			}
@@ -99,20 +93,17 @@ var createExclusive = function() {
 	if(ExclusiveItemExist.includes("true")) {
 		exclusiveOptions.push("Items");
 		for(var i = 0; i < JSONPath_ExclusiveItem.length; i++) {
-			var exclusiveAside3Item = document.createElement("div");
-			var exclusiveAside3ItemTitle = document.createElement("div");
-			var exclusiveAside3ItemTitleImg = document.createElement("img");
-			var exclusiveAside3ItemContent = document.createElement("ul");
-			exclusiveAside3Item.classList.add("exclusive-item");
-			exclusiveAside3ItemTitle.classList.add("exclusive-item-title");
-			exclusiveAside3ItemTitleImg.src = "./media/Images/Misc/Title/Text/" + getFullGameName(JSONPath_ExclusiveItem[i]).replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
-			exclusiveAside3ItemTitleImg.title = "Items exclusive to " + getFullGameName(JSONPath_ExclusiveItem[i]);
-			exclusiveAside3ItemContent.classList.add("exclusive-item-content");
-			exclusiveAside3ItemContent.classList.add("scroll");
-			exclusiveAside3ItemOuter.appendChild(exclusiveAside3Item);
-			exclusiveAside3Item.appendChild(exclusiveAside3ItemTitle);
-			exclusiveAside3ItemTitle.appendChild(exclusiveAside3ItemTitleImg);
-			exclusiveAside3Item.appendChild(exclusiveAside3ItemContent);
+			var exclusiveSection3Item = document.createElement("div");
+			var exclusiveSection3ItemTitle = document.createElement("div");
+			var exclusiveSection3ItemTitleImg = document.createElement("img");
+			var exclusiveSection3ItemContent = document.createElement("ul");
+			exclusiveSection3ItemTitleImg.src = "./media/Images/Misc/Title/Text/" + getFullGameName(JSONPath_ExclusiveItem[i]).replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+			exclusiveSection3ItemTitleImg.title = "Items exclusive to " + getFullGameName(JSONPath_ExclusiveItem[i]);
+			exclusiveSection3ItemContent.classList.add("scroll");
+			exclusiveSection3ItemOuter.appendChild(exclusiveSection3Item);
+			exclusiveSection3Item.appendChild(exclusiveSection3ItemTitle);
+			exclusiveSection3ItemTitle.appendChild(exclusiveSection3ItemTitleImg);
+			exclusiveSection3Item.appendChild(exclusiveSection3ItemContent);
 			for(var q = 0; q < finaldataExclusiveItem.length; q++) {
 				if(finaldataExclusiveItem[q][JSONPath_ExclusiveItem[i]] != undefined) {
 					var Exclusive = document.createElement("li");
@@ -121,7 +112,7 @@ var createExclusive = function() {
 					ExclusiveImg.setAttribute("title", finaldataExclusiveItem[q][JSONPath_ExclusiveItem[i]]);
 					ExclusiveImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
 					ExclusiveImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
-					exclusiveAside3ItemContent.appendChild(Exclusive);
+					exclusiveSection3ItemContent.appendChild(Exclusive);
 					Exclusive.appendChild(ExclusiveImg);
 				}
 			}
@@ -138,47 +129,44 @@ var createExclusive = function() {
 	if(ExclusiveFeatureExist.includes("true")) {
 		exclusiveOptions.push("Features");
 		for(var i = 0; i < JSONPath_ExclusiveFeature.length; i++) {
-			var exclusiveAside3Feature = document.createElement("div");
-			var exclusiveAside3FeatureTitle = document.createElement("div");
-			var exclusiveAside3FeatureTitleImg = document.createElement("img");
-			var exclusiveAside3FeatureContent = document.createElement("ul");
-			exclusiveAside3Feature.classList.add("exclusive-feature");
-			exclusiveAside3FeatureTitle.classList.add("exclusive-feature-title");
-			exclusiveAside3FeatureTitleImg.src = "./media/Images/Misc/Title/Text/" + getFullGameName(JSONPath_ExclusiveFeature[i]).replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
-			exclusiveAside3FeatureTitleImg.title = "Features exclusive to " + getFullGameName(JSONPath_ExclusiveFeature[i]);
-			exclusiveAside3FeatureContent.classList.add("exclusive-feature-content");
-			exclusiveAside3FeatureContent.classList.add("scroll");
-			exclusiveAside3FeatureOuter.appendChild(exclusiveAside3Feature);
-			exclusiveAside3Feature.appendChild(exclusiveAside3FeatureTitle);
-			exclusiveAside3FeatureTitle.appendChild(exclusiveAside3FeatureTitleImg);
-			exclusiveAside3Feature.appendChild(exclusiveAside3FeatureContent);
+			var exclusiveSection3Feature = document.createElement("div");
+			var exclusiveSection3FeatureTitle = document.createElement("div");
+			var exclusiveSection3FeatureTitleImg = document.createElement("img");
+			var exclusiveSection3FeatureContent = document.createElement("ul");
+			exclusiveSection3FeatureTitleImg.src = "./media/Images/Misc/Title/Text/" + getFullGameName(JSONPath_ExclusiveFeature[i]).replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+			exclusiveSection3FeatureTitleImg.title = "Features exclusive to " + getFullGameName(JSONPath_ExclusiveFeature[i]);
+			exclusiveSection3FeatureContent.classList.add("scroll");
+			exclusiveSection3FeatureOuter.appendChild(exclusiveSection3Feature);
+			exclusiveSection3Feature.appendChild(exclusiveSection3FeatureTitle);
+			exclusiveSection3FeatureTitle.appendChild(exclusiveSection3FeatureTitleImg);
+			exclusiveSection3Feature.appendChild(exclusiveSection3FeatureContent);
 			for(var q = 0; q < finaldataExclusiveFeature.length; q++) {
 				if(finaldataExclusiveFeature[q][JSONPath_ExclusiveFeature[i]] != undefined) {
 					var Exclusive = document.createElement("li");
 					Exclusive.innerText = finaldataExclusiveFeature[q][JSONPath_ExclusiveFeature[i]];
 					Exclusive.setAttribute("title", finaldataExclusiveFeature[q][JSONPath_ExclusiveFeature[i]]);
-					exclusiveAside3FeatureContent.appendChild(Exclusive);
+					exclusiveSection3FeatureContent.appendChild(Exclusive);
 				}
 			}
 		}
 	}
 	for(var q = 0; q < exclusiveOptions.length; q++) {
-		var exclusiveAside1OptionsInput = document.createElement("input");
-		var exclusiveAside1OptionsLabel = document.createElement("label");
-		exclusiveAside1OptionsInput.setAttribute("type", "radio");
-		exclusiveAside1OptionsInput.setAttribute("name", "exclusive-options");
-		exclusiveAside1OptionsInput.setAttribute("id", "exclusive-options-" + q);
-		exclusiveAside1OptionsInput.setAttribute("autocomplete", "off");
-		exclusiveAside1OptionsInput.value = q;
-		exclusiveAside1OptionsLabel.setAttribute("for", "exclusive-options-" + q);
-		exclusiveAside1OptionsLabel.setAttribute("name", "large");
-		exclusiveAside1OptionsLabel.innerText = exclusiveOptions[q];
-		exclusiveAside1Options.appendChild(exclusiveAside1OptionsInput);
-		exclusiveAside1Options.appendChild(exclusiveAside1OptionsLabel);
-		exclusiveAside1OptionsInput.addEventListener("click", exclusiveOptionsSelector);
+		var exclusiveSection1OptionsInput = document.createElement("input");
+		var exclusiveSection1OptionsLabel = document.createElement("label");
+		exclusiveSection1OptionsInput.setAttribute("type", "radio");
+		exclusiveSection1OptionsInput.setAttribute("name", "exclusive-options");
+		exclusiveSection1OptionsInput.setAttribute("id", "exclusive-options-" + q);
+		exclusiveSection1OptionsInput.setAttribute("autocomplete", "off");
+		exclusiveSection1OptionsInput.value = q;
+		exclusiveSection1OptionsLabel.setAttribute("for", "exclusive-options-" + q);
+		exclusiveSection1OptionsLabel.setAttribute("type","large");
+		exclusiveSection1OptionsLabel.innerText = exclusiveOptions[q];
+		exclusiveSection1Options.appendChild(exclusiveSection1OptionsInput);
+		exclusiveSection1Options.appendChild(exclusiveSection1OptionsLabel);
+		exclusiveSection1OptionsInput.addEventListener("click", exclusiveOptionsSelector);
 
 		function exclusiveOptionsSelector() {
-			exclusiveAside2Title.innerText = "Exclusive " + exclusiveOptions[this.value];
+			exclusiveSection2Title.innerText = "Exclusive " + exclusiveOptions[this.value];
 			var exclusiveContents = document.querySelectorAll(".exclusive-content-outer[name]");
 			var exclusiveContent = document.querySelectorAll(".exclusive-content-outer[name='" + this.value + "']");
 			for(var q = 0; q < exclusiveContents.length; q++) {
@@ -189,7 +177,7 @@ var createExclusive = function() {
 			}
 		}
 		if(q == 0) {
-			exclusiveAside1OptionsLabel.click();
+			exclusiveSection1OptionsLabel.click();
 		}
 	}
 };
