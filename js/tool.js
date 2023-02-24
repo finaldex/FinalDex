@@ -1,215 +1,214 @@
 var createTool = function() {
 	var toolOuter = document.createElement("div");
-	var toolAside1 = document.createElement("aside");
-	var toolAside1OptionsTitleOuter = document.createElement("div");
-	var toolAside1OptionsTitle = document.createElement("h2");
-	var toolAside1OptionsOuter = document.createElement("div");
-	var toolAside1Options = document.createElement("div");
-	var toolAside2 = document.createElement("aside");
-	var toolAside2Title = document.createElement("h1");
-	var toolAside3 = document.createElement("aside");
-	var toolAside3TimersOuter = document.createElement("div");
-	var toolAside3TimerSelectorOuter = document.createElement("div");
-	toolOuter.setAttribute("id", "tool-outer");
-	toolOuter.setAttribute("name", "Tools");
-	toolAside1.setAttribute("id", "tool-aside1");
-	toolAside1OptionsTitleOuter.setAttribute("id", "tool-options-title");
-	toolAside1OptionsTitle.innerText = "Tools";
-	toolAside1OptionsOuter.setAttribute("id", "tool-options-outer");
-	toolAside1OptionsOuter.classList.add("scroll");
-	toolAside1Options.setAttribute("id", "tool-options");
-	toolAside2.setAttribute("id", "tool-aside2");
-	toolAside2Title.innerText = "Tools";
-	toolAside3.setAttribute("id", "tool-aside3");
-	toolAside3TimersOuter.setAttribute("id", "timers-outer");
-	toolAside3TimersOuter.setAttribute("name", "0");
-	toolAside3TimerSelectorOuter.setAttribute("id", "timer-selector-outer");
+	var toolSectionList = document.createElement("section");
+	var toolSectionListOptionsTitleOuter = document.createElement("div");
+	var toolSectionListOptionsTitle = document.createElement("h3");
+	var toolSectionListOptionsOuter = document.createElement("div");
+	var toolSectionListOptions = document.createElement("ol");
+	var toolSectionHeader = document.createElement("section");
+	var toolSectionHeaderTitle = document.createElement("span");
+	var toolSectionHeaderTitleText = document.createElement("h3");
+	var toolSectionContent = document.createElement("section");
+	var toolSectionContentTimersOuter = document.createElement("div");
+	var toolSectionContentTimerSelectorOuter = document.createElement("div");
+	toolOuter.setAttribute("id","tool")
+	toolOuter.setAttribute("value","tools");
+	toolSectionListOptionsTitle.innerText = "Tools";
+	toolSectionListOptionsOuter.classList.add("scroll");
+	toolSectionHeaderTitleText.innerText = "Tools";
+
+	toolSectionContentTimersOuter.setAttribute("name","timer");
+	toolSectionContentTimersOuter.setAttribute("value",0);
+
 	document.querySelector("#contain").appendChild(toolOuter);
-	toolOuter.appendChild(toolAside1);
-	toolAside1.appendChild(toolAside1OptionsTitleOuter);
-	toolAside1OptionsTitleOuter.appendChild(toolAside1OptionsTitle);
-	toolAside1.appendChild(toolAside1OptionsOuter);
-	toolAside1OptionsOuter.appendChild(toolAside1Options);
-	toolOuter.appendChild(toolAside2);
-	toolAside2.appendChild(toolAside2Title);
-	toolOuter.appendChild(toolAside3);
-	toolAside3.appendChild(toolAside3TimersOuter);
-	toolAside3TimersOuter.appendChild(toolAside3TimerSelectorOuter);
+	toolOuter.appendChild(toolSectionList);
+	toolSectionList.appendChild(toolSectionListOptionsTitleOuter);
+	toolSectionListOptionsTitleOuter.appendChild(toolSectionListOptionsTitle);
+	toolSectionList.appendChild(toolSectionListOptionsOuter);
+	toolSectionListOptionsOuter.appendChild(toolSectionListOptions);
+	toolOuter.appendChild(toolSectionHeader);
+	toolSectionHeader.appendChild(toolSectionHeaderTitle);
+	toolSectionHeaderTitle.appendChild(toolSectionHeaderTitleText);
+	toolOuter.appendChild(toolSectionContent);
+	toolSectionContent.appendChild(toolSectionContentTimersOuter);
+	toolSectionContentTimersOuter.appendChild(toolSectionContentTimerSelectorOuter);
+
+	toolSectionList.setAttribute("name","list");
+	toolSectionHeader.setAttribute("name","header");
+	toolSectionContent.setAttribute("name","content");
 
 
-  var toolAside2Game = document.createElement("span");
-  var toolAside2GameImage = document.createElement("img");
-  toolAside2GameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
-  toolAside2GameImage.setAttribute("onerror","this.display='none'");
-  toolAside2.appendChild(toolAside2Game);
-  toolAside2Game.appendChild(toolAside2GameImage);
+	var toolSectionHeaderGame = document.createElement("span");
+	var toolSectionHeaderGameImage = document.createElement("img");
+	toolSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",","").replaceAll("!","").replaceAll("'","").replaceAll(":","") + ".png";
+	toolSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
+	toolSectionHeader.appendChild(toolSectionHeaderGame);
+	toolSectionHeaderGame.appendChild(toolSectionHeaderGameImage);
 
 
-
-
-
-
-
-
-
-
+	
 	function createTimer() {
-		var stopwatchcountdown = ["stopwatch", "countdown"];
+		var stopwatchcountdown = ["stopwatch","countdown"];
 		for(var q = 0; q < stopwatchcountdown.length; q++) {
-			var toolAside3TimerOuter = document.createElement("div");
-			var toolAside3Timer = document.createElement("div");
-			var toolAside3TimerPausePlay = document.createElement("button");
-			var toolAside3TimerTime = document.createElement("p");
-			var toolAside3TimerSet = document.createElement("div");
-			var toolAside3TimerSetSpan = document.createElement("span");
-			var toolAside3TimerSetInputHours = document.createElement("input");
-			var toolAside3TimerSetInputMinutes = document.createElement("input");
-			var toolAside3TimerSetInputSeconds = document.createElement("input");
-			var toolAside3TimerSetInputMilliseconds = document.createElement("input");
-			var toolAside3TimerList = document.createElement("ul");
-			var toolAside3TimerLaps = document.createElement("button");
-			var toolAside3TimerReset = document.createElement("button");
-			toolAside3TimerOuter.setAttribute("id", stopwatchcountdown[q] + "-outer");
-			toolAside3Timer.setAttribute("id", stopwatchcountdown[q]);
-			toolAside3TimerPausePlay.setAttribute("id", stopwatchcountdown[q] + "-start-stop");
-			toolAside3TimerPausePlay.setAttribute("title", "Start");
-			toolAside3TimerPausePlay.innerText = "\u23F5";
-			toolAside3TimerTime.setAttribute("id", stopwatchcountdown[q] + "-time");
-			toolAside3TimerSet.setAttribute("id", stopwatchcountdown[q] + "-set");
-			toolAside3TimerSetSpan;
-			toolAside3TimerSetInputHours.setAttribute("type", "number");
-			toolAside3TimerSetInputHours.setAttribute("min", "0");
-			toolAside3TimerSetInputHours.setAttribute("max", "9999");
-			toolAside3TimerSetInputHours.setAttribute("autocomplete", "off");
-			toolAside3TimerSetInputHours.setAttribute("placeholder", "00");
-			toolAside3TimerSetInputHours.setAttribute("title", "Hours");
-			toolAside3TimerSetInputHours.classList.add(stopwatchcountdown[q] + "-hours");
-			toolAside3TimerSetInputMinutes.setAttribute("type", "number");
-			toolAside3TimerSetInputMinutes.setAttribute("min", "0");
-			toolAside3TimerSetInputMinutes.setAttribute("max", "59");
-			toolAside3TimerSetInputMinutes.setAttribute("autocomplete", "off");
-			toolAside3TimerSetInputMinutes.setAttribute("placeholder", "00");
-			toolAside3TimerSetInputMinutes.setAttribute("title", "Minutes");
-			toolAside3TimerSetInputMinutes.classList.add(stopwatchcountdown[q] + "-minutes");
-			toolAside3TimerSetInputSeconds.setAttribute("type", "number");
-			toolAside3TimerSetInputSeconds.setAttribute("min", "0");
-			toolAside3TimerSetInputSeconds.setAttribute("max", "59");
-			toolAside3TimerSetInputSeconds.setAttribute("autocomplete", "off");
-			toolAside3TimerSetInputSeconds.setAttribute("placeholder", "00");
-			toolAside3TimerSetInputSeconds.setAttribute("title", "Seconds");
-			toolAside3TimerSetInputSeconds.classList.add(stopwatchcountdown[q] + "-seconds");
-			toolAside3TimerSetInputMilliseconds.setAttribute("type", "number");
-			toolAside3TimerSetInputMilliseconds.setAttribute("min", "0");
-			toolAside3TimerSetInputMilliseconds.setAttribute("max", "99");
-			toolAside3TimerSetInputMilliseconds.setAttribute("autocomplete", "off");
-			toolAside3TimerSetInputMilliseconds.setAttribute("placeholder", "00");
-			toolAside3TimerSetInputMilliseconds.setAttribute("title", "Milliseconds");
-			toolAside3TimerSetInputMilliseconds.classList.add(stopwatchcountdown[q] + "-milliseconds");
-			toolAside3TimerList.setAttribute("id", stopwatchcountdown[q] + "-list");
-			toolAside3TimerLaps.setAttribute("id", stopwatchcountdown[q] + "-laps");
-			toolAside3TimerLaps.setAttribute("title", "Laps");
-			toolAside3TimerLaps.innerHTML = "<p>\u23F7</p>";
-			toolAside3TimerReset.setAttribute("id", stopwatchcountdown[q] + "-reset");
-			toolAside3TimerReset.setAttribute("title", "Reset");
-			toolAside3TimerReset.innerHTML = "<p>\u23F9</p>";
-			toolAside3TimersOuter.appendChild(toolAside3TimerOuter);
-			toolAside3TimerOuter.appendChild(toolAside3Timer);
-			toolAside3Timer.appendChild(toolAside3TimerPausePlay);
-			toolAside3Timer.appendChild(toolAside3TimerSet);
-			toolAside3TimerSet.appendChild(toolAside3TimerReset);
-			toolAside3TimerSet.appendChild(toolAside3TimerTime);
-			toolAside3TimerSet.appendChild(toolAside3TimerSetSpan);
-			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputHours);
-			toolAside3TimerSetSpan.innerHTML += ":";
-			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputMinutes);
-			toolAside3TimerSetSpan.innerHTML += ":";
-			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputSeconds);
-			toolAside3TimerSetSpan.innerHTML += ":";
-			toolAside3TimerSetSpan.appendChild(toolAside3TimerSetInputMilliseconds);
-			toolAside3TimerOuter.appendChild(toolAside3TimerList);
+			var toolSectionContentTimerOuter = document.createElement("div");
+			var toolSectionContentTimer = document.createElement("div");
+			var toolSectionContentTimerPlay = document.createElement("b");
+			var toolSectionContentTimerPlayText = document.createElement("h1");
+			var toolSectionContentTimerPause = document.createElement("b");
+			var toolSectionContentTimerPauseText = document.createElement("h1");
+			var toolSectionContentTimerTime = document.createElement("data");
+			var toolSectionContentTimerTimeText = document.createElement("h2");
+			var toolSectionContentTimerSet = document.createElement("div");
+			var toolSectionContentTimerSetSpan = document.createElement("span");
+			var toolSectionContentTimerSetInputHours = document.createElement("input");
+			var toolSectionContentTimerSetInputMinutes = document.createElement("input");
+			var toolSectionContentTimerSetInputSeconds = document.createElement("input");
+			var toolSectionContentTimerSetInputMilliseconds = document.createElement("input");
+			var toolSectionContentTimerList = document.createElement("ul");
+			var toolSectionContentTimerLaps = document.createElement("figure");
+			var toolSectionContentTimerReset = document.createElement("figure");
+			toolSectionContentTimerOuter.setAttribute("name",stopwatchcountdown[q]);
+			toolSectionContentTimerOuter.setAttribute("state","stop");
+			toolSectionContentTimerPlay.setAttribute("title","Play");
+			toolSectionContentTimerPause.setAttribute("title","Pause");
+			toolSectionContentTimerPlayText.innerText = "⏵";
+			toolSectionContentTimerPauseText.innerText = "⏸︎";
 
-			toolAside3TimerSet.appendChild(toolAside3TimerLaps);
+			toolSectionContentTimerReset.setAttribute("name","reset");
+			toolSectionContentTimerLaps.setAttribute("name","lap");
+			toolSectionContentTimerSet.setAttribute("name","set");
+			toolSectionContentTimerTime.setAttribute("name","time");
+
+			toolSectionContentTimerSetInputHours.setAttribute("type","number");
+			toolSectionContentTimerSetInputHours.setAttribute("min","0");
+			toolSectionContentTimerSetInputHours.setAttribute("max","9999");
+			toolSectionContentTimerSetInputHours.setAttribute("autocomplete","off");
+			toolSectionContentTimerSetInputHours.setAttribute("placeholder","00");
+			toolSectionContentTimerSetInputHours.setAttribute("title","Hours");
+			toolSectionContentTimerSetInputMinutes.setAttribute("type","number");
+			toolSectionContentTimerSetInputMinutes.setAttribute("min","0");
+			toolSectionContentTimerSetInputMinutes.setAttribute("max","59");
+			toolSectionContentTimerSetInputMinutes.setAttribute("autocomplete","off");
+			toolSectionContentTimerSetInputMinutes.setAttribute("placeholder","00");
+			toolSectionContentTimerSetInputMinutes.setAttribute("title","Minutes");
+			toolSectionContentTimerSetInputSeconds.setAttribute("type","number");
+			toolSectionContentTimerSetInputSeconds.setAttribute("min","0");
+			toolSectionContentTimerSetInputSeconds.setAttribute("max","59");
+			toolSectionContentTimerSetInputSeconds.setAttribute("autocomplete","off");
+			toolSectionContentTimerSetInputSeconds.setAttribute("placeholder","00");
+			toolSectionContentTimerSetInputSeconds.setAttribute("title","Seconds");
+			toolSectionContentTimerSetInputMilliseconds.setAttribute("type","number");
+			toolSectionContentTimerSetInputMilliseconds.setAttribute("min","0");
+			toolSectionContentTimerSetInputMilliseconds.setAttribute("max","99");
+			toolSectionContentTimerSetInputMilliseconds.setAttribute("autocomplete","off");
+			toolSectionContentTimerSetInputMilliseconds.setAttribute("placeholder","00");
+			toolSectionContentTimerSetInputMilliseconds.setAttribute("title","Milliseconds");
+			toolSectionContentTimerLaps.setAttribute("title","Laps");
+			toolSectionContentTimerLaps.innerHTML = "<h2>\u23F7</h2>";
+			toolSectionContentTimerReset.setAttribute("title","Reset");
+			toolSectionContentTimerReset.innerHTML = "<h2>\u23F9</h2>";
+			toolSectionContentTimersOuter.appendChild(toolSectionContentTimerOuter);
+			toolSectionContentTimerOuter.appendChild(toolSectionContentTimer);
+			toolSectionContentTimer.appendChild(toolSectionContentTimerPlay);
+			toolSectionContentTimerPlay.appendChild(toolSectionContentTimerPlayText);
+			toolSectionContentTimer.appendChild(toolSectionContentTimerPause);
+			toolSectionContentTimerPause.appendChild(toolSectionContentTimerPauseText);
+			toolSectionContentTimer.appendChild(toolSectionContentTimerSet);
+			toolSectionContentTimerSet.appendChild(toolSectionContentTimerReset);
+			toolSectionContentTimerSet.appendChild(toolSectionContentTimerTime);
+			toolSectionContentTimerTime.appendChild(toolSectionContentTimerTimeText);
+			toolSectionContentTimerSet.appendChild(toolSectionContentTimerSetSpan);
+			toolSectionContentTimerSetSpan.appendChild(toolSectionContentTimerSetInputHours);
+			toolSectionContentTimerSetSpan.innerHTML += "<p>:</p>";
+			toolSectionContentTimerSetSpan.appendChild(toolSectionContentTimerSetInputMinutes);
+			toolSectionContentTimerSetSpan.innerHTML += "<p>:</p>";
+			toolSectionContentTimerSetSpan.appendChild(toolSectionContentTimerSetInputSeconds);
+			toolSectionContentTimerSetSpan.innerHTML += "<p>:</p>";
+			toolSectionContentTimerSetSpan.appendChild(toolSectionContentTimerSetInputMilliseconds);
+			toolSectionContentTimerOuter.appendChild(toolSectionContentTimerList);
+
+			toolSectionContentTimerSet.appendChild(toolSectionContentTimerLaps);
 		}
 		for(var q = 0; q < stopwatchcountdown.length; q++) {
 			var x = q + 1;
-			var toolAside3TimerSelector = document.createElement("div");
-			var toolAside3TimerSelectorInput = document.createElement("input");
-			var toolAside3TimerSelectorLabel = document.createElement("label");
-			toolAside3TimerSelector.setAttribute("id", "timer-selector");
-			toolAside3TimerSelectorInput.setAttribute("type", "radio");
-			toolAside3TimerSelectorInput.setAttribute("id", "timerselector" + x);
-			toolAside3TimerSelectorInput.setAttribute("name", "timerselector");
-			toolAside3TimerSelectorInput.setAttribute("autocomplete", "off");
-			toolAside3TimerSelectorLabel.setAttribute("for", "timerselector" + x);
-			toolAside3TimerSelectorLabel.innerText = titleCase(stopwatchcountdown[q]);
-			toolAside3TimerSelectorOuter.appendChild(toolAside3TimerSelector);
-			toolAside3TimerSelector.appendChild(toolAside3TimerSelectorInput);
-			toolAside3TimerSelector.appendChild(toolAside3TimerSelectorLabel);
+
+			var toolSectionContentTimerSelectorInput = document.createElement("input");
+			var toolSectionContentTimerSelectorLabel = document.createElement("label");
+			var toolSectionContentTimerSelectorLabelText = document.createElement("h5");
+			toolSectionContentTimerSelectorInput.setAttribute("type","radio");
+			toolSectionContentTimerSelectorInput.setAttribute("id","timerselector" + x);
+			toolSectionContentTimerSelectorInput.setAttribute("name","timerselector");
+			toolSectionContentTimerSelectorInput.setAttribute("autocomplete","off");
+			toolSectionContentTimerSelectorLabel.setAttribute("for","timerselector" + x);
+			toolSectionContentTimerSelectorLabelText.innerText = titleCase(stopwatchcountdown[q]);
+			toolSectionContentTimerSelectorOuter.appendChild(toolSectionContentTimerSelectorInput);
+			toolSectionContentTimerSelectorOuter.appendChild(toolSectionContentTimerSelectorLabel);
+			toolSectionContentTimerSelectorLabel.appendChild(toolSectionContentTimerSelectorLabelText);
 			if(q == 0) {
-				toolAside3TimerSelectorLabel.click();
+				toolSectionContentTimerSelectorLabel.click();
 			}
-			toolAside3TimerSelectorInput.addEventListener("click", timerSelector);
+			toolSectionContentTimerSelectorInput.addEventListener("click", timerSelector);
 		}
 	}
 
 	function createRNG() {
-		var toolAside3RNGOuter = document.createElement("div");
-		var toolAside3RNG = document.createElement("div");
-		var toolAside3RNGOptions = document.createElement("div");
-		var toolAside3RNGOptionsIterations = document.createElement("div");
-		var toolAside3RNGOptionsIterationsText = document.createElement("p");
-		var toolAside3RNGOptionsIterationsInput = document.createElement("input");
-		var toolAside3RNGOptionsTitle = document.createElement("div");
-		var toolAside3RNGOptionsTitleIterations = document.createElement("div");
-		var toolAside3RNGOptionsTitleIterationsText = document.createElement("p");
-		var toolAside3RNGOptionsTitleMin = document.createElement("div");
-		var toolAside3RNGOptionsTitleMinText = document.createElement("p");
-		var toolAside3RNGOptionsTitleMax = document.createElement("div");
-		var toolAside3RNGOptionsTitleMaxText = document.createElement("p");
-		var toolAside3RNGOptionsUl = document.createElement("ul");
-		var toolAside3RNGOptionsExecute = document.createElement("div");
-		var toolAside3RNGOptionsExecuteButton = document.createElement("button");
-		var toolAside3RNGResult = document.createElement("div");
-		toolAside3RNGOuter.classList.add("rng-outer");
-		toolAside3RNGOuter.setAttribute("name", "1");
-		toolAside3RNG.setAttribute("id", "rng");
-		toolAside3RNGResult.classList.add("result");
-		toolAside3RNGResult.classList.add("scroll");
-		toolAside3RNGOptions.classList.add("options");
-		toolAside3RNGOptionsIterations.classList.add("iterations");
-		toolAside3RNGOptionsIterationsText.innerText = "Iterations";
-		toolAside3RNGOptionsIterationsInput.setAttribute("type", "number");
-		toolAside3RNGOptionsIterationsInput.setAttribute("min", "1");
-		toolAside3RNGOptionsIterationsInput.setAttribute("max", "1000");
-		toolAside3RNGOptionsIterationsInput.setAttribute("value", "1");
-		toolAside3RNGOptionsIterationsInput.setAttribute("autocomplete", "off");
-		toolAside3RNGOptionsTitle.classList.add("title");
-		toolAside3RNGOptionsTitleIterations.classList.add("it");
-		toolAside3RNGOptionsTitleIterationsText.innerText = "#";
-		toolAside3RNGOptionsTitleMin.classList.add("min");
-		toolAside3RNGOptionsTitleMinText.innerText = "Min";
-		toolAside3RNGOptionsTitleMax.classList.add("max");
-		toolAside3RNGOptionsTitleMaxText.innerText = "Max";
-		toolAside3RNGOptionsUl.classList.add("scroll");
-		toolAside3RNGOptionsExecute.classList.add("execute");
-		toolAside3RNGOptionsExecuteButton.innerText = "Generate Random Numbers";
-		toolAside3.appendChild(toolAside3RNGOuter);
-		toolAside3RNGOuter.appendChild(toolAside3RNG);
-		toolAside3RNG.appendChild(toolAside3RNGResult);
-		toolAside3RNG.appendChild(toolAside3RNGOptions);
-		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsExecute);
-		toolAside3RNGOptionsExecute.appendChild(toolAside3RNGOptionsExecuteButton);
-		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsIterations);
-		toolAside3RNGOptionsIterations.appendChild(toolAside3RNGOptionsIterationsText);
-		toolAside3RNGOptionsIterations.appendChild(toolAside3RNGOptionsIterationsInput);
-		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsTitle);
-		toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleIterations);
-		toolAside3RNGOptionsTitleIterations.appendChild(toolAside3RNGOptionsTitleIterationsText);
-		toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleMin);
-		toolAside3RNGOptionsTitleMin.appendChild(toolAside3RNGOptionsTitleMinText);
-		toolAside3RNGOptionsTitle.appendChild(toolAside3RNGOptionsTitleMax);
-		toolAside3RNGOptionsTitleMax.appendChild(toolAside3RNGOptionsTitleMaxText);
-		toolAside3RNGOptions.appendChild(toolAside3RNGOptionsUl);
+		var toolSectionContentRNGOuter = document.createElement("div");
+		var toolSectionContentRNG = document.createElement("div");
+		var toolSectionContentRNGOptions = document.createElement("div");
+		var toolSectionContentRNGOptionsTop = document.createElement("div");
+		var toolSectionContentRNGOptionsIterations = document.createElement("span");
+		var toolSectionContentRNGOptionsIterationsText = document.createElement("p");
+		var toolSectionContentRNGOptionsIterationsInput = document.createElement("input");
+		var toolSectionContentRNGOptionsTitle = document.createElement("span");
+		var toolSectionContentRNGOptionsTitleIterations = document.createElement("span");
+		var toolSectionContentRNGOptionsTitleIterationsText = document.createElement("p");
+		var toolSectionContentRNGOptionsTitleMin = document.createElement("span");
+		var toolSectionContentRNGOptionsTitleMinText = document.createElement("p");
+		var toolSectionContentRNGOptionsTitleMax = document.createElement("span");
+		var toolSectionContentRNGOptionsTitleMaxText = document.createElement("p");
+		var toolSectionContentRNGOptionsUl = document.createElement("ul");
+		var toolSectionContentRNGOptionsExecute = document.createElement("span");
+		var toolSectionContentRNGOptionsExecuteButton = document.createElement("button");
+		var toolSectionContentRNGResult = document.createElement("div");
+
+		toolSectionContentRNGOuter.setAttribute("name","rng");
+		toolSectionContentRNGOuter.setAttribute("value","1");
+
+		toolSectionContentRNGResult.setAttribute("name","result");
+		toolSectionContentRNGResult.classList.add("scroll");
+		toolSectionContentRNGOptions.setAttribute("name","options");
+		toolSectionContentRNGOptionsIterations.setAttribute("name","iterations");
+		toolSectionContentRNGOptionsIterationsText.innerText = "Iterations";
+		toolSectionContentRNGOptionsIterationsInput.setAttribute("type","number");
+		toolSectionContentRNGOptionsIterationsInput.setAttribute("min","1");
+		toolSectionContentRNGOptionsIterationsInput.setAttribute("max","1000");
+		toolSectionContentRNGOptionsIterationsInput.setAttribute("value","1");
+		toolSectionContentRNGOptionsIterationsInput.setAttribute("autocomplete","off");
+		toolSectionContentRNGOptionsTitle.setAttribute("name","title");
+		toolSectionContentRNGOptionsTitleIterationsText.innerText = "#";
+		toolSectionContentRNGOptionsTitleMinText.innerText = "Min";
+		toolSectionContentRNGOptionsTitleMaxText.innerText = "Max";
+		toolSectionContentRNGOptionsUl.classList.add("scroll");
+		toolSectionContentRNGOptionsExecute.setAttribute("name","execute");
+		toolSectionContentRNGOptionsExecuteButton.innerText = "Generate Random Numbers";
+		toolSectionContent.appendChild(toolSectionContentRNGOuter);
+		toolSectionContentRNGOuter.appendChild(toolSectionContentRNG);
+		toolSectionContentRNG.appendChild(toolSectionContentRNGResult);
+		toolSectionContentRNG.appendChild(toolSectionContentRNGOptions);
+		toolSectionContentRNGOptions.appendChild(toolSectionContentRNGOptionsTop);
+		toolSectionContentRNGOptionsTop.appendChild(toolSectionContentRNGOptionsExecute);
+		toolSectionContentRNGOptionsExecute.appendChild(toolSectionContentRNGOptionsExecuteButton);
+		toolSectionContentRNGOptionsTop.appendChild(toolSectionContentRNGOptionsIterations);
+		toolSectionContentRNGOptionsIterations.appendChild(toolSectionContentRNGOptionsIterationsText);
+		toolSectionContentRNGOptionsIterations.appendChild(toolSectionContentRNGOptionsIterationsInput);
+		toolSectionContentRNGOptionsTop.appendChild(toolSectionContentRNGOptionsTitle);
+		toolSectionContentRNGOptionsTitle.appendChild(toolSectionContentRNGOptionsTitleIterations);
+		toolSectionContentRNGOptionsTitleIterations.appendChild(toolSectionContentRNGOptionsTitleIterationsText);
+		toolSectionContentRNGOptionsTitle.appendChild(toolSectionContentRNGOptionsTitleMin);
+		toolSectionContentRNGOptionsTitleMin.appendChild(toolSectionContentRNGOptionsTitleMinText);
+		toolSectionContentRNGOptionsTitle.appendChild(toolSectionContentRNGOptionsTitleMax);
+		toolSectionContentRNGOptionsTitleMax.appendChild(toolSectionContentRNGOptionsTitleMaxText);
+		toolSectionContentRNGOptions.appendChild(toolSectionContentRNGOptionsUl);
 	}
 	function createType() {
 
@@ -218,130 +217,121 @@ var createTool = function() {
 		var typeTitle = document.createElement("div");
 
 		var typeContent = document.createElement("div");
-		var typeContentTypechartMatrix = document.createElement("div");
-		var typeContentTypechartEffectiveness = document.createElement("div");
-		var typeContentTypechartIneffectiveness = document.createElement("div");
-		var typeContentTypechartImmunity = document.createElement("div");
+		
 		var typeSidebar = document.createElement("div");
 		var typeSidebarDescription = document.createElement("div");
 		var typeSidebarDescriptionSelector = document.createElement("div");
 		var typeSidebarDescriptionTitleOuter = document.createElement("div");
-		var typeSidebarDescriptionTitleTitle = document.createElement("h1");
-		var typeSidebarDescriptionTitleImageOuter = document.createElement("div");
+		var typeSidebarDescriptionTitleTitle = document.createElement("span");
+		var typeSidebarDescriptionTitleTitleText = document.createElement("h4");
+		var typeSidebarDescriptionTitleImageOuter = document.createElement("span");
 		var typeSidebarDescriptionTitleImage = document.createElement("img");
 		var typeSidebarDescriptionAgainstOpposed = document.createElement("div");
 		var typeSidebarDescriptionAgainst = document.createElement("div");
-		var typeSidebarDescriptionAgainstEffective = document.createElement("div");
+		var typeSidebarDescriptionAgainstEffective = document.createElement("span");
 		var typeSidebarDescriptionAgainstEffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstEffectiveContain = document.createElement("data");
-		var typeSidebarDescriptionAgainstIneffective = document.createElement("div");
+		var typeSidebarDescriptionAgainstEffectiveContain = document.createElement("span");
+		var typeSidebarDescriptionAgainstIneffective = document.createElement("span");
 		var typeSidebarDescriptionAgainstIneffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstIneffectiveContain = document.createElement("data");
-		var typeSidebarDescriptionAgainstImmune = document.createElement("div");
+		var typeSidebarDescriptionAgainstIneffectiveContain = document.createElement("span");
+		var typeSidebarDescriptionAgainstImmune = document.createElement("span");
 		var typeSidebarDescriptionAgainstImmuneTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstImmuneContain = document.createElement("data");
-		var typeSidebarDescriptionAgainstDefault = document.createElement("div");
+		var typeSidebarDescriptionAgainstImmuneContain = document.createElement("span");
+		var typeSidebarDescriptionAgainstDefault = document.createElement("span");
 		var typeSidebarDescriptionAgainstDefaultTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstDefaultContain = document.createElement("data");
+		var typeSidebarDescriptionAgainstDefaultContain = document.createElement("span");
 		var typeSidebarDescriptionOpposed = document.createElement("div");
-		var typeSidebarDescriptionOpposedEffective = document.createElement("div");
+		var typeSidebarDescriptionOpposedEffective = document.createElement("span");
 		var typeSidebarDescriptionOpposedEffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedEffectiveContain = document.createElement("data");
-		var typeSidebarDescriptionOpposedIneffective = document.createElement("div");
+		var typeSidebarDescriptionOpposedEffectiveContain = document.createElement("span");
+		var typeSidebarDescriptionOpposedIneffective = document.createElement("span");
 		var typeSidebarDescriptionOpposedIneffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedIneffectiveContain = document.createElement("data");
-		var typeSidebarDescriptionOpposedImmune = document.createElement("div");
+		var typeSidebarDescriptionOpposedIneffectiveContain = document.createElement("span");
+		var typeSidebarDescriptionOpposedImmune = document.createElement("span");
 		var typeSidebarDescriptionOpposedImmuneTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedImmuneContain = document.createElement("data");
-		var typeSidebarDescriptionOpposedDefault = document.createElement("div");
+		var typeSidebarDescriptionOpposedImmuneContain = document.createElement("span");
+		var typeSidebarDescriptionOpposedDefault = document.createElement("span");
 		var typeSidebarDescriptionOpposedDefaultTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedDefaultContain = document.createElement("data");
-		typeOuter.setAttribute("id", "type-outer");
-		typeOuter.setAttribute("name", "2");
+		var typeSidebarDescriptionOpposedDefaultContain = document.createElement("span");
 
 
-		typeTitle.setAttribute("name", "Title");
+		typeTitle.setAttribute("name","header");
 
-		typeContent.setAttribute("name", "Content");
-		typeContentTypechartMatrix.setAttribute("id", "typechart-matrix");
-		typeContentTypechartMatrix.setAttribute("name", "0");
-		typeContentTypechartMatrix.classList.add("scroll");
-		typeContentTypechartEffectiveness.setAttribute("id", "typechart-effective");
-		typeContentTypechartEffectiveness.setAttribute("name", "1");
-		typeContentTypechartEffectiveness.classList.add("scroll");
-		typeContentTypechartIneffectiveness.setAttribute("id", "typechart-ineffective");
-		typeContentTypechartIneffectiveness.setAttribute("name", "2");
-		typeContentTypechartIneffectiveness.classList.add("scroll");
-		typeContentTypechartImmunity.setAttribute("id", "typechart-immunity");
-		typeContentTypechartImmunity.setAttribute("name", "3");
-		typeContentTypechartImmunity.classList.add("scroll");
+		typeSidebarDescriptionTitleOuter.setAttribute("name","title");
+		typeSidebarDescriptionAgainstOpposed.setAttribute("name","description");
+
+		typeContent.setAttribute("name","content");
+		typeContent.classList.add("scroll");
+
 		
-		typeSidebar.setAttribute("name", "Sidebar");
-		typeSidebarDescription.classList.add("type-description");
-		typeSidebarDescriptionSelector.classList.add("type-selector");
-		typeSidebarDescriptionTitleOuter.classList.add("type-description-title");
-		typeSidebarDescriptionTitleTitle;
-		typeSidebarDescriptionTitleImageOuter.classList.add("type-symbol-outer");
-		typeSidebarDescriptionTitleImage.classList.add("type-symbol");
-		typeSidebarDescriptionTitleImage.setAttribute("onerror", "this.style.display='none';");
+		
+		typeSidebar.setAttribute("name","sidebar");
+
+
+		typeOuter.setAttribute("name","type");
+
+		typeOuter.setAttribute("value","2");
+
+		typeSidebarDescriptionTitleImage.setAttribute("onerror","this.style.display='none';");
 		typeSidebarDescriptionTitleImage.setAttribute("alt", MEDIAPath_Type_Icon);
-		typeSidebarDescriptionAgainstOpposed.classList.add("type-againstopposed");
-		typeSidebarDescriptionAgainst.classList.add("type-against");
+
+		typeSidebarDescriptionAgainst.setAttribute("name","against");
 		typeSidebarDescriptionAgainst.classList.add("scroll");
-		typeSidebarDescriptionAgainstEffective.classList.add("type-effective");
-		typeSidebarDescriptionAgainstEffectiveTitle.setAttribute("title", "Super Effective when used by a Move with with following types:");
+
+		typeSidebarDescriptionAgainstEffective.setAttribute("name","effective");
+		typeSidebarDescriptionAgainstIneffective.setAttribute("name","ineffective");
+		typeSidebarDescriptionAgainstImmune.setAttribute("name","immune");
+		typeSidebarDescriptionAgainstDefault.setAttribute("name","default");
+
+		typeSidebarDescriptionOpposedEffective.setAttribute("name","effective");
+		typeSidebarDescriptionOpposedIneffective.setAttribute("name","ineffective");
+		typeSidebarDescriptionOpposedImmune.setAttribute("name","immune");
+		typeSidebarDescriptionOpposedDefault.setAttribute("name","default");
+
+		typeSidebarDescriptionAgainstEffectiveTitle.setAttribute("title","Super Effective when used by a Move with with following types:");
 		typeSidebarDescriptionAgainstEffectiveTitle.innerText = "Super Effective";
-		typeSidebarDescriptionAgainstEffectiveContain.classList.add("type-effective-content");
-		typeSidebarDescriptionAgainstEffectiveContain.value = MEDIAPath_Type_Text;
-		typeSidebarDescriptionAgainstIneffective.classList.add("type-ineffective");
-		typeSidebarDescriptionAgainstIneffectiveTitle.setAttribute("title", "Not Very Effective when used by a Move with with following types:");
+
+		typeSidebarDescriptionAgainstIneffectiveTitle.setAttribute("title","Not Very Effective when used by a Move with with following types:");
 		typeSidebarDescriptionAgainstIneffectiveTitle.innerText = "Not Very Effective";
-		typeSidebarDescriptionAgainstIneffectiveContain.classList.add("type-ineffective-content");
-		typeSidebarDescriptionAgainstIneffectiveContain.value = MEDIAPath_Type_Text;
-		typeSidebarDescriptionAgainstImmune.classList.add("type-immune");
-		typeSidebarDescriptionAgainstImmuneTitle.setAttribute("title", "No Effect when used by a Move with following types:");
+
+		typeSidebarDescriptionAgainstImmuneTitle.setAttribute("title","No Effect when used by a Move with following types:");
 		typeSidebarDescriptionAgainstImmuneTitle.innerText = "No Effect";
-		typeSidebarDescriptionAgainstImmuneContain.classList.add("type-immune-content");
-		typeSidebarDescriptionAgainstImmuneContain.value = MEDIAPath_Type_Text;
-		typeSidebarDescriptionAgainstDefault.classList.add("type-normal");
-		typeSidebarDescriptionAgainstDefaultTitle.setAttribute("title", "Normal Effectiveness when used by a Move with following types:");
+
+		typeSidebarDescriptionAgainstDefaultTitle.setAttribute("title","Normal Effectiveness when used by a Move with following types:");
 		typeSidebarDescriptionAgainstDefaultTitle.innerText = "Normal Effectiveness";
-		typeSidebarDescriptionAgainstDefaultContain.classList.add("type-default-content");
-		typeSidebarDescriptionAgainstDefaultContain.value = MEDIAPath_Type_Text;
-		typeSidebarDescriptionOpposed.classList.add("type-opposed");
+
+		typeSidebarDescriptionOpposed.setAttribute("name","opposed");
+
 		typeSidebarDescriptionOpposed.classList.add("scroll");
-		typeSidebarDescriptionOpposedEffective.classList.add("type-effective");
-		typeSidebarDescriptionOpposedEffectiveTitle.setAttribute("title", "Super Effective when used against an opposing Pokémon with following types:");
+
+		typeSidebarDescriptionOpposedEffectiveTitle.setAttribute("title","Super Effective when used against an opposing Pokémon with following types:");
 		typeSidebarDescriptionOpposedEffectiveTitle.innerText = "Super Effective";
-		typeSidebarDescriptionOpposedEffectiveContain.classList.add("type-effective-content");
+
 		typeSidebarDescriptionOpposedEffectiveContain.value = MEDIAPath_Type_Text;
-		typeSidebarDescriptionOpposedIneffective.classList.add("type-ineffective");
-		typeSidebarDescriptionOpposedIneffectiveTitle.setAttribute("title", "Not Very Effective when used against an opposing Pokémon with following types:");
+
+		typeSidebarDescriptionOpposedIneffectiveTitle.setAttribute("title","Not Very Effective when used against an opposing Pokémon with following types:");
 		typeSidebarDescriptionOpposedIneffectiveTitle.innerText = "Not Very Effective";
-		typeSidebarDescriptionOpposedIneffectiveContain.classList.add("type-ineffective-content");
+
 		typeSidebarDescriptionOpposedIneffectiveContain.value = MEDIAPath_Type_Text;
-		typeSidebarDescriptionOpposedImmune.classList.add("type-immune");
-		typeSidebarDescriptionOpposedImmuneTitle.setAttribute("title", "No Effect when used against an opposing Pokémon with following types:");
+
+		typeSidebarDescriptionOpposedImmuneTitle.setAttribute("title","No Effect when used against an opposing Pokémon with following types:");
 		typeSidebarDescriptionOpposedImmuneTitle.innerText = "No Effect";
-		typeSidebarDescriptionOpposedImmuneContain.classList.add("type-immune-content");
+
 		typeSidebarDescriptionOpposedImmuneContain.value = MEDIAPath_Type_Text;
-		typeSidebarDescriptionOpposedDefault.classList.add("type-normal");
-		typeSidebarDescriptionOpposedDefaultTitle.setAttribute("title", "Normal Effectiveness when used against an opposing Pokémon with following types:");
+
+		typeSidebarDescriptionOpposedDefaultTitle.setAttribute("title","Normal Effectiveness when used against an opposing Pokémon with following types:");
 		typeSidebarDescriptionOpposedDefaultTitle.innerText = "Normal Effectiveness";
-		typeSidebarDescriptionOpposedDefaultContain.classList.add("type-default-content");
+
 		typeSidebarDescriptionOpposedDefaultContain.value = MEDIAPath_Type_Text;
 
-		toolAside3.appendChild(typeOuter);
+		toolSectionContent.appendChild(typeOuter);
 
 		typeOuter.appendChild(typeTitle);
 
 		typeOuter.appendChild(typeSidebar);
 
 		typeOuter.appendChild(typeContent);
-		typeContent.appendChild(typeContentTypechartMatrix);
-		typeContent.appendChild(typeContentTypechartEffectiveness);
-		typeContent.appendChild(typeContentTypechartIneffectiveness);
-		typeContent.appendChild(typeContentTypechartImmunity);
+
 
 
 
@@ -349,6 +339,7 @@ var createTool = function() {
 		typeSidebar.appendChild(typeSidebarDescription);
 		typeSidebarDescription.appendChild(typeSidebarDescriptionTitleOuter);
 		typeSidebarDescriptionTitleOuter.appendChild(typeSidebarDescriptionTitleTitle);
+		typeSidebarDescriptionTitleTitle.appendChild(typeSidebarDescriptionTitleTitleText);
 		typeSidebarDescriptionTitleOuter.appendChild(typeSidebarDescriptionTitleImageOuter);
 		typeSidebarDescriptionTitleImageOuter.appendChild(typeSidebarDescriptionTitleImage);
 		typeSidebarDescription.appendChild(typeSidebarDescriptionAgainstOpposed);
@@ -383,40 +374,36 @@ var createTool = function() {
 		for(var i = 0; i < 2; i++) {
 			var typeSidebarDescriptionSelectorInput = document.createElement("input");
 			var typeSidebarDescriptionSelectorLabel = document.createElement("label");
-			typeSidebarDescriptionSelectorInput.setAttribute("type", "radio");
+			var typeSidebarDescriptionSelectorLabelText = document.createElement("p");
+			typeSidebarDescriptionSelectorInput.setAttribute("type","radio");
 			typeSidebarDescriptionSelectorInput.setAttribute("value", i);
-			typeSidebarDescriptionSelectorInput.setAttribute("name", "type-selector");
-			typeSidebarDescriptionSelectorInput.setAttribute("id", "type-selector" + i);
-			typeSidebarDescriptionSelectorInput.setAttribute("autocomplete", "off");
-			typeSidebarDescriptionSelectorLabel.setAttribute("for", "type-selector" + i);
+			typeSidebarDescriptionSelectorInput.setAttribute("name","type-selector");
+			typeSidebarDescriptionSelectorInput.setAttribute("id","type-selector" + i);
+			typeSidebarDescriptionSelectorInput.setAttribute("autocomplete","off");
+			typeSidebarDescriptionSelectorLabel.setAttribute("for","type-selector" + i);
 			if(i == 0) {
-				typeSidebarDescriptionSelectorInput.setAttribute("checked", "");
-				typeSidebarDescriptionSelectorInput.setAttribute("onclick", "this.parentElement.nextElementSibling.style.display='block';this.parentElement.nextElementSibling.nextElementSibling.style.display='none'");
-				typeSidebarDescriptionSelectorLabel.innerText = "Defending";
+				typeSidebarDescriptionSelectorInput.setAttribute("checked","");
+				typeSidebarDescriptionSelectorInput.setAttribute("onclick","this.parentElement.nextElementSibling.style.display='block';this.parentElement.nextElementSibling.nextElementSibling.style.display='none'");
+				typeSidebarDescriptionSelectorLabelText.innerText = "Defending";
 			}
 			if(i == 1) {
-				typeSidebarDescriptionSelectorInput.setAttribute("onclick", "this.parentElement.nextElementSibling.style.display='none';this.parentElement.nextElementSibling.nextElementSibling.style.display='block'");
-				typeSidebarDescriptionSelectorLabel.innerText = "Attacking";
+				typeSidebarDescriptionSelectorInput.setAttribute("onclick","this.parentElement.nextElementSibling.style.display='none';this.parentElement.nextElementSibling.nextElementSibling.style.display='block'");
+				typeSidebarDescriptionSelectorLabelText.innerText = "Attacking";
 			}
 			typeSidebarDescriptionSelector.appendChild(typeSidebarDescriptionSelectorInput);
 			typeSidebarDescriptionSelector.appendChild(typeSidebarDescriptionSelectorLabel);
+			typeSidebarDescriptionSelectorLabel.appendChild(typeSidebarDescriptionSelectorLabelText);
 		}
 		var typeContentTypeChartMatrixTable = document.createElement("table");
-		var typeContentTypeChartMatrixTableHead = document.createElement("thead");
-		var typeContentTypeChartMatrixTableBody = document.createElement("tbody");
-		typeContentTypeChartMatrixTable.setAttribute("id", "typechart-matrix-table");
-		typeContentTypeChartMatrixTable.setAttribute("name", MEDIAPath_Type_Icon);
-		typeContentTypeChartMatrixTable.classList.add("typechart");
+
+		typeContentTypeChartMatrixTable.setAttribute("name", 'matrix');
+		typeContentTypeChartMatrixTable.setAttribute("type", MEDIAPath_Type_Icon);
 		var typeContentTypeChartMatrixTableTR = document.createElement("tr");
-		for(var i = 0; i < finaldataTypeChart.length + 1; i++) {
-			var typeContentTypeChartMatrixTableCol = document.createElement("colgroup");
-			typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableCol);
-		}
-		typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableHead);
-		typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableBody);
-		typeContentTypeChartMatrixTableHead.appendChild(typeContentTypeChartMatrixTableTR);
+	
+
+		typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableTR);
 		var typeContentTypeChartMatrixTableTH0 = document.createElement("th");
-		typeContentTypeChartMatrixTableTH0.setAttribute("title", "");
+		typeContentTypeChartMatrixTableTH0.setAttribute("title","");
 		typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH0);
 		for(var i = 0; i < finaldataTypeChart.length; i++) {
 			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
@@ -426,7 +413,7 @@ var createTool = function() {
 			typeContentTypeChartMatrixTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
 			typeContentTypeChartMatrixTableTH.appendChild(typeContentTypeChartMatrixTableTHIMG);
 		}
@@ -435,42 +422,42 @@ var createTool = function() {
 			var typeContentTypeChartMatrixTableTR = document.createElement("tr");
 			var typeContentTypeChartMatrixTableTH = document.createElement("th");
 			var typeContentTypeChartMatrixTableTHIMG = document.createElement("img");
-			typeContentTypeChartMatrixTableBody.appendChild(typeContentTypeChartMatrixTableTR);
+			typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableTR);
 			typeContentTypeChartMatrixTableTH.innerText = finaldataTypeChartTitle[i];
 			typeContentTypeChartMatrixTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				var typeContentTypeChartMatrixTableTD = document.createElement("td");
-				typeContentTypeChartMatrixTableTD.innerText = finaldataTypeChart[i][finaldataTypeChartTitle[q]];
-				typeContentTypeChartMatrixTableTD.setAttribute("title", finaldataTypeChart[i][finaldataTypeChartTitle[q]]);
+				var typeContentTypeChartMatrixTableTDText = document.createElement("small");
+
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+					typeContentTypeChartMatrixTableTD.setAttribute("title", "Super Effective");
+				}
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "1×") {
+					typeContentTypeChartMatrixTableTD.setAttribute("title", "Normal Effectiveness");
+				}
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+					typeContentTypeChartMatrixTableTD.setAttribute("title", "Not Very Effective");
+				}
+				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+					typeContentTypeChartMatrixTableTD.setAttribute("title", "No Effect");
+				}
+				typeContentTypeChartMatrixTableTDText.innerText = finaldataTypeChart[i][finaldataTypeChartTitle[q]];
 				typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTD);
+				typeContentTypeChartMatrixTableTD.appendChild(typeContentTypeChartMatrixTableTDText);
+				typeContentTypeChartMatrixTableTD.addEventListener("mouseenter",matrixHoverClass);
+				typeContentTypeChartMatrixTableTD.addEventListener("mouseleave",function() {this.parentElement.parentElement.querySelector(":scope > *:first-child").className = "";});
 			}
 			typeContentTypeChartMatrixTableTH.appendChild(typeContentTypeChartMatrixTableTHIMG);
 		}
-		typeContentTypechartMatrix.appendChild(typeContentTypeChartMatrixTable);
-		var TypeChartNormal = document.querySelectorAll('.typechart td[title="1×"]');
-		var TypeChartMatrix = document.querySelectorAll('.typechart td[title="2×"]');
-		var TypeChartInmatrix = document.querySelectorAll('.typechart td[title="½×"]');
-		var TypeChartImmune = document.querySelectorAll('.typechart td[title="0×"]');
-		for(var i = 0; i < TypeChartNormal.length; i++) {
-			TypeChartNormal[i].setAttribute("title", "Normal Effectiveness");
-		}
-		for(var i = 0; i < TypeChartMatrix.length; i++) {
-			TypeChartMatrix[i].setAttribute("title", "Super Effective");
-		}
-		for(var i = 0; i < TypeChartInmatrix.length; i++) {
-			TypeChartInmatrix[i].setAttribute("title", "Not Very Effective");
-		}
-		for(var i = 0; i < TypeChartImmune.length; i++) {
-			TypeChartImmune[i].setAttribute("title", "No Effect");
-		}
+		typeContent.appendChild(typeContentTypeChartMatrixTable);
+
 		var typeContentTypeChartEffectivenessTable = document.createElement("table");
-		typeContentTypeChartEffectivenessTable.setAttribute("id", "typechart-effectiveness-table");
-		typeContentTypeChartEffectivenessTable.setAttribute("name", MEDIAPath_Type_Icon);
-		typeContentTypeChartEffectivenessTable.classList.add("typechart");
+		typeContentTypeChartEffectivenessTable.setAttribute("name", 'effectiveness');
+		typeContentTypeChartEffectivenessTable.setAttribute("type", MEDIAPath_Type_Icon);
 		var typeContentTypeChartEffectivenessTableTR = document.createElement("tr");
 		typeContentTypeChartEffectivenessTable.appendChild(typeContentTypeChartEffectivenessTableTR);
 		var tempEffectivenessArrLeft = [];
@@ -533,7 +520,7 @@ var createTool = function() {
 			typeContentTypeChartEffectivenessTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			typeContentTypeChartEffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			typeContentTypeChartEffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartEffectivenessTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			typeContentTypeChartEffectivenessTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "2×") {
 					var typeContentTypeChartEffectivenessTableTHLeft = document.createElement("th");
@@ -542,16 +529,18 @@ var createTool = function() {
 					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
 					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
 					typeContentTypeChartEffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartEffectivenessTableTHLeftIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartEffectivenessTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHLeft);
 					typeContentTypeChartEffectivenessTableTHLeft.appendChild(typeContentTypeChartEffectivenessTableTHLeftIMG);
 				}
 			}
 			var typeContentTypeChartEffectivenessTableTDLeftArrow = document.createElement("td");
+			var typeContentTypeChartEffectivenessTableTDLeftArrowText = document.createElement("p");
 			if(tempEffectivenessArrLeftCount[i] != 0) {
-				typeContentTypeChartEffectivenessTableTDLeftArrow.innerText = "→";
+				typeContentTypeChartEffectivenessTableTDLeftArrowText.innerText = "→";
 			}
 			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDLeftArrow);
+			typeContentTypeChartEffectivenessTableTDLeftArrow.appendChild(typeContentTypeChartEffectivenessTableTDLeftArrowText);
 			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTH);
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
@@ -565,10 +554,12 @@ var createTool = function() {
 				tempEffectivenessArrRightCount[i] = 0;
 			}
 			var typeContentTypeChartEffectivenessTableTDRightArrow = document.createElement("td");
+			var typeContentTypeChartEffectivenessTableTDRightArrowText = document.createElement("td");
 			if(tempEffectivenessArrRightCount[i] != 0) {
-				typeContentTypeChartEffectivenessTableTDRightArrow.innerText = "→";
+				typeContentTypeChartEffectivenessTableTDRightArrowText.innerText = "→";
 			}
 			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDRightArrow);
+			typeContentTypeChartEffectivenessTableTDRightArrow.appendChild(typeContentTypeChartEffectivenessTableTDRightArrowText);
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
 					var typeContentTypeChartEffectivenessTableTHRight = document.createElement("th");
@@ -577,7 +568,7 @@ var createTool = function() {
 					typeContentTypeChartEffectivenessTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
 					typeContentTypeChartEffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
 					typeContentTypeChartEffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartEffectivenessTableTHRightIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartEffectivenessTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHRight);
 					typeContentTypeChartEffectivenessTableTHRight.appendChild(typeContentTypeChartEffectivenessTableTHRightIMG);
 				}
@@ -588,11 +579,10 @@ var createTool = function() {
 				typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDRight);
 			}
 		}
-		typeContentTypechartEffectiveness.appendChild(typeContentTypeChartEffectivenessTable);
+		typeContent.appendChild(typeContentTypeChartEffectivenessTable);
 		var typeContentTypeChartIneffectivenessTable = document.createElement("table");
-		typeContentTypeChartIneffectivenessTable.setAttribute("id", "typechart-ineffectiveness-table");
-		typeContentTypeChartIneffectivenessTable.setAttribute("name", MEDIAPath_Type_Icon);
-		typeContentTypeChartIneffectivenessTable.classList.add("typechart");
+		typeContentTypeChartIneffectivenessTable.setAttribute("name", 'ineffectiveness');
+		typeContentTypeChartIneffectivenessTable.setAttribute("type", MEDIAPath_Type_Icon);
 		var typeContentTypeChartIneffectivenessTableTR = document.createElement("tr");
 		typeContentTypeChartIneffectivenessTable.appendChild(typeContentTypeChartIneffectivenessTableTR);
 		var tempIneffectivenessArrLeft = [];
@@ -655,7 +645,7 @@ var createTool = function() {
 			typeContentTypeChartIneffectivenessTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			typeContentTypeChartIneffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			typeContentTypeChartIneffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartIneffectivenessTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			typeContentTypeChartIneffectivenessTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "½×") {
 					var typeContentTypeChartIneffectivenessTableTHLeft = document.createElement("th");
@@ -664,16 +654,18 @@ var createTool = function() {
 					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
 					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
 					typeContentTypeChartIneffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartIneffectivenessTableTHLeftIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartIneffectivenessTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHLeft);
 					typeContentTypeChartIneffectivenessTableTHLeft.appendChild(typeContentTypeChartIneffectivenessTableTHLeftIMG);
 				}
 			}
 			var typeContentTypeChartIneffectivenessTableTDLeftArrow = document.createElement("td");
+			var typeContentTypeChartIneffectivenessTableTDLeftArrowText = document.createElement("p");
 			if(tempIneffectivenessArrLeftCount[i] != 0) {
-				typeContentTypeChartIneffectivenessTableTDLeftArrow.innerText = "→";
+				typeContentTypeChartIneffectivenessTableTDLeftArrowText.innerText = "→";
 			}
 			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDLeftArrow);
+			typeContentTypeChartIneffectivenessTableTDLeftArrow.appendChild(typeContentTypeChartIneffectivenessTableTDLeftArrowText);
 			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTH);
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
@@ -687,10 +679,12 @@ var createTool = function() {
 				tempIneffectivenessArrRightCount[i] = 0;
 			}
 			var typeContentTypeChartIneffectivenessTableTDRightArrow = document.createElement("td");
+			var typeContentTypeChartIneffectivenessTableTDRightArrowText = document.createElement("p");
 			if(tempIneffectivenessArrRightCount[i] != 0) {
-				typeContentTypeChartIneffectivenessTableTDRightArrow.innerText = "→";
+				typeContentTypeChartIneffectivenessTableTDRightArrowText.innerText = "→";
 			}
 			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDRightArrow);
+			typeContentTypeChartIneffectivenessTableTDRightArrow.appendChild(typeContentTypeChartIneffectivenessTableTDRightArrowText);
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
 					var typeContentTypeChartIneffectivenessTableTHRight = document.createElement("th");
@@ -699,7 +693,7 @@ var createTool = function() {
 					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
 					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
 					typeContentTypeChartIneffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartIneffectivenessTableTHRightIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartIneffectivenessTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHRight);
 					typeContentTypeChartIneffectivenessTableTHRight.appendChild(typeContentTypeChartIneffectivenessTableTHRightIMG);
 				}
@@ -710,11 +704,10 @@ var createTool = function() {
 				typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDRight);
 			}
 		}
-		typeContentTypechartIneffectiveness.appendChild(typeContentTypeChartIneffectivenessTable);
+		typeContent.appendChild(typeContentTypeChartIneffectivenessTable);
 		var typeContentTypeChartImmunityTable = document.createElement("table");
-		typeContentTypeChartImmunityTable.setAttribute("id", "typechart-immunity-table");
-		typeContentTypeChartImmunityTable.setAttribute("name", MEDIAPath_Type_Icon);
-		typeContentTypeChartImmunityTable.classList.add("typechart");
+		typeContentTypeChartImmunityTable.setAttribute("name", 'immunity');
+		typeContentTypeChartImmunityTable.setAttribute("type", MEDIAPath_Type_Icon);
 		var typeContentTypeChartImmunityTableTR = document.createElement("tr");
 		typeContentTypeChartImmunityTable.appendChild(typeContentTypeChartImmunityTableTR);
 		var tempImmunityArrLeft = [];
@@ -777,7 +770,7 @@ var createTool = function() {
 			typeContentTypeChartImmunityTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			typeContentTypeChartImmunityTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			typeContentTypeChartImmunityTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartImmunityTableTHIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+			typeContentTypeChartImmunityTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "0×") {
 					var typeContentTypeChartImmunityTableTHLeft = document.createElement("th");
@@ -786,16 +779,18 @@ var createTool = function() {
 					typeContentTypeChartImmunityTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
 					typeContentTypeChartImmunityTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
 					typeContentTypeChartImmunityTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartImmunityTableTHLeftIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartImmunityTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHLeft);
 					typeContentTypeChartImmunityTableTHLeft.appendChild(typeContentTypeChartImmunityTableTHLeftIMG);
 				}
 			}
 			var typeContentTypeChartImmunityTableTDLeftArrow = document.createElement("td");
+			var typeContentTypeChartImmunityTableTDLeftArrowText = document.createElement("p");
 			if(tempImmunityArrLeftCount[i] != 0) {
-				typeContentTypeChartImmunityTableTDLeftArrow.innerText = "→";
+				typeContentTypeChartImmunityTableTDLeftArrowText.innerText = "→";
 			}
 			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDLeftArrow);
+			typeContentTypeChartImmunityTableTDLeftArrow.appendChild(typeContentTypeChartImmunityTableTDLeftArrowText);
 			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTH);
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
@@ -809,10 +804,12 @@ var createTool = function() {
 				tempImmunityArrRightCount[i] = 0;
 			}
 			var typeContentTypeChartImmunityTableTDRightArrow = document.createElement("td");
+			var typeContentTypeChartImmunityTableTDRightArrowText = document.createElement("td");
 			if(tempImmunityArrRightCount[i] != 0) {
-				typeContentTypeChartImmunityTableTDRightArrow.innerText = "→";
+				typeContentTypeChartImmunityTableTDRightArrowText.innerText = "→";
 			}
 			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDRightArrow);
+			typeContentTypeChartImmunityTableTDRightArrow.appendChild(typeContentTypeChartImmunityTableTDRightArrowText);
 			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
 				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
 					var typeContentTypeChartImmunityTableTHRight = document.createElement("th");
@@ -821,7 +818,7 @@ var createTool = function() {
 					typeContentTypeChartImmunityTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
 					typeContentTypeChartImmunityTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
 					typeContentTypeChartImmunityTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartImmunityTableTHRightIMG.setAttribute("onerror", "this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
+					typeContentTypeChartImmunityTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHRight);
 					typeContentTypeChartImmunityTableTHRight.appendChild(typeContentTypeChartImmunityTableTHRightIMG);
 				}
@@ -832,31 +829,33 @@ var createTool = function() {
 				typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDRight);
 			}
 		}
-		typeContentTypechartImmunity.appendChild(typeContentTypeChartImmunityTable);
+		typeContent.appendChild(typeContentTypeChartImmunityTable);
 		
-		var typeOptionsTitle = ["Matrix", "Effectiveness", "Ineffectiveness", "Immunity", ];
+		var typeOptionsTitle = ["Matrix","Effectiveness","Ineffectiveness","Immunity"];
 		for(var q = 0; q < typeOptionsTitle.length; q++) {
 			var typeTitleOptionsInput = document.createElement("input");
 			var typeTitleOptionsLabel = document.createElement("label");
-			typeTitleOptionsInput.setAttribute("type", "radio");
-			typeTitleOptionsInput.setAttribute("name", "type-options");
-			typeTitleOptionsInput.setAttribute("id", "type-options-" + q);
-			typeTitleOptionsInput.setAttribute("autocomplete", "off");
-			typeTitleOptionsInput.value = q;
-			typeTitleOptionsLabel.setAttribute("for", "type-options-" + q);
-			typeTitleOptionsLabel.innerText = typeOptionsTitle[q];
+			var typeTitleOptionsLabelText = document.createElement("p");
+			typeTitleOptionsInput.setAttribute("type","radio");
+			typeTitleOptionsInput.setAttribute("name","type-options");
+			typeTitleOptionsInput.setAttribute("id","type-options-" + q);
+			typeTitleOptionsInput.setAttribute("autocomplete","off");
+			typeTitleOptionsInput.value = typeOptionsTitle[q].toLowerCase();
+			typeTitleOptionsLabel.setAttribute("for","type-options-" + q);
+			typeTitleOptionsLabelText.innerText = typeOptionsTitle[q];
 			typeTitle.appendChild(typeTitleOptionsInput);
 			typeTitle.appendChild(typeTitleOptionsLabel);
+			typeTitleOptionsLabel.appendChild(typeTitleOptionsLabelText);
 			typeTitleOptionsInput.addEventListener("click", typeOptionsSelector);
 	
 			function typeOptionsSelector() {
-				var typechartContents = document.querySelectorAll("#type-outer > div[name='Content'] div[name]");
-				var typechartContent = document.querySelectorAll("#type-outer > div[name='Content'] div[name='" + this.value + "']");
+				var typechartContents = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='type'] > div[name='content'] table[name]");
+				var typechartContent = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='type'] > div[name='content'] table[name='"+this.value+"']");
 				for(var q = 0; q < typechartContents.length; q++) {
 					typechartContents[q].style.display = "none";
 				}
 				for(var q = 0; q < typechartContent.length; q++) {
-					typechartContent[q].style.display = "flex";
+					typechartContent[q].style.removeProperty("display");
 				}
 			}
 			if(q == 0) {
@@ -876,25 +875,25 @@ var createTool = function() {
 	// Counter, Damage Calculator, Catch Rate Calculator, Shiny Odds Calculator, IV Calculator, Pokémon Finder, Item Checklist
 
 	for(var q = 0; q < toolOptionsTitle.length; q++) {
-		var toolAside1OptionsInput = document.createElement("input");
-		var toolAside1OptionsLabel = document.createElement("label");
-		toolAside1OptionsInput.setAttribute("type", "radio");
-		toolAside1OptionsInput.setAttribute("name", "tool-options");
-		toolAside1OptionsInput.setAttribute("id", "tool-options-" + q);
-		toolAside1OptionsInput.setAttribute("autocomplete", "off");
-		toolAside1OptionsInput.value = q;
-		toolAside1OptionsLabel.setAttribute("for", "tool-options-" + q);
-		toolAside1OptionsLabel.setAttribute("name", "large");
-		toolAside1OptionsLabel.innerHTML = toolOptionsTitle[q];
-		toolAside1Options.appendChild(toolAside1OptionsInput);
-		toolAside1Options.appendChild(toolAside1OptionsLabel);
-		toolAside1OptionsInput.addEventListener("click", toolOptionsSelector);
+		var toolSectionListOptionsInput = document.createElement("input");
+		var toolSectionListOptionsLabel = document.createElement("label");
+		toolSectionListOptionsInput.setAttribute("type","radio");
+		toolSectionListOptionsInput.setAttribute("name","tool-options");
+		toolSectionListOptionsInput.setAttribute("id","tool-options-" + q);
+		toolSectionListOptionsInput.setAttribute("autocomplete","off");
+		toolSectionListOptionsInput.value = q;
+		toolSectionListOptionsLabel.setAttribute("for","tool-options-" + q);
+		toolSectionListOptionsLabel.setAttribute("type","medium");
+		toolSectionListOptionsLabel.innerHTML = toolOptionsTitle[q];
+		toolSectionListOptions.appendChild(toolSectionListOptionsInput);
+		toolSectionListOptions.appendChild(toolSectionListOptionsLabel);
+		toolSectionListOptionsInput.addEventListener("click", toolOptionsSelector);
 
 		function toolOptionsSelector() {
 			var i = this.value;
-			toolAside2Title.innerText = toolOptionsTitle[i];
-			var toolContents = document.querySelectorAll("#tool-aside3 > div[name]");
-			var toolContent = document.querySelectorAll("#tool-aside3 > div[name='"+i+"']");
+			toolSectionHeaderTitleText.innerText = toolOptionsTitle[i];
+			var toolContents = document.querySelectorAll("#tool section[name='content'] > div[value]");
+			var toolContent = document.querySelectorAll("#tool section[name='content'] > div[value='"+i+"']");
 			for(var q = 0; q < toolContents.length; q++) {
 				toolContents[q].style.display = "none";
 			}
@@ -903,7 +902,7 @@ var createTool = function() {
 			}
 		}
 		if(q == 0) {
-			toolAside1OptionsLabel.click();
+			toolSectionListOptionsLabel.click();
 		}
 	}
 
@@ -911,9 +910,31 @@ var createTool = function() {
 };
 
 function countdown() {
+
+	var base = document.querySelector('#contain div#tool > section[name="content"] > div[name="timer"] > *[name="countdown"]')
+	var audiopath = "./media/Sounds/FinalDex/Complete.wav";
+
+	var countdownInput = base.querySelectorAll(":scope input");
+	var countdownPlayButton = base.querySelector(":scope b[title='Play']");
+	var countdownPauseButton = base.querySelector(":scope b[title='Pause']");
+	var countdownResetButton = base.querySelector(":scope *[name='reset']");
+	var countdownLapsButton = base.querySelector(":scope *[name='lap']");
+
+	var countdownTimeContainer = base.querySelector(':scope > div > div > data > *');
+	var countdownInputContainer = base.querySelector(':scope > div > div > span');
+	var countdownSetContainer = base.querySelector(':scope > div > div');
+
+	var countdownHoursInput = base.querySelector(":scope input[title='Hours']");
+	var countdownMinutesInput = base.querySelector(":scope input[title='Minutes']");
+	var countdownSecondsInput = base.querySelector(":scope input[title='Seconds']");
+	var countdownMillisecondsInput = base.querySelector(":scope input[title='Milliseconds']");
+
+	var countdownList = base.querySelector(":scope ul");
+
+
 	/*
 	    polyfills for IE8
-	  */
+	*/
 	if(!Array.prototype.forEach) {
 		Array.prototype.forEach = function(countdownCallback) {
 			for(var i = 0; i < this.length; i++) {
@@ -997,11 +1018,7 @@ function countdown() {
 		var countdown_this = this;
 		var countdownCallbackProperties = ["countdownCallback", "countdownCallbackTarget", "countdownLapCallback", "countdownLapCallbackTarget", ];
 		var countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
-		var countdownTimerSetHours = document.querySelector(".countdown-hours");
-		var countdownTimerSetMinutes = document.querySelector(".countdown-minutes");
-		var countdownTimerSetSeconds = document.querySelector(".countdown-seconds");
-		var countdownTimerSetMilliseconds = document.querySelector(".countdown-milliseconds");
-		var countdownInput = document.querySelectorAll("#countdown-set input");
+	
 		for(var i = 0; i < countdownInput.length; i++) {
 			countdownInput[i].addEventListener("click", countdownSetTime);
 			countdownInput[i].addEventListener("click", countdownSelect);
@@ -1010,52 +1027,46 @@ function countdown() {
 			countdownInput[i].addEventListener("change", countdownSetTime);
 			countdownInput[i].addEventListener("change", countdownFormatNumber);
 		}
-		document.querySelector("#countdown-start-stop").addEventListener("click", countdownHideShow);
-		document.querySelector("#countdown-reset").addEventListener("click", countdownReset);
+
+		countdownPlayButton.addEventListener("click", countdownHideShow);
+		countdownPauseButton.addEventListener("click", countdownHideShow);
+		countdownResetButton.addEventListener("click", countdownReset);
 
 		function countdownReset() {
-			countdownTimerSetHours.value = "";
-			countdownTimerSetMinutes.value = "";
-			countdownTimerSetSeconds.value = "";
-			countdownTimerSetMilliseconds.value = "";
+			countdownHoursInput.value = "";
+			countdownMinutesInput.value = "";
+			countdownSecondsInput.value = "";
+			countdownMillisecondsInput.value = "";
 			var countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
 			countdownLaps = [];
 			countdownLapDidChange(null, true);
-			if(countdown.countdownRunning()) {
-				document.getElementById("countdown-time").style.display = "none";
-				document.querySelector("#countdown-set > span").style.display = "flex";
-				replaceClass(countdownStartStopButton, "countdown-stop", "countdown-start");
-				countdownStartStopButton.innerHTML = "⏵︎";
-				countdownStartStopButton.setAttribute("title", "Start");
-				countdown.reset();
-			}
+		
+			base.setAttribute("state","stop");
+			countdown.reset();
+			
 		}
 
 		function countdownHideShow() {
-			countdownTimerSetHours.value = [countdownPad(countdownHours)];
-			countdownTimerSetMinutes.value = [countdownPad(countdownMinutes)];
-			countdownTimerSetSeconds.value = [countdownPad(countdownSeconds)];
-			countdownTimerSetMilliseconds.value = [
+
+			countdownHoursInput.value = [countdownPad(countdownHours)];
+			countdownMinutesInput.value = [countdownPad(countdownMinutes)];
+			countdownSecondsInput.value = [countdownPad(countdownSeconds)];
+			countdownMillisecondsInput.value = [
 				countdownPad(countdownMilliseconds / 10),
 			];
-			var a = parseInt(countdownTimerSetHours.value);
-			var b = parseInt(countdownTimerSetMinutes.value);
-			var c = parseInt(countdownTimerSetSeconds.value);
-			var d = parseInt(countdownTimerSetMilliseconds.value);
+			var a = parseInt(countdownHoursInput.value);
+			var b = parseInt(countdownMinutesInput.value);
+			var c = parseInt(countdownSecondsInput.value);
+			var d = parseInt(countdownMillisecondsInput.value);
 			a = a || 0;
 			b = b || 0;
 			c = c || 0;
 			d = d || 0;
-			if(a + b + c + d > 0) {
-				if(!countdown.countdownRunning()) {
-					document.getElementById("countdown-time").style.display = "flex";
-					document.querySelector("#countdown-set > span").style.display = "none";
-				} else {
-					document.getElementById("countdown-time").style.display = "none";
-					document.querySelector("#countdown-set > span").style.display = "flex";
-				}
-			} else {
-				document.querySelector("#countdown-set span").animate(
+
+
+
+			if(!a + b + c + d > 0) {
+				countdownInputContainer.animate(
 					[{
 						transform: "translateX(0px)"
 					}, {
@@ -1089,28 +1100,28 @@ function countdown() {
 				this.value = "00";
 			}
 			if(!countdown.countdownRunning()) {
-				if(this.classList.contains("countdown-hours")) {
+				if(this.getAttribute("title") == "Hours") {
 					var countdownNetTime = (countdownHours = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var countdownNetTime = (countdownHours = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
-				if(this.classList.contains("countdown-minutes")) {
+				if(this.getAttribute("title") == "Minutes") {
 					var countdownNetTime = (countdownMinutes = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var countdownNetTime = (countdownMinutes = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
-				if(this.classList.contains("countdown-seconds")) {
+				if(this.getAttribute("title") == "Seconds") {
 					var countdownNetTime = (countdownSeconds = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var countdownNetTime = (countdownSeconds = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
-				if(this.classList.contains("countdown-milliseconds")) {
+				if(this.getAttribute("title") == "Milliseconds") {
 					var countdownNetTime = (countdownMilliseconds = parseInt(this.value) * 10);
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var countdownNetTime = (countdownMilliseconds = parseInt(this.max) * 10);
@@ -1119,25 +1130,24 @@ function countdown() {
 				}
 			}
 
+			var hours = countdownHoursInput.value;
+			var minutes = countdownMinutesInput.value;
+			var seconds = countdownSecondsInput.value;
+			var milliseconds = countdownMillisecondsInput.value;
 
-			var hours = document.querySelector(".countdown-hours").value;
-			var minutes = document.querySelector(".countdown-minutes").value;
-			var second = document.querySelector(".countdown-seconds").value;
-			var millisecond = document.querySelector(".countdown-milliseconds").value;
-
-			if (hours == "") {
+			if (countdownHoursInput.value == "") {
 				hours = "00";
 			}
-			if (minutes == "") {
+			if (countdownMinutesInput.value == "") {
 				minutes = "00";
 			}
-			if (second == "") {
-				second = "00";
+			if (countdownSecondsInput.value == "") {
+				seconds = "00";
 			}
-			if (millisecond == "") {
-				millisecond = "00";
+			if (countdownMillisecondsInput.value == "") {
+				milliseconds = "00";
 			}
-			document.querySelector("#countdown-time").innerHTML = hours+":"+minutes+":"+second+":"+millisecond;
+			countdownTimeContainer.innerHTML = hours+":"+minutes+":"+seconds+":"+milliseconds;
 		}
 		var countdownRunning = false;
 		var countdownLaps = [];
@@ -1198,11 +1208,11 @@ function countdown() {
 			}
 		};
 		var countdownInitializeTimer = function(countdownTimeInMilliseconds) {
-			var coutdownTime = countdownExtractTime(countdownTimeInMilliseconds);
-			countdownHours = coutdownTime.countdownHours;
-			countdownMinutes = coutdownTime.countdownMinutes;
-			countdownSeconds = coutdownTime.countdownSeconds;
-			countdownMilliseconds = coutdownTime.countdownMilliseconds;
+			var countdownTime = countdownExtractTime(countdownTimeInMilliseconds);
+			countdownHours = countdownTime.countdownHours;
+			countdownMinutes = countdownTime.countdownMinutes;
+			countdownSeconds = countdownTime.countdownSeconds;
+			countdownMilliseconds = countdownTime.countdownMilliseconds;
 			countdownNetTime = countdownTimeInMilliseconds;
 			countdownTimeDidChange();
 			return countdown_this;
@@ -1226,22 +1236,21 @@ function countdown() {
 			}
 			if(countdownHours + countdownMinutes + countdownSeconds + countdownMilliseconds <= 0) {
 				countdown.stop();
-				var countdownCompletedAudio = new Audio("./media/Sounds/FinalDex/Complete.wav");
-				countdownCompletedAudio.play();
-				document.getElementById("countdown-time").style.display = "none";
-				document.querySelector("#countdown-set > span").style.display = "flex";
+				if (audiopath != undefined && audiopath != "") {
+					var countdownCompletedAudio = new Audio(audiopath);
+					countdownCompletedAudio.play();
+				}
+			
+	
 				var countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
-				document.querySelector(".countdown-hours").value = "";
-				document.querySelector(".countdown-minutes").value = "";
-				document.querySelector(".countdown-seconds").value = "";
-				document.querySelector(".countdown-milliseconds").value = "";
-				countdownTimerSetHours.value = "";
-				countdownTimerSetMinutes.value = "";
-				countdownTimerSetSeconds.value = "";
-				countdownTimerSetMilliseconds.value = "";
-				replaceClass(countdownStartStopButton, "countdown-stop", "countdown-start");
-				countdownStartStopButton.innerHTML = "⏵︎";
-				countdownStartStopButton.setAttribute("title", "Start");
+				countdownHoursInput.value = "";
+				countdownMinutesInput.value = "";
+				countdownSecondsInput.value = "";
+				countdownMillisecondsInput.value = "";
+
+
+				base.setAttribute("state","stop");
+
 			}
 			countdownNetTime -= 10;
 			countdownTimeDidChange();
@@ -1297,22 +1306,21 @@ function countdown() {
 			countdownInitializeTimer(countdownNetTime);
 		}
 	});
-	var count = document.getElementById("countdown-time");
-	var countdownLapContainer = document.getElementById("countdown-list");
+
 	var countdownLapCount = 0;
 	window.countdownUpdateCount = function(countdownMilitaryTime) {
-		count.innerHTML = countdownMilitaryTime;
+		countdownTimeContainer.innerHTML = countdownMilitaryTime;
 	};
 	window.countdownUpdateLap = function(countdownLapSplitString, countdownIsReset) {
 		if(countdownIsReset) {
-			document.querySelector("#countdown-time").innerHTML = "";
-			countdownLapContainer.innerHTML = "";
+			countdownTimeContainer.innerHTML = "";
+			countdownList.innerHTML = "";
 			countdownLapCount = 0;
 		} else {
 			var countdownli = document.createElement("li");
 			countdownLapCount += 1;
-			countdownli.innerHTML = "<span>#" + countdownLapCount + "</span>" + count.innerHTML;
-			countdownLapContainer.appendChild(countdownli);
+			countdownli.innerHTML = "<span>#" + countdownLapCount + "</span>" + countdownTimeContainer.innerHTML;
+			countdownList.appendChild(countdownli);
 		}
 	};
 	var replaceClass = function(ele, class1, class2) {
@@ -1324,58 +1332,70 @@ function countdown() {
 		countdownCallback: "countdownUpdateCount",
 		countdownLapCallback: "countdownUpdateLap",
 	});
-	var countdownStartStopButton = document.getElementById("countdown-start-stop");
-	var countdownResetButton = document.querySelector("#countdown-reset");
-	var countdownLapsButton = document.querySelector("#countdown-laps");
-	var countdownTimerSetHours = document.querySelector(".countdown-hours");
-	var countdownTimerSetMinutes = document.querySelector(".countdown-minutes");
-	var countdownTimerSetSeconds = document.querySelector(".countdown-seconds");
-	var countdownTimerSetMilliseconds = document.querySelector(".countdown-milliseconds");
+
+
 	var countdownStartStopButtonEvent = function() {
-		var a = parseInt(countdownTimerSetHours.value);
-		var b = parseInt(countdownTimerSetMinutes.value);
-		var c = parseInt(countdownTimerSetSeconds.value);
-		var d = parseInt(countdownTimerSetMilliseconds.value);
+		var a = parseInt(countdownHoursInput.value);
+		var b = parseInt(countdownMinutesInput.value);
+		var c = parseInt(countdownSecondsInput.value);
+		var d = parseInt(countdownMillisecondsInput.value);
 		a = a || 0;
 		b = b || 0;
 		c = c || 0;
 		d = d || 0;
 		if(!countdown.countdownRunning() && a + b + c + d > 0) {
-			replaceClass(countdownStartStopButton, "countdown-start", "countdown-stop");
-			countdownStartStopButton.innerHTML = "⏸︎";
-			countdownStartStopButton.setAttribute("title", "Pause");
+			base.setAttribute("state","play");
 			countdown.start();
 		} else if(a + b + c + d > 0) {
-			replaceClass(countdownStartStopButton, "countdown-stop", "countdown-start");
-			countdownStartStopButton.innerHTML = "⏵︎";
-			countdownStartStopButton.setAttribute("title", "Start");
+			base.setAttribute("state","stop");
 			countdown.stop();
 		}
 	};
 	var countdownResetButtonEvent = function() {
-		var watch = document.querySelector("#countdown-time");
-		if(!countdown.countdownRunning()) {} else {
-			watch.innerHTML = "";
-			countdown.reset();
-		}
+		countdownTimeContainer.innerHTML = "";
+		countdown.reset();
 	};
 	var countdownLapsButtonEvent = function() {
-		var watch = document.querySelector("#countdown-time");
-		if (watch.innerHTML != "00:00:00:00" && watch.innerHTML != "") {
+		if (countdownTimeContainer.innerHTML != "00:00:00:00" && countdownTimeContainer.innerHTML != "") {
 			countdown.countdownAddLap();
 		}
 	};
 
 	function countdownLapsScroll() {
-		document.querySelector("#countdown-list").scrollTo(0, document.querySelector("#countdown-list").scrollHeight);
+		countdownList.scrollTo(0, countdownList.scrollHeight);
 	}
-	countdownStartStopButton.addEventListener("click", countdownStartStopButtonEvent);
+	countdownPlayButton.addEventListener("click", countdownStartStopButtonEvent);
+	countdownPauseButton.addEventListener("click", countdownStartStopButtonEvent);
 	countdownResetButton.addEventListener("click", countdownResetButtonEvent);
 	countdownLapsButton.addEventListener("click", countdownLapsButtonEvent);
 	countdownLapsButton.addEventListener("click", countdownLapsScroll);
 }
 
+
 function stopwatch() {
+
+	var base = document.querySelector('#contain div#tool > section[name="content"] > div[name="timer"] > *[name="stopwatch"]')
+
+	var stopwatchInput = base.querySelectorAll(":scope input");
+	var stopwatchPlayButton = base.querySelector(":scope b[title='Play']");
+	var stopwatchPauseButton = base.querySelector(":scope b[title='Pause']");
+	var stopwatchResetButton = base.querySelector(":scope *[name='reset']");
+	var stopwatchLapsButton = base.querySelector(":scope *[name='lap']");
+
+	var stopwatchTimeContainer = base.querySelector(':scope > div > div > data > *');
+	var stopwatchInputContainer = base.querySelector(':scope > div > div > span');
+	var stopwatchSetContainer = base.querySelector(':scope > div > div');
+
+	var stopwatchHoursInput = base.querySelector(":scope input[title='Hours']");
+	var stopwatchMinutesInput = base.querySelector(":scope input[title='Minutes']");
+	var stopwatchSecondsInput = base.querySelector(":scope input[title='Seconds']");
+	var stopwatchMillisecondsInput = base.querySelector(":scope input[title='Milliseconds']");
+
+	var stopwatchList = base.querySelector(":scope ul");
+
+
+
+
 	/*
 	    polyfills for IE8
 	  */
@@ -1442,7 +1462,7 @@ function stopwatch() {
 			var stopwatchTimeSeparator = ":";
 			var stopwatchTime = stopwatchExtractTime(stopwatchTimeInMilliseconds);
 			stopwatchTime.stopwatchMilliseconds = stopwatchTime.stopwatchMilliseconds / 10;
-			return ["stopwatchHours", "stopwatchMinutes", "stopwatchSeconds", "stopwatchMilliseconds", ].map(function(stopwatchProperty) {
+			return ["stopwatchHours","stopwatchMinutes","stopwatchSeconds","stopwatchMilliseconds", ].map(function(stopwatchProperty) {
 				return stopwatchPad(stopwatchTime[stopwatchProperty]);
 			}).join(stopwatchTimeSeparator);
 		},
@@ -1460,13 +1480,16 @@ function stopwatch() {
 			stopwatchOptions = {};
 		}
 		var stopwatch_this = this;
-		var stopwatchCallbackProperties = ["stopwatchCallback", "stopwatchCallbackTarget", "stopwatchLapCallback", "stopwatchLapCallbackTarget", ];
+
+
+
+
+
+		var stopwatchCallbackProperties = ["stopwatchCallback","stopwatchCallbackTarget","stopwatchLapCallback","stopwatchLapCallbackTarget", ];
 		var stopwatchNetTime = (stopwatchHours = stopwatchMinutes = stopwatchSeconds = stopwatchMilliseconds = 0);
-		var stopwatchTimerSetHours = document.querySelector(".stopwatch-hours");
-		var stopwatchTimerSetMinutes = document.querySelector(".stopwatch-minutes");
-		var stopwatchTimerSetSeconds = document.querySelector(".stopwatch-seconds");
-		var stopwatchTimerSetMilliseconds = document.querySelector(".stopwatch-milliseconds");
-		var stopwatchInput = document.querySelectorAll("#stopwatch-set input");
+
+
+
 		for(var i = 0; i < stopwatchInput.length; i++) {
 			stopwatchInput[i].addEventListener("click", stopwatchSetTime);
 			stopwatchInput[i].addEventListener("click", stopwatchSelect);
@@ -1475,41 +1498,33 @@ function stopwatch() {
 			stopwatchInput[i].addEventListener("change", stopwatchSetTime);
 			stopwatchInput[i].addEventListener("change", stopwatchFormatNumber);
 		}
-		document.querySelector("#stopwatch-start-stop").addEventListener("click", stopwatchHideShow);
-		document.querySelector("#stopwatch-reset").addEventListener("click", stopwatchReset);
+		stopwatchPlayButton.addEventListener("click", stopwatchHideShow);
+		stopwatchPauseButton.addEventListener("click", stopwatchHideShow);
+		stopwatchResetButton.addEventListener("click", stopwatchReset);
+
+
 
 		function stopwatchReset() {
-			stopwatchTimerSetHours.value = "";
-			stopwatchTimerSetMinutes.value = "";
-			stopwatchTimerSetSeconds.value = "";
-			stopwatchTimerSetMilliseconds.value = "";
+			stopwatchHoursInput.value = "";
+			stopwatchMinutesInput.value = "";
+			stopwatchSecondsInput.value = "";
+			stopwatchMillisecondsInput.value = "";
 			var stopwatchNetTime = (stopwatchHours = stopwatchMinutes = stopwatchSeconds = stopwatchMilliseconds = 0);
 			stopwatchLaps = [];
 			stopwatchLapDidChange(null, true);
-			if(stopwatch.stopwatchRunning()) {
-				document.querySelector("#stopwatch-time").style.display = "none";
-				document.querySelector("#stopwatch-set > span").style.display = "flex";
-				replaceClass(stopwatchStartStopButton, "stopwatch-stop", "stopwatch-start");
-				stopwatchStartStopButton.innerHTML = "⏵︎";
-				stopwatchStartStopButton.setAttribute("title", "Start");
-				stopwatch.reset();
-			}
+
+			base.setAttribute("state","stop");
+			stopwatch.reset();
 		}
 
 		function stopwatchHideShow() {
-			stopwatchTimerSetHours.value = [stopwatchPad(stopwatchHours)];
-			stopwatchTimerSetMinutes.value = [stopwatchPad(stopwatchMinutes)];
-			stopwatchTimerSetSeconds.value = [stopwatchPad(stopwatchSeconds)];
-			stopwatchTimerSetMilliseconds.value = [
+			stopwatchHoursInput.value = [stopwatchPad(stopwatchHours)];
+			stopwatchMinutesInput.value = [stopwatchPad(stopwatchMinutes)];
+			stopwatchSecondsInput.value = [stopwatchPad(stopwatchSeconds)];
+			stopwatchMillisecondsInput.value = [
 				stopwatchPad(stopwatchMilliseconds / 10),
 			];
-			if(!stopwatch.stopwatchRunning()) {
-				document.getElementById("stopwatch-time").style.display = "flex";
-				document.querySelector("#stopwatch-set > span").style.display = "none";
-			} else {
-				document.getElementById("stopwatch-time").style.display = "none";
-				document.querySelector("#stopwatch-set > span").style.display = "flex";
-			}
+			
 		}
 
 		function stopwatchFormatNumber() {
@@ -1527,28 +1542,28 @@ function stopwatch() {
 				this.value = "00";
 			}
 			if(!stopwatch.stopwatchRunning()) {
-				if(this.classList.contains("stopwatch-hours")) {
+				if(this.getAttribute("title") == "Hours") {
 					var stopwatchNetTime = (stopwatchHours = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var stopwatchNetTime = (stopwatchHours = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
-				if(this.classList.contains("stopwatch-minutes")) {
+				if(this.getAttribute("title") == "Minutes") {
 					var stopwatchNetTime = (stopwatchMinutes = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var stopwatchNetTime = (stopwatchMinutes = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
-				if(this.classList.contains("stopwatch-seconds")) {
+				if(this.getAttribute("title") == "Seconds") {
 					var stopwatchNetTime = (stopwatchSeconds = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var stopwatchNetTime = (stopwatchSeconds = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
-				if(this.classList.contains("stopwatch-milliseconds")) {
+				if(this.getAttribute("title") == "Milliseconds") {
 					var stopwatchNetTime = (stopwatchMilliseconds = parseInt(this.value) * 10);
 					if(parseInt(this.value) > parseInt(this.max)) {
 						var stopwatchNetTime = (stopwatchMilliseconds = parseInt(this.max) * 10);
@@ -1557,10 +1572,10 @@ function stopwatch() {
 				}
 			}
 
-			var hours = document.querySelector(".stopwatch-hours").value;
-			var minutes = document.querySelector(".stopwatch-minutes").value;
-			var second = document.querySelector(".stopwatch-seconds").value;
-			var millisecond = document.querySelector(".stopwatch-milliseconds").value;
+			var hours = stopwatchHoursInput.value;
+			var minutes = stopwatchMinutesInput.value;
+			var second = stopwatchSecondsInput.value;
+			var millisecond = stopwatchMillisecondsInput.value;
 
 			if (hours == "") {
 				hours = "00";
@@ -1574,7 +1589,7 @@ function stopwatch() {
 			if (millisecond == "") {
 				millisecond = "00";
 			}
-			document.querySelector("#stopwatch-time").innerHTML = hours+":"+minutes+":"+second+":"+millisecond;
+			stopwatchTimeContainer.innerHTML = hours+":"+minutes+":"+second+":"+millisecond;
 		}
 		var stopwatchRunning = false;
 		var stopwatchLaps = [];
@@ -1635,11 +1650,11 @@ function stopwatch() {
 			}
 		};
 		var stopwatchInitializeTimer = function(stopwatchTimeInMilliseconds) {
-			var coutdownTime = stopwatchExtractTime(stopwatchTimeInMilliseconds);
-			stopwatchHours = coutdownTime.stopwatchHours;
-			stopwatchMinutes = coutdownTime.stopwatchMinutes;
-			stopwatchSeconds = coutdownTime.stopwatchSeconds;
-			stopwatchMilliseconds = coutdownTime.stopwatchMilliseconds;
+			var stopwatchTime = stopwatchExtractTime(stopwatchTimeInMilliseconds);
+			stopwatchHours = stopwatchTime.stopwatchHours;
+			stopwatchMinutes = stopwatchTime.stopwatchMinutes;
+			stopwatchSeconds = stopwatchTime.stopwatchSeconds;
+			stopwatchMilliseconds = stopwatchTime.stopwatchMilliseconds;
 			stopwatchNetTime = stopwatchTimeInMilliseconds;
 			stopwatchTimeDidChange();
 			return stopwatch_this;
@@ -1715,22 +1730,22 @@ function stopwatch() {
 			stopwatchInitializeTimer(stopwatchNetTime);
 		}
 	});
-	var watch = document.getElementById("stopwatch-time");
-	var stopwatchLapContainer = document.getElementById("stopwatch-list");
+
+
 	var stopwatchLapCount = 0;
 	window.stopwatchUpdateWatch = function(stopwatchMilitaryTime) {
-		watch.innerHTML = stopwatchMilitaryTime;
+		stopwatchTimeContainer.innerHTML = stopwatchMilitaryTime;
 	};
 	window.stopwatchUpdateLap = function(stopwatchLapSplitString, stopwatchIsReset) {
 		if(stopwatchIsReset) {
-			document.querySelector("#stopwatch-time").innerHTML = "";
-			stopwatchLapContainer.innerHTML = "";
+			stopwatchTimeContainer.innerHTML = "";
+			stopwatchList.innerHTML = "";
 			stopwatchLapCount = 0;
 		} else {
 			var stopwatchli = document.createElement("li");
 			stopwatchLapCount += 1;
-			stopwatchli.innerHTML = "<span>#" + stopwatchLapCount + "</span>" + watch.innerHTML;
-			stopwatchLapContainer.appendChild(stopwatchli);
+			stopwatchli.innerHTML = "<span>#" + stopwatchLapCount + "</span>" + stopwatchTimeContainer.innerHTML;
+			stopwatchList.appendChild(stopwatchli);
 		}
 	};
 	var replaceClass = function(ele, class1, class2) {
@@ -1742,44 +1757,33 @@ function stopwatch() {
 		stopwatchCallback: "stopwatchUpdateWatch",
 		stopwatchLapCallback: "stopwatchUpdateLap",
 	});
-	var stopwatchStartStopButton = document.getElementById("stopwatch-start-stop");
-	var stopwatchResetButton = document.querySelector("#stopwatch-reset");
-	var stopwatchLapsButton = document.querySelector("#stopwatch-laps");
-	var stopwatchTimerSetHours = document.querySelector(".stopwatch-hours");
-	var stopwatchTimerSetMinutes = document.querySelector(".stopwatch-minutes");
-	var stopwatchTimerSetSeconds = document.querySelector(".stopwatch-seconds");
-	var stopwatchTimerSetMilliseconds = document.querySelector(".stopwatch-milliseconds");
+
+
 	var stopwatchStartStopButtonEvent = function() {
 		if(!stopwatch.stopwatchRunning()) {
-			replaceClass(stopwatchStartStopButton, "stopwatch-start", "stopwatch-stop");
-			stopwatchStartStopButton.innerHTML = "⏸︎";
-			stopwatchStartStopButton.setAttribute("title", "Pause");
+			base.setAttribute("state","play");
 			stopwatch.start();
 		} else {
-			replaceClass(stopwatchStartStopButton, "stopwatch-stop", "stopwatch-start");
-			stopwatchStartStopButton.innerHTML = "⏵︎";
-			stopwatchStartStopButton.setAttribute("title", "Start");
+			base.setAttribute("state","stop");
 			stopwatch.stop();
 		}
 	};
 	var stopwatchResetButtonEvent = function() {
-		var watch = document.querySelector("#stopwatch-time");
-		if(!stopwatch.stopwatchRunning()) {} else {
-			watch.innerHTML = "";
-			stopwatch.reset();
-		}
+		stopwatchTimeContainer.innerHTML = "";
+		stopwatch.reset();
 	};
 	var stopwatchLapsButtonEvent = function() {
-		var watch = document.querySelector("#stopwatch-time");
-		if (watch.innerHTML != "00:00:00:00" && watch.innerHTML != "") {
+		if (stopwatchTimeContainer.innerHTML != "00:00:00:00" && stopwatchTimeContainer.innerHTML != "") {
 			stopwatch.stopwatchAddLap();
 		}
 	};
 
+
 	function stopwatchLapsScroll() {
-		document.querySelector("#stopwatch-list").scrollTo(0, document.querySelector("#stopwatch-list").scrollHeight);
+		stopwatchList.scrollTo(0, stopwatchList.scrollHeight);
 	}
-	stopwatchStartStopButton.addEventListener("click", stopwatchStartStopButtonEvent);
+	stopwatchPlayButton.addEventListener("click", stopwatchStartStopButtonEvent);
+	stopwatchPauseButton.addEventListener("click", stopwatchStartStopButtonEvent);
 	stopwatchResetButton.addEventListener("click", stopwatchResetButtonEvent);
 	stopwatchLapsButton.addEventListener("click", stopwatchLapsButtonEvent);
 	stopwatchLapsButton.addEventListener("click", stopwatchLapsScroll);
@@ -1789,17 +1793,22 @@ function RNG() {
 	var lastMin = 1;
 	var lastMax = 100;
 
+	var base = document.querySelector("#contain > div#tool section[name='content'] *[name='rng']");
+
 	function rollNumber() {
+
+		var it = 0;
+
 		addIteration();
-		var iteration = document.querySelector("#rng .iterations input").value;
+		var iteration = base.querySelector(":scope span[name='iterations'] input").value;
 		for(var i = 0; i < iteration; i++) {
 			var x = i + 1;
 
 			function generateNumber(x) {
-				var min = parseInt(document.querySelector("#rng ul li[name='" + x + "'] div:nth-child(2) input").value);
-				var max = parseInt(document.querySelector("#rng ul li[name='" + x + "'] div:nth-child(3) input").value) + 1;
+				var min = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(2) input").value);
+				var max = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(3) input").value) + 1;
 				var random1 = Math.floor(Math.random() * (max - min)) + min;
-				var output = document.querySelector(".result div[name='" + x + "']");
+				var output = base.querySelector(":scope *[name='result'] div[name='" + x + "'] > *");
 				var intervalRandom = setInterval(genRandom, 100);
 				var startDate = new Date();
 				var durationMin = 1000;
@@ -1814,35 +1823,69 @@ function RNG() {
 					} else if(random1 == random2 && currentDate - startDate > durationMin) {
 						stopcount();
 					}
-
+		
 					function stopcount() {
 						output.innerText = random1;
 						clearInterval(intervalRandom);
 						output.style.color = "gold";
+						highestLowest();
 					}
 				}
 			}
 			generateNumber(x);
+
 		}
+
+		function highestLowest() {
+
+	
+
+			it = it+1;
+			if (it == iteration) {
+				var nums = [];
+				var num = base.querySelectorAll(":scope div[name='result'] > *")
+				for(var r = 0; r < num.length; r++) {
+					nums.push(num[r].firstElementChild.innerText);
+				}
+			
+				var max = Math.max(...nums);
+				var min = Math.min(...nums);
+
+
+				for(var r = 0; r < num.length; r++) {
+					if (parseInt(num[r].firstElementChild.innerText) == max) {
+						num[r].classList.add("max");
+					}
+					if (parseInt(num[r].firstElementChild.innerText) == min) {
+						num[r].classList.add("min");
+					}
+				}
+			
+			}
+			
+		}
+	
 	}
-	document.querySelector("#rng button").addEventListener("click", rollNumber);
-	document.querySelector("#rng .iterations input").addEventListener("change", addIteration);
+	base.querySelector(":scope button").addEventListener("click", rollNumber);
+	base.querySelector(":scope span[name='iterations'] input").addEventListener("change", addIteration);
 	addIteration();
 
 	function addIteration() {
-		var iteration = document.querySelector("#rng .iterations input").value;
+		var iteration = base.querySelector(":scope span[name='iterations'] input").value;
 		var themin = [];
 		var themax = [];
-		var lis = document.querySelectorAll("#rng ul li");
+		var lis = base.querySelectorAll(":scope ul li");
 		for(var q = 0; q < lis.length; q++) {
 			themin.push(lis[q].lastElementChild.previousElementSibling.firstChild.value);
 			themax.push(lis[q].lastElementChild.firstChild.value);
 			lis[q].remove();
 		}
-		var outs = document.querySelectorAll("#rng .result div");
+
+		var outs = base.querySelectorAll(":scope div[name='result'] > div");
 		for(var q = 0; q < outs.length; q++) {
 			outs[q].remove();
 		}
+		
 		for(var i = 0; i < iteration; i++) {
 			var x = i + 1;
 			var li = document.createElement("li");
@@ -1853,36 +1896,37 @@ function RNG() {
 			var max = document.createElement("div");
 			var maxInput = document.createElement("input");
 			li.setAttribute("name", x);
-			it.setAttribute("name", "it");
+			it.setAttribute("name","it");
 			itText.innerText = "#" + x;
-			itText.setAttribute("title", "Iteration");
-			min.setAttribute("name", "min");
-			minInput.setAttribute("type", "number");
-			minInput.setAttribute("title", "Min");
-			minInput.setAttribute("autocomplete", "off");
+			itText.setAttribute("title","Iteration");
+			min.setAttribute("name","min");
+			minInput.setAttribute("type","number");
+			minInput.setAttribute("title","Min");
+			minInput.setAttribute("autocomplete","off");
 			if(themin[i] != undefined) {
 				minInput.setAttribute("value", themin[i]);
 			} else if(lastMin != undefined) {
 				minInput.setAttribute("value", lastMin);
 			} else {
-				minInput.setAttribute("value", "1");
+				minInput.setAttribute("value","1");
 			}
-			max.setAttribute("name", "max");
-			maxInput.setAttribute("type", "number");
-			maxInput.setAttribute("title", "Max");
-			maxInput.setAttribute("autocomplete", "off");
+			max.setAttribute("name","max");
+			maxInput.setAttribute("type","number");
+			maxInput.setAttribute("title","Max");
+			maxInput.setAttribute("autocomplete","off");
 			if(themax[i] != undefined) {
 				maxInput.setAttribute("value", themax[i]);
 			} else if(lastMax != undefined) {
 				maxInput.setAttribute("value", lastMax);
 			} else {
-				maxInput.setAttribute("value", "100");
+				maxInput.setAttribute("value","100");
 			}
-			minInput.setAttribute("min", "1");
+			minInput.setAttribute("min","1");
 			minInput.setAttribute("max", parseInt(maxInput.value) - 1);
 			maxInput.setAttribute("min", parseInt(minInput.value) + 1);
-			maxInput.setAttribute("max", "1000");
-			document.querySelector("#rng ul").appendChild(li);
+			maxInput.setAttribute("max","1000");
+		
+			base.querySelector(":scope ul").appendChild(li);
 			li.appendChild(it);
 			it.appendChild(itText);
 			li.appendChild(min);
@@ -1892,12 +1936,12 @@ function RNG() {
 			var out = document.createElement("div");
 			out.setAttribute("name", x);
 			out.title = "#" + x + "\n" + "Number between " + minInput.value + "-" + maxInput.value;
-			out.innerText = "-";
-			document.querySelector("#rng .result").appendChild(out);
+			out.innerHTML = "<header>-</header>";
+			base.querySelector(":scope div[name='result']").appendChild(out);
 			minInput.addEventListener("change", minmaxChange);
 			maxInput.addEventListener("change", minmaxChange);
 		}
-		document.querySelector("#rng ul").scrollTo(0, document.querySelector("#rng ul").scrollHeight);
+		base.querySelector(":scope ul").scrollTo(0, base.querySelector(":scope ul").scrollHeight);
 	}
 
 	function minmaxChange() {
@@ -1912,14 +1956,14 @@ function RNG() {
 
 function timerSelector() {
 	if(document.querySelector("#timerselector1").checked == true) {
-		document.querySelector("#stopwatch-outer").style.display = "inline-block";
-		document.querySelector("#countdown-outer").style.display = "none";
-		document.querySelector("#countdown-reset").click();
+		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='stopwatch']").style.display = "block";
+		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='countdown']").style.display = "none";
+		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='countdown'] *[name='reset']").click();
 	}
 	if(document.querySelector("#timerselector2").checked == true) {
-		document.querySelector("#stopwatch-outer").style.display = "none";
-		document.querySelector("#countdown-outer").style.display = "inline-block";
-		document.querySelector("#stopwatch-reset").click();
+		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='stopwatch']").style.display = "none";
+		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='countdown']").style.display = "block";
+		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='stopwatch'] *[name='reset']").click();
 	}
 }
 
@@ -1930,106 +1974,90 @@ function timerSelector() {
 function typeSwitch(type) {
 	var type;
 	var typeTitle = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
-	var img = document.querySelectorAll(".type-againstopposed data img");
-	for(var i = 0; i < img.length; i++) {
-		img[i].remove();
+	var stuff = document.querySelectorAll("#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > span > span");
+	for(var i = 0; i < stuff.length; i++) {
+		stuff[i].innerHTML = "";
 	}
-	var brk = document.querySelectorAll(".type-againstopposed data br");
-	for(var i = 0; i < brk.length; i++) {
-		brk[i].remove();
-	}
-	var spn = document.querySelectorAll(".type-againstopposed data span");
-	for(var i = 0; i < spn.length; i++) {
-		spn[i].remove();
-	}
-	let typetitle = document.querySelector(".type-description-title h1");
-	let typeicon = document.querySelector(".type-symbol");
-	let againstEffective = document.querySelector(".type-against .type-effective-content");
-	let againstIneffective = document.querySelector(".type-against .type-ineffective-content");
-	let againstImmune = document.querySelector(".type-against .type-immune-content");
-	let againstDefault = document.querySelector(".type-against .type-default-content");
-	let opposedEffective = document.querySelector(".type-opposed .type-effective-content");
-	let opposedIneffective = document.querySelector(".type-opposed .type-ineffective-content");
-	let opposedImmune = document.querySelector(".type-opposed .type-immune-content");
-	let opposedDefault = document.querySelector(".type-opposed .type-default-content");
+
+	var base = document.querySelector("#contain > div#tool section[name='content'] *[name='type']");
+	var typetitle = base.querySelector(":scope div[name='sidebar'] div[name='title'] > *:first-child > *");
+	var typeicon = base.querySelector(":scope div[name='sidebar'] div[name='title'] img");
+	var againstEffective = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='effective'] > *:last-child");
+	var againstIneffective = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='ineffective'] > *:last-child");
+	var againstImmune = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='immune'] > *:last-child");
+	var againstDefault = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='default'] > *:last-child");
+	var opposedEffective = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='effective'] > *:last-child");
+	var opposedIneffective = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='ineffective'] > *:last-child");
+	var opposedImmune = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='immune'] > *:last-child");
+	var opposedDefault = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='default'] > *:last-child");
+
+
+
 	typetitle.innerText = typeTitle;
 	typeicon.src = "./media/Images/Misc/Type/Symbol/" + typeicon.alt + "/" + typeTitle + ".png";
 	typeicon.title = typetitle.innerText;
-	var againstEffectiveBreak = document.createElement("br");
-	var againstIneffectiveBreak = document.createElement("br");
-	var againstImmuneBreak = document.createElement("br");
-	var againstDefaultBreak = document.createElement("br");
-	var opposedEffectiveBreak = document.createElement("br");
-	var opposedIneffectiveBreak = document.createElement("br");
-	var opposedImmuneBreak = document.createElement("br");
-	var opposedDefaultBreak = document.createElement("br");
-	var selectors = document.querySelectorAll(".type-selector label");
+
+
+
+	var selectors = document.querySelectorAll("#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] label");
 	for(var i = 0; i < selectors.length; i++) {
 		if(i == 0) {
-			selectors[i].setAttribute("title", "When used on a " + typeTitle + "-type Pokémon");
+			selectors[i].setAttribute("title","When used on a " + typeTitle + "-type Pokémon");
 		}
 		if(i == 1) {
-			selectors[i].setAttribute("title", "When used by a " + typeTitle + "-type Move");
+			selectors[i].setAttribute("title","When used by a " + typeTitle + "-type Move");
 		}
 	}
-	againstEffective.appendChild(againstEffectiveBreak);
-	againstIneffective.appendChild(againstIneffectiveBreak);
-	againstImmune.appendChild(againstImmuneBreak);
-	againstDefault.appendChild(againstDefaultBreak);
-	opposedEffective.appendChild(opposedEffectiveBreak);
-	opposedIneffective.appendChild(opposedIneffectiveBreak);
-	opposedImmune.appendChild(opposedImmuneBreak);
-	opposedDefault.appendChild(opposedDefaultBreak);
+
+
+
+
 	var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[0]).toString().split(",");
 	var index = finaldataTypeChartTitle.indexOf(type);
 	for(var i = 0; i < finaldataTypeChart.length; i++) {
 		if(finaldataTypeChart[i][type] == "0×") {
 			var ImmunityType = document.createElement("img");
 			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			ImmunityType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			ImmunityType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			ImmunityType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			againstImmune.appendChild(ImmunityType);
-			var ImmunityTypeText = document.createElement("span");
+			var ImmunityTypeText = document.createElement("p");
 			ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			againstImmune.appendChild(ImmunityTypeText);
-			againstImmuneBreak.remove();
 		}
 		if(finaldataTypeChart[i][type] == "½×") {
 			var IneffectivenessType = document.createElement("img");
 			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			IneffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			IneffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			againstIneffective.appendChild(IneffectivenessType);
-			var IneffectivenessTypeText = document.createElement("span");
+			var IneffectivenessTypeText = document.createElement("p");
 			IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			againstIneffective.appendChild(IneffectivenessTypeText);
-			againstIneffectiveBreak.remove();
 		}
 		if(finaldataTypeChart[i][type] == "1×") {
 			var DefaultType = document.createElement("img");
 			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			DefaultType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			DefaultType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			DefaultType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			againstDefault.appendChild(DefaultType);
-			var DefaultTypeText = document.createElement("span");
+			var DefaultTypeText = document.createElement("p");
 			DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			againstDefault.appendChild(DefaultTypeText);
-			againstDefaultBreak.remove();
 		}
 		if(finaldataTypeChart[i][type] == "2×") {
 			var EffectivenessType = document.createElement("img");
 			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			EffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			EffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			againstEffective.appendChild(EffectivenessType);
-			var EffectivenessTypeText = document.createElement("span");
+			var EffectivenessTypeText = document.createElement("p");
 			EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			againstEffective.appendChild(EffectivenessTypeText);
-			againstEffectiveBreak.remove();
 		}
 	}
 	for(var i = 0; i < finaldataTypeChart.length; i++) {
@@ -2038,103 +2066,70 @@ function typeSwitch(type) {
 			] == "0×") {
 			var ImmunityType = document.createElement("img");
 			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			ImmunityType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			ImmunityType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			ImmunityType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			opposedImmune.appendChild(ImmunityType);
-			var ImmunityTypeText = document.createElement("span");
+			var ImmunityTypeText = document.createElement("p");
 			ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			opposedImmune.appendChild(ImmunityTypeText);
-			opposedImmuneBreak.remove();
 		}
 		if(finaldataTypeChart[index][
 				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
 			] == "½×") {
 			var IneffectivenessType = document.createElement("img");
 			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			IneffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			IneffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			opposedIneffective.appendChild(IneffectivenessType);
-			var IneffectivenessTypeText = document.createElement("span");
+			var IneffectivenessTypeText = document.createElement("p");
 			IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			opposedIneffective.appendChild(IneffectivenessTypeText);
-			opposedIneffectiveBreak.remove();
 		}
 		if(finaldataTypeChart[index][
 				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
 			] == "1×") {
 			var DefaultType = document.createElement("img");
 			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			DefaultType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			DefaultType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			DefaultType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			opposedDefault.appendChild(DefaultType);
-			var DefaultTypeText = document.createElement("span");
+			var DefaultTypeText = document.createElement("p");
 			DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			opposedDefault.appendChild(DefaultTypeText);
-			opposedDefaultBreak.remove();
+
 		}
 		if(finaldataTypeChart[index][
 				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
 			] == "2×") {
 			var EffectivenessType = document.createElement("img");
 			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
-			EffectivenessType.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='inline'");
+			EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
 			EffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
 			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
 			opposedEffective.appendChild(EffectivenessType);
-			var EffectivenessTypeText = document.createElement("span");
+			var EffectivenessTypeText = document.createElement("p");
 			EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
 			opposedEffective.appendChild(EffectivenessTypeText);
-			opposedEffectiveBreak.remove();
 		}
 	}
 }
 
-function switchTypeChartMatrix() {
-	const typeChartMatrixText = document.querySelectorAll(".typechart th");
-	const typeChartMatrixImg = document.querySelectorAll(".typechart th img");
-	const check1 = document.getElementById("typechart-title-switch-1");
-	const check2 = document.getElementById("typechart-title-switch-2");
-	const checklabel1 = document.querySelector("#typechart-title-switch-1 ~ label");
-	const checklabel2 = document.querySelector("#typechart-title-switch-2 ~ label");
-	if(check1.checked == true) {
-		for(var i = 0; i < typeChartMatrixText.length; i++) {
-			typeChartMatrixText[i].style.fontSize = "0.5vw";
+function matrixHoverClass(event) {
+	var base = event.target;
+	
+	var tar = base.parentElement.parentElement.firstChild;
+	var els = base.parentElement.querySelectorAll(":scope > *");
+
+	var num = 0;
+	for(var q = 0; q < els.length; q++) {
+		if (els[q] == base) {
+			num = q;
+			break;
 		}
-		for(var i = 0; i < typeChartMatrixImg.length; i++) {
-			typeChartMatrixImg[i].style.display = "none";
-		}
-		checklabel1.parentElement.style.fontSize = "unset";
-		checklabel1.style.display = "none";
-		checklabel2.style.display = "block";
 	}
-	if(check2.checked == true) {
-		for(var i = 0; i < typeChartMatrixText.length; i++) {
-			typeChartMatrixText[i].style.fontSize = "0%";
-		}
-		for(var i = 0; i < typeChartMatrixImg.length; i++) {
-			typeChartMatrixImg[i].style.display = "block";
-		}
-		checklabel1.parentElement.style.fontSize = "unset";
-		checklabel1.style.display = "block";
-		checklabel2.style.display = "none";
-	}
+	tar.className = "";
+	tar.className = num;
 }
-
-
-$("#typechart-matrix-table td").bind("mouseover mouseleave", function(e) {
-	var index = this.cellIndex;
-	if(e.type == "mouseover") {
-		$(this).parent().addClass("highlight");
-		$(this).parents("table").find("tr").each(function() {
-			$(this).find("th").eq(index).addClass("highlight");
-		});
-	} else {
-		$(this).parent().removeClass("highlight");
-		$(this).parents("table").find("tr").each(function() {
-			$(this).find("th").eq(index).removeClass("highlight");
-		});
-	}
-});
