@@ -458,14 +458,16 @@ li:focus {
 
 
 [title="Male"],
-[name="Male"] {
+[name="Male"],
+[name="male"] {
 	color: var(--colorBlue);
 	font-family: fantasy;
 	font-weight: bold;
 }
 
 [title="Female"],
-[name="Female"] {
+[name="Female"],
+[name="female"] {
 	color: var(--colorRed);
 	font-family: fantasy;
 	font-weight: bold;
