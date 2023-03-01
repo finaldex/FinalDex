@@ -643,11 +643,10 @@ var createData = function(id, i) {
 
 		}
 	}
-    dataSectionHeaderTypePrimaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
-	dataSectionHeaderTypeSecondaryText.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+    dataSectionHeaderTypePrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+	dataSectionHeaderTypeSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
 
-	dataSectionHeaderTypePrimaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
-	dataSectionHeaderTypeSecondaryImg.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+
 	
 	if(Ability.length >= 1) {
 		dataSectionMainMetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
@@ -1835,21 +1834,600 @@ function modalData() {
 }
 
 
+function callPopUp(x, arr, type, style) {
+	var x;
+	var arr;
+	var type;
+	var popup = document.querySelector("#data > div[value='"+x+"'] section[name='main'] > div[name='metadata'] > div[name='popup']");
+	var ul = popup.querySelector(":scope ul");
+	var lis = popup.querySelectorAll(":scope li");
+	var idpath = popup.querySelector(":scope span > h6");
+	var iconpath = popup.querySelector(":scope span > img");
+	var titlepath = popup.querySelector(":scope span > h4");
+	var descriptionpath = popup.querySelector(":scope span > p");
 
-function doubleClicker(handler) {
-	var timeout = 0,
-		clicked = false;
-	return function(e) {
-		e.preventDefault();
-		if(clicked) {
-			clearTimeout(timeout);
-			clicked = false;
-			return handler.apply(this, arguments);
-		} else {
-			clicked = true;
-			timeout = setTimeout(function() {
-				clicked = false;
-			}, 1000);
+
+    if (popup.classList.length == 0) {
+        popup.classList.add("close");
+    }
+	if(!popup.getAttribute("class").includes("open") && !popup.getAttribute("class").includes("close")) {
+		popup.classList.add("close");
+	}
+	var id;
+	var icon;
+	var title;
+	var description;
+	var additional;
+	var style;
+	var formula;
+	var abbreviation;
+	var alteration;
+	var target = event.currentTarget;
+	var enhancetarget;
+	if(target.getAttribute("dataname") == "value") {
+		enhancetarget = target;
+	} else {
+		enhancetarget = target.querySelector(':scope [dataname="value"]');
+	}
+	if(enhancetarget.getAttribute("value") != undefined) {
+		title = enhancetarget.getAttribute("value");
+	} else if(enhancetarget.innerText != "") {
+		title = enhancetarget.innerText;
+	} else if(enhancetarget.getAttribute("title") != undefined) {
+		title = enhancetarget.getAttribute("title");
+	}
+	if(title.includes("  ")) {
+		title = title.replaceAll("  ","");
+	}
+	if(navChecker != 1) {
+		navChecker.fill(1);
+		document.querySelector("#data > div[value='"+x+"'] nav label:nth-child(2)").click();
+	}
+	ul.setAttribute("name", type);
+	if(type == "Ability") {
+		id = getAbilityData(title,"ID");
+		description = getAbilityData(title,"Flavor");
+	} else if(type == "Held Item") {
+		id = enhancetarget.getAttribute("name");
+        description = getItemData(title,"Description").join("\n");
+	}
+	if(title.includes(" : ")) {
+		title = title.split(" : ");
+	}
+	if(type == "Catch Rate") {
+		if(Generation == 1) {
+			formula = Math.round(((Math.min(parseInt(title)+1, 256)) / 256 * (85+1 / 256) / 256 * 100) * 10) / 10+"%";
+		} else if(Generation == 2) {
+			formula = Math.round(((Math.max(parseInt(title) / 3, 1)+1) / 256 * 100) * 10) / 10+"%";
+		} else if(Generation == 3 || Generation == 4) {
+			formula = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(title) / 3))) / 65536) ** 4 * 100) * 10) / 10+"%";
+		} else if(Generation >= 5) {
+			formula = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(title) / 3))) / 65536) ** 3 * 100) * 10) / 10+"%";
 		}
-	};
+	} else if(type == "Experience Yield") {
+		if(title >= 300) {
+			abbreviation = "Very High";
+		} else if(title >= 200 && title <= 299) {
+			abbreviation = "High";
+		} else if(title >= 100 && title <= 199) {
+			abbreviation = "Medium";
+		} else if(title >= 50 && title <= 99) {
+			abbreviation = "Low";
+		} else if(title >= 0 && title <= 49) {
+			abbreviation = "Very Low";
+		}
+	} else if(type == "Hatch Rate") {
+		if(Generation == 2 || Generation == 7) {
+			formula = parseInt(title) * 256;
+		} else if(Generation == 3) {
+			formula = (parseInt(title)+1) * 256;
+		} else if(Generation == 4) {
+			formula = (parseInt(title)+1) * 255;
+		} else if(Generation == 5 || Generation == 6) {
+			formula = parseInt(title) * 257;
+		}
+	} else if(type == "Gender Ratio") {
+		if(title[0] == "1" && title[1] == "0") { // Always Male
+			alteration = "<span name='male'>♂</span> 1 : 0 <span name='female'>♀</span>";
+			abbreviation = "Always Male";
+		} else if(title[0] == "7" && title[1] == "1") { // Very Often Male
+			alteration = "<span name='male'>♂</span> 7 : 1 <span name='female'>♀</span>";
+			abbreviation = "Very Often Male";
+		} else if(title[0] == "3" && title[1] == "1") { // Often Male
+			alteration = "<span name='male'>♂</span> 3 : 1 <span name='female'>♀</span>";
+			abbreviation = "Often Male";
+		} else if(title[0] == "1" && title[1] == "1") { // Equal Ratio
+			alteration = "<span name='male'>♂</span> 1 : 1 <span name='female'>♀</span>";
+			abbreviation = "Equal Ratio";
+		} else if(title[0] == "1" && title[1] == "3") { // Often Female
+			alteration = "<span name='male'>♂</span> 1 : 3 <span name='female'>♀</span>";
+			abbreviation = "Often Female";
+		} else if(title[0] == "1" && title[1] == "7") { // Very Often Female
+			alteration = "<span name='male'>♂</span> 1 : 7 <span name='female'>♀</span>";
+			abbreviation = "Very Often Female";
+		} else if(title[0] == "0" && title[1] == "1") { // Always Female
+			alteration = "<span name='male'>♂</span> 0 : 1 <span name='female'>♀</span>";
+			abbreviation = "Always Female";
+		} else if(title[0] == "0" && title[1] == "0") { // Genderless
+			alteration = "<span name='male'>♂</span> 0 : 0 <span name='female'>♀</span>";
+			abbreviation = "Genderless";
+		}
+	}
+	if(type == "Held Item") {
+		icon = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(target.getAttribute("value"))+".png";
+		iconpath.setAttribute("name","item");
+		iconpath.addEventListener("click", dataRedirect);
+        iconpath.setAttribute("function","dataRedirect");
+	}
+	if(type == "Base Stats" && style == "Multiple" || type == "EV Yield" && style == "Multiple") {
+		additional = target.parentElement.getAttribute("name");
+	} else if(type == "Base Stats" && style == "Total" || type == "EV Yield" && style == "Total") {
+		additional = target.getAttribute("name");
+	}
+	if(additional == "hp") {
+		additional = "HP";
+	} else if(additional == "atk") {
+		additional = "attack";
+	} else if(additional == "def") {
+		additional = "defense";
+	} else if(additional == "spatk") {
+		additional = "Sp. Atk";
+	} else if(additional == "spdef") {
+		additional = "Sp. Def";
+	}
+	if(additional != undefined) {
+		additional = additional.charAt(0).toUpperCase()+additional.slice(1);
+	}
+	for(u = 0; u < lis.length; u++) {
+		lis[u].remove();
+	}
+	
+	if(type == "Ability") {
+		var jsonpath = JSONPath_Ability;
+		if(Generation <= 4) {
+			var json = ["Primary","Secondary"];
+		} else {
+			var json = ["Primary","Secondary","Hidden"];
+		}
+		json = json.map(i => i+"_"+jsonpath);
+	} else if(type == "Egg Group") {
+		var jsonpath = JSONPath_EggGroup;
+		var json = ["Primary","Secondary"];
+		json = json.map(i => i+"_"+jsonpath);
+	} else if(type == "Catch Rate") {
+		var json = [JSONPath_CatchRate,"Percentage"];
+	} else if(type == "Hatch Rate") {
+		var json = ["Egg Cycle_"+JSONPath_HatchRateEggCycle,"Steps_"+JSONPath_HatchRateSteps];
+	} else if(type == "Experience Yield") {
+		var json = [JSONPath_ExperienceYield,"Category"];
+	} else if(type == "Leveling Rate") {
+		var json = [JSONPath_LevelingRate];
+	} else if(type == "Type") {
+		var jsonpath = JSONPath_Type;
+		var json = ["Primary","Secondary"];
+		json = json.map(i => i+"_"+jsonpath);
+	} else if(type == "Gender Ratio") {
+		var jsonpath = JSONPath_GenderRatio;
+		var json = ["Male","Female"];
+		json = json.map(i => i+"_"+jsonpath);
+	} else if(type == "Base Stats") {
+		if(Generation <= 1) {
+			var jsonpath = JSONPath_BaseStats;
+			var json = ["HP","Attack","Defense","Special","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
+		} else {
+			var jsonpath = JSONPath_BaseStats;
+			var json = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
+		}
+	} else if(type == "EV Yield") {
+		if(Generation <= 1) {
+			var jsonpath = JSONPath_EVYield;
+			var json = ["HP","Attack","Defense","Special","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
+		} else {
+			var jsonpath = JSONPath_EVYield;
+			var json = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
+			json = json.map(i => i+"_"+jsonpath);
+		}
+	} else if(type == "Held Item") {
+		var jsonpath = JSONPath_HeldItem;
+		var json = JSONPath_HeldItemPercentage;
+		json = json.map(i => i+"_"+jsonpath);
+	}
+	if(id == undefined) {
+		idpath.innerText = "";
+		idpath.style.display = "none";
+	} else if(id.includes("%")) {
+		idpath.innerText = id;
+		idpath.style.display = "unset";
+	} else {
+		idpath.innerText = "#"+id;
+		idpath.style.display = "unset";
+	}
+	if(style == "Total") {
+		titlepath.innerHTML = type+"<br>"+title;
+	} else if(type == "Catch Rate" || type == "Experience Yield" || type == "Leveling Rate" || type == "Base Stats" || type == "EV Yield") {
+		if(additional == undefined) {
+			titlepath.innerHTML = type+"<br>"+title;
+		} else {
+			titlepath.innerHTML = type+" "+additional+"<br>"+title;
+		}
+	} else if(type == "Hatch Rate") {
+		titlepath.innerHTML = "Egg Cycles<br>"+title;
+	} else if(type == "Gender Ratio") {
+		titlepath.innerHTML = type+"<br>"+"<span title='"+abbreviation+"'>"+alteration+"</span>";
+	} else if (type == "Egg Group") {
+        titlepath.innerHTML = type+"<br>"+"<span name='eggText"+title+"'>"+title+"</span>";
+    } else {
+		titlepath.innerText = title;
+	}
+	if(icon != undefined) {
+		iconpath.style.display = "unset";
+		iconpath.src = icon;
+	} else {
+		iconpath.style.display = "none";
+	}
+	iconpath.title = title;
+	descriptionpath.innerText = description;
+
+
+	if (description == undefined) {
+		descriptionpath.style.display = "none";
+	} else {
+		descriptionpath.style.removeProperty("display");
+	}
+
+    
+	var result = [];
+	if(style == "Single") {
+		for(q = 0; q < json.length; q++) {
+			for(u = 0; u < arr.length; u++) {
+				if(arr[u][json[q]] == title) {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
+						var obj = new Object();
+						obj["Integer"] = u;
+						for(var y = 0; y < json.length; y++) {
+							if(arr[u][json[y]] != undefined) {
+								obj[json[y]] = arr[u][json[y]];
+							}
+						}
+						if(type == "Catch Rate") {
+							if(Generation == 1) {
+								obj["Percentage"] = Math.round(((Math.min(parseInt(arr[u][json[q]])+1, 256)) / 256 * (85+1 / 256) / 256 * 100) * 10) / 10+"%";
+							}
+							if(Generation == 2) {
+								obj["Percentage"] = Math.round(((Math.max(parseInt(arr[u][json[q]]) / 3, 1)+1) / 256 * 100) * 10) / 10+"%";
+							}
+							if(Generation == 3 || Generation == 4) {
+								obj["Percentage"] = Math.round(((65535 / Math.sqrt(Math.sqrt(255 / (parseInt(arr[u][json[q]]) / 3))) / 65536) ** 4 * 100) * 10) / 10+"%";
+							}
+							if(Generation >= 5) {
+								obj["Percentage"] = Math.round(((65536 / Math.sqrt(Math.sqrt(255 / (parseInt(arr[u][json[q]]) / 3))) / 65536) ** 3 * 100) * 10) / 10+"%";
+							}
+						}
+						result[u] = obj;
+					}
+				}
+			}
+		}
+	} else if(style == "Multiple") {
+		for(q = 0; q < json.length; q++) {
+			for(u = 0; u < arr.length; u++) {
+				if(arr[u][additional+"_"+jsonpath] == title) {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
+						var obj = new Object();
+						obj["Integer"] = u;
+						for(var y = 0; y < json.length; y++) {
+							if(arr[u][json[y]] != undefined) {
+								obj[json[y]] = arr[u][json[y]];
+							}
+						}
+						result[u] = obj;
+					}
+				}
+			}
+		}
+	} else if(style == "Total") {
+		for(q = 0; q < json.length; q++) {
+			for(u = 0; u < arr.length; u++) {
+				if(arr[u][json[q]] != undefined) {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
+						var obj = new Object();
+						obj["Integer"] = u;
+						for(var y = 0; y < json.length; y++) {
+							if(arr[u][json[y]] != undefined) {
+								obj[json[y]] = arr[u][json[y]];
+							}
+						}
+						result[u] = obj;
+					}
+				}
+			}
+		}
+		result.sort(function(a, b) {
+			return b[additional+"_"+jsonpath] - a[additional+"_"+jsonpath];
+		});
+	} else if(style == "Custom1") {
+		for(var q = 0; q < json.length; q++) {
+			for(var u = 0; u < arr.length; u++) {
+				var condition;
+				var abbreviation2;
+				if(abbreviation == "Very High") {
+					condition = parseInt(arr[u][json[q]]) >= 300;
+					abbreviation2 = "Very High";
+				}
+				if(abbreviation == "High") {
+					condition = parseInt(arr[u][json[q]]) >= 200 && parseInt(arr[u][json[q]]) <= 299;
+					abbreviation2 = "High";
+				}
+				if(abbreviation == "Medium") {
+					condition = parseInt(arr[u][json[q]]) >= 100 && parseInt(arr[u][json[q]]) <= 199;
+					abbreviation2 = "Medium";
+				}
+				if(abbreviation == "Low") {
+					condition = parseInt(arr[u][json[q]]) >= 50 && parseInt(arr[u][json[q]]) <= 99;
+					abbreviation2 = "Low";
+				}
+				if(abbreviation == "Very Low") {
+					condition = parseInt(arr[u][json[q]]) >= 0 && parseInt(arr[u][json[q]]) <= 49;
+					abbreviation2 = "Very Low";
+				}
+				if(condition) {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
+						var obj = new Object();
+						obj["Integer"] = u;
+						obj["Category"] = abbreviation2;
+						for(var y = 0; y < json.length; y++) {
+							if(arr[u][json[y]] != undefined) {
+								obj[json[y]] = arr[u][json[y]];
+							}
+						}
+						result[u] = obj;
+					}
+				}
+			}
+		}
+		result.sort(function(a, b) {
+			return b[json[0]] - a[json[0]];
+		});
+	} else if(style == "Custom2") {
+		for(var q = 0; q < json.length; q++) {
+			for(var u = 0; u < arr.length; u++) {
+				var alteration2;
+				var abbreviation2;
+				if(arr[u][json[0]] == "1" && arr[u][json[1]] == "0") { // Always Male
+					alteration2 = "<span name='male'>♂</span> 1 : 0 <span name='female'>♀</span>";
+					abbreviation2 = "Always Male";
+				} else if(arr[u][json[0]] == "7" && arr[u][json[1]] == "1") { // Very Often Male
+					alteration2 = "<span name='male'>♂</span> 7 : 1 <span name='female'>♀</span>";
+					abbreviation2 = "Very Often Male";
+				} else if(arr[u][json[0]] == "3" && arr[u][json[1]] == "1") { // Often Male
+					alteration2 = "<span name='male'>♂</span> 3 : 1 <span name='female'>♀</span>";
+					abbreviation2 = "Often Male";
+				} else if(arr[u][json[0]] == "1" && arr[u][json[1]] == "1") { // Equal Ratio
+					alteration2 = "<span name='male'>♂</span> 1 : 1 <span name='female'>♀</span>";
+					abbreviation2 = "Equal Ratio";
+				} else if(arr[u][json[0]] == "1" && arr[u][json[1]] == "3") { // Often Female
+					alteration2 = "<span name='male'>♂</span> 1 : 3 <span name='female'>♀</span>";
+					abbreviation2 = "Often Female";
+				} else if(arr[u][json[0]] == "1" && arr[u][json[1]] == "7") { // Very Often Female
+					alteration2 = "<span name='male'>♂</span> 1 : 7 <span name='female'>♀</span>";
+					abbreviation2 = "Very Often Female";
+				} else if(arr[u][json[0]] == "0" && arr[u][json[1]] == "1") { // Always Female
+					alteration2 = "<span name='male'>♂</span> 0 : 1 <span name='female'>♀</span>";
+					abbreviation2 = "Always Female";
+				} else if(arr[u][json[0]] == "0" && arr[u][json[1]] == "0") { // Genderless
+					alteration2 = "<span name='male'>♂</span> 0 : 0 <span name='female'>♀</span>";
+					abbreviation2 = "Genderless";
+				}
+				if(alteration == alteration2) {
+					if(finaldataPokémon[u][JSONPath_Reference] == "true") {
+						var obj = new Object();
+						obj["Integer"] = u;
+						obj["Alteration"] = alteration2;
+						obj["Abbreviation"] = abbreviation2;
+						for(var y = 0; y < json.length; y++) {
+							if(arr[u][json[y]] != undefined) {
+								obj[json[y]] = arr[u][json[y]];
+							}
+						}
+						result[u] = obj;
+					}
+				}
+			}
+		}
+		result.sort(function(a, b) {
+			return b[json[0]] - a[json[0]];
+		});
+	}
+	result = result.filter(value => Object.keys(value).length !== 0);
+	if(icon == undefined) {
+		for(u = 0; u < result.length; u++) {
+            var int = result[u]["Integer"];
+            var name = getPokémonName(int);
+
+			var li = document.createElement("li");
+			var span = document.createElement("span");
+			if(type == "Ability") {
+				if(Generation <= 4) {
+					li.setAttribute("name","2");
+				} else {
+					li.setAttribute("name","3");
+				}
+			}
+			var img = document.createElement("img");
+            img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
+            img.title = name;
+            img.setAttribute("value",int);
+			img.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+            img.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+
+			if(getIntID(int,"") == x) {
+				li.classList.add("select");
+			}
+
+			img.addEventListener("click", modalData);
+            img.setAttribute("function","modalData");
+			ul.appendChild(li);
+			li.appendChild(span);
+			span.appendChild(img);
+			if(type == "Gender Ratio") {
+				var p = document.createElement("p");
+				p.title = result[u]["Abbreviation"];
+				if(result[u]["Category"] == formula) {
+					p.classList.add("select");
+				}
+				if(result[u]["Alteration"] != undefined) {
+					p.innerHTML = result[u]["Alteration"];
+				} else {
+					p.innerText = "–";
+				}
+				li.appendChild(p);
+			} else {
+				for(q = 0; q < json.length; q++) {
+					var p = document.createElement("p");
+					if(type == "Hatch Rate" && q == 0) {
+						p.title = "Egg Cycles";
+					} else if(type == "Hatch Rate" && q == 1) {
+						p.title = "Steps";
+					} else if(type == "Base Stats" || type == "EV Yield") {
+						p.title = json[q].split("_")[0];
+						p.setAttribute("name","stat"+json[q].split("_")[0]);
+					} else if(json[q].includes("_") && type != "Base Stats" || json[q].includes("_") && type != "EV Yield") {
+						p.title = json[q].split("_")[0]+" "+type;
+					} else if(type == "Catch Rate") {
+						if(q == 0) {
+							p.title = type;
+						} else {
+                            p.title = "When thrown at a full health "+name+" with an ordinary Poké Ball.";
+						}
+					} else if(type == "Experience Yield") {
+						if(q == 0) {
+							p.title = type;
+						} else {
+							p.title = type+" Category";
+						}
+					} else {
+						p.title = type;
+					}
+					if(style == "Multiple") {
+						if(result[u][json[q]] == title && json[q] == additional+"_"+jsonpath) {
+							p.classList.add("select");
+						}
+					} else if(style == "Total") {
+						if(json[q] == additional+"_"+jsonpath) {
+							p.classList.add("select");
+						}
+					} else if(type == "Catch Rate" || type == "Hatch Rate" || type == "Experience Yield") {
+						if(result[u][json[q]] == title || result[u][json[q]] == formula || result[u][json[q]] == abbreviation) {
+							p.classList.add("select");
+						}
+					} else {
+						if(result[u][json[q]] == title) {
+							p.classList.add("select");
+						}
+					}
+					if(type != "Type") {
+						if(type == "Egg Group") {
+							if(result[u][json[q]] != undefined) {
+								p.innerText = result[u][json[q]];
+								p.setAttribute("name","eggText"+result[u][json[q]]);
+							} else {
+								p.innerText = "–";
+							}
+						} else {
+							if(result[u][json[q]] != undefined) {
+								p.innerText = result[u][json[q]];
+								if(type == "Ability") {
+									p.setAttribute("name","ability");
+									p.addEventListener("click", dataRedirect);
+                                    p.setAttribute("function","dataRedirect");
+									p.classList.add("active");
+								}
+							} else {
+								p.innerText = "–";
+							}
+						}
+					} else {
+						var img2 = document.createElement("img");
+						var text = document.createElement("p");
+						if(result[u][json[q]] != undefined) {
+							img2.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+result[u][json[q]]+".png";
+							img2.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
+							text.innerText = result[u][json[q]];
+						}
+						text.style.display = "none";
+						p.appendChild(img2);
+						p.appendChild(text);
+					}
+					li.appendChild(p);
+				}
+			}
+		}
+	} else {
+		for(u = 0; u < result.length; u++) {
+            var int = result[u]["Integer"];
+            var name = getPokémonName(int);
+
+			var li = document.createElement("li");
+			var span = document.createElement("span");
+			var img = document.createElement("img");
+	
+            img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
+            img.title = name;
+            img.setAttribute("value",int);
+			
+			if(type == "Held Item") {
+				li.setAttribute("name", json.length);
+			}
+			img.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+            img.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+			if(getIntID(int,"") == x) {
+				img.classList.add("select");
+			}
+			img.addEventListener("click", modalData);
+            img.setAttribute("function","modalData");
+			ul.appendChild(li);
+			li.appendChild(span);
+			span.appendChild(img);
+			for(q = 0; q < json.length; q++) {
+				var p = document.createElement("p");
+				var span2 = document.createElement("span");
+				var pimg = document.createElement("img");
+				if(result[u][json[q]] != undefined) {
+					pimg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(result[u][json[q]])+".png";
+                    pimg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Misc/FinalDex/Error.png';this.setAttribute('srced','');}");
+                    pimg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+					pimg.title = result[u][json[q]];
+					if(json[q].includes("_")) {
+						span2.innerText = json[q].split("_")[0];
+					} else {
+						span2.innerText = json[q];
+					}
+					pimg.setAttribute("name","item");
+					pimg.addEventListener("click", dataRedirect);
+                    pimg.setAttribute("function","dataRedirect");
+					pimg.classList.add("active");
+				} else {
+					span2.innerText = "–";
+					pimg.style.display = "none";
+				}
+				p.title = json[q].split("_")[0];
+				if(result[u][json[q]] == title) {
+					pimg.classList.add("select");
+				}
+				if(result[u][json[q]] == title && json[q].split("_")[0] == id) {
+					span2.classList.add("select");
+					li.classList.add("select");
+				}
+				li.appendChild(p);
+				p.appendChild(span2);
+				p.appendChild(pimg);
+			}
+		}
+	}
+	ul.querySelector(":scope > li.select").scrollIntoView();
 }
+
+
