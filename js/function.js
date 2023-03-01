@@ -1418,3 +1418,23 @@ function returnMoveLearnset(move,conditions) {
 	return result;
 	
 }
+
+
+
+function doubleClicker(handler) {
+	var timeout = 0,
+		clicked = false;
+	return function(e) {
+		e.preventDefault();
+		if(clicked) {
+			clearTimeout(timeout);
+			clicked = false;
+			return handler.apply(this, arguments);
+		} else {
+			clicked = true;
+			timeout = setTimeout(function() {
+				clicked = false;
+			}, 1000);
+		}
+	};
+}
