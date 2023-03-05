@@ -69,7 +69,7 @@ var createNav = function() {
 	fullscreenOverlay.addEventListener("click",exitFullscreen);
 
 	fullscreenButtonLeft.addEventListener("click",function(){fullscreenMove("left")});
-	fullscreenButtonRight.addEventListener("click",function(){fullscreenMove("left")});
+	fullscreenButtonRight.addEventListener("click",function(){fullscreenMove("right")});
 }
 
 function navSelector() {
