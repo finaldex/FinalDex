@@ -112,14 +112,17 @@
 	transition: all 0.5s;
 	fill:transparent;
 	stroke: transparent;
-  stroke-width: 2px;
 }
 
 svg[name="mark"] .mapify-polygon[name="active"] {
 	fill: var(--colorRed);
-	stroke: none;
+  stroke: var(--color1);
+  stroke-width: 1px;
+  stroke-dasharray: 2px;
 }
-
+body[generation="2"] svg[name="mark"] .mapify-polygon[name="active"] {
+  fill: var(--colorBlue);
+}
 
 
 
@@ -129,7 +132,9 @@ svg[name="mark"] .mapify-polygon[name="active"] {
 
 .mapify-hover{
 	fill: var(--colorGreen);
-    stroke: none;
+  stroke: var(--color1);
+  stroke-width: 1px;
+  stroke-dasharray: 2px;
 }
 body[game="Sun"] .mapify-hover,
 body[game="Moon"] .mapify-hover,
