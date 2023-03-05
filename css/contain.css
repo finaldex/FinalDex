@@ -405,6 +405,15 @@
     align-items: center;
 	background: var(--color_5);
 }
+
+#contain div#item > section[name="sidebar"] > * > div:first-child > div:not([name="pause"]) ~ figure[name="pause"] {
+	display: none;
+}
+
+#contain div#item > section[name="sidebar"] > * > div:first-child figure > * {
+	text-shadow: 1px 1px 0px var(--border1);
+}
+
 #contain div#item > section[name="sidebar"] > * > div:first-child figure {
 	position: absolute;
 }
@@ -412,6 +421,12 @@
 	bottom: 5px;
 	right: 5px;
 }
+#contain div#item > section[name="sidebar"] > * > div:first-child figure[name="pause"] {
+	left: 5px;
+	bottom: 5px;
+	cursor: default;
+}
+
 
 #contain div#item > section[name="sidebar"] > * > div:first-child figure[name="zoom"] {
 	top: 5px;
@@ -1529,7 +1544,15 @@
 	color:var(--fontLight);
 }
 
+#contain > div#map > section[name='content'] > *[name='map'] > div > div > div:not([name="pause"]) ~ figure[name="pause"] {
+	display: none;
+}
 
+#contain > div#map > section[name='content'] > *[name='map'] > div figure[name="pause"] {
+	bottom: 15px;
+	left: 10px;
+	cursor: default;
+}
 
 #contain > div#map > section[name='content'] > *[name='map'] > div figure[name="reset"] {
 	top: 10px;
@@ -1850,7 +1873,7 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li img {
+#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li span[name="rate"] img {
     max-width: 30px;
 }
 
