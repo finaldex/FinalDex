@@ -475,10 +475,10 @@ var createPokémon = function() {
                             teamDataAddInput.appendChild(teamDataAddLabel)
 
                             for(var t = 0; t < finaldataLocation.length; t++) {
-                                if (finaldataLocation[t][JSONPath_Location+"_Name"] != undefined) {
+                                if (finaldataLocation[t]["Location"] != undefined) {
                                     var teamDataAddLabel = document.createElement("option");
-                                    teamDataAddLabel.innerText = finaldataLocation[t][JSONPath_Location+"_Name"];
-                                    teamDataAddLabel.value = finaldataLocation[t][JSONPath_Location+"_Name"];
+                                    teamDataAddLabel.innerText = finaldataLocation[t]["Location"];
+                                    teamDataAddLabel.value = finaldataLocation[t]["Location"];
                                     teamDataAddInput.appendChild(teamDataAddLabel)
                                 }
                             }
