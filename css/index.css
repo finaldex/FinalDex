@@ -19,7 +19,9 @@ nav {
 }
 
 
-
+nav b:active {
+    transform:scale(0.95);
+}
 nav > div:first-child {
     display: flex;
     align-items: center;
