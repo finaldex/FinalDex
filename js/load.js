@@ -81,198 +81,204 @@ for(var i = 0; i < loads.length; i++) {
 }
 
 function requestLoad(i,url) {
-	var startDate = new Date();
+	
 	var i;
 	var url;
-	var request = new XMLHttpRequest();
-	request.open('GET', url);
-	request.responseType = 'json';
-	request.send();
-	request.onload = function() {
-		var Metadata = request.response;
-		console.log(request)
 
-			if(loads[i] == "Locations") {
-				for(var q = 0; q < Metadata["Reference"].length; q++) {
-					if (Metadata["Reference"][q][JSONPath_Location+"_"+"Name"] != undefined) {
-						finaldataLocation.push(Metadata["Reference"][q]);
+	var gameRequest = new XMLHttpRequest();
+	gameRequest.open('GET', baseurl+loads[0]+baseextra+"."+baseextension);
+	gameRequest.responseType = 'json';
+	gameRequest.send();
+	gameRequest.onload = function() {
+		var Metadata = gameRequest.response;
+		if (loads[i] == "Game") {
+			for(var q = 0; q < Metadata["Reference"].length; q++) {
+				finaldataGame.push(Metadata["Reference"][q]);
+			}
+
+			var urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","");
+			GameID = getGameName("",urlid);
+			define();
+
+			for(var q = 0; q < Metadata["Type Chart_" + JSONPath_Typechart].length; q++) {
+				finaldataTypeChart.push(Metadata["Type Chart_" + JSONPath_Typechart][q]);
+			}
+			for(var q = 0; q < Metadata["Exclusive Pokémon"].length; q++) {
+				finaldataExclusivePokémon.push(Metadata["Exclusive Pokémon"][q]);
+			}
+			for(var q = 0; q < Metadata["Exclusive Item"].length; q++) {
+				finaldataExclusiveItem.push(Metadata["Exclusive Item"][q]);
+			}
+			for(var q = 0; q < Metadata["Exclusive Feature"].length; q++) {
+				finaldataExclusiveFeature.push(Metadata["Exclusive Feature"][q]);
+			}
+		}
+		
+		if (i != 0) {
+			var request = new XMLHttpRequest();
+			request.open('GET', url);
+			request.responseType = 'json';
+			request.send();
+			request.onload = function() {
+				var Metadata = request.response;
+					if(loads[i] == "Locations") {
+						for(var q = 0; q < Metadata["Reference"].length; q++) {
+							if (Metadata["Reference"][q][JSONPath_Location+"_"+"Name"] != undefined) {
+								finaldataLocation.push(Metadata["Reference"][q]);
+							}
+						}
+						for(var q = 0; q < Metadata["Connecting"].length; q++) {
+							finaldataLocationConnection.push(Metadata["Connecting"][q]);
+						}
+						for(var q = 0; q < Metadata["Description"].length; q++) {
+							finaldataLocationDescription.push(Metadata["Description"][q]);
+						}
+						for(var q = 0; q < Metadata["Slogan"].length; q++) {
+							finaldataLocationSlogan.push(Metadata["Slogan"][q]);
+						}
+						for(var q = 0; q < Metadata["Navigation"].length; q++) {
+							finaldataLocationNavigation.push(Metadata["Navigation"][q]);
+						}
+						for(var q = 0; q < Metadata["Move Tutor"].length; q++) {
+							finaldataLocationTutor.push(Metadata["Move Tutor"][q]);
+						}
+						for(var q = 0; q < Metadata["Point of Interest"].length; q++) {
+							finaldataLocationPointOfInterest.push(Metadata["Point of Interest"][q]);
+						}
 					}
-				}
-				for(var q = 0; q < Metadata["Connecting"].length; q++) {
-					finaldataLocationConnection.push(Metadata["Connecting"][q]);
-				}
-				for(var q = 0; q < Metadata["Description"].length; q++) {
-					finaldataLocationDescription.push(Metadata["Description"][q]);
-				}
-				for(var q = 0; q < Metadata["Slogan"].length; q++) {
-					finaldataLocationSlogan.push(Metadata["Slogan"][q]);
-				}
-				for(var q = 0; q < Metadata["Navigation"].length; q++) {
-					finaldataLocationNavigation.push(Metadata["Navigation"][q]);
-				}
-				for(var q = 0; q < Metadata["Move Tutor"].length; q++) {
-					finaldataLocationTutor.push(Metadata["Move Tutor"][q]);
-				}
-				for(var q = 0; q < Metadata["Point of Interest"].length; q++) {
-					finaldataLocationPointOfInterest.push(Metadata["Point of Interest"][q]);
-				}
-				console.log(Metadata["Reference"])
-				console.log(Metadata["Reference"][0][JSONPath_Location+"_"+"Name"])
-				console.log(Metadata)
-				console.log(finaldataLocation)
-				console.log(finaldataLocation[0])
-				console.log(finaldataLocationConnection)
-				console.log(Metadata["Reference"][0])
-				console.log(Metadata["Reference"].length)
-			}
-			if (loads[i] == "Location Trainers") {
-				for(var q = 0; q < Metadata["Trainers"].length; q++) {
-					finaldataLocationTrainers.push(Metadata["Trainers"][q]);
-				}
-			}
-			if (loads[i] == "Location Pokémon") {
-				for(var q = 0; q < Metadata["Pokémon"].length; q++) {
-					finaldataLocationPokémon.push(Metadata["Pokémon"][q]);
-				}
-			}
-			if (loads[i] == "Location Items") {
-				for(var q = 0; q < Metadata["Items"].length; q++) {
-					finaldataLocationItems.push(Metadata["Items"][q]);
-				}
-				for(var q = 0; q < Metadata["Pickup"].length; q++) {
-					finaldataLocationPickup.push(Metadata["Pickup"][q]);
-				}
-			}
-			if (loads[i] == "Learnset") {
-				for(var q = 0; q < Metadata["Evolution"].length; q++) {
-					finaldataLearnsetEvolution.push(Metadata["Evolution"][q]);
-				}
-				for(var q = 0; q < Metadata["Level Up"].length; q++) {
-					finaldataLearnsetLevel.push(Metadata["Level Up"][q]);
-				}
-				for(var q = 0; q < Metadata["Machine"].length; q++) {
-					finaldataLearnsetMachine.push(Metadata["Machine"][q]);
-				}
-				for(var q = 0; q < Metadata["Breeding"].length; q++) {
-					finaldataLearnsetBreed.push(Metadata["Breeding"][q]);
-				}	
-			}
-			if (loads[i] == "Items") {
-				for(var q = 0; q < Metadata["Reference"].length; q++) {
-					finaldataItems.push(Metadata["Reference"][q]);
-				}
-				for(var q = 0; q < Metadata["Price"].length; q++) {
-					finaldataItemsPrice.push(Metadata["Price"][q]);
-				}
-				for(var q = 0; q < Metadata["Price Extra"].length; q++) {
-					finaldataItemsPriceExtra.push(Metadata["Price Extra"][q]);
-				}
-				for(var q = 0; q < Metadata["Description"].length; q++) {
-					finaldataItemsDescription.push(Metadata["Description"][q]);
-				}
-			}
-			if (loads[i] == "Abilities" && Ability.length > 0) {
-
-				for(var q = 0; q < Metadata["Reference"].length; q++) {
-					if(Object.keys(Metadata["Reference"][q]).includes(JSONPath_AbilityReference + "_" + "Name")) {
-						finaldataAbility.push(Metadata["Reference"][q]);
+					if (loads[i] == "Location Trainers") {
+						for(var q = 0; q < Metadata["Trainers"].length; q++) {
+							finaldataLocationTrainers.push(Metadata["Trainers"][q]);
+						}
 					}
-				}
-				for(var q = 0; q < Metadata["Flavor"].length; q++) {
-					finaldataAbilityFlavor.push(Metadata["Flavor"][q]);
-				}
+					if (loads[i] == "Location Pokémon") {
+						for(var q = 0; q < Metadata["Pokémon"].length; q++) {
+							finaldataLocationPokémon.push(Metadata["Pokémon"][q]);
+						}
+					}
+					if (loads[i] == "Location Items") {
+						for(var q = 0; q < Metadata["Items"].length; q++) {
+							finaldataLocationItems.push(Metadata["Items"][q]);
+						}
+						for(var q = 0; q < Metadata["Pickup"].length; q++) {
+							finaldataLocationPickup.push(Metadata["Pickup"][q]);
+						}
+					}
+					if (loads[i] == "Learnset") {
+						for(var q = 0; q < Metadata["Evolution"].length; q++) {
+							finaldataLearnsetEvolution.push(Metadata["Evolution"][q]);
+						}
+						for(var q = 0; q < Metadata["Level Up"].length; q++) {
+							finaldataLearnsetLevel.push(Metadata["Level Up"][q]);
+						}
+						for(var q = 0; q < Metadata["Machine"].length; q++) {
+							finaldataLearnsetMachine.push(Metadata["Machine"][q]);
+						}
+						for(var q = 0; q < Metadata["Breeding"].length; q++) {
+							finaldataLearnsetBreed.push(Metadata["Breeding"][q]);
+						}	
+					}
+					if (loads[i] == "Items") {
+						for(var q = 0; q < Metadata["Reference"].length; q++) {
+							finaldataItems.push(Metadata["Reference"][q]);
+						}
+						for(var q = 0; q < Metadata["Price"].length; q++) {
+							finaldataItemsPrice.push(Metadata["Price"][q]);
+						}
+						for(var q = 0; q < Metadata["Price Extra"].length; q++) {
+							finaldataItemsPriceExtra.push(Metadata["Price Extra"][q]);
+						}
+						for(var q = 0; q < Metadata["Description"].length; q++) {
+							finaldataItemsDescription.push(Metadata["Description"][q]);
+						}
+					}
+					if (loads[i] == "Abilities" && Ability.length > 0) {
+		
+						for(var q = 0; q < Metadata["Reference"].length; q++) {
+							if(Object.keys(Metadata["Reference"][q]).includes(JSONPath_AbilityReference + "_" + "Name")) {
+								finaldataAbility.push(Metadata["Reference"][q]);
+							}
+						}
+						for(var q = 0; q < Metadata["Flavor"].length; q++) {
+							finaldataAbilityFlavor.push(Metadata["Flavor"][q]);
+						}
+					}
+					if (loads[i] == "Moves") {
+						for(var q = 0; q < Metadata["Description"].length; q++) {
+							finaldataMoveDescription.push(Metadata["Description"][q]);
+						}
+						for(var q = 0; q < Metadata["Reference"].length; q++) {
+							finaldataMove.push(Metadata["Reference"][q]);
+						}
+						for(var q = 0; q < Metadata["Machine"].length; q++) {
+							finaldataMoveMachine.push(Metadata["Machine"][q]);
+						}
+						for(var q = 0; q < Metadata["Range"].length; q++) {
+							finaldataMoveRange.push(Metadata["Range"][q]);
+						}
+						for(var q = 0; q < Metadata["Other Moves"].length; q++) {
+							finaldataMoveOtherMoves.push(Metadata["Other Moves"][q]);
+						}
+						for(var q = 0; q < Metadata["Accuracy"].length; q++) {
+							finaldataMoveAccuracy.push(Metadata["Accuracy"][q]);
+						}
+						for(var q = 0; q < Metadata["Power"].length; q++) {
+							finaldataMovePower.push(Metadata["Power"][q]);
+						}
+						for(var q = 0; q < Metadata["PP"].length; q++) {
+							finaldataMovePP.push(Metadata["PP"][q]);
+						}
+						for(var q = 0; q < Metadata["Category"].length; q++) {
+							finaldataMoveCategory.push(Metadata["Category"][q]);
+						}
+						for(var q = 0; q < Metadata["ID"].length; q++) {
+							finaldataMoveID.push(Metadata["ID"][q]);
+						}
+						for(var q = 0; q < Metadata["Type"].length; q++) {
+							finaldataMoveType.push(Metadata["Type"][q]);
+						}
+						for(var q = 0; q < Metadata["Priority"].length; q++) {
+							finaldataMovePriority.push(Metadata["Priority"][q]);
+						}
+					}
+					
+					if (loads[i] == "Pokémon") {
+						for(var q = 0; q < Metadata["Reference"].length; q++) {
+							finaldataPokémon.push(Metadata["Reference"][q]);
+							finaldataPokémonPath.push(Metadata["Path"][q]);
+							finaldataPokémonForm.push(Metadata["Form"][q]);
+							finaldataPokémonFormItem.push(Metadata["Form Item"][q]);
+							finaldataPokémonAbility.push(Metadata["Ability"][q]);
+							finaldataPokémonFriendship.push(Metadata["Base Friendship"][q]);
+							finaldataPokémonBaseStats.push(Metadata["Base Stats"][q]);
+							finaldataPokémonCatchRate.push(Metadata["Catch Rate"][q]);
+							finaldataPokémonCategory.push(Metadata["Category"][q]);
+							finaldataPokémonEggGroup.push(Metadata["Egg Group"][q]);
+							finaldataPokémonEvolutionMethod.push(Metadata["Evolution Method"][q]);
+							finaldataPokémonEvolutionSpecie.push(Metadata["Evolution Specie"][q]);
+							finaldataPokémonEvolutionStage.push(Metadata["Evolution Stage"][q]);
+							finaldataPokémonEVYield.push(Metadata["Effort Value Yield"][q]);
+							finaldataPokémonExperienceYield.push(Metadata["Experience Yield"][q]);
+							finaldataPokémonGenderRatio.push(Metadata["Gender Ratio"][q]);
+							finaldataPokémonHatchRate.push(Metadata["Hatch Rate"][q]);
+							finaldataPokémonHeldItem.push(Metadata["Held Item"][q]);
+							finaldataPokémonLevelingRate.push(Metadata["Leveling Rate"][q]);
+							finaldataPokémonPokédexEntry.push(Metadata["Pokédex Entry"][q]);
+							finaldataPokémonPokédexID.push(Metadata["Pokédex ID"][q]);
+							finaldataPokémonType.push(Metadata["Type"][q]);
+							finaldataPokémonOffspring.push(Metadata["Offspring"][q]);
+							finaldataPokémonFormChange.push(Metadata["Form Change"][q]);
+						}
+					}
+		
+					initialize();
 			}
-			if (loads[i] == "Moves") {
-				for(var q = 0; q < Metadata["Description"].length; q++) {
-					finaldataMoveDescription.push(Metadata["Description"][q]);
-				}
-				for(var q = 0; q < Metadata["Reference"].length; q++) {
-					finaldataMove.push(Metadata["Reference"][q]);
-				}
-				for(var q = 0; q < Metadata["Machine"].length; q++) {
-					finaldataMoveMachine.push(Metadata["Machine"][q]);
-				}
-				for(var q = 0; q < Metadata["Range"].length; q++) {
-					finaldataMoveRange.push(Metadata["Range"][q]);
-				}
-				for(var q = 0; q < Metadata["Other Moves"].length; q++) {
-					finaldataMoveOtherMoves.push(Metadata["Other Moves"][q]);
-				}
-				for(var q = 0; q < Metadata["Accuracy"].length; q++) {
-					finaldataMoveAccuracy.push(Metadata["Accuracy"][q]);
-				}
-				for(var q = 0; q < Metadata["Power"].length; q++) {
-					finaldataMovePower.push(Metadata["Power"][q]);
-				}
-				for(var q = 0; q < Metadata["PP"].length; q++) {
-					finaldataMovePP.push(Metadata["PP"][q]);
-				}
-				for(var q = 0; q < Metadata["Category"].length; q++) {
-					finaldataMoveCategory.push(Metadata["Category"][q]);
-				}
-				for(var q = 0; q < Metadata["ID"].length; q++) {
-					finaldataMoveID.push(Metadata["ID"][q]);
-				}
-				for(var q = 0; q < Metadata["Type"].length; q++) {
-					finaldataMoveType.push(Metadata["Type"][q]);
-				}
-				for(var q = 0; q < Metadata["Priority"].length; q++) {
-					finaldataMovePriority.push(Metadata["Priority"][q]);
-				}
-			}
-			if (loads[i] == "Game") {
-				for(var q = 0; q < Metadata["Reference"].length; q++) {
-					finaldataGame.push(Metadata["Reference"][q]);
-				}
+		}
 
-				var urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","");
-				GameID = getGameName("",urlid);
-				define();
-
-				for(var q = 0; q < Metadata["Type Chart_" + JSONPath_Typechart].length; q++) {
-					finaldataTypeChart.push(Metadata["Type Chart_" + JSONPath_Typechart][q]);
-				}
-				for(var q = 0; q < Metadata["Exclusive Pokémon"].length; q++) {
-					finaldataExclusivePokémon.push(Metadata["Exclusive Pokémon"][q]);
-				}
-				for(var q = 0; q < Metadata["Exclusive Item"].length; q++) {
-					finaldataExclusiveItem.push(Metadata["Exclusive Item"][q]);
-				}
-				for(var q = 0; q < Metadata["Exclusive Feature"].length; q++) {
-					finaldataExclusiveFeature.push(Metadata["Exclusive Feature"][q]);
-				}
-			}
-			if (loads[i] == "Pokémon") {
-				for(var q = 0; q < Metadata["Reference"].length; q++) {
-					finaldataPokémon.push(Metadata["Reference"][q]);
-					finaldataPokémonPath.push(Metadata["Path"][q]);
-					finaldataPokémonForm.push(Metadata["Form"][q]);
-					finaldataPokémonFormItem.push(Metadata["Form Item"][q]);
-					finaldataPokémonAbility.push(Metadata["Ability"][q]);
-					finaldataPokémonFriendship.push(Metadata["Base Friendship"][q]);
-					finaldataPokémonBaseStats.push(Metadata["Base Stats"][q]);
-					finaldataPokémonCatchRate.push(Metadata["Catch Rate"][q]);
-					finaldataPokémonCategory.push(Metadata["Category"][q]);
-					finaldataPokémonEggGroup.push(Metadata["Egg Group"][q]);
-					finaldataPokémonEvolutionMethod.push(Metadata["Evolution Method"][q]);
-					finaldataPokémonEvolutionSpecie.push(Metadata["Evolution Specie"][q]);
-					finaldataPokémonEvolutionStage.push(Metadata["Evolution Stage"][q]);
-					finaldataPokémonEVYield.push(Metadata["Effort Value Yield"][q]);
-					finaldataPokémonExperienceYield.push(Metadata["Experience Yield"][q]);
-					finaldataPokémonGenderRatio.push(Metadata["Gender Ratio"][q]);
-					finaldataPokémonHatchRate.push(Metadata["Hatch Rate"][q]);
-					finaldataPokémonHeldItem.push(Metadata["Held Item"][q]);
-					finaldataPokémonLevelingRate.push(Metadata["Leveling Rate"][q]);
-					finaldataPokémonPokédexEntry.push(Metadata["Pokédex Entry"][q]);
-					finaldataPokémonPokédexID.push(Metadata["Pokédex ID"][q]);
-					finaldataPokémonType.push(Metadata["Type"][q]);
-					finaldataPokémonOffspring.push(Metadata["Offspring"][q]);
-					finaldataPokémonFormChange.push(Metadata["Form Change"][q]);
-				}
-			}
-
-			initialize();
 	}
+
+
+
 
 }
 
@@ -288,7 +294,7 @@ function initialize() {
 	if(new Date() - initTimeStart >= 5000) {
 		loaddescription.innerHTML = "Load taking longer than expected<span>.</span><span>.</span><span>.</span>";
 	}
-	if(initEnd >= initLength) {
+	if(initEnd >= initLength - 1) {
 		loaddescription.innerHTML = "Complete!";
 
 		config();
@@ -410,7 +416,8 @@ function mapifyMap(base) {
                 	zones[i] = `<b name="map" onclick="dataRedirect()"><p style="pointer-events:none">`+z+`</p></b>`;
                 }
                 return zones.join("<br>");
-            }
+            },
+			margin: "15px"
         }
         });
     }
@@ -533,8 +540,6 @@ function proportionalScale(originalSize, newSize) {
 
 function zoom(base,condition) {
 
-
-
     var base;
     var condition;
 
@@ -557,15 +562,17 @@ function zoom(base,condition) {
 
 
 	if (condition == "pause") {
-		if (base.getAttribute("name") != "pause") {
-			base.setAttribute("name","pause");
-			$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
-			$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
-		}
-		else {
-			base.removeAttribute("name");
-			$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
-			$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
+		if (base.getAttribute("data-active") == "true") {
+			if (base.getAttribute("name") != "pause") {
+				base.setAttribute("name","pause");
+				$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
+				$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
+			}
+			else {
+				base.removeAttribute("name");
+				$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
+				$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
+			}
 		}
 	}
 
