@@ -303,11 +303,11 @@ var createMap = function() {
 		mapSectionListOptionsInput.value = q;
 		mapSectionListOptionsLabel.setAttribute("for", "map-options-"+q);
 		mapSectionListOptionsLabel.setAttribute("type","medium");
-		mapSectionListOptionsLabel.setAttribute("data-search-name", finaldataLocation[q][JSONPath_Location+"_"+"Name"].toLowerCase());
+		mapSectionListOptionsLabel.setAttribute("data-search-name", finaldataLocation[q]["Location"].toLowerCase());
 		var poi = [];
 		for(var u = 0; u < finaldataLocationPointOfInterest.length; u++) {
 			if (getApplicable(finaldataLocationPointOfInterest[u]["Game"])) {
-				if (finaldataLocationPointOfInterest[u]["Location"] == finaldataLocation[q][JSONPath_Location+"_"+"Name"]) {
+				if (finaldataLocationPointOfInterest[u]["Location"] == finaldataLocation[q]["Location"]) {
 					poi.push(finaldataLocationPointOfInterest[u]["Point of Interest"]);
 				}
 			}
@@ -322,7 +322,7 @@ var createMap = function() {
 
 		var nav = [];
 		for(var u = 0; u < finaldataLocationNavigation.length; u++) {
-			if (finaldataLocationNavigation[u][JSONPath_LocationNavigation+"_Name"] == finaldataLocation[q][JSONPath_Location+"_"+"Name"]) {
+			if (finaldataLocationNavigation[u][JSONPath_LocationNavigation+"_Name"] == finaldataLocation[q]["Location"]) {
 				nav.push(finaldataLocationNavigation[u][JSONPath_LocationNavigation+"_Navigation"]);
 			}
 		}
@@ -333,7 +333,7 @@ var createMap = function() {
 			mapSectionListOptionsLabel.setAttribute("data-search-navigation","none");
 		}
 
-		mapSectionListOptionsText.innerText = finaldataLocation[q][JSONPath_Location+"_"+"Name"];
+		mapSectionListOptionsText.innerText = finaldataLocation[q]["Location"];
 		mapSectionListOptions.appendChild(mapSectionListOptionsInput);
 		mapSectionListOptions.appendChild(mapSectionListOptionsLabel);
 		mapSectionListOptionsLabel.appendChild(mapSectionListOptionsText);
@@ -385,7 +385,7 @@ var createMap = function() {
 		if (this.value != undefined) {
 			i = this.value;
 		}
-		var location = finaldataLocation[i][JSONPath_Location+"_"+"Name"];
+		var location = finaldataLocation[i]["Location"];
 		var trainers = getLocationTrainers(location);
 		var items = [];
 		var poks = [];
