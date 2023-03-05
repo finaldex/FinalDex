@@ -103,10 +103,10 @@ var createItem = function() {
 	var itemSectionSidebarSidebarMap = document.createElement("map");
 	var itemSectionSidebarSidebarMapFullscreen = document.createElement("figure");
 	var itemSectionSidebarSidebarMapFullscreenText = document.createElement("h5");
-
+	var itemSectionSidebarSidebarMapPause = document.createElement("figure");
+	var itemSectionSidebarSidebarMapPauseText = document.createElement("h3");
 	var itemSectionSidebarSidebarMapZoomIn = document.createElement("figure");
 	var itemSectionSidebarSidebarMapZoomInText = document.createElement("h3");
-
 	var itemSectionSidebarSidebarMapZoomOut = document.createElement("figure");
 	var itemSectionSidebarSidebarMapZoomOutText = document.createElement("h3");
 
@@ -125,6 +125,8 @@ var createItem = function() {
 	itemSectionSidebarSidebarMapZoomOutText.innerText = "-";
 	itemSectionSidebarSidebarMapZoomInText.innerText = "+";
 	itemSectionSidebarSidebarMapFullscreenText.innerText = "⛶";
+	itemSectionSidebarSidebarMapPause.setAttribute("name","pause");
+	itemSectionSidebarSidebarMapPauseText.innerText = "⏸︎";
 
 	itemSectionSidebarSidebarMap.setAttribute("name",MEDIAPath_Map+"-item");
 	itemSectionSidebarSidebarMap.setAttribute("id",MEDIAPath_Map+"-item");
@@ -136,12 +138,14 @@ var createItem = function() {
 	itemSectionSidebarSidebarMapInner.appendChild(itemSectionSidebarSidebarMap);
 	itemSectionSidebarSidebar.appendChild(itemSectionSidebarSidebarUl);
 
-	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapZoomOut)
-	itemSectionSidebarSidebarMapZoomOut.appendChild(itemSectionSidebarSidebarMapZoomOutText)
-	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapZoomIn)
-	itemSectionSidebarSidebarMapZoomIn.appendChild(itemSectionSidebarSidebarMapZoomInText)
-	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapFullscreen)
-	itemSectionSidebarSidebarMapFullscreen.appendChild(itemSectionSidebarSidebarMapFullscreenText)
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapZoomOut);
+	itemSectionSidebarSidebarMapZoomOut.appendChild(itemSectionSidebarSidebarMapZoomOutText);
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapZoomIn);
+	itemSectionSidebarSidebarMapZoomIn.appendChild(itemSectionSidebarSidebarMapZoomInText);
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapFullscreen);
+	itemSectionSidebarSidebarMapFullscreen.appendChild(itemSectionSidebarSidebarMapFullscreenText);
+	itemSectionSidebarSidebarMapOuter.appendChild(itemSectionSidebarSidebarMapPause);
+	itemSectionSidebarSidebarMapPause.appendChild(itemSectionSidebarSidebarMapPauseText);
 
 	itemSectionSidebarSidebarMapInner.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([itemSectionSidebarSidebarMapImage],0)}});
 
@@ -385,7 +389,7 @@ var createItem = function() {
 
 					if (finaldataLocationItems[q]["Field"] != undefined) {
 	
-						var itemSectionSidebarSidebarRequirementTitle = document.createElement("small");
+						var itemSectionSidebarSidebarRequirementTitle = document.createElement("h6");
 						itemSectionSidebarSidebarRequirementTitle.innerText = "Requires:";
 						itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarRequirementTitle);
 
@@ -403,8 +407,8 @@ var createItem = function() {
 									itm = finaldataLocationItems[q]["Field"].split("/")[y];
 								}
 
-								var itemSectionSidebarSidebarField = document.createElement("span");
-								var itemSectionSidebarSidebarFieldText = document.createElement("p");
+								var itemSectionSidebarSidebarField = document.createElement("b");
+								var itemSectionSidebarSidebarFieldText = document.createElement("small");
 								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split("/")[y];
 								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
@@ -413,13 +417,12 @@ var createItem = function() {
 									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split("/")[y];
 									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
-	
-									itemSectionSidebarSidebarField.setAttribute("name","item");
-									itemSectionSidebarSidebarField.setAttribute("value",itm);
-									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
-									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 								}
 								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
+								itemSectionSidebarSidebarField.setAttribute("name","item");
+								itemSectionSidebarSidebarField.setAttribute("value",itm);
+								itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+								itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 								if (y != finaldataLocationItems[q]["Field"].split("/").length - 1) {
 									var itemSectionSidebarSidebarFieldSpace = document.createElement("p");
 									itemSectionSidebarSidebarFieldSpace.innerText = " or ";
@@ -440,8 +443,8 @@ var createItem = function() {
 									itm = finaldataLocationItems[q]["Field"].split(",")[y];
 								}
 
-								var itemSectionSidebarSidebarField = document.createElement("span");
-								var itemSectionSidebarSidebarFieldText = document.createElement("p");
+								var itemSectionSidebarSidebarField = document.createElement("b");
+								var itemSectionSidebarSidebarFieldText = document.createElement("small");
 								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split(",")[y];
 								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
@@ -450,13 +453,13 @@ var createItem = function() {
 									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split(",")[y];
 									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
-	
-									itemSectionSidebarSidebarField.setAttribute("name","item");
-									itemSectionSidebarSidebarField.setAttribute("value",itm);
-									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
-									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 								}
 								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
+									
+								itemSectionSidebarSidebarField.setAttribute("name","item");
+								itemSectionSidebarSidebarField.setAttribute("value",itm);
+								itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+								itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 							}
 						}
 						else {
@@ -471,8 +474,8 @@ var createItem = function() {
 								itm = finaldataLocationItems[q]["Field"];
 							}
 
-							var itemSectionSidebarSidebarField = document.createElement("span");
-							var itemSectionSidebarSidebarFieldText = document.createElement("p");
+							var itemSectionSidebarSidebarField = document.createElement("b");
+							var itemSectionSidebarSidebarFieldText = document.createElement("small");
 							itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"];
 							itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 							if (itemIcon != undefined) {
@@ -482,14 +485,13 @@ var createItem = function() {
 								itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 								itemSectionSidebarSidebarFieldImage.setAttribute("name","item");
 								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
-
-								itemSectionSidebarSidebarField.setAttribute("name","item");
-								itemSectionSidebarSidebarField.setAttribute("value",itm);
-								itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
-								itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 							}
 							itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
 
+							itemSectionSidebarSidebarField.setAttribute("name","item");
+							itemSectionSidebarSidebarField.setAttribute("value",itm);
+							itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+							itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 						}
 					}
 
