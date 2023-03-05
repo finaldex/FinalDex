@@ -15,7 +15,7 @@ for (var i = 0; i < GamesFull.length; i++) {
     var x = i;
     var li = document.createElement("li");
     li.name = x;
-    li.addEventListener("keyup",function(event){if(event.which === 13){console.log(event.target); event.target.querySelector(":scope a").click();}});
+    li.addEventListener("keyup",function(event){if(event.which === 13){event.target.querySelector(":scope a").click();}});
     document.querySelector("#Games span ul").appendChild(li);
     li.setAttribute("tabindex","1");
 
