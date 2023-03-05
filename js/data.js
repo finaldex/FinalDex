@@ -12,6 +12,8 @@ var createData = function(id, i) {
 	var dataSectionMainMapZoomOutText = document.createElement("h2");
 	var dataSectionMainMapFullscreen = document.createElement("figure");
 	var dataSectionMainMapFullscreenText = document.createElement("h5");
+	var dataSectionMainMapPause = document.createElement("figure");
+	var dataSectionMainMapPauseText = document.createElement("h3");
 	var dataSectionMainMapOuter = document.createElement("div");
 	var dataSectionMainMapImage = document.createElement("img");
 	var dataSectionMainMap = document.createElement("map");
@@ -70,6 +72,9 @@ var createData = function(id, i) {
 	dataSectionMainMapFullscreenText.innerText = "⛶";
 	dataSectionMainMapFullscreen.setAttribute("name","fullscreen");
 
+	dataSectionMainMapPauseText.innerText = "⏸︎";
+	dataSectionMainMapPause.setAttribute("name","pause");
+
 	var dataSectionHeader = document.createElement("section");
 	var dataSectionHeaderDivPortrait = document.createElement("div");
 	var dataSectionHeaderDivPortraitContent = document.createElement("div");
@@ -127,7 +132,6 @@ var createData = function(id, i) {
 	dataSectionHeaderDebut.setAttribute("name","debut");
 
 	dataDivOverlay.addEventListener("click", modalData);
-	dataDivOverlay.setAttribute("function","modalData");
 
 	var navz = ["metadata","learnset","area"];
 	var navztitles = ["Data","Learnset","Area"];
@@ -462,13 +466,15 @@ var createData = function(id, i) {
 	dataSectionHeaderDebutCategoryOuter.appendChild(dataSectionHeaderType);
 	dataDivContent.appendChild(dataSectionMain);
 	dataSectionMainAreaDiv.appendChild(dataSectionMainMapContain);
+	dataSectionMainMapContain.appendChild(dataSectionMainMapOuter);
 	dataSectionMainMapContain.appendChild(dataSectionMainMapZoomOut);
 	dataSectionMainMapZoomOut.appendChild(dataSectionMainMapZoomOutText);
 	dataSectionMainMapContain.appendChild(dataSectionMainMapZoomIn);
 	dataSectionMainMapZoomIn.appendChild(dataSectionMainMapZoomInText);
 	dataSectionMainMapContain.appendChild(dataSectionMainMapFullscreen);
 	dataSectionMainMapFullscreen.appendChild(dataSectionMainMapFullscreenText);
-	dataSectionMainMapContain.appendChild(dataSectionMainMapOuter);
+	dataSectionMainMapContain.appendChild(dataSectionMainMapPause);
+	dataSectionMainMapPause.appendChild(dataSectionMainMapPauseText);
 	dataSectionMainMapOuter.appendChild(dataSectionMainMapImage);
 	dataSectionMainMapOuter.appendChild(dataSectionMainMap);
 	dataDivContent.appendChild(dataSectionMain);
@@ -1225,8 +1231,8 @@ function loadData() {
 
                         
                                     var pokPok = document.createElement("span");
-                                    var pokPokIsAlly = document.createElement("h4");
-                                    var pokPokLvl = document.createElement("h5");
+                                    var pokPokIsAlly = document.createElement("h6");
+                                    var pokPokLvl = document.createElement("small");
                                     var pokPokImg = document.createElement("img");
                         
                                     pokPok.setAttribute("name","pokémon");
