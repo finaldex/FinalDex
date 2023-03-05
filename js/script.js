@@ -3876,13 +3876,13 @@ function excludeDuplicateAreas(arr) {
             if (arr1[i]["id"].includes("<br>")) {
                 var ids = arr1[i]["id"].split("<br>");
                 for (var u = 0; u < ids.length; u++) {
-                    if (ids[u] == list[q][JSONPath_Location+"_"+"Name"]) {
+                    if (ids[u] == list[q]["Location"]) {
                         listboo = false;
                         break;
                     }
                 }
             }
-            else if (arr1[i]["id"] == list[q][JSONPath_Location+"_"+"Name"]) {
+            else if (arr1[i]["id"] == list[q]["Location"]) {
                 listboo = false;
                 break;
             }
