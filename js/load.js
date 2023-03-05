@@ -123,7 +123,7 @@ function requestLoad(i,url) {
 				var Metadata = request.response;
 					if(loads[i] == "Locations") {
 						for(var q = 0; q < Metadata["Reference"].length; q++) {
-							if (Metadata["Reference"][q][JSONPath_Location+"_"+"Name"] != undefined) {
+							if (getApplicable(Metadata["Reference"][q]["Game"])) {
 								finaldataLocation.push(Metadata["Reference"][q]);
 							}
 						}
