@@ -51,6 +51,8 @@ var createMap = function() {
 	var mapSectionContentMapZoomInText = document.createElement("h3");
 	var mapSectionContentMapFullscreen = document.createElement("figure");
 	var mapSectionContentMapFullscreenText = document.createElement("h5");
+	var mapSectionContentMapPause = document.createElement("figure");
+	var mapSectionContentMapPauseText = document.createElement("h2");
 	var mapSectionContentMapImg = document.createElement("img");
 	var mapSectionContentMap = document.createElement("map");
 
@@ -62,6 +64,8 @@ var createMap = function() {
 	mapSectionContentMapZoomInText.innerText = "+";
 	mapSectionContentMapFullscreen.setAttribute("name","fullscreen");
 	mapSectionContentMapFullscreenText.innerText = "⛶";
+	mapSectionContentMapPause.setAttribute("name","pause");
+	mapSectionContentMapPauseText.innerText = "⏸︎";
 	mapSectionContentMapImg.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
 	mapSectionContentMapImg.setAttribute("usemap","#"+MEDIAPath_Map+"-map");
 	mapOuter.appendChild(mapSectionContent);
@@ -104,16 +108,17 @@ var createMap = function() {
 
 
 	mapSectionContentMapOuter2.appendChild(mapSectionContentMapInner);
+	mapSectionContentMapInner.appendChild(mapSectionContentMapInner2);
+	mapSectionContentMapInner2.appendChild(mapSectionContentMapImg);
+	mapSectionContentMapInner2.appendChild(mapSectionContentMap);
 	mapSectionContentMapInner.appendChild(mapSectionContentMapZoomReset);
 	mapSectionContentMapZoomReset.appendChild(mapSectionContentMapZoomResetText);
 	mapSectionContentMapInner.appendChild(mapSectionContentMapZoomIn);
 	mapSectionContentMapZoomIn.appendChild(mapSectionContentMapZoomInText);
 	mapSectionContentMapInner.appendChild(mapSectionContentMapFullscreen);
 	mapSectionContentMapFullscreen.appendChild(mapSectionContentMapFullscreenText);
-	mapSectionContentMapInner.appendChild(mapSectionContentMapInner2);
-	mapSectionContentMapInner2.appendChild(mapSectionContentMapImg);
-	mapSectionContentMapInner2.appendChild(mapSectionContentMap);
-
+	mapSectionContentMapInner.appendChild(mapSectionContentMapPause);
+	mapSectionContentMapPause.appendChild(mapSectionContentMapPauseText);
 
 
 
@@ -1083,15 +1088,15 @@ var createMap = function() {
 
 
 					if (Allies) {
-						var mapSectionSidebarDescriptionPokAllies = document.createElement("span");
-						var mapSectionSidebarDescriptionPokAlliesHeader = document.createElement("h6");
-						mapSectionSidebarDescriptionPokAllies.setAttribute("name","allies");
-						mapSectionSidebarDescriptionPokAlliesHeader.innerText = "Allies";
-						mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokAllies);
-						mapSectionSidebarDescriptionPokAllies.appendChild(mapSectionSidebarDescriptionPokAlliesHeader);
-						
 
 						if (poks[u]["Allies"] != undefined) {
+
+							var mapSectionSidebarDescriptionPokAllies = document.createElement("span");
+							var mapSectionSidebarDescriptionPokAlliesHeader = document.createElement("h6");
+							mapSectionSidebarDescriptionPokAllies.setAttribute("name","allies");
+							mapSectionSidebarDescriptionPokAlliesHeader.innerText = "Allies";
+							mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokAllies);
+							mapSectionSidebarDescriptionPokAllies.appendChild(mapSectionSidebarDescriptionPokAlliesHeader);
 
 							var ally = poks[u]["Allies"].replaceAll("extremelyharshsunlight:",'').replaceAll("hail:",'').replaceAll("harshsunlight:",'').replaceAll("heavyrain:",'').replaceAll("rain:",'').replaceAll("sandstorm:",'').replaceAll("strongwinds:",'').replaceAll("fog:",'').replaceAll("cloudy:",'').replaceAll("clear:",'').replaceAll("blizzard:",'').replaceAll("snow:",'').replaceAll("thunderstorm:",'');
 							var allies = [ally];
