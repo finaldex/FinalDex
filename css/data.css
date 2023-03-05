@@ -287,6 +287,9 @@
 	position: absolute;
 	z-index: 1000;
 }
+#data > div section[name='main'] > div[name='area'] > div figure > * {
+	text-shadow: 1px 1px 0px var(--border1);
+}
 
 
 #data > div section[name='main'] > div[name='area'] > div figure[name="zoom"] {
@@ -304,9 +307,14 @@
 	right: 10px;
 }
 
-
-
-
+#data > div section[name='main'] > div[name='area'] > div figure[name="pause"] {
+	bottom: 15px;
+	left: 10px;
+	cursor: default;
+}
+#data > div section[name='main'] > div[name='area'] > div > div:not([name="pause"]) ~ figure[name="pause"] {
+	display: none;
+}
 
 
 
@@ -1151,7 +1159,7 @@
 #data > div section[name='main'] > div[name='area'] ul li > *[title]:hover > * {
 	text-decoration-style: dashed;
 }
-#data > div section[name='main'] > div[name='area'] ul li > *[title] {
+#data > div section[name='main'] > div[name='area'] ul li > *:not([name="location"])[title] {
 	cursor: help;
 }
 
@@ -1181,17 +1189,19 @@
     font-weight: bold;
 }
 
+#data > div section[name='main'] > div[name='area'] ul li span[name="rate"] img[title] {
+	max-width: 30px;
+	display: block;
+}
+
 #data > div section[name='main'] > div[name='area'] ul li span img[title="Morning"] {
 	filter: invert(99%) sepia(85%) saturate(499%) hue-rotate(339deg) brightness(104%) contrast(106%);
-	max-width: 30px;
 }
 #data > div section[name='main'] > div[name='area'] ul li span img[title="Day"] {
 	filter: invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%);
-	max-width: 30px;
 }
 #data > div section[name='main'] > div[name='area'] ul li span img[title="Night"] {
 	filter: invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%);
-	max-width: 30px;
 }
 #data > div section[name='main'] > div[name='area'] ul li span[name="pokémon"][title] {
 	border-bottom: 1px dashed;
