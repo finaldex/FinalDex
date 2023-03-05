@@ -232,11 +232,6 @@ function dataRedirect() {
 
         searchExit.click();
 
-        console.log(notval)
-        console.log(what)
-        console.log(where)
-        console.log(tar)
-
         if (tar != null) {
             if (where == "item") {
 
