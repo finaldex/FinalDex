@@ -311,7 +311,6 @@ var createItem = function() {
 			
 					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
 					itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+".";
-					itemSectionSidebarSidebarDescriptionText.setAttribute("title","Location Description");
 					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 					
 
@@ -379,7 +378,6 @@ var createItem = function() {
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
 						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
 						itemSectionSidebarSidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
-						itemSectionSidebarSidebarDescriptionText.setAttribute("title","Location Description");
 						itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 					}
 
@@ -536,11 +534,113 @@ var createItem = function() {
 			}
 		}
 
+		for(var q = 0; q < finaldataLocationItemsShops.length; q++) {
+			if (getApplicable(finaldataLocationItemsShops[q]["Game"])) {
+				if(finaldataLocationItemsShops[q]["Item"] == item) {
+					var itemSectionSidebarSidebarLi = document.createElement("li");
+					itemSectionSidebarSidebarLi.setAttribute("name","shop")
+					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
+
+					var quantity = finaldataLocationItemsShops[q]["Quantity"];
+
+					if (quantity == undefined) {
+						quantity = 1;
+					}
+					if (quantity > 10) {
+						quantity = 10;
+					}
+
+					var itemSectionSidebarSidebarLocation = document.createElement("span");
+					var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
+					var itemSectionSidebarSidebarLocationText = document.createElement("h5");
+					itemSectionSidebarSidebarLocation.setAttribute("name","location")
+					itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItemsShops[q]["Location"];
+					itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
+					itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
+					itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarLocationTrigger);
+					itemSectionSidebarSidebarLocationTrigger.appendChild(itemSectionSidebarSidebarLocationText);
+
+					itemSectionSidebarSidebarLocationTrigger.addEventListener("click",dataRedirect)
+					itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
 
 
-		for(var q = 0; q < finaldataLocationPickup.length; q++) {
-			if (getApplicable(finaldataLocationPickup[q]["Game"])) {
-				if(finaldataLocationPickup[q]["Item"] == item) {
+					if (finaldataLocationItemsShops[q]["Area"] != undefined && finaldataLocationItemsShops[q]["Area"] != finaldataLocationItemsShops[q]["Location"]) {
+						var itemSectionSidebarSidebarAreaText = document.createElement("small");
+						itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItemsShops[q]["Area"];
+						itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
+					}
+
+
+					var currency = finaldataLocationItemsShops[q]["Currency"];
+
+					if (currency == "Pokémon Dollar") {
+						currency = '<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />';
+					}
+					else {
+						currency = "<span title='"+currency+"'>"+currency.replace(/[^A-Z]+/g,"")+"</span>";
+					}
+				
+					var itemSectionSidebarSidebarDescription = document.createElement("span");
+					itemSectionSidebarSidebarDescription.setAttribute("name","description");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
+					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+					if (finaldataLocationItemsShops[q]["Type"] != undefined) {
+						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Type"]+" for "+finaldataLocationItemsShops[q]["Cost"]+currency;
+					}
+					else {
+						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+finaldataLocationItemsShops[q]["Cost"]+currency;
+					}
+					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
+			
+
+				
+					if (finaldataLocationItemsShops[q]["Requirement"] != undefined) {
+						itemSectionSidebarSidebarDescriptionText.title = finaldataLocationItemsShops[q]["Requirement"];
+					}
+
+
+					var itemSectionSidebarSidebarItem = document.createElement("span");
+					itemSectionSidebarSidebarItem.setAttribute("name","item");
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
+
+					for(var u = 0; u < quantity; u++) {
+						var itemSectionSidebarSidebarItemImg = document.createElement("img");
+						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsShops[q]["Item"])+".png";
+						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
+						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
+					}
+
+					if (quantity != 1) { 
+						itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Quantity"]+"x "+finaldataLocationItemsShops[q]["Item"];
+					}
+					else {
+						itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Item"];
+					}
+
+
+
+
+					var itemSectionSidebarSidebarItemText = document.createElement("h6");
+					if (quantity != 1) { 
+						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Quantity"]+"x <br>"+finaldataLocationItemsShops[q]["Item"];
+					}
+					else {
+						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Item"];
+					}
+					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
+					itemSectionSidebarSidebarItemText.style.display = "none";
+
+
+			
+				}
+			}
+		}
+
+
+		for(var q = 0; q < finaldataLocationItemsPickup.length; q++) {
+			if (getApplicable(finaldataLocationItemsPickup[q]["Game"])) {
+				if(finaldataLocationItemsPickup[q]["Item"] == item) {
 					var itemSectionSidebarSidebarLi = document.createElement("li");
 					itemSectionSidebarSidebarLi.setAttribute("name","pickup");
 					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
@@ -568,7 +668,6 @@ var createItem = function() {
 					itemSectionSidebarSidebarDescription.setAttribute("name","description");
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
 					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-					itemSectionSidebarSidebarDescriptionText.setAttribute("title","Location Description");
 					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 
 
@@ -580,17 +679,17 @@ var createItem = function() {
 
 	
 
-					if (finaldataLocationPickup[q]["Level"] != undefined) {
-						PickupLevel = 'Level '+finaldataLocationPickup[q]["Level"];
+					if (finaldataLocationItemsPickup[q]["Level"] != undefined) {
+						PickupLevel = 'Level '+finaldataLocationItemsPickup[q]["Level"];
 					}
-					if (finaldataLocationPickup[q]["Rate"] != undefined) {
-						PickupRate = finaldataLocationPickup[q]["Rate"];
+					if (finaldataLocationItemsPickup[q]["Rate"] != undefined) {
+						PickupRate = finaldataLocationItemsPickup[q]["Rate"];
 					}
-					if (finaldataLocationPickup[q]["Location"] != undefined) {
-						PickupLocation = 'at <b name="map" title="'+finaldataLocationPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationPickup[q]["Location"]+'</b>';
+					if (finaldataLocationItemsPickup[q]["Location"] != undefined) {
+						PickupLocation = 'at <b name="map" title="'+finaldataLocationItemsPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationItemsPickup[q]["Location"]+'</b>';
 					}
-					if (finaldataLocationPickup[q]["Additional"] != undefined) {
-						PickupAdditional = 'on '+finaldataLocationPickup[q]["Additional"];
+					if (finaldataLocationItemsPickup[q]["Additional"] != undefined) {
+						PickupAdditional = 'on '+finaldataLocationItemsPickup[q]["Additional"];
 					}
 
 					PickupText = PickupRate+' chance to be found by a '+PickupLevel+' Pokémon '+PickupAdditional+' '+PickupLocation+' with the ability <b name="ability" title="Pickup" onclick="dataRedirect()">Pickup</b>';
@@ -602,17 +701,17 @@ var createItem = function() {
 
 					var itemSectionSidebarSidebarItem = document.createElement("span");
 					itemSectionSidebarSidebarItem.setAttribute("name","item");
-					itemSectionSidebarSidebarItem.title = finaldataLocationPickup[q]["Item"];
+					itemSectionSidebarSidebarItem.title = finaldataLocationItemsPickup[q]["Item"];
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 			
 					var itemSectionSidebarSidebarItemImg = document.createElement("img");
-					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationPickup[q]["Item"])+".png";
+					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsPickup[q]["Item"])+".png";
 					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 
 					var itemSectionSidebarSidebarItemText = document.createElement("p");
-					itemSectionSidebarSidebarItemText.innerText = finaldataLocationPickup[q]["Item"];
+					itemSectionSidebarSidebarItemText.innerText = finaldataLocationItemsPickup[q]["Item"];
 					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
 					itemSectionSidebarSidebarItemText.style.display = "none";
 
