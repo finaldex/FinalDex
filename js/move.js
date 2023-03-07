@@ -150,7 +150,7 @@ var createMove = function() {
 	var moveSectionSidebarLearnset = document.createElement("div");
 	moveSectionSidebar.appendChild(moveSectionSidebarLearnset);
 	var moveSectionSidebarLearnsetTitle = document.createElement("div");
-	var moveSectionSidebarLearnsetTitleText = document.createElement("h3");
+	var moveSectionSidebarLearnsetTitleText = document.createElement("h4");
 	moveSectionSidebarLearnsetTitleText.innerHTML = "Learnset";
 	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetTitle);
 	moveSectionSidebarLearnsetTitle.appendChild(moveSectionSidebarLearnsetTitleText);
@@ -166,7 +166,7 @@ var createMove = function() {
 	for(var q = 0; q < parbo.length; q++) {
 		var moveSectionSidebarLearnsetInput = document.createElement("input");
 		var moveSectionSidebarLearnsetLabel = document.createElement("label");
-		var moveSectionSidebarLearnsetText = document.createElement("h5");
+		var moveSectionSidebarLearnsetText = document.createElement("h6");
 		moveSectionSidebarLearnsetInput.setAttribute("type","checkbox");
 		moveSectionSidebarLearnsetInput.setAttribute("id","move-learnset-partybox-"+q);
 		moveSectionSidebarLearnsetInput.setAttribute("name","move-learnset-partybox");
