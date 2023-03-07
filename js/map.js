@@ -406,6 +406,7 @@ var createMap = function() {
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
 		shops = getDataArr(finaldataLocationShops,location);
+		console.log(getDataArr(finaldataLocationShops,location))
 
 
 		var mapImg = document.querySelector("#contain > div#map section[name='content'] *[name='map'] img[usemap]");
@@ -819,7 +820,8 @@ var createMap = function() {
 					mapSectionSidebarCostShopCostOuter.setAttribute("name","Cost");
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarCostShopCostOuter);
 					var mapSectionSidebarCostShopCost = document.createElement("small");
-			
+					console.log(shops)
+					console.log(shops[u])
 					if (shops[u]["Currency"] == "Pokémon Dollar") {
 						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+" <img src='./media/Images/Misc/Currency/VIII/Pokémon Dollar.png' title='Pokémon Dollar' />";
 					}
