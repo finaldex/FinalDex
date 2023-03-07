@@ -3034,7 +3034,7 @@ function overviewMove(dir) {
         for (var q = 0; q < figs.length; q++) {
             figs[q].setAttribute("value",x);
         }
-        
+        figs[1].classList.remove("last");
     }
     else if (dir == "right" && val1 < val2) {
 
