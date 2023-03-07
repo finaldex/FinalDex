@@ -1629,6 +1629,7 @@
 
 
 #contain div#map > section[name="sidebar"] > div > *[name="pokémon"],
+#contain div#map > section[name="sidebar"] > div > *[name="shop"],
 #contain div#map > section[name="sidebar"] > div > *[name="items"],
 #contain div#map > section[name="sidebar"] > div > *[name="movetutor"] {
 	overflow: auto;
@@ -1803,7 +1804,11 @@
 #contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > span > *:first-child {
 	line-height: 160%;
 }
-
+#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > span br {
+	content: "";
+    display: block;
+    padding-bottom: 5px;
+}
 
 #contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > p br {
 	content: "";
@@ -1888,6 +1893,50 @@
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li img[title="Night"] {
 	filter: brightness(0) saturate(100%) invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%) drop-shadow(1px 1px 0px var(--border1));
 }
+
+#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > * {
+	width: 20%;
+	display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+	overflow: auto;
+}
+
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span {
+	width: 40%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+	padding: 0 10px;
+}
+
+
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="item"] span {
+	width: 100%;
+	overflow: auto;
+	display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span.hide {
+	filter: brightness(0.4) contrast(0.6);
+}
+
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="requirement"] span > *:last-child {
+	display:block;
+}
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="description"] {
+	align-content: flex-start;
+	text-align:left;
+}
+
 
 
 
@@ -2133,13 +2182,15 @@
 
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul,
 #contain div#map > section[name="sidebar"] > div > *[name='items'] ul,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul {
+#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul,
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul {
 	width: 100%;
 }
 
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > h4,
 #contain div#map > section[name="sidebar"] > div > *[name='items'] ul > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul > h4  {
+#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul > h4,
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul > h4  {
 	padding: 20px 0;
 	text-align: center;
 	background: var(--color17);
@@ -2148,14 +2199,16 @@
 }
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul:first-child > h4,
 #contain div#map > section[name="sidebar"] > div > *[name='items'] ul:first-child > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul:first-child > h4 {
+#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul:first-child > h4,
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul:first-child > h4 {
 	border-top: none;
 }
 
 
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li,
 #contain div#map > section[name="sidebar"] > div > *[name='items'] ul li,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li {
+#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li,
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li {
 	width: 100%;
 	position: relative;
     flex-direction: row;
@@ -2410,6 +2463,7 @@
 img[title="Pokémon Dollar"] {
 	max-width: 10px;
 	filter: invert(1);
+	position: absolute;
 }
 
 #contain div#map > section[name="sidebar"] > * > div:first-child {
