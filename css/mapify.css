@@ -130,18 +130,22 @@ body[generation="2"] svg[name="mark"] .mapify-polygon[name="active"] {
   animation: blinkOpacity0 normal 2.5s infinite ease-in-out;
 }
 
-.mapify-hover{
+.mapify-hover {
 	fill: var(--colorGreen);
   stroke: var(--color1);
   stroke-width: 1px;
   stroke-dasharray: 2px;
 }
-body[game="Sun"] .mapify-hover,
-body[game="Moon"] .mapify-hover,
-body[game="Ultra Sun"] .mapify-hover,
-body[game="Ultra Moon"] .mapify-hover {
+[game="Sun"] .mapify-hover,
+[game="Moon"] .mapify-hover,
+[game="Ultra Sun"] .mapify-hover,
+[game="Ultra Moon"] .mapify-hover {
 	fill: transparent;
-    stroke: var(--color1);
+  stroke: var(--color1);
+}
+
+[generation="5"] .mapify-hover {
+  fill: var(--color_10);
 }
 
 .mapify-popOver b {
