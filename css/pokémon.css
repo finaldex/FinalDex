@@ -262,6 +262,7 @@
     flex-wrap: nowrap;
     align-content: stretch;
     transition: .5s ease width, 0s ease opacity 1s;
+	max-width: 70vw;
 }
 #pokémon > aside[name='settings']:not(.open) {
 	width: 0;
