@@ -481,9 +481,26 @@
 	justify-content: flex-start;
 	text-align:left;
 }
+#contain div > section[name="sidebar"] > div > ul li span[name="description"] > *[title] {
+	cursor: help;
+	text-decoration: underline;
+}
+#contain div > section[name="sidebar"] > div > ul li span[name="description"] > *[title]:hover {
+	text-decoration-style: dashed;
+}
+
+#contain div > section[name="sidebar"] > div > ul li span[name="description"] > * > span[title] {
+	cursor: help;
+}
+#contain div > section[name="sidebar"] > div > ul li[name="shop"] span[name="location"],
 #contain div > section[name="sidebar"] > div > ul li[name="location"] span[name="location"] {
 	width: 100%;
 }
+
+#contain div > section[name="sidebar"] > div > ul li[name="shop"] span[name="description"] {
+	width: 250%;
+}
+
 #contain div > section[name="sidebar"] > div > ul li span[name="pokémon"],
 #contain div > section[name="sidebar"] > div > ul li span[name="ability"],
 #contain div > section[name="sidebar"] > div > ul li span[name="location"],
@@ -1915,6 +1932,18 @@
 	padding: 0 10px;
 }
 
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span small {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	white-space: pre;
+}
+
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span small span,
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span small img {
+	cursor: help;
+}
+
 
 #contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="item"] span {
 	width: 100%;
@@ -2013,7 +2042,8 @@
 }
 
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] > span,
-#contain div#map > section[name="sidebar"] > div > *[name='items'] > span  {
+#contain div#map > section[name="sidebar"] > div > *[name='items'] > span,
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] > span {
 	position: fixed;
     z-index: 100;
     padding: 10px;
@@ -2463,7 +2493,6 @@
 img[title="Pokémon Dollar"] {
 	max-width: 10px;
 	filter: invert(1);
-	position: absolute;
 }
 
 #contain div#map > section[name="sidebar"] > * > div:first-child {
