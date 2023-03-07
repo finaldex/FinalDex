@@ -276,6 +276,17 @@ var createMap = function() {
 	mapSectionSidebarDescriptionItem.appendChild(mapSectionSidebarDescriptionItemHead);
 	mapSectionSidebarDescriptionItemHead.appendChild(mapSectionSidebarDescriptionItemHeadText);
 
+
+	var mapSectionSidebarDescriptionShop = document.createElement("div");
+	var mapSectionSidebarDescriptionShopHead = document.createElement("span");
+	var mapSectionSidebarDescriptionShopHeadText = document.createElement("h5");
+
+	mapSectionSidebarDescriptionShop.setAttribute("name", "shop");
+	mapSectionSidebarDescription.appendChild(mapSectionSidebarDescriptionShop);
+	mapSectionSidebarDescriptionShop.appendChild(mapSectionSidebarDescriptionShopHead);
+	mapSectionSidebarDescriptionShopHead.appendChild(mapSectionSidebarDescriptionShopHeadText);
+
+
 	var mapSectionSidebarDescriptionTrainer = document.createElement("div");
 
 	mapSectionSidebarDescriptionTrainer.setAttribute("name", "trainers");
@@ -387,12 +398,15 @@ var createMap = function() {
 		}
 		var location = finaldataLocation[i]["Location"];
 		var trainers = getLocationTrainers(location);
+		var shops = [];
 		var items = [];
 		var poks = [];
 		var tutors = [];
 		items = getLocationItems(location);
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
+		shops = getDataArr(finaldataLocationShops,location);
+
 
 		var mapImg = document.querySelector("#contain > div#map section[name='content'] *[name='map'] img[usemap]");
 
@@ -413,13 +427,16 @@ var createMap = function() {
 
 		
 
-		var mapDescriptionTitles = ["Overview","Pokémon", "Items", "Trainers", "Move Tutor"];
+		var mapDescriptionTitles = ["Overview","Pokémon", "Items", "Shop", "Trainers", "Move Tutor"];
 
 		if (poks.length == 0) {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Pokémon"));
 		}
 		if (items.length == 0) {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Items"));
+		}
+		if (shops.length == 0) {
+			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Shop"));
 		}
 		if (trainers.length == 0) {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Trainers"));
@@ -691,6 +708,300 @@ var createMap = function() {
 		for (var q = 0; q < locimgs.length; q++) {
 			locimgs[q].parentElement.setAttribute("name",q);
 			locimgs[q].addEventListener("mousedown", function(event) { if(event.button === 0 || event.button === 1) {fullscreenIMG(locimgs,buttons[0].getAttribute("value"))};});
+		}
+
+
+		for(var q = 0; q < shops.length; q++) {
+			if (shops[q]["Area"] != undefined && shops[q]["Title"] != undefined) {
+				shops[q]["Sort"] = shops[q]["Area"]+" "+shops[q]["Title"];
+			}
+			else if (shops[q]["Area"] == undefined && shops[q]["Title"] != undefined) {
+				shops[q]["Sort"] = shops[q]["Title"];
+			}
+			else if (shops[q]["Area"] != undefined && shops[q]["Title"] == undefined) {
+				shops[q]["Sort"] = shops[q]["Area"];
+			}
+			else {
+				shops[q]["Sort"] = "a";
+			}
+		}
+
+
+		shops = sortObjectArray(shops, "Sort");
+
+		for(var q = 0; q < shops.length; q++) {
+			if (shops[q]["Sort"] == "a") {
+				shops[q]["Sort"] = location;
+			}
+		}
+
+		var shopArea = [];
+		for(var q = 0; q < shops.length; q++) {
+			shopArea.push(shops[q]["Sort"]);
+		}
+		shopArea = [...new Set(shopArea)];
+
+		var uls = mapSectionSidebarDescriptionShop.querySelectorAll(":scope > ul");
+		for(var q = 0; q < uls.length; q++) {
+			uls[q].remove();
+		}
+
+		for(var q = 0; q < shopArea.length; q++) {
+			var ul;
+			ul = mapSectionSidebarDescriptionShop.querySelector(':scope > ul[name="'+shopArea[q]+'"]');
+
+			if (ul == null) {
+				var mapSectionSidebarDescriptionShopUl = document.createElement("ul");
+				mapSectionSidebarDescriptionShopUl.setAttribute("name",shopArea[q])
+				mapSectionSidebarDescriptionShop.appendChild(mapSectionSidebarDescriptionShopUl);
+
+				if (shopArea[q] != location) {
+					var mapSectionSidebarDescriptionShopUlTitle = document.createElement("h4");
+					mapSectionSidebarDescriptionShopUlTitle.innerText = shopArea[q];
+					mapSectionSidebarDescriptionShopUl.appendChild(mapSectionSidebarDescriptionShopUlTitle);
+				}
+					
+			}
+			ul = mapSectionSidebarDescriptionShop.querySelector(':scope > ul[name="'+shopArea[q]+'"]');
+
+			for(var u = 0; u < shops.length; u++) {
+				if (shops[u]["Sort"] == shopArea[q]) {
+					var quantity = shops[u]["Quantity"];
+
+					var mapSectionSidebarDescriptionShopLi = document.createElement("li");
+					var mapSectionSidebarDescriptionShopIconOuter = document.createElement("span");
+					mapSectionSidebarDescriptionShopIconOuter.setAttribute("name","item");
+					mapSectionSidebarDescriptionShopIconOuter.setAttribute("value",shops[u]["Item"])
+					ul.appendChild(mapSectionSidebarDescriptionShopLi);
+					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopIconOuter);
+					mapSectionSidebarDescriptionShopIconOuter.addEventListener("click",dataRedirect);
+					mapSectionSidebarDescriptionShopIconOuter.setAttribute("function","dataRedirect");
+
+					if (quantity == undefined) {
+						quantity = 1;
+					}
+					if (quantity > 10) {
+						quantity = 10;
+					}
+
+
+					var mapSectionSidebarDescriptionShopIconInner = document.createElement("span");
+					mapSectionSidebarDescriptionShopIconOuter.appendChild(mapSectionSidebarDescriptionShopIconInner);
+
+					for(var y = 0; y < quantity; y++) {
+						var mapSectionSidebarDescriptionShopIcon = document.createElement("img");
+						mapSectionSidebarDescriptionShopIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(shops[u]["Item"])+".png";
+						mapSectionSidebarDescriptionShopIcon.setAttribute("onerror", "this.style.display='none';");
+						mapSectionSidebarDescriptionShopIconInner.appendChild(mapSectionSidebarDescriptionShopIcon);
+					}
+
+					if (quantity > 1) {
+						mapSectionSidebarDescriptionShopIconOuter.title = shops[u]["Quantity"]+"x "+shops[u]["Item"];
+					}
+					else {
+						mapSectionSidebarDescriptionShopIconOuter.title = shops[u]["Item"];
+					}
+
+	
+
+					var mapSectionSidebarDescriptionShopText = document.createElement("small");
+					mapSectionSidebarDescriptionShopText.innerText = shops[u]["Item"];
+
+					if (getMachineMove(shops[u]["Item"]) != undefined) {
+						mapSectionSidebarDescriptionShopText.innerText += " ("+getMachineMove(shops[u]["Item"])+")";
+					}
+		
+					mapSectionSidebarDescriptionShopIconOuter.appendChild(mapSectionSidebarDescriptionShopText);
+		
+					
+
+					var mapSectionSidebarCostShopCostOuter = document.createElement("span");
+					mapSectionSidebarCostShopCostOuter.setAttribute("name","Cost");
+					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarCostShopCostOuter);
+					var mapSectionSidebarCostShopCost = document.createElement("small");
+			
+					if (shops[u]["Currency"] == "Pokémon Dollar") {
+						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+" <img src='./media/Images/Misc/Currency/VIII/Pokémon Dollar.png' title='Pokémon Dollar' />";
+					}
+					else {
+						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+" <span title='"+shops[u]["Currency"]+"'>"+shops[u]["Currency"].replace(/[^A-Z]+/g,"")+"</span>";
+					}
+
+					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCost);
+
+
+		
+				
+					var shopTime = "";
+					var shopDay = [];
+					var shopSeason = [];
+
+					var shopTimeResult = [];
+	
+					if (shops[u]["Time"] != undefined) {
+						shopTime = shops[u]["Time"];
+					}
+
+					if (shops[u]["Day"] != undefined) {
+						if (shops[u]["Day"].includes(",")) {
+							var daySplit = shops[u]["Day"].split(",");
+							for(var y = 0; y < daySplit.length; y++) {
+								shopDay.push(daySplit[y]);
+							}
+						}
+						else {
+							shopDay.push(shops[u]["Day"])
+						}
+					}
+
+					if (shops[u]["Season"] != undefined) {
+						if (shops[u]["Season"].includes(",")) {
+							var seasonSplit = shops[u]["Season"].split(",");
+							for(var y = 0; y < seasonSplit.length; y++) {
+								shopSeason.push(seasonSplit[y]);
+							}
+						}
+						else {
+							shopSeason.push(shops[u]["Season"])
+						}
+						
+					}
+
+
+					for(var y = 0; y < shopSeason.length; y++) {
+						shopTimeResult.push(shopSeason[y]);
+					}
+
+					for(var y = 0; y < shopDay.length; y++) {
+						shopTimeResult.push(shopDay[y]);
+					}
+
+					shopTimeResult = shopTimeResult.map(i => "("+i+" "+shopTime+")");
+					shopTimeResult = shopTimeResult.map(i => i.replaceAll(" )",")"));
+					var shopTimeResultFinish = "";
+
+					for(var y = 0; y < shopTimeResult.length; y++) {
+						shopTimeResultFinish += " "+shopTimeResult[y];
+					}
+					shopTimeResultFinish = shopTimeResultFinish.replaceAll(") (",", ");
+					shopTimeResultFinish = shopTimeResultFinish.replace(/,([^,]*)$/, ' and $1');
+
+
+					mapSectionSidebarCostShopCost.innerHTML += shopTimeResultFinish;
+					
+			
+
+					if (shops[u]["Field"] != undefined) {
+						var mapSectionSidebarDescriptionShopRequirementOuter = document.createElement("span");
+						var mapSectionSidebarDescriptionShopRequirementTitle = document.createElement("small");
+						mapSectionSidebarDescriptionShopRequirementOuter.setAttribute("name","requirement");
+						mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopRequirementOuter);
+						mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopRequirementTitle);
+
+						mapSectionSidebarDescriptionShopRequirementTitle.innerText = "Requires:";
+
+
+						if (shops[u]["Field"].includes("/")) {
+							for(var y = 0; y < shops[u]["Field"].split("/").length; y++) {
+								var shopIcon;
+								var itm;
+								if (getMoveMachine(shops[u]["Field"].split("/")[y]) != undefined) {
+									shopIcon = getShopIcon(getMoveMachine(shops[u]["Field"].split("/")[y]));
+									itm = getMoveMachine(shops[u]["Field"].split("/")[y]);
+								}
+								else if (getShopIcon(shops[u]["Field"].split("/")[y]) != undefined) {
+									shopIcon = getShopIcon(shops[u]["Field"].split("/")[y]);
+									itm = shops[u]["Field"].split("/")[y];
+								}
+
+								var mapSectionSidebarDescriptionShopField = document.createElement("span");
+								var mapSectionSidebarDescriptionShopFieldText = document.createElement("small");
+								mapSectionSidebarDescriptionShopFieldText.innerText = shops[u]["Field"].split("/")[y];
+								mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopField);
+								if (shopIcon != undefined) {
+									var mapSectionSidebarDescriptionShopFieldImage = document.createElement("img");
+									mapSectionSidebarDescriptionShopFieldImage.src = "./media/Images/Shop/Bag/"+MEDIAPath_Shop_Bag+"/"+shopIcon+".png";
+									mapSectionSidebarDescriptionShopFieldImage.title = shops[u]["Field"].split("/")[y];
+									mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldImage);
+									mapSectionSidebarDescriptionShopField.setAttribute("name","shop");
+									mapSectionSidebarDescriptionShopField.setAttribute("value",itm);
+									mapSectionSidebarDescriptionShopField.addEventListener("click",dataRedirect);
+									mapSectionSidebarDescriptionShopField.setAttribute("function","dataRedirect");
+								}
+								mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldText);
+								if (y != shops[u]["Field"].split("/").length - 1) {
+									var mapSectionSidebarDescriptionShopFieldSpace = document.createElement("small");
+									mapSectionSidebarDescriptionShopFieldSpace.innerText = " or ";
+									mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopFieldSpace)
+								}
+							}
+						}
+						else if (shops[u]["Field"].includes(",")) {
+							for(var y = 0; y < shops[u]["Field"].split(",").length; y++) {
+								var shopIcon;
+								var itm;
+								if (getMoveMachine(shops[u]["Field"].split(",")[y]) != undefined) {
+									shopIcon = getShopIcon(getMoveMachine(shops[u]["Field"].split(",")[y]));
+									itm = getMoveMachine(shops[u]["Field"].split(",")[y]);
+								}
+								else if (getShopIcon(shops[u]["Field"].split(",")[y]) != undefined) {
+									shopIcon = getShopIcon(shops[u]["Field"].split(",")[y]);
+									itm = shops[u]["Field"].split(",")[y];
+								}
+
+								var mapSectionSidebarDescriptionShopField = document.createElement("span");
+								var mapSectionSidebarDescriptionShopFieldText = document.createElement("small");
+								mapSectionSidebarDescriptionShopFieldText.innerText = shops[u]["Field"].split(",")[y];
+								mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopField);
+								if (shopIcon != undefined) {
+									var mapSectionSidebarDescriptionShopFieldImage = document.createElement("img");
+									mapSectionSidebarDescriptionShopFieldImage.src = "./media/Images/Shop/Bag/"+MEDIAPath_Shop_Bag+"/"+shopIcon+".png";
+									mapSectionSidebarDescriptionShopFieldImage.title = shops[u]["Field"].split(",")[y];
+									mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldImage);
+	
+									mapSectionSidebarDescriptionShopField.setAttribute("name","shop");
+									mapSectionSidebarDescriptionShopField.setAttribute("value",itm);
+									mapSectionSidebarDescriptionShopField.addEventListener("click",dataRedirect);
+									mapSectionSidebarDescriptionShopField.setAttribute("function","dataRedirect");
+								}
+								mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldText);
+							}
+						}
+						else {
+							var shopIcon;
+							var itm;
+							if (getMoveMachine(shops[u]["Field"]) != undefined) {
+								shopIcon = getShopIcon(getMoveMachine(shops[u]["Field"]));
+								itm = getMoveMachine(shops[u]["Field"]);
+							}
+							else if (getShopIcon(shops[u]["Field"]) != undefined) {
+								shopIcon = getShopIcon(shops[u]["Field"]);
+								itm = shops[u]["Field"];
+							}
+
+							var mapSectionSidebarDescriptionShopField = document.createElement("span");
+							var mapSectionSidebarDescriptionShopFieldText = document.createElement("small");
+							mapSectionSidebarDescriptionShopFieldText.innerText = shops[u]["Field"];
+							mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopField);
+							if (shopIcon != undefined) {
+								var mapSectionSidebarDescriptionShopFieldImage = document.createElement("img");
+								mapSectionSidebarDescriptionShopFieldImage.src = "./media/Images/Shop/Bag/"+MEDIAPath_Shop_Bag+"/"+shopIcon+".png";
+								mapSectionSidebarDescriptionShopFieldImage.title = shops[u]["Field"];
+								mapSectionSidebarDescriptionShopFieldImage.setAttribute("name","shop");
+								mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldImage);
+
+								mapSectionSidebarDescriptionShopField.setAttribute("name","shop");
+								mapSectionSidebarDescriptionShopField.setAttribute("value",itm);
+								mapSectionSidebarDescriptionShopField.addEventListener("click",dataRedirect);
+								mapSectionSidebarDescriptionShopField.setAttribute("function","dataRedirect");
+							}
+							mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldText);
+
+						}
+					}
+
+				}
+			}
 		}
 
 
