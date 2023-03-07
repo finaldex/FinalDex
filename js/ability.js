@@ -37,7 +37,7 @@ var createAbility = function() {
 		for(var q = 0; q < parbo.length; q++) {
 			var abilitySectionSidebarLearnsetInput = document.createElement("input");
 			var abilitySectionSidebarLearnsetLabel = document.createElement("label");
-			var abilitySectionSidebarLearnsetText = document.createElement("h5");
+			var abilitySectionSidebarLearnsetText = document.createElement("h6");
 			abilitySectionSidebarLearnsetInput.setAttribute("type","checkbox");
 			abilitySectionSidebarLearnsetInput.setAttribute("id","ability-learnset-partybox-"+q);
 			abilitySectionSidebarLearnsetInput.setAttribute("name","ability-learnset-partybox");
