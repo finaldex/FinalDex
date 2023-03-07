@@ -40,9 +40,10 @@ var finaldataItemsPrice = [];
 var finaldataItemsPriceExtra = [];
 var finaldataItemsDescription = [];
 var finaldataLocationPokémon = [];
+var finaldataLocationPokémonShops = [];
 var finaldataLocationItems = [];
-var finaldataLocationShops = [];
-var finaldataLocationPickup = [];
+var finaldataLocationItemsShops = [];
+var finaldataLocationItemsPickup = [];
 var finaldataLocationTrainers = [];
 var finaldataAbility = [];
 var finaldataAbilityFlavor = [];
@@ -66,7 +67,7 @@ var drag;
 var savedtar;
 var saveddrag;
 var boxDrag;
-var loads = ["Game","Pokémon","Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers","Mechanics"];
+var loads = ["Game","Pokémon","Pokémon Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers","Mechanics"];
 var baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
 var baseextension = "json";
 var baseextra = " Metadata"
@@ -157,19 +158,22 @@ function requestLoad(i,url) {
 						for(var q = 0; q < Metadata["Pokémon"].length; q++) {
 							finaldataLocationPokémon.push(Metadata["Pokémon"][q]);
 						}
+						for(var q = 0; q < Metadata["Shop"].length; q++) {
+							finaldataLocationPokémonShops.push(Metadata["Shop"][q]);
+						}
 					}
 					if (loads[i] == "Location Items") {
 						for(var q = 0; q < Metadata["Shop"].length; q++) {
-							finaldataLocationShops.push(Metadata["Shop"][q]);
+							finaldataLocationItemsShops.push(Metadata["Shop"][q]);
 						}
 						for(var q = 0; q < Metadata["Items"].length; q++) {
 							finaldataLocationItems.push(Metadata["Items"][q]);
 						}
 						for(var q = 0; q < Metadata["Pickup"].length; q++) {
-							finaldataLocationPickup.push(Metadata["Pickup"][q]);
+							finaldataLocationItemsPickup.push(Metadata["Pickup"][q]);
 						}
 					}
-					if (loads[i] == "Learnset") {
+					if (loads[i] == "Pokémon Learnset") {
 						for(var q = 0; q < Metadata["Evolution"].length; q++) {
 							finaldataLearnsetEvolution.push(Metadata["Evolution"][q]);
 						}
@@ -304,7 +308,6 @@ function initialize() {
 
 		createNav();
 		createPokémon();
-		//createMechanic();
 		createTool();
 		createMap();
 		createAbility();
@@ -565,16 +568,18 @@ function zoom(base,condition) {
 
 
 	if (condition == "pause") {
-		if (base.getAttribute("data-active") == "true") {
-			if (base.getAttribute("name") != "pause") {
-				base.setAttribute("name","pause");
-				$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
-				$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
-			}
-			else {
-				base.removeAttribute("name");
-				$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
-				$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
+		if (!event.target.classList.contains("mapify-popOver") && !event.target.parentElement.parentElement.classList.contains("mapify-popOver")) {
+			if (base.getAttribute("data-active") == "true") {
+				if (base.getAttribute("name") != "pause") {
+					base.setAttribute("name","pause");
+					$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
+					$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
+				}
+				else {
+					base.removeAttribute("name");
+					$(base).css({'transform': 'scale('+ $(base).attr('data-scale') +') !important'});
+					$(base).css({'transform-origin': (relativeX / width) * 100 + '% ' + (relativeY / height) * 100 +'% !important'});
+				}
 			}
 		}
 	}
