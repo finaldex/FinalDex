@@ -178,7 +178,7 @@ var createMap = function() {
     var mapSectionHeaderGame = document.createElement("span");
     var mapSectionHeaderGameImage = document.createElement("img");
     mapSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
-    mapSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
+    mapSectionHeaderGameImage.setAttribute("onerror","this.display='none'");require
     mapSectionHeader.appendChild(mapSectionHeaderGame);
     mapSectionHeaderGame.appendChild(mapSectionHeaderGameImage);
 
@@ -402,11 +402,21 @@ var createMap = function() {
 		var items = [];
 		var poks = [];
 		var tutors = [];
+		var shop1 = [];
+		var shop2 = [];
 		items = getLocationItems(location);
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
-		shops = getDataArr(finaldataLocationShops,location);
-		console.log(getDataArr(finaldataLocationShops,location))
+		shop1 = getDataArr(finaldataLocationPokémonShops,location);
+		shop2 = getDataArr(finaldataLocationItemsShops,location);
+		for(var q = 0; q < shop1.length; q++) {
+			shops.push(shop1[q]);
+		}
+		for(var q = 0; q < shop2.length; q++) {
+			shops.push(shop2[q]);
+		}
+
+
 
 
 		var mapImg = document.querySelector("#contain > div#map section[name='content'] *[name='map'] img[usemap]");
@@ -647,12 +657,14 @@ var createMap = function() {
 		}
 
 
-		if (overviewImages.length == 1) {
+		if (overviewImages.length <= 1) {
 			mapSectionSidebarDescriptionOviewButtonRightButton.classList.add("last");
 		}
 		else {
 			mapSectionSidebarDescriptionOviewButtonRightButton.classList.remove("last");
 		}
+
+	
 
 		var lis = mapSectionSidebarDescriptionOviewSelector.querySelectorAll(":scope > li")
 		for (var q = 0; q < lis.length; q++) {
@@ -713,18 +725,22 @@ var createMap = function() {
 
 
 		for(var q = 0; q < shops.length; q++) {
-			if (shops[q]["Area"] != undefined && shops[q]["Title"] != undefined) {
-				shops[q]["Sort"] = shops[q]["Area"]+" "+shops[q]["Title"];
+			var arr = [];
+			if (shops[q]["Type"] != undefined) {
+				arr.push(shops[q]["Type"]);
 			}
-			else if (shops[q]["Area"] == undefined && shops[q]["Title"] != undefined) {
-				shops[q]["Sort"] = shops[q]["Title"];
+			if (shops[q]["Area"] != undefined) {
+				arr.push(shops[q]["Area"]);
 			}
-			else if (shops[q]["Area"] != undefined && shops[q]["Title"] == undefined) {
-				shops[q]["Sort"] = shops[q]["Area"];
+			if (shops[q]["Title"] != undefined) {
+				arr.push(shops[q]["Title"]);
 			}
-			else {
-				shops[q]["Sort"] = "a";
+
+			if (arr.length == 0) {
+				arr.push("a");
 			}
+
+			shops[q]["Sort"] = arr.join("<br>");
 		}
 
 
@@ -758,7 +774,7 @@ var createMap = function() {
 
 				if (shopArea[q] != location) {
 					var mapSectionSidebarDescriptionShopUlTitle = document.createElement("h4");
-					mapSectionSidebarDescriptionShopUlTitle.innerText = shopArea[q];
+					mapSectionSidebarDescriptionShopUlTitle.innerHTML = shopArea[q];
 					mapSectionSidebarDescriptionShopUl.appendChild(mapSectionSidebarDescriptionShopUlTitle);
 				}
 					
@@ -769,14 +785,34 @@ var createMap = function() {
 				if (shops[u]["Sort"] == shopArea[q]) {
 					var quantity = shops[u]["Quantity"];
 
+					var main = undefined;
+					var type = undefined;
+
+					if (shops[u]["Item"] != undefined) {
+						main = shops[u]["Item"];
+						type = "item";
+					}
+					else if (shops[u]["Pokémon"] != undefined) {
+						main = shops[u]["Pokémon"];
+						type = "pokémon";
+					}
+
 					var mapSectionSidebarDescriptionShopLi = document.createElement("li");
 					var mapSectionSidebarDescriptionShopIconOuter = document.createElement("span");
-					mapSectionSidebarDescriptionShopIconOuter.setAttribute("name","item");
-					mapSectionSidebarDescriptionShopIconOuter.setAttribute("value",shops[u]["Item"])
 					ul.appendChild(mapSectionSidebarDescriptionShopLi);
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopIconOuter);
-					mapSectionSidebarDescriptionShopIconOuter.addEventListener("click",dataRedirect);
-					mapSectionSidebarDescriptionShopIconOuter.setAttribute("function","dataRedirect");
+
+					if (type == "item") {
+						mapSectionSidebarDescriptionShopIconOuter.setAttribute("name","item");
+						mapSectionSidebarDescriptionShopIconOuter.setAttribute("value",main)
+						mapSectionSidebarDescriptionShopIconOuter.addEventListener("click",dataRedirect);
+						mapSectionSidebarDescriptionShopIconOuter.setAttribute("function","dataRedirect");
+					}
+					else if (type == "pokémon") {
+						mapSectionSidebarDescriptionShopIconOuter.setAttribute("value",getPokémonInt(main))
+						mapSectionSidebarDescriptionShopIconOuter.addEventListener("click",modalData);
+						mapSectionSidebarDescriptionShopIconOuter.setAttribute("function","modalData");
+					}
 
 					if (quantity == undefined) {
 						quantity = 1;
@@ -786,30 +822,46 @@ var createMap = function() {
 					}
 
 
+					if (shops[u]["Level"] != undefined) {
+						var mapSectionSidebarDescriptionShopTitle = document.createElement("small");
+						mapSectionSidebarDescriptionShopTitle.innerText = "Lv. "+shops[u]["Level"];
+						mapSectionSidebarDescriptionShopIconOuter.appendChild(mapSectionSidebarDescriptionShopTitle);
+					}
+
 					var mapSectionSidebarDescriptionShopIconInner = document.createElement("span");
 					mapSectionSidebarDescriptionShopIconOuter.appendChild(mapSectionSidebarDescriptionShopIconInner);
 
 					for(var y = 0; y < quantity; y++) {
 						var mapSectionSidebarDescriptionShopIcon = document.createElement("img");
-						mapSectionSidebarDescriptionShopIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(shops[u]["Item"])+".png";
-						mapSectionSidebarDescriptionShopIcon.setAttribute("onerror", "this.style.display='none';");
+						if (type == "item") {
+							mapSectionSidebarDescriptionShopIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(shops[u]["Item"])+".png";
+							mapSectionSidebarDescriptionShopIcon.setAttribute("onerror", "this.style.display='none';");
+						}
+						else if (type == "pokémon") {
+							mapSectionSidebarDescriptionShopIcon.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(main),"Box")+".png";
+							mapSectionSidebarDescriptionShopIcon.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
+							mapSectionSidebarDescriptionShopIcon.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+						}
 						mapSectionSidebarDescriptionShopIconInner.appendChild(mapSectionSidebarDescriptionShopIcon);
 					}
 
 					if (quantity > 1) {
-						mapSectionSidebarDescriptionShopIconOuter.title = shops[u]["Quantity"]+"x "+shops[u]["Item"];
+						mapSectionSidebarDescriptionShopIconOuter.title = shops[u]["Quantity"]+"x "+main;
 					}
 					else {
-						mapSectionSidebarDescriptionShopIconOuter.title = shops[u]["Item"];
+						mapSectionSidebarDescriptionShopIconOuter.title = main;
 					}
 
 	
 
 					var mapSectionSidebarDescriptionShopText = document.createElement("small");
-					mapSectionSidebarDescriptionShopText.innerText = shops[u]["Item"];
+					mapSectionSidebarDescriptionShopText.innerText = main;
+					if (shops[u]["Citeria"] != undefined) {
+						mapSectionSidebarDescriptionShopText.setAttribute("title",shops[u]["Citeria"]);
+					}
 
-					if (getMachineMove(shops[u]["Item"]) != undefined) {
-						mapSectionSidebarDescriptionShopText.innerText += " ("+getMachineMove(shops[u]["Item"])+")";
+					if (getMachineMove(main) != undefined) {
+						mapSectionSidebarDescriptionShopText.innerText += " ("+getMachineMove(main)+")";
 					}
 		
 					mapSectionSidebarDescriptionShopIconOuter.appendChild(mapSectionSidebarDescriptionShopText);
@@ -819,188 +871,22 @@ var createMap = function() {
 					var mapSectionSidebarCostShopCostOuter = document.createElement("span");
 					mapSectionSidebarCostShopCostOuter.setAttribute("name","Cost");
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarCostShopCostOuter);
+					var mapSectionSidebarCostShopCostTitle = document.createElement("h6");
 					var mapSectionSidebarCostShopCost = document.createElement("small");
-					console.log(shops)
-					console.log(shops[u])
+					mapSectionSidebarCostShopCostTitle.innerText = "Cost:";
+				
 					if (shops[u]["Currency"] == "Pokémon Dollar") {
-						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+" <img src='./media/Images/Misc/Currency/VIII/Pokémon Dollar.png' title='Pokémon Dollar' />";
+						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+"<img src='./media/Images/Misc/Currency/VIII/Pokémon Dollar.png' title='Pokémon Dollar' />";
+					}
+					else if (getItemIcon(shops[u]["Currency"]) != undefined) {
+						mapSectionSidebarCostShopCost.innerHTML = quantity+"x "+"<img src='./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(shops[u]["Currency"])+".png' onerror='this.style.display=´none´;' title='"+shops[u]["Currency"]+"'>";
 					}
 					else {
-						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+" <span title='"+shops[u]["Currency"]+"'>"+shops[u]["Currency"].replace(/[^A-Z]+/g,"")+"</span>";
+						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+"<span title='"+shops[u]["Currency"]+"'>"+shops[u]["Currency"].replace(/[^A-Z]+/g,"")+"</span>";
 					}
 
+					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCostTitle);
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCost);
-
-
-		
-				
-					var shopTime = "";
-					var shopDay = [];
-					var shopSeason = [];
-
-					var shopTimeResult = [];
-	
-					if (shops[u]["Time"] != undefined) {
-						shopTime = shops[u]["Time"];
-					}
-
-					if (shops[u]["Day"] != undefined) {
-						if (shops[u]["Day"].includes(",")) {
-							var daySplit = shops[u]["Day"].split(",");
-							for(var y = 0; y < daySplit.length; y++) {
-								shopDay.push(daySplit[y]);
-							}
-						}
-						else {
-							shopDay.push(shops[u]["Day"])
-						}
-					}
-
-					if (shops[u]["Season"] != undefined) {
-						if (shops[u]["Season"].includes(",")) {
-							var seasonSplit = shops[u]["Season"].split(",");
-							for(var y = 0; y < seasonSplit.length; y++) {
-								shopSeason.push(seasonSplit[y]);
-							}
-						}
-						else {
-							shopSeason.push(shops[u]["Season"])
-						}
-						
-					}
-
-
-					for(var y = 0; y < shopSeason.length; y++) {
-						shopTimeResult.push(shopSeason[y]);
-					}
-
-					for(var y = 0; y < shopDay.length; y++) {
-						shopTimeResult.push(shopDay[y]);
-					}
-
-					shopTimeResult = shopTimeResult.map(i => "("+i+" "+shopTime+")");
-					shopTimeResult = shopTimeResult.map(i => i.replaceAll(" )",")"));
-					var shopTimeResultFinish = "";
-
-					for(var y = 0; y < shopTimeResult.length; y++) {
-						shopTimeResultFinish += " "+shopTimeResult[y];
-					}
-					shopTimeResultFinish = shopTimeResultFinish.replaceAll(") (",", ");
-					shopTimeResultFinish = shopTimeResultFinish.replace(/,([^,]*)$/, ' and $1');
-
-
-					mapSectionSidebarCostShopCost.innerHTML += shopTimeResultFinish;
-					
-			
-
-					if (shops[u]["Field"] != undefined) {
-						var mapSectionSidebarDescriptionShopRequirementOuter = document.createElement("span");
-						var mapSectionSidebarDescriptionShopRequirementTitle = document.createElement("small");
-						mapSectionSidebarDescriptionShopRequirementOuter.setAttribute("name","requirement");
-						mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopRequirementOuter);
-						mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopRequirementTitle);
-
-						mapSectionSidebarDescriptionShopRequirementTitle.innerText = "Requires:";
-
-
-						if (shops[u]["Field"].includes("/")) {
-							for(var y = 0; y < shops[u]["Field"].split("/").length; y++) {
-								var shopIcon;
-								var itm;
-								if (getMoveMachine(shops[u]["Field"].split("/")[y]) != undefined) {
-									shopIcon = getShopIcon(getMoveMachine(shops[u]["Field"].split("/")[y]));
-									itm = getMoveMachine(shops[u]["Field"].split("/")[y]);
-								}
-								else if (getShopIcon(shops[u]["Field"].split("/")[y]) != undefined) {
-									shopIcon = getShopIcon(shops[u]["Field"].split("/")[y]);
-									itm = shops[u]["Field"].split("/")[y];
-								}
-
-								var mapSectionSidebarDescriptionShopField = document.createElement("span");
-								var mapSectionSidebarDescriptionShopFieldText = document.createElement("small");
-								mapSectionSidebarDescriptionShopFieldText.innerText = shops[u]["Field"].split("/")[y];
-								mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopField);
-								if (shopIcon != undefined) {
-									var mapSectionSidebarDescriptionShopFieldImage = document.createElement("img");
-									mapSectionSidebarDescriptionShopFieldImage.src = "./media/Images/Shop/Bag/"+MEDIAPath_Shop_Bag+"/"+shopIcon+".png";
-									mapSectionSidebarDescriptionShopFieldImage.title = shops[u]["Field"].split("/")[y];
-									mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldImage);
-									mapSectionSidebarDescriptionShopField.setAttribute("name","shop");
-									mapSectionSidebarDescriptionShopField.setAttribute("value",itm);
-									mapSectionSidebarDescriptionShopField.addEventListener("click",dataRedirect);
-									mapSectionSidebarDescriptionShopField.setAttribute("function","dataRedirect");
-								}
-								mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldText);
-								if (y != shops[u]["Field"].split("/").length - 1) {
-									var mapSectionSidebarDescriptionShopFieldSpace = document.createElement("small");
-									mapSectionSidebarDescriptionShopFieldSpace.innerText = " or ";
-									mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopFieldSpace)
-								}
-							}
-						}
-						else if (shops[u]["Field"].includes(",")) {
-							for(var y = 0; y < shops[u]["Field"].split(",").length; y++) {
-								var shopIcon;
-								var itm;
-								if (getMoveMachine(shops[u]["Field"].split(",")[y]) != undefined) {
-									shopIcon = getShopIcon(getMoveMachine(shops[u]["Field"].split(",")[y]));
-									itm = getMoveMachine(shops[u]["Field"].split(",")[y]);
-								}
-								else if (getShopIcon(shops[u]["Field"].split(",")[y]) != undefined) {
-									shopIcon = getShopIcon(shops[u]["Field"].split(",")[y]);
-									itm = shops[u]["Field"].split(",")[y];
-								}
-
-								var mapSectionSidebarDescriptionShopField = document.createElement("span");
-								var mapSectionSidebarDescriptionShopFieldText = document.createElement("small");
-								mapSectionSidebarDescriptionShopFieldText.innerText = shops[u]["Field"].split(",")[y];
-								mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopField);
-								if (shopIcon != undefined) {
-									var mapSectionSidebarDescriptionShopFieldImage = document.createElement("img");
-									mapSectionSidebarDescriptionShopFieldImage.src = "./media/Images/Shop/Bag/"+MEDIAPath_Shop_Bag+"/"+shopIcon+".png";
-									mapSectionSidebarDescriptionShopFieldImage.title = shops[u]["Field"].split(",")[y];
-									mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldImage);
-	
-									mapSectionSidebarDescriptionShopField.setAttribute("name","shop");
-									mapSectionSidebarDescriptionShopField.setAttribute("value",itm);
-									mapSectionSidebarDescriptionShopField.addEventListener("click",dataRedirect);
-									mapSectionSidebarDescriptionShopField.setAttribute("function","dataRedirect");
-								}
-								mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldText);
-							}
-						}
-						else {
-							var shopIcon;
-							var itm;
-							if (getMoveMachine(shops[u]["Field"]) != undefined) {
-								shopIcon = getShopIcon(getMoveMachine(shops[u]["Field"]));
-								itm = getMoveMachine(shops[u]["Field"]);
-							}
-							else if (getShopIcon(shops[u]["Field"]) != undefined) {
-								shopIcon = getShopIcon(shops[u]["Field"]);
-								itm = shops[u]["Field"];
-							}
-
-							var mapSectionSidebarDescriptionShopField = document.createElement("span");
-							var mapSectionSidebarDescriptionShopFieldText = document.createElement("small");
-							mapSectionSidebarDescriptionShopFieldText.innerText = shops[u]["Field"];
-							mapSectionSidebarDescriptionShopRequirementOuter.appendChild(mapSectionSidebarDescriptionShopField);
-							if (shopIcon != undefined) {
-								var mapSectionSidebarDescriptionShopFieldImage = document.createElement("img");
-								mapSectionSidebarDescriptionShopFieldImage.src = "./media/Images/Shop/Bag/"+MEDIAPath_Shop_Bag+"/"+shopIcon+".png";
-								mapSectionSidebarDescriptionShopFieldImage.title = shops[u]["Field"];
-								mapSectionSidebarDescriptionShopFieldImage.setAttribute("name","shop");
-								mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldImage);
-
-								mapSectionSidebarDescriptionShopField.setAttribute("name","shop");
-								mapSectionSidebarDescriptionShopField.setAttribute("value",itm);
-								mapSectionSidebarDescriptionShopField.addEventListener("click",dataRedirect);
-								mapSectionSidebarDescriptionShopField.setAttribute("function","dataRedirect");
-							}
-							mapSectionSidebarDescriptionShopField.appendChild(mapSectionSidebarDescriptionShopFieldText);
-
-						}
-					}
 
 				}
 			}
@@ -1297,18 +1183,22 @@ var createMap = function() {
 		}
 
 		for(var q = 0; q < poks.length; q++) {
-			if (poks[q]["Area"] != undefined && poks[q]["Title"] != undefined) {
-				poks[q]["Sort"] = poks[q]["Area"]+" - "+poks[q]["Title"];
+			var arr = [];
+			if (poks[q]["Mechanic"] != undefined) {
+				arr.push(poks[q]["Mechanic"]);
 			}
-			else if (poks[q]["Area"] == undefined && poks[q]["Title"] != undefined) {
-				poks[q]["Sort"] = poks[q]["Title"];
+			if (poks[q]["Area"] != undefined) {
+				arr.push(poks[q]["Area"]);
 			}
-			else if (poks[q]["Area"] != undefined && poks[q]["Title"] == undefined) {
-				poks[q]["Sort"] = poks[q]["Area"];
+			if (poks[q]["Title"] != undefined) {
+				arr.push(poks[q]["Title"]);
 			}
-			else {
-				poks[q]["Sort"] = "a";
+
+			if (arr.length == 0) {
+				arr.push("a");
 			}
+
+			poks[q]["Sort"] = arr.join("<br>");
 		}
 
 
@@ -1345,7 +1235,7 @@ var createMap = function() {
 
 				if (pokArea[q] != location) {
 					var mapSectionSidebarDescriptionPokUlTitle = document.createElement("h4");
-					mapSectionSidebarDescriptionPokUlTitle.innerText = pokArea[q];
+					mapSectionSidebarDescriptionPokUlTitle.innerHTML = pokArea[q];
 					mapSectionSidebarDescriptionPokUl.appendChild(mapSectionSidebarDescriptionPokUlTitle);
 				}
 			}
@@ -1454,6 +1344,70 @@ var createMap = function() {
 						}
 					}
 
+					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static") {
+						var mapSectionSidebarDescriptionPokTypeTile = document.createElement("img");
+						var mapSectionSidebarDescriptionPokTypeTileText = document.createElement("small");
+
+
+						var dash;
+						var entr;
+						var ti;
+						var res;
+
+						if (poks[u]["Tile"].includes("Rod")) {
+							dash = "in";
+						}
+						else {
+							dash = "on";
+						}
+
+						if (poks[u]["Encounter"] == undefined) {
+							entr = "";
+							dash = "";
+						}
+						else {
+							entr = poks[u]["Encounter"]+" ";
+						}
+
+						if (poks[u]["Tile"] == undefined) {
+							ti = "";
+							dash = "";
+						}
+						else {
+							ti = " "+poks[u]["Tile"]+" ";
+						}
+
+
+						res = dash+ti;
+
+						res = res.replaceAll(/^ /g,"").replaceAll(/ $/g,"");
+						res = " "+res;
+
+						mapSectionSidebarDescriptionPokTypeTile.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
+						mapSectionSidebarDescriptionPokTypeTile.title = poks[u]["Tile"];
+						mapSectionSidebarDescriptionPokTypeTile.alt = poks[u]["Tile"];
+						mapSectionSidebarDescriptionPokTypeTile.setAttribute("onerror","this.style.display = 'none';");
+						mapSectionSidebarDescriptionPokTypeTile.setAttribute("name","tile");
+						mapSectionSidebarDescriptionPokTypeTileText.innerText = res;
+
+						var rgs;
+
+						if (Region.includes(",")) {
+							rgs = Region.split(",")
+						}
+						else {
+							rgs = [Region];
+						}
+						for(var r = 0; r < rgs.length; r++) {
+							mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
+						}
+						mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
+
+
+		
+												
+					}
+
 
 					for(var r = 0; r < encounters.length; r++) {
 						var mapSectionSidebarDescriptionPokTypeEncounter = document.createElement("img");
@@ -1470,7 +1424,7 @@ var createMap = function() {
 						if (encounter != undefined) {
 							
 							if (encounter == "Static") {
-								mapSectionSidebarDescriptionPokTypeEncounter.src = "./media/Images/Pokémon/Overworld/Front/Normal/PNG/"+MEDIAPath_Encounter+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
+								mapSectionSidebarDescriptionPokTypeEncounter.src = "./media/Images/Pokémon/Overworld/Front/Default/PNG/"+MEDIAPath_Encounter+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
 								mapSectionSidebarDescriptionPokTypeEncounter.title = encounters[r]+"\n"+poks[u]["Pokémon"];
 								mapSectionSidebarDescriptionPokTypeWrap.setAttribute("name","static");
 								mapSectionSidebarDescriptionPokTypeWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
@@ -1525,86 +1479,37 @@ var createMap = function() {
 							}
 						}
 						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeEncounter);
-						mapSectionSidebarDescriptionPokType.appendChild(mapSectionSidebarDescriptionPokTypeEncounterText);
+						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeEncounterText);
 					}
 
+
+
+					
+
+					
 
 					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static") {
-						var mapSectionSidebarDescriptionPokTypeTile = document.createElement("img");
-						var mapSectionSidebarDescriptionPokTypeTileText = document.createElement("small");
-						mapSectionSidebarDescriptionPokType.appendChild(mapSectionSidebarDescriptionPokTypeTileText);
-
-						var dash;
-						var entr;
-						var ti;
-						var res;
-
-						if (poks[u]["Tile"].includes("Rod")) {
-							dash = "in";
-						}
-						else {
-							dash = "on";
-						}
-
-						if (poks[u]["Encounter"] == undefined) {
-							entr = "";
-							dash = "";
-						}
-						else {
-							entr = poks[u]["Encounter"]+" ";
-						}
-
-						if (poks[u]["Tile"] == undefined) {
-							ti = "";
-							dash = "";
-						}
-						else {
-							ti = " "+poks[u]["Tile"]+" ";
-						}
-
-
-						res = dash+ti;
-
-						res = res.replaceAll(/^ /g,"").replaceAll(/ $/g,"");
-						res = " "+res;
-
-						mapSectionSidebarDescriptionPokTypeTile.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
-						mapSectionSidebarDescriptionPokTypeTile.title = poks[u]["Tile"];
-						mapSectionSidebarDescriptionPokTypeTile.alt = poks[u]["Tile"];
-						mapSectionSidebarDescriptionPokTypeTile.setAttribute("name","tile");
-						mapSectionSidebarDescriptionPokTypeTileText.innerText = res;
-
-						var rgs;
-
-						if (Region.includes(",")) {
-							rgs = Region.split(",")
-						}
-						else {
-							rgs = [Region];
-						}
-						for(var r = 0; r < rgs.length; r++) {
-							mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
-						}
-						mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
-
-
 						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeTile);
-						
-												
+						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeTileText);
+						var text = mapSectionSidebarDescriptionPokTypeWrap.querySelectorAll(":scope > small");
+						for(var r = 0; r < text.length; r++) {
+							mapSectionSidebarDescriptionPokTypeWrap.appendChild(text[r]);
+						}
 					}
-
 
 
 					if (poks[u]["Mechanic"] != undefined) {
-						var mapSectionSidebarDescriptionPokTypeMechanicText = document.createElement("h6");
+						var mapSectionSidebarDescriptionPokTypeMechanicText = document.createElement("small");
 						mapSectionSidebarDescriptionPokTypeMechanicText.innerText = poks[u]["Mechanic"];
 						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeMechanicText);
 					}
 
+
+
+
+
 					if (poks[u]["Criteria"] != undefined) {
-				
 						mapSectionSidebarDescriptionPokRate.title = poks[u]["Criteria"];
-					
 					}
 
 					if (poks[u]["Machine"] != undefined) {
@@ -2444,9 +2349,11 @@ var createMap = function() {
 
 	mapSectionSidebarDescriptionPok.addEventListener("scroll",function(){updateTitleHeader("pokémon")});
 	mapSectionSidebarDescriptionItem.addEventListener("scroll",function(){updateTitleHeader("items")});
+	mapSectionSidebarDescriptionShop.addEventListener("scroll",function(){updateTitleHeader("shop")});
 
 	updateTitleHeader("pokémon");
 	updateTitleHeader("items");
+	updateTitleHeader("shop");
 
 
 	var mapdescriptionsel = document.querySelector('#contain > div#map > section[name="sidebar"] input[value="'+mapSelectorVal[0]+'"]');
