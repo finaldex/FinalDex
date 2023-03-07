@@ -1152,13 +1152,8 @@
 #data > div section[name='main'] > div[name='area'] ul li > *[title]:hover > * {
 	text-decoration-style: dashed;
 }
-#data > div section[name='main'] > div[name='area'] ul li > *[title] > * {
-	text-decoration:underline;
-	text-decoration-style: solid;
-}
-#data > div section[name='main'] > div[name='area'] ul li > *[title]:hover > * {
-	text-decoration-style: dashed;
-}
+
+
 #data > div section[name='main'] > div[name='area'] ul li > *:not([name="location"])[title] {
 	cursor: help;
 }
