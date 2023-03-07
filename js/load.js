@@ -41,6 +41,7 @@ var finaldataItemsPriceExtra = [];
 var finaldataItemsDescription = [];
 var finaldataLocationPokémon = [];
 var finaldataLocationItems = [];
+var finaldataLocationShops = [];
 var finaldataLocationPickup = [];
 var finaldataLocationTrainers = [];
 var finaldataAbility = [];
@@ -99,6 +100,7 @@ function requestLoad(i,url) {
 			var urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","");
 			GameID = getGameName("",urlid);
 			define();
+			config();
 
 			for(var q = 0; q < Metadata["Type Chart_" + JSONPath_Typechart].length; q++) {
 				finaldataTypeChart.push(Metadata["Type Chart_" + JSONPath_Typechart][q]);
@@ -157,6 +159,9 @@ function requestLoad(i,url) {
 						}
 					}
 					if (loads[i] == "Location Items") {
+						for(var q = 0; q < Metadata["Shop"].length; q++) {
+							finaldataLocationShops.push(Metadata["Shop"][q]);
+						}
 						for(var q = 0; q < Metadata["Items"].length; q++) {
 							finaldataLocationItems.push(Metadata["Items"][q]);
 						}
@@ -296,8 +301,6 @@ function initialize() {
 	}
 	if(initEnd >= initLength - 1) {
 		loaddescription.innerHTML = "Complete!";
-
-		config();
 
 		createNav();
 		createPokémon();
