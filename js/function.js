@@ -633,6 +633,25 @@ function getLocationPokémon(location) {
 
 }
 
+function getDataArr(arr,location) {
+
+	var arr;
+	var location;
+	var result = [];
+
+    for (var q = 0; q < arr.length; q++) {
+		if (getApplicable(arr[q]["Game"]) == true) {
+			if(arr[q]["Location"] == location) {
+				result.push(arr[q]);
+			}
+		}
+	}
+
+	return result;
+}
+
+
+
 
 function sortObjectArray(objectsArr, prop) {
 	var objectsArr;
