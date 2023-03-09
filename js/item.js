@@ -173,6 +173,22 @@ var createItem = function() {
 			itemSectionListOptionsInput.value = q;
 			itemSectionListOptionsLabel.setAttribute("for", "item-options-" + q);
 			itemSectionListOptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
+			itemSectionListOptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
+
+
+			if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Name_"+JSONPath_Items]).length > 0) {
+				if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Name_"+JSONPath_Items])[0]["Sell Amount"] != undefined) {
+					itemSectionListOptionsLabel.setAttribute("data-search-price",getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Name_"+JSONPath_Items])[0]["Sell Amount"]);
+				}
+				else {
+					itemSectionListOptionsLabel.setAttribute("data-search-price",0);
+				}
+			}
+			else {
+				itemSectionListOptionsLabel.setAttribute("data-search-price",0);
+			}
+			
+
 			if (finaldataItems[q]["Pocket_"+JSONPath_Items] != undefined) {
 				itemSectionListOptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket_"+JSONPath_Items].toLowerCase());
 			}
@@ -233,6 +249,19 @@ var createItem = function() {
 		itemSectionHeaderTitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
 		itemSectionHeaderTitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
 
+		var priceArr = getDataArr(finaldataItemsPrice,"Item",item);
+	
+
+		if (priceArr.length > 0) {
+			var price = priceArr[0]["Sell Amount"];
+			var currency = priceArr[0]["Sell Currency"];	
+			if (price != undefined) {
+				itemSectionHeaderDebutText.innerHTML = "Sold for: "+price+currency.replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />');
+			}
+			else {
+				itemSectionHeaderDebutText.innerText = "Cannot be Sold";
+			}
+		}
 
 		var destexts = itemSectionContentDescription.querySelectorAll(":scope > p");
 		for(var q = 0; q < destexts.length; q++) {
