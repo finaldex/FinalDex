@@ -178,7 +178,7 @@ var createMap = function() {
     var mapSectionHeaderGame = document.createElement("span");
     var mapSectionHeaderGameImage = document.createElement("img");
     mapSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
-    mapSectionHeaderGameImage.setAttribute("onerror","this.display='none'");require
+    mapSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     mapSectionHeader.appendChild(mapSectionHeaderGame);
     mapSectionHeaderGame.appendChild(mapSectionHeaderGameImage);
 
@@ -407,8 +407,8 @@ var createMap = function() {
 		items = getLocationItems(location);
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
-		shop1 = getDataArr(finaldataLocationPokémonShops,location);
-		shop2 = getDataArr(finaldataLocationItemsShops,location);
+		shop1 = getDataArr(finaldataLocationPokémonShops,"Location",location);
+		shop2 = getDataArr(finaldataLocationItemsShops,"Location",location);
 		for(var q = 0; q < shop1.length; q++) {
 			shops.push(shop1[q]);
 		}
