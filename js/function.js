@@ -633,15 +633,16 @@ function getLocationPokémon(location) {
 
 }
 
-function getDataArr(arr,location) {
+function getDataArr(arr,subject,target) {
 
 	var arr;
-	var location;
+	var subject;
+	var target;
 	var result = [];
 
     for (var q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"]) == true) {
-			if(arr[q]["Location"] == location) {
+			if(arr[q][subject] == target) {
 				result.push(arr[q]);
 			}
 		}
