@@ -1936,7 +1936,7 @@
 	display: flex;
     justify-content: center;
     align-items: center;
-	white-space: pre;
+    white-space: pre;
 }
 
 #contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span small span,
@@ -2013,8 +2013,8 @@
 }
 
 
-
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span img {
+#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="item"] img,
+#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span[name="item"] img {
 	margin: 0 -80%;
 }
 
@@ -2029,13 +2029,30 @@
 	display:block
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span {
+#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span:first-child {
+	position: relative;
+    display: inline;
+}
+
+#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span:last-child {
 	position: relative;
     display: flex;
     padding: 5px 0;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    white-space: pre;
 }
+
+
+#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span[name="multi"] img:first-child {
+	position: absolute;
+    bottom: 30%;
+    left: 30%;
+}
+
+
+
 
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span > * {
     padding: 2px 0;
