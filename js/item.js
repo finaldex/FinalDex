@@ -256,7 +256,13 @@ var createItem = function() {
 			var price = priceArr[0]["Sell Amount"];
 			var currency = priceArr[0]["Sell Currency"];	
 			if (price != undefined) {
-				itemSectionHeaderDebutText.innerHTML = "Sold for: "+price+currency.replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />');
+				if (currency == "Pokémon Dollar") {
+					currency = currency.replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />')
+				}
+				else {
+					currency = currency.replace(/[^A-Z]+/g,"");
+				}
+				itemSectionHeaderDebutText.innerHTML = "Sold for: "+price+currency;
 			}
 			else {
 				itemSectionHeaderDebutText.innerText = "Cannot be Sold";
@@ -614,8 +620,8 @@ var createItem = function() {
 					itemSectionSidebarSidebarDescription.setAttribute("name","description");
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
 					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-					if (finaldataLocationItemsShops[q]["Type"] != undefined) {
-						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Type"]+" for "+finaldataLocationItemsShops[q]["Cost"]+currency;
+					if (finaldataLocationItemsShops[q]["Shop"] != undefined) {
+						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Shop"]+" for "+finaldataLocationItemsShops[q]["Cost"]+currency;
 					}
 					else {
 						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+finaldataLocationItemsShops[q]["Cost"]+currency;
