@@ -726,8 +726,8 @@ var createMap = function() {
 
 		for(var q = 0; q < shops.length; q++) {
 			var arr = [];
-			if (shops[q]["Type"] != undefined) {
-				arr.push(shops[q]["Type"]);
+			if (shops[q]["Shop"] != undefined) {
+				arr.push(shops[q]["Shop"]);
 			}
 			if (shops[q]["Area"] != undefined) {
 				arr.push(shops[q]["Area"]);
@@ -873,20 +873,63 @@ var createMap = function() {
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarCostShopCostOuter);
 					var mapSectionSidebarCostShopCostTitle = document.createElement("h6");
 					var mapSectionSidebarCostShopCost = document.createElement("small");
-					mapSectionSidebarCostShopCostTitle.innerText = "Cost:";
-				
-					if (shops[u]["Currency"] == "Pokémon Dollar") {
-						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+"<img src='./media/Images/Misc/Currency/VIII/Pokémon Dollar.png' title='Pokémon Dollar' />";
-					}
-					else if (getItemIcon(shops[u]["Currency"]) != undefined) {
-						mapSectionSidebarCostShopCost.innerHTML = quantity+"x "+"<img src='./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(shops[u]["Currency"])+".png' onerror='this.style.display=´none´;' title='"+shops[u]["Currency"]+"'>";
+
+					if (shops[u]["Currency"].includes("Fossil") || shops[u]["Currency"].includes("Old Amber")) {
+						mapSectionSidebarCostShopCostTitle.innerText = "Revive:";
 					}
 					else {
-						mapSectionSidebarCostShopCost.innerHTML = shops[u]["Cost"]+"<span title='"+shops[u]["Currency"]+"'>"+shops[u]["Currency"].replace(/[^A-Z]+/g,"")+"</span>";
+						mapSectionSidebarCostShopCostTitle.innerText = "Cost:";
 					}
+				
+					var currency = [shops[u]["Currency"]];
+					var cost = shops[u]["Cost"];
+
+					if (cost == undefined) {
+						if (quantity != undefined) {
+							cost = quantity+"x";
+						}
+						else {
+							cost = "1x";
+						}
+					}
+
+					if (currency[0].includes(",")) {
+						currency = currency[0].split(",");
+					}
+
+
+					for(var r = 0; r < currency.length; r++) {
+						if (getItemIcon(currency[r]) != undefined) {
+							currency[r] = "<img src='./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(currency[r])+".png' onerror='this.style.display=´none´'; onclick='dataRedirect()' name='item' title='"+getItemIcon(currency[r])+"'/>";
+						}
+						else {
+							if (currency[r] == "Pokémon Dollar") {
+								currency[r] = currency[r].replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />');
+							}
+							else {
+								currency[r] = "<span title='"+currency[r]+"'>"+currency[r].replace(/[^A-Z]+/g,"")+"</span>";
+							}
+						}
+					}
+				
+					if(cost == "1x") {
+						cost = "";
+					}
+
+		
+					mapSectionSidebarCostShopCost.innerHTML = cost+currency.join("");
+					
 
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCostTitle);
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCost);
+
+					var imgs = mapSectionSidebarCostShopCost.querySelectorAll(":scope > img:not([title='Pokémon Dollar'])");
+
+					for (var r = 0; r < imgs.length; r++) {
+						mapSectionSidebarCostShopCostOuter.appendChild(imgs[r])
+					}
+
+
 
 				}
 			}
@@ -1006,9 +1049,14 @@ var createMap = function() {
 					mapSectionSidebarDescriptionItemDescriptionOuter.setAttribute("name","description");
 					mapSectionSidebarDescriptionItemLi.appendChild(mapSectionSidebarDescriptionItemDescriptionOuter);
 					var mapSectionSidebarDescriptionItemDescription = document.createElement("small");
-					mapSectionSidebarDescriptionItemDescription.innerText = items[u]["Description"];
 					mapSectionSidebarDescriptionItemDescriptionOuter.appendChild(mapSectionSidebarDescriptionItemDescription);
-				
+
+					if (items[u]["Description"] != undefined) {
+						mapSectionSidebarDescriptionItemDescription.innerText = items[u]["Description"];
+					}
+					else {
+						mapSectionSidebarDescriptionItemDescription.innerText = "-";
+					}
 
 					var itemTime = "";
 					var itemDay = [];
@@ -1323,12 +1371,14 @@ var createMap = function() {
 					}
 
 					var mapSectionSidebarDescriptionPokType = document.createElement("span");
-					var mapSectionSidebarDescriptionPokTypeWrap = document.createElement("span");
+					var mapSectionSidebarDescriptionPokTypeImgWrap = document.createElement("span");
+					var mapSectionSidebarDescriptionPokTypeTxtWrap = document.createElement("span");
 					mapSectionSidebarDescriptionPokType.setAttribute("name","encounter")
 
 
 					mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokType);
-					mapSectionSidebarDescriptionPokType.appendChild(mapSectionSidebarDescriptionPokTypeWrap);
+					mapSectionSidebarDescriptionPokType.appendChild(mapSectionSidebarDescriptionPokTypeImgWrap);
+					mapSectionSidebarDescriptionPokType.appendChild(mapSectionSidebarDescriptionPokTypeTxtWrap);
 
 		
 
@@ -1344,15 +1394,93 @@ var createMap = function() {
 						}
 					}
 
+					for(var r = 0; r < encounters.length; r++) {
+						var mapSectionSidebarDescriptionPokTypeEncounterImg = document.createElement("img");
+						var mapSectionSidebarDescriptionPokTypeEncounterText = document.createElement("small");
+
+						var encounter = encounters[r];
+
+						if (encounter.includes("Surfing")) {
+							encounter = encounter+"_M"
+						}
+						else {
+							encounter = encounter;
+						}
+
+						if (encounter != undefined) {
+	
+							
+							if (encounter == "Static") {
+								mapSectionSidebarDescriptionPokTypeEncounterImg.src = "./media/Images/Pokémon/Overworld/Front/Default/PNG/"+MEDIAPath_Encounter+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
+								mapSectionSidebarDescriptionPokTypeEncounterImg.title = encounters[r]+"\n"+poks[u]["Pokémon"];
+								mapSectionSidebarDescriptionPokTypeImgWrap.setAttribute("name","static");
+								mapSectionSidebarDescriptionPokTypeImgWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
+								mapSectionSidebarDescriptionPokTypeImgWrap.addEventListener("click",modalData);
+								mapSectionSidebarDescriptionPokTypeImgWrap.setAttribute("function","modalData");
+								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = poks[u]["Pokémon"];
+							}
+							else {
+								mapSectionSidebarDescriptionPokTypeEncounterImg.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounter+".png";
+								mapSectionSidebarDescriptionPokTypeEncounterImg.title = encounters[r];
+								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = encounters[r];
+							}
+							if (poks[u]["Item"] != undefined) {
+								if (poks[u]["Item"] == poks[u]["Encounter"]) {
+									mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("name","item");
+									mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("value",poks[u]["Item"]);
+									mapSectionSidebarDescriptionPokTypeEncounterImg.addEventListener("click",dataRedirect);
+									mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("function","dataRedirect");
+
+									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","item");
+									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value",poks[u]["Item"]);
+									mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
+									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
+								}
+							}
+
+							mapSectionSidebarDescriptionPokTypeEncounterImg.alt = encounter;
+							mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("onerror","this.style.display='none';")
+							
+							if (encounters[r] == "Surfing") {
+								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("name","move");
+								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("value","Surf");
+								mapSectionSidebarDescriptionPokTypeEncounterImg.addEventListener("click",dataRedirect);
+								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("function","dataRedirect");
+
+								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","move");
+								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value","Surf");
+								mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
+								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
+							}
+					
+							if (getMoveData(encounters[r], "Type") != undefined) {
+								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("name","move");
+								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("value",encounters[r]);
+								mapSectionSidebarDescriptionPokTypeEncounterImg.addEventListener("click",dataRedirect);
+								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("function","dataRedirect");
+
+								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","move");
+								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value",encounters[r]);
+								mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
+								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
+							}
+						}
+						mapSectionSidebarDescriptionPokTypeImgWrap.appendChild(mapSectionSidebarDescriptionPokTypeEncounterImg);
+						mapSectionSidebarDescriptionPokTypeTxtWrap.appendChild(mapSectionSidebarDescriptionPokTypeEncounterText);
+					}
+
+
 					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static") {
-						var mapSectionSidebarDescriptionPokTypeTile = document.createElement("img");
+						var mapSectionSidebarDescriptionPokTypeTileImg = document.createElement("img");
 						var mapSectionSidebarDescriptionPokTypeTileText = document.createElement("small");
 
+					
 
 						var dash;
 						var entr;
 						var ti;
 						var res;
+						var space;
 
 						if (poks[u]["Tile"].includes("Rod")) {
 							dash = "in";
@@ -1378,17 +1506,27 @@ var createMap = function() {
 						}
 
 
+						if (poks[u]["Encounter"] != undefined) {
+							mapSectionSidebarDescriptionPokTypeImgWrap.setAttribute("name","multi");
+							space = " ";
+						}
+						else {
+							space = "";
+						}
+
 						res = dash+ti;
 
 						res = res.replaceAll(/^ /g,"").replaceAll(/ $/g,"");
-						res = " "+res;
+						res = space+res;
 
-						mapSectionSidebarDescriptionPokTypeTile.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
-						mapSectionSidebarDescriptionPokTypeTile.title = poks[u]["Tile"];
-						mapSectionSidebarDescriptionPokTypeTile.alt = poks[u]["Tile"];
-						mapSectionSidebarDescriptionPokTypeTile.setAttribute("onerror","this.style.display = 'none';");
-						mapSectionSidebarDescriptionPokTypeTile.setAttribute("name","tile");
+						mapSectionSidebarDescriptionPokTypeTileImg.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
+						mapSectionSidebarDescriptionPokTypeTileImg.title = poks[u]["Tile"];
+						mapSectionSidebarDescriptionPokTypeTileImg.alt = poks[u]["Tile"];
+						mapSectionSidebarDescriptionPokTypeTileImg.setAttribute("onerror","this.style.display = 'none';");
 						mapSectionSidebarDescriptionPokTypeTileText.innerText = res;
+
+
+					
 
 						var rgs;
 
@@ -1401,110 +1539,26 @@ var createMap = function() {
 						for(var r = 0; r < rgs.length; r++) {
 							mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
 						}
-						mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");
+						mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");				
 
-
-		
-												
-					}
-
-
-					for(var r = 0; r < encounters.length; r++) {
-						var mapSectionSidebarDescriptionPokTypeEncounter = document.createElement("img");
-						var mapSectionSidebarDescriptionPokTypeEncounterText = document.createElement("small");
-	
-						var encounter = encounters[r];
-						if (encounter.includes("Surfing")) {
-							encounter = encounter+"_M"
-						}
-						else {
-							encounter = encounter;
-						}
-
-						if (encounter != undefined) {
-							
-							if (encounter == "Static") {
-								mapSectionSidebarDescriptionPokTypeEncounter.src = "./media/Images/Pokémon/Overworld/Front/Default/PNG/"+MEDIAPath_Encounter+"/"+getPokémonMediaPath(getPokémonInt(poks[u]["Pokémon"]),"Box")+".png";
-								mapSectionSidebarDescriptionPokTypeEncounter.title = encounters[r]+"\n"+poks[u]["Pokémon"];
-								mapSectionSidebarDescriptionPokTypeWrap.setAttribute("name","static");
-								mapSectionSidebarDescriptionPokTypeWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
-								mapSectionSidebarDescriptionPokTypeWrap.addEventListener("click",modalData);
-								mapSectionSidebarDescriptionPokTypeWrap.setAttribute("function","modalData");
-								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = poks[u]["Pokémon"];
-							}
-							else {
-								mapSectionSidebarDescriptionPokTypeEncounter.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounter+".png";
-								mapSectionSidebarDescriptionPokTypeEncounter.title = encounters[r];
-								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = encounters[r];
-							}
-							if (poks[u]["Item"] != undefined) {
-								if (poks[u]["Item"] == poks[u]["Encounter"]) {
-									mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("name","item");
-									mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("value",poks[u]["Item"]);
-									mapSectionSidebarDescriptionPokTypeEncounter.addEventListener("click",dataRedirect);
-									mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("function","dataRedirect");
-
-									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","item");
-									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value",poks[u]["Item"]);
-									mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
-									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
-								}
-							}
-
-							mapSectionSidebarDescriptionPokTypeEncounter.alt = encounter;
-							mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("onerror","this.style.display='none';")
-							
-							if (encounters[r] == "Surfing") {
-								mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("name","move");
-								mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("value","Surf");
-								mapSectionSidebarDescriptionPokTypeEncounter.addEventListener("click",dataRedirect);
-								mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("function","dataRedirect");
-
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","move");
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value","Surf");
-								mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
-							}
-					
-							if (getMoveData(encounters[r], "Type") != undefined) {
-								mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("name","move");
-								mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("value",encounters[r]);
-								mapSectionSidebarDescriptionPokTypeEncounter.addEventListener("click",dataRedirect);
-								mapSectionSidebarDescriptionPokTypeEncounter.setAttribute("function","dataRedirect");
-
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","move");
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value",encounters[r]);
-								mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
-							}
-						}
-						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeEncounter);
-						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeEncounterText);
+						mapSectionSidebarDescriptionPokTypeImgWrap.appendChild(mapSectionSidebarDescriptionPokTypeTileImg);
+						mapSectionSidebarDescriptionPokTypeTxtWrap.appendChild(mapSectionSidebarDescriptionPokTypeTileText);
 					}
 
 
 
 					
 
-					
 
-					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static") {
-						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeTile);
-						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeTileText);
-						var text = mapSectionSidebarDescriptionPokTypeWrap.querySelectorAll(":scope > small");
-						for(var r = 0; r < text.length; r++) {
-							mapSectionSidebarDescriptionPokTypeWrap.appendChild(text[r]);
-						}
-					}
+					console.log(encounters)
+
 
 
 					if (poks[u]["Mechanic"] != undefined) {
 						var mapSectionSidebarDescriptionPokTypeMechanicText = document.createElement("small");
 						mapSectionSidebarDescriptionPokTypeMechanicText.innerText = poks[u]["Mechanic"];
-						mapSectionSidebarDescriptionPokTypeWrap.appendChild(mapSectionSidebarDescriptionPokTypeMechanicText);
+						mapSectionSidebarDescriptionPokTypeTxtWrap.appendChild(mapSectionSidebarDescriptionPokTypeMechanicText);
 					}
-
-
 
 
 
@@ -1519,31 +1573,6 @@ var createMap = function() {
 							mapSectionSidebarDescriptionPokType.setAttribute("title","Requires: "+machine);
 						}
 					}
-
-					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static" && poks[u]["Encounter"] != undefined) {
-						mapSectionSidebarDescriptionPokTypeWrap.setAttribute("name","multi");
-
-
-						var apds = mapSectionSidebarDescriptionPokType.querySelectorAll(":scope h6");
-						for(var t = 0; t < apds.length; t++) {
-
-							if (t == 0) {
-								apds[t].remove();
-							}
-							else {
-								mapSectionSidebarDescriptionPokType.append(apds[t]);
-							}
-						}
-
-					
-
-					}
-
-
-
-
-	
-
 
 				}
 			}
