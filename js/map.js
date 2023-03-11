@@ -510,8 +510,10 @@ var createMap = function() {
 		
 		var desc = [];
 		for(var q = 0; q < finaldataLocationDescription.length; q++) {
-			if (finaldataLocationDescription[q][JSONPath_LocationDescription+"_Name"] == location) {
-				desc.push(finaldataLocationDescription[q][JSONPath_LocationDescription+"_Description"]);
+			if (getApplicable(finaldataLocationDescription[q]["Game"])) {
+				if (finaldataLocationDescription[q]["Location"] == location) {
+					desc.push(finaldataLocationDescription[q]["Description"]);
+				}
 			}
 		}
 
@@ -1547,12 +1549,6 @@ var createMap = function() {
 
 
 
-					
-
-
-					console.log(encounters)
-
-
 
 					if (poks[u]["Mechanic"] != undefined) {
 						var mapSectionSidebarDescriptionPokTypeMechanicText = document.createElement("small");
@@ -1713,8 +1709,10 @@ var createMap = function() {
 
 		
 		for(var q = 0; q < finaldataLocationSlogan.length; q++) {
-			if(finaldataLocationSlogan[q][JSONPath_LocationSlogan+"_"+"Name"] == location) {
-				mapSectionHeaderFlavorText.innerHTML = '"'+finaldataLocationSlogan[q][JSONPath_LocationSlogan+"_"+"Slogan"]+'"';
+			if(getApplicable(finaldataLocationSlogan[q]["Game"])) {
+				if(finaldataLocationSlogan[q]["Location"] == location) {
+					mapSectionHeaderFlavorText.innerHTML = '"'+finaldataLocationSlogan[q]["Slogan"]+'"';
+				}
 			}
 		}
 		var subs = mapSectionContentAreaContent.querySelectorAll(":scope > p");
@@ -1759,37 +1757,39 @@ var createMap = function() {
 			navs[q].remove();
 		}
 		for(var q = 0; q < finaldataLocationNavigation.length; q++) {
-			if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Name"] == location && finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Name"] != undefined) {
-				for(var u = 0; u < finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",").length; u++) {
-					var mapSectionContentNavigationInnerContent = document.createElement("span")
-					var mapSectionContentNavigationInnerImg = document.createElement("img");
-					var mapSectionContentNavigationInnerText = document.createElement("p");
-					mapSectionContentNavigationInnerContent.setAttribute("name","item");
-					if (getMoveMachine(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u]) != undefined) {
-						mapSectionContentNavigationInnerContent.setAttribute("value",getMoveMachine(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u]));
+			if (getApplicable(finaldataLocationNavigation[q]["Game"])) {
+				if(finaldataLocationNavigation[q]["Location"] == location) {
+					for(var u = 0; u < finaldataLocationNavigation[q]["Navigation"].split(",").length; u++) {
+						var mapSectionContentNavigationInnerContent = document.createElement("span")
+						var mapSectionContentNavigationInnerImg = document.createElement("img");
+						var mapSectionContentNavigationInnerText = document.createElement("p");
+						mapSectionContentNavigationInnerContent.setAttribute("name","item");
+						if (getMoveMachine(finaldataLocationNavigation[q]["Navigation"].split(",")[u]) != undefined) {
+							mapSectionContentNavigationInnerContent.setAttribute("value",getMoveMachine(finaldataLocationNavigation[q]["Navigation"].split(",")[u]));
+						}
+						else {
+							mapSectionContentNavigationInnerContent.setAttribute("value",finaldataLocationNavigation[q]["Navigation"].split(",")[u]);
+						}
+						mapSectionContentNavigationInnerText.innerText = finaldataLocationNavigation[q]["Navigation"].split(",")[u];
+						if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Cut" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Strength") {
+							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Normal"+".png";
+						} else if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Waterfall" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Surf" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Dive" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Whirlpool") {
+							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Water"+".png";
+						} else if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Rock Smash" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Rock Climb") {
+							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Fighting"+".png";
+						} else if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Defog") {
+							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Flying"+".png";
+						} else {
+							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataLocationNavigation[q]["Navigation"].split(",")[u]+".png";
+						}
+						mapSectionContentNavigationInnerImg.setAttribute("title", finaldataLocationNavigation[q]["Navigation"].split(",")[u]);
+						mapSectionContentNavigationInnerImg.setAttribute("onerror", "this.style.display='none'");
+						mapSectionContentNavigationContent.appendChild(mapSectionContentNavigationInnerContent);
+						mapSectionContentNavigationInnerContent.appendChild(mapSectionContentNavigationInnerImg);
+						mapSectionContentNavigationInnerContent.appendChild(mapSectionContentNavigationInnerText);
+						mapSectionContentNavigationInnerContent.addEventListener("click",dataRedirect);
+						mapSectionContentNavigationInnerContent.setAttribute("function","dataRedirect");
 					}
-					else {
-						mapSectionContentNavigationInnerContent.setAttribute("value",finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u]);
-					}
-					mapSectionContentNavigationInnerText.innerText = finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u];
-					if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Cut" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Strength") {
-						mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Normal"+".png";
-					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Waterfall" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Surf" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Dive" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Whirlpool") {
-						mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Water"+".png";
-					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Rock Smash" || finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Rock Climb") {
-						mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Fighting"+".png";
-					} else if(finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u] == "Defog") {
-						mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Flying"+".png";
-					} else {
-						mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u]+".png";
-					}
-					mapSectionContentNavigationInnerImg.setAttribute("title", finaldataLocationNavigation[q][JSONPath_LocationNavigation+"_"+"Navigation"].split(",")[u]);
-					mapSectionContentNavigationInnerImg.setAttribute("onerror", "this.style.display='none'");
-					mapSectionContentNavigationContent.appendChild(mapSectionContentNavigationInnerContent);
-					mapSectionContentNavigationInnerContent.appendChild(mapSectionContentNavigationInnerImg);
-					mapSectionContentNavigationInnerContent.appendChild(mapSectionContentNavigationInnerText);
-					mapSectionContentNavigationInnerContent.addEventListener("click",dataRedirect);
-					mapSectionContentNavigationInnerContent.setAttribute("function","dataRedirect");
 				}
 			}
 		}
