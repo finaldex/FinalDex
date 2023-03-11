@@ -1737,12 +1737,12 @@ var createMap = function() {
 		}
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
 			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
-				if(finaldataLocationConnection[q]["Location"] != undefined) {
-					for(var u = 0; u < finaldataLocationConnection[q]["Location"].split(",").length; u++) {
-						if(finaldataLocationConnection[q]["Location"].split(",")[u] == location) {
+				if(finaldataLocationConnection[q]["Located"] != undefined) {
+					for(var u = 0; u < finaldataLocationConnection[q]["Located"].split(",").length; u++) {
+						if(finaldataLocationConnection[q]["Located"].split(",")[u] == location) {
 							var mapSectionContentAreaText = document.createElement("p");
 							mapSectionContentAreaTitle.innerText = "Sub Areas";
-							mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Name"];
+							mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Location"];
 							mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
 							mapSectionContentAreaText.setAttribute("name", "map");
 							mapSectionContentAreaText.addEventListener("click", dataRedirect);
