@@ -136,13 +136,7 @@ body[generation="2"] svg[name="mark"] .mapify-polygon[name="active"] {
   stroke-width: 1px;
   stroke-dasharray: 2px;
 }
-[game="Sun"] .mapify-hover,
-[game="Moon"] .mapify-hover,
-[game="Ultra Sun"] .mapify-hover,
-[game="Ultra Moon"] .mapify-hover {
-	fill: transparent;
-  stroke: var(--color1);
-}
+
 
 [generation="5"] .mapify-hover {
   fill: var(--color_10);
