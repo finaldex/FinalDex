@@ -1120,6 +1120,10 @@
 	flex-direction: column;
 }
 
+#data > div section[name='main'] > div[name='area'] ul li > *[name="description"] span[title] {
+	cursor:help;
+}
+
 
 #data > div section[name='main'] > div[name='area'] ul li > span[name="location"] {
 	/*width: 50%;*/
