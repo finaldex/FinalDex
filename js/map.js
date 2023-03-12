@@ -1722,11 +1722,11 @@ var createMap = function() {
 		mapSectionContentAreaTitle.innerText = "Sub Area/Location";
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
 			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
-				if(finaldataLocationConnection[q]["Name"] == location && finaldataLocationConnection[q]["Location"] != undefined) {
-					for(var u = 0; u < finaldataLocationConnection[q]["Location"].split(",").length; u++) {
+				if(finaldataLocationConnection[q]["Location"] == location && finaldataLocationConnection[q]["Located"] != undefined) {
+					for(var u = 0; u < finaldataLocationConnection[q]["Located"].split(",").length; u++) {
 						var mapSectionContentAreaText = document.createElement("p");
 						mapSectionContentAreaTitle.innerText = "Location";
-						mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Location"].split(",")[u];
+						mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Located"].split(",")[u];
 						mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
 						mapSectionContentAreaText.setAttribute("name", "map");
 						mapSectionContentAreaText.addEventListener("click", dataRedirect);
@@ -1735,6 +1735,7 @@ var createMap = function() {
 				}
 			}
 		}
+
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
 			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
 				if(finaldataLocationConnection[q]["Located"] != undefined) {
