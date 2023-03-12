@@ -47,6 +47,7 @@ var finaldataLocationItemsPickup = [];
 var finaldataLocationTrainers = [];
 var finaldataAbility = [];
 var finaldataAbilityFlavor = [];
+var finaldataAbilityDescription = [];
 var finaldataMove = [];
 var finaldataMoveDescription = [];
 var finaldataLocationTutor = [];
@@ -207,6 +208,9 @@ function requestLoad(i,url) {
 							if(Object.keys(Metadata["Reference"][q]).includes(JSONPath_AbilityReference + "_" + "Name")) {
 								finaldataAbility.push(Metadata["Reference"][q]);
 							}
+						}
+						for(var q = 0; q < Metadata["Description"].length; q++) {
+							finaldataAbilityDescription.push(Metadata["Description"][q]);
 						}
 						for(var q = 0; q < Metadata["Flavor"].length; q++) {
 							finaldataAbilityFlavor.push(Metadata["Flavor"][q]);
