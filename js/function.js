@@ -713,6 +713,9 @@ function getApplicable(val) {
 	var val;
 
 	if (val != undefined) {
+		if (val == "All") {
+			return true;
+		}
 		if (val.includes(",")) {
 			var valArr = val.split(",");
 			for (var q = 0; q < valArr.length; q++) {
