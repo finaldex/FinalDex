@@ -3825,18 +3825,18 @@ function getAreasFromLocation(location) {
 
     for (var i = 0; i < arr.length; i++) {
         if (getApplicable(arr[i]["Game"])) {
-            if (arr[i]["Location"] != undefined) {
-                if (arr[i]["Location"].includes(",")) {
-                    var arr2 = arr[i]["Location"].split(",");
+            if (arr[i]["Located"] != undefined) {
+                if (arr[i]["Located"].includes(",")) {
+                    var arr2 = arr[i]["Located"].split(",");
                     for (var q = 0; q < arr2.length; q++) {
                         if (arr2[q] == location) {
-                            result.push(arr[i]["Name"])
+                            result.push(arr[i]["Location"])
                         }
                     }
                 }
                 else {
-                    if (arr[i]["Location"] == location) {
-                        result.push(arr[i]["Name"])
+                    if (arr[i]["Located"] == location) {
+                        result.push(arr[i]["Location"])
                     }
                 }
             }
