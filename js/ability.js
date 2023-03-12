@@ -178,6 +178,30 @@ var createAbility = function() {
 		abilitySectionHeaderDebutText.innerText = "Introduced in "+getAbilityData(finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"], "Debut");
 		abilitySectionHeaderTitleName.innerText = finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"];
 		abilitySectionContentDescriptionText.innerText = getAbilityData(finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"], "Flavor");
+
+		var desc = [];
+
+		for(var q = 0; q < finaldataAbilityDescription.length; q++) {
+			if(getApplicable(finaldataAbilityDescription[q]["Game"])) {
+				if(finaldataAbilityDescription[q]["Ability"] == finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"]) {
+					desc.push(finaldataAbilityDescription[q]["Description"])
+				}
+			}
+		}
+
+		
+		abilitySectionContentEffectText.innerHTML = desc.join("\n");
+		
+		if (desc.length > 0) {
+			abilitySectionContentEffectTitle.innerText = "Effect";
+		}
+		else {
+			abilitySectionContentEffectTitle.innerText = "";
+		}
+		
+		
+
+
 		var lis = document.querySelectorAll("#contain div#ability > section[name='sidebar'] ul li");
 		for(var q = 0; q < lis.length; q++) {
 			lis[q].remove();
