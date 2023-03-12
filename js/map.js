@@ -1715,6 +1715,9 @@ var createMap = function() {
 				}
 			}
 		}
+
+
+
 		var subs = mapSectionContentAreaContent.querySelectorAll(":scope > p");
 		for(var q = 0; q < subs.length; q++) {
 			subs[q].remove();
