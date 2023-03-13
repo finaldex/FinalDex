@@ -17,7 +17,7 @@ var createAbility = function() {
 		var abilitySectionContent = document.createElement("section");
 		var abilitySectionContentDescription = document.createElement("div");
 		var abilitySectionContentDescriptionText = document.createElement("p");
-		var abilitySectionContentEffectTitle = document.createElement("h3");
+		var abilitySectionContentEffectTitle = document.createElement("h4");
 		var abilitySectionContentEffectText = document.createElement("p");
 		var abilitySectionSidebar = document.createElement("section");
 		var abilitySectionSidebarSidebar = document.createElement("div");
@@ -190,7 +190,7 @@ var createAbility = function() {
 		}
 
 		
-		abilitySectionContentEffectText.innerHTML = desc.join("\n");
+		abilitySectionContentEffectText.innerHTML = desc.join("<br>");
 		
 		if (desc.length > 0) {
 			abilitySectionContentEffectTitle.innerText = "Effect";
