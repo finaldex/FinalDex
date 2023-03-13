@@ -655,32 +655,20 @@
     flex-direction: column;
 }
 
-
-#contain div > section[name='content'] > div[name="description"] p {
-	padding: 10px;
-}
-
-
-
-
-
-
-#contain div > section[name='content'] > div[name="description"] h3 {
+#contain div > section[name='content'] > div[name="description"] > * {
 	padding: 2px 10px;
 }
-
-#contain div > section[name='content'] > div[name="description"] h3 + p {
-	padding: 0 10px 10px 10px;
+#contain div > section[name='content'] > div[name="description"] > *:first-child {
+	padding: 10px 10px 15px;
 }
 
-#contain div > section[name='content'] > div[name="description"] p li {
-	list-style: disc;
-	padding: 0 10px;
-}
-#contain div > section[name='content'] > div[name="description"] p li:first-child {
-	padding: 10px 10px 0 10px;
-}
 
+
+#contain div > section[name='content'] > div[name="description"] p br {
+	display: block;
+	content: "";
+	padding: 5px;
+}
 
 
 
