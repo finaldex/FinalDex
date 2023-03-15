@@ -46,8 +46,9 @@ var finaldataLocationItemsShops = [];
 var finaldataLocationItemsPickup = [];
 var finaldataLocationTrainers = [];
 var finaldataAbility = [];
-var finaldataAbilityFlavor = [];
 var finaldataAbilityDescription = [];
+var finaldataAbilityEffect = [];
+var finaldataAbilityAffect = [];
 var finaldataMove = [];
 var finaldataMoveDescription = [];
 var finaldataLocationTutor = [];
@@ -205,15 +206,16 @@ function requestLoad(i,url) {
 					if (loads[i] == "Abilities" && Ability.length > 0) {
 		
 						for(var q = 0; q < Metadata["Reference"].length; q++) {
-							if(Object.keys(Metadata["Reference"][q]).includes(JSONPath_AbilityReference + "_" + "Name")) {
-								finaldataAbility.push(Metadata["Reference"][q]);
-							}
+							finaldataAbility.push(Metadata["Reference"][q]);
 						}
 						for(var q = 0; q < Metadata["Description"].length; q++) {
 							finaldataAbilityDescription.push(Metadata["Description"][q]);
 						}
-						for(var q = 0; q < Metadata["Flavor"].length; q++) {
-							finaldataAbilityFlavor.push(Metadata["Flavor"][q]);
+						for(var q = 0; q < Metadata["Effect"].length; q++) {
+							finaldataAbilityEffect.push(Metadata["Effect"][q]);
+						}
+						for(var q = 0; q < Metadata["Affect"].length; q++) {
+							finaldataAbilityAffect.push(Metadata["Affect"][q]);
 						}
 					}
 					if (loads[i] == "Moves") {
@@ -325,8 +327,6 @@ function initialize() {
 
 		window.addEventListener('resize', resize);
 
-
-
 		memory("Restore","resize","site",document.getElementById('resizer'));
 		memory("Restore","variant","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"]'));
 
@@ -338,6 +338,8 @@ function initialize() {
 
 		load();
 
+
+		console.log(formatEvoBreedText(Math.floor(Math.random() * (1000 - 0) + 0),"Evolution"))
 	}
 }
 
@@ -643,6 +645,107 @@ function zoom(base,condition) {
 
 }
 
+
+
+
+function divideDifferenceArr(arr,include,exclude) {
+	var arr;
+	var include;
+	var exclude;
+
+	var temp = [];
+	var result = [];
+
+	var check1;
+	var check2;
+
+
+	var int = 0;
+
+
+	var store = JSON.parse(JSON.stringify(arr));
+
+
+
+	for(var i = 0; i < arr.length; i++) {
+		check2 = true;
+		for(var q = 0; q < exclude.length; q++) {
+			for(var u = 0; u < exclude[q].length; u++) {
+				if (u > 0) {
+		
+					if (arr[i][exclude[q][0]] == exclude[q][u]) {
+						check2 = false;
+					}
+				}
+			}
+
+			arr[i][exclude[q][0]] = check2;
+
+			if (include[include.length - 1] != exclude[q][0]) {
+				include.push(exclude[q][0]);
+			}
+	
+		}
+
+
+
+	}
+
+
+	for(var i = 0; i < arr.length; i++) {
+		check1 = true;
+
+		temp.push([])
+		for(var q = 0; q < include.length; q++) {
+
+			if (i == 0) {
+				break;
+			}
+
+			if(arr[i - 1][include[q]] != arr[i][include[q]]) {
+				check1 = false;
+			}
+
+		}
+
+		if (!check1) {
+			int = int+1;
+		}
+
+		temp[int].push(arr[i]);
+	}
+	for(var i = 0; i < temp.length; i++) {
+		if (temp[i].length != 0) {
+			result.push(temp[i])
+		}
+	}
+	var ints = [];
+	for(var u = 0; u < exclude.length; u++) {
+		for(var i = 0; i < result.length; i++) {
+			for(var q = 0; q < result[i].length; q++) {
+				for(var y = 0; y < store.length; y++) {
+					if (!ints.includes(y)) {
+						ints.push(y)
+						result[i][q][exclude[u][0]] = store[y][exclude[u][0]];
+						break;
+					}
+				}
+			}
+		}
+	}
+
+
+	for(var u = 0; u < exclude.length; u++) {
+		for(var i = 0; i < store.length; i++) {
+
+		}
+	}
+
+
+
+
+	return result;
+}
 
 
 
