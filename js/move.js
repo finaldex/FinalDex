@@ -466,6 +466,7 @@ var createMove = function() {
 							}
 							moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
 							moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
+							moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("type","invert");
 						}
 						
 					} else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by "+othermove[q]) {
@@ -484,6 +485,7 @@ var createMove = function() {
 								}
 								moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
 								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
+								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("type","invert");
 							}
 						
 					}
@@ -507,6 +509,8 @@ var createMove = function() {
 					moveSectionContentMenuOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
 					moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","move");
 					moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
+					moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
+					moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("type","invert");
 				}
 				else if(finaldataMoveOtherMoves[i][othermove[u]] == "Not affected by Magic Coat or Magic Bounce") { 
 					moveSectionContentMenuOtherText.innerHTML = "Not affected by <b>Magic Coat</b> or <b>Magic Bounce</b>";
@@ -521,6 +525,7 @@ var createMove = function() {
 						}
 						applicables[r].addEventListener("click",dataRedirect);
 						applicables[r].setAttribute("function","dataRedirect");
+						applicables[r].setAttribute("type","invert");
 					}
 				}
 				moveSectionContentMenuRight.appendChild(moveSectionContentMenuOther);
