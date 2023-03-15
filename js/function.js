@@ -1010,19 +1010,19 @@ function getEvolutionData(i,column) {
 					pokémon[q] = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
 				}
 				if (stage == undefined) {
-					stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
+					stage = arrStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage];
 				}
 				if (method == undefined) {
-					method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];	
+					method = arrMethod[getDefaultInt(i)]["Type_"+JSONPath_EvolutionMethod];	
 				}
 				if (factor == undefined) {
-					factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
+					factor = arrMethod[getDefaultInt(i)]["Factor_"+JSONPath_EvolutionMethod];
 				}
 				if (additional == undefined) {
-					additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
+					additional = arrMethod[getDefaultInt(i)]["Additional_"+JSONPath_EvolutionMethod];
 				}
 				if (gender == undefined) {
-					gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
+					gender = arrMethod[getDefaultInt(i)]["Gender_"+JSONPath_EvolutionMethod];
 				}
 
 				if (pokémon != undefined) {
@@ -1049,20 +1049,22 @@ function getEvolutionData(i,column) {
 				pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
 			}
 			if (stage == undefined) {
-				stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+				stage = arrStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage];
 			}
 			if (method == undefined) {
-				method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];	
+				method = arrMethod[getDefaultInt(i)]["Type_"+JSONPath_EvolutionMethod];	
 			}
 			if (factor == undefined) {
-				factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
+				factor = arrMethod[getDefaultInt(i)]["Factor_"+JSONPath_EvolutionMethod];
 			}
 			if (additional == undefined) {
-				additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
+				additional = arrMethod[getDefaultInt(i)]["Additional_"+JSONPath_EvolutionMethod];
 			}
 			if (gender == undefined) {
-				gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+				gender = arrMethod[getDefaultInt(i)]["Gender_"+JSONPath_EvolutionMethod];
 			}
+
+			console.log(stage)
 	
 			if (pokémon != undefined) {
 				var obj = new Object();
@@ -1231,10 +1233,6 @@ function formatEvoBreedText(i,type) {
 		console.log(previous)
 		if (previous.length > 0) {
 			var poks = getEvolutionData(previous[0]["Integer"],"Next");
-			
-			console.log(poks)
-
-
 			
 			for (var q = 0; q < poks.length; q++) {
 				var pok = previous[0]["Pokémon"];
