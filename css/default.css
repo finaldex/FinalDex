@@ -149,7 +149,7 @@ figure,
 b,
 button {
     border: none;
-    font-weight:bold;
+    font-weight:unset;
     font-size:unset;
 }
 button {
@@ -503,8 +503,6 @@ li:focus {
 
 [title="Genderless"],
 [name="Genderless"] {
-	color: var(--fontDark);
-	font-family: fantasy;
 	font-weight: bold;
 }
 
