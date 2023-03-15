@@ -35,6 +35,9 @@
     align-items: center;
     justify-content: center;
 }
+#pokémon > div ul li label > div > *[name="popup"] > * {
+	filter: unset;
+}
 
 
 #pokémon > div ul li label > div > span[name="data"] img {
