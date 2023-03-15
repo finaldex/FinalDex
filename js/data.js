@@ -740,6 +740,7 @@ function loadData() {
         var evoArr = [previous,next];
         var evoArrName = ["previous","next"];
 
+		console.log(evoArr)
 
         for(var q = 0; q < evoArr.length; q++) {
             for(var u = 0; u < evoArr[q].length; u++) {
@@ -788,23 +789,26 @@ function loadData() {
 
 					var os = finaldataPokémonOffspring[evoArr[q][u]["Integer"]]["Factor_"+JSONPath_Offspring];
 					if (os == undefined) {
+						os = finaldataPokémonOffspring[getDefaultInt(evoArr[q][u]["Integer"])]["Factor_"+JSONPath_Offspring];;
+					}
+					if (os == undefined) {
 						os = "";
 					}
 
-
+					console.log(finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage])
+					console.log(finaldataPokémonEvolutionStage[i])
 					if (os.includes(",")) {
 						var arr = [formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution"),formatEvoBreedText(evoArr[q][u]["Integer"],"Breed")];
 						evoDescriptionText.innerHTML = arr.join("<br>");
-						console.log(1)
-						consoleText("TRUE")
+						consoleText(1)
 					}
-                    else if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
-                        evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Breed").join("<br>");
-						console.log(2)
+                    else if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Three-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Third-Stage") {
+                        evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution").join("<br>");
+						consoleText(2)
                     }
                     else {
-                        evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution").join("<br>");
-						console.log(3)
+                        evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Breed").join("<br>");
+						consoleText(3)
                     }
 
                 }
@@ -813,10 +817,6 @@ function loadData() {
                     evoContent.appendChild(evoMain);
                     evoToggle.setAttribute("onclick","this.nextElementSibling.classList.toggle('active')");
                     evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution")[u];
-
-					console.log(q)
-					console.log(u)
-					console.log(4)
                 }
 
                 evoToggle.appendChild(evoImg);
