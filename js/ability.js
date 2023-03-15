@@ -19,6 +19,9 @@ var createAbility = function() {
 		var abilitySectionContentDescriptionText = document.createElement("p");
 		var abilitySectionContentEffectTitle = document.createElement("h4");
 		var abilitySectionContentEffectText = document.createElement("p");
+		var abilitySectionContentBreak = document.createElement("br");
+		var abilitySectionContentAffectTitle = document.createElement("h4");
+		var abilitySectionContentAffectText = document.createElement("p");
 		var abilitySectionSidebar = document.createElement("section");
 		var abilitySectionSidebarSidebar = document.createElement("div");
 		var abilitySectionSidebarSidebarTitle = document.createElement("div");
@@ -99,6 +102,9 @@ var createAbility = function() {
 		abilitySectionContentDescription.appendChild(abilitySectionContentDescriptionText);
 		abilitySectionContentDescription.appendChild(abilitySectionContentEffectTitle);
 		abilitySectionContentDescription.appendChild(abilitySectionContentEffectText);
+		abilitySectionContentDescription.appendChild(abilitySectionContentBreak);
+		abilitySectionContentDescription.appendChild(abilitySectionContentAffectTitle);
+		abilitySectionContentDescription.appendChild(abilitySectionContentAffectText);
 		abilityOuter.appendChild(abilitySectionSidebar);
 
 		abilitySectionListOptionsSearch.addEventListener("keyup", function() {search("Ability");});
@@ -115,32 +121,29 @@ var createAbility = function() {
 
 		var firstabilityiteration;
 		for(var q = 0; q < finaldataAbility.length; q++) {
-			for(var u = 0; u < finaldataAbility.length; u++) {
-				if(Object.keys(finaldataAbility[q])[u] == JSONPath_AbilityReference+"_"+"Name") {
-					var abilitySectionListOptionsInput = document.createElement("input");
-					var abilitySectionListOptionsLabel = document.createElement("label");
-					var abilitySectionListOptionsText = document.createElement("p");
-					abilitySectionListOptionsInput.setAttribute("type","radio");
-					abilitySectionListOptionsInput.setAttribute("name","ability-options");
-					abilitySectionListOptionsInput.setAttribute("id","ability-options-"+q);
-					abilitySectionListOptionsInput.setAttribute("autocomplete","off");
-					abilitySectionListOptionsInput.value = q;
-					abilitySectionListOptionsLabel.setAttribute("for","ability-options-"+q);
-					abilitySectionListOptionsLabel.setAttribute("type","medium");
-					abilitySectionListOptionsLabel.setAttribute("data-search-name", finaldataAbility[q][JSONPath_AbilityReference+"_"+"Name"].toLowerCase());
-					abilitySectionListOptionsText.innerText = finaldataAbility[q][JSONPath_AbilityReference+"_"+"Name"];
-					abilitySectionListOptions.appendChild(abilitySectionListOptionsInput);
-					abilitySectionListOptions.appendChild(abilitySectionListOptionsLabel);
-					abilitySectionListOptionsLabel.appendChild(abilitySectionListOptionsText);
-					abilitySectionListOptionsInput.addEventListener("click", abilityOptionsSelector);
-					abilitySectionListOptionsLabel.setAttribute("tabindex",q+10);
-					abilitySectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;abilityOptionsSelector(event.target.previousElementSibling.value);}}});
+			if(getApplicable(finaldataAbility[q]["Game"])) {
+				var abilitySectionListOptionsInput = document.createElement("input");
+				var abilitySectionListOptionsLabel = document.createElement("label");
+				var abilitySectionListOptionsText = document.createElement("p");
+				abilitySectionListOptionsInput.setAttribute("type","radio");
+				abilitySectionListOptionsInput.setAttribute("name","ability-options");
+				abilitySectionListOptionsInput.setAttribute("id","ability-options-"+q);
+				abilitySectionListOptionsInput.setAttribute("autocomplete","off");
+				abilitySectionListOptionsInput.value = q;
+				abilitySectionListOptionsLabel.setAttribute("for","ability-options-"+q);
+				abilitySectionListOptionsLabel.setAttribute("type","medium");
+				abilitySectionListOptionsLabel.setAttribute("data-search-name", finaldataAbility[q]["Ability"].toLowerCase());
+				abilitySectionListOptionsText.innerText = finaldataAbility[q]["Ability"];
+				abilitySectionListOptions.appendChild(abilitySectionListOptionsInput);
+				abilitySectionListOptions.appendChild(abilitySectionListOptionsLabel);
+				abilitySectionListOptionsLabel.appendChild(abilitySectionListOptionsText);
+				abilitySectionListOptionsInput.addEventListener("click", abilityOptionsSelector);
+				abilitySectionListOptionsLabel.setAttribute("tabindex",q+10);
+				abilitySectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;abilityOptionsSelector(event.target.previousElementSibling.value);}}});
 
-
-					if(firstabilityiteration != true) {
-						firstabilityiteration = true;
-						abilitySectionListOptionsLabel.click();
-					}
+				if(firstabilityiteration != true) {
+					firstabilityiteration = true;
+					abilitySectionListOptionsLabel.click();
 				}
 			}
 		}
@@ -173,33 +176,95 @@ var createAbility = function() {
 			i = this.value;
 		}
 	
-		abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"]+"</u>";
-		abilitySectionHeaderTitleID.innerText = "#"+getAbilityData(finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"], "ID");
-		abilitySectionHeaderDebutText.innerText = "Introduced in "+getAbilityData(finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"], "Debut");
-		abilitySectionHeaderTitleName.innerText = finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"];
-		abilitySectionContentDescriptionText.innerText = getAbilityData(finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"], "Flavor");
+		abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldataAbility[i]["Ability"]+"</u>";
+		abilitySectionHeaderTitleID.innerText = "#"+getDataArr(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["ID"];
 
-		var desc = [];
+		abilitySectionHeaderDebutText.innerText = "Introduced in "+getDataArr(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["Debut"];
+		abilitySectionHeaderTitleName.innerText = finaldataAbility[i]["Ability"];
+		abilitySectionContentDescriptionText.innerText = getDataArr(finaldataAbilityDescription,"Ability",finaldataAbility[i]["Ability"])[0]["Description"];
 
-		for(var q = 0; q < finaldataAbilityDescription.length; q++) {
-			if(getApplicable(finaldataAbilityDescription[q]["Game"])) {
-				if(finaldataAbilityDescription[q]["Ability"] == finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"]) {
-					desc.push(finaldataAbilityDescription[q]["Description"])
+		var effect = [];
+
+		for(var q = 0; q < finaldataAbilityEffect.length; q++) {
+			if(getApplicable(finaldataAbilityEffect[q]["Game"])) {
+				if(finaldataAbilityEffect[q]["Ability"] == finaldataAbility[i]["Ability"]) {
+					effect.push(finaldataAbilityEffect[q]["Effect"])
 				}
 			}
 		}
 
+		abilitySectionContentEffectText.innerText = "";
+
+		for(var q = 0; q < effect.length; q++) {
+			abilitySectionContentEffectText.innerText += effect[q];
+			if (q != effect.length - 1) {
+				abilitySectionContentEffectText.innerHTML += "<br>"
+			}
+		}
 		
-		abilitySectionContentEffectText.innerHTML = desc.join("<br>");
-		
-		if (desc.length > 0) {
+		if (effect.length > 0) {
 			abilitySectionContentEffectTitle.innerText = "Effect";
 		}
 		else {
 			abilitySectionContentEffectTitle.innerText = "";
 		}
+
+		//abilitySectionContentEffectText.innerHTML = referenceLink(abilitySectionContentEffectText.innerHTML);
+
+		var affect = [];
+
+		for(var q = 0; q < finaldataAbilityAffect.length; q++) {
+			if(getApplicable(finaldataAbilityAffect[q]["Game"])) {
+				if(finaldataAbilityAffect[q]["Ability"] == finaldataAbility[i]["Ability"]) {
+					if (finaldataAbilityAffect[q]["Type"] == "Move") {
+						var move = getMoveData(finaldataAbilityAffect[q]["Name"], "Description");
+						if (move != undefined) {
+							affect.push(finaldataAbilityAffect[q]);
+						}
+					}
+					else if (finaldataAbilityAffect[q]["Type"] == "Item") {
+						var item = getItemIcon(finaldataAbilityAffect[q]["Name"]);
+						if (item != undefined) {
+							affect.push(finaldataAbilityAffect[q]);
+						}
+					}
+				}
+			}
+		}
+
+		abilitySectionContentAffectText.innerText = "";
+		for(var q = 0; q < affect.length; q++) {
+			var b = document.createElement("b");
+			b.innerText = affect[q]["Name"];
+			abilitySectionContentAffectText.appendChild(b)
+			
+			b.setAttribute("name",affect[q]["Type"].toLowerCase());
+			b.setAttribute("type", "invert");
+			b.setAttribute("onclick", "dataRedirect()");
+			b.setAttribute("function","dataRedirect");
+			b.style.color = "var(--type"+getMoveData(affect[q]["Name"],"Type")+")";
+			b.style.textShadow  = "1px 1px #000";
+			
+			if (q == affect.length - 2) {
+				abilitySectionContentAffectText.innerHTML += " and ";
+			}
+			else if (q == affect.length - 1) {
+				abilitySectionContentAffectText.innerHTML += ".";
+			}
+			else {
+				abilitySectionContentAffectText.innerHTML += ", ";
+			}
+		}
+
 		
+		if (affect.length > 0) {
+			abilitySectionContentAffectTitle.innerText = "Affected "+affect[0]["Type"]+"s";
+		}
+		else {
+			abilitySectionContentAffectTitle.innerText = "";
+		}
 		
+
 
 
 		var lis = document.querySelectorAll("#contain div#ability > section[name='sidebar'] ul li");
@@ -212,7 +277,7 @@ var createAbility = function() {
 		for(var q = 0; q < sidebarAbilityListFull.length; q++) {
 			sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability","");
 		}
-		var AbilityResults = getPokémonData(finaldataPokémonAbility, finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"], sidebarAbilityListFull);
+		var AbilityResults = getPokémonData(finaldataPokémonAbility, finaldataAbility[i]["Ability"], sidebarAbilityListFull);
 	
 		for(var q = 0; q < AbilityResults.length; q++) {
 			var abilitySectionSidebarSidebarLi = document.createElement("li");
@@ -240,7 +305,7 @@ var createAbility = function() {
 				} else if(u != 0) {
 				
 
-					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldataAbility[i][JSONPath_AbilityReference+"_"+"Name"]) {
+					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldataAbility[i]["Ability"]) {
 						var abilitySectionSidebarSidebarLiTextOuter = document.createElement("span");
 						var abilitySectionSidebarSidebarLiText = document.createElement("h6");
 						if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
