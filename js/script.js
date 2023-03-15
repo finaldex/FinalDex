@@ -1308,8 +1308,9 @@ function createParty(base,data) {
                 baseAbility.appendChild(option)
             }
         }
-        if (getAbilityData(baseAbility.value,"Flavor") != undefined) {
-            baseAbility.setAttribute("title",getAbilityData(baseAbility.value,"Flavor"));
+        var desc = getDataArr(finaldataAbilityDescription,"Ability",baseAbility.value)[0]["Description"];
+        if (desc != undefined) {
+            baseAbility.setAttribute("title",desc);
         }
     }
 
@@ -1730,8 +1731,9 @@ function selectModify(e) {
     }
 
     if (this.parentElement.getAttribute("name") == "Ability") {
-        if (getAbilityData(this.value,"Flavor") != undefined) {
-            this.setAttribute("title",getAbilityData(this.value,"Flavor"));
+        var desc = getDataArr(finaldataAbilityDescription,"Ability",this.value)[0]["Description"];
+        if (desc != undefined) {
+            this.setAttribute("title",desc);
         }
         this.setAttribute("name",this.querySelector(':scope > option[value="'+this.value+'"]').getAttribute("name"));
     }
