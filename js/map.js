@@ -2148,7 +2148,7 @@ var createMap = function() {
 						var mapSectionSidebarDescriptionTrainerAbility = document.createElement("b");
 						var mapSectionSidebarDescriptionTrainerAbilityText = document.createElement("p");
 						mapSectionSidebarDescriptionTrainerAbilityText.innerText = ability;
-						mapSectionSidebarDescriptionTrainerAbility.title = getAbilityPosition(getPokémonInt(pok),ability)+" Ability\n"+getAbilityData(ability,"Flavor");
+						mapSectionSidebarDescriptionTrainerAbility.title = getAbilityPosition(getPokémonInt(pok),ability)+" Ability\n"+getDataArr(finaldataAbilityDescription,"Ability",ability)[0]["Description"];
 						mapSectionSidebarDescriptionTrainerAbility.setAttribute("name","ability");
 						mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerAbility);
 						mapSectionSidebarDescriptionTrainerAbility.appendChild(mapSectionSidebarDescriptionTrainerAbilityText);
