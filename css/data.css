@@ -1088,7 +1088,7 @@
 }
 
 #data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li p img {
-	max-width: 50%;
+	max-width: 90px;
 }
 
 
