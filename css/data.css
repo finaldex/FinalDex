@@ -1392,6 +1392,47 @@
 	top: 85%;
 }
 
+
+#data aside[name="evolution"][type*="/9"] {
+	height: 9%;
+}
+
+#data aside[name="evolution"][type*="1/9"] {
+	top: 16%;
+}
+
+#data aside[name="evolution"][type*="2/9"] {
+	top: 25%;
+}
+
+#data aside[name="evolution"][type*="3/9"] {
+	top: 34%;
+}
+
+#data aside[name="evolution"][type*="4/9"] {
+	top: 43%;
+}
+
+#data aside[name="evolution"][type*="5/9"] {
+	top: 52%;
+}
+
+#data aside[name="evolution"][type*="6/9"] {
+	top: 61%;
+}
+
+#data aside[name="evolution"][type*="7/9"] {
+	top: 70%;
+}
+
+#data aside[name="evolution"][type*="8/9"] {
+	top: 79%;
+}
+
+#data aside[name="evolution"][type*="9/9"] {
+	top: 88%;
+}
+
 #data aside[name="evolution"][type*="previous"] {
 	left: 0;
 }
