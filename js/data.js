@@ -786,12 +786,25 @@ function loadData() {
                     evoContent.appendChild(evoToggle);
                     evoToggle.setAttribute("onclick","this.previousElementSibling.classList.toggle('active')");
 
-      
-                    if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
-                        evoDescriptionText.innerHTML = formatEvolutionText(i,getOffspringData(evoArr[q][u]["Integer"]),"Previous")
+					var os = finaldataPokémonOffspring[evoArr[q][u]["Integer"]]["Factor_"+JSONPath_Offspring];
+					if (os == undefined) {
+						os = "";
+					}
+
+
+					if (os.includes(",")) {
+						var arr = [formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution"),formatEvoBreedText(evoArr[q][u]["Integer"],"Breed")];
+						evoDescriptionText.innerHTML = arr.join("<br>");
+						console.log(1)
+						consoleText("TRUE")
+					}
+                    else if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
+                        evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Breed").join("<br>");
+						console.log(2)
                     }
                     else {
-                        evoDescriptionText.innerHTML = formatEvolutionText(i,evoArr[q][u],"Previous");
+                        evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution").join("<br>");
+						console.log(3)
                     }
 
                 }
@@ -799,7 +812,11 @@ function loadData() {
                     evoContent.appendChild(evoToggle);
                     evoContent.appendChild(evoMain);
                     evoToggle.setAttribute("onclick","this.nextElementSibling.classList.toggle('active')");
-                    evoDescriptionText.innerHTML = formatEvolutionText(i,evoArr[q][u],"Next");
+                    evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution")[u];
+
+					console.log(q)
+					console.log(u)
+					console.log(4)
                 }
 
                 evoToggle.appendChild(evoImg);
@@ -1983,8 +2000,8 @@ function callPopUp(x, arr, type, style) {
 	}
 	ul.setAttribute("name", type);
 	if(type == "Ability") {
-		id = getAbilityData(title,"ID");
-		description = getAbilityData(title,"Flavor");
+		id = getDataArr(finaldataAbility,"Ability",title)[0]["ID"];
+		description = getDataArr(finaldataAbilityDescription,"Ability",title)[0]["Description"];
 	} else if(type == "Held Item") {
 		id = enhancetarget.getAttribute("name");
         description = getItemData(title,"Description").join("\n");
