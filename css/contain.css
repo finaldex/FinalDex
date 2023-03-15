@@ -303,6 +303,7 @@
 	height: 100%;
 	width: 100%;
 	background: var(--color16);
+	overflow: auto;
 }
 #contain div#move > section[name='content'] > *:first-child {
 	height:70%;
