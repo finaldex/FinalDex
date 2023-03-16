@@ -337,9 +337,6 @@ function initialize() {
 		memoryDexSwitch();
 
 		load();
-
-
-		console.log(formatEvoBreedText(Math.floor(Math.random() * (1000 - 0) + 0),"Evolution"))
 	}
 }
 
