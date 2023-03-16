@@ -267,7 +267,7 @@ var createItem = function() {
 				else {
 					currency = currency.replace(/[^A-Z]+/g,"");
 				}
-				itemSectionHeaderDebutText.innerHTML = "Sold for: "+price+currency;
+				itemSectionHeaderDebutText.innerHTML = "Sold for: "+numFormat(price)+currency;
 			}
 			else {
 				itemSectionHeaderDebutText.innerText = "Cannot be Sold";
@@ -626,10 +626,10 @@ var createItem = function() {
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
 					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
 					if (finaldataLocationItemsShops[q]["Shop"] != undefined) {
-						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Shop"]+" for "+finaldataLocationItemsShops[q]["Cost"]+currency;
+						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Shop"]+" for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
 					}
 					else {
-						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+finaldataLocationItemsShops[q]["Cost"]+currency;
+						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
 					}
 					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 			
