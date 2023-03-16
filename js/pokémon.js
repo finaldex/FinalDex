@@ -1382,7 +1382,7 @@ function createContain(condition) {
                     contentConfirm.setAttribute("name","confirm");
                     contentPopup.setAttribute("name","popup");
                     contentPopup.setAttribute("value",i);
-                    contentPopup.innerHTML = "<h4>✵</h4>";
+                    contentPopup.innerHTML = "✵";
                     contentNationalID.innerText = "#"+ID;
                     contentImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
                     contentImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
