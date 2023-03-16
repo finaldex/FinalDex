@@ -1148,7 +1148,17 @@ function formatEvoBreedText(i,type) {
 									obj["Gender Ratio"] = returnData(q,"Gender Ratio","").join("/");
 									obj["Primary Egg Group"] = returnData(q,"Egg Group","")[0];
 									obj["Secondary Egg Group"] = returnData(q,"Egg Group","")[1];
-									obj["Offspring Factor"] = finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring].split(",")[u];
+									if (finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring] != undefined) {
+										if (finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring].split(",").includes(",")) {
+											obj["Offspring Factor"] = finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring].split(",")[u];
+										}
+										else {
+											obj["Offspring Factor"] = finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring];
+										}
+									}
+									else {
+										obj["Offspring Factor"] = undefined;
+									}
 									poks.push(obj)
 								}
 							}
@@ -1261,7 +1271,7 @@ function formatEvoBreedText(i,type) {
 				else if (gender == "♂") {
 					gender = "<span name='male'>♂</span>"
 				}
-				else if (gender == "♂") {
+				else if (gender == "♀") {
 					gender = "<span name='female'>♀</span>"
 				}
 				if (add == undefined) {
