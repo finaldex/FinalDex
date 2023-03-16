@@ -1828,6 +1828,7 @@ function RNG() {
 						output.innerText = random1;
 						clearInterval(intervalRandom);
 						output.style.color = "gold";
+						output.innerText = numFormat(output.innerText);
 						highestLowest();
 					}
 				}
