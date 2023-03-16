@@ -1283,14 +1283,18 @@
 
 #contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] div {
 	margin: 10px;
-	border-radius: 10px;
-	width: var(--sizeWidthS);
+    padding: 5px;
+    border-radius: 10px;
+    width: var(--sizeWidthS);
     height: var(--sizeWidthS);
-	color: var(--fontLight);
-	background: var(--color8);
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    color: var(--fontLight);
+    background: var(--color8);
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] div.min,
@@ -2641,7 +2645,6 @@ img[title="Pokémon Dollar"] {
 
 #contain div#tool > section[name='content'] > div[name="timer"] > *[name] input {
 	background: var(--color_95);
-    caret-color: transparent;
     font-size: var(--sizeFontXL);
     color: var(--fontDark);
 	padding: 5px 10px;
