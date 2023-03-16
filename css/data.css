@@ -331,11 +331,13 @@
 }
 
 
+#data > div section[name='main'] > div[name='metadata'] > div[name='description'] p[name="entry"] {
+	font-family: monospace;
+	text-align:center
+}
 #data > div section[name='main'] > div[name='metadata'] > div[name='description'] p {
 	padding: 10px;
-	font-family: monospace;
 }
-
 
 
 
@@ -368,6 +370,7 @@
 
 #data > div section[name='main'] > div[name='metadata'] > div[name='description'] {
 	height: 85%;
+	text-align:left;
 }
 
 
