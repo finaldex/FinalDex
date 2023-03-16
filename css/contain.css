@@ -116,6 +116,10 @@
     position: relative;
 }
 
+#contain > div#tool > section[name='list'] div:first-child {
+	box-shadow: 0px 1px 1px var(--border1);
+}
+
 #contain > div#item > section[name='list'] div:first-child {
 	height: 15%;
 	display: flex;
