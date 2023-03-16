@@ -18,7 +18,9 @@ function titleCase(str) {
 	}
 }
 
-
+function numFormat(num) {
+	return num.replaceAll(",","").toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function getEvolutionFamily(i) {
 	var i;
 	var stage = [];
