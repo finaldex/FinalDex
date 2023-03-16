@@ -23,13 +23,14 @@ function getEvolutionFamily(i) {
 	var i;
 	var stage = [];
 	var specie = [];
-	var Previous;
-	var Next;
+	var Previous = undefined;
+	var Next = undefined;
 	stage = finaldataPokémonEvolutionStage;
 	specie = finaldataPokémonEvolutionSpecie;
 	var result = [];
 	result.push(finaldataPokémon[i]["Pokémon"])
 
+	console.log(finaldataPokémonEvolutionSpecie[i])
 	for(var q = 0; q < 10; q++) {
 		Previous = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie];
 		Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie];
@@ -1283,6 +1284,10 @@ function formatEvoBreedText(i,type) {
 				method = method.replaceAll("Special ","").replaceAll("Item","").replaceAll("Unique","");
 
 				var txt = "Evolve  "+pok+" "+gender+" "+dash+" "+method+" "+factor+" "+add+".";
+
+				if (method == "Unavailable") {
+					txt = "Unavailable";
+				}
 				txt = txt.replaceAll("  "," ");
 				txt = txt.replaceAll(" .",".");
 				txt = txt.replaceAll("by  by","by");
