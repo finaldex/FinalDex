@@ -383,23 +383,32 @@ nav > div:first-child > span > h2 {
     align-items: center;
 }
 #Changelog ul pre {
-    padding: 5px 0;
+    padding: 5px 0; 
 }
-#Changelog ul > ul {
+#Changelog ul > ol {
     width: 95%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
 }
 #Changelog li {
     padding: 2px 0;
     font-size: 0.8em;
 }
-#Changelog li:last-child {
+#Changelog li:not(:first-child) {
     list-style-type: none;
+    margin-left: 20px;
+}
+#Changelog li:not(:first-child) > * {
+    font-size: 90%;
 }
 
+#Changelog ol ul {
+    padding-bottom: 10px;
+}
 
 #Bug select {
     padding: 10px 30px;
