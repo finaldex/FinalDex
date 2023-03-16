@@ -625,7 +625,7 @@ var createData = function(id, i) {
 	if(HeldItem == true) {
 		var dataSectionMainMetadataSidebarRow5 = document.createElement("div");
 		var dataSectionMainMetadataSidebarHeldItemOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarHeldItemTitle = document.createElement("h5");
+		var dataSectionMainMetadataSidebarHeldItemTitle = document.createElement("h6");
 		dataSectionMainMetadataSidebarHeldItemOuter.setAttribute("name","helditem");
 		dataSectionMainMetadataSidebarHeldItemTitle.innerText = "Held Item";
 		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow5);
