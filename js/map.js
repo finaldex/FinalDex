@@ -919,7 +919,7 @@ var createMap = function() {
 					}
 
 		
-					mapSectionSidebarCostShopCost.innerHTML = cost+currency.join("");
+					mapSectionSidebarCostShopCost.innerHTML = numFormat(cost)+currency.join("");
 					
 
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCostTitle);
@@ -1681,7 +1681,7 @@ var createMap = function() {
 						var mapSectionSidebarDescriptionTutorCostHeader = document.createElement("h6");
 						var mapSectionSidebarDescriptionTutorCostText = document.createElement("p");
 						mapSectionSidebarDescriptionTutorCostHeader.innerText = "Cost:";
-						mapSectionSidebarDescriptionTutorCostText.innerHTML = tutors[u]["Cost"].replaceAll(",","\n").replaceAll(" Yellow Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Yellow Shard.png" name="item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Red Shard.png" name="item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Blue Shard.png" name="item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Green Shard.png" name="item" title="Green Shard">');
+						mapSectionSidebarDescriptionTutorCostText.innerHTML = numFormat(tutors[u]["Cost"].replaceAll(",","\n")).replaceAll(" Yellow Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Yellow Shard.png" name="item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Red Shard.png" name="item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Blue Shard.png" name="item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Green Shard.png" name="item" title="Green Shard">');
 						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorCost);
 						mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostHeader);
 						mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostText);
