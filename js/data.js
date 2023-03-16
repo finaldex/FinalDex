@@ -94,7 +94,6 @@ var createData = function(id, i) {
 	var dataSectionMainMetadata = document.createElement("div");
 	var dataSectionMainMetadataStats = document.createElement("div");
 	var dataSectionMainDescriptionOuter = document.createElement("div");
-	var dataSectionMainDescription = document.createElement("p");
 	var dataSectionMainMetadataSidebarOuter = document.createElement("div");
 	var dataSectionMainMetadataSidebar = document.createElement("div");
 	var dataSectionMainMetadataSidebarRow1 = document.createElement("div");
@@ -481,7 +480,6 @@ var createData = function(id, i) {
 	dataSectionMain.appendChild(dataNavigation);
 	dataSectionMain.appendChild(dataSectionMainMetadata);
 	dataSectionMainMetadata.appendChild(dataSectionMainDescriptionOuter);
-	dataSectionMainDescriptionOuter.appendChild(dataSectionMainDescription);
 	dataSectionMainMetadataSidebarOuter.appendChild(dataSectionMainMetadataStats);
 
 	dataSectionMainMapFullscreen.addEventListener("click", function() {fullscreenIMG([dataSectionMainMapImage],0)});
@@ -649,37 +647,37 @@ var createData = function(id, i) {
 
 		}
 	}
-    dataSectionHeaderTypePrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
-	dataSectionHeaderTypeSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonType,"Type","Single");});
+    dataSectionHeaderTypePrimary.addEventListener("click", function() {callPopUp("Type");});
+	dataSectionHeaderTypeSecondary.addEventListener("click", function() {callPopUp("Type");});
 
 
 	
 	if(Ability.length >= 1) {
-		dataSectionMainMetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
-		dataSectionMainMetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
+		dataSectionMainMetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp("Ability");});
+		dataSectionMainMetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp("Ability");});
 		if(Ability.length >= 3) {
-			dataSectionMainMetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp(id, finaldataPokémonAbility,"Ability","Single");});
+			dataSectionMainMetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp("Ability");});
 		}
 	}
 	if(Egg == true) {
-		dataSectionMainMetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
-		dataSectionMainMetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+		dataSectionMainMetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp("Egg Group");});
+		dataSectionMainMetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp("Egg Group");});
 	}
-	dataSectionMainMetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonCatchRate,"Catch Rate","Single");});
+	dataSectionMainMetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp("Catch Rate");});
 	if(Egg == true) {
-		dataSectionMainMetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonHatchRate,"Hatch Rate","Single");});
+		dataSectionMainMetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp("Hatch Rate");});
 	}
     if(Gender == true) {
-        dataSectionMainMetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp(id, finaldataPokémonGenderRatio,"Gender Ratio","Custom2");});
+        dataSectionMainMetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp("Gender Ratio");});
     }
-	dataSectionMainMetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonExperienceYield,"Experience Yield","Custom1");});
-	dataSectionMainMetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp(id, finaldataPokémonLevelingRate,"Leveling Rate","Single");});
+	dataSectionMainMetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp("Experience Yield");});
+	dataSectionMainMetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp("Leveling Rate");});
 
 
 	
 	var helditm = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] span[name='helditem'] > div > b");
 	for(q = 0; q < helditm.length; q++) {
-		helditm[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonHeldItem,"Held Item","Single");});
+		helditm[q].addEventListener("click", function() {callPopUp("Held Item");});
 	}
 	dataSectionMainMetadataPopupTitleExitUp.addEventListener("click", function() {OpenExitPopUp(id, false);});
 	dataSectionMainMetadataPopupTitleExitDown.addEventListener("click", function() {OpenExitPopUp(id, true);});
@@ -687,17 +685,17 @@ var createData = function(id, i) {
 	var baseEV = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > li > b");
 	for(q = 0; q < baseEV.length; q++) {
 		if(baseEV[q].parentElement.parentElement.getAttribute("name") == "basestats") {
-			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats,"Base Stats","Multiple");});
+			baseEV[q].addEventListener("click", function() {callPopUp("Base Stats");});
 		} else if(baseEV[q].parentElement.parentElement.getAttribute("name") == "evyield") {
-			baseEV[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield,"EV Yield","Multiple");});
+			baseEV[q].addEventListener("click", function() {callPopUp("EV Yield");});
 		}
 	}
 	var baseEVTotal = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > b");
 	for(q = 0; q < baseEVTotal.length; q++) {
 		if(baseEVTotal[q].parentElement.getAttribute("name") == "basestats") {
-			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonBaseStats,"Base Stats","Total");});
+			baseEVTotal[q].addEventListener("click", function() {callPopUp("Base Stats Total");});
 		} else if(baseEVTotal[q].parentElement.getAttribute("name") == "evyield") {
-			baseEVTotal[q].addEventListener("click", function() {callPopUp(id, finaldataPokémonEVYield,"EV Yield","Total");});
+			baseEVTotal[q].addEventListener("click", function() {callPopUp("EV Yield Total");});
 		}
 	}
 };
@@ -739,8 +737,6 @@ function loadData() {
         var next = getEvolutionData(i,"Next");
         var evoArr = [previous,next];
         var evoArrName = ["previous","next"];
-
-		console.log(evoArr)
 
         for(var q = 0; q < evoArr.length; q++) {
             for(var u = 0; u < evoArr[q].length; u++) {
@@ -795,20 +791,15 @@ function loadData() {
 						os = "";
 					}
 
-					console.log(finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage])
-					console.log(finaldataPokémonEvolutionStage[i])
 					if (os.includes(",")) {
 						var arr = [formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution"),formatEvoBreedText(evoArr[q][u]["Integer"],"Breed")];
 						evoDescriptionText.innerHTML = arr.join("<br>");
-						consoleText(1)
 					}
-                    else if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Three-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Third-Stage") {
+                    else if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Third-Stage") {
                         evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution").join("<br>");
-						consoleText(2)
                     }
                     else {
                         evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Breed").join("<br>");
-						consoleText(3)
                     }
 
                 }
@@ -832,7 +823,7 @@ function loadData() {
                 var eggSpan = evoDescription.querySelectorAll(':scope b[name*="egg"]');
                 for(y = 0; y < eggSpan.length; y++) {
                     eggSpan[y].setAttribute("dataname","value")
-                    eggSpan[y].addEventListener("click", function() {callPopUp(id, finaldataPokémonEggGroup,"Egg Group","Single");});
+                    eggSpan[y].addEventListener("click", function() {callPopUp("Egg Group");});
                 }
 
                 var pokSpan = evoDescription.querySelectorAll(':scope b[name="pokémon"]');
@@ -1378,13 +1369,21 @@ function loadData() {
     
     locs = [...new Set(locs)];
 
-    //mapBlink(document.querySelector("#data-map-contain"),locs)
-
-
+	description.innerHTML = "";
 	category.innerText = '"'+returnData(i,"Category","")[0]+' Pokémon"';
 	if(returnData(i,"Pokédex Entry","")[0] != undefined) {
-		description.querySelector(':scope p').innerText = returnData(i,"Pokédex Entry","")[0];
+		description.innerHTML += "<p name='entry'>"+returnData(i,"Pokédex Entry","")[0]+"</p>";
 	}
+	if (getEvolutionFamily(i).length == 1 && finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring].includes(",") || getEvolutionFamily(i).length == 1 && finaldataPokémonOffspring[getDefaultInt(i)]["Offspring_"+JSONPath_Offspring].includes(",")) {
+		var bd = finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring];
+		if (bd == undefined) {
+			bd = finaldataPokémonOffspring[getDefaultInt(i)]["Offspring_"+JSONPath_Offspring];
+		}
+
+		description.innerHTML += "<p>"+"It breeds to "+bd.replaceAll(",",", ").replace(/,([^,]*)$/, ' and $1')+"<p>";
+	}
+	console.log(getEvolutionFamily(i))
+	console.log(finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring])
 	if(returnData(i,"Debut","")[0].includes("-")) {
 		debut.innerText = "Introduced in "+returnData(i,"Debut","")[0].split("-")[0];
 	} else {
@@ -1887,7 +1886,12 @@ function modalData() {
 	var int;
 	var id;
 	var def;
-	int = this.getAttribute("value");
+
+	tar = this;
+	if (tar.tagName == undefined) {
+		tar = event.target;
+	}
+	int = tar.getAttribute("value");
 	def = true;
 
 	for(var i = 0; i < finaldataPokémon.length; i++) {
@@ -1949,11 +1953,14 @@ function modalData() {
 }
 
 
-function callPopUp(x, arr, type, style) {
+function callPopUp(type) {
 	var x;
 	var arr;
 	var type;
-	var popup = document.querySelector("#data > div[value='"+x+"'] section[name='main'] > div[name='metadata'] > div[name='popup']");
+
+	var base = findUpEl(event.target,"class","open");
+	x = base.getAttribute("value");
+	var popup = base.querySelector(":scope section[name='main'] > div[name='metadata'] > div[name='popup']")
 	var ul = popup.querySelector(":scope ul");
 	var lis = popup.querySelectorAll(":scope li");
 	var idpath = popup.querySelector(":scope span > h6");
@@ -1979,11 +1986,71 @@ function callPopUp(x, arr, type, style) {
 	var alteration;
 	var target = event.currentTarget;
 	var enhancetarget;
+
+	if (type == "Gender Ratio") {
+		var arr = finaldataPokémonGenderRatio;
+	}
+	if (type == "Hatch Rate") {
+		var arr = finaldataPokémonHatchRate;
+	}
+	if (type == "Catch Rate") {
+		var arr = finaldataPokémonCatchRate;
+	}
+	if (type == "Base Stats") {
+		var arr = finaldataPokémonBaseStats;
+	}
+	if (type == "Base Stats Total") {
+		var arr = finaldataPokémonBaseStats;
+	}
+	if (type == "EV Yield") {
+		var arr = finaldataPokémonEVYield;
+	}
+	if (type == "EV Yield Total") {
+		var arr = finaldataPokémonEVYield;
+	}
+	if (type == "Experience Yield") {
+		var arr = finaldataPokémonExperienceYield;
+	}
+	if (type == "Leveling Rate") {
+		var arr = finaldataPokémonLevelingRate;
+	}
+	if (type == "Egg Group") {
+		var arr = finaldataPokémonEggGroup;
+	}
+	if (type == "Type") {
+		var arr = finaldataPokémonType;
+	}
+	if (type == "Ability") {
+		var arr = finaldataPokémonAbility;
+	}
+	if (type == "Held Item") {
+		var arr = finaldataPokémonHeldItem;
+	}
+
+
+	if (type == "Experience Yield") {
+		style = "Custom1";
+	}
+	else if (type == "Gender Ratio") {
+		style = "Custom2";
+	}
+	else if (type == "Base Stats" || type == "EV Yield") {
+		style = "Multiple";
+	}
+	else if (type.includes("Total")) {
+		style = "Total";
+	}
+	else {
+		style = "Single";
+	}
+
+
 	if(target.getAttribute("dataname") == "value") {
 		enhancetarget = target;
 	} else {
 		enhancetarget = target.querySelector(':scope [dataname="value"]');
 	}
+
 	if(enhancetarget.getAttribute("value") != undefined) {
 		title = enhancetarget.getAttribute("value");
 	} else if(enhancetarget.innerText != "") {
@@ -1999,15 +2066,18 @@ function callPopUp(x, arr, type, style) {
 		document.querySelector("#data > div[value='"+x+"'] nav label:nth-child(2)").click();
 	}
 	ul.setAttribute("name", type);
+
+	if(title.includes(" : ")) {
+		title = title.split(" : ");
+	}
+	
+	
 	if(type == "Ability") {
 		id = getDataArr(finaldataAbility,"Ability",title)[0]["ID"];
 		description = getDataArr(finaldataAbilityDescription,"Ability",title)[0]["Description"];
 	} else if(type == "Held Item") {
 		id = enhancetarget.getAttribute("name");
         description = getItemData(title,"Description").join("\n");
-	}
-	if(title.includes(" : ")) {
-		title = title.split(" : ");
 	}
 	if(type == "Catch Rate") {
 		if(Generation == 1) {
@@ -2074,9 +2144,9 @@ function callPopUp(x, arr, type, style) {
 		iconpath.addEventListener("click", dataRedirect);
         iconpath.setAttribute("function","dataRedirect");
 	}
-	if(type == "Base Stats" && style == "Multiple" || type == "EV Yield" && style == "Multiple") {
+	if(type == "Base Stats" || type == "EV Yield") {
 		additional = target.parentElement.getAttribute("name");
-	} else if(type == "Base Stats" && style == "Total" || type == "EV Yield" && style == "Total") {
+	} else if(type == "Base Stats Total"|| type == "EV Yield Total") {
 		additional = target.getAttribute("name");
 	}
 	if(additional == "hp") {
@@ -2125,7 +2195,7 @@ function callPopUp(x, arr, type, style) {
 		var jsonpath = JSONPath_GenderRatio;
 		var json = ["Male","Female"];
 		json = json.map(i => i+"_"+jsonpath);
-	} else if(type == "Base Stats") {
+	} else if(type == "Base Stats" || type == "Base Stats Total") {
 		if(Generation <= 1) {
 			var jsonpath = JSONPath_BaseStats;
 			var json = ["HP","Attack","Defense","Special","Speed","Total"];
@@ -2135,7 +2205,7 @@ function callPopUp(x, arr, type, style) {
 			var json = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
 			json = json.map(i => i+"_"+jsonpath);
 		}
-	} else if(type == "EV Yield") {
+	} else if(type == "EV Yield" || type == "EV Yield Total") {
 		if(Generation <= 1) {
 			var jsonpath = JSONPath_EVYield;
 			var json = ["HP","Attack","Defense","Special","Speed","Total"];
@@ -2160,9 +2230,11 @@ function callPopUp(x, arr, type, style) {
 		idpath.innerText = "#"+id;
 		idpath.style.display = "unset";
 	}
-	if(style == "Total") {
-		titlepath.innerHTML = type+"<br>"+title;
-	} else if(type == "Catch Rate" || type == "Experience Yield" || type == "Leveling Rate" || type == "Base Stats" || type == "EV Yield") {
+	if(type.includes("Total")) {
+		titlepath.innerHTML = type.replaceAll("Total","")+"<br>"+title;
+	} else if (type == "Base Stats" || type == "EV Yield") {
+		titlepath.innerHTML = type+"<br>"+additional+": "+title;
+	} else if(type == "Catch Rate" || type == "Experience Yield" || type == "Leveling Rate") {
 		if(additional == undefined) {
 			titlepath.innerHTML = type+"<br>"+title;
 		} else {
@@ -2406,10 +2478,10 @@ function callPopUp(x, arr, type, style) {
 						p.title = "Egg Cycles";
 					} else if(type == "Hatch Rate" && q == 1) {
 						p.title = "Steps";
-					} else if(type == "Base Stats" || type == "EV Yield") {
+					} else if(type == "Base Stats" || type == "Base Stats Total" || type == "EV Yield" || type == "EV Yield Total") {
 						p.title = json[q].split("_")[0];
 						p.setAttribute("name","stat"+json[q].split("_")[0]);
-					} else if(json[q].includes("_") && type != "Base Stats" || json[q].includes("_") && type != "EV Yield") {
+					} else if(json[q].includes("_")) {
 						p.title = json[q].split("_")[0]+" "+type;
 					} else if(type == "Catch Rate") {
 						if(q == 0) {
@@ -2542,7 +2614,10 @@ function callPopUp(x, arr, type, style) {
 			}
 		}
 	}
-	ul.querySelector(":scope > li.select").scrollIntoView();
+	var select = ul.querySelector(":scope > li.select");
+	if (select != undefined) {
+		select.scrollIntoView();
+	}
 }
 
 
