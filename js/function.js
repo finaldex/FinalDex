@@ -389,6 +389,15 @@ function abbreviateStats(stats) {
     return stats;
 }
 
+
+function findUpEl(base,att,val) {
+	while (base.parentNode) {
+        base = base.parentNode;
+        if (base.getAttribute(att) === val)
+            return base;
+    }
+}
+
 function findUpTag(el, tag) {
     while (el.parentNode) {
         el = el.parentNode;
@@ -1012,16 +1021,11 @@ function getEvolutionData(i,column) {
 				if (stage == undefined) {
 					stage = arrStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage];
 				}
-				if (method == undefined) {
+
+				if (method == undefined && factor == undefined && additional == undefined && gender == undefined) {
 					method = arrMethod[getDefaultInt(i)]["Type_"+JSONPath_EvolutionMethod];	
-				}
-				if (factor == undefined) {
 					factor = arrMethod[getDefaultInt(i)]["Factor_"+JSONPath_EvolutionMethod];
-				}
-				if (additional == undefined) {
 					additional = arrMethod[getDefaultInt(i)]["Additional_"+JSONPath_EvolutionMethod];
-				}
-				if (gender == undefined) {
 					gender = arrMethod[getDefaultInt(i)]["Gender_"+JSONPath_EvolutionMethod];
 				}
 
@@ -1051,20 +1055,12 @@ function getEvolutionData(i,column) {
 			if (stage == undefined) {
 				stage = arrStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage];
 			}
-			if (method == undefined) {
+			if (method == undefined && factor == undefined && additional == undefined && gender == undefined) {
 				method = arrMethod[getDefaultInt(i)]["Type_"+JSONPath_EvolutionMethod];	
-			}
-			if (factor == undefined) {
 				factor = arrMethod[getDefaultInt(i)]["Factor_"+JSONPath_EvolutionMethod];
-			}
-			if (additional == undefined) {
 				additional = arrMethod[getDefaultInt(i)]["Additional_"+JSONPath_EvolutionMethod];
-			}
-			if (gender == undefined) {
 				gender = arrMethod[getDefaultInt(i)]["Gender_"+JSONPath_EvolutionMethod];
 			}
-
-			console.log(stage)
 	
 			if (pokémon != undefined) {
 				var obj = new Object();
@@ -1131,7 +1127,6 @@ function getOffspringData(i) {
 
 
 function formatEvoBreedText(i,type) {
-	console.log("Pokémon is: "+getPokémonName(i))
 	var i;
 	var type;
 	var Text = [];
@@ -1187,8 +1182,8 @@ function formatEvoBreedText(i,type) {
 			var factor = res[q][0]["Offspring Factor"];
 
 
-			var att1 = "type='invert' onclick='callPopUp(´Egg Group´)' name='eggText"+egg1+"' dataname='value'";
-			var att2 = "type='invert' onclick='callPopUp(´Egg Group´)' name='eggText"+egg2+"' dataname='value'";
+			var att1 = "type='invert' onclick='callPopUp(`Egg Group`)' name='eggText"+egg1+"' dataname='value'";
+			var att2 = "type='invert' onclick='callPopUp(`Egg Group`)' name='eggText"+egg2+"' dataname='value'";
 			
 
 
@@ -1230,7 +1225,6 @@ function formatEvoBreedText(i,type) {
 			previous = getEvolutionData(getDefaultInt(i),"Previous")
 		}
 
-		console.log(previous)
 		if (previous.length > 0) {
 			var poks = getEvolutionData(previous[0]["Integer"],"Next");
 			
@@ -1248,8 +1242,6 @@ function formatEvoBreedText(i,type) {
 
 				pok = "<b "+att1+">"+pok+"</b>"
 
-			
-
 				if (method == undefined) {
 					method = "";
 				}
@@ -1266,6 +1258,12 @@ function formatEvoBreedText(i,type) {
 				if (gender == undefined) {
 					gender = "";
 				}
+				else if (gender == "♂") {
+					gender = "<span name='male'>♂</span>"
+				}
+				else if (gender == "♂") {
+					gender = "<span name='female'>♀</span>"
+				}
 				if (add == undefined) {
 					add = "";
 				}
@@ -1281,431 +1279,11 @@ function formatEvoBreedText(i,type) {
 				Text.push(txt);
 			}
 		}
-		console.log(poks)
 	}	
 
 	return Text;
 }
 
-
-function formatEvolutionText(i,obj,type) {
-	var i;
-	var obj;
-	var type;
-	var result = "";
-
-
-
-	var check = false;
-
-
-	if (type == "Previous") {
-		var os = finaldataPokémonOffspring[getPokémonInt(obj["Pokémon"])]["Offspring_"+JSONPath_Offspring];
-		if (os.includes(",")) {
-			var arr = os.split(",");
-			for (var q = 0; q < arr.length; q++){
-				var pre = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous");
-				if (pre.length > 0) {
-					if (arr[q] == pre[0]["Pokémon"]) {
-						check = true
-					}
-				}
-			}
-		}
-		else {
-			var pre = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous");
-			if (pre.length > 0) {
-				if (os == pre[0]["Pokémon"]) {
-					if (finaldataPokémonOffspring[getPokémonInt(obj["Pokémon"])]["Factor_"+JSONPath_Offspring] != undefined) {
-						check = true
-					}
-				}
-			}
-		}
-	}
-
-
-	
-	console.log(obj)
-
-	if (check) {
-		if (type == "Previous") {
-	
-			var Text = [];
-
-
-			for(var name in obj) {
-				if (obj[name] == undefined) {
-					obj[name] = "";
-				}
-				if (name == "Factor" && obj[name] != "" && obj["Method"] != "Item") {
-					obj[name] = "("+obj[name]+")"
-				}
-				if (obj[name] == "Special Level Up") {
-					obj[name] = "Level Up";
-				}
-				if (obj[name] == "Special Trade") {
-					obj[name] = "Trade";
-				}
-				if (name == "Additional" && obj[name] != "") {
-					obj[name] = obj[name]+".";
-				}
-				if (name == "Gender" && obj[name] == "♂") {
-					obj[name] = '<span name="male">'+obj[name]+"</span>";
-				}
-				if (name == "Gender" && obj[name] == "♀") {
-					obj[name] = '<span name="female">'+obj[name]+"</span>";
-				}
-			}
-			var pokprev = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous");
-	
-			if(pokprev.length > 0) {
-				var pokémon = '<b type="invert" name="pokémon">'+pokprev[0]["Pokémon"]+'</b>';
-				var res;
-				if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
-					res = "Evolve "+pokémon+" "+obj["Gender"]+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
-				}
-				else if (obj["Method"] == "Item") {
-					res = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <b type="invert" name="item">'+obj["Factor"]+"</b> "+obj["Additional"];
-				}
-				else if(obj["Method"] == "Unique") {
-					res = "Evolve "+pokémon+" "+obj["Gender"]+obj["Factor"]+" "+obj["Additional"];
-				}
-				else if (obj["Method"] == "Unavailable") {
-					res = "Evolution Unavailable."
-				}
-				Text.push(res);
-			}
-
-
-
-			for(var name in obj) {
-				if (obj[name] == undefined) {
-					obj[name] = "";
-				}
-			}
-
-
-			var breed = obj;
-			var breedResult = [];
-			var breedGroup = [];
-			var breedName;
-	
-			if (breed.length == undefined) {
-				breed = [breed];
-			}
-
-			for (var q = 0; q < breed.length; q++) {
-				var int = breed[q]["Integer"];
-				if (finaldataPokémon[int][JSONPath_Reference] == "true") {
-					var ob = new Object();
-					var rat = returnData(int,"Gender Ratio","");
-					ob["Pokémon"] = getPokémonName(int);
-					ob["Primary"] = returnData(int,"Egg Group","")[0];
-					ob["Secondary"] = returnData(int,"Egg Group","")[1];
-					ob["Factor"] = breed[q]["Factor"];
-					ob["Gender Ratio"] = rat.join("/");
-					breedResult.push(ob)
-				}
-			}
-
-			breedName = joinObj(breedResult,"Pokémon",",").replace(/,([^,]*)$/, ' or $1');
-
-			var groupPrimary = joinObj(breedResult,"Primary",",");
-			var groupSecondary = joinObj(breedResult,"Secondary",",");
-			
-		
-			groupPrimary = groupPrimary.split(",");
-			groupSecondary = groupSecondary.split(",");
-
-			groupPrimary = [...new Set(groupPrimary)];
-			groupSecondary = [...new Set(groupSecondary)];
-
-
-			if (groupPrimary != undefined) {
-				for (var q = 0; q < groupPrimary.length; q++){
-					breedGroup.push(groupPrimary[q]);
-				}
-			}
-			if (groupSecondary != undefined) {
-				for (var q = 0; q < groupSecondary.length; q++){
-					breedGroup.push(groupSecondary[q]);
-				}
-			}
-
-			if (breedGroup.length > 1) {
-				breedGroup = breedGroup.join(", ");
-			}
-			else {
-				breedGroup = breedGroup[0];
-			}
-
-			breedGroup = breedGroup.replace(/,([^,]*)$/, ' or $1');
-
-			var breedRes = divideDifferenceArr(breedResult,["Primary","Secondary","Factor"],[["Gender Ratio","1/0","0/0"]]);
-			console.log(breedResult)
-
-			for (var i = 0; i < breedRes.length; i++){
-				var poks = [];
-				var primary = undefined;
-				var secondary = undefined;
-				var factor = undefined;
-				var ratio = undefined;
-
-				for (var q = 0; q < breedRes[i].length; q++){
-					poks.push(breedRes[i][q]["Pokémon"]);
-					primary = breedRes[i][q]["Primary"];
-					secondary = breedRes[i][q]["Secondary"];
-					factor = breedRes[i][q]["Factor"];
-					ratio = breedRes[i][q]["Gender Ratio"];
-				}
-
-				var group = undefined;
-				if (ratio == "1/0" || ratio == "0/0") {
-					group = "Ditto";
-				}
-				else if (secondary != undefined) {
-					group = primary+" or "+secondary;
-				}
-				else {
-					group = primary;
-				}
-				if (factor != undefined) {
-					factor = " "+factor+" ";
-				}
-				else {
-					factor = "";
-				}
-
-
-				var res = "";
-
-				res = "Breed "+poks.join(", ")+factor+" with "+group;
-				res = res.replace(/,([^,]*)$/, ' or $1').replaceAll("  "," ");
-
-				Text.push(res);
-			}	
-
-			result = Text.join("<br>");
-		}
-	}
-	else if (finaldataPokémonEvolutionStage[i]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage" || finaldataPokémonEvolutionStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] != "Third-Stage") {
-		if (type == "Previous") {
-	
-				for(var name in obj) {
-					if (obj[name] == undefined) {
-						obj[name] = "";
-					}
-				}
-	
-	
-				var breed = obj;
-				var breedResult = [];
-				var breedGroup = [];
-				var breedName;
-				var length = breed.length;
-		
-				if (breed.length == undefined) {
-					breed = [breed];
-				}
-
-				for (var q = 0; q < breed.length; q++) {
-					var int = breed[q]["Integer"];
-
-					if (finaldataPokémon[int][JSONPath_Reference] == "true") {
-						var ob = new Object();
-						var rat = returnData(int,"Gender Ratio","");
-						ob["Pokémon"] = getPokémonName(int);
-						ob["Primary"] = returnData(int,"Egg Group","")[0];
-						ob["Secondary"] = returnData(int,"Egg Group","")[1];
-						ob["Factor"] = breed[q]["Factor"];
-						ob["Gender Ratio"] = rat.join("/");
-						breedResult.push(ob)
-					}
-				}
-					
-		
-					breedName = joinObj(breedResult,"Pokémon",",").replace(/,([^,]*)$/, ' or $1');
-	
-					var groupPrimary = joinObj(breedResult,"Primary",",");
-					var groupSecondary = joinObj(breedResult,"Secondary",",");
-					
-				
-					groupPrimary = groupPrimary.split(",");
-					groupSecondary = groupSecondary.split(",");
-	
-					groupPrimary = [...new Set(groupPrimary)];
-					groupSecondary = [...new Set(groupSecondary)];
-	
-	
-					if (groupPrimary != undefined) {
-						for (var q = 0; q < groupPrimary.length; q++){
-							breedGroup.push(groupPrimary[q]);
-						}
-					}
-					if (groupSecondary != undefined) {
-						for (var q = 0; q < groupSecondary.length; q++){
-							breedGroup.push(groupSecondary[q]);
-						}
-					}
-	
-					if (breedGroup.length > 1) {
-						breedGroup = breedGroup.join(", ");
-					}
-					else {
-						breedGroup = breedGroup[0];
-					}
-	
-					breedGroup = breedGroup.replace(/,([^,]*)$/, ' or $1');
-
-
-					var breedRes = divideDifferenceArr(breedResult,["Primary","Secondary","Factor"],[["Gender Ratio","1/0","0/0"]]);
-
-					var Text = [];
-
-
-					for (var i = 0; i < breedRes.length; i++){
-						var poks = [];
-						var primary = undefined;
-						var secondary = undefined;
-						var factor = undefined;
-						var ratio = undefined;
-
-						for (var q = 0; q < breedRes[i].length; q++){
-							poks.push(breedRes[i][q]["Pokémon"]);
-							primary = breedRes[i][q]["Primary"];
-							secondary = breedRes[i][q]["Secondary"];
-							factor = breedRes[i][q]["Factor"];
-							ratio = breedRes[i][q]["Gender Ratio"];
-						}
-
-						var group = undefined;
-						if (ratio == "1/0" || ratio == "0/0") {
-							group = "Ditto";
-						}
-						else if (secondary != undefined) {
-							group = primary+" or "+secondary;
-						}
-						else {
-							group = primary;
-						}
-						if (factor != undefined) {
-							factor = " "+factor+" ";
-						}
-						else {
-							factor = "";
-						}
-
-
-						var res = "";
-
-						res = "Breed "+poks.join(", ")+factor+" with "+group;
-						res = res.replace(/,([^,]*)$/, ' or $1').replaceAll("  "," ");
-
-						Text.push(res);
-					}	
-				result = Text.join("<br>");
-		}
-	}
-	else if (type == "Previous") {
-
-		for(var name in obj) {
-			if (obj[name] == undefined) {
-				obj[name] = "";
-			}
-			if (name == "Factor" && obj[name] != "" && obj["Method"] != "Item") {
-				obj[name] = "("+obj[name]+")"
-			}
-			if (obj[name] == "Special Level Up") {
-				obj[name] = "Level Up";
-			}
-			if (obj[name] == "Special Trade") {
-				obj[name] = "Trade";
-			}
-			if (name == "Additional" && obj[name] != "") {
-				obj[name] = obj[name]+".";
-			}
-			if (name == "Gender" && obj[name] == "♂") {
-				obj[name] = '<span name="male">'+obj[name]+"</span>";
-			}
-			if (name == "Gender" && obj[name] == "♀") {
-				obj[name] = '<span name="female">'+obj[name]+"</span>";
-			}
-		}
-		var pokprev = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous");
-
-		if(pokprev.length > 0) {
-			var pokémon = '<b type="invert" name="pokémon">'+pokprev[0]["Pokémon"]+'</b>';
-			if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
-				result = "Evolve "+pokémon+" "+obj["Gender"]+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
-			}
-			else if (obj["Method"] == "Item") {
-				result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <b type="invert" name="item">'+obj["Factor"]+"</b> "+obj["Additional"];
-			}
-			else if(obj["Method"] == "Unique") {
-				result = "Evolve "+pokémon+" "+obj["Gender"]+obj["Factor"]+" "+obj["Additional"];
-			}
-			else if (obj["Method"] == "Unavailable") {
-				result = "Evolution Unavailable."
-			}
-		}
-	}
-
-
-	if (type == "Next") {
-
-		for(var name in obj) {
-			if (obj[name] == undefined) {
-				obj[name] = "";
-			}
-			if (name == "Factor" && obj[name] != "" && obj["Method"] != "Item") {
-				obj[name] = "("+obj[name]+")"
-			}
-			if (obj[name] == "Special Level Up") {
-				obj[name] = "Level Up";
-			}
-			if (obj[name] == "Special Trade") {
-				obj[name] = "Trade";
-			}
-			if (name == "Additional" && obj[name] != "") {
-				obj[name] = obj[name]+".";
-			}
-			if (name == "Gender" && obj[name] == "♂") {
-				obj[name] = '<span name="male">'+obj[name]+"</span>";
-			}
-			if (name == "Gender" && obj[name] == "♀") {
-				obj[name] = '<span name="female">'+obj[name]+"</span>";
-			}
-		}
-
-		var pokémon = getEvolutionData(getPokémonInt(obj["Pokémon"]),"Previous")[0]["Pokémon"];
-		
-
-		if (obj["Method"] == "Level Up" || obj["Method"] == "Trade") {
-			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ " by "+obj["Method"]+" "+obj["Factor"]+" "+obj["Additional"];
-		}
-		else if (obj["Method"] == "Item") {
-			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+ ' with <b type="invert" name="item">'+obj["Factor"]+"</b> "+obj["Additional"];
-		}
-		else if(obj["Method"] == "Unique") {
-			result = "Evolve "+" "+pokémon+" "+obj["Gender"]+obj["Factor"]+" "+obj["Additional"];
-		}
-		else if (obj["Method"] == "Unavailable") {
-			result = "Evolution Unavailable."
-		}
-	}
-
-	result = result.replaceAll("  "," ").replaceAll("..",".");
-
-	if (check || type == "Previous") {
-		var eggGroups = ["Monster","Water 1","Bug","Flying","Field","Fairy","Grass","Human-Like","Water 3","Mineral","Amorphous","Water 2","Ditto","Dragon","Undiscovered"];
-		for (var q = 0; q < eggGroups.length; q++){
-			result = result.replaceAll(' '+eggGroups[q],' <b type="invert" name="eggText'+eggGroups[q]+'">'+eggGroups[q]+'</b>');
-		}
-	}
-
-	return result;
-}
 
 
 function getItemData(item,type) {
