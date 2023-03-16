@@ -1379,11 +1379,13 @@ function loadData() {
 		if (bd == undefined) {
 			bd = finaldataPokémonOffspring[getDefaultInt(i)]["Offspring_"+JSONPath_Offspring];
 		}
+		bd = bd.replaceAll(getPokémonName(i),"");
+		bd = bd.replaceAll(getPokémonName(getDefaultInt(i)),"");
+		bd = bd.replaceAll(/^\,/g,"");
+		bd = bd.replace(/,([^,]*)$/, ' and $1');
 
-		description.innerHTML += "<p>"+"It breeds to "+bd.replaceAll(",",", ").replace(/,([^,]*)$/, ' and $1')+"<p>";
+		description.innerHTML += "<p>"+"It can produce eggs containing "+bd+"."+"<p>";
 	}
-	console.log(getEvolutionFamily(i))
-	console.log(finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring])
 	if(returnData(i,"Debut","")[0].includes("-")) {
 		debut.innerText = "Introduced in "+returnData(i,"Debut","")[0].split("-")[0];
 	} else {
