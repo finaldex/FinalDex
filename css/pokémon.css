@@ -24,8 +24,10 @@
 	user-select: none;
 }
 #pokémon > div ul li label > div > *[name="popup"] {
-	position: absolute;
-    top: 15%;
+	width: 7%;
+    height: 35%;
+    position: absolute;
+    top: 20%;
     right: 5%;
     opacity: 0.2;
     z-index: 1;
@@ -37,6 +39,7 @@
 }
 #pokémon > div ul li label > div > *[name="popup"] > * {
 	filter: unset;
+	font-size: 23px;
 }
 
 
