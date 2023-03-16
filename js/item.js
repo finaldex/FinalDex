@@ -77,7 +77,12 @@ var createItem = function() {
 		itemSectionListOptionsPocketInput.value = pockets[q];
 		itemSectionListOptionsPocketLabel.setAttribute("for","item-options-pocket-"+q);
 		itemSectionListOptionsPocketLabelImage.src = "./media/Images/Item/Pocket/Icon/"+MEDIAPath_Item_Pocket+"/"+pockets[q]+".png";
-		itemSectionListOptionsPocketLabelImage.title = pockets[q]+" Pocket";
+		if (pockets[q].includes("Pocket")) {
+			itemSectionListOptionsPocketLabelImage.title = pockets[q];
+		}
+		else {
+			itemSectionListOptionsPocketLabelImage.title = pockets[q]+" Pocket";
+		}
 		itemSectionListOptionsPocketLabelImage.setAttribute("onerror",'this.style.display = "none";this.nextElementSibling.style.display = "unset";')
 		itemSectionListOptionsPocketLabelText.innerText = pockets[q];
 		itemSectionListOptionsPocketOuter.appendChild(itemSectionListOptionsPocketInput)
@@ -764,7 +769,7 @@ var createItem = function() {
 		for(var q = 0; q < locs.length; q++) {
 			locations.push(locs[q].innerText);
 		}
-	
+		console.log(locations)
 		if (itemMap.classList.contains("mapify")) {
 			if (itemMap.naturalWidth == 0) {
 				itemMap.addEventListener("load", event => {
