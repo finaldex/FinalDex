@@ -449,6 +449,7 @@ function mapBlink(base,area) {
 			points.push(pts[q])
 		}
 	}
+	console.log(pts)
 
 
 	var polys = base.querySelectorAll(':scope polygon[name="active"]');
