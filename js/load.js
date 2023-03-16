@@ -69,7 +69,7 @@ var drag;
 var savedtar;
 var saveddrag;
 var boxDrag;
-var loads = ["Game","Pokémon","Pokémon Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers","Mechanics"];
+var loads = ["Game","Pokémon","Pokémon Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers"];
 var baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
 var baseextension = "json";
 var baseextra = " Metadata"
