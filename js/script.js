@@ -3760,7 +3760,7 @@ function getMapPoints(area,base) {
             result.push(areas[i].getAttribute("coords"))
         }
     }
-
+    console.log(result)
     if (result.length == 0) {
         var area2 = getLocationFromArea(area);
         for (var q = 0; q < area2.length; q++) {
@@ -3771,7 +3771,9 @@ function getMapPoints(area,base) {
             }
         }
     }
-
+    console.log(area)
+    console.log(area2)
+    console.log(result)
     return result;
 }
 
@@ -3800,16 +3802,16 @@ function getLocationFromArea(area) {
     var result = [];
     for (var i = 0; i < arr.length; i++) {
         if (getApplicable(arr[i]["Game"])) {
-            if (arr[i]["Location"] != undefined) {
-                if (arr[i]["Name"] == area) {
-                    if (arr[i]["Location"].includes(",")) {
-                        var arr2 = arr[i]["Location"].split(",");
+            if (arr[i]["Located"] != undefined) {
+                if (arr[i]["Location"] == area) {
+                    if (arr[i]["Located"].includes(",")) {
+                        var arr2 = arr[i]["Located"].split(",");
                         for (var q = 0; q < arr2.length; q++) {
                             result.push(arr2[q])
                         }
                     }
                     else {
-                        return [arr[i]["Location"]]
+                        return [arr[i]["Located"]]
                     }
                 }
             }
