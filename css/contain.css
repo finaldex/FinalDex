@@ -184,6 +184,7 @@
 	text-align:center;
 }
 
+
 #contain > div#item > section[name='list'] > div:first-child > *:last-child label p {
 	display: none;
 }
@@ -2263,9 +2264,7 @@
 	border-bottom: 1px dotted;
 	background: var(--color16);
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li {
-    display: table;
-}
+
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li,
 #contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul > li {
 	justify-content: space-around;
@@ -2767,3 +2766,20 @@ img[title="Pokémon Dollar"] {
 	display: none !important;
 }
 
+#data > div section[name='main'] > div[name='area'] ul li input,
+#contain div#item > section[name="sidebar"] > div > ul li input,
+#contain div#map > section[name="sidebar"] > div > *[name] ul > li input[type="checkbox"] {
+	display: unset;
+	margin: 10px;
+}
+
+#data > div section[name='main'] > div[name='area'] ul li input:checked ~ *,
+#contain div#item > section[name="sidebar"] > div > ul li input:checked ~ *,
+#contain div#map > section[name="sidebar"] > div > *[name] ul > li input[type="checkbox"]:checked ~ * {
+	opacity: 0.5;
+	text-decoration:line-through;
+}
+
+#contain div > section[name="sidebar"] > div > ul li span[name="requirement"] small {
+	display: block;
+}
