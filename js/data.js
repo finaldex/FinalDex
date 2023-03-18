@@ -874,7 +874,13 @@ function loadData() {
                     var pokLi = document.createElement("li");
                     area.appendChild(pokLi)
 
-            
+					var pokLiInput = document.createElement("input");
+					pokLiInput.setAttribute("type","checkbox");
+					pokLiInput.setAttribute("id","location-pokémon");
+					pokLiInput.setAttribute("name","location-pokémon"+q);
+					pokLi.appendChild(pokLiInput);
+					pokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
+
 
                     var pokLocation = document.createElement("span");
 					pokLocation.setAttribute("type","invert");
@@ -1056,6 +1062,13 @@ function loadData() {
                                 area.appendChild(pokLi)
 
                         
+								var pokLiInput = document.createElement("input");
+								pokLiInput.setAttribute("type","checkbox");
+								pokLiInput.setAttribute("id","location-pokémon");
+								pokLiInput.setAttribute("name","location-pokémon"+q);
+								pokLi.appendChild(pokLiInput);
+								pokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
+
 
 								var pokLocation = document.createElement("span");
 								pokLocation.setAttribute("type","invert");
@@ -1246,7 +1259,12 @@ function loadData() {
                     var pokLi = document.createElement("li");
                     area.appendChild(pokLi)
 
-            
+					var pokLiInput = document.createElement("input");
+					pokLiInput.setAttribute("type","checkbox");
+					pokLiInput.setAttribute("id","location-pokémon-shop");
+					pokLiInput.setAttribute("name","location-pokémon-shop"+q);
+					pokLi.appendChild(pokLiInput);
+					pokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
                     var pokLocation = document.createElement("span");
 					pokLocation.setAttribute("type","invert");
@@ -1255,6 +1273,7 @@ function loadData() {
                         pokLocation.setAttribute("title",finaldataLocationPokémonShops[q]["Title"]);
                     }
                     pokLi.appendChild(pokLocation);
+					
 
                     if (finaldataLocationPokémonShops[q]["Location"] != undefined) {
                         var pokLocationRedir = document.createElement("b");
@@ -1374,17 +1393,21 @@ function loadData() {
 	if(returnData(i,"Pokédex Entry","")[0] != undefined) {
 		description.innerHTML += "<p name='entry'>"+returnData(i,"Pokédex Entry","")[0]+"</p>";
 	}
-	if (getEvolutionFamily(i).length == 1 && finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring].includes(",") || getEvolutionFamily(i).length == 1 && finaldataPokémonOffspring[getDefaultInt(i)]["Offspring_"+JSONPath_Offspring].includes(",")) {
-		var bd = finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring];
-		if (bd == undefined) {
-			bd = finaldataPokémonOffspring[getDefaultInt(i)]["Offspring_"+JSONPath_Offspring];
-		}
-		bd = bd.replaceAll(getPokémonName(i),"");
-		bd = bd.replaceAll(getPokémonName(getDefaultInt(i)),"");
-		bd = bd.replaceAll(/^\,/g,"");
-		bd = bd.replace(/,([^,]*)$/, ' and $1');
 
-		description.innerHTML += "<p>"+"It can produce eggs containing "+bd+"."+"<p>";
+	var os = finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring];
+	if (os != undefined) {
+		if (getEvolutionFamily(i).length == 1 && finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring].includes(",") || getEvolutionFamily(i).length == 1 && finaldataPokémonOffspring[getDefaultInt(i)]["Offspring_"+JSONPath_Offspring].includes(",")) {
+			var bd = finaldataPokémonOffspring[i]["Offspring_"+JSONPath_Offspring];
+			if (bd == undefined) {
+				bd = finaldataPokémonOffspring[getDefaultInt(i)]["Offspring_"+JSONPath_Offspring];
+			}
+			bd = bd.replaceAll(getPokémonName(i),"");
+			bd = bd.replaceAll(getPokémonName(getDefaultInt(i)),"");
+			bd = bd.replaceAll(/^\,/g,"");
+			bd = bd.replace(/,([^,]*)$/, ' and $1');
+
+			description.innerHTML += "<p>"+"It can produce eggs containing "+bd+"."+"<p>";
+		}
 	}
 	if(returnData(i,"Debut","")[0].includes("-")) {
 		debut.innerText = "Introduced in "+returnData(i,"Debut","")[0].split("-")[0];
@@ -1814,7 +1837,9 @@ function loadData() {
         }
 		
 	}
-    dexCheck();
+	
+	
+	memory("Restore","game",base.querySelectorAll(":scope section[name='main'] > div[name='area'] ul input"))  
 }
 
 
@@ -1951,7 +1976,7 @@ function modalData() {
 		}
 		navKeeper(id);
 	}
-	dexCheck();
+
 }
 
 
