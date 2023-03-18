@@ -19,8 +19,106 @@ function titleCase(str) {
 }
 
 function numFormat(num) {
-	return num.replaceAll(",","").toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	if (isNaN(num)) {
+		num = num.replaceAll(",")
+		num = parseInt(num);
+	}
+	if (isNaN(num)) {
+		return num;
+	}
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function getShopLocationInt(obj,type,cost,location) {
+	var arr;
+	var location;
+	var obj;
+	var type;
+	var cost;
+
+	if (type == "pokémon") {
+		arr = finaldataLocationPokémonShops;
+	}
+	else if (type == "item") {
+		arr = finaldataLocationItemsShops;
+		
+	}
+
+	for(var i = 0; i < arr.length; i++) {
+		if (getApplicable(arr[i]["Game"])) {
+			if (arr[i]["Location"] == location) {
+				if (arr[i][titleCase(type)] == obj) {
+					if (arr[i]["Cost"] == cost) {
+						return i;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+function getItemLocationInt(obj,description,location) {
+	var arr;
+	var obj;
+	var description;
+	var location;
+
+	arr = finaldataItems;
+
+
+	for(var i = 0; i < arr.length; i++) {
+		if (getApplicable(arr[i]["Game"])) {
+			if (arr[i]["Location"] == location) {
+				if (arr[i]["Item"] == obj) {
+					if (arr[i]["Description"] == description) {
+						return i;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
+	var arr;
+	var obj;
+	var lvl;
+	var rate;
+	var tile;
+	var encounter;
+	var mechanic;
+	var location;
+
+	arr = finaldataLocationPokémon;
+	
+
+
+	for(var i = 0; i < arr.length; i++) {
+		if (getApplicable(arr[i]["Game"])) {
+			if (arr[i]["Location"] == location) {
+				if (arr[i]["Pokémon"] == obj) {
+					if (arr[i]["Level"] == lvl) {
+						if (arr[i]["Rate"] == rate) {
+							if (arr[i]["Tile"] == tile) {
+								if (arr[i]["Encounter"] == encounter) {
+									if (arr[i]["Mechanic"] == mechanic) {
+										return i;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
 function getEvolutionFamily(i) {
 	var i;
 	var stage = [];
@@ -1594,4 +1692,27 @@ function doubleClicker(handler) {
 			}, 1000);
 		}
 	};
+}
+
+function exportData() {
+	consoleText("Exporting")
+	//localStorage.clear();
+	console.log(localStorage)
+}
+function importData() {
+	var res = [];
+
+	for (var i = 0; i < localStorage.length; i++) {
+		console.log(localStorage[i])
+
+	
+	}
+
+
+	console.log(localStorage[0])
+	console.log(localStorage["Storage"])
+
+	console.log(res)
+	navigator.clipboard.writeText(res);
+	consoleText("Copied Export String!")
 }
