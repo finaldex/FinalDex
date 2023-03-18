@@ -61,60 +61,52 @@ function boxMemory(action) {
 }
 
 
-function memory(action,name,suffix,element) {
+function memory(action,suffix,elements) {
 	
 	var action;
-	var name;
-	var suffix;
-	var element;
+	var elements;
+    var suffix
 
 	var tempArr = [];
-	var tempStr;
 
-	if (suffix != undefined) {
-		tempArr.push("finaldex");
-	}
-	if (name != undefined) {
-		tempArr.push(name);
-	}
-	if (suffix == "game") {
-		tempArr.push(GameID);
-	}
-
-	if (tempArr.length > 1) {
-		tempStr = tempArr.join("-");
-	}
-	else {
-		tempStr = tempArr[0];
-	}
-
-	if (element != undefined) {
-		if (NodeList.prototype.isPrototypeOf(element) == true) {
-			for(var i = 0; i < element.length; i++) {
-				if (action == "Save") {
-					localStorage.setItem(tempStr+"-"+element[i].getAttribute("name"),element[i].checked);
-				}
-				else if (action == "Restore") {
-					if (JSON.parse(localStorage.getItem(tempStr+"-"+element[i].getAttribute("name"))) != null) {
-						element[i].checked = JSON.parse(localStorage.getItem(tempStr+"-"+element[i].getAttribute("name")));
-					}
-				}
-			}
-		}
-		else {
-			
-			if (action == "Save") {
-				localStorage.setItem(tempStr,element.value);
-			}
-			else if (action == "Restore") {
-				if (localStorage.getItem(tempStr) != null) {
-					element.value = localStorage.getItem(tempStr);
-				}
-			}
-		}
-	}
+	tempArr.push("finaldex");
+    if (suffix.includes("game")) {
+        tempArr.push(GameID);
+    }
 	
 
+	for(var i = 0; i < elements.length; i++) {
+		var setName = tempArr.join("-")+"-"+elements[i].getAttribute("name");
+		var setValue;
+
+   
+    
+
+		if (elements[i].tagName == "INPUT" && elements[i].getAttribute("type") == "checkbox") {
+			setValue = elements[i].checked;
+		}
+		else {
+			setValue = elements[i].value;
+		}
+
+		if (action == "Save") {
+			localStorage.setItem(setName,setValue);
+		}
+		else if (action == "Restore") {
+            if (elements[i].tagName == "INPUT" && elements[i].getAttribute("type") == "checkbox") {
+                var item = JSON.parse(localStorage.getItem(setName));
+                if (item != null) {
+                    elements[i].checked = JSON.parse(localStorage.getItem(setName));
+                }
+            }
+            else {
+                var item = localStorage.getItem(setName);
+                if (item != null) {
+                    elements[i].value = item;
+                }
+            }
+		}
+	}
 
 }
 
