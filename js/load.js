@@ -327,8 +327,10 @@ function initialize() {
 
 		window.addEventListener('resize', resize);
 
-		memory("Restore","resize","site",document.getElementById('resizer'));
-		memory("Restore","variant","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"]'));
+		memory("Restore","",[document.querySelector('#resizer')]);
+		memory("Restore","",[document.querySelector('#pokémon > aside[name="settings"] > span[name="theme"] input')]);
+		
+		memory("Restore","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"]'));
 
 		variantSelector();
 
@@ -449,7 +451,6 @@ function mapBlink(base,area) {
 			points.push(pts[q])
 		}
 	}
-	console.log(pts)
 
 
 	var polys = base.querySelectorAll(':scope polygon[name="active"]');
