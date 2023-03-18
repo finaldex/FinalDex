@@ -800,9 +800,23 @@ var createMap = function() {
 					}
 
 					var mapSectionSidebarDescriptionShopLi = document.createElement("li");
+
+					var mapSectionSidebarDescriptionShopLiInput = document.createElement("input");
+					mapSectionSidebarDescriptionShopLiInput.setAttribute("type","checkbox");
+					mapSectionSidebarDescriptionShopLiInput.setAttribute("id","location-"+type+"-shop"+type);
+					mapSectionSidebarDescriptionShopLiInput.setAttribute("name","location-"+type+"-shop"+getShopLocationInt(main,type,shops[u]["Cost"],location));
+				
+					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopLiInput);
+					mapSectionSidebarDescriptionShopLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
+
+
 					var mapSectionSidebarDescriptionShopIconOuter = document.createElement("span");
 					ul.appendChild(mapSectionSidebarDescriptionShopLi);
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopIconOuter);
+
+
+
+
 
 					if (type == "item") {
 						mapSectionSidebarDescriptionShopIconOuter.setAttribute("name","item");
@@ -917,9 +931,12 @@ var createMap = function() {
 					if(cost == "1x") {
 						cost = "";
 					}
+					else {
+						cost = numFormat(cost);
+					}
 
 		
-					mapSectionSidebarCostShopCost.innerHTML = numFormat(cost)+currency.join("");
+					mapSectionSidebarCostShopCost.innerHTML = cost+currency.join("");
 					
 
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCostTitle);
@@ -998,6 +1015,16 @@ var createMap = function() {
 					var quantity = items[u]["Quantity"];
 
 					var mapSectionSidebarDescriptionItemLi = document.createElement("li");
+
+
+					var mapSectionSidebarDescriptionItemLiInput = document.createElement("input");
+					mapSectionSidebarDescriptionItemLiInput.setAttribute("type","checkbox");
+					mapSectionSidebarDescriptionItemLiInput.setAttribute("id","location-item");
+					mapSectionSidebarDescriptionItemLiInput.setAttribute("name","location-item"+getItemLocationInt(items[u]["Item"],items[u]["Description"],location));
+					mapSectionSidebarDescriptionItemLi.appendChild(mapSectionSidebarDescriptionItemLiInput);
+					mapSectionSidebarDescriptionItemLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
+
+
 					var mapSectionSidebarDescriptionItemIconOuter = document.createElement("span");
 					mapSectionSidebarDescriptionItemIconOuter.setAttribute("name","item");
 					mapSectionSidebarDescriptionItemIconOuter.setAttribute("value",items[u]["Item"])
@@ -1297,6 +1324,16 @@ var createMap = function() {
 
 					var mapSectionSidebarDescriptionPokLi = document.createElement("li");
 					ul.appendChild(mapSectionSidebarDescriptionPokLi);
+
+
+
+					var mapSectionSidebarDescriptionPokLiInput = document.createElement("input");
+					mapSectionSidebarDescriptionPokLiInput.setAttribute("type","checkbox");
+					mapSectionSidebarDescriptionPokLiInput.setAttribute("id","location-pokémon");
+					mapSectionSidebarDescriptionPokLiInput.setAttribute("name","location-pokémon"+getPokémonLocationInt(poks[u]["Pokémon"],poks[u]["Level"],poks[u]["Rate"],poks[u]["Tile"],poks[u]["Encounter"],poks[u]["Mechanic"],location));
+					mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokLiInput);
+					mapSectionSidebarDescriptionPokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
+
 
 					var mapSectionSidebarDescriptionPokOuter = document.createElement("span");
 					var mapSectionSidebarDescriptionPokLvl = document.createElement("span");
@@ -2401,6 +2438,10 @@ var createMap = function() {
 		}
 		divs[0].style.removeProperty("display");
 	}
+
+
+
+	memory("Restore","game",document.querySelectorAll("#contain div#map > section[name='sidebar'] > div > *[name] input"))
 
 	}
 }
