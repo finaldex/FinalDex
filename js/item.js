@@ -256,7 +256,7 @@ var createItem = function() {
 
 		var priceArr = getDataArr(finaldataItemsPrice,"Item",item);
 	
-
+		itemSectionHeaderDebutText.innerText = "Cannot be Sold";
 		if (priceArr.length > 0) {
 			var price = priceArr[0]["Sell Amount"];
 			var currency = priceArr[0]["Sell Currency"];	
@@ -326,9 +326,7 @@ var createItem = function() {
 					var itemSectionSidebarSidebarPokémon = document.createElement("span");
 					itemSectionSidebarSidebarPokémon.setAttribute("name","pokémon");
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarPokémon);
-					
 
-				
 					var itemSectionSidebarSidebarPokémonImg = document.createElement("img");
 					itemSectionSidebarSidebarPokémonImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(q,"Box")+".png";
 					itemSectionSidebarSidebarPokémonImg.title = getPokémonName(q);
@@ -350,8 +348,14 @@ var createItem = function() {
 
 			
 					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-					itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+".";
 					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
+
+					if (HeldItem == false) {
+						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+" that was traded to Generation "+(Generation+1)+".";
+					}
+					else {
+						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+".";
+					}
 					
 
 					var itemSectionSidebarSidebarItem = document.createElement("span");
@@ -376,18 +380,25 @@ var createItem = function() {
 		for(var q = 0; q < finaldataLocationItems.length; q++) {
 			if (getApplicable(finaldataLocationItems[q]["Game"])) {
 				if(finaldataLocationItems[q]["Item"] == item) {
-					var itemSectionSidebarSidebarLi = document.createElement("li");
-					itemSectionSidebarSidebarLi.setAttribute("name","location")
-					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
-
 					var quantity = finaldataLocationItems[q]["Quantity"];
-
 					if (quantity == undefined) {
 						quantity = 1;
 					}
 					if (quantity > 10) {
 						quantity = 10;
 					}
+
+					var itemSectionSidebarSidebarLi = document.createElement("li");
+					itemSectionSidebarSidebarLi.setAttribute("name","location")
+					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
+
+					var itemSectionSidebarSidebarInput = document.createElement("input");
+					itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
+					itemSectionSidebarSidebarInput.setAttribute("id","location-item");
+					itemSectionSidebarSidebarInput.setAttribute("name","location-item"+q);
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarInput);
+
+					itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
 					var itemSectionSidebarSidebarLocation = document.createElement("span");
 					var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
@@ -577,18 +588,24 @@ var createItem = function() {
 		for(var q = 0; q < finaldataLocationItemsShops.length; q++) {
 			if (getApplicable(finaldataLocationItemsShops[q]["Game"])) {
 				if(finaldataLocationItemsShops[q]["Item"] == item) {
-					var itemSectionSidebarSidebarLi = document.createElement("li");
-					itemSectionSidebarSidebarLi.setAttribute("name","shop")
-					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
-
 					var quantity = finaldataLocationItemsShops[q]["Quantity"];
-
 					if (quantity == undefined) {
 						quantity = 1;
 					}
 					if (quantity > 10) {
 						quantity = 10;
 					}
+
+					var itemSectionSidebarSidebarLi = document.createElement("li");
+					itemSectionSidebarSidebarLi.setAttribute("name","shop")
+					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
+					
+					var itemSectionSidebarSidebarInput = document.createElement("input");
+					itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
+					itemSectionSidebarSidebarInput.setAttribute("id","location-shop");
+					itemSectionSidebarSidebarInput.setAttribute("name","location-shop"+q);
+					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarInput);
+					itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
 					var itemSectionSidebarSidebarLocation = document.createElement("span");
 					var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
@@ -684,7 +701,6 @@ var createItem = function() {
 					var itemSectionSidebarSidebarLi = document.createElement("li");
 					itemSectionSidebarSidebarLi.setAttribute("name","pickup");
 					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
-
 			
 					var itemSectionSidebarSidebarPickup = document.createElement("span");
 					var itemSectionSidebarSidebarPickupTitle = document.createElement("small");
@@ -769,7 +785,6 @@ var createItem = function() {
 		for(var q = 0; q < locs.length; q++) {
 			locations.push(locs[q].innerText);
 		}
-		console.log(locations)
 		if (itemMap.classList.contains("mapify")) {
 			if (itemMap.naturalWidth == 0) {
 				itemMap.addEventListener("load", event => {
@@ -781,6 +796,8 @@ var createItem = function() {
 			}	
 		}
 
+
+		memory("Restore","game",document.querySelectorAll("#contain div#item > section[name='sidebar'] > div > ul li input"))
 
 	}
 
