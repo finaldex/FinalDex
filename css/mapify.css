@@ -108,10 +108,12 @@
   display:block;
 }
 
-.mapify-polygon{
+.mapify-polygon {
 	transition: all 0.5s;
 	fill:transparent;
 	stroke: transparent;
+  stroke-width: 1px;
+  stroke-dasharray: 2px;
 }
 
 svg[name="mark"] .mapify-polygon[name="active"] {
@@ -120,9 +122,10 @@ svg[name="mark"] .mapify-polygon[name="active"] {
   stroke-width: 1px;
   stroke-dasharray: 2px;
 }
-body[generation="2"] svg[name="mark"] .mapify-polygon[name="active"] {
+[generation="2"] svg[name="mark"] .mapify-polygon[name="active"] {
   fill: var(--colorBlue);
 }
+
 
 
 
@@ -133,9 +136,16 @@ body[generation="2"] svg[name="mark"] .mapify-polygon[name="active"] {
 .mapify-hover {
 	fill: var(--colorGreen);
   stroke: var(--color1);
-  stroke-width: 1px;
-  stroke-dasharray: 2px;
 }
+
+[game="Sword"] .mapify-polygon,
+[game="Shield"] .mapify-polygon,
+[game="Sword"] svg[name="mark"] .mapify-polygon[name="active"],
+[game="Shield"] svg[name="mark"] .mapify-polygon[name="active"] {
+  stroke-width: 0.25px;
+  stroke-dasharray: 0.5px;
+}
+
 
 
 [generation="5"] .mapify-hover {
