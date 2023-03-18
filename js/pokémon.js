@@ -672,7 +672,6 @@ var createPokémon = function() {
 
 
         function startDrag() {
-            console.log("where")
             saveddrag.style.pointerEvents = "none";
 
             if (saveddrag.getAttribute("data-pok") != undefined) {
@@ -827,6 +826,7 @@ var createPokémon = function() {
 
     settingsDefaultImgtypePath.setAttribute("name","path");
     settingsDefaultImgtypePath.setAttribute("title","Image Types");
+    settingsDefaultImgtypePath.value = tempImgTypes[0]["name"];
     settingsDefaultImgtypeExtension.setAttribute("name","extension");
     settingsDefaultImgtypeExtension.setAttribute("title","Extension");
     settingsDefaultImgtypeType.setAttribute("name","type");
@@ -844,11 +844,7 @@ var createPokémon = function() {
     settingsDefaultResizeInput.setAttribute("autocomplete","off");
     settingsDefaultThemeOuter.setAttribute("name","theme");
     settingsDefaultThemeInput.setAttribute("type","checkbox");
-    settingsDefaultThemeInput.addEventListener('change', switchTheme, false);
-    if (localStorage.getItem('finaldex-theme') == 'dark') {
-        settingsDefaultThemeInput.checked = true;
-    }
-
+ 
 
     settings.appendChild(settingsDefaultImgtypeOuter);
     settingsDefaultImgtypeOuter.appendChild(settingsDefaultImgtypeOuterLeft);
@@ -872,32 +868,62 @@ var createPokémon = function() {
     settingsDefaultTheme.appendChild(settingsDefaultThemeInput);
     settingsDefaultTheme.appendChild(settingsDefaultThemeSpan);
 
-
-    var settingsDefaultCheckbox = document.createElement("span")
-	var settingsDefaultCheckboxCheck = document.createElement("button");
-    var settingsDefaultCheckboxCheckText = document.createElement("p");
-	var settingsDefaultCheckboxUncheck = document.createElement("button");
-    var settingsDefaultCheckboxUncheckText = document.createElement("p");
+    settingsDefaultThemeInput.addEventListener('change', function() {switchTheme(); memory("Save","",settingsDefaultThemeInput)});
 
 
-    settingsDefaultCheckbox.setAttribute("name","checkbox");
-	settingsDefaultCheckboxCheckText.innerText = "Check All";
-    settingsDefaultCheckboxCheck.setAttribute("type","medium");
-	settingsDefaultCheckboxCheck.setAttribute("title","Applies to current filters only");
 
-	settingsDefaultCheckboxUncheckText.innerText = "Uncheck All";
-    settingsDefaultCheckboxUncheck.setAttribute("type","medium");
-	settingsDefaultCheckboxUncheck.setAttribute("title","Applies to current filters only");
 
-    settings.appendChild(settingsDefaultCheckbox);
-	settingsDefaultCheckbox.appendChild(settingsDefaultCheckboxCheck);
-    settingsDefaultCheckboxCheck.appendChild(settingsDefaultCheckboxCheckText);
-	settingsDefaultCheckbox.appendChild(settingsDefaultCheckboxUncheck);
-    settingsDefaultCheckboxUncheck.appendChild(settingsDefaultCheckboxUncheckText);
+
+
+
+
+    
+    var settingsCheckbox = document.createElement("span")
+	var settingsCheckboxCheck = document.createElement("button");
+    var settingsCheckboxCheckText = document.createElement("p");
+	var settingsCheckboxUncheck = document.createElement("button");
+    var settingsCheckboxUncheckText = document.createElement("p");
+
+
+    settingsCheckbox.setAttribute("name","checkbox");
+	settingsCheckboxCheckText.innerText = "Check All";
+    settingsCheckboxCheck.setAttribute("type","medium");
+	settingsCheckboxCheck.setAttribute("title","Applies to current filters only");
+
+	settingsCheckboxUncheckText.innerText = "Uncheck All";
+    settingsCheckboxUncheck.setAttribute("type","medium");
+	settingsCheckboxUncheck.setAttribute("title","Applies to current filters only");
+
+    settings.appendChild(settingsCheckbox);
+	settingsCheckbox.appendChild(settingsCheckboxCheck);
+    settingsCheckboxCheck.appendChild(settingsCheckboxCheckText);
+	settingsCheckbox.appendChild(settingsCheckboxUncheck);
+    settingsCheckboxUncheck.appendChild(settingsCheckboxUncheckText);
     
 
-    settingsDefaultCheckboxCheck.addEventListener("click", CheckAll);
-	settingsDefaultCheckboxUncheck.addEventListener("click", UncheckAll);
+    settingsCheckboxCheck.addEventListener("click", CheckAll);
+	settingsCheckboxUncheck.addEventListener("click", UncheckAll);
+
+
+	var settingsCheckboxExport = document.createElement("button");
+    var settingsCheckboxExportText = document.createElement("p");
+	var settingsCheckboxImport = document.createElement("button");
+    var settingsCheckboxImportText = document.createElement("p");
+
+	settingsCheckboxExportText.innerText = "Export Data";
+    settingsCheckboxExport.setAttribute("type","medium");
+
+	settingsCheckboxImportText.innerText = "Import Data";
+    settingsCheckboxImport.setAttribute("type","medium");
+
+	settingsCheckbox.appendChild(settingsCheckboxExport);
+    settingsCheckboxExport.appendChild(settingsCheckboxExportText);
+	settingsCheckbox.appendChild(settingsCheckboxImport);
+    settingsCheckboxImport.appendChild(settingsCheckboxImportText);
+
+    settingsCheckboxExport.addEventListener("click", exportData);
+	settingsCheckboxImport.addEventListener("click", importData);
+
 
 
 
@@ -915,6 +941,11 @@ var createPokémon = function() {
     settingsVariantBottom.appendChild(settingsVariantButton);
     settingsVariantButton.appendChild(settingsVariantButtonText);
 
+
+
+
+
+
     
 	var formopts = [];
 	for(var q = 0; q < finaldataPokémon.length; q++) {
@@ -929,29 +960,30 @@ var createPokémon = function() {
 		formopts[q] = formopts[q].replace("Mega","Mega Evolution");
 	}
 	formopts = [...new Set(formopts)];
-	for(var i = 0; i < formopts.length; i++) {
+	for(var q = 0; q < formopts.length; q++) {
 		var settingsVariantInput = document.createElement("input");
 		var settingsVariantLabel = document.createElement("label");
+        var settingsVariantLabelText = document.createElement("p");
 		var settingsVariantSpan = document.createElement("span");
 		settingsVariantInput.setAttribute("type","checkbox");
 
-		settingsVariantInput.setAttribute("id","settings-form-"+formopts[i]+"-"+i);
-		settingsVariantInput.setAttribute("name",i);
-		settingsVariantLabel.setAttribute("for","settings-form-"+formopts[i]+"-"+i);
-		settingsVariantLabel.innerText = formopts[i];
+		settingsVariantInput.setAttribute("id","settings-form-"+formopts[q]+"-"+q);
+		settingsVariantInput.setAttribute("name",q);
+		settingsVariantLabel.setAttribute("for","settings-form-"+formopts[q]+"-"+q);
+		settingsVariantLabelText.innerText = formopts[q];
 		settingsVariantTop.appendChild(settingsVariantInput);
 		settingsVariantTop.appendChild(settingsVariantLabel);
+        settingsVariantLabel.appendChild(settingsVariantLabelText);
 		settingsVariantLabel.appendChild(settingsVariantSpan);
         settingsVariantInput.addEventListener("click", function() {preventCheckboxZero(this.parentElement);});
-        if (i == 0) {
-            settingsVariantInput.checked = true
+      
+        if (q == 0) {
+            settingsVariantInput.checked = true;
         }
 
 	}
 
     settingsVariantButton.addEventListener("click", variantSelector);
-
-
 
     settingsDefaultImgtypePath.addEventListener("change", function() {ImageType("Populate,Execute");});
     settingsDefaultImgtypeExtension.addEventListener("change", function() {ImageType("Execute");});
@@ -1066,7 +1098,7 @@ function resizeDiv() {
 	}
 	output.innerText = Math.round((slider.value / sliderDefaultValue) * 100)+"%";
 
-    memory("Save","resize","site",document.getElementById("resizer"))
+    memory("Save","",[document.querySelector("#resizer")])
 }
 
 
@@ -1081,7 +1113,19 @@ function dexMove() {
     else {
 		this.parentElement.style.transform = "translate(-"+x+"00%)";
 	}
+
 	dexChecker.fill(x);
+
+    var el = this.previousElementSibling;
+    if (el != null) {
+        var val = el.querySelector(":scope > *").innerText;
+        if (val.toLowerCase().includes("national")) {
+            document.body.setAttribute("dex","national")
+        }
+    }
+    else {
+        document.body.setAttribute("dex",dexChecker[0])
+    }
 }
 
 function dexSwitch() {
@@ -1100,87 +1144,11 @@ function dexSwitch() {
 			$("#pokémon > div ul").html(divList);
 		}
 	}
-	dexCheck();
+
     searchFilter(document.querySelector("#pokémon nav ul li[name='search'] input"),document.querySelector("#pokémon > div ul"),"Remove");
 	count();
 }
 
-function dexCheck() {
-	var contdiv = document.querySelectorAll("#pokémon > div li");
-	for(u = 0; u < contdiv.length; u++) {
-		contdiv[u].style.display = "inline-block";
-	}
-	let contid = document.querySelectorAll("#pokémon > div caption");
-	for(u = 0; u < contid.length; u++) {
-		contid[u].style.display = "none";
-	}
-	var ids = document.querySelectorAll("#data div[name='idname'] > * > *:not([name='name'])");
-	for(u = 0; u < ids.length; u++) {
-		ids[u].style.display = "none";
-	}
-	var prev = document.querySelectorAll("#data aside[name='previous'] > b");
-	for(u = 0; u < prev.length; u++) {
-		prev[u].style.display = "none";
-	}
-	var nxt = document.querySelectorAll("#data aside[name='next'] > b");
-	for(u = 0; u < nxt.length; u++) {
-		nxt[u].style.display = "none";
-	}
-	for(q = 0; q < [JSONPath_Pokédex.length+1]; q++) {
-		var p = q+1;
-		if(dexChecker == p && dexChecker != JSONPath_Pokédex.length+1) {
-			let contreg = document.querySelectorAll("#pokémon > div ul li caption[name='regional"+p+"']");
-			for(u = 0; u < contreg.length; u++) {
-				contreg[u].style.display = "flex";
-			}
-			var contregdiv = document.querySelectorAll("#pokémon > div li[data-regional-"+p+'=""]');
-			for(u = 0; u < contregdiv.length; u++) {
-				contregdiv[u].style.display = "none";
-			}
-
-            var regID = document.querySelectorAll("#data div[name='idname'] *[name='regional"+p+"']");
-			for(u = 0; u < regID.length; u++) {
-				regID[u].style.display = "unset";
-			}
-
-			var regEvoID = document.querySelectorAll("#data aside[name='evolution'] *[name='regional"+p+"']");
-			for(u = 0; u < regEvoID.length; u++) {
-				regEvoID[u].style.display = "unset";
-			}
-
-			var regPrevious = document.querySelectorAll("#data aside[name='previous'] > b[name='regional"+p+"']");
-			for(u = 0; u < regPrevious.length; u++) {
-				regPrevious[u].style.display = "flex";
-			}
-			var regNext = document.querySelectorAll("#data aside[name='next'] > b[name='regional"+p+"']");
-			for(u = 0; u < regNext.length; u++) {
-				regNext[u].style.display = "flex";
-			}
-		} else if(dexChecker == p && dexChecker == JSONPath_Pokédex.length+1) {
-			let contnat = document.querySelectorAll("#pokémon > div ul li *[name='national']");
-			for(u = 0; u < contnat.length; u++) {
-				contnat[u].style.display = "flex";
-			}
-
-            var natID = document.querySelectorAll("#data div[name='idname'] *[name='national']");
-			for(u = 0; u < natID.length; u++) {
-				natID[u].style.display = "unset";
-			}
-			var natEvoID = document.querySelectorAll("#data aside[name='evolution'] *[name='national']");
-			for(u = 0; u < natEvoID.length; u++) {
-				natEvoID[u].style.display = "unset";
-			}
-			var natPrevious = document.querySelectorAll("#data aside[name='previous'] > b[name='national']");
-			for(u = 0; u < natPrevious.length; u++) {
-				natPrevious[u].style.display = "flex";
-			}
-			var natNext = document.querySelectorAll("#data aside[name='next'] > b[name='national']");
-			for(u = 0; u < natNext.length; u++) {
-				natNext[u].style.display = "flex";
-			}
-		}
-	}
-}
 
 function UncheckAll() {
 	count();
@@ -1188,7 +1156,7 @@ function UncheckAll() {
 	for(var i = 0; i < uncheck.length; i++) {
 		uncheck[i].click();
 	}
-    memory("Save","check","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
+    memory("Save","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
     consoleText("Unchecked all in the current filter.")
 }
 
@@ -1198,7 +1166,7 @@ function CheckAll() {
 	for(var i = 0; i < check.length; i++) {
 		check[i].click();
 	}
-    memory("Save","check","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
+    memory("Save","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
     consoleText("Checked all in the current filter.")
 }
 
@@ -1409,7 +1377,7 @@ function createContain(condition) {
                     
                     contentPopup.addEventListener("click", modalData);
                     contentPopup.setAttribute("function","modalData");
-                    contentInput.addEventListener("change",function() {memory("Save","check","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));});
+                    contentInput.addEventListener("change",function() {memory("Save","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));});
                     contentInput.addEventListener("change", count);
 
 
