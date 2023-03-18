@@ -1113,7 +1113,7 @@
 }
 
 
-#data > div section[name='main'] > div[name='area'] ul li > * {
+#data > div section[name='main'] > div[name='area'] ul li > span {
 	width: 50%;
     display: flex;
     align-items: center;
@@ -1126,6 +1126,12 @@
 #data > div section[name='main'] > div[name='area'] ul li > *[name="description"] span[title] {
 	cursor:help;
 }
+
+
+#data > div section[name='main'] > div[name='area'] ul li > *[title] {
+	cursor:help;
+}
+
 
 
 #data > div section[name='main'] > div[name='area'] ul li > span[name="location"] {
@@ -1240,9 +1246,7 @@
     z-index: 10;
 	margin-bottom: -5px;
 }
-#data > div section[name='header'] > div[name="idname"] *[name*="regional"] {
-	display: none;
-}
+
 /*
 #data > div section[name='main'] > div[name='area'] > div > div {
 	width: 100%;
@@ -1500,9 +1504,6 @@
 	outline: none;
 	background: none;
 	height: 50%;
-}
-#data aside[name="evolution"] > div > div > b > * > * {
-	display: none;
 }
 
 
