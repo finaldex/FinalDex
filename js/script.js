@@ -47,6 +47,7 @@ variantIteration = 0;
 
 function variantSelector() {
 
+
     var inputs = document.querySelectorAll('#pokémon > aside[name="settings"] span[name="variant"] input:checked');
 
 	if(inputs.length > 0) {
@@ -66,16 +67,21 @@ function variantSelector() {
 
         createContain(tempStr);
 
+        memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
+
+        memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
+
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
         ImageType("Populate");
-
-        memory("Save","variant","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"]'));
-        memory("Restore","check","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
-        memory("Restore","imgtype-path","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]'));
-        memory("Restore","imgtype-extension","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]'));
-        memory("Restore","imgtype-type","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]'));
-        memory("Restore","imgtype-angle","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]'));
-
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
         ImageType("Execute");
+
         resizeDiv();
 		dexSwitch();
 
@@ -234,11 +240,12 @@ function dataRedirect() {
 
         if (tar != null) {
             if (where == "item") {
-
                 var pocket = tar.getAttribute("data-pocket");
                 var pocketInput = document.querySelector('#contain > div#item > section[name="list"] > div:first-child > *:last-child input[alt="'+pocket+'"]');
-                if (pocketInput.checked == false) {
-                    pocketInput.click();
+                if (pocketInput != undefined) {
+                    if (pocketInput.checked == false) {
+                        pocketInput.click();
+                    }
                 }
             }
         
@@ -3760,7 +3767,6 @@ function getMapPoints(area,base) {
             result.push(areas[i].getAttribute("coords"))
         }
     }
-    console.log(result)
     if (result.length == 0) {
         var area2 = getLocationFromArea(area);
         for (var q = 0; q < area2.length; q++) {
@@ -3771,9 +3777,6 @@ function getMapPoints(area,base) {
             }
         }
     }
-    console.log(area)
-    console.log(area2)
-    console.log(result)
     return result;
 }
 
@@ -4013,57 +4016,52 @@ function ImageType(action) {
     var action;
 
 
-
     var tar = document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"]');
     var path = tar.querySelector(":scope select[name='path']");
     var ext = tar.querySelector(":scope select[name='extension']");
     var type = tar.querySelector(":scope select[name='type']");
     var angle = tar.querySelector(":scope select[name='angle']");
-
-    if (action.includes("Populate")) { 
-        var exts = [];
-        var types = [];
-        var angles = [];
-
     
-        for (var q = 0; q < ImageTypes.length; q++) {
-            if (ImageTypes[q]["name"] == path.value) {
-                exts.push(ImageTypes[q]["extension"]);
-                types.push(ImageTypes[q]["type"]);
-                angles.push(ImageTypes[q]["angle"]);
-            }
+
+    var exts = [];
+    var types = [];
+    var angles = [];
+
+
+    for (var q = 0; q < ImageTypes.length; q++) {
+        if (ImageTypes[q]["name"] == path.value) {
+            exts.push(ImageTypes[q]["extension"]);
+            types.push(ImageTypes[q]["type"]);
+            angles.push(ImageTypes[q]["angle"]);
         }
+    }
 
-        exts = [...new Set(exts)];
-        types = [...new Set(types)];
-        angles = [...new Set(angles)];
+    exts = [...new Set(exts)];
+    types = [...new Set(types)];
+    angles = [...new Set(angles)];
 
+
+
+    if (action.includes("Populate")) {
 
         if (exts.length == 1 || exts[0] == undefined) {
-            ext.classList.add("none");
             ext.setAttribute("disabled","");
         }
         else {
-            ext.classList.remove("none");
             ext.removeAttribute("disabled");
         }
         if (types.length == 1 || types[0] == undefined) {
-            type.classList.add("none");
             type.setAttribute("disabled","");
         }
         else {
-            type.classList.remove("none");
             type.removeAttribute("disabled");
         }
         if (angles.length == 1 || angles[0] == undefined) {
-            angle.classList.add("none");
             angle.setAttribute("disabled","");
         }
         else {
-            angle.classList.remove("none");
             angle.removeAttribute("disabled");
         }
-
 
         var oldoptions = tar.querySelectorAll(":scope > span:last-child option");
         for (var q = 0; q < oldoptions.length; q++) {
@@ -4071,12 +4069,15 @@ function ImageType(action) {
         }
 
 
+        path.setAttribute("value",path.querySelector(":scope > *:first-child").getAttribute("value"))
+
         for (var q = 0; q < exts.length; q++) {
             var option = document.createElement("option");
             option.innerText = exts[q];
             option.setAttribute("value",exts[q]);
             ext.appendChild(option);
         }
+
 
         for (var q = 0; q < types.length; q++) {
             var option = document.createElement("option");
@@ -4091,12 +4092,13 @@ function ImageType(action) {
             option.setAttribute("value",angles[q]);
             angle.appendChild(option);
         }
+
     }
     if (action.includes("Execute")) {
         var conimg = document.querySelectorAll('#pokémon > div ul li label > img');
         var parimg = document.querySelectorAll('#pokémon > section[name="team"] aside[name="party"] div section img[value]');
 
-        if (tar.value != "") {
+        if (path.value != "") {
 
             var dataPath = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-path");
             var dataCategory = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-category");
@@ -4113,174 +4115,14 @@ function ImageType(action) {
                 parimg[q].src = './media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].getAttribute("value"),dataCategory)+"."+dataExtension;
                 parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].getAttribute("value"),dataCategory)+"."+dataExtension);
             }
-        
-            
         }
 
-        memory("Save","imgtype-path","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]'));
-        memory("Save","imgtype-extension","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]'));
-        memory("Save","imgtype-type","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]'));
-        memory("Save","imgtype-angle","game",document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]'));
+        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
+        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
+        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
+        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
     }
 
 }
 
 
-
-
-
-
-
-
-/*
-function mapifyMap(something) {
-	var base = document.querySelector("#contain > div#map section[name='content'] *[name='map']"); 
-	var mapSection3MapImg = base.querySelector(":scope img[usemap]");
-	var mapSection3Map = base.querySelector(":scope map")
-	var mapSection3MapFullscreen = base.querySelector(':scope *[name="fullscreen"]');
-	var mapSection3MapZoomIn = base.querySelector(':scope *[name="zoom"]');
-	var mapSection3MapZoomReset = base.querySelector(':scope *[name="reset"]');
-	var mapSection3MapInner2 = base.querySelector(":scope > div > div > div");
-	var mapSection3MapOuter2 = base;
-	var mapSection1OptionsInput = document.querySelector("#contain > div#map section[name='list'] ol > input:first-child");
-
-	if (!mapSection3MapImg.classList.contains("mapify")) {
-
-		MapArea = excludeDuplicateAreas(MapArea);
-
-		var defaultHeight = mapSection3MapImg.naturalHeight;
-		var defaultWidth = mapSection3MapImg.naturalWidth;
-		var height = mapSection3MapImg.getBoundingClientRect().height;
-		var width = mapSection3MapImg.getBoundingClientRect().width;
-
-
-
-		mapSection3MapImg.setAttribute("height",height+"px");
-		mapSection3MapImg.setAttribute("width",width+"px");
-
-	
-		resizeAreas();
-
-
-		function resizeAreas() {
-
-
-			var height = mapSection3MapImg.offsetHeight;
-			var width = mapSection3MapImg.offsetWidth;
-
-			var relative = (defaultHeight+defaultWidth) / (height+width);
-
-			for (var i = 0; i < MapArea.length; i++) {
-				var coords = MapArea[i]["coords"].split(",");
-				var coordNew = [];
-				for (var q = 0; q < coords.length; q++) {
-					var coord = parseInt(coords[q].replaceAll(" ",""));
-					coordNew.push(coord/relative);
-					MapArea[i]["coords"].split(",")[q] = coord;
-				}
-				MapArea[i]["coords"] = coordNew.join(",");
-			}
-	
-			afterResize();
-		}
-
-		function afterResize() {
-			complete = true;
-	
-			for (var i = 0; i < MapArea.length; i++) {
-				var area = document.createElement("area");
-				area.setAttribute("shape",MapArea[i]["type"])
-				area.setAttribute("coords",MapArea[i]["coords"])
-				area.setAttribute("title",MapArea[i]["id"])
-				mapSection3Map.appendChild(area);
-			}
-
-
-			$(mapSection3MapImg).mapify({
-				popOver: {
-				content: function(zone){ 
-					var zones = [];
-					if (zone.attr("data-title").includes("<br>")) {
-					zones = zone.attr("data-title").split("<br>");
-					}
-					else {
-					zones = [zone.attr("data-title")];
-					}
-					for (var i = 0; i < zones.length; i++) {
-					zones[i] = '<button name="map" onclick="dataRedirect()">'+zones[i]+'</button>';
-					}
-					return zones.join("<br>");
-				},
-				margin: "15px"
-			}
-			});
-
-			var scaleY = defaultHeight/height;
-			var scaleX = defaultWidth/width;
-			var scale = (scaleX+scaleY) * 0.8;
-
-			var active = false;
-			var minDuration = 0.1;
-			var maxDuration = 1;
-			var duration = (0.25*scale);
-		
-			if (duration > maxDuration) {
-				duration = maxDuration;
-			}
-			if (duration < minDuration) {
-				duration = minDuration;
-			}
-		
-
-		
-			if (scale < 1) {
-				scale = scale * 2;
-			}
-		
-		
-			mapSection3MapFullscreen.addEventListener("click",function(){fullscreenIMG([mapSection3MapImg],0)});
-		
-			//mapSection3MapInner2.style.height = height+"px";
-			//mapSection3MapInner2.style.width = width+"px";
-			mapSection3MapInner2.setAttribute("data-scale",scale);
-			mapSection3MapInner2.style.transitionDuration = duration+"s";
-			mapSection3MapInner2.style.transitionProperty = "transform";
-			
-			var activeZoom;
-		
-			mapSection3MapZoomIn.addEventListener("click",function() {zoomIn(true)});
-			mapSection3MapZoomReset.addEventListener("click",function() {zoomReset(false)});
-			mapSection3MapOuter2.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){zoomIn(true)}else if(!delta.includes("-")){zoomReset(false)}});
-			mapSection3MapOuter2.addEventListener("mouseleave", function() {zoomReset(undefined)});
-			mapSection3MapOuter2.addEventListener("mouseenter", function() {zoomIn(undefined)});
-			mapSection3MapOuter2.addEventListener("mousemove", function() {zoomPan()});
-
-
-
-			
-			function zoomIn(condition) {
-				if (activeZoom) {
-					$(mapSection3MapInner2).css({'transform': 'scale('+ $(mapSection3MapInner2).attr('data-scale') +')'});
-				}
-				if (condition != undefined) {
-					activeZoom = condition;
-				}
-			}
-			function zoomReset(condition) {
-				$(mapSection3MapInner2).css({'transform': 'scale(1)'});
-				if (condition != undefined) {
-					activeZoom = condition;
-				}
-			}
-			function zoomPan() {
-				$(mapSection3MapInner2).css({'transform-origin': ((event.pageX - $(mapSection3MapOuter2).offset().left) / $(mapSection3MapOuter2).width()) * 100 + '% ' + ((event.pageY - $(mapSection3MapOuter2).offset().top) / $(mapSection3MapOuter2).height()) * 100 +'%'});
-			}
-		}
-	
-
-		mapSection1OptionsInput.click();
-	}
-}
-
-
-*/
