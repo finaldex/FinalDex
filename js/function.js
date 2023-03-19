@@ -20,7 +20,7 @@ function titleCase(str) {
 
 function numFormat(num) {
 	if (isNaN(num)) {
-		num = num.replaceAll(",")
+		num = num.replaceAll(",","");
 		num = parseInt(num);
 	}
 	if (isNaN(num)) {
@@ -1695,24 +1695,54 @@ function doubleClicker(handler) {
 }
 
 function exportData() {
-	consoleText("Exporting")
-	//localStorage.clear();
-	console.log(localStorage)
+
+	var lock = prompt("Enter Export String:");
+
+	if (lock != undefined && lock != "") {
+		if (lock.charAt(0) == "[" && lock.includes("]") && lock.includes(":")) {
+			var conf = confirm("It's not recommended to transfer data cross-games.\nThis action cannot be reversed.\nDo you want to continue?")
+			if (conf) {
+				var tempArr = lock.replaceAll("{","").replaceAll("}","").replaceAll("[","").replaceAll("]","").replaceAll('"','').split(",")
+
+				for (var i = 0; i < tempArr.length; i++) {
+					if (tempArr[i].includes("finaldex")) {
+						var name = tempArr[i].split(":")[0];
+						var val = tempArr[i].split(":")[1];
+						localStorage.setItem(name,val);
+					}
+				}
+				consoleText("Successfully Exported!")
+				consoleText("Reload page for full effect.")
+			}
+		}
+		else {
+			consoleText("Returned Invalid String.")
+		}
+	}
+	else if (lock == null) {
+		return;
+	}
+	else {
+		consoleText("Returned Invalid String.")
+	}
 }
 function importData() {
 	var res = [];
+	var tempArr = JSON.stringify(localStorage).replaceAll("{","").replaceAll("}","").replaceAll('"','').split(",");
 
-	for (var i = 0; i < localStorage.length; i++) {
-		console.log(localStorage[i])
-
-	
+	for (var i = 0; i < tempArr.length; i++) {
+		if (tempArr[i].includes("finaldex-")) {
+			var name = tempArr[i].split(":")[0];
+			var val = tempArr[i].split(":")[1];
+			var obj = new Object();
+			obj[name] = val;
+			res.push(obj);
+		}
 	}
 
+	var resStr = JSON.stringify(res);
 
-	console.log(localStorage[0])
-	console.log(localStorage["Storage"])
-
-	console.log(res)
-	navigator.clipboard.writeText(res);
-	consoleText("Copied Export String!")
+	navigator.clipboard.writeText(resStr);
+	console.log(resStr)
+	consoleText("Copied Data String!")
 }
