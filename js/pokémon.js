@@ -1116,9 +1116,17 @@ function dexMove() {
 
 	dexChecker.fill(x);
 
-    var el = this.previousElementSibling;
-    if (el != null) {
-        var val = el.querySelector(":scope > *").innerText;
+    var el1 = event.target.nextElementSibling.nextElementSibling;
+    var el2 = event.target.nextElementSibling;
+
+    if (el1 == null) {
+        var val = event.target.parentElement.firstElementChild.nextElementSibling.querySelector(":scope > *").innerText;
+        if (val.toLowerCase().includes("national")) {
+            document.body.setAttribute("dex","national")
+        }
+    }
+    else if (el2 != null && JSONPath_Pokédex.length == 0) {
+        var val = el2.querySelector(":scope > *").innerText;
         if (val.toLowerCase().includes("national")) {
             document.body.setAttribute("dex","national")
         }
