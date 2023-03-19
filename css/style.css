@@ -5,9 +5,11 @@
     z-index: 1000;
 	cursor:default;
 	display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 	pointer-events:none;
 	border: 1px solid var(--border1);
+	max-width: 50vw;
+    max-height: 95vh;
 }
 #console p {
 	padding: 5px 20px;
