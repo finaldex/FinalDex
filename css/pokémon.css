@@ -1135,7 +1135,7 @@
 #pokémon nav li[name='search'] input {
 	width: 90%;
 	height: 40%;
-	padding: 0 1vw;
+	padding: 0 2vw;
 }
 #pokémon nav li[name='dexswitch'] label[name="National Pokédex"] {
 	background: var(--colorRed);
