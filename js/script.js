@@ -3993,19 +3993,21 @@ function searchFilter(bar,base,condition) {
 function consoleText(text) {
     var text;
     var base = document.querySelector("#console")
+    var time = 2000;
 
     var p = document.createElement("p");
     p.innerText = text;
     base.appendChild(p);
 
     p.style.opacity = "1";
+    console.log(time)
 
     setInterval(function() {
         p.style.opacity = "0";
             setTimeout(function () {
                 p.remove();
             }, 1000);
-    }, 1000);
+    }, time);
 
     console.log(text)
 }
