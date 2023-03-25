@@ -58,7 +58,7 @@ var createItem = function() {
 	var pockets = [];
 	for (var q = 0; q < finaldataItems.length; q++) {
 		if (getApplicable(finaldataItems[q]["Game"])) {
-			if (finaldataItems[q]["Use"] == true) {
+			if (finaldataItems[q]["Use"] == "true") {
 				pockets.push(finaldataItems[q]["Pocket"])
 			}
 		}
@@ -169,12 +169,15 @@ var createItem = function() {
 
 	for(var q = 0; q < finaldataItems.length; q++) {
 		if (getApplicable(finaldataItems[q]["Game"])) {
-			if (finaldataItems[q]["Use"] == true) {
+			if (finaldataItems[q]["Use"] == "true") {
 
 				var name = finaldataItems[q]["Item"];
 
 				if (finaldataItems[q]["Alias"] != undefined) {
 					name += " ("+finaldataItems[q]["Alias"]+")";
+				}
+				else if (getMachineMove(finaldataItems[q]["Item"]) != undefined) {
+					name += " ("+getMachineMove(finaldataItems[q]["Item"])+")";
 				}
 
 			var itemSectionListOptionsInput = document.createElement("input");
@@ -214,12 +217,9 @@ var createItem = function() {
 				itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
 				itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
 			}
-			if (getMachineMove(finaldataItems[q]["Item"]) != undefined) {
-				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Item"]+" ("+getMachineMove(finaldataItems[q]["Item"])+")";
-			}
-			else {
-				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Item"];
-			}
+		
+			itemSectionListOptionsLabelText.innerText = name;
+			
 			itemSectionListOptions.appendChild(itemSectionListOptionsInput);
 			itemSectionListOptions.appendChild(itemSectionListOptionsLabel);
 
@@ -288,7 +288,7 @@ var createItem = function() {
 			}
 		}
 
-		var destexts = itemSectionContentDescription.querySelectorAll(":scope > p");
+		var destexts = itemSectionContentDescription.querySelectorAll(":scope > *");
 		for(var q = 0; q < destexts.length; q++) {
 			destexts[q].remove();
 		}
@@ -328,10 +328,16 @@ var createItem = function() {
 
 		var effect = [];
 
-		for(var q = 0; q < finaldataItemEffect.length; q++) {
-			if(getApplicable(finaldataItemEffect[q]["Game"])) {
-				if(finaldataItemEffect[q]["Item"] == finaldataItem[i]["Name_"+JSONPath_ItemName]) {
-					effect.push(finaldataItemEffect[q]["Description"])
+		for(var q = 0; q < finaldataItemsEffect.length; q++) {
+			if(getApplicable(finaldataItemsEffect[q]["Game"])) {
+				var check = true;
+				if (finaldataItemsEffect[q]["Index"] != undefined) {
+					check = finaldataItemsEffect[q]["Index"] == finaldataItems[i]["Index"];
+				}
+				if (check) {
+					if(finaldataItemsEffect[q]["Item"] == finaldataItems[i]["Item"]) {
+						effect.push(finaldataItemsEffect[q]["Effect"])
+					}
 				}
 			}
 		}
@@ -428,317 +434,329 @@ var createItem = function() {
 
 		for(var q = 0; q < finaldataLocationItems.length; q++) {
 			if (getApplicable(finaldataLocationItems[q]["Game"])) {
-				if(finaldataLocationItems[q]["Item"] == item) {
-					var quantity = finaldataLocationItems[q]["Quantity"];
-					if (quantity == undefined) {
-						quantity = 1;
-					}
-					if (quantity > 10) {
-						quantity = 10;
-					}
+				var check = true;
+				if (finaldataLocationItems[q]["Index"] != undefined) {
+					check = finaldataLocationItems[q]["Index"] == finaldataItems[i]["Index"];
+				}
+				if (check) {
+					if(finaldataLocationItems[q]["Item"] == item) {
+						var quantity = finaldataLocationItems[q]["Quantity"];
+						if (quantity == undefined) {
+							quantity = 1;
+						}
+						if (quantity > 10) {
+							quantity = 10;
+						}
 
-					var itemSectionSidebarSidebarLi = document.createElement("li");
-					itemSectionSidebarSidebarLi.setAttribute("name","location")
-					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
+						var itemSectionSidebarSidebarLi = document.createElement("li");
+						itemSectionSidebarSidebarLi.setAttribute("name","location")
+						itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 
-					var itemSectionSidebarSidebarInput = document.createElement("input");
-					itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
-					itemSectionSidebarSidebarInput.setAttribute("id","location-item");
-					itemSectionSidebarSidebarInput.setAttribute("name","location-item"+q);
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarInput);
+						var itemSectionSidebarSidebarInput = document.createElement("input");
+						itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
+						itemSectionSidebarSidebarInput.setAttribute("id","location-item");
+						itemSectionSidebarSidebarInput.setAttribute("name","location-item"+q);
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarInput);
 
-					itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
+						itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
-					var itemSectionSidebarSidebarLocation = document.createElement("span");
-					var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
-					var itemSectionSidebarSidebarLocationText = document.createElement("h5");
-					itemSectionSidebarSidebarLocation.setAttribute("name","location");
-					itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
-					itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
-					itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
-					itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarLocationTrigger);
-					itemSectionSidebarSidebarLocationTrigger.appendChild(itemSectionSidebarSidebarLocationText);
+						var itemSectionSidebarSidebarLocation = document.createElement("span");
+						var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
+						var itemSectionSidebarSidebarLocationText = document.createElement("h5");
+						itemSectionSidebarSidebarLocation.setAttribute("name","location");
+						itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
+						itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
+						itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
+						itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarLocationTrigger);
+						itemSectionSidebarSidebarLocationTrigger.appendChild(itemSectionSidebarSidebarLocationText);
 
-					itemSectionSidebarSidebarLocationTrigger.addEventListener("click",dataRedirect)
-					itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
-
-
-					if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
-						var itemSectionSidebarSidebarAreaText = document.createElement("small");
-						itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
-						itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
-					}
+						itemSectionSidebarSidebarLocationTrigger.addEventListener("click",dataRedirect)
+						itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
 
 
-
-					if (finaldataLocationItems[q]["Description"] != undefined) {
-						var itemSectionSidebarSidebarDescription = document.createElement("span");
-						itemSectionSidebarSidebarDescription.setAttribute("name","description");
-						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
-						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-						itemSectionSidebarSidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
-						itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
-					}
-
-					var itemSectionSidebarSidebarRequirementOuter = document.createElement("span");
-					itemSectionSidebarSidebarRequirementOuter.setAttribute("name","requirement");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarRequirementOuter);
-
-					if (finaldataLocationItems[q]["Field"] != undefined) {
-	
-						var itemSectionSidebarSidebarRequirementTitle = document.createElement("h6");
-						itemSectionSidebarSidebarRequirementTitle.innerText = "Requires:";
-						itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarRequirementTitle);
+						if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
+							var itemSectionSidebarSidebarAreaText = document.createElement("small");
+							itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
+							itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
+						}
 
 
-						if (finaldataLocationItems[q]["Field"].includes("/")) {
-							for(var y = 0; y < finaldataLocationItems[q]["Field"].split("/").length; y++) {
+
+						if (finaldataLocationItems[q]["Description"] != undefined) {
+							var itemSectionSidebarSidebarDescription = document.createElement("span");
+							itemSectionSidebarSidebarDescription.setAttribute("name","description");
+							itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
+							var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+							itemSectionSidebarSidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
+							itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
+						}
+
+						var itemSectionSidebarSidebarRequirementOuter = document.createElement("span");
+						itemSectionSidebarSidebarRequirementOuter.setAttribute("name","requirement");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarRequirementOuter);
+
+						if (finaldataLocationItems[q]["Field"] != undefined) {
+		
+							var itemSectionSidebarSidebarRequirementTitle = document.createElement("h6");
+							itemSectionSidebarSidebarRequirementTitle.innerText = "Requires:";
+							itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarRequirementTitle);
+
+
+							if (finaldataLocationItems[q]["Field"].includes("/")) {
+								for(var y = 0; y < finaldataLocationItems[q]["Field"].split("/").length; y++) {
+									var itemIcon;
+									var itm;
+									if (getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
+										itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]));
+										itm = getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]);
+									}
+									else if (getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
+										itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]);
+										itm = finaldataLocationItems[q]["Field"].split("/")[y];
+									}
+
+									var itemSectionSidebarSidebarField = document.createElement("b");
+									var itemSectionSidebarSidebarFieldText = document.createElement("small");
+									itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split("/")[y];
+									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
+									if (itemIcon != undefined) {
+										var itemSectionSidebarSidebarFieldImage = document.createElement("img");
+										itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+										itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split("/")[y];
+										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
+									}
+									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
+									itemSectionSidebarSidebarField.setAttribute("name","item");
+									itemSectionSidebarSidebarField.setAttribute("value",itm);
+									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
+									if (y != finaldataLocationItems[q]["Field"].split("/").length - 1) {
+										var itemSectionSidebarSidebarFieldSpace = document.createElement("p");
+										itemSectionSidebarSidebarFieldSpace.innerText = " or ";
+										itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarFieldSpace)
+									}
+								}
+							}
+							else if (finaldataLocationItems[q]["Field"].includes(",")) {
+								for(var y = 0; y < finaldataLocationItems[q]["Field"].split(",").length; y++) {
+									var itemIcon;
+									var itm;
+									if (getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
+										itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]));
+										itm = getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]);
+									}
+									else if (getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
+										itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]);
+										itm = finaldataLocationItems[q]["Field"].split(",")[y];
+									}
+
+									var itemSectionSidebarSidebarField = document.createElement("b");
+									var itemSectionSidebarSidebarFieldText = document.createElement("small");
+									itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split(",")[y];
+									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
+									if (itemIcon != undefined) {
+										var itemSectionSidebarSidebarFieldImage = document.createElement("img");
+										itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+										itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split(",")[y];
+										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
+									}
+									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
+										
+									itemSectionSidebarSidebarField.setAttribute("name","item");
+									itemSectionSidebarSidebarField.setAttribute("value",itm);
+									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
+									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
+								}
+							}
+							else {
 								var itemIcon;
 								var itm;
-								if (getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
-									itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]));
-									itm = getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]);
+								if (getMoveMachine(finaldataLocationItems[q]["Field"]) != undefined) {
+									itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"]));
+									itm = getMoveMachine(finaldataLocationItems[q]["Field"]);
 								}
-								else if (getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
-									itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]);
-									itm = finaldataLocationItems[q]["Field"].split("/")[y];
+								else if (getItemIcon(finaldataLocationItems[q]["Field"]) != undefined) {
+									itemIcon = getItemIcon(finaldataLocationItems[q]["Field"]);
+									itm = finaldataLocationItems[q]["Field"];
 								}
 
 								var itemSectionSidebarSidebarField = document.createElement("b");
 								var itemSectionSidebarSidebarFieldText = document.createElement("small");
-								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split("/")[y];
+								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"];
 								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
 									var itemSectionSidebarSidebarFieldImage = document.createElement("img");
 									itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split("/")[y];
+									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"];
 									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
+									itemSectionSidebarSidebarFieldImage.setAttribute("name","item");
 									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
 								}
 								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
+
 								itemSectionSidebarSidebarField.setAttribute("name","item");
 								itemSectionSidebarSidebarField.setAttribute("value",itm);
 								itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
 								itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
-								if (y != finaldataLocationItems[q]["Field"].split("/").length - 1) {
-									var itemSectionSidebarSidebarFieldSpace = document.createElement("p");
-									itemSectionSidebarSidebarFieldSpace.innerText = " or ";
-									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarFieldSpace)
-								}
 							}
 						}
-						else if (finaldataLocationItems[q]["Field"].includes(",")) {
-							for(var y = 0; y < finaldataLocationItems[q]["Field"].split(",").length; y++) {
-								var itemIcon;
-								var itm;
-								if (getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
-									itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]));
-									itm = getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]);
-								}
-								else if (getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
-									itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]);
-									itm = finaldataLocationItems[q]["Field"].split(",")[y];
-								}
 
-								var itemSectionSidebarSidebarField = document.createElement("b");
-								var itemSectionSidebarSidebarFieldText = document.createElement("small");
-								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split(",")[y];
-								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
-								if (itemIcon != undefined) {
-									var itemSectionSidebarSidebarFieldImage = document.createElement("img");
-									itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split(",")[y];
-									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
-									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
-								}
-								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
-									
-								itemSectionSidebarSidebarField.setAttribute("name","item");
-								itemSectionSidebarSidebarField.setAttribute("value",itm);
-								itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
-								itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
-							}
+						var itemSectionSidebarSidebarItem = document.createElement("span");
+						itemSectionSidebarSidebarItem.setAttribute("name","item");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
+
+						for(var u = 0; u < quantity; u++) {
+							var itemSectionSidebarSidebarItemImg = document.createElement("img");
+							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
+							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
+							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
+						}
+
+						if (quantity != 1) { 
+							itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
 						}
 						else {
-							var itemIcon;
-							var itm;
-							if (getMoveMachine(finaldataLocationItems[q]["Field"]) != undefined) {
-								itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"]));
-								itm = getMoveMachine(finaldataLocationItems[q]["Field"]);
-							}
-							else if (getItemIcon(finaldataLocationItems[q]["Field"]) != undefined) {
-								itemIcon = getItemIcon(finaldataLocationItems[q]["Field"]);
-								itm = finaldataLocationItems[q]["Field"];
-							}
-
-							var itemSectionSidebarSidebarField = document.createElement("b");
-							var itemSectionSidebarSidebarFieldText = document.createElement("small");
-							itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"];
-							itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
-							if (itemIcon != undefined) {
-								var itemSectionSidebarSidebarFieldImage = document.createElement("img");
-								itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-								itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"];
-								itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
-								itemSectionSidebarSidebarFieldImage.setAttribute("name","item");
-								itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
-							}
-							itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldText);
-
-							itemSectionSidebarSidebarField.setAttribute("name","item");
-							itemSectionSidebarSidebarField.setAttribute("value",itm);
-							itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
-							itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
+							itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Item"];
 						}
+
+
+
+
+						var itemSectionSidebarSidebarItemText = document.createElement("h6");
+						if (quantity != 1) { 
+							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Quantity"]+"x <br>"+finaldataLocationItems[q]["Item"];
+						}
+						else {
+							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Item"];
+						}
+						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
+						itemSectionSidebarSidebarItemText.style.display = "none";
+
+						if (finaldataLocationItems[q]["Hidden"] == "Hidden") {
+							itemSectionSidebarSidebarLi.classList.add("hide");
+							itemSectionSidebarSidebarItem.title += " (Hidden)";
+						}
+
+				
 					}
-
-					var itemSectionSidebarSidebarItem = document.createElement("span");
-					itemSectionSidebarSidebarItem.setAttribute("name","item");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
-
-					for(var u = 0; u < quantity; u++) {
-						var itemSectionSidebarSidebarItemImg = document.createElement("img");
-						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
-						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
-						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
-					}
-
-					if (quantity != 1) { 
-						itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
-					}
-					else {
-						itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Item"];
-					}
-
-
-
-
-					var itemSectionSidebarSidebarItemText = document.createElement("h6");
-					if (quantity != 1) { 
-						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Quantity"]+"x <br>"+finaldataLocationItems[q]["Item"];
-					}
-					else {
-						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Item"];
-					}
-					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
-					itemSectionSidebarSidebarItemText.style.display = "none";
-
-					if (finaldataLocationItems[q]["Hidden"] == "Hidden") {
-						itemSectionSidebarSidebarLi.classList.add("hide");
-						itemSectionSidebarSidebarItem.title += " (Hidden)";
-					}
-
-			
 				}
 			}
 		}
 
 		for(var q = 0; q < finaldataLocationItemsShops.length; q++) {
 			if (getApplicable(finaldataLocationItemsShops[q]["Game"])) {
-				if(finaldataLocationItemsShops[q]["Item"] == item) {
-					var quantity = finaldataLocationItemsShops[q]["Quantity"];
-					if (quantity == undefined) {
-						quantity = 1;
-					}
-					if (quantity > 10) {
-						quantity = 10;
-					}
+				var check = true;
+				if (finaldataLocationItemsShops[q]["Index"] != undefined) {
+					check = finaldataLocationItemsShops[q]["Index"] == finaldataItems[i]["Index"];
+				}
+				if (check) {
+					if(finaldataLocationItemsShops[q]["Item"] == item) {
+						var quantity = finaldataLocationItemsShops[q]["Quantity"];
+						if (quantity == undefined) {
+							quantity = 1;
+						}
+						if (quantity > 10) {
+							quantity = 10;
+						}
 
-					var itemSectionSidebarSidebarLi = document.createElement("li");
-					itemSectionSidebarSidebarLi.setAttribute("name","shop")
-					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
+						var itemSectionSidebarSidebarLi = document.createElement("li");
+						itemSectionSidebarSidebarLi.setAttribute("name","shop")
+						itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
+						
+						var itemSectionSidebarSidebarInput = document.createElement("input");
+						itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
+						itemSectionSidebarSidebarInput.setAttribute("id","location-shop");
+						itemSectionSidebarSidebarInput.setAttribute("name","location-shop"+q);
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarInput);
+						itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
+
+						var itemSectionSidebarSidebarLocation = document.createElement("span");
+						var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
+						var itemSectionSidebarSidebarLocationText = document.createElement("h5");
+						itemSectionSidebarSidebarLocation.setAttribute("name","location")
+						itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItemsShops[q]["Location"];
+						itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
+						itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
+						itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarLocationTrigger);
+						itemSectionSidebarSidebarLocationTrigger.appendChild(itemSectionSidebarSidebarLocationText);
+
+						itemSectionSidebarSidebarLocationTrigger.addEventListener("click",dataRedirect)
+						itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
+
+
+						if (finaldataLocationItemsShops[q]["Area"] != undefined && finaldataLocationItemsShops[q]["Area"] != finaldataLocationItemsShops[q]["Location"]) {
+							var itemSectionSidebarSidebarAreaText = document.createElement("small");
+							itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItemsShops[q]["Area"];
+							itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
+						}
+
+
+						var currency = finaldataLocationItemsShops[q]["Currency"];
+
+						if (currency == "Pokémon Dollar") {
+							currency = '<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />';
+						}
+						else {
+							currency = "<span title='"+currency+"'>"+currency.replace(/[^A-Z]+/g,"")+"</span>";
+						}
 					
-					var itemSectionSidebarSidebarInput = document.createElement("input");
-					itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
-					itemSectionSidebarSidebarInput.setAttribute("id","location-shop");
-					itemSectionSidebarSidebarInput.setAttribute("name","location-shop"+q);
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarInput);
-					itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
-
-					var itemSectionSidebarSidebarLocation = document.createElement("span");
-					var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
-					var itemSectionSidebarSidebarLocationText = document.createElement("h5");
-					itemSectionSidebarSidebarLocation.setAttribute("name","location")
-					itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItemsShops[q]["Location"];
-					itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
-					itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
-					itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarLocationTrigger);
-					itemSectionSidebarSidebarLocationTrigger.appendChild(itemSectionSidebarSidebarLocationText);
-
-					itemSectionSidebarSidebarLocationTrigger.addEventListener("click",dataRedirect)
-					itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
-
-
-					if (finaldataLocationItemsShops[q]["Area"] != undefined && finaldataLocationItemsShops[q]["Area"] != finaldataLocationItemsShops[q]["Location"]) {
-						var itemSectionSidebarSidebarAreaText = document.createElement("small");
-						itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItemsShops[q]["Area"];
-						itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
-					}
-
-
-					var currency = finaldataLocationItemsShops[q]["Currency"];
-
-					if (currency == "Pokémon Dollar") {
-						currency = '<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />';
-					}
-					else {
-						currency = "<span title='"+currency+"'>"+currency.replace(/[^A-Z]+/g,"")+"</span>";
-					}
+						var itemSectionSidebarSidebarDescription = document.createElement("span");
+						itemSectionSidebarSidebarDescription.setAttribute("name","description");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
+						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+						if (finaldataLocationItemsShops[q]["Shop"] != undefined) {
+							itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Shop"]+" for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
+						}
+						else {
+							itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
+						}
+						itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 				
-					var itemSectionSidebarSidebarDescription = document.createElement("span");
-					itemSectionSidebarSidebarDescription.setAttribute("name","description");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
-					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-					if (finaldataLocationItemsShops[q]["Shop"] != undefined) {
-						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Shop"]+" for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
-					}
-					else {
-						itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
-					}
-					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
-			
+
+					
+						if (finaldataLocationItemsShops[q]["Requirement"] != undefined) {
+							itemSectionSidebarSidebarDescriptionText.title = finaldataLocationItemsShops[q]["Requirement"];
+						}
+
+
+						var itemSectionSidebarSidebarItem = document.createElement("span");
+						itemSectionSidebarSidebarItem.setAttribute("name","item");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
+
+						for(var u = 0; u < quantity; u++) {
+							var itemSectionSidebarSidebarItemImg = document.createElement("img");
+							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsShops[q]["Item"])+".png";
+							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
+							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
+						}
+
+						if (quantity != 1) { 
+							itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Quantity"]+"x "+finaldataLocationItemsShops[q]["Item"];
+						}
+						else {
+							itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Item"];
+						}
+
+
+
+
+						var itemSectionSidebarSidebarItemText = document.createElement("h6");
+						if (quantity != 1) { 
+							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Quantity"]+"x <br>"+finaldataLocationItemsShops[q]["Item"];
+						}
+						else {
+							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Item"];
+						}
+						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
+						itemSectionSidebarSidebarItemText.style.display = "none";
+
 
 				
-					if (finaldataLocationItemsShops[q]["Requirement"] != undefined) {
-						itemSectionSidebarSidebarDescriptionText.title = finaldataLocationItemsShops[q]["Requirement"];
 					}
-
-
-					var itemSectionSidebarSidebarItem = document.createElement("span");
-					itemSectionSidebarSidebarItem.setAttribute("name","item");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
-
-					for(var u = 0; u < quantity; u++) {
-						var itemSectionSidebarSidebarItemImg = document.createElement("img");
-						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsShops[q]["Item"])+".png";
-						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
-						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
-					}
-
-					if (quantity != 1) { 
-						itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Quantity"]+"x "+finaldataLocationItemsShops[q]["Item"];
-					}
-					else {
-						itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Item"];
-					}
-
-
-
-
-					var itemSectionSidebarSidebarItemText = document.createElement("h6");
-					if (quantity != 1) { 
-						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Quantity"]+"x <br>"+finaldataLocationItemsShops[q]["Item"];
-					}
-					else {
-						itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Item"];
-					}
-					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
-					itemSectionSidebarSidebarItemText.style.display = "none";
-
-
-			
 				}
 			}
 		}
@@ -746,81 +764,87 @@ var createItem = function() {
 
 		for(var q = 0; q < finaldataLocationItemsPickup.length; q++) {
 			if (getApplicable(finaldataLocationItemsPickup[q]["Game"])) {
-				if(finaldataLocationItemsPickup[q]["Item"] == item) {
-					var itemSectionSidebarSidebarLi = document.createElement("li");
-					itemSectionSidebarSidebarLi.setAttribute("name","pickup");
-					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
-			
-					var itemSectionSidebarSidebarPickup = document.createElement("span");
-					var itemSectionSidebarSidebarPickupTitle = document.createElement("small");
-					var itemSectionSidebarSidebarPickupText = document.createElement("h5");
-					itemSectionSidebarSidebarPickup.setAttribute("name","ability");
-					itemSectionSidebarSidebarPickupTitle.innerText = "Ability";
-					itemSectionSidebarSidebarPickupText.innerText = "Pickup";
-					itemSectionSidebarSidebarPickupText.title = "Pickup";
-					itemSectionSidebarSidebarPickupText.setAttribute("name","ability");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarPickup);
-					itemSectionSidebarSidebarPickup.appendChild(itemSectionSidebarSidebarPickupTitle);
-					itemSectionSidebarSidebarPickup.appendChild(itemSectionSidebarSidebarPickupText);
+				var check = true;
+				if (finaldataLocationItemsPickup[q]["Index"] != undefined) {
+					check = finaldataLocationItemsPickup[q]["Index"] == finaldataItems[i]["Index"];
+				}
+				if (check) {
+					if(finaldataLocationItemsPickup[q]["Item"] == item) {
+						var itemSectionSidebarSidebarLi = document.createElement("li");
+						itemSectionSidebarSidebarLi.setAttribute("name","pickup");
+						itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
+				
+						var itemSectionSidebarSidebarPickup = document.createElement("span");
+						var itemSectionSidebarSidebarPickupTitle = document.createElement("small");
+						var itemSectionSidebarSidebarPickupText = document.createElement("h5");
+						itemSectionSidebarSidebarPickup.setAttribute("name","ability");
+						itemSectionSidebarSidebarPickupTitle.innerText = "Ability";
+						itemSectionSidebarSidebarPickupText.innerText = "Pickup";
+						itemSectionSidebarSidebarPickupText.title = "Pickup";
+						itemSectionSidebarSidebarPickupText.setAttribute("name","ability");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarPickup);
+						itemSectionSidebarSidebarPickup.appendChild(itemSectionSidebarSidebarPickupTitle);
+						itemSectionSidebarSidebarPickup.appendChild(itemSectionSidebarSidebarPickupText);
 
 
-					itemSectionSidebarSidebarPickupText.addEventListener("click",dataRedirect)
-					itemSectionSidebarSidebarPickupText.setAttribute("function","dataRedirect");
+						itemSectionSidebarSidebarPickupText.addEventListener("click",dataRedirect)
+						itemSectionSidebarSidebarPickupText.setAttribute("function","dataRedirect");
 
-	
+		
 
-					var itemSectionSidebarSidebarDescription = document.createElement("span");
-					itemSectionSidebarSidebarDescription.setAttribute("name","description");
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
-					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
+						var itemSectionSidebarSidebarDescription = document.createElement("span");
+						itemSectionSidebarSidebarDescription.setAttribute("name","description");
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
+						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+						itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 
 
-					var PickupText;
-					var PickupLevel = "";
-					var PickupRate = "";
-					var PickupLocation = "";
-					var PickupAdditional = "";
+						var PickupText;
+						var PickupLevel = "";
+						var PickupRate = "";
+						var PickupLocation = "";
+						var PickupAdditional = "";
 
-	
+		
 
-					if (finaldataLocationItemsPickup[q]["Level"] != undefined) {
-						PickupLevel = 'Level '+finaldataLocationItemsPickup[q]["Level"];
+						if (finaldataLocationItemsPickup[q]["Level"] != undefined) {
+							PickupLevel = 'Level '+finaldataLocationItemsPickup[q]["Level"];
+						}
+						if (finaldataLocationItemsPickup[q]["Rate"] != undefined) {
+							PickupRate = finaldataLocationItemsPickup[q]["Rate"];
+						}
+						if (finaldataLocationItemsPickup[q]["Location"] != undefined) {
+							PickupLocation = 'at <b name="map" title="'+finaldataLocationItemsPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationItemsPickup[q]["Location"]+'</b>';
+						}
+						if (finaldataLocationItemsPickup[q]["Additional"] != undefined) {
+							PickupAdditional = 'on '+finaldataLocationItemsPickup[q]["Additional"];
+						}
+
+						PickupText = PickupRate+' chance to be found by a '+PickupLevel+' Pokémon '+PickupAdditional+' '+PickupLocation+' with the ability <b name="ability" title="Pickup" onclick="dataRedirect()">Pickup</b>';
+
+						PickupText = PickupText.replaceAll("  "," ");
+
+						itemSectionSidebarSidebarDescriptionText.innerHTML = PickupText+".";
+
+
+						var itemSectionSidebarSidebarItem = document.createElement("span");
+						itemSectionSidebarSidebarItem.setAttribute("name","item");
+						itemSectionSidebarSidebarItem.title = finaldataLocationItemsPickup[q]["Item"];
+						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
+
+				
+						var itemSectionSidebarSidebarItemImg = document.createElement("img");
+						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsPickup[q]["Item"])+".png";
+						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
+						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
+
+						var itemSectionSidebarSidebarItemText = document.createElement("p");
+						itemSectionSidebarSidebarItemText.innerText = finaldataLocationItemsPickup[q]["Item"];
+						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
+						itemSectionSidebarSidebarItemText.style.display = "none";
+
+						
 					}
-					if (finaldataLocationItemsPickup[q]["Rate"] != undefined) {
-						PickupRate = finaldataLocationItemsPickup[q]["Rate"];
-					}
-					if (finaldataLocationItemsPickup[q]["Location"] != undefined) {
-						PickupLocation = 'at <b name="map" title="'+finaldataLocationItemsPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationItemsPickup[q]["Location"]+'</b>';
-					}
-					if (finaldataLocationItemsPickup[q]["Additional"] != undefined) {
-						PickupAdditional = 'on '+finaldataLocationItemsPickup[q]["Additional"];
-					}
-
-					PickupText = PickupRate+' chance to be found by a '+PickupLevel+' Pokémon '+PickupAdditional+' '+PickupLocation+' with the ability <b name="ability" title="Pickup" onclick="dataRedirect()">Pickup</b>';
-
-					PickupText = PickupText.replaceAll("  "," ");
-
-					itemSectionSidebarSidebarDescriptionText.innerHTML = PickupText+".";
-
-
-					var itemSectionSidebarSidebarItem = document.createElement("span");
-					itemSectionSidebarSidebarItem.setAttribute("name","item");
-					itemSectionSidebarSidebarItem.title = finaldataLocationItemsPickup[q]["Item"];
-					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
-
-			
-					var itemSectionSidebarSidebarItemImg = document.createElement("img");
-					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsPickup[q]["Item"])+".png";
-					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
-					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
-
-					var itemSectionSidebarSidebarItemText = document.createElement("p");
-					itemSectionSidebarSidebarItemText.innerText = finaldataLocationItemsPickup[q]["Item"];
-					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
-					itemSectionSidebarSidebarItemText.style.display = "none";
-
-					
 				}
 			}
 		}
