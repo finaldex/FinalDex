@@ -321,6 +321,41 @@ var createItem = function() {
 			}
 		}
 
+
+
+
+
+
+		var effect = [];
+
+		for(var q = 0; q < finaldataItemEffect.length; q++) {
+			if(getApplicable(finaldataItemEffect[q]["Game"])) {
+				if(finaldataItemEffect[q]["Item"] == finaldataItem[i]["Name_"+JSONPath_ItemName]) {
+					effect.push(finaldataItemEffect[q]["Description"])
+				}
+			}
+		}
+		var itemSectionContentEffectTitle = document.createElement("h4");
+		itemSectionContentDescription.appendChild(itemSectionContentEffectTitle)
+		var itemSectionContentEffectText = document.createElement("p");
+		itemSectionContentDescription.appendChild(itemSectionContentEffectText)
+
+		for(var q = 0; q < effect.length; q++) {
+			itemSectionContentEffectText.innerText += effect[q];
+			if (q != effect.length - 1) {
+				itemSectionContentEffectText.innerHTML += "<br>"
+			}
+		}
+		
+		if (effect.length > 0) {
+			itemSectionContentEffectTitle.innerText = "Effect";
+		}
+		else {
+			itemSectionContentEffectTitle.innerText = "";
+		}
+
+
+
 		var lis = itemSectionSidebarSidebarUl.querySelectorAll(":scope li");
 		
 		for(var q = 0; q < lis.length; q++) {
