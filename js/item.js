@@ -57,10 +57,11 @@ var createItem = function() {
 
 	var pockets = [];
 	for (var q = 0; q < finaldataItems.length; q++) {
-		if(finaldataItems[q]["Pocket_"+JSONPath_Items] != undefined && finaldataItems[q]["Pocket_"+JSONPath_Items] != "Unknown") {
-			pockets.push(finaldataItems[q]["Pocket_"+JSONPath_Items])
+		if (getApplicable(finaldataItems[q]["Game"])) {
+			if (finaldataItems[q]["Use"] == true) {
+				pockets.push(finaldataItems[q]["Pocket"])
+			}
 		}
-
 	}
 	pockets = pockets.filter(function(v) {return v !== undefined;});
 	pockets = [...new Set(pockets)];
@@ -167,7 +168,15 @@ var createItem = function() {
 
 
 	for(var q = 0; q < finaldataItems.length; q++) {
-		if (finaldataItems[q]["Name_"+JSONPath_Items] != undefined && finaldataItems[q]["Pocket_"+JSONPath_Items] != "Unknown") {
+		if (getApplicable(finaldataItems[q]["Game"])) {
+			if (finaldataItems[q]["Use"] == true) {
+
+				var name = finaldataItems[q]["Item"];
+
+				if (finaldataItems[q]["Alias"] != undefined) {
+					name += " ("+finaldataItems[q]["Alias"]+")";
+				}
+
 			var itemSectionListOptionsInput = document.createElement("input");
 			var itemSectionListOptionsLabel = document.createElement("label");
 			var itemSectionListOptionsLabelText = document.createElement("p");
@@ -177,13 +186,12 @@ var createItem = function() {
 			itemSectionListOptionsInput.setAttribute("autocomplete", "off");
 			itemSectionListOptionsInput.value = q;
 			itemSectionListOptionsLabel.setAttribute("for", "item-options-" + q);
-			itemSectionListOptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
-			itemSectionListOptionsLabel.setAttribute("data-search-name", finaldataItems[q]["Name_"+JSONPath_Items].toLowerCase());
+			itemSectionListOptionsLabel.setAttribute("data-search-name", name.toLowerCase());
 
 
-			if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Name_"+JSONPath_Items]).length > 0) {
-				if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Name_"+JSONPath_Items])[0]["Sell Amount"] != undefined) {
-					itemSectionListOptionsLabel.setAttribute("data-search-price",getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Name_"+JSONPath_Items])[0]["Sell Amount"]);
+			if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"]).length > 0) {
+				if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"] != undefined) {
+					itemSectionListOptionsLabel.setAttribute("data-search-price",getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"]);
 				}
 				else {
 					itemSectionListOptionsLabel.setAttribute("data-search-price",0);
@@ -194,23 +202,23 @@ var createItem = function() {
 			}
 			
 
-			if (finaldataItems[q]["Pocket_"+JSONPath_Items] != undefined) {
-				itemSectionListOptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket_"+JSONPath_Items].toLowerCase());
+			if (finaldataItems[q]["Pocket"] != undefined) {
+				itemSectionListOptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket"].toLowerCase());
 			}
 			itemSectionListOptionsLabel.setAttribute("type","medium");
-			if (finaldataItems[q]["Icon_"+JSONPath_Items] != undefined) {
+			if (finaldataItems[q]["Icon"] != undefined) {
 				var itemSectionListOptionsLabelImageOuter = document.createElement("span");
 				var itemSectionListOptionsLabelImage = document.createElement("img");
-				itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon_"+JSONPath_Items]+".png";
+				itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon"]+".png";
 				itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
 				itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
 				itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
 			}
-			if (getMachineMove(finaldataItems[q]["Name_"+JSONPath_Items]) != undefined) {
-				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items]+" ("+getMachineMove(finaldataItems[q]["Name_"+JSONPath_Items])+")";
+			if (getMachineMove(finaldataItems[q]["Item"]) != undefined) {
+				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Item"]+" ("+getMachineMove(finaldataItems[q]["Item"])+")";
 			}
 			else {
-				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Name_"+JSONPath_Items];
+				itemSectionListOptionsLabelText.innerText = finaldataItems[q]["Item"];
 			}
 			itemSectionListOptions.appendChild(itemSectionListOptionsInput);
 			itemSectionListOptions.appendChild(itemSectionListOptionsLabel);
@@ -221,6 +229,7 @@ var createItem = function() {
 			itemSectionListOptionsLabel.setAttribute("tabindex",q+10);
 			itemSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;itemOptionsSelector(event.target.previousElementSibling.value);}}});
 
+			}
 		}
 
 	}
@@ -249,10 +258,15 @@ var createItem = function() {
 		if (this.value != undefined) {
 			i = this.value;
 		}
-		var item = finaldataItems[i]["Name_"+JSONPath_Items];
+		var item = finaldataItems[i]["Item"];
 
-		itemSectionHeaderTitleName.innerText = finaldataItems[i]["Name_"+JSONPath_Items];
-		itemSectionHeaderTitleID.innerText = "#"+finaldataItems[i]["ID_"+JSONPath_Items];
+		itemSectionHeaderTitleName.innerText = finaldataItems[i]["Item"];
+
+		if (finaldataItems[i]["Alias"] != undefined) {
+			itemSectionHeaderTitleName.innerText += " ("+finaldataItems[i]["Alias"]+")";
+		}
+
+		itemSectionHeaderTitleID.innerText = "#"+finaldataItems[i]["ID"];
 
 		var priceArr = getDataArr(finaldataItemsPrice,"Item",item);
 	
@@ -292,7 +306,7 @@ var createItem = function() {
 					if (getApplicable(finaldataItemsDescription[q]["Game"])) {
 						var check = true;
 						if (finaldataItemsDescription[q]["Index"] != undefined) {
-							check = finaldataItemsDescription[q]["Index"] == finaldataItems[i]["Index_"+JSONPath_Items];
+							check = finaldataItemsDescription[q]["Index"] == finaldataItems[i]["Index"];
 						}
 						if (check) {
 							var itemSectionContentDescriptionText = document.createElement("p");
