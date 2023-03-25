@@ -857,8 +857,8 @@ function getItemIcon(item) {
 	var arr = finaldataItems;
 
 	for (var q = 0; q < arr.length; q++) {
-		if (arr[q]["Name_"+JSONPath_Items] == item) {
-			return arr[q]["Icon_"+JSONPath_Items]
+		if (arr[q]["Item"] == item) {
+			return arr[q]["Icon"]
 		}
 	}
     return;
@@ -1485,7 +1485,7 @@ function referenceLink(text) {
 
 
 	for (var i = 0; i < items.length; i++) {
-		var item = items[i]["Name_"+JSONPath_Items];
+		var item = items[i]["Item"];
 		if (item != undefined) {
 			if (item.includes(" ")) {
 				itemArr.push(item)
@@ -1493,7 +1493,7 @@ function referenceLink(text) {
 		}
 	}
 	for (var i = 0; i < items.length; i++) {
-		var item = items[i]["Name_"+JSONPath_Items];
+		var item = items[i]["Item"];
 		if (item != undefined) {
 			if (!item.includes(" ")) {
 				itemArr.push(item)
