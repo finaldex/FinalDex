@@ -267,6 +267,7 @@ var createItem = function() {
 		}
 
 		itemSectionHeaderTitleID.innerText = "#"+finaldataItems[i]["ID"];
+		itemSectionHeaderTitleID.setAttribute("title",finaldataItems[i]["Index"]);
 
 		var priceArr = getDataArr(finaldataItemsPrice,"Item",item);
 	
@@ -330,14 +331,16 @@ var createItem = function() {
 
 		for(var q = 0; q < finaldataItemsEffect.length; q++) {
 			if(getApplicable(finaldataItemsEffect[q]["Game"])) {
-				var check = true;
-				if (finaldataItemsEffect[q]["Index"] != undefined) {
-					check = finaldataItemsEffect[q]["Index"] == finaldataItems[i]["Index"];
-				}
-				if (check) {
-					if(finaldataItemsEffect[q]["Item"] == finaldataItems[i]["Item"]) {
+				if(finaldataItemsEffect[q]["Item"] == finaldataItems[i]["Item"]) {
+					var check = true;
+					if (finaldataItemsEffect[q]["Index"] != undefined) {
+						check = finaldataItemsEffect[q]["Index"] == finaldataItems[i]["Index"];
+					}
+					if (check) {
 						effect.push(finaldataItemsEffect[q]["Effect"])
 					}
+					console.log(finaldataItemsEffect[q]["Effect"])
+					console.log(finaldataItemsEffect[q]["Index"])
 				}
 			}
 		}
