@@ -319,6 +319,36 @@ var createMove = function() {
 			moveSectionContentDescriptionText.innerText = finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription];
 		}
 
+
+
+
+		var effect = [];
+
+		for(var q = 0; q < finaldataMoveEffect.length; q++) {
+			if(getApplicable(finaldataMoveEffect[q]["Game"])) {
+				if(finaldataMoveEffect[q]["Move"] == finaldataMove[i]["Name_"+JSONPath_MoveName]) {
+					effect.push(finaldataMoveEffect[q]["Effect"])
+				}
+			}
+		}
+
+		moveSectionContentEffectText.innerText = "";
+
+		for(var q = 0; q < effect.length; q++) {
+			moveSectionContentEffectText.innerText += effect[q];
+			if (q != effect.length - 1) {
+				moveSectionContentEffectText.innerHTML += "<br>"
+			}
+		}
+		
+		if (effect.length > 0) {
+			moveSectionContentEffectTitle.innerText = "Effect";
+		}
+		else {
+			moveSectionContentEffectTitle.innerText = "";
+		}
+
+
 		if (finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine] != undefined) {
 			moveSectionContentMachineText.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" is <b type='invert' name='item' value='"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"' onclick='dataRedirect()' function='dataRedirect'>"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"</b>."
 			moveSectionContentMachineText.style.removeProperty("display");
