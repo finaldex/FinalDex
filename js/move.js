@@ -602,8 +602,7 @@ var createMove = function() {
 			moveSectionSidebarLearnsetLiText.innerText = learnsetlevelarr[q]["Pokémon"];
 			moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(learnsetlevelarr[q]["Pokémon"]),"Box")+".png";
 			moveSectionSidebarLearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
-			moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-			moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+			moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
 			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
 			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
@@ -654,8 +653,7 @@ var createMove = function() {
 				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetEvolution[q]["Pokémon"]),"Box")+".png";
 				moveSectionSidebarLearnsetLiImg.title = finaldataLearnsetEvolution[q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldataLearnsetEvolution[q]["Pokémon"];				
-				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-				moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
 				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
 				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
@@ -702,8 +700,7 @@ var createMove = function() {
 				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]),"Box")+".png";
 				moveSectionSidebarLearnsetLiImg.title = finaldataLearnsetMachine[q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldataLearnsetMachine[q]["Pokémon"];
-				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-				moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
 				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
 				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
@@ -752,8 +749,7 @@ var createMove = function() {
 				moveSectionSidebarLearnsetLiImg.title = finaldataLearnsetBreed[q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldataLearnsetBreed[q]["Pokémon"];
 
-				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-				moveSectionSidebarLearnsetLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
 				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
 				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
