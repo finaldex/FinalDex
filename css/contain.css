@@ -2788,3 +2788,7 @@ img[title="Pokémon Dollar"] {
 #contain div > section[name="sidebar"] > div > ul li span[name="requirement"] small {
 	display: block;
 }
+
+#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
+	user-select: none;
+}
