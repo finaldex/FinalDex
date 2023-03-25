@@ -53,6 +53,7 @@ var finaldataMove = [];
 var finaldataMoveDescription = [];
 var finaldataLocationTutor = [];
 var finaldataMoveMachine = [];
+var finaldataMoveEffect = [];
 var finaldataMoveRange = [];
 var finaldataMoveOtherMoves = [];
 var finaldataMoveAccuracy = [];
@@ -227,6 +228,9 @@ function requestLoad(i,url) {
 						}
 						for(var q = 0; q < Metadata["Machine"].length; q++) {
 							finaldataMoveMachine.push(Metadata["Machine"][q]);
+						}
+						for(var q = 0; q < Metadata["Effect"].length; q++) {
+							finaldataMoveEffect.push(Metadata["Effect"][q]);
 						}
 						for(var q = 0; q < Metadata["Range"].length; q++) {
 							finaldataMoveRange.push(Metadata["Range"][q]);
