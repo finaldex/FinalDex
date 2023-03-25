@@ -962,7 +962,6 @@ function loadData() {
 
 
                             var pokEncounterImage = document.createElement("img");
-                            pokEncounterImage.title = encounters[u];
                             pokEncounterImage.setAttribute("onerror","this.remove();")
 
                             
