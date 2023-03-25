@@ -2779,7 +2779,7 @@ function moveLearnsetPartyBox(action) {
 
     if (action != undefined) {
         for (var i = 0; i < lis.length; i++) {
-            var lisImg = lis[i].querySelectorAll(":scope *[value]");
+            var lisImg = lis[i].querySelectorAll(":scope > *[value]");
             for (var q = 0; q < lisImg.length; q++) {
                 var conditions = [];
                 var tempArr = [];
@@ -2887,7 +2887,7 @@ function abilityLearnsetPartyBox(action) {
 
     if (action != undefined) {
         for (var i = 0; i < lis.length; i++) {
-            var lisImg = lis[i].querySelectorAll(":scope *[value]");
+            var lisImg = lis[i].querySelectorAll(":scope > *[value]");
             for (var q = 0; q < lisImg.length; q++) {
                 
                 var conditions = [];
@@ -3990,17 +3990,20 @@ function searchFilter(bar,base,condition) {
 }
 
 
-function consoleText(text) {
+function consoleText(text,time) {
     var text;
     var base = document.querySelector("#console")
-    var time = 2000;
+    var time;
+
+    if (time == "" || time == undefined) {
+        time = 2000;
+    }
 
     var p = document.createElement("p");
     p.innerText = text;
     base.appendChild(p);
 
     p.style.opacity = "1";
-    console.log(time)
 
     setInterval(function() {
         p.style.opacity = "0";
