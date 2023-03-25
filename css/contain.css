@@ -669,7 +669,7 @@
 	padding: 2px 10px;
 }
 #contain div > section[name='content'] > div[name="description"] > *:first-child {
-	padding: 10px 10px 15px;
+	padding: 10px;
 }
 
 
@@ -2791,4 +2791,9 @@ img[title="Pokémon Dollar"] {
 
 #contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
 	user-select: none;
+}
+
+
+#contain div > section[name='content'] > div[name="description"] > h4 {
+	padding-top: 15px;
 }
