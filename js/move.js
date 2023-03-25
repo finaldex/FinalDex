@@ -18,7 +18,7 @@ var createMove = function() {
 	var moveSectionContentDescriptionText = document.createElement("p");
 	var moveSectionContentMachineText = document.createElement("p");
 	var moveSectionContentTutorText = document.createElement("p");
-	var moveSectionContentEffectTitle = document.createElement("h3");
+	var moveSectionContentEffectTitle = document.createElement("h4");
 	var moveSectionContentEffectText = document.createElement("p");
 	var moveSectionSidebar = document.createElement("section");
 	moveOuter.setAttribute("id", "move");
