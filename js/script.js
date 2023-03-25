@@ -1128,12 +1128,12 @@ function createParty(base,data) {
     if (HeldItem == true) {
 
         var items = [];
-        var result = finaldataItems.map(el => el["Pocket_"+JSONPath_Items] == "Berries" ? {...el, ["Pocket_"+JSONPath_Items]: "a"} : el).map(el => el["Pocket_"+JSONPath_Items] == "Items" || el["Pocket_"+JSONPath_Items] == "Other Items"  ? {...el, ["Pocket_"+JSONPath_Items]: "b"} : el).map(el => el["Pocket_"+JSONPath_Items] != "a" && el["Pocket_"+JSONPath_Items] != "b" ? {...el, ["Pocket_"+JSONPath_Items]: "c"} : el);
+        var result = finaldataItems.map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
 
-        items = sortObjectArray(result,"Pocket_"+JSONPath_Items);
+        items = sortObjectArray(result,"Pocket");
 
         var obj = new Object();
-        obj["Name_"+JSONPath_Items] = "Item";
+        obj["Name"] = "Item";
         items.unshift(obj);
 
 
@@ -1147,18 +1147,18 @@ function createParty(base,data) {
                 req[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"];
             }
             for (var q = 0; q < items.length; q++) {
-                if (items[q]["Name_"+JSONPath_Items] != undefined) {
-                    if (req.includes(items[q]["Name_"+JSONPath_Items])) {
+                if (items[q]["Item"] != undefined) {
+                    if (req.includes(items[q]["Item"])) {
                         var teamItemOption = document.createElement("option");
-                        teamItemOption.value = items[q]["Name_"+JSONPath_Items];
-                        teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
+                        teamItemOption.value = items[q]["Item"];
+                        teamItemOption.innerText = items[q]["Item"];
                         baseItem.appendChild(teamItemOption);
 
-                        if (items[q]["Icon_"+JSONPath_Items] != undefined) {
-                            teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
+                        if (items[q]["Icon"] != undefined) {
+                            teamItemOption.setAttribute("name",items[q]["Icon"]);
                         }
                         else {
-                            teamItemOption.setAttribute("name",items[q]["Name_"+JSONPath_Items]);
+                            teamItemOption.setAttribute("name",items[q]["Item"]);
                         }
                     }
                 }
@@ -1175,18 +1175,18 @@ function createParty(base,data) {
                 notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"];
             }
             for (var q = 0; q < items.length; q++) {
-                if (items[q]["Name_"+JSONPath_Items] != undefined) {
-                    if (!notreq.includes(items[q]["Name_"+JSONPath_Items])) {
+                if (items[q]["Item"] != undefined) {
+                    if (!notreq.includes(items[q]["Item"])) {
                         var teamItemOption = document.createElement("option");
-                        teamItemOption.value = items[q]["Name_"+JSONPath_Items];
-                        teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
+                        teamItemOption.value = items[q]["Item"];
+                        teamItemOption.innerText = items[q]["Item"];
                         baseItem.appendChild(teamItemOption);
 
-                        if (items[q]["Icon_"+JSONPath_Items] != undefined) {
-                            teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
+                        if (items[q]["Item"] != undefined) {
+                            teamItemOption.setAttribute("name",items[q]["Item"]);
                         }
                         else {
-                            teamItemOption.setAttribute("name",items[q]["Name_"+JSONPath_Items]);
+                            teamItemOption.setAttribute("name",items[q]["Item"]);
                         }
                     }
                 }
@@ -1194,17 +1194,17 @@ function createParty(base,data) {
         }
         else {
             for (var q = 0; q < items.length; q++) {
-                if (items[q]["Name_"+JSONPath_Items] != undefined) {
+                if (items[q]["Item"] != undefined) {
                     var teamItemOption = document.createElement("option");
-                    teamItemOption.value = items[q]["Name_"+JSONPath_Items];
-                    teamItemOption.innerText = items[q]["Name_"+JSONPath_Items];
+                    teamItemOption.value = items[q]["Item"];
+                    teamItemOption.innerText = items[q]["Item"];
                     baseItem.appendChild(teamItemOption);
 
-                    if (items[q]["Icon_"+JSONPath_Items] != undefined) {
-                        teamItemOption.setAttribute("name",items[q]["Icon_"+JSONPath_Items]);
+                    if (items[q]["Icon"] != undefined) {
+                        teamItemOption.setAttribute("name",items[q]["Item"]);
                     }
                     else {
-                        teamItemOption.setAttribute("name",items[q]["Name_"+JSONPath_Items]);
+                        teamItemOption.setAttribute("name",items[q]["Item"]);
                     }
                 }
             }
