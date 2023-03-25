@@ -200,8 +200,7 @@ var createPokémon = function() {
         teamImg.setAttribute("title","");
         teamImg.addEventListener("click", modalData);
         teamImg.setAttribute("function","modalData");
-        teamImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-        teamImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+        teamImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 
         teamGrab.innerText = "⋮⋮⋮";
         teamStatsButton.setAttribute("type","rotate");
@@ -271,8 +270,7 @@ var createPokémon = function() {
 
             var teamHeldItemImage = document.createElement("img");
             teamHeldItemImage.src = "";
-            teamHeldItemImage.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Misc/FinalDex/Error.png';this.setAttribute('srced','');}");
-            teamHeldItemImage.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+            teamHeldItemImage.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
             teamHeldItemImage.setAttribute("name","item");
             teamHeldItemImage.setAttribute("title","");
             teamImgOuter.appendChild(teamHeldItemImage);
@@ -1360,8 +1358,7 @@ function createContain(condition) {
                     contentPopup.setAttribute("value",i);
                     contentPopup.innerHTML = "✵";
                     contentNationalID.innerText = "#"+ID;
-                    contentImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-                    contentImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+                    contentImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
                     if(formName != undefined) {
                         contentName.innerText = formName;
                         contentImg.setAttribute("id", formName);
