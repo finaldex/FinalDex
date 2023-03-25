@@ -158,7 +158,7 @@
 	height: 100%;
 	position: relative;
 }
-#contain > div#item > section[name='list'] div:first-child > *:first-child {
+#contain > div#item > section[name='list'] > div:first-child > *:first-child {
 	height: 300%;
 }
 
