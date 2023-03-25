@@ -339,8 +339,6 @@ var createItem = function() {
 					if (check) {
 						effect.push(finaldataItemsEffect[q]["Effect"])
 					}
-					console.log(finaldataItemsEffect[q]["Effect"])
-					console.log(finaldataItemsEffect[q]["Index"])
 				}
 			}
 		}
