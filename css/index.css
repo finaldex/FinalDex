@@ -121,7 +121,8 @@ nav > div > div.active {
 #Bug,
 #Metadata > * > *,
 #Sources > * > *,
-#Changelog > * > * {
+#Changelog > * > *,
+#Agenda > * > * {
     transform: scaleX(-1);
 }
 #Games > * > * > *,
@@ -129,7 +130,8 @@ nav > div > div.active {
 #Bug > *,
 #Metadata > * > * > *,
 #Sources > * > * > *,
-#Changelog > * > * > * {
+#Changelog > * > * > *,
+#Agenda > * > * > * {
     transform: scaleX(-1);
 }
 #Games > span header {
@@ -147,6 +149,7 @@ nav > div > div.active {
 #FAQ,
 #Bug,
 #Changelog,
+#Agenda,
 #Sources {
     width: 100%;
     height: 95vh;
@@ -161,6 +164,7 @@ nav > div > div.active {
 #FAQ,
 #Bug,
 #Changelog,
+#Agenda,
 #Sources {
     width:100%;
     height: 95vh;
@@ -302,7 +306,8 @@ nav > div:first-child > span > h2 {
 #Bug > span,
 #Metadata > span,
 #Sources > span,
-#Changelog > span {
+#Changelog > span,
+#Agenda > span {
     width:100%;
     height:100%;
     display: flex;
@@ -316,7 +321,8 @@ nav > div:first-child > span > h2 {
 #Bug > span > ul,
 #Metadata > span > ul,
 #Sources > span > ul,
-#Changelog > span > ul {
+#Changelog > span > ul,
+#Agenda > span > ul {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -378,6 +384,44 @@ nav > div:first-child > span > h2 {
     justify-content: flex-start;
     align-items: center;
 }
+
+
+#Agenda h3 {
+    padding: 10px 0;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Agenda ul pre {
+    padding: 5px 0; 
+}
+#Agenda ul > ol {
+    width: 95%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+#Agenda li {
+    padding: 2px 0;
+    font-size: 0.8em;
+}
+#Agenda li:not(:first-child) {
+    list-style-type: none;
+    margin-left: 20px;
+}
+#Agenda li:not(:first-child) > * {
+    font-size: 90%;
+}
+
+#Agenda ol ul {
+    padding-bottom: 10px;
+}
+
+
 
 #Changelog h3 {
     padding: 10px 0;
@@ -498,6 +542,9 @@ nav > div:first-child > span > h2 {
 }
 #Sources ul ul ul > li {
     list-style-type: none;
+}
+#Agenda li {
+    list-style-type: circle;
 }
 #Changelog li,
 #Metadata ul ul > li,
