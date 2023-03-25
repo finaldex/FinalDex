@@ -291,8 +291,7 @@ var createAbility = function() {
 					var abilitySectionSidebarSidebarLiText = document.createElement("small");
 					abilitySectionSidebarSidebarLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
 					abilitySectionSidebarSidebarLiImg.setAttribute("title", name);
-					abilitySectionSidebarSidebarLiImg.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-					abilitySectionSidebarSidebarLiImg.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+					abilitySectionSidebarSidebarLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 					abilitySectionSidebarSidebarLiText.innerText = name;
 					abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiImgOuter);
 					abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiImg);
