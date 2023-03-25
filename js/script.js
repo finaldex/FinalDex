@@ -1951,8 +1951,7 @@ function storeInBox(data) {
     var shadow = document.createElement("span");
     var img = document.createElement("img");
     img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(i,"Box")+".png";
-    img.setAttribute("onerror","if(this.getAttribute('srced') == null){this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';this.setAttribute('srced','');}");
-    img.setAttribute("onload","if(this.getAttribute('srced') != null){this.removeAttribute('srced')};");
+    img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
     img.setAttribute("value",i);
     box.appendChild(li)
     li.appendChild(shadow)
