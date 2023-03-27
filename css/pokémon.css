@@ -362,6 +362,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
+	box-shadow: 0px 1px 0px var(--border1);
 }
 #pokémon > aside[name='settings'] > span[name="imagetype"] > span {
 	display: flex;
