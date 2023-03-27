@@ -201,6 +201,9 @@ function dataRedirect() {
                 return;
             }
         }
+        else {
+            return;
+        }
       
     }
 
@@ -234,7 +237,7 @@ function dataRedirect() {
         var modalOpen = document.querySelector("#data > div.open");
         var navInput = document.querySelector("#navigation > input[value='"+typevariant+"']");
         var searchExit = document.querySelector('#contain > div#'+where+' section[name="list"] span[name="exit"]');
-        var tar = document.querySelector('#contain > div#'+where+' ol label[data-search-name="'+z+'"]');
+        var tar = document.querySelector('#contain > div#'+where+' ol label[data-title="'+z+'"]');
 
         searchExit.click();
 
