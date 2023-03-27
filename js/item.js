@@ -189,7 +189,8 @@ var createItem = function() {
 			itemSectionListOptionsInput.setAttribute("autocomplete", "off");
 			itemSectionListOptionsInput.value = q;
 			itemSectionListOptionsLabel.setAttribute("for", "item-options-" + q);
-			itemSectionListOptionsLabel.setAttribute("data-search-name", name.toLowerCase());
+			itemSectionListOptionsLabel.setAttribute("data-name", name.toLowerCase());
+			itemSectionListOptionsLabel.setAttribute("data-title", finaldataItems[q]["Item"].toLowerCase());
 
 
 			if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"]).length > 0) {
@@ -248,7 +249,7 @@ var createItem = function() {
             }
         }
     }
-	searchItemAttributes = searchItemAttributes.filter(function(v) {return v !== "data-search-name";});
+
     for(q = 0; q < searchItemAttributes.length; q++) {
         searchItemAttributes[q] = searchItemAttributes[q].replaceAll("data-search-","")
     }
