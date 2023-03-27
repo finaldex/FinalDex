@@ -1009,7 +1009,7 @@ function search(type) {
         tar.style.color = "var(--colorRed)";
     }
     else if (event.target.value.length > 0) {
-        var tags = base.querySelectorAll(':scope > '+tag+':not([data-search-name*="'+searchName+'"])');
+        var tags = base.querySelectorAll(':scope > '+tag+':not([data-name*="'+searchName+'"])');
 		for(i = 0; i < tags.length; i++) {
 			tags[i].classList.add("hidden");
 		}
