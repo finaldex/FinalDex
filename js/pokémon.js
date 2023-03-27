@@ -1362,11 +1362,13 @@ function createContain(condition) {
                     if(formName != undefined) {
                         contentName.innerText = formName;
                         contentImg.setAttribute("id", formName);
-                        contentDiv.setAttribute("data-search-name", formName.toLowerCase());
+                        contentDiv.setAttribute("data-name", formName.toLowerCase());
+                        contentDiv.setAttribute("data-title", formName.toLowerCase());
                     } else {
                         contentName.innerText = Name;
                         contentImg.setAttribute("id", Name);
-                        contentDiv.setAttribute("data-search-name", Name.toLowerCase());
+                        contentDiv.setAttribute("data-name", Name.toLowerCase());
+                        contentDiv.setAttribute("data-title", Name.toLowerCase());
                     }
                     contentDiv.setAttribute("data-national", ID);
                     document.querySelector("#pokémon > div > ul").appendChild(contentDiv);
@@ -1432,7 +1434,7 @@ function createContain(condition) {
             }
         }
     }
-    searchPokémonAttributes = searchPokémonAttributes.filter(function(v) {return v !== "data-search-name";});
+
     for(q = 0; q < searchPokémonAttributes.length; q++) {
         searchPokémonAttributes[q] = searchPokémonAttributes[q].replaceAll("data-search-","")
     }
