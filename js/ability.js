@@ -132,7 +132,8 @@ var createAbility = function() {
 				abilitySectionListOptionsInput.value = q;
 				abilitySectionListOptionsLabel.setAttribute("for","ability-options-"+q);
 				abilitySectionListOptionsLabel.setAttribute("type","medium");
-				abilitySectionListOptionsLabel.setAttribute("data-search-name", finaldataAbility[q]["Ability"].toLowerCase());
+				abilitySectionListOptionsLabel.setAttribute("data-name", finaldataAbility[q]["Ability"].toLowerCase());
+				abilitySectionListOptionsLabel.setAttribute("data-title", finaldataAbility[q]["Ability"].toLowerCase());
 				abilitySectionListOptionsText.innerText = finaldataAbility[q]["Ability"];
 				abilitySectionListOptions.appendChild(abilitySectionListOptionsInput);
 				abilitySectionListOptions.appendChild(abilitySectionListOptionsLabel);
@@ -162,7 +163,7 @@ var createAbility = function() {
 				}
 			}
 		}
-		searchAbilityAttributes = searchAbilityAttributes.filter(function(v) {return v !== "data-search-name";});
+
 		for(q = 0; q < searchAbilityAttributes.length; q++) {
 			searchAbilityAttributes[q] = searchAbilityAttributes[q].replaceAll("data-search-","");
 		}
