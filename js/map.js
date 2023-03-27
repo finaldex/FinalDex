@@ -314,7 +314,8 @@ var createMap = function() {
 		mapSectionListOptionsInput.value = q;
 		mapSectionListOptionsLabel.setAttribute("for", "map-options-"+q);
 		mapSectionListOptionsLabel.setAttribute("type","medium");
-		mapSectionListOptionsLabel.setAttribute("data-search-name", finaldataLocation[q]["Location"].toLowerCase());
+		mapSectionListOptionsLabel.setAttribute("data-name", finaldataLocation[q]["Location"].toLowerCase());
+		mapSectionListOptionsLabel.setAttribute("data-title", finaldataLocation[q]["Location"].toLowerCase());
 		var poi = [];
 		for(var u = 0; u < finaldataLocationPointOfInterest.length; u++) {
 			if (getApplicable(finaldataLocationPointOfInterest[u]["Game"])) {
@@ -364,7 +365,7 @@ var createMap = function() {
             }
         }
     }
-	searchMapAttributes = searchMapAttributes.filter(function(v) {return v !== "data-search-name";});
+
     for(q = 0; q < searchMapAttributes.length; q++) {
         searchMapAttributes[q] = searchMapAttributes[q].replaceAll("data-search-","")
     }
@@ -579,8 +580,8 @@ var createMap = function() {
 
 		mapSectionSidebarDescriptionOviewHeaderText.innerText = "";
 		mapSectionSidebarDescriptionOviewSelector.style.removeProperty("transform");
-		mapSectionSidebarDescriptionOviewButtonLeftButton.value = 0;
-		mapSectionSidebarDescriptionOviewButtonRightButton.value = 0;
+		mapSectionSidebarDescriptionOviewButtonLeftButton.setAttribute("value",0);
+		mapSectionSidebarDescriptionOviewButtonRightButton.setAttribute("value",0);
 
 
 
@@ -1850,7 +1851,7 @@ var createMap = function() {
 
 		for(var q = 0; q < finaldataLocationConnection.length; q++) {
 			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
-				var name = finaldataLocationConnection[q]["Name"];
+				var name = finaldataLocationConnection[q]["Location"];
 				var north = finaldataLocationConnection[q]["North"];
 				var south = finaldataLocationConnection[q]["South"];
 				var west = finaldataLocationConnection[q]["West"];
@@ -2390,7 +2391,7 @@ var createMap = function() {
             }
         }
     }
-	searchMapAttributes = searchMapAttributes.filter(function(v) {return v !== "data-search-name";});
+
     for(q = 0; q < searchMapAttributes.length; q++) {
         searchMapAttributes[q] = searchMapAttributes[q].replaceAll("data-search-","")
     }
