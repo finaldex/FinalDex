@@ -1864,7 +1864,13 @@
 	display: none;
 }
 
-
+#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > span figure {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
