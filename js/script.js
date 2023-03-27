@@ -1136,7 +1136,8 @@ function createParty(base,data) {
         items = sortObjectArray(result,"Pocket");
 
         var obj = new Object();
-        obj["Name"] = "Item";
+        obj["Item"] = "Item";
+        obj["Game"] = "All";
         items.unshift(obj);
 
 
@@ -1150,18 +1151,20 @@ function createParty(base,data) {
                 req[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"];
             }
             for (var q = 0; q < items.length; q++) {
-                if (items[q]["Item"] != undefined) {
-                    if (req.includes(items[q]["Item"])) {
-                        var teamItemOption = document.createElement("option");
-                        teamItemOption.value = items[q]["Item"];
-                        teamItemOption.innerText = items[q]["Item"];
-                        baseItem.appendChild(teamItemOption);
+                if (getApplicable(items[q]["Game"])) {
+                    if (items[q]["Item"] != undefined) {
+                        if (req.includes(items[q]["Item"])) {
+                            var teamItemOption = document.createElement("option");
+                            teamItemOption.value = items[q]["Item"];
+                            teamItemOption.innerText = items[q]["Item"];
+                            baseItem.appendChild(teamItemOption);
 
-                        if (items[q]["Icon"] != undefined) {
-                            teamItemOption.setAttribute("name",items[q]["Icon"]);
-                        }
-                        else {
-                            teamItemOption.setAttribute("name",items[q]["Item"]);
+                            if (items[q]["Icon"] != undefined) {
+                                teamItemOption.setAttribute("name",items[q]["Icon"]);
+                            }
+                            else {
+                                teamItemOption.setAttribute("name",items[q]["Item"]);
+                            }
                         }
                     }
                 }
@@ -1178,18 +1181,20 @@ function createParty(base,data) {
                 notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"];
             }
             for (var q = 0; q < items.length; q++) {
-                if (items[q]["Item"] != undefined) {
-                    if (!notreq.includes(items[q]["Item"])) {
-                        var teamItemOption = document.createElement("option");
-                        teamItemOption.value = items[q]["Item"];
-                        teamItemOption.innerText = items[q]["Item"];
-                        baseItem.appendChild(teamItemOption);
+                if (getApplicable(items[q]["Game"])) {
+                    if (items[q]["Item"] != undefined) {
+                        if (!notreq.includes(items[q]["Item"])) {
+                            var teamItemOption = document.createElement("option");
+                            teamItemOption.value = items[q]["Item"];
+                            teamItemOption.innerText = items[q]["Item"];
+                            baseItem.appendChild(teamItemOption);
 
-                        if (items[q]["Item"] != undefined) {
-                            teamItemOption.setAttribute("name",items[q]["Item"]);
-                        }
-                        else {
-                            teamItemOption.setAttribute("name",items[q]["Item"]);
+                            if (items[q]["Item"] != undefined) {
+                                teamItemOption.setAttribute("name",items[q]["Item"]);
+                            }
+                            else {
+                                teamItemOption.setAttribute("name",items[q]["Item"]);
+                            }
                         }
                     }
                 }
@@ -1197,17 +1202,19 @@ function createParty(base,data) {
         }
         else {
             for (var q = 0; q < items.length; q++) {
-                if (items[q]["Item"] != undefined) {
-                    var teamItemOption = document.createElement("option");
-                    teamItemOption.value = items[q]["Item"];
-                    teamItemOption.innerText = items[q]["Item"];
-                    baseItem.appendChild(teamItemOption);
+                if (getApplicable(items[q]["Game"])) {
+                    if (items[q]["Item"] != undefined) {
+                        var teamItemOption = document.createElement("option");
+                        teamItemOption.value = items[q]["Item"];
+                        teamItemOption.innerText = items[q]["Item"];
+                        baseItem.appendChild(teamItemOption);
 
-                    if (items[q]["Icon"] != undefined) {
-                        teamItemOption.setAttribute("name",items[q]["Item"]);
-                    }
-                    else {
-                        teamItemOption.setAttribute("name",items[q]["Item"]);
+                        if (items[q]["Icon"] != undefined) {
+                            teamItemOption.setAttribute("name",items[q]["Item"]);
+                        }
+                        else {
+                            teamItemOption.setAttribute("name",items[q]["Item"]);
+                        }
                     }
                 }
             }
