@@ -857,8 +857,10 @@ function getItemIcon(item) {
 	var arr = finaldataItems;
 
 	for (var q = 0; q < arr.length; q++) {
-		if (arr[q]["Item"] == item) {
-			return arr[q]["Icon"]
+		if (getApplicable(arr[q]["Game"])) {
+			if (arr[q]["Item"] == item) {
+				return arr[q]["Icon"]
+			}
 		}
 	}
     return;
