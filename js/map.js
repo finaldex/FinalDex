@@ -1016,11 +1016,24 @@ var createMap = function() {
 
 					var mapSectionSidebarDescriptionItemLi = document.createElement("li");
 
+					var locint = getItemLocationInt(items[u]["Item"],items[u]["Description"],location);
+					if (locint == undefined) {
+						for(var r = 0; r < 10; r++) {
+							var ran = getRandomInt(50000,51000);
+							if (localStorage.getItem("location-item"+ran) == undefined) {
+								locint = ran;
+								break;
+							}
+						}
+					}
+
+					
+
 
 					var mapSectionSidebarDescriptionItemLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionItemLiInput.setAttribute("type","checkbox");
 					mapSectionSidebarDescriptionItemLiInput.setAttribute("id","location-item");
-					mapSectionSidebarDescriptionItemLiInput.setAttribute("name","location-item"+getItemLocationInt(items[u]["Item"],items[u]["Description"],location));
+					mapSectionSidebarDescriptionItemLiInput.setAttribute("name","location-item"+locint);
 					mapSectionSidebarDescriptionItemLi.appendChild(mapSectionSidebarDescriptionItemLiInput);
 					mapSectionSidebarDescriptionItemLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
@@ -1325,12 +1338,21 @@ var createMap = function() {
 					var mapSectionSidebarDescriptionPokLi = document.createElement("li");
 					ul.appendChild(mapSectionSidebarDescriptionPokLi);
 
-
+					var locint = getPokémonLocationInt(poks[u]["Pokémon"],poks[u]["Level"],poks[u]["Rate"],poks[u]["Tile"],poks[u]["Encounter"],poks[u]["Mechanic"],location);
+					if (locint == undefined) {
+						for(var r = 0; r < 10; r++) {
+							var ran = getRandomInt(50000,51000);
+							if (localStorage.getItem("location-pokémon"+ran) == undefined) {
+								locint = ran;
+								break;
+							}
+						}
+					}
 
 					var mapSectionSidebarDescriptionPokLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionPokLiInput.setAttribute("type","checkbox");
 					mapSectionSidebarDescriptionPokLiInput.setAttribute("id","location-pokémon");
-					mapSectionSidebarDescriptionPokLiInput.setAttribute("name","location-pokémon"+getPokémonLocationInt(poks[u]["Pokémon"],poks[u]["Level"],poks[u]["Rate"],poks[u]["Tile"],poks[u]["Encounter"],poks[u]["Mechanic"],location));
+					mapSectionSidebarDescriptionPokLiInput.setAttribute("name","location-pokémon"+locint);
 					mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokLiInput);
 					mapSectionSidebarDescriptionPokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
@@ -1758,39 +1780,31 @@ var createMap = function() {
 			subs[q].remove();
 		}
 		mapSectionContentAreaTitle.innerText = "Sub Area/Location";
-		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
-				if(finaldataLocationConnection[q]["Location"] == location && finaldataLocationConnection[q]["Located"] != undefined) {
-					for(var u = 0; u < finaldataLocationConnection[q]["Located"].split(",").length; u++) {
-						var mapSectionContentAreaText = document.createElement("p");
-						mapSectionContentAreaTitle.innerText = "Location";
-						mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Located"].split(",")[u];
-						mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
-						mapSectionContentAreaText.setAttribute("name", "map");
-						mapSectionContentAreaText.addEventListener("click", dataRedirect);
-						mapSectionContentAreaText.setAttribute("function","dataRedirect");
-					}
-				}
-			}
+
+		var areas = getAreasFromLocation(location);
+		var locations = getLocationFromArea(location);
+
+		for(var q = 0; q < locations.length; q++) {
+			var mapSectionContentAreaText = document.createElement("p");
+			mapSectionContentAreaTitle.innerText = "Location";
+			mapSectionContentAreaText.innerText = locations[q];
+			mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
+			mapSectionContentAreaText.setAttribute("name", "map");
+			mapSectionContentAreaText.addEventListener("click", dataRedirect);
+			mapSectionContentAreaText.setAttribute("function","dataRedirect");
 		}
 
-		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
-				if(finaldataLocationConnection[q]["Located"] != undefined) {
-					for(var u = 0; u < finaldataLocationConnection[q]["Located"].split(",").length; u++) {
-						if(finaldataLocationConnection[q]["Located"].split(",")[u] == location) {
-							var mapSectionContentAreaText = document.createElement("p");
-							mapSectionContentAreaTitle.innerText = "Sub Areas";
-							mapSectionContentAreaText.innerText = finaldataLocationConnection[q]["Location"];
-							mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
-							mapSectionContentAreaText.setAttribute("name", "map");
-							mapSectionContentAreaText.addEventListener("click", dataRedirect);
-							mapSectionContentAreaText.setAttribute("function","dataRedirect");
-						}
-					}
-				}
-			}
+		for(var q = 0; q < areas.length; q++) {
+			var mapSectionContentAreaText = document.createElement("p");
+			mapSectionContentAreaTitle.innerText = "Sub Areas";
+			mapSectionContentAreaText.innerText = areas[q];
+			mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
+			mapSectionContentAreaText.setAttribute("name", "map");
+			mapSectionContentAreaText.addEventListener("click", dataRedirect);
+			mapSectionContentAreaText.setAttribute("function","dataRedirect");
 		}
+
+
 		var navs = mapSectionContentNavigationContent.querySelectorAll(":scope > span");
 		for(var q = 0; q < navs.length; q++) {
 			navs[q].remove();
