@@ -170,66 +170,67 @@ var createItem = function() {
 	for(var q = 0; q < finaldataItems.length; q++) {
 		if (getApplicable(finaldataItems[q]["Game"])) {
 			if (finaldataItems[q]["Use"] == "true") {
+				if (getDataArr(finaldataItemsDescription,"Item",finaldataItems[q]["Item"]).length > 0) {
+					var name = finaldataItems[q]["Item"];
 
-				var name = finaldataItems[q]["Item"];
+					if (finaldataItems[q]["Alias"] != undefined) {
+						name += " ("+finaldataItems[q]["Alias"]+")";
+					}
+					else if (getMachineMove(finaldataItems[q]["Item"]) != undefined) {
+						name += " ("+getMachineMove(finaldataItems[q]["Item"])+")";
+					}
 
-				if (finaldataItems[q]["Alias"] != undefined) {
-					name += " ("+finaldataItems[q]["Alias"]+")";
+					var itemSectionListOptionsInput = document.createElement("input");
+					var itemSectionListOptionsLabel = document.createElement("label");
+					var itemSectionListOptionsLabelText = document.createElement("p");
+					itemSectionListOptionsInput.setAttribute("type", "radio");
+					itemSectionListOptionsInput.setAttribute("name", "item-options");
+					itemSectionListOptionsInput.setAttribute("id", "item-options-" + q);
+					itemSectionListOptionsInput.setAttribute("autocomplete", "off");
+					itemSectionListOptionsInput.value = q;
+					itemSectionListOptionsLabel.setAttribute("for", "item-options-" + q);
+					itemSectionListOptionsLabel.setAttribute("data-name", name.toLowerCase());
+					itemSectionListOptionsLabel.setAttribute("data-title", finaldataItems[q]["Item"].toLowerCase());
+
+
+					if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"]).length > 0) {
+						if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"] != undefined) {
+							itemSectionListOptionsLabel.setAttribute("data-search-price",getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"]);
+						}
+						else {
+							itemSectionListOptionsLabel.setAttribute("data-search-price",0);
+						}
+					}
+					else {
+						itemSectionListOptionsLabel.setAttribute("data-search-price",0);
+					}
+					
+
+					if (finaldataItems[q]["Pocket"] != undefined) {
+						itemSectionListOptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket"].toLowerCase());
+					}
+					itemSectionListOptionsLabel.setAttribute("type","medium");
+					if (finaldataItems[q]["Icon"] != undefined) {
+						var itemSectionListOptionsLabelImageOuter = document.createElement("span");
+						var itemSectionListOptionsLabelImage = document.createElement("img");
+						itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon"]+".png";
+						itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
+						itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
+						itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
+					}
+				
+					itemSectionListOptionsLabelText.innerText = name;
+					
+					itemSectionListOptions.appendChild(itemSectionListOptionsInput);
+					itemSectionListOptions.appendChild(itemSectionListOptionsLabel);
+
+					itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelText);
+					itemSectionListOptionsInput.addEventListener("click", itemOptionsSelector);
+
+					itemSectionListOptionsLabel.setAttribute("tabindex",q+10);
+					itemSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;itemOptionsSelector(event.target.previousElementSibling.value);}}});
+
 				}
-				else if (getMachineMove(finaldataItems[q]["Item"]) != undefined) {
-					name += " ("+getMachineMove(finaldataItems[q]["Item"])+")";
-				}
-
-			var itemSectionListOptionsInput = document.createElement("input");
-			var itemSectionListOptionsLabel = document.createElement("label");
-			var itemSectionListOptionsLabelText = document.createElement("p");
-			itemSectionListOptionsInput.setAttribute("type", "radio");
-			itemSectionListOptionsInput.setAttribute("name", "item-options");
-			itemSectionListOptionsInput.setAttribute("id", "item-options-" + q);
-			itemSectionListOptionsInput.setAttribute("autocomplete", "off");
-			itemSectionListOptionsInput.value = q;
-			itemSectionListOptionsLabel.setAttribute("for", "item-options-" + q);
-			itemSectionListOptionsLabel.setAttribute("data-name", name.toLowerCase());
-			itemSectionListOptionsLabel.setAttribute("data-title", finaldataItems[q]["Item"].toLowerCase());
-
-
-			if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"]).length > 0) {
-				if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"] != undefined) {
-					itemSectionListOptionsLabel.setAttribute("data-search-price",getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"]);
-				}
-				else {
-					itemSectionListOptionsLabel.setAttribute("data-search-price",0);
-				}
-			}
-			else {
-				itemSectionListOptionsLabel.setAttribute("data-search-price",0);
-			}
-			
-
-			if (finaldataItems[q]["Pocket"] != undefined) {
-				itemSectionListOptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket"].toLowerCase());
-			}
-			itemSectionListOptionsLabel.setAttribute("type","medium");
-			if (finaldataItems[q]["Icon"] != undefined) {
-				var itemSectionListOptionsLabelImageOuter = document.createElement("span");
-				var itemSectionListOptionsLabelImage = document.createElement("img");
-				itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon"]+".png";
-				itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
-				itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
-				itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
-			}
-		
-			itemSectionListOptionsLabelText.innerText = name;
-			
-			itemSectionListOptions.appendChild(itemSectionListOptionsInput);
-			itemSectionListOptions.appendChild(itemSectionListOptionsLabel);
-
-			itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelText);
-			itemSectionListOptionsInput.addEventListener("click", itemOptionsSelector);
-
-			itemSectionListOptionsLabel.setAttribute("tabindex",q+10);
-			itemSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;itemOptionsSelector(event.target.previousElementSibling.value);}}});
-
 			}
 		}
 
