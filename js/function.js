@@ -64,7 +64,7 @@ function getItemLocationInt(obj,description,location) {
 	var description;
 	var location;
 
-	arr = finaldataItems;
+	arr = finaldataLocationItems;
 
 
 	for(var i = 0; i < arr.length; i++) {
@@ -78,6 +78,11 @@ function getItemLocationInt(obj,description,location) {
 			}
 		}
 	}
+}
+
+
+function getRandomInt(min,max) {
+	return Math.random() * (max - min) + min;
 }
 
 
