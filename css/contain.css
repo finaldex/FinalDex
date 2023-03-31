@@ -2118,6 +2118,9 @@
 #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li span[name="pok"] > * {
 	padding: 2px 0;
 }
+#contain div#map > section[name="sidebar"] > div > *[name] small {
+	display:block;
+}
 
 #contain div#map > section[name="sidebar"] > div > *[name='items'] ul li span[name="description"] {
 	width: 100%;
