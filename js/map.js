@@ -2195,8 +2195,7 @@ var createMap = function() {
 					}
 
 					if (ability != undefined) {
-						console.log(ability)
-						console.log(getDataArr(finaldataAbilityDescription,"Ability",ability))
+
 						var mapSectionSidebarDescriptionTrainerAbility = document.createElement("b");
 						var mapSectionSidebarDescriptionTrainerAbilityText = document.createElement("p");
 						mapSectionSidebarDescriptionTrainerAbilityText.innerText = ability;
