@@ -2,11 +2,11 @@ var wsrc = ["Home","Games","FAQ","Bug","Metadata","Sources","Changelog"]
 
 function build() {
 
-var GamesFull = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD: Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Let's Go, Pikachu!","Let's Go, Eevee!","Sword","Shield"];
-var GamesSimple = ["Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield"];
-var GamesGeneration = [1,1,1,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,7,7,8,8]
-var GamesArt = ["Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","Hoenn_RS","Hoenn_RS","","Kanto_FRLG","Kanto_FRLG","Hoenn_E","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","JohtoKanto_HGSS","JohtoKanto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
-var GamesDescription = ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""];
+var GamesFull = ["random","Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD: Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Let's Go, Pikachu!","Let's Go, Eevee!","Sword","Shield"];
+var GamesSimple = ["random","Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield"];
+var GamesGeneration = [0,1,1,1,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,7,7,8,8]
+var GamesArt = ["","Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","Hoenn_RS","Hoenn_RS","","Kanto_FRLG","Kanto_FRLG","Hoenn_E","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","JohtoKanto_HGSS","JohtoKanto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
+var GamesTitle = ["Random","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
 
 
 
@@ -32,6 +32,8 @@ for (var i = 0; i < GamesFull.length; i++) {
         li.classList.add("miss");
     }
 
+
+
     var titlewrap = document.createElement("a");
     var title = document.createElement("img");
     title.src = "./media/Images/Misc/Title/Text/" + GamesSimple[i] + ".png";
@@ -41,6 +43,12 @@ for (var i = 0; i < GamesFull.length; i++) {
     titlewrap.setAttribute("tabindex","-1");
     li.appendChild(titlewrap)
     titlewrap.appendChild(title)
+
+    if (GamesTitle[i] != "") {
+      var h = document.createElement("h1");
+      h.innerText = GamesTitle[i];
+      titlewrap.appendChild(h);
+    }
 
 }
 
