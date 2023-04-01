@@ -2059,25 +2059,32 @@ var createMap = function() {
 			mapSectionSidebarDescriptionTrainerUlTopTitleValueTitle.innerText = "Reward:"
 			mapSectionSidebarDescriptionTrainerUlTopTitleValue.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueTitle)
 
-			if (trainerRewardCount == undefined) {
-				trainerRewardCount = 1;
+			var rwcount = trainerRewardCount;
+			if (rwcount == undefined) {
+				rwcount = 1;
+			}
+			if (rwcount > 5) {
+				rwcount = 5;
 			}
 
-			for(var u = 0; u < trainerRewardCount; u++) {
+			var mapSectionSidebarDescriptionTrainerUlTopTitleValueImgWrap = document.createElement("span");
+			mapSectionSidebarDescriptionTrainerUlTopTitleValue.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueImgWrap);
+
+			for(var u = 0; u < rwcount; u++) {
 				var mapSectionSidebarDescriptionTrainerUlTopTitleValueImg = document.createElement("img");
 				mapSectionSidebarDescriptionTrainerUlTopTitleValueImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(trainerReward)+".png";
-				if (trainerRewardCount != 1) {
+				if (rwcount != 1) {
 					mapSectionSidebarDescriptionTrainerUlTopTitleValueImg.title = trainerRewardCount+"x "+trainerReward;
 				}
 				else {
 					mapSectionSidebarDescriptionTrainerUlTopTitleValueImg.title = trainerReward;
 				}
-				mapSectionSidebarDescriptionTrainerUlTopTitleValueImg.setAttribute("onerror","this.style.display='none';this.parentElement.lastChild.style.display='unset';")
-				mapSectionSidebarDescriptionTrainerUlTopTitleValue.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueImg)
+				mapSectionSidebarDescriptionTrainerUlTopTitleValueImg.setAttribute("onerror","this.style.display='none';this.parentElement.parentElement.lastChild.style.display='unset';")
+				mapSectionSidebarDescriptionTrainerUlTopTitleValueImgWrap.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueImg)
 			}
 
 			var mapSectionSidebarDescriptionTrainerUlTopTitleValueText = document.createElement("h6");
-			if (trainerRewardCount != 1) {
+			if (rwcount != 1) {
 				mapSectionSidebarDescriptionTrainerUlTopTitleValueText.innerText = trainerRewardCount+"x "+trainerReward;
 			}
 			else {
@@ -2111,390 +2118,412 @@ var createMap = function() {
 
 
 		if (trainerItem != undefined) {
-			if (trainerItemCount == undefined) {
-				trainerItemCount = 1;
+			var itcount = trainerItemCount;
+			if (itcount == undefined) {
+				itcount = 1;
 			}
+			if (itcount > 5) {
+				itcount = 5;
+			}
+			
+			var mapSectionSidebarDescriptionTrainerUlTopItemsImageWrap = document.createElement("span");
+			mapSectionSidebarDescriptionTrainerUlTopItems.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsImageWrap);
 
-			for(var u = 0; u < trainerItemCount; u++) {
+			for(var u = 0; u < itcount; u++) {
 				var mapSectionSidebarDescriptionTrainerUlTopItemsImage = document.createElement("img");
 				mapSectionSidebarDescriptionTrainerUlTopItemsImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(trainerItem)+".png";
-				if (trainerItemCount != 1) {
+				if (itcount != 1) {
 					mapSectionSidebarDescriptionTrainerUlTopItemsImage.title = trainerItemCount+"x "+trainerItem;
 				}
 				else {
 					mapSectionSidebarDescriptionTrainerUlTopItemsImage.title = trainerItem;
 				}
-				mapSectionSidebarDescriptionTrainerUlTopItemsImage.setAttribute("onerror","this.style.display='none';this.parentElement.lastChild.style.display='unset';");
-				mapSectionSidebarDescriptionTrainerUlTopItems.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsImage);
+				mapSectionSidebarDescriptionTrainerUlTopItemsImage.setAttribute("onerror","this.style.display='none';this.parentElement.parentElement.lastChild.style.display='unset';");
+				mapSectionSidebarDescriptionTrainerUlTopItemsImageWrap.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsImage);
 			}
 
 			var mapSectionSidebarDescriptionTrainerUlTopItemsText = document.createElement("h6");
-			if (trainerItemCount != 1) {
+			if (itcount != 1) {
 				mapSectionSidebarDescriptionTrainerUlTopItemsText.innerText = trainerItemCount+"x "+trainerItem;
 			}
 			else {
 				mapSectionSidebarDescriptionTrainerUlTopItemsText.innerText = trainerItem;
 			}
 			mapSectionSidebarDescriptionTrainerUlTopItems.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsText);
+			mapSectionSidebarDescriptionTrainerUlTopItemsText.style.display = "none";
 		}
 
 		var groups = [];
-
+		var datas = [];
 		if (trainers[q]["Pokémon"].includes("\n")) {
-			var datas = trainers[q]["Pokémon"].split("\n");
-			for(var u = 0; u < datas.length; u++) {
+			datas = trainers[q]["Pokémon"].split("\n");
+		}
+		else {
+			datas = [datas]
+		}
+
+		
+		for(var u = 0; u < datas.length; u++) {
+		
+			var data = datas[u];
+			var pok = undefined;
+			var item = undefined;
+			var level = undefined;
+			var gender = undefined;
+			var move = undefined;
+			var ability = undefined;
+			var iv = undefined;
+			var ev = undefined;
+			var nature = undefined;
+
+			if(data.includes("|")) {
+				data = data.split("|")
+				for (var r = 0; r < data.length; r++) {
+					if (data[r].split(":")[0] == "pok") {
+						pok = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "it") {
+						item = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "lv") {
+						level = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "ge") {
+						gender = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "mo") {
+						move = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "ab") {
+						ability = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "iv") {
+						iv = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "ev") {
+						ev = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+					if (data[r].split(":")[0] == "na") {
+						nature = data[r].replaceAll(data[r].split(":")[0]+":","")
+					}
+				}
+			}
+			else {
+				if (data.split(":")[0] == "pok") {
+					pok = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "it") {
+					item = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "lv") {
+					level = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "ge") {
+					gender = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "mo") {
+					move = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "ab") {
+					ability = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "iv") {
+					iv = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "ev") {
+					ev = data.replaceAll(data.split(":")[0]+":","")
+				}
+				if (data.split(":")[0] == "na") {
+					nature = data.replaceAll(data.split(":")[0]+":","")
+				}
+			}
+
 			
 
-
-
-				var data = datas[u];
-				var pok = undefined;
-				var item = undefined;
-				var level = undefined;
-				var gender = undefined;
-				var move = undefined;
-				var ability = undefined;
-				var iv = undefined;
-				var ev = undefined;
-				var nature = undefined;
-
-				if(data.includes("|")) {
-					data = data.split("|")
-					for (var r = 0; r < data.length; r++) {
-						if (data[r].split(":")[0] == "pok") {
-							pok = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "it") {
-							item = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "lv") {
-							level = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "ge") {
-							gender = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "mo") {
-							move = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "ab") {
-							ability = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "iv") {
-							iv = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "ev") {
-							ev = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
-						if (data[r].split(":")[0] == "na") {
-							nature = data[r].replaceAll(data[r].split(":")[0]+":","")
-						}
+			if (trainers[q]["Grouping"] != undefined) {
+				if (trainers[q]["Grouping"].includes("|")) {
+					if (!groups.includes(trainers[q]["Grouping"].split("|")[u])) {
+						var grp = document.createElement("span");
+						var grptxt = document.createElement("h6");
+						grptxt.innerText = trainers[q]["Grouping"].split("|")[u];
+						mapSectionSidebarDescriptionTrainerUlContent.appendChild(grp);
+						grp.appendChild(grptxt);
 					}
+			
+					groups.push(trainers[q]["Grouping"].split("|")[u])
 				}
 				else {
-					if (data.split(":")[0] == "pok") {
-						pok = data.replaceAll(data.split(":")[0]+":","")
+					if (!groups.includes(trainers[q]["Grouping"][u])) {
+						var grp = document.createElement("span");
+						var grptxt = document.createElement("h6");
+						grptxt.innerText = trainers[q]["Grouping"][u];
+						mapSectionSidebarDescriptionTrainerUlContent.appendChild(grp);
+						grp.appendChild(grptxt);
 					}
-					if (data.split(":")[0] == "it") {
-						item = data.replaceAll(data.split(":")[0]+":","")
-					}
-					if (data.split(":")[0] == "lv") {
-						level = data.replaceAll(data.split(":")[0]+":","")
-					}
-					if (data.split(":")[0] == "ge") {
-						gender = data.replaceAll(data.split(":")[0]+":","")
-					}
-					if (data.split(":")[0] == "mo") {
-						move = data.replaceAll(data.split(":")[0]+":","")
-					}
-					if (data.split(":")[0] == "ab") {
-						ability = data.replaceAll(data.split(":")[0]+":","")
-					}
-					if (data.split(":")[0] == "iv") {
-						iv = data.replaceAll(data.split(":")[0]+":","")
-					}
-					if (data.split(":")[0] == "ev") {
-						ev = data.replaceAll(data.split(":")[0]+":","")
-					}
-					if (data.split(":")[0] == "na") {
-						nature = data.replaceAll(data.split(":")[0]+":","")
-					}
-				}
-
-				
-
-
-				console.log(groups)
-				if (!groups.includes(trainers[q]["Grouping"].split("|")[u])) {
-					console.log(groups)
-					var grp = document.createElement("span");
-					var grptxt = document.createElement("h6");
-					grptxt.innerText = trainers[q]["Grouping"].split("|")[u];
-					mapSectionSidebarDescriptionTrainerUlContent.appendChild(grp);
-					grp.appendChild(grptxt);
-				}
-				console.log(trainers[q]["Grouping"].split("|")[u])
-				groups.push(trainers[q]["Grouping"].split("|")[u])
 			
-
-
-				var mapSectionSidebarDescriptionTrainerLi = document.createElement("li");
-				mapSectionSidebarDescriptionTrainerUlContent.appendChild(mapSectionSidebarDescriptionTrainerLi);
-
-
-				var dvs = mapSectionSidebarDescriptionTrainerUlTopTitleCount.querySelectorAll(":scope > *");
-				for (var t = 0; t < dvs.length; t++) {
-					dvs[t].remove();
+					groups.push(trainers[q]["Grouping"][u])
 				}
-
-
-				for (var t = 0; t < 6; t++) {
-					var outer = document.createElement("span");
-					mapSectionSidebarDescriptionTrainerUlTopTitleCount.appendChild(outer);
-
-					if (datas[t] != undefined) {
-						var ball = document.createElement("div");
-						ball.classList.add("pokéball");
-						outer.appendChild(ball);
-					}
-					else {
-						var empty = document.createElement("div");
-						empty.classList.add("empty");
-						outer.appendChild(empty);
-					}
-				}
-
-				if (nature != undefined || ability != undefined || level != undefined || gender != undefined) {
-					var mapSectionSidebarDescriptionTrainerAdditional = document.createElement("div");
-					var mapSectionSidebarDescriptionTrainerAdditionalInner = document.createElement("span");
-					mapSectionSidebarDescriptionTrainerAdditional.setAttribute("name", "Additional");
-					mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerAdditional);
-					mapSectionSidebarDescriptionTrainerAdditional.appendChild(mapSectionSidebarDescriptionTrainerAdditionalInner);
-
-					if (move == undefined && iv == undefined && ev == undefined) {
-						mapSectionSidebarDescriptionTrainerAdditional.style.width = "25%";
-					}
-				
-					if (nature != undefined) {
-						var mapSectionSidebarDescriptionTrainerNature = document.createElement("small");
-						mapSectionSidebarDescriptionTrainerNature.innerText = nature;
-						if (getNatureTitle(nature) == "Neutral") {
-							mapSectionSidebarDescriptionTrainerNature.title = "Neutral Nature";
-						}
-						else {
-							mapSectionSidebarDescriptionTrainerNature.title = getNatureTitle(nature);
-						}
-						mapSectionSidebarDescriptionTrainerNature.setAttribute("name","nature");
-						mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerNature);
-					}
-
-					if (ability != undefined) {
-						var desc = getDataArr(finaldataAbilityDescription,"Ability",ability);
-
-						var mapSectionSidebarDescriptionTrainerAbility = document.createElement("b");
-						var mapSectionSidebarDescriptionTrainerAbilityText = document.createElement("p");
-						mapSectionSidebarDescriptionTrainerAbilityText.innerText = ability;
-						mapSectionSidebarDescriptionTrainerAbility.title = getAbilityPosition(getPokémonInt(pok),ability)+" Ability";
-						if (desc.length > 0) {
-							mapSectionSidebarDescriptionTrainerAbility.title += "\n"+desc[0]["Description"];
-						}
-						else {
-							console.log(ability+" is missing description?");
-						}
-						mapSectionSidebarDescriptionTrainerAbility.setAttribute("name","ability");
-						mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerAbility);
-						mapSectionSidebarDescriptionTrainerAbility.appendChild(mapSectionSidebarDescriptionTrainerAbilityText);
-						mapSectionSidebarDescriptionTrainerAbility.addEventListener("click", dataRedirect);
-						mapSectionSidebarDescriptionTrainerAbility.setAttribute("function","dataRedirect");
-					}
-					if (level != undefined) {
-						var mapSectionSidebarDescriptionTrainerLv = document.createElement("small");
-						if (level.includes("-")) {
-							mapSectionSidebarDescriptionTrainerLv.innerText = "Lvls. "+level;
-						}
-						else {
-							mapSectionSidebarDescriptionTrainerLv.innerText = "Lvl. "+level;
-						}
-						mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerLv);
-					}
-					if (gender != undefined) {
-						var mapSectionSidebarDescriptionTrainerGender = document.createElement("small");
-						mapSectionSidebarDescriptionTrainerGender.setAttribute("name","gender");
-						if (gender == "♂") {
-							mapSectionSidebarDescriptionTrainerGender.setAttribute("title", "Male");
-						}
-						if(gender == "♀") {
-							mapSectionSidebarDescriptionTrainerGender.setAttribute("title", "Female");
-						}
-						if(gender == "☿") {
-							mapSectionSidebarDescriptionTrainerGender.setAttribute("title", "Genderless");
-						}
-						mapSectionSidebarDescriptionTrainerGender.innerText = gender;
-						mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerGender);
-					}
-				}
-
-
-				var mapSectionSidebarDescriptionTrainerPokémon = document.createElement("div");
-				var mapSectionSidebarDescriptionTrainerPokémonImageOuter = document.createElement("span");
-				mapSectionSidebarDescriptionTrainerPokémon.setAttribute("name", "Pokémon");
-				mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerPokémon);
-				mapSectionSidebarDescriptionTrainerPokémon.appendChild(mapSectionSidebarDescriptionTrainerPokémonImageOuter);
-
-				if (item != undefined) {
-					var mapSectionSidebarDescriptionTrainerHeldItem = document.createElement("img");
-					mapSectionSidebarDescriptionTrainerHeldItem.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+item+".png";
-					mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-					mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("title",item);
-					mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("name","item");
-					mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("value",item);
-					mapSectionSidebarDescriptionTrainerPokémon.appendChild(mapSectionSidebarDescriptionTrainerHeldItem);
-					mapSectionSidebarDescriptionTrainerHeldItem.addEventListener("click", dataRedirect);
-					mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("function","dataRedirect");
-				}
-
-				var mapSectionSidebarDescriptionTrainerPokémonImage = document.createElement("img");
-				mapSectionSidebarDescriptionTrainerPokémonImage.src = "./media/Images/Pokémon/Battle/PNG/Default/Front/"+ImageTypes[0]["path"]+"/"+getPokémonMediaPath(getPokémonInt(pok),"Battle")+".png";
-				mapSectionSidebarDescriptionTrainerPokémonImage.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-				mapSectionSidebarDescriptionTrainerPokémonImage.setAttribute("title", pok);
-				mapSectionSidebarDescriptionTrainerPokémonImageOuter.setAttribute("value",getPokémonInt(pok));
-				mapSectionSidebarDescriptionTrainerPokémonImageOuter.appendChild(mapSectionSidebarDescriptionTrainerPokémonImage);
-				mapSectionSidebarDescriptionTrainerPokémonImageOuter.addEventListener("click", modalData);
-				mapSectionSidebarDescriptionTrainerPokémonImageOuter.setAttribute("function","modalData");
-
-				var mapSectionSidebarDescriptionTrainerPokémonText = document.createElement("small");
-				mapSectionSidebarDescriptionTrainerPokémonText.innerText = pok;
-				mapSectionSidebarDescriptionTrainerPokémonImageOuter.appendChild(mapSectionSidebarDescriptionTrainerPokémonText);
-
-				if (move != undefined || iv != undefined || ev != undefined) {
-					var mapSectionSidebarDescriptionTrainerData = document.createElement("div");
-					mapSectionSidebarDescriptionTrainerData.setAttribute("name","data");
-					mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerData);
-				}
-
-				if (move != undefined) {
-					var moves = undefined;
-					var mapSectionSidebarDescriptionTrainerMove = document.createElement("div");
-					mapSectionSidebarDescriptionTrainerMove.setAttribute("name", "moves");
-					mapSectionSidebarDescriptionTrainerData.appendChild(mapSectionSidebarDescriptionTrainerMove);
-
-					if (move.includes(",")) {
-						moves = move.split(",");
-					}
-					else {
-						moves = move;
-					}
-					for(var y = 0; y < moves.length; y++) {
-						var mapSectionSidebarDescriptionTrainerMoveTextOuter = document.createElement("b");
-						var mapSectionSidebarDescriptionTrainerMoveText = document.createElement("p");
-						mapSectionSidebarDescriptionTrainerMoveText.innerText = moves[y];
-						mapSectionSidebarDescriptionTrainerMoveTextOuter.title = formatMoveData(moves[y]);
-						mapSectionSidebarDescriptionTrainerMoveTextOuter.style.color = "var(--type"+getMoveData(moves[y],"Type")+")";
-						mapSectionSidebarDescriptionTrainerMoveTextOuter.setAttribute("name","move");
-						mapSectionSidebarDescriptionTrainerMove.appendChild(mapSectionSidebarDescriptionTrainerMoveTextOuter);
-						mapSectionSidebarDescriptionTrainerMoveTextOuter.appendChild(mapSectionSidebarDescriptionTrainerMoveText);
-						mapSectionSidebarDescriptionTrainerMoveTextOuter.addEventListener("click", dataRedirect);
-						mapSectionSidebarDescriptionTrainerMoveTextOuter.setAttribute("function","dataRedirect");
-					}
-				}
-
-				if (iv != undefined) {
-					var ivs = undefined;
-					var mapSectionSidebarDescriptionTrainerIV = document.createElement("div");
-					mapSectionSidebarDescriptionTrainerIV.setAttribute("name", "ivs");
-					mapSectionSidebarDescriptionTrainerData.appendChild(mapSectionSidebarDescriptionTrainerIV);
-					mapSectionSidebarDescriptionTrainerIVHeader 
-					var mapSectionSidebarDescriptionTrainerIVHeader = document.createElement("small");
-					mapSectionSidebarDescriptionTrainerIVHeader.innerText = "Individual Values";
-					mapSectionSidebarDescriptionTrainerIV.appendChild(mapSectionSidebarDescriptionTrainerIVHeader);
-					if (iv.includes(",")) {
-						ivs = iv.split(",");
-					}
-					else {
-						ivs = iv;
-					}
-					for(var y = 0; y < ivs.length; y++) {
-						if (ivs[y] != "") {
-							var mapSectionSidebarDescriptionTrainerIVText = document.createElement("small");
-							mapSectionSidebarDescriptionTrainerIVText.setAttribute("name","iv");
-							mapSectionSidebarDescriptionTrainerIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+": </span>"+ivs[y];
-							mapSectionSidebarDescriptionTrainerIV.appendChild(mapSectionSidebarDescriptionTrainerIVText);
-						}
-					}
-				}
-
-				if (ev != undefined) {
-					var evs = undefined;
-					var mapSectionSidebarDescriptionTrainerEV = document.createElement("div");
-					mapSectionSidebarDescriptionTrainerEV.setAttribute("name", "evs");
-					mapSectionSidebarDescriptionTrainerData.appendChild(mapSectionSidebarDescriptionTrainerEV);
-
-					var mapSectionSidebarDescriptionTrainerEVHeader = document.createElement("small");
-					mapSectionSidebarDescriptionTrainerEVHeader.innerText = "Effort Values";
-					mapSectionSidebarDescriptionTrainerEV.appendChild(mapSectionSidebarDescriptionTrainerEVHeader);
-
-					if (ev.includes(",")) {
-						evs = ev.split(",");
-					}
-					else {
-						evs = ev;
-					}
-					for(var y = 0; y < evs.length; y++) {
-						if (evs[y] != "") {
-							var mapSectionSidebarDescriptionTrainerEVText = document.createElement("small");
-							mapSectionSidebarDescriptionTrainerEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+": </span>"+evs[y];
-							mapSectionSidebarDescriptionTrainerEVText.setAttribute("name","ev");
-							mapSectionSidebarDescriptionTrainerEV.appendChild(mapSectionSidebarDescriptionTrainerEVText);
-						}
-					}
-				}
-	
-				var p = "";
-				var a = "";
-	
-
-	
-
-				if (datas[u].includes("pok:")) {
-					p = datas[u].match(/pok:(.*?)*/g)[0].replaceAll(/\|(.*?)*/g,"").split(":")[1];
-				}
-				if (datas[u].includes("ab:")) {
-					a = datas[u].match(/ab:(.*?)*/g)[0].replaceAll(/\|(.*?)*/g,"").split(":")[1];
-				}
-
-
-				
-
-				var mapSectionSidebarDescriptionTrainerButtonsExport = document.createElement("figure");
-				var mapSectionSidebarDescriptionTrainerButtonsExportText = document.createElement("p");
-				mapSectionSidebarDescriptionTrainerButtonsExportText.innerText = "➢";
-
-			
-				mapSectionSidebarDescriptionTrainerButtonsExport.value = datas[u].replaceAll(a,getAbilityPosition(getPokémonInt(p),a));
-				mapSectionSidebarDescriptionTrainerButtonsExport.title = "Export Pokémon Buttons String";
-				mapSectionSidebarDescriptionTrainerButtonsExport.setAttribute("name","export");
-				mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerButtonsExport);
-				mapSectionSidebarDescriptionTrainerButtonsExport.appendChild(mapSectionSidebarDescriptionTrainerButtonsExportText);
-				mapSectionSidebarDescriptionTrainerButtonsExport.addEventListener("click", trainerPokExport);
-
-				if (move != undefined || iv != undefined || ev != undefined ) {
-					var adds = mapSectionSidebarDescriptionTrainerLi.querySelectorAll(':scope > div[name="data"] > div[name]');
-					if (adds.length > 1) {
-						var mapSectionSidebarDescriptionTrainerButtonsCycle = document.createElement("figure");
-						var mapSectionSidebarDescriptionTrainerButtonsCycleText = document.createElement("p");
-						mapSectionSidebarDescriptionTrainerButtonsCycleText.innerText = "⟲";
-						mapSectionSidebarDescriptionTrainerButtonsCycle.setAttribute("value","ivs");
-						mapSectionSidebarDescriptionTrainerButtonsCycle.setAttribute("name","cycle");
-						mapSectionSidebarDescriptionTrainerButtonsCycle.setAttribute("type","rotate");
-						mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerButtonsCycle);
-						mapSectionSidebarDescriptionTrainerButtonsCycle.appendChild(mapSectionSidebarDescriptionTrainerButtonsCycleText);
-						mapSectionSidebarDescriptionTrainerButtonsCycle.addEventListener("click", trainerPokCycle);
-					}
-				}
-
-
-
 			}
+
+
+			var mapSectionSidebarDescriptionTrainerLi = document.createElement("li");
+			mapSectionSidebarDescriptionTrainerUlContent.appendChild(mapSectionSidebarDescriptionTrainerLi);
+
+
+			var dvs = mapSectionSidebarDescriptionTrainerUlTopTitleCount.querySelectorAll(":scope > *");
+			for (var t = 0; t < dvs.length; t++) {
+				dvs[t].remove();
+			}
+
+
+			for (var t = 0; t < 6; t++) {
+				var outer = document.createElement("span");
+				mapSectionSidebarDescriptionTrainerUlTopTitleCount.appendChild(outer);
+
+				if (datas[t] != undefined) {
+					var ball = document.createElement("div");
+					ball.classList.add("pokéball");
+					outer.appendChild(ball);
+				}
+				else {
+					var empty = document.createElement("div");
+					empty.classList.add("empty");
+					outer.appendChild(empty);
+				}
+			}
+
+			if (nature != undefined || ability != undefined || level != undefined || gender != undefined) {
+				var mapSectionSidebarDescriptionTrainerAdditional = document.createElement("div");
+				var mapSectionSidebarDescriptionTrainerAdditionalInner = document.createElement("span");
+				mapSectionSidebarDescriptionTrainerAdditional.setAttribute("name", "Additional");
+				mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerAdditional);
+				mapSectionSidebarDescriptionTrainerAdditional.appendChild(mapSectionSidebarDescriptionTrainerAdditionalInner);
+
+				if (move == undefined && iv == undefined && ev == undefined) {
+					mapSectionSidebarDescriptionTrainerAdditional.style.width = "25%";
+				}
+			
+				if (nature != undefined) {
+					var mapSectionSidebarDescriptionTrainerNature = document.createElement("small");
+					mapSectionSidebarDescriptionTrainerNature.innerText = nature;
+					if (getNatureTitle(nature) == "Neutral") {
+						mapSectionSidebarDescriptionTrainerNature.title = "Neutral Nature";
+					}
+					else {
+						mapSectionSidebarDescriptionTrainerNature.title = getNatureTitle(nature);
+					}
+					mapSectionSidebarDescriptionTrainerNature.setAttribute("name","nature");
+					mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerNature);
+				}
+
+				if (ability != undefined) {
+					var desc = getDataArr(finaldataAbilityDescription,"Ability",ability);
+
+					var mapSectionSidebarDescriptionTrainerAbility = document.createElement("b");
+					var mapSectionSidebarDescriptionTrainerAbilityText = document.createElement("p");
+					mapSectionSidebarDescriptionTrainerAbilityText.innerText = ability;
+					mapSectionSidebarDescriptionTrainerAbility.title = getAbilityPosition(getPokémonInt(pok),ability)+" Ability";
+					if (desc.length > 0) {
+						mapSectionSidebarDescriptionTrainerAbility.title += "\n"+desc[0]["Description"];
+					}
+					else {
+						console.log(ability+" is missing description?");
+					}
+					mapSectionSidebarDescriptionTrainerAbility.setAttribute("name","ability");
+					mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerAbility);
+					mapSectionSidebarDescriptionTrainerAbility.appendChild(mapSectionSidebarDescriptionTrainerAbilityText);
+					mapSectionSidebarDescriptionTrainerAbility.addEventListener("click", dataRedirect);
+					mapSectionSidebarDescriptionTrainerAbility.setAttribute("function","dataRedirect");
+				}
+				if (level != undefined) {
+					var mapSectionSidebarDescriptionTrainerLv = document.createElement("small");
+					if (level.includes("-")) {
+						mapSectionSidebarDescriptionTrainerLv.innerText = "Lvls. "+level;
+					}
+					else {
+						mapSectionSidebarDescriptionTrainerLv.innerText = "Lvl. "+level;
+					}
+					mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerLv);
+				}
+				if (gender != undefined) {
+					var mapSectionSidebarDescriptionTrainerGender = document.createElement("small");
+					mapSectionSidebarDescriptionTrainerGender.setAttribute("name","gender");
+					if (gender == "♂") {
+						mapSectionSidebarDescriptionTrainerGender.setAttribute("title", "Male");
+					}
+					if(gender == "♀") {
+						mapSectionSidebarDescriptionTrainerGender.setAttribute("title", "Female");
+					}
+					if(gender == "☿") {
+						mapSectionSidebarDescriptionTrainerGender.setAttribute("title", "Genderless");
+					}
+					mapSectionSidebarDescriptionTrainerGender.innerText = gender;
+					mapSectionSidebarDescriptionTrainerAdditionalInner.appendChild(mapSectionSidebarDescriptionTrainerGender);
+				}
+			}
+
+
+			var mapSectionSidebarDescriptionTrainerPokémon = document.createElement("div");
+			var mapSectionSidebarDescriptionTrainerPokémonImageOuter = document.createElement("span");
+			mapSectionSidebarDescriptionTrainerPokémon.setAttribute("name", "Pokémon");
+			mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerPokémon);
+			mapSectionSidebarDescriptionTrainerPokémon.appendChild(mapSectionSidebarDescriptionTrainerPokémonImageOuter);
+
+			if (item != undefined) {
+				var mapSectionSidebarDescriptionTrainerHeldItem = document.createElement("img");
+				mapSectionSidebarDescriptionTrainerHeldItem.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+item+".png";
+				mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+				mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("title",item);
+				mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("name","item");
+				mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("value",item);
+				mapSectionSidebarDescriptionTrainerPokémon.appendChild(mapSectionSidebarDescriptionTrainerHeldItem);
+				mapSectionSidebarDescriptionTrainerHeldItem.addEventListener("click", dataRedirect);
+				mapSectionSidebarDescriptionTrainerHeldItem.setAttribute("function","dataRedirect");
+			}
+
+			var mapSectionSidebarDescriptionTrainerPokémonImage = document.createElement("img");
+			mapSectionSidebarDescriptionTrainerPokémonImage.src = "./media/Images/Pokémon/Battle/PNG/Default/Front/"+ImageTypes[0]["path"]+"/"+getPokémonMediaPath(getPokémonInt(pok),"Battle")+".png";
+			mapSectionSidebarDescriptionTrainerPokémonImage.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+			mapSectionSidebarDescriptionTrainerPokémonImage.setAttribute("title", pok);
+			mapSectionSidebarDescriptionTrainerPokémonImageOuter.setAttribute("value",getPokémonInt(pok));
+			mapSectionSidebarDescriptionTrainerPokémonImageOuter.appendChild(mapSectionSidebarDescriptionTrainerPokémonImage);
+			mapSectionSidebarDescriptionTrainerPokémonImageOuter.addEventListener("click", modalData);
+			mapSectionSidebarDescriptionTrainerPokémonImageOuter.setAttribute("function","modalData");
+
+			var mapSectionSidebarDescriptionTrainerPokémonText = document.createElement("small");
+			mapSectionSidebarDescriptionTrainerPokémonText.innerText = pok;
+			mapSectionSidebarDescriptionTrainerPokémonImageOuter.appendChild(mapSectionSidebarDescriptionTrainerPokémonText);
+
+			if (move != undefined || iv != undefined || ev != undefined) {
+				var mapSectionSidebarDescriptionTrainerData = document.createElement("div");
+				mapSectionSidebarDescriptionTrainerData.setAttribute("name","data");
+				mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerData);
+			}
+
+			if (move != undefined) {
+				var moves = undefined;
+				var mapSectionSidebarDescriptionTrainerMove = document.createElement("div");
+				mapSectionSidebarDescriptionTrainerMove.setAttribute("name", "moves");
+				mapSectionSidebarDescriptionTrainerData.appendChild(mapSectionSidebarDescriptionTrainerMove);
+
+				if (move.includes(",")) {
+					moves = move.split(",");
+				}
+				else {
+					moves = move;
+				}
+				for(var y = 0; y < moves.length; y++) {
+					var mapSectionSidebarDescriptionTrainerMoveTextOuter = document.createElement("b");
+					var mapSectionSidebarDescriptionTrainerMoveText = document.createElement("p");
+					mapSectionSidebarDescriptionTrainerMoveText.innerText = moves[y];
+					mapSectionSidebarDescriptionTrainerMoveTextOuter.title = formatMoveData(moves[y]);
+					mapSectionSidebarDescriptionTrainerMoveTextOuter.style.color = "var(--type"+getMoveData(moves[y],"Type")+")";
+					mapSectionSidebarDescriptionTrainerMoveTextOuter.setAttribute("name","move");
+					mapSectionSidebarDescriptionTrainerMove.appendChild(mapSectionSidebarDescriptionTrainerMoveTextOuter);
+					mapSectionSidebarDescriptionTrainerMoveTextOuter.appendChild(mapSectionSidebarDescriptionTrainerMoveText);
+					mapSectionSidebarDescriptionTrainerMoveTextOuter.addEventListener("click", dataRedirect);
+					mapSectionSidebarDescriptionTrainerMoveTextOuter.setAttribute("function","dataRedirect");
+				}
+			}
+
+			if (iv != undefined) {
+				var ivs = undefined;
+				var mapSectionSidebarDescriptionTrainerIV = document.createElement("div");
+				mapSectionSidebarDescriptionTrainerIV.setAttribute("name", "ivs");
+				mapSectionSidebarDescriptionTrainerData.appendChild(mapSectionSidebarDescriptionTrainerIV);
+				mapSectionSidebarDescriptionTrainerIVHeader 
+				var mapSectionSidebarDescriptionTrainerIVHeader = document.createElement("small");
+				mapSectionSidebarDescriptionTrainerIVHeader.innerText = "Individual Values";
+				mapSectionSidebarDescriptionTrainerIV.appendChild(mapSectionSidebarDescriptionTrainerIVHeader);
+				if (iv.includes(",")) {
+					ivs = iv.split(",");
+				}
+				else {
+					ivs = iv;
+				}
+				for(var y = 0; y < ivs.length; y++) {
+					if (ivs[y] != "") {
+						var mapSectionSidebarDescriptionTrainerIVText = document.createElement("small");
+						mapSectionSidebarDescriptionTrainerIVText.setAttribute("name","iv");
+						mapSectionSidebarDescriptionTrainerIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+": </span>"+ivs[y];
+						mapSectionSidebarDescriptionTrainerIV.appendChild(mapSectionSidebarDescriptionTrainerIVText);
+					}
+				}
+			}
+
+			if (ev != undefined) {
+				var evs = undefined;
+				var mapSectionSidebarDescriptionTrainerEV = document.createElement("div");
+				mapSectionSidebarDescriptionTrainerEV.setAttribute("name", "evs");
+				mapSectionSidebarDescriptionTrainerData.appendChild(mapSectionSidebarDescriptionTrainerEV);
+
+				var mapSectionSidebarDescriptionTrainerEVHeader = document.createElement("small");
+				mapSectionSidebarDescriptionTrainerEVHeader.innerText = "Effort Values";
+				mapSectionSidebarDescriptionTrainerEV.appendChild(mapSectionSidebarDescriptionTrainerEVHeader);
+
+				if (ev.includes(",")) {
+					evs = ev.split(",");
+				}
+				else {
+					evs = ev;
+				}
+				for(var y = 0; y < evs.length; y++) {
+					if (evs[y] != "") {
+						var mapSectionSidebarDescriptionTrainerEVText = document.createElement("small");
+						mapSectionSidebarDescriptionTrainerEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+": </span>"+evs[y];
+						mapSectionSidebarDescriptionTrainerEVText.setAttribute("name","ev");
+						mapSectionSidebarDescriptionTrainerEV.appendChild(mapSectionSidebarDescriptionTrainerEVText);
+					}
+				}
+			}
+
+			var p = "";
+			var a = "";
+
+
+
+
+			if (datas[u].includes("pok:")) {
+				p = datas[u].match(/pok:(.*?)*/g)[0].replaceAll(/\|(.*?)*/g,"").split(":")[1];
+			}
+			if (datas[u].includes("ab:")) {
+				a = datas[u].match(/ab:(.*?)*/g)[0].replaceAll(/\|(.*?)*/g,"").split(":")[1];
+			}
+
+
+			
+
+			var mapSectionSidebarDescriptionTrainerButtonsExport = document.createElement("figure");
+			var mapSectionSidebarDescriptionTrainerButtonsExportText = document.createElement("p");
+			mapSectionSidebarDescriptionTrainerButtonsExportText.innerText = "➢";
+
+		
+			mapSectionSidebarDescriptionTrainerButtonsExport.value = datas[u].replaceAll(a,getAbilityPosition(getPokémonInt(p),a));
+			mapSectionSidebarDescriptionTrainerButtonsExport.title = "Export Pokémon Buttons String";
+			mapSectionSidebarDescriptionTrainerButtonsExport.setAttribute("name","export");
+			mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerButtonsExport);
+			mapSectionSidebarDescriptionTrainerButtonsExport.appendChild(mapSectionSidebarDescriptionTrainerButtonsExportText);
+			mapSectionSidebarDescriptionTrainerButtonsExport.addEventListener("click", trainerPokExport);
+
+			if (move != undefined || iv != undefined || ev != undefined ) {
+				var adds = mapSectionSidebarDescriptionTrainerLi.querySelectorAll(':scope > div[name="data"] > div[name]');
+				if (adds.length > 1) {
+					var mapSectionSidebarDescriptionTrainerButtonsCycle = document.createElement("figure");
+					var mapSectionSidebarDescriptionTrainerButtonsCycleText = document.createElement("p");
+					mapSectionSidebarDescriptionTrainerButtonsCycleText.innerText = "⟲";
+					mapSectionSidebarDescriptionTrainerButtonsCycle.setAttribute("value","ivs");
+					mapSectionSidebarDescriptionTrainerButtonsCycle.setAttribute("name","cycle");
+					mapSectionSidebarDescriptionTrainerButtonsCycle.setAttribute("type","rotate");
+					mapSectionSidebarDescriptionTrainerLi.appendChild(mapSectionSidebarDescriptionTrainerButtonsCycle);
+					mapSectionSidebarDescriptionTrainerButtonsCycle.appendChild(mapSectionSidebarDescriptionTrainerButtonsCycleText);
+					mapSectionSidebarDescriptionTrainerButtonsCycle.addEventListener("click", trainerPokCycle);
+				}
+			}
+
+
+
 		}
+		
 	}
 
 
