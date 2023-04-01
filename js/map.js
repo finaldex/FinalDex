@@ -1901,7 +1901,7 @@ var createMap = function() {
 
 
 	for(var q = 0; q < trainers.length; q++) {
-		var trainerName = trainers[q]["Name"];
+		var trainerName = trainers[q]["Trainer"];
 		var trainerClass = trainers[q]["Class"];
 		var trainerImage = trainers[q]["Image"];
 		var trainerItems = trainers[q]["Items"];
@@ -1921,6 +1921,10 @@ var createMap = function() {
 		}
 		if (q != ((trainers.length)-1)) {
 			trainerNext = trainers[q+1];
+		}
+
+		if (trainerImage == undefined) {
+			trainerImage = trainerClass;
 		}
 
 
@@ -1947,7 +1951,8 @@ var createMap = function() {
 		mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.setAttribute("name", parseInt(q) - 1);
 		mapSectionSidebarDescriptionTrainerUlTopImgCurrentImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+trainerImage+".png";
 		mapSectionSidebarDescriptionTrainerUlTopImgCurrentImage.setAttribute("name", parseInt(q));
-		mapSectionSidebarDescriptionTrainerUlTopImgNextImage.setAttribute("name", parseInt(q)+1);		
+		mapSectionSidebarDescriptionTrainerUlTopImgNextImage.setAttribute("name", parseInt(q)+1);
+	
 
 		if (trainerInfo != undefined) {
 			mapSectionSidebarDescriptionTrainerUlTopImgCurrentImage.title = trainerInfo;
@@ -1955,7 +1960,7 @@ var createMap = function() {
 
 		if(trainerPrevious != undefined) {
 			mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+trainerPrevious["Image"]+".png";
-			mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Name"];
+			mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Trainer"];
 		}
 		else {
 			mapSectionSidebarDescriptionTrainerUlTopImgPrevious.style.visibility = "hidden";
@@ -1963,16 +1968,16 @@ var createMap = function() {
 		}
 		if(trainerNext != undefined) {
 			mapSectionSidebarDescriptionTrainerUlTopImgNextImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+trainerNext["Image"]+".png";
-			mapSectionSidebarDescriptionTrainerUlTopImgNextImage.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Name"];
+			mapSectionSidebarDescriptionTrainerUlTopImgNextImage.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Trainer"];
 		}
 		else {
 			mapSectionSidebarDescriptionTrainerUlTopImgNext.style.visibility = "hidden";
 			mapSectionSidebarDescriptionTrainerUlTopImgNext.style.pointerEvents = "none";
 		}
 
-		mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-		mapSectionSidebarDescriptionTrainerUlTopImgCurrentImage.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-		mapSectionSidebarDescriptionTrainerUlTopImgNextImage.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+		mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.setAttribute("onerror","this.src='./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+MEDIAPath_Character_Fallback+".png';");
+		mapSectionSidebarDescriptionTrainerUlTopImgCurrentImage.setAttribute("onerror","this.src='./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+MEDIAPath_Character_Fallback+".png';");
+		mapSectionSidebarDescriptionTrainerUlTopImgNextImage.setAttribute("onerror","this.src='./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+MEDIAPath_Character_Fallback+".png';");
 		mapSectionSidebarDescriptionTrainerUlTopTitleNameText.innerText = trainerClass+"\n"+trainerName;
 
 		if (trainerReq != undefined) {
@@ -2190,6 +2195,8 @@ var createMap = function() {
 					}
 
 					if (ability != undefined) {
+						console.log(ability)
+						console.log(getDataArr(finaldataAbilityDescription,"Ability",ability))
 						var mapSectionSidebarDescriptionTrainerAbility = document.createElement("b");
 						var mapSectionSidebarDescriptionTrainerAbilityText = document.createElement("p");
 						mapSectionSidebarDescriptionTrainerAbilityText.innerText = ability;
