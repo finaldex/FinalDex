@@ -340,7 +340,7 @@ nav > div:first-child > span > h2 {
     padding: 20px 0;
 }
 
-#Games > span > ul > *:first-child {
+#Games > span > ul > h4:first-child {
     position: absolute;
     top: 0;
 }
@@ -591,4 +591,24 @@ body > span[name="num"] {
 .gform select {
     padding: 10px 30px;
     margin: 10px;
+}
+#Games ul li > a:hover {
+    text-decoration: none;
+}
+#Games ul li > a:active {
+    text-decoration: underline;
+}
+
+
+#Games ul li > a {
+    color: var(--color_10);
+}
+
+#Games ul li > a h1 {
+    text-transform:uppercase;
+    font-family: "Roboto";
+    font-weight: bold;
+    text-shadow: -1px 1px 1px #fff;
+    text-decoration-color: #000 !important;
+
 }
