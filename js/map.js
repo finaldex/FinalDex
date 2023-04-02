@@ -2271,15 +2271,15 @@ var createMap = function() {
 					groups.push(trainers[q]["Grouping"].split("|")[u])
 				}
 				else {
-					if (!groups.includes(trainers[q]["Grouping"][u])) {
+					if (!groups.includes(trainers[q]["Grouping"])) {
 						var grp = document.createElement("span");
 						var grptxt = document.createElement("h6");
-						grptxt.innerText = trainers[q]["Grouping"][u];
+						grptxt.innerText = trainers[q]["Grouping"];
 						mapSectionSidebarDescriptionTrainerUlContent.appendChild(grp);
 						grp.appendChild(grptxt);
 					}
 			
-					groups.push(trainers[q]["Grouping"][u])
+					groups.push(trainers[q]["Grouping"])
 				}
 			}
 
