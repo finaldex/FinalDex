@@ -2427,18 +2427,22 @@
 	text-decoration-style: dashed;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span[name="items"] > span img,
+#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span span img,
 #contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child img {
 	margin: 0 -75%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span[name="items"] > span,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child > span {
+#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span span,
+#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child span {
 	width: 100%;
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
     justify-content: space-evenly;
+}
+#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span b,
+#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child b {
+	width: 100%;
 }
 
 #contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > * {
