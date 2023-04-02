@@ -2067,8 +2067,13 @@ var createMap = function() {
 				rwcount = 5;
 			}
 
+
+			var mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap = document.createElement("b");
+			mapSectionSidebarDescriptionTrainerUlTopTitleValue.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap);
+			
 			var mapSectionSidebarDescriptionTrainerUlTopTitleValueImgWrap = document.createElement("span");
-			mapSectionSidebarDescriptionTrainerUlTopTitleValue.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueImgWrap);
+			mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueImgWrap);
+			
 
 			for(var u = 0; u < rwcount; u++) {
 				var mapSectionSidebarDescriptionTrainerUlTopTitleValueImg = document.createElement("img");
@@ -2093,18 +2098,22 @@ var createMap = function() {
 
 
 			mapSectionSidebarDescriptionTrainerUlTopTitleValueText.innerHTML = mapSectionSidebarDescriptionTrainerUlTopTitleValueText.innerHTML.replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />');
-			mapSectionSidebarDescriptionTrainerUlTopTitleValue.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueText);
+			mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap.appendChild(mapSectionSidebarDescriptionTrainerUlTopTitleValueText);
 			mapSectionSidebarDescriptionTrainerUlTopTitleValueText.style.display = "none";
+
+
+			mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap.addEventListener("click",dataRedirect)
+			mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap.setAttribute("function","dataRedirect")
+			mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap.setAttribute("name","item");
+			mapSectionSidebarDescriptionTrainerUlTopTitleValueWrap.setAttribute("value",trainerReward);
 		}
 
 
 		var mapSectionSidebarDescriptionTrainerUlTopMatchArea = document.createElement("span");
-		mapSectionSidebarDescriptionTrainerUlTopMatchArea.setAttribute("name","matcharea");
 		mapSectionSidebarDescriptionTrainerUlTopCountOuter.appendChild(mapSectionSidebarDescriptionTrainerUlTopMatchArea);
 
 	
 		var mapSectionSidebarDescriptionTrainerUlTopItems = document.createElement("span");
-		mapSectionSidebarDescriptionTrainerUlTopItems.setAttribute("name","items");
 		mapSectionSidebarDescriptionTrainerUlTopCountOuter.appendChild(mapSectionSidebarDescriptionTrainerUlTopItems);
 
 
@@ -2126,8 +2135,12 @@ var createMap = function() {
 				itcount = 5;
 			}
 			
+			var mapSectionSidebarDescriptionTrainerUlTopItemsWrap = document.createElement("b");
+			mapSectionSidebarDescriptionTrainerUlTopItems.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsWrap);
+
+
 			var mapSectionSidebarDescriptionTrainerUlTopItemsImageWrap = document.createElement("span");
-			mapSectionSidebarDescriptionTrainerUlTopItems.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsImageWrap);
+			mapSectionSidebarDescriptionTrainerUlTopItemsWrap.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsImageWrap);
 
 			for(var u = 0; u < itcount; u++) {
 				var mapSectionSidebarDescriptionTrainerUlTopItemsImage = document.createElement("img");
@@ -2149,8 +2162,13 @@ var createMap = function() {
 			else {
 				mapSectionSidebarDescriptionTrainerUlTopItemsText.innerText = trainerItem;
 			}
-			mapSectionSidebarDescriptionTrainerUlTopItems.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsText);
+			mapSectionSidebarDescriptionTrainerUlTopItemsWrap.appendChild(mapSectionSidebarDescriptionTrainerUlTopItemsText);
 			mapSectionSidebarDescriptionTrainerUlTopItemsText.style.display = "none";
+
+			mapSectionSidebarDescriptionTrainerUlTopItemsWrap.addEventListener("click",dataRedirect)
+			mapSectionSidebarDescriptionTrainerUlTopItemsWrap.setAttribute("function","dataRedirect")
+			mapSectionSidebarDescriptionTrainerUlTopItemsWrap.setAttribute("name","item");
+			mapSectionSidebarDescriptionTrainerUlTopItemsWrap.setAttribute("value",trainerItem);
 		}
 
 		var groups = [];
