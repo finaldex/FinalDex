@@ -2680,12 +2680,12 @@ function updateTrainer(trainers,condition) {
 					if(getMoveData(moves[y],"Type") == undefined) {
 						console.log(moves[y]+" needs formatting?");
 					}
-					/*
+					
 					var moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
 					if (!moveset.includes(moves[y])) {
 						console.log(pok+" cannot learn "+moves[y]+"?");
 					}
-					*/
+
 				}
 			}
 		}
