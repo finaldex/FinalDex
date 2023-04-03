@@ -439,6 +439,18 @@ function mapifyMap(base) {
 			margin: "15px"
         }
         });
+
+
+
+		
+		for (var i = 0; i < finaldataLocation.length; i++) {
+			if (getApplicable(finaldataLocation[i]["Game"])) {
+				var points = getMapPoints(finaldataLocation[i]["Location"],base);
+				if (points.length == 0) {
+					console.log(finaldataLocation[i]["Location"]+" returned an error.");
+				}
+			}
+		}
     }
     
 
