@@ -225,7 +225,7 @@
 
 
 
-#contain div > section[name="list"]  {
+#contain div > section[name='list']  {
 	width: 20%;
 	height: 100%;
 	float: left;
@@ -235,7 +235,7 @@
 	box-shadow: 1px 0 1px var(--border1);
 }
 
-#contain div > section[name="header"]  {
+#contain div > section[name='header']  {
 	width: 80%;
 	height: 20%;
 	z-index: 3;
@@ -244,7 +244,7 @@
     float:right;
 }
 
-#contain div#tool > section[name="header"] h1 {
+#contain div#tool > section[name='header'] h1 {
 	text-align: left;
 	position: absolute;
 	bottom: 5px;
@@ -273,7 +273,7 @@
 }
 
 
-#contain div > section[name="sidebar"] {
+#contain div > section[name='sidebar'] {
 	width: 30%;
 	height: 80%;
 	float: right;
@@ -281,7 +281,7 @@
 	z-index: 1;
 }
 
-#contain div#tool > section[name="sidebar"] {
+#contain div#tool > section[name='sidebar'] {
 	width: 80%;
 	height: 50%;
 }
@@ -290,20 +290,20 @@
 
 
 
-#contain div > section[name="header"] > span:first-child {
+#contain div > section[name='header'] > span:first-child {
 	position: absolute;
 	bottom: 5px;
 	left: 15px;
 	text-align: left;
 }
 
-#contain div > section[name="header"] > span:nth-child(2):not(:last-child) {
+#contain div > section[name='header'] > span:nth-child(2):not(:last-child) {
 	position: absolute;
 	bottom: 5px;
 	right: 38%;
 	text-align: right;
 }
-#contain div#map > section[name="header"] > span:nth-child(2) {
+#contain div#map > section[name='header'] > span:nth-child(2) {
 	right: 32%;
 }
 
@@ -353,7 +353,7 @@
 
 
 
-#contain div > section[name="sidebar"] > * {
+#contain div > section[name='sidebar'] > * {
 	height: 100%;
 	width: 100%;
 	position: relative;
@@ -361,7 +361,7 @@
     flex-direction: column;
 }
 
-#contain div > section[name="sidebar"] > * > div:first-child {
+#contain div > section[name='sidebar'] > * > div:first-child {
 	width: 100%;
 	height: 15%;
 	border-bottom: 1px solid;
@@ -372,37 +372,37 @@
 	overflow: hidden;
 	position: relative;
 }
-#contain div > section[name="sidebar"] > * > div:nth-child(2) {
+#contain div > section[name='sidebar'] > * > div:nth-child(2) {
 	height: 75%;
     width: 100%;
     position: relative;
 }
 
-#contain div > section[name="sidebar"] > * > div:nth-child(3) {
+#contain div > section[name='sidebar'] > * > div:nth-child(3) {
 	height: 10%;
     width: 100%;
     position: relative;
     display: flex;
     align-items: center;
 }
-#contain div#item > section[name="sidebar"] > * > div:first-child > div:not([name='pause']),
+#contain div#item > section[name='sidebar'] > * > div:first-child > div:not([name='pause']),
 #contain > div#map > section[name='content'] > *[name='map'] > div > div > div:not([name='pause']) {
 	cursor: crosshair;
 }
 
-#contain div#item > section[name="sidebar"] > * > div:nth-child(3) {
+#contain div#item > section[name='sidebar'] > * > div:nth-child(3) {
 	height: 20%;
 	background: var(--color14);
 }
 
 
 
-#contain div#item > section[name="sidebar"] > * > * {
+#contain div#item > section[name='sidebar'] > * > * {
 	height: 50%;
 }
 
 
-#contain div#item > section[name="sidebar"] > * > div:first-child > div {
+#contain div#item > section[name='sidebar'] > * > div:first-child > div {
 	position: relative;
     width: 100%;
     height: 100%;
@@ -416,44 +416,44 @@
 	background: var(--color_5);
 }
 
-#contain div#item > section[name="sidebar"] > * > div:first-child > div:not([name="pause"]) ~ figure[name="pause"] {
+#contain div#item > section[name='sidebar'] > * > div:first-child > div:not([name='pause']) ~ figure[name='pause'] {
 	display: none;
 }
 
-#contain div#item > section[name="sidebar"] > * > div:first-child figure > * {
+#contain div#item > section[name='sidebar'] > * > div:first-child figure > * {
 	text-shadow: 1px 1px 0px var(--border1);
 }
 
-#contain div#item > section[name="sidebar"] > * > div:first-child figure {
+#contain div#item > section[name='sidebar'] > * > div:first-child figure {
 	position: absolute;
 }
-#contain div#item > section[name="sidebar"] > * > div:first-child figure[name="fullscreen"] {
+#contain div#item > section[name='sidebar'] > * > div:first-child figure[name='fullscreen'] {
 	bottom: 5px;
 	right: 5px;
 }
-#contain div#item > section[name="sidebar"] > * > div:first-child figure[name="pause"] {
+#contain div#item > section[name='sidebar'] > * > div:first-child figure[name='pause'] {
 	left: 5px;
 	bottom: 5px;
 	cursor: default;
 }
 
 
-#contain div#item > section[name="sidebar"] > * > div:first-child figure[name="zoom"] {
+#contain div#item > section[name='sidebar'] > * > div:first-child figure[name='zoom'] {
 	top: 5px;
 	right: 15px;
 }
 
-#contain div#item > section[name="sidebar"] > * > div:first-child figure[name="reset"] {
+#contain div#item > section[name='sidebar'] > * > div:first-child figure[name='reset'] {
 	top: 5px;
 	left: 15px;
 }
-#contain div#item > section[name="sidebar"] > * > div:first-child figure[name="fullscreen"]:active {
+#contain div#item > section[name='sidebar'] > * > div:first-child figure[name='fullscreen']:active {
 	transform:scale(1.2);
 }
 
 
 
-#contain div > section[name="sidebar"] > div > ul {
+#contain div > section[name='sidebar'] > div > ul {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -461,7 +461,7 @@
 	background: var(--color17);
 }
 
-#contain div > section[name="sidebar"] > div > ul li {
+#contain div > section[name='sidebar'] > div > ul li {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -472,54 +472,54 @@
 
 
 
-#contain div > section[name="sidebar"] > div > ul li[name="held"] span[name="description"],
-#contain div > section[name="sidebar"] > div > ul li[name="pickup"] span[name="description"] {
+#contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='description'],
+#contain div > section[name='sidebar'] > div > ul li[name='pickup'] span[name='description'] {
 	width: 250%;
 }
-#contain div > section[name="sidebar"] > div > ul li[name="held"] span[name="pokémon"],
-#contain div > section[name="sidebar"] > div > ul li[name="pickup"] span[name="ability"] {
+#contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='pokémon'],
+#contain div > section[name='sidebar'] > div > ul li[name='pickup'] span[name='ability'] {
 	width: 100%;
 }
 
-#contain div > section[name="sidebar"] > div > ul li[name="held"] span[name="description"] {
+#contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='description'] {
 	align-items: flex-start;
     text-align: left;
 }
-#contain div > section[name="sidebar"] > div > ul li span[name="description"] {
+#contain div > section[name='sidebar'] > div > ul li span[name='description'] {
 	width: 200%;
 	align-items: flex-start;
 	justify-content: flex-start;
 	text-align:left;
 }
-#contain div > section[name="sidebar"] > div > ul li span[name="description"] > *[title] {
+#contain div > section[name='sidebar'] > div > ul li span[name='description'] > *[title] {
 	cursor: help;
 	text-decoration: underline;
 }
-#contain div > section[name="sidebar"] > div > ul li span[name="description"] > *[title]:hover {
+#contain div > section[name='sidebar'] > div > ul li span[name='description'] > *[title]:hover {
 	text-decoration-style: dashed;
 }
 
-#contain div > section[name="sidebar"] > div > ul li span[name="description"] > * > span[title] {
+#contain div > section[name='sidebar'] > div > ul li span[name='description'] > * > span[title] {
 	cursor: help;
 }
-#contain div > section[name="sidebar"] > div > ul li[name="shop"] span[name="location"],
-#contain div > section[name="sidebar"] > div > ul li[name="location"] span[name="location"] {
+#contain div > section[name='sidebar'] > div > ul li[name='shop'] span[name='location'],
+#contain div > section[name='sidebar'] > div > ul li[name='location'] span[name='location'] {
 	width: 100%;
 }
 
-#contain div > section[name="sidebar"] > div > ul li[name="shop"] span[name="description"] {
+#contain div > section[name='sidebar'] > div > ul li[name='shop'] span[name='description'] {
 	width: 250%;
 }
 
-#contain div > section[name="sidebar"] > div > ul li span[name="pokémon"],
-#contain div > section[name="sidebar"] > div > ul li span[name="ability"],
-#contain div > section[name="sidebar"] > div > ul li span[name="location"],
-#contain div > section[name="sidebar"] > div > ul li span[name="requirement"] {
+#contain div > section[name='sidebar'] > div > ul li span[name='pokémon'],
+#contain div > section[name='sidebar'] > div > ul li span[name='ability'],
+#contain div > section[name='sidebar'] > div > ul li span[name='location'],
+#contain div > section[name='sidebar'] > div > ul li span[name='requirement'] {
 	flex-direction: column;
 }
 
 
-#contain div > section[name="sidebar"] > div > ul li div {
+#contain div > section[name='sidebar'] > div > ul li div {
 	width: 20%;
 	display: flex;
 	align-items: center;
@@ -529,8 +529,8 @@
 }
 
 
-#contain div > section[name="sidebar"] > div > ul li > span,
-#contain div > section[name="sidebar"] > div > ul li > b {
+#contain div > section[name='sidebar'] > div > ul li > span,
+#contain div > section[name='sidebar'] > div > ul li > b {
 	width: 50%;
 	display: flex;
 	align-items: center;
@@ -538,12 +538,12 @@
 	text-align: center;
 }
 
-#contain div > section[name="sidebar"] > div > ul li div,
-#contain div > section[name="sidebar"] > div > ul li > span,
-#contain div > section[name="sidebar"] > div > ul li > b {
+#contain div > section[name='sidebar'] > div > ul li div,
+#contain div > section[name='sidebar'] > div > ul li > span,
+#contain div > section[name='sidebar'] > div > ul li > b {
 	padding: 0 10px;
 }
-#contain div > section[name="sidebar"] > div > ul li > b {
+#contain div > section[name='sidebar'] > div > ul li > b {
 	font-weight: normal;
 }
 
@@ -580,7 +580,7 @@
 
 
 
-#contain div > section[name="sidebar"] > * > div:nth-child(3) label {
+#contain div > section[name='sidebar'] > * > div:nth-child(3) label {
 	display: flex;
     height: 100%;
     width: 100%;
@@ -593,21 +593,21 @@
 	position: relative;
 }
 
-#contain div > section[name="sidebar"] > * > div:nth-child(3) input:checked + label {
+#contain div > section[name='sidebar'] > * > div:nth-child(3) input:checked + label {
 	background: var(--color10);
     color: var(--font2);
 }
 
 
-#contain div#move > section[name='content'] > *:nth-child(2) > div:last-child span[name="positive"] * {
+#contain div#move > section[name='content'] > *:nth-child(2) > div:last-child span[name='positive'] * {
 	color: var(--colorGreen);
 }
 
-#contain div#move > section[name='content'] > *:nth-child(2) > div:last-child span[name="negative"] * {
+#contain div#move > section[name='content'] > *:nth-child(2) > div:last-child span[name='negative'] * {
 	color: var(--colorRed);
 }
 
-#contain div#move > section[name="sidebar"] ul li > span[title="Parent"] > p {
+#contain div#move > section[name='sidebar'] ul li > span[title='Parent'] > p {
 	padding-top: 2px;
 }
 
@@ -620,7 +620,7 @@
 
 
 
-#contain div#move > section[name='content'] > div[name="menu"] > div:first-child > div > span {
+#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div > span {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -629,17 +629,17 @@
 	box-shadow: 0.5px 0.5px 0.5px var(--border1);
 }
 
-#contain div#move > section[name='content'] > div[name="menu"] > div:nth-child(2) > div {
+#contain div#move > section[name='content'] > div[name='menu'] > div:nth-child(2) > div {
 	box-shadow: 0.5px 0.5px 0.5px var(--border1);
 }
 
-#contain div#move > section[name='content'] > div[name="menu"] > div:first-child > div span img {
+#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div span img {
 	max-width: 50%;
 }
 
 
 
-#contain div#move > section[name='content'] > div[name="menu"] > div:first-child > div {
+#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div {
 	width: 100%;
 	height: 50%;
 	display: flex;
@@ -648,16 +648,16 @@
 	align-content: center;
 }
 
-#contain div#move > section[name='content'] > div[name="menu"] > div:first-child > div:last-child span span *:last-child,
-#contain div#move > section[name='content'] > div[name="menu"] > div:last-child > div[name="movetutor"] span span *:last-child {
+#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div:last-child span span *:last-child,
+#contain div#move > section[name='content'] > div[name='menu'] > div:last-child > div[name='movetutor'] span span *:last-child {
 	padding: 5px 0;
 }
 
 
-#contain div#move > section[name="sidebar"] ul li span {
+#contain div#move > section[name='sidebar'] ul li span {
 	width: 100%;
 }
-#contain div#move > section[name="sidebar"] ul li > span {
+#contain div#move > section[name='sidebar'] ul li > span {
 	display: flex;
     align-items: center;
     justify-content: center;
@@ -665,16 +665,16 @@
     flex-direction: column;
 }
 
-#contain div > section[name='content'] > div[name="description"] > * {
+#contain div > section[name='content'] > div[name='description'] > * {
 	padding: 2px 10px;
 }
-#contain div > section[name='content'] > div[name="description"] > *:first-child {
+#contain div > section[name='content'] > div[name='description'] > *:first-child {
 	padding: 10px;
 }
 
 
 
-#contain div > section[name='content'] > div[name="description"] p br {
+#contain div > section[name='content'] > div[name='description'] p br {
 	display: block;
 	content: "";
 	padding: 5px;
@@ -685,7 +685,7 @@
 
 
 
-#contain div > section[name="sidebar"] > div > ul li > span[name="item"] img {
+#contain div > section[name='sidebar'] > div > ul li > span[name='item'] img {
 	margin: -2px -8px;
 }
 
@@ -693,17 +693,17 @@
 
 
 
-#contain div#item > section[name="sidebar"] ul li > span[name="item"] {
+#contain div#item > section[name='sidebar'] ul li > span[name='item'] {
 	width: 30%;
 	flex-wrap: wrap;
 }
 
-#contain div#item > section[name="sidebar"] ul li.hide > span[name="item"] {
+#contain div#item > section[name='sidebar'] ul li.hide > span[name='item'] {
 	filter: brightness(0.4) contrast(0.6);
 }
 
 
-#contain div#item > section[name="sidebar"] ul li.hide > span[name="item"]:hover {
+#contain div#item > section[name='sidebar'] ul li.hide > span[name='item']:hover {
 	filter: unset;
 }
 
@@ -717,7 +717,7 @@
 
 
 
-#contain div#item > section[name="sidebar"] > * > div:nth-child(3) {
+#contain div#item > section[name='sidebar'] > * > div:nth-child(3) {
 	display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -729,7 +729,7 @@
 }
 
 
-#contain div#item > section[name="sidebar"] > * > div:nth-child(3) > span {
+#contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span {
 	width: 100%;
     height: 100%;
     display: flex;
@@ -738,16 +738,16 @@
     flex-direction: column;
 	text-align: center;
 }
-#contain div#item > section[name="sidebar"] > * > div:nth-child(3) > span > span {
+#contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span > span {
 	display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#contain div#item > section[name="sidebar"] > * > div:nth-child(3) > span p {
+#contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span p {
 	display: inline;
 }
-#contain div#item > section[name="sidebar"] > * > div:nth-child(3) > span img {
+#contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span img {
 	padding: 0 2px;
 	max-width: 12px;
 
@@ -755,7 +755,7 @@
 
 
 
-#contain div#item > section[name="sidebar"] > * > div:nth-child(3) p img {
+#contain div#item > section[name='sidebar'] > * > div:nth-child(3) p img {
 	max-width: 10px;
 }
 
@@ -766,7 +766,7 @@
 
 
 
-#contain > div#tool section[name='content'] *[name='type'] > div[name="header"] {
+#contain > div#tool section[name='content'] *[name='type'] > div[name='header'] {
 	height: 5%;
     width: 75%;
     box-shadow: 0 1px 1px var(--border1);
@@ -786,7 +786,7 @@
 	background: var(--color14);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] > div[name="sidebar"] {
+#contain > div#tool section[name='content'] *[name='type'] > div[name='sidebar'] {
 	width: 25%;
 	height: 100%;
 	float: right;
@@ -795,7 +795,7 @@
 	background: var(--color16);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] > div[name="header"] label {
+#contain > div#tool section[name='content'] *[name='type'] > div[name='header'] label {
 	width: 100%;
     height: 100%;
     display: flex;
@@ -803,7 +803,7 @@
     justify-content: center;
 	background: var(--color12);
 }
-#contain > div#tool section[name='content'] *[name='type'] > div[name="header"] input:checked + label {
+#contain > div#tool section[name='content'] *[name='type'] > div[name='header'] input:checked + label {
 	background: var(--color10);
     color: var(--font2);
 }
@@ -844,82 +844,82 @@
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="1"] > th:nth-child(2) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='1'] > th:nth-child(2) img {
 	filter: invert(1);
 }
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="2"] > th:nth-child(3) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="3"] > th:nth-child(4) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='2'] > th:nth-child(3) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="4"] > th:nth-child(5) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='3'] > th:nth-child(4) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="5"] > th:nth-child(6) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='4'] > th:nth-child(5) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="6"] > th:nth-child(7) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='5'] > th:nth-child(6) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="7"] > th:nth-child(8) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='6'] > th:nth-child(7) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="8"] > th:nth-child(9) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='7'] > th:nth-child(8) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="9"] > th:nth-child(10) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='8'] > th:nth-child(9) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="10"] > th:nth-child(11) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='9'] > th:nth-child(10) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="11"] > th:nth-child(12) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='10'] > th:nth-child(11) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="12"] > th:nth-child(13) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='11'] > th:nth-child(12) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="13"] > th:nth-child(14) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='12'] > th:nth-child(13) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="14"] > th:nth-child(15) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='13'] > th:nth-child(14) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="15"] > th:nth-child(16) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='14'] > th:nth-child(15) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="16"] > th:nth-child(17) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='15'] > th:nth-child(16) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="17"] > th:nth-child(18) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='16'] > th:nth-child(17) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="18"] > th:nth-child(19) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='17'] > th:nth-child(18) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="19"] > th:nth-child(20) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='18'] > th:nth-child(19) img {
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class="20"] > th:nth-child(21) img {
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='19'] > th:nth-child(20) img {
+	filter: invert(1);
+}
+
+#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='20'] > th:nth-child(21) img {
 	filter: invert(1);
 }
 
@@ -967,9 +967,9 @@
 	filter: invert(1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table th[title=""],
-#contain > div#tool section[name='content'] *[name='type'] table th[title=""]:hover,
-#contain > div#tool section[name='content'] *[name='type'] table th[title=""]:active {
+#contain > div#tool section[name='content'] *[name='type'] table th[title=''],
+#contain > div#tool section[name='content'] *[name='type'] table th[title='']:hover,
+#contain > div#tool section[name='content'] *[name='type'] table th[title='']:active {
 	filter: unset !important;
 	cursor: unset !important;
 }
@@ -980,7 +980,7 @@
 	background: var(--color7);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table th[title=""] {
+#contain > div#tool section[name='content'] *[name='type'] table th[title=''] {
 	background: var(--color_70);
 	font-weight: unset;
 }
@@ -989,92 +989,92 @@
 	color: var(--fontLight);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table td[title="Normal Effectiveness"] {
+#contain > div#tool section[name='content'] *[name='type'] table td[title='Normal Effectiveness'] {
 	background: var(--color13);
     color: var(--font1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table td[title="Super Effective"] {
+#contain > div#tool section[name='content'] *[name='type'] table td[title='Super Effective'] {
 	background: var(--colorGreen);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table td[title="Not Very Effective"] {
+#contain > div#tool section[name='content'] *[name='type'] table td[title='Not Very Effective'] {
 	background: var(--colorRed);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table td[title="No Effect"] {
+#contain > div#tool section[name='content'] *[name='type'] table td[title='No Effect'] {
 	background: var(--color_20);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Normal"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Normal'] {
 	background: var(--typeNormal);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Fighting"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Fighting'] {
 	background: var(--typeFighting);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Flying"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Flying'] {
 	background: var(--typeFlying);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Poison"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Poison'] {
 	background: var(--typePoison);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Ground"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Ground'] {
 	background: var(--typeGround);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Rock"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Rock'] {
 	background: var(--typeRock);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Bug"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Bug'] {
 	background: var(--typeBug);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Ghost"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Ghost'] {
 	background: var(--typeGhost);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Steel"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Steel'] {
 	background: var(--typeSteel);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Fire"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Fire'] {
 	background: var(--typeFire);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Water"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Water'] {
 	background: var(--typeWater);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Grass"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Grass'] {
 	background: var(--typeGrass);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Electric"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Electric'] {
 	background: var(--typeElectric);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Psychic"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Psychic'] {
 	background: var(--typePsychic);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Ice"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Ice'] {
 	background: var(--typeIce);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Dragon"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Dragon'] {
 	background: var(--typeDragon);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Dark"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Dark'] {
 	background: var(--typeDark);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type="SwSh"] th[title="Fairy"] {
+#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Fairy'] {
 	background: var(--typeFairy);
 }
 
@@ -1082,7 +1082,7 @@
 	font-size: 0;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table th[title=""] {
+#contain > div#tool section[name='content'] *[name='type'] table th[title=''] {
 	font-size: unset;
 }
 
@@ -1142,7 +1142,7 @@
 	padding: 0 2px;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] > div data[value="SwSh"] img {
+#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] > div data[value='SwSh'] img {
 	max-width: 75px;
 	min-width: 60px;
 }
@@ -1255,12 +1255,12 @@
 
 
 
-#contain div#tool > section[name='content'] > div[name="rng"] {
+#contain div#tool > section[name='content'] > div[name='rng'] {
 	width: 100%;
 	height: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div {
+#contain div#tool > section[name='content'] > div[name='rng'] > div {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -1269,7 +1269,7 @@
 	flex-direction: row;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -1278,7 +1278,7 @@
 	flex-wrap: wrap;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div button {
+#contain div#tool > section[name='content'] > div[name='rng'] > div button {
 	align-self: center;
 	background: var(--color15);
 	font-weight: bold;
@@ -1287,7 +1287,7 @@
 	cursor: pointer;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] div {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div {
 	margin: 10px;
     padding: 5px;
     border-radius: 10px;
@@ -1303,20 +1303,20 @@
     justify-content: center;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] div.min,
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] div.max  {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.min,
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.max  {
 	text-decoration-line:underline;
 }
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] div.min {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.min {
 	text-decoration-color: var(--colorGreen);
 }
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="result"] div.max  {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.max  {
 	text-decoration-color: var(--colorRed);
 }
 
 
 
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="iterations"] {
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='iterations'] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1326,28 +1326,28 @@
 	padding: 10px 0;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="iterations"] p,
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="iterations"] input {
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='iterations'] p,
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='iterations'] input {
 	text-align: center;
 	width: 80%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="title"] {
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='title'] {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="title"] > span {
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='title'] > span {
 	text-align: center;
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="title"] > span:first-child {
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='title'] > span:first-child {
 	width: 30%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="options"] {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='options'] {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -1360,7 +1360,7 @@
 
 
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div ul {
+#contain div#tool > section[name='content'] > div[name='rng'] > div ul {
 	overflow: auto;
 	height: 100%;
 	width: 100%;
@@ -1368,38 +1368,38 @@
 	/*border: 1px solid var(--border1);*/
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div li div {
+#contain div#tool > section[name='content'] > div[name='rng'] > div li div {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div li div[name="it"] {
+#contain div#tool > section[name='content'] > div[name='rng'] > div li div[name='it'] {
 	width: 30%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div li p:nth-child(1) {
+#contain div#tool > section[name='content'] > div[name='rng'] > div li p:nth-child(1) {
 	text-align: center;
 }
 
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div li p,
-#contain div#tool > section[name='content'] > div[name="rng"] > div li input {
+#contain div#tool > section[name='content'] > div[name='rng'] > div li p,
+#contain div#tool > section[name='content'] > div[name='rng'] > div li input {
 	width: 100%;
 	text-align: center;
 	margin: 0 5px;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div input {
+#contain div#tool > section[name='content'] > div[name='rng'] > div input {
 	color: var(--fontDark);
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="options"] {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='options'] {
 	flex-direction: column;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div li {
+#contain div#tool > section[name='content'] > div[name='rng'] > div li {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1408,15 +1408,15 @@
 	padding: 1px 0;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div li > div p {
+#contain div#tool > section[name='content'] > div[name='rng'] > div li > div p {
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="execute"] > button:active {
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='execute'] > button:active {
 	transform: scale(0.95);
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] span[name="execute"] {
+#contain div#tool > section[name='content'] > div[name='rng'] span[name='execute'] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1424,23 +1424,23 @@
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] div[name="options"] > div {
+#contain div#tool > section[name='content'] > div[name='rng'] div[name='options'] > div {
 	background: var(--color18);
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div ul > li:nth-child(1) {
+#contain div#tool > section[name='content'] > div[name='rng'] > div ul > li:nth-child(1) {
 	padding-top: 10px;
 }
 
-#contain div#tool > section[name='content'] > div[name="rng"] > div ul > li:last-child {
+#contain div#tool > section[name='content'] > div[name='rng'] > div ul > li:last-child {
 	padding-bottom: 10px;
 }
 
 
 
 
-#contain > div > section[name="header"] span:last-child {
+#contain > div > section[name='header'] span:last-child {
 	position: absolute;
     right: 0;
     height: 100%;
@@ -1451,12 +1451,12 @@
 
 
 
-#contain > div > section[name="header"] span:last-child {
+#contain > div > section[name='header'] span:last-child {
 	width: 25%;
 }
 
 
-#contain > div > section[name="header"] span:last-child img   {
+#contain > div > section[name='header'] span:last-child img   {
 	max-width: 90%;
     max-height: 70%;
 }
@@ -1504,7 +1504,7 @@
 	transition: .5s ease opacity;
 	color: var(--fontLight);
 }
-#contain > div#map > section[name='content'] > *[name='map'] span[title=""] figure {
+#contain > div#map > section[name='content'] > *[name='map'] span[title=''] figure {
 	opacity: 0;
 	pointer-events: none;
 }
@@ -1563,29 +1563,29 @@
 	color:var(--fontLight);
 }
 
-#contain > div#map > section[name='content'] > *[name='map'] > div > div > div:not([name="pause"]) ~ figure[name="pause"] {
+#contain > div#map > section[name='content'] > *[name='map'] > div > div > div:not([name='pause']) ~ figure[name='pause'] {
 	display: none;
 }
 
-#contain > div#map > section[name='content'] > *[name='map'] > div figure[name="pause"] {
+#contain > div#map > section[name='content'] > *[name='map'] > div figure[name='pause'] {
 	bottom: 15px;
 	left: 10px;
 	cursor: default;
 }
 
-#contain > div#map > section[name='content'] > *[name='map'] > div figure[name="reset"] {
+#contain > div#map > section[name='content'] > *[name='map'] > div figure[name='reset'] {
 	top: 10px;
 	left: 10px;
 }
-#contain > div#map > section[name='content'] > *[name='map'] > div figure[name="zoom"] {
+#contain > div#map > section[name='content'] > *[name='map'] > div figure[name='zoom'] {
 	top: 10px;
 	right: 10px;
 }
-#contain > div#map > section[name='content'] > *[name='map'] > div figure[name="fullscreen"] {
+#contain > div#map > section[name='content'] > *[name='map'] > div figure[name='fullscreen'] {
 	bottom: 10px;
 	right: 10px;
 }
-#contain > div#map > section[name='content'] > *[name='map'] > div figure[name="fullscreen"]:active {
+#contain > div#map > section[name='content'] > *[name='map'] > div figure[name='fullscreen']:active {
 	transform:scale(1.2);
 }
 
@@ -1637,7 +1637,7 @@
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name] {
+#contain div#map > section[name='sidebar'] > div > *[name] {
 	height: 85%;
 	background: var(--color14);
 	display: flex;
@@ -1648,19 +1648,19 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name="pokémon"],
-#contain div#map > section[name="sidebar"] > div > *[name="shop"],
-#contain div#map > section[name="sidebar"] > div > *[name="items"],
-#contain div#map > section[name="sidebar"] > div > *[name="movetutor"] {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'],
+#contain div#map > section[name='sidebar'] > div > *[name='shop'],
+#contain div#map > section[name='sidebar'] > div > *[name='items'],
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] {
 	overflow: auto;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > figure[name="cycle"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > figure[name='cycle'] {
 	position: absolute;
     top: 5px;
     right: 5px;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > figure[name="export"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > figure[name='export'] {
 	position: absolute;
     bottom: 5px;
     right: 5px;
@@ -1668,24 +1668,24 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > div[name="Additional"] *[name="gender"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div[name='Additional'] *[name='gender'] {
 	text-shadow: 1px 1px 1px var(--border1);
 } 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > div > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div > span {
 	display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > div[name="Additional"] > span > * {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div[name='Additional'] > span > * {
 	padding: 1px 0;
 }
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > div {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div {
 	width: 100%;
 	display: inline-flex;
     justify-content: center;
@@ -1695,7 +1695,7 @@
 	text-align:center;
 	margin: 0 2px;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > div[name="pokémon"] > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div[name='pokémon'] > span {
 	position:relative;
 	display: flex;
     flex-direction: column;
@@ -1703,67 +1703,67 @@
     align-items: center;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div[name="data"] > div > * {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > div > * {
 	text-align: center;
 	display: block;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div[name="data"] > div[name="ivs"] > *:first-child,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div[name="data"] > div[name="evs"] > *:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > div[name='ivs'] > *:first-child,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > div[name='evs'] > *:first-child {
 	padding: 5px 0;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li span[name="HP"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='HP'] {
 	color:var(--statHP);
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li span[name="Attack"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='Attack'] {
 	color:var(--statAtk);
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li span[name="Defense"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='Defense'] {
 	color:var(--statDef);
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li span[name="Sp. Atk"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='Sp. Atk'] {
 	color:var(--statSpAtk);
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li span[name="Sp. Def"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='Sp. Def'] {
 	color:var(--statSpDef);
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li span[name="Special"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='Special'] {
 	color:var(--statSpecial);
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li span[name="Speed"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='Speed'] {
 	color:var(--statSpeed);
 }
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div[name="stats"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='stats'] {
 	display: none;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > button {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button {
 	position:absolute;
 	right: 10px;
 	transition: .25s ease;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > button[name="cycle"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button[name='cycle'] {
 	top: 5px;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > button:not(:last-child)[name="export"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button:not(:last-child)[name='export'] {
 	bottom: 5px;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > button[name="cycle"]:active {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button[name='cycle']:active {
 	transform: rotate(-90deg);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li > button[name="export"]:active {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button[name='export']:active {
 	color: var(--font2);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] {
     background: var(--color14);
 	display: flex;
     flex-direction: column;
@@ -1771,12 +1771,12 @@
     align-items: center;
     flex-wrap: nowrap;
 }
-#contain div#map > section[name="sidebar"] > div > *:not([name='overview']) {
+#contain div#map > section[name='sidebar'] > div > *:not([name='overview']) {
 	display: none;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div {
 	width: 100%;
     height: 50%;
     position: relative;
@@ -1790,7 +1790,7 @@
 	overflow:hidden;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span:first-child {
 	width: 100%;
     height: 10%;
     display: flex;
@@ -1803,7 +1803,7 @@
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span:last-child {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span:last-child {
 	width: 100%;
     height: 100%;
     display: flex;
@@ -1811,33 +1811,33 @@
     flex-direction: column;
     overflow: auto;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > p {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > p {
 	padding: 10px 15px;
 	font-variant: all-small-caps;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > span {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > span {
 	padding: 10px 15px;
     line-height: 110%;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > span > *:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > span > *:first-child {
 	line-height: 160%;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > span br {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > span br {
 	content: "";
     display: block;
     padding-bottom: 5px;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > span > p br {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > p br {
 	content: "";
     display: block;
     padding: 3px 0;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > ul {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > ul {
 	width: 100%;
     height: 100%;
     display: flex;
@@ -1850,7 +1850,7 @@
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > span {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span {
 	width: 10%;
 	background: var(--color_15);
 	display: flex;
@@ -1860,12 +1860,12 @@
 	color:var(--fontLight);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > span:first-child > figure[value="0"],
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > span:last-child > figure.last {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span:first-child > figure[value='0'],
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span:last-child > figure.last {
 	display: none;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > span figure {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span figure {
 	width: 100%;
     height: 100%;
     display: flex;
@@ -1875,12 +1875,12 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > ul li {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > ul li {
 	width: 100%;
     height: 100%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div > ul img {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > ul img {
 	width: 100%;
     height: 100%;
     user-select: none;
@@ -1889,7 +1889,7 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='overview'] > div button:active {
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div button:active {
 	font-weight: bold;
 }
 
@@ -1898,29 +1898,29 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div[name="data"] > div[name]:not([name="moves"]) {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > div[name]:not([name='moves']) {
 	display:none;
 }
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li span[name="rate"] img {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li span[name='rate'] img {
     max-width: 30px;
 }
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li img[title="Morning"] {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li img[title='Morning'] {
 	filter: brightness(0) saturate(100%) invert(87%) sepia(49%) saturate(212%) hue-rotate(357deg) brightness(109%) contrast(101%) drop-shadow(1px 1px 0px var(--border1));
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li img[title="Day"] {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li img[title='Day'] {
 	filter: brightness(0) saturate(100%) invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%) drop-shadow(1px 1px 0px var(--border1));
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li img[title="Night"] {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li img[title='Night'] {
 	filter: brightness(0) saturate(100%) invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%) drop-shadow(1px 1px 0px var(--border1));
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > * {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * {
 	width: 20%;
 	display: flex;
     flex-direction: row-reverse;
@@ -1929,7 +1929,7 @@
 	overflow: auto;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span {
 	width: 40%;
     text-align: center;
     display: flex;
@@ -1941,20 +1941,20 @@
 	padding: 0 10px;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span small {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small {
 	display: flex;
     justify-content: center;
     align-items: center;
     white-space: pre;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span small span,
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span small img {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small span,
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small img {
 	cursor: help;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="item"] span {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='item'] span {
 	width: 100%;
 	overflow: auto;
 	display: flex;
@@ -1963,14 +1963,14 @@
     justify-content: space-evenly;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span.hide {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span.hide {
 	filter: brightness(0.4) contrast(0.6);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="requirement"] span > *:last-child {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='requirement'] span > *:last-child {
 	display:block;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="description"] {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='description'] {
 	align-content: flex-start;
 	text-align:left;
 }
@@ -1978,7 +1978,7 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > * {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * {
 	width: 20%;
 	display: flex;
     flex-direction: row-reverse;
@@ -1987,7 +1987,7 @@
 	overflow: auto;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span {
 	width: 40%;
     text-align: center;
     display: flex;
@@ -2000,7 +2000,7 @@
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span[name="item"] span {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='item'] span {
 	width: 100%;
 	overflow: auto;
 	display: flex;
@@ -2009,41 +2009,41 @@
     justify-content: space-evenly;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span.hide {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span.hide {
 	filter: brightness(0.4) contrast(0.6);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span[name="requirement"] span > *:last-child {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='requirement'] span > *:last-child {
 	display:block;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span[name="description"] {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='description'] {
 	align-content: flex-start;
 	text-align:left;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li > span[name="item"] img,
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li > span[name="item"] img {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='item'] img,
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='item'] img {
 	margin: 0 -80%;
 }
 
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span > span {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > span {
 	text-align:center;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span > span,
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span > b > span {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > span,
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > b > span {
 	display:block
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span:first-child {
 	position: relative;
     display: inline;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span:last-child {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span:last-child {
 	position: relative;
     display: flex;
     padding: 5px 0;
@@ -2054,7 +2054,7 @@
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span[name="multi"] img:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span[name='multi'] img:first-child {
 	position: absolute;
     bottom: 30%;
     left: 30%;
@@ -2063,13 +2063,13 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span > * {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span > * {
     padding: 2px 0;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] > span,
-#contain div#map > section[name="sidebar"] > div > *[name='items'] > span,
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] > span {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] > span,
+#contain div#map > section[name='sidebar'] > div > *[name='items'] > span,
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] > span {
 	position: fixed;
     z-index: 100;
     padding: 10px;
@@ -2083,16 +2083,16 @@
     pointer-events: none;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span > img {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span > img {
 	max-width: 50px;
 } 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span > img[title="Gift"] {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span > img[title='Gift'] {
 	max-width: 10px;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span[name="encounter"] > span[name="multi"] > img[src]:not([name="tile"]) {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span[name='multi'] > img[src]:not([name='tile']) {
 	margin-left: 10px;
     margin-bottom: -10px;
     z-index: 10;
@@ -2104,37 +2104,37 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > li[title] span h6,
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > li[title] p {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title] span h6,
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title] p {
 	text-decoration: underline;
     text-decoration-style: solid;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > li[title]:hover span h6,
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > li[title]:hover p {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title]:hover span h6,
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title]:hover p {
 	text-decoration-style: dashed;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li span[name="pok"] > *:nth-child(1) {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li span[name='pok'] > *:nth-child(1) {
 	padding: 0;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li span[name="pok"] > * {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li span[name='pok'] > * {
 	padding: 2px 0;
 }
-#contain div#map > section[name="sidebar"] > div > *[name] small {
+#contain div#map > section[name='sidebar'] > div > *[name] small {
 	display:block;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li span[name="description"] {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='description'] {
 	width: 100%;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li span[name="description"] p {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='description'] p {
 	padding: 0 10px;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li span[name="description"]:last-child {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='description']:last-child {
 	width: 140%;
 	padding: 0 5px;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li span[name="requirement"] {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='requirement'] {
 	width: 40%;
 	display: flex;
     justify-content: center;
@@ -2143,7 +2143,7 @@
     flex-direction: column;
     text-align: center;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li span[name="requirement"] > * {
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='requirement'] > * {
 	padding: 2px 0;
 }
 
@@ -2154,30 +2154,30 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > * {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * {
 	text-align:center;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > b {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > b {
 	text-shadow: 1px 1px 1px var(--fontDark);
 }
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > * > span {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * > span {
 	padding: 3px 0;
 	display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > * > span img {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * > span img {
 	max-width: 30px;
 	max-height: 30px;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li > * {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * {
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -2185,8 +2185,8 @@
 	flex-direction: column;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li p,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li h4 {
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li p,
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li h4 {
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -2197,14 +2197,14 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul {
 	width: 100%;
 	height: 70%;
 	overflow: auto;
 	background: var(--color15);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li {
 	position: relative;
 	width: 100%;
 	display: flex;
@@ -2214,7 +2214,7 @@
 	border-bottom: 1px dotted;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span {
 	display: flex;
     justify-content: center;
     align-items: center;
@@ -2225,7 +2225,7 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div img[name="item"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div img[name='item'] {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -2236,11 +2236,11 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div[name="moves"] p {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='moves'] p {
 	text-shadow: 1px 1px 1px var(--fontDark);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] ul li div img {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div img {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -2248,35 +2248,35 @@
 	user-select: none;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul,
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul,
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul,
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul,
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul,
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul {
 	width: 100%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul > h4  {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > h4,
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul > h4,
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > h4,
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul > h4  {
 	padding: 20px 0;
 	text-align: center;
 	background: var(--color17);
 	border-top: 1px solid;
     border-bottom: 1px solid;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul:first-child > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul:first-child > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul:first-child > h4,
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul:first-child > h4 {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul:first-child > h4,
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul:first-child > h4,
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul:first-child > h4,
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul:first-child > h4 {
 	border-top: none;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li,
-#contain div#map > section[name="sidebar"] > div > *[name='items'] ul li,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul li,
-#contain div#map > section[name="sidebar"] > div > *[name='shop'] ul li {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li,
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li,
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li,
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li {
 	width: 100%;
 	position: relative;
     flex-direction: row;
@@ -2289,57 +2289,53 @@
 	background: var(--color16);
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li,
-#contain div#map > section[name="sidebar"] > div > *[name='movetutor'] ul > li {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li,
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > li {
 	justify-content: space-around;
 }
-#contain div#map > section[name="sidebar"] > div > *[name="pokémon"] ul > li > span[name="rate"] > * {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='rate'] > * {
 	display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name="pokémon"] ul > li > span {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span {
 	width: 33%;
 	text-align: center;
 	display:table-cell;
 	vertical-align: middle;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name="pokémon"] ul > li > span > small {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > small {
 	display: inline;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name="pokémon"] ul > li > span[title] {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[title] {
     text-decoration: underline;
 	cursor:help;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name="pokémon"] ul > li > span[title]:hover {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[title]:hover {
     text-decoration-style:dashed;
 }
 
-[game="Sun"] #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span,
-[game="Moon"] #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span,
-[game="Ultra Sun"] #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span,
-[game="Ultra Moon"] #contain div#map > section[name="sidebar"] > div > *[name='pokémon'] ul > li > span {
+[game='Sun'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span,
+[game='Moon'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span,
+[game='Ultra Sun'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span,
+[game='Ultra Moon'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span {
 	width: 25%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div {
 	display: flex;
     flex-direction: column;
     height: 100%;
 	width: 100%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div:not([name='0']) {
-	display: none;
-}
-
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span {
 	width: 40%;
     display: flex;
     position: relative;
@@ -2348,22 +2344,22 @@
 	text-align:center;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:first-child {
 	flex-direction: column;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:first-child p {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:first-child p {
 	font-style:italic;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) img {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) img {
 	margin: 0 -18px;
 }
 
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child {
 	width: 100%;
 	height: 30%;
 	position: relative;
@@ -2372,100 +2368,110 @@
 	box-shadow: 0px 0.5px 0 #000;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span {
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:first-child {
 	height: 25%;
 	justify-content: space-between;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
 	height: 50%;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child {
 	height: 25%;
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span {
 	height: 100%;
 	display: flex;
 	align-items: center;
 	overflow: auto;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child {
 	width: 25%;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:nth-child(2) {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:nth-child(2) {
 	width: 50%;
 	justify-content: center;
 	text-align:center;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child {
 	width: 25%;
 	justify-content: center;
 	flex-direction: column;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child > span:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child > span:first-child {
 	padding-left: 5px;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child > span {
 	padding: 0 1px;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span[title] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span[title] {
 	text-decoration: underline;
 	cursor: help;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span[title]:hover {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span[title]:hover {
 	text-decoration-style: dashed;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span span img,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child img {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:last-child > span img,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child img {
 	margin: 0 -75%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span span,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:last-child > span,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child > span {
 	width: 100%;
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;
     justify-content: space-evenly;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span b,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child b {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span b,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child b {
 	width: 100%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > * {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > * {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
 	width: 100%;
 	position:relative;
+	cursor: default;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span {
 	width: 200%;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span img[title]:not([name="extra"]) {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='current'][title] {
 	cursor: help;
 	border-bottom: 1px solid var(--font1) !important;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span img[title]:not([name="extra"]):hover {
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='current'][title]:hover {
 	border-bottom: 1px dashed var(--font1) !important;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img:not([name="extra"]) {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span img[title]:not([name='extra']) {
+	cursor: help;
+	border-bottom: 1px solid var(--font1) !important;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span img[title]:not([name='extra']):hover {
+	border-bottom: 1px dashed var(--font1) !important;
+}
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img:not([name='extra']) {
 	height: 100%;
 }
 
@@ -2474,7 +2480,7 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img[name="extra"] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img[name='extra'] {
 	position:absolute;
 	top: 5px;
 	left: 5px;
@@ -2482,37 +2488,41 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b img {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b img {
 	filter: brightness(0.4);
     transform: scale(0.8);
+	cursor: pointer;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] {
-	position:absolute;
-	top:0;
-	z-index: 100;
-}
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] {
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] {
 	align-items:center;
 }
 
-
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] > * {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span[name='navigation'] {
+	flex-direction: column;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] {
+	flex-direction: row;
+    justify-content: center;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] > * {
 	display: unset;
 }
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"],
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] input,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] input::placeholder {
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'],
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::placeholder {
 	background: none;
 	color:var(--font1);
 	outline:none;
 	border: none;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] input,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] input::-webkit-outer-spin-button,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] input::-webkit-inner-spin-button {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::-webkit-outer-spin-button,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
    -moz-appearance: textfield;
@@ -2521,23 +2531,67 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > span[name="count"] input:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input:first-child {
 	text-align:right;
 	cursor: pointer;
 }
 
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] {
+	width: 100%;
+	position:relative;
+}
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover,
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover * {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] input {
+	padding: 2px 0;
+    text-indent: 5px;
+    width: 100%;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] input  {
+	border-radius: 0;
+	outline: none;
+}
+
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol {
+	position: absolute;
+    background: var(--color16);
+    z-index: 100;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+    box-shadow: 0px 0px 2px #000;
+}
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol:not(.active) {
+	display: none;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li {
+	border-bottom: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: var(--color16);
+	padding: 2px 0;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li:last-child {
+	border-bottom: none;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li b {
+	padding: 2px 5px;
+}
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover * {
 	filter: none;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover > img.error {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover > img.error {
 	filter: brightness(0) contrast(1);
 }
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img.error {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img.error {
 	filter: brightness(0) contrast(0.7);
 }
 
@@ -2545,7 +2599,7 @@
 
 
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -2596,12 +2650,12 @@
 
 
 
-img[title="Pokémon Dollar"] {
+img[title='Pokémon Dollar'] {
 	max-width: 10px;
 	filter: invert(1);
 }
 
-#contain div#map > section[name="sidebar"] > * > div:first-child {
+#contain div#map > section[name='sidebar'] > * > div:first-child {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -2611,7 +2665,7 @@ img[title="Pokémon Dollar"] {
 	/*border-bottom: 1px solid;*/
 }
 
-#contain div#map > section[name="sidebar"] > * > div:first-child > span {
+#contain div#map > section[name='sidebar'] > * > div:first-child > span {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -2619,7 +2673,7 @@ img[title="Pokémon Dollar"] {
 	height: 100%;
 }
 
-#contain div#map > section[name="sidebar"] > * > div:first-child label {
+#contain div#map > section[name='sidebar'] > * > div:first-child label {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -2630,7 +2684,7 @@ img[title="Pokémon Dollar"] {
 	color: var(--font1);
 }
 
-#contain div#map > section[name="sidebar"] > * > div:first-child input:checked + label {
+#contain div#map > section[name='sidebar'] > * > div:first-child input:checked + label {
 	background: var(--color11);
 	color: var(--font2);
 }
@@ -2639,7 +2693,7 @@ img[title="Pokémon Dollar"] {
 
 
 
-#contain > div#map > section[name="list"] {
+#contain > div#map > section[name='list'] {
 	height: 100%;
 	width: 20%;
 	float: left;
@@ -2649,7 +2703,7 @@ img[title="Pokémon Dollar"] {
 	z-index: 4;
 }
 
-#contain > div#map > section[name="header"] {
+#contain > div#map > section[name='header'] {
 	height: 20%;
 	width: 80%;
 	float: right;
@@ -2667,7 +2721,7 @@ img[title="Pokémon Dollar"] {
 	z-index: 2;
 }
 
-#contain > div#map > section[name="sidebar"] {
+#contain > div#map > section[name='sidebar'] {
 	width: 25%;
 	height: 80%;
 	float: right;
@@ -2680,12 +2734,12 @@ img[title="Pokémon Dollar"] {
 
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] {
+#contain div#tool > section[name='content'] > div[name='timer'] {
 	width: 100%;
 	height: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *:first-child {
+#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child {
 	width: 100%;
 	height: 10%;
 	display: flex;
@@ -2694,7 +2748,7 @@ img[title="Pokémon Dollar"] {
 
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *:first-child label {
+#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child label {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -2705,19 +2759,19 @@ img[title="Pokémon Dollar"] {
 	color: var(--font2);
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *:first-child label:active {
+#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child label:active {
 	filter: brightness(1.1);
 	color: var(--font1);
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *:first-child input:checked + label {
+#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child input:checked + label {
 	background: var(--color13);
 	color: var(--font1);
 }
 
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] {
 	background: var(--color15);
 	/*display: inline-block;*/
 	margin: auto;
@@ -2726,44 +2780,44 @@ img[title="Pokémon Dollar"] {
 	position: relative;
 	overflow: hidden;
 }
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name="countdown"] {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name='countdown'] {
 	display: none;
 }
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] b {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b {
 	display: flex;
     align-items: center;
     justify-content: center;
     color: var(--font2);
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] input {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] input {
 	background: var(--color_95);
     font-size: var(--sizeFontXL);
     color: var(--fontDark);
 	padding: 5px 10px;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] input::placeholder {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] input::placeholder {
 	color: var(--fontDark);
 }
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] > div > div > span > p {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > span > p {
 	padding: 0 5px;
 }
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] b {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b {
 	height: 40%;
 	width: 100%;
 	color:var(--fontDark);
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] b:active {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b:active {
 	color:var(--fontLight);
 }
 
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] figure {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] figure {
 	height: 100%;
 	width: 10%;
 	display: flex;
@@ -2772,21 +2826,21 @@ img[title="Pokémon Dollar"] {
 }
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] b[title="Play"] {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b[title='Play'] {
 	background: var(--colorGreen);
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] b[title="Pause"] {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b[title='Pause'] {
 	background: var(--colorRed);
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] b:active {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b:active {
 	color: var(--fontDark);
 }
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] > div > div,
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] > div > div > data {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div,
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > data {
     text-align: center;
     width: 100%;
     height: 60%;
@@ -2797,7 +2851,7 @@ img[title="Pokémon Dollar"] {
 }
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] > div > div > span {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > span {
 	display:flex;
 	align-items:center;
 	justify-content:center;
@@ -2806,18 +2860,18 @@ img[title="Pokémon Dollar"] {
 
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] > div > div > data {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > data {
 	width: 80%;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] > div {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div {
 	width: 100%;
 	height: 30%;
 	background: var(--color17);
 	border-bottom: 1px solid;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] ul {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul {
 	width: 100%;
 	height: 70%;
 	overflow-y: auto;
@@ -2826,7 +2880,7 @@ img[title="Pokémon Dollar"] {
 	padding: 0;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] ul > li {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li {
 	width: 100%;
     display: inline-block;
     text-align: center;
@@ -2836,15 +2890,15 @@ img[title="Pokémon Dollar"] {
     border-top: 1px solid;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] ul > li:first-child {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li:first-child {
 	border-top: none;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] ul > li:last-child {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li:last-child {
 	border-bottom: 1px solid;
 }
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[name] ul > li span {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li span {
 	position: absolute;
 	left: 10px;
 }
@@ -2853,36 +2907,36 @@ img[title="Pokémon Dollar"] {
 
 
 
-#contain div#tool > section[name='content'] > div[name="timer"] > *[state="play"] b[title="Play"],
-#contain div#tool > section[name='content'] > div[name="timer"] > *[state="stop"] b[title="Pause"],
-#contain div#tool > section[name='content'] > div[name="timer"] > *[state="stop"] data,
-#contain div#tool > section[name='content'] > div[name="timer"] > *[state="play"] > div > div > span {
+#contain div#tool > section[name='content'] > div[name='timer'] > *[state='play'] b[title='Play'],
+#contain div#tool > section[name='content'] > div[name='timer'] > *[state='stop'] b[title='Pause'],
+#contain div#tool > section[name='content'] > div[name='timer'] > *[state='stop'] data,
+#contain div#tool > section[name='content'] > div[name='timer'] > *[state='play'] > div > div > span {
 	display: none !important;
 }
 
 #data > div section[name='main'] > div[name='area'] ul li input,
-#contain div#item > section[name="sidebar"] > div > ul li input,
-#contain div#map > section[name="sidebar"] > div > *[name] ul > li input[type="checkbox"] {
+#contain div#item > section[name='sidebar'] > div > ul li input,
+#contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox'] {
 	display: unset;
 	margin: 10px;
 }
 
 #data > div section[name='main'] > div[name='area'] ul li input:checked ~ *,
-#contain div#item > section[name="sidebar"] > div > ul li input:checked ~ *,
-#contain div#map > section[name="sidebar"] > div > *[name] ul > li input[type="checkbox"]:checked ~ * {
+#contain div#item > section[name='sidebar'] > div > ul li input:checked ~ *,
+#contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox']:checked ~ * {
 	opacity: 0.5 !important;
 	text-decoration:line-through !important;
 }
 
-#contain div > section[name="sidebar"] > div > ul li span[name="requirement"] small {
+#contain div > section[name='sidebar'] > div > ul li span[name='requirement'] small {
 	display: block;
 }
 
-#contain div#map > section[name="sidebar"] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
 	user-select: none;
 }
 
 
-#contain div > section[name='content'] > div[name="description"] > h4 {
+#contain div > section[name='content'] > div[name='description'] > h4 {
 	padding-top: 15px;
 }
