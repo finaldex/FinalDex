@@ -662,6 +662,21 @@ function inputMinMax() {
 }
 
 
+function iMinMax() {
+
+
+    var val = parseInt(this.value);
+    var min = parseInt(this.min);
+    var max = parseInt(this.max);
+
+    if(val <= min) {
+        this.value = min;
+    }
+    else if(val >= max) {
+        this.value = max;
+    }
+
+}
 
 function partyDataSwitchAll() {
 
