@@ -40,6 +40,7 @@ var createMap = function() {
 
 
 
+
 	var mapSectionContent = document.createElement("section");
 	var mapSectionContentMapOuter = document.createElement("div");
 	var mapSectionContentMapOuter2 = document.createElement("div");
@@ -436,7 +437,7 @@ var createMap = function() {
 
 	
 
-
+		
 
 		
 
@@ -2043,6 +2044,62 @@ var createMap = function() {
 
 	memory("Restore","game",document.querySelectorAll("#contain div#map > section[name='sidebar'] > div > *[name] input"))
 
+	}
+
+
+	for (var i = 0; i < finaldataLocationConnection.length; i++) {
+		if (getApplicable(finaldataLocationConnection[i]["Game"])) {
+			var north = finaldataLocationConnection[i]["North"];
+			var south = finaldataLocationConnection[i]["South"];
+			var west = finaldataLocationConnection[i]["West"];
+			var east = finaldataLocationConnection[i]["East"];
+
+			var vals = [north,south,west,east];
+			var origin1 = ["North","South","West","East"];
+			var origin2 = ["South","North","East","West"];
+			for (var q = 0; q < vals.length; q++) {
+				var val = vals[q];
+				if (val != undefined) {
+					if (val.includes(",")) {
+						val = val.split(",");
+						for (var u = 0; u < val.length; u++) {
+							for (var r = 0; r < finaldataLocationConnection.length; r++) {
+								if (getApplicable(finaldataLocationConnection[r]["Game"])) {
+									if (finaldataLocationConnection[r]["Location"] == val[u]) {
+										if (finaldataLocationConnection[r][origin2[q]] != undefined) {
+											if (!finaldataLocationConnection[r][origin2[q]].includes(finaldataLocationConnection[i]["Location"])) {
+												console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+											}
+										}
+										else {
+											console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+										}
+									}
+								}
+							}
+						}
+					}
+					else {
+						for (var r = 0; r < finaldataLocationConnection.length; r++) {
+							if (getApplicable(finaldataLocationConnection[r]["Game"])) {
+								if (finaldataLocationConnection[r]["Location"] == val[u]) {
+									if (finaldataLocationConnection[r][origin2[q]] != undefined) {
+										if (!finaldataLocationConnection[r][origin2[q]].includes(finaldataLocationConnection[i]["Location"])) {
+											console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+										}
+									}
+									else {
+										console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			
+		}
 	}
 }
 var mapSelectorVal = [0];
