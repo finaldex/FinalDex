@@ -1956,6 +1956,7 @@ var createMap = function() {
 		if (trainerArea != undefined) {
 			trainerInfo.push(trainerArea)
 		}
+		
 
 		var trainerPrevious = undefined;
 		var trainerNext = undefined;
@@ -1969,6 +1970,12 @@ var createMap = function() {
 
 		if (trainerImage == undefined) {
 			trainerImage = trainerClass;
+			if (trainerGender == "Male") {
+				trainerImage +=	"_M";
+			}
+			else if (trainerGender == "Female") {
+				trainerImage +=	"_F";
+			}
 		}
 
 
@@ -2005,6 +2012,13 @@ var createMap = function() {
 			var previmg = trainerPrevious["Image"];
 			if (previmg == undefined) {
 				previmg = trainerPrevious["Class"];
+
+				if (trainerPrevious["Gender"] == "Male") {
+					previmg +=	"_M";
+				}
+				else if (trainerPrevious["Gender"] == "Female") {
+					previmg +=	"_F";
+				}
 			}
 			mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+previmg+".png";
 			mapSectionSidebarDescriptionTrainerUlTopImgPreviousImage.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Trainer"];
@@ -2017,6 +2031,13 @@ var createMap = function() {
 			var nextimg = trainerNext["Image"];
 			if (nextimg == undefined) {
 				nextimg = trainerNext["Class"];
+
+				if (trainerNext["Gender"] == "Male") {
+					nextimg +=	"_M";
+				}
+				else if (trainerNext["Gender"] == "Female") {
+					nextimg +=	"_F";
+				}
 			}
 			mapSectionSidebarDescriptionTrainerUlTopImgNextImage.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+nextimg+".png";
 			mapSectionSidebarDescriptionTrainerUlTopImgNextImage.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Trainer"];
