@@ -1655,37 +1655,75 @@
 	overflow: auto;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > figure[name='cycle'] {
-	position: absolute;
-    top: 5px;
-    right: 5px;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > figure[name='export'] {
-	position: absolute;
-    bottom: 5px;
-    right: 5px;
-}
 
 
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div[name='Additional'] *[name='gender'] {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] *[name='gender'] {
 	text-shadow: 1px 1px 1px var(--border1);
 } 
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child {
+    padding: 10px 0;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child {
+	border-bottom: 1px solid;
+	flex-direction: column;
+}
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child > div {
+	width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px 0;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child > figure {
+	width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child > div > span small span {
+	display:block;
+}
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child > div > span:first-child {
+	width:50%;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child > div > span {
+	width: 100%;
+	display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child > div > span {
 	display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div[name='Additional'] > span > * {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > span > * {
 	padding: 1px 0;
 }
 
 
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child > div {
 	width: 100%;
 	display: inline-flex;
     justify-content: center;
@@ -1695,7 +1733,7 @@
 	text-align:center;
 	margin: 0 2px;
 }
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div[name='pokémon'] > span {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='pokémon'] > span {
 	position:relative;
 	display: flex;
     flex-direction: column;
@@ -1703,15 +1741,12 @@
     align-items: center;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > div > * {
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='moves'] > * {
 	text-align: center;
 	display: block;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > div[name='ivs'] > *:first-child,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > div[name='evs'] > *:first-child {
-	padding: 5px 0;
-}
+
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li span[name='HP'] {
 	color:var(--statHP);
@@ -1737,31 +1772,9 @@
 
 
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='stats'] {
-	display: none;
-}
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button {
-	position:absolute;
-	right: 10px;
-	transition: .25s ease;
-}
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button[name='cycle'] {
-	top: 5px;
-}
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button:not(:last-child)[name='export'] {
-	bottom: 5px;
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button[name='cycle']:active {
-	transform: rotate(-90deg);
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > button[name='export']:active {
-	color: var(--font2);
-}
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] {
     background: var(--color14);
@@ -2206,12 +2219,11 @@
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li {
 	position: relative;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 5px 0;
-	border-bottom: 1px dotted;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span {
