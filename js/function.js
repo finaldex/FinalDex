@@ -872,6 +872,7 @@ function getItemIcon(item) {
 }
 
 
+
 var searchPokémonAttributes = [];
 var searchMoveAttributes = [];
 var searchAbilityAttributes = [];
