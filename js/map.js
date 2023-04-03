@@ -2504,6 +2504,11 @@ function updateTrainer(trainers,condition) {
 		var li = document.createElement("li");
 		ulPath.appendChild(li);
 
+		var liMain = document.createElement("div");
+		li.appendChild(liMain);
+		var liAdditional = document.createElement("div");
+		li.appendChild(liAdditional);
+
 
 
 		if (u == 0) {
@@ -2545,8 +2550,8 @@ function updateTrainer(trainers,condition) {
 		if (nature != undefined || ability != undefined || level != undefined || gender != undefined) {
 			var pokLeft = document.createElement("div");
 			var pokLeftWrap = document.createElement("span");
-			pokLeft.setAttribute("name", "Additional");
-			li.appendChild(pokLeft);
+			pokLeft.setAttribute("name", "data");
+			liMain.appendChild(pokLeft);
 			pokLeft.appendChild(pokLeftWrap);
 
 			if (move == undefined && iv == undefined && ev == undefined) {
@@ -2615,8 +2620,8 @@ function updateTrainer(trainers,condition) {
 
 		var pokCenter = document.createElement("div");
 		var pokCenterWrap = document.createElement("span");
-		pokCenter.setAttribute("name", "Pokémon");
-		li.appendChild(pokCenter);
+		pokCenter.setAttribute("name", "pokémon");
+		liMain.appendChild(pokCenter);
 		pokCenter.appendChild(pokCenterWrap);
 
 		if (item != undefined) {
@@ -2646,15 +2651,13 @@ function updateTrainer(trainers,condition) {
 
 		if (move != undefined || iv != undefined || ev != undefined) {
 			var pokRight = document.createElement("div");
-			pokRight.setAttribute("name","data");
-			li.appendChild(pokRight);
+			pokRight.setAttribute("name","moves");
+			liMain.appendChild(pokRight);
 		}
 
 		if (move != undefined) {
 			var moves = undefined;
-			var pokRightMoves = document.createElement("div");
-			pokRightMoves.setAttribute("name", "moves");
-			pokRight.appendChild(pokRightMoves);
+
 
 			if (move.includes(",")) {
 				moves = move.split(",");
@@ -2669,7 +2672,7 @@ function updateTrainer(trainers,condition) {
 				pokRightMovesWrap.title = formatMoveData(moves[y]);
 				pokRightMovesWrap.style.color = "var(--type"+getMoveData(moves[y],"Type")+")";
 				pokRightMovesWrap.setAttribute("name","move");
-				pokRightMoves.appendChild(pokRightMovesWrap);
+				pokRight.appendChild(pokRightMovesWrap);
 				pokRightMovesWrap.appendChild(pokRightMovesText);
 				pokRightMovesWrap.addEventListener("click", dataRedirect);
 				pokRightMovesWrap.setAttribute("function","dataRedirect");
@@ -2677,6 +2680,12 @@ function updateTrainer(trainers,condition) {
 					if(getMoveData(moves[y],"Type") == undefined) {
 						console.log(moves[y]+" needs formatting?");
 					}
+					/*
+					var moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
+					if (!moveset.includes(moves[y])) {
+						console.log(pok+" cannot learn "+moves[y]+"?");
+					}
+					*/
 				}
 			}
 		}
@@ -2685,11 +2694,16 @@ function updateTrainer(trainers,condition) {
 			var ivs = undefined;
 			var pokRightIV = document.createElement("div");
 			pokRightIV.setAttribute("name", "ivs");
-			pokRight.appendChild(pokRightIV);
+			liAdditional.appendChild(pokRightIV);
+			var pokRightIVTitle = document.createElement("span");
 			var pokRightIVTitleText = document.createElement("small");
-			pokRightIVTitleText.innerText = "Individual Values";
-			pokRightIV.appendChild(pokRightIVTitleText);
+			pokRightIVTitleText.innerText = "Individual Values:";
+			pokRightIV.appendChild(pokRightIVTitle);
+			pokRightIVTitle.appendChild(pokRightIVTitleText);
 
+
+			var pokRightIVMain = document.createElement("span");
+			pokRightIV.appendChild(pokRightIVMain);
 			if (iv.includes(",")) {
 				ivs = iv.split(",");
 			}
@@ -2700,8 +2714,8 @@ function updateTrainer(trainers,condition) {
 				if (ivs[y] != "") {
 					var pokRightIVText = document.createElement("small");
 					pokRightIVText.setAttribute("name","iv");
-					pokRightIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+": </span>"+ivs[y];
-					pokRightIV.appendChild(pokRightIVText);
+					pokRightIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+ivs[y];
+					pokRightIVMain.appendChild(pokRightIVText);
 				}
 			}
 		}
@@ -2710,12 +2724,16 @@ function updateTrainer(trainers,condition) {
 			var evs = undefined;
 			var pokRightEV = document.createElement("div");
 			pokRightEV.setAttribute("name", "evs");
-			pokRight.appendChild(pokRightEV);
-
+			liAdditional.appendChild(pokRightEV);
+			var pokRightEVTitle = document.createElement("span");
 			var pokRightEVTitleText = document.createElement("small");
-			pokRightEVTitleText.innerText = "Effort Values";
-			pokRightEV.appendChild(pokRightEVTitleText);
+			pokRightEVTitleText.innerText = "Effort Values:";
+			pokRightEV.appendChild(pokRightEVTitle);
+			pokRightEVTitle.appendChild(pokRightEVTitleText);
 
+
+			var pokRightEVMain = document.createElement("span");
+			pokRightEV.appendChild(pokRightEVMain);
 			if (ev.includes(",")) {
 				evs = ev.split(",");
 			}
@@ -2725,13 +2743,12 @@ function updateTrainer(trainers,condition) {
 			for(var y = 0; y < evs.length; y++) {
 				if (evs[y] != "") {
 					var pokRightEVText = document.createElement("small");
-					pokRightEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+": </span>"+evs[y];
 					pokRightEVText.setAttribute("name","ev");
-					pokRightEV.appendChild(pokRightEVText);
+					pokRightEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+evs[y];
+					pokRightEVMain.appendChild(pokRightEVText);
 				}
 			}
 		}
-
 
 
 		var tempArr = datas[u].split("|")
@@ -2752,7 +2769,8 @@ function updateTrainer(trainers,condition) {
 		exportButton.value = tempStr;
 		exportButton.title = "Export Pokémon Buttons String";
 		exportButton.setAttribute("name","export");
-		li.appendChild(exportButton);
+		exportButton.setAttribute("type","scale");
+		liMain.appendChild(exportButton);
 		exportButton.appendChild(exportButtonText);
 
 		exportButton.addEventListener("click", trainerPokExport);
