@@ -914,10 +914,10 @@ var createPokémon = function() {
 	settingsCheckboxImportText.innerText = "Import Data";
     settingsCheckboxImport.setAttribute("type","medium");
 
+    settingsCheckbox.appendChild(settingsCheckboxImport);
+    settingsCheckboxImport.appendChild(settingsCheckboxImportText);
 	settingsCheckbox.appendChild(settingsCheckboxExport);
     settingsCheckboxExport.appendChild(settingsCheckboxExportText);
-	settingsCheckbox.appendChild(settingsCheckboxImport);
-    settingsCheckboxImport.appendChild(settingsCheckboxImportText);
 
     settingsCheckboxExport.addEventListener("click", exportData);
 	settingsCheckboxImport.addEventListener("click", importData);
