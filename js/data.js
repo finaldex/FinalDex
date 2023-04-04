@@ -1729,6 +1729,21 @@ function loadData() {
 						dataSectionMainLearnsetLiImg.setAttribute("function","modalData");
                     }
                 }
+				else if (learnsetArr[u]["Type"] == "Tutor") {
+					var tutordata = getTutorData(learnsetArr[u]["Move"],"Move");
+
+					if (tutordata.length > 0) {
+						var dataSectionMainLearnsetLiTextOuter = document.createElement("b");
+						var dataSectionMainLearnsetLiText = document.createElement("small");
+						dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+						dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+						dataSectionMainLearnsetLiText.innerText = "Move Tutor";
+						dataSectionMainLearnsetLiTextOuter.setAttribute("name","map");
+						dataSectionMainLearnsetLiTextOuter.setAttribute("value",tutordata[0]["Location"])
+					}
+
+                }
 				dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
             }
             if(y == 1) {
