@@ -1741,6 +1741,16 @@ function loadData() {
 						dataSectionMainLearnsetLiText.innerText = "Move Tutor";
 						dataSectionMainLearnsetLiTextOuter.setAttribute("name","map");
 						dataSectionMainLearnsetLiTextOuter.setAttribute("value",tutordata[0]["Location"])
+						dataSectionMainLearnsetLiTextOuter.addEventListener("click",dataRedirect)
+						dataSectionMainLearnsetLiTextOuter.setAttribute("function","dataRedirect")
+					}
+					else {
+						var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+						var dataSectionMainLearnsetLiText = document.createElement("small");
+						dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
+						dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+
+						dataSectionMainLearnsetLiText.innerText = "Move Tutor";
 					}
 
                 }
