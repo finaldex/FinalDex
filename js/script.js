@@ -1550,6 +1550,7 @@ function returnMoveSet(int,additional) {
     var arrL = finaldataLearnsetLevel;
     var arrM = finaldataLearnsetMachine;
     var arrB = finaldataLearnsetBreed;
+    var arrT = finaldataLearnsetTutor;
 
     var additional;
 
@@ -1559,6 +1560,7 @@ function returnMoveSet(int,additional) {
     var lvlres = [];
     var machres = [];
     var breres = [];
+    var tutres = [];
 
 
     for(var i = 0; i < arrE.length; i++) {
@@ -1609,6 +1611,17 @@ function returnMoveSet(int,additional) {
             obj["Game"] = arrB[i]["Game"];
             obj["Type"] = "Breeding";
             breres.push(obj)
+		}
+	}
+
+    for(var i = 0; i < arrT.length; i++) {
+		if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
+            var obj = new Object();
+            obj["Pokémon"] = arrT[i]["Pokémon"];
+            obj["Move"] = arrT[i]["Move"];
+            obj["Game"] = arrT[i]["Game"];
+            obj["Type"] = "Tutor";
+            tutres.push(obj)
 		}
 	}
 
@@ -1674,7 +1687,18 @@ function returnMoveSet(int,additional) {
         }
     }
 
-    
+    if (!tutres.length > 0) {
+        for(var i = 0; i < arrT.length; i++) {
+            if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
+                var obj = new Object();
+                obj["Pokémon"] = arrT[i]["Pokémon"];
+                obj["Move"] = arrT[i]["Move"];
+                obj["Game"] = arrT[i]["Game"];
+                obj["Type"] = "Tutor";
+                tutres.push(obj)
+            }
+        }
+    }
 
     var result = [];
 
@@ -1689,6 +1713,9 @@ function returnMoveSet(int,additional) {
     }
     for(var q = 0; q < breres.length; q++) {
         result.push(breres[q]);
+    }
+    for(var q = 0; q < tutres.length; q++) {
+        result.push(tutres[q]);
     }
     if (additional.includes("noduplicate")) {
         result = removeDuplicateObjectFromArray(result,"Move");
