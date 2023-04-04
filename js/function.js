@@ -1702,9 +1702,9 @@ function doubleClicker(handler) {
 	};
 }
 
-function exportData() {
+function importData() {
 
-	var lock = prompt("Enter Export String:");
+	var lock = prompt("Enter Import String:");
 
 	if (lock != undefined && lock != "") {
 		if (lock.charAt(0) == "[" && lock.includes("]") && lock.includes(":")) {
@@ -1734,7 +1734,7 @@ function exportData() {
 		consoleText("Returned Invalid String.")
 	}
 }
-function importData() {
+function exportData() {
 	var res = [];
 	var tempArr = JSON.stringify(localStorage).replaceAll("{","").replaceAll("}","").replaceAll('"','').split(",");
 
