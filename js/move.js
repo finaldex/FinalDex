@@ -261,9 +261,14 @@ var createMove = function() {
 			}
 
 			if(getTutorData(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
-				moveSectionListOptionsLabel.setAttribute("data-search-tutor", "y");
+				var tutors = getTutorData(finaldataMove[q]["Name"+"_"+JSONPath_MoveName],"Move");
+				var res = [];
+				for(y = 0; y < tutors.length; y++) {
+					res.push(tutors[y]["Location"].toLowerCase())
+				}
+				moveSectionListOptionsLabel.setAttribute("data-search-tutor", res.join(","));
 			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-tutor", "n");
+				moveSectionListOptionsLabel.setAttribute("data-search-tutor", "none");
 			}
 			if(finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine] != undefined) {
 				moveSectionListOptionsLabel.setAttribute("data-search-machine", finaldataMoveMachine[q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
@@ -710,6 +715,57 @@ var createMove = function() {
 				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
 				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldataLearnsetMachine[q]["Pokémon"]));
+				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
+
+			}
+		}
+		for(var q = 0; q < finaldataLearnsetTutor.length; q++) {
+			if(finaldataLearnsetTutor[q]["Move"] == finaldataMove[i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldataLearnsetTutor[q]["Game"]) == true) {
+				var tutorData = getTutorData(finaldataLearnsetTutor[q]["Move"],"Move");
+				
+				var moveSectionSidebarLearnsetLi = document.createElement("li");
+				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
+				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				var moveSectionSidebarLearnsetLiText = document.createElement("small");
+
+				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldataLearnsetTutor[q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.title = finaldataLearnsetTutor[q]["Pokémon"];
+				moveSectionSidebarLearnsetLiText.innerText = finaldataLearnsetTutor[q]["Pokémon"];
+				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
+				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
+
+				if (tutorData.length > 0) {
+
+					var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+					var moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
+					var moveSectionSidebarLearnsetLiSourceWrap = document.createElement("b");
+					var moveSectionSidebarLearnsetLiSourceText = document.createElement("small");
+
+					moveSectionSidebarLearnsetLiSourceTitle.innerText = "Move Tutor";
+					moveSectionSidebarLearnsetLiSourceText.innerText = tutorData[0]["Location"];
+					moveSectionSidebarLearnsetLiSourceWrap.setAttribute("name","map");
+					moveSectionSidebarLearnsetLiSourceWrap.setAttribute("value",tutorData[0]["Location"])
+					moveSectionSidebarLearnsetLiSourceWrap.addEventListener("click",dataRedirect);
+					moveSectionSidebarLearnsetLiSourceWrap.setAttribute("function","dataRedirect");
+
+					moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
+					moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceTitle);
+					moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceWrap);
+					moveSectionSidebarLearnsetLiSourceWrap.appendChild(moveSectionSidebarLearnsetLiSourceText);
+				}
+				else {
+					var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+					var moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
+					moveSectionSidebarLearnsetLiSourceTitle.innerText = "Move Tutor";
+					moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
+					moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceTitle);
+				}
+
+				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldataLearnsetTutor[q]["Pokémon"]));
 				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
 				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
 
