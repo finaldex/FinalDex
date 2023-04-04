@@ -1600,6 +1600,18 @@ function returnMoveSet(int,additional) {
 		}
 	}
 
+    for(var i = 0; i < arrT.length; i++) {
+		if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
+            var obj = new Object();
+            obj["Pokémon"] = arrT[i]["Pokémon"];
+            obj["Move"] = arrT[i]["Move"];
+            obj["Game"] = arrT[i]["Game"];
+            obj["Type"] = "Tutor";
+            tutres.push(obj)
+		}
+	}
+
+
     for(var i = 0; i < arrB.length; i++) {
 		if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"])) {
             var obj = new Object();
@@ -1611,17 +1623,6 @@ function returnMoveSet(int,additional) {
             obj["Game"] = arrB[i]["Game"];
             obj["Type"] = "Breeding";
             breres.push(obj)
-		}
-	}
-
-    for(var i = 0; i < arrT.length; i++) {
-		if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
-            var obj = new Object();
-            obj["Pokémon"] = arrT[i]["Pokémon"];
-            obj["Move"] = arrT[i]["Move"];
-            obj["Game"] = arrT[i]["Game"];
-            obj["Type"] = "Tutor";
-            tutres.push(obj)
 		}
 	}
 
@@ -1671,6 +1672,19 @@ function returnMoveSet(int,additional) {
         }
     }
 
+    if (!tutres.length > 0) {
+        for(var i = 0; i < arrT.length; i++) {
+            if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
+                var obj = new Object();
+                obj["Pokémon"] = arrT[i]["Pokémon"];
+                obj["Move"] = arrT[i]["Move"];
+                obj["Game"] = arrT[i]["Game"];
+                obj["Type"] = "Tutor";
+                tutres.push(obj)
+            }
+        }
+    }
+
     if (!breres.length > 0) {
         for(var i = 0; i < arrB.length; i++) {
             if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"])) {
@@ -1687,19 +1701,6 @@ function returnMoveSet(int,additional) {
         }
     }
 
-    if (!tutres.length > 0) {
-        for(var i = 0; i < arrT.length; i++) {
-            if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
-                var obj = new Object();
-                obj["Pokémon"] = arrT[i]["Pokémon"];
-                obj["Move"] = arrT[i]["Move"];
-                obj["Game"] = arrT[i]["Game"];
-                obj["Type"] = "Tutor";
-                tutres.push(obj)
-            }
-        }
-    }
-
     var result = [];
 
     for(var q = 0; q < evores.length; q++) {
@@ -1711,11 +1712,11 @@ function returnMoveSet(int,additional) {
     for(var q = 0; q < machres.length; q++) {
         result.push(machres[q]);
     }
-    for(var q = 0; q < breres.length; q++) {
-        result.push(breres[q]);
-    }
     for(var q = 0; q < tutres.length; q++) {
         result.push(tutres[q]);
+    }
+    for(var q = 0; q < breres.length; q++) {
+        result.push(breres[q]);
     }
     if (additional.includes("noduplicate")) {
         result = removeDuplicateObjectFromArray(result,"Move");
