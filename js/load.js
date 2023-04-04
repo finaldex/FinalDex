@@ -35,6 +35,7 @@ var finaldataLearnsetMachine = [];
 var finaldataLearnsetEvolution = [];
 var finaldataLearnsetLevel = [];
 var finaldataLearnsetBreed = [];
+var finaldataLearnsetTutor = [];
 var finaldataItems = [];
 var finaldataItemsEffect = [];
 var finaldataItemsPrice = [];
@@ -189,7 +190,10 @@ function requestLoad(i,url) {
 						}
 						for(var q = 0; q < Metadata["Breeding"].length; q++) {
 							finaldataLearnsetBreed.push(Metadata["Breeding"][q]);
-						}	
+						}
+						for(var q = 0; q < Metadata["Tutor"].length; q++) {
+							finaldataLearnsetTutor.push(Metadata["Tutor"][q]);
+						}
 					}
 					if (loads[i] == "Items") {
 						for(var q = 0; q < Metadata["Reference"].length; q++) {
