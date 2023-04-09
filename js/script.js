@@ -678,6 +678,38 @@ function iMinMax() {
 
 }
 
+
+function onlyOneInput(inputs,input) {
+    var inputs;
+    var input;
+
+    var checks = [];
+
+
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked) {
+            checks.push(inputs[i])
+        }
+        else if (inputs[i].value != undefined) {
+            checks.push(inputs[i])
+        }
+    }
+    if (checks.length > 1) {
+        for (var i = 0; i < checks.length; i++) {
+            if (checks[i] != input) {
+                console.log(checks[i].value)
+                if (checks[i].value != "on") {
+                    checks[i].value = "";
+                }
+                else if (checks[i].checked != undefined) {
+                    checks[i].checked = false;
+                }
+            }
+        }
+    }
+}
+
+
 function partyDataSwitchAll() {
 
 
