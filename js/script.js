@@ -2435,7 +2435,7 @@ function statsCalc(type,level,base,iv,ev,nature,friendship) {
         }
         else {
             if (Generation >= 1 && Generation <= 2) {
-                return Math.floor((((base+iv)*2+(Math.ceil(Math.sqrt(ev))/4))*level)/100)+level+10;
+                return Math.floor((((base+iv)*2+(Math.ceil(ev)/4))*level)/100)+level+10;
             }
             else if (GameID >= 31 && GameID <= 32) {
                 return Math.floor(((2*base+iv)*level)/100)+level+10+ev;
@@ -2447,7 +2447,7 @@ function statsCalc(type,level,base,iv,ev,nature,friendship) {
     }
     else {
         if (Generation >= 1 && Generation <= 2) {
-            return Math.floor((((base+iv)*2+Math.floor(Math.ceil(Math.sqrt(ev))/4))*level)/100)+5;
+            return Math.floor((((base+iv)*2+Math.floor(Math.ceil(ev)/4))*level)/100)+5;
         }
         else if (GameID >= 31 && GameID <= 32) {
             return Math.floor(((((2*base+iv)*level)/100)+5)*nature*friendship)+ev;
