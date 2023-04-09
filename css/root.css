@@ -103,11 +103,15 @@
 
 	--statHP:#FF5959;
 	--statAtk:#F5AC78;
+	--statAttack:#F5AC78;
 	--statDef:#FAE078;
+	--statDefense:#FAE078;
 	--statSpecial:#974DFF;
+	--statSpc:#974DFF;
 	--statSpAtk:#9DB7F5;
 	--statSpDef:#A7DB8D;
 	--statSpeed:#FA92B2;
+	--statSpe:#FA92B2;
 
     --sizeFontTitle: min(max(1.5em, 15vw), 6em);
     --sizeFontHeader: min(max(1em, 8vw), 4em);
