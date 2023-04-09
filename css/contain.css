@@ -1440,6 +1440,900 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] {
+	width: 100%;
+	height: 100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] {
+	width: 100%;
+    height: 80%;
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+	overflow:hidden;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] {
+	width: 100%;
+    height: 100%;
+    display: inline-flex;
+    /* text-align: center; */
+    /* vertical-align: middle; */
+    flex-direction: column;
+    align-items: center;
+	justify-content: center;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > span {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > span:first-child {
+	padding: 20px 0 10px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div {
+	padding: 10px;
+    width: 60%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+	flex-wrap: nowrap;
+	border-radius: 20px;
+
+	width: 350px;
+	height: 120px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span {
+	position: relative;
+	height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+	background: limegreen;
+	text-shadow: 0px 0px 1px var(--fontDark);
+	color: var(--fontLight);
+	user-select:none;
+	border-radius: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="opponent"] > div[name].active > span {
+	outline: 3px solid var(--colorRed);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="player"] > div[name].active > span {
+	outline: 3px solid var(--colorBlue);
+}
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="opponent"] > div[name].target:not(.active):hover > span {
+	outline: 1px solid var(--colorRed);
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="player"] > div[name]:not(.active):hover > span {
+	outline: 1px solid var(--colorBlue);
+}
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name].active.target:hover > span,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name].target > span {
+	border-style: inset;
+	border-width: 2px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name].target:hover > span {
+	border-width: 3px;
+}
+
+
+
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span {
+	border: 1px solid;
+}
+
+
+
+
+
+/*
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="Player"] > div[name].activeclick:hover > span,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="Player"] > div[name].activeclick > span {
+	outline: 5px solid var(--colorBlue);
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="Opponent"] > div[name].activeclick:hover > span,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*="Opponent"] > div[name].activeclick > span {
+	outline: 5px solid var(--colorRed);
+}
+
+*/
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name="hp"] {
+	display: flex;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    flex-direction: column;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name="hp"] > span {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name="imgs"] img[name='item'] {
+	position:absolute;
+	left:-5px;
+	top:5px;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:first-child {
+	background: linear-gradient(to right, Skyblue, var(--color_50));
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:first-child b {
+	width:100%;
+	height:100%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:first-child b:hover {
+	filter: brightness(0.8);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:first-child b:active {
+	transform: scale(0.9);
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string=""]):not([data-string*='pok:|']) > span:first-child {
+	display: none;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string=""] > span:last-child,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string*='pok:|'] > span:last-child {
+	display: none;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span > span[name='pok'] {
+	height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name="imgs"] {
+	position: relative;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name="name"] {
+	height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name="hp"] small {
+	display: block;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure {
+	position: absolute;
+    top: 10px;
+    text-shadow: unset;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name="close"] {
+	left: 10px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name="edit"] {
+	right: 10px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure > * {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure:active > * {
+	transform:scale(0.8)
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > canvas {
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] {
+	width: 100%;
+	height: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--color18);
+	box-shadow: 0 -1px 0px var(--border1);
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div {
+	width: 100%;
+    height: 100%;
+    display: flex;
+	justify-content: space-evenly;
+    align-items: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child {
+	flex-direction: column;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span {
+	display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    position: relative;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child > span {
+	width: 75%;
+	position:relative;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child > span[name='critical'] > * {
+	display: inline;
+	padding: 0 10px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child input[type="checkbox"] {
+	display: unset;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span {
+	width: 100%;
+	height: 100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type="range"] {
+	width: 100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name="min"],
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name="max"] {
+	position: absolute;
+    bottom: -20px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name="min"] {
+	left: 5px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name="max"] {
+	right: 5px;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child > span:first-child > *:nth-child(1) {
+    position: absolute;
+    left: 5px;
+    top: -20px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child > span:first-child > *:nth-child(2) {
+    position: absolute;
+    right: 5px;
+    top: -20px;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select {
+	width: 75%;
+    padding: 5px 10px;
+    outline: none;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: none;
+    color: var(--font1);
+    font-size: var(--sizeFontXL);
+    font-weight: bold;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span option {
+	color: var(--fontDark);
+    font-size: small;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 40%;
+	height: 100%;
+}
+
+
+[game="Sun"] #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'],
+[game="Moon"] #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'],
+[game="Ultra Sun"] #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'],
+[game="Ultra Moon"] #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] {
+	width: 90%;
+}
+
+
+
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] span[name='title'] {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] span[name='title'] > span {
+	text-align: center;
+	width: 100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] span[name='title'] > span:first-child {
+	width: 30%;
+}
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol {
+    width: 100%;
+    display: flex;
+    background: var(--color17);
+    flex-direction: row;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li > span {
+	display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span input {
+	text-align: center;
+	outline: none;
+	caret-color: var(--font1);
+	width: 100%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span input:first-child {
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span {
+	display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:first-child {
+	width: 200%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] input {
+	background:none;
+	cursor:default;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span[name] input {
+	cursor:unset;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name='stats'].disabled > span {
+	pointer-events: none;
+	opacity: 0.5;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled]  {
+	background-color: rgba(239, 239, 239, 0.3);
+	color:rgba(0, 0, 0, 0.3);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled] ~ label,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled] ~ small {
+	opacity: 0.5;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] input::placeholder,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] input {
+	color:var(--font1);
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] input::-webkit-outer-spin-button,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] input::-webkit-inner-spin-button {
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Lonely"] input:nth-child(3),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Brave"] input:nth-child(3),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Adamant"] input:nth-child(3),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Naughty"] input:nth-child(3) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Bold"] input:nth-child(4),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Relaxed"] input:nth-child(4),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Impish"] input:nth-child(4),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Lax"] input:nth-child(4) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Modest"] input:nth-child(5),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Mild"] input:nth-child(5),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Quiet"] input:nth-child(5),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Rash"] input:nth-child(5) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Calm"] input:nth-child(6),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Gentle"] input:nth-child(6),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Sassy"] input:nth-child(6),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Careful"] input:nth-child(6) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Timid"] input:nth-child(7),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Hasty"] input:nth-child(7),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Jolly"] input:nth-child(7),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Naive"] input:nth-child(7) {
+	color: var(--colorGreen) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Bold"] input:nth-child(3),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Timid"] input:nth-child(3),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Modest"] input:nth-child(3),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Calm"] input:nth-child(3) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Lonely"] input:nth-child(4),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Hasty"] input:nth-child(4),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Mild"] input:nth-child(4),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Gentle"] input:nth-child(4) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Adamant"] input:nth-child(5),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Impish"] input:nth-child(5),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Jolly"] input:nth-child(5),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Careful"] input:nth-child(5) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Naughty"] input:nth-child(6),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Lax"] input:nth-child(6),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Naive"] input:nth-child(6),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Rash"] input:nth-child(6) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Brave"] input:nth-child(7),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Relaxed"] input:nth-child(7),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Quiet"] input:nth-child(7),
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child[name="Sassy"] input:nth-child(7) {
+	color: var(--colorRed) !important;
+	text-shadow: 1px 1px 1px var(--border1);
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child input {
+	font-weight: bold;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:first-child input {
+	text-align:right;
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:first-child input::placeholder {
+	color:inherit;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span > span:last-child {
+	font-weight: bold;
+	text-shadow: 1px 1px 1px var(--fontDark);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="pokémon"] > span {
+    width: 100%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul {
+	display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+	border: 1px solid;
+	position:relative;
+	padding: 10px 0;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul {
+	display: none;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name*="Group"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="pokémon"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="stats"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="level"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="nature"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="friendship"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="ability"] {
+	flex-direction: column;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li > *:not(input):first-child {
+	text-indent: 5%;
+    padding: 10px 0 5px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li {
+	padding: 2px 0;
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure:first-child {
+	position:absolute;
+	top: 2px;
+	right: 2px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > li {
+	width: 90%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] > span {
+	width:100%;
+}
+	
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] > span > li {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 5px 10%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] > span > li[name] > span > li {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] > span > li[name] {
+	flex-direction: column;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] > span > li > span { 
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] > span > li small {
+	display: block;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] > span > li span li {
+	padding: 5px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name="team"] {
+	display: flex;
+    width: 100%;
+    padding: 10px 0;
+    flex-direction: row;
+    position: relative;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > li:not([title]) {
+	padding: 3px 0;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div input {
+	color: var(--fontDark);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] {
+	flex-direction: column;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div {
+	background: var(--color18);
+	width: 100%;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	height: 20%;
+	flex-direction: column;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:nth-child(2) {
+	display: flex;
+    height: 100%;
+    text-align: center;
+    flex-wrap: nowrap;
+    background: var(--color17);
+    flex-direction: column;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	text-align:center
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * {
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    width: 50%;
+	padding: 2px 0;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > *[name] {
+	flex-direction: column;
+	width:100%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span {
+	display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+    width: 100%;
+	padding: 5px 0;
+	flex-wrap: wrap;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span:first-child {
+	padding-top: 10px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span:last-child {
+	padding-bottom: 10px;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span > li label{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child input[type="checkbox"] {
+	display:unset;
+	margin: 0 10px;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span {
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span > * {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span > select {
+	outline: none;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: none;
+    color: var(--font1);
+    font-weight: bold;
+    padding: 0 10px;
+    
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span:first-child > select {
+	font-size: var(--sizeFontM);
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span:last-child > select {
+	font-size: var(--sizeFontS);
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span:last-child > select option {
+	font-size: var(--sizeFontL);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] option {
+	padding: 5px 10px;
+	color:var(--fontDark);
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol input[type="checkbox"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol input[type="number"] {
+	display: unset;
+    margin: 0 10px;
+}
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > div[name] {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > div[name] > span {
+	display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 0;
+    width: 75%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > div[name] > span[name] {
+	flex-direction: column;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > div[name] > span[name] > span {
+	display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > div[name] > span[name] > span > span {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > div:not([name*="1"]) {
+	display: none;
+}
+
+
+
+
+
+
+
+
 #contain > div > section[name='header'] span:last-child {
 	position: absolute;
     right: 0;
