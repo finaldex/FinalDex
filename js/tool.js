@@ -939,6 +939,8 @@ var createTool = function() {
 
 
 		toolSectionContentDMGMenuLeftRange.setAttribute("type","range");
+		toolSectionContentDMGMenuLeftRange.setAttribute("name","dmg-roll-range")
+		toolSectionContentDMGMenuLeftRange.setAttribute("id","dmg-roll-range")
 	
 
 		toolSectionContentDMGOptionsContentTop.setAttribute("name","pokémon");
@@ -2025,7 +2027,7 @@ var createTool = function() {
 
 
 
-					Level = userLevelPath.value;
+					Level = parseInt(userLevelPath.value);
 					if (criticalPath.checked) {
 						Critical = 2;
 					}
@@ -2074,11 +2076,10 @@ var createTool = function() {
 					random = parseInt(random);
 
 					if (Critical == 2) {
-						Attack = NoModAttack;
-						Defense = NoModDefense;
+						Attack = parseInt(NoModAttack);
+						Defense = parseInt(NoModDefense);
 					}
 
-	
 					random = randomPath.value/255;
 
 
@@ -2100,8 +2101,6 @@ var createTool = function() {
 						for (var u = 0; u < Types.length; u++) {
 							if (moveType == Types[u]) {
 								var typeadv = returnTypeAdvantage(Types[u],"Attacking");
-
-									console.log(typeadv)
 
 								if (typeadv[2].includes(tarTypes[0].toUpperCase())) {
 									used.push(tarTypes[0].toUpperCase())
@@ -2138,7 +2137,20 @@ var createTool = function() {
 
 
 
-					var calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2)*STAB*Type1*Type2*random;
+					console.log("Level:"+Level)
+					console.log("Critical:"+Critical)
+					console.log("Power:"+Power)
+					console.log("Attack:"+Attack)
+					console.log("Defense:"+Defense)
+					console.log("STAB:"+STAB)
+					console.log("Type1:"+Type1)
+					console.log("Type2:"+Type2)
+					console.log("Random:"+random)
+
+					var calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2)
+					calculation = calculation+(Math.floor((calculation/2)*STAB));
+
+					calculation = calculation*Type1*Type2*random;
 
 					if (Immune) {
 						calculation = 0;
@@ -2167,12 +2179,6 @@ var createTool = function() {
 					if (isNaN(percentResult)) {
 						percentResult = 100;
 					}
-
-					
-
-					
-
-
 					if (isNaN(integerResult)) {
 						integerResult = maxHP;
 					}
@@ -2494,8 +2500,10 @@ var createTool = function() {
 				var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
 				var randomMinText = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name='min']");
 				var randomMaxText = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name='max']");
-				randomPath.setAttribute("min","217");
+				randomPath.setAttribute("min","216");
 				randomPath.setAttribute("max","255");
+				randomPath.setAttribute("step","1");
+				randomPath.value = 217;
 
 
 				
