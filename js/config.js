@@ -14,6 +14,7 @@ var Gender;
 var Generation;
 var HeldItem;
 var Friendship;
+var Types = [];
 var JSONPath_Ability;
 var JSONPath_AbilityFlavor;
 var JSONPath_AbilityReference;
@@ -941,6 +942,7 @@ if(Generation == 1) {
 	JSONPath_MoveCategory = "1";
     JSONPath_EVYield = "1";
 	JSONPath_MovePriority = "1";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Fire","Water","Grass","Electric","Psychic","Ice","Dragon"];
 }
 if(Generation == 2) {
 	JSONPath_CatchRate = "2";
@@ -956,6 +958,7 @@ if(Generation == 2) {
     JSONPath_Friendship = "2";
 	JSONPath_MovePriority = "2";
 	JSONPath_Offspring = "2";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark"];
 }
 if(Generation == 3) {
 	JSONPath_HatchRateSteps = "3";
@@ -970,6 +973,7 @@ if(Generation == 3) {
 	JSONPath_MovePriority = "3";
 	JSONPath_Offspring = "3";
 	JSONPath_FormChange = "3";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark"];
 }
 if(Generation == 4) {
 	JSONPath_HatchRateSteps = "4";
@@ -984,6 +988,7 @@ if(Generation == 4) {
 	JSONPath_MoveReference = "4";
 	JSONPath_MovePriority = "4";
 	JSONPath_Offspring = "4";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark"];
 }
 if(Generation == 5) {
 	JSONPath_Type = "5";
@@ -1003,6 +1008,7 @@ if(Generation == 5) {
 	JSONPath_MovePriority = "5";
 	JSONPath_EvolutionMethod = "5";
 	JSONPath_FormChange = "5";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark"];
 }
 if(Generation == 6) {
 	JSONPath_Ability = "6";
@@ -1018,6 +1024,7 @@ if(Generation == 6) {
 	JSONPath_MovePP = "6";
 	JSONPath_MovePriority = "6";
 	JSONPath_EvolutionMethod = "6";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark","Fairy"];
 }
 if(Generation == 7) {
 	JSONPath_Ability = "7";
@@ -1027,6 +1034,7 @@ if(Generation == 7) {
 	JSONPath_EVYield = "7";
 	JSONPath_AbilityReference = "7";
 	JSONPath_MoveAccuracy = "7";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark","Fairy"];
 }
 if(Generation == 8) {
 	JSONPath_Ability = "8";
@@ -1049,6 +1057,7 @@ if(Generation == 8) {
 	JSONPath_MoveID = "8";
 	JSONPath_MoveName = "8";
     JSONPath_Friendship = "8";
+	Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark","Fairy"];
 }
 
 
