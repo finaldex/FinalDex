@@ -326,11 +326,11 @@ function initialize() {
 
 		createNav();
 		createPokémon();
-		createTool();
 		createMap();
 		createAbility();
 		createItem();
 		createMove();
+		createTool();
 
 		countdown();
 		stopwatch();
@@ -341,7 +341,6 @@ function initialize() {
 
 		memory("Restore","",[document.querySelector('#resizer')]);
 		memory("Restore","",[document.querySelector('#pokémon > aside[name="settings"] > span[name="theme"] input')]);
-		
 		memory("Restore","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"]'));
 
 		variantSelector();
