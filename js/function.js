@@ -436,11 +436,16 @@ function getMoveData(move, type) {
 		arr = finaldataMoveDescription;
 		game = "Description_"+JSONPath_MoveDescription;
 	}
+	if(type == "Range") {
+		arr = finaldataMoveRange;
+		game = "Range";
+	}
 	for(var i = 0; i < arr.length; i++) {
 		if(arr[i]["Name"+"_"+JSONPath_MoveName] == move) {
 			return arr[i][game]
 		}
 	}
+	return undefined;
 }
 
 
@@ -520,6 +525,109 @@ function getPokémonInt(name) {
 			return q;
 		}
 	}
+}
+function returnSortedItemsList(i) {
+
+	var i;
+	var items = [];
+	var result = finaldataItems.map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
+
+	items = sortObjectArray(result,"Pocket");
+
+	var result = [];
+	
+	if (finaldataPokémonFormItem[i] != undefined) {
+		if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"] != undefined) {
+			var req = [];
+			if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"].includes(",")) {
+				req = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"].split(",")
+			}
+			else {
+				req[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"];
+			}
+
+			for (var r = 0; r < req.length; r++) {
+				for (var q = 0; q < items.length; q++) {
+					if (getApplicable(items[q]["Game"])) {
+						if (items[q]["Item"] != undefined) {
+							if (items[q]["Item"] == req[r]) {
+								result.push(items[q]);
+							}
+						}
+					}
+				}
+			}
+		}
+		else if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"] != undefined) {
+			var notreq = [];
+			if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"].includes(",")) {
+				notreq = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"].split(",")
+			}
+			else {
+				notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"];
+			}
+
+
+			var obj = new Object();
+			obj["Item"] = "";
+			obj["Game"] = "All";
+			items.unshift(obj);
+
+			for (var r = 0; r < notreq.length; r++) {
+				for (var q = 0; q < items.length; q++) {
+					if (getApplicable(items[q]["Game"])) {
+						if (items[q]["Item"] != undefined) {
+							if (items[q]["Item"] != notreq[r]) {
+								result.push(items[q]);
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		else {
+			var obj = new Object();
+			obj["Item"] = "";
+			obj["Game"] = "All";
+			items.unshift(obj);
+
+			for (var q = 0; q < items.length; q++) {
+				if (getApplicable(items[q]["Game"])) {
+					if (items[q]["Item"] != undefined) {
+						result.push(items[q]);
+					}
+				}
+			}
+
+		}
+	}
+
+	return result;
+}
+
+function dataStringToObjArr(data) {
+	var data
+	var tempArr;
+	var result = [];
+	if (data != "" && data != undefined) {
+		if (data.includes("|")) {
+			tempArr = data.split("|")
+		}
+		else {
+			tempArr = [data];
+		}
+		
+		for (var i = 0; i < tempArr.length; i++) {
+			var val1 = tempArr[i].split(":")[0];
+			var val2 = tempArr[i].split(":")[1];
+			var obj = new Object();
+			obj[val1] = val2;
+			result.push(obj)
+		}
+	}
+
+	return result;
 }
 
 function getPokémonName(int) {
