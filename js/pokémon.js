@@ -391,7 +391,7 @@ var createPokémon = function() {
 
                                     if (Generation >= 1 && Generation <= 2) {
                                         teamDataInput.setAttribute("min","0");
-                                        teamDataInput.setAttribute("max","65535");
+                                        teamDataInput.setAttribute("max","255");
                                         teamDataInput.setAttribute("placeholder","EV");
                                         teamDataInput.setAttribute("title","Effort Value"+"\n"+Stats[q]);
                                     }
