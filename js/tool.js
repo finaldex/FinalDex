@@ -1005,20 +1005,32 @@ var createTool = function() {
 		toolSectionContentDMGMenuLeftCrit.appendChild(toolSectionContentDMGMenuLeftCritLabel);
 		toolSectionContentDMGMenuLeftCritLabel.appendChild(toolSectionContentDMGMenuLeftCritText);
 
-		toolSectionContentDMGMenuLeftCritInput.addEventListener("change", DMGCalcStart);
-		toolSectionContentDMGMenuLeftRange.addEventListener("change", DMGCalcStart);
+		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGCalcPokStats);
+		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGSyncData);
+		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGCalcStart);
+
+		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGCalcPokStats);
+		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGSyncData);
+		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGCalcStart);
+
+		var tempMoves = [];
 
 		for(var m = 0; m < finaldataMove.length; m++) {
 			if(finaldataMove[m][JSONPath_MoveReference] == "true") {
-				var toolSectionContentDMGMenuRightTopOption = document.createElement("option");
-				toolSectionContentDMGMenuRightTopOption.setAttribute("value",finaldataMove[m]["Name_"+JSONPath_MoveName]);
-				toolSectionContentDMGMenuRightTopOption.innerText = finaldataMove[m]["Name_"+JSONPath_MoveName];
-				toolSectionContentDMGMenuRightTopSelect.appendChild(toolSectionContentDMGMenuRightTopOption);
-
-				toolSectionContentDMGMenuRightTopOption.style.background = "var(--type"+getMoveData(finaldataMove[m]["Name_"+JSONPath_MoveName],"Type")+")";
+				tempMoves.push(finaldataMove[m]["Name_"+JSONPath_MoveName])
 			}
 		}
 
+		tempMoves.sort();
+
+		for(var m = 0; m < tempMoves.length; m++) {
+			var toolSectionContentDMGMenuRightTopOption = document.createElement("option");
+			toolSectionContentDMGMenuRightTopOption.setAttribute("value",tempMoves[m]);
+			toolSectionContentDMGMenuRightTopOption.innerText = tempMoves[m];
+			toolSectionContentDMGMenuRightTopSelect.appendChild(toolSectionContentDMGMenuRightTopOption);
+
+			toolSectionContentDMGMenuRightTopOption.style.background = "var(--type"+getMoveData(tempMoves[m],"Type")+")";
+		}
 	
 
 
@@ -1048,12 +1060,10 @@ var createTool = function() {
 		toolSectionContentDMGMenuRightTopSelect.addEventListener("change",DMGCalcStart);
 
 
-		//DMGCalcStart();
-	
-
 		//var conditions = [{Name:"Reflect",Affect:"Team"},{Name:"Light Screen",Affect:"Team"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain"}]
 		//var conditions = [{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"1 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"2 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"3 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"All"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}];
-		var conditions = [{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
+		//var conditions = [{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
+		var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
 
 		var battleVariation = [{Name:"Single Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"All"},{Name:"Double Battle",TeamMin:"2",TeamMax:"2",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Triple Battle",TeamMin:"3",TeamMax:"3",OpponentMin:"3",OpponentMax:"3",Teams:"2",Game:"Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Battle Royal",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"4",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"SOS Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"Horde Encounter",TeamMin:"1",TeamMax:"1",OpponentMin:"5",OpponentMax:"5",Teams:"2",Game:"X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Max Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Sword,Shield"},{Name:"Tera Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Scarlet,Violet"}]
 
@@ -1197,6 +1207,8 @@ var createTool = function() {
 					var resultTeamInactive = document.createElement("span");
 					var resultTeamInactiveImport = document.createElement("b");
 					var resultTeamActive = document.createElement("span");
+					var resultTeamActiveTop = document.createElement("span");
+					var resultTeamActiveBottom = document.createElement("span");
 					var resultTeamActivePok = document.createElement("span");
 					var resultTeamActivePokHealth = document.createElement("span");
 					var resultTeamActivePokHealthPercentage = document.createElement("small");
@@ -1243,35 +1255,45 @@ var createTool = function() {
 					//resultTeamActivePokItem.setAttribute("onerror","this.src = ''; this.title = '';");
 					resultTeamActiveCloseText.innerText = "❌";
 					resultTeamActiveExportText.innerText = "➢";
-
+					resultTeamActiveBottom.setAttribute("name","moves");
 
 
 					resultTeam.appendChild(resultTeamInactive);
 					resultTeamInactive.appendChild(resultTeamInactiveImport)
 					resultTeam.appendChild(resultTeamActive);
-					resultTeamActive.appendChild(resultTeamActivePok);
-					resultTeamActive.appendChild(resultTeamActivePok);
-					resultTeamActive.appendChild(resultTeamActiveClose);
-					resultTeamActive.appendChild(resultTeamActiveExport);
+					resultTeamActive.appendChild(resultTeamActiveTop);
+					resultTeamActive.appendChild(resultTeamActiveBottom);
+					resultTeamActiveTop.appendChild(resultTeamActivePok);
+					resultTeamActiveTop.appendChild(resultTeamActivePok);
+					resultTeamActiveTop.appendChild(resultTeamActiveClose);
+					resultTeamActiveTop.appendChild(resultTeamActiveExport);
 					resultTeamActiveClose.appendChild(resultTeamActiveCloseText);
 					resultTeamActiveExport.appendChild(resultTeamActiveExportText);
-					resultTeamActive.appendChild(resultTeamActivePokHealth);
+					resultTeamActiveTop.appendChild(resultTeamActivePokHealth);
 					resultTeamActivePokHealth.appendChild(resultTeamActivePokHealthPercentage);
 					resultTeamActivePokHealth.appendChild(resultTeamActivePokHealthWrap);
 					resultTeamActivePokHealthWrap.appendChild(resultTeamActivePokHealthCurrent);
 					resultTeamActivePokHealthWrap.appendChild(resultTeamActivePokHealthDash);
 					resultTeamActivePokHealthWrap.appendChild(resultTeamActivePokHealthMax);
-
+					resultTeamActivePok.appendChild(resultTeamActivePokName);
+					resultTeamActivePokName.appendChild(resultTeamActivePokNameText);
 					resultTeamActivePok.appendChild(resultTeamActivePokImgWrap);
 					resultTeamActivePokImgWrap.appendChild(resultTeamActivePokImg);
 					resultTeamActivePokImgWrap.appendChild(resultTeamActivePokItem);
-					resultTeamActivePok.appendChild(resultTeamActivePokName);
-					resultTeamActivePokName.appendChild(resultTeamActivePokNameText);
-
 					resultTeamInactiveImport.addEventListener("click",DMGSetDataString);
 					resultTeamActiveClose.addEventListener("click",DMGRemoveDataString);
 					resultTeamActiveExport.addEventListener("click",DMGExportDataString);
 
+					for (var m = 0; m < 4; m++) {
+						var resultTeamActiveMove = document.createElement("b");
+						var resultTeamActiveMoveText = document.createElement("small");
+						resultTeamActiveMove.setAttribute("name",m);
+						resultTeamActiveMove.setAttribute("type","invert");
+						resultTeamActiveBottom.appendChild(resultTeamActiveMove)
+						resultTeamActiveMove.appendChild(resultTeamActiveMoveText)
+						resultTeamActiveMove.addEventListener("click",function(){var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");if (this.firstChild.innerText != "") {tar.style.color = "var(--type"+getMoveData(this.firstChild.innerText,"Type")+")"; tar.value = this.firstChild.innerText; DMGSetInfo();DMGCalcStart();}})
+					}
+	
 		
 
 
@@ -1300,10 +1322,11 @@ var createTool = function() {
 				base.appendChild(pok);
 				pok.appendChild(pokTitle);
 				pok.appendChild(pokSelect);
+
+				pokSelect.addEventListener("change",DMGCalcPokStats);
 				pokSelect.addEventListener("change",DMGSyncData);
 				pokSelect.addEventListener("change",DMGPokSpecific);
 				pokSelect.addEventListener("change",DMGSetChange);
-				pokSelect.addEventListener("change",DMGCalcPokStats);
 				pokSelect.addEventListener("change",DMGCalcStart);
 
 
@@ -1325,6 +1348,24 @@ var createTool = function() {
 					pokSelect.appendChild(pokOption);
 				}
 
+
+				var maxHP = document.createElement("li");
+				var maxHPRange = document.createElement("input");
+				maxHPRange.setAttribute("type","range");
+				maxHPRange.setAttribute("name","range-maxhp");
+				maxHPRange.setAttribute("id","range-maxhp");
+				maxHPRange.setAttribute("min","1");
+				maxHPRange.setAttribute("max","100");
+				maxHPRange.setAttribute("step","1");
+				maxHPRange.setAttribute("value","100");
+				maxHPRange.setAttribute("disabled","");
+				maxHPRange.setAttribute("setDisable","");
+				maxHP.setAttribute("name","hp")
+				base.appendChild(maxHP);
+				maxHP.appendChild(maxHPRange);
+
+				maxHPRange.addEventListener("change",DMGCalcPokStats);
+				maxHPRange.addEventListener("change",DMGCalcStart);
 
 
 				var stats = document.createElement("li");
@@ -1359,6 +1400,9 @@ var createTool = function() {
 						abbr = "IV";
 						min = 0;
 						max = 31;
+						if (getApplicable("Red,Blue,Yellow,Gold,Silver,Crystal")) {
+							max = 15;
+						}
 					}
 					if (e == 2) {
 						tit = "Effort Value";
@@ -1446,7 +1490,9 @@ var createTool = function() {
 						statsWrapCenter.appendChild(statsWrapInput);
 						statsWrapInput.addEventListener("change",iMinMax);
 						statsWrapInput.addEventListener("change",DMGCalcPokStats);
+						statsWrapInput.addEventListener("change",DMGSyncData);
 						statsWrapInput.addEventListener("change",DMGCalcStart);
+
 						statsWrapInput.addEventListener("change",function(){if (this.value == 0) {this.value = ""}});
 
 						if (e < 3) {
@@ -1454,6 +1500,46 @@ var createTool = function() {
 						}
 					}
 				}
+		
+
+				var move = document.createElement("li");
+				var moveTitle = document.createElement("h6");
+				var moveWrap = document.createElement("span");
+				move.setAttribute("name","moves");
+				moveTitle.innerText = "Moves"
+				base.appendChild(move)
+				move.appendChild(moveTitle);
+				move.appendChild(moveWrap);
+		
+		
+				for (var m = 0; m < 4; m++) {
+					var moveSelect = document.createElement("select");
+					moveWrap.appendChild(moveSelect)
+					moveSelect.setAttribute("name",m)
+					moveSelect.setAttribute("disabled","");
+					moveSelect.setAttribute("setDisable","");
+					moveSelect.addEventListener("change",function(){var x = getMoveData(this.value,"Type"); if (x == undefined) {this.style.removeProperty("color")} else {this.style.color = "var(--type"+x+")"}})
+					moveSelect.addEventListener("change",DMGCalcPokStats);
+					moveSelect.addEventListener("change",DMGSyncData);
+					moveSelect.addEventListener("change",DMGCalcStart);
+					moveSelect.addEventListener("change",DMGSetChange);
+
+					var movesTemp = [...tempMoves];
+					movesTemp.sort();
+					if (!movesTemp[0].includes("#")) {
+						movesTemp.unshift("Move #"+(m+1));
+					}
+					for(var n = 0; n < movesTemp.length; n++) {
+						var moveOption = document.createElement("option");
+						moveOption.value = movesTemp[n];
+						moveOption.innerText = movesTemp[n];
+						moveSelect.appendChild(moveOption)
+						if (n != 0) {
+							moveOption.style.background = "var(--type"+getMoveData(movesTemp[n],"Type")+")";
+						}
+					}
+				}
+				
 
 
 				if (Natures.length > 0) {
@@ -1473,7 +1559,6 @@ var createTool = function() {
 					natureSelect.addEventListener("change",function(){this.parentElement.parentElement.querySelector(":scope > *[name='stats'] > *:last-child > *:last-child").setAttribute("name",this.value)})
 					natureSelect.addEventListener("change",DMGCalcPokStats);
 					natureSelect.addEventListener("change",DMGSyncData);
-					natureSelect.addEventListener("change",DMGSetChange);
 					natureSelect.addEventListener("change",DMGCalcStart);
 					
 					var naturesTemp = Natures;
@@ -1494,7 +1579,6 @@ var createTool = function() {
 				base.appendChild(level)
 
 				var levelTitle = document.createElement("h6");
-				var levelInputWrap = document.createElement("span");
 				var levelInput = document.createElement("input");
 
 				levelTitle.innerText = "Level";
@@ -1509,13 +1593,11 @@ var createTool = function() {
 				levelInput.setAttribute("setDisable","");
 
 				level.appendChild(levelTitle)
-				level.appendChild(levelInputWrap)
-				levelInputWrap.appendChild(levelInput)
+				level.appendChild(levelInput)
 
 				levelInput.addEventListener("change",iMinMax);
 				levelInput.addEventListener("change",DMGCalcPokStats);
 				levelInput.addEventListener("change",DMGSyncData);
-				levelInput.addEventListener("change",DMGSetChange);
 				levelInput.addEventListener("change",DMGCalcStart);
 
 
@@ -1538,8 +1620,11 @@ var createTool = function() {
 					genderSelect.setAttribute("setDisable","");
 
 
+					genderSelect.addEventListener("change",DMGCalcPokStats);
 					genderSelect.addEventListener("change",DMGSyncData);
-					genderSelect.addEventListener("change",DMGSetChange);
+					genderSelect.addEventListener("change",DMGCalcStart);
+
+					genderSelect.addEventListener("change",function(){this.style.removeProperty("color"); if (this.value == "♂") {this.style.color == "blue";}else if (this.value == "♀") {this.style.color == "red";}});
 		
 			
 					var possibleGender = [];
@@ -1575,7 +1660,6 @@ var createTool = function() {
 					friendshipInput.addEventListener("change",iMinMax);
 					friendshipInput.addEventListener("change",DMGCalcPokStats);
 					friendshipInput.addEventListener("change",DMGSyncData);
-					friendshipInput.addEventListener("change",DMGSetChange);
 					friendshipInput.addEventListener("change",DMGCalcStart);
 
 					friendship.appendChild(friendshipTitle)
@@ -1599,9 +1683,8 @@ var createTool = function() {
 					abilitySelect.setAttribute("disabled","");
 					abilitySelect.setAttribute("setDisable","");
 
+					abilitySelect.addEventListener("change",DMGCalcPokStats);
 					abilitySelect.addEventListener("change",DMGSyncData);
-					abilitySelect.addEventListener("change",DMGSetChange);
-
 					abilitySelect.addEventListener("change",DMGCalcStart);
 			
 					var abilities = [];
@@ -1647,9 +1730,10 @@ var createTool = function() {
 					itemSelect.setAttribute("disabled","");
 					itemSelect.setAttribute("setDisable","");
 
+					itemSelect.addEventListener("change",DMGCalcPokStats);
 					itemSelect.addEventListener("change",DMGSyncData);
-					itemSelect.addEventListener("change",DMGSetChange);
 					itemSelect.addEventListener("change",DMGCalcStart);
+					itemSelect.addEventListener("change",DMGSetChange);
 
 					var items = []
 					if (items[0] != "") {
@@ -1761,7 +1845,11 @@ var createTool = function() {
 									cond.appendChild(conditionInput)
 									cond.appendChild(conditionLabel)
 									conditionLabel.appendChild(conditionLabelText)
-									conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
+									if (conditions[c]["Group"] != "Badge") {
+										conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
+									}
+									conditionInput.addEventListener("change",DMGCalcPokStats);
+									conditionInput.addEventListener("change",DMGSyncData);
 									conditionInput.addEventListener("change",DMGCalcStart);
 									
 									if (conditions[c]["Values"] != undefined) {
@@ -1793,7 +1881,11 @@ var createTool = function() {
 								condition.appendChild(conditionInput)
 								condition.appendChild(conditionLabel)
 								conditionLabel.appendChild(conditionLabelText)
+								conditionInput.addEventListener("change",DMGCalcPokStats);
+								conditionInput.addEventListener("change",DMGSyncData);
 								conditionInput.addEventListener("change",DMGCalcStart);
+					
+								
 								
 
 								if (conditions[c]["Values"] != undefined) {
@@ -1883,7 +1975,9 @@ var createTool = function() {
 								cond.appendChild(conditionInput)
 								cond.appendChild(conditionLabel)
 								conditionLabel.appendChild(conditionLabelText)
-								conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
+								if (conditions[c]["Group"] != "Badge") {
+									conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
+								}
 							}
 						}
 						else {
@@ -1907,6 +2001,20 @@ var createTool = function() {
 				}
 			}
 			
+
+
+			if (Generation == 1) {
+				var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
+				var randomMinText = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name='min']");
+				var randomMaxText = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name='max']");
+				randomPath.setAttribute("min","215");
+				randomPath.setAttribute("max","255");
+				randomPath.setAttribute("step","1");
+				randomPath.value = randomPath.getAttribute("min");
+				randomMinText.innerText = 1;
+				randomMaxText.innerText =  randomPath.getAttribute("max")-randomPath.getAttribute("min");
+			}
+
 
 			DMGSetInfo();
 			DMGSetPossible();
@@ -1933,6 +2041,7 @@ var createTool = function() {
 			var userPokémonPath = userbase.querySelector(":scope *[name='pokémon'] select");
 			var userStatsPath = userbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
 			var userLevelPath = userbase.querySelector(":scope *[name='level'] input");
+			var userHPInputPath = userbase.querySelector(":scope *[name='hp'] input");
 			var userStatusLeechSeedPath = targetbase.querySelector(":scope *[name='Leech Seed'] input");
 			var userStatusPoisonPath = userbase.querySelector(":scope *[name='Poisoned'] input");
 			var userStatusBadPoisonPath = userbase.querySelector(":scope *[name='Badly Poisoned'] input");
@@ -1944,6 +2053,7 @@ var createTool = function() {
 			// Target
 			var tarPokémonPath = targetbase.querySelector(":scope *[name='pokémon'] select");
 			var tarStatsPath = targetbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
+			var tarHPInputPath = targetbase.querySelector(":scope *[name='hp'] input");
 			var tarHPCurrentPath = target.querySelector(":scope *[name='hp'] *[name='current']");
 			var tarHPMaxPath = target.querySelector(":scope *[name='hp'] *[name='max']");
 			var tarHPPercentagePath = target.querySelector(":scope *[name='hp'] *[name='percentage']");
@@ -2134,37 +2244,32 @@ var createTool = function() {
 							}
 						}
 					}
+	
+
+					var calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2);
 
 
+					//calculation = calculation+(Math.floor((calculation/2)*STAB));
+					//calculation = calculation+(Math.floor(calculation*STAB));
+					calculation = calculation*STAB;
+					calculation = calculation*Type1*Type2;
 
-					console.log("Level:"+Level)
-					console.log("Critical:"+Critical)
-					console.log("Power:"+Power)
-					console.log("Attack:"+Attack)
-					console.log("Defense:"+Defense)
-					console.log("STAB:"+STAB)
-					console.log("Type1:"+Type1)
-					console.log("Type2:"+Type2)
-					console.log("Random:"+random)
 
-					var calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2)
-					calculation = calculation+(Math.floor((calculation/2)*STAB));
+					if (calculation == 1) {
+						random = 1;
+					}
+				
 
-					calculation = calculation*Type1*Type2*random;
+					calculation = calculation*random;
 
 					if (Immune) {
 						calculation = 0;
 					}
 
-					
 					var maxHP = parseInt(tarHPMaxPath.innerText);
-					var integerResult = maxHP-Math.round(calculation);
+					var currentHP = parseInt(tarHPInputPath.value);
+					var integerResult = currentHP-Math.round(calculation);
 					var percentResult = Math.round(Math.round(integerResult)/maxHP*100);
-
-
-
-
-
 
 
 					if (integerResult < 0) {
@@ -2177,13 +2282,11 @@ var createTool = function() {
 						percentResult = 0;
 					}
 					if (isNaN(percentResult)) {
-						percentResult = 100;
+						percentResult = Math.round(Math.round(currentHP)/maxHP*100);
 					}
 					if (isNaN(integerResult)) {
-						integerResult = maxHP;
+						integerResult = currentHP;
 					}
-				
-				
 
 					var extras = []
 					if (tarStatusPoisonPath.checked) {
@@ -2212,7 +2315,6 @@ var createTool = function() {
 					}
 
 					if (tarStatusBadPoisonPath.value != "" && tarStatusBadPoisonPath.value != undefined) {
-						console.log(tarStatusBadPoisonPath.value)
 						var val = Math.floor(maxHP/16);
 						if (val <= 0) {
 							val = 1;
@@ -2225,8 +2327,6 @@ var createTool = function() {
 						obj["Damage"] = val;
 						extras.push(obj)
 					}
-
-
 
 					var bgArr = [];
 					bgArr.push("Orangered "+percentResult+"%")
@@ -2257,12 +2357,7 @@ var createTool = function() {
 					if (tarHPCurrentPath.innerText < 0) {
 						tarHPCurrentPath.innerText = 0;
 					}
-					
 
-
-					
-
-				
 		
 
 
@@ -2295,6 +2390,8 @@ var createTool = function() {
 			var evs = base.querySelectorAll(":scope *[name='stats'] > *:last-child > *:nth-child(3) > input[type='number']:not(:first-child)");
 			var natures = base.querySelectorAll(":scope *[name='nature'] select");
 			var friendship = base.querySelector(":scope *[name='friendship'] input[type='number']");
+			var badges = base.querySelectorAll(":scope *[name='Badge-Group'] li");
+			var maxhp = base.querySelector(":scope *[name='hp'] input");
 		
 			var res = base.querySelectorAll(":scope *[name='stats'] > *:last-child > *:last-child > input[type='number']:not(:first-child)");
 			var mod = base.querySelectorAll(":scope *[name='stats'] > *:last-child > *[name='Mod'] > input[type='number']:not(:first-child)");
@@ -2349,7 +2446,11 @@ var createTool = function() {
 						var hpCurrent =  hpPath.querySelector(":scope *[name='current']");
 						var hpMax =  hpPath.querySelector(":scope *[name='max']");
 						var val = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
-						hpCurrent.innerText = val
+
+						maxhp.setAttribute("value",val);
+						maxhp.setAttribute("max",val);
+
+						hpCurrent.innerText = maxhp.value;
 						hpMax.innerText = val;
 					}
 				}
@@ -2360,7 +2461,122 @@ var createTool = function() {
 				}
 
 
+				for (var b = 0; b < badges.length; b++) {
+					var input = badges[b].querySelector(":scope input");
+					if (input.checked) {
+						if (getApplicable("Red,Blue,Yellow")) {
+							if (badges[b].getAttribute("name") == "Boulder Badge") {
+								if (res[i].getAttribute("name") == "Attack") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Thunder Badge") {
+								if (res[i].getAttribute("name") == "Defense") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Volcano Badge") {
+								if (res[i].getAttribute("name") == "Special") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Soul Badge") {
+								if (res[i].getAttribute("name") == "Speed") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+						}
+						else if (getApplicable("Gold,Silver,Crystal")) {
+							if (badges[b].getAttribute("name") == "Zephyr Badge") {
+								if (res[i].getAttribute("name") == "Attack") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Mineral Badge") {
+								if (res[i].getAttribute("name") == "Defense") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Glacier Badge") {
+								if (res[i].getAttribute("name") == "Sp. Atk") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Glacier Badge") {
+								var check = true;
+								if (res[i].value >= 206 && res[i].value <= 432) {
+									check = false;
+								}
+								if (check) {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Plain Badge") {
+								if (res[i].getAttribute("name") == "Speed") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+						}
+						else if (getApplicable("FireRed,LeafGreen")) {
+							if (badges[b].getAttribute("name") == "Boulder Badge") {
+								if (res[i].getAttribute("name") == "Attack") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Soul Badge") {
+								if (res[i].getAttribute("name") == "Defense") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Volcano Badge") {
+								if (res[i].getAttribute("name") == "Sp. Atk") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Volcano Badge") {
+								if (res[i].getAttribute("name") == "Sp. Def") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Thunder Badge") {
+								if (res[i].getAttribute("name") == "Speed") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+						}
+						else if (getApplicable("Ruby,Sapphire,Emerald")) {
+							if (badges[b].getAttribute("name") == "Stone Badge") {
+								if (res[i].getAttribute("name") == "Attack") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Balance Badge") {
+								if (res[i].getAttribute("name") == "Defense") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Mind Badge") {
+								if (res[i].getAttribute("name") == "Sp. Atk") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Mind Badge") {
+								if (res[i].getAttribute("name") == "Sp. Def") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+							if (badges[b].getAttribute("name") == "Dynamo Badge") {
+								if (res[i].getAttribute("name") == "Speed") {
+									res[i].value = res[i].value * 1.125;
+								}
+							}
+						}
+					}
+				}
+
+
 				res[i].setAttribute("data-nomod",res[i].value);
+				
 
 				if (i != 0) {
 					if (Generation >= 1 && Generation <= 2) {
@@ -2493,23 +2709,9 @@ var createTool = function() {
 				toolSectionContentDMGResult.setAttribute("data-range","")
 			}
 			DMGSetPossible();
-			//DMGSetChange();
 
 
-			if (Generation == 1) {
-				var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
-				var randomMinText = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name='min']");
-				var randomMaxText = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name='max']");
-				randomPath.setAttribute("min","216");
-				randomPath.setAttribute("max","255");
-				randomPath.setAttribute("step","1");
-				randomPath.value = 217;
-
-
-				
-				randomMinText.innerText = 1;
-				randomMaxText.innerText = 255-217;
-			}
+			
 		}
 		function DMGSetChange(base) {
 
@@ -2528,6 +2730,7 @@ var createTool = function() {
 			var pokImgPath = tar.querySelector(":scope *[name='img']");
 			var pokItemPath = tar.querySelector(":scope *[name='item']");
 			var pokNamePath = tar.querySelector(":scope *[name='name'] > *");
+			var pokMovesPath = tar.querySelectorAll(":scope *[name='moves'] > *");
 			
 
 			var pokPath = base.querySelector(":scope *[name='pokémon'] select");
@@ -2540,6 +2743,7 @@ var createTool = function() {
 			var friendshipPath = base.querySelector(":scope *[name='friendship'] input");
 			var naturePath = base.querySelector(":scope *[name='nature'] select");
 			var levelPath = base.querySelector(":scope *[name='level'] input");
+			var movesPath = base.querySelectorAll(":scope *[name='moves'] select");
 		
 			var disabled = base.querySelectorAll(":scope *[setDisable]");
 			var checks = base.querySelectorAll(":scope input[type='checkbox']");
@@ -2559,6 +2763,13 @@ var createTool = function() {
 			}
 			pokNamePath.innerText = "";
 
+			for(var i = 0; i < pokMovesPath.length; i++) {
+				pokMovesPath[i].firstChild.innerText = "";
+				pokMovesPath[i].firstChild.removeAttribute("name");
+			}
+
+			
+
 			var itPath = ImageTypes[0]["path"];
 			var itCategory = ImageTypes[0]["category"];
 			var itAngle = ImageTypes[0]["angle"];
@@ -2577,6 +2788,7 @@ var createTool = function() {
 				var item;
 				var iv;
 				var ev;
+				var moves;
 
 				for(var i = 0; i < dataString.length; i++) {
 					if (dataString[i]["pok"] != undefined) {
@@ -2600,6 +2812,9 @@ var createTool = function() {
 					if (dataString[i]["it"] != undefined) {
 						item = dataString[i]["it"];
 					}
+					if (dataString[i]["mo"] != undefined) {
+						moves = dataString[i]["mo"];
+					}
 					if (dataString[i]["iv"] != undefined) {
 						iv = dataString[i]["iv"];
 					}
@@ -2610,19 +2825,12 @@ var createTool = function() {
 
 				int = getPokémonInt(pokémon);
 
-
-
-
-
-
-
 				if (int != undefined) {
 					check = true;
 				}
 			}
 
 			if (check) {
-
 
 				for(var i = 0; i < disabled.length; i++) {
 					disabled[i].removeAttribute("disabled");
@@ -2657,6 +2865,8 @@ var createTool = function() {
 				if (level != undefined) {
 					levelPath.value = level;
 				}
+				
+				
 				if (Gender) {
 					if (gender != undefined) {
 						genderPath.value = gender;
@@ -2682,6 +2892,31 @@ var createTool = function() {
 					}
 				}
 
+				if (moves != undefined) {
+					if (moves.includes(",")) {
+						moves = moves.split(",");
+						if (moves.length == movesPath.length) {
+							for(var v = 0; v < movesPath.length; v++) {
+								if(moves[v] != undefined && moves[v] != "") {
+									if (getMoveData(moves[v],"Type") != undefined) {
+										movesPath[v].style.color = "var(--type"+getMoveData(moves[v],"Type")+")";
+									}
+									movesPath[v].value = moves[v];
+								}
+							}
+						}
+						if (moves.length == pokMovesPath.length) {
+							for(var v = 0; v < pokMovesPath.length; v++) {
+								if(moves[v] != undefined && !moves[v].includes("#")) {
+									pokMovesPath[v].firstChild.innerText = moves[v];
+									pokMovesPath[v].firstChild.setAttribute("name",moves[v]);
+								}
+							}
+						}
+					}
+				}
+				
+
 				if (iv != undefined) {
 					if (iv.includes(",")) {
 						var ivs = iv.split(",");
@@ -2706,14 +2941,6 @@ var createTool = function() {
 
 			}
 			else {
-				pokImgPath.src = "";
-				pokImgPath.title = "";
-				if (HeldItem) {
-					pokItemPath.src = "";
-					pokItemPath.title = "";
-				}
-				pokNamePath.innerText = "";
-
 				for(var i = 0; i < checks.length; i++) {
 					checks[i].setAttribute("disabled","");
 				}
@@ -3110,6 +3337,7 @@ var createTool = function() {
 
 					genderPath.innerHTML = "";
 
+
 					for (var q = 0; q < genders.length; q++) {
 						var option = document.createElement("option");
 						option.innerText = genders[q];
@@ -3152,7 +3380,6 @@ var createTool = function() {
 						itemPath.value = itemPath.firstChild.value;
 					}
 				}
-
 		}
 
 
@@ -3180,6 +3407,7 @@ var createTool = function() {
 				var itemPath = base.querySelector(":scope *[name='item'] select");
 				var friendshipPath = base.querySelector(":scope *[name='friendship'] input");
 				var naturePath = base.querySelector(":scope *[name='nature'] select");
+				var movesPath = base.querySelectorAll(":scope *[name='moves'] select");
 				var ivsPath = base.querySelectorAll(":scope *[name='stats'] *[name='IV'] input:not(:first-child)");
 				var evsPath = base.querySelectorAll(":scope *[name='stats'] *[name='EV'] input:not(:first-child)");
 
@@ -3201,6 +3429,10 @@ var createTool = function() {
 					naturePath.value = naturePath.firstChild.value;
 				}
 
+				for(var e = 0; e < movesPath.length; e++) {
+					movesPath[e].style.removeProperty("color");
+					movesPath[e].value = movesPath[e].firstChild.value;
+				}
 				for(var e = 0; e < ivsPath.length; e++) {
 					ivsPath[e].value = "";
 				}
@@ -3234,12 +3466,13 @@ var createTool = function() {
 				var itemPath = base.querySelector(":scope *[name='item'] select");
 				var friendshipPath = base.querySelector(":scope *[name='friendship'] input");
 				var naturePath = base.querySelector(":scope *[name='nature'] select");
+				var movesPath = base.querySelectorAll(":scope *[name='moves'] select");
 				var ivsPath = base.querySelectorAll(":scope *[name='stats'] *[name='IV'] input:not(:first-child)");
 				var evsPath = base.querySelectorAll(":scope *[name='stats'] *[name='EV'] input:not(:first-child)");
 		
 				var datas = target.getAttribute("data-string");
 			
-				var tempFull = ["pok","lv","ab","ge","it","na","fr","iv","ev"];
+				var tempFull = ["pok","lv","ab","ge","it","na","fr","mo","iv","ev"];
 				var tempArr = [];
 
 				var resArr = dataStringToObjArr(datas);
@@ -3251,17 +3484,11 @@ var createTool = function() {
 						if (pokPath.value != "" && pokPath.value != undefined) {
 							resArr[e]["pok"] = pokPath.value;
 						}
-						else {
-							resArr[e]["pok"] = "";
-						}
 					}
 					if (resArr[e]["lv"] != undefined) {
 						tempArr.push("lv");
 						if (lvlPath.value != "" && lvlPath.value != undefined) {
 							resArr[e]["lv"] = lvlPath.value;
-						}
-						else {
-							resArr[e]["lv"] = "";
 						}
 					}
 					if (resArr[e]["ab"] != undefined) {
@@ -3269,17 +3496,11 @@ var createTool = function() {
 						if (abilityPath.value != "" && abilityPath.value != undefined) {
 							resArr[e]["ab"] = abilityPath.value;
 						}
-						else {
-							resArr[e]["ab"] = "";
-						}
 					}
 					if (resArr[e]["ge"] != undefined) {
 						tempArr.push("ge");
 						if (genderPath.value != "" && genderPath.value != undefined) {
 							resArr[e]["ge"] = genderPath.value;
-						}
-						else {
-							resArr[e]["ge"] = "";
 						}
 					}
 					if (resArr[e]["it"] != undefined) {
@@ -3287,17 +3508,11 @@ var createTool = function() {
 						if (itemPath.value != "" && itemPath.value != undefined) {
 							resArr[e]["it"] = itemPath.value;
 						}
-						else {
-							resArr[e]["it"] = "";
-						}
 					}
 					if (resArr[e]["na"] != undefined) {
 						tempArr.push("na");
 						if (naturePath.value != "" && naturePath.value != undefined) {
 							resArr[e]["na"] = naturePath.value;
-						}
-						else {
-							resArr[e]["na"] = "";
 						}
 					}
 
@@ -3306,8 +3521,31 @@ var createTool = function() {
 						if (friendshipPath.value != "" && friendshipPath.value != undefined) {
 							resArr[e]["fr"] = friendshipPath.value;
 						}
-						else {
-							resArr[e]["fr"] = "";
+					}
+
+					if (resArr[e]["mo"] != undefined) {
+						tempArr.push("mo");
+						var vals = resArr[e]["mo"].split(",");
+						if (vals.length == movesPath.length) {
+							var tempArr3 = [];
+							var check = true;
+							for (var v = 0; v < movesPath.length; v++) {
+								if (movesPath[v].value != undefined) {
+									if (movesPath[v].value != "" && !movesPath[v].value.includes("#")) {
+										tempArr3.push(movesPath[v].value)
+									}
+									else {
+										tempArr3.push("-")
+									}
+								}
+								else {
+									tempArr3.push("-")
+								}
+							}
+							var res = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
+							if (res.replaceAll(",","") != "") {
+								resArr[e]["mo"] = res;
+							}
 						}
 					}
 
@@ -3324,7 +3562,11 @@ var createTool = function() {
 									tempArr3.push("-")
 								}
 							}
-							resArr[e]["iv"] = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
+
+							var res = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
+							if (res.replaceAll(",","") != "") {
+								resArr[e]["iv"] = res;
+							}
 						}
 					}
 
@@ -3341,7 +3583,10 @@ var createTool = function() {
 									tempArr3.push("-")
 								}
 							}
-							resArr[e]["ev"] = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
+							var res = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
+							if (res.replaceAll(",","") != "") {
+								resArr[e]["ev"] = res;
+							}
 						}
 					}
 				}
@@ -3372,6 +3617,9 @@ var createTool = function() {
 					}
 					if (tempFull[e] == "fr") {
 						path = friendshipPath;
+					}
+					if (tempFull[e] == "mo") {
+						path = movesPath;
 					}
 					if (tempFull[e] == "iv") {
 						path = ivsPath;
@@ -3480,6 +3728,7 @@ var createTool = function() {
 							DMGPokSpecific(base)
 							DMGSetChange(base);
 							DMGCalcPokStats(base);
+							DMGCalcStart(base);
 						}
 						else {
 							consoleText("Pokémon Unavailable.")
