@@ -1640,8 +1640,6 @@
 }
 
 */
-
-
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name="hp"] {
 	display: flex;
     position: absolute;
@@ -1681,14 +1679,16 @@
 
 
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string*="pok"] > span:first-child {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string=""]):not([data-string*='pok:|']) > span:first-child {
+	display: none;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string=""] > span:last-child,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string*='pok:|'] > span:last-child {
 	display: none;
 }
 
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string*="pok"]) > span:last-child {
-	display: none;
-}
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span > span[name='pok'] {
 	height: 100%;
@@ -1781,6 +1781,20 @@
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child {
 	flex-direction: column;
 }
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span:first-child input {
+	text-indent: 10%;
+	outline: none;
+	padding: 5px 0;
+	font-size: var(--sizeFontL);
+	font-weight: bold;
+	text-align: center;
+	border: inset 4px #000 !important;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span:first-child input[disabled] {
+	color: rgba(0,0,0,0.3);
+}
+
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span {
 	display: flex;
@@ -1964,7 +1978,7 @@
 	pointer-events: none;
 	opacity: 0.5;
 }
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled]  {
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']):not([name='hp']) *[disabled]  {
 	background-color: rgba(239, 239, 239, 0.3) !important;
 	color:rgba(0, 0, 0, 0.3) !important;
 	text-shadow: unset;
@@ -2118,8 +2132,37 @@
 	flex-direction: column;
 }
 
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] input {
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] input[type="range"] {
 	width: 100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] span > input {
+    background: none !important;
+    color: var(--font1);
+    outline: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] span > input,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] span > input::-webkit-outer-spin-button,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] span > input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+	-moz-appearance: textfield;
+	appearance:none;
+}
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] span > input:first-child {
+	text-align:right;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] span > input:last-child {
+	text-align:left;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="moves"] > span {
@@ -2177,6 +2220,23 @@
     justify-content: flex-start;
     text-align: left;
 }
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] span {
+	display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    flex-wrap: nowrap;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] input[disabled] ~ span {
+	display: none;
+}
+
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure:first-child {
 	position:absolute;
