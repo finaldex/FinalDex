@@ -2137,7 +2137,7 @@ function getPartyData(base) {
     var level = base.querySelector(':scope > aside:first-child > span:first-child > input[type="number"]');
     var item = base.querySelector(':scope > aside:first-child > span > span[name="item"] > select');
     var nick = base.querySelector(':scope > aside:first-child > span > span[name="name"] > input[type="text"]');
-    var gender = base.querySelector(':scope > aside:first-child > span:last-child > select:nth-child(2)');
+    var gender = base.querySelector(":scope > aside:first-child > span:last-child > select[title='Gender']");
     var ability = base.querySelector(':scope > aside:first-child > span[name="moves"] > span[name="ability"] > select');
 
     var nature = base.querySelectorAll(':scope > aside:first-child > span > span[name="nature"] > select');
