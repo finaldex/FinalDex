@@ -669,7 +669,7 @@
 	padding: 2px 10px;
 }
 #contain div > section[name='content'] > div[name='description'] > *:first-child {
-	padding: 10px;
+	padding: 10px 10px 5px;
 }
 
 
@@ -1510,24 +1510,16 @@
 	padding: 20px 0 10px;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div {
-	padding: 10px;
-    width: 60%;
-    height: 20%;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
 	flex-wrap: nowrap;
-	border-radius: 20px;
-
-	width: 350px;
-	height: 120px;
+	text-shadow: -1px 1px #000;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span {
 	position: relative;
-	height: 100%;
-    width: 100%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -1537,7 +1529,44 @@
 	color: var(--fontLight);
 	user-select:none;
 	border-radius: inherit;
+	flex-direction: column;
 }
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:last-child {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:first-child,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:last-child > span:first-child {
+	width: 320px;
+	height: 120px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span > span {
+	width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+	flex-direction: row;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span > span:last-child > * {
+	width: 25%;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span > span:last-child > * > *[name] {
+	padding: 10px 0;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] *[name='pok'] {
+	height: 100%;
+}
+
 
 
 
@@ -1635,6 +1664,7 @@
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:first-child {
 	background: linear-gradient(to right, Skyblue, var(--color_50));
+	border-radius: 20px;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span:first-child b {
@@ -1651,12 +1681,12 @@
 
 
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string=""]):not([data-string*='pok:|']) > span:first-child {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string*="pok"] > span:first-child {
 	display: none;
 }
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string=""] > span:last-child,
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string*='pok:|'] > span:last-child {
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string*="pok"]) > span:last-child {
 	display: none;
 }
 
@@ -1702,6 +1732,7 @@
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name="close"] {
 	left: 10px;
+	text-shadow: none;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name="edit"] {
 	right: 10px;
@@ -1895,6 +1926,8 @@
     margin-bottom: 10px;
 }
 
+
+
 #contain div#tool > section[name='content'] > div[name='dmg'] > div li[name="stats"] > span {
 	display: flex;
     flex-direction: row;
@@ -1932,8 +1965,9 @@
 	opacity: 0.5;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled]  {
-	background-color: rgba(239, 239, 239, 0.3);
-	color:rgba(0, 0, 0, 0.3);
+	background-color: rgba(239, 239, 239, 0.3) !important;
+	color:rgba(0, 0, 0, 0.3) !important;
+	text-shadow: unset;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled] ~ label,
@@ -2072,14 +2106,64 @@
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name*="Group"],
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="pokémon"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="moves"],
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="stats"],
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="level"],
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="nature"],
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="friendship"],
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="ability"] {
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="ability"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="item"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="gender"] {
 	flex-direction: column;
 }
 
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="hp"] input {
+	width: 100%;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="moves"] > span {
+    flex-direction: row;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="moves"] select {
+	font-size: var(--sizeFontS);
+	text-align: center;
+	text-shadow: -1px 0px 0px rgba(0,0,0,0.25);
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name="options"] input {
+	width: min-content;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name="options"] li > select,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name="options"] li > input {
+    padding: 2px 0px;
+    text-indent: 10%;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name="options"] input,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name="options"] select {
+	outline: none;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="gender"] select {
+	font-family: fantasy;
+    font-weight: bold;
+    text-shadow: 0px 0px 1px #000;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="moves"] select {
+	width: 50%;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	padding: 2px 0px;
+	text-indent: 10%;
+	font-weight: bold;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name="moves"] select {
+	color: rgba(0,0,0,0.1);
+}
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li > *:not(input):first-child {
 	text-indent: 5%;
@@ -3842,7 +3926,3 @@ img[title='Pokémon Dollar'] {
 	user-select: none;
 }
 
-
-#contain div > section[name='content'] > div[name='description'] > h4 {
-	padding-top: 15px;
-}
