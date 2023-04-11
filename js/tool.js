@@ -895,6 +895,7 @@ var createTool = function() {
 		var toolSectionContentDMGMenuRightBottom = document.createElement("span");
 
 		var toolSectionContentDMGMenuRightTopSelect = document.createElement("select");
+		var toolSectionContentDMGMenuRightTopInput = document.createElement("input");
 	
 
 		var toolSectionContentDMGMenuRightBottomLeft = document.createElement("span");
@@ -916,6 +917,12 @@ var createTool = function() {
 		var toolSectionContentDMGMenuLeftRangeTextBottomRight = document.createElement("small");
 		var toolSectionContentDMGMenuLeftRange = document.createElement("input");
 
+
+		toolSectionContentDMGMenuRightTopInput.setAttribute("type","number");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("min","1");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("value","1");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("max","1");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("title","Amount of Hits");
 
 		toolSectionContentDMGMenuRightBottomLeftTitle.innerText = "Power";
 		toolSectionContentDMGMenuRightBottomLeftText.innerText = "-";
@@ -984,6 +991,7 @@ var createTool = function() {
 		toolSectionContentDMGMenuRight.appendChild(toolSectionContentDMGMenuRightTop);
 		toolSectionContentDMGMenuRight.appendChild(toolSectionContentDMGMenuRightBottom);
 		toolSectionContentDMGMenuRightTop.appendChild(toolSectionContentDMGMenuRightTopSelect);
+		toolSectionContentDMGMenuRightTop.appendChild(toolSectionContentDMGMenuRightTopInput);
 
 
 		toolSectionContentDMGMenuRightBottom.appendChild(toolSectionContentDMGMenuRightBottomLeft);
@@ -1006,11 +1014,11 @@ var createTool = function() {
 		toolSectionContentDMGMenuLeftCritLabel.appendChild(toolSectionContentDMGMenuLeftCritText);
 
 		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGCalcPokStats);
-		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGSyncData);
+		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGSaveData);
 		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGCalcStart);
 
 		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGCalcPokStats);
-		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGSyncData);
+		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGSaveData);
 		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGCalcStart);
 
 		var tempMoves = [];
@@ -1056,6 +1064,7 @@ var createTool = function() {
 		}
 
 
+		toolSectionContentDMGMenuRightTopInput.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuRightTopSelect.addEventListener("change",DMGSetInfo);
 		toolSectionContentDMGMenuRightTopSelect.addEventListener("change",DMGCalcStart);
 
@@ -1089,6 +1098,7 @@ var createTool = function() {
 
 		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",buildDMG)
 		buildDMG();
+		DMGSetInfo();
 
 
 
@@ -1323,8 +1333,10 @@ var createTool = function() {
 				pok.appendChild(pokTitle);
 				pok.appendChild(pokSelect);
 
+
+				//pokSelect.addEventListener("change",function(){if(this.value == ""){DMGRemoveDataString(findUpTag(this,"UL"))}});
 				pokSelect.addEventListener("change",DMGCalcPokStats);
-				pokSelect.addEventListener("change",DMGSyncData);
+				pokSelect.addEventListener("change",DMGSaveData);
 				pokSelect.addEventListener("change",DMGPokSpecific);
 				pokSelect.addEventListener("change",DMGSetChange);
 				pokSelect.addEventListener("change",DMGCalcStart);
@@ -1355,16 +1367,35 @@ var createTool = function() {
 				maxHPRange.setAttribute("name","range-maxhp");
 				maxHPRange.setAttribute("id","range-maxhp");
 				maxHPRange.setAttribute("min","1");
-				maxHPRange.setAttribute("max","100");
+				maxHPRange.setAttribute("max","1");
 				maxHPRange.setAttribute("step","1");
-				maxHPRange.setAttribute("value","100");
 				maxHPRange.setAttribute("disabled","");
 				maxHPRange.setAttribute("setDisable","");
 				maxHP.setAttribute("name","hp")
 				base.appendChild(maxHP);
 				maxHP.appendChild(maxHPRange);
 
-				maxHPRange.addEventListener("change",DMGCalcPokStats);
+	
+				var maxHPWrap = document.createElement("span");
+				var maxHPWrapCurrent = document.createElement("input");
+				var maxHPWrapDash = document.createElement("small");
+				var maxHPWrapMax = document.createElement("input");
+				maxHPWrapCurrent.setAttribute("name","current");
+				maxHPWrapCurrent.setAttribute("type","number");
+				maxHPWrapCurrent.setAttribute("min","1");
+				maxHPWrapMax.setAttribute("name","max");
+				maxHPWrapMax.setAttribute("type","number");
+				maxHPWrapDash.innerText = "/";
+				maxHP.appendChild(maxHPWrap)
+				maxHPWrap.appendChild(maxHPWrapCurrent)
+				maxHPWrap.appendChild(maxHPWrapDash)
+				maxHPWrap.appendChild(maxHPWrapMax)
+
+				maxHPWrapCurrent.addEventListener("change",iMinMax);
+				maxHPWrapCurrent.addEventListener("change",function(){this.parentElement.parentElement.querySelector(":scope input[type='range']").value = this.value;});
+				maxHPWrapCurrent.addEventListener("change",DMGCalcStart);
+		
+				maxHPRange.addEventListener("change",function(){this.parentElement.querySelector(":scope *[name='current']").value = this.value;});
 				maxHPRange.addEventListener("change",DMGCalcStart);
 
 
@@ -1490,7 +1521,7 @@ var createTool = function() {
 						statsWrapCenter.appendChild(statsWrapInput);
 						statsWrapInput.addEventListener("change",iMinMax);
 						statsWrapInput.addEventListener("change",DMGCalcPokStats);
-						statsWrapInput.addEventListener("change",DMGSyncData);
+						statsWrapInput.addEventListener("change",DMGSaveData);
 						statsWrapInput.addEventListener("change",DMGCalcStart);
 
 						statsWrapInput.addEventListener("change",function(){if (this.value == 0) {this.value = ""}});
@@ -1520,7 +1551,7 @@ var createTool = function() {
 					moveSelect.setAttribute("setDisable","");
 					moveSelect.addEventListener("change",function(){var x = getMoveData(this.value,"Type"); if (x == undefined) {this.style.removeProperty("color")} else {this.style.color = "var(--type"+x+")"}})
 					moveSelect.addEventListener("change",DMGCalcPokStats);
-					moveSelect.addEventListener("change",DMGSyncData);
+					moveSelect.addEventListener("change",DMGSaveData);
 					moveSelect.addEventListener("change",DMGCalcStart);
 					moveSelect.addEventListener("change",DMGSetChange);
 
@@ -1558,7 +1589,7 @@ var createTool = function() {
 
 					natureSelect.addEventListener("change",function(){this.parentElement.parentElement.querySelector(":scope > *[name='stats'] > *:last-child > *:last-child").setAttribute("name",this.value)})
 					natureSelect.addEventListener("change",DMGCalcPokStats);
-					natureSelect.addEventListener("change",DMGSyncData);
+					natureSelect.addEventListener("change",DMGSaveData);
 					natureSelect.addEventListener("change",DMGCalcStart);
 					
 					var naturesTemp = Natures;
@@ -1597,7 +1628,7 @@ var createTool = function() {
 
 				levelInput.addEventListener("change",iMinMax);
 				levelInput.addEventListener("change",DMGCalcPokStats);
-				levelInput.addEventListener("change",DMGSyncData);
+				levelInput.addEventListener("change",DMGSaveData);
 				levelInput.addEventListener("change",DMGCalcStart);
 
 
@@ -1621,7 +1652,7 @@ var createTool = function() {
 
 
 					genderSelect.addEventListener("change",DMGCalcPokStats);
-					genderSelect.addEventListener("change",DMGSyncData);
+					genderSelect.addEventListener("change",DMGSaveData);
 					genderSelect.addEventListener("change",DMGCalcStart);
 
 					genderSelect.addEventListener("change",function(){this.style.removeProperty("color"); if (this.value == "♂") {this.style.color == "blue";}else if (this.value == "♀") {this.style.color == "red";}});
@@ -1659,7 +1690,7 @@ var createTool = function() {
 
 					friendshipInput.addEventListener("change",iMinMax);
 					friendshipInput.addEventListener("change",DMGCalcPokStats);
-					friendshipInput.addEventListener("change",DMGSyncData);
+					friendshipInput.addEventListener("change",DMGSaveData);
 					friendshipInput.addEventListener("change",DMGCalcStart);
 
 					friendship.appendChild(friendshipTitle)
@@ -1684,7 +1715,7 @@ var createTool = function() {
 					abilitySelect.setAttribute("setDisable","");
 
 					abilitySelect.addEventListener("change",DMGCalcPokStats);
-					abilitySelect.addEventListener("change",DMGSyncData);
+					abilitySelect.addEventListener("change",DMGSaveData);
 					abilitySelect.addEventListener("change",DMGCalcStart);
 			
 					var abilities = [];
@@ -1731,7 +1762,7 @@ var createTool = function() {
 					itemSelect.setAttribute("setDisable","");
 
 					itemSelect.addEventListener("change",DMGCalcPokStats);
-					itemSelect.addEventListener("change",DMGSyncData);
+					itemSelect.addEventListener("change",DMGSaveData);
 					itemSelect.addEventListener("change",DMGCalcStart);
 					itemSelect.addEventListener("change",DMGSetChange);
 
@@ -1849,7 +1880,7 @@ var createTool = function() {
 										conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
 									}
 									conditionInput.addEventListener("change",DMGCalcPokStats);
-									conditionInput.addEventListener("change",DMGSyncData);
+									conditionInput.addEventListener("change",DMGSaveData);
 									conditionInput.addEventListener("change",DMGCalcStart);
 									
 									if (conditions[c]["Values"] != undefined) {
@@ -1882,7 +1913,7 @@ var createTool = function() {
 								condition.appendChild(conditionLabel)
 								conditionLabel.appendChild(conditionLabelText)
 								conditionInput.addEventListener("change",DMGCalcPokStats);
-								conditionInput.addEventListener("change",DMGSyncData);
+								conditionInput.addEventListener("change",DMGSaveData);
 								conditionInput.addEventListener("change",DMGCalcStart);
 					
 								
@@ -1965,6 +1996,8 @@ var createTool = function() {
 								var conditionLabel = document.createElement("label");
 								var conditionLabelText = document.createElement("small");	
 
+								cond.setAttribute("name",conditions[c]["Name"]);
+
 								conditionLabelText.innerText = nameTemp.join(" ");
 								conditionInput.setAttribute("type","checkbox");
 								conditionInput.setAttribute("name","condition-checkbox");
@@ -1986,6 +2019,8 @@ var createTool = function() {
 							var conditionLabel = document.createElement("label");
 							var conditionLabelText = document.createElement("small");	
 		
+							cond.setAttribute("name",conditions[c]["Name"]);
+
 							conditionLabelText.innerText = nameTemp.join(" ");
 							conditionInput.setAttribute("type","checkbox");
 							conditionInput.setAttribute("name","condition-checkbox");
@@ -2034,7 +2069,7 @@ var createTool = function() {
 			var targetbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name*='opponent'] ul[name='"+targetid+"']");
 
 
-
+			
 			var check = true;
 
 			// User
@@ -2065,8 +2100,24 @@ var createTool = function() {
 			var tarStatusAsleepPath = targetbase.querySelector(":scope *[name='Asleep'] input");
 			var tarStatusFrozenPath = targetbase.querySelector(":scope *[name='Frozen'] input");
 
+
+			// Weather
+			var weatherPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group']");
+			var weatherInputsPath = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] input");
+			var weatherHarshSunlightPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Harsh Sunlight'] input");
+			var weatherRainPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Rain'] input");
+			var weatherSandstormPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Sandstorm'] input");
+			var weatherSnowPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Snow'] input");
+			var weatherFogPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Fog'] input");
+			var weatherHailPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Hail'] input");
+			var weatherExtremelyHarshSunlightPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Extremely Harsh Sunlight'] input");
+			var weatherHeavyRainPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Heavy Rain'] input");
+			var weatherStrongWindsPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Strong Winds'] input");
+			var weatherShadowyAuraPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Shadowy Aura'] input");
+
 			// Move
 			var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");
+			var moveHits = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span:first-child input");
 			var powerPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='power']");
 			var accuracyPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='accuracy']");
 			var criticalPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child input[type='checkbox']")
@@ -2077,49 +2128,15 @@ var createTool = function() {
 			var moveType = getMoveData(movePath.value,"Type");
 
 
+			DMGCalcApply(user,undefined,undefined,undefined,"Reset");
+			DMGCalcApply(target,undefined,undefined,undefined,"Reset");
+
+
 			if (user == undefined || target == undefined) {
 				check = false;
 			}
 
 			if (check) {
-
-				// Defaults
-				/*
-				var Level = 1;
-				var Critical = 1;
-				var Power = 0;
-				var Atk = 0;
-				var Def = 0;
-				var Stab = 0;
-				var Type1 = 0;
-				var Type2 = 0;
-				var Weather = 0;
-				var Badge = 0;
-				var MoveMod = 0;
-				var DoubleDmg = 0;
-				var Burn = 0;
-				var Screen = 0;
-				var Targets = 0;
-				var FlashFire = 0;
-				var Stockpile = 0;
-				var Charge = 0;
-				var HelpingHand = 0;
-				var Type = 0;
-				var Item = 0;
-				var First = 0;
-				var SolidRockFilter = 0;
-				var ExpertBelt = 0;
-				var TintedLens = 0;
-				var GlaiveRush = 0;
-				var Other = 0;
-				var SpecialMove = 0;
-				var TeraShield = 0;
-				var Berry = 0;
-				var ParentalBond = 0;
-				var random = 0;
-				*/
-
-
 				if (Generation == 1) {
 					// Defaults
 					var Immune = false;
@@ -2266,40 +2283,160 @@ var createTool = function() {
 						calculation = 0;
 					}
 
+
+
 					var maxHP = parseInt(tarHPMaxPath.innerText);
-					var currentHP = parseInt(tarHPInputPath.value);
-					var integerResult = currentHP-Math.round(calculation);
-					var percentResult = Math.round(Math.round(integerResult)/maxHP*100);
+					var integerResult = Math.round(calculation);
+					var move = movePath.value;
+	
 
-
-					if (integerResult < 0) {
+			
+					if (isNaN(integerResult)) {
 						integerResult = 0;
 					}
-					if (percentResult < 0) {
-						percentResult = 0;
+					else if (integerResult == 0) {
+						integerResult = 1;
 					}
-					if (integerResult == 0) {
-						percentResult = 0;
-					}
-					if (isNaN(percentResult)) {
-						percentResult = Math.round(Math.round(currentHP)/maxHP*100);
-					}
-					if (isNaN(integerResult)) {
-						integerResult = currentHP;
-					}
+					for (var u = 0; u < finaldataMoveAdditional.length; u++) {
+						if (finaldataMoveAdditional[u]["Additional"] == "Healing") {
+							if (finaldataMoveAdditional[u]["Move"] == move) {
+								if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
+									if (getApplicable(finaldataMoveAdditional[u]["Value"]) != undefined) {
+										if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
+											var check = false;
+											if (finaldataMoveAdditional[u]["Condition"] == "No Weather") {
+												check = true;
+												for (var w = 0; w < weatherInputsPath.length; w++) {
+													if(weatherInputsPath[w].checked) {
+														check = false;
+													}
+												}
+											}
+											if (finaldataMoveAdditional[u]["Condition"] == "Harsh Sunlight") {
+												if (weatherHarshSunlightPath.checked) {
+													check = true;
+												}
+											}
+											if (finaldataMoveAdditional[u]["Condition"] == "Strong Winds") {
+												if (weatherStrongWindsPath.checked) {
+													check = true;
+												}
+											}
+											if (finaldataMoveAdditional[u]["Condition"] == "Sandstorm") {
+												if (weatherSandstormPath.checked) {
+													check = true;
+												}
+											}
+											if (finaldataMoveAdditional[u]["Condition"].includes("Non:")) {
+												var tempStr = finaldataMoveAdditional[u]["Condition"].split("Non:")[1];
+												if (tempStr.includes(",")) {
+													check = true;
+													var tempArr = tempStr.split(",")
+													for (var r = 0; r < tempArr.length; r++) {
+														for (var w = 0; w < weatherInputsPath.length; w++) {
+															if (weatherInputsPath[w].parentElement.getAttribute("name") == tempArr[r]) {
+																if (weatherInputsPath[w].checked) {
+																	check = false;
+																}
+															}
+														}
+													}
+												}
+												else {
+													check = true;
+													for (var w = 0; w < weatherInputsPath.length; w++) {
+														if (weatherInputsPath[w].parentElement.getAttribute("name") == tempStr) {
+															if (weatherInputsPath[w].checked) {
+																check = false;
+															}
+														}
+													}
+												}
+											}
+											if (finaldataMoveAdditional[u]["Condition"] == undefined) {
+												check = true;
+											}
 
-					var extras = []
+											if (check) {
+												if (finaldataMoveAdditional[u]["Target"] == undefined) {
+													var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+													DMGCalcApply(target,heal,"Healing","Mediumspringgreen","Apply");
+												}
+												else if (finaldataMoveAdditional[u]["Target"] == "Ally") {
+													if (target.parentElement.getAttribute("name").includes("player")) {
+														var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+														DMGCalcApply(target,heal,"Healing","Mediumspringgreen","Apply");
+													}
+												}
+											}
+										}
+										else if (finaldataMoveAdditional[u]["Type"] == "Target Attack") {
+											if (finaldataMoveAdditional[u]["Condition"] == "Minus One Attack") {
+												
+												if (moveCategory == "Special") {
+													if (Generation == 1) {
+														var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Special']")
+														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Special']")
+													}
+													else {
+														var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Sp. Atk']")
+														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Sp. Atk']")
+													}
+												}
+												else if (moveCategory == "Physical") {
+													var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Attack']")
+													var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Attack']")
+												}
+												var val;
+												
+												var modval;
+												if (modAtk.value == undefined) {
+													modval = 0
+												}
+												else {
+													modval = modAtk.value;
+												}
+
+									
+												if (modval == -6) {
+													val = tarAtk;
+												}
+												else {
+													if (Generation >= 1 && Generation <= 2) {
+														val = tarAtk*0.66;
+													}
+													else {
+														val = tarAtk*0.6666666667;
+													}
+												}
+
+
+												var heal = Math.ceil(val*finaldataMoveAdditional[u]["Value"]);
+												DMGCalcApply(target,heal,"Healing","Mediumspringgreen","Apply");
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+		
+					
+		
+				
+					for (var h = 0; h < moveHits.value; h++) {
+						DMGCalcApply(target,integerResult,"Damage","Orangered","Apply");
+					}
+				
+
+			
 					if (tarStatusPoisonPath.checked) {
 						var val = Math.floor(maxHP/16);
 						if (val <= 0) {
 							val = 1;
 						}
 					
-						var obj = new Object();
-						obj["Name"] = "Poison";
-						obj["Color"] = "Purple";
-						obj["Damage"] = val;
-						extras.push(obj)
+						DMGCalcApply(target,val,"Damage","Purple","Apply");
 					}
 					if (tarStatusBurnPath.checked) {
 						var val = Math.floor(maxHP/16);
@@ -2307,11 +2444,7 @@ var createTool = function() {
 							val = 1;
 						}
 
-						var obj = new Object();
-						obj["Name"] = "Burn";
-						obj["Color"] = "Orange";
-						obj["Damage"] = val;
-						extras.push(obj)
+						DMGCalcApply(target,val,"Damage","Orange","Apply");
 					}
 
 					if (tarStatusBadPoisonPath.value != "" && tarStatusBadPoisonPath.value != undefined) {
@@ -2321,43 +2454,10 @@ var createTool = function() {
 						}
 						val = tarStatusBadPoisonPath.value*val
 
-						var obj = new Object();
-						obj["Name"] = "Bad Poison";
-						obj["Color"] = "Purple";
-						obj["Damage"] = val;
-						extras.push(obj)
+						DMGCalcApply(target,val,"Damage","Rebeccapurple","Apply");
 					}
 
-					var bgArr = [];
-					bgArr.push("Orangered "+percentResult+"%")
-					var newPer = parseInt(percentResult);
-
-					tarHPCurrentPath.innerText = integerResult;
-			
-					for (var e = 0; e < extras.length; e++) {
-						var oldPer = newPer;
-						var thisPer = Math.round(Math.round(extras[e]["Damage"])/maxHP*100);
-						newPer = newPer - thisPer;
-						tarHPCurrentPath.innerText = tarHPCurrentPath.innerText - extras[e]["Damage"];
-						bgArr.push(extras[e]["Color"]+" "+newPer+"%"+","+extras[e]["Color"]+" "+oldPer+"%")
-					}
-					bgArr = bgArr.reverse();
-					var Per = bgArr[0].split("%")[0].split(" ")[1];
-
-					if (Per < 0) {
-						Per = 0;
-					}
-
-					var bg = "linear-gradient(90deg,"+"Limegreen "+Per+"%,"+bgArr.join(",")+")";
-	
-					target.lastChild.style.background = bg;
-
-					tarHPPercentagePath.innerText = Per+"%";
-
-					if (tarHPCurrentPath.innerText < 0) {
-						tarHPCurrentPath.innerText = 0;
-					}
-
+				
 		
 
 
@@ -2370,6 +2470,108 @@ var createTool = function() {
 	
 
 		}
+
+		var bgs = [];
+
+		function DMGCalcApply(base,val,type,color,condition) {
+
+			var base;
+			var type;
+			var color;
+			var condition;
+
+			if (base != undefined) {
+	
+				var team = base.parentElement.getAttribute("name");
+				var pok = base.getAttribute("name");
+				var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"']");
+
+
+				var HPCurrentPath = base.querySelector(":scope *[name='hp'] *[name='current']");
+				var HPMaxPath = base.querySelector(":scope *[name='hp'] *[name='max']");
+				var HPPercentagePath = base.querySelector(":scope *[name='hp'] *[name='percentage']");
+
+				var PokémonPath = target.querySelector(":scope *[name='pokémon'] select");
+				var StatsPath = target.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
+				var HPInputPath = target.querySelector(":scope *[name='hp'] input");
+				var StatusLeechSeedPath = target.querySelector(":scope *[name='Leech Seed'] input");
+				var StatusPoisonPath = target.querySelector(":scope *[name='Poisoned'] input");
+				var StatusBadPoisonPath = target.querySelector(":scope *[name='Badly Poisoned'] input");
+				var StatusBurnPath = target.querySelector(":scope *[name='Burned'] input");
+				var StatusParalyzePath = target.querySelector(":scope *[name='Paralyzed'] input");
+				var StatusAsleepPath = target.querySelector(":scope *[name='Asleep'] input");
+				var StatusFrozenPath = target.querySelector(":scope *[name='Frozen'] input");
+
+				// Move
+				var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");
+				var powerPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='power']");
+				var accuracyPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='accuracy']");
+				var criticalPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child input[type='checkbox']")
+				var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
+
+
+				if (condition == "Reset") {
+					base.lastChild.style.removeProperty("background");
+					HPCurrentPath.innerText = HPInputPath.value;
+					HPPercentagePath.innerText = Math.round(Math.round(HPInputPath.value)/HPMaxPath.innerText*100);
+					HPPercentagePath.innerText = HPPercentagePath.innerText+"%";
+					bgs = [];
+				}
+				else if (condition == "Apply") {
+					var val = parseInt(val);
+					var maxHP = parseInt(HPMaxPath.innerText);
+					var currentHP = parseInt(HPCurrentPath.innerText);
+					var currentPercent = parseInt(HPPercentagePath.innerText.replaceAll("%"));
+					var percent = Math.round(Math.round(val)/maxHP*100);
+
+					var newHP;
+					var newPercent;
+
+					if (type == "Damage") {
+						newHP = currentHP-val;
+						newPercent = currentPercent-percent;
+					}
+					if (type == "Heal") {
+						newHP = currentHP+val;
+						newPercent = currentPercent+percent;
+					}
+
+					if (newHP < 0) {
+						newHP = 0;
+					}
+					if (newPercent < 0) {
+						newPercent = 0;
+					}
+
+	
+
+					var obj = new Object();
+					obj["Color"] = color;
+					obj["Percent"] = newPercent;
+					bgs.push(obj)
+
+					var tempArr = [];
+
+					for (var b = 0; b < bgs.length; b++) {
+						var x = b - 1;
+						if (b == 0) {
+							tempArr.push(bgs[b]["Color"]+" "+bgs[b]["Percent"]+"%")
+						}
+						else {
+							tempArr.push(bgs[b]["Color"]+" "+bgs[b]["Percent"]+"%, "+bgs[b]["Color"]+" "+bgs[x]["Percent"]+"%")
+						}
+					}
+					tempArr.reverse();
+					
+					var tempStr = "linear-gradient(90deg,Limegreen "+newPercent+"%,"+tempArr.join(",")+")";
+
+					base.lastChild.style.background = tempStr;
+					HPCurrentPath.innerText = newHP;
+					HPPercentagePath.innerText = newPercent+"%";
+				}
+			}
+		}
+
 		function DMGCalcPokStats(base) {
 	
 			var base;
@@ -2392,286 +2594,296 @@ var createTool = function() {
 			var friendship = base.querySelector(":scope *[name='friendship'] input[type='number']");
 			var badges = base.querySelectorAll(":scope *[name='Badge-Group'] li");
 			var maxhp = base.querySelector(":scope *[name='hp'] input");
+			var maxhpInput = base.querySelector(":scope *[name='hp'] *[name='max']");
+			var currenthpInput = base.querySelector(":scope *[name='hp'] *[name='current']");
 		
 			var res = base.querySelectorAll(":scope *[name='stats'] > *:last-child > *:last-child > input[type='number']:not(:first-child)");
 			var mod = base.querySelectorAll(":scope *[name='stats'] > *:last-child > *[name='Mod'] > input[type='number']:not(:first-child)");
+		
 
+			if (pokémon.value != "") {
 
-			var int = getPokémonInt(pokémon.value);
+				var int = getPokémonInt(pokémon.value);
+				for (var i = 0; i < res.length; i++) {
 
-			for (var i = 0; i < res.length; i++) {
+					var stat = Stats[i];
 
-				var stat = Stats[i];
+					var lvl = level.value;
+					var base = returnData(int,"Base Stats "+stat,"")[0];
+					var iv = ivs[i].value
+					var ev = evs[i].value
+					var nature;
+					var friendship;
 
-				var lvl = level.value;
-				var base = returnData(int,"Base Stats "+stat,"")[0];
-				var iv = ivs[i].value
-				var ev = evs[i].value
-				var nature;
-				var friendship;
+					if (Natures.length > 0) {
+						nature = natureModifier(stat,natures[0].value);
+					}
+					else {
+						nature = 1;
+					}
 
-				if (Natures.length > 0) {
-					nature = natureModifier(stat,natures[0].value);
-				}
-				else {
-					nature = 1;
-				}
-
-				if (friendship != undefined) {
-					if (friendship.value != undefined && friendship.value != "") {
-						friendship = friendshipModifer(friendship.value);
+					if (friendship != undefined) {
+						if (friendship.value != undefined && friendship.value != "") {
+							friendship = friendshipModifer(friendship.value);
+						}
+						else {
+							friendship = 1;
+						}
 					}
 					else {
 						friendship = 1;
 					}
-				}
-				else {
-					friendship = 1;
-				}
-				
+					
 
-				if (lvl != "") {
-					if (iv == "") {
-						iv = 0;
-					}
-					if (ev == "") {
-						ev = 0;
-					}
-					res[i].setAttribute("min",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
-					res[i].setAttribute("max",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
-					res[i].value = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
+					if (lvl != "") {
+						if (iv == "") {
+							iv = 0;
+						}
+						if (ev == "") {
+							ev = 0;
+						}
+						res[i].setAttribute("min",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
+						res[i].setAttribute("max",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
+						res[i].value = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
 
-					if (stat == "HP") {
-						var hpPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"'] *[name='hp']")
-						var hpCurrent =  hpPath.querySelector(":scope *[name='current']");
-						var hpMax =  hpPath.querySelector(":scope *[name='max']");
-						var val = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
+						if (stat == "HP") {
+							var hpPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"'] *[name='hp']")
+							var hpCurrent =  hpPath.querySelector(":scope *[name='current']");
+							var hpMax =  hpPath.querySelector(":scope *[name='max']");
+							var val = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
 
-						maxhp.setAttribute("value",val);
-						maxhp.setAttribute("max",val);
+							maxhp.setAttribute("max",val);
+							maxhp.value = val;
 
-						hpCurrent.innerText = maxhp.value;
-						hpMax.innerText = val;
-					}
-				}
-				else {
-					res[i].setAttribute("min","0");
-					res[i].setAttribute("max","0");
-					res[i].value = 0;
-				}
+							hpCurrent.innerText = maxhp.value;
+							hpMax.innerText = val;
+
+							currenthpInput.setAttribute("max",val)
+							currenthpInput.value = val;
+							maxhpInput.setAttribute("min",val)
+							maxhpInput.setAttribute("max",val)
+							maxhpInput.value = val;
 
 
-				for (var b = 0; b < badges.length; b++) {
-					var input = badges[b].querySelector(":scope input");
-					if (input.checked) {
-						if (getApplicable("Red,Blue,Yellow")) {
-							if (badges[b].getAttribute("name") == "Boulder Badge") {
-								if (res[i].getAttribute("name") == "Attack") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Thunder Badge") {
-								if (res[i].getAttribute("name") == "Defense") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Volcano Badge") {
-								if (res[i].getAttribute("name") == "Special") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Soul Badge") {
-								if (res[i].getAttribute("name") == "Speed") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-						}
-						else if (getApplicable("Gold,Silver,Crystal")) {
-							if (badges[b].getAttribute("name") == "Zephyr Badge") {
-								if (res[i].getAttribute("name") == "Attack") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Mineral Badge") {
-								if (res[i].getAttribute("name") == "Defense") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Glacier Badge") {
-								if (res[i].getAttribute("name") == "Sp. Atk") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Glacier Badge") {
-								var check = true;
-								if (res[i].value >= 206 && res[i].value <= 432) {
-									check = false;
-								}
-								if (check) {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Plain Badge") {
-								if (res[i].getAttribute("name") == "Speed") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-						}
-						else if (getApplicable("FireRed,LeafGreen")) {
-							if (badges[b].getAttribute("name") == "Boulder Badge") {
-								if (res[i].getAttribute("name") == "Attack") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Soul Badge") {
-								if (res[i].getAttribute("name") == "Defense") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Volcano Badge") {
-								if (res[i].getAttribute("name") == "Sp. Atk") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Volcano Badge") {
-								if (res[i].getAttribute("name") == "Sp. Def") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Thunder Badge") {
-								if (res[i].getAttribute("name") == "Speed") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-						}
-						else if (getApplicable("Ruby,Sapphire,Emerald")) {
-							if (badges[b].getAttribute("name") == "Stone Badge") {
-								if (res[i].getAttribute("name") == "Attack") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Balance Badge") {
-								if (res[i].getAttribute("name") == "Defense") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Mind Badge") {
-								if (res[i].getAttribute("name") == "Sp. Atk") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Mind Badge") {
-								if (res[i].getAttribute("name") == "Sp. Def") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-							if (badges[b].getAttribute("name") == "Dynamo Badge") {
-								if (res[i].getAttribute("name") == "Speed") {
-									res[i].value = res[i].value * 1.125;
-								}
-							}
-						}
-					}
-				}
-
-
-				res[i].setAttribute("data-nomod",res[i].value);
-				
-
-				if (i != 0) {
-					if (Generation >= 1 && Generation <= 2) {
-						if (mod[i].value == -6) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.25);
-						}
-						if (mod[i].value == -5) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.28);
-						}
-						if (mod[i].value == -4) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.33);
-						}
-						if (mod[i].value == -3) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.4);
-						}
-						if (mod[i].value == -2) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.5);
-						}
-						if (mod[i].value == -1) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.66);
-						}
-						if (mod[i].value == 0) {
-							res[i].value = Math.round(parseInt(res[i].value)*1);
-						}
-						if (mod[i].value == 1) {
-							res[i].value = Math.round(parseInt(res[i].value)*1.5);
-						}
-						if (mod[i].value == 2) {
-							res[i].value = Math.round(parseInt(res[i].value)*2);
-						}
-						if (mod[i].value == 3) {
-							res[i].value = Math.round(parseInt(res[i].value)*2.5);
-						}
-						if (mod[i].value == 4) {
-							res[i].value = Math.round(parseInt(res[i].value)*3);
-						}
-						if (mod[i].value == 5) {
-							res[i].value = Math.round(parseInt(res[i].value)*3.5);
-						}
-						if (mod[i].value == 6) {
-							res[i].value = Math.round(parseInt(res[i].value)*4);
 						}
 					}
 					else {
-						if (mod[i].value == -6) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.25);
-						}
-						if (mod[i].value == -5) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.2857142857);
-						}
-						if (mod[i].value == -4) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.3333333333);
-						}
-						if (mod[i].value == -3) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.4);
-						}
-						if (mod[i].value == -2) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.5);
-						}
-						if (mod[i].value == -1) {
-							res[i].value = Math.round(parseInt(res[i].value)*0.6666666667);
-						}
-						if (mod[i].value == 0) {
-							res[i].value = Math.round(parseInt(res[i].value)*1);
-						}
-						if (mod[i].value == 1) {
-							res[i].value = Math.round(parseInt(res[i].value)*1.5);
-						}
-						if (mod[i].value == 2) {
-							res[i].value = Math.round(parseInt(res[i].value)*2);
-						}
-						if (mod[i].value == 3) {
-							res[i].value = Math.round(parseInt(res[i].value)*2.5);
-						}
-						if (mod[i].value == 4) {
-							res[i].value = Math.round(parseInt(res[i].value)*3);
-						}
-						if (mod[i].value == 5) {
-							res[i].value = Math.round(parseInt(res[i].value)*3.5);
-						}
-						if (mod[i].value == 6) {
-							res[i].value = Math.round(parseInt(res[i].value)*4);
+						res[i].setAttribute("min","0");
+						res[i].setAttribute("max","0");
+						res[i].value = 0;
+					}
+
+
+					for (var b = 0; b < badges.length; b++) {
+						var input = badges[b].querySelector(":scope input");
+						if (input.checked) {
+							if (getApplicable("Red,Blue,Yellow")) {
+								if (badges[b].getAttribute("name") == "Boulder Badge") {
+									if (res[i].getAttribute("name") == "Attack") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Thunder Badge") {
+									if (res[i].getAttribute("name") == "Defense") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Volcano Badge") {
+									if (res[i].getAttribute("name") == "Special") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Soul Badge") {
+									if (res[i].getAttribute("name") == "Speed") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+							}
+							else if (getApplicable("Gold,Silver,Crystal")) {
+								if (badges[b].getAttribute("name") == "Zephyr Badge") {
+									if (res[i].getAttribute("name") == "Attack") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Mineral Badge") {
+									if (res[i].getAttribute("name") == "Defense") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Glacier Badge") {
+									if (res[i].getAttribute("name") == "Sp. Atk") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Glacier Badge") {
+									var check = true;
+									if (res[i].value >= 206 && res[i].value <= 432) {
+										check = false;
+									}
+									if (check) {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Plain Badge") {
+									if (res[i].getAttribute("name") == "Speed") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+							}
+							else if (getApplicable("FireRed,LeafGreen")) {
+								if (badges[b].getAttribute("name") == "Boulder Badge") {
+									if (res[i].getAttribute("name") == "Attack") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Soul Badge") {
+									if (res[i].getAttribute("name") == "Defense") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Volcano Badge") {
+									if (res[i].getAttribute("name") == "Sp. Atk") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Volcano Badge") {
+									if (res[i].getAttribute("name") == "Sp. Def") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Thunder Badge") {
+									if (res[i].getAttribute("name") == "Speed") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+							}
+							else if (getApplicable("Ruby,Sapphire,Emerald")) {
+								if (badges[b].getAttribute("name") == "Stone Badge") {
+									if (res[i].getAttribute("name") == "Attack") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Balance Badge") {
+									if (res[i].getAttribute("name") == "Defense") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Mind Badge") {
+									if (res[i].getAttribute("name") == "Sp. Atk") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Mind Badge") {
+									if (res[i].getAttribute("name") == "Sp. Def") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+								if (badges[b].getAttribute("name") == "Dynamo Badge") {
+									if (res[i].getAttribute("name") == "Speed") {
+										res[i].value = res[i].value * 1.125;
+									}
+								}
+							}
 						}
 					}
 
-					if (Generation >= 1 && Generation <= 2) {
-						if (res[i].value > 999) {
-							res[i].value = 999;
+
+					res[i].setAttribute("data-nomod",res[i].value);
+					
+
+					if (i != 0) {
+						if (Generation >= 1 && Generation <= 2) {
+							if (mod[i].value == -6) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.25);
+							}
+							if (mod[i].value == -5) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.28);
+							}
+							if (mod[i].value == -4) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.33);
+							}
+							if (mod[i].value == -3) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.4);
+							}
+							if (mod[i].value == -2) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.5);
+							}
+							if (mod[i].value == -1) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.66);
+							}
+							if (mod[i].value == 0) {
+								res[i].value = Math.round(parseInt(res[i].value)*1);
+							}
+							if (mod[i].value == 1) {
+								res[i].value = Math.round(parseInt(res[i].value)*1.5);
+							}
+							if (mod[i].value == 2) {
+								res[i].value = Math.round(parseInt(res[i].value)*2);
+							}
+							if (mod[i].value == 3) {
+								res[i].value = Math.round(parseInt(res[i].value)*2.5);
+							}
+							if (mod[i].value == 4) {
+								res[i].value = Math.round(parseInt(res[i].value)*3);
+							}
+							if (mod[i].value == 5) {
+								res[i].value = Math.round(parseInt(res[i].value)*3.5);
+							}
+							if (mod[i].value == 6) {
+								res[i].value = Math.round(parseInt(res[i].value)*4);
+							}
+						}
+						else {
+							if (mod[i].value == -6) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.25);
+							}
+							if (mod[i].value == -5) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.2857142857);
+							}
+							if (mod[i].value == -4) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.3333333333);
+							}
+							if (mod[i].value == -3) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.4);
+							}
+							if (mod[i].value == -2) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.5);
+							}
+							if (mod[i].value == -1) {
+								res[i].value = Math.round(parseInt(res[i].value)*0.6666666667);
+							}
+							if (mod[i].value == 0) {
+								res[i].value = Math.round(parseInt(res[i].value)*1);
+							}
+							if (mod[i].value == 1) {
+								res[i].value = Math.round(parseInt(res[i].value)*1.5);
+							}
+							if (mod[i].value == 2) {
+								res[i].value = Math.round(parseInt(res[i].value)*2);
+							}
+							if (mod[i].value == 3) {
+								res[i].value = Math.round(parseInt(res[i].value)*2.5);
+							}
+							if (mod[i].value == 4) {
+								res[i].value = Math.round(parseInt(res[i].value)*3);
+							}
+							if (mod[i].value == 5) {
+								res[i].value = Math.round(parseInt(res[i].value)*3.5);
+							}
+							if (mod[i].value == 6) {
+								res[i].value = Math.round(parseInt(res[i].value)*4);
+							}
+						}
+
+						if (Generation >= 1 && Generation <= 2) {
+							if (res[i].value > 999) {
+								res[i].value = 999;
+							}
 						}
 					}
+
 				}
-
 			}
-			
-
 
 
 			
@@ -2680,6 +2892,40 @@ var createTool = function() {
 			var acc = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] *[name='accuracy']");
 			var pwr = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] *[name='power']");
 			var sel = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");
+			var inp = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span:first-child input");
+
+			var strikes = [1,1];
+
+			for (var a = 0; a < finaldataMoveAdditional.length; a++) {
+				if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike") {
+					if (getApplicable(finaldataMoveAdditional[a]["Game"])) {
+						if (finaldataMoveAdditional[a]["Move"] == sel.value) {
+							if (finaldataMoveAdditional[a]["Value"] != undefined) {
+								if (finaldataMoveAdditional[a]["Value"].includes("-")) {
+									var val1 = finaldataMoveAdditional[a]["Value"].split("-")[0];
+									var val2 = finaldataMoveAdditional[a]["Value"].split("-")[1];
+									strikes = [val1,val2];
+								}
+								else {
+									strikes = [finaldataMoveAdditional[a]["Value"],finaldataMoveAdditional[a]["Value"]];
+								}
+							}
+						}
+					}
+				}
+			}
+
+			inp.setAttribute("min",strikes[0]);
+			inp.setAttribute("max",strikes[1]);
+
+			inp.value = strikes[0];
+
+			if (strikes[0] == 1 && strikes[1] == 1) {
+				inp.setAttribute("disabled","")
+			}
+			else {
+				inp.removeAttribute("disabled");
+			}
 
 			sel.style.color = "var(--type"+getMoveData(sel.value,"Type")+")";
 
@@ -2750,7 +2996,7 @@ var createTool = function() {
 			var nums = base.querySelectorAll(":scope > li:not([name='stats']) input[type='number']");
 
 
-			var dataString = dataStringToObjArr(tar.getAttribute("data-string"));
+			var dataString = dataStringToObj(tar.getAttribute("data-string"));
 
 
 
@@ -2777,7 +3023,9 @@ var createTool = function() {
 			var itExt = ImageTypes[0]["extension"];
 			var check = false;
 
-			if (dataString.length > 0) {
+
+
+			if (dataString != undefined) {
 				var int;
 				var pokémon;
 				var nature;
@@ -2790,38 +3038,38 @@ var createTool = function() {
 				var ev;
 				var moves;
 
-				for(var i = 0; i < dataString.length; i++) {
-					if (dataString[i]["pok"] != undefined) {
-						pokémon = dataString[i]["pok"];
-					}
-					if (dataString[i]["na"] != undefined) {
-						nature = dataString[i]["na"];
-					}
-					if (dataString[i]["lv"] != undefined) {
-						level = dataString[i]["lv"];
-					}
-					if (dataString[i]["ge"] != undefined) {
-						gender = dataString[i]["ge"];
-					}
-					if (dataString[i]["fr"] != undefined) {
-						friendship = dataString[i]["fr"];
-					}
-					if (dataString[i]["ab"] != undefined) {
-						ability = dataString[i]["ab"];
-					}
-					if (dataString[i]["it"] != undefined) {
-						item = dataString[i]["it"];
-					}
-					if (dataString[i]["mo"] != undefined) {
-						moves = dataString[i]["mo"];
-					}
-					if (dataString[i]["iv"] != undefined) {
-						iv = dataString[i]["iv"];
-					}
-					if (dataString[i]["ev"] != undefined) {
-						ev = dataString[i]["ev"];
-					}
+	
+				if (dataString["pok"] != undefined) {
+					pokémon = dataString["pok"];
 				}
+				if (dataString["na"] != undefined) {
+					nature = dataString["na"];
+				}
+				if (dataString["lv"] != undefined) {
+					level = dataString["lv"];
+				}
+				if (dataString["ge"] != undefined) {
+					gender = dataString["ge"];
+				}
+				if (dataString["fr"] != undefined) {
+					friendship = dataString["fr"];
+				}
+				if (dataString["ab"] != undefined) {
+					ability = dataString["ab"];
+				}
+				if (dataString["it"] != undefined) {
+					item = dataString["it"];
+				}
+				if (dataString["mo"] != undefined) {
+					moves = dataString["mo"];
+				}
+				if (dataString["iv"] != undefined) {
+					iv = dataString["iv"];
+				}
+				if (dataString["ev"] != undefined) {
+					ev = dataString["ev"];
+				}
+				
 
 				int = getPokémonInt(pokémon);
 
@@ -3244,19 +3492,17 @@ var createTool = function() {
 			var itemPath = base.querySelector(":scope *[name='item'] select");
 			var friendshipPath = base.querySelector(":scope *[name='friendship'] input");
 
-			var pokNameVal = dataStringToObjArr(tar.getAttribute("data-string"));
+			var pokNameVal = dataStringToObj(tar.getAttribute("data-string"));
 
-			var int = 0;
+			var int;
 			var check = false;
 
-			if (pokNameVal.length > 0) {
-				var int;
-				for(var i = 0; i < pokNameVal.length; i++) {
-					if (pokNameVal[i]["pok"] != undefined) {
-						int = getPokémonInt(pokNameVal[i]["pok"]);
-						break;
-					}
+			if (pokNameVal != undefined) {
+		
+				if (pokNameVal["pok"] != undefined) {
+					int = getPokémonInt(pokNameVal["pok"]);
 				}
+				
 				if (int != undefined) {
 					check = true;
 				}
@@ -3410,6 +3656,7 @@ var createTool = function() {
 				var movesPath = base.querySelectorAll(":scope *[name='moves'] select");
 				var ivsPath = base.querySelectorAll(":scope *[name='stats'] *[name='IV'] input:not(:first-child)");
 				var evsPath = base.querySelectorAll(":scope *[name='stats'] *[name='EV'] input:not(:first-child)");
+				var totalPath = base.querySelectorAll(":scope *[name='stats'] > * > *:last-child input:not(:first-child)");
 
 				pokPath.value = pokPath.firstChild.value;
 				lvlPath.value = lvlPath.getAttribute("min");
@@ -3439,9 +3686,13 @@ var createTool = function() {
 				for(var e = 0; e < evsPath.length; e++) {
 					evsPath[e].value = "";
 				}
+				for(var e = 0; e < totalPath.length; e++) {
+					totalPath[e].value = 0;
+				}
 			}
 		}
-		function DMGSyncData(base) {
+
+		function DMGSaveData(base) {
 
 			var base
 			if (base.tagName != undefined) {
@@ -3453,8 +3704,6 @@ var createTool = function() {
 
 			var team = base.parentElement.getAttribute("name");
 			var pok = base.getAttribute("name");
-			var resArr = [];
-		
 			var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"']");
 		
 
@@ -3469,202 +3718,79 @@ var createTool = function() {
 				var movesPath = base.querySelectorAll(":scope *[name='moves'] select");
 				var ivsPath = base.querySelectorAll(":scope *[name='stats'] *[name='IV'] input:not(:first-child)");
 				var evsPath = base.querySelectorAll(":scope *[name='stats'] *[name='EV'] input:not(:first-child)");
-		
+		 
 				var datas = target.getAttribute("data-string");
 			
 				var tempFull = ["pok","lv","ab","ge","it","na","fr","mo","iv","ev"];
 				var tempArr = [];
 
-				var resArr = dataStringToObjArr(datas);
+	
 
-				
-				for (var e = 0; e < resArr.length; e++) {
-					if (resArr[e]["pok"] != undefined) {
-						tempArr.push("pok");
-						if (pokPath.value != "" && pokPath.value != undefined) {
-							resArr[e]["pok"] = pokPath.value;
-						}
-					}
-					if (resArr[e]["lv"] != undefined) {
-						tempArr.push("lv");
-						if (lvlPath.value != "" && lvlPath.value != undefined) {
-							resArr[e]["lv"] = lvlPath.value;
-						}
-					}
-					if (resArr[e]["ab"] != undefined) {
-						tempArr.push("ab");
-						if (abilityPath.value != "" && abilityPath.value != undefined) {
-							resArr[e]["ab"] = abilityPath.value;
-						}
-					}
-					if (resArr[e]["ge"] != undefined) {
-						tempArr.push("ge");
-						if (genderPath.value != "" && genderPath.value != undefined) {
-							resArr[e]["ge"] = genderPath.value;
-						}
-					}
-					if (resArr[e]["it"] != undefined) {
-						tempArr.push("it");
-						if (itemPath.value != "" && itemPath.value != undefined) {
-							resArr[e]["it"] = itemPath.value;
-						}
-					}
-					if (resArr[e]["na"] != undefined) {
-						tempArr.push("na");
-						if (naturePath.value != "" && naturePath.value != undefined) {
-							resArr[e]["na"] = naturePath.value;
-						}
-					}
+	
+				var stringObj = dataStringToObj(datas);
 
-					if (resArr[e]["fr"] != undefined) {
-						tempArr.push("fr");
-						if (friendshipPath.value != "" && friendshipPath.value != undefined) {
-							resArr[e]["fr"] = friendshipPath.value;
-						}
-					}
 
-					if (resArr[e]["mo"] != undefined) {
-						tempArr.push("mo");
-						var vals = resArr[e]["mo"].split(",");
-						if (vals.length == movesPath.length) {
-							var tempArr3 = [];
-							var check = true;
-							for (var v = 0; v < movesPath.length; v++) {
-								if (movesPath[v].value != undefined) {
-									if (movesPath[v].value != "" && !movesPath[v].value.includes("#")) {
-										tempArr3.push(movesPath[v].value)
-									}
-									else {
-										tempArr3.push("-")
-									}
-								}
-								else {
-									tempArr3.push("-")
-								}
-							}
-							var res = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
-							if (res.replaceAll(",","") != "") {
-								resArr[e]["mo"] = res;
-							}
-						}
-					}
 
-					if (resArr[e]["iv"] != undefined) {
-						tempArr.push("iv");
-						var vals = resArr[e]["iv"].split(",");
-						if (vals.length == ivsPath.length) {
-							var tempArr3 = [];
-							for (var v = 0; v < ivsPath.length; v++) {
-								if (ivsPath[v].value != undefined && ivsPath[v].value != "") {
-									tempArr3.push(ivsPath[v].value)
-								}
-								else {
-									tempArr3.push("-")
-								}
-							}
+				console.log(stringObj)
+				console.log(pokPath)
+				console.log(pokPath.value)
 
-							var res = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
-							if (res.replaceAll(",","") != "") {
-								resArr[e]["iv"] = res;
-							}
-						}
-					}
-
-					if (resArr[e]["ev"] != undefined) {
-						tempArr.push("ev");
-						var vals = resArr[e]["ev"].split(",");
-						if (vals.length == evsPath.length) {
-							var tempArr3 = [];
-							for (var v = 0; v < evsPath.length; v++) {
-								if (evsPath[v].value != undefined && evsPath[v].value != "") {
-									tempArr3.push(evsPath[v].value)
-								}
-								else {
-									tempArr3.push("-")
-								}
-							}
-							var res = tempArr3.join(",").replaceAll(",-",",").replaceAll("-,",",");
-							if (res.replaceAll(",","") != "") {
-								resArr[e]["ev"] = res;
-							}
-						}
-					}
+				if (pokPath.value != undefined) {
+					stringObj["pok"] = pokPath.value;
+				}
+				if (lvlPath.value != undefined) {
+					stringObj["lv"] = lvlPath.value;
+				}
+				if (abilityPath != undefined) {
+					stringObj["ab"] = abilityPath.value;
+				}
+				if (genderPath != undefined) {
+					stringObj["ge"] = genderPath.value;
+				}
+				if (itemPath != undefined) {
+					stringObj["it"] = itemPath.value;
+				}
+				if (friendshipPath != undefined) {
+					stringObj["fr"] = friendshipPath.value;
+				}
+				if (naturePath != undefined) {
+					stringObj["na"] = naturePath.value;
 				}
 
 
-				for (var e = 0; e < tempFull.length; e++) {
-
-					var val;
-					var path;
-
-					if (tempFull[e] == "pok") {
-						path = pokPath;
+				var moves = [];
+				for (var e = 0; e < movesPath.length; e++) {
+					if (movesPath[e].value.includes("#")) {
+						moves.push("");
 					}
-					if (tempFull[e] == "lv") {
-						path = lvlPath;
+					else {
+						moves.push(movesPath[e].value)
 					}
-					if (tempFull[e] == "ab") {
-						path = abilityPath;
-					}
-					if (tempFull[e] == "ge") {
-						path = genderPath;
-					}
-					if (tempFull[e] == "it") {
-						path = itemPath;
-					}
-					if (tempFull[e] == "na") {
-						path = naturePath;
-					}
-					if (tempFull[e] == "fr") {
-						path = friendshipPath;
-					}
-					if (tempFull[e] == "mo") {
-						path = movesPath;
-					}
-					if (tempFull[e] == "iv") {
-						path = ivsPath;
-					}
-					if (tempFull[e] == "ev") {
-						path = evsPath;
-					}
-				
-					
-					if (path != undefined) {
-						if (path.value != undefined) {
-							if (path.value != "") {
-								val = path.value;
-							}
-							else {
-								val = "";
-							}
-						}
-						else {
-							var tempArr2 = [];
-							for (var v = 0; v < path.length; v++) {
-								if (path[v].value != undefined) {
-									tempArr2.push(path[v].value)
-								}
-								else {
-									tempArr2.push("-")
-								}
-							}
-							val = tempArr2.join(",").replaceAll(",-",",").replaceAll("-,",",");
-						}
-
-
-						if (!tempArr.includes(tempFull[e])) {
-							var obj = new Object();
-							obj[tempFull[e]] = val;
-							resArr.push(obj)
-						}
-					}
-
 				}
+				stringObj["mo"] = moves.join(",");
+				
 
+				var ivs = [];
+				for (var e = 0; e < ivsPath.length; e++) {
+					ivs.push(ivsPath[e].value)
+				}
+				stringObj["iv"] = ivs.join(",");
 
-				var result = JSON.stringify(resArr).replaceAll("},{","}|{").replaceAll("}","").replaceAll("{","").replaceAll('"','').replaceAll(']','').replaceAll('[','');
-				target.setAttribute("data-string",result);
+				var evs = [];
+				for (var e = 0; e < evsPath.length; e++) {
+					evs.push(evsPath[e].value)
+				}
+				stringObj["ev"] = evs.join(",");
+
+				console.log(stringObj)
+
+				var keys = Object.keys(stringObj)
+				var tempArr = [];
+				for (var e = 0; e < keys.length; e++) {
+					tempArr.push(keys[e]+":"+stringObj[keys[e]])
+				}
 		
+				target.setAttribute("data-string",tempArr.join("|"))
 			}
 		}
 		function DMGMatchPosition() {
@@ -3764,14 +3890,15 @@ var createTool = function() {
 			if (ask) {
 				base.setAttribute("data-string","");
 				DMGClearData(target);
-				DMGSyncData(target);
+				DMGSaveData(target);
 				DMGSetChange(target);
 			}
 			
 
 		}
 		function DMGExportDataString() {
-			var str = this.parentElement.parentElement.getAttribute("data-string");
+			var base = findUpTag(this,"DIV");
+			var str = base.getAttribute("data-string");
 			navigator.clipboard.writeText(str);
 			console.log(str)
 			consoleText("Copied Data String!")
