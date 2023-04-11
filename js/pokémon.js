@@ -558,6 +558,7 @@ var createPokémon = function() {
             var teamGender = document.createElement("select");
             teamRight.appendChild(teamGender);
             teamGender.setAttribute("type","icon");
+            teamGender.setAttribute("title","Gender");
             teamGender.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
             teamGender.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
             teamGender.addEventListener("change",selectModify);
