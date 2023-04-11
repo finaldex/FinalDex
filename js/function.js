@@ -606,28 +606,34 @@ function returnSortedItemsList(i) {
 	return result;
 }
 
-function dataStringToObjArr(data) {
+function dataStringToObj(data) {
 	var data
 	var tempArr;
-	var result = [];
-	if (data != "" && data != undefined) {
+
+	console.log(data)
+	if (data != "") {
 		if (data.includes("|")) {
 			tempArr = data.split("|")
 		}
 		else {
 			tempArr = [data];
 		}
-		
-		for (var i = 0; i < tempArr.length; i++) {
-			var val1 = tempArr[i].split(":")[0];
-			var val2 = tempArr[i].split(":")[1];
-			var obj = new Object();
-			obj[val1] = val2;
-			result.push(obj)
-		}
 	}
+	else {
+		tempArr = [];
+	}
+	var obj = new Object();
+	for (var i = 0; i < tempArr.length; i++) {
+		var val1 = tempArr[i].split(":")[0];
+		var val2 = tempArr[i].split(":")[1];
+		
+		obj[val1] = val2;
+	}
+	console.log(obj)
+	return obj;
+	
 
-	return result;
+
 }
 
 function getPokémonName(int) {
