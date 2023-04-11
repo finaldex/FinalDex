@@ -15,11 +15,6 @@ var createMove = function() {
 	var moveSectionHeaderDebutText = document.createElement("h5");
 	var moveSectionContent = document.createElement("section");
 	var moveSectionContentDescription = document.createElement("div");
-	var moveSectionContentDescriptionText = document.createElement("p");
-	var moveSectionContentMachineText = document.createElement("p");
-	var moveSectionContentTutorText = document.createElement("p");
-	var moveSectionContentEffectTitle = document.createElement("h4");
-	var moveSectionContentEffectText = document.createElement("p");
 	var moveSectionSidebar = document.createElement("section");
 	moveOuter.setAttribute("id", "move");
 	moveOuter.setAttribute("value","moves");
@@ -52,11 +47,6 @@ var createMove = function() {
 	moveSectionHeaderDebut.appendChild(moveSectionHeaderDebutText);
 	moveOuter.appendChild(moveSectionContent);
 	moveSectionContent.appendChild(moveSectionContentDescription);
-	moveSectionContentDescription.appendChild(moveSectionContentDescriptionText);
-	moveSectionContentDescription.appendChild(moveSectionContentMachineText);
-	moveSectionContentDescription.appendChild(moveSectionContentTutorText);
-	moveSectionContentDescription.appendChild(moveSectionContentEffectTitle);
-	moveSectionContentDescription.appendChild(moveSectionContentEffectText);
 	moveOuter.appendChild(moveSectionSidebar);
 
 	moveSectionList.setAttribute("name","list");
@@ -322,8 +312,37 @@ var createMove = function() {
 			moveSectionHeaderTitleID.title = "Index number";
 		}
 		moveSectionHeaderDebutText.innerText = "Introduced in "+finaldataMove[i]["Debut"].split("-")[0];
+
+		moveSectionContentDescription.innerHTML = "";
+
 		if (finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription] != undefined) {
-			moveSectionContentDescriptionText.innerText = finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription];
+			var text = document.createElement("p");
+			text.innerText = finaldataMoveDescription[i]["Description_"+JSONPath_MoveDescription];
+			moveSectionContentDescription.appendChild(text)
+			moveSectionContentDescription.innerHTML += "<br>"
+		}
+
+
+		if (finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine] != undefined) {
+			var text = document.createElement("p");
+			text.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" is <b type='invert' name='item' value='"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"' onclick='dataRedirect()' function='dataRedirect'>"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"</b>."
+			moveSectionContentDescription.appendChild(text)
+			moveSectionContentDescription.innerHTML += "<br>"
+		}
+
+
+		if(getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
+			var text = document.createElement("p");
+			moveSectionContentDescription.appendChild(text)
+
+			if (getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"].includes("Route")) {
+				text.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor on <b type='invert' name='map' value='"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."
+			}
+			else {
+				text.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."	
+			}
+
+			moveSectionContentDescription.innerHTML += "<br>"
 		}
 
 
@@ -339,47 +358,31 @@ var createMove = function() {
 			}
 		}
 
-		moveSectionContentEffectText.innerText = "";
+
+		if (effect.length > 0) {
+			var text = document.createElement("h4");
+			text.innerText = "Effect";
+			moveSectionContentDescription.appendChild(text)
+		}
+
 
 		for(var q = 0; q < effect.length; q++) {
-			moveSectionContentEffectText.innerText += effect[q];
-			if (q != effect.length - 1) {
-				moveSectionContentEffectText.innerHTML += "<br>"
+			var text = document.createElement("p");
+			text.innerText = effect[q];
+			moveSectionContentDescription.appendChild(text)
+			if (q == effect.length - 1) {
+				moveSectionContentDescription.innerHTML += "<br>"
 			}
 		}
 		
-		if (effect.length > 0) {
-			moveSectionContentEffectTitle.innerText = "Effect";
-		}
-		else {
-			moveSectionContentEffectTitle.innerText = "";
-		}
+	
 
 
-		if (finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine] != undefined) {
-			moveSectionContentMachineText.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" is <b type='invert' name='item' value='"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"' onclick='dataRedirect()' function='dataRedirect'>"+finaldataMoveMachine[i]["Machine_"+JSONPath_MoveMachine]+"</b>."
-			moveSectionContentMachineText.style.removeProperty("display");
-		}
-		else {
-			moveSectionContentMachineText.innerText = "";
-			moveSectionContentMachineText.style.display = "none";
-		}
+
 
 		
 	
-		if(getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
-			if (getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"].includes("Route")) {
-				moveSectionContentTutorText.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor on <b type='invert' name='map' value='"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."
-			}
-			else {
-				moveSectionContentTutorText.innerHTML = finaldataMove[i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldataMove[i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."	
-			}
-			moveSectionContentTutorText.style.removeProperty("display");
-		}
-		else {
-			moveSectionContentTutorText.innerText = "";
-			moveSectionContentTutorText.style.display = "none";
-		}
+
 
 
 
