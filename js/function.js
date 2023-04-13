@@ -440,6 +440,18 @@ function getMoveData(move, type) {
 		arr = finaldataMoveRange;
 		game = "Range";
 	}
+	if(type == "Contact") {
+		arr = finaldataMoveOtherMoves;
+		game = "Contact";
+	}
+	if(type == "Sound") {
+		arr = finaldataMoveOtherMoves;
+		game = "Sound-Based";
+	}
+	if(type == "Group") {
+		arr = finaldataMoveGroup;
+		game = "Group";
+	}
 	for(var i = 0; i < arr.length; i++) {
 		if(arr[i]["Name"+"_"+JSONPath_MoveName] == move) {
 			return arr[i][game]
@@ -610,7 +622,6 @@ function dataStringToObj(data) {
 	var data
 	var tempArr;
 
-	console.log(data)
 	if (data != "") {
 		if (data.includes("|")) {
 			tempArr = data.split("|")
@@ -629,11 +640,8 @@ function dataStringToObj(data) {
 		
 		obj[val1] = val2;
 	}
-	console.log(obj)
+
 	return obj;
-	
-
-
 }
 
 function getPokémonName(int) {
