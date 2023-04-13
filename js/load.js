@@ -41,6 +41,7 @@ var finaldataItemsEffect = [];
 var finaldataItemsPrice = [];
 var finaldataItemsPriceExtra = [];
 var finaldataItemsDescription = [];
+var finaldataItemsDamage = [];
 var finaldataLocationPokémon = [];
 var finaldataLocationPokémonShops = [];
 var finaldataLocationItems = [];
@@ -58,6 +59,7 @@ var finaldataMoveMachine = [];
 var finaldataMoveEffect = [];
 var finaldataMoveRange = [];
 var finaldataMoveAdditional = [];
+var finaldataMoveGroup = [];
 var finaldataMoveOtherMoves = [];
 var finaldataMoveAccuracy = [];
 var finaldataMovePower = [];
@@ -212,6 +214,9 @@ function requestLoad(i,url) {
 						for(var q = 0; q < Metadata["Description"].length; q++) {
 							finaldataItemsDescription.push(Metadata["Description"][q]);
 						}
+						for(var q = 0; q < Metadata["Damage"].length; q++) {
+							finaldataItemsDamage.push(Metadata["Damage"][q]);
+						}
 					}
 					if (loads[i] == "Abilities" && Ability.length > 0) {
 		
@@ -246,6 +251,9 @@ function requestLoad(i,url) {
 						}
 						for(var q = 0; q < Metadata["Additional"].length; q++) {
 							finaldataMoveAdditional.push(Metadata["Additional"][q]);
+						}
+						for(var q = 0; q < Metadata["Group"].length; q++) {
+							finaldataMoveGroup.push(Metadata["Group"][q]);
 						}
 						for(var q = 0; q < Metadata["Other Moves"].length; q++) {
 							finaldataMoveOtherMoves.push(Metadata["Other Moves"][q]);
