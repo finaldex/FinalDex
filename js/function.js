@@ -403,62 +403,6 @@ function getRegionalID(seperator,id,dex) {
     return result
 }
 
-function getMoveData(move, type) {
-	var type;
-	var move;
-	var arr;
-	var game;
-	if(type == "PP Min") {
-		arr = finaldataMovePP;
-		game = "PP Min_"+JSONPath_MovePP;
-	}
-	if(type == "PP Max") {
-		arr = finaldataMovePP;
-		game = "PP Max_"+JSONPath_MovePP;
-	}
-	if(type == "Power") {
-		arr = finaldataMovePower;
-		game = "Power_"+JSONPath_MovePower;
-	}
-	if(type == "Accuracy") {
-		arr = finaldataMoveAccuracy;
-		game = "Accuracy_"+JSONPath_MoveAccuracy;
-	}
-	if(type == "Type") {
-		arr = finaldataMoveType;
-		game = "Type_"+JSONPath_MoveType;
-	}
-	if(type == "Category") {
-		arr = finaldataMoveCategory;
-		game = "Category_"+JSONPath_MoveCategory;
-	}
-    if(type == "Description") {
-		arr = finaldataMoveDescription;
-		game = "Description_"+JSONPath_MoveDescription;
-	}
-	if(type == "Range") {
-		arr = finaldataMoveRange;
-		game = "Range";
-	}
-	if(type == "Contact") {
-		arr = finaldataMoveOtherMoves;
-		game = "Contact";
-	}
-	if(type == "Sound") {
-		arr = finaldataMoveOtherMoves;
-		game = "Sound-Based";
-	}
-	if(type == "Group") {
-		arr = finaldataMoveGroup;
-		game = "Group";
-	}
-	for(var i = 0; i < arr.length; i++) {
-		if(arr[i]["Name"+"_"+JSONPath_MoveName] == move) {
-			return arr[i][game]
-		}
-	}
-	return undefined;
-}
 
 
 function getFullGameName(name) {
@@ -561,9 +505,11 @@ function returnSortedItemsList(i) {
 			for (var r = 0; r < req.length; r++) {
 				for (var q = 0; q < items.length; q++) {
 					if (getApplicable(items[q]["Game"])) {
-						if (items[q]["Item"] != undefined) {
-							if (items[q]["Item"] == req[r]) {
-								result.push(items[q]);
+						if (items[q]["Use"] == "true") {
+							if (items[q]["Item"] != undefined) {
+								if (items[q]["Item"] == req[r]) {
+									result.push(items[q]);
+								}
 							}
 						}
 					}
@@ -588,9 +534,11 @@ function returnSortedItemsList(i) {
 			for (var r = 0; r < notreq.length; r++) {
 				for (var q = 0; q < items.length; q++) {
 					if (getApplicable(items[q]["Game"])) {
-						if (items[q]["Item"] != undefined) {
-							if (items[q]["Item"] != notreq[r]) {
-								result.push(items[q]);
+						if (items[q]["Use"] == "true") {
+							if (items[q]["Item"] != undefined) {
+								if (items[q]["Item"] != notreq[r]) {
+									result.push(items[q]);
+								}
 							}
 						}
 					}
@@ -606,8 +554,10 @@ function returnSortedItemsList(i) {
 
 			for (var q = 0; q < items.length; q++) {
 				if (getApplicable(items[q]["Game"])) {
-					if (items[q]["Item"] != undefined) {
-						result.push(items[q]);
+					if (items[q]["Use"] == "true") {
+						if (items[q]["Item"] != undefined) {
+							result.push(items[q]);
+						}
 					}
 				}
 			}
@@ -850,16 +800,492 @@ function getLocationPokémon(location) {
 
 }
 
-function getDataArr(arr,subject,target) {
 
+function undDel(string,replacement) {
+	var string;
+	var replacement;
+	if (string == undefined) {
+		return replacement
+	}
+	else {
+		return string;
+	}
+}
+function undwsDel(string,replacement) {
+	var string;
+	var replacement;
+	if (string == undefined || string == "") {
+		return replacement
+	}
+	else {
+		return string;
+	}
+}
+
+
+function modStageCalc(type,mod) {
+	var type;
+	var mod;
+	if (type == "Accuracy") {
+		if (Generation == 1) {
+			if (mod == 6) {
+				return 400/100;
+			}
+			if (mod == 5) {
+				return 350/100;
+			}
+			if (mod == 4) {
+				return 300/100;
+			}
+			if (mod == 3) {
+				return 250/100;
+			}
+			if (mod == 2) {
+				return 200/100;
+			}
+			if (mod == 1) {
+				return 150/100;
+			}
+			if (mod == 0) {
+				return 100/100;
+			}
+			if (mod == -1) {
+				return 66/100
+			}
+			if (mod == -2) {
+				return 50/100
+			}
+			if (mod == -3) {
+				return 40/100;
+			}
+			if (mod == -4) {
+				return 33/100;
+			}
+			if (mod == -5) {
+				return 28/100;
+			}
+			if (mod == -6) {
+				return 25/100;
+			}
+		}
+		else if (Generation == 2) {
+			if (mod == 6) {
+				return 300/100;
+			}
+			if (mod == 5) {
+				return 266/100;
+			}
+			if (mod == 4) {
+				return 233/100;
+			}
+			if (mod == 3) {
+				return 200/100;
+			}
+			if (mod == 2) {
+				return 166/100;
+			}
+			if (mod == 1) {
+				return 133/100;
+			}
+			if (mod == 0) {
+				return 100/100;
+			}
+			if (mod == -1) {
+				return 75/100
+			}
+			if (mod == -2) {
+				return 60/100
+			}
+			if (mod == -3) {
+				return 50/100;
+			}
+			if (mod == -4) {
+				return 43/100;
+			}
+			if (mod == -5) {
+				return 36/100;
+			}
+			if (mod == -6) {
+				return 33/100;
+			}
+		}
+		else if (Generation == 3 || Generation == 4) {
+			if (mod == 6) {
+				return 300/100;
+			}
+			if (mod == 5) {
+				return 266/100;
+			}
+			if (mod == 4) {
+				return 250/100;
+			}
+			if (mod == 3) {
+				return 200/100;
+			}
+			if (mod == 2) {
+				return 166/100;
+			}
+			if (mod == 1) {
+				return 133/100;
+			}
+			if (mod == 0) {
+				return 100/100;
+			}
+			if (mod == -1) {
+				return 75/100
+			}
+			if (mod == -2) {
+				return 60/100
+			}
+			if (mod == -3) {
+				return 50/100;
+			}
+			if (mod == -4) {
+				return 43/100;
+			}
+			if (mod == -5) {
+				return 36/100;
+			}
+			if (mod == -6) {
+				return 33/100;
+			}
+		}
+		else if (Generation >= 5) {
+			if (mod == 6) {
+				return 9/3;
+			}
+			if (mod == 5) {
+				return 8/3;
+			}
+			if (mod == 4) {
+				return 7/3;
+			}
+			if (mod == 3) {
+				return 6/3;
+			}
+			if (mod == 2) {
+				return 5/3;
+			}
+			if (mod == 1) {
+				return 4/3;
+			}
+			if (mod == 0) {
+				return 3/3;
+			}
+			if (mod == -1) {
+				return 3/4
+			}
+			if (mod == -2) {
+				return 3/5
+			}
+			if (mod == -3) {
+				return 3/6;
+			}
+			if (mod == -4) {
+				return 3/7;
+			}
+			if (mod == -5) {
+				return 3/8;
+			}
+			if (mod == -6) {
+				return 3/9;
+			}
+		}
+	}
+	if (type == "Evasion") {
+		if (Generation == 1) {
+			if (mod == -6) {
+				return 400/100;
+			}
+			if (mod == -5) {
+				return 350/100;
+			}
+			if (mod == -4) {
+				return 300/100;
+			}
+			if (mod == -3) {
+				return 250/100;
+			}
+			if (mod == -2) {
+				return 200/100;
+			}
+			if (mod == -1) {
+				return 150/100;
+			}
+			if (mod == 0) {
+				return 100/100;
+			}
+			if (mod == 1) {
+				return 66/100
+			}
+			if (mod == 2) {
+				return 50/100
+			}
+			if (mod == 3) {
+				return 40/100;
+			}
+			if (mod == 4) {
+				return 33/100;
+			}
+			if (mod == 5) {
+				return 28/100;
+			}
+			if (mod == 6) {
+				return 25/100;
+			}
+		}
+		else if (Generation == 2) {
+			if (mod == -6) {
+				return 300/100;
+			}
+			if (mod == -5) {
+				return 266/100;
+			}
+			if (mod == -4) {
+				return 233/100;
+			}
+			if (mod == -3) {
+				return 200/100;
+			}
+			if (mod == -2) {
+				return 166/100;
+			}
+			if (mod == -1) {
+				return 133/100;
+			}
+			if (mod == 0) {
+				return 100/100;
+			}
+			if (mod == 1) {
+				return 75/100
+			}
+			if (mod == 2) {
+				return 60/100
+			}
+			if (mod == 3) {
+				return 50/100;
+			}
+			if (mod == 4) {
+				return 43/100;
+			}
+			if (mod == 5) {
+				return 36/100;
+			}
+			if (mod == 6) {
+				return 33/100;
+			}
+		}
+		else if (Generation == 3 || Generation == 4) {
+			if (mod == -6) {
+				return 300/100;
+			}
+			if (mod == -5) {
+				return 266/100;
+			}
+			if (mod == -4) {
+				return 250/100;
+			}
+			if (mod == -3) {
+				return 200/100;
+			}
+			if (mod == -2) {
+				return 166/100;
+			}
+			if (mod == -1) {
+				return 133/100;
+			}
+			if (mod == 0) {
+				return 100/100;
+			}
+			if (mod == 1) {
+				return 75/100
+			}
+			if (mod == 2) {
+				return 60/100
+			}
+			if (mod == 3) {
+				return 50/100;
+			}
+			if (mod == 4) {
+				return 43/100;
+			}
+			if (mod == 5) {
+				return 36/100;
+			}
+			if (mod == 6) {
+				return 33/100;
+			}
+		}
+		else if (Generation >= 5) {
+			if (mod == -6) {
+				return 9/3;
+			}
+			if (mod == -5) {
+				return 8/3;
+			}
+			if (mod == -4) {
+				return 7/3;
+			}
+			if (mod == -3) {
+				return 6/3;
+			}
+			if (mod == -2) {
+				return 5/3;
+			}
+			if (mod == -1) {
+				return 4/3;
+			}
+			if (mod == 0) {
+				return 3/3;
+			}
+			if (mod == 1) {
+				return 3/4
+			}
+			if (mod == 2) {
+				return 3/5
+			}
+			if (mod == 3) {
+				return 3/6;
+			}
+			if (mod == 4) {
+				return 3/7;
+			}
+			if (mod == 5) {
+				return 3/8;
+			}
+			if (mod == 6) {
+				return 3/9;
+			}
+		}
+	}
+	else {
+		if (Generation == 1 || Generation == 2) {
+			if (mod == 6) {
+				return 400/100;
+			}
+			if (mod == 5) {
+				return 350/100;
+			}
+			if (mod == 4) {
+				return 300/100;
+			}
+			if (mod == 3) {
+				return 250/100;
+			}
+			if (mod == 2) {
+				return 200/100;
+			}
+			if (mod == 1) {
+				return 150/100;
+			}
+			if (mod == 0) {
+				return 100/100;
+			}
+			if (mod == -1) {
+				return 66/100;
+			}
+			if (mod == -2) {
+				return 50/100;
+			}
+			if (mod == -3) {
+				return 40/100;
+			}
+			if (mod == -4) {
+				return 33/100;
+			}
+			if (mod == -5) {
+				return 28/100;
+			}
+			if (mod == -6) {
+				return 25/100;
+			}
+		}
+		else if (Generation >= 3) {
+			if (mod == 6) {
+				return 8/2;
+			}
+			if (mod == 5) {
+				return 7/2;
+			}
+			if (mod == 4) {
+				return 6/2;
+			}
+			if (mod == 3) {
+				return 5/2;
+			}
+			if (mod == 2) {
+				return 4/2;
+			}
+			if (mod == 1) {
+				return 3/2;
+			}
+			if (mod == 0) {
+				return 2/2;
+			}
+			if (mod == -1) {
+				return 2/3;
+			}
+			if (mod == -2) {
+				return 2/4;
+			}
+			if (mod == -3) {
+				return 2/5;
+			}
+			if (mod == -4) {
+				return 2/6;
+			}
+			if (mod == -5) {
+				return 2/7;
+			}
+			if (mod == -6) {
+				return 2/8;
+			}
+		}
+	}
+	
+	return undefined;
+}
+
+function returnArrValue(arr,valColumn,tarColumn,val) {
 	var arr;
-	var subject;
+	var valColumn;
+	var tarColumn;
+	var val;
+
+    for (var q = 0; q < arr.length; q++) {
+		if(arr[q][valColumn] == val) {
+			return arr[q][tarColumn];
+		}
+	}
+
+	return undefined;
+}
+
+
+function returnArrData(arr,column,target) {
+	var arr;
+	var column;
 	var target;
 	var result = [];
 
     for (var q = 0; q < arr.length; q++) {
-		if (getApplicable(arr[q]["Game"]) == true) {
-			if(arr[q][subject] == target) {
+		if(arr[q][column] == target) {
+			result.push(arr[q]);
+		}
+	}
+
+	return result;
+}
+
+function returnAppArrData(arr,column,target) {
+	var arr;
+	var column;
+	var target;
+	var result = [];
+
+    for (var q = 0; q < arr.length; q++) {
+		if (getApplicable(arr[q]["Game"])) {
+			if(arr[q][column] == target) {
 				result.push(arr[q]);
 			}
 		}
@@ -867,6 +1293,7 @@ function getDataArr(arr,subject,target) {
 
 	return result;
 }
+
 
 
 
@@ -1746,7 +2173,7 @@ function referenceLink(text) {
 		var i3 = " "+move+",";
 		var i4 = '"'+move+'"';
 
-		var type = getMoveData(move,'Type');
+		var type = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,move);
 
 		var first = "<b type='invert' onclick='dataRedirect()' name='move' style='color:var(--type"+type+");font-weight:bold;text-shadow:1px 1px #000;'>";
 		var last = "</b>";
