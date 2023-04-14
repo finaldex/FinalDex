@@ -178,11 +178,11 @@ var createAbility = function() {
 		}
 	
 		abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldataAbility[i]["Ability"]+"</u>";
-		abilitySectionHeaderTitleID.innerText = "#"+getDataArr(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["ID"];
+		abilitySectionHeaderTitleID.innerText = "#"+returnAppArrData(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["ID"];
 
-		abilitySectionHeaderDebutText.innerText = "Introduced in "+getDataArr(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["Debut"];
+		abilitySectionHeaderDebutText.innerText = "Introduced in "+returnAppArrData(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["Debut"];
 		abilitySectionHeaderTitleName.innerText = finaldataAbility[i]["Ability"];
-		abilitySectionContentDescriptionText.innerText = getDataArr(finaldataAbilityDescription,"Ability",finaldataAbility[i]["Ability"])[0]["Description"];
+		abilitySectionContentDescriptionText.innerText = returnAppArrData(finaldataAbilityDescription,"Ability",finaldataAbility[i]["Ability"])[0]["Description"];
 
 		var effect = [];
 
@@ -218,7 +218,7 @@ var createAbility = function() {
 			if(getApplicable(finaldataAbilityAffect[q]["Game"])) {
 				if(finaldataAbilityAffect[q]["Ability"] == finaldataAbility[i]["Ability"]) {
 					if (finaldataAbilityAffect[q]["Type"] == "Move") {
-						var move = getMoveData(finaldataAbilityAffect[q]["Name"], "Description");
+						var move = returnArrValue(finaldataMoveDescription,"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,finaldataAbilityAffect[q]["Name"]);
 						if (move != undefined) {
 							affect.push(finaldataAbilityAffect[q]);
 						}
@@ -243,7 +243,7 @@ var createAbility = function() {
 			b.setAttribute("type", "invert");
 			b.setAttribute("onclick", "dataRedirect()");
 			b.setAttribute("function","dataRedirect");
-			b.style.color = "var(--type"+getMoveData(affect[q]["Name"],"Type")+")";
+			b.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,affect[q]["Name"])+")";
 			b.style.textShadow  = "1px 1px #000";
 			
 			if (q == affect.length - 2) {
