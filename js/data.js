@@ -1781,71 +1781,76 @@ function loadData() {
 
             }
             if(y == 2) {
+				var typ = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,learnsetArr[u]["Move"]);
+				typ = undDel(typ,"-");
+
 				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
 				var dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
                 dataSectionMainLearnsetLiText.title = "Type";
-                if(getMoveData(learnsetArr[u]["Move"],"Type") == undefined) {
-                    dataSectionMainLearnsetLiText.innerHTML = "–";
-                } else {
-                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Type");
-                }
+				dataSectionMainLearnsetLiText.innerText = typ;
+                
                 dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
             }
             if(y == 3) {
+				var cate = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,learnsetArr[u]["Move"])
+				cate = undDel(cate,"-");
+
 				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
 				var dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
                 dataSectionMainLearnsetLiText.title = "Category";
-                if(getMoveData(learnsetArr[u]["Move"],"Category") == undefined) {
-                    dataSectionMainLearnsetLiText.innerHTML = "–";
-                } else {
-                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Category");
-                }
+				dataSectionMainLearnsetLiText.innerText = cate;
+                
                 dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
             }
             if(y == 4) {
+				var pwr = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,learnsetArr[u]["Move"]);
+				pwr = undDel(pwr,"-");
+
 				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
 				var dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
                 dataSectionMainLearnsetLiText.title = "Power";
-                if(getMoveData(learnsetArr[u]["Move"],"Power") == undefined) {
-                    dataSectionMainLearnsetLiText.innerHTML = "–";
-                } else {
-                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Power");
-                }
+				dataSectionMainLearnsetLiText.innerText = pwr;
+                
             }
             if(y == 5) {
+				var acc = returnArrValue(finaldataMoveAccuracy,"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,learnsetArr[u]["Move"]);
+				acc = undDel(acc,"-");
+
 				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
 				var dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
                 dataSectionMainLearnsetLiText.title = "Accuracy";
-                if(getMoveData(learnsetArr[u]["Move"],"Accuracy") == undefined) {
-                    dataSectionMainLearnsetLiText.innerHTML = "–";
-                } else {
-                    dataSectionMainLearnsetLiText.innerText = getMoveData(learnsetArr[u]["Move"],"Accuracy");
-                }
+				dataSectionMainLearnsetLiText.innerText = acc;
+                
             }
             if(y == 6) {
+				var ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,XXXX)
+				var ppmax = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Max_"+JSONPath_MovePP,XXXX)
+
 				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
 				var dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
                 dataSectionMainLearnsetLiText.title = "PP";
-                if(getMoveData(learnsetArr[u]["Move"],"PP Min") == undefined) {
-                    dataSectionMainLearnsetLiText.innerHTML = "–";
-                } else {
-                    dataSectionMainLearnsetLiText.innerHTML = getMoveData(learnsetArr[u]["Move"],"PP Min")+" <span>(max. "+getMoveData(learnsetArr[u]["Move"],"PP Max")+")</span>";
-                }
+				if (ppmin == undefined || ppmax == undefined) {
+					dataSectionMainLearnsetLiText.innerHTML = "-";
+				}
+				else {
+					dataSectionMainLearnsetLiText.innerHTML = ppmin+" <span>(max. "+ppmax+")</span>";
+				}
+                
             }
 
         }
@@ -2114,8 +2119,8 @@ function callPopUp(type) {
 	
 	
 	if(type == "Ability") {
-		id = getDataArr(finaldataAbility,"Ability",title)[0]["ID"];
-		description = getDataArr(finaldataAbilityDescription,"Ability",title)[0]["Description"];
+		id = returnAppArrData(finaldataAbility,"Ability",title)[0]["ID"];
+		description = returnAppArrData(finaldataAbilityDescription,"Ability",title)[0]["Description"];
 	} else if(type == "Held Item") {
 		id = enhancetarget.getAttribute("name");
         description = getItemData(title,"Description").join("\n");
