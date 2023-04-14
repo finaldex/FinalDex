@@ -888,66 +888,76 @@ var createTool = function() {
 		var toolSectionContentDMGResult = document.createElement("div");
 		var toolSectionContentDMGMenu = document.createElement("div");
 		
-		var toolSectionContentDMGMenuLeft = document.createElement("div");
-		var toolSectionContentDMGMenuRight = document.createElement("div");
+		var toolSectionContentDMGMenuRoll = document.createElement("div");
+		var toolSectionContentDMGMenuMove = document.createElement("div");
+		var toolSectionContentDMGMenuSpecific = document.createElement("div");
 
-		var toolSectionContentDMGMenuRightTop = document.createElement("span");
-		var toolSectionContentDMGMenuRightBottom = document.createElement("span");
+		var toolSectionContentDMGMenuSpecificTop = document.createElement("span");
+		var toolSectionContentDMGMenuSpecificBottom = document.createElement("span");
 
-		var toolSectionContentDMGMenuRightTopSelect = document.createElement("select");
-		var toolSectionContentDMGMenuRightTopInput = document.createElement("input");
+		var toolSectionContentDMGMenuMoveTop = document.createElement("span");
+		var toolSectionContentDMGMenuMoveBottom = document.createElement("span");
+
+		var toolSectionContentDMGMenuMoveTopSelect = document.createElement("select");
+		var toolSectionContentDMGMenuSpecificTopInput = document.createElement("input");
 	
 
-		var toolSectionContentDMGMenuRightBottomLeft = document.createElement("span");
-		var toolSectionContentDMGMenuRightBottomLeftTitle = document.createElement("h6");
-		var toolSectionContentDMGMenuRightBottomLeftText = document.createElement("small");
-		var toolSectionContentDMGMenuRightBottomRight = document.createElement("span");
-		var toolSectionContentDMGMenuRightBottomRightTitle = document.createElement("h6");
-		var toolSectionContentDMGMenuRightBottomRightText = document.createElement("small");
+		var toolSectionContentDMGMenuMoveBottomDamage = document.createElement("span");
+		var toolSectionContentDMGMenuMoveBottomDamageTitle = document.createElement("h6");
+		var toolSectionContentDMGMenuMoveBottomDamageText = document.createElement("small");
+		var toolSectionContentDMGMenuMoveBottomAccuracy = document.createElement("span");
+		var toolSectionContentDMGMenuMoveBottomAccuracyTitle = document.createElement("h6");
+		var toolSectionContentDMGMenuMoveBottomAccuracyText = document.createElement("small");
 
-		var toolSectionContentDMGMenuLeftCrit = document.createElement("span");
-		var toolSectionContentDMGMenuLeftCritInput = document.createElement("input");
-		var toolSectionContentDMGMenuLeftCritLabel = document.createElement("label");
-		var toolSectionContentDMGMenuLeftCritText = document.createElement("h6");
+		var toolSectionContentDMGMenuRollCrit = document.createElement("span");
+		var toolSectionContentDMGMenuRollCritInput = document.createElement("input");
+		var toolSectionContentDMGMenuRollCritLabel = document.createElement("label");
+		var toolSectionContentDMGMenuRollCritText = document.createElement("h6");
 
-		var toolSectionContentDMGMenuLeftRoll = document.createElement("span");
-		var toolSectionContentDMGMenuLeftRangeTextTopLeft = document.createElement("h6");
-		var toolSectionContentDMGMenuLeftRangeTextTopRight = document.createElement("h6");
-		var toolSectionContentDMGMenuLeftRangeTextBottomLeft = document.createElement("small");
-		var toolSectionContentDMGMenuLeftRangeTextBottomRight = document.createElement("small");
-		var toolSectionContentDMGMenuLeftRange = document.createElement("input");
-
-
-		toolSectionContentDMGMenuRightTopInput.setAttribute("type","number");
-		toolSectionContentDMGMenuRightTopInput.setAttribute("min","1");
-		toolSectionContentDMGMenuRightTopInput.setAttribute("value","1");
-		toolSectionContentDMGMenuRightTopInput.setAttribute("max","1");
-		toolSectionContentDMGMenuRightTopInput.setAttribute("title","Amount of Hits");
-
-		toolSectionContentDMGMenuRightBottomLeftTitle.innerText = "Power";
-		toolSectionContentDMGMenuRightBottomLeftText.innerText = "-";
-		toolSectionContentDMGMenuRightBottomRightTitle.innerText = "Accuracy";
-		toolSectionContentDMGMenuRightBottomRightText.innerText = "-";
-		toolSectionContentDMGMenuRightBottomLeftText.setAttribute("name","power");
-		toolSectionContentDMGMenuRightBottomRightText.setAttribute("name","accuracy");
-
-		toolSectionContentDMGMenuLeftCritText.innerText = "Critical";
-
-		toolSectionContentDMGMenuLeftCrit.setAttribute("name","critical");
-		toolSectionContentDMGMenuLeftCritInput.setAttribute("type","checkbox");
-		toolSectionContentDMGMenuLeftCritInput.setAttribute("name","critical-checkbox");
-		toolSectionContentDMGMenuLeftCritInput.setAttribute("id","critical-checkbox");
-		toolSectionContentDMGMenuLeftCritLabel.setAttribute("for","critical-checkbox");
-
-		toolSectionContentDMGMenuLeftRangeTextTopLeft.innerText = "Low Roll";
-		toolSectionContentDMGMenuLeftRangeTextTopRight.innerText = "High Roll";
-		toolSectionContentDMGMenuLeftRangeTextBottomLeft.setAttribute("name","min");
-		toolSectionContentDMGMenuLeftRangeTextBottomRight.setAttribute("name","max");
+		var toolSectionContentDMGMenuRollRoll = document.createElement("span");
+		var toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("h6");
+		var toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("h6");
+		var toolSectionContentDMGMenuRollRangeTextBottomLeft = document.createElement("small");
+		var toolSectionContentDMGMenuRollRangeTextBottomRight = document.createElement("small");
+		var toolSectionContentDMGMenuRollRange = document.createElement("input");
 
 
-		toolSectionContentDMGMenuLeftRange.setAttribute("type","range");
-		toolSectionContentDMGMenuLeftRange.setAttribute("name","dmg-roll-range")
-		toolSectionContentDMGMenuLeftRange.setAttribute("id","dmg-roll-range")
+		toolSectionContentDMGMenuSpecificTopInput.setAttribute("type","number");
+		toolSectionContentDMGMenuSpecificTopInput.setAttribute("min","1");
+		toolSectionContentDMGMenuSpecificTopInput.setAttribute("value","1");
+		toolSectionContentDMGMenuSpecificTopInput.setAttribute("max","1");
+		toolSectionContentDMGMenuSpecificTopInput.setAttribute("title","Amount of Hits");
+
+		toolSectionContentDMGMenuMoveBottomDamage.setAttribute("name","damage");
+		toolSectionContentDMGMenuMoveBottomDamageTitle.innerText = "Damage";
+		toolSectionContentDMGMenuMoveBottomDamageText.innerText = "";
+
+		toolSectionContentDMGMenuMoveBottomAccuracy.setAttribute("name","accuracy");
+		toolSectionContentDMGMenuMoveBottomAccuracyTitle.innerText = "Accuracy";
+		toolSectionContentDMGMenuMoveBottomAccuracyText.innerText = "";
+
+		toolSectionContentDMGMenuRoll.setAttribute("name","roll");
+		toolSectionContentDMGMenuMove.setAttribute("name","move");
+		toolSectionContentDMGMenuSpecific.setAttribute("name","spec");
+
+
+		toolSectionContentDMGMenuRollCritText.innerText = "Critical";
+
+		toolSectionContentDMGMenuRollCrit.setAttribute("name","critical");
+		toolSectionContentDMGMenuRollCritInput.setAttribute("type","checkbox");
+		toolSectionContentDMGMenuRollCritInput.setAttribute("name","critical-checkbox");
+		toolSectionContentDMGMenuRollCritInput.setAttribute("id","critical-checkbox");
+		toolSectionContentDMGMenuRollCritLabel.setAttribute("for","critical-checkbox");
+
+		toolSectionContentDMGMenuRollRangeTextTopLeft.innerText = "Low Roll";
+		toolSectionContentDMGMenuRollRangeTextTopRight.innerText = "High Roll";
+		toolSectionContentDMGMenuRollRangeTextBottomLeft.setAttribute("name","min");
+		toolSectionContentDMGMenuRollRangeTextBottomRight.setAttribute("name","max");
+
+
+		toolSectionContentDMGMenuRollRange.setAttribute("type","range");
+		toolSectionContentDMGMenuRollRange.setAttribute("name","dmg-roll-range")
+		toolSectionContentDMGMenuRollRange.setAttribute("id","dmg-roll-range")
 	
 
 		toolSectionContentDMGOptionsContentTop.setAttribute("name","pokémon");
@@ -985,37 +995,41 @@ var createTool = function() {
 		
 		
 		toolSectionContentDMGOptions.appendChild(toolSectionContentDMGOptionsBottom);
-		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuLeft)
-		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuRight)
+		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuRoll)
+		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuMove)
 
-		toolSectionContentDMGMenuRight.appendChild(toolSectionContentDMGMenuRightTop);
-		toolSectionContentDMGMenuRight.appendChild(toolSectionContentDMGMenuRightBottom);
-		toolSectionContentDMGMenuRightTop.appendChild(toolSectionContentDMGMenuRightTopSelect);
-		toolSectionContentDMGMenuRightTop.appendChild(toolSectionContentDMGMenuRightTopInput);
+		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuSpecific)
+		toolSectionContentDMGMenuSpecific.appendChild(toolSectionContentDMGMenuSpecificTop)
+		toolSectionContentDMGMenuSpecific.appendChild(toolSectionContentDMGMenuSpecificBottom)
+
+		toolSectionContentDMGMenuSpecificTop.appendChild(toolSectionContentDMGMenuSpecificTopInput)
+
+		toolSectionContentDMGMenuMove.appendChild(toolSectionContentDMGMenuMoveTop);
+		toolSectionContentDMGMenuMove.appendChild(toolSectionContentDMGMenuMoveBottom);
+		toolSectionContentDMGMenuMoveTop.appendChild(toolSectionContentDMGMenuMoveTopSelect);
 
 
-		toolSectionContentDMGMenuRightBottom.appendChild(toolSectionContentDMGMenuRightBottomLeft);
-		toolSectionContentDMGMenuRightBottomLeft.appendChild(toolSectionContentDMGMenuRightBottomLeftTitle);
-		toolSectionContentDMGMenuRightBottomLeft.appendChild(toolSectionContentDMGMenuRightBottomLeftText);
-		toolSectionContentDMGMenuRightBottom.appendChild(toolSectionContentDMGMenuRightBottomRight);
-		toolSectionContentDMGMenuRightBottomRight.appendChild(toolSectionContentDMGMenuRightBottomRightTitle);
-		toolSectionContentDMGMenuRightBottomRight.appendChild(toolSectionContentDMGMenuRightBottomRightText);
-		
-		toolSectionContentDMGMenuLeft.appendChild(toolSectionContentDMGMenuLeftRoll)
-		toolSectionContentDMGMenuLeftRoll.appendChild(toolSectionContentDMGMenuLeftRangeTextTopLeft)
-		toolSectionContentDMGMenuLeftRoll.appendChild(toolSectionContentDMGMenuLeftRangeTextTopRight)
-		toolSectionContentDMGMenuLeftRoll.appendChild(toolSectionContentDMGMenuLeftRange)
-		toolSectionContentDMGMenuLeftRoll.appendChild(toolSectionContentDMGMenuLeftRangeTextBottomLeft)
-		toolSectionContentDMGMenuLeftRoll.appendChild(toolSectionContentDMGMenuLeftRangeTextBottomRight)
+		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomDamage);
+		toolSectionContentDMGMenuMoveBottomDamage.appendChild(toolSectionContentDMGMenuMoveBottomDamageTitle);
+		toolSectionContentDMGMenuMoveBottomDamage.appendChild(toolSectionContentDMGMenuMoveBottomDamageText);
+		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomAccuracy);
+		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyTitle);
+		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyText);
 
-		toolSectionContentDMGMenuLeft.appendChild(toolSectionContentDMGMenuLeftCrit);
-		toolSectionContentDMGMenuLeftCrit.appendChild(toolSectionContentDMGMenuLeftCritInput);
-		toolSectionContentDMGMenuLeftCrit.appendChild(toolSectionContentDMGMenuLeftCritLabel);
-		toolSectionContentDMGMenuLeftCritLabel.appendChild(toolSectionContentDMGMenuLeftCritText);
+		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollRoll)
+		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextTopLeft)
+		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextTopRight)
+		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRange)
+		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextBottomLeft)
+		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextBottomRight)
 
-		toolSectionContentDMGMenuLeftCritInput.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollCrit);
+		toolSectionContentDMGMenuRollCrit.appendChild(toolSectionContentDMGMenuRollCritInput);
+		toolSectionContentDMGMenuRollCrit.appendChild(toolSectionContentDMGMenuRollCritLabel);
+		toolSectionContentDMGMenuRollCritLabel.appendChild(toolSectionContentDMGMenuRollCritText);
 
-		toolSectionContentDMGMenuLeftRange.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuRollCritInput.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuRollRange.addEventListener("change",DMGCalcStart);
 
 		var tempMoves = [];
 
@@ -1028,47 +1042,34 @@ var createTool = function() {
 		tempMoves.sort();
 
 		for(var m = 0; m < tempMoves.length; m++) {
-			var toolSectionContentDMGMenuRightTopOption = document.createElement("option");
-			toolSectionContentDMGMenuRightTopOption.setAttribute("value",tempMoves[m]);
-			toolSectionContentDMGMenuRightTopOption.innerText = tempMoves[m];
-			toolSectionContentDMGMenuRightTopSelect.appendChild(toolSectionContentDMGMenuRightTopOption);
+			var toolSectionContentDMGMenuMoveTopOption = document.createElement("option");
+			toolSectionContentDMGMenuMoveTopOption.setAttribute("value",tempMoves[m]);
+			toolSectionContentDMGMenuMoveTopOption.innerText = tempMoves[m];
+			toolSectionContentDMGMenuMoveTopSelect.appendChild(toolSectionContentDMGMenuMoveTopOption);
 
-			toolSectionContentDMGMenuRightTopOption.style.background = "var(--type"+getMoveData(tempMoves[m],"Type")+")";
+			toolSectionContentDMGMenuMoveTopOption.style.background = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempMoves[m])+")";
 		}
 	
 
 
 
-		
-
-		var accvalue = getMoveData(toolSectionContentDMGMenuRightTopSelect.value,"Accuracy");
-		var pwrvalue = getMoveData(toolSectionContentDMGMenuRightTopSelect.value,"Power");
 
 
-		if (accvalue != undefined) {
-			toolSectionContentDMGMenuRightBottomRightText.innerText = accvalue;
-		}
-		else {
-			toolSectionContentDMGMenuRightBottomRightText.innerText = "-";
-		}
-		
-		if (pwrvalue != undefined) {
-			toolSectionContentDMGMenuRightBottomLeftText.innerText = pwrvalue;
-		}
-		else {
-			toolSectionContentDMGMenuRightBottomLeftText.innerText = "-";
-		}
-
-
-		toolSectionContentDMGMenuRightTopInput.addEventListener("change",DMGCalcStart);
-		toolSectionContentDMGMenuRightTopSelect.addEventListener("change",DMGSetInfo);
-		toolSectionContentDMGMenuRightTopSelect.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuSpecificTopInput.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",DMGSetInfo);
+		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",DMGCalcStart);
 
 
 		//var conditions = [{Name:"Reflect",Affect:"Team"},{Name:"Light Screen",Affect:"Team"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain"}]
 		//var conditions = [{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"1 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"2 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"3 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"All"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}];
 		//var conditions = [{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
-		var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
+		//var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
+		//var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Title:"Hive Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Title:"Fog Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Title:"Storm Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Title:"Rising Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Title:"Cascade Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Title:"Rainbow Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Title:"Marsh Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Title:"Earth Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Team",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Title:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Title:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
+		//var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Title:"Hive Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Title:"Fog Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Title:"Storm Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Title:"Rising Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Title:"Cascade Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Title:"Rainbow Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Title:"Marsh Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Title:"Earth Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Group:"Screen",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Group:"Screen",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Team",Group:"Screen",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Charge",Title:"Charge",Affect:"Move",Info:"Is the move powered up by Charge?",Type:"Move",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Me First",Title:"Me First",Affect:"Move",Info:"Is the move called by Me First?",Type:"Move",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Protect",Title:"Protect",Affect:"Move",Info:"Is the move being used into Protection?",Type:"Move",Game:"All"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Title:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Title:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
+		//var conditions = [{Name:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Affect:"Team",Affected:"Stealth Rock",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Affect:"Team",Affected:"Spikes",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Affect:"Team",Affected:"Light Screen",Group:"Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Affected:"Reflect",Group:"Screen",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Affected:"Aurora Veil",Group:"Screen",Type:"Move",Game:"All"},{Name:"Leech Seed",Affect:"Pokémon",Affected:"Leech Seed",Type:"Move",Game:"All"},{Name:"Foresight",Affect:"Pokémon",Affected:"Foresight",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Pokémon",Affected:"Helping Hand",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Flower Gift",Affect:"Team",Affected:"Flower Gift",Type:"Ability",Game:"All"},{Name:"Friend Guard",Affect:"Team",Affected:"Friend Guard",Type:"Ability",Game:"All"},{Name:"Battery",Affect:"Team",Affected:"Battery",Type:"Ability",Game:"All"},{Name:"Power Spot",Affect:"Team",Affected:"Power Spot",Type:"Ability",Game:"All"},{Name:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Affected:"G-Max Steelsurge",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Affect:"Team",Affected:"G-Max Stonesurge",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Protection",Affect:"Move",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Info:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Move",Affected:"Fly,Bounce",Info:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Move",Affected:"Dig",Info:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Move",Affected:"Dive,Surf,Whirlpool",Info:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Move",Affected:"Pursuit",Info:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Minimize",Affect:"Move",Affected:"Minimize,Body Slam,Stomp,Astonish,Extrasensory,Needle Arm,Dragon Rush,Shadow Force,Steamroller,Heat Crash,Heavy Slam,Phantom Force,Flying Press,Malicious Moonsault,Double Iron Bash",Info:"Did the target previously use Minimize?",Type:"Move",Game:"All"},{Name:"Charge",Affect:"Move",Affected:"Charge",Info:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Move",Affected:"Me First",Info:"Is the move called by Me First?",Type:"Move",Game:"All"}]
+		var conditions = [{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Info:"Turns of Bad Poison",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Leech Seed",Affect:"Pokémon",Group:"Seed",Affected:"Leech Seed",Type:"Move",Game:"All"},{Name:"Sappy Seed",Affect:"Pokémon",Group:"Seed",Affected:"Sappy Seed",Type:"Move",Game:"All"},{Name:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Affected:"Stealth Rock",Type:"Move",Game:"All"},{Name:"Spikes",Affect:"Team",Group:"Spikes",Affected:"Spikes",Info:"Layers of Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Affect:"Team",Group:"Screen",Affected:"Light Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Group:"Screen",Affected:"Reflect",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Group:"Screen",Affected:"Aurora Veil",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Flower Gift",Affect:"Team",Affected:"Flower Gift",Type:"Ability",Game:"All"},{Name:"Friend Guard",Affect:"Team",Affected:"Friend Guard",Type:"Ability",Game:"All"},{Name:"Battery",Affect:"Team",Affected:"Battery",Type:"Ability",Game:"All"},{Name:"Power Spot",Affect:"Team",Affected:"Power Spot",Type:"Ability",Game:"All"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Affected:"G-Max Steelsurge",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Affected:"G-Max Stonesurge",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Protection",Affect:"Specific",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Info:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Specific",Affected:"Fly,Bounce",Info:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Specific",Affected:"Dig",Info:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Specific",Affected:"Dive,Surf,Whirlpool",Info:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Specific",Affected:"Pursuit",Info:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Confusion",Affect:"Specific",Affected:"Tangled Feet",Info:"Is the target confused?",Type:"Ability",Game:"All"},{Name:"Minimize",Affect:"Specific",Affected:"Minimize,Body Slam,Stomp,Astonish,Extrasensory,Needle Arm,Dragon Rush,Shadow Force,Steamroller,Heat Crash,Heavy Slam,Phantom Force,Flying Press,Malicious Moonsault,Double Iron Bash",Info:"Did the target previously use Minimize?",Type:"Move",Game:"All"},{Name:"Charge",Affect:"Specific",Affected:"Charge",Info:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Specific",Affected:"Me First",Info:"Is the move called by Me First?",Type:"Move",Game:"All"},{Name:"Flash Fire",Affect:"Specific",Affected:"Flash Fire",Info:"Is Flash Fire active on the user?",Type:"Ability",Game:"All"},{Name:"Laser Focus",Affect:"Specific",Affected:"Laser Focus",Info:"Is Laser Focus active on the user?",Type:"Move",Game:"All"},{Name:"Glaive Rush",Affect:"Specific",Affected:"Glaive Rush",Info:"Did the target previously use Glaive Rush?",Type:"Move",Game:"All"},{Name:"Trick-or-Treat",Affect:"Specific",Affected:"Trick-or-Treat",Info:"Is Trick-or-Treat active on the target?",Type:"Move",Game:"All"},{Name:"Forest's Curse",Affect:"Specific",Affected:"Forest's Curse",Info:"Is Forest's Curse active on the target?",Type:"Move",Game:"All"},{Name:"Lucky Chant",Affect:"Specific",Affected:"Lucky Chant",Info:"Is Lucky Chant active on the target?",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Specific",Affected:"Helping Hand",Info:"Is Helping Hand active on the user?",Type:"Move",Game:"All"},{Name:"Shadow",Affect:"Specific",Info:"Is the user a Shadow Pokémon?",Type:"Form",Game:"Colosseum"}];
+
+
 
 		var battleVariation = [{Name:"Single Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"All"},{Name:"Double Battle",TeamMin:"2",TeamMax:"2",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Triple Battle",TeamMin:"3",TeamMax:"3",OpponentMin:"3",OpponentMax:"3",Teams:"2",Game:"Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Battle Royal",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"4",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"SOS Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"Horde Encounter",TeamMin:"1",TeamMax:"1",OpponentMin:"5",OpponentMax:"5",Teams:"2",Game:"X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Max Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Sword,Shield"},{Name:"Tera Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Scarlet,Violet"}]
 
@@ -1109,7 +1110,7 @@ var createTool = function() {
 			toolSectionContentDMGOptionsTitle.innerHTML = "";
 			toolSectionContentDMGOptionsBottom.innerHTML = "";
 			toolSectionContentDMGResult.innerHTML = "";
-
+			toolSectionContentDMGMenuSpecificBottom.innerHTML = "";
 
 			for(var q = 0; q < battleVar["Teams"]; q++) {
 				var teamName;
@@ -1139,29 +1140,18 @@ var createTool = function() {
 				toolSectionContentDMGOptionsContentBottomSide.setAttribute("name",teamName.toLowerCase())
 				toolSectionContentDMGOptionsContentBottom.appendChild(toolSectionContentDMGOptionsContentBottomSide)
 			
-	
-
-				
-					$(toolSectionContentDMGResult).sortable({
-						stop: function(e,ui) {
-							DMGMatchPosition();
-						},
-						axis: "x",
-            			scroll: false,
-					});
-				
-				
-
+				$(toolSectionContentDMGResult).sortable({
+					stop: function(e,ui) {
+						DMGMatchPosition();
+					},
+					axis: "x",
+					scroll: false,
+				});
+			
 				var toolSectionContentDMGOptionsContentTopContent = document.createElement("span");
 				toolSectionContentDMGOptionsContentTopContent.setAttribute("name",teamName.toLowerCase())
 				toolSectionContentDMGOptionsContentTop.appendChild(toolSectionContentDMGOptionsContentTopContent)
 		
-
-
-	
-
-
-
 				var teamCount = 0;
 				if (q == 0) {
 					teamCount = battleVar["TeamMax"];
@@ -1206,10 +1196,6 @@ var createTool = function() {
 					resultTeams.appendChild(resultTeam);
 					resultTeam.addEventListener("click",DMGSetActive);
 	
-
-					
-		
-		
 					var resultTeamInactive = document.createElement("span");
 					var resultTeamInactiveImport = document.createElement("b");
 					var resultTeamActive = document.createElement("span");
@@ -1233,9 +1219,6 @@ var createTool = function() {
 					var resultTeamActiveExport = document.createElement("figure");
 					var resultTeamActiveExportText = document.createElement("small");
 
-
-
-					
 					resultTeamInactiveImport.innerHTML = "<strong>+</strong>";
 					resultTeamActivePok.setAttribute("name","pok");
 					resultTeamActivePokHealth.setAttribute("name","hp");
@@ -1258,7 +1241,8 @@ var createTool = function() {
 		
 
 					resultTeamActivePokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-					//resultTeamActivePokItem.setAttribute("onerror","this.src = ''; this.title = '';");
+					resultTeamActivePokItem.setAttribute("onerror","this.style.display = 'none';");
+					resultTeamActivePokItem.setAttribute("onload","this.style.removeProperty('display');");
 					resultTeamActiveCloseText.innerText = "❌";
 					resultTeamActiveExportText.innerText = "➢";
 					resultTeamActiveBottom.setAttribute("name","moves");
@@ -1297,12 +1281,8 @@ var createTool = function() {
 						resultTeamActiveMove.setAttribute("type","invert");
 						resultTeamActiveBottom.appendChild(resultTeamActiveMove)
 						resultTeamActiveMove.appendChild(resultTeamActiveMoveText)
-						resultTeamActiveMove.addEventListener("click",function(){var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");if (this.firstChild.innerText != "") {tar.style.color = "var(--type"+getMoveData(this.firstChild.innerText,"Type")+")"; tar.value = this.firstChild.innerText; DMGSetInfo();DMGCalcStart();}})
+						resultTeamActiveMove.addEventListener("click",function(){var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span select");if (this.firstChild.innerText != "") {tar.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.firstChild.innerText)+")"; tar.value = this.firstChild.innerText; DMGSetInfo();DMGCalcStart();}})
 					}
-	
-		
-
-
  				}
 			}
 
@@ -1362,7 +1342,8 @@ var createTool = function() {
 				maxHPRange.setAttribute("type","range");
 				maxHPRange.setAttribute("name","range-maxhp");
 				maxHPRange.setAttribute("id","range-maxhp");
-				maxHPRange.setAttribute("min","1");
+				maxHPRange.setAttribute("min","0");
+				maxHPRange.value = 1;
 				maxHPRange.setAttribute("max","1");
 				maxHPRange.setAttribute("step","1");
 				maxHPRange.setAttribute("disabled","");
@@ -1436,6 +1417,11 @@ var createTool = function() {
 						abbr = "EV";
 						min = 0;
 						max = 255;
+						if (getApplicable("Lets Go Pikachu,Lets Go Eevee")) {
+							tit = "Awakening Value";
+							abbr = "AV";
+							max = 200;
+						}
 					}
 					if (e == 3) {
 						tit = "Modifier";
@@ -1522,8 +1508,18 @@ var createTool = function() {
 
 						statsWrapInput.addEventListener("change",function(){if (this.value == 0) {this.value = ""}});
 
-						if (e < 3) {
-							statsWrapInput.style.color = "var(--stat"+statsTemp[s]+")"
+						if (statsTemp[s] != "Evasion" && statsTemp[s] != "Accuracy") {
+							if (e < 3) {
+								statsWrapInput.style.color = "var(--stat"+statsTemp[s].replaceAll(".","").replaceAll(" ","")+")";
+							}
+						}
+
+						if (e == 2) {
+							if (Generation >= 3) {
+								if (!getApplicable("Lets Go Pikachu,Lets Go Eevee")) {
+									statsWrapInput.addEventListener("change",function(){inputMaxValue(this.parentElement.querySelectorAll(":scope input"),255,510)});
+								}
+							}
 						}
 					}
 				}
@@ -1545,7 +1541,7 @@ var createTool = function() {
 					moveSelect.setAttribute("name",m)
 					moveSelect.setAttribute("disabled","");
 					moveSelect.setAttribute("setDisable","");
-					moveSelect.addEventListener("change",function(){var x = getMoveData(this.value,"Type"); if (x == undefined) {this.style.removeProperty("color")} else {this.style.color = "var(--type"+x+")"}})
+					moveSelect.addEventListener("change",function(){var x = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value); if (x == undefined) {this.style.removeProperty("color")} else {this.style.color = "var(--type"+x+")"}})
 					moveSelect.addEventListener("change",DMGCalcPokStats);
 					moveSelect.addEventListener("change",DMGSaveData);
 					moveSelect.addEventListener("change",DMGCalcStart);
@@ -1562,7 +1558,7 @@ var createTool = function() {
 						moveOption.innerText = movesTemp[n];
 						moveSelect.appendChild(moveOption)
 						if (n != 0) {
-							moveOption.style.background = "var(--type"+getMoveData(movesTemp[n],"Type")+")";
+							moveOption.style.background = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movesTemp[n])+")";
 						}
 					}
 				}
@@ -1651,7 +1647,7 @@ var createTool = function() {
 					genderSelect.addEventListener("change",DMGSaveData);
 					genderSelect.addEventListener("change",DMGCalcStart);
 
-					genderSelect.addEventListener("change",function(){this.style.removeProperty("color"); if (this.value == "♂") {this.style.color == "blue";}else if (this.value == "♀") {this.style.color == "red";}});
+					genderSelect.addEventListener("change",function(){this.style.removeProperty("color"); if (this.value == "♂") {this.style.color = "blue";}else if (this.value == "♀") {this.style.color = "red";}});
 		
 			
 					var possibleGender = [];
@@ -1693,6 +1689,37 @@ var createTool = function() {
 					friendship.appendChild(friendshipInputWrap)
 					friendshipInputWrap.appendChild(friendshipInput)
 					
+				}
+
+				if (getApplicable("X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon")) {
+					var affection = document.createElement("li");
+					affection.setAttribute("name","affection");
+					base.appendChild(affection)
+
+					var affectionTitle = document.createElement("h6");
+					var affectionInputWrap = document.createElement("span");
+					var affectionInput = document.createElement("input");
+					affectionTitle.innerText = "Affection";
+
+					affectionInput.setAttribute("type","number");
+					affectionInput.setAttribute("min","0");
+					affectionInput.setAttribute("max","255");
+					affectionInput.setAttribute("placeholder","0");
+					affectionInput.setAttribute("onblur","this.placeholder='0'");
+					affectionInput.setAttribute("onfocus","this.placeholder=''");
+					affectionInput.value = 0;
+
+					affectionInput.setAttribute("disabled","");
+					affectionInput.setAttribute("setDisable","");
+
+					affectionInput.addEventListener("change",iMinMax);
+					affectionInput.addEventListener("change",DMGCalcPokStats);
+					affectionInput.addEventListener("change",DMGSaveData);
+					affectionInput.addEventListener("change",DMGCalcStart);
+
+					affection.appendChild(affectionTitle)
+					affection.appendChild(affectionInputWrap)
+					affectionInputWrap.appendChild(affectionInput)
 				}
 
 				if (Ability.length > 0) {
@@ -1783,14 +1810,20 @@ var createTool = function() {
 				for(var c = 0; c < conditions.length; c++) {
 					var check = getApplicable(conditions[c]["Game"]);
 					
-					if (conditions[c]["Type"] == "Move" || conditions[c]["Type"] == "Ability") {
-						var exist = document.querySelector("#contain > div#"+conditions[c]["Type"].toLowerCase()+" > section[name='list'] ol label[data-title='"+conditions[c]["Title"].toLowerCase()+"']");
-						
-						if (exist  != undefined) {
-							check = true;
+					if (conditions[c]["Affected"] != undefined) {
+						var val = [];
+						if (conditions[c]["Affected"].includes(",")) {
+							val = conditions[c]["Affected"].split(",");
 						}
 						else {
-							check = false;
+							val = [conditions[c]["Affected"]]
+						}
+						for (var k = 0; k < val.length; k++) {
+							var exist = document.querySelector(`#contain > div#`+conditions[c]["Type"].toLowerCase()+` > section[name='list'] ol label[data-title="`+val[k]+`"]`);
+							if (exist  != undefined) {
+								check = true;
+								break;
+							}
 						}
 					}
 				
@@ -1830,6 +1863,9 @@ var createTool = function() {
 						}
 			
 						if (conditions[c]["Affect"] == "All") {
+							check = false
+						}
+						if (conditions[c]["Affect"] == "Specific") {
 							check = false
 						}
 						if (conditions[c]["Affect"] == "Team" && d+1 > divsBottom.length) {
@@ -1872,8 +1908,13 @@ var createTool = function() {
 									cond.appendChild(conditionInput)
 									cond.appendChild(conditionLabel)
 									conditionLabel.appendChild(conditionLabelText)
-									if (conditions[c]["Group"] != "Badge") {
+
+									if (conditions[c]["Group"] == "Status" || conditions[c]["Group"] == "Weather") {
 										conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
+									}
+
+									if (conditions[c]["Info"] != undefined) {
+										cond.setAttribute("title",conditions[c]["Info"])
 									}
 									conditionInput.addEventListener("change",DMGCalcPokStats);
 									conditionInput.addEventListener("change",DMGSaveData);
@@ -1911,7 +1952,10 @@ var createTool = function() {
 								conditionInput.addEventListener("change",DMGCalcPokStats);
 								conditionInput.addEventListener("change",DMGSaveData);
 								conditionInput.addEventListener("change",DMGCalcStart);
-					
+
+								if (conditions[c]["Info"] != undefined) {
+									condition.setAttribute("title",conditions[c]["Info"])
+								}
 								
 								
 
@@ -1936,14 +1980,20 @@ var createTool = function() {
 			for(var c = 0; c < conditions.length; c++) {
 				var check = getApplicable(conditions[c]["Game"]);
 				
-				if (conditions[c]["Type"] == "Move" || conditions[c]["Type"] == "Ability") {
-					var exist = document.querySelector("#contain > div#"+conditions[c]["Type"].toLowerCase()+" > section[name='list'] ol label[data-title='"+conditions[c]["Title"].toLowerCase()+"']");
-					
-					if (exist  != undefined) {
-						check = true;
+				if (conditions[c]["Affected"] != undefined) {
+					var val = [];
+					if (conditions[c]["Affected"].includes(",")) {
+						val = conditions[c]["Affected"].split(",");
 					}
 					else {
-						check = false;
+						val = [conditions[c]["Affected"]]
+					}
+					for (var k = 0; k < val.length; k++) {
+						var exist = document.querySelector(`#contain > div#`+conditions[c]["Type"].toLowerCase()+` > section[name="list"] ol label[data-title="`+val[k]+`"]`);
+						if (exist  != undefined) {
+							check = true;
+							break;
+						}
 					}
 				}
 			
@@ -1967,6 +2017,10 @@ var createTool = function() {
 						check = false;
 					}
 			
+					if (conditions[c]["Affect"] == "Specific") {
+						check = true;
+						appender = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child")
+					}
 
 					if (check) {
 						if (conditions[c]["Group"] != undefined) {
@@ -2000,11 +2054,24 @@ var createTool = function() {
 								conditionInput.setAttribute("id",conditions[c]["Name"]+"-"+d+"-"+c+"-checkbox");
 								conditionLabel.setAttribute("for",conditions[c]["Name"]+"-"+d+"-"+c+"-checkbox");
 
+								if (conditions[c]["Affect"] == "Specific") {
+									conditionLabelText.innerText = conditions[c]["Name"];
+								}
+
+				
+
 								tar.appendChild(cond)
 								cond.appendChild(conditionInput)
 								cond.appendChild(conditionLabel)
 								conditionLabel.appendChild(conditionLabelText)
-								if (conditions[c]["Group"] != "Badge") {
+
+								if (conditions[c]["Info"] != undefined) {
+									cond.setAttribute("title",conditions[c]["Info"])
+								}
+								
+
+								
+								if (conditions[c]["Group"] == "Status" || conditions[c]["Group"] == "Weather") {
 									conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
 								}
 							}
@@ -2015,7 +2082,7 @@ var createTool = function() {
 							var conditionLabel = document.createElement("label");
 							var conditionLabelText = document.createElement("small");	
 		
-							cond.setAttribute("name",conditions[c]["Name"]);
+							condition.setAttribute("name",conditions[c]["Name"]);
 
 							conditionLabelText.innerText = nameTemp.join(" ");
 							conditionInput.setAttribute("type","checkbox");
@@ -2023,6 +2090,17 @@ var createTool = function() {
 							conditionInput.setAttribute("id",conditions[c]["Name"]+"-"+d+"-"+c+"-checkbox");
 							conditionLabel.setAttribute("for",conditions[c]["Name"]+"-"+d+"-"+c+"-checkbox");
 	
+
+							if (conditions[c]["Affect"] == "Specific") {
+								conditionLabelText.innerText = conditions[c]["Name"];
+							}
+
+
+							if (conditions[c]["Info"] != undefined) {
+								condition.setAttribute("title",conditions[c]["Info"])
+							}
+							
+
 							appender.appendChild(condition)
 							condition.appendChild(conditionInput)
 							condition.appendChild(conditionLabel)
@@ -2032,6 +2110,10 @@ var createTool = function() {
 				}
 			}
 			
+
+			if (toolSectionContentDMGOptionsBottom.firstChild != undefined) {
+				toolSectionContentDMGOptionsBottom.style.padding = "10px 0";
+			}
 
 			var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
 			var randomMinText = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > *[name='min']");
@@ -2056,9 +2138,11 @@ var createTool = function() {
 
 			DMGSetInfo();
 			DMGSetPossible();
-
+			DMGCalcStart();
 			
 		}
+
+
 
 
 
@@ -2076,28 +2160,30 @@ var createTool = function() {
 			var user = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='player'] > div.active");
 			var userid = user.getAttribute("name");
 			var userbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='player'] ul[name='"+userid+"']");
+
 			var userPokémonPath = userbase.querySelector(":scope *[name='pokémon'] select");
-			var userModPath = userbase.querySelectorAll(":scope *[name='stats'] > span > span[name='Mod'] input:not(:first-child)");
-			var userStatsPath = userbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
 			var userLevelPath = userbase.querySelector(":scope *[name='level'] input");
 			var userItemPath = userbase.querySelector(":scope *[name='item'] select");
 			var userItemCountPath = userbase.querySelector(":scope *[name='item'] input[type='number']");
+			var userFriendshipPath = userbase.querySelector(":scope *[name='friendship'] input");
+			var userAffectionPath = userbase.querySelector(":scope *[name='affection'] input");
 			var userAbilityPath = userbase.querySelector(":scope *[name='ability'] select");
 			var userHPInputPath = userbase.querySelector(":scope *[name='hp'] input");
-			var userStatusLeechSeedPath = targetbase.querySelector(":scope *[name='Leech Seed'] input");
+			var userLeechSeedPath = userbase.querySelector(":scope *[name='Leech Seed'] input");
 			var userStatusPoisonPath = userbase.querySelector(":scope *[name='Poisoned'] input");
 			var userStatusBadPoisonPath = userbase.querySelector(":scope *[name='Badly Poisoned'] input");
 			var userStatusBurnPath = userbase.querySelector(":scope *[name='Burned'] input");
 			var userStatusParalyzePath = userbase.querySelector(":scope *[name='Paralyzed'] input");
 			var userStatusAsleepPath = userbase.querySelector(":scope *[name='Asleep'] input");
 			var userStatusFrozenPath = userbase.querySelector(":scope *[name='Frozen'] input");
-			var userHelpingHandPath = userbase.querySelector(":scope *[name='Helping Hand'] input");
-			var userFlashFirePath = userbase.querySelector(":scope *[name='Flash Fire'] input");
+			var userModAccuracyPath = userbase.querySelector(":scope *[name='stats'] > span > span[name='Mod'] input[name='Accuracy']");
+			var userModEvasionPath = userbase.querySelector(":scope *[name='stats'] > span > span[name='Mod'] input[name='Evasion']");
+
+			var userModPath = userbase.querySelectorAll(":scope *[name='stats'] > span > span[name='Mod'] input:not(:first-child)");
+			var userStatsPath = userbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
 			var userBadgePath = userbase.querySelectorAll(":scope *[name='Badge-Group'] input");
-			var userLaserFocusPath = userbase.querySelector(":scope *[name='Laser Focus'] input");
+
 			var userTypes = returnData(getPokémonInt(userPokémonPath.value),"Type","");
-
-
 
 			// Target
 			var target = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div.active.target");
@@ -2116,1242 +2202,1249 @@ var createTool = function() {
 			var weatherStrongWindsPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Strong Winds'] input");
 			var weatherShadowyAuraPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group'] *[name='Shadowy Aura'] input");
 
+			var gravityPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > *[name='Gravity'] input");
+			var wonderRoomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > *[name='Wonder Room'] input");
+			var magicRoomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > *[name='Magic Room'] input");
+
 			// Move
-			var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");
-			var moveCount = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span:first-child input[type='number']");
-			var moveSpecific = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span:first-child input[type='checkbox']");
-			var moveMeFirst = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span input[name='Me First']");
-			var powerPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='power']");
-			var accuracyPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='accuracy']");
+			var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span select");
+			var moveCountPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] input[type='number']");
 			var criticalPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child input[type='checkbox']")
 			var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
 
+			var MeFirstPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Me First'] input[type='checkbox']");
+			var ChargePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Charge'] input[type='checkbox']");
+			var ProtectionPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Protection'] input[type='checkbox']");
+			var InvunerableDivePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Semi-Invulnerable Dive'] input[type='checkbox']");
+			var InvunerableFlightPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Semi-Invulnerable Flight'] input[type='checkbox']");
+			var InvunerableDigPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Semi-Invulnerable Dig'] input[type='checkbox']");
+			var SwitchPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Switching'] input[type='checkbox']");
+			var MinimizePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Minimize'] input[type='checkbox']");
+			var ConfusionPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Confusion'] input[type='checkbox']");
+			var ShadowPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Shadow'] input[type='checkbox']");
+			var HelpingHandPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Helping Hand'] input[type='checkbox']");
+			var ForestsCursePath = document.querySelector(`#contain div#tool > section[name="content"] > div[name="dmg"] div[name="menu"] > div[name="spec"] > span:last-child > li[name="Forest's Curse"] input[type="checkbox"]`);
+			var TrickOrTreatPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Trick-or-Treat'] input[type='checkbox']");
+			var GlaiveRushPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Glaive Rush'] input[type='checkbox']");
+			var LaserFocusPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Laser Focus'] input[type='checkbox']");
+			var FlashFirePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Flash Fire'] input[type='checkbox']");
 
-			var moveCategory = getMoveData(movePath.value,"Category");
-			var moveType = getMoveData(movePath.value,"Type");
+
+
+			var movePower = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,movePath.value);
+			var moveAccuracy = returnArrValue(finaldataMoveAccuracy,"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,movePath.value);
+			var moveCategory = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,movePath.value);
+			var moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movePath.value);
+
+
+			var moveDamageTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > span[name='damage'] > *:last-child");
+			var moveAccuracyTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > span[name='accuracy'] > *:last-child");
 
 
 			DMGCalcApply(user,undefined,undefined,undefined,"Reset");
-			DMGCalcApply(target,undefined,undefined,undefined,"Reset");
+
 
 
 			if (user == undefined || target == undefined) {
 				check = false;
 			}
 
+			var accRes = [];
+			var dmgRes = [];
+
+			moveAccuracyTextPath.innerText = "0%";
+			moveDamageTextPath.innerText = "0";
+
 			if (check) {
 				for (var i = 0; i < target.length; i++) {
+					if (target[i].getAttribute("data-string") != "" && !target[i].getAttribute("data-string").includes("pok:|")) {
 
-					// Paths
+						DMGCalcApply(target[i],undefined,undefined,undefined,"Reset");
 
-					var targetteam = target[i].parentElement.getAttribute("name");
-					var targetid = target[i].getAttribute("name");
-					var targetbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+targetteam+"'] ul[name='"+targetid+"']");
-					var targetteambase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='team'] > span[name='"+targetteam+"']");
-					var tarPokémonPath = targetbase.querySelector(":scope *[name='pokémon'] select");
-					var tarModPath = targetbase.querySelectorAll(":scope *[name='stats'] > span > span[name='Mod'] input:not(:first-child)");
-					var tarStatsPath = targetbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
-					var tarItemPath = targetbase.querySelector(":scope *[name='item'] select");
-					var tarAbilityPath = targetbase.querySelector(":scope *[name='ability'] select");
-					var tarHPInputPath = targetbase.querySelector(":scope *[name='hp'] input");
-					var tarStatusLeechSeedPath = targetbase.querySelector(":scope *[name='Leech Seed'] input");
-					var tarStatusPoisonPath = targetbase.querySelector(":scope *[name='Poisoned'] input");
-					var tarStatusBadPoisonPath = targetbase.querySelector(":scope *[name='Badly Poisoned'] input");
-					var tarStatusBurnPath = targetbase.querySelector(":scope *[name='Burned'] input");
-					var tarStatusParalyzePath = targetbase.querySelector(":scope *[name='Paralyzed'] input");
-					var tarStatusAsleepPath = targetbase.querySelector(":scope *[name='Asleep'] input");
-					var tarStatusFrozenPath = targetbase.querySelector(":scope *[name='Frozen'] input");
+						// Paths
+						var targetteam = target[i].parentElement.getAttribute("name");
+						var targetid = target[i].getAttribute("name");
+						var targetbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+targetteam+"'] ul[name='"+targetid+"']");
+						var targetteambase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='team'] > span[name='"+targetteam+"']");
+						var tarPokémonPath = targetbase.querySelector(":scope *[name='pokémon'] select");
+						var tarModPath = targetbase.querySelectorAll(":scope *[name='stats'] > span > span[name='Mod'] input:not(:first-child)");
+						var tarStatsPath = targetbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
+						var tarItemPath = targetbase.querySelector(":scope *[name='item'] select");
+						var tarAbilityPath = targetbase.querySelector(":scope *[name='ability'] select");
+						var tarHPInputPath = targetbase.querySelector(":scope *[name='hp'] input");
+						var tarStatusLeechSeedPath = targetbase.querySelector(":scope *[name='Leech Seed'] input");
+						var tarStatusPoisonPath = targetbase.querySelector(":scope *[name='Poisoned'] input");
+						var tarStatusBadPoisonPath = targetbase.querySelector(":scope *[name='Badly Poisoned'] input");
+						var tarStatusBurnPath = targetbase.querySelector(":scope *[name='Burned'] input");
+						var tarStatusParalyzePath = targetbase.querySelector(":scope *[name='Paralyzed'] input");
+						var tarStatusAsleepPath = targetbase.querySelector(":scope *[name='Asleep'] input");
+						var tarStatusFrozenPath = targetbase.querySelector(":scope *[name='Frozen'] input");
+						
+						var tarModEvasionPath = targetbase.querySelector(":scope *[name='stats'] *[name='Mod'] *[name='Evasion']");
 
-					var tarProtectPath = targetbase.querySelector(":scope *[name='Protect'] input");
-					var tarTypes = returnData(getPokémonInt(tarPokémonPath.value),"Type","");
+						var tarHPCurrentPath = target[i].querySelector(":scope *[name='hp'] *[name='current']");
+						var tarHPMaxPath = target[i].querySelector(":scope *[name='hp'] *[name='max']");
+						var tarHPPercentagePath = target[i].querySelector(":scope *[name='hp'] *[name='percentage']");
 
-					var tarHPCurrentPath = target[i].querySelector(":scope *[name='hp'] *[name='current']");
-					var tarHPMaxPath = target[i].querySelector(":scope *[name='hp'] *[name='max']");
-					var tarHPPercentagePath = target[i].querySelector(":scope *[name='hp'] *[name='percentage']");
+						var tarAuroraVeilPath = targetteambase.querySelector(":scope *[name='Aurora Veil'] input");
+						var tarLightScreenPath = targetteambase.querySelector(":scope *[name='Light Screen'] input");
+						var tarReflectPath = targetteambase.querySelector(":scope *[name='Reflect'] input");
+						var tarLuckyChantPath = targetteambase.querySelector(":scope *[name='Lucky Chant'] input");
+						
 
-					var tarChargePath = targetbase.querySelector(":scope *[name='Charge'] input");
-					var tarForestsCursePath = targetbase.querySelector(":scope *[name='Forests Curse'] input");
-					var tarTrickOrTreatPath = targetbase.querySelector(":scope *[name='Trick or Treat'] input");
-					var tarGlaiveRushPath = targetbase.querySelector(":scope *[name='Glaive Rush'] input");
+						var tarTypes = returnData(getPokémonInt(tarPokémonPath.value),"Type","");
+						if (tarTypes[1] == undefined) {
+							tarTypes[1] = "";
+						}
 
-					var tarLightScreenPath = targetteambase.querySelector(":scope *[name='Light Screen'] input");
-					var tarReflectPath = targetteambase.querySelector(":scope *[name='Reflect'] input");
-					var tarLuckyChantPath = targetteambase.querySelector(":scope *[name='Lucky Chant'] input");
+						var calculation = 0;
+
+						if (Generation == 1) {
+							// Defaults
+							var Immune = false;
+							var Level = 1;
+							var Critical = 1;
+							var Attack = 0;		
+							var Defense = 0;
+							var NoModAttack = 0;
+							var NoModDefense = 0;
+							var Power = 0;
+							var STAB = 1;
+							var Type1 = 1;
+							var Type2 = 1;
+							var random = 1;
+
+
+
+							Level = parseInt(userLevelPath.value);
+							if (criticalPath.checked) {
+								Critical = 2;
+							}
+							Power = parseInt(movePower);
+							if (moveCategory == "Physical") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Attack") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Defense") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+							else if (moveCategory == "Special") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Special") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Special") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+
+							Level = parseInt(Level);
+							Critical = parseInt(Critical);
+							Attack = parseInt(Attack);
+							Defense = parseInt(Defense);
+							Power = parseInt(Power);
+							STAB = parseInt(STAB);
+							Type1 = parseInt(Type1);
+							Type2 = parseInt(Type2);
+							random = parseInt(random);
+
+							if (Critical == 2) {
+								Attack = parseInt(NoModAttack);
+								Defense = parseInt(NoModDefense);
+							}
+
+							random = randomPath.value/255;
+
+
+							if (Attack > 255 || Defense > 255) {
+								Attack = Math.floor(Attack/4);
+								Defense = Math.floor(Defense/4);
+							}
+
+							if (userTypes[0] == moveType || userTypes[1] == moveType) {
+								STAB = 1.5;
+							}
+
+							var used = []
 					
-					var calculation = 0;
+							if (tarTypes.length > 0) {
+								for (var u = 0; u < Types.length; u++) {
+									if (moveType == Types[u]) {
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
 
-					if (Generation == 1) {
-						// Defaults
-						var Immune = false;
-						var Level = 1;
-						var Critical = 1;
-						var Attack = 0;		
-						var Defense = 0;
-						var NoModAttack = 0;
-						var NoModDefense = 0;
-						var Power = 0;
-						var STAB = 1;
-						var Type1 = 1;
-						var Type2 = 1;
-						var random = 1;
-
-
-
-						Level = parseInt(userLevelPath.value);
-						if (criticalPath.checked) {
-							Critical = 2;
-						}
-						Power = parseInt(powerPath.innerText);
-						if (moveCategory == "Physical") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Attack") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Defense") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-						}
-						else if (moveCategory == "Special") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Special") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Special") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-						}
-
-						Level = parseInt(Level);
-						Critical = parseInt(Critical);
-						Attack = parseInt(Attack);
-						Defense = parseInt(Defense);
-						Power = parseInt(Power);
-						STAB = parseInt(STAB);
-						Type1 = parseInt(Type1);
-						Type2 = parseInt(Type2);
-						random = parseInt(random);
-
-						if (Critical == 2) {
-							Attack = parseInt(NoModAttack);
-							Defense = parseInt(NoModDefense);
-						}
-
-						random = randomPath.value/255;
-
-
-						if (Attack > 255 || Defense > 255) {
-							Attack = Math.floor(Attack/4);
-							Defense = Math.floor(Defense/4);
-						}
-
-						if (userTypes[0] == moveType || userTypes[1] == moveType) {
-							STAB = 1.5;
-						}
-
-						var used = []
-				
-						if (tarTypes.length > 0) {
-							for (var u = 0; u < Types.length; u++) {
-								if (moveType == Types[u]) {
-									var typeadv = returnTypeAdvantage(Types[u],"Attacking");
-
-									if (typeadv[2].includes(tarTypes[0].toUpperCase())) {
-										used.push(tarTypes[0].toUpperCase())
-										Type1 = 2;
-									}
-									if (typeadv[1].includes(tarTypes[0].toUpperCase())) {
-										used.push(tarTypes[0].toUpperCase())
-										Type1 = 0.5;
-									}
-									if (typeadv[3].includes(tarTypes[0].toUpperCase())) {
-										Immune = true;
-									}
-
-									if (tarTypes[1] != undefined) {
-										if (typeadv[2].includes(tarTypes[1].toUpperCase())) {
-											if (!used.includes(tarTypes[1].toUpperCase())) {
-												Type2 = 2;
-											}
+										if (typeadv[2].includes(tarTypes[0].toUpperCase())) {
+											used.push(tarTypes[0].toUpperCase())
 											Type1 = 2;
 										}
-										if (typeadv[1].includes(tarTypes[1].toUpperCase())) {
-											if (!used.includes(tarTypes[1].toUpperCase())) {
-												Type2 = 0.5;
-											}
+										if (typeadv[1].includes(tarTypes[0].toUpperCase())) {
+											used.push(tarTypes[0].toUpperCase())
 											Type1 = 0.5;
 										}
-										if (typeadv[3].includes(tarTypes[1].toUpperCase())) {
+										if (typeadv[3].includes(tarTypes[0].toUpperCase())) {
+											Immune = true;
+										}
+
+										if (tarTypes[1] != undefined) {
+											if (typeadv[2].includes(tarTypes[1].toUpperCase())) {
+												if (!used.includes(tarTypes[1].toUpperCase())) {
+													Type2 = 2;
+												}
+												Type1 = 2;
+											}
+											if (typeadv[1].includes(tarTypes[1].toUpperCase())) {
+												if (!used.includes(tarTypes[1].toUpperCase())) {
+													Type2 = 0.5;
+												}
+												Type1 = 0.5;
+											}
+											if (typeadv[3].includes(tarTypes[1].toUpperCase())) {
+												Immune = true;
+											}
+										}
+									}
+								}
+							}
+			
+
+							calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2);
+
+
+							//calculation = calculation+(Math.floor((calculation/2)*STAB));
+							//calculation = calculation+(Math.floor(calculation*STAB));
+							calculation = calculation*STAB;
+							calculation = calculation*Type1*Type2;
+
+
+							if (calculation == 1) {
+								random = 1;
+							}
+						
+
+							calculation = calculation*random;
+
+							if (Immune) {
+								calculation = 0;
+							}
+						}
+						else if (Generation == 2) {
+							// Defaults
+							var Level = 1;
+							var Power = 0;
+							var Attack = 0;
+							var Defense = 0;
+							var Item = 1;
+							var Critical = 1;
+							var TripleKick = 1;
+							var Badge = 1;
+							var Weather = 1;
+							var STAB = 1;
+							var Type = 1;
+							var MoveMod = 1;
+							var random = 1;
+							var DoubleDmg = 1;
+
+							Level = userLevelPath.value;
+							if (criticalPath.checked) {
+								Critical = 2;
+							}
+							Power = movePower;
+							if (Power == "-") {
+								Power = 0;
+							}
+
+							random = randomPath.value/255;
+			
+
+							if (moveCategory == "Physical") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Attack") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Defense") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+							else if (moveCategory == "Special") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+
+						
+		
+
+
+							
+
+							if (movePath.value == "Flail" || movePath.value == "Reversal" || movePath.value == "Future Sight") {
+								Critical = 1;
+							}
+
+
+					
+
+
+							if (Critical == 2) {
+								if (userModPath.length == tarModPath.length) {
+									for(var u = 0; u < tarModPath.length; u++) {
+								
+										var tarval = tarModPath[u].value;
+										if (tarval == "" || tarval == undefined) {
+											tarval = 0;
+										}
+		
+										if (moveCategory == "Physical") {
+											if (tarModPath[u].getAttribute("name") == "Attack") {
+												for(var r = 0; r < userModPath.length; r++) {
+													var userval = userModPath[r].value;
+													if (userval == "" || userval == undefined) {
+														userval = 0;
+													}
+													if (tarModPath[r].getAttribute("name") == "Defense") {
+														if (userval <= tarval) {
+															Attack = NoModAttack;
+														}
+													}
+												}
+											}
+											if (tarModPath[u].getAttribute("name") == "Defense") {
+												for(var r = 0; r < userModPath.length; r++) {
+													var userval = userModPath[r].value;
+													if (userval == "" || userval == undefined) {
+														userval = 0;
+													}
+													if (tarModPath[r].getAttribute("name") == "Attack") {
+														if (userval <= tarval) {
+															Defense = NoModDefense;
+														}
+													}
+												}
+											}
+										}
+										else if (moveCategory == "Special") {
+											if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
+												for(var r = 0; r < userModPath.length; r++) {
+													var userval = userModPath[r].value;
+													if (userval == "" || userval == undefined) {
+														userval = 0;
+													}
+													if (tarModPath[r].getAttribute("name") == "Sp. Def") {
+														if (userval <= tarval) {
+															Attack = NoModAttack;
+														}
+													}
+												}
+											}
+											if (tarModPath[u].getAttribute("name") == "Sp. Def") {
+												for(var r = 0; r < userModPath.length; r++) {
+													var userval = userModPath[r].value;
+													if (userval == "" || userval == undefined) {
+														userval = 0;
+													}
+													if (tarModPath[r].getAttribute("name") == "Sp. Atk") {
+														if (userval <= tarval) {
+															Defense = NoModDefense;
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+
+
+							if (moveCategory == "Physical") {
+								if (tarReflectPath.checked) {
+									if (Critical == 1) {
+										Defense = Defense*2;
+									}
+								}
+							}
+							if (moveCategory == "Special") {
+								if (tarLightScreenPath.checked) {
+									if (Critical == 1) {
+										Defense = Defense*2;
+									}
+								}
+							}
+		
+
+
+					
+
+							for(var u = 0; u < finaldataItemsDamage.length; u++) {
+								if (finaldataItemsDamage[u]["Item"] == userItemPath.value) {
+									if (getApplicable(finaldataItemsDamage[u]["Game"])) {
+										if (finaldataItemsDamage[u]["Type"] == moveType) {
+											var check = false;
+											if (finaldataItemsDamage[u]["Pokémon"] == undefined) {
+												check = true;
+											}
+											else if (finaldataItemsDamage[u]["Pokémon"].includes(",")) {
+												check 
+												var tempPok = finaldataItemsDamage[u]["Pokémon"].split(",")
+												for(var p = 0; p < tempPok.length; p++) {
+													if (getPokémonName(getPokémonInt(tempPok[p])) == getPokémonName(getDefaultInt(getPokémonInt(userPokémonPath.value)))) {
+														check = true;
+														break;
+													}
+												}
+											}
+											else if (getPokémonName(getPokémonInt(finaldataItemsDamage[u]["Pokémon"])) == getPokémonName(getDefaultInt(getPokémonInt(userPokémonPath.value)))) {
+												check = true;
+											}
+											if (check) {
+												Item = finaldataItemsDamage[u]["Value"];
+											}
+										}
+									}
+								}
+							}
+
+				
+							if (weatherRainPath.checked) {
+								if (moveType == "Fire") {
+									Weather = 0.5;
+								}
+								if (moveType == "Water") {
+									Weather = 1.5;
+								}
+								if (movePath.value == "SolarBeam") {
+									Weather = 0.5;
+								}
+							}
+							if (weatherHarshSunlightPath.checked) {
+								if (moveType == "Fire") {
+									Weather = 1.5;
+								}
+								if (moveType == "Water") {
+									Weather = 0.5;
+								}
+							}
+		
+								
+							if (userTypes[0] == moveType || userTypes[1] == moveType) {
+								STAB = 1.5;
+							}
+
+
+							if (tarTypes.length > 0) {
+								for (var u = 0; u < Types.length; u++) {
+									if (moveType == Types[u]) {
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
+										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
+											Type = 2;
+										}
+										if (typeadv[2].includes(tarTypes[0].toUpperCase()) && typeadv[2].includes(tarTypes[1].toUpperCase())) {
+											Type = 4;
+										}
+										if (typeadv[1].includes(tarTypes[0].toUpperCase()) || typeadv[1].includes(tarTypes[1].toUpperCase())) {
+											Type = 0.5;
+										}
+										if (typeadv[1].includes(tarTypes[0].toUpperCase()) && typeadv[1].includes(tarTypes[1].toUpperCase())) {
+											Type = 0.25;
+										}
+										if (typeadv[3].includes(tarTypes[0].toUpperCase()) || typeadv[3].includes(tarTypes[1].toUpperCase())) {
 											Immune = true;
 										}
 									}
 								}
 							}
-						}
-		
 
-						calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2);
-
-
-						//calculation = calculation+(Math.floor((calculation/2)*STAB));
-						//calculation = calculation+(Math.floor(calculation*STAB));
-						calculation = calculation*STAB;
-						calculation = calculation*Type1*Type2;
-
-
-						if (calculation == 1) {
-							random = 1;
-						}
-					
-
-						calculation = calculation*random;
-
-						if (Immune) {
-							calculation = 0;
-						}
-					}
-					else if (Generation == 2) {
-						// Defaults
-						var Level = 1;
-						var Power = 0;
-						var Attack = 0;
-						var Defense = 0;
-						var Item = 1;
-						var Critical = 1;
-						var TripleKick = 1;
-						var Badge = 1;
-						var Weather = 1;
-						var STAB = 1;
-						var Type = 1;
-						var MoveMod = 1;
-						var random = 1;
-						var DoubleDmg = 1;
-
-						Level = userLevelPath.value;
-						if (criticalPath.checked) {
-							Critical = 2;
-						}
-						Power = powerPath.innerText;
-						if (Power == "-") {
-							Power = 0;
-						}
-
-						random = randomPath.value/255;
-		
-
-						if (moveCategory == "Physical") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Attack") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (movePath.value == "Rollout") {
+								MoveMod = 2**(moveCountPath.value);
+							}
+							if (movePath.value == "Fury Cutter") {
+								MoveMod = 2**(moveCountPath.value);
+							}
+							if (movePath.value == "Rage") {
+								MoveMod = moveCountPath.value;
+							}
+							if (movePath.value == "Pursuit") {
+								if (SwitchPath.checked) {
+									DoubleDmg = 2;
 								}
 							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Defense") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (movePath.value == "Stomp") {
+								if (MinimizePath.checked) {
+									DoubleDmg = 2;
 								}
 							}
-						}
-						else if (moveCategory == "Special") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (movePath.value == "Gust" || movePath.value == "Twister") {
+								if (InvunerableFlightPath.checked) {
+									DoubleDmg = 2;
 								}
 							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
+								if (InvunerableDigPath.checked) {
+									DoubleDmg = 2;
 								}
 							}
-						}
 
-					
-	
+							if (movePath.value == "Triple Kick") {
+								TripleKick = moveCountPath.value;
+							}
 
-
-						
-
-						if (movePath.value == "Flail" || movePath.value == "Reversal" || movePath.value == "Future Sight") {
-							Critical = 1;
-						}
-
-
-				
-
-
-						if (Critical == 2) {
-							if (userModPath.length == tarModPath.length) {
-								for(var u = 0; u < tarModPath.length; u++) {
-							
-									var tarval = tarModPath[u].value;
-									if (tarval == "" || tarval == undefined) {
-										tarval = 0;
+							for (var u = 0; u < userBadgePath.length; u++) {
+								if (userBadgePath[u].title.includes(moveType+"-type")) {
+									if (userBadgePath[u].checked) {
+										Badge = 1.125;
 									}
-	
+								}
+							}
+
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Item*Critical+2)*TripleKick*Weather*Badge*STAB*Type*MoveMod*random*DoubleDmg;
+
+							if (Immune) {
+								calculation = 0;
+							}
+						}
+						else if (Generation == 3) {
+							// Defaults
+							var Level = 1;
+							var Power = 0;
+							var Attack = 0;
+							var Defense = 0;
+							var Burn = 1;
+							var Screen = 1;
+							var Targets = 1;
+							var Weather = 1;
+							var FlashFire = 1;
+							var Stockpile = 1;
+							var Critical = 1;
+							var DoubleDmg = 1;
+							var Charge = 1;
+							var HelpingHand = 1;
+							var STAB = 1;
+							var Type = 1;
+							var random = 1;
+
+							Level = userLevelPath.value;
+							if (criticalPath.checked) {
+								Critical = 2;
+							}
+							Power = movePower;
+							if (Power == "-") {
+								Power = 0;
+							}
+							random = randomPath.value/100;
+
+
+							if (moveCategory == "Physical") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Attack") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Defense") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+							else if (moveCategory == "Special") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+
+							if (movePath.value == "Future Sight" || movePath.value == "Doom Desire" || movePath.value == "Spit Up" || tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
+								Critical = 1;
+							}
+
+							if (tarStatusBurnPath.checked) {
+								if (tarAbilityPath.value != "Guts") {
+									if (moveCategory == "Physical") {
+										Burn = 0.5;
+									}
+								}
+							}
+
+							if (moveCategory == "Physical") {
+								if (tarReflectPath.checked) {
+									if (parseInt(battle.getAttribute("data-count")) > 2) {
+										Screen = 0.6667;
+									}
+									else {
+										Screen = 0.5;
+									}
+								}
+							}
+							if (moveCategory == "Special") {
+								if (tarLightScreenPath.checked) {
+									if (parseInt(battle.getAttribute("data-count")) > 2) {
+										Screen = 0.6667;
+									}
+									else {
+										Screen = 0.5;
+									}
+								}
+							}
+
+							if (Critical == 2) {
+								Screen = 1;
+								// Ignore "Negative" User Attack Stat Changes on Critical Hit
+								for(var u = 0; u < userModPath.length; u++) {
+									var userval = userModPath[u].value;
+									if (userval == "" || userval == undefined) {
+										userval = 0;
+									}
+
 									if (moveCategory == "Physical") {
 										if (tarModPath[u].getAttribute("name") == "Attack") {
-											for(var r = 0; r < userModPath.length; r++) {
-												var userval = userModPath[r].value;
-												if (userval == "" || userval == undefined) {
-													userval = 0;
-												}
-												if (tarModPath[r].getAttribute("name") == "Defense") {
-													if (userval <= tarval) {
-														Attack = NoModAttack;
-													}
-												}
-											}
-										}
-										if (tarModPath[u].getAttribute("name") == "Defense") {
-											for(var r = 0; r < userModPath.length; r++) {
-												var userval = userModPath[r].value;
-												if (userval == "" || userval == undefined) {
-													userval = 0;
-												}
-												if (tarModPath[r].getAttribute("name") == "Attack") {
-													if (userval <= tarval) {
-														Defense = NoModDefense;
-													}
-												}
+											if (userval < 0) {
+												Attack = NoModAttack;
 											}
 										}
 									}
 									else if (moveCategory == "Special") {
 										if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
-											for(var r = 0; r < userModPath.length; r++) {
-												var userval = userModPath[r].value;
-												if (userval == "" || userval == undefined) {
-													userval = 0;
-												}
-												if (tarModPath[r].getAttribute("name") == "Sp. Def") {
-													if (userval <= tarval) {
-														Attack = NoModAttack;
-													}
-												}
+											if (userval < 0) {
+												Attack = NoModAttack;
 											}
 										}
+									}
+								}
+								// Ignore "Positive" Target Defense Stat Changes on Critical Hit
+								for(var u = 0; u < tarModPath.length; u++) {
+									var tarval = tarModPath[u].value;
+									if (tarval == "" || tarval == undefined) {
+										tarval = 0;
+									}
+
+									if (moveCategory == "Physical") {
+										if (tarModPath[u].getAttribute("name") == "Defense") {
+											if (tarval > 0) {
+												Defense = NoModDefense;
+											}
+										}
+									}
+									else if (moveCategory == "Special") {
 										if (tarModPath[u].getAttribute("name") == "Sp. Def") {
-											for(var r = 0; r < userModPath.length; r++) {
-												var userval = userModPath[r].value;
-												if (userval == "" || userval == undefined) {
-													userval = 0;
-												}
-												if (tarModPath[r].getAttribute("name") == "Sp. Atk") {
-													if (userval <= tarval) {
-														Defense = NoModDefense;
-													}
-												}
+											if (tarval > 0) {
+												Defense = NoModDefense;
 											}
 										}
 									}
 								}
 							}
-						}
 
-
-						if (moveCategory == "Physical") {
-							if (tarReflectPath.checked) {
-								if (Critical == 1) {
-									Defense = Defense*2;
-								}
-							}
-						}
-						if (moveCategory == "Special") {
-							if (tarLightScreenPath.checked) {
-								if (Critical == 1) {
-									Defense = Defense*2;
-								}
-							}
-						}
-	
-
-
-				
-
-						for(var u = 0; u < finaldataItemDamage.length; u++) {
-							if (finaldataItemDamage[u]["Item"] == userItemPath.value) {
-								if (getApplicable(finaldataItemDamage[u]["Game"])) {
-									if (finaldataItemDamage[u]["Type"] == moveType) {
-										var check = false;
-										if (finaldataItemDamage[u]["Pokémon"] == undefined) {
-											check = true;
-										}
-										else if (finaldataItemDamage[u]["Pokémon"].includes(",")) {
-											check 
-											var tempPok = finaldataItemDamage[u]["Pokémon"].split(",")
-											for(var p = 0; p < tempPok.length; p++) {
-												if (getPokémonName(getPokémonInt(tempPok[p])) == getPokémonName(getDefaultInt(getPokémonInt(userPokémonPath.value)))) {
-													check = true;
-													break;
-												}
-											}
-										}
-										else if (getPokémonName(getPokémonInt(finaldataItemDamage[u]["Pokémon"])) == getPokémonName(getDefaultInt(getPokémonInt(userPokémonPath.value)))) {
-											check = true;
-										}
-										if (check) {
-											Item = finaldataItemDamage[u]["Value"];
-										}
+							if (parseInt(battle.getAttribute("data-count")) > 2) {
+								if (target.length > 1) {
+									if (target.parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
+										Targets = 0.5;
 									}
 								}
 							}
-						}
 
-			
-						if (weatherRainPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 0.5;
+							if (weatherRainPath.checked) {
+								if (moveType == "Fire") {
+									Weather = 0.5;
+								}
+								if (moveType == "Water") {
+									Weather = 1.5;
+								}
 							}
-							if (moveType == "Water") {
-								Weather = 1.5;
+							if (weatherHarshSunlightPath.checked) {
+								if (moveType == "Fire") {
+									Weather = 1.5;
+								}
+								if (moveType == "Water") {
+									Weather = 0.5;
+								}
 							}
 							if (movePath.value == "SolarBeam") {
-								Weather = 0.5;
-							}
-						}
-						if (weatherHarshSunlightPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 1.5;
-							}
-							if (moveType == "Water") {
-								Weather = 0.5;
-							}
-						}
-	
-							
-						if (userTypes[0] == moveType || userTypes[1] == moveType) {
-							STAB = 1.5;
-						}
-
-
-						if (tarTypes.length > 0) {
-							for (var u = 0; u < Types.length; u++) {
-								if (moveType == Types[u]) {
-									var typeadv = returnTypeAdvantage(Types[u],"Attacking");
-
-									if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
-										Type = 2;
-									}
-									if (typeadv[2].includes(tarTypes[0].toUpperCase()) && typeadv[2].includes(tarTypes[1].toUpperCase())) {
-										Type = 4;
-									}
-									if (typeadv[1].includes(tarTypes[0].toUpperCase()) || typeadv[1].includes(tarTypes[1].toUpperCase())) {
-										Type = 0.5;
-									}
-									if (typeadv[1].includes(tarTypes[0].toUpperCase()) && typeadv[1].includes(tarTypes[1].toUpperCase())) {
-										Type = 0.25;
-									}
-									if (typeadv[3].includes(tarTypes[0].toUpperCase()) || typeadv[3].includes(tarTypes[1].toUpperCase())) {
-										Immune = true;
-									}
-								}
-							}
-						}
-
-						if (movePath.value == "Rollout") {
-							MoveMod = 2**(moveCount.value);
-						}
-						if (movePath.value == "Fury Cutter") {
-							MoveMod = 2**(moveCount.value);
-						}
-						if (movePath.value == "Rage") {
-							MoveMod = moveCount.value;
-						}
-						if (movePath.value == "Pursuit") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-						if (movePath.value == "Stomp") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-						if (movePath.value == "Gust" || movePath.value == "Twister") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-						if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-
-						if (movePath.value == "Triple Kick") {
-							TripleKick = moveCount.value;
-						}
-
-						for (var u = 0; u < userBadgePath.length; u++) {
-							if (userBadgePath[u].title.includes(moveType+"-type")) {
-								if (userBadgePath[u].checked) {
-									Badge = 1.125;
-								}
-							}
-						}
-
-						calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Item*Critical+2)*TripleKick*Weather*Badge*STAB*Type*MoveMod*random*DoubleDmg;
-
-						if (Immune) {
-							calculation = 0;
-						}
-					}
-					else if (Generation == 3) {
-						// Defaults
-						var Level = 1;
-						var Power = 0;
-						var Attack = 0;
-						var Defense = 0;
-						var Burn = 1;
-						var Screen = 1;
-						var Targets = 1;
-						var Weather = 1;
-						var FlashFire = 1;
-						var Stockpile = 1;
-						var Critical = 1;
-						var DoubleDmg = 1;
-						var Charge = 1;
-						var HelpingHand = 1;
-						var STAB = 1;
-						var Type = 1;
-						var random = 1;
-
-						Level = userLevelPath.value;
-						if (criticalPath.checked) {
-							Critical = 2;
-						}
-						Power = powerPath.innerText;
-						if (Power == "-") {
-							Power = 0;
-						}
-						random = randomPath.value/100;
-
-
-						if (moveCategory == "Physical") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Attack") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Defense") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-						}
-						else if (moveCategory == "Special") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-						}
-
-						if (movePath.value == "Future Sight" || movePath.value == "Doom Desire" || movePath.value == "Spit Up" || tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
-							Critical = 1;
-						}
-
-						if (tarStatusBurnPath.checked) {
-							if (tarAbilityPath.value != "Guts") {
-								if (moveCategory == "Physical") {
-									Burn = 0.5;
-								}
-							}
-						}
-
-						if (moveCategory == "Physical") {
-							if (tarReflectPath.checked) {
-								if (parseInt(battle.getAttribute("data-count")) > 2) {
-									Screen = 0.6667;
-								}
-								else {
-									Screen = 0.5;
-								}
-							}
-						}
-						if (moveCategory == "Special") {
-							if (tarLightScreenPath.checked) {
-								if (parseInt(battle.getAttribute("data-count")) > 2) {
-									Screen = 0.6667;
-								}
-								else {
-									Screen = 0.5;
-								}
-							}
-						}
-
-						if (Critical == 2) {
-							Screen = 1;
-							// Ignore "Negative" User Attack Stat Changes on Critical Hit
-							for(var u = 0; u < userModPath.length; u++) {
-								var userval = userModPath[u].value;
-								if (userval == "" || userval == undefined) {
-									userval = 0;
-								}
-
-								if (moveCategory == "Physical") {
-									if (tarModPath[u].getAttribute("name") == "Attack") {
-										if (userval < 0) {
-											Attack = NoModAttack;
+								weatherInputsPath
+								var check = true;
+								for(var u = 0; u < weatherInputsPath.length; u++) {
+									if (weatherInputsPath[u].parentElement.getAttribute("name") != "Harsh Sunlight") {
+										if (weatherInputsPath[u].checked) {
+											check = false;
 										}
 									}
 								}
-								else if (moveCategory == "Special") {
-									if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
-										if (userval < 0) {
-											Attack = NoModAttack;
-										}
-									}
+								if (check) {
+									Weather = 0.5;
 								}
 							}
-							// Ignore "Positive" Target Defense Stat Changes on Critical Hit
-							for(var u = 0; u < tarModPath.length; u++) {
-								var tarval = tarModPath[u].value;
-								if (tarval == "" || tarval == undefined) {
-									tarval = 0;
-								}
 
-								if (moveCategory == "Physical") {
-									if (tarModPath[u].getAttribute("name") == "Defense") {
-										if (tarval > 0) {
-											Defense = NoModDefense;
-										}
-									}
-								}
-								else if (moveCategory == "Special") {
-									if (tarModPath[u].getAttribute("name") == "Sp. Def") {
-										if (tarval > 0) {
-											Defense = NoModDefense;
-										}
-									}
-								}
-							}
-						}
-
-						if (parseInt(battle.getAttribute("data-count")) > 2) {
-							if (target.length > 1) {
-								if (target.parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
-									Targets = 0.5;
-								}
-							}
-						}
-
-						if (weatherRainPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 0.5;
-							}
-							if (moveType == "Water") {
-								Weather = 1.5;
-							}
-						}
-						if (weatherHarshSunlightPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 1.5;
-							}
-							if (moveType == "Water") {
-								Weather = 0.5;
-							}
-						}
-						if (movePath.value == "SolarBeam") {
-							weatherInputsPath
-							var check = true;
-							for(var u = 0; u < weatherInputsPath.length; u++) {
-								if (weatherInputsPath[u].parentElement.getAttribute("name") != "Harsh Sunlight") {
-									if (weatherInputsPath[u].checked) {
-										check = false;
-									}
-								}
-							}
-							if (check) {
-								Weather = 0.5;
-							}
-						}
-
-						var check = false;
-						for(var u = 0; u < allbase.length; u++) {
-							var ab = allbase[u].querySelector(":scope *[name='ability'] select");
-							if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
-								check = true;
-							}
-						}
-						if (check) {
-							Weather = 1;
-						}
-
-
-						if (userAbilityPath.value == "Flash Fire") {
-							if (moveType == "Fire") {
-								if (userFlashFirePath.checked) {
-									FlashFire = 1.5;
-								}
-							}
-						}
-
-						if (movePath.value == "Spit Up") {
-							Stockpile = moveCount.value;
-						}
-
-						if (movePath.value == "Pursuit") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-						if (movePath.value == "Facade") {
-							if (userStatusPoisonPath.checked || userStatusBurnPath.checked || userStatusParalyzePath.checked) {
-								DoubleDmg = 2;
-							}
-							if (userStatusBadPoisonPath.value != "" && userStatusBadPoisonPath.value != undefined) {
-								DoubleDmg = 2;
-							}
-						}
-						
-
-						if (movePath.value == "Gust" || movePath.value == "Twister") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-
-						if (movePath.value == "Stomp" || movePath.value == "Needle Arm" || movePath.value == "Astonish" || movePath.value == "Extrasensory") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-
-						if (movePath.value == "Surf" || movePath.value == "Whirlpool") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-
-						if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
-							if (moveSpecific.checked) {
-								DoubleDmg = 2;
-							}
-						}
-
-						if (movePath.value == "SmellingSalt") {
-							if (tarStatusParalyzePath.checked) {
-								DoubleDmg = 2;
-							}
-						}
-
-						if (movePath.value == "Weather Ball") {
 							var check = false;
-							for(var u = 0; u < weatherInputsPath.length; u++) {
-								if (weatherInputsPath[u].checked) {
-									check = true;
-								}
-							}
 							for(var u = 0; u < allbase.length; u++) {
 								var ab = allbase[u].querySelector(":scope *[name='ability'] select");
 								if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
-									check = false;
+									check = true;
 								}
 							}
 							if (check) {
-								DoubleDmg = 2;
+								Weather = 1;
 							}
-						}
 
 
-						if (moveType == "Electric") {
-							if (tarChargePath.checked) {
-								Charge = 2;
-							}
-						}
-						
-						if (parseInt(battle.getAttribute("data-count")) > 2) {
-							if (userHelpingHandPath.checked) {
-								HelpingHand = 1.5;
-							}
-						}
-
-
-						if (userTypes[0] == moveType || userTypes[1] == moveType) {
-							STAB = 1.5;
-						}
-
-						if (tarTypes.length > 0) {
-							for (var u = 0; u < Types.length; u++) {
-								if (moveType == Types[u]) {
-									var typeadv = returnTypeAdvantage(Types[u],"Attacking");
-
-									if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
-										Type = 2;
-									}
-									if (typeadv[2].includes(tarTypes[0].toUpperCase()) && typeadv[2].includes(tarTypes[1].toUpperCase())) {
-										Type = 4;
-									}
-									if (typeadv[1].includes(tarTypes[0].toUpperCase()) || typeadv[1].includes(tarTypes[1].toUpperCase())) {
-										Type = 0.5;
-									}
-									if (typeadv[1].includes(tarTypes[0].toUpperCase()) && typeadv[1].includes(tarTypes[1].toUpperCase())) {
-										Type = 0.25;
-									}
-									if (typeadv[3].includes(tarTypes[0].toUpperCase()) || typeadv[3].includes(tarTypes[1].toUpperCase())) {
-										Immune = true;
+							if (userAbilityPath.value == "Flash Fire") {
+								if (moveType == "Fire") {
+									if (FlashFirePath.checked) {
+										FlashFire = 1.5;
 									}
 								}
 							}
-						}
 
-						if (movePath.value == "Struggle" || movePath.value == "Future Sight" || movePath.value == "Beat Up" || movePath.value == "Doom Desire") {
-							Type = 1;
-						}
+							if (movePath.value == "Spit Up") {
+								Stockpile = moveCountPath.value;
+							}
 
-						calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Stockpile*Critical*DoubleDmg*Charge*HelpingHand*STAB*Type*random;
-
-						if (Immune) {
-							calculation = 0;
-						}
-					}
-					else if (Generation == 4) {
-						// Defaults
-						var Level = 1;
-						var Power = 0;
-						var Attack = 0;
-						var Defense = 0;
-						var Burn = 1;
-						var Screen = 1;
-						var Targets = 1;
-						var Weather = 1;
-						var FlashFire = 1;
-						var Critical = 1;
-						var Item = 1;
-						var First = 1;
-						var random = 1;
-						var STAB = 1;
-						var Type1 = 1;
-						var Type2 = 1;
-						var SolidRockFilter = 1;
-						var ExpertBelt = 1;
-						var TintedLens = 1;
-						var Berry = 1;
-
-						Level = userLevelPath.value;
-						if (criticalPath.checked) {
-							Critical = 2;
-						}
-						Power = powerPath.innerText;
-						if (Power == "-") {
-							Power = 0;
-						}
-						random = randomPath.value/100;
-
-
-						if (moveCategory == "Physical") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Attack") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (movePath.value == "Pursuit") {
+								if (SwitchPath.checked) {
+									DoubleDmg = 2;
 								}
 							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Defense") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (movePath.value == "Facade") {
+								if (userStatusPoisonPath.checked || userStatusBurnPath.checked || userStatusParalyzePath.checked) {
+									DoubleDmg = 2;
+								}
+								if (userStatusBadPoisonPath.value != "" && userStatusBadPoisonPath.value != undefined) {
+									DoubleDmg = 2;
 								}
 							}
-						}
-						else if (moveCategory == "Special") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-						}
+							
 
+							if (movePath.value == "Gust" || movePath.value == "Twister") {
+								if (InvunerableFlightPath.checked) {
+									DoubleDmg = 2;
+								}
+							}
 
+							if (movePath.value == "Stomp" || movePath.value == "Needle Arm" || movePath.value == "Astonish" || movePath.value == "Extrasensory") {
+								if (MinimizePath.checked) {
+									DoubleDmg = 2;
+								}
+							}
 
-						if (tarStatusBurnPath.checked) {
-							if (tarAbilityPath.value != "Guts") {
-								if (moveCategory == "Physical") {
-									Burn = 0.5;
+							if (movePath.value == "Surf" || movePath.value == "Whirlpool") {
+								if (InvunerableDivePath.checked) {
+									DoubleDmg = 2;
 								}
 							}
-						}
 
-						if (moveCategory == "Physical") {
-							if (tarReflectPath.checked) {
-								if (parseInt(battle.getAttribute("data-count")) > 2) {
-									Screen = 0.6667;
-								}
-								else {
-									Screen = 0.5;
+							if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
+								if (InvunerableDigPath.checked) {
+									DoubleDmg = 2;
 								}
 							}
-						}
-						if (moveCategory == "Special") {
-							if (tarLightScreenPath.checked) {
-								if (parseInt(battle.getAttribute("data-count")) > 2) {
-									Screen = 0.6667;
-								}
-								else {
-									Screen = 0.5;
-								}
-							}
-						}
 
-						
-						if (Critical == 2) {
-							Screen = 1;
+							if (movePath.value == "SmellingSalt") {
+								if (tarStatusParalyzePath.checked) {
+									DoubleDmg = 2;
+								}
+							}
 
-							// Ignore "Negative" User Attack Stat Changes on Critical Hit
-							for(var u = 0; u < userModPath.length; u++) {
-								var userval = userModPath[u].value;
-								if (userval == "" || userval == undefined) {
-									userval = 0;
-								}
-
-								if (moveCategory == "Physical") {
-									if (tarModPath[u].getAttribute("name") == "Attack") {
-										if (userval < 0) {
-											Attack = NoModAttack;
-										}
-									}
-								}
-								else if (moveCategory == "Special") {
-									if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
-										if (userval < 0) {
-											Attack = NoModAttack;
-										}
-									}
-								}
-							}
-							// Ignore "Positive" Target Defense Stat Changes on Critical Hit
-							for(var u = 0; u < tarModPath.length; u++) {
-								var tarval = tarModPath[u].value;
-								if (tarval == "" || tarval == undefined) {
-									tarval = 0;
-								}
-
-								if (moveCategory == "Physical") {
-									if (tarModPath[u].getAttribute("name") == "Defense") {
-										if (tarval > 0) {
-											Defense = NoModDefense;
-										}
-									}
-								}
-								else if (moveCategory == "Special") {
-									if (tarModPath[u].getAttribute("name") == "Sp. Def") {
-										if (tarval > 0) {
-											Defense = NoModDefense;
-										}
-									}
-								}
-							}
-						}
-						
-						if (parseInt(battle.getAttribute("data-count")) > 2) {
-							if (target.length > 1) {
-								if (target.parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
-									Targets = 0.75;
-								}
-							}
-						}
-
-						
-						if (weatherRainPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 0.5;
-							}
-							if (moveType == "Water") {
-								Weather = 1.5;
-							}
-						}
-						if (weatherHarshSunlightPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 1.5;
-							}
-							if (moveType == "Water") {
-								Weather = 0.5;
-							}
-						}
-						if (movePath.value == "SolarBeam") {
-							weatherInputsPath
-							var check = true;
-							for(var u = 0; u < weatherInputsPath.length; u++) {
-								if (weatherInputsPath[u].parentElement.getAttribute("name") != "Harsh Sunlight") {
+							if (movePath.value == "Weather Ball") {
+								var check = false;
+								for(var u = 0; u < weatherInputsPath.length; u++) {
 									if (weatherInputsPath[u].checked) {
+										check = true;
+									}
+								}
+								for(var u = 0; u < allbase.length; u++) {
+									var ab = allbase[u].querySelector(":scope *[name='ability'] select");
+									if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
 										check = false;
 									}
 								}
-							}
-							if (check) {
-								Weather = 0.5;
-							}
-						}
-
-						var check = false;
-						for(var u = 0; u < allbase.length; u++) {
-							var ab = allbase[u].querySelector(":scope *[name='ability'] select");
-							if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
-								check = true;
-							}
-						}
-						if (check) {
-							Weather = 1;
-						}
-
-						if (userAbilityPath.value == "Flash Fire") {
-							if (moveType == "Fire") {
-								if (userFlashFirePath.checked) {
-									FlashFire = 1.5;
+								if (check) {
+									DoubleDmg = 2;
 								}
 							}
-						}
-
-						if (userItemPath.value = "Life Orb") {
-							Item = 1.3;
-						}
-						
-						if (userItemPath.value = "Metronome") {
-							var val = userItemCountPath.value;
-							if (isNaN(val)) {
-								val = 0;
-							}
-							if (val > 10) {
-								val = 10;
-							}
-							Item = 1+(val/10);
-						}
-						
-						if (moveMeFirst.checked) {
-							First = 1.5;
-						}
-						if (userTypes[0] == moveType || userTypes[1] == moveType) {
-							STAB = 1.5;
-						}
 
 
-			
-						var typeadv1 = returnTypeAdvantage(tarTypes[0],"Attacking");
-						if (typeadv1[2].includes(moveType.toUpperCase())) {
-							Type1 = 2;
-						}
-						if (typeadv1[2].includes(moveType.toUpperCase())) {
-							Type1 = 0.5;
-						}
-						if (typeadv1[3].includes(moveType.toUpperCase())) {
-							Immune = true;
-						}
-
-						var typeadv2 = returnTypeAdvantage(tarTypes[1],"Attacking");
-						if (typeadv2[2].includes(moveType.toUpperCase())) {
-							Type2 = 2;
-						}
-						if (typeadv2[2].includes(moveType.toUpperCase())) {
-							Type2 = 0.5;
-						}
-						if (typeadv2[3].includes(moveType.toUpperCase())) {
-							Immune = true;
-						}
-						
-
-						if (movePath.value == "Struggle" || movePath.value == "Future Sight" || movePath.value == "Beat Up" || movePath.value == "Doom Desire") {
-							Type1 = 1;
-							Type2 = 1;
-						}
-
-						if (tarAbilityPath.value == "Solid Rock" || tarAbilityPath.value == "Filter") {
-							if (userAbilityPath != "Mold Breaker") {
-								if (Type1+Type2 > 2) {
-									SolidRockFilter = 0.75;
+							if (moveType == "Electric") {
+								if (ChargePath.checked) {
+									Charge = 2;
 								}
 							}
-						}
+							
+							if (parseInt(battle.getAttribute("data-count")) > 2) {
+								if (HelpingHandPath.checked) {
+									HelpingHand = 1.5;
+								}
+							}
 
-						if (userItemPath.value == "Expert Belt") {
-							if (Type1+Type2 > 2) {
-								ExpertBelt = 1.2;
-							}
-						}
 
-						if (userAbilityPath.value == "Tinted Lens") {
-							if (Type1+Type2 < 2) {
-								TintedLens = 2;
+							if (userTypes[0] == moveType || userTypes[1] == moveType) {
+								STAB = 1.5;
 							}
-						}
-						
-						var check = false;
 
-						if (tarItemPath.value == "Chilan Berry" && moveType == "Normal") {
-							check = true;
-						}
-						if (Type1+Type2 > 2) {
-							if (tarItemPath.value == "Babiri Berry" && moveType == "Steel") {
-								check = true;
+							if (tarTypes.length > 0) {
+								for (var u = 0; u < Types.length; u++) {
+									if (moveType == Types[u]) {
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
+
+										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
+											Type = 2;
+										}
+										if (typeadv[2].includes(tarTypes[0].toUpperCase()) && typeadv[2].includes(tarTypes[1].toUpperCase())) {
+											Type = 4;
+										}
+										if (typeadv[1].includes(tarTypes[0].toUpperCase()) || typeadv[1].includes(tarTypes[1].toUpperCase())) {
+											Type = 0.5;
+										}
+										if (typeadv[1].includes(tarTypes[0].toUpperCase()) && typeadv[1].includes(tarTypes[1].toUpperCase())) {
+											Type = 0.25;
+										}
+										if (typeadv[3].includes(tarTypes[0].toUpperCase()) || typeadv[3].includes(tarTypes[1].toUpperCase())) {
+											Immune = true;
+										}
+									}
+								}
 							}
-							if (tarItemPath.value == "Charti Berry" && moveType == "Rock") {
-								check = true;
+
+							if (movePath.value == "Struggle" || movePath.value == "Future Sight" || movePath.value == "Beat Up" || movePath.value == "Doom Desire") {
+								Type = 1;
 							}
-							if (tarItemPath.value == "Chople Berry" && moveType == "Fighting") {
-								check = true;
-							}
-							if (tarItemPath.value == "Coba Berry" && moveType == "Flying") {
-								check = true;
-							}
-							if (tarItemPath.value == "Colbur Berry" && moveType == "Dark") {
-								check = true;
-							}
-							if (tarItemPath.value == "Haban Berry" && moveType == "Dragon") {
-								check = true;
-							}
-							if (tarItemPath.value == "Kasib Berry" && moveType == "Ghost") {
-								check = true;
-							}
-							if (tarItemPath.value == "Kebia Berry" && moveType == "Poison") {
-								check = true;
-							}
-							if (tarItemPath.value == "Occa Berry" && moveType == "Fire") {
-								check = true;
-							}
-							if (tarItemPath.value == "Passho Berry" && moveType == "Water") {
-								check = true;
-							}
-							if (tarItemPath.value == "Payapa Berry" && moveType == "Psychic") {
-								check = true;
-							}
-							if (tarItemPath.value == "Rindo Berry" && moveType == "Grass") {
-								check = true;
-							}
-							if (tarItemPath.value == "Roseli Berry" && moveType == "Fairy") {
-								check = true;
-							}
-							if (tarItemPath.value == "Shuca Berry" && moveType == "Ground") {
-								check = true;
-							}
-							if (tarItemPath.value == "Tanga Berry" && moveType == "Bug") {
-								check = true;
-							}
-							if (tarItemPath.value == "Wacan Berry" && moveType == "Electric") {
-								check = true;
-							}
-							if (tarItemPath.value == "Yache Berry" && moveType == "Ice") {
-								check = true;
+
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Stockpile*Critical*DoubleDmg*Charge*HelpingHand*STAB*Type*random;
+
+							if (Immune) {
+								calculation = 0;
 							}
 						}
-						if (check) {
-							Berry = 0.5;
-						}
-						
+						else if (Generation == 4) {
+							// Defaults
+							var Level = 1;
+							var Power = 0;
+							var Attack = 0;
+							var Defense = 0;
+							var Burn = 1;
+							var Screen = 1;
+							var Targets = 1;
+							var Weather = 1;
+							var FlashFire = 1;
+							var Critical = 1;
+							var Item = 1;
+							var MeFirst = 1;
+							var random = 1;
+							var STAB = 1;
+							var Type1 = 1;
+							var Type2 = 1;
+							var SolidRockFilter = 1;
+							var ExpertBelt = 1;
+							var TintedLens = 1;
+							var Berry = 1;
 
-						calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*Item*First*random*STAB*Type1*Type2*SolidRockFilter*ExpertBelt*TintedLens*Berry;
-
-					}
-					else if (Generation >= 5) {
-						// Defaults
-						var Level = 1;
-						var Power = 0;
-						var Attack = 0;
-						var Defense = 0;
-						var Targets = 1;
-						var Weather = 1;
-						var GlaiveRush = 1;
-						var Critical = 1;
-						var random = 1;
-						var STAB = 1;
-						var Type = 1;
-						var Screen = 1;
-						var BehemothBladeBehemothBashDynamaxCannon = 1;
-						var Minimize = 1;
-						var SurfWhirlpool = 1;
-						var EarthquakeMagnitude = 1;
-						var Screen = 1;
-						var ColissionCourseElectroDrift = 1;
-						var MultiscaleShadowShield = 1;
-						var Fluffy1 = 1;
-						var PunkRock = 1;
-						var IceScales = 1;
-						var FriendGuard = 1;
-						var FilterPrismArmorSolidRock = 1;
-						var Neuroforce = 1;
-						var Sniper = 1;
-						var TintedLens = 1;
-						var Fluffy2 = 1;
-						var Item = 1;
-						var Berry = 1;
-						var ZMove = 1;
-						var TeraShield = 1;
-
-						Level = userLevelPath.value;
-						if (criticalPath.checked) {
-							if (Generation == 5) {
+							Level = userLevelPath.value;
+							if (criticalPath.checked) {
 								Critical = 2;
 							}
-							else {
-								Critical = 1.5;
+							Power = movePower;
+							if (Power == "-") {
+								Power = 0;
 							}
-						}
-						Power = powerPath.innerText;
-						if (Power == "-") {
-							Power = 0;
-						}
-						random = randomPath.value/100;
+							random = randomPath.value/100;
 
 
-						if (movePath.value == "Storm Throw" || movePath.value == "Frost Breath" || movePath.value == "Zippy Zap" || movePath.value == "Surging Strikes" || movePath.value == "Wicked Blow" || movePath.value == "Flower Trick") {
-							if (Generation == 5) {
-								Critical = 2;
+							if (moveCategory == "Physical") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Attack") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Defense") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
 							}
-							else {
-								Critical = 1.5;
+							else if (moveCategory == "Special") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
 							}
-						}
-						if (userAbilityPath.value == "Merciless") {
+
+
+
+							if (tarStatusBurnPath.checked) {
+								if (tarAbilityPath.value != "Guts") {
+									if (moveCategory == "Physical") {
+										Burn = 0.5;
+									}
+								}
+							}
+
+							if (moveCategory == "Physical") {
+								if (tarReflectPath.checked) {
+									if (parseInt(battle.getAttribute("data-count")) > 2) {
+										Screen = 0.6667;
+									}
+									else {
+										Screen = 0.5;
+									}
+								}
+							}
+							if (moveCategory == "Special") {
+								if (tarLightScreenPath.checked) {
+									if (parseInt(battle.getAttribute("data-count")) > 2) {
+										Screen = 0.6667;
+									}
+									else {
+										Screen = 0.5;
+									}
+								}
+							}
+
+							
+							if (Critical == 2) {
+								Screen = 1;
+
+								// Ignore "Negative" User Attack Stat Changes on Critical Hit
+								for(var u = 0; u < userModPath.length; u++) {
+									var userval = userModPath[u].value;
+									if (userval == "" || userval == undefined) {
+										userval = 0;
+									}
+
+									if (moveCategory == "Physical") {
+										if (tarModPath[u].getAttribute("name") == "Attack") {
+											if (userval < 0) {
+												Attack = NoModAttack;
+											}
+										}
+									}
+									else if (moveCategory == "Special") {
+										if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
+											if (userval < 0) {
+												Attack = NoModAttack;
+											}
+										}
+									}
+								}
+								// Ignore "Positive" Target Defense Stat Changes on Critical Hit
+								for(var u = 0; u < tarModPath.length; u++) {
+									var tarval = tarModPath[u].value;
+									if (tarval == "" || tarval == undefined) {
+										tarval = 0;
+									}
+
+									if (moveCategory == "Physical") {
+										if (tarModPath[u].getAttribute("name") == "Defense") {
+											if (tarval > 0) {
+												Defense = NoModDefense;
+											}
+										}
+									}
+									else if (moveCategory == "Special") {
+										if (tarModPath[u].getAttribute("name") == "Sp. Def") {
+											if (tarval > 0) {
+												Defense = NoModDefense;
+											}
+										}
+									}
+								}
+							}
+							
+							if (parseInt(battle.getAttribute("data-count")) > 2) {
+								if (target.length > 1) {
+									if (target.parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
+										Targets = 0.75;
+									}
+								}
+							}
+
+							
+							if (weatherRainPath.checked) {
+								if (moveType == "Fire") {
+									Weather = 0.5;
+								}
+								if (moveType == "Water") {
+									Weather = 1.5;
+								}
+							}
+							if (weatherHarshSunlightPath.checked) {
+								if (moveType == "Fire") {
+									Weather = 1.5;
+								}
+								if (moveType == "Water") {
+									Weather = 0.5;
+								}
+							}
+							if (movePath.value == "SolarBeam") {
+								weatherInputsPath
+								var check = true;
+								for(var u = 0; u < weatherInputsPath.length; u++) {
+									if (weatherInputsPath[u].parentElement.getAttribute("name") != "Harsh Sunlight") {
+										if (weatherInputsPath[u].checked) {
+											check = false;
+										}
+									}
+								}
+								if (check) {
+									Weather = 0.5;
+								}
+							}
+
 							var check = false;
-							if (tarStatusPoisonPath.checked) {
-								check = true;
-							}
-							if (tarStatusBadPoisonPath.value != "" && tarStatusBadPoisonPath.value != undefined) {
-								check = true;
+							for(var u = 0; u < allbase.length; u++) {
+								var ab = allbase[u].querySelector(":scope *[name='ability'] select");
+								if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
+									check = true;
+								}
 							}
 							if (check) {
+								Weather = 1;
+							}
+
+							if (userAbilityPath.value == "Flash Fire") {
+								if (moveType == "Fire") {
+									if (FlashFirePath.checked) {
+										FlashFire = 1.5;
+									}
+								}
+							}
+
+							if (userItemPath.value == "Life Orb") {
+								Item = 1.3;
+							}
+							
+							if (userItemPath.value == "Metronome") {
+								var val = userItemCountPath.value;
+								if (isNaN(val)) {
+									val = 0;
+								}
+								if (val > 10) {
+									val = 10;
+								}
+								Item = 1+(val/10);
+							}
+							
+							if (MeFirstPath.checked) {
+								MeFirst = 1.5;
+							}
+							if (userTypes[0] == moveType || userTypes[1] == moveType) {
+								STAB = 1.5;
+							}
+
+
+				
+							var typeadv1 = returnTypeAdvantage(tarTypes[0],"Attacking");
+							if (typeadv1[2].includes(moveType.toUpperCase())) {
+								Type1 = 2;
+							}
+							if (typeadv1[2].includes(moveType.toUpperCase())) {
+								Type1 = 0.5;
+							}
+							if (typeadv1[3].includes(moveType.toUpperCase())) {
+								Immune = true;
+							}
+
+							var typeadv2 = returnTypeAdvantage(tarTypes[1],"Attacking");
+							if (typeadv2[2].includes(moveType.toUpperCase())) {
+								Type2 = 2;
+							}
+							if (typeadv2[2].includes(moveType.toUpperCase())) {
+								Type2 = 0.5;
+							}
+							if (typeadv2[3].includes(moveType.toUpperCase())) {
+								Immune = true;
+							}
+							
+
+							if (movePath.value == "Struggle" || movePath.value == "Future Sight" || movePath.value == "Beat Up" || movePath.value == "Doom Desire") {
+								Type1 = 1;
+								Type2 = 1;
+							}
+
+							if (tarAbilityPath.value == "Solid Rock" || tarAbilityPath.value == "Filter") {
+								if (userAbilityPath != "Mold Breaker") {
+									if (Type1+Type2 > 2) {
+										SolidRockFilter = 0.75;
+									}
+								}
+							}
+
+							if (userItemPath.value == "Expert Belt") {
+								if (Type1+Type2 > 2) {
+									ExpertBelt = 1.2;
+								}
+							}
+
+							if (userAbilityPath.value == "Tinted Lens") {
+								if (Type1+Type2 < 2) {
+									TintedLens = 2;
+								}
+							}
+							
+							var check = false;
+
+							if (tarItemPath.value == "Chilan Berry" && moveType == "Normal") {
+								check = true;
+							}
+							if (Type1+Type2 > 2) {
+								if (tarItemPath.value == "Babiri Berry" && moveType == "Steel") {
+									check = true;
+								}
+								if (tarItemPath.value == "Charti Berry" && moveType == "Rock") {
+									check = true;
+								}
+								if (tarItemPath.value == "Chople Berry" && moveType == "Fighting") {
+									check = true;
+								}
+								if (tarItemPath.value == "Coba Berry" && moveType == "Flying") {
+									check = true;
+								}
+								if (tarItemPath.value == "Colbur Berry" && moveType == "Dark") {
+									check = true;
+								}
+								if (tarItemPath.value == "Haban Berry" && moveType == "Dragon") {
+									check = true;
+								}
+								if (tarItemPath.value == "Kasib Berry" && moveType == "Ghost") {
+									check = true;
+								}
+								if (tarItemPath.value == "Kebia Berry" && moveType == "Poison") {
+									check = true;
+								}
+								if (tarItemPath.value == "Occa Berry" && moveType == "Fire") {
+									check = true;
+								}
+								if (tarItemPath.value == "Passho Berry" && moveType == "Water") {
+									check = true;
+								}
+								if (tarItemPath.value == "Payapa Berry" && moveType == "Psychic") {
+									check = true;
+								}
+								if (tarItemPath.value == "Rindo Berry" && moveType == "Grass") {
+									check = true;
+								}
+								if (tarItemPath.value == "Roseli Berry" && moveType == "Fairy") {
+									check = true;
+								}
+								if (tarItemPath.value == "Shuca Berry" && moveType == "Ground") {
+									check = true;
+								}
+								if (tarItemPath.value == "Tanga Berry" && moveType == "Bug") {
+									check = true;
+								}
+								if (tarItemPath.value == "Wacan Berry" && moveType == "Electric") {
+									check = true;
+								}
+								if (tarItemPath.value == "Yache Berry" && moveType == "Ice") {
+									check = true;
+								}
+							}
+							if (check) {
+								Berry = 0.5;
+							}
+
+							if (moveType == "Electric") {
+								if (ChargePath.checked) {
+									Power = Power*2;
+								}
+							}
+							
+
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*Item*MeFirst*random*STAB*Type1*Type2*SolidRockFilter*ExpertBelt*TintedLens*Berry;
+
+						}
+						else if (Generation >= 5) {
+							// Defaults
+							var Level = 1;
+							var Power = 0;
+							var Attack = 0;
+							var Defense = 0;
+							var Targets = 1;
+							var Weather = 1;
+							var GlaiveRush = 1;
+							var Critical = 1;
+							var random = 1;
+							var STAB = 1;
+							var Type = 1;
+							var Screen = 1;
+							var BehemothBladeBehemothBashDynamaxCannon = 1;
+							var Minimize = 1;
+							var SurfWhirlpool = 1;
+							var EarthquakeMagnitude = 1;
+							var Screen = 1;
+							var ColissionCourseElectroDrift = 1;
+							var MultiscaleShadowShield = 1;
+							var Fluffy1 = 1;
+							var PunkRock = 1;
+							var IceScales = 1;
+							var FriendGuard = 1;
+							var FilterPrismArmorSolidRock = 1;
+							var Neuroforce = 1;
+							var Sniper = 1;
+							var TintedLens = 1;
+							var Fluffy2 = 1;
+							var Item = 1;
+							var Berry = 1;
+							var ZMove = 1;
+							var MeFirst = 1;
+
+							Level = userLevelPath.value;
+							if (criticalPath.checked) {
 								if (Generation == 5) {
 									Critical = 2;
 								}
@@ -3359,729 +3452,780 @@ var createTool = function() {
 									Critical = 1.5;
 								}
 							}
-						}
-						if (userLaserFocusPath.checked) {
-							if (Generation == 5) {
-								Critical = 2;
+							Power = movePower;
+							if (Power == "-") {
+								Power = 0;
 							}
-							else {
-								Critical = 1.5;
-							}
-						}
+							random = randomPath.value/100;
 
 
-						if (tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
-							Critical = 1;
-						}
-						if (tarLuckyChantPath.checked) {
-							Critical = 1;
-						}
-						
-
-
-						if (target.length > 1) {
-							if (battle.value == "Battle Royal") {
-								Targets = 0.5;
-							}
-							else {
-								Targets = 0.75;
-							}
-						}
-
-						if (moveCategory == "Physical") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Attack") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (movePath.value == "Storm Throw" || movePath.value == "Frost Breath" || movePath.value == "Zippy Zap" || movePath.value == "Surging Strikes" || movePath.value == "Wicked Blow" || movePath.value == "Flower Trick") {
+								if (Generation == 5) {
+									Critical = 2;
+								}
+								else {
+									Critical = 1.5;
 								}
 							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Defense") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
+							if (userAbilityPath != undefined && userAbilityPath.value == "Merciless") {
+								var check = false;
+								if (tarStatusPoisonPath.checked) {
+									check = true;
 								}
-							}
-						}
-						else if (moveCategory == "Special") {
-							for(var u = 0; u < userStatsPath.length; u++) {
-								if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
-									Attack = userStatsPath[u].value;
-									NoModAttack = userStatsPath[u].getAttribute("data-nomod");
-									break;
+								if (tarStatusBadPoisonPath.value != "" && tarStatusBadPoisonPath.value != undefined) {
+									check = true;
 								}
-							}
-							for(var u = 0; u < tarStatsPath.length; u++) {
-								if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
-									Defense = tarStatsPath[u].value;
-									NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
-									break;
-								}
-							}
-						}
-
-						if (Critical > 1) {
-							// Ignore "Negative" User Attack Stat Changes on Critical Hit
-							for(var u = 0; u < userModPath.length; u++) {
-								var userval = userModPath[u].value;
-								if (userval == "" || userval == undefined) {
-									userval = 0;
-								}
-
-								if (moveCategory == "Physical") {
-									if (tarModPath[u].getAttribute("name") == "Attack") {
-										if (userval < 0) {
-											Attack = NoModAttack;
-										}
+								if (check) {
+									if (Generation == 5) {
+										Critical = 2;
 									}
-								}
-								else if (moveCategory == "Special") {
-									if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
-										if (userval < 0) {
-											Attack = NoModAttack;
-										}
+									else {
+										Critical = 1.5;
 									}
 								}
 							}
-							// Ignore "Positive" Target Defense Stat Changes on Critical Hit
-							for(var u = 0; u < tarModPath.length; u++) {
-								var tarval = tarModPath[u].value;
-								if (tarval == "" || tarval == undefined) {
-									tarval = 0;
+							if (LaserFocusPath.checked) {
+								if (Generation == 5) {
+									Critical = 2;
 								}
+								else {
+									Critical = 1.5;
+								}
+							}
 
-								if (moveCategory == "Physical") {
-									if (tarModPath[u].getAttribute("name") == "Defense") {
-										if (tarval > 0) {
-											Defense = NoModDefense;
+
+							if (tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
+								Critical = 1;
+							}
+							if (tarLuckyChantPath.checked) {
+								Critical = 1;
+							}
+							
+
+
+							if (target.length > 1) {
+								if (battle.value == "Battle Royal") {
+									Targets = 0.5;
+								}
+								else {
+									Targets = 0.75;
+								}
+							}
+
+							if (moveCategory == "Physical") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Attack") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Defense") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+							else if (moveCategory == "Special") {
+								for(var u = 0; u < userStatsPath.length; u++) {
+									if (userStatsPath[u].getAttribute("name") == "Sp. Atk") {
+										Attack = userStatsPath[u].value;
+										NoModAttack = userStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+								for(var u = 0; u < tarStatsPath.length; u++) {
+									if (tarStatsPath[u].getAttribute("name") == "Sp. Def") {
+										Defense = tarStatsPath[u].value;
+										NoModDefense = tarStatsPath[u].getAttribute("data-nomod");
+										break;
+									}
+								}
+							}
+
+							if (Critical > 1) {
+								// Ignore "Negative" User Attack Stat Changes on Critical Hit
+								for(var u = 0; u < userModPath.length; u++) {
+									var userval = userModPath[u].value;
+									if (userval == "" || userval == undefined) {
+										userval = 0;
+									}
+
+									if (moveCategory == "Physical") {
+										if (tarModPath[u].getAttribute("name") == "Attack") {
+											if (userval < 0) {
+												Attack = NoModAttack;
+											}
+										}
+									}
+									else if (moveCategory == "Special") {
+										if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
+											if (userval < 0) {
+												Attack = NoModAttack;
+											}
 										}
 									}
 								}
-								else if (moveCategory == "Special") {
-									if (tarModPath[u].getAttribute("name") == "Sp. Def") {
-										if (tarval > 0) {
-											Defense = NoModDefense;
+								// Ignore "Positive" Target Defense Stat Changes on Critical Hit
+								for(var u = 0; u < tarModPath.length; u++) {
+									var tarval = tarModPath[u].value;
+									if (tarval == "" || tarval == undefined) {
+										tarval = 0;
+									}
+
+									if (moveCategory == "Physical") {
+										if (tarModPath[u].getAttribute("name") == "Defense") {
+											if (tarval > 0) {
+												Defense = NoModDefense;
+											}
+										}
+									}
+									else if (moveCategory == "Special") {
+										if (tarModPath[u].getAttribute("name") == "Sp. Def") {
+											if (tarval > 0) {
+												Defense = NoModDefense;
+											}
 										}
 									}
 								}
 							}
-						}
 
 
-						if (weatherRainPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 0.5;
-							}
-							if (moveType == "Water") {
-								Weather = 1.5;
-							}
-						}
-						if (weatherHarshSunlightPath.checked) {
-							if (moveType == "Fire") {
-								Weather = 1.5;
-							}
-							if (moveType == "Water") {
-								if (movePath.value != "Hydro Steam") {
+							if (weatherRainPath.checked) {
+								if (moveType == "Fire") {
 									Weather = 0.5;
 								}
+								if (moveType == "Water") {
+									Weather = 1.5;
+								}
 							}
-						}
-
-						var check = false;
-						for(var u = 0; u < allbase.length; u++) {
-							var ab = allbase[u].querySelector(":scope *[name='ability'] select");
-							if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
-								check = true;
-							}
-						}
-						if (check) {
-							Weather = 1;
-						}
-
-						if (userTypes[0] == moveType || userTypes[1] == moveType) {
-							if (userAbilityPath.value == "Adaptability") {
-								STAB = 2;
-							}
-							else {
-								STAB = 1.5;
-							}
-						}
-
-						if (movePath.value.includes(" Pledge")) {
-							if (userAbilityPath.value == "Adaptability") {
-								STAB = 2;
-							}
-							else {
-								STAB = 1.5;
-							}
-						}
-
-
-						if (tarTypes.length > 0) {
-							for (var u = 0; u < Types.length; u++) {
-								if (moveType == Types[u]) {
-									var typeadv = returnTypeAdvantage(Types[u],"Attacking");
-
-									if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
-										Type = 2;
+							if (weatherHarshSunlightPath.checked) {
+								if (moveType == "Fire") {
+									Weather = 1.5;
+								}
+								if (moveType == "Water") {
+									if (movePath.value != "Hydro Steam") {
+										Weather = 0.5;
 									}
-									if (typeadv[2].includes(tarTypes[0].toUpperCase()) && typeadv[2].includes(tarTypes[1].toUpperCase())) {
+								}
+							}
+
+							var check = false;
+							for(var u = 0; u < allbase.length; u++) {
+								var ab = allbase[u].querySelector(":scope *[name='ability'] select");
+								if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
+									check = true;
+								}
+							}
+							if (check) {
+								Weather = 1;
+							}
+
+							if (userTypes[0] == moveType || userTypes[1] == moveType) {
+								if (userAbilityPath.value == "Adaptability") {
+									STAB = 2;
+								}
+								else {
+									STAB = 1.5;
+								}
+							}
+
+							if (movePath.value.includes(" Pledge")) {
+								if (userAbilityPath.value == "Adaptability") {
+									STAB = 2;
+								}
+								else {
+									STAB = 1.5;
+								}
+							}
+
+
+							if (tarTypes.length > 0) {
+								for (var u = 0; u < Types.length; u++) {
+									if (moveType == Types[u]) {
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
+
+										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
+											Type = 2;
+										}
+										if (typeadv[2].includes(tarTypes[0].toUpperCase()) && typeadv[2].includes(tarTypes[1].toUpperCase())) {
+											Type = 4;
+										}
+										if (typeadv[1].includes(tarTypes[0].toUpperCase()) || typeadv[1].includes(tarTypes[1].toUpperCase())) {
+											var check = true;
+											if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
+												check = false;
+											}
+
+											if (check) {
+												Type = 0.5;
+											}
+											else {
+												Type = 1;
+											}
+										}
+										if (typeadv[1].includes(tarTypes[0].toUpperCase()) && typeadv[1].includes(tarTypes[1].toUpperCase())) {
+											var check = true;
+											if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
+												check = false;
+											}
+
+											if (check) {
+												Type = 0.25;
+											}
+											else {
+												Type = 0.5;
+											}
+										}
+										if (typeadv[3].includes(tarTypes[0].toUpperCase())) {
+											var check = true;
+											if (tarTypes[0] == "Flying" && tarThousandArrowsPath.checked) {
+												check = false;
+											}
+											if (tarTypes[0] == "Flying" && tarItemPath.value == "Iron Ball") {
+												check = false;
+											}
+											if (tarItemPath.value == "Ring Target") {
+												check = false;
+											}
+											if (tarAbilityPath.value == "Scrappy") {
+												if (tarTypes[0] == "Normal" || tarTypes[0] == "Fighting") {
+													check = false;
+												}
+											}
+											if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuth.checked) {
+												check = false;
+											}
+											if (check) {
+												Immune = true;
+											}
+										}
+										if (typeadv[3].includes(tarTypes[1].toUpperCase())) {
+											var check = true;
+											if (tarTypes[1] == "Flying" && tarThousandArrowsPath.checked) {
+												check = false;
+											}
+											if (tarTypes[1] == "Flying" && tarItemPath.value == "Iron Ball") {
+												check = false;
+											}
+											if (tarItemPath.value == "Ring Target") {
+												check = false;
+											}
+											if (tarAbilityPath.value == "Scrappy") {
+												if (tarTypes[1] == "Normal" || tarTypes[1] == "Fighting") {
+													check = false;
+												}
+											}
+											if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuth.checked) {
+												check = false;
+											}
+											if (check) {
+												Immune = true;
+											}
+										}
+									}
+								}
+							}
+
+							if (movePath.value == "Freeze-Dry") {
+								if (!typeadv[2].includes("WATER")) {
+									if (Type == 4) {
+										Type = 8;
+									}
+									if (Type == 2) {
 										Type = 4;
 									}
-									if (typeadv[1].includes(tarTypes[0].toUpperCase()) || typeadv[1].includes(tarTypes[1].toUpperCase())) {
-										var check = true;
-										if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
-											check = false;
-										}
-
-										if (check) {
-											Type = 0.5;
-										}
-										else {
-											Type = 1;
-										}
+									if (Type == 1) {
+										Type = 2;
 									}
-									if (typeadv[1].includes(tarTypes[0].toUpperCase()) && typeadv[1].includes(tarTypes[1].toUpperCase())) {
-										var check = true;
-										if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
-											check = false;
-										}
-
-										if (check) {
-											Type = 0.25;
-										}
-										else {
-											Type = 0.5;
-										}
+									if (Type == 0.5) {
+										Type = 1;
 									}
-									if (typeadv[3].includes(tarTypes[0].toUpperCase())) {
-										var check = true;
-										if (tarTypes[0] == "Flying" && tarThousandArrowsPath.checked) {
-											check = false;
-										}
-										if (tarTypes[0] == "Flying" && tarItemPath.value == "Iron Ball") {
-											check = false;
-										}
-										if (tarItemPath.value == "Ring Target") {
-											check = false;
-										}
-										if (tarAbilityPath.value == "Scrappy") {
-											if (tarTypes[0] == "Normal" || tarTypes[0] == "Fighting") {
-												check = false;
+									if (Type == 0.25) {
+										Type = 0.5;
+									}
+								}
+							}
+							if (movePath.value == "Flying Press") {
+								var tempTypeAdv = returnTypeAdvantage("Flying","Attacking");
+								if (tempTypeAdv[1].includes("FLYING")) {
+									if (Type == 4) {
+										Type = 2;
+									}
+									if (Type == 2) {
+										Type = 1;
+									}
+									if (Type == 1) {
+										Type = 0.5;
+									}
+									if (Type == 0.5) {
+										Type = 0.25;
+									}
+									if (Type == 0.25) {
+										Type = 0.125;
+									}
+								}
+								if (tempTypeAdv[2].includes("FLYING")) {
+									if (Type == 4) {
+										Type = 8;
+									}
+									if (Type == 2) {
+										Type = 4;
+									}
+									if (Type == 1) {
+										Type = 2;
+									}
+									if (Type == 0.5) {
+										Type = 1;
+									}
+									if (Type == 0.25) {
+										Type = 0.5;
+									}
+								}
+							}
+							if (ForestsCursePath.checked) {
+								if (typeadv[1].includes("GRASS")) {
+									if (Type == 4) {
+										Type = 2;
+									}
+									if (Type == 2) {
+										Type = 1;
+									}
+									if (Type == 1) {
+										Type = 0.5;
+									}
+									if (Type == 0.5) {
+										Type = 0.25;
+									}
+									if (Type == 0.25) {
+										Type = 0.125;
+									}
+								}
+								if (typeadv[2].includes("GRASS")) {
+									if (Type == 4) {
+										Type = 8;
+									}
+									if (Type == 2) {
+										Type = 4;
+									}
+									if (Type == 1) {
+										Type = 2;
+									}
+									if (Type == 0.5) {
+										Type = 1;
+									}
+									if (Type == 0.25) {
+										Type = 0.5;
+									}
+								}
+							}
+							if (TrickOrTreatPath.checked) {
+								if (typeadv[1].includes("Ghost")) {
+									if (Type == 4) {
+										Type = 2;
+									}
+									if (Type == 2) {
+										Type = 1;
+									}
+									if (Type == 1) {
+										Type = 0.5;
+									}
+									if (Type == 0.5) {
+										Type = 0.25;
+									}
+									if (Type == 0.25) {
+										Type = 0.125;
+									}
+								}
+								if (typeadv[2].includes("Ghost")) {
+									if (Type == 4) {
+										Type = 8;
+									}
+									if (Type == 2) {
+										Type = 4;
+									}
+									if (Type == 1) {
+										Type = 2;
+									}
+									if (Type == 0.5) {
+										Type = 1;
+									}
+									if (Type == 0.25) {
+										Type = 0.5;
+									}
+								}
+							}
+
+							if (tarTarShotPath.checked) {
+								if (moveType == "Fire") {
+									Type = Type * 2;
+								}
+							}
+
+							
+							if (movePath.value == "Struggle") {
+								Type = 1;
+							}
+
+
+							if (GlaiveRushPath.checked) {
+								GlaiveRush = 2;
+							}
+
+			
+							if (userStatusBurnPath.checked) {
+								if (userAbilityPath.value != "Guts") {
+									if (moveCategory == "Physical") {
+										if (Generation != 5) {
+											if (movePath.value != "Facade") {
+												Burn = 0.5;
 											}
 										}
-										if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuth.checked) {
-											check = false;
-										}
-										if (check) {
-											Immune = true;
-										}
-									}
-									if (typeadv[3].includes(tarTypes[1].toUpperCase())) {
-										var check = true;
-										if (tarTypes[1] == "Flying" && tarThousandArrowsPath.checked) {
-											check = false;
-										}
-										if (tarTypes[1] == "Flying" && tarItemPath.value == "Iron Ball") {
-											check = false;
-										}
-										if (tarItemPath.value == "Ring Target") {
-											check = false;
-										}
-										if (tarAbilityPath.value == "Scrappy") {
-											if (tarTypes[1] == "Normal" || tarTypes[1] == "Fighting") {
-												check = false;
-											}
-										}
-										if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuth.checked) {
-											check = false;
-										}
-										if (check) {
-											Immune = true;
-										}
-									}
-								}
-							}
-						}
-
-						if (movePath.value == "Freeze-Dry") {
-							if (!typeadv[2].includes("WATER")) {
-								if (Type == 4) {
-									Type = 8;
-								}
-								if (Type == 2) {
-									Type = 4;
-								}
-								if (Type == 1) {
-									Type = 2;
-								}
-								if (Type == 0.5) {
-									Type = 1;
-								}
-								if (Type == 0.25) {
-									Type = 0.5;
-								}
-							}
-						}
-						if (movePath.value == "Flying Press") {
-							var tempTypeAdv = returnTypeAdvantage("Flying","Attacking");
-							if (tempTypeAdv[1].includes("FLYING")) {
-								if (Type == 4) {
-									Type = 2;
-								}
-								if (Type == 2) {
-									Type = 1;
-								}
-								if (Type == 1) {
-									Type = 0.5;
-								}
-								if (Type == 0.5) {
-									Type = 0.25;
-								}
-								if (Type == 0.25) {
-									Type = 0.125;
-								}
-							}
-							if (tempTypeAdv[2].includes("FLYING")) {
-								if (Type == 4) {
-									Type = 8;
-								}
-								if (Type == 2) {
-									Type = 4;
-								}
-								if (Type == 1) {
-									Type = 2;
-								}
-								if (Type == 0.5) {
-									Type = 1;
-								}
-								if (Type == 0.25) {
-									Type = 0.5;
-								}
-							}
-						}
-						if (tarForestsCursePath.checked) {
-							if (typeadv[1].includes("GRASS")) {
-								if (Type == 4) {
-									Type = 2;
-								}
-								if (Type == 2) {
-									Type = 1;
-								}
-								if (Type == 1) {
-									Type = 0.5;
-								}
-								if (Type == 0.5) {
-									Type = 0.25;
-								}
-								if (Type == 0.25) {
-									Type = 0.125;
-								}
-							}
-							if (typeadv[2].includes("GRASS")) {
-								if (Type == 4) {
-									Type = 8;
-								}
-								if (Type == 2) {
-									Type = 4;
-								}
-								if (Type == 1) {
-									Type = 2;
-								}
-								if (Type == 0.5) {
-									Type = 1;
-								}
-								if (Type == 0.25) {
-									Type = 0.5;
-								}
-							}
-						}
-						if (tarTrickOrTreatPath.checked) {
-							if (typeadv[1].includes("Ghost")) {
-								if (Type == 4) {
-									Type = 2;
-								}
-								if (Type == 2) {
-									Type = 1;
-								}
-								if (Type == 1) {
-									Type = 0.5;
-								}
-								if (Type == 0.5) {
-									Type = 0.25;
-								}
-								if (Type == 0.25) {
-									Type = 0.125;
-								}
-							}
-							if (typeadv[2].includes("Ghost")) {
-								if (Type == 4) {
-									Type = 8;
-								}
-								if (Type == 2) {
-									Type = 4;
-								}
-								if (Type == 1) {
-									Type = 2;
-								}
-								if (Type == 0.5) {
-									Type = 1;
-								}
-								if (Type == 0.25) {
-									Type = 0.5;
-								}
-							}
-						}
-
-						if (tarTarShotPath.checked) {
-							if (moveType == "Fire") {
-								Type = Type * 2;
-							}
-						}
-
-						
-						if (movePath.value == "Struggle") {
-							Type = 1;
-						}
-
-
-						if (tarGlaiveRushPath.checked) {
-							GlaiveRush = 2;
-						}
-
-		
-						if (userStatusBurnPath.checked) {
-							if (userAbilityPath.value != "Guts") {
-								if (moveCategory == "Physical") {
-									if (Generation != 5) {
-										if (movePath.value != "Facade") {
+										else {
 											Burn = 0.5;
 										}
 									}
+								}
+							}
+
+							if (tarDynamaxPath.checked) {
+								if (movePath.value == "Behemoth Blade" || movePath.value == "Behemoth Bash" || movePath.value == "Dynamax Cannon") {
+									BehemothBladeBehemothBashDynamaxCannon = 2;
+								}
+							}
+							if (MinimizePath.checked) {
+								var tempOtherMoves = [];
+								if (Generation == 5) {
+									tempOtherMoves = ["Stomp","Steamroller"];
+								}
+								if (Generation == 6) {
+									tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Shadow Force","Steamroller","Heat Crash","Phantom Force","Flying Press"];
+								}
+								if (Generation == 7) {
+									tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Steamroller","Heat Crash","Heavy Slam","Flying Press","Malicious Moonsault","Double Iron Bash"];
+								}
+								if (Generation == 8) {
+									tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Heat Crash","Heavy Slam","Flying Press"];
+								}
+								if (tempOtherMoves.includes(movePath.value)) {
+									Minimize = 2;
+								}
+							}
+
+							if (InvunerableDigPath.checked) {
+								if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
+									EarthquakeMagnitude = 2;
+								}
+							}
+
+							if (InvunerableDivePath.checked) {
+								if (movePath.value == "Surf" || movePath.value == "Whirlpool") {
+									SurfWhirlpool = 2;
+								}
+							}
+							
+
+							if (moveCategory == "Physical") {
+								if (tarReflectPath.checked) {
+									if (parseInt(battle.getAttribute("data-count")) > 2) {
+										Screen = 0.6667;
+									}
 									else {
-										Burn = 0.5;
+										Screen = 0.5;
 									}
 								}
 							}
-						}
+							if (moveCategory == "Special") {
+								if (tarLightScreenPath.checked) {
+									if (parseInt(battle.getAttribute("data-count")) > 2) {
+										Screen = 0.6667;
+									}
+									else {
+										Screen = 0.5;
+									}
+								}
+							}
 
-						if (tarDynamaxPath.checked) {
-							if (movePath.value == "Behemoth Blade" || movePath.value == "Behemoth Bash" || movePath.value == "Dynamax Cannon") {
-								BehemothBladeBehemothBashDynamaxCannon = 2;
+							if (tarAuroraVeilPath.checked) {
+								if (parseInt(battle.getAttribute("data-count")) > 2) {
+									Screen = 0.6667;
+								}
+								else {
+									Screen = 0.5;
+								}
 							}
-						}
-						if (moveSpecific.checked) { // Minimize
-							var tempOtherMoves = [];
-							if (Generation == 5) {
-								tempOtherMoves = ["Stomp","Steamroller"];
-							}
-							if (Generation == 6) {
-								tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Shadow Force","Steamroller","Heat Crash","Phantom Force","Flying Press"];
-							}
-							if (Generation == 7) {
-								tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Steamroller","Heat Crash","Heavy Slam","Flying Press","Malicious Moonsault","Double Iron Bash"];
-							}
-							if (Generation == 8) {
-								tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Heat Crash","Heavy Slam","Flying Press"];
-							}
-							if (tempOtherMoves.includes(movePath.value)) {
-								Minimize = 2;
-							}
-						}
 
-						if (moveSpecific.checked) {
-							if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
-								EarthquakeMagnitude = 2;
+							if (movePath.value == "Collision Course" || movePath.value == "Electro Drift") {
+								if (Type > 1) {
+									ColissionCourseElectroDrift = 1.3333;
+								}
 							}
-						}
 
-						if (moveSpecific.checked) {
-							if (movePath.value == "Surf" || movePath.value == "Whirlpool") {
-								SurfWhirlpool = 2;
+							if (tarAbilityPath.value == "Multiscale" || tarAbilityPath.value == "Shadow Shield") {
+								if (tarHPCurrentPath.innerText == tarHPMaxPath.innerText) {
+									MultiscaleShadowShield = 0.5;
+								}
 							}
+
+							if (tarAbilityPath.value == "Fluffy") {
+								if (movePath.value != "Sunsteel Strike" && movePath.value != "Searing Sunraze Smash") {
+									if (userAbilityPath.value != "Long Reach") {
+										if (returnArrValue(finaldataMoveOtherMoves,"Name_"+JSONPath_MoveName,"Contact",movePath.value) == "Makes contact") {
+											Fluffy1 = 0.5;
+										}
+									}
+								}
+							}
+
+							if (tarAbilityPath.value == "Punk Rock") {
+								if (returnArrValue(finaldataMoveOtherMoves,"Name_"+JSONPath_MoveName,"Sound-Based",movePath.value) == "Is a sound-based move") {
+									PunkRock = 0.5;
+								}
+							}
+
+
+							if (tarAbilityPath.value == "Ice Scales") {
+								if (moveCategory == "Special") {
+									IceScales = 0.5;
+								}
+							}
+
+							var allies = target[i].parentElement.querySelectorAll(":scope > div[data-string]");
+							var check = false;
+							for (var u = 0; u < allies.length; u++) {
+								if (allies[u] != target[i]) {
+									var allyteam = allies[u].parentElement.getAttribute("name");
+									var allyid = allies[u].getAttribute("name");
+									var allyab = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+allyteam+"'] ul[name='"+allyid+"'] li[name='ability'] select");
+
+									if (allyab.value == "Friend Guard") {
+										check = true;
+										break;
+									}
+								}
+							}
+							if (check) {
+								FriendGuard = 0.75;
+							}
+
+							if (tarAbilityPath.value == "Filter" || tarAbilityPath.value == "Prism Armor" || tarAbilityPath.value == "Solid  Rock") {
+								if (Type > 1) {
+									FilterPrismArmorSolidRock = 0.75;
+								}
+							}
+
+							if (userAbilityPath.value == "Neuroforce") {
+								if (Type > 1) {
+									Neuroforce = 1.25;
+								}
+							}
+
+
+							if (Critical > 1) {
+								if (userAbilityPath.value == "Sniper") {
+									Sniper = 1.5;
+								}
+							}
+
+		
+							if (userAbilityPath.value == "Tinted Lens") {
+								if (Type < 1) {
+									TintedLens = 2;
+								}
+							}
+
+							if (tarAbilityPath.value == "Fluffy") {
+								if(movePath.value != "G-Max Fireball") {
+									if (moveType == "Fire") {
+										Fluffy2 = 2;
+									}
+								}
+							}
+			
+
+							var check = false;
+							if (tarItemPath.value == "Chilan Berry" && moveType == "Normal") {
+								check = true;
+							}
+							if (Type > 1) {
+								if (tarItemPath.value == "Babiri Berry" && moveType == "Steel") {
+									check = true;
+								}
+								if (tarItemPath.value == "Charti Berry" && moveType == "Rock") {
+									check = true;
+								}
+								if (tarItemPath.value == "Chople Berry" && moveType == "Fighting") {
+									check = true;
+								}
+								if (tarItemPath.value == "Coba Berry" && moveType == "Flying") {
+									check = true;
+								}
+								if (tarItemPath.value == "Colbur Berry" && moveType == "Dark") {
+									check = true;
+								}
+								if (tarItemPath.value == "Haban Berry" && moveType == "Dragon") {
+									check = true;
+								}
+								if (tarItemPath.value == "Kasib Berry" && moveType == "Ghost") {
+									check = true;
+								}
+								if (tarItemPath.value == "Kebia Berry" && moveType == "Poison") {
+									check = true;
+								}
+								if (tarItemPath.value == "Occa Berry" && moveType == "Fire") {
+									check = true;
+								}
+								if (tarItemPath.value == "Passho Berry" && moveType == "Water") {
+									check = true;
+								}
+								if (tarItemPath.value == "Payapa Berry" && moveType == "Psychic") {
+									check = true;
+								}
+								if (tarItemPath.value == "Rindo Berry" && moveType == "Grass") {
+									check = true;
+								}
+								if (tarItemPath.value == "Roseli Berry" && moveType == "Fairy") {
+									check = true;
+								}
+								if (tarItemPath.value == "Shuca Berry" && moveType == "Ground") {
+									check = true;
+								}
+								if (tarItemPath.value == "Tanga Berry" && moveType == "Bug") {
+									check = true;
+								}
+								if (tarItemPath.value == "Wacan Berry" && moveType == "Electric") {
+									check = true;
+								}
+								if (tarItemPath.value == "Yache Berry" && moveType == "Ice") {
+									check = true;
+								}
+							}
+							if (check) {
+								if (userAbilityPath.value == "Ripen") {
+									Berry = 0.25;
+								}
+								else {
+									Berry = 0.5;
+								}
+							}
+
+							if (userItemPath.value == "Expert Belt") {
+								if (Type > 1) {
+									Item = 1.2;
+								}
+							}
+
+							if (userItemPath.value == "Life Orb") {
+								Item = 1.3;
+							}
+
+
+							if (userItemPath.value == "Metronome") {
+								var val = userItemCountPath.value;
+								if (isNaN(val)) {
+									val = 0;
+								}
+
+								Item = 1+((819/4096)*val);
+
+								if (Item > 2) {
+									Item = 2;
+								}
+							}
+				
+							if (MeFirstPath.checked) {
+								MeFirst = 1.5;
+							}
+
+							if (ProtectionPath.checked) {
+								var grp = returnArrValue(finaldataMoveGroup,"Name_"+JSONPath_MoveName,"Group",movePath.value);
+								if (grp == "Z-Move" || grp == "G-Max Move" || grp == "Max Move") {
+									ZMove = 0.25;
+								}
+							}
+
+							if (moveType == "Electric") {
+								if (ChargePath.checked) {
+									Power = Power*2;
+								}
+							}
+
+
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)+2)*Targets*Weather*GlaiveRush*Critical*random*STAB*Type*Burn*Screen*(BehemothBladeBehemothBashDynamaxCannon*Minimize*SurfWhirlpool*EarthquakeMagnitude*Screen*ColissionCourseElectroDrift*MultiscaleShadowShield*Fluffy1*PunkRock*IceScales*FriendGuard*FilterPrismArmorSolidRock*Neuroforce*Sniper*TintedLens*Fluffy2*Item*Berry)*MeFirst*ZMove*TeraShield;
 						}
 						
-
-						if (moveCategory == "Physical") {
-							if (tarReflectPath.checked) {
-								if (parseInt(battle.getAttribute("data-count")) > 2) {
-									Screen = 0.6667;
-								}
-								else {
-									Screen = 0.5;
-								}
-							}
-						}
-						if (moveCategory == "Special") {
-							if (tarLightScreenPath.checked) {
-								if (parseInt(battle.getAttribute("data-count")) > 2) {
-									Screen = 0.6667;
-								}
-								else {
-									Screen = 0.5;
-								}
-							}
-						}
-
-						if (tarAuroraVeilPath.checked) {
-							if (parseInt(battle.getAttribute("data-count")) > 2) {
-								Screen = 0.6667;
-							}
-							else {
-								Screen = 0.5;
-							}
-						}
-
-						if (movePath.value == "Collision Course" || movePath.value == "Electro Drift") {
-							if (Type > 1) {
-								ColissionCourseElectroDrift = 1.3333;
-							}
-						}
-
-						if (tarAbilityPath.value == "Multiscale" || tarAbilityPath.value == "Shadow Shield") {
-							if (tarHPCurrentPath.innerText == tarHPMaxPath.innerText) {
-								MultiscaleShadowShield = 0.5;
-							}
-						}
-
-						if (tarAbilityPath.value == "Fluffy") {
-							if (movePath.value != "Sunsteel Strike" && movePath.value != "Searing Sunraze Smash") {
-								if (userAbilityPath.value != "Long Reach") {
-									if (getMoveData(movePath.value, "Contact") == "Makes contact") {
-										Fluffy1 = 0.5;
-									}
-								}
-							}
-						}
-
-						if (tarAbilityPath.value == "Punk Rock") {
-							if (getMoveData(movePath.value, "Sound") == "Is a sound-based move") {
-								PunkRock = 0.5;
-							}
-						}
-
-
-						if (tarAbilityPath.value == "Ice Scales") {
-							if (moveCategory == "Special") {
-								IceScales = 0.5;
-							}
-						}
-
-						var allies = target[i].parentElement.querySelectorAll(":scope > div[data-string]");
-						var check = false;
-						for (var u = 0; u < allies.length; u++) {
-							if (allies[u] != target[i]) {
-								var allyteam = allies[u].parentElement.getAttribute("name");
-								var allyid = allies[u].getAttribute("name");
-								var allyab = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+allyteam+"'] ul[name='"+allyid+"'] li[name='ability'] select");
-
-								if (allyab.value == "Friend Guard") {
-									check = true;
-									break;
-								}
-							}
-						}
-						if (check) {
-							FriendGuard = 0.75;
-						}
-
-						if (tarAbilityPath.value == "Filter" || tarAbilityPath.value == "Prism Armor" || tarAbilityPath.value == "Solid  Rock") {
-							if (Type > 1) {
-								FilterPrismArmorSolidRock = 0.75;
-							}
-						}
-
-						if (userAbilityPath.value == "Neuroforce") {
-							if (Type > 1) {
-								Neuroforce = 1.25;
-							}
-						}
-
-
-						if (Critical > 1) {
-							if (userAbilityPath.value = "Sniper") {
-								Sniper = 1.5;
-							}
-						}
-
-	
-						if (userAbilityPath.value = "Tinted Lens") {
-							if (Type < 1) {
-								TintedLens = 2;
-							}
-						}
-
-						if (tarAbilityPath.value == "Fluffy") {
-							if(movePath.value != "G-Max Fireball") {
-								if (moveType == "Fire") {
-									Fluffy2 = 2;
-								}
-							}
-						}
+						var maxHP = parseInt(tarHPMaxPath.innerText);
+						var integerResult = Math.round(calculation);
+						var move = movePath.value;
 		
 
-						var check = false;
-						if (tarItemPath.value == "Chilan Berry" && moveType == "Normal") {
-							check = true;
+				
+						if (isNaN(integerResult)) {
+							integerResult = 0;
 						}
-						if (Type > 1) {
-							if (tarItemPath.value == "Babiri Berry" && moveType == "Steel") {
-								check = true;
-							}
-							if (tarItemPath.value == "Charti Berry" && moveType == "Rock") {
-								check = true;
-							}
-							if (tarItemPath.value == "Chople Berry" && moveType == "Fighting") {
-								check = true;
-							}
-							if (tarItemPath.value == "Coba Berry" && moveType == "Flying") {
-								check = true;
-							}
-							if (tarItemPath.value == "Colbur Berry" && moveType == "Dark") {
-								check = true;
-							}
-							if (tarItemPath.value == "Haban Berry" && moveType == "Dragon") {
-								check = true;
-							}
-							if (tarItemPath.value == "Kasib Berry" && moveType == "Ghost") {
-								check = true;
-							}
-							if (tarItemPath.value == "Kebia Berry" && moveType == "Poison") {
-								check = true;
-							}
-							if (tarItemPath.value == "Occa Berry" && moveType == "Fire") {
-								check = true;
-							}
-							if (tarItemPath.value == "Passho Berry" && moveType == "Water") {
-								check = true;
-							}
-							if (tarItemPath.value == "Payapa Berry" && moveType == "Psychic") {
-								check = true;
-							}
-							if (tarItemPath.value == "Rindo Berry" && moveType == "Grass") {
-								check = true;
-							}
-							if (tarItemPath.value == "Roseli Berry" && moveType == "Fairy") {
-								check = true;
-							}
-							if (tarItemPath.value == "Shuca Berry" && moveType == "Ground") {
-								check = true;
-							}
-							if (tarItemPath.value == "Tanga Berry" && moveType == "Bug") {
-								check = true;
-							}
-							if (tarItemPath.value == "Wacan Berry" && moveType == "Electric") {
-								check = true;
-							}
-							if (tarItemPath.value == "Yache Berry" && moveType == "Ice") {
-								check = true;
-							}
-						}
-						if (check) {
-							if (userAbilityPath.value == "Ripen") {
-								Berry = 0.25;
-							}
-							else {
-								Berry = 0.5;
-							}
-						}
-
-						if (userItemPath.value == "Expert Belt") {
-							if (Type > 1) {
-								Item = 1.2;
-							}
-						}
-
-						if (userItemPath.value = "Life Orb") {
-							Item = 1.3;
+						else if (integerResult == 0) {
+							integerResult = 1;
 						}
 
 
-						if (userItemPath.value = "Metronome") {
-							var val = userItemCountPath.value;
-							if (isNaN(val)) {
-								val = 0;
-							}
 
-							Item = 1+((819/4096)*val);
+						for (var u = 0; u < finaldataMoveAdditional.length; u++) {
+							if (finaldataMoveAdditional[u]["Additional"] == "Healing") {
+								if (finaldataMoveAdditional[u]["Move"] == move) {
+									if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
+										if (getApplicable(finaldataMoveAdditional[u]["Value"]) != undefined) {
+											if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
+												var check = false;
 
-							if (Item > 2) {
-								Item = 2;
-							}
-						}
-			
-						if (tarProtectPath.checked) {
-							if (getMoveData(movePath.value, "Group") == "Z-Move" || getMoveData(movePath.value, "Group") == "G-Max Move" || getMoveData(movePath.value, "Group") == "Max Move") {
-								ZMove = 0.25;
-							}
-						}
-
-
-						calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)+2)*Targets*Weather*GlaiveRush*Critical*random*STAB*Type*Burn*Screen*(BehemothBladeBehemothBashDynamaxCannon*Minimize*SurfWhirlpool*EarthquakeMagnitude*Screen*ColissionCourseElectroDrift*MultiscaleShadowShield*Fluffy1*PunkRock*IceScales*FriendGuard*FilterPrismArmorSolidRock*Neuroforce*Sniper*TintedLens*Fluffy2*Item*Berry)*ZMove*TeraShield;
-					}
-
-
-
-
-					
-					var maxHP = parseInt(tarHPMaxPath.innerText);
-					var integerResult = Math.round(calculation);
-					var move = movePath.value;
-	
-
-			
-					if (isNaN(integerResult)) {
-						integerResult = 0;
-					}
-					else if (integerResult == 0) {
-						integerResult = 1;
-					}
-
-
-
-					for (var u = 0; u < finaldataMoveAdditional.length; u++) {
-						if (finaldataMoveAdditional[u]["Additional"] == "Healing") {
-							if (finaldataMoveAdditional[u]["Move"] == move) {
-								if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
-									if (getApplicable(finaldataMoveAdditional[u]["Value"]) != undefined) {
-										if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
-											var check = false;
-
-											if (finaldataMoveAdditional[u]["Condition"] == undefined) {
-												check = true;
-											}
-											else if (finaldataMoveAdditional[u]["Condition"] == "No Weather") {
-												check = true;
-												for (var w = 0; w < weatherInputsPath.length; w++) {
-													if(weatherInputsPath[w].checked) {
-														check = false;
+												if (finaldataMoveAdditional[u]["Condition"] == undefined) {
+													check = true;
+												}
+												else if (finaldataMoveAdditional[u]["Condition"] == "No Weather") {
+													check = true;
+													for (var w = 0; w < weatherInputsPath.length; w++) {
+														if(weatherInputsPath[w].checked) {
+															check = false;
+														}
 													}
 												}
-											}
-											else if (finaldataMoveAdditional[u]["Condition"] == "Harsh Sunlight") {
-												if (weatherHarshSunlightPath.checked) {
-													check = true;
+												else if (finaldataMoveAdditional[u]["Condition"] == "Harsh Sunlight") {
+													if (weatherHarshSunlightPath.checked) {
+														check = true;
+													}
 												}
-											}
-											else if (finaldataMoveAdditional[u]["Condition"] == "Strong Winds") {
-												if (weatherStrongWindsPath.checked) {
-													check = true;
+												else if (finaldataMoveAdditional[u]["Condition"] == "Strong Winds") {
+													if (weatherStrongWindsPath != undefined) {
+														if (weatherStrongWindsPath.checked) {
+															check = true;
+														}
+													}
 												}
-											}
-											else if (finaldataMoveAdditional[u]["Condition"] == "Sandstorm") {
-												if (weatherSandstormPath.checked) {
-													check = true;
+												else if (finaldataMoveAdditional[u]["Condition"] == "Sandstorm") {
+													if (weatherSandstormPath.checked) {
+														check = true;
+													}
 												}
-											}
-											else if (finaldataMoveAdditional[u]["Condition"].includes("Non:")) {
-												var tempStr = finaldataMoveAdditional[u]["Condition"].split("Non:")[1];
-												if (tempStr.includes(",")) {
-													check = true;
-													var tempArr = tempStr.split(",")
-													for (var r = 0; r < tempArr.length; r++) {
+												else if (finaldataMoveAdditional[u]["Condition"].includes("Non:")) {
+													var tempStr = finaldataMoveAdditional[u]["Condition"].split("Non:")[1];
+													if (tempStr.includes(",")) {
+														check = true;
+														var tempArr = tempStr.split(",")
+														for (var r = 0; r < tempArr.length; r++) {
+															for (var w = 0; w < weatherInputsPath.length; w++) {
+																if (weatherInputsPath[w].parentElement.getAttribute("name") == tempArr[r]) {
+																	if (weatherInputsPath[w].checked) {
+																		check = false;
+																	}
+																}
+															}
+														}
+													}
+													else {
+														check = true;
 														for (var w = 0; w < weatherInputsPath.length; w++) {
-															if (weatherInputsPath[w].parentElement.getAttribute("name") == tempArr[r]) {
+															if (weatherInputsPath[w].parentElement.getAttribute("name") == tempStr) {
 																if (weatherInputsPath[w].checked) {
 																	check = false;
 																}
@@ -4089,164 +4233,438 @@ var createTool = function() {
 														}
 													}
 												}
-												else {
-													check = true;
-													for (var w = 0; w < weatherInputsPath.length; w++) {
-														if (weatherInputsPath[w].parentElement.getAttribute("name") == tempStr) {
-															if (weatherInputsPath[w].checked) {
-																check = false;
-															}
+												
+
+												if (check) {
+													if (finaldataMoveAdditional[u]["Target"] == undefined) {
+														var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+														DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
+													}
+													else if (finaldataMoveAdditional[u]["Target"] == "Ally") {
+														if (target.parentElement.getAttribute("name").includes("player")) {
+															var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+															DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
 														}
 													}
 												}
 											}
-											
-
-											if (check) {
-												if (finaldataMoveAdditional[u]["Target"] == undefined) {
-													var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
-													console.log(heal)
-													DMGCalcApply(target,heal,"Heal","Mediumspringgreen","Apply");
-												}
-												else if (finaldataMoveAdditional[u]["Target"] == "Ally") {
-													if (target.parentElement.getAttribute("name").includes("player")) {
-														var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
-														console.log(heal)
-														DMGCalcApply(target,heal,"Heal","Mediumspringgreen","Apply");
+											else if (finaldataMoveAdditional[u]["Type"] == "Target Attack") {
+												if (finaldataMoveAdditional[u]["Condition"] == "Minus One Attack") {
+													if (moveCategory == "Special") {
+														if (Generation == 1) {
+															var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Special']")
+															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Special']")
+														}
+														else {
+															var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Sp. Atk']")
+															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Sp. Atk']")
+														}
 													}
-												}
-											}
-										}
-										else if (finaldataMoveAdditional[u]["Type"] == "Target Attack") {
-											if (finaldataMoveAdditional[u]["Condition"] == "Minus One Attack") {
-												
-												if (moveCategory == "Special") {
-													if (Generation == 1) {
-														var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Special']")
-														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Special']")
+													else if (moveCategory == "Physical") {
+														var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Attack']")
+														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Attack']")
+													}
+													var val;
+													
+													var modval;
+													if (modAtk.value == undefined) {
+														modval = 0
 													}
 													else {
-														var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Sp. Atk']")
-														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Sp. Atk']")
+														modval = modAtk.value;
 													}
-												}
-												else if (moveCategory == "Physical") {
-													var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Attack']")
-													var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Attack']")
-												}
-												var val;
-												
-												var modval;
-												if (modAtk.value == undefined) {
-													modval = 0
-												}
-												else {
-													modval = modAtk.value;
-												}
 
-									
-												if (modval == -6) {
-													val = tarAtk;
-												}
-												else {
-													if (Generation >= 1 && Generation <= 2) {
-														val = tarAtk*0.66;
+										
+													if (modval == -6) {
+														val = tarAtk;
 													}
 													else {
-														val = tarAtk*0.6666666667;
+														if (Generation >= 1 && Generation <= 2) {
+															val = tarAtk*0.66;
+														}
+														else {
+															val = tarAtk*0.6666666667;
+														}
 													}
+
+
+													var heal = Math.ceil(val*finaldataMoveAdditional[u]["Value"]);
+													DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
 												}
-
-
-												var heal = Math.ceil(val*finaldataMoveAdditional[u]["Value"]);
-												console.log(heal)
-												DMGCalcApply(target,heal,"Heal","Mediumspringgreen","Apply");
 											}
 										}
 									}
 								}
 							}
 						}
-					}
-		
-				
-					if (movePath.value == "Triple Kick" && Generation == 2) {
-						DMGCalcApply(target,integerResult,"Damage","Orangered","Apply");
-					}
-					else if (userAbilityPath.value == "Parental Bond") {
-						var check = true;
-						for (var u = 0; u < finaldataMoveAdditional.length; u++) {
-							if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
-								if (finaldataMoveAdditional[u]["Move"] == movePath.value) {
-									if (finaldataMoveAdditional[u]["Additional"] == "Multi-strike") {
-										check = false;
+			
+					
+						if (movePath.value == "Triple Kick" && Generation == 2) {
+							DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+						}
+						else if (userAbilityPath != undefined && userAbilityPath.value == "Parental Bond") {
+							var check = true;
+							for (var u = 0; u < finaldataMoveAdditional.length; u++) {
+								if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
+									if (finaldataMoveAdditional[u]["Move"] == movePath.value) {
+										if (finaldataMoveAdditional[u]["Additional"] == "Multi-strike") {
+											check = false;
+										}
 									}
 								}
 							}
-						}
-						if (check) {
-							for (var h = 0; h < 2; h++) {
-								if (Generation == 6) {
-									if (h == 1) {
-										DMGCalcApply(target,integerResult*0.5,"Damage","Orangered","Apply");
+							if (check) {
+								for (var h = 0; h < 2; h++) {
+									if (Generation == 6) {
+										if (h == 1) {
+											DMGCalcApply(target[i],integerResult*0.5,"Damage","Orangered","Apply");
+										}
+										else {
+											DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+										}
 									}
 									else {
-										DMGCalcApply(target,integerResult,"Damage","Orangered","Apply");
-									}
-								}
-								else {
-									if (h == 1) {
-										DMGCalcApply(target,integerResult*0.25,"Damage","Orangered","Apply");
-									}
-									else {
-										DMGCalcApply(target,integerResult,"Damage","Orangered","Apply");
+										if (h == 1) {
+											DMGCalcApply(target[i],integerResult*0.25,"Damage","Orangered","Apply");
+										}
+										else {
+											DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+										}
 									}
 								}
 							}
+							
 						}
-						
-					}
-					else if (moveCount.getAttribute("name") == "Hit") {
-						for (var h = 0; h < moveCount.value; h++) {
-							DMGCalcApply(target,integerResult,"Damage","Orangered","Apply");
+						else if (moveCountPath.getAttribute("title").includes("Hit")) {
+							for (var h = 0; h < moveCountPath.value; h++) {
+								DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+							}
 						}
-					}
-					else {
-						DMGCalcApply(target,integerResult,"Damage","Orangered","Apply");
-					}
-				
-					if (tarStatusPoisonPath.checked) {
-						var val = Math.floor(maxHP/16);
-						if (val <= 0) {
-							val = 1;
+						else {
+							DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
 						}
 					
-						DMGCalcApply(target,val,"Damage","Purple","Apply");
-					}
-					if (tarStatusBurnPath.checked) {
-						var val = Math.floor(maxHP/16);
-						if (val <= 0) {
-							val = 1;
+						if (tarStatusPoisonPath.checked) {
+							var val = Math.floor(maxHP/16);
+							if (val <= 0) {
+								val = 1;
+							}
+						
+							DMGCalcApply(target[i],val,"Damage","Purple","Apply");
+						}
+						if (tarStatusBurnPath.checked) {
+							var val = Math.floor(maxHP/16);
+							if (val <= 0) {
+								val = 1;
+							}
+
+							DMGCalcApply(target[i],val,"Damage","Orange","Apply");
 						}
 
-						DMGCalcApply(target,val,"Damage","Orange","Apply");
-					}
+						if (tarStatusBadPoisonPath.value != "" && tarStatusBadPoisonPath.value != undefined) {
+							var val = Math.floor(maxHP/16);
+							if (val <= 0) {
+								val = 1;
+							}
+							val = tarStatusBadPoisonPath.value*val
 
-					if (tarStatusBadPoisonPath.value != "" && tarStatusBadPoisonPath.value != undefined) {
-						var val = Math.floor(maxHP/16);
-						if (val <= 0) {
-							val = 1;
+							DMGCalcApply(target[i],val,"Damage","Rebeccapurple","Apply");
 						}
-						val = tarStatusBadPoisonPath.value*val
 
-						DMGCalcApply(target,val,"Damage","Rebeccapurple","Apply");
-					}
 
-				
-		
-				}
-			}
+
+						var max = target[i].querySelector(":scope *[name='hp'] *[name='max']").innerText;
+						var curr = target[i].querySelector(":scope *[name='hp'] *[name='current']").innerText;
+						if (curr != undefined && max != undefined) {
+							max = parseInt(max);
+							curr = parseInt(curr);
+							if (!isNaN(curr) && !isNaN(max)) {
+								dmgRes.push(max-curr);
+							}
+						}
+
+
+
+
+
+						// Accuracy
+						var acc = undwsDel(moveAccuracy,"0");
+						acc = acc.replaceAll("%","")
+						var evasionMod = tarModEvasionPath.value;
+						var accuracyMod = userModAccuracyPath.value;
 	
+						accuracyMod = undwsDel(accuracyMod,0);
+						accuracyMod = parseInt(accuracyMod);
+						evasionMod = undwsDel(evasionMod,0)
+						evasionMod = parseInt(evasionMod);
+
+						accuracyMod = modStageCalc("Accuracy",accuracyMod);
+						evasionMod = modStageCalc("Evasion",evasionMod);
+
+						var accCalc = 0;
+	
+						// Defaults
+						var CompoundEyes = 1;
+						var SandVeil = 1;
+						var SnowCloak = 1;
+						var VictoryStar = 1;
+						var Fog = 1;
+						var Hustle = 1;
+						var TangledFeet = 1;
+						var BrightPowder = 1;
+						var LaxIncense = 1;
+						var WideLens = 1;
+						var ZoomLens = 1;
+						var MicleBerry = 1;
+						var Gravity = 1;
+
+						if (Generation == 1 || Generation == 2) {
+							BrightPowder = 0;
+
+							if (tarItemPath != undefined && tarItemPath.value == "BrightPowder") {
+								BrightPowder = 20;
+							}
+				
+							acc = 255*(acc/100);
+							accCalc = acc*accuracyMod*evasionMod-BrightPowder;
+							if (accCalc < 1) {
+								accCalc = 1;
+							}
+							if (accCalc > 255) {
+								accCalc = 255;
+							}
+							accCalc = (accCalc/255)*100;
+						}
+						if (Generation == 3) {
+							if (userAbilityPath.value == "CompoundEyes") {
+								CompoundEyes = 1.3;
+							}
+
+							var check = true;
+							for(var u = 0; u < allbase.length; u++) {
+								var ab = allbase[u].querySelector(":scope *[name='ability'] select");
+								if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
+									check = false;
+								}
+							}
+							if (check) {
+								if (tarAbilityPath.value == "Sand Veil") {
+									if (weatherSandstormPath.checked) {
+										SandVeil = 0.8;
+									}
+								}
+							}
+							if (userAbilityPath.value == "Hustle") {
+								if (moveCategory == "Physical") {
+									Hustle = 0.8;
+								}
+							}
+							if (tarItemPath.value == "BrightPowder") {
+								BrightPowder = 0.9;
+							}
+							if (tarItemPath.value == "Lax Incense") {
+								LaxIncense = 0.95;
+							}
+
+							accCalc = acc*(accuracyMod-evasionMod)*CompoundEyes*SandVeil*Hustle*BrightPowder*LaxIncense;
+						}
+						if (Generation == 4) {
+							if (userAbilityPath.value == "CompoundEyes") {
+								CompoundEyes = 1.3;
+							}
+							var check = true;
+							for(var u = 0; u < allbase.length; u++) {
+								var ab = allbase[u].querySelector(":scope *[name='ability'] select");
+								if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
+									check = false;
+								}
+							}
+							if (check) {
+								if (tarAbilityPath.value == "Sand Veil") {
+									if (weatherSandstormPath.checked) {
+										if (userAbilityPath != "Mold Breaker") {
+											SandVeil = 0.8;
+										}
+									}
+								}
+								if (tarAbilityPath.value == "Snow CLoak") {
+									if (weatherHailPath.checked) {
+										if (userAbilityPath != "Mold Breaker") {
+											SandVeil = 0.8;
+										}
+									}
+								}
+								if (weatherFogPath != undefined && weatherFogPath.checked) {
+									Fog = 0.6;
+								}
+							}
+							if (userAbilityPath.value == "Hustle") {
+								if (moveCategory == "Physical") {
+									Hustle = 0.8;
+								}
+							}
+							if (tarAbilityPath.value == "Tangled Feet") {
+								if (ConfusionPath.checked) {
+									if (userAbilityPath.value != "Mold Breaker") {
+										TangledFeet = 0.5;
+									}
+								}
+							}
+
+							if (tarItemPath.value == "BrightPowder") {
+								BrightPowder = 0.9;
+							}
+							if (tarItemPath.value == "Lax Incense") {
+								LaxIncense = 0.9;
+							}
+							if (userItemPath.value == "Wide Lens") {
+								WideLens = 1.1;
+							}
+							if (userItemPath.value == "Zoom Lens") {
+								ZoomLens = 1.2;
+							}
+							if (userItemPath.value == "Micle Berry") {
+								MicleBerry = 1.2;
+							}
+							if (gravityPath.checked) {
+								Gravity = 5/3;
+							}
+							console.log(acc)
+							console.log(accuracyMod)
+							console.log(evasionMod)
+							console.log(accuracyMod-evasionMod)
+							accCalc = acc*(accuracyMod-evasionMod)*CompoundEyes*SandVeil*SnowCloak*Fog*Hustle*TangledFeet*BrightPowder*LaxIncense*WideLens*ZoomLens*MicleBerry*Gravity;
+							console.log(accCalc)
+						}
+						if (Generation >= 5) {
+							if (gravityPath.checked) {
+								Gravity = 6840/4096;
+							}
+							if (tarAbilityPath.value == "Tangled Feet") {
+								if (ConfusionPath.checked) {
+									if (userAbilityPath.value != "Mold Breaker") {
+										TangledFeet = 0.5;
+									}
+								}
+							}
+							if (userAbilityPath.value == "Hustle") {
+								if (moveCategory == "Physical") {
+									Hustle = 3277/4096;
+								}
+							}
+							var check = true;
+							for(var u = 0; u < allbase.length; u++) {
+								var ab = allbase[u].querySelector(":scope *[name='ability'] select");
+								if (ab.value == "Cloud Nine" || ab.value == "Air Lock") {
+									check = false;
+								}
+							}
+							if (check) {
+								if (tarAbilityPath.value == "Sand Veil") {
+									if (weatherSandstormPath.checked) {
+										if (userAbilityPath != "Mold Breaker") {
+											SandVeil = 0.8;
+										}
+									}
+								}
+								if (tarAbilityPath.value == "Snow CLoak") {
+									if (weatherHailPath.checked) {
+										if (userAbilityPath != "Mold Breaker") {
+											SandVeil = 0.8;
+										}
+									}
+								}
+							}
+
+							
+							var allies = userbase.parentElement.querySelectorAll(":scope > div[data-string]");
+							var check = true;
+							var allycount = 0;
+							for (var u = 0; u < allies.length; u++) {
+								var allyteam = allies[u].parentElement.getAttribute("name");
+								var allyid = allies[u].getAttribute("name");
+								var allyab = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+allyteam+"'] ul[name='"+allyid+"'] li[name='ability'] select");
+
+								if (allyab.value == "Victory Star") {
+									allycount = allycount+1;
+								}
+							}
+
+							if (allycount > 0) {
+								VictoryStar = (4506/4096)*allycount;
+							}
+						
+							if (tarItemPath.value == "Lax Incense") {
+								LaxIncense = 3686/4096;
+							}
+							if (userItemPath.value == "Wide Lens") {
+								WideLens = 4505/4096;
+							}
+							if (userItemPath.value == "Zoom Lens") {
+								ZoomLens = 4915/4096;
+							}
+							if (userItemPath.value == "Micle Berry") {
+								MicleBerry = 4915/4096;
+							}
+						}
+
+						if (Generation == 5) {
+							if (tarItemPath.value == "BrightPowder") {
+								BrightPowder = 3686/4096;
+							}
+							if (userAbilityPath.value == "CompoundEyes") {
+								CompoundEyes = 5325/4096;
+							}
+
+							accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod-evasionMod)*MicleBerry;
+						}
+						if (Generation >= 6) {
+							if (tarItemPath.value == "Bright Powder") {
+								BrightPowder = 3686/4096;
+							}
+							if (userAbilityPath.value == "Compound Eyes") {
+								CompoundEyes = 5325/4096;
+							}
+
+							var fr = undDel(userFriendshipPath.value,0);
+							var af = undDel(userAffectionPath.value,0);
+
+							if (getApplicable("X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon")) {
+								if (af >= 150) {
+									Affection = 10;
+								}
+							}
+							else if (getApplicable("Lets Go Pikachu,Lets Go Eevee")) {
+								if (fr >= 200) {
+									Affection = 10;
+								}
+							}
+							else if (Generation >= 8) {
+								if (fr == 255) {
+									Affection = 10;
+								}
+							}
+							accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod-evasionMod)*MicleBerry-Affection;
+						}
+						accRes.push(Math.round(accCalc)+"%")
+			
+					}
+				}
+
+
+				var dmgTotal = 0;
+				var accResult = accRes.join(" / ");
+				if (accRes.length == 0) {
+					accResult = "0%";
+				}
+				
+				for (var i = 0; i < dmgRes.length; i++) {
+					dmgTotal = dmgTotal+dmgRes[i];
+				}
+	
+				moveDamageTextPath.innerText = dmgTotal;
+				moveAccuracyTextPath.innerText = accResult;
+			}
 
 		}
 
@@ -4282,14 +4700,6 @@ var createTool = function() {
 				var StatusAsleepPath = target.querySelector(":scope *[name='Asleep'] input");
 				var StatusFrozenPath = target.querySelector(":scope *[name='Frozen'] input");
 
-				// Move
-				var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");
-				var powerPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='power']");
-				var accuracyPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='accuracy']");
-				var criticalPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child input[type='checkbox']")
-				var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
-
-
 				if (condition == "Reset") {
 					base.lastChild.style.removeProperty("background");
 					HPCurrentPath.innerText = HPInputPath.value;
@@ -4298,7 +4708,7 @@ var createTool = function() {
 					bgs = [];
 				}
 				else if (condition == "Apply") {
-					console.log(val)
+
 
 					var val = parseInt(val);
 					var maxHP = parseInt(HPMaxPath.innerText);
@@ -4317,14 +4727,6 @@ var createTool = function() {
 						newHP = currentHP+val;
 						newPercent = currentPercent+percent;
 					}
-					console.log(newHP)
-					console.log(newPercent)
-					console.log(currentHP)
-					console.log(currentPercent)
-
-					console.log(val)
-					console.log(percent)
-
 
 					if (newHP < 0) {
 						newHP = 0;
@@ -4348,8 +4750,6 @@ var createTool = function() {
 
 					var tempArr = [];
 
-					console.log(bgs)
-
 					for (var b = 0; b < bgs.length; b++) {
 						var x = b - 1;
 						if (b == 0) {
@@ -4361,14 +4761,13 @@ var createTool = function() {
 					}
 
 
-					console.log(tempArr)
-// linear-gradient(90deg, limegreen 8%, mediumspringgreen 8%, mediumspringgreen 58%, orangered 58%)
+					// linear-gradient(90deg, limegreen 8%, mediumspringgreen 8%, mediumspringgreen 58%, orangered 58%)
 					tempArr.reverse();
 
 
-					console.log(tempArr)
+
 					var tempStr = "linear-gradient(90deg,Limegreen "+newPercent+"%,"+tempArr.join(",")+")";
-					console.log(tempStr)
+
 					base.lastChild.style.background = tempStr;
 					HPCurrentPath.innerText = newHP;
 					HPPercentagePath.innerText = newPercent+"%";
@@ -4395,7 +4794,7 @@ var createTool = function() {
 			var ivs = base.querySelectorAll(":scope *[name='stats'] > *:last-child > *:nth-child(2) > input[type='number']:not(:first-child)");
 			var evs = base.querySelectorAll(":scope *[name='stats'] > *:last-child > *:nth-child(3) > input[type='number']:not(:first-child)");
 			var natures = base.querySelectorAll(":scope *[name='nature'] select");
-			var friendship = base.querySelector(":scope *[name='friendship'] input[type='number']");
+			var friendshipInput = base.querySelector(":scope *[name='friendship'] input[type='number']");
 			var badges = base.querySelectorAll(":scope *[name='Badge-Group'] li");
 			var maxhp = base.querySelector(":scope *[name='hp'] input");
 			var maxhpInput = base.querySelector(":scope *[name='hp'] *[name='max']");
@@ -4426,9 +4825,10 @@ var createTool = function() {
 						nature = 1;
 					}
 
-					if (friendship != undefined) {
-						if (friendship.value != undefined && friendship.value != "") {
-							friendship = friendshipModifer(friendship.value);
+					console.log(friendshipInput)
+					if (friendshipInput != undefined) {
+						if (friendshipInput.value != undefined && friendshipInput.value != "") {
+							friendship = friendshipModifer(friendshipInput.value);
 						}
 						else {
 							friendship = 1;
@@ -4437,6 +4837,8 @@ var createTool = function() {
 					else {
 						friendship = 1;
 					}
+
+					console.log(friendship)
 					
 
 					if (lvl != "") {
@@ -4693,10 +5095,17 @@ var createTool = function() {
 			
 		}
 		function DMGSetInfo() {
-			var acc = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] *[name='accuracy']");
-			var pwr = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] *[name='power']");
-			var sel = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span select");
-			var inp = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:last-child > span:first-child input");
+			var sel = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span select");
+			var inp = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:first-child input");
+
+			var user = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*='player'] > div[data-string].active");
+			var userid = user.getAttribute("name");
+			var userbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='player'] ul[name='"+userid+"']");
+			var userAbilityPath = userbase.querySelector(":scope *[name='ability'] select");
+
+			var movePower = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,sel.value);
+			var moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,sel.value);
+			var moveGroup = returnArrValue(finaldataMoveGroup,"Name_"+JSONPath_MoveName,"Group",sel.value)
 
 			var strikes = [1,1];
 
@@ -4719,6 +5128,109 @@ var createTool = function() {
 				}
 			}
 
+
+			var lis = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li");
+			for (var l = 0; l < lis.length; l++) {
+				lis[l].style.display = "none";
+				lis[l].firstChild.checked = false;
+			}
+
+			var lis = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li");
+			for (var l = 0; l < lis.length; l++) {
+				if (parseInt(movePower) > 0) {
+					if (lis[l].getAttribute("name") == "Protection") {
+						if (moveGroup == "Z-Move" || moveGroup == "G-Max Move" || moveGroup == "Max Move") {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Semi-Invulnerable Flight") {
+						if (sel.value == "Twister" || sel.value == "Gust") {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Semi-Invulnerable Dig") {
+						if (sel.value == "Earthquake" || sel.value == "Magnitude") {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Semi-Invulnerable Dive") {
+						if (sel.value == "Surf" || sel.value == "Whirlpool") {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Switching") {
+						if (sel.value == "Pursuit") {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Minimize") {
+						var tempOtherMoves = [];
+						if (Generation == 2) {
+							tempOtherMoves = ["Stomp"];
+						}
+						else if (Generation == 3) {
+							tempOtherMoves = ["Stomp","Astonish","Extrasensory","Needle Arm"];
+						}
+						else if (Generation == 4) {
+							tempOtherMoves = ["Stomp"];
+						}
+						else if (Generation == 5) {
+							tempOtherMoves = ["Stomp","Steamroller"];
+						}
+						else if (Generation == 6) {
+							tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Shadow Force","Steamroller","Heat Crash","Phantom Force","Flying Press"];
+						}
+						else if (Generation == 7) {
+							tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Steamroller","Heat Crash","Heavy Slam","Flying Press","Malicious Moonsault","Double Iron Bash"];
+						}
+						else if (Generation == 8) {
+							tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Heat Crash","Heavy Slam","Flying Press"];
+						}
+
+						if (tempOtherMoves.includes(sel.value)) {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Charge") {
+						if (moveType == "Electric") {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Me First") {
+						var uncallable = [];
+						if (Generation == 4 || Generation == 5) {
+							uncallable = ["Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
+						}
+						else if (Generation == 6) {
+							uncallable = ["Belch","Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
+						}
+						else if (Generation == 7) {
+							uncallable = ["Beak Blast","Belch","Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Shell Trap","Struggle","Thief"]
+						}
+						if (!uncallable.includes(sel.value)) {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Flash Fire") {
+						if (userAbilityPath.value == "Flash Fire") {
+							lis[l].style.removeProperty("display");
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Laser Focus") {
+						lis[l].style.removeProperty("display");
+					}
+					else if (lis[l].getAttribute("name") == "Glaive Rush") {
+						lis[l].style.removeProperty("display");
+					}
+					else if (lis[l].getAttribute("name") == "Trick-or-Treat") {
+						lis[l].style.removeProperty("display");
+					}
+					else if (lis[l].getAttribute("name") == "Forest's Curse") {
+						lis[l].style.removeProperty("display");
+					}
+				}
+			}
+
 			inp.setAttribute("min",strikes[0]);
 			inp.setAttribute("max",strikes[1]);
 
@@ -4731,26 +5243,9 @@ var createTool = function() {
 				inp.removeAttribute("disabled");
 			}
 
-			sel.style.color = "var(--type"+getMoveData(sel.value,"Type")+")";
+			sel.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,sel.value)+")";
 
-			var accVal = getMoveData(sel.value,"Accuracy");
-			var pwrVal = getMoveData(sel.value,"Power");
-			
-			if (pwrVal != undefined) {
-				pwr.innerText = pwrVal;
-			}
-			else {
-				pwr.innerText = "-";
-			}
-
-			if (accVal != undefined) {
-				acc.innerText = accVal;
-			}
-			else {
-				acc.innerText = "-";
-			}
-
-			var range = getMoveData(sel.value,"Range");
+			var range = returnArrValue(finaldataMoveRange,"Name_"+JSONPath_MoveName,"Range",sel.value);
 
 			if (range != undefined) {
 				toolSectionContentDMGResult.setAttribute("data-range",range)
@@ -4759,9 +5254,6 @@ var createTool = function() {
 				toolSectionContentDMGResult.setAttribute("data-range","")
 			}
 			DMGSetPossible();
-
-
-			
 		}
 		function DMGSetChange(base) {
 
@@ -4787,6 +5279,7 @@ var createTool = function() {
 			var statsPath = base.querySelector(":scope *[name='stats']");
 			var ivPath = statsPath.querySelectorAll(":scope *[name='IV'] > input:not(:first-child)");
 			var evPath = statsPath.querySelectorAll(":scope *[name='EV'] > input:not(:first-child)");
+			var avPath = statsPath.querySelectorAll(":scope *[name='AV'] > input:not(:first-child)");
 			var abilityPath = base.querySelector(":scope *[name='ability'] select");
 			var genderPath = base.querySelector(":scope *[name='gender'] select");
 			var itemPath = base.querySelector(":scope *[name='item'] select");
@@ -4840,6 +5333,7 @@ var createTool = function() {
 				var item;
 				var iv;
 				var ev;
+				var av;
 				var moves;
 
 	
@@ -4872,6 +5366,9 @@ var createTool = function() {
 				}
 				if (dataString["ev"] != undefined) {
 					ev = dataString["ev"];
+				}
+				if (dataString["av"] != undefined) {
+					av = dataString["av"];
 				}
 				
 
@@ -4950,9 +5447,7 @@ var createTool = function() {
 						if (moves.length == movesPath.length) {
 							for(var v = 0; v < movesPath.length; v++) {
 								if(moves[v] != undefined && moves[v] != "") {
-									if (getMoveData(moves[v],"Type") != undefined) {
-										movesPath[v].style.color = "var(--type"+getMoveData(moves[v],"Type")+")";
-									}
+									movesPath[v].style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[v])+")";
 									movesPath[v].value = moves[v];
 								}
 							}
@@ -4986,6 +5481,17 @@ var createTool = function() {
 						if (evs.length == evPath.length) {
 							for(var v = 0; v < evs.length; v++) {
 								evPath[v].value = evs[v];
+							}
+						}
+					}
+				}
+
+				if (av != undefined) {
+					if (av.includes(",")) {
+						var avs = av.split(",");
+						if (avs.length == avPath.length) {
+							for(var v = 0; v < avs.length; v++) {
+								avPath[v].value = avs[v];
 							}
 						}
 					}
@@ -5413,6 +5919,7 @@ var createTool = function() {
 					itemPath.innerHTML = "";
 
 					var items = [];
+					items.unshift("");
 					for (var q = 0; q < result.length; q++) {
 						items.push(result[q]["Item"])
 					}
@@ -5460,6 +5967,7 @@ var createTool = function() {
 				var movesPath = base.querySelectorAll(":scope *[name='moves'] select");
 				var ivsPath = base.querySelectorAll(":scope *[name='stats'] *[name='IV'] input:not(:first-child)");
 				var evsPath = base.querySelectorAll(":scope *[name='stats'] *[name='EV'] input:not(:first-child)");
+				var avsPath = base.querySelectorAll(":scope *[name='stats'] *[name='AV'] input:not(:first-child)");
 				var totalPath = base.querySelectorAll(":scope *[name='stats'] > * > *:last-child input:not(:first-child)");
 
 				pokPath.value = pokPath.firstChild.value;
@@ -5489,6 +5997,9 @@ var createTool = function() {
 				}
 				for(var e = 0; e < evsPath.length; e++) {
 					evsPath[e].value = "";
+				}
+				for(var e = 0; e < avsPath.length; e++) {
+					avsPath[e].value = "";
 				}
 				for(var e = 0; e < totalPath.length; e++) {
 					totalPath[e].value = 0;
