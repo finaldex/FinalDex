@@ -410,8 +410,8 @@ var createMap = function() {
 		items = getLocationItems(location);
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
-		shop1 = getDataArr(finaldataLocationPokémonShops,"Location",location);
-		shop2 = getDataArr(finaldataLocationItemsShops,"Location",location);
+		shop1 = returnAppArrData(finaldataLocationPokémonShops,"Location",location);
+		shop2 = returnAppArrData(finaldataLocationItemsShops,"Location",location);
 		for(var q = 0; q < shop1.length; q++) {
 			shops.push(shop1[q]);
 		}
@@ -1514,7 +1514,7 @@ var createMap = function() {
 								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
 							}
 					
-							if (getMoveData(encounters[r], "Type") != undefined) {
+							if (returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,encounters[r]) != undefined) {
 								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("name","move");
 								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("value",encounters[r]);
 								mapSectionSidebarDescriptionPokTypeEncounterImg.addEventListener("click",dataRedirect);
@@ -1689,7 +1689,7 @@ var createMap = function() {
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("name","move");
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("type","invert");
 					mapSectionSidebarDescriptionTutorMoveText.title = formatMoveData(tutors[u]["Move"]);
-					mapSectionSidebarDescriptionTutorMoveText.style.color = "var(--type"+getMoveData(tutors[u]["Move"],"Type")+")";
+					mapSectionSidebarDescriptionTutorMoveText.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tutors[u]["Move"])+")";
 					mapSectionSidebarDescriptionTutorLi.appendChild(mapSectionSidebarDescriptionTutorMove);
 					mapSectionSidebarDescriptionTutorMove.appendChild(mapSectionSidebarDescriptionTutorMoveTrigger);
 					mapSectionSidebarDescriptionTutorMoveTrigger.appendChild(mapSectionSidebarDescriptionTutorMoveText);
@@ -2629,7 +2629,7 @@ function updateTrainer(trainers,condition) {
 			}
 
 			if (ability != undefined) {
-				var desc = getDataArr(finaldataAbilityDescription,"Ability",ability);
+				var desc = returnAppArrData(finaldataAbilityDescription,"Ability",ability);
 
 				var abilityWrap = document.createElement("b");
 				var abilityText = document.createElement("p");
@@ -2727,14 +2727,14 @@ function updateTrainer(trainers,condition) {
 				var pokRightMovesText = document.createElement("p");
 				pokRightMovesText.innerText = moves[y];
 				pokRightMovesWrap.title = formatMoveData(moves[y]);
-				pokRightMovesWrap.style.color = "var(--type"+getMoveData(moves[y],"Type")+")";
+				pokRightMovesWrap.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y])+")";
 				pokRightMovesWrap.setAttribute("name","move");
 				pokRight.appendChild(pokRightMovesWrap);
 				pokRightMovesWrap.appendChild(pokRightMovesText);
 				pokRightMovesWrap.addEventListener("click", dataRedirect);
 				pokRightMovesWrap.setAttribute("function","dataRedirect");
 				if (moves[y] != "") {
-					if(getMoveData(moves[y],"Type") == undefined) {
+					if(returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y]) == undefined) {
 						console.log(moves[y]+" needs formatting?");
 					}
 					
