@@ -170,7 +170,7 @@ var createItem = function() {
 	for(var q = 0; q < finaldataItems.length; q++) {
 		if (getApplicable(finaldataItems[q]["Game"])) {
 			if (finaldataItems[q]["Use"] == "true") {
-				if (getDataArr(finaldataItemsDescription,"Item",finaldataItems[q]["Item"]).length > 0) {
+				if (returnAppArrData(finaldataItemsDescription,"Item",finaldataItems[q]["Item"]).length > 0) {
 					var name = finaldataItems[q]["Item"];
 
 					if (finaldataItems[q]["Alias"] != undefined) {
@@ -193,9 +193,9 @@ var createItem = function() {
 					itemSectionListOptionsLabel.setAttribute("data-title", finaldataItems[q]["Item"].toLowerCase());
 
 
-					if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"]).length > 0) {
-						if (getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"] != undefined) {
-							itemSectionListOptionsLabel.setAttribute("data-search-price",getDataArr(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"]);
+					if (returnAppArrData(finaldataItemsPrice,"Item",finaldataItems[q]["Item"]).length > 0) {
+						if (returnAppArrData(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"] != undefined) {
+							itemSectionListOptionsLabel.setAttribute("data-search-price",returnAppArrData(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"]);
 						}
 						else {
 							itemSectionListOptionsLabel.setAttribute("data-search-price",0);
@@ -271,7 +271,7 @@ var createItem = function() {
 		itemSectionHeaderTitleID.innerText = "#"+finaldataItems[i]["ID"];
 		itemSectionHeaderTitleID.setAttribute("title",finaldataItems[i]["Index"]);
 
-		var priceArr = getDataArr(finaldataItemsPrice,"Item",item);
+		var priceArr = returnAppArrData(finaldataItemsPrice,"Item",item);
 	
 		itemSectionHeaderDebutText.innerText = "Cannot be Sold";
 		if (priceArr.length > 0) {
