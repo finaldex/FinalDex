@@ -595,7 +595,47 @@ function openSettings() {
 
 }
 
+function inputMaxValue(base,limit,totallimit) {
 
+    var totallimit;
+    var limit;
+    var combinedValues = 0;
+    var valueVSlimit;
+    var base;
+    var values = [];
+
+    for (i = 0; i < base.length; i++) {
+        if(base[i].value != "") {
+            values.push(parseInt(base[i].value))
+        }
+        else {
+            values.push(0)
+        }
+    }
+
+
+
+    for (i = 0; i < values.length; i++) {
+        combinedValues = combinedValues+values[i];
+    }
+
+    valueVSlimit = totallimit - combinedValues;
+
+    var tempArr = [];
+
+    for (i = 0; i < values.length; i++) {
+        if ((valueVSlimit+values[i]) >= limit) {
+            tempArr.push(limit)
+        }
+        else {
+            tempArr.push(valueVSlimit+values[i])
+        }
+    }
+
+    for (i = 0; i < base.length; i++) {
+        base[i].setAttribute("max",tempArr[i]);
+    }
+}
 
 
 function evInputMax() {
@@ -697,7 +737,6 @@ function onlyOneInput(inputs,input) {
     if (checks.length > 1) {
         for (var i = 0; i < checks.length; i++) {
             if (checks[i] != input) {
-                console.log(checks[i].value)
                 if (checks[i].value != "on") {
                     checks[i].value = "";
                 }
@@ -1346,7 +1385,7 @@ function createParty(base,data) {
                 option.title = formatMoveData(tempmoves[q]);
             }
 
-            option.setAttribute("name","styleBackgroundType"+getMoveData(tempmoves[q],"Type"));
+            option.setAttribute("name","styleBackgroundType"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempmoves[q]));
             baseMoves[u].appendChild(option)
         }
     }
@@ -1372,7 +1411,7 @@ function createParty(base,data) {
                 baseAbility.appendChild(option)
             }
         }
-        var desc = getDataArr(finaldataAbilityDescription,"Ability",baseAbility.value)[0]["Description"];
+        var desc = returnAppArrData(finaldataAbilityDescription,"Ability",baseAbility.value)[0]["Description"];
         if (desc != undefined) {
             baseAbility.setAttribute("title",desc);
         }
@@ -1450,7 +1489,7 @@ function createParty(base,data) {
                     if (!tempmove[q].includes("Move")) {
                         baseMove.querySelector(":scope > span:nth-child("+y+") select").title = formatMoveData(tempmove[q]);
                         baseMove.querySelector(":scope > span:nth-child("+y+") select").style.fontStyle = "unset";
-                        baseMove.querySelector(":scope > span:nth-child("+y+") select").setAttribute("name","styleBackgroundType"+getMoveData(tempmove[q],"Type"))
+                        baseMove.querySelector(":scope > span:nth-child("+y+") select").setAttribute("name","styleBackgroundType"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempmove[q]))
                     }
                 }
             }
@@ -1823,7 +1862,7 @@ function selectModify(e) {
     }
 
     if (this.parentElement.getAttribute("name") == "Ability") {
-        var desc = getDataArr(finaldataAbilityDescription,"Ability",this.value)[0]["Description"];
+        var desc = returnAppArrData(finaldataAbilityDescription,"Ability",this.value)[0]["Description"];
         if (desc != undefined) {
             this.setAttribute("title",desc);
         }
@@ -1908,7 +1947,7 @@ function selectModify(e) {
             this.title = "";
         }
 
-        this.setAttribute("name","styleBackgroundType"+getMoveData(this.value,"Type"));
+        this.setAttribute("name","styleBackgroundType"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value));
     }
 
     partyMemory("Save");
@@ -2629,28 +2668,25 @@ function formatMoveData(move) {
     var tempStr;
     var tempArr = [];
 
-    if (getMoveData(move,"Category") != undefined) {
-        tempArr.push("Category: "+getMoveData(move,"Category"));
+    var cate = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,move);
+    var ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,move);
+    var pwr = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,move);
+    var acc = returnArrValue(finaldataMoveAccuracy,"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,move);
+
+    pwr = undDel(pwr,"-");
+    acc = undDel(acc,"-");
+
+    if (cate != undefined) {
+        tempArr.push("Category: "+cate);
     }
 
-    if (getMoveData(move,"PP Min") != undefined) {
-        tempArr.push("PP: "+getMoveData(move,"PP Min"));
+    if (ppmin != undefined) {
+        tempArr.push("PP: "+ppmin);
     }
 
-    if (getMoveData(move,"Power") != undefined) {
-        tempArr.push("Power: "+getMoveData(move,"Power"));
-    }
-    else {
-        tempArr.push("Power: "+"–");
-    }
-
-    if (getMoveData(move,"Accuracy") != undefined) {
-        tempArr.push("Accuracy: "+getMoveData(move,"Accuracy"));
-    }
-    else {
-        tempArr.push("Accuracy: "+"–");
-    }
-
+    tempArr.push("Power: "+pwr);
+    tempArr.push("Accuracy: "+acc);
+ 
 
 
     tempStr = tempArr.join("\n")
