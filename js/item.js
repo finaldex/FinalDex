@@ -165,12 +165,10 @@ var createItem = function() {
 	itemSectionSidebarSidebarMapInner.addEventListener("mouseenter", function() {zoom(itemSectionSidebarSidebarMapInner,"in",undefined)});
 	itemSectionSidebarSidebarMapInner.addEventListener("mousemove", function() {zoom(itemSectionSidebarSidebarMapInner,"pan",undefined)});
 
-
-
 	for(var q = 0; q < finaldataItems.length; q++) {
 		if (getApplicable(finaldataItems[q]["Game"])) {
 			if (finaldataItems[q]["Use"] == "true") {
-				if (returnAppArrData(finaldataItemsDescription,"Item",finaldataItems[q]["Item"]).length > 0) {
+				//if (returnAppArrData(finaldataItemsDescription,"Item",finaldataItems[q]["Item"]).length > 0) {
 					var name = finaldataItems[q]["Item"];
 
 					if (finaldataItems[q]["Alias"] != undefined) {
@@ -230,7 +228,7 @@ var createItem = function() {
 					itemSectionListOptionsLabel.setAttribute("tabindex",q+10);
 					itemSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;itemOptionsSelector(event.target.previousElementSibling.value);}}});
 
-				}
+				//}
 			}
 		}
 
