@@ -927,7 +927,6 @@ var createTool = function() {
 		toolSectionContentDMGMenuSpecificTopInput.setAttribute("min","1");
 		toolSectionContentDMGMenuSpecificTopInput.setAttribute("value","1");
 		toolSectionContentDMGMenuSpecificTopInput.setAttribute("max","1");
-		toolSectionContentDMGMenuSpecificTopInput.setAttribute("title","Amount of Hits");
 
 		toolSectionContentDMGMenuRollRangeTextTopCenter.setAttribute("name","disable");
 		toolSectionContentDMGMenuRollRangeTextTopCenterDisable.setAttribute("type","checkbox");
@@ -4594,6 +4593,8 @@ var createTool = function() {
 											}
 										}
 
+
+										
 										if (finaldataMoveAdditional[u]["Additional"] == "Recoil") {
 											if (finaldataMoveAdditional[u]["Value"] != undefined) {
 												var val = 0;
@@ -4611,21 +4612,31 @@ var createTool = function() {
 											}
 										}
 
-										
-										if (finaldataMoveAdditional[u]["Additional"] == "Recoil") {
+
+										if (finaldataMoveAdditional[u]["Additional"] == "Drain") {
 											if (finaldataMoveAdditional[u]["Value"] != undefined) {
 												var val = 0;
+												var check = true;
 												if (finaldataMoveAdditional[u]["Type"] == "Move Damage") {
 													val = integerResult*finaldataMoveAdditional[u]["Value"];
 												}
-												if (finaldataMoveAdditional[u]["Type"] == "Current HP") {
-													val = parseInt(userCurrentHPPath.innerText)*finaldataMoveAdditional[u]["Value"];
+												if (userItemPath.value == "Big Root") {
+													val = val*1.3;
 												}
-												if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
-													val = parseInt(userMaxHPPath.innerText)*finaldataMoveAdditional[u]["Value"];
+												if (finaldataMoveAdditional[u]["Condition"] == "Asleep") {
+													if (!tarStatusAsleepPath.checked) {
+														check = false;
+													}
 												}
-				
-												DMGCalcApply(user,val,"Damage","Blue","Apply");
+
+												if (check) {
+													if (tarAbilityPath.value == "Liquid Ooze") {
+														DMGCalcApply(user,val,"Damage","Blue","Apply");
+													}
+													else {
+														DMGCalcApply(user,val,"Healing","Blue","Apply");
+													}
+												}
 											}
 										}
 									}
@@ -5506,6 +5517,8 @@ var createTool = function() {
 
 			var strikes = [1,1];
 
+			inp.title = "";
+
 			for (var a = 0; a < finaldataMoveAdditional.length; a++) {
 				if (finaldataMoveAdditional[a]["Move"] == sel.value) {
 					if (getApplicable(finaldataMoveAdditional[a]["Game"])) {
@@ -5520,6 +5533,13 @@ var createTool = function() {
 									strikes = [finaldataMoveAdditional[a]["Value"],finaldataMoveAdditional[a]["Value"]];
 								}
 							}
+						}
+
+						if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike") {
+							inp.title = "Amount of Hits";
+						}
+						else if (finaldataMoveAdditional[a]["Additional"] == "Consecutive") {
+							inp.title = "Consecutive Turns of Hits";
 						}
 					}
 				}
