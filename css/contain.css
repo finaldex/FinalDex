@@ -1516,6 +1516,7 @@
     justify-content: center;
 	flex-wrap: nowrap;
 	text-shadow: -1px 1px #000;
+	margin: 10px;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name] > span {
@@ -1577,11 +1578,18 @@
 
 
 
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not(.target) figure[name='select'],
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name].active figure[name='select'] {
+	display: none;
+}
 
 
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'][data-range*="Affects"] > span > div[name].target > span {
+	outline: 3px solid var(--colorRed);
+}
 
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*='opponent'] > div[name].active > span {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name*='opponent'] > div[name].active.target > span {
 	outline: 3px solid var(--colorRed);
 }
 
@@ -1653,7 +1661,7 @@
     align-items: center;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name='imgs'] img[name="img"] {
-	max-height: 100%;
+	max-height: 70%;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name='imgs'] img[name='item'] {
@@ -1725,7 +1733,6 @@
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure {
 	position: absolute;
-    top: 10px;
     text-shadow: unset;
     cursor: pointer;
     width: 20px;
@@ -1735,12 +1742,19 @@
     align-items: center;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name='close'] {
+	top: 10px;
 	left: 10px;
 	text-shadow: none;
 }
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name='edit'] {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name='export'] {
+	top: 10px;
 	right: 10px;
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure[name='select'] {
+	bottom: 10px;
+	right: 10px;
+}
+
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] figure > * {
 	width: 100%;
     height: 100%;
@@ -1879,21 +1893,86 @@
 	right: 5px;
 }
 
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='roll'] > span:first-child > *[name="disable"] input {
+	display: unset;
+}
 
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='roll'] > span:first-child > *[name="disable"] {
+    position: absolute;
+    top: -20px;
+}
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='roll'] > span:first-child > *:nth-child(1) {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='roll'] > span:first-child > *[name="low"] {
     position: absolute;
     left: 5px;
     top: -20px;
 }
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='roll'] > span:first-child > *:nth-child(2) {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='roll'] > span:first-child > *[name="high"] {
     position: absolute;
     right: 5px;
     top: -20px;
 }
 
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > span {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] input[type="range"] {
+	height: 4px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] input[type="range"] {
+	height: 8px;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] input[type='range'] {
+	border: solid 1px #000;
+	border-radius: 4px;
+	-webkit-appearance: none;
+	outline: none;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] input[type='range'] {
+	background: var(--color_90);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] input[type='range'] {
+	background: var(--colorBlue);
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] input[type='range']::-webkit-slider-thumb {
+	width: 0;
+	height: 0;
+	-webkit-appearance: none;
+	pointer-events: none;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] input[type='range'][disabled] {
+	filter:grayscale(1) contrast(0.5);
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > *[name='critical'] input {
+	display: none;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > *[name='critical'] small {
+	padding: 0 2px;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > *[name='critical'] > * {
+	filter: brightness(0.5);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > *[name='critical'] > input:checked ~ * {
+	filter: none;
+}
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span:last-child > * {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1968,13 +2047,17 @@
     background: var(--color17);
     flex-direction: row;
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol:last-child {
+	border-top: 2px groove;
+}
+
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div li > span {
 	display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 
@@ -2030,6 +2113,7 @@
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled] ~ label,
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled] ~ small {
 	opacity: 0.5;
+	cursor: default;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div li[name='stats'] input::placeholder,
@@ -2148,17 +2232,31 @@
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='pokémon'] > span {
     width: 100%;
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='pokémon'] > span:not(:first-child) {
+	border-left: 1px solid;
+}
+
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul {
 	display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
-	border: 1px solid;
 	position:relative;
 	padding: 10px 0;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul {
 	display: none;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span:last-child > * {
+	padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 30%;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name*='Group'],
@@ -2196,7 +2294,15 @@
     margin: 0;
     padding: 0;
     width: 100%;
+	font-weight: bold;
 }
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name*="opponent"] ul li[title*="user"],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name*="player"] ul li[title*="target"] {
+	display: none;
+}
+
+
 
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name='hp'] span > input,
@@ -2261,9 +2367,6 @@
 	color: rgba(0,0,0,0.1);
 }
 
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li > *:not(input):first-child {
-    padding: 10px 0 5px;
-}
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li {
 	padding: 2px 0;
@@ -2314,9 +2417,10 @@
     justify-content: flex-start;
     text-align: left;
 }
-
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li > *:not(input):first-child,
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='team'] > span > li[name*='-Group'] > *:first-child {
     padding: 10px 0 5px;
+	text-indent: 5%;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='team'] > span > li[name] > span > li {
@@ -2353,7 +2457,7 @@
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul span > li {
-	padding: 0;	
+	padding: 1px 0;	
 }
 
 
@@ -2379,6 +2483,7 @@
     align-items: center;
 	height: 20%;
 	flex-direction: column;
+	padding: 10px 0;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:nth-child(2) {
 	display: flex;
@@ -2390,18 +2495,20 @@
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child {
 	display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+    flex-wrap: wrap;
     align-items: center;
-	text-align:center;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * {
 	display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-content: center;
-    width: 50%;
-	padding: 2px 0;
+    width: 46%;
+    padding: 2px 0;
+    align-items: center;
+    padding: 2px 2%;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > *[name*='-Group'] {
 	flex-direction: column;
@@ -2413,21 +2520,13 @@
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span {
 	display: flex;
-    align-items: stretch;
     flex-direction: row;
-    align-content: center;
-    justify-content: space-evenly;
     width: 100%;
-	padding: 5px 0;
-	flex-wrap: wrap;
-}
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span:first-child {
-	padding-top: 10px;
+    align-items: center;
+    justify-content: space-between;
+	margin-bottom: 10px;
 }
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span:last-child {
-	padding-bottom: 10px;
-}
 
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child > * > span > li label{
