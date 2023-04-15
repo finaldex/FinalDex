@@ -18,7 +18,7 @@ var createTool = function() {
 	toolSectionHeaderTitleText.innerText = "Tools";
 
 	toolSectionContentTimersOuter.setAttribute("name","timer");
-	toolSectionContentTimersOuter.setAttribute("value",0);
+	toolSectionContentTimersOuter.setAttribute("value","2");
 
 	document.querySelector("#contain").appendChild(toolOuter);
 	toolOuter.appendChild(toolSectionList);
@@ -172,7 +172,7 @@ var createTool = function() {
 		var toolSectionContentRNGResult = document.createElement("div");
 
 		toolSectionContentRNGOuter.setAttribute("name","rng");
-		toolSectionContentRNGOuter.setAttribute("value","1");
+		toolSectionContentRNGOuter.setAttribute("value","3");
 
 		toolSectionContentRNGResult.setAttribute("name","result");
 		toolSectionContentRNGResult.classList.add("scroll");
@@ -270,7 +270,7 @@ var createTool = function() {
 
 		typeOuter.setAttribute("name","type");
 
-		typeOuter.setAttribute("value","2");
+		typeOuter.setAttribute("value","1");
 
 		typeSidebarDescriptionTitleImage.setAttribute("onerror","this.style.display='none';");
 		typeSidebarDescriptionTitleImage.setAttribute("alt", MEDIAPath_Type_Icon);
@@ -908,15 +908,16 @@ var createTool = function() {
 		var toolSectionContentDMGMenuMoveBottomAccuracy = document.createElement("span");
 		var toolSectionContentDMGMenuMoveBottomAccuracyTitle = document.createElement("h6");
 		var toolSectionContentDMGMenuMoveBottomAccuracyText = document.createElement("small");
+		var toolSectionContentDMGMenuMoveBottomCritical = document.createElement("label");
+		var toolSectionContentDMGMenuMoveBottomCriticalInput = document.createElement("input");
+		var toolSectionContentDMGMenuMoveBottomCriticalTitle = document.createElement("h6");
+		var toolSectionContentDMGMenuMoveBottomCriticalText = document.createElement("small");
 
-		var toolSectionContentDMGMenuRollCrit = document.createElement("span");
-		var toolSectionContentDMGMenuRollCritInput = document.createElement("input");
-		var toolSectionContentDMGMenuRollCritLabel = document.createElement("label");
-		var toolSectionContentDMGMenuRollCritText = document.createElement("h6");
-
-		var toolSectionContentDMGMenuRollRoll = document.createElement("span");
-		var toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("h6");
-		var toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("h6");
+		var toolSectionContentDMGMenuRollWrap = document.createElement("span");
+		var toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("span");
+		var toolSectionContentDMGMenuRollRangeTextTopCenter = document.createElement("span");
+		var toolSectionContentDMGMenuRollRangeTextTopCenterDisable = document.createElement("input");
+		var toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("span");
 		var toolSectionContentDMGMenuRollRangeTextBottomLeft = document.createElement("small");
 		var toolSectionContentDMGMenuRollRangeTextBottomRight = document.createElement("small");
 		var toolSectionContentDMGMenuRollRange = document.createElement("input");
@@ -928,6 +929,10 @@ var createTool = function() {
 		toolSectionContentDMGMenuSpecificTopInput.setAttribute("max","1");
 		toolSectionContentDMGMenuSpecificTopInput.setAttribute("title","Amount of Hits");
 
+		toolSectionContentDMGMenuRollRangeTextTopCenter.setAttribute("name","disable");
+		toolSectionContentDMGMenuRollRangeTextTopCenterDisable.setAttribute("type","checkbox");
+		toolSectionContentDMGMenuRollRangeTextTopCenterDisable.checked = true;
+
 		toolSectionContentDMGMenuMoveBottomDamage.setAttribute("name","damage");
 		toolSectionContentDMGMenuMoveBottomDamageTitle.innerText = "Damage";
 		toolSectionContentDMGMenuMoveBottomDamageText.innerText = "";
@@ -936,21 +941,23 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveBottomAccuracyTitle.innerText = "Accuracy";
 		toolSectionContentDMGMenuMoveBottomAccuracyText.innerText = "";
 
+		toolSectionContentDMGMenuMoveBottomCritical.setAttribute("for","dmg-critical")
+		toolSectionContentDMGMenuMoveBottomCriticalInput.setAttribute("id","dmg-critical")
+		toolSectionContentDMGMenuMoveBottomCriticalInput.setAttribute("type","checkbox");
+		toolSectionContentDMGMenuMoveBottomCritical.setAttribute("name","critical");
+		toolSectionContentDMGMenuMoveBottomCriticalTitle.innerText = "Critical";
+		toolSectionContentDMGMenuMoveBottomCriticalText.innerText = ""
+		
+
 		toolSectionContentDMGMenuRoll.setAttribute("name","roll");
 		toolSectionContentDMGMenuMove.setAttribute("name","move");
 		toolSectionContentDMGMenuSpecific.setAttribute("name","spec");
 
 
-		toolSectionContentDMGMenuRollCritText.innerText = "Critical";
-
-		toolSectionContentDMGMenuRollCrit.setAttribute("name","critical");
-		toolSectionContentDMGMenuRollCritInput.setAttribute("type","checkbox");
-		toolSectionContentDMGMenuRollCritInput.setAttribute("name","critical-checkbox");
-		toolSectionContentDMGMenuRollCritInput.setAttribute("id","critical-checkbox");
-		toolSectionContentDMGMenuRollCritLabel.setAttribute("for","critical-checkbox");
-
-		toolSectionContentDMGMenuRollRangeTextTopLeft.innerText = "Low Roll";
-		toolSectionContentDMGMenuRollRangeTextTopRight.innerText = "High Roll";
+		toolSectionContentDMGMenuRollRangeTextTopLeft.setAttribute("name","low");
+		toolSectionContentDMGMenuRollRangeTextTopLeft.innerHTML = "<h6>Low Roll</h6>";
+		toolSectionContentDMGMenuRollRangeTextTopRight.setAttribute("name","high");
+		toolSectionContentDMGMenuRollRangeTextTopRight.innerHTML = "<h6>High Roll</h6>";
 		toolSectionContentDMGMenuRollRangeTextBottomLeft.setAttribute("name","min");
 		toolSectionContentDMGMenuRollRangeTextBottomRight.setAttribute("name","max");
 
@@ -964,7 +971,7 @@ var createTool = function() {
 		toolSectionContentDMGOptionsContentBottom.setAttribute("name","team");
 
 		toolSectionContentDMGOuter.setAttribute("name","dmg");
-		toolSectionContentDMGOuter.setAttribute("value","3");
+		toolSectionContentDMGOuter.setAttribute("value","0");
 
 		toolSectionContentDMGContent.setAttribute("name","content");
 
@@ -1015,21 +1022,27 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomAccuracy);
 		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyTitle);
 		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyText);
+		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomCritical);
+		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalInput);
+		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalTitle);
+		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalText);
 
-		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollRoll)
-		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextTopLeft)
-		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextTopRight)
-		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRange)
-		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextBottomLeft)
-		toolSectionContentDMGMenuRollRoll.appendChild(toolSectionContentDMGMenuRollRangeTextBottomRight)
 
-		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollCrit);
-		toolSectionContentDMGMenuRollCrit.appendChild(toolSectionContentDMGMenuRollCritInput);
-		toolSectionContentDMGMenuRollCrit.appendChild(toolSectionContentDMGMenuRollCritLabel);
-		toolSectionContentDMGMenuRollCritLabel.appendChild(toolSectionContentDMGMenuRollCritText);
+		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollWrap)
+		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextTopLeft)
+		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextTopCenter)
+		toolSectionContentDMGMenuRollRangeTextTopCenter.appendChild(toolSectionContentDMGMenuRollRangeTextTopCenterDisable)
+		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextTopRight)
+		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRange)
+		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextBottomLeft)
+		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextBottomRight)
 
-		toolSectionContentDMGMenuRollCritInput.addEventListener("change",DMGCalcStart);
-		toolSectionContentDMGMenuRollRange.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuMoveBottomCriticalInput.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuRollRange.addEventListener("input",DMGCalcStart);
+		toolSectionContentDMGMenuRollRangeTextTopCenterDisable.addEventListener("change",function(){var x = this.parentElement.parentElement.querySelector(":scope input[type='range']");x.removeAttribute("disabled");if (this.checked == false) {x.setAttribute("disabled","")}});
+		toolSectionContentDMGMenuRollRangeTextTopCenterDisable.addEventListener("change",DMGCalcStart)
+		toolSectionContentDMGMenuRollRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`})
+
 
 		var tempMoves = [];
 
@@ -1060,16 +1073,7 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",DMGCalcStart);
 
 
-		//var conditions = [{Name:"Reflect",Affect:"Team"},{Name:"Light Screen",Affect:"Team"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain"}]
-		//var conditions = [{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"1 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"2 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"3 Layers",Title:"Spikes",Affect:"Team",Group:"Spikes",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"All"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"All"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}];
-		//var conditions = [{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
-		//var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Switching Out",Title:"Switching Out",Affect:"Pokémon",Info:"Is the Pokémon switching out?",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Sun",Title:"Sun",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sand",Title:"Sand",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
-		//var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Title:"Hive Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Title:"Fog Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Title:"Storm Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Title:"Rising Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Title:"Cascade Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Title:"Rainbow Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Title:"Marsh Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Title:"Earth Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Type:"Move",Game:"All"},{Name:"Protect",Title:"Protect",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Team",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Title:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Title:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
-		//var conditions = [{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Title:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Title:"Hive Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Title:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Title:"Fog Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Title:"Storm Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Title:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Title:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Title:"Rising Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Title:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Title:"Cascade Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Title:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Title:"Rainbow Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Title:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Title:"Marsh Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Title:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Title:"Earth Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Title:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Title:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Title:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Title:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Title:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Title:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Title:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Title:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Title:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Title:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Title:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Title:"Spikes",Affect:"Team",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Title:"Light Screen",Affect:"Team",Group:"Screen",Type:"Move",Game:"All"},{Name:"Reflect",Title:"Reflect",Affect:"Team",Group:"Screen",Type:"Move",Game:"All"},{Name:"Aurora Veil",Title:"Aurora Veil",Affect:"Team",Group:"Screen",Type:"Move",Game:"All"},{Name:"Leech Seed",Title:"Leech Seed",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Foresight",Title:"Foresight",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Helping Hand",Title:"Helping Hand",Affect:"Pokémon",Type:"Move",Game:"All"},{Name:"Tailwind",Title:"Tailwind",Affect:"Team",Type:"Move",Game:"All"},{Name:"Flower Gift",Title:"Flower Gift",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Friend Guard",Title:"Friend Guard",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Battery",Title:"Battery",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Power Spot",Title:"Power Spot",Affect:"Team",Type:"Ability",Game:"All"},{Name:"Shadow",Title:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Charge",Title:"Charge",Affect:"Move",Info:"Is the move powered up by Charge?",Type:"Move",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Me First",Title:"Me First",Affect:"Move",Info:"Is the move called by Me First?",Type:"Move",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Protect",Title:"Protect",Affect:"Move",Info:"Is the move being used into Protection?",Type:"Move",Game:"All"},{Name:"Harsh Sunlight",Title:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Title:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Title:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Title:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Title:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Title:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Title:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Title:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Title:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Title:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Title:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Title:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Title:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Title:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Title:"Magic Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Wonder Room",Title:"Wonder Room",Affect:"All",Type:"Move",Game:"All"},{Name:"Gravity",Title:"Gravity",Affect:"All",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Title:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Title:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Title:"G-Max Volcalith",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Title:"G-Max Cannonade",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Title:"G-Max Vine Lash",Affect:"Team",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Title:"G-Max Wildfire",Affect:"Team",Type:"Move",Game:"Sword,Shield"}]
-		//var conditions = [{Name:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Group:"Badge",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Pokémon",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Group:"Badge",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Info:"Turns of Bad Poison",Group:"Status",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Stealth Rock",Affect:"Team",Affected:"Stealth Rock",Group:"Pointed Stones",Type:"Move",Game:"All"},{Name:"Spikes",Affect:"Team",Affected:"Spikes",Info:"Layers of Spikes",Group:"Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Affect:"Team",Affected:"Light Screen",Group:"Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Affected:"Reflect",Group:"Screen",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Affected:"Aurora Veil",Group:"Screen",Type:"Move",Game:"All"},{Name:"Leech Seed",Affect:"Pokémon",Affected:"Leech Seed",Type:"Move",Game:"All"},{Name:"Foresight",Affect:"Pokémon",Affected:"Foresight",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Pokémon",Affected:"Helping Hand",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Flower Gift",Affect:"Team",Affected:"Flower Gift",Type:"Ability",Game:"All"},{Name:"Friend Guard",Affect:"Team",Affected:"Friend Guard",Type:"Ability",Game:"All"},{Name:"Battery",Affect:"Team",Affected:"Battery",Type:"Ability",Game:"All"},{Name:"Power Spot",Affect:"Team",Affected:"Power Spot",Type:"Ability",Game:"All"},{Name:"Shadow",Affect:"Pokémon",Info:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Affected:"G-Max Steelsurge",Group:"Sharp Steel",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Affect:"Team",Affected:"G-Max Stonesurge",Group:"Pointed Stones",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Protection",Affect:"Move",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Info:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Move",Affected:"Fly,Bounce",Info:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Move",Affected:"Dig",Info:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Move",Affected:"Dive,Surf,Whirlpool",Info:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Move",Affected:"Pursuit",Info:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Minimize",Affect:"Move",Affected:"Minimize,Body Slam,Stomp,Astonish,Extrasensory,Needle Arm,Dragon Rush,Shadow Force,Steamroller,Heat Crash,Heavy Slam,Phantom Force,Flying Press,Malicious Moonsault,Double Iron Bash",Info:"Did the target previously use Minimize?",Type:"Move",Game:"All"},{Name:"Charge",Affect:"Move",Affected:"Charge",Info:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Move",Affected:"Me First",Info:"Is the move called by Me First?",Type:"Move",Game:"All"}]
-		var conditions = [{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Info:"Turns of Bad Poison",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Leech Seed",Affect:"Pokémon",Group:"Seed",Affected:"Leech Seed",Type:"Move",Game:"All"},{Name:"Sappy Seed",Affect:"Pokémon",Group:"Seed",Affected:"Sappy Seed",Type:"Move",Game:"All"},{Name:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Affected:"Stealth Rock",Type:"Move",Game:"All"},{Name:"Spikes",Affect:"Team",Group:"Spikes",Affected:"Spikes",Info:"Layers of Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"Light Screen",Affect:"Team",Group:"Screen",Affected:"Light Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Group:"Screen",Affected:"Reflect",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Group:"Screen",Affected:"Aurora Veil",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Flower Gift",Affect:"Team",Affected:"Flower Gift",Type:"Ability",Game:"All"},{Name:"Friend Guard",Affect:"Team",Affected:"Friend Guard",Type:"Ability",Game:"All"},{Name:"Battery",Affect:"Team",Affected:"Battery",Type:"Ability",Game:"All"},{Name:"Power Spot",Affect:"Team",Affected:"Power Spot",Type:"Ability",Game:"All"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Affected:"G-Max Steelsurge",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Affected:"G-Max Stonesurge",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Protection",Affect:"Specific",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Info:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Specific",Affected:"Fly,Bounce",Info:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Specific",Affected:"Dig",Info:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Specific",Affected:"Dive,Surf,Whirlpool",Info:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Specific",Affected:"Pursuit",Info:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Confusion",Affect:"Specific",Affected:"Tangled Feet",Info:"Is the target confused?",Type:"Ability",Game:"All"},{Name:"Minimize",Affect:"Specific",Affected:"Minimize,Body Slam,Stomp,Astonish,Extrasensory,Needle Arm,Dragon Rush,Shadow Force,Steamroller,Heat Crash,Heavy Slam,Phantom Force,Flying Press,Malicious Moonsault,Double Iron Bash",Info:"Did the target previously use Minimize?",Type:"Move",Game:"All"},{Name:"Charge",Affect:"Specific",Affected:"Charge",Info:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Specific",Affected:"Me First",Info:"Is the move called by Me First?",Type:"Move",Game:"All"},{Name:"Flash Fire",Affect:"Specific",Affected:"Flash Fire",Info:"Is Flash Fire active on the user?",Type:"Ability",Game:"All"},{Name:"Laser Focus",Affect:"Specific",Affected:"Laser Focus",Info:"Is Laser Focus active on the user?",Type:"Move",Game:"All"},{Name:"Glaive Rush",Affect:"Specific",Affected:"Glaive Rush",Info:"Did the target previously use Glaive Rush?",Type:"Move",Game:"All"},{Name:"Trick-or-Treat",Affect:"Specific",Affected:"Trick-or-Treat",Info:"Is Trick-or-Treat active on the target?",Type:"Move",Game:"All"},{Name:"Forest's Curse",Affect:"Specific",Affected:"Forest's Curse",Info:"Is Forest's Curse active on the target?",Type:"Move",Game:"All"},{Name:"Lucky Chant",Affect:"Specific",Affected:"Lucky Chant",Info:"Is Lucky Chant active on the target?",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Specific",Affected:"Helping Hand",Info:"Is Helping Hand active on the user?",Type:"Move",Game:"All"},{Name:"Shadow",Affect:"Specific",Info:"Is the user a Shadow Pokémon?",Type:"Form",Game:"Colosseum"}];
-
-
+		var conditions = [{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Pokémon",Group:"Badge",Info:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Info:"Turns of Bad Poison",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Leech Seed",Affect:"Pokémon",Group:"Seed",Affected:"Leech Seed",Type:"Move",Game:"All"},{Name:"Sappy Seed",Affect:"Pokémon",Group:"Seed",Affected:"Sappy Seed",Type:"Move",Game:"All"},{Name:"Laser Focus",Affect:"Pokémon",Affected:"Laser Focus",Info:"Is Laser Focus active on the user?",Type:"Move",Game:"All"},{Name:"Glaive Rush",Affect:"Pokémon",Affected:"Glaive Rush",Info:"Did the target previously use Glaive Rush?",Type:"Move",Game:"All"},{Name:"Trick-or-Treat",Affect:"Pokémon",Affected:"Trick-or-Treat",Info:"Is Trick-or-Treat active on the target?",Type:"Move",Game:"All"},{Name:"Forest's Curse",Affect:"Pokémon",Affected:"Forest's Curse",Info:"Is Forest's Curse active on the target?",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Pokémon",Affected:"Helping Hand",Info:"Is Helping Hand active on the user?",Type:"Move",Game:"All"},{Name:"Thousand Arrows",Affect:"Pokémon",Affected:"Thousand Arrows",Info:"Is Thousand Arrows active on the target?",Type:"Move",Game:"All"},{Name:"Odor Sleuth",Affect:"Pokémon",Affected:"Odor Sleuth",Info:"Is Odor Sleuth active on the target?",Type:"Move",Game:"All"},{Name:"Foresight",Affect:"Pokémon",Affected:"Foresight",Info:"Is Foresight active on the target?",Type:"Move",Game:"All"},{Name:"Miracle Eye",Affect:"Pokémon",Affected:"Miracle Eye",Info:"Is Miracle Eye active on the target?",Type:"Move",Game:"All"},{Name:"Shadow",Affect:"Pokémon",Info:"Is the user a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Dynamax",Affect:"Pokémon",Info:"Is the user Dynamaxed?",Type:"Form",Game:"Sword,Shield"},{Name:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Affected:"Stealth Rock",Type:"Move",Game:"All"},{Name:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Affected:"G-Max Stonesurge",Type:"Move",Game:"Sword,Shield"},{Name:"Spikes",Affect:"Team",Group:"Spikes",Affected:"Spikes",Info:"Layers of Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Affected:"G-Max Steelsurge",Type:"Move",Game:"Sword,Shield"},{Name:"Light Screen",Affect:"Team",Group:"Screen",Affected:"Light Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Group:"Screen",Affected:"Reflect",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Group:"Screen",Affected:"Aurora Veil",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Lucky Chant",Affect:"Team",Affected:"Lucky Chant",Type:"Move",Game:"All"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Trick Room",Affect:"All",Affected:"Trick Room",Type:"Move",Game:"All"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"Protection",Affect:"Specific",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Info:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Specific",Affected:"Fly,Bounce",Info:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Specific",Affected:"Dig",Info:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Specific",Affected:"Dive,Surf,Whirlpool",Info:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Specific",Affected:"Pursuit",Info:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Confusion",Affect:"Specific",Affected:"Tangled Feet",Info:"Is the target confused?",Type:"Ability",Game:"All"},{Name:"Minimize",Affect:"Specific",Affected:"Minimize,Body Slam,Stomp,Astonish,Extrasensory,Needle Arm,Dragon Rush,Shadow Force,Steamroller,Heat Crash,Heavy Slam,Phantom Force,Flying Press,Malicious Moonsault,Double Iron Bash",Info:"Did the target previously use Minimize?",Type:"Move",Game:"All"},{Name:"Charge",Affect:"Specific",Affected:"Charge",Info:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Specific",Affected:"Me First",Info:"Is the move called by Me First?",Type:"Move",Game:"All"},{Name:"Flash Fire",Affect:"Specific",Affected:"Flash Fire",Info:"Is Flash Fire active on the user?",Type:"Ability",Game:"All"},{Name:"Tar Shot",Affect:"Specific",Affected:"Tar Shot",Info:"Is Tar Shot active on the target?",Type:"Move",Game:"All"}]
 
 		var battleVariation = [{Name:"Single Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"All"},{Name:"Double Battle",TeamMin:"2",TeamMax:"2",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Triple Battle",TeamMin:"3",TeamMax:"3",OpponentMin:"3",OpponentMax:"3",Teams:"2",Game:"Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Battle Royal",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"4",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"SOS Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"Horde Encounter",TeamMin:"1",TeamMax:"1",OpponentMin:"5",OpponentMax:"5",Teams:"2",Game:"X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Max Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Sword,Shield"},{Name:"Tera Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Scarlet,Violet"}]
 
@@ -1080,7 +1084,8 @@ var createTool = function() {
 	
 				var toolSectionContentDMGOptionsBattlesOption = document.createElement("option");
 				toolSectionContentDMGOptionsBattlesOption.innerText = battleVariation[q]["Name"];
-				toolSectionContentDMGOptionsBattlesOption.value = q;
+				toolSectionContentDMGOptionsBattlesOption.value = battleVariation[q]["Name"];
+				toolSectionContentDMGOptionsBattlesOption.setAttribute("name",q);
 				toolSectionContentDMGOptionsBattlesSelect.appendChild(toolSectionContentDMGOptionsBattlesOption)
 
 
@@ -1092,7 +1097,14 @@ var createTool = function() {
 				}
 			}
 		}
+		toolSectionContentDMGOptionsBattlesSelect.setAttribute("teammin",battleVariation[0]["TeamMax"])
+		toolSectionContentDMGOptionsBattlesSelect.setAttribute("teammax",battleVariation[0]["TeamMax"])
+		toolSectionContentDMGOptionsBattlesSelect.setAttribute("opponentmin",battleVariation[0]["OpponentMin"])
+		toolSectionContentDMGOptionsBattlesSelect.setAttribute("opponentmax",battleVariation[0]["OpponentMax"])
+		toolSectionContentDMGOptionsBattlesSelect.setAttribute("name",0)
 
+
+		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function() {let x = this.value; let tar = this.querySelector(":scope > *[value='"+x+"']"); this.setAttribute("opponentmax",tar.getAttribute("opponentmax"));this.setAttribute("teammax",tar.getAttribute("teammax")); this.setAttribute("opponentmin",tar.getAttribute("opponentmin"));this.setAttribute("teammin",tar.getAttribute("teammin"));this.setAttribute("name",tar.getAttribute("name")); })
 		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",buildDMG)
 		buildDMG();
 		DMGSetInfo();
@@ -1102,7 +1114,7 @@ var createTool = function() {
 
 		function buildDMG() {
 
-			var battleVar = battleVariation[toolSectionContentDMGOptionsBattles.querySelector(":scope option[value='"+toolSectionContentDMGOptionsBattlesSelect.value+"']").value];
+			var battleVar = battleVariation[toolSectionContentDMGOptionsBattlesSelect.getAttribute("name")];
 			
 		
 			toolSectionContentDMGOptionsContentTop.innerHTML = "";
@@ -1128,7 +1140,7 @@ var createTool = function() {
 				var toolSectionContentDMGOptionsTitleTeam = document.createElement("select");
 				toolSectionContentDMGOptionsTitleTeam.setAttribute("name",teamName.toLowerCase());
 				toolSectionContentDMGOptionsTitle.appendChild(toolSectionContentDMGOptionsTitleTeam);
-				toolSectionContentDMGOptionsTitleTeam.addEventListener("change",function(){var x = this.value; var z = this.getAttribute("name");var dvs = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div ul[name*='"+z+"']"); var dv = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div ul[name*='"+z+"'][value='"+x+"']"); for (var i = 0; i < dvs.length; i++) {dvs[i].style.display = "none";} dv.style.display="flex";})
+				toolSectionContentDMGOptionsTitleTeam.addEventListener("change",function(){var x = this.value; var z = this.getAttribute("name");var dvs = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z.toLowerCase()+"'] ul"); var dv = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z.toLowerCase()+"'] ul[name='"+x+"']");for (var i = 0; i < dvs.length; i++) {dvs[i].style.display = "none";} dv.style.display="flex";})
 			
 
 				var resultTeams = document.createElement("span");
@@ -1169,7 +1181,7 @@ var createTool = function() {
 					else {
 						opt.innerText = teamName+" #"+t;
 					}
-					opt.setAttribute("value",t);
+					opt.setAttribute("value",r);
 					toolSectionContentDMGOptionsTitleTeam.appendChild(opt);
 
 					var toolSectionContentDMGOptionsContentTeam = document.createElement("ul");
@@ -1194,7 +1206,6 @@ var createTool = function() {
 					}
 					
 					resultTeams.appendChild(resultTeam);
-					resultTeam.addEventListener("click",DMGSetActive);
 	
 					var resultTeamInactive = document.createElement("span");
 					var resultTeamInactiveImport = document.createElement("b");
@@ -1218,6 +1229,8 @@ var createTool = function() {
 					var resultTeamActiveCloseText = document.createElement("small");
 					var resultTeamActiveExport = document.createElement("figure");
 					var resultTeamActiveExportText = document.createElement("small");
+					var resultTeamActiveSelect = document.createElement("figure");
+					var resultTeamActiveSelectText = document.createElement("small");
 
 					resultTeamInactiveImport.innerHTML = "<strong>+</strong>";
 					resultTeamActivePok.setAttribute("name","pok");
@@ -1237,7 +1250,8 @@ var createTool = function() {
 					resultTeamActivePokName.setAttribute("name","name");
 					resultTeamActivePokNameText.innerText = "Bulbasaur"
 					resultTeamActiveClose.setAttribute("name","close");
-					resultTeamActiveExport.setAttribute("name","edit");
+					resultTeamActiveExport.setAttribute("name","export");
+					resultTeamActiveSelect.setAttribute("name","select");
 		
 
 					resultTeamActivePokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
@@ -1245,6 +1259,7 @@ var createTool = function() {
 					resultTeamActivePokItem.setAttribute("onload","this.style.removeProperty('display');");
 					resultTeamActiveCloseText.innerText = "❌";
 					resultTeamActiveExportText.innerText = "➢";
+					resultTeamActiveSelectText.innerText = "⨀";
 					resultTeamActiveBottom.setAttribute("name","moves");
 
 
@@ -1256,9 +1271,11 @@ var createTool = function() {
 					resultTeamActiveTop.appendChild(resultTeamActivePok);
 					resultTeamActiveTop.appendChild(resultTeamActivePok);
 					resultTeamActiveTop.appendChild(resultTeamActiveClose);
-					resultTeamActiveTop.appendChild(resultTeamActiveExport);
 					resultTeamActiveClose.appendChild(resultTeamActiveCloseText);
+					resultTeamActiveTop.appendChild(resultTeamActiveExport);
 					resultTeamActiveExport.appendChild(resultTeamActiveExportText);
+					resultTeamActiveTop.appendChild(resultTeamActiveSelect);
+					resultTeamActiveSelect.appendChild(resultTeamActiveSelectText);
 					resultTeamActiveTop.appendChild(resultTeamActivePokHealth);
 					resultTeamActivePokHealth.appendChild(resultTeamActivePokHealthPercentage);
 					resultTeamActivePokHealth.appendChild(resultTeamActivePokHealthWrap);
@@ -1273,6 +1290,7 @@ var createTool = function() {
 					resultTeamInactiveImport.addEventListener("click",DMGSetDataString);
 					resultTeamActiveClose.addEventListener("click",DMGRemoveDataString);
 					resultTeamActiveExport.addEventListener("click",DMGExportDataString);
+					resultTeamActiveSelect.addEventListener("click",DMGSetActive);
 
 					for (var m = 0; m < 4; m++) {
 						var resultTeamActiveMove = document.createElement("b");
@@ -1352,6 +1370,8 @@ var createTool = function() {
 				base.appendChild(maxHP);
 				maxHP.appendChild(maxHPRange);
 
+				maxHPRange.addEventListener("input",function(){let v = (((this.value-this.min)/(this.max-this.min))*100);let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`})
+
 	
 				var maxHPWrap = document.createElement("span");
 				var maxHPWrapCurrent = document.createElement("input");
@@ -1368,12 +1388,14 @@ var createTool = function() {
 				maxHPWrap.appendChild(maxHPWrapDash)
 				maxHPWrap.appendChild(maxHPWrapMax)
 
+
 				maxHPWrapCurrent.addEventListener("change",iMinMax);
 				maxHPWrapCurrent.addEventListener("change",function(){this.parentElement.parentElement.querySelector(":scope input[type='range']").value = this.value;});
+				maxHPWrapCurrent.addEventListener("change",function(){var tar = this.parentElement.parentElement.querySelector(":scope input[type='range']");let v = ((tar.value-tar.min)/(tar.max-tar.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";tar.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`})
 				maxHPWrapCurrent.addEventListener("change",DMGCalcStart);
 		
-				maxHPRange.addEventListener("change",function(){this.parentElement.querySelector(":scope *[name='current']").value = this.value;});
-				maxHPRange.addEventListener("change",DMGCalcStart);
+				maxHPRange.addEventListener("input",function(){this.parentElement.querySelector(":scope *[name='current']").value = this.value;});
+				maxHPRange.addEventListener("input",DMGCalcStart);
 
 
 				var stats = document.createElement("li");
@@ -1457,13 +1479,14 @@ var createTool = function() {
 
 					statsTemp.push("Evasion");
 					statsTemp.push("Accuracy");
+					statsTemp.push("Critical");
 
 					statsTemp = statsTemp.filter(e => e !== 'Total');
 
 					for(var s = 0; s < statsTemp.length; s++) {
 
 						if (e == 1 || e == 2 || e == 4) {
-							if (statsTemp[s] == "Evasion" || statsTemp[s] == "Accuracy") {
+							if (statsTemp[s] == "Evasion" || statsTemp[s] == "Accuracy" || statsTemp[s] == "Critical") {
 								break;
 							}
 						}
@@ -1480,7 +1503,18 @@ var createTool = function() {
 						if (e == 0 || e == 4) {
 							statsWrapInput.setAttribute("disabled","");
 						}
-
+			
+						if (statsTemp[s] == "Critical") {
+							if (Generation == 1) {
+								statsWrapInput.min = 0;
+								statsWrapInput.max = 1;
+							}
+							else if (Generation >= 2) {
+								statsWrapInput.min = 0;
+								statsWrapInput.max = 4;
+							}
+						}
+					
 						if (e == 3) {
 							if (s == 0) {
 								statsWrapInput.setAttribute("disabled","");
@@ -1501,12 +1535,12 @@ var createTool = function() {
 						}
 					
 						statsWrapCenter.appendChild(statsWrapInput);
-						statsWrapInput.addEventListener("change",iMinMax);
-						statsWrapInput.addEventListener("change",DMGCalcPokStats);
-						statsWrapInput.addEventListener("change",DMGSaveData);
-						statsWrapInput.addEventListener("change",DMGCalcStart);
+						statsWrapInput.addEventListener("input",iMinMax);
+						statsWrapInput.addEventListener("input",DMGCalcPokStats);
+						statsWrapInput.addEventListener("input",DMGSaveData);
+						statsWrapInput.addEventListener("input",DMGCalcStart);
 
-						statsWrapInput.addEventListener("change",function(){if (this.value == 0) {this.value = ""}});
+						statsWrapInput.addEventListener("input",function(){if (this.value == 0) {this.value = ""}});
 
 						if (statsTemp[s] != "Evasion" && statsTemp[s] != "Accuracy") {
 							if (e < 3) {
@@ -1618,10 +1652,10 @@ var createTool = function() {
 				level.appendChild(levelTitle)
 				level.appendChild(levelInput)
 
-				levelInput.addEventListener("change",iMinMax);
-				levelInput.addEventListener("change",DMGCalcPokStats);
-				levelInput.addEventListener("change",DMGSaveData);
-				levelInput.addEventListener("change",DMGCalcStart);
+				levelInput.addEventListener("input",iMinMax);
+				levelInput.addEventListener("input",DMGCalcPokStats);
+				levelInput.addEventListener("input",DMGSaveData);
+				levelInput.addEventListener("input",DMGCalcStart);
 
 
 
@@ -1680,10 +1714,10 @@ var createTool = function() {
 					friendshipInput.setAttribute("disabled","");
 					friendshipInput.setAttribute("setDisable","");
 
-					friendshipInput.addEventListener("change",iMinMax);
-					friendshipInput.addEventListener("change",DMGCalcPokStats);
-					friendshipInput.addEventListener("change",DMGSaveData);
-					friendshipInput.addEventListener("change",DMGCalcStart);
+					friendshipInput.addEventListener("input",iMinMax);
+					friendshipInput.addEventListener("input",DMGCalcPokStats);
+					friendshipInput.addEventListener("input",DMGSaveData);
+					friendshipInput.addEventListener("input",DMGCalcStart);
 
 					friendship.appendChild(friendshipTitle)
 					friendship.appendChild(friendshipInputWrap)
@@ -1712,10 +1746,10 @@ var createTool = function() {
 					affectionInput.setAttribute("disabled","");
 					affectionInput.setAttribute("setDisable","");
 
-					affectionInput.addEventListener("change",iMinMax);
-					affectionInput.addEventListener("change",DMGCalcPokStats);
-					affectionInput.addEventListener("change",DMGSaveData);
-					affectionInput.addEventListener("change",DMGCalcStart);
+					affectionInput.addEventListener("input",iMinMax);
+					affectionInput.addEventListener("input",DMGCalcPokStats);
+					affectionInput.addEventListener("input",DMGSaveData);
+					affectionInput.addEventListener("input",DMGCalcStart);
 
 					affection.appendChild(affectionTitle)
 					affection.appendChild(affectionInputWrap)
@@ -1811,6 +1845,7 @@ var createTool = function() {
 					var check = getApplicable(conditions[c]["Game"]);
 					
 					if (conditions[c]["Affected"] != undefined) {
+						check = false;
 						var val = [];
 						if (conditions[c]["Affected"].includes(",")) {
 							val = conditions[c]["Affected"].split(",");
@@ -1818,8 +1853,9 @@ var createTool = function() {
 						else {
 							val = [conditions[c]["Affected"]]
 						}
+
 						for (var k = 0; k < val.length; k++) {
-							var exist = document.querySelector(`#contain > div#`+conditions[c]["Type"].toLowerCase()+` > section[name='list'] ol label[data-title="`+val[k]+`"]`);
+							var exist = document.querySelector(`#contain > div#`+conditions[c]["Type"].toLowerCase()+` > section[name='list'] ol label[data-title="`+val[k].toLowerCase()+`"]`);
 							if (exist  != undefined) {
 								check = true;
 								break;
@@ -1909,22 +1945,28 @@ var createTool = function() {
 									cond.appendChild(conditionLabel)
 									conditionLabel.appendChild(conditionLabelText)
 
-									if (conditions[c]["Group"] == "Status" || conditions[c]["Group"] == "Weather") {
+									if (conditions[c]["Group"] != "Badge" && conditions[c]["Group"] != "Screen") {
 										conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
 									}
 
 									if (conditions[c]["Info"] != undefined) {
 										cond.setAttribute("title",conditions[c]["Info"])
 									}
-									conditionInput.addEventListener("change",DMGCalcPokStats);
-									conditionInput.addEventListener("change",DMGSaveData);
-									conditionInput.addEventListener("change",DMGCalcStart);
+								
 									
 									if (conditions[c]["Values"] != undefined) {
 										conditionInput.setAttribute("type","number");
 										conditionInput.setAttribute("min",conditions[c]["Values"].split(",")[0]);
 										conditionInput.setAttribute("max",conditions[c]["Values"].split(",")[1]);
-										conditionInput.addEventListener("change",iMinMax);
+										conditionInput.addEventListener("input",iMinMax);
+										conditionInput.addEventListener("input",DMGCalcPokStats);
+										conditionInput.addEventListener("input",DMGSaveData);
+										conditionInput.addEventListener("input",DMGCalcStart);
+									}
+									else {
+										conditionInput.addEventListener("change",DMGCalcPokStats);
+										conditionInput.addEventListener("change",DMGSaveData);
+										conditionInput.addEventListener("change",DMGCalcStart);
 									}
 
 									if (conditions[c]["Affect"] == "Pokémon") {
@@ -1949,10 +1991,7 @@ var createTool = function() {
 								condition.appendChild(conditionInput)
 								condition.appendChild(conditionLabel)
 								conditionLabel.appendChild(conditionLabelText)
-								conditionInput.addEventListener("change",DMGCalcPokStats);
-								conditionInput.addEventListener("change",DMGSaveData);
-								conditionInput.addEventListener("change",DMGCalcStart);
-
+						
 								if (conditions[c]["Info"] != undefined) {
 									condition.setAttribute("title",conditions[c]["Info"])
 								}
@@ -1963,7 +2002,15 @@ var createTool = function() {
 									conditionInput.setAttribute("type","number");
 									conditionInput.setAttribute("min",conditions[c]["Values"].split(",")[0])
 									conditionInput.setAttribute("max",conditions[c]["Values"].split(",")[1])
-									conditionInput.addEventListener("change",iMinMax)
+									conditionInput.addEventListener("input",iMinMax);
+									conditionInput.addEventListener("input",DMGCalcPokStats);
+									conditionInput.addEventListener("input",DMGSaveData);
+									conditionInput.addEventListener("input",DMGCalcStart);	
+								}
+								else {
+									conditionInput.addEventListener("change",DMGCalcPokStats);
+									conditionInput.addEventListener("change",DMGSaveData);
+									conditionInput.addEventListener("change",DMGCalcStart);	
 								}
 
 								if (conditions[c]["Affect"] == "Pokémon") {
@@ -1981,6 +2028,7 @@ var createTool = function() {
 				var check = getApplicable(conditions[c]["Game"]);
 				
 				if (conditions[c]["Affected"] != undefined) {
+					check = false;
 					var val = [];
 					if (conditions[c]["Affected"].includes(",")) {
 						val = conditions[c]["Affected"].split(",");
@@ -1988,8 +2036,9 @@ var createTool = function() {
 					else {
 						val = [conditions[c]["Affected"]]
 					}
+
 					for (var k = 0; k < val.length; k++) {
-						var exist = document.querySelector(`#contain > div#`+conditions[c]["Type"].toLowerCase()+` > section[name="list"] ol label[data-title="`+val[k]+`"]`);
+						var exist = document.querySelector(`#contain > div#`+conditions[c]["Type"].toLowerCase()+` > section[name='list'] ol label[data-title="`+val[k].toLowerCase()+`"]`);
 						if (exist  != undefined) {
 							check = true;
 							break;
@@ -2069,9 +2118,13 @@ var createTool = function() {
 									cond.setAttribute("title",conditions[c]["Info"])
 								}
 								
+								conditionInput.addEventListener("change",DMGCalcPokStats);
+								conditionInput.addEventListener("change",DMGSaveData);
+								conditionInput.addEventListener("change",DMGCalcStart);	
+
 
 								
-								if (conditions[c]["Group"] == "Status" || conditions[c]["Group"] == "Weather") {
+								if (conditions[c]["Group"] != "Badge" && conditions[c]["Group"] != "Screen") {
 									conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
 								}
 							}
@@ -2099,6 +2152,10 @@ var createTool = function() {
 							if (conditions[c]["Info"] != undefined) {
 								condition.setAttribute("title",conditions[c]["Info"])
 							}
+
+							conditionInput.addEventListener("change",DMGCalcPokStats);
+							conditionInput.addEventListener("change",DMGSaveData);
+							conditionInput.addEventListener("change",DMGCalcStart);	
 							
 
 							appender.appendChild(condition)
@@ -2112,7 +2169,7 @@ var createTool = function() {
 			
 
 			if (toolSectionContentDMGOptionsBottom.firstChild != undefined) {
-				toolSectionContentDMGOptionsBottom.style.padding = "10px 0";
+				toolSectionContentDMGOptionsBottom.style.padding = "5px 0";
 			}
 
 			var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
@@ -2136,8 +2193,8 @@ var createTool = function() {
 			}
 
 
-			DMGSetInfo();
 			DMGSetPossible();
+			DMGSetInfo();
 			DMGCalcStart();
 			
 		}
@@ -2155,11 +2212,16 @@ var createTool = function() {
 
 			// All
 			var allbase = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name] ul[name]");
+			var alldivbase = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div[name]");
 
 			// User
 			var user = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='player'] > div.active");
 			var userid = user.getAttribute("name");
 			var userbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='player'] ul[name='"+userid+"']");
+
+			var userMaxHPPath = user.querySelector(":scope *[name='hp'] *[name='max']");
+			var userCurrentHPPath = user.querySelector(":scope *[name='hp'] *[name='current']");
+			var userPercentageHPPath = user.querySelector(":scope *[name='hp'] *[name='percentage']");
 
 			var userPokémonPath = userbase.querySelector(":scope *[name='pokémon'] select");
 			var userLevelPath = userbase.querySelector(":scope *[name='level'] input");
@@ -2178,15 +2240,28 @@ var createTool = function() {
 			var userStatusFrozenPath = userbase.querySelector(":scope *[name='Frozen'] input");
 			var userModAccuracyPath = userbase.querySelector(":scope *[name='stats'] > span > span[name='Mod'] input[name='Accuracy']");
 			var userModEvasionPath = userbase.querySelector(":scope *[name='stats'] > span > span[name='Mod'] input[name='Evasion']");
+			var userModCriticalPath = userbase.querySelector(":scope *[name='stats'] > span > span[name='Mod'] input[name='Critical']");
 
 			var userModPath = userbase.querySelectorAll(":scope *[name='stats'] > span > span[name='Mod'] input:not(:first-child)");
 			var userStatsPath = userbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
 			var userBadgePath = userbase.querySelectorAll(":scope *[name='Badge-Group'] input");
 
+			var userSpeedStatPath = userbase.querySelector(":scope *[name='stats'] > span > span:last-child input[name='Speed']");
+
+			var userDireHitPath = userbase.querySelector(":scope *[name='Dire Hit'] input");
+			var userFocusEnergyPath = userbase.querySelector(":scope *[name='Focus Energy'] input");
+
 			var userTypes = returnData(getPokémonInt(userPokémonPath.value),"Type","");
 
 			// Target
-			var target = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div.active.target");
+			var target = [];
+
+			if (user.parentElement.parentElement.getAttribute("data-range").includes("Affects")) {
+				target = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div.target")
+			}
+			else {
+				target = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div.active.target")
+			}
 
 			// Weather
 			var weatherPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:last-child *[name='Weather-Group']");
@@ -2209,7 +2284,7 @@ var createTool = function() {
 			// Move
 			var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span select");
 			var moveCountPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] input[type='number']");
-			var criticalPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div:first-child input[type='checkbox']")
+			var criticalPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='critical'] input[type='checkbox']")
 			var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
 
 			var MeFirstPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Me First'] input[type='checkbox']");
@@ -2221,24 +2296,20 @@ var createTool = function() {
 			var SwitchPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Switching'] input[type='checkbox']");
 			var MinimizePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Minimize'] input[type='checkbox']");
 			var ConfusionPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Confusion'] input[type='checkbox']");
-			var ShadowPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Shadow'] input[type='checkbox']");
-			var HelpingHandPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Helping Hand'] input[type='checkbox']");
-			var ForestsCursePath = document.querySelector(`#contain div#tool > section[name="content"] > div[name="dmg"] div[name="menu"] > div[name="spec"] > span:last-child > li[name="Forest's Curse"] input[type="checkbox"]`);
-			var TrickOrTreatPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Trick-or-Treat'] input[type='checkbox']");
-			var GlaiveRushPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Glaive Rush'] input[type='checkbox']");
-			var LaserFocusPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Laser Focus'] input[type='checkbox']");
 			var FlashFirePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Flash Fire'] input[type='checkbox']");
-
-
+			var TarShotPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Tar Shot'] input[type='checkbox']");
 
 			var movePower = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,movePath.value);
 			var moveAccuracy = returnArrValue(finaldataMoveAccuracy,"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,movePath.value);
 			var moveCategory = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,movePath.value);
 			var moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movePath.value);
 
+			movePower = undwsDel(movePower,0);
+			moveAccuracy = undwsDel(moveAccuracy,0);
 
-			var moveDamageTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > span[name='damage'] > *:last-child");
-			var moveAccuracyTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span > span[name='accuracy'] > *:last-child");
+			var moveDamageTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='damage'] > *:last-child");
+			var moveAccuracyTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='accuracy'] > *:last-child");
+			var moveCriticalTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='critical'] > *:last-child");
 
 
 			DMGCalcApply(user,undefined,undefined,undefined,"Reset");
@@ -2254,6 +2325,19 @@ var createTool = function() {
 
 			moveAccuracyTextPath.innerText = "0%";
 			moveDamageTextPath.innerText = "0";
+			moveCriticalTextPath.innerText = "0%";
+
+			for(var u = 0; u < alldivbase.length; u++) {
+				var val = (allbase[u].querySelector(":scope *[name='hp'] > input[type='range']").value/allbase[u].querySelector(":scope *[name='hp'] > input[type='range']").max)*100;
+				
+
+				alldivbase[u].lastChild.style.removeProperty("background");
+				alldivbase[u].lastChild.style.background = "linear-gradient(90deg, limegreen 0%, limegreen "+val+"%, orangered "+val+"%, orangered 100%)";
+
+				alldivbase[u].querySelector(":scope *[name='hp'] *[name='percentage']").innerText = "100%";
+				alldivbase[u].querySelector(":scope *[name='hp'] *[name='current']").innerText = allbase[u].querySelector(":scope *[name='hp'] > input[type='range']").value;
+			}
+
 
 			if (check) {
 				for (var i = 0; i < target.length; i++) {
@@ -2271,15 +2355,25 @@ var createTool = function() {
 						var tarStatsPath = targetbase.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
 						var tarItemPath = targetbase.querySelector(":scope *[name='item'] select");
 						var tarAbilityPath = targetbase.querySelector(":scope *[name='ability'] select");
-						var tarHPInputPath = targetbase.querySelector(":scope *[name='hp'] input");
-						var tarStatusLeechSeedPath = targetbase.querySelector(":scope *[name='Leech Seed'] input");
 						var tarStatusPoisonPath = targetbase.querySelector(":scope *[name='Poisoned'] input");
 						var tarStatusBadPoisonPath = targetbase.querySelector(":scope *[name='Badly Poisoned'] input");
 						var tarStatusBurnPath = targetbase.querySelector(":scope *[name='Burned'] input");
 						var tarStatusParalyzePath = targetbase.querySelector(":scope *[name='Paralyzed'] input");
 						var tarStatusAsleepPath = targetbase.querySelector(":scope *[name='Asleep'] input");
 						var tarStatusFrozenPath = targetbase.querySelector(":scope *[name='Frozen'] input");
-						
+
+						var tarHelpingHandPath = targetbase.querySelector(":scope *[name='Helping Hand'] input");
+						var tarForestsCursePath = targetbase.querySelector(`:scope *[name="Forest's Curse"] input`);
+						var tarTrickOrTreatPath = targetbase.querySelector(":scope *[name='Trick-or-Treat'] input");
+						var tarGlaiveRushPath = targetbase.querySelector(":scope *[name='Glaive Rush'] input");
+						var tarLaserFocusPath = targetbase.querySelector(":scope *[name='Laser Focus'] input");
+						var tarShadowPath = targetbase.querySelector(":scope *[name='Shadow'] input");
+						var tarDynamaxPath = targetbase.querySelector(":scope *[name='Dynamax'] input");
+						var tarForesightPath = targetbase.querySelector(":scope *[name='Foresight'] input");
+						var tarMiracleEyePath = targetbase.querySelector(":scope *[name='Miracle Eye'] input");
+						var tarOdorSleuthPath = targetbase.querySelector(":scope *[name='Odor Sleuth'] input");
+						var tarThousandArrowsPath = targetbase.querySelector(":scope *[name='Thousand Arrows'] input");
+
 						var tarModEvasionPath = targetbase.querySelector(":scope *[name='stats'] *[name='Mod'] *[name='Evasion']");
 
 						var tarHPCurrentPath = target[i].querySelector(":scope *[name='hp'] *[name='current']");
@@ -2290,6 +2384,9 @@ var createTool = function() {
 						var tarLightScreenPath = targetteambase.querySelector(":scope *[name='Light Screen'] input");
 						var tarReflectPath = targetteambase.querySelector(":scope *[name='Reflect'] input");
 						var tarLuckyChantPath = targetteambase.querySelector(":scope *[name='Lucky Chant'] input");
+						
+		
+			
 						
 
 						var tarTypes = returnData(getPokémonInt(tarPokémonPath.value),"Type","");
@@ -2320,6 +2417,8 @@ var createTool = function() {
 							if (criticalPath.checked) {
 								Critical = 2;
 							}
+
+	
 							Power = parseInt(movePower);
 							if (moveCategory == "Physical") {
 								for(var u = 0; u < userStatsPath.length; u++) {
@@ -2354,22 +2453,22 @@ var createTool = function() {
 								}
 							}
 
-							Level = parseInt(Level);
-							Critical = parseInt(Critical);
-							Attack = parseInt(Attack);
-							Defense = parseInt(Defense);
-							Power = parseInt(Power);
-							STAB = parseInt(STAB);
-							Type1 = parseInt(Type1);
-							Type2 = parseInt(Type2);
-							random = parseInt(random);
-
 							if (Critical == 2) {
 								Attack = parseInt(NoModAttack);
 								Defense = parseInt(NoModDefense);
 							}
 
-							random = randomPath.value/255;
+
+							Attack = parseFloat(Attack);
+							Defense = parseFloat(Defense);
+
+							if (randomPath.getAttribute("disabled") == "") {
+								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/255;
+							}
+							else {
+								random = randomPath.value/255;
+							}
+							
 
 
 							if (Attack > 255 || Defense > 255) {
@@ -2386,7 +2485,7 @@ var createTool = function() {
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
+										var typeadv = returnTypeAdvantage(Types[u],"Defending");
 
 										if (typeadv[2].includes(tarTypes[0].toUpperCase())) {
 											used.push(tarTypes[0].toUpperCase())
@@ -2422,19 +2521,23 @@ var createTool = function() {
 							}
 			
 
-							calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2);
+
+							Level = parseFloat(Level);
+							Critical = parseFloat(Critical);
+							Attack = parseFloat(Attack);
+							Defense = parseFloat(Defense);
+							Power = parseFloat(Power);
+							STAB = parseFloat(STAB);
+							Type1 = parseFloat(Type1);
+							Type2 = parseFloat(Type2);
+							random = parseFloat(random);
 
 
-							//calculation = calculation+(Math.floor((calculation/2)*STAB));
-							//calculation = calculation+(Math.floor(calculation*STAB));
-							calculation = calculation*STAB;
-							calculation = calculation*Type1*Type2;
-
+							calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2)*STAB*Type1*Type2;
 
 							if (calculation == 1) {
 								random = 1;
 							}
-						
 
 							calculation = calculation*random;
 
@@ -2468,8 +2571,13 @@ var createTool = function() {
 								Power = 0;
 							}
 
-							random = randomPath.value/255;
-			
+
+							if (randomPath.getAttribute("disabled") == "") {
+								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/255;
+							}
+							else {
+								random = randomPath.value/255;
+							}
 
 							if (moveCategory == "Physical") {
 								for(var u = 0; u < userStatsPath.length; u++) {
@@ -2504,19 +2612,9 @@ var createTool = function() {
 								}
 							}
 
-						
-		
-
-
-							
-
 							if (movePath.value == "Flail" || movePath.value == "Reversal" || movePath.value == "Future Sight") {
 								Critical = 1;
 							}
-
-
-					
-
 
 							if (Critical == 2) {
 								if (userModPath.length == tarModPath.length) {
@@ -2587,7 +2685,6 @@ var createTool = function() {
 								}
 							}
 
-
 							if (moveCategory == "Physical") {
 								if (tarReflectPath.checked) {
 									if (Critical == 1) {
@@ -2602,10 +2699,7 @@ var createTool = function() {
 									}
 								}
 							}
-		
 
-
-					
 
 							for(var u = 0; u < finaldataItemsDamage.length; u++) {
 								if (finaldataItemsDamage[u]["Item"] == userItemPath.value) {
@@ -2666,7 +2760,7 @@ var createTool = function() {
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
+										var typeadv = returnTypeAdvantage(Types[u],"Defending");
 										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
 											Type = 2;
 										}
@@ -2728,6 +2822,21 @@ var createTool = function() {
 								}
 							}
 
+							Level = parseFloat(Level);
+							Power = parseFloat(Power);
+							Attack = parseFloat(Attack);
+							Defense = parseFloat(Defense);
+							Item = parseFloat(Item);
+							Critical = parseFloat(Critical);
+							TripleKick = parseFloat(TripleKick);
+							Weather = parseFloat(Weather);
+							Badge = parseFloat(Badge);
+							STAB = parseFloat(STAB);
+							Type = parseFloat(Type);
+							MoveMod = parseFloat(MoveMod);
+							random = parseFloat(random);
+							DoubleDmg = parseFloat(DoubleDmg);
+
 							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Item*Critical+2)*TripleKick*Weather*Badge*STAB*Type*MoveMod*random*DoubleDmg;
 
 							if (Immune) {
@@ -2762,7 +2871,16 @@ var createTool = function() {
 							if (Power == "-") {
 								Power = 0;
 							}
-							random = randomPath.value/100;
+
+
+							if (randomPath.getAttribute("disabled") == "") {
+								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/100;
+							}
+							else {
+								random = randomPath.value/100;
+							}
+
+		
 
 
 							if (moveCategory == "Physical") {
@@ -2812,7 +2930,7 @@ var createTool = function() {
 
 							if (moveCategory == "Physical") {
 								if (tarReflectPath.checked) {
-									if (parseInt(battle.getAttribute("data-count")) > 2) {
+									if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 										Screen = 0.6667;
 									}
 									else {
@@ -2822,12 +2940,17 @@ var createTool = function() {
 							}
 							if (moveCategory == "Special") {
 								if (tarLightScreenPath.checked) {
-									if (parseInt(battle.getAttribute("data-count")) > 2) {
+									if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 										Screen = 0.6667;
 									}
 									else {
 										Screen = 0.5;
 									}
+								}
+							}
+							if (tarAbilityPath.value == "Levitate") {
+								if (moveType == "Ground") {
+									Immune = true;
 								}
 							}
 
@@ -2841,14 +2964,14 @@ var createTool = function() {
 									}
 
 									if (moveCategory == "Physical") {
-										if (tarModPath[u].getAttribute("name") == "Attack") {
+										if (userModPath[u].getAttribute("name") == "Attack") {
 											if (userval < 0) {
 												Attack = NoModAttack;
 											}
 										}
 									}
 									else if (moveCategory == "Special") {
-										if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
+										if (userModPath[u].getAttribute("name") == "Sp. Atk") {
 											if (userval < 0) {
 												Attack = NoModAttack;
 											}
@@ -2879,13 +3002,15 @@ var createTool = function() {
 								}
 							}
 
-							if (parseInt(battle.getAttribute("data-count")) > 2) {
+
+							if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 								if (target.length > 1) {
-									if (target.parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
+									if (target[i].parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
 										Targets = 0.5;
 									}
 								}
 							}
+	
 
 							if (weatherRainPath.checked) {
 								if (moveType == "Fire") {
@@ -2903,6 +3028,7 @@ var createTool = function() {
 									Weather = 0.5;
 								}
 							}
+
 							if (movePath.value == "SolarBeam") {
 								weatherInputsPath
 								var check = true;
@@ -2930,7 +3056,7 @@ var createTool = function() {
 							}
 
 
-							if (userAbilityPath.value == "Flash Fire") {
+							if (userAbilityPath != undefined && userAbilityPath.value == "Flash Fire") {
 								if (moveType == "Fire") {
 									if (FlashFirePath.checked) {
 										FlashFire = 1.5;
@@ -3012,8 +3138,8 @@ var createTool = function() {
 								}
 							}
 							
-							if (parseInt(battle.getAttribute("data-count")) > 2) {
-								if (HelpingHandPath.checked) {
+							if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
+								if (tarHelpingHandPath.checked) {
 									HelpingHand = 1.5;
 								}
 							}
@@ -3026,7 +3152,7 @@ var createTool = function() {
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
+										var typeadv = returnTypeAdvantage(Types[u],"Defending");
 
 										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
 											Type = 2;
@@ -3051,6 +3177,27 @@ var createTool = function() {
 								Type = 1;
 							}
 
+
+
+							Level = parseFloat(Level);
+							Power = parseFloat(Power);
+							Attack = parseFloat(Attack);
+							Defense = parseFloat(Defense)
+							Burn = parseFloat(Burn);
+							Screen = parseFloat(Screen);
+							Targets = parseFloat(Targets);
+							Weather = parseFloat(Weather);
+							FlashFire = parseFloat(FlashFire);
+							Stockpile = parseFloat(Stockpile);
+							Critical = parseFloat(Critical);
+							DoubleDmg = parseFloat(DoubleDmg);
+							Charge = parseFloat(Charge);
+							HelpingHand = parseFloat(HelpingHand);
+							STAB = parseFloat(STAB);
+							Type = parseFloat(Type);
+							random = parseFloat(random);
+
+							
 							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Stockpile*Critical*DoubleDmg*Charge*HelpingHand*STAB*Type*random;
 
 							if (Immune) {
@@ -3088,8 +3235,12 @@ var createTool = function() {
 							if (Power == "-") {
 								Power = 0;
 							}
-							random = randomPath.value/100;
-
+							if (randomPath.getAttribute("disabled") == "") {
+								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/100;
+							}
+							else {
+								random = randomPath.value/100;
+							}
 
 							if (moveCategory == "Physical") {
 								for(var u = 0; u < userStatsPath.length; u++) {
@@ -3136,7 +3287,7 @@ var createTool = function() {
 
 							if (moveCategory == "Physical") {
 								if (tarReflectPath.checked) {
-									if (parseInt(battle.getAttribute("data-count")) > 2) {
+									if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 										Screen = 0.6667;
 									}
 									else {
@@ -3146,7 +3297,7 @@ var createTool = function() {
 							}
 							if (moveCategory == "Special") {
 								if (tarLightScreenPath.checked) {
-									if (parseInt(battle.getAttribute("data-count")) > 2) {
+									if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 										Screen = 0.6667;
 									}
 									else {
@@ -3167,14 +3318,14 @@ var createTool = function() {
 									}
 
 									if (moveCategory == "Physical") {
-										if (tarModPath[u].getAttribute("name") == "Attack") {
+										if (userModPath[u].getAttribute("name") == "Attack") {
 											if (userval < 0) {
 												Attack = NoModAttack;
 											}
 										}
 									}
 									else if (moveCategory == "Special") {
-										if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
+										if (userModPath[u].getAttribute("name") == "Sp. Atk") {
 											if (userval < 0) {
 												Attack = NoModAttack;
 											}
@@ -3205,9 +3356,9 @@ var createTool = function() {
 								}
 							}
 							
-							if (parseInt(battle.getAttribute("data-count")) > 2) {
+							if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 								if (target.length > 1) {
-									if (target.parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
+									if (target[i].parentElement.parentElement.getAttribute("data-range") != "Affects all Pokémon adjacent to the user") {
 										Targets = 0.75;
 									}
 								}
@@ -3256,7 +3407,7 @@ var createTool = function() {
 								Weather = 1;
 							}
 
-							if (userAbilityPath.value == "Flash Fire") {
+							if (userAbilityPath != undefined && userAbilityPath.value == "Flash Fire") {
 								if (moveType == "Fire") {
 									if (FlashFirePath.checked) {
 										FlashFire = 1.5;
@@ -3286,9 +3437,13 @@ var createTool = function() {
 								STAB = 1.5;
 							}
 
-
+							if (tarAbilityPath.value == "Levitate") {
+								if (moveType == "Ground") {
+									Immune = true;
+								}
+							}
 				
-							var typeadv1 = returnTypeAdvantage(tarTypes[0],"Attacking");
+							var typeadv1 = returnTypeAdvantage(tarTypes[0],"Defending");
 							if (typeadv1[2].includes(moveType.toUpperCase())) {
 								Type1 = 2;
 							}
@@ -3299,7 +3454,7 @@ var createTool = function() {
 								Immune = true;
 							}
 
-							var typeadv2 = returnTypeAdvantage(tarTypes[1],"Attacking");
+							var typeadv2 = returnTypeAdvantage(tarTypes[1],"Defending");
 							if (typeadv2[2].includes(moveType.toUpperCase())) {
 								Type2 = 2;
 							}
@@ -3309,7 +3464,7 @@ var createTool = function() {
 							if (typeadv2[3].includes(moveType.toUpperCase())) {
 								Immune = true;
 							}
-							
+
 
 							if (movePath.value == "Struggle" || movePath.value == "Future Sight" || movePath.value == "Beat Up" || movePath.value == "Doom Desire") {
 								Type1 = 1;
@@ -3403,9 +3558,33 @@ var createTool = function() {
 									Power = Power*2;
 								}
 							}
-							
+
+							Level = parseFloat(Level);
+							Power = parseFloat(Power);
+							Attack = parseFloat(Attack);
+							Defense = parseFloat(Defense);
+							Burn = parseFloat(Burn);
+							Screen = parseFloat(Screen);
+							Targets = parseFloat(Targets);
+							Weather = parseFloat(Weather);
+							FlashFire = parseFloat(FlashFire);
+							Critical = parseFloat(Critical);
+							Item = parseFloat(Item);
+							MeFirst = parseFloat(MeFirst);
+							random = parseFloat(random);
+							STAB = parseFloat(STAB);
+							Type1 = parseFloat(Type1);
+							Type2 = parseFloat(Type2);
+							SolidRockFilter = parseFloat(SolidRockFilter);
+							ExpertBelt = parseFloat(ExpertBelt);
+							TintedLens = parseFloat(TintedLens);
+							Berry = parseFloat(Berry);
 
 							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*Item*MeFirst*random*STAB*Type1*Type2*SolidRockFilter*ExpertBelt*TintedLens*Berry;
+
+							if (Immune) {
+								calculation = 0;
+							}
 
 						}
 						else if (Generation >= 5) {
@@ -3421,6 +3600,7 @@ var createTool = function() {
 							var random = 1;
 							var STAB = 1;
 							var Type = 1;
+							var Burn = 1;
 							var Screen = 1;
 							var BehemothBladeBehemothBashDynamaxCannon = 1;
 							var Minimize = 1;
@@ -3456,8 +3636,12 @@ var createTool = function() {
 							if (Power == "-") {
 								Power = 0;
 							}
-							random = randomPath.value/100;
-
+							if (randomPath.getAttribute("disabled") == "") {
+								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/100;
+							}
+							else {
+								random = randomPath.value/100;
+							}
 
 							if (movePath.value == "Storm Throw" || movePath.value == "Frost Breath" || movePath.value == "Zippy Zap" || movePath.value == "Surging Strikes" || movePath.value == "Wicked Blow" || movePath.value == "Flower Trick") {
 								if (Generation == 5) {
@@ -3484,7 +3668,7 @@ var createTool = function() {
 									}
 								}
 							}
-							if (LaserFocusPath.checked) {
+							if (tarLaserFocusPath != undefined && tarLaserFocusPath.checked) {
 								if (Generation == 5) {
 									Critical = 2;
 								}
@@ -3494,10 +3678,12 @@ var createTool = function() {
 							}
 
 
-							if (tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
-								Critical = 1;
+							if (tarAbilityPath != undefined) {
+								if (tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
+									Critical = 1;
+								}
 							}
-							if (tarLuckyChantPath.checked) {
+							if (tarLuckyChantPath != undefined && tarLuckyChantPath.checked) {
 								Critical = 1;
 							}
 							
@@ -3554,14 +3740,14 @@ var createTool = function() {
 									}
 
 									if (moveCategory == "Physical") {
-										if (tarModPath[u].getAttribute("name") == "Attack") {
+										if (userModPath[u].getAttribute("name") == "Attack") {
 											if (userval < 0) {
 												Attack = NoModAttack;
 											}
 										}
 									}
 									else if (moveCategory == "Special") {
-										if (tarModPath[u].getAttribute("name") == "Sp. Atk") {
+										if (userModPath[u].getAttribute("name") == "Sp. Atk") {
 											if (userval < 0) {
 												Attack = NoModAttack;
 											}
@@ -3641,11 +3827,16 @@ var createTool = function() {
 								}
 							}
 
+							if (tarAbilityPath.value == "Levitate") {
+								if (moveType == "Ground") {
+									Immune = true;
+								}
+							}
 
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
+										var typeadv = returnTypeAdvantage(Types[u],"Defending");
 
 										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
 											Type = 2;
@@ -3655,8 +3846,10 @@ var createTool = function() {
 										}
 										if (typeadv[1].includes(tarTypes[0].toUpperCase()) || typeadv[1].includes(tarTypes[1].toUpperCase())) {
 											var check = true;
-											if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
-												check = false;
+											if (weatherStrongWindsPath != undefined) {
+												if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
+													check = false;
+												}
 											}
 
 											if (check) {
@@ -3668,8 +3861,10 @@ var createTool = function() {
 										}
 										if (typeadv[1].includes(tarTypes[0].toUpperCase()) && typeadv[1].includes(tarTypes[1].toUpperCase())) {
 											var check = true;
-											if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
-												check = false;
+											if (weatherStrongWindsPath != undefined) {
+												if (weatherStrongWindsPath.checked && tarTypes[0] == "Flying" || weatherStrongWindsPath.checked && tarTypes[1] == "Flying") {
+													check = false;
+												}
 											}
 
 											if (check) {
@@ -3681,7 +3876,7 @@ var createTool = function() {
 										}
 										if (typeadv[3].includes(tarTypes[0].toUpperCase())) {
 											var check = true;
-											if (tarTypes[0] == "Flying" && tarThousandArrowsPath.checked) {
+											if (tarTypes[0] == "Flying" && tarThousandArrowsPath != undefined && tarThousandArrowsPath.checked) {
 												check = false;
 											}
 											if (tarTypes[0] == "Flying" && tarItemPath.value == "Iron Ball") {
@@ -3695,7 +3890,7 @@ var createTool = function() {
 													check = false;
 												}
 											}
-											if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuth.checked) {
+											if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuthPath.checked) {
 												check = false;
 											}
 											if (check) {
@@ -3704,7 +3899,7 @@ var createTool = function() {
 										}
 										if (typeadv[3].includes(tarTypes[1].toUpperCase())) {
 											var check = true;
-											if (tarTypes[1] == "Flying" && tarThousandArrowsPath.checked) {
+											if (tarTypes[1] == "Flying" && tarThousandArrowsPath != undefined && tarThousandArrowsPath.checked) {
 												check = false;
 											}
 											if (tarTypes[1] == "Flying" && tarItemPath.value == "Iron Ball") {
@@ -3718,7 +3913,7 @@ var createTool = function() {
 													check = false;
 												}
 											}
-											if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuth.checked) {
+											if (tarForesightPath.checked || tarMiracleEyePath.checked || tarOdorSleuthPath.checked) {
 												check = false;
 											}
 											if (check) {
@@ -3749,7 +3944,7 @@ var createTool = function() {
 								}
 							}
 							if (movePath.value == "Flying Press") {
-								var tempTypeAdv = returnTypeAdvantage("Flying","Attacking");
+								var tempTypeAdv = returnTypeAdvantage("Flying","Defending");
 								if (tempTypeAdv[1].includes("FLYING")) {
 									if (Type == 4) {
 										Type = 2;
@@ -3785,7 +3980,7 @@ var createTool = function() {
 									}
 								}
 							}
-							if (ForestsCursePath.checked) {
+							if (tarForestsCursePath != undefined && tarForestsCursePath.checked) {
 								if (typeadv[1].includes("GRASS")) {
 									if (Type == 4) {
 										Type = 2;
@@ -3821,7 +4016,7 @@ var createTool = function() {
 									}
 								}
 							}
-							if (TrickOrTreatPath.checked) {
+							if (tarTrickOrTreatPath != undefined && tarTrickOrTreatPath.checked) {
 								if (typeadv[1].includes("Ghost")) {
 									if (Type == 4) {
 										Type = 2;
@@ -3858,7 +4053,7 @@ var createTool = function() {
 								}
 							}
 
-							if (tarTarShotPath.checked) {
+							if (TarShotPath != undefined && TarShotPath.checked) {
 								if (moveType == "Fire") {
 									Type = Type * 2;
 								}
@@ -3870,7 +4065,7 @@ var createTool = function() {
 							}
 
 
-							if (GlaiveRushPath.checked) {
+							if (tarGlaiveRushPath != undefined && tarGlaiveRushPath.checked) {
 								GlaiveRush = 2;
 							}
 
@@ -3890,9 +4085,11 @@ var createTool = function() {
 								}
 							}
 
-							if (tarDynamaxPath.checked) {
-								if (movePath.value == "Behemoth Blade" || movePath.value == "Behemoth Bash" || movePath.value == "Dynamax Cannon") {
-									BehemothBladeBehemothBashDynamaxCannon = 2;
+							if (tarDynamaxPath != undefined) {
+								if (tarDynamaxPath.checked || userPokémonPath.value.includes("Gigantamax")) {
+									if (movePath.value == "Behemoth Blade" || movePath.value == "Behemoth Bash" || movePath.value == "Dynamax Cannon") {
+										BehemothBladeBehemothBashDynamaxCannon = 2;
+									}
 								}
 							}
 							if (MinimizePath.checked) {
@@ -3929,7 +4126,7 @@ var createTool = function() {
 
 							if (moveCategory == "Physical") {
 								if (tarReflectPath.checked) {
-									if (parseInt(battle.getAttribute("data-count")) > 2) {
+									if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 										Screen = 0.6667;
 									}
 									else {
@@ -3939,7 +4136,7 @@ var createTool = function() {
 							}
 							if (moveCategory == "Special") {
 								if (tarLightScreenPath.checked) {
-									if (parseInt(battle.getAttribute("data-count")) > 2) {
+									if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 										Screen = 0.6667;
 									}
 									else {
@@ -3948,8 +4145,8 @@ var createTool = function() {
 								}
 							}
 
-							if (tarAuroraVeilPath.checked) {
-								if (parseInt(battle.getAttribute("data-count")) > 2) {
+							if (tarAuroraVeilPath != undefined && tarAuroraVeilPath.checked) {
+								if (parseInt(battle.getAttribute("teammax"))+parseInt(battle.getAttribute("opponentmax")) > 2) {
 									Screen = 0.6667;
 								}
 								else {
@@ -4121,6 +4318,11 @@ var createTool = function() {
 								Item = 1.3;
 							}
 
+							if (tarAbilityPath.value == "Levitate") {
+								if (moveType == "Ground") {
+									Immune = true;
+								}
+							}
 
 							if (userItemPath.value == "Metronome") {
 								var val = userItemCountPath.value;
@@ -4135,7 +4337,7 @@ var createTool = function() {
 								}
 							}
 				
-							if (MeFirstPath.checked) {
+							if (MeFirstPath != undefined && MeFirstPath.checked) {
 								MeFirst = 1.5;
 							}
 
@@ -4152,8 +4354,46 @@ var createTool = function() {
 								}
 							}
 
+							Level = parseFloat(Level);
+							Power = parseFloat(Power);
+							Attack = parseFloat(Attack);
+							Defense = parseFloat(Defense);
+							Targets = parseFloat(Targets);
+							Weather = parseFloat(Weather);
+							GlaiveRush = parseFloat(GlaiveRush);
+							Critical = parseFloat(Critical);
+							random = parseFloat(random);
+							STAB = parseFloat(STAB);
+							Type = parseFloat(Type);
+							Burn = parseFloat(Burn);
+							Screen = parseFloat(Screen);
+							BehemothBladeBehemothBashDynamaxCannon = parseFloat(BehemothBladeBehemothBashDynamaxCannon);
+							Minimize = parseFloat(Minimize);
+							SurfWhirlpool = parseFloat(SurfWhirlpool);
+							EarthquakeMagnitude = parseFloat(EarthquakeMagnitude);
+							Screen = parseFloat(Screen);
+							ColissionCourseElectroDrift = parseFloat(ColissionCourseElectroDrift);
+							MultiscaleShadowShield = parseFloat(MultiscaleShadowShield);
+							Fluffy1 = parseFloat(Fluffy1);
+							PunkRock = parseFloat(PunkRock);
+							IceScales = parseFloat(IceScales);
+							FriendGuard = parseFloat(FriendGuard);
+							FilterPrismArmorSolidRock = parseFloat(FilterPrismArmorSolidRock);
+							Neuroforce = parseFloat(Neuroforce);
+							Sniper = parseFloat(Sniper);
+							TintedLens = parseFloat(TintedLens);
+							Fluffy2 = parseFloat(Fluffy2);
+							Item = parseFloat(Item);
+							Berry = parseFloat(Berry);
+							MeFirst = parseFloat(MeFirst);
+							ZMove = parseFloat(ZMove);
 
-							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)+2)*Targets*Weather*GlaiveRush*Critical*random*STAB*Type*Burn*Screen*(BehemothBladeBehemothBashDynamaxCannon*Minimize*SurfWhirlpool*EarthquakeMagnitude*Screen*ColissionCourseElectroDrift*MultiscaleShadowShield*Fluffy1*PunkRock*IceScales*FriendGuard*FilterPrismArmorSolidRock*Neuroforce*Sniper*TintedLens*Fluffy2*Item*Berry)*MeFirst*ZMove*TeraShield;
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)+2)*Targets*Weather*GlaiveRush*Critical*random*STAB*Type*Burn*Screen*(BehemothBladeBehemothBashDynamaxCannon*Minimize*SurfWhirlpool*EarthquakeMagnitude*Screen*ColissionCourseElectroDrift*MultiscaleShadowShield*Fluffy1*PunkRock*IceScales*FriendGuard*FilterPrismArmorSolidRock*Neuroforce*Sniper*TintedLens*Fluffy2*Item*Berry)*MeFirst*ZMove;
+
+
+							if (Immune) {
+								calculation = 0;
+							}
 						}
 						
 						var maxHP = parseInt(tarHPMaxPath.innerText);
@@ -4165,141 +4405,23 @@ var createTool = function() {
 						if (isNaN(integerResult)) {
 							integerResult = 0;
 						}
-						else if (integerResult == 0) {
-							integerResult = 1;
+						if (movePower == 0) {
+							integerResult = 0;
 						}
 
+		
 
 
-						for (var u = 0; u < finaldataMoveAdditional.length; u++) {
-							if (finaldataMoveAdditional[u]["Additional"] == "Healing") {
-								if (finaldataMoveAdditional[u]["Move"] == move) {
-									if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
-										if (getApplicable(finaldataMoveAdditional[u]["Value"]) != undefined) {
-											if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
-												var check = false;
-
-												if (finaldataMoveAdditional[u]["Condition"] == undefined) {
-													check = true;
-												}
-												else if (finaldataMoveAdditional[u]["Condition"] == "No Weather") {
-													check = true;
-													for (var w = 0; w < weatherInputsPath.length; w++) {
-														if(weatherInputsPath[w].checked) {
-															check = false;
-														}
-													}
-												}
-												else if (finaldataMoveAdditional[u]["Condition"] == "Harsh Sunlight") {
-													if (weatherHarshSunlightPath.checked) {
-														check = true;
-													}
-												}
-												else if (finaldataMoveAdditional[u]["Condition"] == "Strong Winds") {
-													if (weatherStrongWindsPath != undefined) {
-														if (weatherStrongWindsPath.checked) {
-															check = true;
-														}
-													}
-												}
-												else if (finaldataMoveAdditional[u]["Condition"] == "Sandstorm") {
-													if (weatherSandstormPath.checked) {
-														check = true;
-													}
-												}
-												else if (finaldataMoveAdditional[u]["Condition"].includes("Non:")) {
-													var tempStr = finaldataMoveAdditional[u]["Condition"].split("Non:")[1];
-													if (tempStr.includes(",")) {
-														check = true;
-														var tempArr = tempStr.split(",")
-														for (var r = 0; r < tempArr.length; r++) {
-															for (var w = 0; w < weatherInputsPath.length; w++) {
-																if (weatherInputsPath[w].parentElement.getAttribute("name") == tempArr[r]) {
-																	if (weatherInputsPath[w].checked) {
-																		check = false;
-																	}
-																}
-															}
-														}
-													}
-													else {
-														check = true;
-														for (var w = 0; w < weatherInputsPath.length; w++) {
-															if (weatherInputsPath[w].parentElement.getAttribute("name") == tempStr) {
-																if (weatherInputsPath[w].checked) {
-																	check = false;
-																}
-															}
-														}
-													}
-												}
-												
-
-												if (check) {
-													if (finaldataMoveAdditional[u]["Target"] == undefined) {
-														var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
-														DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
-													}
-													else if (finaldataMoveAdditional[u]["Target"] == "Ally") {
-														if (target.parentElement.getAttribute("name").includes("player")) {
-															var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
-															DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
-														}
-													}
-												}
-											}
-											else if (finaldataMoveAdditional[u]["Type"] == "Target Attack") {
-												if (finaldataMoveAdditional[u]["Condition"] == "Minus One Attack") {
-													if (moveCategory == "Special") {
-														if (Generation == 1) {
-															var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Special']")
-															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Special']")
-														}
-														else {
-															var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Sp. Atk']")
-															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Sp. Atk']")
-														}
-													}
-													else if (moveCategory == "Physical") {
-														var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Attack']")
-														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Attack']")
-													}
-													var val;
-													
-													var modval;
-													if (modAtk.value == undefined) {
-														modval = 0
-													}
-													else {
-														modval = modAtk.value;
-													}
-
-										
-													if (modval == -6) {
-														val = tarAtk;
-													}
-													else {
-														if (Generation >= 1 && Generation <= 2) {
-															val = tarAtk*0.66;
-														}
-														else {
-															val = tarAtk*0.6666666667;
-														}
-													}
-
-
-													var heal = Math.ceil(val*finaldataMoveAdditional[u]["Value"]);
-													DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-			
 					
-						if (movePath.value == "Triple Kick" && Generation == 2) {
+					
+				
+						if (movePath.value == "Dragon Rage") {
+							DMGCalcApply(target[i],40,"Damage","Orangered","Apply");
+						}
+						else if (movePath.value == "Sonic Boom" || movePath.value == "SonicBoom") {
+							DMGCalcApply(target[i],20,"Damage","Orangered","Apply");
+						}
+						else if (movePath.value == "Triple Kick" && Generation == 2) {
 							DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
 						}
 						else if (userAbilityPath != undefined && userAbilityPath.value == "Parental Bond") {
@@ -4335,15 +4457,185 @@ var createTool = function() {
 							}
 							
 						}
-						else if (moveCountPath.getAttribute("title").includes("Hit")) {
+						else if (movePath.value == "Spit Up") {
+							DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+						}
+						else {
 							for (var h = 0; h < moveCountPath.value; h++) {
 								DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
 							}
 						}
-						else {
-							DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
-						}
+		
+
+			
+
 					
+						if (i == 0) {
+							for (var u = 0; u < finaldataMoveAdditional.length; u++) {
+								if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
+									if (finaldataMoveAdditional[u]["Move"] == move) {
+										if (finaldataMoveAdditional[u]["Additional"] == "Healing") {
+											if (finaldataMoveAdditional[u]["Value"] != undefined) {
+												if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
+													var check = false;
+
+													if (finaldataMoveAdditional[u]["Condition"] == undefined) {
+														check = true;
+													}
+													else if (finaldataMoveAdditional[u]["Condition"] == "No Weather") {
+														check = true;
+														for (var w = 0; w < weatherInputsPath.length; w++) {
+															if(weatherInputsPath[w].checked) {
+																check = false;
+															}
+														}
+													}
+													else if (finaldataMoveAdditional[u]["Condition"] == "Harsh Sunlight") {
+														if (weatherHarshSunlightPath.checked) {
+															check = true;
+														}
+													}
+													else if (finaldataMoveAdditional[u]["Condition"] == "Strong Winds") {
+														if (weatherStrongWindsPath != undefined) {
+															if (weatherStrongWindsPath.checked) {
+																check = true;
+															}
+														}
+													}
+													else if (finaldataMoveAdditional[u]["Condition"] == "Sandstorm") {
+														if (weatherSandstormPath.checked) {
+															check = true;
+														}
+													}
+													else if (finaldataMoveAdditional[u]["Condition"].includes("Non:")) {
+														var tempStr = finaldataMoveAdditional[u]["Condition"].split("Non:")[1];
+														if (tempStr.includes(",")) {
+															check = true;
+															var tempArr = tempStr.split(",")
+															for (var r = 0; r < tempArr.length; r++) {
+																for (var w = 0; w < weatherInputsPath.length; w++) {
+																	if (weatherInputsPath[w].parentElement.getAttribute("name") == tempArr[r]) {
+																		if (weatherInputsPath[w].checked) {
+																			check = false;
+																		}
+																	}
+																}
+															}
+														}
+														else {
+															check = true;
+															for (var w = 0; w < weatherInputsPath.length; w++) {
+																if (weatherInputsPath[w].parentElement.getAttribute("name") == tempStr) {
+																	if (weatherInputsPath[w].checked) {
+																		check = false;
+																	}
+																}
+															}
+														}
+													}
+													
+
+													if (check) {
+														if (finaldataMoveAdditional[u]["Target"] == undefined) {
+															var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+															DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
+														}
+														else if (finaldataMoveAdditional[u]["Target"] == "Ally") {
+															if (target[i].parentElement.getAttribute("name").includes("player")) {
+																var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+																DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
+															}
+														}
+													}
+												}
+												else if (finaldataMoveAdditional[u]["Type"] == "Target Attack") {
+													if (finaldataMoveAdditional[u]["Condition"] == "Minus One Attack") {
+														if (moveCategory == "Special") {
+															if (Generation == 1) {
+																var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Special']")
+																var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Special']")
+															}
+															else {
+																var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Sp. Atk']")
+																var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Sp. Atk']")
+															}
+														}
+														else if (moveCategory == "Physical") {
+															var tarAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Attack']")
+															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Attack']")
+														}
+														var val;
+														
+														var modval;
+														if (modAtk.value == undefined) {
+															modval = 0
+														}
+														else {
+															modval = modAtk.value;
+														}
+
+											
+														if (modval == -6) {
+															val = tarAtk;
+														}
+														else {
+															if (Generation >= 1 && Generation <= 2) {
+																val = tarAtk*0.66;
+															}
+															else {
+																val = tarAtk*0.6666666667;
+															}
+														}
+
+														var heal = Math.ceil(val*finaldataMoveAdditional[u]["Value"]);
+														DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
+													}
+												}
+											}
+										}
+
+										if (finaldataMoveAdditional[u]["Additional"] == "Recoil") {
+											if (finaldataMoveAdditional[u]["Value"] != undefined) {
+												var val = 0;
+												if (finaldataMoveAdditional[u]["Type"] == "Move Damage") {
+													val = integerResult*finaldataMoveAdditional[u]["Value"];
+												}
+												if (finaldataMoveAdditional[u]["Type"] == "Current HP") {
+													val = parseInt(userCurrentHPPath.innerText)*finaldataMoveAdditional[u]["Value"];
+												}
+												if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
+													val = parseInt(userMaxHPPath.innerText)*finaldataMoveAdditional[u]["Value"];
+												}
+				
+												DMGCalcApply(user,val,"Damage","Blue","Apply");
+											}
+										}
+
+										
+										if (finaldataMoveAdditional[u]["Additional"] == "Recoil") {
+											if (finaldataMoveAdditional[u]["Value"] != undefined) {
+												var val = 0;
+												if (finaldataMoveAdditional[u]["Type"] == "Move Damage") {
+													val = integerResult*finaldataMoveAdditional[u]["Value"];
+												}
+												if (finaldataMoveAdditional[u]["Type"] == "Current HP") {
+													val = parseInt(userCurrentHPPath.innerText)*finaldataMoveAdditional[u]["Value"];
+												}
+												if (finaldataMoveAdditional[u]["Type"] == "Max HP") {
+													val = parseInt(userMaxHPPath.innerText)*finaldataMoveAdditional[u]["Value"];
+												}
+				
+												DMGCalcApply(user,val,"Damage","Blue","Apply");
+											}
+										}
+									}
+								}
+							}
+						}
+
+							
+						
+
 						if (tarStatusPoisonPath.checked) {
 							var val = Math.floor(maxHP/16);
 							if (val <= 0) {
@@ -4373,7 +4665,7 @@ var createTool = function() {
 
 
 
-						var max = target[i].querySelector(":scope *[name='hp'] *[name='max']").innerText;
+						var max = targetbase.querySelector(":scope *[name='hp'] input[type='range']").value;
 						var curr = target[i].querySelector(":scope *[name='hp'] *[name='current']").innerText;
 						if (curr != undefined && max != undefined) {
 							max = parseInt(max);
@@ -4382,6 +4674,8 @@ var createTool = function() {
 								dmgRes.push(max-curr);
 							}
 						}
+
+
 
 
 
@@ -4417,6 +4711,7 @@ var createTool = function() {
 						var ZoomLens = 1;
 						var MicleBerry = 1;
 						var Gravity = 1;
+						var Affection = 0;
 
 						if (Generation == 1 || Generation == 2) {
 							BrightPowder = 0;
@@ -4465,8 +4760,8 @@ var createTool = function() {
 							if (tarItemPath.value == "Lax Incense") {
 								LaxIncense = 0.95;
 							}
-
-							accCalc = acc*(accuracyMod-evasionMod)*CompoundEyes*SandVeil*Hustle*BrightPowder*LaxIncense;
+	
+							accCalc = acc*(accuracyMod*evasionMod)*CompoundEyes*SandVeil*Hustle*BrightPowder*LaxIncense;
 						}
 						if (Generation == 4) {
 							if (userAbilityPath.value == "CompoundEyes") {
@@ -4529,12 +4824,7 @@ var createTool = function() {
 							if (gravityPath.checked) {
 								Gravity = 5/3;
 							}
-							console.log(acc)
-							console.log(accuracyMod)
-							console.log(evasionMod)
-							console.log(accuracyMod-evasionMod)
-							accCalc = acc*(accuracyMod-evasionMod)*CompoundEyes*SandVeil*SnowCloak*Fog*Hustle*TangledFeet*BrightPowder*LaxIncense*WideLens*ZoomLens*MicleBerry*Gravity;
-							console.log(accCalc)
+							accCalc = acc*(accuracyMod*evasionMod)*CompoundEyes*SandVeil*SnowCloak*Fog*Hustle*TangledFeet*BrightPowder*LaxIncense*WideLens*ZoomLens*MicleBerry*Gravity;
 						}
 						if (Generation >= 5) {
 							if (gravityPath.checked) {
@@ -4616,7 +4906,7 @@ var createTool = function() {
 								CompoundEyes = 5325/4096;
 							}
 
-							accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod-evasionMod)*MicleBerry;
+							accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod*evasionMod)*MicleBerry;
 						}
 						if (Generation >= 6) {
 							if (tarItemPath.value == "Bright Powder") {
@@ -4627,9 +4917,9 @@ var createTool = function() {
 							}
 
 							var fr = undDel(userFriendshipPath.value,0);
-							var af = undDel(userAffectionPath.value,0);
 
 							if (getApplicable("X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon")) {
+								var af = undDel(userAffectionPath.value,0);
 								if (af >= 150) {
 									Affection = 10;
 								}
@@ -4644,31 +4934,180 @@ var createTool = function() {
 									Affection = 10;
 								}
 							}
-							accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod-evasionMod)*MicleBerry-Affection;
+
+							accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod*evasionMod)*MicleBerry-Affection;
+						}
+						if (accCalc > 100) {
+							accCalc = 100;
 						}
 						accRes.push(Math.round(accCalc)+"%")
 			
 					}
 				}
 
+				var dmgResult;
+				var check = true;
+				for (var u = 0; u < dmgRes.length; u++) {
+					if (u != 0) {
+						if (dmgRes[u] != dmgRes[u-1]) {
+							check = false;
+							break;
+						}
+					}
+				}
+		
+				if (check) {
+					dmgResult = dmgRes[0];
+				}
+				else {
+					dmgResult = dmgRes.join(" / ");
+				}
 
-				var dmgTotal = 0;
-				var accResult = accRes.join(" / ");
+
+
+
+				var accResult;
+				var check = true;
+				for (var u = 0; u < accRes.length; u++) {
+					if (u != 0) {
+						if (accRes[u] != accRes[u-1]) {
+							check = false;
+							break;
+						}
+					}
+				}
+		
+				if (check) {
+					accResult = accRes[0];
+				}
+				else {
+					accResult = accRes.join(" / ");
+				}
+
+
+				
+
 				if (accRes.length == 0) {
 					accResult = "0%";
 				}
-				
-				for (var i = 0; i < dmgRes.length; i++) {
-					dmgTotal = dmgTotal+dmgRes[i];
+				if (dmgRes.length == 0) {
+					dmgResult = "0";
 				}
-	
-				moveDamageTextPath.innerText = dmgTotal;
+				
+		
+
+
+			
+
+				moveDamageTextPath.innerText = dmgResult;
 				moveAccuracyTextPath.innerText = accResult;
 			}
 
-		}
 
-		var bgs = [];
+
+			// Critical
+			var critCalc = 0;
+
+			if (Generation == 1) {
+				var basespeed = parseInt(returnData(getPokémonInt(userPokémonPath.value),"Base Stats Speed","")[0])
+
+				if (movePath.value == "Crabhammer" || movePath.value == "Karate Chop" || movePath.value == "Razor Leaf" || movePath.value == "Slash") {
+					if (userModCriticalPath.value == 1) {
+						critCalc = 4*Math.floor(basespeed/4);
+					}
+					else {
+						critCalc = Math.min(8*Math.floor(basespeed/2),255);
+					}
+				}
+				else {
+					if (userModCriticalPath.value == 1) {
+						critCalc = Math.floor(basespeed/8);
+					}
+					else {
+						critCalc = Math.floor(basespeed/2);
+					}
+				}
+
+				critCalc = (critCalc/256)*100;
+			}
+			else if (Generation == 2) {
+				if (userModCriticalPath.value == 0 || userModCriticalPath.value == undefined || userModCriticalPath.value == "") {
+					critCalc = 17/256;
+				}
+				else if (userModCriticalPath.value == 1) {
+					critCalc = 1/8;
+				}
+				else if (userModCriticalPath.value == 2) {
+					critCalc = 1/4;
+				}
+				else if (userModCriticalPath.value == 3) {
+					critCalc = 85/256;
+				}
+				else if (userModCriticalPath.value >= 4) {
+					critCalc = 1/2;
+				}
+				critCalc = critCalc*100;
+			}
+			else if (Generation >= 3 && Generation <= 5) {
+				if (userModCriticalPath.value == 0 || userModCriticalPath.value == undefined || userModCriticalPath.value == "") {
+					critCalc = 1/16;
+				}
+				else if (userModCriticalPath.value == 1) {
+					critCalc = 1/8;
+				}
+				else if (userModCriticalPath.value == 2) {
+					critCalc = 1/4;
+				}
+				else if (userModCriticalPath.value == 3) {
+					critCalc = 1/3;
+				}
+				else if (userModCriticalPath.value >= 4) {
+					critCalc = 1/2;
+				}
+				critCalc = critCalc*100;
+			}
+			else if (Generation == 6) {
+				if (userModCriticalPath.value == 0 || userModCriticalPath.value == undefined || userModCriticalPath.value == "") {
+					critCalc = 1/16;
+				}
+				else if (userModCriticalPath.value == 1) {
+					critCalc = 1/8;
+				}
+				else if (userModCriticalPath.value == 2) {
+					critCalc = 1/2;
+				}
+				else if (userModCriticalPath.value == 3) {
+					critCalc = 1;
+				}
+				else if (userModCriticalPath.value >= 4) {
+					critCalc = 1;
+				}
+				critCalc = critCalc*100;
+			}
+			else if (Generation >= 7) {
+				if (userModCriticalPath.value == 0 || userModCriticalPath.value == undefined || userModCriticalPath.value == "") {
+					critCalc = 1/24;
+				}
+				else if (userModCriticalPath.value == 1) {
+					critCalc = 1/8;
+				}
+				else if (userModCriticalPath.value == 2) {
+					critCalc = 1/2;
+				}
+				else if (userModCriticalPath.value == 3) {
+					critCalc = 1;
+				}
+				else if (userModCriticalPath.value >= 4) {
+					critCalc = 1;
+				}
+				critCalc = critCalc*100;
+			}
+	
+			critCalc = Math.round(critCalc);
+			critCalc = undwsnanDel(critCalc,0);
+			moveCriticalTextPath.innerText = critCalc+"%";
+
+		}
 
 		function DMGCalcApply(base,val,type,color,condition) {
 
@@ -4684,32 +5123,21 @@ var createTool = function() {
 				var pok = base.getAttribute("name");
 				var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"']");
 
-
+				var HPMaxPath = base.querySelector(":scope *[name='hp'] *[name='max']");
 				var HPCurrentPath = base.querySelector(":scope *[name='hp'] *[name='current']");
 				var HPMaxPath = base.querySelector(":scope *[name='hp'] *[name='max']");
 				var HPPercentagePath = base.querySelector(":scope *[name='hp'] *[name='percentage']");
+				var HPInputPath = target.querySelector(":scope *[name='hp'] > input");
 
-				var PokémonPath = target.querySelector(":scope *[name='pokémon'] select");
-				var StatsPath = target.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
-				var HPInputPath = target.querySelector(":scope *[name='hp'] input");
-				var StatusLeechSeedPath = target.querySelector(":scope *[name='Leech Seed'] input");
-				var StatusPoisonPath = target.querySelector(":scope *[name='Poisoned'] input");
-				var StatusBadPoisonPath = target.querySelector(":scope *[name='Badly Poisoned'] input");
-				var StatusBurnPath = target.querySelector(":scope *[name='Burned'] input");
-				var StatusParalyzePath = target.querySelector(":scope *[name='Paralyzed'] input");
-				var StatusAsleepPath = target.querySelector(":scope *[name='Asleep'] input");
-				var StatusFrozenPath = target.querySelector(":scope *[name='Frozen'] input");
+				
 
 				if (condition == "Reset") {
 					base.lastChild.style.removeProperty("background");
 					HPCurrentPath.innerText = HPInputPath.value;
 					HPPercentagePath.innerText = Math.round(Math.round(HPInputPath.value)/HPMaxPath.innerText*100);
 					HPPercentagePath.innerText = HPPercentagePath.innerText+"%";
-					bgs = [];
 				}
 				else if (condition == "Apply") {
-
-
 					var val = parseInt(val);
 					var maxHP = parseInt(HPMaxPath.innerText);
 					var currentHP = parseInt(HPCurrentPath.innerText);
@@ -4741,34 +5169,7 @@ var createTool = function() {
 						newPercent = 100;
 					}
 
-	
-
-					var obj = new Object();
-					obj["Color"] = color;
-					obj["Percent"] = newPercent;
-					bgs.push(obj)
-
-					var tempArr = [];
-
-					for (var b = 0; b < bgs.length; b++) {
-						var x = b - 1;
-						if (b == 0) {
-							tempArr.push(bgs[b]["Color"]+" "+bgs[b]["Percent"]+"%")
-						}
-						else {
-							tempArr.push(bgs[b]["Color"]+" "+bgs[b]["Percent"]+"%, "+bgs[b]["Color"]+" "+bgs[x]["Percent"]+"%")
-						}
-					}
-
-
-					// linear-gradient(90deg, limegreen 8%, mediumspringgreen 8%, mediumspringgreen 58%, orangered 58%)
-					tempArr.reverse();
-
-
-
-					var tempStr = "linear-gradient(90deg,Limegreen "+newPercent+"%,"+tempArr.join(",")+")";
-
-					base.lastChild.style.background = tempStr;
+					base.lastChild.style.background = "linear-gradient(90deg, Limegreen 0%, Limegreen "+newPercent+"%, Orangered "+newPercent+"%, Orangered 100%)";
 					HPCurrentPath.innerText = newHP;
 					HPPercentagePath.innerText = newPercent+"%";
 				}
@@ -4825,7 +5226,6 @@ var createTool = function() {
 						nature = 1;
 					}
 
-					console.log(friendshipInput)
 					if (friendshipInput != undefined) {
 						if (friendshipInput.value != undefined && friendshipInput.value != "") {
 							friendship = friendshipModifer(friendshipInput.value);
@@ -4837,9 +5237,6 @@ var createTool = function() {
 					else {
 						friendship = 1;
 					}
-
-					console.log(friendship)
-					
 
 					if (lvl != "") {
 						if (iv == "") {
@@ -4869,7 +5266,7 @@ var createTool = function() {
 							maxhpInput.setAttribute("min",val)
 							maxhpInput.setAttribute("max",val)
 							maxhpInput.value = val;
-
+							maxhp.style.removeProperty("background");
 
 						}
 					}
@@ -5110,9 +5507,9 @@ var createTool = function() {
 			var strikes = [1,1];
 
 			for (var a = 0; a < finaldataMoveAdditional.length; a++) {
-				if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike") {
+				if (finaldataMoveAdditional[a]["Move"] == sel.value) {
 					if (getApplicable(finaldataMoveAdditional[a]["Game"])) {
-						if (finaldataMoveAdditional[a]["Move"] == sel.value) {
+						if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike" || finaldataMoveAdditional[a]["Additional"] == "Consecutive" || finaldataMoveAdditional[a]["Additional"] == "Variable") {
 							if (finaldataMoveAdditional[a]["Value"] != undefined) {
 								if (finaldataMoveAdditional[a]["Value"].includes("-")) {
 									var val1 = finaldataMoveAdditional[a]["Value"].split("-")[0];
@@ -5212,21 +5609,14 @@ var createTool = function() {
 						}
 					}
 					else if (lis[l].getAttribute("name") == "Flash Fire") {
-						if (userAbilityPath.value == "Flash Fire") {
+						if (userAbilityPath != undefined && userAbilityPath.value == "Flash Fire") {
 							lis[l].style.removeProperty("display");
 						}
 					}
-					else if (lis[l].getAttribute("name") == "Laser Focus") {
-						lis[l].style.removeProperty("display");
-					}
-					else if (lis[l].getAttribute("name") == "Glaive Rush") {
-						lis[l].style.removeProperty("display");
-					}
-					else if (lis[l].getAttribute("name") == "Trick-or-Treat") {
-						lis[l].style.removeProperty("display");
-					}
-					else if (lis[l].getAttribute("name") == "Forest's Curse") {
-						lis[l].style.removeProperty("display");
+					else if (lis[l].getAttribute("name") == "Tar Shot") {
+						if (moveType == "Fire") {
+							lis[l].style.removeProperty("display");
+						}
 					}
 				}
 			}
@@ -5253,6 +5643,8 @@ var createTool = function() {
 			else {
 				toolSectionContentDMGResult.setAttribute("data-range","")
 			}
+	
+
 			DMGSetPossible();
 		}
 		function DMGSetChange(base) {
@@ -5454,7 +5846,7 @@ var createTool = function() {
 						}
 						if (moves.length == pokMovesPath.length) {
 							for(var v = 0; v < pokMovesPath.length; v++) {
-								if(moves[v] != undefined && !moves[v].includes("#")) {
+								if(moves[v] != undefined && !moves[v].includes("#") && moves[v] != "") {
 									pokMovesPath[v].firstChild.innerText = moves[v];
 									pokMovesPath[v].firstChild.setAttribute("name",moves[v]);
 								}
@@ -5522,25 +5914,29 @@ var createTool = function() {
 			var y = undefined;
 			var check = false;
 
-			if (this.parentElement.getAttribute("name").includes("player")) {
+			var base = findUpTag(this,"DIV");
+
+			if (base.parentElement.getAttribute("name").includes("player")) {
 				check = true;
 				y = "player";
 			}
-			else if (this.classList.contains("target")) {
+			else if (base.classList.contains("target")) {
 				check = true;
 				y = "opponent";
 			}
 
-			var x = this.parentElement.parentElement.querySelectorAll(":scope > *[name*='"+y+"'] > *[name].active");
+			var x = base.parentElement.parentElement.querySelectorAll(":scope > *[name*='"+y+"'] > *[name].active");
 
 			for(var i = 0; i < x.length; i++) {
 				x[i].classList.remove("active");
 			}
 
 			if (check) {
-				this.classList.add("active");
+				base.classList.add("active");
 				DMGSetPossible();
 			}
+
+			DMGCalcStart();
 		}
 		function DMGSetPossible() {
 
@@ -6212,7 +6608,7 @@ var createTool = function() {
 	createDamageCalc();
 
 
-	var toolOptionsTitle = ["Timers","Random Number Generator","Type Advantage","Damage Calculator"];
+	var toolOptionsTitle = ["Damage Calculator","Type Advantage","Timers","Random Number Generator"];
 
 	// Counter, Damage Calculator, Catch Rate Calculator, Shiny Odds Calculator, Item/Move/Type/Ability/Location Checklist
 
