@@ -85,6 +85,116 @@ function getRandomInt(min,max) {
 	return Math.random() * (max - min) + min;
 }
 
+function linGradCalc() {
+	let Arr = [{Type:"Burn",Value:15},{Type:"Damage",Value:63},{Type:"Bad Poison",Value:44},{Type:"Poison",Value:21},{Type:"Heal",Value:52},{Type:"Seed",Value:11}];
+	let MaxHP = 253;
+	let Percentage = 100;
+
+
+	for (let i = 0; i < Arr.length; i++) {
+		Arr[i]["Percent"] = (parseInt(Arr[i]["Value"])/MaxHP)*100
+	}
+
+
+	let perArr1 = [];
+	let colArr1 = [];
+
+	for (let i = 0; i < Arr.length; i++) {
+		if (Arr[i]["Type"] == "Heal") {
+			Percentage = Percentage+Arr[i]["Percent"];
+			perArr1.push(Math.round(Percentage))
+		}
+		else {
+			Percentage = Percentage-Arr[i]["Percent"];
+			perArr1.push(Math.round(Percentage))
+		}
+
+		if (Arr[i]["Type"] == "Heal") {
+			colArr1.push("Mediumspringgreen")
+		}
+		else if (Arr[i]["Type"] == "Poison") {
+			colArr1.push("Blue")
+		}
+		else if (Arr[i]["Type"] == "Burn") {
+			colArr1.push("Orange")
+		}
+		else if (Arr[i]["Type"] == "Seed") {
+			colArr1.push("Yellow")
+		}
+		else if (Arr[i]["Type"] == "Bad Poison") {
+			colArr1.push("Rebeccapurple")
+		}
+		else {
+			colArr1.push("Orangered")
+		}
+
+
+		if (Percentage <= 0) {
+			Percentage = 0;
+			break;
+		}
+	}
+	/*
+	for (let q = 0; q < 20; q++) {
+		for (let i = 0; i < perArr1.length; i++) {
+			var x = i+1;
+			if (perArr1[x] != undefined) {
+				if (perArr1[i] < perArr1[x]) {
+					perArr1.splice(i,1);
+					colArr1.splice(i,1);
+				}
+			}
+		}
+	}
+	*/
+
+	var perArr2 = [];
+	var colArr2 = [];
+
+	for (let i = 0; i < perArr1.length; i++) {
+		for (let q = 0; q < 2; q++) {
+			perArr2.push(perArr1[i])
+			colArr2.push(colArr1[i])
+		}
+	}
+
+
+
+
+	colArr2.splice(0,1);
+	colArr2.push(colArr2[colArr2.length-1])
+
+	colArr2.splice(colArr2.length-1,1);
+	perArr2.splice(perArr2.length-1,1);
+	colArr2.splice(0,1);
+	perArr2.splice(0,1);
+
+
+	perArr2.unshift(100);
+	perArr2.push(perArr2[perArr2.length-1])
+	perArr2.push(0)
+
+	colArr2.unshift(colArr2[0]);
+	colArr2.push("Limegreen")
+	colArr2.push("Limegreen")
+
+
+	var tempArr = [];
+	for (let i = 0; i < perArr2.length; i++) {
+		tempArr.push(" "+colArr2[i]+" "+perArr2[i]+"%")
+	}
+	tempArr.reverse();
+
+	var tempStr = "linear-gradient(90deg,"+tempArr.join(",")+")";
+
+
+
+
+
+
+
+}
+
 
 function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
 	var arr;
@@ -821,6 +931,17 @@ function undwsDel(string,replacement) {
 		return string;
 	}
 }
+function undwsnanDel(string,replacement) {
+	var string;
+	var replacement;
+	if (string == undefined || string == "" || isNaN(string)) {
+		return replacement;
+	}
+	else {
+		return string;
+	}
+}
+
 
 
 function modStageCalc(type,mod) {
