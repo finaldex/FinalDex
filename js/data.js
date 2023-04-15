@@ -1835,8 +1835,8 @@ function loadData() {
                 
             }
             if(y == 6) {
-				var ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,XXXX)
-				var ppmax = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Max_"+JSONPath_MovePP,XXXX)
+				var ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,learnsetArr[u]["Move"])
+				var ppmax = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Max_"+JSONPath_MovePP,learnsetArr[u]["Move"])
 
 				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
 				var dataSectionMainLearnsetLiText = document.createElement("h6");
