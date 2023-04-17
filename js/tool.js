@@ -2311,7 +2311,7 @@ var createTool = function() {
 			var moveCriticalTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='critical'] > *:last-child");
 
 
-			DMGCalcApply(user,undefined,undefined,undefined,"Reset");
+			DMGCalcApply(user,undefined,undefined,"Reset");
 
 
 
@@ -2342,7 +2342,7 @@ var createTool = function() {
 				for (var i = 0; i < target.length; i++) {
 					if (target[i].getAttribute("data-string") != "" && !target[i].getAttribute("data-string").includes("pok:|")) {
 
-						DMGCalcApply(target[i],undefined,undefined,undefined,"Reset");
+						DMGCalcApply(target[i],undefined,undefined,"Reset");
 
 						// Paths
 						var targetteam = target[i].parentElement.getAttribute("name");
@@ -2393,32 +2393,143 @@ var createTool = function() {
 							tarTypes[1] = "";
 						}
 
+			
+
+						// --
+						// Defaults
 						var calculation = 0;
+						var Immune = false;
+						var Level = 1;
+						var Critical = 1;
+						var Attack = 0;		
+						var Defense = 0;
+						var NoModAttack = 0;
+						var NoModDefense = 0;
+						var Power = 0;
+						var STAB = 1;
+						var Type = 1;
+						var Type1 = 1;
+						var Type2 = 1;
+						var random = 1;
+						var Targets = 1;
+						
+						// Abilities
+						var FlashFire = 1;
+						var Fluffy1 = 1;
+						var Fluffy2 = 1;
+						var TintedLens = 1;
+						var SolidRockFilter = 1;
+						var FilterPrismArmorSolidRock = 1;
+						var PunkRock = 1;
+						var IceScales = 1;
+						var FriendGuard = 1;
+						var Neuroforce = 1;
+						var Sniper = 1;
+						var MultiscaleShadowShield = 1;
 
-						if (Generation == 1) {
-							// Defaults
-							var Immune = false;
-							var Level = 1;
-							var Critical = 1;
-							var Attack = 0;		
-							var Defense = 0;
-							var NoModAttack = 0;
-							var NoModDefense = 0;
-							var Power = 0;
-							var STAB = 1;
-							var Type1 = 1;
-							var Type2 = 1;
-							var random = 1;
+						// Moves
+						var HelpingHand = 1;
+						var MeFirst = 1;
+						var Charge = 1;
+						var GlaiveRush = 1;
+						var Stockpile = 1;
+						var TripleKick = 1;
+						var BehemothBladeBehemothBashDynamaxCannon = 1;
+						var Minimize = 1;
+						var SurfWhirlpool = 1;
+						var EarthquakeMagnitude = 1;
+						var GustTwister = 1;
+						var ColissionCourseElectroDrift = 1;
+						var Rollout = 1;
+						var FuryCutter = 1;
+						var Rage = 1;
+						var Pursuit = 1;
+						var StompNeedleArmAstonishExtrasensory = 1;
+						var Facade = 1;
+						var SmellingSalt = 1;
+						var Revenge = 1;
+						var WeatherBall = 1;
 
+						// Items
+						var Item = 1;
+						var ExpertBelt = 1;
+						var LifeOrb = 1;
+						var Metronome = 1;
 
-
-							Level = parseInt(userLevelPath.value);
-							if (criticalPath.checked) {
-								Critical = 2;
-							}
+						// Other
+						var Weather = 1;
+						var Badge = 1;
+						var Burn = 1;
+						var Screen = 1;
+						var Berry = 1;
+						var ZMove = 1;
 
 	
-							Power = parseInt(movePower);
+		
+						
+	
+
+
+						// Factors
+						Level = parseInt(userLevelPath.value);
+						Power = parseInt(movePower);
+						if (Level == "" || Level == undefined) {
+							Level = 0;
+						}
+						if (Power == "-") {
+							Power = 0;
+						}
+						if (criticalPath.checked) {
+							Critical = 2;
+						}
+						if (userTypes[0] == moveType || userTypes[1] == moveType) {
+							if (userAbilityPath.value == "Adaptability") {
+								STAB = 2;
+							}
+							else {
+								STAB = 1.5;
+							}
+						}
+						if (InvunerableDigPath.checked) {
+							if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
+								EarthquakeMagnitude = 2;
+							}
+						}
+						if (InvunerableDivePath.checked) {
+							if (movePath.value == "Surf" || movePath.value == "Whirlpool") {
+								SurfWhirlpool = 2;
+							}
+						}
+						if (movePath.value == "Gust" || movePath.value == "Twister") {
+							if (InvunerableFlightPath.checked) {
+								GustTwister = 2;
+							}
+						}
+						if (weatherRainPath.checked) {
+							if (moveType == "Fire") {
+								Weather = 0.5;
+							}
+							if (moveType == "Water") {
+								Weather = 1.5;
+							}
+						}
+						if (weatherHarshSunlightPath.checked) {
+							if (moveType == "Fire") {
+								Weather = 1.5;
+							}
+							if (moveType == "Water") {
+								if (movePath.value != "Hydro Steam") {
+									Weather = 0.5;
+								}
+							}
+						}
+
+
+
+
+
+
+						if (Generation == 1) { // DMG Generation 1
 							if (moveCategory == "Physical") {
 								for(var u = 0; u < userStatsPath.length; u++) {
 									if (userStatsPath[u].getAttribute("name") == "Attack") {
@@ -2451,40 +2562,27 @@ var createTool = function() {
 									}
 								}
 							}
-
 							if (Critical == 2) {
 								Attack = parseInt(NoModAttack);
 								Defense = parseInt(NoModDefense);
 							}
-
-
 							Attack = parseFloat(Attack);
 							Defense = parseFloat(Defense);
-
+							if (Attack > 255 || Defense > 255) {
+								Attack = Math.floor(Attack/4);
+								Defense = Math.floor(Defense/4);
+							}
 							if (randomPath.getAttribute("disabled") == "") {
 								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/255;
 							}
 							else {
 								random = randomPath.value/255;
 							}
-							
-
-
-							if (Attack > 255 || Defense > 255) {
-								Attack = Math.floor(Attack/4);
-								Defense = Math.floor(Defense/4);
-							}
-
-							if (userTypes[0] == moveType || userTypes[1] == moveType) {
-								STAB = 1.5;
-							}
-
 							var used = []
-					
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Defending");
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
 
 										if (typeadv[2].includes(tarTypes[0].toUpperCase())) {
 											used.push(tarTypes[0].toUpperCase())
@@ -2518,66 +2616,14 @@ var createTool = function() {
 									}
 								}
 							}
-			
-
-
-							Level = parseFloat(Level);
-							Critical = parseFloat(Critical);
-							Attack = parseFloat(Attack);
-							Defense = parseFloat(Defense);
-							Power = parseFloat(Power);
-							STAB = parseFloat(STAB);
-							Type1 = parseFloat(Type1);
-							Type2 = parseFloat(Type2);
-							random = parseFloat(random);
-
-
-							calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2)*STAB*Type1*Type2;
-
-							if (calculation == 1) {
-								random = 1;
-							}
-
-							calculation = calculation*random;
-
-							if (Immune) {
-								calculation = 0;
-							}
 						}
-						else if (Generation == 2) {
-							// Defaults
-							var Level = 1;
-							var Power = 0;
-							var Attack = 0;
-							var Defense = 0;
-							var Item = 1;
-							var Critical = 1;
-							var TripleKick = 1;
-							var Badge = 1;
-							var Weather = 1;
-							var STAB = 1;
-							var Type = 1;
-							var MoveMod = 1;
-							var random = 1;
-							var DoubleDmg = 1;
-
-							Level = userLevelPath.value;
-							if (criticalPath.checked) {
-								Critical = 2;
-							}
-							Power = movePower;
-							if (Power == "-") {
-								Power = 0;
-							}
-
-
+						else if (Generation == 2) { // DMG Generation 2
 							if (randomPath.getAttribute("disabled") == "") {
 								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/255;
 							}
 							else {
 								random = randomPath.value/255;
 							}
-
 							if (moveCategory == "Physical") {
 								for(var u = 0; u < userStatsPath.length; u++) {
 									if (userStatsPath[u].getAttribute("name") == "Attack") {
@@ -2610,11 +2656,9 @@ var createTool = function() {
 									}
 								}
 							}
-
 							if (movePath.value == "Flail" || movePath.value == "Reversal" || movePath.value == "Future Sight") {
 								Critical = 1;
 							}
-
 							if (Critical == 2) {
 								if (userModPath.length == tarModPath.length) {
 									for(var u = 0; u < tarModPath.length; u++) {
@@ -2683,7 +2727,6 @@ var createTool = function() {
 									}
 								}
 							}
-
 							if (moveCategory == "Physical") {
 								if (tarReflectPath.checked) {
 									if (Critical == 1) {
@@ -2698,8 +2741,6 @@ var createTool = function() {
 									}
 								}
 							}
-
-
 							for(var u = 0; u < finaldataItemsDamage.length; u++) {
 								if (finaldataItemsDamage[u]["Item"] == userItemPath.value) {
 									if (getApplicable(finaldataItemsDamage[u]["Game"])) {
@@ -2728,38 +2769,15 @@ var createTool = function() {
 									}
 								}
 							}
-
-				
 							if (weatherRainPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 0.5;
-								}
-								if (moveType == "Water") {
-									Weather = 1.5;
-								}
 								if (movePath.value == "SolarBeam") {
 									Weather = 0.5;
 								}
 							}
-							if (weatherHarshSunlightPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 1.5;
-								}
-								if (moveType == "Water") {
-									Weather = 0.5;
-								}
-							}
-		
-								
-							if (userTypes[0] == moveType || userTypes[1] == moveType) {
-								STAB = 1.5;
-							}
-
-
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Defending");
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
 										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
 											Type = 2;
 										}
@@ -2778,41 +2796,28 @@ var createTool = function() {
 									}
 								}
 							}
-
 							if (movePath.value == "Rollout") {
-								MoveMod = 2**(moveCountPath.value);
+								Rollout = 2**(moveCountPath.value);
 							}
 							if (movePath.value == "Fury Cutter") {
-								MoveMod = 2**(moveCountPath.value);
+								FuryCutter = 2**(moveCountPath.value);
 							}
 							if (movePath.value == "Rage") {
-								MoveMod = moveCountPath.value;
+								Rage = moveCountPath.value;
 							}
 							if (movePath.value == "Pursuit") {
 								if (SwitchPath.checked) {
-									DoubleDmg = 2;
+									Pursuit = 2;
 								}
 							}
 							if (movePath.value == "Stomp") {
 								if (MinimizePath.checked) {
-									DoubleDmg = 2;
+									StompNeedleArmAstonishExtrasensory = 2;
 								}
 							}
-							if (movePath.value == "Gust" || movePath.value == "Twister") {
-								if (InvunerableFlightPath.checked) {
-									DoubleDmg = 2;
-								}
-							}
-							if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
-								if (InvunerableDigPath.checked) {
-									DoubleDmg = 2;
-								}
-							}
-
 							if (movePath.value == "Triple Kick") {
 								TripleKick = moveCountPath.value;
 							}
-
 							for (var u = 0; u < userBadgePath.length; u++) {
 								if (userBadgePath[u].title.includes(moveType+"-type")) {
 									if (userBadgePath[u].checked) {
@@ -2820,57 +2825,9 @@ var createTool = function() {
 									}
 								}
 							}
-
-							Level = parseFloat(Level);
-							Power = parseFloat(Power);
-							Attack = parseFloat(Attack);
-							Defense = parseFloat(Defense);
-							Item = parseFloat(Item);
-							Critical = parseFloat(Critical);
-							TripleKick = parseFloat(TripleKick);
-							Weather = parseFloat(Weather);
-							Badge = parseFloat(Badge);
-							STAB = parseFloat(STAB);
-							Type = parseFloat(Type);
-							MoveMod = parseFloat(MoveMod);
-							random = parseFloat(random);
-							DoubleDmg = parseFloat(DoubleDmg);
-
-							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Item*Critical+2)*TripleKick*Weather*Badge*STAB*Type*MoveMod*random*DoubleDmg;
-
-							if (Immune) {
-								calculation = 0;
-							}
 						}
-						else if (Generation == 3) {
-							// Defaults
-							var Level = 1;
-							var Power = 0;
-							var Attack = 0;
-							var Defense = 0;
-							var Burn = 1;
-							var Screen = 1;
-							var Targets = 1;
-							var Weather = 1;
-							var FlashFire = 1;
-							var Stockpile = 1;
-							var Critical = 1;
-							var DoubleDmg = 1;
-							var Charge = 1;
-							var HelpingHand = 1;
-							var STAB = 1;
-							var Type = 1;
-							var random = 1;
-
-							Level = userLevelPath.value;
-							if (criticalPath.checked) {
-								Critical = 2;
-							}
-							Power = movePower;
-							if (Power == "-") {
-								Power = 0;
-							}
-
+						else if (Generation == 3) { // DMG Generation 3
+			
 
 							if (randomPath.getAttribute("disabled") == "") {
 								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/100;
@@ -3010,24 +2967,6 @@ var createTool = function() {
 								}
 							}
 	
-
-							if (weatherRainPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 0.5;
-								}
-								if (moveType == "Water") {
-									Weather = 1.5;
-								}
-							}
-							if (weatherHarshSunlightPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 1.5;
-								}
-								if (moveType == "Water") {
-									Weather = 0.5;
-								}
-							}
-
 							if (movePath.value == "SolarBeam") {
 								weatherInputsPath
 								var check = true;
@@ -3069,46 +3008,30 @@ var createTool = function() {
 
 							if (movePath.value == "Pursuit") {
 								if (SwitchPath.checked) {
-									DoubleDmg = 2;
+									Pursuit = 2;
 								}
 							}
 							if (movePath.value == "Facade") {
 								if (userStatusPoisonPath.checked || userStatusBurnPath.checked || userStatusParalyzePath.checked) {
-									DoubleDmg = 2;
+									Facade = 2;
 								}
 								if (userStatusBadPoisonPath.value != "" && userStatusBadPoisonPath.value != undefined) {
-									DoubleDmg = 2;
+									Facade = 2;
 								}
 							}
 							
 
-							if (movePath.value == "Gust" || movePath.value == "Twister") {
-								if (InvunerableFlightPath.checked) {
-									DoubleDmg = 2;
-								}
-							}
 
 							if (movePath.value == "Stomp" || movePath.value == "Needle Arm" || movePath.value == "Astonish" || movePath.value == "Extrasensory") {
 								if (MinimizePath.checked) {
-									DoubleDmg = 2;
+									StompNeedleArmAstonishExtrasensory = 2;
 								}
 							}
 
-							if (movePath.value == "Surf" || movePath.value == "Whirlpool") {
-								if (InvunerableDivePath.checked) {
-									DoubleDmg = 2;
-								}
-							}
-
-							if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
-								if (InvunerableDigPath.checked) {
-									DoubleDmg = 2;
-								}
-							}
 
 							if (movePath.value == "SmellingSalt") {
 								if (tarStatusParalyzePath.checked) {
-									DoubleDmg = 2;
+									SmellingSalt = 2;
 								}
 							}
 
@@ -3126,7 +3049,7 @@ var createTool = function() {
 									}
 								}
 								if (check) {
-									DoubleDmg = 2;
+									WeatherBall = 2;
 								}
 							}
 
@@ -3144,15 +3067,10 @@ var createTool = function() {
 							}
 
 
-							if (userTypes[0] == moveType || userTypes[1] == moveType) {
-								STAB = 1.5;
-							}
-
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Defending");
-
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
 										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
 											Type = 2;
 										}
@@ -3178,62 +3096,9 @@ var createTool = function() {
 
 
 
-							Level = parseFloat(Level);
-							Power = parseFloat(Power);
-							Attack = parseFloat(Attack);
-							Defense = parseFloat(Defense)
-							Burn = parseFloat(Burn);
-							Screen = parseFloat(Screen);
-							Targets = parseFloat(Targets);
-							Weather = parseFloat(Weather);
-							FlashFire = parseFloat(FlashFire);
-							Stockpile = parseFloat(Stockpile);
-							Critical = parseFloat(Critical);
-							DoubleDmg = parseFloat(DoubleDmg);
-							Charge = parseFloat(Charge);
-							HelpingHand = parseFloat(HelpingHand);
-							STAB = parseFloat(STAB);
-							Type = parseFloat(Type);
-							random = parseFloat(random);
-
-							
-							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Stockpile*Critical*DoubleDmg*Charge*HelpingHand*STAB*Type*random;
-
-							if (Immune) {
-								calculation = 0;
-							}
+						
 						}
-						else if (Generation == 4) {
-							// Defaults
-							var Level = 1;
-							var Power = 0;
-							var Attack = 0;
-							var Defense = 0;
-							var Burn = 1;
-							var Screen = 1;
-							var Targets = 1;
-							var Weather = 1;
-							var FlashFire = 1;
-							var Critical = 1;
-							var Item = 1;
-							var MeFirst = 1;
-							var random = 1;
-							var STAB = 1;
-							var Type1 = 1;
-							var Type2 = 1;
-							var SolidRockFilter = 1;
-							var ExpertBelt = 1;
-							var TintedLens = 1;
-							var Berry = 1;
-
-							Level = userLevelPath.value;
-							if (criticalPath.checked) {
-								Critical = 2;
-							}
-							Power = movePower;
-							if (Power == "-") {
-								Power = 0;
-							}
+						else if (Generation == 4) { // DMG Generation 4
 							if (randomPath.getAttribute("disabled") == "") {
 								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/100;
 							}
@@ -3363,23 +3228,7 @@ var createTool = function() {
 								}
 							}
 
-							
-							if (weatherRainPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 0.5;
-								}
-								if (moveType == "Water") {
-									Weather = 1.5;
-								}
-							}
-							if (weatherHarshSunlightPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 1.5;
-								}
-								if (moveType == "Water") {
-									Weather = 0.5;
-								}
-							}
+						
 							if (movePath.value == "SolarBeam") {
 								weatherInputsPath
 								var check = true;
@@ -3415,7 +3264,7 @@ var createTool = function() {
 							}
 
 							if (userItemPath.value == "Life Orb") {
-								Item = 1.3;
+								LifeOrb = 1.3;
 							}
 							
 							if (userItemPath.value == "Metronome") {
@@ -3426,14 +3275,11 @@ var createTool = function() {
 								if (val > 10) {
 									val = 10;
 								}
-								Item = 1+(val/10);
+								Metronome = 1+(val/10);
 							}
 							
 							if (MeFirstPath.checked) {
 								MeFirst = 1.5;
-							}
-							if (userTypes[0] == moveType || userTypes[1] == moveType) {
-								STAB = 1.5;
 							}
 
 							if (tarAbilityPath.value == "Levitate") {
@@ -3558,82 +3404,13 @@ var createTool = function() {
 								}
 							}
 
-							Level = parseFloat(Level);
-							Power = parseFloat(Power);
-							Attack = parseFloat(Attack);
-							Defense = parseFloat(Defense);
-							Burn = parseFloat(Burn);
-							Screen = parseFloat(Screen);
-							Targets = parseFloat(Targets);
-							Weather = parseFloat(Weather);
-							FlashFire = parseFloat(FlashFire);
-							Critical = parseFloat(Critical);
-							Item = parseFloat(Item);
-							MeFirst = parseFloat(MeFirst);
-							random = parseFloat(random);
-							STAB = parseFloat(STAB);
-							Type1 = parseFloat(Type1);
-							Type2 = parseFloat(Type2);
-							SolidRockFilter = parseFloat(SolidRockFilter);
-							ExpertBelt = parseFloat(ExpertBelt);
-							TintedLens = parseFloat(TintedLens);
-							Berry = parseFloat(Berry);
-
-							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*Item*MeFirst*random*STAB*Type1*Type2*SolidRockFilter*ExpertBelt*TintedLens*Berry;
-
-							if (Immune) {
-								calculation = 0;
-							}
 
 						}
-						else if (Generation >= 5) {
-							// Defaults
-							var Level = 1;
-							var Power = 0;
-							var Attack = 0;
-							var Defense = 0;
-							var Targets = 1;
-							var Weather = 1;
-							var GlaiveRush = 1;
-							var Critical = 1;
-							var random = 1;
-							var STAB = 1;
-							var Type = 1;
-							var Burn = 1;
-							var Screen = 1;
-							var BehemothBladeBehemothBashDynamaxCannon = 1;
-							var Minimize = 1;
-							var SurfWhirlpool = 1;
-							var EarthquakeMagnitude = 1;
-							var Screen = 1;
-							var ColissionCourseElectroDrift = 1;
-							var MultiscaleShadowShield = 1;
-							var Fluffy1 = 1;
-							var PunkRock = 1;
-							var IceScales = 1;
-							var FriendGuard = 1;
-							var FilterPrismArmorSolidRock = 1;
-							var Neuroforce = 1;
-							var Sniper = 1;
-							var TintedLens = 1;
-							var Fluffy2 = 1;
-							var Item = 1;
-							var Berry = 1;
-							var ZMove = 1;
-							var MeFirst = 1;
-
-							Level = userLevelPath.value;
+						else if (Generation >= 5) { // DMG Generation 5+
 							if (criticalPath.checked) {
-								if (Generation == 5) {
-									Critical = 2;
-								}
-								else {
+								if (Generation >= 6) {
 									Critical = 1.5;
 								}
-							}
-							Power = movePower;
-							if (Power == "-") {
-								Power = 0;
 							}
 							if (randomPath.getAttribute("disabled") == "") {
 								random = Math.round(getRandomInt(parseInt(randomPath.min),parseInt(randomPath.max)))/100;
@@ -3778,25 +3555,6 @@ var createTool = function() {
 							}
 
 
-							if (weatherRainPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 0.5;
-								}
-								if (moveType == "Water") {
-									Weather = 1.5;
-								}
-							}
-							if (weatherHarshSunlightPath.checked) {
-								if (moveType == "Fire") {
-									Weather = 1.5;
-								}
-								if (moveType == "Water") {
-									if (movePath.value != "Hydro Steam") {
-										Weather = 0.5;
-									}
-								}
-							}
-
 							var check = false;
 							for(var u = 0; u < allbase.length; u++) {
 								var ab = allbase[u].querySelector(":scope *[name='ability'] select");
@@ -3808,14 +3566,7 @@ var createTool = function() {
 								Weather = 1;
 							}
 
-							if (userTypes[0] == moveType || userTypes[1] == moveType) {
-								if (userAbilityPath.value == "Adaptability") {
-									STAB = 2;
-								}
-								else {
-									STAB = 1.5;
-								}
-							}
+
 
 							if (movePath.value.includes(" Pledge")) {
 								if (userAbilityPath.value == "Adaptability") {
@@ -3835,8 +3586,7 @@ var createTool = function() {
 							if (tarTypes.length > 0) {
 								for (var u = 0; u < Types.length; u++) {
 									if (moveType == Types[u]) {
-										var typeadv = returnTypeAdvantage(Types[u],"Defending");
-
+										var typeadv = returnTypeAdvantage(Types[u],"Attacking");
 										if (typeadv[2].includes(tarTypes[0].toUpperCase()) || typeadv[2].includes(tarTypes[1].toUpperCase())) {
 											Type = 2;
 										}
@@ -4110,17 +3860,7 @@ var createTool = function() {
 								}
 							}
 
-							if (InvunerableDigPath.checked) {
-								if (movePath.value == "Earthquake" || movePath.value == "Magnitude") {
-									EarthquakeMagnitude = 2;
-								}
-							}
-
-							if (InvunerableDivePath.checked) {
-								if (movePath.value == "Surf" || movePath.value == "Whirlpool") {
-									SurfWhirlpool = 2;
-								}
-							}
+	
 							
 
 							if (moveCategory == "Physical") {
@@ -4309,12 +4049,12 @@ var createTool = function() {
 
 							if (userItemPath.value == "Expert Belt") {
 								if (Type > 1) {
-									Item = 1.2;
+									ExpertBelt = 1.2;
 								}
 							}
 
 							if (userItemPath.value == "Life Orb") {
-								Item = 1.3;
+								LifeOrb = 1.3;
 							}
 
 							if (tarAbilityPath.value == "Levitate") {
@@ -4328,11 +4068,9 @@ var createTool = function() {
 								if (isNaN(val)) {
 									val = 0;
 								}
-
-								Item = 1+((819/4096)*val);
-
-								if (Item > 2) {
-									Item = 2;
+								Metronome = 1+((819/4096)*val);
+								if (Metronome > 2) {
+									Metronome = 2;
 								}
 							}
 				
@@ -4352,48 +4090,42 @@ var createTool = function() {
 									Power = Power*2;
 								}
 							}
-
-							Level = parseFloat(Level);
-							Power = parseFloat(Power);
-							Attack = parseFloat(Attack);
-							Defense = parseFloat(Defense);
-							Targets = parseFloat(Targets);
-							Weather = parseFloat(Weather);
-							GlaiveRush = parseFloat(GlaiveRush);
-							Critical = parseFloat(Critical);
-							random = parseFloat(random);
-							STAB = parseFloat(STAB);
-							Type = parseFloat(Type);
-							Burn = parseFloat(Burn);
-							Screen = parseFloat(Screen);
-							BehemothBladeBehemothBashDynamaxCannon = parseFloat(BehemothBladeBehemothBashDynamaxCannon);
-							Minimize = parseFloat(Minimize);
-							SurfWhirlpool = parseFloat(SurfWhirlpool);
-							EarthquakeMagnitude = parseFloat(EarthquakeMagnitude);
-							Screen = parseFloat(Screen);
-							ColissionCourseElectroDrift = parseFloat(ColissionCourseElectroDrift);
-							MultiscaleShadowShield = parseFloat(MultiscaleShadowShield);
-							Fluffy1 = parseFloat(Fluffy1);
-							PunkRock = parseFloat(PunkRock);
-							IceScales = parseFloat(IceScales);
-							FriendGuard = parseFloat(FriendGuard);
-							FilterPrismArmorSolidRock = parseFloat(FilterPrismArmorSolidRock);
-							Neuroforce = parseFloat(Neuroforce);
-							Sniper = parseFloat(Sniper);
-							TintedLens = parseFloat(TintedLens);
-							Fluffy2 = parseFloat(Fluffy2);
-							Item = parseFloat(Item);
-							Berry = parseFloat(Berry);
-							MeFirst = parseFloat(MeFirst);
-							ZMove = parseFloat(ZMove);
-
-							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)+2)*Targets*Weather*GlaiveRush*Critical*random*STAB*Type*Burn*Screen*(BehemothBladeBehemothBashDynamaxCannon*Minimize*SurfWhirlpool*EarthquakeMagnitude*Screen*ColissionCourseElectroDrift*MultiscaleShadowShield*Fluffy1*PunkRock*IceScales*FriendGuard*FilterPrismArmorSolidRock*Neuroforce*Sniper*TintedLens*Fluffy2*Item*Berry)*MeFirst*ZMove;
-
-
-							if (Immune) {
-								calculation = 0;
-							}
 						}
+
+
+
+
+
+
+
+						// Calculation
+						if (Generation == 1) {
+							calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2)*STAB*Type1*Type2;
+							if (calculation == 1) {
+								random = 1;
+							}
+							calculation = calculation*random;
+						}
+						else if (Generation == 2) {
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Item*Critical+2)*TripleKick*Weather*Badge*STAB*Type*(Rollout*FuryCutter*Rage)*random*(Pursuit*StompNeedleArmAstonishExtrasensory*GustTwister*EarthquakeMagnitude);
+						}
+						else if (Generation == 3) {
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Stockpile*Critical*(GustTwister*StompNeedleArmAstonishExtrasensory*SurfWhirlpool*EarthquakeMagnitude*Pursuit*Facade*SmellingSalt*Revenge*WeatherBall)*Charge*HelpingHand*STAB*Type*random;
+						}
+						else if (Generation == 4) {
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*(Item*LifeOrb*Metronome)*MeFirst*random*STAB*Type1*Type2*SolidRockFilter*ExpertBelt*TintedLens*Berry;
+						}
+						else if (Generation >= 5) {
+							calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)+2)*Targets*Weather*GlaiveRush*Critical*random*STAB*Type*Burn*Screen*(BehemothBladeBehemothBashDynamaxCannon*Minimize*SurfWhirlpool*EarthquakeMagnitude*Screen*ColissionCourseElectroDrift*MultiscaleShadowShield*Fluffy1*PunkRock*IceScales*FriendGuard*FilterPrismArmorSolidRock*Neuroforce*Sniper*TintedLens*Fluffy2*(Item*LifeOrb*ExpertBelt*Metronome)*Berry)*MeFirst*ZMove;
+						}
+
+						if (Immune) {
+							calculation = 0;
+						}
+
+
+
+
 						
 						var maxHP = parseInt(tarHPMaxPath.innerText);
 						var integerResult = Math.round(calculation);
@@ -4415,13 +4147,13 @@ var createTool = function() {
 					
 				
 						if (movePath.value == "Dragon Rage") {
-							DMGCalcApply(target[i],40,"Damage","Orangered","Apply");
+							DMGCalcApply(target[i],40,"Damage","Apply");
 						}
 						else if (movePath.value == "Sonic Boom" || movePath.value == "SonicBoom") {
-							DMGCalcApply(target[i],20,"Damage","Orangered","Apply");
+							DMGCalcApply(target[i],20,"Damage","Apply");
 						}
 						else if (movePath.value == "Triple Kick" && Generation == 2) {
-							DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+							DMGCalcApply(target[i],integerResult,"Damage","Apply");
 						}
 						else if (userAbilityPath != undefined && userAbilityPath.value == "Parental Bond") {
 							var check = true;
@@ -4438,18 +4170,18 @@ var createTool = function() {
 								for (var h = 0; h < 2; h++) {
 									if (Generation == 6) {
 										if (h == 1) {
-											DMGCalcApply(target[i],integerResult*0.5,"Damage","Orangered","Apply");
+											DMGCalcApply(target[i],integerResult*0.5,"Damage","Apply");
 										}
 										else {
-											DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+											DMGCalcApply(target[i],integerResult,"Damage","Apply");
 										}
 									}
 									else {
 										if (h == 1) {
-											DMGCalcApply(target[i],integerResult*0.25,"Damage","Orangered","Apply");
+											DMGCalcApply(target[i],integerResult*0.25,"Damage","Apply");
 										}
 										else {
-											DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+											DMGCalcApply(target[i],integerResult,"Damage","Apply");
 										}
 									}
 								}
@@ -4457,11 +4189,11 @@ var createTool = function() {
 							
 						}
 						else if (movePath.value == "Spit Up") {
-							DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+							DMGCalcApply(target[i],integerResult,"Damage","Apply");
 						}
 						else {
 							for (var h = 0; h < moveCountPath.value; h++) {
-								DMGCalcApply(target[i],integerResult,"Damage","Orangered","Apply");
+								DMGCalcApply(target[i],integerResult,"Damage","Apply");
 							}
 						}
 		
@@ -4537,12 +4269,12 @@ var createTool = function() {
 													if (check) {
 														if (finaldataMoveAdditional[u]["Target"] == undefined) {
 															var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
-															DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
+															DMGCalcApply(target[i],heal,"Heal","Apply");
 														}
 														else if (finaldataMoveAdditional[u]["Target"] == "Ally") {
 															if (target[i].parentElement.getAttribute("name").includes("player")) {
 																var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
-																DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
+																DMGCalcApply(target[i],heal,"Heal","Apply");
 															}
 														}
 													}
@@ -4587,7 +4319,7 @@ var createTool = function() {
 														}
 
 														var heal = Math.ceil(val*finaldataMoveAdditional[u]["Value"]);
-														DMGCalcApply(target[i],heal,"Heal","Mediumspringgreen","Apply");
+														DMGCalcApply(target[i],heal,"Heal","Apply");
 													}
 												}
 											}
@@ -4608,7 +4340,7 @@ var createTool = function() {
 													val = parseInt(userMaxHPPath.innerText)*finaldataMoveAdditional[u]["Value"];
 												}
 				
-												DMGCalcApply(user,val,"Damage","Blue","Apply");
+												DMGCalcApply(user,val,"Damage","Apply");
 											}
 										}
 
@@ -4618,7 +4350,7 @@ var createTool = function() {
 												var val = 0;
 												var check = true;
 												if (finaldataMoveAdditional[u]["Type"] == "Move Damage") {
-													val = integerResult*finaldataMoveAdditional[u]["Value"];
+													val = integerResult*parseFloat(finaldataMoveAdditional[u]["Value"]);
 												}
 												if (userItemPath.value == "Big Root") {
 													val = val*1.3;
@@ -4629,12 +4361,20 @@ var createTool = function() {
 													}
 												}
 
+												val = Math.round(val);
+
+												if (val < 1) {
+													val = 1;
+												}
+
+				
+
 												if (check) {
 													if (tarAbilityPath.value == "Liquid Ooze") {
-														DMGCalcApply(user,val,"Damage","Blue","Apply");
+														DMGCalcApply(user,val,"Damage","Apply");
 													}
 													else {
-														DMGCalcApply(user,val,"Healing","Blue","Apply");
+														DMGCalcApply(user,val,"Heal","Apply");
 													}
 												}
 											}
@@ -4653,7 +4393,7 @@ var createTool = function() {
 								val = 1;
 							}
 						
-							DMGCalcApply(target[i],val,"Damage","Purple","Apply");
+							DMGCalcApply(target[i],val,"Damage","Apply");
 						}
 						if (tarStatusBurnPath.checked) {
 							var val = Math.floor(maxHP/16);
@@ -4661,7 +4401,7 @@ var createTool = function() {
 								val = 1;
 							}
 
-							DMGCalcApply(target[i],val,"Damage","Orange","Apply");
+							DMGCalcApply(target[i],val,"Damage","Apply");
 						}
 
 						if (tarStatusBadPoisonPath.value != "" && tarStatusBadPoisonPath.value != undefined) {
@@ -4671,7 +4411,7 @@ var createTool = function() {
 							}
 							val = tarStatusBadPoisonPath.value*val
 
-							DMGCalcApply(target[i],val,"Damage","Rebeccapurple","Apply");
+							DMGCalcApply(target[i],val,"Damage","Apply");
 						}
 
 
@@ -4953,6 +4693,7 @@ var createTool = function() {
 						}
 						accRes.push(Math.round(accCalc)+"%")
 			
+					
 					}
 				}
 
@@ -5120,12 +4861,11 @@ var createTool = function() {
 
 		}
 
-		function DMGCalcApply(base,val,type,color,condition) {
+		function DMGCalcApply(base,val,type,condition) {
 
 			var base;
 			var val;
 			var type;
-			var color;
 			var condition;
 
 			if (base != undefined) {
@@ -5522,7 +5262,7 @@ var createTool = function() {
 			for (var a = 0; a < finaldataMoveAdditional.length; a++) {
 				if (finaldataMoveAdditional[a]["Move"] == sel.value) {
 					if (getApplicable(finaldataMoveAdditional[a]["Game"])) {
-						if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike" || finaldataMoveAdditional[a]["Additional"] == "Consecutive" || finaldataMoveAdditional[a]["Additional"] == "Variable") {
+						if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike" || finaldataMoveAdditional[a]["Additional"] == "Ramping" || finaldataMoveAdditional[a]["Additional"] == "Variable") {
 							if (finaldataMoveAdditional[a]["Value"] != undefined) {
 								if (finaldataMoveAdditional[a]["Value"].includes("-")) {
 									var val1 = finaldataMoveAdditional[a]["Value"].split("-")[0];
@@ -5538,7 +5278,7 @@ var createTool = function() {
 						if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike") {
 							inp.title = "Amount of Hits";
 						}
-						else if (finaldataMoveAdditional[a]["Additional"] == "Consecutive") {
+						else if (finaldataMoveAdditional[a]["Additional"] == "Ramping") {
 							inp.title = "Consecutive Turns of Hits";
 						}
 					}
