@@ -2100,6 +2100,35 @@ function getItemData(item,type) {
 	return result;
 }
 
+function uniqueValueSelect(selects) {
+	var selects;
+
+	var vals = [];
+
+	for (var i = 0; i < selects.length; i++) {
+		vals.push(selects[i].value);
+	}
+
+	for (var i = 0; i < selects.length; i++) {
+		var opt = selects[i].querySelectorAll(":scope option")
+		for (var u = 0; u < opt.length; u++) {
+			opt[u].style.removeProperty("display");
+		}
+	}
+
+	for (var i = 0; i < selects.length; i++) {
+		for (var u = 0; u < vals.length; u++) {
+			if (vals[u] != "") {
+				if (i != u) {
+					var opt = selects[i].querySelector(":scope option[value='"+vals[u]+"']")
+					if (opt != undefined) {
+						opt.style.display = "none";
+					}
+				}
+			}
+		}
+	}
+}
 
 
 function returnMoveLearnset(move,conditions) {
