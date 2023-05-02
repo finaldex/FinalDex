@@ -2820,7 +2820,7 @@ function updateTrainer(trainers,condition) {
 
 		var exportButton = document.createElement("figure");
 		var exportButtonText = document.createElement("p");
-		exportButtonText.innerText = "➢";
+		exportButtonText.innerText = "⮟";
 
 	
 		exportButton.value = tempStr;
