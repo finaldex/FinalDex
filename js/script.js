@@ -1870,7 +1870,7 @@ function selectModify(e) {
     }
 
 
-    if (this.firstElementChild.value == "➢") {
+    if (this.firstElementChild.value == "⮟") {
         var tar = this.parentElement.parentElement.parentElement;
         var base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
    
@@ -1900,7 +1900,7 @@ function selectModify(e) {
         else if (this.value == "Change Form") {
             changePartyForm(tar,tar.querySelector(":scope img[value]").getAttribute("value"));
         }
-        this.value = "➢";
+        this.value = "⮟";
     }
     if (this.firstElementChild.value == "❌") {
         var tar = this.parentElement.parentElement.parentElement;
@@ -2759,9 +2759,6 @@ function changePartyEvolution(base,i) {
         }
 
         var result = evos[parseInt(reply)-1]
-
-
-
 
         if (data.includes("|")) {
             if (data.includes("pok")) {
@@ -4110,17 +4107,30 @@ function searchFilter(bar,base,condition) {
 }
 
 
-function consoleText(text,time) {
-    var text;
-    var base = document.querySelector("#console")
+function consoleText(txt,time) {
+    var txt;
+    var base = document.querySelector("#console");
     var time;
 
     if (time == "" || time == undefined) {
         time = 2000;
     }
 
+    var pdiv = document.querySelector("#contain > div#pokémon");
+    var con = document.querySelector("#console");
+    if (pdiv != undefined) {
+        if (pdiv.style.getPropertyValue("display") != "none") {
+            con.classList.remove("top");
+            con.classList.add("bottom");
+        }
+        else {
+            con.classList.add("top");
+            con.classList.remove("bottom");
+        }
+    }
+
     var p = document.createElement("p");
-    p.innerText = text;
+    p.innerText = txt;
     base.appendChild(p);
 
     p.style.opacity = "1";
@@ -4132,7 +4142,7 @@ function consoleText(text,time) {
             }, 1000);
     }, time);
 
-    console.log(text)
+    console.log(txt);
 }
 
 
