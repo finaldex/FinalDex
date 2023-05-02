@@ -887,7 +887,7 @@ var createTool = function() {
 		var toolSectionContentDMGContent = document.createElement("div");
 		var toolSectionContentDMGResult = document.createElement("div");
 		var toolSectionContentDMGMenu = document.createElement("div");
-		
+
 		var toolSectionContentDMGMenuRoll = document.createElement("div");
 		var toolSectionContentDMGMenuMove = document.createElement("div");
 		var toolSectionContentDMGMenuSpecific = document.createElement("div");
@@ -978,7 +978,6 @@ var createTool = function() {
 		toolSectionContentDMGResult.classList.add("scroll");
 		toolSectionContentDMGOptions.setAttribute("name","options");
 		toolSectionContentDMGMenu.setAttribute("name","menu");
-
 	
 		toolSectionContentDMGOptionsContent.classList.add("scroll");
 
@@ -992,6 +991,53 @@ var createTool = function() {
 		toolSectionContentDMGOptionsTop.appendChild(toolSectionContentDMGOptionsBattles);
 		toolSectionContentDMGOptionsBattles.appendChild(toolSectionContentDMGOptionsBattlesSelect);
 		toolSectionContentDMGOptionsTop.appendChild(toolSectionContentDMGOptionsTitle);
+
+		var toolSectionContentDMGImport = document.createElement("figure");
+		var toolSectionContentDMGImportText = document.createElement("h5");
+		toolSectionContentDMGImport.setAttribute("name","import");
+		toolSectionContentDMGImportText.innerText = "⮟";
+		toolSectionContentDMGContent.appendChild(toolSectionContentDMGImport);
+		toolSectionContentDMGImport.appendChild(toolSectionContentDMGImportText);
+		var toolSectionContentDMGImportWrapTop = document.createElement("div");
+		var toolSectionContentDMGImportWrap = document.createElement("span");
+		toolSectionContentDMGImport.appendChild(toolSectionContentDMGImportWrapTop);
+		toolSectionContentDMGImportWrapTop.appendChild(toolSectionContentDMGImportWrap);
+
+		toolSectionContentDMGImport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+
+		var impopts = ["Import Pokémon","Copy Data Strings"];
+		for (var r = 0; r < impopts.length; r++) {
+			var toolSectionContentDMGImportWrapSpan = document.createElement("span");
+			var toolSectionContentDMGImportWrapTrigger = document.createElement("b");
+			var toolSectionContentDMGImportWrapText = document.createElement("small");
+			toolSectionContentDMGImportWrapText.innerText = impopts[r];
+			toolSectionContentDMGImportWrapTrigger.setAttribute("type","invert");
+			toolSectionContentDMGImportWrapSpan.setAttribute("name",impopts[r])
+			toolSectionContentDMGImportWrap.appendChild(toolSectionContentDMGImportWrapSpan);
+			toolSectionContentDMGImportWrapSpan.appendChild(toolSectionContentDMGImportWrapTrigger);
+			toolSectionContentDMGImportWrapTrigger.appendChild(toolSectionContentDMGImportWrapText);
+			if (r == 0) {
+				toolSectionContentDMGImportWrapTrigger.addEventListener("click",function(){var z = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] div[data-string]"); DMGSetDataString(z);})
+			}
+			if (r == 1) {
+				toolSectionContentDMGImportWrapTrigger.addEventListener("click",function(){var z = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] div[data-string]"); var res = []; for(var t = 0; t < z.length; t++) {var val = z[t].getAttribute("data-string"); if (val != undefined && val != "") {res.push(val)}} var resStr = res.join("\n"); if (res.length > 0 && resStr.includes("pok:") && !resStr.includes("pok:|") && !resStr.includes("pok:\n")) {navigator.clipboard.writeText(resStr);consoleText("Copied!");}})
+			}
+		}
+
+
+
+
+
+
+		var toolSectionContentDMGReset = document.createElement("figure");
+		var toolSectionContentDMGResetText = document.createElement("h5");
+		toolSectionContentDMGReset.setAttribute("type","scale");
+		toolSectionContentDMGReset.setAttribute("name","reset");
+		toolSectionContentDMGResetText.innerText = "❌";
+		toolSectionContentDMGContent.appendChild(toolSectionContentDMGReset);
+		toolSectionContentDMGReset.appendChild(toolSectionContentDMGResetText);
+		toolSectionContentDMGReset.addEventListener("click",function(){var x = findUpTag(this,"DIV"); var z = x.querySelectorAll(":scope div[data-string]"); var lock = confirm("The Pokémon's data will not be saved.\nDo you want to continue?"); if (lock) {for(var p = 0; p < z.length; p++) {z[p].setAttribute("data-string","");var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z[p].parentElement.getAttribute("name")+"'] ul[name='"+z[p].getAttribute("name")+"']");DMGClearData(tar);DMGSaveData(tar);DMGSetChange(tar);}}})
+
 
 
 
@@ -1038,7 +1084,6 @@ var createTool = function() {
 
 		toolSectionContentDMGMenuMoveBottomCriticalInput.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuRollRange.addEventListener("input",DMGCalcStart);
-		toolSectionContentDMGMenuRollRangeTextTopCenterDisable.addEventListener("change",function(){var x = this.parentElement.parentElement.querySelector(":scope input[type='range']");x.removeAttribute("disabled");if (this.checked == false) {x.setAttribute("disabled","")}});
 		toolSectionContentDMGMenuRollRangeTextTopCenterDisable.addEventListener("change",DMGCalcStart)
 		toolSectionContentDMGMenuRollRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`;this.title = this.value-this.min;})
 
@@ -1046,7 +1091,9 @@ var createTool = function() {
 
 		for(var m = 0; m < finaldataMove.length; m++) {
 			if(finaldataMove[m][JSONPath_MoveReference] == "true") {
-				tempMoves.push(finaldataMove[m]["Name_"+JSONPath_MoveName])
+				if (finaldataMoveGroup[m]["Group"] != "Z-Move" && finaldataMoveGroup[m]["Group"] != "Max Move") {
+					tempMoves.push(finaldataMove[m]["Name_"+JSONPath_MoveName])
+				}
 			}
 		}
 
@@ -1061,13 +1108,12 @@ var createTool = function() {
 			toolSectionContentDMGMenuMoveTopOption.style.background = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempMoves[m])+")";
 		}
 	
-
 		toolSectionContentDMGMenuSpecificTopInput.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",DMGSetInfo);
 		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",DMGCalcStart);
 
 
-		var conditions = [{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Title:"Turns of Bad Poison",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Leech Seed",Affect:"Pokémon",Group:"Seed",Affected:"Leech Seed",Type:"Move",Game:"All"},{Name:"Sappy Seed",Affect:"Pokémon",Group:"Seed",Affected:"Sappy Seed",Type:"Move",Game:"All"},{Name:"Forest's Curse",Affect:"Pokémon",Group:"Type Change",Affected:"Forest's Curse",Type:"Move",Game:"All"},{Name:"Trick-or-Treat",Affect:"Pokémon",Group:"Type Change",Affected:"Trick-or-Treat",Type:"Move",Game:"All"},{Name:"Magnet Rise",Affect:"Pokémon",Group:"Ungrounded",Affected:"Magnet Rise",Type:"Move",Game:"All"},{Name:"Telekinesis",Affect:"Pokémon",Group:"Ungrounded",Affected:"Telekinesis",Type:"Move",Game:"All"},{Name:"Thousand Arrows",Affect:"Pokémon",Group:"Grounded",Affected:"Thousand Arrows",Type:"Move",Game:"All"},{Name:"Smack Down",Affect:"Pokémon",Group:"Grounded",Affected:"Smack Down",Type:"Move",Game:"All"},{Name:"Ingrain",Affect:"Pokémon",Group:"Grounded",Affected:"Ingrain",Type:"Move",Game:"Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Glaive Rush",Affect:"Pokémon",Affected:"Glaive Rush",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Pokémon",Affected:"Helping Hand",Type:"Move",Game:"All"},{Name:"Laser Focus",Affect:"Pokémon",Affected:"Laser Focus",Type:"Move",Game:"All"},{Name:"Odor Sleuth",Affect:"Pokémon",Affected:"Odor Sleuth",Type:"Move",Game:"All"},{Name:"Foresight",Affect:"Pokémon",Affected:"Foresight",Type:"Move",Game:"All"},{Name:"Miracle Eye",Affect:"Pokémon",Affected:"Miracle Eye",Type:"Move",Game:"All"},{Name:"Shadow",Affect:"Pokémon",Title:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Dynamax",Affect:"Pokémon",Title:"Is the Pokémon Dynamaxed?",Type:"Form",Game:"Sword,Shield"},{Name:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Affected:"Stealth Rock",Type:"Move",Game:"All"},{Name:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Affected:"G-Max Stonesurge",Type:"Move",Game:"Sword,Shield"},{Name:"Spikes",Affect:"Team",Group:"Spikes",Affected:"Spikes",Title:"Layers of Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Affected:"G-Max Steelsurge",Type:"Move",Game:"Sword,Shield"},{Name:"Light Screen",Affect:"Team",Group:"Screen",Affected:"Light Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Group:"Screen",Affected:"Reflect",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Group:"Screen",Affected:"Aurora Veil",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Lucky Chant",Affect:"Team",Affected:"Lucky Chant",Type:"Move",Game:"All"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Trick Room",Affect:"All",Affected:"Trick Room",Type:"Move",Game:"All"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"Protection",Affect:"Specific",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Title:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Specific",Affected:"Fly,Bounce",Title:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Specific",Affected:"Dig",Title:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Specific",Affected:"Dive,Surf,Whirlpool",Title:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Specific",Affected:"Pursuit",Title:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Confusion",Affect:"Specific",Affected:"Tangled Feet",Title:"Is the target confused?",Type:"Ability",Game:"All"},{Name:"Minimize",Affect:"Specific",Title:"Did the target previously use Minimize?",Type:"Move",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Charge",Affect:"Specific",Affected:"Charge",Title:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Specific",Affected:"Me First",Title:"Is the move called by Me First?",Type:"Move",Game:"All"},{Name:"Flash Fire",Affect:"Specific",Affected:"Flash Fire",Title:"Is Flash Fire active on the user?",Type:"Ability",Game:"All"},{Name:"Tar Shot",Affect:"Specific",Affected:"Tar Shot",Title:"Is Tar Shot active on the target?",Type:"Move",Game:"All"},{Name:"Damaged",Affect:"Specific",Affected:"Revenge",Title:"Did the user take damage this turn?",Type:"Move",Game:"All"},{Name:"Defense Curl",Affect:"Specific",Affected:"Defense Curl",Title:"Did the user previously use Defense Curl?",Type:"Move",Game:"All"}]
+		var conditions = [{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Pokémon",Group:"Badge",Title:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Title:"Turns of Bad Poison",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Leech Seed",Affect:"Pokémon",Group:"Seed",Affected:"Leech Seed",Type:"Move",Game:"All"},{Name:"Sappy Seed",Affect:"Pokémon",Group:"Seed",Affected:"Sappy Seed",Type:"Move",Game:"All"},{Name:"Forest's Curse",Affect:"Pokémon",Group:"Type Change",Affected:"Forest's Curse",Type:"Move",Game:"All"},{Name:"Trick-or-Treat",Affect:"Pokémon",Group:"Type Change",Affected:"Trick-or-Treat",Type:"Move",Game:"All"},{Name:"Magnet Rise",Affect:"Pokémon",Group:"Ungrounded",Affected:"Magnet Rise",Type:"Move",Game:"All"},{Name:"Telekinesis",Affect:"Pokémon",Group:"Ungrounded",Affected:"Telekinesis",Type:"Move",Game:"All"},{Name:"Thousand Arrows",Affect:"Pokémon",Group:"Grounded",Affected:"Thousand Arrows",Type:"Move",Game:"All"},{Name:"Smack Down",Affect:"Pokémon",Group:"Grounded",Affected:"Smack Down",Type:"Move",Game:"All"},{Name:"Ingrain",Affect:"Pokémon",Group:"Grounded",Affected:"Ingrain",Type:"Move",Game:"Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Glaive Rush",Affect:"Pokémon",Affected:"Glaive Rush",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Pokémon",Affected:"Helping Hand",Type:"Move",Game:"All"},{Name:"Laser Focus",Affect:"Pokémon",Affected:"Laser Focus",Type:"Move",Game:"All"},{Name:"Odor Sleuth",Affect:"Pokémon",Affected:"Odor Sleuth",Type:"Move",Game:"All"},{Name:"Foresight",Affect:"Pokémon",Affected:"Foresight",Type:"Move",Game:"All"},{Name:"Miracle Eye",Affect:"Pokémon",Affected:"Miracle Eye",Type:"Move",Game:"All"},{Name:"Shadow",Affect:"Pokémon",Title:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Dynamax",Affect:"Pokémon",Title:"Is the Pokémon Dynamaxed?",Type:"Form",Game:"Sword,Shield"},{Name:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Affected:"Stealth Rock",Type:"Move",Game:"All"},{Name:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Affected:"G-Max Stonesurge",Type:"Move",Game:"Sword,Shield"},{Name:"Spikes",Affect:"Team",Group:"Spikes",Affected:"Spikes",Title:"Layers of Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Affected:"G-Max Steelsurge",Type:"Move",Game:"Sword,Shield"},{Name:"Light Screen",Affect:"Team",Group:"Screen",Affected:"Light Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Group:"Screen",Affected:"Reflect",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Group:"Screen",Affected:"Aurora Veil",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Lucky Chant",Affect:"Team",Affected:"Lucky Chant",Type:"Move",Game:"All"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Legend Arceus,Scarlet,Violet"},{Name:"Trick Room",Affect:"All",Affected:"Trick Room",Type:"Move",Game:"All"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"Protection",Affect:"Specific",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Title:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Specific",Affected:"Fly,Bounce",Title:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Specific",Affected:"Dig",Title:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Specific",Affected:"Dive,Surf,Whirlpool",Title:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Specific",Affected:"Pursuit",Title:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Confusion",Affect:"Specific",Affected:"Tangled Feet",Title:"Is the target confused?",Type:"Ability",Game:"All"},{Name:"Minimize",Affect:"Specific",Title:"Did the target previously use Minimize?",Type:"Move",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Charge",Affect:"Specific",Affected:"Charge",Title:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Specific",Affected:"Me First",Title:"Is the move called by Me First?",Type:"Move",Game:"All"},{Name:"Flash Fire",Affect:"Specific",Affected:"Flash Fire",Title:"Is Flash Fire active on the user?",Type:"Ability",Game:"All"},{Name:"Tar Shot",Affect:"Specific",Affected:"Tar Shot",Title:"Is Tar Shot active on the target?",Type:"Move",Game:"All"},{Name:"Damaged",Affect:"Specific",Affected:"Revenge",Title:"Did the user take damage this turn?",Type:"Move",Game:"All"},{Name:"Defense Curl",Affect:"Specific",Affected:"Defense Curl",Title:"Did the user previously use Defense Curl?",Type:"Move",Game:"All"},{Name:"Z-Move",Affect:"Specific",Title:"Transform move to Z-Move?",Type:"Move",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee"},{Name:"Max Move",Affect:"Specific",Title:"Transform move to Max Move?",Type:"Move",Game:"Sword,Shield"}]
 		var battleVariation = [{Name:"Single Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"All"},{Name:"Double Battle",TeamMin:"2",TeamMax:"2",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Triple Battle",TeamMin:"3",TeamMax:"3",OpponentMin:"3",OpponentMax:"3",Teams:"2",Game:"Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Battle Royal",TeamMin:"1",TeamMax:"1",OpponentMin:"1",OpponentMax:"1",Teams:"4",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"SOS Battle",TeamMin:"1",TeamMax:"1",OpponentMin:"2",OpponentMax:"2",Teams:"2",Game:"Sun,Moon,Ultra Sun,Ultra Moon"},{Name:"Horde Encounter",TeamMin:"1",TeamMax:"1",OpponentMin:"5",OpponentMax:"5",Teams:"2",Game:"X,Y,Omega Ruby,Alpha Sapphire"},{Name:"Max Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Sword,Shield"},{Name:"Tera Raid Battle",TeamMin:"4",TeamMax:"4",OpponentMin:"1",OpponentMax:"1",Teams:"2",Game:"Scarlet,Violet"}]
 
 
@@ -1095,13 +1141,42 @@ var createTool = function() {
 
 
 		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function() {let x = this.value; let tar = this.querySelector(":scope > *[value='"+x+"']"); this.setAttribute("opponentmax",tar.getAttribute("opponentmax"));this.setAttribute("teammax",tar.getAttribute("teammax")); this.setAttribute("opponentmin",tar.getAttribute("opponentmin"));this.setAttribute("teammin",tar.getAttribute("teammin"));this.setAttribute("name",tar.getAttribute("name"));})
-		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",buildDMG)
+		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function(){buildDMG()})
 		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function() {document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div").setAttribute("name",this.value)})
 		buildDMG();
 		DMGSetInfo();
 
 
 		function buildDMG() {
+
+
+			var ds1 = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name]")
+			
+
+			var dsArr1 = [];
+			var dsArr2 = [];
+			for (var d = 0; d < ds1.length; d++) {
+				var ds2 = ds1[d].querySelectorAll(":scope > *[data-string]");
+
+				for (var r = 0; r < ds2.length; r++) {
+					var val = ds2[r].getAttribute("data-string");
+					if (val != undefined && val != "") {
+						if (val.includes("pok:") && !val.includes("pok:|") && !val.includes("pok:\n")) {
+							dsArr1.push(val);
+						}
+						else {
+							dsArr1.push("");
+						}
+					}
+					else {
+						dsArr1.push("");
+					}
+
+					dsArr2.push(ds2[r].parentElement.getAttribute("name")+"-"+r);
+				}
+			}
+
+
 			var battleVar = battleVariation[toolSectionContentDMGOptionsBattlesSelect.getAttribute("name")];
 			
 			toolSectionContentDMGOptionsContentTop.innerHTML = "";
@@ -1110,6 +1185,9 @@ var createTool = function() {
 			toolSectionContentDMGOptionsBottom.innerHTML = "";
 			toolSectionContentDMGResult.innerHTML = "";
 			toolSectionContentDMGMenuSpecificBottom.innerHTML = "";
+
+
+
 
 			for(var q = 0; q < battleVar["Teams"]; q++) {
 				var teamName;
@@ -1127,7 +1205,7 @@ var createTool = function() {
 				var toolSectionContentDMGOptionsTitleTeam = document.createElement("select");
 				toolSectionContentDMGOptionsTitleTeam.setAttribute("name",teamName.toLowerCase());
 				toolSectionContentDMGOptionsTitle.appendChild(toolSectionContentDMGOptionsTitleTeam);
-				toolSectionContentDMGOptionsTitleTeam.addEventListener("change",function(){var x = this.value; var z = this.getAttribute("name");var dvs = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z.toLowerCase()+"'] ul"); var dv = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z.toLowerCase()+"'] ul[name='"+x+"']");for (var i = 0; i < dvs.length; i++) {dvs[i].style.display = "none";} dv.style.display="flex";})
+				toolSectionContentDMGOptionsTitleTeam.addEventListener("change",function(){var x = this.value; var z = this.getAttribute("name");var dvs = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z.toLowerCase()+"'] ul"); var dv = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z.toLowerCase()+"'] ul:nth-child("+(parseInt(x)+1)+")");for (var i = 0; i < dvs.length; i++) {dvs[i].style.display = "none";} dv.style.display="flex";})
 			
 
 				var resultTeams = document.createElement("span");
@@ -1142,6 +1220,7 @@ var createTool = function() {
 				$(toolSectionContentDMGResult).sortable({
 					stop: function(e,ui) {
 						DMGMatchPosition();
+						DMGCalcStart();
 					},
 					axis: "x",
 					scroll: false,
@@ -1150,6 +1229,7 @@ var createTool = function() {
 				$(resultTeams).sortable({
 					stop: function(e,ui) {
 						DMGMatchPosition();
+						DMGCalcStart();
 					},
 					axis: "y",
 					scroll: false,
@@ -1260,8 +1340,8 @@ var createTool = function() {
 					resultTeamActivePokItem.setAttribute("onerror","this.style.display = 'none';");
 					resultTeamActivePokItem.setAttribute("onload","this.style.removeProperty('display');");
 					resultTeamActiveCloseText.innerText = "❌";
-					resultTeamActiveExportText.innerText = "➢";
-					resultTeamActiveUserSelectText.innerText = "⨀";
+					resultTeamActiveExportText.innerText = "⮟";
+					resultTeamActiveUserSelectText.innerText = "⍟";
 					resultTeamActiveTargetSelectText.innerText = "⨀";
 					resultTeamActiveGrabText.innerText = "⋮⋮⋮";
 					resultTeamActiveBottom.setAttribute("name","moves");
@@ -1322,14 +1402,6 @@ var createTool = function() {
 			for(var d = 0; d < divsTop.length; d++) {
 				var base = divsTop[d];
 
-				var reset = document.createElement("figure");
-				var resetText = document.createElement("h6");
-				resetText.innerText = "❌";
-				reset.setAttribute("type","scale");
-				base.appendChild(reset)
-				reset.appendChild(resetText)
-				reset.addEventListener("click",function(){var base = findUpTag(this,"UL");DMGRemoveDataString(document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+base.parentElement.getAttribute("name")+"'] > div[name='"+base.getAttribute("name")+"']"))})
-
 				var pok = document.createElement("li");
 				var pokTitle = document.createElement("h6");
 				var pokSelect = document.createElement("select");
@@ -1376,8 +1448,6 @@ var createTool = function() {
 				maxHPRange.value = 1;
 				maxHPRange.setAttribute("max","1");
 				maxHPRange.setAttribute("step","1");
-				maxHPRange.setAttribute("disabled","");
-				maxHPRange.setAttribute("setDisable","");
 				maxHP.setAttribute("name","hp")
 				base.appendChild(maxHP);
 				maxHP.appendChild(maxHPRange);
@@ -1413,7 +1483,6 @@ var createTool = function() {
 				var stats = document.createElement("li");
 				var statsWrap = document.createElement("span");
 				stats.setAttribute("name","stats")
-				stats.classList.add("disabled");
 				base.appendChild(stats);
 				stats.appendChild(statsWrap);
 		
@@ -1473,7 +1542,7 @@ var createTool = function() {
 
 					var statsWrapTempInput = document.createElement("input");
 					statsWrapTempInput.setAttribute("type","number");
-					statsWrapTempInput.setAttribute("disabled","")
+					statsWrapTempInput.setAttribute("disabled","");
 					statsWrapTempInput.setAttribute("min",0);
 					statsWrapTempInput.setAttribute("max",0);
 					statsWrapTempInput.setAttribute("value",abbr);
@@ -1584,8 +1653,6 @@ var createTool = function() {
 					var typeSelect = document.createElement("select");
 					typeWrap.appendChild(typeSelect)
 					typeSelect.setAttribute("name",m)
-					typeSelect.setAttribute("disabled","");
-					typeSelect.setAttribute("setDisable","");
 					typeSelect.addEventListener("change",function(){if (this.value != "" && this.value != undefined) {this.style.background = "var(--type"+this.value+")"} else {this.style.removeProperty("background")}})
 					typeSelect.addEventListener("change",function(){uniqueValueSelect(this.parentElement.querySelectorAll(":scope select"))});
 					typeSelect.addEventListener("change",DMGCalcPokStats);
@@ -1633,8 +1700,6 @@ var createTool = function() {
 				levelInput.setAttribute("onblur","this.placeholder='1'");
 				levelInput.setAttribute("onfocus","this.placeholder=''");
 				levelInput.value = 1;
-				levelInput.setAttribute("disabled","");
-				levelInput.setAttribute("setDisable","");
 
 				level.appendChild(levelTitle)
 				level.appendChild(levelInput)
@@ -1657,8 +1722,6 @@ var createTool = function() {
 					base.appendChild(nature)
 					nature.appendChild(natureTitle);
 					nature.appendChild(natureSelect)
-					natureSelect.setAttribute("disabled","");
-					natureSelect.setAttribute("setDisable","");
 
 					natureSelect.addEventListener("change",function(){this.parentElement.parentElement.querySelector(":scope > *[name='stats'] > *:last-child > *:last-child").setAttribute("name",this.value)})
 					natureSelect.addEventListener("change",DMGCalcPokStats);
@@ -1697,9 +1760,6 @@ var createTool = function() {
 					ability.appendChild(abilityTitle);
 					ability.appendChild(abilitySelect)
 
-					abilitySelect.setAttribute("disabled","");
-					abilitySelect.setAttribute("setDisable","");
-
 					abilitySelect.addEventListener("change",DMGCalcPokStats);
 					abilitySelect.addEventListener("change",DMGSaveData);
 					abilitySelect.addEventListener("change",DMGCalcStart);
@@ -1733,10 +1793,6 @@ var createTool = function() {
 					base.appendChild(gender)
 					gender.appendChild(genderTitle);
 					gender.appendChild(genderSelect)
-
-					genderSelect.setAttribute("disabled","");
-					genderSelect.setAttribute("setDisable","");
-
 
 					genderSelect.addEventListener("change",DMGCalcPokStats);
 					genderSelect.addEventListener("change",DMGSaveData);
@@ -1772,9 +1828,6 @@ var createTool = function() {
 					friendshipInput.setAttribute("onfocus","this.placeholder=''");
 					friendshipInput.value = 0;
 
-					friendshipInput.setAttribute("disabled","");
-					friendshipInput.setAttribute("setDisable","");
-
 					friendshipInput.addEventListener("input",iMinMax);
 					friendshipInput.addEventListener("input",DMGCalcPokStats);
 					friendshipInput.addEventListener("input",DMGSaveData);
@@ -1803,9 +1856,6 @@ var createTool = function() {
 					affectionInput.setAttribute("onblur","this.placeholder='0'");
 					affectionInput.setAttribute("onfocus","this.placeholder=''");
 					affectionInput.value = 0;
-
-					affectionInput.setAttribute("disabled","");
-					affectionInput.setAttribute("setDisable","");
 
 					affectionInput.addEventListener("input",iMinMax);
 					affectionInput.addEventListener("input",DMGCalcPokStats);
@@ -1843,13 +1893,12 @@ var createTool = function() {
 					item.appendChild(itemImgWrap)
 					itemImgWrap.appendChild(itemImg)
 
-					itemSelect.setAttribute("disabled","");
-					itemSelect.setAttribute("setDisable","");
-
+					itemSelect.addEventListener("change",DMGSetInfo);
 					itemSelect.addEventListener("change",DMGCalcPokStats);
 					itemSelect.addEventListener("change",DMGSaveData);
 					itemSelect.addEventListener("change",DMGCalcStart);
 					itemSelect.addEventListener("change",DMGSetChange);
+				
 
 					var items = []
 					if (items[0] != "") {
@@ -1879,9 +1928,7 @@ var createTool = function() {
 					var moveSelect = document.createElement("select");
 					moveWrap.appendChild(moveSelect)
 					moveSelect.setAttribute("name",m)
-					moveSelect.setAttribute("disabled","");
-					moveSelect.setAttribute("setDisable","");
-					moveSelect.addEventListener("change",function(){var x = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value); if (x == undefined) {this.style.removeProperty("color")} else {this.style.color = "var(--type"+x+")"}})
+					moveSelect.addEventListener("change",function(){var x = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value); if (x == undefined) {this.style.removeProperty("color");this.style.removeProperty("background");} else {this.style.color = "var(--type"+x+")";this.style.background="dimgray";}})
 					moveSelect.addEventListener("change",DMGCalcPokStats);
 					moveSelect.addEventListener("change",DMGSaveData);
 					moveSelect.addEventListener("change",DMGCalcStart);
@@ -2055,9 +2102,6 @@ var createTool = function() {
 										conditionInput.addEventListener("change",DMGCalcStart);
 									}
 
-									if (conditions[c]["Affect"] == "Pokémon") {
-										conditionInput.setAttribute("disabled","");
-									}
 								}
 							}
 							else {
@@ -2109,14 +2153,230 @@ var createTool = function() {
 								}
 
 								
-								if (conditions[c]["Affect"] == "Pokémon") {
-									conditionInput.setAttribute("disabled","");
-								}
 
 		
 							}
 						}
 					}
+				}
+
+
+				var reset = document.createElement("figure");
+				var resetText = document.createElement("h6");
+				resetText.innerText = "❌";
+				reset.setAttribute("type","scale");
+				reset.setAttribute("name","reset");
+				base.appendChild(reset)
+				reset.appendChild(resetText)
+				reset.addEventListener("click",function(){var base = findUpTag(this,"UL");DMGRemoveDataString(document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+base.parentElement.getAttribute("name")+"'] > div[name='"+base.getAttribute("name")+"']"))})
+
+
+				var ex = document.createElement("figure");
+				ex.setAttribute("name","export");
+				base.appendChild(ex)
+
+				ex.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+
+				var exText = document.createElement("small");
+				exText.innerText = "⮟";
+				ex.appendChild(exText)
+
+				var extop = document.createElement("div");
+				ex.appendChild(extop)
+				var extopwrap = document.createElement("span");
+				extop.appendChild(extopwrap)
+
+				var exopts = ["Import Pokémon","Copy Data String","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
+
+				for(var e = 0; e < exopts.length; e++) {
+					var exwraptop = document.createElement("span");
+					var exwrap = document.createElement("b");
+					var extext = document.createElement("small");
+					exwraptop.setAttribute("name",exopts[e]);
+					exwrap.setAttribute("type","invert");
+					extext.innerText = exopts[e];
+					extopwrap.appendChild(exwraptop);
+					exwraptop.appendChild(exwrap);
+					exwrap.appendChild(extext);
+					exwrap.addEventListener("click",exChange);
+				}
+
+		
+
+				function exChange() {
+					var base = findUpTag(this,"UL");
+					var val = findUpTag(this,"SPAN").querySelector(":scope small").innerText;
+
+					var team = base.parentElement.getAttribute("name");
+					var id = base.getAttribute("name");
+
+					var divbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[data-string][name='"+id+"']")
+					var dataString = divbase.getAttribute("data-string");
+
+					var pokPath = base.querySelector(":scope li[name='pokémon'] select");
+					var int = undefined;
+					if (pokPath.value != undefined && pokPath.value != "") {
+						int = getPokémonInt(pokPath.value);
+					}
+		
+		
+					if (val == "Import Pokémon") {
+						DMGSetDataString(divbase);
+					}
+
+					if (int != undefined) {
+						var evoFamily = getEvolutionFamily(int).map(function(v) {return v["Pokémon"];});
+						var pokForm = getPokémonForm(int);
+						
+						if (val == "Copy Data String") {
+							DMGSaveData(base);
+							dataString = divbase.getAttribute("data-string");
+							navigator.clipboard.writeText(dataString);
+							console.log(dataString);
+							consoleText("Copied Data String!");
+						}
+						if (val == "Add Copy to Party") {
+							var slot = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
+							if (slot.length > 0) {
+								createParty(slot[0],dataString);
+								partyShow(slot[0]);
+								consoleText("Copy added to Party.");
+							}
+							else {
+								consoleText("Party is full!")
+							}
+						}
+						if (val == "Add Copy to Box") {
+							storeInBox(dataString);
+							consoleText("Copy added to Box.");
+						}
+						if (val == "Change Evolution") {
+							evoFamily = evoFamily.filter(function(v) {
+								return v != finaldataPokémon[int]["Pokémon"];
+							})
+							evoFamily = evoFamily.filter(function(v) {
+								return v != finaldataPokémonForm[int]["Form_"+JSONPath_Form];
+							})
+
+							for (var q = 0; q < evoFamily.length; q++) {
+								var x = q+1;
+								evoFamily[q] = x+". "+evoFamily[q];
+							}
+
+							evoFamily = evoFamily.join("\n");
+
+							var reply = prompt("Change Evolution\nEnter Number:\n"+evoFamily,"");
+							var num = [];
+
+							if (reply != null && reply != "") {
+								evoFamily = evoFamily.split("\n");
+
+								for (var q = 0; q < evoFamily.length; q++) {
+									num.push(evoFamily[q].split(". ",2)[0]);
+								}
+
+								for (var q = 0; q < evoFamily.length; q++) {
+									evoFamily[q] = evoFamily[q].split(". ",2)[1];
+								}
+
+								var result = evoFamily[parseInt(reply)-1]
+
+								if (dataString.includes("|")) {
+									if (dataString.includes("pok")) {
+										var data = dataString.split("|");
+										for (var u = 0; u < data.length; u++) {
+											if (data[u].includes("pok:")) {
+												data[u] = data[u].split(":",1)[0]+":"+result;
+												break;
+											}
+										}
+										data = data.join("|");
+									}
+								}
+								else {
+									if (dataString.includes("pok")) {
+										var data = dataString.split(":",1)[0]+":"+result;
+									}
+								}
+
+								if (num.includes(reply)) {
+									divbase.setAttribute("data-string",data);
+									DMGSetChange(base);
+									DMGPokSpecific(base);
+									DMGSetChange(base);
+									DMGCalcPokStats(base);
+									DMGCalcStart(base);
+									consoleText("Evolution updated.");
+								}
+								else {
+									consoleText("Number returned an error.")
+								}
+							}
+						}
+						if (val == "Change Form") {
+							pokForm = pokForm.filter(function(v) {
+								return v != getPokémonName(int);
+							})
+						
+							for (var q = 0; q < pokForm.length; q++) {
+								var x = q+1;
+								pokForm[q] = x+". "+pokForm[q];
+							}
+						
+							pokForm = pokForm.join("\n");
+						
+							var reply = prompt("Change Form\nEnter Number:\n"+pokForm,"");
+							var num = [];
+						
+							if (reply != null && reply != "") {
+						
+								pokForm = pokForm.split("\n");
+						
+								for (var q = 0; q < pokForm.length; q++) {
+									num.push(pokForm[q].split(". ",2)[0]);
+								}
+						
+								for (var q = 0; q < pokForm.length; q++) {
+									pokForm[q] = pokForm[q].split(". ",2)[1];
+								}
+						
+								var result = pokForm[parseInt(reply)-1]
+						
+								if (dataString.includes("|")) {
+									if (dataString.includes("pok")) {
+										var data = dataString.split("|");
+										for (var u = 0; u < data.length; u++) {
+											if (data[u].includes("pok:")) {
+												data[u] = data[u].split(":",1)[0]+":"+result;
+												break;
+											}
+										}
+										data = data.join("|");
+									}
+								}
+								else {
+									if (data.includes("pok")) {
+										var data = dataString.split(":",1)[0]+":"+result;
+									}
+								}
+						
+								if (num.includes(reply)) {
+									divbase.setAttribute("data-string",data);
+									DMGSetChange(base);
+									DMGPokSpecific(base);
+									DMGSetChange(base);
+									DMGCalcPokStats(base);
+									DMGCalcStart(base);
+									consoleText("Form updated.");
+								}
+								else {
+									consoleText("Number returned an error.")
+								}
+								
+							}
+						}
+					}
+
 				}
 			}
 
@@ -2316,6 +2576,7 @@ var createTool = function() {
 				}
 			}
 			
+			
 
 			if (toolSectionContentDMGOptionsBottom.firstChild != undefined) {
 				toolSectionContentDMGOptionsBottom.style.padding = "5px 0";
@@ -2345,6 +2606,22 @@ var createTool = function() {
 			DMGSetPossible();
 			DMGSetInfo();
 			DMGCalcStart();
+
+
+			if (dsArr1.length > 0) {
+				if (dsArr1.join("") != "") {
+					for(var r = 0; r < dsArr2.length; r++) {
+						if (dsArr1[r] != "") {
+							var val1 = dsArr2[r].split("-")[0];
+							var val2 = dsArr2[r].split("-")[1];
+							var dbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+val1+"'] > div[data-string][name='"+val2+"']")
+							if (dbase != undefined) {
+								DMGSetDataString(dbase,dsArr1[r]);
+							}
+						}
+					}
+				}
+			}
 			
 		}
 
@@ -2364,7 +2641,7 @@ var createTool = function() {
 			var alldivbase = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div[name]");
 
 			// User
-			var user = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='player'] > div.user");
+			var user = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div.user");
 			var userid = user.getAttribute("name");
 			var userbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='player'] ul[name='"+userid+"']");
 
@@ -2414,6 +2691,14 @@ var createTool = function() {
 			for (var t = 0; t < userTypesPath.length; t++) {
 				userTypes.push(userTypesPath[t].value);
 			}
+
+			
+			// HP
+			var userMaxHP = parseInt(userMaxHPPath.innerText);
+			var userCurrHP = parseInt(userCurrentHPPath.innerText);
+			userMaxHP = undwsnanDel(userMaxHP,0);
+			userCurrHP = undwsnanDel(userCurrHP,0);
+
 			
 
 			// Allies
@@ -2572,9 +2857,13 @@ var createTool = function() {
 			// Move
 			var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span select");
 			var moveCountPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] input[type='number']");
+			var moveSelectPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:first-child > input[type='number']");
 			var criticalPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='critical'] input[type='checkbox']")
 			var randomPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div > span > input[type='range']");
 
+	
+			var ZMovePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Z-Move'] input[type='checkbox']");
+			var MaxMovePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Max Move'] input[type='checkbox']");
 			var MeFirstPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Me First'] input[type='checkbox']");
 			var ChargePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Charge'] input[type='checkbox']");
 			var ProtectionPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li[name='Protection'] input[type='checkbox']");
@@ -2593,6 +2882,7 @@ var createTool = function() {
 			var moveCategory = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,movePath.value);
 			var moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movePath.value);
 			var movePriority = returnArrValue(finaldataMovePriority,"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,movePath.value);
+			var moveGroup = returnArrValue(finaldataMoveGroup,"Name_"+JSONPath_MoveName,"Group",movePath.value);
 
 			movePower = undwsDel(movePower,0);
 			moveAccuracy = undwsDel(moveAccuracy,0);
@@ -2600,10 +2890,93 @@ var createTool = function() {
 			moveType = undwsDel(moveType,"");
 			movePriority = undwsDel(movePriority,0);
 
+			if (ZMovePath.checked) {
+				if (movePower >= 0 && movePower <= 55) {
+					movePower = 100;
+				}
+				else if (movePower >= 60 && movePower <= 65) {
+					movePower = 120;
+				}
+				else if (movePower >= 70 && movePower <= 75) {
+					movePower = 140;
+				}
+				else if (movePower >= 80 && movePower <= 85) {
+					movePower = 100;
+				}
+				else if (movePower >= 90 && movePower <= 95) {
+					movePower = 100;
+				}
+				else if (movePower == 100) {
+					movePower = 100;
+				}
+				else if (movePower == 110) {
+					movePower = 100;
+				}
+				else if (movePower >= 120 && movePower <= 125) {
+					movePower = 100;
+				}
+				else if (movePower == 130) {
+					movePower = 100;
+				}
+				else if (movePower >= 140) {
+					movePower = 200;
+				}
+
+				if (movePath.value == "Mega Drain") {
+					movePower = 120;
+				}
+				else if (movePath.value == "Weather Ball") {
+					movePower = 160;
+				}
+				else if (movePath.value == "Hex") {
+					movePower = 160;
+				}
+				else if (movePath.value == "Gear Grind") {
+					movePower = 180;
+				}
+				else if (movePath.value == "V-create") {
+					movePower = 220;
+				}
+				else if (movePath.value == "Flying Press") {
+					movePower = 170;
+				}
+				else if (movePath.value == "Core Enforcer") {
+					movePower = 140;
+				}
+				else {
+					for (var u = 0; u < finaldataMoveAdditional.length; u++) {
+						if (finaldataMoveAdditional[u]["Additional"] == "One-hit Knockout") {
+							if (finaldataMoveAdditional[u]["Move"] == movePath.value) {
+								if (getApplicable(finaldataMoveAdditional[u]["Game"])) {
+									movePower = 180;
+									break;
+								}
+							}
+								
+						}
+					}
+				}
+				
+				
+				for (var u = 0; u < finaldataMoveType.length; u++) {
+					if (finaldataMoveType[u]["Name_"+JSONPath_MoveName].includes("(")) {
+						if (returnArrValue(finaldataMoveGroup,"Name_"+JSONPath_MoveName,"Group",finaldataMoveType[u]["Name_"+JSONPath_MoveName]) == "Z-Move") {
+							if (finaldataMoveType[u]["Type_"+JSONPath_MoveType] == moveType) {
+								if (finaldataMoveType[u]["Name_"+JSONPath_MoveName].includes(moveCategory)) {
+									consoleText(movePath.value+" ("+finaldataMoveType[u]["Name_"+JSONPath_MoveName].replaceAll(" ("+moveCategory+")","")+")");
+									break;
+								}
+							}
+						}
+					}
+				}
+			
+				
+			}
+
 			var moveDamageTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='damage'] > *:last-child");
 			var moveAccuracyTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='accuracy'] > *:last-child");
 			var moveCriticalTextPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] *[name='critical'] > *:last-child");
-
 
 			if (user == undefined || target == undefined) {
 				check = false;
@@ -2652,6 +3025,8 @@ var createTool = function() {
 						var baseLevelPath = base.querySelector(":scope *[name='level'] input");
 						var baseModPath = base.querySelectorAll(":scope *[name='stats'] > span > span[name='Mod'] input:not(:first-child)");
 						var baseStatsPath = base.querySelectorAll(":scope *[name='stats'] > span > span:last-child input:not(:first-child)");
+						var baseSpeedStatPath = base.querySelector(":scope *[name='stats'] > span > span:last-child input[name='Speed']");
+						var baseFriendshipPath = base.querySelector(":scope *[name='friendship'] input");
 						var baseItemPath = base.querySelector(":scope *[name='item'] select");
 						var baseAbilityPath = base.querySelector(":scope *[name='ability'] select");
 						var baseStatusPoisonPath = base.querySelector(":scope *[name='Poisoned'] input");
@@ -2702,6 +3077,13 @@ var createTool = function() {
 						for (var t = 0; t < baseTypesPath.length; t++) {
 							baseTypes.push(baseTypesPath[t].value);
 						}
+
+
+						// HP
+						var baseMaxHP = parseInt(baseHPMaxPath.innerText);
+						var baseCurrHP = parseInt(baseHPCurrentPath.innerText);
+						baseMaxHP = undwsnanDel(baseMaxHP,0);
+						baseCurrHP = undwsnanDel(baseCurrHP,0);
 
 						// Allies
 						var AllyMoldBreaker = false;
@@ -2894,6 +3276,129 @@ var createTool = function() {
 							var Screen = 1;
 							var Berry = 1;
 							var ZMove = 1;
+
+							// Variable Power Moves
+							if (movePath.value == "Return") {
+								var val = baseFriendshipPath.value;
+								val = undwsnanDel(val,0);
+								movePower = val/2.5;
+							}
+							if (movePath.value == "Frustration") {
+								var val = baseFriendshipPath.value;
+								val = undwsnanDel(val,0);
+								movePower = (255-val)/2.5;
+							}
+							if (movePath.value == "Dragon Energy") {
+								movePower = Math.floor((150*userCurrHP)/userMaxHP);
+							}
+							if (movePath.value == "Crush Grip") {
+								if (Generation == 4) {
+									movePower = 1+120*(baseCurrHP/baseMaxHP);
+									if (movePower < 1) {
+										movePower = 1;
+									}
+									if (movePower > 121) {
+										movePower = 121;
+									}
+								}
+								else if (Generation >= 5) {
+									movePower = 120*(baseCurrHP/baseMaxHP);
+									if (movePower < 1) {
+										movePower = 1;
+									}
+									if (movePower > 120) {
+										movePower = 120;
+									}
+								}
+							}
+							if (movePath.value == "Electro Ball") {
+								var val1 = userSpeedStatPath.value;
+								val1 = undwsnanDel(val1,0);
+								var val2 = baseSpeedStatPath.value;
+								val2 = undwsnanDel(val2,0);
+
+								var val = val1/val2;
+
+								if (val > 1 || val2 == 0) {
+									movePower = 40;
+								}
+								else if (val >= 0.5001 && val <= 1) {
+									movePower = 60;
+								}
+								else if (val >= 0.3334 && val <= 0.5) {
+									movePower = 80;
+								}
+								else if (val >= 0.2501 && val <= 0.3333) {
+									movePower = 120;
+								}
+								else if (val >= 0.001 && val <= 0.25) {
+									movePower = 150;
+								}
+							}
+							if (movePath.value == "Eruption") {
+								movePower = Math.floor((150*userCurrHP)/userMaxHP);
+								if (movePower < 1) {
+									movePower = 1;
+								}
+							}
+							if (movePath.value == "Flail") {
+								var val = userCurrHP/userMaxHP;
+								if (Generation == 4) {
+									if (val >= 0.6719) {
+										movePower = 20;
+									}
+									else if (val >= 0.3438 && val < 0.6719) {
+										movePower = 40;
+									}
+									else if (val >= 0.2031 && val < 0.3438) {
+										movePower = 80;
+									}
+									else if (val >= 0.0938 && val < 0.2031) {
+										movePower = 100;
+									}
+									else if (val >= 0.0313 && val < 0.0938) {
+										movePower = 150;
+									}
+									else if (val < 0.0313) {
+										movePower = 200;
+									}
+								}
+								else {
+									if (val >= 0.6875) {
+										movePower = 20;
+									}
+									else if (val >= 0.3542 && val < 0.6875) {
+										movePower = 40;
+									}
+									else if (val >= 0.2083 && val < 0.3542) {
+										movePower = 80;
+									}
+									else if (val >= 0.1042 && val < 0.2083) {
+										movePower = 100;
+									}
+									else if (val >= 0.0417 && val < 0.1042) {
+										movePower = 150;
+									}
+									else if (val < 0.0417) {
+										movePower = 200;
+									}
+								}
+							}
+							if (movePath.value == "Fling") {
+								if (userItemPath != undefined) {
+									movePower = flingPowerCalc(userItemPath.value);
+									if (userItemPath.value.includes("TR")) {
+										var val = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,getMachineMove(userItemPath.value));
+										val = undwsnanDel(val,10);
+										movePower = val;
+										movePower = parseInt(movePower);
+									}
+								}
+							}
+
+			
+
+
 
 							// Factors
 							Level = parseInt(userLevelPath.value);
@@ -3135,8 +3640,6 @@ var createTool = function() {
 									}
 								}
 							}
-							
-	
 						
 
 
@@ -3386,6 +3889,9 @@ var createTool = function() {
 								}
 								if (movePath.value == "Triple Kick") {
 									TripleKick = moveCountPath.value;
+								}
+								if (movePath.value == "Flail" || movePath.value == "Reversal") {
+									random = 1;
 								}
 							}
 							else if (Generation == 3) { // DMG Generation 3
@@ -4204,15 +4710,13 @@ var createTool = function() {
 
 
 							
-							var maxHP = parseInt(baseHPMaxPath.innerText);
+		
 							var integerResult = Math.round(calculation);
 							var move = movePath.value;
-			
+							
+							integerResult = undwsnanDel(integerResult,0)
 
-					
-							if (isNaN(integerResult)) {
-								integerResult = 0;
-							}
+				
 							if (movePower == 0) {
 								integerResult = 0;
 							}
@@ -4686,14 +5190,7 @@ var createTool = function() {
 
 
 						}
-					
-
-
-
-
-
-
-
+	
 
 						// All
 						var check = true;
@@ -4720,10 +5217,10 @@ var createTool = function() {
 							if (baseStatusBurnPath.checked) {
 								var val = 0;
 								if (Generation == 1) {
-									val = Math.floor(maxHP/16);
+									val = Math.floor(baseMaxHP/16);
 								}
 								else {
-									val = Math.floor(maxHP/8);
+									val = Math.floor(baseMaxHP/8);
 								}
 		
 								if (baseAbilityPath != undefined && baseAbilityPath.value == "Heatproof") {
@@ -4760,10 +5257,10 @@ var createTool = function() {
 							if (baseStatusPoisonPath.checked) {
 								var val = 0;
 								if (Generation == 1) {
-									val = Math.floor(maxHP/16);
+									val = Math.floor(baseMaxHP/16);
 								}
 								else {
-									val = Math.floor(maxHP/8);
+									val = Math.floor(baseMaxHP/8);
 								}
 								if (val <= 0) {
 									val = 1;
@@ -4775,10 +5272,10 @@ var createTool = function() {
 							if (baseStatusBadPoisonPath.value != "" && baseStatusBadPoisonPath.value != undefined && baseStatusBadPoisonPath.value != 0) {
 								var val = 0;
 								if (Generation == 1) {
-									val = Math.floor(maxHP/16);
+									val = Math.floor(baseMaxHP/16);
 								}
 								else {
-									val = Math.floor(maxHP/8);
+									val = Math.floor(baseMaxHP/8);
 								}
 								if (val <= 0) {
 									val = 1;
@@ -4805,7 +5302,7 @@ var createTool = function() {
 							}
 		
 							if (check) {
-								var val = Math.floor(maxHP/16);
+								var val = Math.floor(baseMaxHP/16);
 			
 								DMGCalcApply(alldivbase[i],val,"Damage");
 							}
@@ -4827,7 +5324,7 @@ var createTool = function() {
 							}
 		
 							if (check) {
-								var val = Math.floor(maxHP/16);
+								var val = Math.floor(baseMaxHP/16);
 			
 								DMGCalcApply(alldivbase[i],val,"Damage");
 							}
@@ -4847,7 +5344,7 @@ var createTool = function() {
 							}
 		
 							if (baseGrounded) {
-								var val = Math.floor(maxHP/rel);
+								var val = Math.floor(baseMaxHP/rel);
 								if (val <= 0) {
 									val = 1;
 								}
@@ -4855,7 +5352,7 @@ var createTool = function() {
 								DMGCalcApply(alldivbase[i],val,"Damage");
 							}
 						}
-		
+						
 						var check = true;
 						if (baseAbilityPath != undefined && baseAbilityPath.value == "Magic Guard") {
 							check = false;
@@ -4901,7 +5398,8 @@ var createTool = function() {
 								else if (typ == 4) {
 									val = 2;
 								}
-								DMGCalcApply(alldivbase[i],Math.floor(maxHP/val),"Damage");
+								val = Math.floor(baseMaxHP/val);
+								DMGCalcApply(alldivbase[i],val,"Damage");
 							}
 						}
 
@@ -4974,12 +5472,12 @@ var createTool = function() {
 
 												if (check) {
 													if (finaldataMoveAdditional[u]["Target"] == undefined) {
-														var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+														var heal = Math.ceil(baseMaxHP*finaldataMoveAdditional[u]["Value"]);
 														DMGCalcApply(alldivbase[i],heal,"Heal");
 													}
 													else if (finaldataMoveAdditional[u]["Target"] == "Ally") {
 														if (alldivbase[i].parentElement.getAttribute("name").includes("player")) {
-															var heal = Math.ceil(maxHP*finaldataMoveAdditional[u]["Value"]);
+															var heal = Math.ceil(baseMaxHP*finaldataMoveAdditional[u]["Value"]);
 															DMGCalcApply(alldivbase[i],heal,"Heal");
 														}
 													}
@@ -4989,17 +5487,17 @@ var createTool = function() {
 												if (finaldataMoveAdditional[u]["Condition"] == "Minus One Attack") {
 													if (moveCategory == "Special") {
 														if (Generation == 1) {
-															var baseAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Special']")
-															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Special']")
+															var baseAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+divteam+"'] ul[name='"+divid+"'] li[name='stats'] > * > *:last-child > *[name='Special']")
+															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+divteam+"'] ul[name='"+divid+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Special']")
 														}
 														else {
-															var baseAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Sp. Atk']")
-															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Sp. Atk']")
+															var baseAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+divteam+"'] ul[name='"+divid+"'] li[name='stats'] > * > *:last-child > *[name='Sp. Atk']")
+															var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+divteam+"'] ul[name='"+divid+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Sp. Atk']")
 														}
 													}
 													else if (moveCategory == "Physical") {
-														var baseAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *:last-child > *[name='Attack']")
-														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Attack']")
+														var baseAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+divteam+"'] ul[name='"+divid+"'] li[name='stats'] > * > *:last-child > *[name='Attack']")
+														var modAtk = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+divteam+"'] ul[name='"+divid+"'] li[name='stats'] > * > *[name='Mod'] > *[name='Attack']")
 													}
 													var val;
 													
@@ -5102,8 +5600,6 @@ var createTool = function() {
 							}
 						}
 
-
-
 					}
 				}
 
@@ -5161,7 +5657,6 @@ var createTool = function() {
 					critResult = critRes.join(" / ");
 				}
 
-
 				if (accRes.length == 0) {
 					accResult = "0%";
 				}
@@ -5186,18 +5681,17 @@ var createTool = function() {
 
 		}
 
-		function DMGCalcApply(base,val,type,condition) {
+		function DMGCalcApply(base,val,type) {
 
 			var base;
 			var val;
 			var type;
-			var condition;
 
 			if (base != undefined) {
 	
 				var team = base.parentElement.getAttribute("name");
-				var pok = base.getAttribute("name");
-				var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"']");
+				var id = base.getAttribute("name");
+				var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+id+"']");
 
 				var HPMaxPath = base.querySelector(":scope *[name='hp'] *[name='max']");
 				var HPCurrentPath = base.querySelector(":scope *[name='hp'] *[name='current']");
@@ -5259,7 +5753,7 @@ var createTool = function() {
 
 
 			var team = base.parentElement.getAttribute("name");
-			var pok = base.getAttribute("name");
+			var id = base.getAttribute("name");
 
 	
 			var pokémon = base.querySelector(":scope *[name='pokémon'] select");
@@ -5336,7 +5830,7 @@ var createTool = function() {
 						res[i].value = val;
 
 						if (stat == "HP") {
-							var hpPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"'] *[name='hp']")
+							var hpPath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+id+"'] *[name='hp']")
 							var hpCurrent =  hpPath.querySelector(":scope *[name='current']");
 							var hpMax =  hpPath.querySelector(":scope *[name='max']");
 							var val = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
@@ -5630,11 +6124,13 @@ var createTool = function() {
 		function DMGSetInfo() {
 			var sel = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span select");
 			var inp = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:first-child input");
-
+	
 			var user = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div[data-string].user");
 			var userid = user.getAttribute("name");
 			var userbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='player'] ul[name='"+userid+"']");
 			var userAbilityPath = userbase.querySelector(":scope *[name='ability'] select");
+			var userPokPath = userbase.querySelector(":scope *[name='pokémon'] select");
+			var userItemPath = userbase.querySelector(":scope *[name='item'] select");
 
 			var movePower = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,sel.value);
 			var moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,sel.value);
@@ -5680,12 +6176,7 @@ var createTool = function() {
 			var lis = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:last-child > li");
 			for (var l = 0; l < lis.length; l++) {
 				if (parseInt(movePower) > 0) {
-					if (lis[l].getAttribute("name") == "Protection") {
-						if (moveGroup == "Z-Move" || moveGroup == "G-Max Move" || moveGroup == "Max Move") {
-							lis[l].style.removeProperty("display");
-						}
-					}
-					else if (lis[l].getAttribute("name") == "Semi-Invulnerable Flight") {
+					if (lis[l].getAttribute("name") == "Semi-Invulnerable Flight") {
 						if (sel.value == "Twister" || sel.value == "Gust") {
 							lis[l].style.removeProperty("display");
 						}
@@ -5768,8 +6259,61 @@ var createTool = function() {
 							lis[l].style.removeProperty("display");
 						}
 					}
+					else if (lis[l].getAttribute("name") == "Z-Move") {
+						if (sel.value != "Struggle") {
+							var check1 = true;
+							var check2 = true;
+							var check3 = false;
+						
+							for (var r = 0; r < finaldataMoveCall.length; r++) {
+								if (finaldataMoveCall[r]["Call"] == sel.value) {
+									if (finaldataMoveCall[r]["Type"] == "Z-Move") {
+										if (finaldataMoveCall[r]["Pokémon"] != undefined) {
+											check1 = false;
+											if (finaldataMoveCall[r]["Pokémon"].includes(",")) {
+												var vals = finaldataMoveCall[r]["Pokémon"].split(",");
+												for (var u = 0; u < vals.length; u++) {
+													if (vals[u] == userPokPath.value) {
+														check1 = true;
+													}
+												}
+											}
+											else {
+												if (finaldataMoveCall[r]["Pokémon"] == userPokPath.value) {
+													check1 = true;
+												}
+											}
+										}
+										if (finaldataMoveCall[r]["Item"] != undefined) {
+											check2 = false;
+											if (finaldataMoveCall[r]["Item"] == userItemPath.value) {
+												check2 = true;
+											}
+										}
+									}
+								}
+							}
+
+
+							if (userItemPath.value.includes(" Z") && userItemPath.value.includes(moveType.replace(/.$/, ''))) {
+								check3 = true;
+							}
+
+							if (check1 && check2 && check3) {
+								lis[l].style.removeProperty("display");
+							}
+						}
+					}
+					else if (lis[l].getAttribute("name") == "Max Move") {
+						lis[l].style.removeProperty("display");
+					}
 				}
 			}
+
+
+		
+
+
 
 			inp.setAttribute("min",strikes[0]);
 			inp.setAttribute("max",strikes[1]);
@@ -5810,8 +6354,8 @@ var createTool = function() {
 			}
 
 			var team = base.parentElement.getAttribute("name");
-			var pok = base.getAttribute("name");
-			var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"']")
+			var id = base.getAttribute("name");
+			var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+id+"']")
 			
 			var pokImgPath = tar.querySelector(":scope *[name='img']");
 			var pokItemPath = tar.querySelector(":scope *[name='item']");
@@ -5831,11 +6375,6 @@ var createTool = function() {
 			var naturePath = base.querySelector(":scope *[name='nature'] select");
 			var levelPath = base.querySelector(":scope *[name='level'] input");
 			var movesPath = base.querySelectorAll(":scope *[name='moves'] select");
-		
-			var disabled = base.querySelectorAll(":scope *[setDisable]");
-			var checks = base.querySelectorAll(":scope input[type='checkbox']");
-			var nums = base.querySelectorAll(":scope > li:not([name='stats']) input[type='number']");
-
 
 			var dataString = dataStringToObj(tar.getAttribute("data-string"));
 
@@ -5916,7 +6455,9 @@ var createTool = function() {
 				}
 				
 
-				int = getPokémonInt(pokémon);
+				if (pokémon != undefined) {
+					int = getPokémonInt(pokémon);
+				}
 
 				if (int != undefined) {
 					check = true;
@@ -5924,26 +6465,12 @@ var createTool = function() {
 			}
 
 			if (check) {
-
-				for(var i = 0; i < disabled.length; i++) {
-					disabled[i].removeAttribute("disabled");
-				}
-				statsPath.classList.remove("disabled");
-
-				for(var i = 0; i < checks.length; i++) {
-					checks[i].removeAttribute("disabled");
-				}
-				for(var i = 0; i < nums.length; i++) {
-					nums[i].removeAttribute("disabled");
-				}
+				base.classList.add("active");
 
 				pokImgPath.src = "./media/Images/Pokémon/"+itCategory+"/"+itExt+"/"+itType+"/"+itAngle+"/"+itPath+"/"+getPokémonMediaPath(int,"Battle")+"."+itExt;
 				pokImgPath.title = getPokémonName(int);
 
-				if (HeldItem) {
-					pokItemPath.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(itemPath.value)+".png";
-					pokItemPath.title = itemPath.value;
-				}
+			
 				pokNamePath.innerText = getPokémonName(int);
 
 				if (pokémon != undefined) {
@@ -5963,6 +6490,12 @@ var createTool = function() {
 				if (Gender) {
 					if (gender != undefined) {
 						genderPath.value = gender;
+						if (genderPath.value == "♂") {
+							genderPath.style.color = "blue";
+						}
+						else if (genderPath.value == "♀") {
+							genderPath.style.color = "red";
+						}
 					}
 				}
 				if (Friendship) {
@@ -5973,7 +6506,6 @@ var createTool = function() {
 				if (Ability.length > 0) {
 					if (ability != undefined) {
 						var val = abilityPath.querySelector(":scope > *[name='"+ability+"']");
-						
 						if (val != undefined) {
 							abilityPath.value = val.value;
 						}
@@ -5982,6 +6514,8 @@ var createTool = function() {
 				if (HeldItem) {
 					if (item != undefined) {
 						itemPath.value = item;
+						pokItemPath.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(itemPath.value)+".png";
+						pokItemPath.title = itemPath.value;
 					}
 				}
 
@@ -6043,18 +6577,7 @@ var createTool = function() {
 
 			}
 			else {
-				for(var i = 0; i < checks.length; i++) {
-					checks[i].setAttribute("disabled","");
-				}
-
-				for(var i = 0; i < nums.length; i++) {
-					nums[i].setAttribute("disabled","");
-				}
-
-				for(var i = 0; i < disabled.length; i++) {
-					disabled[i].setAttribute("disabled","");
-				}
-				statsPath.classList.add("disabled");
+				base.classList.remove("active");
 			}
 
 
@@ -6062,77 +6585,19 @@ var createTool = function() {
 
 		}
 		function DMGSetActive(val) {
-
 			var val;
-			var rev;
 
-			if (val == "user") {
-				rev = "target";
-			}
-			if (val == "target") {
-				rev = "user";
-			}
 			var x = findUpTag(event.target,"DIV");
-			var xs = x.parentElement.parentElement.querySelectorAll(":scope div[data-string]");
+			var all = x.parentElement.parentElement.querySelectorAll(":scope div[data-string]")			
 			
+			for(var a = 0; a < all.length; a++) {
+				all[a].classList.remove(val);
+			}
+			x.classList.add(val);
 
-			
-			for(var i = 0; i < xs.length; i++){
-				if (xs[i].classList.contains("target") && !xs[i].classList.contains("viable")) {
-					var vi = x.parentElement.parentElement.querySelectorAll(":scope div[data-string].viable");
-					xs[i].classList.remove("target");
-					vi[0].classList.add("target");
-				}
-			}
-			
-
-			if (x.classList.contains(rev)) {
-				for(var i = 0; i < xs.length; i++){
-					if (xs[i].classList.contains(val)) {
-						xs[i].classList.add(rev);
-						xs[i].classList.remove(val);
-						break;
-					}
-				}
-				x.classList.add(val);
-			}
-			else {
-				for(var i = 0; i < xs.length; i++){
-					xs[i].classList.remove(val);
-				}
-				x.classList.add(val);
-			}
 			DMGSetPossible();
 			DMGCalcStart();
 
-			/*
-			var y = undefined;
-			var check = false;
-
-			var base = findUpTag(this,"DIV");
-
-			if (base.parentElement.getAttribute("name").includes("player")) {
-				check = true;
-				y = "player";
-			}
-			else if (base.classList.contains("target")) {
-				check = true;
-				y = "opponent";
-			}
-
-			var x = base.parentElement.parentElement.querySelectorAll(":scope > *[name*='"+y+"'] > *[name].active");
-
-			for(var i = 0; i < x.length; i++) {
-				x[i].classList.remove("active");
-			}
-
-			if (check) {
-				base.classList.add("active");
-				DMGSetPossible();
-			}
-
-			DMGCalcStart();
-			*/
 		}
 		function DMGSetPossible() {
 
@@ -6150,78 +6615,61 @@ var createTool = function() {
 			var movePath = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='move'] > span select")
 			var moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movePath.value);
 
-			var player = base.querySelectorAll(":scope > *[name] > *.user");
-			var playerTemp = base.querySelectorAll(":scope > *[name*='player'] > *[name]");
 
-			var New = false;
-
-
-			if (!player.length > 0) {
-				player = playerTemp;
-				New = true;
+			var user = base.querySelectorAll(":scope > *[name] > *[name].user");
+			var users = base.querySelectorAll(":scope > *[name*='player'] > *[name]");
+			
+			if (user.length == 0) {
+				if (users.length > 0) {
+					users[0].classList.add("user");
+				}
 			}
 
+			if (user.length > 1) {
+				for(var a = 0; a < user.length; a++) {
+					user[a].classList.remove("user");
+				}
+				users[0].classList.add("user");
+			}
 
-			var id = player[0].getAttribute("name");
+			user = base.querySelector(":scope > *[name] > *[name].user");
 
+			var team = user.parentElement.getAttribute("name");
+			var id = user.getAttribute("name");
 
 			var idPrevious = parseInt(id)-1;
 			var idNext = parseInt(id)+1;
 
-
-
 			var adjacent = [];
 
-
-
-
-			var allies = base.querySelectorAll(":scope > *[name*='player'] > *[name]:not([name='"+id+"'])");
-			var enemies = base.querySelectorAll(":scope > *[name*='opponent'] > *[name]");
+			var allies = base.querySelectorAll(":scope > *[name='"+team+"'] > *[name]:not([name='"+id+"'])");
+			var enemies = base.querySelectorAll(":scope > *[name]:not([name='"+team+"']) > *[name]");
 			var all = base.querySelectorAll(":scope > *[name] > *[name]");
-			var target = base.querySelectorAll(":scope > *[name] > *.target");
 
-			if (New) {
-				player[0].classList.add("user");
-				enemies[0].classList.add("target");
-			}
 
-			var adjacentTop = player[0].parentElement.querySelector(":scope > *[name='"+idPrevious+"']");
-			var adjacentBottom = player[0].parentElement.querySelector(":scope > *[name='"+idNext+"']");
 
-			if (adjacentTop != undefined) {
-				adjacent.push(adjacentTop)
-			}
-			if (adjacentBottom != undefined) {
-				adjacent.push(adjacentBottom)
-			}
-
-			if (player[0].parentElement.previousElementSibling != undefined) {
-				var adjacentLeftTop = player[0].parentElement.previousElementSibling.querySelector(":scope > *[name='"+idPrevious+"']");
-				var adjacentLeft = player[0].parentElement.previousElementSibling.querySelector(":scope > *[name='"+id+"']");
-				var adjacentLeftBottom = player[0].parentElement.previousElementSibling.querySelector(":scope > *[name='"+idNext+"']");
-				if (adjacentLeftTop != undefined) {
-					adjacent.push(adjacentLeftTop)
+			var adjThis = user.parentElement.querySelectorAll(":scope > *[name]");
+			for(var a = 0; a < adjThis.length; a++) {
+				if (a == idNext || a == idPrevious) {
+					adjacent.push(adjThis[a])
 				}
-				if (adjacentLeft != undefined) {
-					adjacent.push(adjacentLeft)
-				}
-				if (adjacentLeftBottom != undefined) {
-					adjacent.push(adjacentLeftBottom)
+			}
+
+			if (user.parentElement.previousElementSibling != undefined) {
+				var adjLeft = user.parentElement.previousElementSibling.querySelectorAll(":scope > *[name]");
+				for(var a = 0; a < adjLeft.length; a++) {
+					if (a == id || a == idNext || a == idPrevious) {
+						adjacent.push(adjLeft[a])
+					}
 				}
 			}
 			
-			if (player[0].parentElement.nextElementSibling != undefined) {
-				var adjacentRightTop = player[0].parentElement.nextElementSibling.querySelector(":scope > *[name='"+idPrevious+"']");
-				var adjacentRight = player[0].parentElement.nextElementSibling.querySelector(":scope > *[name='"+id+"']");
-				var adjacentRightBottom = player[0].parentElement.nextElementSibling.querySelector(":scope > *[name='"+idNext+"']");
-				if (adjacentRightTop != undefined) {
-					adjacent.push(adjacentRightTop)
-				}
-				if (adjacentRight != undefined) {
-					adjacent.push(adjacentRight)
-				}
-				if (adjacentRightBottom != undefined) {
-					adjacent.push(adjacentRightBottom)
+			if (user.parentElement.nextElementSibling != undefined) {
+				var adjRight = user.parentElement.nextElementSibling.querySelectorAll(":scope > *[name]");
+				for(var a = 0; a < adjRight.length; a++) {
+					if (a == id || a == idNext || a == idPrevious) {
+						adjacent.push(adjRight[a])
+					}
 				}
 			}
 
@@ -6255,21 +6703,18 @@ var createTool = function() {
 
 
 			if (base.getAttribute("data-range") == "Affects the user") {
-				for(var a = 0; a < player.length; a++) {
-					tars.push(player[a])
-				}
+				tars.push(user)
 			}
 
 			if (base.getAttribute("data-range") == "May affect anyone but the user") {
 				for(var a = 0; a < all.length; a++) {
 					var check = true;
 	
-					for(var al = 0; al < player.length; al++) {
-						if (player[al] == all[a]) {
-							check = false;
-							break;
-						}
+
+					if (all[a] == user) {
+						check = false;
 					}
+					
 					if (check) {
 						tars.push(all[a])
 					}
@@ -6278,9 +6723,7 @@ var createTool = function() {
 	
 
 			if (base.getAttribute("data-range") == "Affects the user and all allies") {
-				for(var a = 0; a < player.length; a++) {
-					tars.push(player[a])
-				}
+				tars.push(user)
 				for(var a = 0; a < allies.length; a++) {
 					tars.push(allies[a])
 				}
@@ -6335,9 +6778,7 @@ var createTool = function() {
 						tars.push(adjacent[a])
 					}
 				}
-				for(var a = 0; a < player.length; a++) {
-					tars.push(player[a])
-				}
+				tars.push(user)
 			}
 
 			if (base.getAttribute("data-range") == "May affect any adjacent foe, but not allies") {
@@ -6392,11 +6833,53 @@ var createTool = function() {
 
 		
 
+
+
+
 			
 			for(var a = 0; a < tars.length; a++) {
 				tars[a].classList.add("viable");
 			}
-		
+
+
+			var check = false;
+			var check2 = true;
+			for(var a = 0; a < all.length; a++) {
+				if (all[a].classList.contains("target") && !all[a].classList.contains("viable")) {
+					check = true;
+				}
+				if (all[a].classList.contains("target")) {
+					check2 = false;
+				}
+			}
+			if (check2) {
+				check = true;
+			}
+
+			if (check) {
+				for(var a = 0; a < all.length; a++) {
+					all[a].classList.remove("target");
+				}
+
+				var target = base.querySelectorAll(":scope > *[name] > *[name].target");
+				var targets = base.querySelectorAll(":scope > *[name] > *[name].viable");
+
+				if (target.length == 0) {
+					if (targets.length > 1) {
+						for(var a = 0; a < targets.length; a++) {
+							if (targets[a] != user) {
+								if (targets[a].parentElement.getAttribute("name") != "player") {
+									targets[a].classList.add("target");
+									break;
+								}
+							}
+						}
+					}
+					else if (targets.length > 0) {
+						targets[0].classList.add("target");
+					}
+				}
+			}
 
 		}
 		function DMGPokSpecific(base) {
@@ -6409,8 +6892,8 @@ var createTool = function() {
 			}
 
 			var team = base.parentElement.getAttribute("name");
-			var pok = base.getAttribute("name");
-			var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"']")
+			var id = base.getAttribute("name");
+			var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+id+"']")
 	
 
 			var pokémonPath = base.querySelector(":scope *[name='pokémon'] select");
@@ -6422,11 +6905,12 @@ var createTool = function() {
 
 			var pokNameVal = dataStringToObj(tar.getAttribute("data-string"));
 
+
+
 			var int;
 			var check = false;
 
 			if (pokNameVal != undefined) {
-		
 				if (pokNameVal["pok"] != undefined) {
 					int = getPokémonInt(pokNameVal["pok"]);
 				}
@@ -6472,6 +6956,23 @@ var createTool = function() {
 			}
 
 			if (check) {
+				var ex = base.querySelector(":scope figure[name='export']")
+				var evoFamily = getEvolutionFamily(int);
+				if (evoFamily.length > 1) {
+					ex.querySelector(":scope span[name='Change Evolution']").style.removeProperty("display");
+				}
+				else {
+					ex.querySelector(":scope span[name='Change Evolution']").style.display = "none";
+				}
+	
+				var pokForms = getPokémonForm(int);
+				if (pokForms.length > 1) {
+					ex.querySelector(":scope span[name='Change Form']").style.removeProperty("display");
+				}
+				else {
+					ex.querySelector(":scope span[name='Change Form']").style.display = "none";
+				}
+
 
 				if (Friendship) {
 					if (friendshipPath.value != 0) {
@@ -6485,11 +6986,6 @@ var createTool = function() {
 
 				if (Ability.length > 0) {
 					var abilities = returnData(int,"Ability","");
-					/*
-					if (abilities[0] != "") {
-						abilities.unshift("");
-					}
-					*/
 
 					var storeAbilityVal = abilityPath.value;
 					
@@ -6606,8 +7102,8 @@ var createTool = function() {
 			}
 
 			var team = base.parentElement.getAttribute("name");
-			var pok = base.getAttribute("name");
-			var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"']");
+			var id = base.getAttribute("name");
+			var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+id+"']");
 		
 
 			if (target != undefined) {
@@ -6672,8 +7168,8 @@ var createTool = function() {
 			}
 
 			var team = base.parentElement.getAttribute("name");
-			var pok = base.getAttribute("name");
-			var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+pok+"']");
+			var id = base.getAttribute("name");
+			var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name='"+team+"'] > div[name='"+id+"']");
 		
 
 			if (target != undefined) {
@@ -6699,7 +7195,10 @@ var createTool = function() {
 					stringObj["lv"] = lvlPath.value;
 				}
 				if (abilityPath != undefined) {
-					stringObj["ab"] = abilityPath.value;
+					var pos = getAbilityPosition(getPokémonInt(pokPath.value),abilityPath.value);
+					if (pos != undefined) {
+						stringObj["ab"] = pos;
+					}
 				}
 				if (genderPath != undefined) {
 					stringObj["ge"] = genderPath.value;
@@ -6725,7 +7224,6 @@ var createTool = function() {
 					}
 				}
 				stringObj["mo"] = moves.join(",");
-				
 
 				var ivs = [];
 				for (var e = 0; e < ivsPath.length; e++) {
@@ -6742,23 +7240,33 @@ var createTool = function() {
 				var keys = Object.keys(stringObj)
 				var tempArr = [];
 				for (var e = 0; e < keys.length; e++) {
-					tempArr.push(keys[e]+":"+stringObj[keys[e]])
+					var val1 = keys[e];
+					var val2 = stringObj[keys[e]];
+					if (val2 != "") {
+						if (val2.replaceAll(",","") != "") {
+							tempArr.push(val1+":"+val2)
+						}
+					}
 				}
 		
 				target.setAttribute("data-string",tempArr.join("|"))
 			}
+			var tars = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[data-string]");
+			var tarsint = 0;
+			for (var t = 0; t < tars.length; t++) {
+				var val = tars[t].getAttribute("data-string");
+				if (val.includes("pok:") && !val.includes("pok:|") && !val.includes("pok:\n")) {
+					tarsint = tarsint+1;
+				}
+			}
+			document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div").setAttribute("data-count",tarsint);
 		}
 		function DMGMatchPosition() {
 			var teams = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name]");
 			var poks = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div[data-string]");
 
-
-
-
-
 			var datas1 = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='pokémon'] > span[name]");
 			var datas2 = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='team'] > span[name]");
-
 			var datas3 = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='pokémon'] > span[name] > ul[name]");
 
 			var selects = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span > select");
@@ -6790,6 +7298,7 @@ var createTool = function() {
 			for(var p = 0; p < poks.length; p++) {
 				order2.push(poks[p].parentElement.getAttribute("name")+"-"+poks[p].getAttribute("name"));
 			}
+
 			for(var o = 0; o < order2.length; o++) {
 				for(var p = 0; p < datas3.length; p++) {
 					if (datas3[p].parentElement.getAttribute("name")+"-"+datas3[p].getAttribute("name") == order2[o]) {
@@ -6798,70 +7307,203 @@ var createTool = function() {
 				}
 			}
 
+			for(var t = 0; t < teams.length; t++) {
+				var pok = teams[t].querySelectorAll(":scope > *[data-string]");
+				for(var p = 0; p < pok.length; p++) {
+					var x = p + 1;
+					var val = "";
+					if (pok[p].parentElement.getAttribute("name") == "player") {
+						val = "Pokémon"
+					}
+					else {
+						val = pok[p].parentElement.getAttribute("name");
+						val = undDel(val,"");
+						val = titleCase(val);
+					}
+					pok[p].setAttribute("title",val+" #"+x);
+				}
+			}
+
+
 			for(var p = 0; p < datas1.length; p++) {
 				var dat = datas1[p].querySelectorAll(":scope > *");
 				var val = undefined;
 				for(var r = 0; r < dat.length; r++) {
-					dat[r].setAttribute("name",r);
-					if (dat[r].style.getPropertyValue("display") == "none") {
+					if (dat[r].style.getPropertyValue("display") == "flex") {
 						val = r;
 					}
 				}
 				for(var t = 0; t < selects.length; t++) {
 					if (selects[t].getAttribute("name") == datas1[p].getAttribute("name")) {
-						if (val != undefined) {
-							selects[t].setAttribute("value",val);
-						}
+						selects[t].value = val;
 					}
 				}
+				
 			}
 
 	
 			DMGSetPossible();
 			
 		}
-		function DMGSetDataString() {
-			var data = prompt("Enter Pokémon Data String:","");
+		function DMGSetDataString(base,str) {
 
+			var base;
+			var str;
+	
+			if (base.tagName != undefined) {
+				base = base;
+			}
+			else if (base[0] != undefined) {
+				base = base;
+			}
+			else {
+				base = findUpTag(this,"DIV");
+			}
+
+			var data;
+
+			if (str == undefined) {
+				if (base.length > 1) {
+					data = prompt("Enter Pokémon Data Strings:","");
+				}
+				else {
+					data = prompt("Enter Pokémon Data String:","");
+				}
+			}
+			else {
+				data = str;
+			}
+	
+			
 			if (data != null && data != "") {
-				if (data.includes("pok:")) {
-					var temparr = [];
-					var tempstr;
-		
-					if (data.includes("|")) {
-						temparr = data.split("pok:");
-						if (temparr.length > 1) {
-							temparr = temparr[1].split("|");
-							tempstr = getPokémonInt(temparr[0]);
+				data = data.replaceAll("\r","");
+				data = data.replaceAll("\n","_");
+				data = data.replaceAll("\\n","_");
+				if (data.includes("_") && base.length > 1) {
+					data = data.split("_");
+					if (base.length >= data.length) {
+						if (base.length > 1) {
+							for (var d = 0; d < base.length; d++) {
+								var team = base[d].parentElement.getAttribute("name");
+								var id = base[d].getAttribute("name");
+								var ulbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div *[name='"+team+"'] ul[name='"+id+"']");
+								base[d].setAttribute("data-string","");
+								DMGPokSpecific(ulbase);
+								DMGSetChange(ulbase);
+								DMGCalcPokStats(ulbase);
+								DMGCalcStart(ulbase);
+							}
+						}
+						for (var d = 0; d < base.length; d++) {
+							if (data[d].includes("pok:")) {
+								var team = base[d].parentElement.getAttribute("name");
+								var id = base[d].getAttribute("name");
+								var ulbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div *[name='"+team+"'] ul[name='"+id+"']");
+								
+								var temparr = [];
+								var tempstr = undefined;
+
+								if (data[d].includes("|")) {
+									temparr = data[d].split("pok:");
+									if (temparr.length > 1) {
+										temparr = temparr[1].split("|");
+										tempstr = getPokémonInt(temparr[0]);
+									}
+								}
+								else {
+									temparr = data[d].split("pok:");
+									tempstr = getPokémonInt(temparr[1]);
+								}
+				
+								if (tempstr != undefined) {
+									if (finaldataPokémon[parseInt(tempstr)][JSONPath_Reference] == "true") {
+										base[d].setAttribute("data-string",data[d]);
+										DMGPokSpecific(ulbase);
+										DMGSetChange(ulbase);
+										DMGCalcPokStats(ulbase);
+										DMGCalcStart(ulbase);
+
+									}
+									else {
+										consoleText("Pokémon Unavailable.");
+										base[d].setAttribute("data-string","");
+										DMGPokSpecific(ulbase);
+										DMGSetChange(ulbase);
+										DMGCalcPokStats(ulbase);
+										DMGCalcStart(ulbase);
+									}
+								}
+								else {
+									consoleText("Data returned an error.");
+									base[d].setAttribute("data-string","");
+									DMGPokSpecific(ulbase);
+									DMGSetChange(ulbase);
+									DMGCalcPokStats(ulbase);
+									DMGCalcStart(ulbase);
+								}
+							}
+							else {
+								consoleText("Data returned an error.")
+							}
 						}
 					}
 					else {
-						temparr = data.split("pok:");
-						tempstr = getPokémonInt(temparr[1]);
+						consoleText("Too many Pokémon for the battle.");
 					}
-					if (tempstr != undefined) {
-						if (finaldataPokémon[parseInt(tempstr)][JSONPath_Reference] == "true") {
-							var team = this.parentElement.parentElement.parentElement.getAttribute("name");
-							var pok = this.parentElement.parentElement.getAttribute("name");
-							var base = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div *[name='"+team+"'] ul[name='"+pok+"']");
+				}
+				else {
+					if (data.includes("pok:") && !data.includes("_")) {
+						if (base.length > 1) {
+							for (var d = 0; d < base.length; d++) {
+								var team = base[d].parentElement.getAttribute("name");
+								var id = base[d].getAttribute("name");
+								var ulbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div *[name='"+team+"'] ul[name='"+id+"']");
+								base[d].setAttribute("data-string","");
+								DMGPokSpecific(ulbase);
+								DMGSetChange(ulbase);
+								DMGCalcPokStats(ulbase);
+								DMGCalcStart(ulbase);
+							}
+							base = base[0];
+						}
 
-							this.parentElement.parentElement.setAttribute("data-string",data);
-
-							DMGPokSpecific(base)
-							DMGSetChange(base);
-							DMGCalcPokStats(base);
-							DMGCalcStart(base);
+						var temparr = [];
+						var tempstr = undefined;
+						if (data.includes("|")) {
+							temparr = data.split("pok:");
+							if (temparr.length > 1) {
+								temparr = temparr[1].split("|");
+								tempstr = getPokémonInt(temparr[0]);
+							}
 						}
 						else {
-							consoleText("Pokémon Unavailable.")
+							temparr = data.split("pok:");
+							tempstr = getPokémonInt(temparr[1]);
+						}
+						if (tempstr != undefined) {
+							if (finaldataPokémon[parseInt(tempstr)][JSONPath_Reference] == "true") {
+								var team = base.parentElement.getAttribute("name");
+								var id = base.getAttribute("name");
+								var ulbase = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div *[name='"+team+"'] ul[name='"+id+"']");			
+
+								base.setAttribute("data-string",data);
+	
+								DMGPokSpecific(ulbase);
+								DMGSetChange(ulbase);
+								DMGCalcPokStats(ulbase);
+								DMGCalcStart(ulbase);
+							}
+							else {
+								consoleText("Pokémon Unavailable.")
+							}
+						}
+						else {
+							consoleText("Data returned an error.")
 						}
 					}
 					else {
 						consoleText("Data returned an error.")
 					}
-				}
-				else {
-					consoleText("Data returned an error.")
 				}
 			}
 		}
@@ -6876,8 +7518,8 @@ var createTool = function() {
 			}
 
 			var team = base.parentElement.getAttribute("name");
-			var pok = base.getAttribute("name");
-			var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+pok+"']");
+			var id = base.getAttribute("name");
+			var target = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+team+"'] ul[name='"+id+"']");
 		
 
 			
@@ -8005,6 +8647,14 @@ function timerSelector() {
 	}
 }
 
+$("body").click(function(event) {
+	if(!$(event.target).closest("#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export']").length && !$(event.target).is("#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export']")) {
+		$("#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export']").removeClass("active");
+	}
+	if(!$(event.target).closest("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name='import']").length && !$(event.target).is("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name='import']")) {
+		$("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name='import']").removeClass("active");
+	}
+});
 
 
 
