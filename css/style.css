@@ -1,7 +1,5 @@
 #console {
 	position: fixed;
-    bottom: 25px;
-    right: 50px;
     z-index: 1000;
 	cursor:default;
 	display: flex;
@@ -16,6 +14,14 @@
     background: rgba(255,255,255,0.8);
 	transition: 1s ease opacity 0.5s;
 	opacity: 0;
+}
+#console.top {
+	top: 50px;
+    right: 25px;
+}
+#console.bottom {
+	bottom: 25px;
+    right: 50px;
 }
 
 
