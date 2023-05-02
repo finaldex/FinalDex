@@ -2453,3 +2453,58 @@ function exportData() {
 	console.log(resStr)
 	consoleText("Copied Data String!")
 }
+
+
+
+function flingPowerCalc(item) {
+	var p10 = ["Air Balloon","Big Root","Bright Powder","Choice Band","Choice Scarf","Choice Specs","Destiny Knot","Discount Coupon","Electric Seed","Expert Belt","Focus Band","Focus Sash","Grassy Seed","Lagging Tail","Leftovers","Mental Herb","Metal Powder","Misty Seed","Muscle Band","Power Herb","Psychic Seed","Quick Powder","Reaper Cloth","Red Card","Ring Target","Shed Shell","Silk Scarf","Silver Powder","Smooth Rock","Soft Sand","Soothe Bell","White Herb","Wide Lens","Wise Glasses","Zoom Lens","Bread","Coconut Milk","Fresh Cream","Fried Food","Fruit Bunch","Instant Noodles","Mixed Mushrooms","Pack of Potatoes","Packaged Curry","Pasta","Precooked Burger","Pungent Root","Salad Mix","Sausages","Smoke-Poke Tail","Adamant Mint","Aguav Berry","Apicot Berry","Aspear Berry","Babiri Berry","Belue Berry","Berry Sweet","Blue Scarf","Bluk Berry","Bold Mint","Brave Mint","Calm Mint","Careful Mint","Charti Berry","Cheri Berry","Chesto Berry","Chilan Berry","Chople Berry","Clover Sweet","Coba Berry","Colbur Berry","Cornn Berry","Custap Berry","Durin Berry","Enigma Berry","Figy Berry","Flower Sweet","Full Incense","Ganlon Berry","Gentle Mint","Green Scarf","Grepa Berry","Haban Berry","Hasty Mint","Hondew Berry","Hopo Berry","Iapapa Berry","Impish Mint","Jaboca Berry","Jolly Mint","Kasib Berry","Kebia Berry","Kee Berry","Kelpsy Berry","Lansat Berry","Lax Incense","Lax Mint","Leppa Berry","Liechi Berry","Lonely Mint","Love Sweet","Luck Incense","Lum Berry","Mago Berry","Magost Berry","Maranga Berry","Micle Berry","Mild Mint","Modest Mint","Naive Mint","Nanab Berry","Naughty Mint","Nomel Berry","Occa Berry","Odd Incense","Oran Berry","Pamtre Berry","Passho Berry","Payapa Berry","Pecha Berry","Persim Berry","Petaya Berry","Pinap Berry","Pink Nectar","Pink Scarf","Pomeg Berry","Pure Incense","Purple Nectar","Qualot Berry","Quiet Mint","Rabuta Berry","Rash Mint","Rawst Berry","Razz Berry","Red Nectar","Red Scarf","Relaxed Mint","Ribbon Sweet","Rindo Berry","Rock Incense","Rose Incense","Roseli Berry","Rowap Berry","Salac Berry","Sassy Mint","Sea Incense","Serious Mint","Shuca Berry","Sitrus Berry","Spelon Berry","Star Sweet","Starf Berry","Strawberry Sweet","Tamato Berry","Tanga Berry","Timid Mint","Wacan Berry","Watmel Berry","Wave Incense","Wepear Berry","Wiki Berry","Yache Berry","Yellow Nectar","Yellow Scarf","Pumkin Berry","Drash Berry","Eggant Berry","Strib Berry","Chilan Berry","Nutpea Berry","Ginema Berry","Kuo Berry","Yago Berry","Touga Berry","Niniku Berry","Topo Berry"];
+	var p20 = ["Boiled Egg","Fancy Apple","Large Leek","Moomoo Cheese","Health Feather","Muscle Feather","Resist Feather","Genius Feather","Clever Feather","Swift Feather","Pretty Feather"];
+	var p30 = ["Ether","Elixir","Max Ether","Max Elixir","Repel","Super Repel","Max Repel","Ability Shield","Absorb Bulb","Adrenaline Orb","Amulet Coin","Armorite Ore","Auspicious Armor","Balm Mushroom","Berry Juice","Big Bamboo Shoot","Big Malasada","Big Mushroom","Big Nugget","Big Pearl","Binding Band","Black Belt","Black Glasses","Black Sludge","Booster Energy","Bottle Cap","Casteliacone","Cell Battery","Charcoal","Cleanse Tag","Clear Amulet","Comet Shard","Covert Cloak","Deep Sea Scale","Dragon Scale","Dynamax Candy","Eject Button","Escape Rope","Everstone","Fire Stone","Flame Orb","Float Stone","Fluffy Tail","Galarica Cuff","Galarica Twig","Galarica Wreath","Gold Bottle Cap","Heart Scale","Honey","Ice Stone","King's Rock","Lava Cookie","Leader's Crest","Leaf Stone","Life Orb","Light Ball","Light Clay","Loaded Dice","Lucky Egg","Luminous Moss","Lumiose Galette","Magnet","Malicious Armor","Max Mushrooms","Max Revive","Metal Coat","Metronome","Miracle Seed","Mirror Herb","Moon Stone","Mystic Water","Never-Melt Ice","Nugget","Old Gateau","Pass Orb","Pearl String","Pearl","Poké Doll","Poké Toy","Prism Scale","Protective Pads","Punching Glove","Rare Candy","Razor Fang","Relic Band","Relic Copper","Relic Crown","Relic Gold","Relic Silver","Relic Statue","Relic Vase","Revive","Sacred Ash","Scope Lens","Shalour Sable","Shell Bell","Shoal Salt","Shoal Shell","Smoke Ball","Snowball","Soul Dew","Spell Tag","Star Piece","Strange Souvenir","Stardust","Sun Stone","Sweet Apple","Sweet Heart","Tart Apple","Thunder Stone","Tiny Bamboo Shoot","Tiny Mushroom","Toxic Orb","Throat Spray","Twisted Spoon","Upgrade","Water Stone","Brittle Bones","Antidote","Aspear Berry","Awakening","Big Malasada","Bitter Berry","Blue Flute","Burn Heal","Burnt Berry","Casteliacone","Cheri Berry","Chesto Berry","Drash Berry","Eggant Berry","Full Heal","Full Restore","Heal Powder","Ice Berry","Ice Heal","Lava Cookie","Lum Berry","Lumiose Galette","Max Revive","Mental Herb","Mint Berry","MiracleBerry","Old Gateau","Paralyze Heal","Pecha Berry","Persim Berry","Pewter Crunchies","Poké Flute","PRZCureBerry","PSNCureBerry","Pumkin Berry","Rage Candy Bar","Rawst Berry","Red Flute","Revive","Revival Herb","Sacred Ash","Shalour Sable","Touga Berry","Yago Berry","Yellow Flute","Full Restore","Hyper Potion","Max Potion","Potion","Super Potion","Heal Powder","Energy Powder","Energy Root","Revival Herb","Fresh Water","Soda Pop","Lemonade","Moomoo Milk","Berry Juice","Tea","HP Up","Protein","Iron","Calcium","Zinc","Carbos","PP Up","PP Max","Red Shard","Green Shard","Blue Shard","Yellow Shard","Growth Mulch","Damp Mulch","Stable Mulch","Gooey Mulch","Amaze Mulch","Boost Mulch","Rich Mulch","Surprise Mulch","X Attack","X Defense","X Sp. Atk","X Sp. Def","X Speed","X Accuracy","Dire Hit","Guard Spec.","Blue Flute","Yellow Flute","Red Flute","Black Flute","White Flute","Exp. Candy XS","Exp. Candy S","Exp. Candy M","Exp. Candy L","Exp. Candy XL","Normal Tera Shard","Fire Tera Shard","Water Tera Shard","Electric Tera Shard","Grass Tera Shard","Ice Tera Shard","Fighting Tera Shard","Poison Tera Shard","Ground Tera Shard","Flying Tera Shard","Psychic Tera Shard","Bug Tera Shard","Rock Tera Shard","Ghost Tera Shard","Dragon Tera Shard","Dark Tera Shard","Steel Tera Shard","Fairy Tera Shard"];
+	var p40 = ["Eviolite","Icy Rock","Lucky Punch"];
+	var p50 = ["Dubious Disc","Eject Pack","Sharp Beak","Wishing Piece","Gigantamix","Spice Mix","Bug Memory","Dark Memory","Dragon Memory","Electric Memory","Fairy Memory","Fighting Memory","Fire Memory","Flying Memory","Ghost Memory","Grass Memory","Ground Memory","Ice Memory","Poison Memory","Psychic Memory","Rock Memory","Steel Memory","Water Memory"];
+	var p60 = ["Adamant Orb","Damp Rock","Griseous Orb","Heat Rock","Leek","Lustrous Orb","Macho Brace","Rocky Helmet","Terrain Extender","Utility Umbrella"];
+	var p70 = ["Dragon Fang","Poison Barb","Shock Drive","Burn Drive","Chill Drive","Douse Drive","Power Anklet","Power Band","Power Belt","Power Bracer","Power Lens","Power Weight"];
+	var p80 = ["Assault Vest","Blunder Policy","Chipped Pot","Cracked Pot","Dawn Stone","Dusk Stone","Electirizer","Heavy-Duty Boots","Magmarizer","Odd Keystone","Oval Stone","Protector","Quick Claw","Razor Claw","Sachet","Safety Goggles","Shiny Stone","Sticky Barb","Tin of Beans","Weakness Policy","Whipped Dream","Bach's Food Tin","Bob's Food Tin","Gengarite","Gardevoirite","Ampharosite","Venusaurite","Charizardite X","Blastoisinite","Mewtwonite X","Mewtwonite Y","Blazikenite","Medichamite","Houndoominite","Aggronite","Banettite","Tyranitarite","Scizorite","Pinsirite","Aerodactylite","Lucarionite","Abomasite","Kangaskhanite","Gyaradosite","Absolite","Charizardite Y","Alakazite","Heracronite","Mawilite","Manectite","Garchompite","Latiasite","Latiosite","Swampertite","Sceptilite","Sablenite","Altarianite","Galladite","Audinite","Metagrossite","Sharpedonite","Slowbronite","Steelixite","Pidgeotite","Glalitite","Diancite","Cameruptite","Lopunnite","Salamencite","Beedrillite"];
+	var p90 = ["Deep Sea Tooth","Grip Claw","Thick Club","Blank Plate","Draco Plate","Dread Plate","Earth Plate","Fist Plate","Flame Plate","Icicle Plate","Insect Plate","Iron Plate","Legend Plate","Meadow Plate","Mind Plate","Pixie Plate","Sky Plate","Splash Plate","Spooky Plate","Stone Plate","Toxic Plate","Zap Plate"];
+	var p100 = ["Hard Stone","Rare Bone","Room Service","Helix Fossil","Dome Fossil","Old Amber","Root Fossil","Claw Fossil","Skull Fossil","Armor Fossil","Cover Fossil","Plume Fossil","Jaw Fossil","Sail Fossil","Bird Fossil","Fish Fossil","Drake Fossil","Dino Fossil"];
+	var p130 = ["Iron Ball"];
+	
+
+	if (p10.includes(item)) {
+		return 10;
+	}
+	else if (p20.includes(item)) {
+		return 20;
+	}
+	else if (p30.includes(item)) {
+		return 30;
+	}
+	else if (p40.includes(item)) {
+		return 40;
+	}
+	else if (p50.includes(item)) {
+		return 50;
+	}
+	else if (p60.includes(item)) {
+		return 60;
+	}
+	else if (p70.includes(item)) {
+		return 70;
+	}
+	else if (p80.includes(item)) {
+		return 80;
+	}
+	else if (p90.includes(item)) {
+		return 90;
+	}
+	else if (p100.includes(item)) {
+		return 100;
+	}
+	else if (p130.includes(item)) {
+		return 130;
+	}
+
+	return 0;
+	
+
+}
