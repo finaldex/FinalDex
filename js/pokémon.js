@@ -305,7 +305,7 @@ var createPokémon = function() {
             teamExit.appendChild(teamExitOption);
         }
 
-        var exportOptions = ["➢","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form","Export Pokémon Data String"];
+        var exportOptions = ["⮟","Export Pokémon Data String","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
         for (var u = 0; u < exportOptions.length; u++) {
             var teamExportOption = document.createElement("option");
             teamExportOption.setAttribute("value",exportOptions[u]);
