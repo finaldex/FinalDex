@@ -1473,6 +1473,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+	position:relative;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] {
 	width: 100%;
@@ -1485,6 +1486,105 @@
     align-items: center;
     justify-content: space-around;
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure {
+	position:absolute;
+	top: 15px;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="reset"] {
+	right: 20px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] {
+	left: 20px;
+}
+
+
+
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div {
+	position:relative;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    min-width: 100px;
+    background: #fff;
+    width: 100%;
+    color: var(--fontDark);
+	text-align: center;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > small {
+	width:100%;
+	height:100%;
+	display:block;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > h5 {
+	transform: rotate(-90deg);
+    transition: .2s ease;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"].active > h5 {
+	transform: none;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"]:active > h5,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"].active > h5 {
+	filter:invert(0.3);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div[data-count="0"] div[name='content'] > figure[name="import"] > div > span > span[name='Copy Data Strings'],
+#contain div#tool > section[name='content'] > div[name='dmg'] > div:not([data-count]) div[name='content'] > figure[name="import"] > div > span > span[name='Copy Data Strings'] {
+	display: none;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"]:not(.active) > div > span {
+	display: none;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div > span > span {
+	display: block;
+    padding: 2px 0;
+    border: 1px solid;
+    width: 100%;
+    border-bottom: 0;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div > span > span:last-child {
+    border-bottom: 1px solid;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div > span > span:hover,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div > span > span:active {
+	background: var(--color_50);
+    color: var(--fontLight);
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div > span > span > b,
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='content'] > figure[name="import"] > div > span > span > b > small {
+	font-weight: normal;
+	width:100%;
+	height:100%;
+	display: block;
+}
+
+
+
+
+
+
+
+
+
+
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] {
     display: flex;
@@ -1595,6 +1695,11 @@
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'][data-range*="Affects"] > span > div[name].viable > span {
 	outline: 3px solid var(--colorRed);
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'][data-range*="Affects"] > span > div[name].viable.user > span {
+	outline: 3px solid var(--colorRed) !important;
+    border: 3px solid var(--colorBlue) !important;
+}
+
 
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div[name].target > span {
@@ -1603,6 +1708,13 @@
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div[name].user > span {
 	outline: 3px solid var(--colorBlue);
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span[name] > div[name].user.target > span {
+	outline: 3px solid var(--colorRed) !important;
+    border: 3px solid var(--colorBlue) !important;
 }
 
 
@@ -1633,7 +1745,7 @@
     align-items: center;
 }
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name='imgs'] img[name="img"] {
-	height: 100%;
+	height: 90%;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name='imgs'] img[name='item'] {
@@ -1683,10 +1795,12 @@
 
 
 
-#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string='']):not([data-string*='pok:|']) > span:first-child {
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string='']):not([data-string*='pok:|'])[data-string*='pok:'] > span:first-child {
 	display: none;
 }
 
+
+#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name]:not([data-string*='pok:']) > span:last-child,
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string=''] > span:last-child,
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > div[name][data-string*='pok:|'] > span:last-child {
 	display: none;
@@ -1708,7 +1822,7 @@
     height: 80%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] *[name='name'] {
@@ -1834,6 +1948,8 @@
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span:first-child input[disabled] {
 	color: rgba(0,0,0,0.3);
 }
+
+
 
 
 #contain div#tool > section[name='content'] > div[name='dmg'] div[name='menu'] > div[name='spec'] > span {
@@ -2096,21 +2212,45 @@
 	cursor:unset;
 }
 
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name='stats'].disabled > span {
-	pointer-events: none;
-	opacity: 0.5;
 
-}
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name='stats'].disabled > span *::placeholder,
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name='stats'].disabled > span * {
-	color: gray !important;
-}
 
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']):not([name='hp']) *[disabled]  {
-	background-color: rgba(239, 239, 239, 0.3) !important;
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) > *:not([name='pokémon'])  {
+	pointer-events:none;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li:not([name='pokémon']) select,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li:not([name='stats']):not([name='hp']) input,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li[name='hp'] > input  {
+	background: rgba(239, 239, 239, 0.3) !important;
 	color:rgba(0, 0, 0, 0.3) !important;
 	text-shadow: unset;
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) > figure {
+	display: none;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li[name='hp'] > span {
+	opacity: 0;
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li[name='stats'] > span {
+	pointer-events: none;
+	opacity: 0.5;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li:not([name='pokémon']) *::placeholder,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li:not([name='pokémon']) * {
+	color: gray !important;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul:not(.active) li input[type="checkbox"] {
+	filter: brightness(0.5);
+}
+
+
+
+
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled] ~ label,
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li:not([name='stats']) *[disabled] ~ small {
@@ -2382,7 +2522,21 @@
 	font-family: fantasy;
     font-weight: bold;
     text-shadow: 0px 0px 1px #000;
+    caret-color: #000 !important;
+    appearance: none;
+    width: fit-content;
+    padding: 3px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-indent: 0;
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name='gender'] select option {
+	text-align: left;
+}
+
+
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul li[name='moves'] select {
 	width: 50%;
 	-moz-appearance: none;
@@ -2420,15 +2574,91 @@
 }
 
 
-#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure:first-child {
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure {
 	position:absolute;
-	top: 2px;
-	right: 2px;
 }
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='reset'] {
+	right: 2px;
+	top: 2px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] {
+	left: 7px;
+	top: 2px;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div {
+	position:relative;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    min-width: 100px;
+    background: #fff;
+    width: 100%;
+    color: var(--fontDark);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > small {
+	width:100%;
+	height:100%;
+	display:block;
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export']:active > small,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'].active > small {
+	filter:invert(0.3);
+}
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export']:not(.active) > div > span {
+	display: none;
+}
+
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div > span > span {
+	display: block;
+    padding: 2px 0;
+    border: 1px solid;
+    width: 100%;
+    border-bottom: 0;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div > span > span:last-child {
+    border-bottom: 1px solid;
+}
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div > span > span:hover,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div > span > span:active {
+	background: var(--color_50);
+    color: var(--fontLight);
+}
+
+
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div > span > span > b,
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > figure[name='export'] > div > span > span > b > small {
+	font-weight: normal;
+	width:100%;
+	height:100%;
+	display: block;
+}
+
+
+
 
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ul > li {
 	width: 90%;
 }
+#contain div#tool > section[name='content'] > div[name='dmg'] > div ul > li:first-child {
+	margin-top: 10px;
+}
+
 #contain div#tool > section[name='content'] > div[name='dmg'] > div ol[name='team'] > span {
 	width:100%;
 	display: flex;
