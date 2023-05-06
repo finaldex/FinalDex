@@ -2314,7 +2314,12 @@ function updateTrainer(trainers,condition) {
 
 
 
-	nameText.innerText = trainerClass+"\n"+trainerName;
+	if (trainerClass != undefined) {
+		nameText.innerText = trainerClass+"\n"+trainerName;
+	}
+	else {
+		nameText.innerText = trainerName;
+	}
 
 	previousPath.appendChild(previousImg);
 	currentPath.appendChild(currentImg);
