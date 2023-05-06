@@ -1602,7 +1602,6 @@ function loadData() {
         type.setAttribute("title","");
     }
 	if(returnData(i,"Type","")[0] != undefined) {
-		
 		type.querySelector(":scope > span:first-child > * > *:last-child").style.display = "none";
 		type.querySelector(":scope > span:first-child").classList.add("active");
 		type.querySelector(":scope > span:first-child img").style.display = "inline";
