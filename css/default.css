@@ -506,97 +506,6 @@ li:focus {
 
 
 
-*[name="Normal"] {
-	background: var(--typeNormal);
-}
-
-*[name="Fighting"] {
-	background: var(--typeFighting);
-}
-
-*[name="Flying"] {
-	background: var(--typeFlying);
-}
-
-*[name="Poison"] {
-	background: var(--typePoison);
-}
-
-*[name="Ground"] {
-	background: var(--typeGround);
-}
-
-*[name="Rock"] {
-	background: var(--typeRock);
-}
-
-*[name="Bug"] {
-	background: var(--typeBug);
-}
-
-*[name="Ghost"] {
-	background: var(--typeGhost);
-	color: var(--fontLight);
-}
-
-*[name="Steel"] {
-	background: var(--typeSteel);
-}
-
-*[name="Fire"] {
-	background: var(--typeFire);
-}
-
-*[name="Water"] {
-	background: var(--typeWater);
-}
-
-*[name="Grass"] {
-	background: var(--typeGrass);
-}
-
-*[name="Electric"] {
-	background: var(--typeElectric);
-}
-
-*[name="Psychic"] {
-	background: var(--typePsychic);
-}
-
-*[name="Ice"] {
-	background: var(--typeIce);
-}
-
-*[name="Dragon"] {
-	background: var(--typeDragon);
-	color: var(--fontLight);
-}
-
-*[name="Dark"] {
-	background: var(--typeDark);
-	color: var(--fontLight);
-}
-
-*[name="Fairy"] {
-	background: var(--typeFairy);
-}
-
-*[name="???"] {
-	background: var(--typeUnknown);
-}
-
-*[name="Physical"] {
-	background: var(--typePhysical);
-}
-
-*[name="Special"] {
-	background: var(--typeSpecial);
-}
-
-*[name="Status"] {
-	background: var(--typeStatus);
-}
-
 
 [name="statHP"] *,
 [name="statHP"] {
@@ -700,8 +609,8 @@ li:focus {
 
 
 
-.indicator.enabled,
-.indicator.ui-droppable-active {
+body.dragging .indicator.enabled,
+body.dragging .indicator.ui-droppable-active {
     background: linear-gradient(90deg, var(--border1) 50%, transparent 50%), 
                 linear-gradient(90deg, var(--border1) 50%, transparent 50%), 
                 linear-gradient(0deg, var(--border1) 50%, transparent 50%), 
@@ -711,9 +620,11 @@ li:focus {
     background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
     animation: dash 10s linear infinite;
 }
-.indicator.ui-droppable-active.ui-droppable-hover,
-.hover > .indicator.enabled,
-.indicator.enabled.hover {
+
+
+body.dragging .indicator.ui-droppable-active.ui-droppable-hover,
+body.dragging .hover > .indicator.enabled,
+body.dragging .indicator.enabled.hover {
 	background: linear-gradient(90deg, var(--colorGreen) 50%, transparent 50%), 
                 linear-gradient(90deg, var(--colorGreen) 50%, transparent 50%), 
                 linear-gradient(0deg, var(--colorGreen) 50%, transparent 50%), 
@@ -1266,5 +1177,6 @@ input[type=text] {
 .dropdown-toggle.active {
 	background: var(--color16);
 }
+
 
 
