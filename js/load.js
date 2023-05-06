@@ -68,6 +68,7 @@ var finaldataMoveCategory = [];
 var finaldataMoveID = [];
 var finaldataMoveType = [];
 var finaldataMovePriority = [];
+var finaldataMoveCall = [];
 var finaldataPokémonOffspring = [];
 var finaldataPokémonFormChange = [];
 var finaldataLocationPointOfInterest = [];
@@ -279,6 +280,9 @@ function requestLoad(i,url) {
 						for(var q = 0; q < Metadata["Priority"].length; q++) {
 							finaldataMovePriority.push(Metadata["Priority"][q]);
 						}
+						for(var q = 0; q < Metadata["Call"].length; q++) {
+							finaldataMoveCall.push(Metadata["Call"][q]);
+						}
 					}
 					
 					if (loads[i] == "Pokémon") {
@@ -462,7 +466,7 @@ function mapifyMap(base) {
 			if (getApplicable(finaldataLocation[i]["Game"])) {
 				var points = getMapPoints(finaldataLocation[i]["Location"],base);
 				if (points.length == 0) {
-					console.log(finaldataLocation[i]["Location"]+" returned an error.");
+					console.log("#DEBUG# "+finaldataLocation[i]["Location"]+" returned an error.");
 				}
 			}
 		}
