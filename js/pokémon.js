@@ -116,6 +116,100 @@ var createPokémon = function() {
     team.appendChild(teamParty);
     team.appendChild(teamBox);
     team.appendChild(teamNav);
+    var teamPartyBar = document.createElement("span");
+    teamParty.appendChild(teamPartyBar);
+
+
+    var teamPartyExport = document.createElement("figure");
+    teamPartyExport.setAttribute("name","export");
+    teamPartyBar.appendChild(teamPartyExport)
+    teamPartyExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+    var teamPartyExportText = document.createElement("small");
+    teamPartyExportText.innerText = "⮟";
+    teamPartyExport.appendChild(teamPartyExportText)
+    var teamPartyExportTop = document.createElement("div");
+    teamPartyExport.appendChild(teamPartyExportTop)
+    var teamPartyExportTopWrap = document.createElement("span");
+    teamPartyExportTop.appendChild(teamPartyExportTopWrap)
+    var teamPartyExportOpts = ["Import Pokémon","Copy Data Strings","Send to Damage Calculator"];
+
+    teamPartyExport.addEventListener("click",dropRelPos);
+
+    for(var e = 0; e < teamPartyExportOpts.length; e++) {
+        var teamPartyExportWrapTop = document.createElement("span");
+        var teamPartyExportWrap = document.createElement("b");
+        var teamPartyExportTxt = document.createElement("small");
+        teamPartyExportWrapTop.setAttribute("name",teamPartyExportOpts[e]);
+        teamPartyExportWrap.setAttribute("type","invert");
+        teamPartyExportTxt.innerText = teamPartyExportOpts[e];
+        teamPartyExportTopWrap.appendChild(teamPartyExportWrapTop);
+        teamPartyExportWrapTop.appendChild(teamPartyExportWrap);
+        teamPartyExportWrap.appendChild(teamPartyExportTxt);
+        teamPartyExportWrap.addEventListener("click",teamPartyExportFunction);
+    }
+    function teamPartyExportFunction() {
+        let base = findUpTag(this,"SECTION");
+        let tars = base.querySelectorAll(":scope > div:not([name='empty'])");
+
+        if (tars.length == 0) {
+            consoleText("No Pokémon in Party!");
+            return;
+        }
+        else {
+            var res = [];
+            for (var i = 0; i < tars.length; i++) {
+                res.push(getPartyData(tars[i]))
+            }
+        }
+
+        let dataStrings = res.join("\n");
+
+        let val = this.parentElement.getAttribute("name");
+
+        if (val == "Copy Data Strings") {
+            navigator.clipboard.writeText(dataStrings);
+            console.log(dataStrings);
+            consoleText("Copied!");
+        }
+        else if (val == "Send to Damage Calculator") {
+            let dmgBoxes = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+				
+
+            let vals = dmgBoxes.querySelectorAll(":scope li[name]");
+            let check = false;
+            if (vals.length == 0) {
+                check = true;
+            }
+            if (check) {
+                DMGBoxCreate(dmgBoxes,dataStrings);
+                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                return;
+            }
+            
+            
+         
+            
+
+            let ask = confirm("Do you want to replace exising Pokémon in the Box?");
+            if (ask) {
+                var oldEl = dmgBoxes.querySelectorAll(":scope li[name]");
+                for (var r = 0; r < oldEl.length; r++) {
+                    oldEl[r].remove();
+                }
+                DMGBoxCreate(dmgBoxes,dataStrings);
+                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                return;
+            }
+
+            let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
+            if (ask2) {
+                DMGBoxCreate(dmgBoxes,dataStrings);
+                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                return;
+            }
+        }
+    
+    }
 
 
 
@@ -179,9 +273,7 @@ var createPokémon = function() {
         var teamAdd = document.createElement("b");
         teamAdd.setAttribute("type","invert");
         var teamLeft = document.createElement("span");
-        var teamExit = document.createElement("select");
         var teamGrab = document.createElement("b");
-        teamGrab.setAttribute("type","invert");
         var teamPokémon = document.createElement("span");
 
 
@@ -190,11 +282,13 @@ var createPokémon = function() {
 
         var teamRight = document.createElement("span");
         var teamStatsButton = document.createElement("figure");
-        var teamExport = document.createElement("select");
+        var teamExit = document.createElement("figure");
         var teamLevel = document.createElement("input");
         var teamNickOuter = document.createElement("span");
         var teamNick = document.createElement("input");
 
+
+        teamDiv.setAttribute("data-string","");
         teamDiv.setAttribute("name","empty")
         teamImg.setAttribute("value","");
         teamImg.setAttribute("title","");
@@ -206,9 +300,6 @@ var createPokémon = function() {
         teamStatsButton.setAttribute("type","rotate");
         teamStatsButton.innerText = "⟲";
 
-        teamExit.setAttribute("type","icon");
-        teamExport.setAttribute("type","icon");
-
         teamAdd.innerText = "+";
         teamAdd.classList.add("indicator");
 
@@ -216,7 +307,8 @@ var createPokémon = function() {
         teamNickOuter.setAttribute("name","name");
         teamImgOuter.setAttribute("name","pokémon");
 
-
+    
+        teamExit.setAttribute("name","exit");
         teamLevel.setAttribute("type","number");
         teamLevel.setAttribute("min","0");
         teamLevel.setAttribute("max","100");
@@ -296,34 +388,236 @@ var createPokémon = function() {
 
 
 
+        teamExit.addEventListener("click",dropRelPos);
+        teamExit.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
 
-        var exitOptions = ["❌","Send to Box","Delete"];
-        for (var u = 0; u < exitOptions.length; u++) {
-            var teamExitOption = document.createElement("option");
-            teamExitOption.setAttribute("value",exitOptions[u]);
-            teamExitOption.innerText = exitOptions[u];
-            teamExit.appendChild(teamExitOption);
+        var teamExitTxt = document.createElement("small");
+        teamExitTxt.innerText = "❌";
+        teamExit.appendChild(teamExitTxt)
+
+        var teamExitTop = document.createElement("div");
+        teamExit.appendChild(teamExitTop)
+        var teamExitTopWrap = document.createElement("span");
+        teamExitTop.appendChild(teamExitTopWrap)
+
+        var teamExitOpts = ["Send to Box","Delete"];
+
+
+        for(var e = 0; e < teamExitOpts.length; e++) {
+            var teamExitWrapTop = document.createElement("span");
+            var teamExitWrap = document.createElement("b");
+            var teamExitText = document.createElement("small");
+            teamExitWrapTop.setAttribute("name",teamExitOpts[e]);
+            teamExitWrap.setAttribute("type","invert");
+            teamExitText.innerText = teamExitOpts[e];
+            teamExitTopWrap.appendChild(teamExitWrapTop);
+            teamExitWrapTop.appendChild(teamExitWrap);
+            teamExitWrap.appendChild(teamExitText);
+            teamExitWrap.addEventListener("click",teamExitChange);
         }
 
-        var exportOptions = ["⮟","Export Pokémon Data String","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
-        for (var u = 0; u < exportOptions.length; u++) {
-            var teamExportOption = document.createElement("option");
-            teamExportOption.setAttribute("value",exportOptions[u]);
-            teamExportOption.innerText = exportOptions[u];
-            teamExport.appendChild(teamExportOption);
+
+
+
+
+
+
+		var teamExport = document.createElement("figure");
+        teamExport.setAttribute("name","export");
+        teamLeft.appendChild(teamExport)
+
+        teamExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+
+        var teamExportTxt = document.createElement("small");
+        teamExportTxt.innerText = "⮟";
+        teamExport.appendChild(teamExportTxt)
+
+        var teamExportTop = document.createElement("div");
+        teamExport.appendChild(teamExportTop)
+        var teamExportTopWrap = document.createElement("span");
+        teamExportTop.appendChild(teamExportTopWrap)
+
+        teamExport.addEventListener("click",dropRelPos);
+       
+
+        var teamExportOpts = ["Copy Data String","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
+
+
+        for(var e = 0; e < teamExportOpts.length; e++) {
+            var teamExportWrapTop = document.createElement("span");
+            var teamExportWrap = document.createElement("b");
+            var teamExportText = document.createElement("small");
+            teamExportWrapTop.setAttribute("name",teamExportOpts[e]);
+            teamExportWrap.setAttribute("type","invert");
+            teamExportText.innerText = teamExportOpts[e];
+            teamExportTopWrap.appendChild(teamExportWrapTop);
+            teamExportWrapTop.appendChild(teamExportWrap);
+            teamExportWrap.appendChild(teamExportText);
+            teamExportWrap.addEventListener("click",teamExportChange);
         }
 
-        teamExit.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
-        teamExit.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-        teamExit.addEventListener("change", selectModify);
-        teamExport.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
-        teamExport.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-        teamExport.addEventListener("change", selectModify);
+        
 
 
-        var dataOptions = ["Moves","Stats","Additional"];
+        function teamExportChange() {
+            var tar = findUpAtt(this,"data-string");
+            var base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
+       
+            let val = this.parentElement.getAttribute("name");
+            let dataString = getPartyData(tar);
+            let dataStringObj = dataStringToObj(dataString);
+
+
+            let pok = dataStringObj["pok"];
+            let int = getPokémonInt(pok);
+
+
+
+            if (int == undefined) {
+                consoleText("An error occured.")
+                return;
+            }
+
+   
+            if (val == "Add Copy to Box") {
+                storeInBox(dataString);
+                consoleText("Copy added to Box.");
+            }
+            else if (val == "Add Copy to Party") {
+                if (base.length > 0) {
+                    createParty(base[0],dataString);
+                    partyShow(base[0]);
+                    consoleText("Copy added to Party.");
+                }
+                else {
+                    consoleText("Party is full!")
+                }
+            }
+            else if (val == "Copy Data String") {
+                navigator.clipboard.writeText(dataString);
+                console.log(dataString);
+                consoleText("Copied!");
+            }
+            else if (val == "Change Evolution") {
+                changePartyEvolution(tar,tar.querySelector(":scope img[value]").getAttribute("value"));
+            }
+            else if (val == "Change Form") {
+                changePartyForm(tar,tar.querySelector(":scope img[value]").getAttribute("value"));
+            }
+            else if (val == "Add to Damage Calculator") {
+                let dmgSlots = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > div > span[name='team 1'] > div[data-string]");
+            
+                let check = false;
+                for (var t = 0; t < dmgSlots.length; t++) {
+                    let ds = dmgSlots[t].getAttribute("data-string");
+                    let dsobj = dataStringToObj(ds);
     
-      
+                    if (dsobj["pok"] == undefined || dsobj["pok"] == "") {
+                       check = true;
+                    }
+
+                    if (check) {
+                        DMGSetDataString(dmgSlots[t],dataString);
+                        SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                        return;
+                    }
+                }
+
+          
+                let ask = confirm("Damage Calculator field is full.\nDo you want to replace existing Pokémon?");
+
+                if (ask) {
+                    DMGSetDataString(dmgSlots[0],dataString);
+                    SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                }
+                
+            }
+    
+
+
+
+ 
+
+
+
+
+
+
+
+        }
+
+        function teamExitChange() {
+            var tar = findUpAtt(this,"data-string");
+          
+            let val = this.parentElement.getAttribute("name");
+            let dataString = getPartyData(tar);
+            let dataStringObj = dataStringToObj(dataString);
+
+            let pok = dataStringObj["pok"];
+            let int = getPokémonInt(pok);
+
+            if (int == undefined) {
+                consoleText("An error occured.")
+                return;
+            }
+
+            if (val == "Delete") {
+                let ask = confirm("The Pokémon's data will not be saved.\nDo you want to continue?");
+                if (ask) {
+                    partyHide(tar);
+                    partyDefault(tar);
+                    consoleText("Pokémon deleted.");
+                }
+            }
+            else if (val == "Send to Box") {
+                consoleText("Sent "+pok+" to Box.");
+                storeInBox(dataString);
+                partyHide(tar);
+                partyDefault(tar);
+            }
+        }
+        function dropRelPos() {
+
+            let box = this.getBoundingClientRect();
+            let body = document.body;
+            let docEl = document.documentElement;
+        
+            let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+            let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+        
+            let clientTop = docEl.clientTop || body.clientTop || 0;
+            let clientLeft = docEl.clientLeft || body.clientLeft || 0;
+        
+            let top  = box.top + scrollTop - clientTop;
+            let left = box.left + scrollLeft - clientLeft;
+
+            let bodyY = body.getBoundingClientRect().bottom;
+            let bodyX = body.getBoundingClientRect().right;
+
+     
+            let y = top/bodyY;
+            let x = left/bodyX;
+
+            this.lastChild.className = "";
+
+            if (x > 0.5) {
+                this.lastChild.classList.add("right");
+            }
+            else {
+                this.lastChild.classList.add("left");
+            }
+
+            if (y < 0.5) {
+                this.lastChild.classList.add("top");
+            }
+            else {
+                this.lastChild.classList.add("bottom");
+            }
+        }
+        
+    
+        var dataOptions = ["Moves","Stats","Additional"];
+
         for (var u = 0; u < dataOptions.length; u++) {
             var teamData = document.createElement("span");
      
@@ -496,11 +790,7 @@ var createPokémon = function() {
                             teamDataAddInput.setAttribute("type","date");
                             teamDataAddInput.setAttribute("name","small");
                             teamDataAdd.appendChild(teamDataAddInput)
-                            teamDataAddInput.addEventListener("change", inputMinMax);
-                            teamDataAddInput.addEventListener("change", function() {this.blur();});
-                            teamDataAddInput.addEventListener("focus", function() {dateHideShow(event,"open");});
-                            teamDataAddInput.addEventListener("blur", function() {dateHideShow(event,"close");});
-                            teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+                            //teamDataAddInput.addEventListener("change", function() {consoleText("now1");this.blur();});   
                         }
                     }
 
@@ -577,16 +867,124 @@ var createPokémon = function() {
 
     var boxDiv = document.createElement("ul");
     teamBox.appendChild(boxDiv);
-    var teamBoxTrash = document.createElement("span");
-    var teamBoxTrashFigure = document.createElement("figure");
+
+
+
+    var teamBoxTrash = document.createElement("figure");
     var teamBoxTrashText = document.createElement("header");
     teamBoxTrashText.innerText = "🛇";
-    teamBoxTrashFigure.classList.add("deselect");
+    teamBoxTrash.setAttribute("name","trash");
     teamBox.appendChild(teamBoxTrash);
-    teamBoxTrash.appendChild(teamBoxTrashFigure);
-    teamBoxTrashFigure.appendChild(teamBoxTrashText);
+    teamBoxTrash.appendChild(teamBoxTrashText);
 
-    teamBoxTrashFigure.addEventListener("click", BoxDelete);
+    teamBoxTrash.addEventListener("click", BoxDelete);
+
+
+
+
+    var boxExport = document.createElement("figure");
+    boxExport.setAttribute("name","export");
+    teamBox.appendChild(boxExport)
+
+    boxExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+    var boxExportText = document.createElement("header");
+    boxExportText.innerText = "🟆";
+    boxExport.appendChild(boxExportText)
+    var boxExportTop = document.createElement("div");
+    boxExport.appendChild(boxExportTop)
+    var boxExportTopWrap = document.createElement("span");
+    boxExportTop.appendChild(boxExportTopWrap)
+    var boxExportOpts = ["Copy Data Strings","Send to Damage Calculator"];
+
+    boxExport.addEventListener("click",dropRelPos);
+
+    for(var e = 0; e < boxExportOpts.length; e++) {
+        var boxExportWrapTop = document.createElement("span");
+        var boxExportWrap = document.createElement("b");
+        var boxExportTxt = document.createElement("small");
+        boxExportWrapTop.setAttribute("name",boxExportOpts[e]);
+        boxExportWrap.setAttribute("type","invert");
+        boxExportTxt.innerText = boxExportOpts[e];
+        boxExportTopWrap.appendChild(boxExportWrapTop);
+        boxExportWrapTop.appendChild(boxExportWrap);
+        boxExportWrap.appendChild(boxExportTxt);
+        boxExportWrap.addEventListener("click",boxExportFunction);
+    }
+    function boxExportFunction() {
+        let base = findUpTag(this,"SECTION");
+        let tars = base.querySelectorAll(":scope ul li");
+
+        if (tars.length == 0) {
+            consoleText("No Pokémon in Box!");
+            return;
+        }
+        else {
+            var res = [];
+            for (var i = 0; i < tars.length; i++) {
+                res.push(getBoxData(tars[i]))
+            }
+        }
+
+
+        let dataStrings = res.join("\n");
+
+        let val = this.parentElement.getAttribute("name");
+
+        if (val == "Copy Data Strings") {
+            navigator.clipboard.writeText(dataStrings);
+            console.log(dataStrings);
+            consoleText("Copied!");
+        }
+        else if (val == "Send to Damage Calculator") {
+            let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+				
+            let vals = dmgBox.querySelectorAll(":scope li[name]");
+            let check = false;
+            if (vals.length == 0) {
+                check = true;
+            }
+            if (check) {
+                DMGBoxCreate(dmgBox,dataStrings);
+                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                return;
+            }
+            
+            let ask = confirm("Do you want to replace exising Pokémon in the Box?");
+            
+            if (ask) {
+                var oldEl = dmgBox.querySelectorAll(":scope li[name]");
+                for (var r = 0; r < oldEl.length; r++) {
+                    oldEl[r].remove();
+                }
+                DMGBoxCreate(dmgBox,dataStrings);
+                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                return;
+            }
+
+            let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
+            if (ask2) {
+                DMGBoxCreate(dmgBox,dataStrings);
+                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                return;
+            }
+        }
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function BoxDelete() {
@@ -596,16 +994,20 @@ var createPokémon = function() {
 
    
             if (lock) {
-                if (items.length > 0) {
-                    for (var u = 0; u < items.length; u++) {
-                        items[u].remove("hover");
-                    }
-                    boxMemory("Save");
+                let ask = confirm("This cannot be reverted.\nDo you want to continue?");
 
-                    consoleText("Box successfully cleared.");
-                }
-                else {
-                    consoleText ("No Pokémon found in Box.")
+                if (ask) {
+                    if (items.length > 0) {
+                        for (var u = 0; u < items.length; u++) {
+                            items[u].remove("hover");
+                        }
+                        boxMemory("Save");
+
+                        consoleText("Box successfully cleared.");
+                    }
+                    else {
+                        consoleText ("No Pokémon found in Box.")
+                    }
                 }
             }
     }
@@ -621,11 +1023,13 @@ var createPokémon = function() {
             start: function(e, ui) {
                 saveddrag = ui.item.context;
                 startDrag();
-                boxMemory("Save");                
+                boxMemory("Save");
+                document.body.classList.add("dragging");
             },
             stop: function(e, ui) {
                 stopDrag();
                 boxMemory("Save");
+                document.body.classList.remove("dragging");
             },
         });
 
@@ -637,7 +1041,7 @@ var createPokémon = function() {
             scroll: false,
         });
 
-        $('#pokémon > aside section[name="box"] > span').droppable({
+        $('#pokémon > aside section[name="box"] > figure[name="trash"]').droppable({
             drop: function(e, ui) {
                 if (saveddrag != undefined) {
                     deleteBox(saveddrag);
@@ -746,9 +1150,6 @@ var createPokémon = function() {
                 hovers[u].classList.remove("hover");
             }
         }
-       
-
-        
     });
 
     
@@ -756,8 +1157,11 @@ var createPokémon = function() {
         $('#pokémon > aside section[name="party"]').sortable({
             stop: function(e,ui) {
             },
+            handle:"aside > span:first-child > b:last-child",
+            cursor:"grabbing",
             axis: "y",
             scroll: false,
+            items:"> div",
         });
     });
     
@@ -991,7 +1395,6 @@ var createPokémon = function() {
     
 
     $( function() {
-        $('#pokémon > div li img').draggable();
         $('#pokémon > aside section[name="box"] ul').droppable();
     } );
 
@@ -1388,6 +1791,8 @@ function createContain(condition) {
                     contentInput.addEventListener("change",function() {memory("Save","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));});
                     contentInput.addEventListener("change", count);
 
+                    contentImg.addEventListener("dragstart",function(){document.body.classList.add("dragging");})
+                    contentImg.addEventListener("dragend",function(){document.body.classList.remove("dragging");})
 
                     for(q = 0; q < JSONPath_Pokédex.length; q++) {
                         let y = q+1;
@@ -1440,4 +1845,22 @@ function createContain(condition) {
         searchPokémonAttributes[q] = searchPokémonAttributes[q].replaceAll("data-search-","")
     }
 
+
+    
 }
+
+$("body").click(function(event) {
+	if(!$(event.target).closest("#pokémon > aside section[name='party'] figure[name='export'], #pokémon > aside section[name='party'] > span > figure[name='export']").length && !$(event.target).is("#pokémon > aside section[name='party'] figure[name='export'], #pokémon > aside section[name='party'] > span > figure[name='export']")) {
+		$("#pokémon > aside section[name='party'] figure[name='export'], #pokémon > aside section[name='party'] > span > figure[name='export']").removeClass("active");
+	}
+	if(!$(event.target).closest("#pokémon > aside section[name='party'] figure[name='export']").length && !$(event.target).is("#pokémon > aside section[name='party'] figure[name='export']")) {
+		$("#pokémon > aside section[name='party'] figure[name='export']").removeClass("active");
+	}
+    if(!$(event.target).closest("#pokémon > aside section[name='party'] figure[name='exit']").length && !$(event.target).is("#pokémon > aside section[name='party'] figure[name='exit']")) {
+		$("#pokémon > aside section[name='party'] figure[name='exit']").removeClass("active");
+	}
+    if(!$(event.target).closest("#pokémon > aside section[name='box'] figure[name='export']").length && !$(event.target).is("#pokémon > aside section[name='box'] figure[name='export']")) {
+		$("#pokémon > aside section[name='box'] figure[name='export']").removeClass("active");
+	}
+    
+});
