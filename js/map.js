@@ -749,7 +749,7 @@ var createMap = function() {
 		}
 
 
-		shops = sortObjectArray(shops, "Sort");
+		shops = sortObjectArray(shops,"Sort",true);
 
 		for(var q = 0; q < shops.length; q++) {
 			if (shops[q]["Sort"] == "a") {
@@ -975,7 +975,7 @@ var createMap = function() {
 		}
 
 
-		items = sortObjectArray(items, "Sort");
+		items = sortObjectArray(items,"Sort",true);
 
 		for(var q = 0; q < items.length; q++) {
 			if (items[q]["Sort"] == "a") {
@@ -1294,7 +1294,7 @@ var createMap = function() {
 		}
 
 
-		poks = sortObjectArray(poks, "Sort");
+		poks = sortObjectArray(poks,"Sort",true);
 
 		for(var q = 0; q < poks.length; q++) {
 			if (poks[q]["Sort"] == "a") {
@@ -1639,7 +1639,7 @@ var createMap = function() {
 			}
 		}
 
-		tutors = sortObjectArray(tutors, "Area");
+		tutors = sortObjectArray(tutors,"Area",true);
 
 		for(var q = 0; q < tutors.length; q++) {
 			if (tutors[q]["Area"] == "a") {
@@ -2068,11 +2068,11 @@ var createMap = function() {
 									if (finaldataLocationConnection[r]["Location"] == val[u]) {
 										if (finaldataLocationConnection[r][origin2[q]] != undefined) {
 											if (!finaldataLocationConnection[r][origin2[q]].includes(finaldataLocationConnection[i]["Location"])) {
-												console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+												console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
 											}
 										}
 										else {
-											console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+											console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
 										}
 									}
 								}
@@ -2085,11 +2085,11 @@ var createMap = function() {
 								if (finaldataLocationConnection[r]["Location"] == val[u]) {
 									if (finaldataLocationConnection[r][origin2[q]] != undefined) {
 										if (!finaldataLocationConnection[r][origin2[q]].includes(finaldataLocationConnection[i]["Location"])) {
-											console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+											console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
 										}
 									}
 									else {
-										console.log(finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+										console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
 									}
 								}
 							}
@@ -2210,14 +2210,13 @@ function updateTrainer(trainers,condition) {
 	var trainerRewardCount = trainers[q]["Reward Quantity"];
 	var trainerGender = trainers[q]["Gender"];
 	var trainerCount =  trainers[q]["Count"];
-	
-	
 	var trainerNote = trainers[q]["Note"];
 	var trainerArea = trainers[q]["Area"];
 	var trainerTitle = trainers[q]["Title"];
-
-
 	var trainerType = trainers[q]["Type"];
+
+
+
 
 
 	var trainerInfo = [];
@@ -2317,9 +2316,6 @@ function updateTrainer(trainers,condition) {
 
 	nameText.innerText = trainerClass+"\n"+trainerName;
 
-
-
-
 	previousPath.appendChild(previousImg);
 	currentPath.appendChild(currentImg);
 	nextPath.appendChild(nextImg);
@@ -2328,8 +2324,6 @@ function updateTrainer(trainers,condition) {
 
 	previousImg.addEventListener("click",function(){updateTrainer(trainers,"remove")});
 	nextImg.addEventListener("click",function(){updateTrainer(trainers,"add")});
-
-
 
 	if (trainerReward != undefined) {
 
@@ -2386,11 +2380,6 @@ function updateTrainer(trainers,condition) {
 		rewardWrap.setAttribute("name","item");
 		rewardWrap.setAttribute("value",trainerReward);
 	}
-
-
-
-
-
 
 	if (trainerInfo.length > 0) {
 		var titleText = document.createElement("small");
@@ -2454,7 +2443,8 @@ function updateTrainer(trainers,condition) {
 		datas = [datas]
 	}
 
-	
+
+
 	for(var u = 0; u < datas.length; u++) {
 	
 		var data = datas[u];
@@ -2530,32 +2520,218 @@ function updateTrainer(trainers,condition) {
 			}
 		}
 
-		
 
-		if (trainers[q]["Grouping"] != undefined) {
-			if (trainers[q]["Grouping"].includes("|")) {
-				if (!groups.includes(trainers[q]["Grouping"].split("|")[u])) {
-					var grp = document.createElement("span");
-					var grptxt = document.createElement("h6");
-					grptxt.innerText = trainers[q]["Grouping"].split("|")[u];
-					ulPath.appendChild(grp);
-					grp.appendChild(grptxt);
+
+
+		
+		var grp = trainers[q]["Grouping"];
+		if (u == 0) {
+			grp = undDel(grp,"Pokémon");
+		}
+
+		if (grp != undefined) {
+			if (grp.includes("|")) {
+				if (!groups.includes(grp.split("|")[u])) {
+					var grpWrap = document.createElement("span");
+					var grpTxt = document.createElement("h6");
+					grpTxt.innerText = grp.split("|")[u];
+					ulPath.appendChild(grpWrap);
+					grpWrap.appendChild(grpTxt);
+					
+
+					var grpFig = document.createElement("figure");
+					grpFig.setAttribute("name","export");
+					grpWrap.appendChild(grpFig)
+					grpFig.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+					var grpFigText = document.createElement("small");
+					grpFigText.innerText = "⮟";
+					grpFig.appendChild(grpFigText)
+					var grpFigTop = document.createElement("div");
+					grpFig.appendChild(grpFigTop)
+					var grpFigTopWrap = document.createElement("span");
+					grpFigTop.appendChild(grpFigTopWrap)
+					var grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
+	
+					for(var e = 0; e < grpFigOpts.length; e++) {
+						var grpFigWrapTop = document.createElement("span");
+						var grpFigWrap = document.createElement("b");
+						var grpFigTxt = document.createElement("small");
+						grpFigWrapTop.setAttribute("name",grpFigOpts[e]);
+						grpFigWrap.setAttribute("type","invert");
+						grpFigTxt.innerText = grpFigOpts[e];
+						grpFigTopWrap.appendChild(grpFigWrapTop);
+						grpFigWrapTop.appendChild(grpFigWrap);
+						grpFigWrap.appendChild(grpFigTxt);
+						grpFigWrap.addEventListener("click",grpFigFunction);
+					}
 				}
 		
-				groups.push(trainers[q]["Grouping"].split("|")[u])
+				groups.push(grp.split("|")[u])
 			}
 			else {
-				if (!groups.includes(trainers[q]["Grouping"])) {
-					var grp = document.createElement("span");
-					var grptxt = document.createElement("h6");
-					grptxt.innerText = trainers[q]["Grouping"];
-					ulPath.appendChild(grp);
-					grp.appendChild(grptxt);
+				if (!groups.includes(grp)) {
+					var grpWrap = document.createElement("span");
+					var grpTxt = document.createElement("h6");
+					grpTxt.innerText = grp;
+					ulPath.appendChild(grpWrap);
+					grpWrap.appendChild(grpTxt);
+
+
+					var grpFig = document.createElement("figure");
+					grpFig.setAttribute("name","export");
+					grpWrap.appendChild(grpFig)
+					grpFig.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+					var grpFigText = document.createElement("small");
+					grpFigText.innerText = "⮟";
+					grpFig.appendChild(grpFigText)
+					var grpFigTop = document.createElement("div");
+					grpFig.appendChild(grpFigTop)
+					var grpFigTopWrap = document.createElement("span");
+					grpFigTop.appendChild(grpFigTopWrap)
+					var grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
+	
+					for(var e = 0; e < grpFigOpts.length; e++) {
+						var grpFigWrapTop = document.createElement("span");
+						var grpFigWrap = document.createElement("b");
+						var grpFigTxt = document.createElement("small");
+						grpFigWrapTop.setAttribute("name",grpFigOpts[e]);
+						grpFigWrap.setAttribute("type","invert");
+						grpFigTxt.innerText = grpFigOpts[e];
+						grpFigTopWrap.appendChild(grpFigWrapTop);
+						grpFigWrapTop.appendChild(grpFigWrap);
+						grpFigWrap.appendChild(grpFigTxt);
+						grpFigWrap.addEventListener("click",grpFigFunction);
+					}
 				}
 		
-				groups.push(trainers[q]["Grouping"])
+				groups.push(grp)
+			}
+			function grpFigFunction() {
+
+			
+				const val = this.parentElement.getAttribute("name");
+				const dataStrings = findUpAtt(this,"data-string").getAttribute("data-string");
+				const base = findUpAtt(this,"data-string");
+
+				let battleType = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div").getAttribute("data-type");
+				battleType = undDel(battleType,"");
+	
+				let sel = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span:first-child > select");
+				let els = sel.querySelectorAll(":scope option")
+				let el = sel.querySelector(":scope option[value='"+sel.getAttribute("value")+"']")
+
+
+				if (battleType != undefined) {
+					for (var t = 0; t < els.length; t++) {
+						if (els[t].getAttribute("value").includes(battleType)) {
+							el = els[t];
+							break;
+						}
+					}
+				}
+				
+
+				let suggestChange = false;
+
+				if (sel.value != el.value) {
+					suggestChange = true;
+				}
+		
+
+	
+				if (val == "Copy Data Strings") {
+					navigator.clipboard.writeText(dataStrings);
+					console.log(dataStrings)
+					consoleText("Copied Data String!")
+				}
+				else if (val == "Send to Damage Calculator") {
+					let dmgBoxes = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name]:not([name='team 1'])");
+
+					if (base.firstChild.innerText != undefined) {
+						if (base.firstChild.innerText.toLowerCase().includes("player")) {
+							dmgBoxes = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+						}
+					}
+				
+					for (var t = 0; t < dmgBoxes.length; t++) {
+						let vals = dmgBoxes[t].querySelectorAll(":scope li[name]");
+						let check = false;
+						if (vals.length == 0) {
+							check = true;
+						}
+						if (check) {
+							if (suggestChange) {
+								sel.value = el.value;
+								const preval = sel.getAttribute("name");
+								let x = sel.value;
+								let y = sel.querySelector(":scope option[value='"+x+"']");
+								let keys = y.getAttributeNames();
+								for(var q = 0; q < keys.length; q++) {
+									let val1 = keys[q];
+									let val2 = y.getAttribute(keys[q]);
+									sel.setAttribute(val1,val2);
+								}
+								buildDMG(preval)
+							}
+							DMGBoxCreate(dmgBoxes[t],dataStrings);
+							SwitchTab("Tools",document.querySelector("#tool-options-0"));
+							return;
+						}
+					}
+					
+				
+			
+					let ask = confirm("Do you want to replace existing Pokémon in the Box?");
+					if (ask) {
+						var oldEl = dmgBoxes[0].querySelectorAll(":scope li[name]");
+						for (var r = 0; r < oldEl.length; r++) {
+							oldEl[r].remove();
+						}
+						if (suggestChange) {
+							sel.value = el.value;
+							const preval = sel.getAttribute("name");
+							let x = sel.value;
+							let y = sel.querySelector(":scope option[value='"+x+"']");
+							let keys = y.getAttributeNames();
+							for(var q = 0; q < keys.length; q++) {
+								let val1 = keys[q];
+								let val2 = y.getAttribute(keys[q]);
+								sel.setAttribute(val1,val2);
+							}
+							buildDMG(preval)
+						}
+						DMGBoxCreate(dmgBoxes[0],dataStrings);
+						SwitchTab("Tools",document.querySelector("#tool-options-0"));
+						return;
+					}
+
+					let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
+					if (ask2) {
+						if (suggestChange) {
+							sel.value = el.value;
+							const preval = sel.getAttribute("name");
+							let x = sel.value;
+							let y = sel.querySelector(":scope option[value='"+x+"']");
+							let keys = y.getAttributeNames();
+							for(var q = 0; q < keys.length; q++) {
+								let val1 = keys[q];
+								let val2 = y.getAttribute(keys[q]);
+								sel.setAttribute(val1,val2);
+							}
+							buildDMG(preval)
+						}
+						DMGBoxCreate(dmgBoxes[0],dataStrings);
+						SwitchTab("Tools",document.querySelector("#tool-options-0"));
+						return;
+					}
+					
+				}
+			
+				
 			}
 		}
+
+
 
 
 		var li = document.createElement("li");
@@ -2567,6 +2743,9 @@ function updateTrainer(trainers,condition) {
 		li.appendChild(liAdditional);
 
 
+
+
+		
 
 		if (u == 0) {
 
@@ -2639,7 +2818,7 @@ function updateTrainer(trainers,condition) {
 					abilityWrap.title += "\n"+desc[0]["Description"];
 				}
 				else {
-					console.log(ability+" is missing description?");
+					console.log("#DEBUG# "+ability+" is missing description?");
 				}
 				abilityWrap.setAttribute("name","ability");
 				pokLeftWrap.appendChild(abilityWrap);
@@ -2735,12 +2914,12 @@ function updateTrainer(trainers,condition) {
 				pokRightMovesWrap.setAttribute("function","dataRedirect");
 				if (moves[y] != "") {
 					if(returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y]) == undefined) {
-						console.log(moves[y]+" needs formatting?");
+						console.log("#DEBUG# "+moves[y]+" needs formatting?");
 					}
 					
 					var moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
 					if (!moveset.includes(moves[y])) {
-						console.log(pok+" cannot learn "+moves[y]+"?");
+						console.log("#DEBUG# "+pok+" cannot learn "+moves[y]+"?");
 					}
 
 				}
@@ -2808,22 +2987,9 @@ function updateTrainer(trainers,condition) {
 		}
 
 
-		var tempArr = datas[u].split("|")
-		for(var y = 0; y < tempArr.length; y++) {
-			var first = tempArr[y].split(":")[0];
-			var last = tempArr[y].split(":")[1]
-			if (first == "ab") {
-				tempArr[y] = first+":"+getAbilityPosition(getPokémonInt(pok),ability);
-			}
-		}
-		var tempStr = tempArr.join("|")
-
 		var exportButton = document.createElement("figure");
 		var exportButtonText = document.createElement("p");
 		exportButtonText.innerText = "⮟";
-
-	
-		exportButton.value = tempStr;
 		exportButton.title = "Export Pokémon Buttons String";
 		exportButton.setAttribute("name","export");
 		exportButton.setAttribute("type","scale");
@@ -2832,14 +2998,70 @@ function updateTrainer(trainers,condition) {
 
 		exportButton.addEventListener("click", trainerPokExport);
 
+		li.setAttribute("data-string",datas[u]);
 
+
+
+
+		let eles = [];
+		let startEle = li;
+		for(var y = 0; y < 1000; y++) {
+			if (startEle != undefined && startEle.tagName != "SPAN") {
+				eles.push(startEle);
+				startEle = startEle.previousElementSibling;
+			}
+			else {
+				break;
+			}
+		}
+		startEle = li.nextElementSibling;
+		for(var y = 0; y < 1000; y++) {
+			if (startEle != undefined && startEle.tagName != "SPAN") {
+				eles.push(startEle);
+				startEle = startEle.nextElementSibling;
+			}
+			else {
+				break;
+			}
+		
+		}
+		eles = eles.reverse();
+		for(var y = 0; y < eles.length; y++) {
+			eles[y] = eles[y].getAttribute("data-string");
+		}
+		startEle = li;
+		for(var y = 0; y < 1000; y++) {
+			if (startEle.tagName == "SPAN") {
+				if (eles.length > 0) {
+					startEle.setAttribute("data-string",eles.join("\n"));
+				}
+				else {
+					startEle.setAttribute("data-string","");
+				}
+				break;
+			}
+			else {
+				startEle = startEle.previousElementSibling;
+			}
+		}
 
 
 	}
 	
-
-
-
+	trainerName = undDel(trainerName,"");
+	trainerClass = undDel(trainerClass,"");
+	trainerGender = undDel(trainerGender,"");
+	trainerCount = undDel(trainerCount,"");
+	trainerArea = undDel(trainerArea,"");
+	trainerType = undDel(trainerType,"");
+	let basediv = base.querySelector(":scope > div");
+	basediv.setAttribute("data-name",trainerName);
+	basediv.setAttribute("data-class",trainerClass);
+	basediv.setAttribute("data-gender",trainerGender);
+	basediv.setAttribute("data-count",trainerCount);
+	basediv.setAttribute("data-area",trainerArea);
+	basediv.setAttribute("data-type",trainerType);
+	
 }
 
 
@@ -2867,7 +3089,11 @@ $("body").click(function(event) {
 	if(!$(event.target).closest("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search']").length && !$(event.target).is("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search']")) {
 		$("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol").removeClass("active");
 	}
+	if(!$(event.target).closest("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']").length && !$(event.target).is("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']")) {
+		$("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']").removeClass("active");
+	}
 });
+
 
 
 function updateTitleHeader(what) {
