@@ -307,18 +307,246 @@
     height: 100%;
 	position:relative;
     width: 80%;
+	overflow: hidden;
 }
+#pokémon > aside section[name='box'] {
+	overflow:unset;
+}
+#pokémon > aside section[name='party'] > span {
+	height: 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+}
+
+#pokémon > aside section[name='party'] figure[name='exit'] > * *,
+#pokémon > aside section[name='box'] figure[name='export'] > * *,
+#pokémon > aside section[name='party'] figure[name='export'] > * * {
+	color:var(--fontDark) !important;
+}
+
+#pokémon > aside[name="team"] section[name]:not(.open):not(.switch) figure[name='export'],
+#pokémon > aside section[name='box'] figure[name='trash'] {
+	max-width: 100%;
+	overflow:hidden;
+}
+#pokémon > aside section[name='box'] figure[name='export'] {
+	position:absolute;
+	bottom: 10px;
+	right:10px;
+	font-size: 120%;
+}
+
+#pokémon > aside section[name='box'] figure[name='export'] > span:first-child {
+	color: var(--color_70);
+    text-shadow: 0 0 2px #000;
+}
+#pokémon > aside section[name='box'] figure[name='export'] > div {
+	font-size:initial;
+}
+
+
+
+#pokémon > aside section[name='party'] figure[name='exit'] > div,
+#pokémon > aside section[name='box'] figure[name='export'] > div,
+#pokémon > aside section[name='party'] figure[name='export'] > div,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div {
+	position:relative;
+	z-index: 100;
+	text-align: center;
+}
+
+
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span {
+	top:0;
+	left:0;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    min-width: 100px;
+    background: #fff;
+    width: 100%;
+    color: var(--fontDark);
+}
+
+
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div.top > span,
+#pokémon > aside section[name='box'] figure[name='export'] > div.top > span,
+#pokémon > aside section[name='party'] figure[name='export'] > div.top > span,
+#pokémon > aside section[name='party'] figure[name='exit'] > div.top > span {
+	top:0;
+	bottom:unset;
+}
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div.bottom > span,
+#pokémon > aside section[name='box'] figure[name='export'] > div.bottom > span,
+#pokémon > aside section[name='party'] figure[name='export'] > div.bottom > span,
+#pokémon > aside section[name='party'] figure[name='exit'] > div.bottom > span {
+	bottom:0;
+	top:unset;
+}
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div.left > span,
+#pokémon > aside section[name='box'] figure[name='export'] > div.left > span,
+#pokémon > aside section[name='party'] figure[name='export'] > div.left > span,
+#pokémon > aside section[name='party'] figure[name='exit'] > div.left > span {
+	left:0;
+	right:unset;
+}
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div.right > span,
+#pokémon > aside section[name='box'] figure[name='export'] > div.right > span,
+#pokémon > aside section[name='party'] figure[name='export'] > div.right > span,
+#pokémon > aside section[name='party'] figure[name='exit'] > div.right > span {
+	right:0;
+	left:unset;
+}
+
+#pokémon > aside section[name='party'] figure[name='export'] > div > span {
+	right:0 !important;
+	left:unset !important;
+}
+
+
+#pokémon > aside section[name='box'] figure[name='export'] > div > span {
+	bottom:50px !important;
+	top:unset !important;
+	right:50px !important;
+	left:unset !important;
+}
+
+ 
+
+#pokémon > aside section[name='party'] figure[name='exit'] > *:first-child,
+#pokémon > aside section[name='box'] figure[name='export'] > *:first-child,
+#pokémon > aside section[name='party'] figure[name='export'] > *:first-child,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > *:first-child {
+	width:100%;
+	height:100%;
+	display:block;
+	transition: .2s ease;
+}
+
+
+#pokémon > aside section[name='box'] figure[name='export']:active > header,
+#pokémon > aside section[name='box'] figure[name='export'].active > header {
+	filter:invert(0.3);
+	transform:rotate(22.5deg);
+}
+
+
+
+
+
+#pokémon > aside section[name='party'] figure[name='export']:not(.active) > small,
+#pokémon > aside section[name='party'] > span > figure[name='export']:not(.active) > small {
+	transform: rotate(-90deg);
+}
+
+#pokémon > aside section[name='party'] figure[name='exit']:active > small,
+#pokémon > aside section[name='party'] figure[name='exit'].active > small {
+	transform:scale(0.9);
+}
+
+#pokémon > aside section[name='party'] figure[name='export']:active > small,
+#pokémon > aside section[name='party'] figure[name='export'].active > small,
+#pokémon > aside section[name='party'] > span > figure[name='export']:active > small,
+#pokémon > aside section[name='party'] > span > figure[name='export'].active > small {
+	filter:invert(0.3);
+}
+
+#pokémon > aside section[name='party'] figure[name='exit']:not(.active) > div > span,
+#pokémon > aside section[name='box'] figure[name='export']:not(.active) > div > span,
+#pokémon > aside section[name='party'] figure[name='export']:not(.active) > div > span,
+#pokémon > aside section[name='party'] > span > figure[name='export']:not(.active) > div > span {
+	display: none;
+}
+
+
+
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span > span,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span > span,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span > span,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span > span {
+	display: block;
+    border: 1px solid;
+    width: 100%;
+    border-bottom: 0;
+}
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span > span:last-child,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span > span:last-child,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span > span:last-child,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span > span:last-child {
+    border-bottom: 1px solid;
+}
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span > span:hover,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span > span:hover,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span > span:hover,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span > span:hover,
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span > span:active,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span > span:active,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span > span:active,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span > span:active {
+	background: var(--color_50);
+    color: var(--fontLight);
+}
+
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span > span > b,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span > span > b,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span > span > b,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span > span > b {
+    padding: 2px 0;
+}
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span > span > b,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span > span > b,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span > span > b,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span > span > b,
+#pokémon > aside section[name='party'] figure[name='exit'] > div > span > span > b > small,
+#pokémon > aside section[name='box'] figure[name='export'] > div > span > span > b > small,
+#pokémon > aside section[name='party'] figure[name='export'] > div > span > span > b > small,
+#pokémon > aside section[name='party'] > span > figure[name='export'] > div > span > span > b > small {
+	font-weight: normal;
+	width:100%;
+	height:100%;
+	display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #pokémon > aside  {
     transform-origin:left;
 }
-#pokémon > aside[name="team"] section[name] > span,
 #pokémon > aside[name="team"] section[name] {
     width: 0vw;
 }
-#pokémon > aside[name="team"] section[name].open > span,
-#pokémon > aside[name="team"] section[name].switch > span {
-    width: unset;
-}
+
 #pokémon > aside[name="team"] section[name].open,
 #pokémon > aside[name="team"] section[name].switch {
     width: min(max(300px, 20vw), 500px);
@@ -382,9 +610,14 @@
 	padding: 5px;
 	margin: 2px 0;
 }
-#pokémon > aside section[name="party"] * {
+#pokémon > aside section[name="party"] > div * {
 	color:var(--fontLight);
 }
+
+#pokémon > aside section:not([name]) p {
+	pointer-events: none;	
+}
+
 #pokémon > aside section > b {
 	width: 100%;
 	height: 100%;
@@ -408,11 +641,10 @@
 #pokémon > aside section > b:active {
     font-weight: bold;
 }
-#pokémon > aside section div {
+#pokémon > aside section > div {
     width: 100%;
-	height: 16.66667%;
+    height: 15.83333%;
     position: relative;
-	overflow:hidden;
 	background: var(--color17);
 	border: 1px solid;
 }
@@ -478,7 +710,7 @@
 	width: 100%;
 	height: 100%;
 }
-#pokémon > aside section[name="box"] > span {
+#pokémon > aside section[name="box"] > figure[name='trash'] {
     position:absolute;
     bottom: 10px;
     left: 10px;
@@ -498,23 +730,20 @@
     align-content: flex-start;
 	overflow:auto;
 }
-#pokémon > aside section[name="box"] > span {
+#pokémon > aside section[name="box"] > figure[name='trash'] {
 	position:absolute;
 	left: 10px;
 	bottom: 10px;
-}
-#pokémon > aside section[name="box"] > span figure {
-	width: 100%;
-	height: 100%;
 	object-fit: scale-down;
     transition:.2s ease filter;
 }
-#pokémon > aside section[name="box"] > span figure:hover,
-#pokémon > aside section[name="box"] > span.ui-droppable-active figure {
+
+#pokémon > aside section[name="box"] > figure[name='trash']:hover,
+#pokémon > aside section[name="box"] > figure[name='trash'].ui-droppable-active {
 	animation: scale80 infinite 2s linear;
 }
-#pokémon > aside section[name="box"] > span figure:active,
-#pokémon > aside section[name="box"] > span.ui-droppable-hover.ui-droppable-active.ui-droppable figure {
+#pokémon > aside section[name="box"] > figure[name='trash']:active,
+#pokémon > aside section[name="box"] > figure[name='trash'].ui-droppable-hover.ui-droppable-active.ui-droppable {
 	filter: grayscale(0.8);
     animation-play-state: paused;
 }
@@ -535,19 +764,23 @@
 #pokémon > aside section[name="box"] ul li img {
 	position:inherit;
 }
+#pokémon > aside section[name="box"] ul li:active img {
+	pointer-events:none;
+}
+
 #pokémon > div li img {
     -webkit-user-drag: auto;
 }
-#pokémon > aside[name='team'] div button {
+#pokémon > aside[name='team'] section > div button {
     cursor: pointer;
 	transition: .25s ease opacity .25s, .1s linear;
 }
-#pokémon > aside[name='team'] div aside > span:first-child select,
-#pokémon > aside[name='team'] div aside > span:last-child select:last-child {
+#pokémon > aside[name='team'] section > div aside > span:first-child select,
+#pokémon > aside[name='team'] section > div aside > span:last-child select:last-child {
 	font-style: normal;
 }
-#pokémon > aside[name='team'] div aside > span:first-child select:focus,
-#pokémon > aside[name='team'] div aside > span:last-child select:last-child:focus {
+#pokémon > aside[name='team'] section > div aside > span:first-child select:focus,
+#pokémon > aside[name='team'] section > div aside > span:last-child select:last-child:focus {
 	background: none;
     border: none;
 	color: var(--fontLight);
@@ -555,17 +788,23 @@
 	font-style:normal;
 	outline:none;
 }
-#pokémon > aside[name='team'] div aside > span:first-child select > option:first-child,
-#pokémon > aside[name='team'] div aside > span:last-child select:last-child > option:first-child {
+#pokémon > aside[name='team'] section > div aside > span:first-child select > option:first-child,
+#pokémon > aside[name='team'] section > div aside > span:last-child select:last-child > option:first-child {
 	display: none;
 }
-#pokémon > aside[name='team'] div span b:first-child:active {
+#pokémon > aside[name='team'] section > div span b:first-child:active {
 	filter: unset;
 }
-#pokémon > aside[name='team'] div span:first-child b:last-child {
-	pointer-events: none;
+
+
+#pokémon > aside section[name="party"] div aside > span:first-child > b:last-child:active {
+    cursor:grabbing;
+}
+
+#pokémon > aside section[name="party"] div aside > span:first-child > b:last-child {
     font-weight: normal;
     font-size: unset;
+	cursor:grab;
 }
 #pokémon > aside div span[name='settings'] button:first-child:active {
 	transform: rotate(-180deg);
@@ -601,6 +840,10 @@
     align-items: stretch;
     flex-wrap: wrap;
     align-content: stretch;
+}
+
+#pokémon > aside section[name="party"] div aside > span.scroll > span {
+	padding: 2px 0;
 }
 #pokémon > aside section[name="party"] div aside > span:last-child select:nth-child(2):not(:last-child) {
 	text-shadow: rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px, rgb(0 0 0 / 80%) 0px 0px 0px;
@@ -690,6 +933,7 @@
 #pokémon > aside section[name="party"] div span select,
 #pokémon > aside section[name="party"] div span option {
 	text-align: center;
+	outline: none;
 }
 #pokémon > aside div aside > span input,
 #pokémon > aside div aside > span select,
@@ -699,18 +943,12 @@
 	cursor: pointer;
 	color: var(--fontLight);
 }
-#pokémon > aside div aside > span input:focus-within,
-#pokémon > aside div aside > span select:focus-within,
-#pokémon > aside div aside > span select:focus-within * {
-	background: var(--color_97);
-    border: unset;
-	color: var(--fontDark);
-	cursor: auto;
-	font-style:normal;
-}
+
 #pokémon > aside div aside > span input {
     width: 90%;
 	text-align: center;
+	outline: none;
+    border-radius: 0;
 }
 #pokémon > aside[name='team'] select {
 	font-style: italic;
@@ -976,9 +1214,7 @@
 #pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name="date"] input {
 	color: transparent;
 }
-#pokémon > aside section[name="party"] div aside > span[name="additional"] > span label[name="date"] input:focus {
-    color: var(--fontDark);
-}
+
 #pokémon > aside section[name="party"] div aside > span[name="additional"] select {
 	font-style:normal;
 }
@@ -988,6 +1224,20 @@
 #pokémon > aside section[name="party"] select option[disabled] {
 	display: none;
 }
+
+#pokémon > aside div aside > span input:focus-within,
+#pokémon > aside div aside > span select:focus-within,
+#pokémon > aside div aside > span select:focus-within * {
+	background: var(--color_97);
+    border: unset;
+	color: var(--fontDark) !important;
+	cursor: auto;
+	font-style:normal;
+}
+
+
+
+
 #imgtype {
 	display: inline-block;
 	width: 80%;
