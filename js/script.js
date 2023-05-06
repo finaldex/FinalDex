@@ -1182,7 +1182,7 @@ function createParty(base,data) {
     var baseMetLevel = base.querySelector(':scope span[name="additional"] label[name="level"] input');
     var baseMetDate = base.querySelector(':scope span[name="additional"] label[name="date"] input');
     var baseFriendship = base.querySelector(':scope span[name="additional"] label[name="friendship"] input');
-    var baseExport = base.querySelector(':scope aside > span:last-child > select:last-child');
+    var baseExport = base.querySelector(":scope aside figure[name='export']");
 
 
     var imgtype = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"]');
@@ -1219,7 +1219,7 @@ function createParty(base,data) {
         var items = [];
         var result = finaldataItems.map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
 
-        items = sortObjectArray(result,"Pocket");
+        items = sortObjectArray(result,"Pocket",true);
 
         var obj = new Object();
         obj["Item"] = "Item";
@@ -1353,17 +1353,17 @@ function createParty(base,data) {
 
 
     if (getEvolutionFamily(i).length > 1) {
-        baseExport.querySelector(':scope > option[value="Change Evolution"]').removeAttribute("disabled");
+        baseExport.querySelector(':scope *[name="Change Evolution"]').style.removeProperty("display");
     }
     else {
-        baseExport.querySelector(':scope > option[value="Change Evolution"]').setAttribute("disabled","");
+        baseExport.querySelector(':scope *[name="Change Evolution"]').style.display = "none";
     }
 
     if (getPokémonForm(i).length > 1) {
-        baseExport.querySelector(':scope > option[value="Change Form"]').removeAttribute("disabled");
+        baseExport.querySelector(':scope *[name="Change Form"]').style.removeProperty("display");
     }
     else {
-        baseExport.querySelector(':scope > option[value="Change Form"]').setAttribute("disabled","");
+        baseExport.querySelector(':scope *[name="Change Form"]').style.display = "none";
     }
 
 
@@ -1870,53 +1870,7 @@ function selectModify(e) {
     }
 
 
-    if (this.firstElementChild.value == "⮟") {
-        var tar = this.parentElement.parentElement.parentElement;
-        var base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
-   
 
-        if (this.value == "Add Copy to Box") {
-            storeInBox(getPartyData(tar));
-            consoleText("Copy added to Box.");
-        }
-        else if (this.value == "Add Copy to Party") {
-            if (base.length > 0) {
-                createParty(base[0],getPartyData(tar));
-                partyShow(base[0]);
-                consoleText("Copy added to Party.");
-            }
-            else {
-                consoleText("Party is full!")
-            }
-        }
-        else if (this.value == "Export Pokémon Data String") {
-            navigator.clipboard.writeText(getPartyData(tar));
-            console.log(getPartyData(tar));
-            consoleText("Copied!");
-        }
-        else if (this.value == "Change Evolution") {
-            changePartyEvolution(tar,tar.querySelector(":scope img[value]").getAttribute("value"));
-        }
-        else if (this.value == "Change Form") {
-            changePartyForm(tar,tar.querySelector(":scope img[value]").getAttribute("value"));
-        }
-        this.value = "⮟";
-    }
-    if (this.firstElementChild.value == "❌") {
-        var tar = this.parentElement.parentElement.parentElement;
-        if (this.value == "Delete") {
-            partyHide(tar);
-            partyDefault(tar);
-            consoleText("Pokémon deleted.");
-        }
-        else if (this.value == "Send to Box") {
-            consoleText("Sent "+getPartyData(tar).split("|")[0].split("pok:")[1]+" to Box.");
-            storeInBox(getPartyData(tar));
-            partyHide(tar);
-            partyDefault(tar);
-        }
-        this.value = "❌";
-    }
 
     if (this.firstElementChild.value.includes("Move")) {
         var sel = this.parentElement.parentElement.querySelectorAll(':scope select');
@@ -1957,6 +1911,7 @@ function storeInBox(data) {
 
     var data;
     var box = document.querySelector('#pokémon > aside[name="team"] > section[name="box"] ul');
+    const datastr = data;
 
     var i;
     var pok;
@@ -2067,8 +2022,6 @@ function storeInBox(data) {
         }
     }
 
-
-
     i = getPokémonInt(pok);
 
     var li = document.createElement("li");
@@ -2125,45 +2078,8 @@ function storeInBox(data) {
     }
    
 
-    var titlearr = [];
-
-    if (level != undefined) {
-        titlearr.push("Lv. "+level)
-    }
-    if (nick != undefined && gender != undefined) {
-        titlearr.push(gender+" "+pok+" ("+nick+")");
-    }
-    else if (nick != undefined && gender == undefined) {
-        titlearr.push(pok+" ("+nick+")");
-    }
-    else if (nick == undefined && gender != undefined) {
-        titlearr.push(gender+" "+pok);
-    }
-    else if (nick == undefined && gender == undefined) {
-        titlearr.push(pok);
-    }
-    else if (nick != undefined && gender == undefined) {
-        titlearr.push(nick);
-    }
-    if (item != undefined) {
-        titlearr.push("Item: "+item);
-    }
-    if (ability != undefined) {
-        titlearr.push("Ability: "+getPositionAbility(i,ability));
-    }
-    if (move != undefined) {
-        if (move.includes(",")) {
-            titlearr.push("")
-            for (var q = 0; q < move.split(",").length; q++) {
-                if (move.split(",")[q] != "" && !move.split(",")[q].includes("Move")) {
-                    titlearr.push(move.split(",")[q]);
-                }
-            }
-        }
-    }
-
-
-    img.setAttribute("title",titlearr.join("\n"));
+   
+    img.setAttribute("title",dataStringTitle(datastr));
     boxMemory("Save");
 }
 
@@ -2672,21 +2588,28 @@ function formatMoveData(move) {
     var ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,move);
     var pwr = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,move);
     var acc = returnArrValue(finaldataMoveAccuracy,"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,move);
+    var desc = returnArrValue(finaldataMoveDescription,"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,move);
 
     pwr = undDel(pwr,"-");
     acc = undDel(acc,"-");
+    
 
     if (cate != undefined) {
         tempArr.push("Category: "+cate);
     }
 
+    tempArr.push("Power: "+pwr);
+    tempArr.push("Accuracy: "+acc);
+
     if (ppmin != undefined) {
         tempArr.push("PP: "+ppmin);
     }
 
-    tempArr.push("Power: "+pwr);
-    tempArr.push("Accuracy: "+acc);
+
  
+    if (desc != undefined) {
+        tempArr.push(desc);
+    }
 
 
     tempStr = tempArr.join("\n")
@@ -3076,7 +2999,7 @@ function abilityPartyBoxLearnset() {
 
 
 function trainerPokExport() {
-    var data = this.value;
+    var data = findUpTag(this,"LI").getAttribute("data-string");
     navigator.clipboard.writeText(data);
     consoleText("Copied Data String!");
 }
