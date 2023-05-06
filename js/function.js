@@ -568,10 +568,18 @@ function abbreviateStats(stats) {
 
 function findUpEl(base,att,val) {
 	while (base.parentNode) {
-        base = base.parentNode;
-        if (base.getAttribute(att) === val)
-            return base;
-    }
+		base = base.parentNode;
+		if (base.getAttribute(att) === val)
+			return base;
+	}
+}
+
+function findUpAtt(base,att) {
+	while (base.parentNode) {
+		base = base.parentNode;
+		if (base.getAttribute(att) != undefined)
+			return base;
+	}
 }
 
 function findUpTag(el, tag) {
@@ -598,7 +606,7 @@ function returnSortedItemsList(i) {
 	var items = [];
 	var result = finaldataItems.map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
 
-	items = sortObjectArray(result,"Pocket");
+	items = sortObjectArray(result,"Pocket",true);
 
 	var result = [];
 	
@@ -676,6 +684,78 @@ function returnSortedItemsList(i) {
 	}
 
 	return result;
+}
+
+function dataStringTitle(data) {
+	var data;
+
+	var obj = dataStringToObj(data);
+	if (obj != undefined) {
+
+		var titlearr = [];
+
+		let pok = obj["pok"];
+
+		if (pok != undefined) {
+			let int = getPokémonInt(pok);
+		
+			let level = obj["lv"];
+			let nick = obj["ni"];
+			let item = obj["it"];
+			let gender = obj["ge"];
+			let ability = obj["ab"];
+			let move = obj["mo"];
+			
+
+			if (level != undefined && gender != undefined) {
+				titlearr.push("Lv. "+level+" "+gender)
+			}
+			else if (level != undefined) {
+				titlearr.push("Lv. "+level);
+			}
+			else if (gender != undefined) {
+				pok = pok+" "+gender;
+			}
+
+
+	
+			if (nick != undefined) {
+				titlearr.push(pok+" ("+nick+")");
+			}
+			else {
+				titlearr.push(pok);
+			}
+
+
+			
+			if (item != undefined) {
+				titlearr.push("Item: "+item);
+			}
+			if (ability != undefined) {
+				let val = ability;
+				if (val == "Secondary" || val == "Primary" || val == "Hidden") {
+					val = getPositionAbility(int,ability);
+				}
+				 
+				if (val != undefined) {
+					titlearr.push("Ability: "+val);
+				}
+			}
+			if (move != undefined) {
+				if (move.includes(",")) {
+					titlearr.push("")
+					for (var q = 0; q < move.split(",").length; q++) {
+						if (move.split(",")[q] != "" && !move.split(",")[q].includes("Move")) {
+							titlearr.push(move.split(",")[q]);
+						}
+					}
+				}
+			}
+
+			return titlearr.join("\n")
+		}
+	}
+	return "";
 }
 
 function dataStringToObj(data) {
@@ -1416,13 +1496,37 @@ function returnAppArrData(arr,column,target) {
 }
 
 
+function SwitchTab(tab,sub) {
+	if (tab != undefined) {
+
+		let inputs = document.querySelectorAll("#navigation input");
+		let input = document.querySelector("#navigation input[value='"+tab+"']");
+
+		for (var q = 0; q < inputs.length; q++) {
+			inputs[q].checked = false;
+		}
+		input.checked = true;
+
+
+		let tars = document.querySelectorAll("#contain > div");
+		let tar = document.querySelector("#contain > div[value='"+tab.toLowerCase()+"']");
+
+		for (var q = 0; q < tars.length; q++) {
+			tars[q].style.display = "none";
+		}
+		tar.style.display = "block";
+
+	}
+}
 
 
 
-function sortObjectArray(objectsArr, prop) {
+
+
+function sortObjectArray(objectsArr,prop,ascending) {
 	var objectsArr;
 	var prop;
-	var ascending = true;
+	var ascending;
 
 	let objectsHaveProp = objectsArr.every(object => object.hasOwnProperty(prop));
 
@@ -2113,6 +2217,7 @@ function uniqueValueSelect(selects) {
 		var opt = selects[i].querySelectorAll(":scope option")
 		for (var u = 0; u < opt.length; u++) {
 			opt[u].style.removeProperty("display");
+			opt[u].removeAttribute("disabled");
 		}
 	}
 
@@ -2123,6 +2228,7 @@ function uniqueValueSelect(selects) {
 					var opt = selects[i].querySelector(":scope option[value='"+vals[u]+"']")
 					if (opt != undefined) {
 						opt.style.display = "none";
+						opt.setAttribute("disabled","");
 					}
 				}
 			}
