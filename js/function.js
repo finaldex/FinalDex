@@ -80,6 +80,16 @@ function getItemLocationInt(obj,description,location) {
 	}
 }
 
+function splitStr(str,selector) {
+	if (str.includes(selector)) {
+        return str.split(selector);
+    }
+    else {
+        return [str]
+    }
+}
+
+
 
 function getRandomInt(min,max) {
 	return Math.random() * (max - min) + min;
@@ -581,6 +591,15 @@ function findUpAtt(base,att) {
 			return base;
 	}
 }
+function findUpTagAtt(base,tag,att) {
+	while (base.parentNode) {
+		base = base.parentNode;
+		if (base.tagName == tag)
+			if (base.getAttribute(att) != undefined)
+				return base;
+	}
+}
+
 
 function findUpTag(el, tag) {
     while (el.parentNode) {
@@ -784,34 +803,35 @@ function dataStringToObj(data) {
 	return obj;
 }
 
-function getPokémonName(int) {
+function getPokémonName(int,alt) {
 	var int;
 	var arr = finaldataPokémonForm;
-	for(var i = 0; i < arr.length; i++) {
-		if(int == i) {
-			if(arr[i]["Form_"+JSONPath_Form] != undefined) {
-				return arr[i]["Form_"+JSONPath_Form];
-			} else {
-				return arr[i]["Pokémon"];
+	if (alt == "Alt") {
+		for(var i = 0; i < arr.length; i++) {
+			if(int == i) {
+				if(arr[i]["Form_"+JSONPath_Form] != undefined && !arr[i]["Variant"].includes("Default")) {
+					return arr[i]["Form_"+JSONPath_Form];
+				} else {
+					return arr[i]["Pokémon"];
+				}
 			}
 		}
 	}
-}
-
-
-function getPokémonName2(int) {
-	var int;
-	var arr = finaldataPokémonForm;
-	for(var i = 0; i < arr.length; i++) {
-		if(int == i) {
-			if(arr[i]["Form_"+JSONPath_Form] != undefined && !arr[i]["Variant"].includes("Default")) {
-				return arr[i]["Form_"+JSONPath_Form];
-			} else {
-				return arr[i]["Pokémon"];
+	else {
+		for(var i = 0; i < arr.length; i++) {
+			if(int == i) {
+				if(arr[i]["Form_"+JSONPath_Form] != undefined) {
+					return arr[i]["Form_"+JSONPath_Form];
+				} else {
+					return arr[i]["Pokémon"];
+				}
 			}
 		}
 	}
+	
 }
+
+
 
 
 
