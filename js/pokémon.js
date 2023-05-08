@@ -181,8 +181,8 @@ var createPokémon = function() {
                 check = true;
             }
             if (check) {
-                DMGBoxCreate(dmgBoxes,dataStrings);
-                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                DMGPartyCreate(dmgBoxes,dataStrings);
+                SwitchTab("Tools","Damage Calculator");
                 return;
             }
             
@@ -190,21 +190,21 @@ var createPokémon = function() {
          
             
 
-            let ask = confirm("Do you want to replace exising Pokémon in the Box?");
+            let ask = confirm("Do you want to replace exising Pokémon in the Party?");
             if (ask) {
                 var oldEl = dmgBoxes.querySelectorAll(":scope li[name]");
                 for (var r = 0; r < oldEl.length; r++) {
                     oldEl[r].remove();
                 }
-                DMGBoxCreate(dmgBoxes,dataStrings);
-                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                DMGPartyCreate(dmgBoxes,dataStrings);
+                SwitchTab("Tools","Damage Calculator");
                 return;
             }
 
             let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
             if (ask2) {
-                DMGBoxCreate(dmgBoxes,dataStrings);
-                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                DMGPartyCreate(dmgBoxes,dataStrings);
+                SwitchTab("Tools","Damage Calculator");
                 return;
             }
         }
@@ -518,7 +518,7 @@ var createPokémon = function() {
 
                     if (check) {
                         DMGSetDataString(dmgSlots[t],dataString);
-                        SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                        SwitchTab("Tools","Damage Calculator");
                         return;
                     }
                 }
@@ -528,7 +528,15 @@ var createPokémon = function() {
 
                 if (ask) {
                     DMGSetDataString(dmgSlots[0],dataString);
-                    SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                    SwitchTab("Tools","Damage Calculator");
+                }
+                else {
+                    let ask2 = confirm("Do you instead want to add it to the Party?");
+                    if (ask2) {
+                        let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+                        DMGPartyCreate(dmgBox,dataString);
+                        SwitchTab("Tools","Damage Calculator");
+                    }
                 }
                 
             }
@@ -944,27 +952,27 @@ var createPokémon = function() {
                 check = true;
             }
             if (check) {
-                DMGBoxCreate(dmgBox,dataStrings);
-                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                DMGPartyCreate(dmgBox,dataStrings);
+                SwitchTab("Tools","Damage Calculator");
                 return;
             }
             
-            let ask = confirm("Do you want to replace exising Pokémon in the Box?");
+            let ask = confirm("Do you want to replace exising Pokémon in the Party?");
             
             if (ask) {
                 var oldEl = dmgBox.querySelectorAll(":scope li[name]");
                 for (var r = 0; r < oldEl.length; r++) {
                     oldEl[r].remove();
                 }
-                DMGBoxCreate(dmgBox,dataStrings);
-                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                DMGPartyCreate(dmgBox,dataStrings);
+                SwitchTab("Tools","Damage Calculator");
                 return;
             }
 
             let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
             if (ask2) {
-                DMGBoxCreate(dmgBox,dataStrings);
-                SwitchTab("Tools",document.querySelector("#tool-options-0"));
+                DMGPartyCreate(dmgBox,dataStrings);
+                SwitchTab("Tools","Damage Calculator");
                 return;
             }
         }
