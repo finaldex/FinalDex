@@ -759,7 +759,7 @@ function loadData() {
 
                 evoImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
                 if (getPokémonID(evoArr[q][u]["Pokémon"]) == undefined) {
-                    evoNationalID.innerText = "#"+getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"]))));
+                    evoNationalID.innerText = "#"+getPokémonID(getPokémonName(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])),"Alt"));
                 }
                 else {
                     evoNationalID.innerText = "#"+getPokémonID(evoArr[q][u]["Pokémon"]);
@@ -840,8 +840,8 @@ function loadData() {
                     if (ID != undefined) {
                         evoRegionalID.innerText = "#"+ID;
                     }
-                    else if (getRegionalID("=",getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])))),JSONPath_Pokédex[y]) != undefined) {
-                        evoRegionalID.innerText = "#"+getRegionalID("=",getPokémonID(getPokémonName2(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])))),JSONPath_Pokédex[y]);
+                    else if (getRegionalID("=",getPokémonID(getPokémonName(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])),"Alt")),JSONPath_Pokédex[y]) != undefined) {
+                        evoRegionalID.innerText = "#"+getRegionalID("=",getPokémonID(getPokémonName(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])),"Alt")),JSONPath_Pokédex[y]);
                     }
 					else {
 						evoRegionalID.innerText = "#";
