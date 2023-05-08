@@ -2678,15 +2678,15 @@ function updateTrainer(trainers,condition) {
 								}
 								buildDMG(preval)
 							}
-							DMGBoxCreate(dmgBoxes[t],dataStrings);
-							SwitchTab("Tools",document.querySelector("#tool-options-0"));
+							DMGPartyCreate(dmgBoxes[t],dataStrings);
+							SwitchTab("Tools","Damage Calculator");
 							return;
 						}
 					}
 					
 				
 			
-					let ask = confirm("Do you want to replace existing Pokémon in the Box?");
+					let ask = confirm("Do you want to replace existing Pokémon in the Party?");
 					if (ask) {
 						var oldEl = dmgBoxes[0].querySelectorAll(":scope li[name]");
 						for (var r = 0; r < oldEl.length; r++) {
@@ -2705,8 +2705,8 @@ function updateTrainer(trainers,condition) {
 							}
 							buildDMG(preval)
 						}
-						DMGBoxCreate(dmgBoxes[0],dataStrings);
-						SwitchTab("Tools",document.querySelector("#tool-options-0"));
+						DMGPartyCreate(dmgBoxes[0],dataStrings);
+						SwitchTab("Tools","Damage Calculator");
 						return;
 					}
 
@@ -2725,8 +2725,8 @@ function updateTrainer(trainers,condition) {
 							}
 							buildDMG(preval)
 						}
-						DMGBoxCreate(dmgBoxes[0],dataStrings);
-						SwitchTab("Tools",document.querySelector("#tool-options-0"));
+						DMGPartyCreate(dmgBoxes[0],dataStrings);
+						SwitchTab("Tools","Damage Calculator");
 						return;
 					}
 					
