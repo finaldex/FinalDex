@@ -1625,7 +1625,7 @@ function returnMoveSet(int,additional) {
 
     var additional;
 
-    var name = getPokémonName2(int);
+    var name = getPokémonName(int,"Alt");
 
     var evores = [];
     var lvlres = [];
@@ -1697,7 +1697,7 @@ function returnMoveSet(int,additional) {
 		}
 	}
 
-    var name = getPokémonName2([finaldataPokémon.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[int]["ID"])]);
+    var name = getPokémonName([finaldataPokémon.map(function(e) {return e.ID;}).indexOf(finaldataPokémon[int]["ID"])],"Alt");
 
 
     if (!evores.length > 0) {
@@ -2580,19 +2580,29 @@ function calcPartyStat(divBase) {
 
 function formatMoveData(move) {
 
-    var move;
-    var tempStr;
-    var tempArr = [];
+    let tempStr;
+    let tempArr = [];
 
-    var cate = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,move);
-    var ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,move);
-    var pwr = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,move);
-    var acc = returnArrValue(finaldataMoveAccuracy,"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,move);
-    var desc = returnArrValue(finaldataMoveDescription,"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,move);
+    let cate = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,move);
+    let ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,move);
+    let pwr = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,move);
+    let acc = returnArrValue(finaldataMoveAccuracy,"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,move);
+    let desc = returnArrValue(finaldataMoveDescription,"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,move);
+    let prio = returnArrValue(finaldataMovePriority,"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,move);
 
-    pwr = undDel(pwr,"-");
-    acc = undDel(acc,"-");
+    prio = undwsnanDel(prio,"0");
+    pwr = undwsnanDel(pwr,"-");
+    acc = undwsnanDel(acc,"-");
+
     
+    if (prio.includes("+")) {
+        prio = "+"+prio.replaceAll("+","")
+    }
+
+    if (prio.includes("-")) {
+        prio = "-"+prio.replaceAll("-","")
+    }
+
 
     if (cate != undefined) {
         tempArr.push("Category: "+cate);
@@ -2603,6 +2613,10 @@ function formatMoveData(move) {
 
     if (ppmin != undefined) {
         tempArr.push("PP: "+ppmin);
+    }
+
+    if (prio != 0) {
+        tempArr.push("Priority: "+prio);
     }
 
 
