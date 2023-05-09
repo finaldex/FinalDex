@@ -172,38 +172,31 @@ var createPokémon = function() {
             consoleText("Copied!");
         }
         else if (val == "Send to Damage Calculator") {
-            let dmgBoxes = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
-				
+            let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+			
 
-            let vals = dmgBoxes.querySelectorAll(":scope li[name]");
-            let check = false;
-            if (vals.length == 0) {
-                check = true;
-            }
-            if (check) {
-                DMGPartyCreate(dmgBoxes,dataStrings);
+            if (dmgBox.getAttribute("data-string") == "") {
+                DMGPartyCreate(dmgBox,dataStrings);
                 SwitchTab("Tools","Damage Calculator");
                 return;
             }
-            
+
             
          
             
 
             let ask = confirm("Do you want to replace exising Pokémon in the Party?");
             if (ask) {
-                var oldEl = dmgBoxes.querySelectorAll(":scope li[name]");
-                for (var r = 0; r < oldEl.length; r++) {
-                    oldEl[r].remove();
-                }
-                DMGPartyCreate(dmgBoxes,dataStrings);
+                dmgBox.setAttribute("data-string","");
+                dmgBox.setAttribute("data-row","1")
+                DMGPartyCreate(dmgBox,dataStrings);
                 SwitchTab("Tools","Damage Calculator");
                 return;
             }
 
             let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
             if (ask2) {
-                DMGPartyCreate(dmgBoxes,dataStrings);
+                DMGPartyCreate(dmgBox,dataStrings);
                 SwitchTab("Tools","Damage Calculator");
                 return;
             }
@@ -946,24 +939,18 @@ var createPokémon = function() {
         else if (val == "Send to Damage Calculator") {
             let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
 				
-            let vals = dmgBox.querySelectorAll(":scope li[name]");
-            let check = false;
-            if (vals.length == 0) {
-                check = true;
-            }
-            if (check) {
+            if (dmgBox.getAttribute("data-string") == "") {
                 DMGPartyCreate(dmgBox,dataStrings);
                 SwitchTab("Tools","Damage Calculator");
                 return;
             }
+
             
             let ask = confirm("Do you want to replace exising Pokémon in the Party?");
             
             if (ask) {
-                var oldEl = dmgBox.querySelectorAll(":scope li[name]");
-                for (var r = 0; r < oldEl.length; r++) {
-                    oldEl[r].remove();
-                }
+                dmgBox.setAttribute("data-string","");
+                dmgBox.setAttribute("data-row","1")
                 DMGPartyCreate(dmgBox,dataStrings);
                 SwitchTab("Tools","Damage Calculator");
                 return;
@@ -1858,6 +1845,7 @@ function createContain(condition) {
 }
 
 $("body").click(function(event) {
+    document.body.classList.remove("dragging");
 	if(!$(event.target).closest("#pokémon > aside section[name='party'] figure[name='export'], #pokémon > aside section[name='party'] > span > figure[name='export']").length && !$(event.target).is("#pokémon > aside section[name='party'] figure[name='export'], #pokémon > aside section[name='party'] > span > figure[name='export']")) {
 		$("#pokémon > aside section[name='party'] figure[name='export'], #pokémon > aside section[name='party'] > span > figure[name='export']").removeClass("active");
 	}
