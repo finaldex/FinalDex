@@ -81,11 +81,14 @@ function getItemLocationInt(obj,description,location) {
 }
 
 function splitStr(str,selector) {
-	if (str.includes(selector)) {
+	if (typeof str != "string") {
+		return str;
+	}
+	else if (str.includes(selector)) {
         return str.split(selector);
     }
     else {
-        return [str]
+        return [str];
     }
 }
 
@@ -1981,7 +1984,282 @@ function getEvolutionData(i,column) {
 	return result;
 }
 
+function binaryHPCalc(ivs) {
+	
+	ivs = splitStr(ivs,",");
 
+	let HP = ivs[0];
+	let Attack = ivs[1];
+	let Defense = ivs[2];
+	let Special = ivs[3];
+	let Speed = ivs[5];
+
+	HP = undwsDel(HP,0)
+	Attack = undwsDel(Attack,0)
+	Defense = undwsDel(Defense,0)
+	Special = undwsDel(Special,0)
+	Speed = undwsDel(Speed,0)
+
+	HP = parseInt(HP);
+	Attack = parseInt(Attack);
+	Defense = parseInt(Defense);
+	Special = parseInt(Special);
+	Speed = parseInt(Speed);
+
+	let val = 0;
+
+	if (Attack % 2 != 0) {
+		val = val+8;
+	}
+	if (Defense % 2 != 0) {
+		val = val+4;
+	}
+	if (Speed % 2 != 0) {
+		val = val+2;
+	}
+	if (Special % 2 != 0) {
+		val = val+1;
+	}
+
+
+
+	return val;
+}
+
+function hiddenPowerCalc(ivs) {
+
+	ivs = splitStr(ivs,",");
+
+	let types = [...Types];
+	types.splice(0,1);
+
+	let Type;
+	let Power;
+
+	if (Generation == 2) {
+		let HP = ivs[0];
+		let Attack = ivs[1];
+		let Defense = ivs[2];
+		let Special = ivs[3];
+		let Speed = ivs[5];
+
+		HP = undwsDel(HP,0)
+		Attack = undwsDel(Attack,0)
+		Defense = undwsDel(Defense,0)
+		Special = undwsDel(Special,0)
+		Speed = undwsDel(Speed,0)
+
+		HP = parseInt(HP)
+		Attack = parseInt(Attack)
+		Defense = parseInt(Defense)
+		Special = parseInt(Special)
+		Speed = parseInt(Speed)
+
+
+		let AttackMod = ((Attack/4)-(Math.floor(Attack/4)))*4;
+		let DefenseMod = ((Defense/4)-(Math.floor(Defense/4)))*4;
+		let SpecialMod = ((Special/4)-(Math.floor(Special/4)))*4;
+
+		if (HP < 8) {
+			HP = 0;
+		}
+		else {
+			HP = 1;
+		}
+		
+		if (Attack < 8) {
+			Attack = 0;
+		}
+		else {
+			Attack = 1;
+		}
+
+		if (Defense < 8) {
+			Defense = 0;
+		}
+		else {
+			Defense = 1;
+		}
+
+		if (Special < 8) {
+			Special = 0;
+		}
+		else {
+			Special = 1;
+		}
+
+		if (Speed < 8) {
+			Speed = 0;
+		}
+		else {
+			Speed = 1;
+		}
+
+		Power = Math.floor(((5*(Special+(2*Speed)+(4*Defense)+(8*Attack))+SpecialMod)/2))+31;
+		Type = 4*AttackMod+DefenseMod;
+	}
+	else if (Generation >= 3) {
+		let HP = ivs[0];
+		let Attack = ivs[1];
+		let Defense = ivs[2];
+		let SpAtk = ivs[3];
+		let SpDef = ivs[4];
+		let Speed = ivs[5];
+
+		HP = parseInt(HP);
+		Attack = parseInt(Attack);
+		Defense = parseInt(Defense);
+		SpAtk = parseInt(SpAtk);
+		SpDef = parseInt(SpDef);
+		Speed = parseInt(Speed);
+
+		HP = undwsDel(HP,0);
+		Attack = undwsDel(Attack,0);
+		Defense = undwsDel(Defense,0);
+		SpAtk = undwsDel(SpAtk,0);
+		SpDef = undwsDel(SpDef,0);
+		Speed = undwsDel(Speed,0);
+
+		let HPMod1 = HP;
+		let AttackMod1 = Attack;
+		let DefenseMod1 = Defense;
+		let SpAtkMod1 = SpAtk;
+		let SpDefMod1 = SpDef;
+		let SpeedMod1 = Speed;
+
+		if (HPMod1 % 2 != 0) {
+			HPMod1 = 1;
+		}
+		else {
+			HPMod1 = 0;
+		}
+
+		if (AttackMod1 % 2 != 0) {
+			AttackMod1 = 1;
+		}
+		else {
+			AttackMod1 = 0;
+		}
+
+		if (DefenseMod1 % 2 != 0) {
+			DefenseMod1 = 1;
+		}
+		else {
+			DefenseMod1 = 0;
+		}
+
+		if (SpAtkMod1 % 2 != 0) {
+			SpAtkMod1 = 1;
+		}
+		else {
+			SpAtkMod1 = 0;
+		}
+
+		if (SpDefMod1 % 2 != 0) {
+			SpDefMod1 = 1;
+		}
+		else {
+			SpDefMod1 = 0;
+		}
+
+		if (SpeedMod1 % 2 != 0) {
+			SpeedMod1 = 1;
+		}
+		else {
+			SpeedMod1 = 0;
+		}
+
+
+		let HPMod2 = ((HP/4)-(Math.floor(HP/4)))*4;
+		let AttackMod2 = ((Attack/4)-(Math.floor(Attack/4)))*4;
+		let DefenseMod2 = ((Defense/4)-(Math.floor(Defense/4)))*4;
+		let SpAtkMod2 = ((SpAtk/4)-(Math.floor(SpAtk/4)))*4;
+		let SpDefMod2 = ((SpDef/4)-(Math.floor(SpDef/4)))*4;
+		let SpeedMod2 = ((Speed/4)-(Math.floor(Speed/4)))*4;
+
+		if (HPMod2 == 2 || HPMod2 == 3) {
+			HPMod2 = 1;
+		}
+		else {
+			HPMod2 = 0;
+		}
+
+		if (AttackMod2 == 2 || AttackMod2 == 3) {
+			AttackMod2 = 1;
+		}
+		else {
+			AttackMod2 = 0;
+		}
+
+		if (DefenseMod2 == 2 || DefenseMod2 == 3) {
+			DefenseMod2 = 1;
+		}
+		else {
+			DefenseMod2 = 0;
+		}
+
+		if (SpAtkMod2 == 2 || SpAtkMod2 == 3) {
+			SpAtkMod2 = 1;
+		}
+		else {
+			SpAtkMod2 = 0;
+		}
+
+		if (SpDefMod2 == 2 || SpDefMod2 == 3) {
+			SpDefMod2 = 1;
+		}
+		else {
+			SpDefMod2 = 0;
+		}
+
+		if (SpeedMod2 == 2 || SpeedMod2 == 3) {
+			SpeedMod2 = 1;
+		}
+		else {
+			SpeedMod2 = 0;
+		}
+	
+		Type = Math.floor((((HPMod1)+(2*AttackMod1)+(4*DefenseMod1)+(8*SpeedMod1)+(16*SpAtkMod1)+(32*SpDefMod1))*15)/63);
+		Power = Math.floor((((HPMod2)+(2*AttackMod2)+(4*DefenseMod2)+(8*SpeedMod2)+(16*SpAtkMod2)+(32*SpDefMod2))*40)/63)+30;
+	}
+
+	let obj = new Object();
+	obj["Type"] = types[Type];
+	obj["Power"] = Power;
+	return obj;
+}
+
+function shinyTest(ivs) {
+	ivs = splitStr(ivs,",");
+	if (Generation == 1 || Generation == 2) {
+		let HP = ivs[0];
+		let Attack = ivs[1];
+		let Defense = ivs[2];
+		let Special = ivs[3];
+		let Speed = ivs[5];
+
+		HP = undwsDel(HP,0)
+		Attack = undwsDel(Attack,0)
+		Defense = undwsDel(Defense,0)
+		Special = undwsDel(Special,0)
+		Speed = undwsDel(Speed,0)
+
+		HP = parseInt(HP)
+		Attack = parseInt(Attack)
+		Defense = parseInt(Defense)
+		Special = parseInt(Special)
+		Speed = parseInt(Speed)
+
+		let vals1 = [10];
+		let vals2 = [2,3,6,7,10,11,14,15];
+		
+		if (vals1.includes(Defense) && vals1.includes(Special) && vals1.includes(Speed) && vals2.includes(Attack)) {
+			return true;
+		}
+	}
+
+	return false;
+}
 
 
 
