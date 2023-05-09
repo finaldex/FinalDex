@@ -5345,8 +5345,8 @@ function buildDMG(preval) {
 
 
 	if ("Save Previous") {
-		var teamdspath = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string]");
-		var boxdspath = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > span > span[name] li[data-string]");
+		var teamdspath = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] div[data-string]");
+		var boxdspath = document.querySelectorAll("#contain > div#tool div#dmg span[name='party'] span[data-string]");
 
 		for(var q = 0; q < teamdspath.length; q++) {
 			let ds = teamdspath[q].getAttribute("data-string");
@@ -5364,31 +5364,36 @@ function buildDMG(preval) {
 			let dsobj = dataStringToObj(ds);
 			if (dsobj["pok"] != undefined) {
 				let obj = new Object();
-				obj["Team"] = boxdspath[q].parentElement.parentElement.parentElement.getAttribute("name");
+				obj["Team"] = boxdspath[q].getAttribute("name");
 				obj["Data"] = ds;
 				boxds.push(obj)
 			}
 		}
 
 		for(var q = 0; q < teamds.length; q++) {
-			let team = teamds[q]["Team"].replaceAll("team","").replaceAll(" ","");
-			team = parseInt(team);
+			let val1 = teamds[q]["Team"].replaceAll("team","").replaceAll(" ","");
+			let val2 = battleTeams;
+			val1 = parseInt(val1);
+			val2 = parseInt(val2);
 
-			if (team > battleTeams) {
+			if (val1 > val2) {
 				deleted = true;
 				break;
 			}
 		}
 
 		for(var q = 0; q < boxds.length; q++) {
-			let team = boxds[q]["Team"].replaceAll("team","").replaceAll(" ","");
-			team = parseInt(team);
-			
-			if (team > battleTeams) {
+			let val1 = boxds[q]["Team"].replaceAll("team","").replaceAll(" ","");
+			let val2 = battleTeams;
+			val1 = parseInt(val1);
+			val2 = parseInt(val2);
+
+			if (val1 > val2) {
 				deleted = true;
 				break;
 			}
 		}
+
 
 		if (deleted) {
 			let ask = confirm("There are existing data that does not fit the field, if you proceed the data will be removed.\nDo you want to continue?")
@@ -5643,12 +5648,15 @@ function buildDMG(preval) {
 			partyTeam.setAttribute("data-row",1);
 			partyTeam.setAttribute("data-string","");
 
+			let partyTeamFigureWrap = document.createElement("span");
+			partyTeam.appendChild(partyTeamFigureWrap)
+
 			var partyTeamDel = document.createElement("figure");
 			var partyTeamDelText = document.createElement("h6");
-			partyTeamDel.classList.add("del");
+			partyTeamDel.setAttribute("name","exit");
 			partyTeamDel.setAttribute("type","scale");
 			partyTeamDelText.innerText = "❌";
-			partyTeam.appendChild(partyTeamDel);
+			partyTeamFigureWrap.appendChild(partyTeamDel);
 			partyTeamDel.appendChild(partyTeamDelText);
 			partyTeamDel.addEventListener("click",function(){
 				var ask = confirm("The Pokémon's data will not be saved.\nDo you want to continue?");
@@ -5659,6 +5667,7 @@ function buildDMG(preval) {
 					DMGPartyRow(ele);
 				}
 			});
+
 
 			$(partyTeamDel).droppable({
 				drop: function(e,ui) {
@@ -5690,6 +5699,23 @@ function buildDMG(preval) {
 					}
 				}
 			});
+
+			var partyTeamExport = document.createElement("figure");
+			var partyTeamExportText = document.createElement("h6");
+			partyTeamExport.setAttribute("name","export");
+			partyTeamExport.setAttribute("type","invert");
+			partyTeamExportText.innerText = "⮟";
+			partyTeamFigureWrap.appendChild(partyTeamExport);
+			partyTeamExport.appendChild(partyTeamExportText);
+			partyTeamExport.addEventListener("click",function(){
+				var ele = findUpAtt(this,"data-string");
+				let dataString = ele.getAttribute("data-string");
+				dataString = undDel(dataString,"");
+				navigator.clipboard.writeText(dataString);
+				console.log(dataString);
+				consoleText("Copied Data String!");				
+			});
+
 
 
 			var partyTeamWrap = document.createElement("span");
@@ -7091,7 +7117,7 @@ function buildDMG(preval) {
         for(var q = 0; q < teamds.length; q++) {
             let team = teamds[q]["Team"];
             let data = teamds[q]["Data"];
-            let els = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span[name='"+team+"'] > div[data-string]");
+            let els = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name='"+team+"'] > div[data-string]");
             for(var r = 0; r < els.length; r++) {
                 let eldata = els[r].getAttribute("data-string");
                 let elobj = dataStringToObj(eldata);
@@ -7105,10 +7131,9 @@ function buildDMG(preval) {
         for(var q = 0; q < boxds.length; q++) {
             let team = boxds[q]["Team"];
             let data = boxds[q]["Data"];
-            let el = document.querySelector("#contain > div#tool div#dmg div[name='result'] > span > span[name='"+team+"']")
-            if (el != undefined) {
-                DMGPartyCreate(el,data)
-            }
+            let el = document.querySelector("#contain > div#tool div#dmg span[name='party'] span[name='"+team+"'][data-string]")
+			el.setAttribute("data-string",data);
+			DMGPartyRow(el);
         }
     }
 	
