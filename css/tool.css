@@ -736,12 +736,12 @@
 	width: 100%;
     height: 65%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     position: relative;
-    flex-direction: row;
+    flex-direction: column;
     text-align: center;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     z-index: 1;
 }
 #contain div#tool div#dmg div[name='result'] > div {
@@ -874,6 +874,7 @@
     z-index: 5;
     cursor: grab;
     padding: 5px 0;
+	user-select: none;
 }
 #contain div#tool div#dmg div[name='result'] > div > span[name] > span > * {
     pointer-events: none;
@@ -1104,8 +1105,8 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     height: 80%;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-	user-select: none;
+    align-items: center;
+    user-select: none;
 }
 #contain div#tool div#dmg > div:not([data-battle="Single Battle"]) div[name='result'] *[name='imgs'] > img[name='img'] {
 	cursor: pointer;
@@ -1219,7 +1220,12 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 }
 
 
-
+#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child select {
+	display: none;
+    margin: 0px 10px;
+    padding: 5px;
+    outline: none;
+}
 
 #contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child input {
 	text-indent: 10%;
@@ -1491,6 +1497,11 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 
 #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name] input {
 	cursor:unset;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name] input[name][disabled],
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name] input[name][disabled]::placeholder {
+	color: gray !important;
 }
 
 
@@ -1944,106 +1955,81 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 
 
 
-#contain div#tool div#dmg div[name='result'] > span {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
+#contain div#tool div#dmg div[name='result'] > span[name='party'] {
+	width: 100%;
     z-index: 10;
     display: flex;
-    /* padding: 5px 0; */
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
     flex-direction: row;
-    height: 100%;
-    pointer-events: none;
+    background: var(--color18);
+    border-top: 1px solid #000 !important;
 }
 
-#contain div#tool div#dmg div[name='result'] > span > span[name] > figure.open {
-    text-shadow: 0px 1px 1px #000;
-    opacity: 1;
-    height: 20px;
-    display: flex;
-    align-items: flex-end;
+
+
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name] {
+	display: flex;
     width: 100%;
-    justify-content: center;
-    position: absolute;
-    bottom: 80px;
-    z-index: 10;
-    pointer-events: all;
-}
-
-/*
-#contain > div#tool .ui-draggable-dragging {
-	position:fixed !important;
-}
-*/
-#contain div#tool div#dmg div[name='result'] > span > span[name].active {
-    pointer-events: all;
-}
-
-#contain div#tool div#dmg div[name='result'] > span > span[name].active figure.open {
-    opacity: 0;
-    pointer-events: none;
-    user-select:none;
-    transition: .2s ease 0.3s;
-}
-
-
-
-#contain div#tool div#dmg div[name='result'] > span > span[name]:not(.active) {
-    transform: translateY(80px);
-}
-#contain div#tool div#dmg div[name='result'] > span > span[name] {
-    display: inline-flex;
-    width: 100%;
-    height: 100%;
-    transition: 0.5s ease;
     position: relative;
-    padding: 0px 20px;
+    padding: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name] > span[name='wrap'] {
+	width: 90%;
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name] > span[name='row'] {
+	display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-end;
-    align-content: center;
-    float: left;
-    overflow: hidden;
-}
-#contain div#tool div#dmg div[name='result'] > span > span[name] > span {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    /* padding: 0 20px; */
-    flex-direction: row;
-    align-items: flex-end;
-    flex-wrap: nowrap;
-    text-align: center;
-    overflow: overlay;
-}
-#contain div#tool div#dmg div[name='result'] > span > span[name] > span > span {
-    display: flex;
-    flex-direction: row;
-    height: 80px;
-    align-items: center;
-    width: 100%;
+	user-select: none;
 }
 
-#contain div#tool div#dmg div[name='result'] > span > span[name] li {
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] b {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] b:not(.active) {
+	pointer-events: none;
+	opacity:0.2;
+}
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add:not(.active),
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[data-string=""] {
+	display: none;
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li {
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     user-select: none;
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li img {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li img {
     -webkit-user-drag: unset;
     -khtml-user-drag: unset;
     -moz-user-drag: unset;
     -o-user-drag: unset;
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li.add,
-#contain div#tool div#dmg div[name='result'] > span > span[name] li[name] {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add,
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name] {
     border: 1px solid;
     width: 40px;
     height: 40px;
@@ -2051,37 +2037,48 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     border-radius: 4px;
     margin: 0 10px;
     box-sizing: border-box;
+	border-style: outset;
 }
 
-#contain div#tool div#dmg div[name='result'] > span > span[name] li[name] > * {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name] > * {
     pointer-events: none;
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li.add {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add {
     background: linear-gradient(to bottom, Skyblue, var(--color_50));
     cursor:pointer;
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li[name] {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name] {
     cursor:grab;
     background: var(--color13);
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li[name]:active {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name]:active {
     cursor: grabbing;
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] figure.del {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] figure.del {
     cursor:pointer;
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li.add > * {
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] figure.del.ui-droppable-hover ~ span li[data-string].ui-draggable-dragging {
+	background: var(--colorRed);
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add > * {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li.add:active > * {
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add:hover > * {
+	opacity: 0.5;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add:active > * {
     transform:scale(0.8);
 }
-#contain div#tool div#dmg div[name='result'] > span > span[name] li[name].top {
-    margin-bottom: 20px;
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name].select {
+	border-style: dashed;
+	border-color: var(--color10) !important;
 }
 
 
