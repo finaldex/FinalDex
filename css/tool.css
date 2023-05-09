@@ -2054,10 +2054,10 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 #contain div#tool div#dmg div[name='result'] > span[name='party'] li[name]:active {
     cursor: grabbing;
 }
-#contain div#tool div#dmg div[name='result'] > span[name='party'] figure.del {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] figure[name='exit'] {
     cursor:pointer;
 }
-body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] figure.del.ui-droppable-hover ~ span li[data-string].ui-draggable-dragging {
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] figure[name='exit'].ui-droppable-hover ~ span li[data-string].ui-draggable-dragging {
 	background: var(--colorRed);
 }
 
