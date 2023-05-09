@@ -29,7 +29,7 @@ function DMGCalcStart() {
 
     let fieldBase = document.querySelector("#contain > div#tool div#dmg div[name='field']");
 	let menuBase = document.querySelector("#contain > div#tool div#dmg div[name='menu']");
-	let specBase = document.querySelector("#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child");
+	let specBase = document.querySelector("#contain div#tool div#dmg div[name='menu'] > div[name='spec']");
 
 
     // Battle
@@ -56,6 +56,7 @@ function DMGCalcStart() {
 	var userModPath = userStatsBase.querySelectorAll(":scope span[name='Mod'] input:not(:first-child)");
 	var userStatsPath = userStatsBase.querySelectorAll(":scope span:last-child input:not(:first-child)");
 	var userSpeedStatPath = userStatsBase.querySelector(":scope span:last-child input[name='Speed']");
+	let userStatsIVPath = userStatsBase.querySelectorAll(":scope *[name='IV'] input:not(:first-child)");
 
 	// User Pokémon
 	var userPokémonPath = userPokBase.querySelector(":scope *[name='pokémon'] select");
@@ -108,6 +109,8 @@ function DMGCalcStart() {
 	var magicRoomPath = fieldBase.querySelector(":scope *[name='Magic Room'] input");
 
 	// Specific
+	var specSelectPath = specBase.querySelector(":scope > span:first-child input");
+	var specInputPath = specBase.querySelector(":scope > span:first-child input");
 	var ZMovePath = specBase.querySelector(":scope li[name='Z-Move'] input");
 	var MaxMovePath = specBase.querySelector(":scope li[name='Max Move'] input");
 	var MeFirstPath = specBase.querySelector(":scope li[name='Me First'] input");
@@ -124,11 +127,10 @@ function DMGCalcStart() {
 	var TarShotPath = specBase.querySelector(":scope li[name='Tar Shot'] input");
 	var HelpingHandPath = specBase.querySelector(":scope li[name='Helping Hand'] input");
 
+	
 
 	// Move
 	var movePath = menuBase.querySelector(":scope > div[name='move'] > span select");
-	var moveCountPath = menuBase.querySelector(":scope > div[name='spec'] input[type='number']");
-	var moveSelectPath = menuBase.querySelector(":scope > div[name='spec'] > span:first-child > input[type='number']");
 	var criticalPath = menuBase.querySelector(":scope *[name='critical'] input[type='checkbox']")
 	var randomPath = menuBase.querySelector(":scope > div > span > input[type='range']");
 
@@ -155,7 +157,7 @@ function DMGCalcStart() {
 	var moveGroup = returnArrValue(finaldataMoveGroup,"Name_"+JSONPath_MoveName,"Group",movePath.value);
 	var moveRange = returnArrValue(finaldataMoveRange,"Name_"+JSONPath_MoveName,"Range",movePath.value);
 	movePower = undwsDel(movePower,0);
-	moveAccuracy = undwsDel(moveAccuracy,0);
+	moveAccuracy = undwsDel(moveAccuracy,"100%");
 	moveCategory = undwsDel(moveCategory,"");
 	moveType = undwsDel(moveType,"");
 	movePriority = undwsDel(movePriority,0);
@@ -176,8 +178,20 @@ function DMGCalcStart() {
 	}
 
 
-
-
+	if (movePath.value == "Hidden Power") {
+		let ivs = [];
+		for (var q = 0; q < userStatsIVPath.length; q++) {
+			if (userStatsIVPath[q].value != undefined && userStatsIVPath[q].value != "") {
+				ivs.push(userStatsIVPath[q].value);
+			}
+			else {
+				ivs.push(0);
+			}
+		}
+	
+		moveType = hiddenPowerCalc(ivs)["Type"];
+		movePower = hiddenPowerCalc(ivs)["Power"];
+	}
 	if (ZMovePath != undefined && ZMovePath.checked) {
 		var check1 = false;
 		var check2 = false;
@@ -355,6 +369,18 @@ function DMGCalcStart() {
 	moveDamageTextPath.innerText = "0";
 	moveCriticalTextPath.innerText = "0%";
 
+
+
+	if (Generation < 4) {
+		let typ1 = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel"];
+		let typ2 = ["Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark"];
+		if (typ1.includes(moveType)) {
+			moveCategory = "Physical";
+		}
+		else if (typ2.includes(moveType)) {
+			moveCategory = "Special";
+		}
+	}
 
 	var check = true;
 	if (user == undefined || target == undefined) {
@@ -726,17 +752,17 @@ function DMGCalcStart() {
 					}
 					if (movePath.value == "Rollout") {
 						if (DefenseCurlPath.checked) {
-							Rollout = 2**((parseInt(moveCountPath.value)-1)+1);
+							Rollout = 2**((parseInt(specInputPath.value)-1)+1);
 						}
 						else {
-							Rollout = 2**(parseInt(moveCountPath.value)-1);
+							Rollout = 2**(parseInt(specInputPath.value)-1);
 						}
 					}
 					if (movePath.value == "Fury Cutter") {
-						FuryCutter = 2**(parseInt(moveCountPath.value)-1);
+						FuryCutter = 2**(parseInt(specInputPath.value)-1);
 					}
 					if (movePath.value == "Rage") {
-						Rage = parseInt(moveCountPath.value);
+						Rage = parseInt(specInputPath.value);
 					}
 					if (movePath.value == "Pursuit") {
 						if (SwitchPath.checked) {
@@ -802,7 +828,7 @@ function DMGCalcStart() {
 						}
 					}
 					if (movePath.value == "Spit Up") {
-						Stockpile = moveCountPath.value;
+						Stockpile = specInputPath.value;
 					}
 					if (movePath.value == "Facade") {
 						if (userStatusPoisonPath.checked || userStatusBurnPath.checked || userStatusParalyzePath.checked) {
@@ -1153,7 +1179,7 @@ function DMGCalcStart() {
 							}
 						}
 						if (movePath.value == "Triple Kick") {
-							TripleKick = moveCountPath.value;
+							TripleKick = specInputPath.value;
 						}
 						if (movePath.value == "Flail" || movePath.value == "Reversal") {
 							random = 1;
@@ -2085,14 +2111,14 @@ function DMGCalcStart() {
 						DMGCalcApply(allDivBase[i],integerResult,"Damage");
 					}
 					else {
-						for (var h = 0; h < moveCountPath.value; h++) {
+						for (var h = 0; h < specInputPath.value; h++) {
 							DMGCalcApply(allDivBase[i],integerResult,"Damage");
 						}
 					}
 
 
 					// Accuracy
-					var acc = undwsDel(moveAccuracy,"0");
+					var acc = moveAccuracy;
 					acc = acc.replaceAll("%","").replaceAll("~","");
 					var evasionMod = tarModEvasionPath.value;
 					var accuracyMod = userModAccuracyPath.value;
@@ -3001,7 +3027,9 @@ function DMGCalcStart() {
 	}
 
 
+	movePath.style.color = "var(--type"+moveType+")";
 
+	movePath.title = formatMoveData(movePath.value,{Power:movePower,Category:moveCategory});
 
 
 }
@@ -3135,6 +3163,14 @@ function DMGCalcPokStats(base) {
 
 	if (pokémonPath.value != "") {
 		var int = getPokémonInt(pokémonPath.value);
+
+		let ivs = [];
+		for(var t = 0; t < ivsPath.length; t++) {
+			let val = ivsPath[t].value;
+			val = undwsDel(val,0);
+			ivs.push(val);
+		}
+
 		for (var i = 0; i < totalPath.length; i++) {
 			let stat = Stats[i];
 			let base = returnData(int,"Base Stats "+stat,"")[0];
@@ -3169,6 +3205,11 @@ function DMGCalcPokStats(base) {
 
 				if (stat == "HP") {
 					
+					if (Generation == 2) {
+						ivsPath[0].value = binaryHPCalc(ivs);
+					}
+
+
 					pokHPPath.setAttribute("max",val);
 				
 					divHPCurrentPath.innerText = pokHPPath.value;
@@ -3189,7 +3230,179 @@ function DMGCalcPokStats(base) {
 				
 				}
 
-					
+		
+
+				if (tailwindPath != undefined && tailwindPath.checked) {
+					if (stat == "Speed") {
+						totalPath[i].value = totalPath[i].value*2;
+					}
+				}
+
+				if (sandstormPath != undefined && sandstormPath.checked) {
+					if (stat == "Sp. Def") {
+						if (Generation >= 4) {
+							if (types.includes("Rock")) {
+								var newVal = val*1.5;
+								totalPath[i].setAttribute("min",newVal);
+								totalPath[i].setAttribute("max",newVal);
+								totalPath[i].value = newVal;
+							}
+						}
+					}
+				}
+				if (burnPath.checked) {
+					if (Generation == 1 || Generation == 2) {
+						if (stat == "Attack") {
+							var newVal = val*0.5;
+							totalPath[i].setAttribute("min",newVal);
+							totalPath[i].setAttribute("max",newVal);
+							totalPath[i].value = newVal;
+						}
+					}
+				}
+				if (paraPath.checked) {
+					if (stat == "Speed") {
+						var poktype = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,pokémon.value);
+						var check = true;
+						if (Generation >= 6) {
+							if (poktype[0] == "Electric" || poktype[1] == "Electric") {
+								check = false;
+							}
+						}
+							
+						if (check) {
+							if (Generation >= 1 && Generation <= 6) {
+								var newVal = val*0.75;
+								totalPath[i].setAttribute("min",newVal);
+								totalPath[i].setAttribute("max",newVal);
+								totalPath[i].value = newVal;
+							}
+							else {
+								var newVal = val*0.5;
+								totalPath[i].setAttribute("min",newVal);
+								totalPath[i].setAttribute("max",newVal);
+								totalPath[i].value = newVal;
+							}
+						}
+					}
+				}
+
+				for (var b = 0; b < badgesPath.length; b++) {
+					var input = badgesPath[b].querySelector(":scope input");
+					if (input.checked) {
+						if (getApplicable("Red,Blue,Yellow")) {
+							if (badgesPath[b].getAttribute("name") == "Boulder Badge") {
+								if (totalPath[i].getAttribute("name") == "Attack") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Thunder Badge") {
+								if (totalPath[i].getAttribute("name") == "Defense") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Volcano Badge") {
+								if (totalPath[i].getAttribute("name") == "Special") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Soul Badge") {
+								if (totalPath[i].getAttribute("name") == "Speed") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+						}
+						else if (getApplicable("Gold,Silver,Crystal")) {
+							if (badgesPath[b].getAttribute("name") == "Zephyr Badge") {
+								if (totalPath[i].getAttribute("name") == "Attack") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Mineral Badge") {
+								if (totalPath[i].getAttribute("name") == "Defense") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Glacier Badge") {
+								if (totalPath[i].getAttribute("name") == "Sp. Atk") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Glacier Badge") {
+								var check = true;
+								if (totalPath[i].value >= 206 && totalPath[i].value <= 432) {
+									check = false;
+								}
+								if (check) {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Plain Badge") {
+								if (totalPath[i].getAttribute("name") == "Speed") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+						}
+						else if (getApplicable("FireRed,LeafGreen")) {
+							if (badgesPath[b].getAttribute("name") == "Boulder Badge") {
+								if (totalPath[i].getAttribute("name") == "Attack") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Soul Badge") {
+								if (totalPath[i].getAttribute("name") == "Defense") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Volcano Badge") {
+								if (totalPath[i].getAttribute("name") == "Sp. Atk") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Volcano Badge") {
+								if (totalPath[i].getAttribute("name") == "Sp. Def") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Thunder Badge") {
+								if (totalPath[i].getAttribute("name") == "Speed") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+						}
+						else if (getApplicable("Ruby,Sapphire,Emerald")) {
+							if (badgesPath[b].getAttribute("name") == "Stone Badge") {
+								if (totalPath[i].getAttribute("name") == "Attack") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Balance Badge") {
+								if (totalPath[i].getAttribute("name") == "Defense") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Mind Badge") {
+								if (totalPath[i].getAttribute("name") == "Sp. Atk") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Mind Badge") {
+								if (totalPath[i].getAttribute("name") == "Sp. Def") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+							if (badgesPath[b].getAttribute("name") == "Dynamo Badge") {
+								if (totalPath[i].getAttribute("name") == "Speed") {
+									totalPath[i].value = totalPath[i].value * 1.125;
+								}
+							}
+						}
+					}
+				}
+
+
+				totalPath[i].setAttribute("data-nomod",totalPath[i].value);
+				
 				if (stat != "HP") {
 					if (Generation >= 1 && Generation <= 2) {
 						if (modPath[i].value == -6) {
@@ -3280,191 +3493,12 @@ function DMGCalcPokStats(base) {
 						}
 					}
 				}
-
-
-				if (tailwindPath != undefined && tailwindPath.checked) {
-					if (stat == "Speed") {
-						totalPath[i].value = totalPath[i].value*2;
-					}
-				}
-
-				if (sandstormPath != undefined && sandstormPath.checked) {
-					if (stat == "Sp. Def") {
-						if (Generation >= 4) {
-							if (types.includes("Rock")) {
-								var newVal = val*1.5;
-								totalPath[i].setAttribute("min",newVal);
-								totalPath[i].setAttribute("max",newVal);
-								totalPath[i].value = newVal;
-							}
-						}
-					}
-				}
-				if (burnPath.checked) {
-					if (Generation == 1 || Generation == 2) {
-						if (stat == "Attack") {
-							var newVal = val*0.5;
-							totalPath[i].setAttribute("min",newVal);
-							totalPath[i].setAttribute("max",newVal);
-							totalPath[i].value = newVal;
-						}
-					}
-				}
-				if (paraPath.checked) {
-					if (stat == "Speed") {
-						var poktype = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,pokémon.value);
-						var check = true;
-						if (Generation >= 6) {
-							if (poktype[0] == "Electric" || poktype[1] == "Electric") {
-								check = false;
-							}
-						}
-							
-						if (check) {
-							if (Generation >= 1 && Generation <= 6) {
-								var newVal = val*0.75;
-								totalPath[i].setAttribute("min",newVal);
-								totalPath[i].setAttribute("max",newVal);
-								totalPath[i].value = newVal;
-							}
-							else {
-								var newVal = val*0.5;
-								totalPath[i].setAttribute("min",newVal);
-								totalPath[i].setAttribute("max",newVal);
-								totalPath[i].value = newVal;
-							}
-						}
-					}
-				}
-
-
-
 			}
 			else {
 				totalPath[i].setAttribute("min","0");
 				totalPath[i].setAttribute("max","0");
 				totalPath[i].value = 0;
 			}
-
-
-			for (var b = 0; b < badgesPath.length; b++) {
-				var input = badgesPath[b].querySelector(":scope input");
-				if (input.checked) {
-					if (getApplicable("Red,Blue,Yellow")) {
-						if (badgesPath[b].getAttribute("name") == "Boulder Badge") {
-							if (totalPath[i].getAttribute("name") == "Attack") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Thunder Badge") {
-							if (totalPath[i].getAttribute("name") == "Defense") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Volcano Badge") {
-							if (totalPath[i].getAttribute("name") == "Special") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Soul Badge") {
-							if (totalPath[i].getAttribute("name") == "Speed") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-					}
-					else if (getApplicable("Gold,Silver,Crystal")) {
-						if (badgesPath[b].getAttribute("name") == "Zephyr Badge") {
-							if (totalPath[i].getAttribute("name") == "Attack") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Mineral Badge") {
-							if (totalPath[i].getAttribute("name") == "Defense") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Glacier Badge") {
-							if (totalPath[i].getAttribute("name") == "Sp. Atk") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Glacier Badge") {
-							var check = true;
-							if (totalPath[i].value >= 206 && totalPath[i].value <= 432) {
-								check = false;
-							}
-							if (check) {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Plain Badge") {
-							if (totalPath[i].getAttribute("name") == "Speed") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-					}
-					else if (getApplicable("FireRed,LeafGreen")) {
-						if (badgesPath[b].getAttribute("name") == "Boulder Badge") {
-							if (totalPath[i].getAttribute("name") == "Attack") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Soul Badge") {
-							if (totalPath[i].getAttribute("name") == "Defense") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Volcano Badge") {
-							if (totalPath[i].getAttribute("name") == "Sp. Atk") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Volcano Badge") {
-							if (totalPath[i].getAttribute("name") == "Sp. Def") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Thunder Badge") {
-							if (totalPath[i].getAttribute("name") == "Speed") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-					}
-					else if (getApplicable("Ruby,Sapphire,Emerald")) {
-						if (badgesPath[b].getAttribute("name") == "Stone Badge") {
-							if (totalPath[i].getAttribute("name") == "Attack") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Balance Badge") {
-							if (totalPath[i].getAttribute("name") == "Defense") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Mind Badge") {
-							if (totalPath[i].getAttribute("name") == "Sp. Atk") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Mind Badge") {
-							if (totalPath[i].getAttribute("name") == "Sp. Def") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-						if (badgesPath[b].getAttribute("name") == "Dynamo Badge") {
-							if (totalPath[i].getAttribute("name") == "Speed") {
-								totalPath[i].value = totalPath[i].value * 1.125;
-							}
-						}
-					}
-				}
-			}
-
-
-			totalPath[i].setAttribute("data-nomod",totalPath[i].value);
-			
-
-
 		}
 	}
 
@@ -3472,27 +3506,32 @@ function DMGCalcPokStats(base) {
 	DMGSpeedCalc();	
 }
 function DMGSetInfo() {
-	var sel = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");
-	var inp = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child input");
-
-	var def = document.querySelector("#contain > div#tool div#dmg > div");
-	var user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string].user");
-	var userid = user.getAttribute("name");
-	var userteam = user.parentElement.getAttribute("name");
 	
-    var userbase = document.querySelector("#contain > div#tool div#dmg > div span[name='"+userteam+"'] ul[name='"+userid+"']");
+	let user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string].user");
+	let userID = user.getAttribute("name");
+	let userTeam = user.parentElement.getAttribute("name");
+    let userPokBase = document.querySelector("#contain > div#tool div#dmg > div span[name='"+userTeam+"'] ul[name='"+userID+"']");
 
+	let userAbilityPath = userPokBase.querySelector(":scope *[name='ability'] select");
+	let userPokPath = userPokBase.querySelector(":scope *[name='pokémon'] select");
+	let userItemPath = userPokBase.querySelector(":scope *[name='item'] select");
 
-	var userAbilityPath = userbase.querySelector(":scope *[name='ability'] select");
-	var userPokPath = userbase.querySelector(":scope *[name='pokémon'] select");
-	var userItemPath = userbase.querySelector(":scope *[name='item'] select");
+	let baseDiv = document.querySelector("#contain > div#tool div#dmg > div");
 
-	var movePower = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,sel.value);
-	var moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,sel.value);
-	var moveGroup = returnArrValue(finaldataMoveGroup,"Name_"+JSONPath_MoveName,"Group",sel.value)
+	let moveSelect = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");
 
+	let specInput = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child input");
+	let specSelect = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child select");
+	let specLis = document.querySelectorAll("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child > li");
 
     let battleSelect = document.querySelector("#contain > div#tool div#dmg div[name='options'] > div:first-child > span:first-child > select")
+
+
+	let movePower = returnArrValue(finaldataMovePower,"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,moveSelect.value);
+	let moveType = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moveSelect.value);
+	let moveGroup = returnArrValue(finaldataMoveGroup,"Name_"+JSONPath_MoveName,"Group",moveSelect.value)
+	let moveRange = returnArrValue(finaldataMoveRange,"Name_"+JSONPath_MoveName,"Range",moveSelect.value);
+
 
     let battleSizes = battleSelect.getAttribute("pokémon");
     battleSizes = undDel(battleSizes,"")
@@ -3510,10 +3549,12 @@ function DMGSetInfo() {
 
 	var strikes = [1,1];
 
-	inp.title = "";
+	specInput.title = "";
+	specSelect.innerHTML = "";
+	specSelect.style.display = "none";
 
 	for (var a = 0; a < finaldataMoveAdditional.length; a++) {
-		if (finaldataMoveAdditional[a]["Move"] == sel.value) {
+		if (finaldataMoveAdditional[a]["Move"] == moveSelect.value) {
 			if (getApplicable(finaldataMoveAdditional[a]["Game"])) {
 				if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike" || finaldataMoveAdditional[a]["Additional"] == "Ramping" || finaldataMoveAdditional[a]["Additional"] == "Variable") {
 					if (finaldataMoveAdditional[a]["Value"] != undefined) {
@@ -3529,47 +3570,46 @@ function DMGSetInfo() {
 				}
 
 				if (finaldataMoveAdditional[a]["Additional"] == "Multi-strike") {
-					inp.title = "Amount of Hits";
+					specInput.title = "Amount of Hits";
 				}
 				else if (finaldataMoveAdditional[a]["Additional"] == "Ramping") {
-					inp.title = "Consecutive Turns of Hits";
+					specInput.title = "Consecutive Turns of Hits";
 				}
 			}
 		}
 	}
 
 
-	var lis = document.querySelectorAll("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child > li");
-	for (var l = 0; l < lis.length; l++) {
-		lis[l].style.display = "none";
-		lis[l].firstChild.checked = false;
+
+	for (var l = 0; l < specLis.length; l++) {
+		specLis[l].style.display = "none";
+		specLis[l].firstChild.checked = false;
 	}
 
-	var battlesel = document.querySelector("#contain > div#tool div#dmg div[name='options'] > div:first-child > span:first-child > select");
-	var lis = document.querySelectorAll("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child > li");
-	for (var l = 0; l < lis.length; l++) {
+
+	for (var l = 0; l < specLis.length; l++) {
 		if (parseInt(movePower) > 0) {
-			if (lis[l].getAttribute("name") == "Semi-Invulnerable Flight") {
-				if (sel.value == "Twister" || sel.value == "Gust") {
-					lis[l].style.removeProperty("display");
+			if (specLis[l].getAttribute("name") == "Semi-Invulnerable Flight") {
+				if (moveSelect.value == "Twister" || moveSelect.value == "Gust") {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Semi-Invulnerable Dig") {
-				if (sel.value == "Earthquake" || sel.value == "Magnitude") {
-					lis[l].style.removeProperty("display");
+			else if (specLis[l].getAttribute("name") == "Semi-Invulnerable Dig") {
+				if (moveSelect.value == "Earthquake" || moveSelect.value == "Magnitude") {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Semi-Invulnerable Dive") {
-				if (sel.value == "Surf" || sel.value == "Whirlpool") {
-					lis[l].style.removeProperty("display");
+			else if (specLis[l].getAttribute("name") == "Semi-Invulnerable Dive") {
+				if (moveSelect.value == "Surf" || moveSelect.value == "Whirlpool") {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Switching") {
-				if (sel.value == "Pursuit") {
-					lis[l].style.removeProperty("display");
+			else if (specLis[l].getAttribute("name") == "Switching") {
+				if (moveSelect.value == "Pursuit") {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Minimize") {
+			else if (specLis[l].getAttribute("name") == "Minimize") {
 				var tempOtherMoves = [];
 				if (Generation == 2) {
 					tempOtherMoves = ["Stomp"];
@@ -3593,16 +3633,16 @@ function DMGSetInfo() {
 					tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Heat Crash","Heavy Slam","Flying Press"];
 				}
 
-				if (tempOtherMoves.includes(sel.value)) {
-					lis[l].style.removeProperty("display");
+				if (tempOtherMoves.includes(moveSelect.value)) {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Charge") {
+			else if (specLis[l].getAttribute("name") == "Charge") {
 				if (moveType == "Electric") {
-					lis[l].style.removeProperty("display");
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Me First") {
+			else if (specLis[l].getAttribute("name") == "Me First") {
 				var uncallable = [];
 				if (Generation == 4 || Generation == 5) {
 					uncallable = ["Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
@@ -3613,38 +3653,38 @@ function DMGSetInfo() {
 				else if (Generation == 7) {
 					uncallable = ["Beak Blast","Belch","Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Shell Trap","Struggle","Thief"]
 				}
-				if (!uncallable.includes(sel.value)) {
-					lis[l].style.removeProperty("display");
+				if (!uncallable.includes(moveSelect.value)) {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Flash Fire") {
+			else if (specLis[l].getAttribute("name") == "Flash Fire") {
 				if (userAbilityPath != undefined && userAbilityPath.value == "Flash Fire") {
-					lis[l].style.removeProperty("display");
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Tar Shot") {
+			else if (specLis[l].getAttribute("name") == "Tar Shot") {
 				if (moveType == "Fire") {
-					lis[l].style.removeProperty("display");
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Defense Curl") {
-				if (sel.value == "Rollout") {
-					lis[l].style.removeProperty("display");
+			else if (specLis[l].getAttribute("name") == "Defense Curl") {
+				if (moveSelect.value == "Rollout") {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Helping Hand") {
+			else if (specLis[l].getAttribute("name") == "Helping Hand") {
 				if (battleSize > 2) {
-					lis[l].style.removeProperty("display");
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Z-Move") {
-				if (sel.value != "Struggle") {
+			else if (specLis[l].getAttribute("name") == "Z-Move") {
+				if (moveSelect.value != "Struggle") {
 					var check1 = false;
 					var check2 = false;
 					var check3 = false;
 				
 					for (var r = 0; r < finaldataMoveCall.length; r++) {
-						if (finaldataMoveCall[r]["Call"] == sel.value) {
+						if (finaldataMoveCall[r]["Call"] == moveSelect.value) {
 							if (finaldataMoveCall[r]["Type"] == "Z-Move") {
 								if (finaldataMoveCall[r]["Pokémon"] != undefined) {
 									if (finaldataMoveCall[r]["Pokémon"].includes(",")) {
@@ -3678,12 +3718,12 @@ function DMGSetInfo() {
 					
 
 					if (check1 && check2 || check3) {
-						lis[l].style.removeProperty("display");
+						specLis[l].style.removeProperty("display");
 					}
 				}
 			}
-			else if (lis[l].getAttribute("name") == "Max Move") {
-				lis[l].style.removeProperty("display");
+			else if (specLis[l].getAttribute("name") == "Max Move") {
+				specLis[l].style.removeProperty("display");
 			}
 		}
 	}
@@ -3692,29 +3732,25 @@ function DMGSetInfo() {
 
 
 
-
-	inp.setAttribute("min",strikes[0]);
-	inp.setAttribute("max",strikes[1]);
-	inp.value = strikes[0];
+	specInput.setAttribute("min",strikes[0]);
+	specInput.setAttribute("max",strikes[1]);
+	specInput.value = strikes[0];
 
 
 	if (strikes[0] == strikes[1]) {
-		inp.setAttribute("disabled","")
+		specInput.setAttribute("disabled","")
 	}
 	else {
-		inp.removeAttribute("disabled");
+		specInput.removeAttribute("disabled");
 	}
 
-	sel.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,sel.value)+")";
-
-	var moveRange = returnArrValue(finaldataMoveRange,"Name_"+JSONPath_MoveName,"Range",sel.value);
 
 
 	if (moveRange != undefined) {
-		def.setAttribute("data-range",moveRange)
+		baseDiv.setAttribute("data-range",moveRange)
 	}
 	else {
-		def.setAttribute("data-range","")
+		baseDiv.setAttribute("data-range","")
 	}
 
 
@@ -4655,7 +4691,7 @@ function DMGClearData(base) {
     statsBase.classList.remove("active");
 
 
-	DMGBoxActiveSet();
+	DMGPartyActiveSet();
 }
 function DMGSaveData(base) {
     var base;
@@ -4804,7 +4840,7 @@ function DMGSaveData(base) {
 	document.querySelector("#contain > div#tool div#dmg > div").setAttribute("data-count",tarsint);
 
 	DMGSetChange(base);
-	DMGBoxActiveSet();
+	DMGPartyActiveSet();
 }
 function DMGMatchPosition() {
 	var teams = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span[name]");
@@ -4929,7 +4965,7 @@ function DMGRemoveDataString(base) {
 		DMGClearData(pokBase);
 	}
 	
-	DMGBoxActiveSet();
+	DMGPartyActiveSet();
 }
 function DMGExportDataString() {
 	var base = findUpTag(this,"DIV");
@@ -5084,7 +5120,9 @@ function DMGSetDataString(base,str) {
                 if (dataPok != undefined && dataInt != undefined) {
                     if (finaldataPokémon[parseInt(dataInt)][JSONPath_Reference] == "true") {
                         divBase.setAttribute("data-string",data[d]);
-                        DMGPokSpecific(pokBase);
+
+						DMGSetChange(pokBase);
+						DMGPokSpecific(pokBase);
                         DMGSetChange(pokBase);
 						DMGSaveData(pokBase);
                         DMGCalcPokStats(pokBase);
@@ -5106,7 +5144,7 @@ function DMGSetDataString(base,str) {
 	
 	}
 
-	DMGBoxActiveSet();
+	DMGPartyActiveSet();
 }
 
 
@@ -5115,6 +5153,13 @@ function DMGPartyCreate(base,data) {
 		var ask = prompt("Enter Pokémon Data String");
 		data = ask;
 	}
+
+	let dataStrings = base.getAttribute("data-string");
+	dataStrings = undwsDel(dataStrings,"");
+	dataStrings = dataStrings.replaceAll("\r","");
+	dataStrings = dataStrings.replaceAll("\n","_");
+	dataStrings = splitStr(dataStrings,"_");
+	dataStrings = dataStrings.filter(e => e !== "");
 
 	if (data != null && data != "") {
 		data = data.replaceAll("\r","");
@@ -5126,15 +5171,6 @@ function DMGPartyCreate(base,data) {
 			data = [data];
 		}
 
-		let team = base.getAttribute("name");
-		if (team != undefined && team.includes("team")) {
-			base.classList.add("active");
-			base = base.querySelector(":scope li.add");
-			base = base.parentElement;
-		}
-	
-
-
 		for (var r = 0; r < data.length; r++) {
 			let dataobj = dataStringToObj(data[r]);
 			let pok = dataobj["pok"];
@@ -5142,34 +5178,9 @@ function DMGPartyCreate(base,data) {
 	
 			if (pok != undefined && pokint != undefined) {
 				if(finaldataPokémon[pokint][JSONPath_Reference] == "true") {
-					let els =  base.querySelectorAll(":scope li[name]");
-					let el = els[parseInt(els.length)-1]
-					let int = 0;
-					if (el != undefined) {
-						int = parseInt(el.getAttribute("name"))+1;
-					}
-
-					var pokli = document.createElement("li");
-					var pokimg = document.createElement("img");
-					pokli.setAttribute("name",int);
-					pokli.setAttribute("data-string",data[r]);
-					pokli.title = dataStringTitle(data[r]);
-					pokimg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(pokint,"Box")+".png";
-					pokimg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-					base.appendChild(pokli);
-					pokli.appendChild(pokimg);
-					
-				
-
-					$(pokli).draggable({
-						start:function(e,ui){
-							document.body.classList.add("dragging");
-						},
-						stop:function(e,ui){
-							document.body.classList.remove("dragging");
-						},
-						revert: true,
-					});
+					dataStrings.push(data[r])
+					base.setAttribute("data-string",dataStrings.join("_"));
+					DMGPartyRow(base);
 				}
 				else {
 					consoleText("Pokémon Unavailable.");
@@ -5182,65 +5193,136 @@ function DMGPartyCreate(base,data) {
 		}
 	}
 
-	DMGBoxActiveSet();
+	DMGPartyActiveSet();
 }
 
 
-function DMGBoxActiveSet() {
+function DMGPartyRow(base) {
+	let els =  base.querySelectorAll(":scope li[data-string]");
+	let elAdd =  base.querySelector(":scope li.add");
+
+	let rowPath = base.querySelector(":scope *[name='row']");
+	let rowUp = rowPath.querySelector(":scope b[name='up']");
+	let rowText = rowPath.querySelector(":scope > small");
+	let rowDown = rowPath.querySelector(":scope b[name='down']");
+
+	let dataStrings = base.getAttribute("data-string");
+	dataStrings = undwsDel(dataStrings,"");
+	dataStrings = dataStrings.replaceAll("\r","");
+	dataStrings = dataStrings.replaceAll("\n","_");
+	dataStrings = splitStr(dataStrings,"_");
+	dataStrings = dataStrings.filter(e => e !== "");
+
+
+	let row = base.getAttribute("data-row");
+	row = parseInt(row);
+	let val1 = ((row*6)-6)+1;
+	let val2 = row*6;
+
+
+	rowText.innerText = row;
+
+	let used = [];
+
+	if (dataStrings.length > val2) {
+		rowDown.classList.add("active")
+		elAdd.classList.remove("active");
+	}
+	else {
+		rowDown.classList.remove("active");
+		elAdd.classList.add("active");
+	}
+
+
+	if (row == 1) {
+		rowUp.classList.remove("active")
+	}
+	else {
+		rowUp.classList.add("active");
+	}
+
+	for (var e = 0; e < els.length; e++) {
+		let li = els[e];
+		let img = els[e].querySelector(":scope img");
+		li.setAttribute("title","");
+		li.setAttribute("data-string","");
+		img.removeAttribute("src");
+	}
+
+	for (var e = 0; e < els.length; e++) { // 6
+		let li = els[e];
+		let img = els[e].querySelector(":scope img");
+
+		for (var r = 0; r < dataStrings.length; r++) {
+			if (!used.includes(r)) {
+				let x = r+1;
+		
+				let obj = dataStringToObj(dataStrings[r]);
+				let pok = obj["pok"];
+				let int = getPokémonInt(pok);
+
+				if (pok != undefined && int != undefined) {
+					if (x >= val1 && x <= val2) {
+						li.setAttribute("data-string",dataStrings[r]);
+						li.setAttribute("title",dataStringTitle(dataStrings[r]));
+						img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
+						used.push(r);
+						break;
+					}
+				}
+			}
+		}
+
+	}
+
+
+	DMGPartyActiveSet();
+}
+
+function DMGPartyActiveSet() {
 	let els1 = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span > div[data-string]");
 	let els2 = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > span > span[name] li[data-string]");
 
 
-	let res = [];
+	for (var i = 0; i < els2.length; i++) {
+		els2[i].classList.remove("select");
+	}
+
+	let vals = ["pok","it","iv","ev","mo","na"];
+
+	if (Natures.length == 0) {
+		vals = vals.filter(e => e !== "na");
+	}
+
+	if (!HeldItem) {
+		vals = vals.filter(e => e !== "it");
+	}
+
 	for (var i = 0; i < els1.length; i++) {
-		let val = els1[i].getAttribute("data-string");
-		let obj = dataStringToObj(val);
-		let val1 = obj["ab"];
-		let val2 = obj["lv"];
-		if (val != undefined && val != "") {
-			if(val1 != undefined) { 
-				val = val.replaceAll("ab:"+val1,"")
+		if (els1[i].getAttribute("data-string") != undefined && els1[i].getAttribute("data-string") != "") {
+			let obj1 = dataStringToObj(els1[i].getAttribute("data-string"));
+
+			for (var q = 0; q < els2.length; q++) {
+				if (els2[q].getAttribute("data-string") != undefined && els2[q].getAttribute("data-string") != "") {
+					let obj2 = dataStringToObj(els2[q].getAttribute("data-string"));
+
+					let check = true;
+
+					for (var r = 0; r < vals.length; r++) {
+						if (obj1[vals[r]] != obj2[vals[r]]) {
+							check = false;
+						}
+					}
+					
+					if (check) {
+						els2[q].classList.add("select");
+					}
+				}
 			}
-			if(val2 != undefined) { 
-				val = val.replaceAll("lv:"+val2,"")
-			}
-			val = val.replaceAll("||","|");
-			val = val.replaceAll("\n","");
-			val = val.replaceAll("\r","");
-			val = val.replace(/\|+$/,"");
-			val = val.toString();
-	
-			res.push(val);
 		}
 	}
 
-	for (var i = 0; i < els2.length; i++) {
-		els2[i].classList.remove("top");
-	}
 
-	for (var i = 0; i < els2.length; i++) {
-		let val = els2[i].getAttribute("data-string");
-		let obj = dataStringToObj(val);
-		let val1 = obj["ab"];
-		let val2 = obj["lv"];
-		if (val != undefined && val != "") {
-			if(val1 != undefined) { 
-				val = val.replaceAll("ab:"+val1,"")
-			}
-			if(val2 != undefined) { 
-				val = val.replaceAll("lv:"+val2,"")
-			}
-			val = val.replaceAll("||","|");
-			val = val.replaceAll("\n","");
-			val = val.replaceAll("\r","");
-			val = val.replace(/\|+$/,"");
-			val = val.toString();
-
-			if (res.includes(val)) {
-				els2[i].classList.add("top");
-			}
-		}
-	}
 }
 
 var conditions = [{Name:"Poisoned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Badly Poisoned",Affect:"Pokémon",Group:"Status",Title:"Turns of Bad Poison",Values:"0,15",Type:"Status",Game:"All"},{Name:"Burned",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Paralyzed",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Asleep",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Frozen",Affect:"Pokémon",Group:"Status",Type:"Status",Game:"All"},{Name:"Forest's Curse",Affect:"Pokémon",Group:"Type Change",Affected:"Forest's Curse",Type:"Move",Game:"All"},{Name:"Trick-or-Treat",Affect:"Pokémon",Group:"Type Change",Affected:"Trick-or-Treat",Type:"Move",Game:"All"},{Name:"Magnet Rise",Affect:"Pokémon",Group:"Ungrounded",Affected:"Magnet Rise",Type:"Move",Game:"All"},{Name:"Telekinesis",Affect:"Pokémon",Group:"Ungrounded",Affected:"Telekinesis",Type:"Move",Game:"All"},{Name:"Thousand Arrows",Affect:"Pokémon",Group:"Grounded",Affected:"Thousand Arrows",Type:"Move",Game:"All"},{Name:"Smack Down",Affect:"Pokémon",Group:"Grounded",Affected:"Smack Down",Type:"Move",Game:"All"},{Name:"Ingrain",Affect:"Pokémon",Group:"Grounded",Affected:"Ingrain",Type:"Move",Game:"Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Seed Damage",Affect:"Pokémon",Group:"Seed",Affected:"Leech Seed",Title:"Is the Pokémon affected by Leech Seed?",Type:"Move",Game:"All"},{Name:"Seed Heal",Affect:"Pokémon",Group:"Seed",Affected:"Leech Seed",Title:"Is the Pokémon being healed by Leech Seed?",Type:"Move",Game:"All"},{Name:"Glaive Rush",Affect:"Pokémon",Affected:"Glaive Rush",Type:"Move",Game:"All"},{Name:"Laser Focus",Affect:"Pokémon",Affected:"Laser Focus",Type:"Move",Game:"All"},{Name:"Odor Sleuth",Affect:"Pokémon",Affected:"Odor Sleuth",Type:"Move",Game:"All"},{Name:"Foresight",Affect:"Pokémon",Affected:"Foresight",Type:"Move",Game:"All"},{Name:"Miracle Eye",Affect:"Pokémon",Affected:"Miracle Eye",Type:"Move",Game:"All"},{Name:"Shadow",Affect:"Pokémon",Title:"Is it a Shadow Pokémon?",Type:"Form",Game:"Colosseum"},{Name:"Dynamax",Affect:"Pokémon",Title:"Is the Pokémon Dynamaxed?",Type:"Form",Game:"Sword,Shield"},{Name:"Boulder Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Brock in Pewter City, it raises the the Attack stat stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow,FireRed,LeafGreen"},{Name:"Thunder Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Thunder Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Soul Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Koga in Fuchsia City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special stat by 12.5% when entering a battle.",Type:"Badge",Game:"Red,Blue,Yellow"},{Name:"Volcano Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on Cinnabar Island, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"FireRed,LeafGreen"},{Name:"Zephyr Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Falkner in Violet City, it increases the power of Flying-type moves by 12.5% and raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Hive Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Bugsy in Azaela Town, it increases the power of Bug-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Plain Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Whitney in Goldenrod City, it increases the power of Normal-type moves by 12.5% and raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Fog Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Morty in Ecruteak City, it increases the power of Ghost-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Storm Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Chuck in Cianwood City, it increases the power of Fighting-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Mineral Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Jasmine in Olivine City, it increases the power of Steel-type moves by 12.5% and raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Glacier Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Pryce in Mahogany Town, it increases the power of Ice-type moves by 12.5% and raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rising Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Clair in Blackthorn City, it increases the power of Dragon-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Boulder Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Brock in Pewter City, it increases the power of Rock-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Cascade Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Misty in Cerulean City, it increases the power of Water-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Thunder Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Lt. Surge in Vermilion City, it increases the power of Electric-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Rainbow Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Erika in Celadon City, it increases the power of Grass-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Soul Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Janine in Fuchsia City, it increases the power of Poison-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Marsh Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Sabrina in Saffron City, it increases the power of Psychic-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Volcano Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Blaine on the Seafoam Islands, it increases the power of Fire-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Earth Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Blue in Viridian City, it increases the power of Ground-type moves by 12.5%.",Type:"Badge",Game:"Gold,Silver,Crystal"},{Name:"Stone Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Roxanne in Rustboro City, it raises the Attack stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Dynamo Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Wattson in Mauville City, it raises the Speed stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Balance Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Norman in Petalburg City, it raises the Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Mind Badge",Affect:"Team",Group:"Badge",Title:"Obtained from the Gym Leader Tate and Liza in Mossdeep City, it raises the Special Attack and Special Defense stat by 12.5% when entering a battle.",Type:"Badge",Game:"Ruby,Sapphire,Emerald"},{Name:"Stealth Rock",Affect:"Team",Group:"Pointed Stones",Affected:"Stealth Rock",Type:"Move",Game:"All"},{Name:"G-Max Stonesurge",Affect:"Team",Group:"Pointed Stones",Affected:"G-Max Stonesurge",Type:"Move",Game:"Sword,Shield"},{Name:"Spikes",Affect:"Team",Group:"Spikes",Affected:"Spikes",Title:"Layers of Spikes",Values:"0,3",Type:"Move",Game:"All"},{Name:"G-Max Steelsurge",Affect:"Team",Group:"Sharp Steel",Affected:"G-Max Steelsurge",Type:"Move",Game:"Sword,Shield"},{Name:"Light Screen",Affect:"Team",Group:"Screen",Affected:"Light Screen",Type:"Move",Game:"All"},{Name:"Reflect",Affect:"Team",Group:"Screen",Affected:"Reflect",Type:"Move",Game:"All"},{Name:"Aurora Veil",Affect:"Team",Group:"Screen",Affected:"Aurora Veil",Type:"Move",Game:"All"},{Name:"Tailwind",Affect:"Team",Affected:"Tailwind",Type:"Move",Game:"All"},{Name:"Lucky Chant",Affect:"Team",Affected:"Lucky Chant",Type:"Move",Game:"All"},{Name:"G-Max Volcalith",Affect:"Team",Affected:"G-Max Volcalith",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Cannonade",Affect:"Team",Affected:"G-Max Cannonade",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Vine Lash",Affect:"Team",Affected:"G-Max Vine Lash",Type:"Move",Game:"Sword,Shield"},{Name:"G-Max Wildfire",Affect:"Team",Affected:"G-Max Wildfire",Type:"Move",Game:"Sword,Shield"},{Name:"Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Sandstorm",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Snow",Affect:"All",Group:"Weather",Type:"Weather",Game:"Legend Arceus,Scarlet,Violet"},{Name:"Fog",Affect:"All",Group:"Weather",Type:"Weather",Game:"Diamond,Pearl,Platinum,Brilliant Diamond,Shining Pearl,Legend Arceus"},{Name:"Hail",Affect:"All",Group:"Weather",Type:"Weather",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Extremely Harsh Sunlight",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Heavy Rain",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Strong Winds",Affect:"All",Group:"Weather",Type:"Weather",Game:"Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee"},{Name:"Shadowy Aura",Affect:"All",Group:"Weather",Type:"Weather",Game:"XD"},{Name:"Electric Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Grassy Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Misty Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Psychic Terrain",Affect:"All",Group:"Terrain",Type:"Terrain",Game:"Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Legend Arceus,Scarlet,Violet"},{Name:"Trick Room",Affect:"All",Affected:"Trick Room",Type:"Move",Game:"All"},{Name:"Magic Room",Affect:"All",Affected:"Magic Room",Type:"Move",Game:"All"},{Name:"Wonder Room",Affect:"All",Affected:"Wonder Room",Type:"Move",Game:"All"},{Name:"Gravity",Affect:"All",Affected:"Gravity",Type:"Move",Game:"All"},{Name:"Protection",Affect:"Specific",Affected:"Baneful Bunker,Crafty Shield,Detect,King's Shield,Mat Block,Max Guard,Obstruct,Protect,Quick Guard,Silk Trap,Spiky Shield,Wide Guard",Title:"Is the target being Protected?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Flight",Affect:"Specific",Affected:"Fly,Bounce",Title:"Is the target in a semi-invulnerable turn of Fly or Bounce?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dig",Affect:"Specific",Affected:"Dig",Title:"Is the target in a semi-invulnerable turn of Dig?",Type:"Move",Game:"All"},{Name:"Semi-Invulnerable Dive",Affect:"Specific",Affected:"Dive,Surf,Whirlpool",Title:"Is the target in a semi-invulnerable turn of Dive?",Type:"Move",Game:"All"},{Name:"Switching",Affect:"Specific",Affected:"Pursuit",Title:"Is the target switching out?",Type:"Move",Game:"All"},{Name:"Confusion",Affect:"Specific",Affected:"Tangled Feet",Title:"Is the target confused?",Type:"Ability",Game:"All"},{Name:"Minimize",Affect:"Specific",Title:"Did the target previously use Minimize?",Type:"Move",Game:"Gold,Silver,Crystal,Ruby,Sapphire,Colosseum,FireRed,LeafGreen,Emerald,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield,Brilliant Diamond,Shining Pearl,Legend Arceus,Scarlet,Violet"},{Name:"Charge",Affect:"Specific",Affected:"Charge",Title:"Is the move powered up by Charge?",Type:"Move",Game:"All"},{Name:"Me First",Affect:"Specific",Affected:"Me First",Title:"Is the move called by Me First?",Type:"Move",Game:"All"},{Name:"Flash Fire",Affect:"Specific",Affected:"Flash Fire",Title:"Is Flash Fire active on the user?",Type:"Ability",Game:"All"},{Name:"Tar Shot",Affect:"Specific",Affected:"Tar Shot",Title:"Is Tar Shot active on the target?",Type:"Move",Game:"All"},{Name:"Helping Hand",Affect:"Specific",Affected:"Helping Hand",Title:"Is the user affected by Helping Hand?",Type:"Move",Game:"All"},{Name:"Damaged",Affect:"Specific",Affected:"Revenge",Title:"Did the user take damage this turn?",Type:"Move",Game:"All"},{Name:"Defense Curl",Affect:"Specific",Affected:"Defense Curl",Title:"Did the user previously use Defense Curl?",Type:"Move",Game:"All"},{Name:"Z-Move",Affect:"Specific",Title:"Transform move to Z-Move?",Type:"Move",Game:"X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee"},{Name:"Max Move",Affect:"Specific",Title:"Transform move to Max Move?",Type:"Move",Game:"Sword,Shield"}]
@@ -5384,16 +5466,14 @@ function buildDMG(preval) {
 				$(contentPokWrap).droppable({
 					drop: function(e,ui) {
 						var tar = ui.helper[0];
-						var base = this;
 						if (tar.tagName == "LI") {
+							var base = findUpAtt(tar,"data-row");
 							var tarString = tar.getAttribute("data-string");
-							var baseString = base.getAttribute("data-string");
 
-							DMGBoxActiveSet();
-			
 							if (tarString.includes("pok:") && !tarString.includes("pok:|") && !tarString.includes("pok:\n")) {
 								if (finaldataPokémon[getPokémonInt(dataStringToObj(tarString)["pok"])][JSONPath_Reference] == "true") {
-									DMGSetDataString(base,tarString);
+									DMGSetDataString(this,tarString);
+									DMGPartyRow(base);
 								}
 								else {
 									consoleText("Pokémon Unavailable.")
@@ -5402,7 +5482,6 @@ function buildDMG(preval) {
 							else {
 								consoleText("Data returned an error.");
 							}
-
 						}
 					}
 				});
@@ -5528,7 +5607,6 @@ function buildDMG(preval) {
 					contentActiveBottom.appendChild(contentActiveMove)
 					contentActiveMove.appendChild(contentActiveMoveText);
 					contentActiveMove.addEventListener("click",function(){let val = this.firstChild.innerText;var tar = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");var tarTemp = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select > option[value='"+val+"']"); if (val != "") {tar.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,val)+")"; if (tarTemp != undefined) {tar.value = val;} DMGSetInfo();DMGCalcStart();let movd = formatMoveData(val);movd = undDel(movd,"");tar.title = movd;}});
-
 				}
 			}
 			// Sortable Pokémon //
@@ -5562,46 +5640,125 @@ function buildDMG(preval) {
 			var partyTeam = document.createElement("span");
 			partyTeam.setAttribute("name","team "+x);
 			partyPath.appendChild(partyTeam);
-
-			var partyTeamOpen = document.createElement("figure");
-			var partyTeamOpenText = document.createElement("h5");
-			partyTeamOpen.setAttribute("type","invert");
-			partyTeamOpenText.innerText = "⮝";
-			partyTeamOpen.classList.add("open");
-			partyTeam.appendChild(partyTeamOpen);
-			partyTeamOpen.appendChild(partyTeamOpenText);
-			partyTeamOpen.addEventListener("click",function(){if(this.parentElement.classList.contains("active")) {this.parentElement.classList.remove("active")} else {this.parentElement.classList.add("active");}});
-
-			var partyTeamWrap = document.createElement("span");
-			partyTeam.appendChild(partyTeamWrap);
-			var partyTeamInner = document.createElement("span");
-			partyTeamWrap.appendChild(partyTeamInner)
-
+			partyTeam.setAttribute("data-row",1);
+			partyTeam.setAttribute("data-string","");
 
 			var partyTeamDel = document.createElement("figure");
 			var partyTeamDelText = document.createElement("h6");
 			partyTeamDel.classList.add("del");
 			partyTeamDel.setAttribute("type","scale");
 			partyTeamDelText.innerText = "❌";
-			partyTeamInner.appendChild(partyTeamDel);
+			partyTeam.appendChild(partyTeamDel);
 			partyTeamDel.appendChild(partyTeamDelText);
 			partyTeamDel.addEventListener("click",function(){
 				var ask = confirm("The Pokémon's data will not be saved.\nDo you want to continue?");
 				if (ask) {
-					var eles = this.parentElement.querySelectorAll(":scope li[name]");
-					for (var i = 0; i < eles.length; i++) {
-						eles[i].remove();
+					var ele = findUpAtt(this,"data-string");
+					ele.setAttribute("data-string","");
+					ele.setAttribute("data-row","1");
+					DMGPartyRow(ele);
+				}
+			});
+
+			$(partyTeamDel).droppable({
+				drop: function(e,ui) {
+					let tar = ui.helper[0];
+					let base = findUpAtt(tar,"data-row");
+					if (tar.tagName == "LI" && tar.getAttribute("data-string") != undefined) {
+						let row = base.getAttribute("data-row");
+						let dataStrings = base.getAttribute("data-string");
+						dataStrings = undwsDel(dataStrings,"");
+						dataStrings = dataStrings.replaceAll("\r","");
+						dataStrings = dataStrings.replaceAll("\n","_");
+						dataStrings = splitStr(dataStrings,"_");
+						dataStrings = dataStrings.filter(e => e !== "");
+				
+
+						let id = tar.getAttribute("name");
+						let int = ((parseInt(row)-1)*6)+parseInt(id);
+
+
+						DMGPartyActiveSet();
+
+						let ask = confirm("The Pokémon's data will not be saved.\nDo you want to continue?");
+
+						if (ask) {
+							dataStrings.splice(int,1);
+							base.setAttribute("data-string",dataStrings.join("_"));
+							DMGPartyRow(base);
+						}
 					}
 				}
-			})
+			});
+
+
+			var partyTeamWrap = document.createElement("span");
+			partyTeamWrap.setAttribute("name","wrap");
+			partyTeam.appendChild(partyTeamWrap);
+
+
+
+			for(var q = 0; q < 6; q++) {
+				var partyTeamPok = document.createElement("li");
+				var partyTeamPokImg = document.createElement("img");
+				partyTeamPok.setAttribute("data-string","");
+				partyTeamPok.setAttribute("name",q);
+				partyTeamPokImg.title = "";
+				partyTeamPokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+				partyTeamWrap.appendChild(partyTeamPok);
+				partyTeamPok.appendChild(partyTeamPokImg);
+
+				$(partyTeamPok).draggable({
+					start:function(e,ui){
+						document.body.classList.add("dragging");
+					},
+					stop:function(e,ui){
+						document.body.classList.remove("dragging");
+					},
+					revert: true,
+				});
+			}
 
 			var partyTeamAdd = document.createElement("li");
 			var partyTeamAddText = document.createElement("h2");
 			partyTeamAdd.classList.add("add");
 			partyTeamAddText.innerText = "+";
-			partyTeamInner.appendChild(partyTeamAdd);
+			partyTeamWrap.appendChild(partyTeamAdd);
 			partyTeamAdd.appendChild(partyTeamAddText);
-			partyTeamAdd.addEventListener("click",function(){DMGPartyCreate(this.parentElement.parentElement.parentElement)});
+			partyTeamAdd.addEventListener("click",function(){DMGPartyCreate(this.parentElement.parentElement)});
+
+
+			var partyTeamPointerWrap = document.createElement("span");
+			partyTeamPointerWrap.setAttribute("name","row")
+			partyTeam.appendChild(partyTeamPointerWrap);
+
+			var partyTeamPointerUp = document.createElement("b");
+			var partyTeamPointerUpText = document.createElement("small");
+			partyTeamPointerUp.setAttribute("type","invert");
+			partyTeamPointerUp.setAttribute("name","up");
+			partyTeamPointerUp.classList.add("active");
+			partyTeamPointerUpText.innerText = "⮝";
+			partyTeamPointerWrap.appendChild(partyTeamPointerUp)
+			partyTeamPointerUp.appendChild(partyTeamPointerUpText)
+			partyTeamPointerUp.addEventListener("click",function(){let x = findUpAtt(this,"data-row");let y = x.getAttribute("data-row"); let z = parseInt(y)-1; if (z > 0) {x.setAttribute("data-row",z); DMGPartyRow(x);}});
+
+	
+			var partyTeamPointerRow = document.createElement("small");
+			partyTeamPointerRow.innerText = "1";
+			partyTeamPointerWrap.appendChild(partyTeamPointerRow);
+	
+
+			var partyTeamPointerDown = document.createElement("b");
+			var partyTeamPointerDownText = document.createElement("small");
+			partyTeamPointerDown.setAttribute("type","invert");
+			partyTeamPointerDown.setAttribute("name","down");
+			partyTeamPointerDown.classList.add("active");
+			partyTeamPointerDownText.innerText = "⮟";
+			partyTeamPointerWrap.appendChild(partyTeamPointerDown);
+			partyTeamPointerDown.appendChild(partyTeamPointerDownText);
+			partyTeamPointerDown.addEventListener("click",function(){let x = findUpAtt(this,"data-row"); let y = x.getAttribute("data-row");let z = parseInt(y)+1;  if (z > 0) {x.setAttribute("data-row",z); DMGPartyRow(x);}});
+
+			DMGPartyRow(partyTeam);
 		}
 		if ("Options") {
             // Title //
@@ -6376,73 +6533,96 @@ function buildDMG(preval) {
                                 break;
                             }
                         }
+
+						
                         
-    
-                        var statsWrapInput = document.createElement("input");
-                        statsWrapInput.setAttribute("type","number");
-                        statsWrapInput.setAttribute("min",statsMin);
-                        statsWrapInput.setAttribute("max",statsMax);
-                        statsWrapInput.setAttribute("name",statsTemp[s]);
-                        statsWrapInput.setAttribute("title",statsTitle+"\n"+statsTemp[s]);
-                        statsWrapInput.setAttribute("onblur","this.placeholder='0'");
-                        statsWrapInput.setAttribute("onfocus","this.placeholder=''");
-                        if (e == 0 || e == 4) {
-                            statsWrapInput.setAttribute("disabled","");
-                        }
-            
-                        if (statsTemp[s] == "Critical") {
-                            if (Generation == 1) {
-                                statsWrapInput.min = 0;
-                                statsWrapInput.max = 1;
-                            }
-                            else if (Generation >= 2) {
-                                statsWrapInput.min = 0;
-                                statsWrapInput.max = 4;
-                            }
-                        }
-                    
-                        if (e == 3) {
-                            if (s == 0) {
-                                statsWrapInput.setAttribute("disabled","");
-                                statsWrapInput.style.opacity = "0";
-                                statsWrapInput.style.pointerEvents = "none";
-                            }
-                        }
-    
-                        if (e == 0) {
-                            statsWrapInput.setAttribute("placeholder",statsTemp[s]+":");
-                        }
-                        else {
-                            statsWrapInput.setAttribute("placeholder","0");
-                            
-                        }
-                        if (e == 4) {
-                            statsWrapInput.value = 0;
-                        }
-                    
-                        statsColumn.appendChild(statsWrapInput);
-                        statsWrapInput.addEventListener("input",iMinMax);
-    
+						
+						var statsWrapInput = document.createElement("input");
+						statsWrapInput.setAttribute("type","number");
+						statsWrapInput.setAttribute("min",statsMin);
+						statsWrapInput.setAttribute("max",statsMax);
+						statsWrapInput.setAttribute("name",statsTemp[s]);
+						statsWrapInput.setAttribute("title",statsName+"\n"+statsTemp[s]);
+						statsWrapInput.setAttribute("onblur","this.placeholder='0'");
+						statsWrapInput.setAttribute("onfocus","this.placeholder=''");
+						if (e == 0 || e == 4) {
+							statsWrapInput.setAttribute("disabled","");
+						}
+			
+						if (statsTemp[s] == "Critical") {
+							if (Generation == 1) {
+								statsWrapInput.min = 0;
+								statsWrapInput.max = 1;
+							}
+							else if (Generation >= 2) {
+								statsWrapInput.min = 0;
+								statsWrapInput.max = 4;
+							}
+						}
+					
+						if (e == 3) {
+							if (s == 0) {
+								statsWrapInput.setAttribute("disabled","");
+								statsWrapInput.style.opacity = "0";
+								statsWrapInput.style.pointerEvents = "none";
+							}
+						}
+	
+						if (e == 0) {
+							statsWrapInput.setAttribute("placeholder",statsTemp[s]+":");
+						}
+						else {
+							statsWrapInput.setAttribute("placeholder","0");
+							
+						}
+						if (e == 4) {
+							statsWrapInput.value = 0;
+						}
+					
+						statsColumn.appendChild(statsWrapInput);
+						statsWrapInput.addEventListener("input",iMinMax);
+
+						if (Generation == 2) {
+							if (statsCol[e]["Title"] == "IV") {
+								if (statsTemp[s] == "Sp. Atk") {
+									statsWrapInput.addEventListener("input",function(){let x = this.parentElement.querySelector(":scope *[name='Sp. Def']");x.value = this.value;});
+								}
+								if (statsTemp[s] == "Sp. Def") {
+									statsWrapInput.addEventListener("input",function(){let x = this.parentElement.querySelector(":scope *[name='Sp. Atk']");x.value = this.value;});
+								}
+							}
+						}
+
 						statsWrapInput.addEventListener("click",function(){this.select();})
-                        statsWrapInput.addEventListener("input",function(){var x = findUpTag(this,"UL");var base2 = document.querySelector("#contain > div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name='"+x.parentElement.getAttribute("name")+"'] > ul[name='"+x.getAttribute("name")+"']");DMGCalcPokStats(base2)});
-                        statsWrapInput.addEventListener("input",function(){var x = findUpTag(this,"UL");var base2 = document.querySelector("#contain > div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name='"+x.parentElement.getAttribute("name")+"'] > ul[name='"+x.getAttribute("name")+"']");DMGSaveData(base2)});
-                        statsWrapInput.addEventListener("input",function(){var x = findUpTag(this,"UL");var base2 = document.querySelector("#contain > div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name='"+x.parentElement.getAttribute("name")+"'] > ul[name='"+x.getAttribute("name")+"']");DMGCalcStart(base2)});
-    
-                        statsWrapInput.addEventListener("input",function(){if (this.value == 0) {this.value = ""}});
-    
-                        if (statsTemp[s] != "Evasion" && statsTemp[s] != "Accuracy") {
-                            if (e < 3) {
-                                statsWrapInput.style.color = "var(--stat"+statsTemp[s].replaceAll(".","").replaceAll(" ","")+")";
-                            }
-                        }
-    
-                        if (e == 2) {
-                            if (Generation >= 3) {
-                                if (!getApplicable("Lets Go Pikachu,Lets Go Eevee")) {
-                                    statsWrapInput.addEventListener("change",function(){inputMaxValue(this.parentElement.querySelectorAll(":scope input"),255,510)});
-                                }
-                            }
-                        }
+						statsWrapInput.addEventListener("input",function(){var x = findUpTag(this,"UL");var base2 = document.querySelector("#contain > div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name='"+x.parentElement.getAttribute("name")+"'] > ul[name='"+x.getAttribute("name")+"']");DMGCalcPokStats(base2)});
+						statsWrapInput.addEventListener("input",function(){var x = findUpTag(this,"UL");var base2 = document.querySelector("#contain > div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name='"+x.parentElement.getAttribute("name")+"'] > ul[name='"+x.getAttribute("name")+"']");DMGSaveData(base2)});
+						statsWrapInput.addEventListener("input",function(){var x = findUpTag(this,"UL");var base2 = document.querySelector("#contain > div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name='"+x.parentElement.getAttribute("name")+"'] > ul[name='"+x.getAttribute("name")+"']");DMGCalcStart(base2)});
+	
+						statsWrapInput.addEventListener("input",function(){if (this.value == 0) {this.value = ""}});
+	
+						if (statsTemp[s] != "Evasion" && statsTemp[s] != "Accuracy") {
+							if (e < 3) {
+								statsWrapInput.style.color = "var(--stat"+statsTemp[s].replaceAll(".","").replaceAll(" ","")+")";
+							}
+						}
+	
+						if (e == 2) {
+							if (Generation >= 3) {
+								if (!getApplicable("Lets Go Pikachu,Lets Go Eevee")) {
+									statsWrapInput.addEventListener("change",function(){inputMaxValue(this.parentElement.querySelectorAll(":scope input"),255,510)});
+								}
+							}
+						}
+
+
+						if (Generation == 2) {
+							if (statsCol[e]["Title"] == "IV") {
+								if (statsTemp[s] == "HP") {
+									statsWrapInput.setAttribute("disabled","")
+								}
+							}
+						}
+						
                     }
 
                 }
