@@ -2659,12 +2659,7 @@ function updateTrainer(trainers,condition) {
 					}
 				
 					for (var t = 0; t < dmgBoxes.length; t++) {
-						let vals = dmgBoxes[t].querySelectorAll(":scope li[name]");
-						let check = false;
-						if (vals.length == 0) {
-							check = true;
-						}
-						if (check) {
+						if (dmgBoxes[t].getAttribute("data-string") == "") {
 							if (suggestChange) {
 								sel.value = el.value;
 								const preval = sel.getAttribute("name");
@@ -2683,15 +2678,12 @@ function updateTrainer(trainers,condition) {
 							return;
 						}
 					}
-					
+					//Farfetch'd
 				
 			
 					let ask = confirm("Do you want to replace existing Pokémon in the Party?");
 					if (ask) {
-						var oldEl = dmgBoxes[0].querySelectorAll(":scope li[name]");
-						for (var r = 0; r < oldEl.length; r++) {
-							oldEl[r].remove();
-						}
+						dmgBoxes[0].setAttribute("data-string","")
 						if (suggestChange) {
 							sel.value = el.value;
 							const preval = sel.getAttribute("name");
