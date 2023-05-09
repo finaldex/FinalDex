@@ -907,9 +907,9 @@ var createTool = function() {
 		var toolSectionContentDMGMenuMoveTop = document.createElement("span");
 		var toolSectionContentDMGMenuMoveBottom = document.createElement("span");
 
-		var toolSectionContentDMGMenuMoveTopSelect = document.createElement("select");
+		var toolSectionContentDMGMenuMoveSelect = document.createElement("select");
 		var toolSectionContentDMGMenuSpecificTopInput = document.createElement("input");
-	
+		var toolSectionContentDMGMenuSpecificTopSelect = document.createElement("select");
 
 		var toolSectionContentDMGMenuMoveBottomDamage = document.createElement("span");
 		var toolSectionContentDMGMenuMoveBottomDamageTitle = document.createElement("h6");
@@ -1028,11 +1028,12 @@ var createTool = function() {
 		toolSectionContentDMGMenuSpecific.appendChild(toolSectionContentDMGMenuSpecificTop)
 		toolSectionContentDMGMenuSpecific.appendChild(toolSectionContentDMGMenuSpecificBottom)
 
-		toolSectionContentDMGMenuSpecificTop.appendChild(toolSectionContentDMGMenuSpecificTopInput)
+		toolSectionContentDMGMenuSpecificTop.appendChild(toolSectionContentDMGMenuSpecificTopSelect);
+		toolSectionContentDMGMenuSpecificTop.appendChild(toolSectionContentDMGMenuSpecificTopInput);
 
 		toolSectionContentDMGMenuMove.appendChild(toolSectionContentDMGMenuMoveTop);
 		toolSectionContentDMGMenuMove.appendChild(toolSectionContentDMGMenuMoveBottom);
-		toolSectionContentDMGMenuMoveTop.appendChild(toolSectionContentDMGMenuMoveTopSelect);
+		toolSectionContentDMGMenuMoveTop.appendChild(toolSectionContentDMGMenuMoveSelect);
 
 
 		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomDamage);
@@ -1150,7 +1151,7 @@ var createTool = function() {
 				var toolSectionContentDMGMenuMoveTopOption = document.createElement("option");
 				toolSectionContentDMGMenuMoveTopOption.setAttribute("value",tempMoves[m]);
 				toolSectionContentDMGMenuMoveTopOption.innerText = tempMoves[m];
-				toolSectionContentDMGMenuMoveTopSelect.appendChild(toolSectionContentDMGMenuMoveTopOption);
+				toolSectionContentDMGMenuMoveSelect.appendChild(toolSectionContentDMGMenuMoveTopOption);
 
 
 				let movd = formatMoveData(tempMoves[m]);
@@ -1161,21 +1162,22 @@ var createTool = function() {
 			}
 		}
 
-		if (toolSectionContentDMGMenuMoveTopSelect.querySelector(":scope option[value='Pound']") != undefined) {
-			toolSectionContentDMGMenuMoveTopSelect.value = "Pound";
+		if (toolSectionContentDMGMenuMoveSelect.querySelector(":scope option[value='Pound']") != undefined) {
+			toolSectionContentDMGMenuMoveSelect.value = "Pound";
 		}
 	
 		toolSectionContentDMGMenuSpecificTopInput.addEventListener("change",DMGCalcStart);
-		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",DMGSetInfo);
-		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",DMGCalcStart);
-		toolSectionContentDMGMenuMoveTopSelect.addEventListener("change",function(){
+		toolSectionContentDMGMenuSpecificTopSelect.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGSetInfo);
+		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuMoveSelect.addEventListener("change",function(){
 			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;
 		});
 
 
-		let movd = formatMoveData(toolSectionContentDMGMenuMoveTopSelect.value);
+		let movd = formatMoveData(toolSectionContentDMGMenuMoveSelect.value);
 		movd = undDel(movd,"");
-		toolSectionContentDMGMenuMoveTopSelect.title = movd;
+		toolSectionContentDMGMenuMoveSelect.title = movd;
 	
 
 
