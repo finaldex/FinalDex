@@ -2578,10 +2578,16 @@ function calcPartyStat(divBase) {
 
 }
 
-function formatMoveData(move) {
+function formatMoveData(move,obj) {
 
     let tempStr;
     let tempArr = [];
+
+    var obj;
+
+    if (obj == undefined) {
+        obj = {};
+    }
 
     let cate = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,move);
     let ppmin = returnArrValue(finaldataMovePP,"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,move);
@@ -2590,11 +2596,18 @@ function formatMoveData(move) {
     let desc = returnArrValue(finaldataMoveDescription,"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,move);
     let prio = returnArrValue(finaldataMovePriority,"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,move);
 
-    prio = undwsnanDel(prio,"0");
-    pwr = undwsnanDel(pwr,"-");
-    acc = undwsnanDel(acc,"-");
+    if (obj["Power"] != undefined) {
+        pwr = obj["Power"];
+    }
+    if (obj["Category"] != undefined) {
+        cate = obj["Category"];
+    }
 
-    
+    prio = undwsDel(prio,"0");
+    pwr = undwsDel(pwr,"-");
+    acc = undwsDel(acc,"100%");
+
+
     if (prio.includes("+")) {
         prio = "+"+prio.replaceAll("+","")
     }
