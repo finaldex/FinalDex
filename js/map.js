@@ -2678,7 +2678,6 @@ function updateTrainer(trainers,condition) {
 							return;
 						}
 					}
-					//Farfetch'd
 				
 			
 					let ask = confirm("Do you want to replace existing Pokémon in the Party?");
