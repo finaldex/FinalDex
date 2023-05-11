@@ -1014,6 +1014,7 @@ function getLocationPokémon(location) {
 }
 
 
+
 function undDel(string,replacement) {
 	var string;
 	var replacement;
@@ -1034,10 +1035,20 @@ function undwsDel(string,replacement) {
 		return string;
 	}
 }
-function undwsnanDel(string,replacement) {
+function undwsnullDel(string,replacement) {
 	var string;
 	var replacement;
-	if (string == undefined || string == "" || isNaN(string)) {
+	if (string == undefined || string == null || string == "") {
+		return replacement
+	}
+	else {
+		return string;
+	}
+}
+function undwsnullnanDel(string,replacement) {
+	var string;
+	var replacement;
+	if (string == undefined || string == "" || string == null || isNaN(string)) {
 		return replacement;
 	}
 	else {
@@ -1538,6 +1549,24 @@ function SwitchTab(tab,sub) {
 			tars[q].style.display = "none";
 		}
 		tar.style.display = "block";
+
+		if (sub != undefined) {
+			let inputs = tar.querySelectorAll(":scope section[name='list'] ol input");
+			let contents = tar.querySelectorAll(":scope section[name='content'] > div[name]")
+			if (sub == "Damage Calculator") {
+				let input = tar.querySelector(":scope section[name='list'] ol input[value='0']");
+				for (var q = 0; q < inputs.length; q++) {
+					inputs[q].checked = false;
+				}
+				input.checked = true;
+
+				let content = tar.querySelector(":scope div#dmg");
+				for (var q = 0; q < contents.length; q++) {
+					contents[q].style.display = "none";
+				}
+				content.style.display = "block";
+			}
+		}
 
 	}
 }
