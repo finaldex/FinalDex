@@ -41,7 +41,7 @@ var finaldataItemsEffect = [];
 var finaldataItemsPrice = [];
 var finaldataItemsPriceExtra = [];
 var finaldataItemsDescription = [];
-var finaldataItemsDamage = [];
+var finaldataItemsTypeEnhance = [];
 var finaldataLocationPokémon = [];
 var finaldataLocationPokémonShops = [];
 var finaldataLocationItems = [];
@@ -215,8 +215,8 @@ function requestLoad(i,url) {
 						for(var q = 0; q < Metadata["Description"].length; q++) {
 							finaldataItemsDescription.push(Metadata["Description"][q]);
 						}
-						for(var q = 0; q < Metadata["Damage"].length; q++) {
-							finaldataItemsDamage.push(Metadata["Damage"][q]);
+						for(var q = 0; q < Metadata["Type Enhance"].length; q++) {
+							finaldataItemsTypeEnhance.push(Metadata["Type Enhance"][q]);
 						}
 					}
 					if (loads[i] == "Abilities" && Ability.length > 0) {
