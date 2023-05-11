@@ -2149,6 +2149,7 @@ function trainerSearch() {
 			var li = document.createElement("li");
 			var b = document.createElement("b");
 			var txt = document.createElement("h6");
+			li.setAttribute("name",found[i]["Name"]);
 			txt.innerText = found[i]["Name"];
 			b.setAttribute("type","invert");
 			b.setAttribute("value",parseInt(found[i]["Integer"])+1);
@@ -2184,7 +2185,6 @@ function updateTrainer(trainers,condition) {
 	var trainers;
 	var q = input.value-1;
 
-	
 
 	if (condition == "add") {
 		if (trainers.length > parseInt(q)+1) {
@@ -2214,6 +2214,7 @@ function updateTrainer(trainers,condition) {
 	var trainerArea = trainers[q]["Area"];
 	var trainerTitle = trainers[q]["Title"];
 	var trainerType = trainers[q]["Type"];
+
 
 
 
@@ -2320,6 +2321,17 @@ function updateTrainer(trainers,condition) {
 	else {
 		nameText.innerText = trainerName;
 	}
+
+
+	let el = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] li[name='"+(nameText.innerHTML.replaceAll("<br>"," "))+"']");
+	if (el != undefined) {
+		let el0 = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol");
+		el0.classList.add("active");
+		el.scrollIntoView();
+		el0.classList.remove("active");
+	}
+
+
 
 	previousPath.appendChild(previousImg);
 	currentPath.appendChild(currentImg);
@@ -2673,6 +2685,7 @@ function updateTrainer(trainers,condition) {
 								}
 								buildDMG(preval)
 							}
+							dmgBoxes[t].setAttribute("data-row","1");
 							DMGPartyCreate(dmgBoxes[t],dataStrings);
 							SwitchTab("Tools","Damage Calculator");
 							return;
@@ -2683,6 +2696,9 @@ function updateTrainer(trainers,condition) {
 					let ask = confirm("Do you want to replace existing Pokémon in the Party?");
 					if (ask) {
 						dmgBoxes[0].setAttribute("data-string","")
+						dmgBoxes[0].setAttribute("data-row","1");
+						DMGPartyCreate(dmgBoxes[0],dataStrings);
+						SwitchTab("Tools","Damage Calculator");
 						if (suggestChange) {
 							sel.value = el.value;
 							const preval = sel.getAttribute("name");
@@ -2696,13 +2712,14 @@ function updateTrainer(trainers,condition) {
 							}
 							buildDMG(preval)
 						}
-						DMGPartyCreate(dmgBoxes[0],dataStrings);
-						SwitchTab("Tools","Damage Calculator");
 						return;
 					}
 
 					let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
 					if (ask2) {
+						dmgBoxes[0].setAttribute("data-row","1");
+						DMGPartyCreate(dmgBoxes[0],dataStrings);
+						SwitchTab("Tools","Damage Calculator");
 						if (suggestChange) {
 							sel.value = el.value;
 							const preval = sel.getAttribute("name");
@@ -2716,8 +2733,6 @@ function updateTrainer(trainers,condition) {
 							}
 							buildDMG(preval)
 						}
-						DMGPartyCreate(dmgBoxes[0],dataStrings);
-						SwitchTab("Tools","Damage Calculator");
 						return;
 					}
 					
@@ -2983,18 +2998,85 @@ function updateTrainer(trainers,condition) {
 		}
 
 
-		var exportButton = document.createElement("figure");
-		var exportButtonText = document.createElement("p");
-		exportButtonText.innerText = "⮟";
-		exportButton.title = "Export Pokémon Buttons String";
-		exportButton.setAttribute("name","export");
-		exportButton.setAttribute("type","scale");
-		liMain.appendChild(exportButton);
-		exportButton.appendChild(exportButtonText);
-
-		exportButton.addEventListener("click", trainerPokExport);
 
 		li.setAttribute("data-string",datas[u]);
+
+
+
+		var exportButton = document.createElement("figure");
+		exportButton.setAttribute("name","export");
+		liMain.appendChild(exportButton)
+		exportButton.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
+		var exportButtonText = document.createElement("small");
+		exportButtonText.innerText = "⮟";
+		exportButton.appendChild(exportButtonText)
+		var exportButtonTop = document.createElement("div");
+		exportButton.appendChild(exportButtonTop)
+		var exportButtonTopWrap = document.createElement("span");
+		exportButtonTop.appendChild(exportButtonTopWrap)
+		var exportButtonOpts = ["Copy Data String","Send to Damage Calculator"];
+
+		for(var e = 0; e < exportButtonOpts.length; e++) {
+			var exportButtonWrapTop = document.createElement("span");
+			var exportButtonWrap = document.createElement("b");
+			var exportButtonTxt = document.createElement("small");
+			exportButtonWrapTop.setAttribute("name",exportButtonOpts[e]);
+			exportButtonWrap.setAttribute("type","invert");
+			exportButtonTxt.innerText = exportButtonOpts[e];
+			exportButtonTopWrap.appendChild(exportButtonWrapTop);
+			exportButtonWrapTop.appendChild(exportButtonWrap);
+			exportButtonWrap.appendChild(exportButtonTxt);
+			exportButtonWrap.addEventListener("click",exportButtonFunction);
+		}
+
+		function exportButtonFunction() {
+			let val = this.parentElement.getAttribute("name");
+			let base = findUpTagAtt(this,"LI","data-string");
+			let dataString = base.getAttribute("data-string");
+
+			if (val == "Copy Data String") {
+				navigator.clipboard.writeText(dataString);
+				console.log(dataString)
+				consoleText("Copied Data String!")
+			}
+			if (val == "Send to Damage Calculator") {
+				let dmgSlots = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > div > span:not([name='team 1']) > div[data-string]");
+            
+                let check = false;
+                for (var t = 0; t < dmgSlots.length; t++) {
+                    let ds = dmgSlots[t].getAttribute("data-string");
+                    let dsobj = dataStringToObj(ds);
+    
+                    if (dsobj["pok"] == undefined || dsobj["pok"] == "") {
+                       check = true;
+                    }
+
+                    if (check) {
+                        DMGSetDataString(dmgSlots[t],dataString);
+                        SwitchTab("Tools","Damage Calculator");
+                        return;
+                    }
+                }
+
+          
+                let ask = confirm("Damage Calculator field is full.\nDo you want to replace existing Pokémon?");
+
+                if (ask) {
+                    DMGSetDataString(dmgSlots[0],dataString);
+                    SwitchTab("Tools","Damage Calculator");
+                }
+                else {
+                    let ask2 = confirm("Do you instead want to add it to the Party?");
+                    if (ask2) {
+                        let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span:not([name='team 1'])");
+                        DMGPartyCreate(dmgBox,dataString);
+                        SwitchTab("Tools","Damage Calculator");
+                    }
+                }
+                
+			}
+		
+		}
 
 
 
@@ -3088,6 +3170,10 @@ $("body").click(function(event) {
 	if(!$(event.target).closest("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']").length && !$(event.target).is("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']")) {
 		$("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']").removeClass("active");
 	}
+	if(!$(event.target).closest("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export']").length && !$(event.target).is("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export']")) {
+		$("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export']").removeClass("active");
+	}
+
 });
 
 
