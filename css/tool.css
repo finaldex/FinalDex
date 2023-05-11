@@ -725,6 +725,7 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: row;
+	-webkit-user-drag: none;
 }
 
 #contain div#tool div#dmg div[name='content'] {
@@ -742,7 +743,6 @@
     text-align: center;
     align-items: center;
     justify-content: space-between;
-    z-index: 1;
 }
 #contain div#tool div#dmg div[name='result'] > div {
     width: 100%;
@@ -897,6 +897,7 @@
     z-index: 10;
 }
 
+
 #contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'],
 #contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='active'] {
 	position: relative;
@@ -907,7 +908,6 @@
 	background: limegreen;
 	text-shadow: 0px 0px 1px var(--fontDark);
 	color: var(--fontLight);
-	user-select:none;
 	border-radius: inherit;
 	flex-direction: column;
     border: 2px solid;
@@ -966,22 +966,30 @@
 }
 
 
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].target figure[name='target'] {
+
+#contain div#tool div#dmg > div[data-range*="Affects"] div[name='battle'] > span[name] > div[data-string].viable figure[name='target'] {
 	display: none;
 }
 
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name]:not(.viable) figure[name='target'] {
+
+#contain div#tool div#dmg > div[data-range] div[name='battle'] > span[name] > div[data-string].target figure[name='target'] {
+	display: none;
+}
+
+#contain div#tool div#dmg > div[data-range] div[name='battle'] > span[name] > div[data-string]:not(.viable) figure[name='target'] {
 	display: none;
 }
 
 
 
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] > span > div[name].viable > span[name='inactive'],
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] > span > div[name].viable.user > span[name='active'] {
+
+
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable > span[name='inactive'],
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable > span[name='active'] {
 	outline: 4px solid var(--colorRed);
 }
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] > span > div[name].viable.user > span[name='inactive'],
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] > span > div[name].viable.user > span[name='active'] {
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable.user > span[name='inactive'],
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable.user > span[name='active'] {
 	outline: 4px solid var(--colorRed) !important;
     border: 4px solid var(--colorBlue) !important;
 }
@@ -1032,6 +1040,8 @@
 	max-height: 100%;
 }
 
+
+
 body[Generation="1"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
 body[Generation="2"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
 body[Generation="3"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
@@ -1040,7 +1050,14 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 	image-rendering: pixelated;
 }
 
+#contain div#tool div#dmg div[name='battle'] div[data-string] *[name='hp'][title] {
+	cursor: help;
+}
 
+
+#contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='item'][title]:not([title=""]) {
+	cursor: help;
+}
 
 #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='item'] {
 	position:absolute;
@@ -1055,6 +1072,7 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 
 #contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'] {
 	background: linear-gradient(to right, Skyblue, var(--color_50));
+	user-select: none;
 }
 
 #contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'] b {
@@ -1108,6 +1126,7 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     align-items: center;
     user-select: none;
 }
+
 #contain div#tool div#dmg > div:not([data-battle="Single Battle"]) div[name='result'] *[name='imgs'] > img[name='img'] {
 	cursor: pointer;
 }
@@ -1169,7 +1188,12 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 	transform:scale(0.8)
 }
 
-
+#contain div#tool > section[name='content'] {
+	z-index: unset;
+}
+#contain div#tool > section[name='content'] > * {
+	overflow:unset;
+}
 
 #contain div#tool div#dmg div[name='menu'] {
 	width: 100%;
@@ -1179,7 +1203,6 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 	justify-content: center;
 	background: var(--color17);
 	box-shadow: 1px -1px 0px var(--border1);
-    z-index: 3;
     position: inherit;
 }
 
@@ -1264,16 +1287,25 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 }
 
 #contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span {
-	width: 75%;
-	position:relative;
+    width: 75%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:last-child > * {
 	display: flex;
+    flex-direction: row;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span[name='critical'] > * {
-	display: inline;
-	padding: 0 10px;
+#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:last-child > * > * {
+	padding: 5px 10px;
+    cursor: pointer;
 }
 
 #contain div#tool div#dmg div[name='menu'] > div[name='roll'] input[type='checkbox'] {
@@ -1290,9 +1322,10 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 }
 
 #contain div#tool div#dmg div[name='menu'] > div > span > *[name='min'],
+#contain div#tool div#dmg div[name='menu'] > div > span > *[name='val'],
 #contain div#tool div#dmg div[name='menu'] > div > span > *[name='max'] {
 	position: absolute;
-    bottom: -20px;
+    bottom: -15px;
 }
 #contain div#tool div#dmg div[name='menu'] > div > span > *[name='min'] {
 	left: 5px;
@@ -1356,26 +1389,6 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 #contain div#tool div#dmg input[type='range'][disabled] {
 	filter:grayscale(1) contrast(0.5);
 }
-
-
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span > *[name='critical'] input {
-	display: none;
-}
-
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span > *[name='critical'] small {
-	padding: 0 2px;
-}
-
-
-
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span > *[name='critical'] > * {
-	filter: brightness(0.5);
-}
-
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span > *[name='critical'] > input:checked ~ * {
-	filter: none;
-}
-
 
 
 
@@ -1499,8 +1512,8 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 	cursor:unset;
 }
 
-#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name] input[name][disabled],
-#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name] input[name][disabled]::placeholder {
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name]:not([name=""]):not(:last-child) input[name][disabled],
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name]:not([name=""]):not(:last-child) input[name][disabled]::placeholder {
 	color: gray !important;
 }
 
@@ -2057,9 +2070,18 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 #contain div#tool div#dmg div[name='result'] > span[name='party'] figure[name='exit'] {
     cursor:pointer;
 }
-body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] figure[name='exit'].ui-droppable-hover ~ span li[data-string].ui-draggable-dragging {
+
+
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] span li[data-string].delete {
 	background: var(--colorRed);
 }
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] span li[data-string].copy {
+	background: var(--color_80);
+}
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] span li[data-string].plus {
+	background: var(--colorGreen);
+}
+
 
 #contain div#tool div#dmg div[name='result'] > span[name='party'] li.add > * {
     display: flex;
@@ -2339,7 +2361,6 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
     background: var(--color17);
 	position:relative;
 	display:flex;
-    z-index: 2;
 }
 #contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > * {
 	display: inline-flex;
