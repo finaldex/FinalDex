@@ -940,6 +940,7 @@ var createPokémon = function() {
             let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
 				
             if (dmgBox.getAttribute("data-string") == "") {
+                dmgBox.setAttribute("data-row","1");
                 DMGPartyCreate(dmgBox,dataStrings);
                 SwitchTab("Tools","Damage Calculator");
                 return;
@@ -958,6 +959,7 @@ var createPokémon = function() {
 
             let ask2 = confirm("Do you want to continue without overriding existing Pokémon?");
             if (ask2) {
+                dmgBox.setAttribute("data-row","1");
                 DMGPartyCreate(dmgBox,dataStrings);
                 SwitchTab("Tools","Damage Calculator");
                 return;
