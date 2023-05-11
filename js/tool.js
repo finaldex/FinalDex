@@ -917,17 +917,22 @@ var createTool = function() {
 		var toolSectionContentDMGMenuMoveBottomAccuracy = document.createElement("span");
 		var toolSectionContentDMGMenuMoveBottomAccuracyTitle = document.createElement("h6");
 		var toolSectionContentDMGMenuMoveBottomAccuracyText = document.createElement("small");
-		var toolSectionContentDMGMenuMoveBottomCritical = document.createElement("label");
-		var toolSectionContentDMGMenuMoveBottomCriticalInput = document.createElement("input");
+		var toolSectionContentDMGMenuMoveBottomCritical = document.createElement("span");
 		var toolSectionContentDMGMenuMoveBottomCriticalTitle = document.createElement("h6");
 		var toolSectionContentDMGMenuMoveBottomCriticalText = document.createElement("small");
 
-		var toolSectionContentDMGMenuRollWrap = document.createElement("span");
+		var toolSectionContentDMGMenuRollTop = document.createElement("span");
 		var toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("span");
 		var toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("span");
 		var toolSectionContentDMGMenuRollRangeTextBottomLeft = document.createElement("small");
+		var toolSectionContentDMGMenuRollRangeTextBottomCenter = document.createElement("small");
 		var toolSectionContentDMGMenuRollRangeTextBottomRight = document.createElement("small");
 		var toolSectionContentDMGMenuRollRange = document.createElement("input");
+		
+		var toolSectionContentDMGMenuRollBottom = document.createElement("span");
+		var toolSectionContentDMGMenuRollCritical = document.createElement("label");
+		var toolSectionContentDMGMenuRollCriticalText = document.createElement("h6");
+		var toolSectionContentDMGMenuRollCriticalInput = document.createElement("input");
 
 
 		toolSectionContentDMGOptionsTop.setAttribute("name","header");
@@ -947,15 +952,20 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveBottomAccuracyTitle.innerText = "Accuracy";
 		toolSectionContentDMGMenuMoveBottomAccuracyText.innerText = "";
 
-		toolSectionContentDMGMenuMoveBottomCritical.setAttribute("for","dmg-critical")
-		toolSectionContentDMGMenuMoveBottomCriticalInput.setAttribute("id","dmg-critical")
-		toolSectionContentDMGMenuMoveBottomCriticalInput.setAttribute("type","checkbox");
 		toolSectionContentDMGMenuMoveBottomCritical.setAttribute("name","critical");
 		toolSectionContentDMGMenuMoveBottomCriticalTitle.innerText = "Critical";
 		toolSectionContentDMGMenuMoveBottomCriticalText.innerText = ""
 		
 
 		toolSectionContentDMGMenuRoll.setAttribute("name","roll");
+
+		toolSectionContentDMGMenuRollCritical.setAttribute("name","critical");
+		toolSectionContentDMGMenuRollCritical.setAttribute("for","dmg-critical")
+		toolSectionContentDMGMenuRollCriticalText.innerText = "Critical";
+		toolSectionContentDMGMenuRollCriticalInput.setAttribute("id","dmg-critical")
+		toolSectionContentDMGMenuRollCriticalInput.setAttribute("name","dmg-critical")
+		toolSectionContentDMGMenuRollCriticalInput.setAttribute("type","checkbox");
+
 		toolSectionContentDMGMenuMove.setAttribute("name","move");
 		toolSectionContentDMGMenuSpecific.setAttribute("name","spec");
 
@@ -965,6 +975,7 @@ var createTool = function() {
 		toolSectionContentDMGMenuRollRangeTextTopRight.setAttribute("name","high");
 		toolSectionContentDMGMenuRollRangeTextTopRight.innerHTML = "<h6>High Roll</h6>";
 		toolSectionContentDMGMenuRollRangeTextBottomLeft.setAttribute("name","min");
+		toolSectionContentDMGMenuRollRangeTextBottomCenter.setAttribute("name","val");
 		toolSectionContentDMGMenuRollRangeTextBottomRight.setAttribute("name","max");
 
 
@@ -1043,22 +1054,28 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyTitle);
 		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyText);
 		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomCritical);
-		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalInput);
 		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalTitle);
 		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalText);
+	
 
 
-		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollWrap)
-		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextTopLeft)
-		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextTopRight)
-		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRange)
-		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextBottomLeft)
-		toolSectionContentDMGMenuRollWrap.appendChild(toolSectionContentDMGMenuRollRangeTextBottomRight)
+		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollTop)
+		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextTopLeft)
+		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextTopRight)
+		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRange)
+		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextBottomLeft)
+		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextBottomCenter)
+		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextBottomRight)
+		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollBottom)
+		toolSectionContentDMGMenuRollBottom.appendChild(toolSectionContentDMGMenuRollCritical);
+		toolSectionContentDMGMenuRollCritical.appendChild(toolSectionContentDMGMenuRollCriticalText);
+		toolSectionContentDMGMenuRollCritical.appendChild(toolSectionContentDMGMenuRollCriticalInput);
 
-		toolSectionContentDMGMenuMoveBottomCriticalInput.addEventListener("change",DMGCalcStart);
+
 		toolSectionContentDMGMenuRollRange.addEventListener("input",DMGCalcStart);
-		toolSectionContentDMGMenuRollRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`;this.title = this.value-this.min;})
+		toolSectionContentDMGMenuRollRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`; let z = this.parentElement.querySelector(":scope *[name='val']"); z.innerText = (this.value-this.min);z.innerText = z.innerText+" ("+parseInt(v)+"%)";})
 
+		toolSectionContentDMGMenuRollCriticalInput.addEventListener("change",DMGCalcStart);
 
 		var toolSectionContentDMGImport = document.createElement("figure");
 		var toolSectionContentDMGImportText = document.createElement("h5");
