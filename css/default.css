@@ -173,6 +173,10 @@ figure[type="rotate"]:active {
 figure[type="scale"]:active {
 	transform:scale(0.8);
 }
+figure[type="invert"]:active {
+	filter: invert(0.3) !important;
+}
+
 
 button:active {
     transform:scale(0.95);
