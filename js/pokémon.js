@@ -767,11 +767,11 @@ var createPokémon = function() {
                             teamDataAddLabel.value = "";
                             teamDataAddInput.appendChild(teamDataAddLabel)
 
-                            for(var t = 0; t < finaldataLocation.length; t++) {
-                                if (finaldataLocation[t]["Location"] != undefined) {
+                            for(var t = 0; t < finaldata["Locations"]["Reference"].length; t++) {
+                                if (finaldata["Locations"]["Reference"][t]["Location"] != undefined) {
                                     var teamDataAddLabel = document.createElement("option");
-                                    teamDataAddLabel.innerText = finaldataLocation[t]["Location"];
-                                    teamDataAddLabel.value = finaldataLocation[t]["Location"];
+                                    teamDataAddLabel.innerText = finaldata["Locations"]["Reference"][t]["Location"];
+                                    teamDataAddLabel.value = finaldata["Locations"]["Reference"][t]["Location"];
                                     teamDataAddInput.appendChild(teamDataAddLabel)
                                 }
                             }
@@ -1348,9 +1348,9 @@ var createPokémon = function() {
 
     
 	var formopts = [];
-	for(var q = 0; q < finaldataPokémon.length; q++) {
-		if(finaldataPokémon[q][JSONPath_Reference] == "true") {
-			formopts.push(finaldataPokémon[q]["Variant"]);
+	for(var q = 0; q < finaldata["Pokémon"]["Reference"].length; q++) {
+		if(finaldata["Pokémon"]["Reference"][q][JSONPath_Reference] == "true") {
+			formopts.push(finaldata["Pokémon"]["Reference"][q]["Variant"]);
 		}
 	}
 	formopts = formopts.filter((item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
@@ -1587,33 +1587,33 @@ function createContain(condition) {
         lis[q].remove();
     }
 
-	for(var i = 0; i < finaldataPokémon.length; i++) {
+	for(var i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
         var conditions = [];
         if (condition != undefined) {
             if (condition.includes("Default")) {
-                conditions.push(finaldataPokémon[i]["Variant"].includes("Default"));
+                conditions.push(finaldata["Pokémon"]["Reference"][i]["Variant"].includes("Default"));
             }
             if (condition.includes("Regional Form")) {
-                conditions.push(finaldataPokémon[i]["Variant"].includes("Alolan") || finaldataPokémon[i]["Variant"].includes("Galarian"));
+                conditions.push(finaldata["Pokémon"]["Reference"][i]["Variant"].includes("Alolan") || finaldata["Pokémon"]["Reference"][i]["Variant"].includes("Galarian"));
             }
             if (condition.includes("Form")) {
-                conditions.push(finaldataPokémon[i]["Variant"] == "Form");
+                conditions.push(finaldata["Pokémon"]["Reference"][i]["Variant"] == "Form");
             }
             if (condition.includes("Mega Evolution")) {
-                conditions.push(finaldataPokémon[i]["Variant"].includes("Mega"));
+                conditions.push(finaldata["Pokémon"]["Reference"][i]["Variant"].includes("Mega"));
             }
             if (condition.includes("Gigantamax")) {
-                conditions.push(finaldataPokémon[i]["Variant"].includes("Gigantamax"));
+                conditions.push(finaldata["Pokémon"]["Reference"][i]["Variant"].includes("Gigantamax"));
             }
         }
 
-        if(finaldataPokémon[i][JSONPath_Reference] == "true" || finaldataPokémon[i][JSONPath_Reference] == "true") {
+        if(finaldata["Pokémon"]["Reference"][i][JSONPath_Reference] == "true" || finaldata["Pokémon"]["Reference"][i][JSONPath_Reference] == "true") {
             for (var q = 0; q < conditions.length; q++) {
                 if (conditions[q] == true) {
-                    var ID = finaldataPokémon[i]["ID"];
-                    var Name = finaldataPokémonForm[i]["Pokémon"];
-                    var formName = finaldataPokémonForm[i]["Form_"+JSONPath_Form];
-                    var variant = finaldataPokémon[i]["Variant"];
+                    var ID = finaldata["Pokémon"]["Reference"][i]["ID"];
+                    var Name = finaldata["Pokémon"]["Form"][i]["Pokémon"];
+                    var formName = finaldata["Pokémon"]["Form"][i]["Form_"+JSONPath_Form];
+                    var variant = finaldata["Pokémon"]["Reference"][i]["Variant"];
                     var contentDiv = document.createElement("li");
                     var contentInput = document.createElement("input");
                     var contentLabel = document.createElement("label");
@@ -1757,7 +1757,7 @@ function createContain(condition) {
                     contentConfirm.setAttribute("name","confirm");
                     contentPopup.setAttribute("name","popup");
                     contentPopup.setAttribute("value",i);
-                    contentPopup.innerHTML = "✵";
+                    contentPopup.innerHTML = "❖";
                     contentNationalID.innerText = "#"+ID;
                     contentImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
                     if(formName != undefined) {
@@ -1794,23 +1794,23 @@ function createContain(condition) {
                     for(q = 0; q < JSONPath_Pokédex.length; q++) {
                         let y = q+1;
                         var contentMainRegionalID = document.createElement("caption");
-                        if(finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]] == undefined) {
-                            if(finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                        if(finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]] == undefined) {
+                            if(finaldata["Pokémon"]["Pokédex ID"][finaldata["Pokémon"]["Pokédex ID"].map(function(e) {
                                     return e.ID;
-                                }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]] != undefined) {
-                                contentDiv.setAttribute("data-regional-"+y, finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][JSONPath_Pokédex[q]] != undefined) {
+                                contentDiv.setAttribute("data-regional-"+y, finaldata["Pokémon"]["Pokédex ID"][finaldata["Pokémon"]["Pokédex ID"].map(function(e) {
                                     return e.ID;
-                                }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]]);
-                                contentMainRegionalID.innerText = "#"+finaldataPokémonPokédexID[finaldataPokémonPokédexID.map(function(e) {
+                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][JSONPath_Pokédex[q]]);
+                                contentMainRegionalID.innerText = "#"+finaldata["Pokémon"]["Pokédex ID"][finaldata["Pokémon"]["Pokédex ID"].map(function(e) {
                                     return e.ID;
-                                }).indexOf(finaldataPokémon[i]["ID"])][JSONPath_Pokédex[q]];
+                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][JSONPath_Pokédex[q]];
                             } else {
                                 contentDiv.setAttribute("data-regional-"+y, "");
                                 contentMainRegionalID.innerText = "#";
                             }
                         } else {
-                            contentDiv.setAttribute("data-regional-"+y, finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]]);
-                            contentMainRegionalID.innerText = "#"+finaldataPokémonPokédexID[i][JSONPath_Pokédex[q]];
+                            contentDiv.setAttribute("data-regional-"+y, finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]]);
+                            contentMainRegionalID.innerText = "#"+finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]];
                         }
                         contentMainRegionalID.setAttribute("name","regional"+y)
                         contentMainUp.appendChild(contentMainRegionalID);
