@@ -120,8 +120,8 @@ var createAbility = function() {
 
 
 		var firstabilityiteration;
-		for(var q = 0; q < finaldataAbility.length; q++) {
-			if(getApplicable(finaldataAbility[q]["Game"])) {
+		for(var q = 0; q < finaldata["Abilities"]["Reference"].length; q++) {
+			if(getApplicable(finaldata["Abilities"]["Reference"][q]["Game"])) {
 				var abilitySectionListOptionsInput = document.createElement("input");
 				var abilitySectionListOptionsLabel = document.createElement("label");
 				var abilitySectionListOptionsText = document.createElement("p");
@@ -132,9 +132,9 @@ var createAbility = function() {
 				abilitySectionListOptionsInput.value = q;
 				abilitySectionListOptionsLabel.setAttribute("for","ability-options-"+q);
 				abilitySectionListOptionsLabel.setAttribute("type","medium");
-				abilitySectionListOptionsLabel.setAttribute("data-name", finaldataAbility[q]["Ability"].toLowerCase());
-				abilitySectionListOptionsLabel.setAttribute("data-title", finaldataAbility[q]["Ability"].toLowerCase());
-				abilitySectionListOptionsText.innerText = finaldataAbility[q]["Ability"];
+				abilitySectionListOptionsLabel.setAttribute("data-name", finaldata["Abilities"]["Reference"][q]["Ability"].toLowerCase());
+				abilitySectionListOptionsLabel.setAttribute("data-title", finaldata["Abilities"]["Reference"][q]["Ability"].toLowerCase());
+				abilitySectionListOptionsText.innerText = finaldata["Abilities"]["Reference"][q]["Ability"];
 				abilitySectionListOptions.appendChild(abilitySectionListOptionsInput);
 				abilitySectionListOptions.appendChild(abilitySectionListOptionsLabel);
 				abilitySectionListOptionsLabel.appendChild(abilitySectionListOptionsText);
@@ -177,19 +177,19 @@ var createAbility = function() {
 			i = this.value;
 		}
 	
-		abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldataAbility[i]["Ability"]+"</u>";
-		abilitySectionHeaderTitleID.innerText = "#"+returnAppArrData(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["ID"];
+		abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldata["Abilities"]["Reference"][i]["Ability"]+"</u>";
+		abilitySectionHeaderTitleID.innerText = "#"+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["ID"];
 
-		abilitySectionHeaderDebutText.innerText = "Introduced in "+returnAppArrData(finaldataAbility,"Ability",finaldataAbility[i]["Ability"])[0]["Debut"];
-		abilitySectionHeaderTitleName.innerText = finaldataAbility[i]["Ability"];
-		abilitySectionContentDescriptionText.innerText = returnAppArrData(finaldataAbilityDescription,"Ability",finaldataAbility[i]["Ability"])[0]["Description"];
+		abilitySectionHeaderDebutText.innerText = "Introduced in "+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["Debut"];
+		abilitySectionHeaderTitleName.innerText = finaldata["Abilities"]["Reference"][i]["Ability"];
+		abilitySectionContentDescriptionText.innerText = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["Description"];
 
 		var effect = [];
 
-		for(var q = 0; q < finaldataAbilityEffect.length; q++) {
-			if(getApplicable(finaldataAbilityEffect[q]["Game"])) {
-				if(finaldataAbilityEffect[q]["Ability"] == finaldataAbility[i]["Ability"]) {
-					effect.push(finaldataAbilityEffect[q]["Effect"])
+		for(var q = 0; q < finaldata["Abilities"]["Effect"].length; q++) {
+			if(getApplicable(finaldata["Abilities"]["Effect"][q]["Game"])) {
+				if(finaldata["Abilities"]["Effect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
+					effect.push(finaldata["Abilities"]["Effect"][q]["Effect"])
 				}
 			}
 		}
@@ -214,19 +214,19 @@ var createAbility = function() {
 
 		var affect = [];
 
-		for(var q = 0; q < finaldataAbilityAffect.length; q++) {
-			if(getApplicable(finaldataAbilityAffect[q]["Game"])) {
-				if(finaldataAbilityAffect[q]["Ability"] == finaldataAbility[i]["Ability"]) {
-					if (finaldataAbilityAffect[q]["Type"] == "Move") {
-						var move = returnArrValue(finaldataMoveDescription,"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,finaldataAbilityAffect[q]["Name"]);
+		for(var q = 0; q < finaldata["Abilities"]["Affect"].length; q++) {
+			if(getApplicable(finaldata["Abilities"]["Affect"][q]["Game"])) {
+				if(finaldata["Abilities"]["Affect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
+					if (finaldata["Abilities"]["Affect"][q]["Type"] == "Move") {
+						var move = returnArrValue(finaldata["Moves"]["Description"],"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,finaldata["Abilities"]["Affect"][q]["Name"]);
 						if (move != undefined) {
-							affect.push(finaldataAbilityAffect[q]);
+							affect.push(finaldata["Abilities"]["Affect"][q]);
 						}
 					}
-					else if (finaldataAbilityAffect[q]["Type"] == "Item") {
-						var item = getItemIcon(finaldataAbilityAffect[q]["Name"]);
+					else if (finaldata["Abilities"]["Affect"][q]["Type"] == "Item") {
+						var item = getItemIcon(finaldata["Abilities"]["Affect"][q]["Name"]);
 						if (item != undefined) {
-							affect.push(finaldataAbilityAffect[q]);
+							affect.push(finaldata["Abilities"]["Affect"][q]);
 						}
 					}
 				}
@@ -243,7 +243,7 @@ var createAbility = function() {
 			b.setAttribute("type", "invert");
 			b.setAttribute("onclick", "dataRedirect()");
 			b.setAttribute("function","dataRedirect");
-			b.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,affect[q]["Name"])+")";
+			b.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,affect[q]["Name"])+")";
 			b.style.textShadow  = "1px 1px #000";
 			
 			if (q == affect.length - 2) {
@@ -278,7 +278,7 @@ var createAbility = function() {
 		for(var q = 0; q < sidebarAbilityListFull.length; q++) {
 			sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability","");
 		}
-		var AbilityResults = getPokémonData(finaldataPokémonAbility, finaldataAbility[i]["Ability"], sidebarAbilityListFull);
+		var AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"], finaldata["Abilities"]["Reference"][i]["Ability"], sidebarAbilityListFull);
 	
 		for(var q = 0; q < AbilityResults.length; q++) {
 			var abilitySectionSidebarSidebarLi = document.createElement("li");
@@ -305,7 +305,7 @@ var createAbility = function() {
 				} else if(u != 0) {
 				
 
-					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldataAbility[i]["Ability"]) {
+					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
 						var abilitySectionSidebarSidebarLiTextOuter = document.createElement("span");
 						var abilitySectionSidebarSidebarLiText = document.createElement("h6");
 						if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
