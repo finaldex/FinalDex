@@ -305,55 +305,57 @@ var createMap = function() {
 	mapSectionListOptionsOuter.setAttribute("name", "0");
 	mapSectionList.appendChild(mapSectionListOptionsOuter);
 	mapSectionListOptionsOuter.appendChild(mapSectionListOptions);
-	for(var q = 0; q < finaldataLocation.length; q++) {
-		var mapSectionListOptionsInput = document.createElement("input");
-		var mapSectionListOptionsLabel = document.createElement("label");
-		var mapSectionListOptionsText = document.createElement("p");
-		mapSectionListOptionsInput.setAttribute("type", "radio");
-		mapSectionListOptionsInput.setAttribute("name", "map-options");
-		mapSectionListOptionsInput.setAttribute("id", "map-options-"+q);
-		mapSectionListOptionsInput.setAttribute("autocomplete", "off");
-		mapSectionListOptionsInput.value = q;
-		mapSectionListOptionsLabel.setAttribute("for", "map-options-"+q);
-		mapSectionListOptionsLabel.setAttribute("type","medium");
-		mapSectionListOptionsLabel.setAttribute("data-name", finaldataLocation[q]["Location"].toLowerCase());
-		mapSectionListOptionsLabel.setAttribute("data-title", finaldataLocation[q]["Location"].toLowerCase());
-		var poi = [];
-		for(var u = 0; u < finaldataLocationPointOfInterest.length; u++) {
-			if (getApplicable(finaldataLocationPointOfInterest[u]["Game"])) {
-				if (finaldataLocationPointOfInterest[u]["Location"] == finaldataLocation[q]["Location"]) {
-					poi.push(finaldataLocationPointOfInterest[u]["Point of Interest"]);
+	for(var q = 0; q < finaldata["Locations"]["Reference"].length; q++) {
+		if (getApplicable(finaldata["Locations"]["Reference"][q]["Game"])) {
+			var mapSectionListOptionsInput = document.createElement("input");
+			var mapSectionListOptionsLabel = document.createElement("label");
+			var mapSectionListOptionsText = document.createElement("p");
+			mapSectionListOptionsInput.setAttribute("type", "radio");
+			mapSectionListOptionsInput.setAttribute("name", "map-options");
+			mapSectionListOptionsInput.setAttribute("id", "map-options-"+q);
+			mapSectionListOptionsInput.setAttribute("autocomplete", "off");
+			mapSectionListOptionsInput.value = q;
+			mapSectionListOptionsLabel.setAttribute("for", "map-options-"+q);
+			mapSectionListOptionsLabel.setAttribute("type","medium");
+			mapSectionListOptionsLabel.setAttribute("data-name", finaldata["Locations"]["Reference"][q]["Location"].toLowerCase());
+			mapSectionListOptionsLabel.setAttribute("data-title", finaldata["Locations"]["Reference"][q]["Location"].toLowerCase());
+			var poi = [];
+			for(var u = 0; u < finaldata["Locations"]["Point of Interest"].length; u++) {
+				if (getApplicable(finaldata["Locations"]["Point of Interest"][u]["Game"])) {
+					if (finaldata["Locations"]["Point of Interest"][u]["Location"] == finaldata["Locations"]["Reference"][q]["Location"]) {
+						poi.push(finaldata["Locations"]["Point of Interest"][u]["Point of Interest"]);
+					}
 				}
 			}
-		}
-		if (poi.length > 0) {
-			mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest",poi.join(",").toLowerCase());
-		}
-		else {
-			mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest","none");
-		}
-
-
-		var nav = [];
-		for(var u = 0; u < finaldataLocationNavigation.length; u++) {
-			if (finaldataLocationNavigation[u][JSONPath_LocationNavigation+"_Name"] == finaldataLocation[q]["Location"]) {
-				nav.push(finaldataLocationNavigation[u][JSONPath_LocationNavigation+"_Navigation"]);
+			if (poi.length > 0) {
+				mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest",poi.join(",").toLowerCase());
 			}
-		}
-		if (nav.length > 0) {
-			mapSectionListOptionsLabel.setAttribute("data-search-navigation",nav.join(",").toLowerCase());
-		}
-		else {
-			mapSectionListOptionsLabel.setAttribute("data-search-navigation","none");
-		}
+			else {
+				mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest","none");
+			}
 
-		mapSectionListOptionsText.innerText = finaldataLocation[q]["Location"];
-		mapSectionListOptions.appendChild(mapSectionListOptionsInput);
-		mapSectionListOptions.appendChild(mapSectionListOptionsLabel);
-		mapSectionListOptionsLabel.appendChild(mapSectionListOptionsText);
-		mapSectionListOptionsInput.addEventListener("click", mapOptionsSelector);
-		mapSectionListOptionsLabel.setAttribute("tabindex",q+10);
-		mapSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;mapOptionsSelector(event.target.previousElementSibling.value);}}});
+
+			var nav = [];
+			for(var u = 0; u < finaldata["Locations"]["Navigation"].length; u++) {
+				if (finaldata["Locations"]["Navigation"][u][JSONPath_LocationNavigation+"_Name"] == finaldata["Locations"]["Reference"][q]["Location"]) {
+					nav.push(finaldata["Locations"]["Navigation"][u][JSONPath_LocationNavigation+"_Navigation"]);
+				}
+			}
+			if (nav.length > 0) {
+				mapSectionListOptionsLabel.setAttribute("data-search-navigation",nav.join(",").toLowerCase());
+			}
+			else {
+				mapSectionListOptionsLabel.setAttribute("data-search-navigation","none");
+			}
+
+			mapSectionListOptionsText.innerText = finaldata["Locations"]["Reference"][q]["Location"];
+			mapSectionListOptions.appendChild(mapSectionListOptionsInput);
+			mapSectionListOptions.appendChild(mapSectionListOptionsLabel);
+			mapSectionListOptionsLabel.appendChild(mapSectionListOptionsText);
+			mapSectionListOptionsInput.addEventListener("click", mapOptionsSelector);
+			mapSectionListOptionsLabel.setAttribute("tabindex",q+10);
+			mapSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;mapOptionsSelector(event.target.previousElementSibling.value);}}});
+		}
 	}
 
 	var searchLis = document.querySelectorAll("#contain > div#map > section[name='list'] ol > label");
@@ -399,7 +401,7 @@ var createMap = function() {
 		if (this.value != undefined) {
 			i = this.value;
 		}
-		var location = finaldataLocation[i]["Location"];
+		var location = finaldata["Locations"]["Reference"][i]["Location"];
 		var trainers = getLocationTrainers(location);
 		var shops = [];
 		var items = [];
@@ -410,8 +412,8 @@ var createMap = function() {
 		items = getLocationItems(location);
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
-		shop1 = returnAppArrData(finaldataLocationPokémonShops,"Location",location);
-		shop2 = returnAppArrData(finaldataLocationItemsShops,"Location",location);
+		shop1 = returnAppArrData(finaldata["Location Pokémon"]["Shop"],"Location",location);
+		shop2 = returnAppArrData(finaldata["Location Items"]["Shop"],"Location",location);
 		for(var q = 0; q < shop1.length; q++) {
 			shops.push(shop1[q]);
 		}
@@ -512,10 +514,10 @@ var createMap = function() {
 
 		
 		var desc = [];
-		for(var q = 0; q < finaldataLocationDescription.length; q++) {
-			if (getApplicable(finaldataLocationDescription[q]["Game"])) {
-				if (finaldataLocationDescription[q]["Location"] == location) {
-					desc.push(finaldataLocationDescription[q]["Description"]);
+		for(var q = 0; q < finaldata["Locations"]["Description"].length; q++) {
+			if (getApplicable(finaldata["Locations"]["Description"][q]["Game"])) {
+				if (finaldata["Locations"]["Description"][q]["Location"] == location) {
+					desc.push(finaldata["Locations"]["Description"][q]["Description"]);
 				}
 			}
 		}
@@ -527,20 +529,20 @@ var createMap = function() {
 		}
 
 		var poi = [];
-		for(var q = 0; q < finaldataLocationPointOfInterest.length; q++) {
-			if (getApplicable(finaldataLocationPointOfInterest[q]["Game"])) {
-				if (finaldataLocationPointOfInterest[q]["Location"] == location) {
+		for(var q = 0; q < finaldata["Locations"]["Point of Interest"].length; q++) {
+			if (getApplicable(finaldata["Locations"]["Point of Interest"][q]["Game"])) {
+				if (finaldata["Locations"]["Point of Interest"][q]["Location"] == location) {
 					var areadesc = [];
 					var pointdesc = [];
-					if (finaldataLocationPointOfInterest[q]["Area Description"] != undefined) {
-						areadesc.push(finaldataLocationPointOfInterest[q]["Area Description"]);
+					if (finaldata["Locations"]["Point of Interest"][q]["Area Description"] != undefined) {
+						areadesc.push(finaldata["Locations"]["Point of Interest"][q]["Area Description"]);
 					}
-					if (finaldataLocationPointOfInterest[q]["Point Description"] != undefined) {
-						pointdesc.push(finaldataLocationPointOfInterest[q]["Point Description"]);
+					if (finaldata["Locations"]["Point of Interest"][q]["Point Description"] != undefined) {
+						pointdesc.push(finaldata["Locations"]["Point of Interest"][q]["Point Description"]);
 					}
 
 					var obj = new Object();
-					obj["Header"] = finaldataLocationPointOfInterest[q]["Point of Interest"];
+					obj["Header"] = finaldata["Locations"]["Point of Interest"][q]["Point of Interest"];
 					if (areadesc.length > 0) {
 						obj["Area Description"] = areadesc.join("\n");
 					}
@@ -1514,7 +1516,7 @@ var createMap = function() {
 								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
 							}
 					
-							if (returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,encounters[r]) != undefined) {
+							if (returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,encounters[r]) != undefined) {
 								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("name","move");
 								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("value",encounters[r]);
 								mapSectionSidebarDescriptionPokTypeEncounterImg.addEventListener("click",dataRedirect);
@@ -1689,7 +1691,7 @@ var createMap = function() {
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("name","move");
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("type","invert");
 					mapSectionSidebarDescriptionTutorMoveText.title = formatMoveData(tutors[u]["Move"]);
-					mapSectionSidebarDescriptionTutorMoveText.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tutors[u]["Move"])+")";
+					mapSectionSidebarDescriptionTutorMoveText.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tutors[u]["Move"])+")";
 					mapSectionSidebarDescriptionTutorLi.appendChild(mapSectionSidebarDescriptionTutorMove);
 					mapSectionSidebarDescriptionTutorMove.appendChild(mapSectionSidebarDescriptionTutorMoveTrigger);
 					mapSectionSidebarDescriptionTutorMoveTrigger.appendChild(mapSectionSidebarDescriptionTutorMoveText);
@@ -1767,10 +1769,10 @@ var createMap = function() {
 	
 
 		
-		for(var q = 0; q < finaldataLocationSlogan.length; q++) {
-			if(getApplicable(finaldataLocationSlogan[q]["Game"])) {
-				if(finaldataLocationSlogan[q]["Location"] == location) {
-					mapSectionHeaderFlavorText.innerHTML = '"'+finaldataLocationSlogan[q]["Slogan"]+'"';
+		for(var q = 0; q < finaldata["Locations"]["Slogan"].length; q++) {
+			if(getApplicable(finaldata["Locations"]["Slogan"][q]["Game"])) {
+				if(finaldata["Locations"]["Slogan"][q]["Location"] == location) {
+					mapSectionHeaderFlavorText.innerHTML = '"'+finaldata["Locations"]["Slogan"][q]["Slogan"]+'"';
 				}
 			}
 		}
@@ -1811,33 +1813,33 @@ var createMap = function() {
 		for(var q = 0; q < navs.length; q++) {
 			navs[q].remove();
 		}
-		for(var q = 0; q < finaldataLocationNavigation.length; q++) {
-			if (getApplicable(finaldataLocationNavigation[q]["Game"])) {
-				if(finaldataLocationNavigation[q]["Location"] == location) {
-					for(var u = 0; u < finaldataLocationNavigation[q]["Navigation"].split(",").length; u++) {
+		for(var q = 0; q < finaldata["Locations"]["Navigation"].length; q++) {
+			if (getApplicable(finaldata["Locations"]["Navigation"][q]["Game"])) {
+				if(finaldata["Locations"]["Navigation"][q]["Location"] == location) {
+					for(var u = 0; u < finaldata["Locations"]["Navigation"][q]["Navigation"].split(",").length; u++) {
 						var mapSectionContentNavigationInnerContent = document.createElement("span")
 						var mapSectionContentNavigationInnerImg = document.createElement("img");
 						var mapSectionContentNavigationInnerText = document.createElement("p");
 						mapSectionContentNavigationInnerContent.setAttribute("name","item");
-						if (getMoveMachine(finaldataLocationNavigation[q]["Navigation"].split(",")[u]) != undefined) {
-							mapSectionContentNavigationInnerContent.setAttribute("value",getMoveMachine(finaldataLocationNavigation[q]["Navigation"].split(",")[u]));
+						if (getMoveMachine(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]) != undefined) {
+							mapSectionContentNavigationInnerContent.setAttribute("value",getMoveMachine(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]));
 						}
 						else {
-							mapSectionContentNavigationInnerContent.setAttribute("value",finaldataLocationNavigation[q]["Navigation"].split(",")[u]);
+							mapSectionContentNavigationInnerContent.setAttribute("value",finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]);
 						}
-						mapSectionContentNavigationInnerText.innerText = finaldataLocationNavigation[q]["Navigation"].split(",")[u];
-						if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Cut" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Strength") {
+						mapSectionContentNavigationInnerText.innerText = finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u];
+						if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Cut" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Strength") {
 							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Normal"+".png";
-						} else if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Waterfall" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Surf" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Dive" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Whirlpool") {
+						} else if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Waterfall" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Surf" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Dive" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Whirlpool") {
 							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Water"+".png";
-						} else if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Rock Smash" || finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Rock Climb") {
+						} else if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Rock Smash" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Rock Climb") {
 							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Fighting"+".png";
-						} else if(finaldataLocationNavigation[q]["Navigation"].split(",")[u] == "Defog") {
+						} else if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Defog") {
 							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Flying"+".png";
 						} else {
-							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataLocationNavigation[q]["Navigation"].split(",")[u]+".png";
+							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]+".png";
 						}
-						mapSectionContentNavigationInnerImg.setAttribute("title", finaldataLocationNavigation[q]["Navigation"].split(",")[u]);
+						mapSectionContentNavigationInnerImg.setAttribute("title", finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]);
 						mapSectionContentNavigationInnerImg.setAttribute("onerror", "this.style.display='none'");
 						mapSectionContentNavigationContent.appendChild(mapSectionContentNavigationInnerContent);
 						mapSectionContentNavigationInnerContent.appendChild(mapSectionContentNavigationInnerImg);
@@ -1865,13 +1867,13 @@ var createMap = function() {
 		mapLeft.firstElementChild.setAttribute("value","");
 		mapRight.firstElementChild.setAttribute("value","");
 
-		for(var q = 0; q < finaldataLocationConnection.length; q++) {
-			if (getApplicable(finaldataLocationConnection[q]["Game"])) {
-				var name = finaldataLocationConnection[q]["Location"];
-				var north = finaldataLocationConnection[q]["North"];
-				var south = finaldataLocationConnection[q]["South"];
-				var west = finaldataLocationConnection[q]["West"];
-				var east = finaldataLocationConnection[q]["East"];
+		for(var q = 0; q < finaldata["Locations"]["Connecting"].length; q++) {
+			if (getApplicable(finaldata["Locations"]["Connecting"][q]["Game"])) {
+				var name = finaldata["Locations"]["Connecting"][q]["Location"];
+				var north = finaldata["Locations"]["Connecting"][q]["North"];
+				var south = finaldata["Locations"]["Connecting"][q]["South"];
+				var west = finaldata["Locations"]["Connecting"][q]["West"];
+				var east = finaldata["Locations"]["Connecting"][q]["East"];
 
 				if(name == location) {
 					if (north != undefined) {
@@ -2047,12 +2049,12 @@ var createMap = function() {
 	}
 
 
-	for (var i = 0; i < finaldataLocationConnection.length; i++) {
-		if (getApplicable(finaldataLocationConnection[i]["Game"])) {
-			var north = finaldataLocationConnection[i]["North"];
-			var south = finaldataLocationConnection[i]["South"];
-			var west = finaldataLocationConnection[i]["West"];
-			var east = finaldataLocationConnection[i]["East"];
+	for (var i = 0; i < finaldata["Locations"]["Connecting"].length; i++) {
+		if (getApplicable(finaldata["Locations"]["Connecting"][i]["Game"])) {
+			var north = finaldata["Locations"]["Connecting"][i]["North"];
+			var south = finaldata["Locations"]["Connecting"][i]["South"];
+			var west = finaldata["Locations"]["Connecting"][i]["West"];
+			var east = finaldata["Locations"]["Connecting"][i]["East"];
 
 			var vals = [north,south,west,east];
 			var origin1 = ["North","South","West","East"];
@@ -2063,16 +2065,16 @@ var createMap = function() {
 					if (val.includes(",")) {
 						val = val.split(",");
 						for (var u = 0; u < val.length; u++) {
-							for (var r = 0; r < finaldataLocationConnection.length; r++) {
-								if (getApplicable(finaldataLocationConnection[r]["Game"])) {
-									if (finaldataLocationConnection[r]["Location"] == val[u]) {
-										if (finaldataLocationConnection[r][origin2[q]] != undefined) {
-											if (!finaldataLocationConnection[r][origin2[q]].includes(finaldataLocationConnection[i]["Location"])) {
-												console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+							for (var r = 0; r < finaldata["Locations"]["Connecting"].length; r++) {
+								if (getApplicable(finaldata["Locations"]["Connecting"][r]["Game"])) {
+									if (finaldata["Locations"]["Connecting"][r]["Location"] == val[u]) {
+										if (finaldata["Locations"]["Connecting"][r][origin2[q]] != undefined) {
+											if (!finaldata["Locations"]["Connecting"][r][origin2[q]].includes(finaldata["Locations"]["Connecting"][i]["Location"])) {
+												console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 											}
 										}
 										else {
-											console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+											console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 										}
 									}
 								}
@@ -2080,16 +2082,16 @@ var createMap = function() {
 						}
 					}
 					else {
-						for (var r = 0; r < finaldataLocationConnection.length; r++) {
-							if (getApplicable(finaldataLocationConnection[r]["Game"])) {
-								if (finaldataLocationConnection[r]["Location"] == val[u]) {
-									if (finaldataLocationConnection[r][origin2[q]] != undefined) {
-										if (!finaldataLocationConnection[r][origin2[q]].includes(finaldataLocationConnection[i]["Location"])) {
-											console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+						for (var r = 0; r < finaldata["Locations"]["Connecting"].length; r++) {
+							if (getApplicable(finaldata["Locations"]["Connecting"][r]["Game"])) {
+								if (finaldata["Locations"]["Connecting"][r]["Location"] == val[u]) {
+									if (finaldata["Locations"]["Connecting"][r][origin2[q]] != undefined) {
+										if (!finaldata["Locations"]["Connecting"][r][origin2[q]].includes(finaldata["Locations"]["Connecting"][i]["Location"])) {
+											console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 										}
 									}
 									else {
-										console.log("#DEBUG# "+finaldataLocationConnection[i]["Location"]+" is not "+origin2[q]+" of "+finaldataLocationConnection[r]["Location"]+".")
+										console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 									}
 								}
 							}
@@ -2819,7 +2821,7 @@ function updateTrainer(trainers,condition) {
 			}
 
 			if (ability != undefined) {
-				var desc = returnAppArrData(finaldataAbilityDescription,"Ability",ability);
+				var desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",ability);
 
 				var abilityWrap = document.createElement("b");
 				var abilityText = document.createElement("p");
@@ -2917,14 +2919,14 @@ function updateTrainer(trainers,condition) {
 				var pokRightMovesText = document.createElement("p");
 				pokRightMovesText.innerText = moves[y];
 				pokRightMovesWrap.title = formatMoveData(moves[y]);
-				pokRightMovesWrap.style.color = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y])+")";
+				pokRightMovesWrap.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y])+")";
 				pokRightMovesWrap.setAttribute("name","move");
 				pokRight.appendChild(pokRightMovesWrap);
 				pokRightMovesWrap.appendChild(pokRightMovesText);
 				pokRightMovesWrap.addEventListener("click", dataRedirect);
 				pokRightMovesWrap.setAttribute("function","dataRedirect");
 				if (moves[y] != "") {
-					if(returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y]) == undefined) {
+					if(returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y]) == undefined) {
 						console.log("#DEBUG# "+moves[y]+" needs formatting?");
 					}
 					
