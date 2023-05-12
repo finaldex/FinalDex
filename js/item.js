@@ -56,10 +56,10 @@ var createItem = function() {
 	itemSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Item");});
 
 	var pockets = [];
-	for (var q = 0; q < finaldataItems.length; q++) {
-		if (getApplicable(finaldataItems[q]["Game"])) {
-			if (finaldataItems[q]["Use"] == "true") {
-				pockets.push(finaldataItems[q]["Pocket"])
+	for (var q = 0; q < finaldata["Items"]["Reference"].length; q++) {
+		if (getApplicable(finaldata["Items"]["Reference"][q]["Game"])) {
+			if (finaldata["Items"]["Reference"][q]["Use"] == "true") {
+				pockets.push(finaldata["Items"]["Reference"][q]["Pocket"])
 			}
 		}
 	}
@@ -165,17 +165,17 @@ var createItem = function() {
 	itemSectionSidebarSidebarMapInner.addEventListener("mouseenter", function() {zoom(itemSectionSidebarSidebarMapInner,"in",undefined)});
 	itemSectionSidebarSidebarMapInner.addEventListener("mousemove", function() {zoom(itemSectionSidebarSidebarMapInner,"pan",undefined)});
 
-	for(var q = 0; q < finaldataItems.length; q++) {
-		if (getApplicable(finaldataItems[q]["Game"])) {
-			if (finaldataItems[q]["Use"] == "true") {
-				//if (returnAppArrData(finaldataItemsDescription,"Item",finaldataItems[q]["Item"]).length > 0) {
-					var name = finaldataItems[q]["Item"];
+	for(var q = 0; q < finaldata["Items"]["Reference"].length; q++) {
+		if (getApplicable(finaldata["Items"]["Reference"][q]["Game"])) {
+			if (finaldata["Items"]["Reference"][q]["Use"] == "true") {
+				//if (returnAppArrData(finaldata["Items"]["Description"],"Item",finaldata["Items"]["Reference"][q]["Item"]).length > 0) {
+					var name = finaldata["Items"]["Reference"][q]["Item"];
 
-					if (finaldataItems[q]["Alias"] != undefined) {
-						name += " ("+finaldataItems[q]["Alias"]+")";
+					if (finaldata["Items"]["Reference"][q]["Alias"] != undefined) {
+						name += " ("+finaldata["Items"]["Reference"][q]["Alias"]+")";
 					}
-					else if (getMachineMove(finaldataItems[q]["Item"]) != undefined) {
-						name += " ("+getMachineMove(finaldataItems[q]["Item"])+")";
+					else if (getMachineMove(finaldata["Items"]["Reference"][q]["Item"]) != undefined) {
+						name += " ("+getMachineMove(finaldata["Items"]["Reference"][q]["Item"])+")";
 					}
 
 					var itemSectionListOptionsInput = document.createElement("input");
@@ -188,12 +188,12 @@ var createItem = function() {
 					itemSectionListOptionsInput.value = q;
 					itemSectionListOptionsLabel.setAttribute("for", "item-options-" + q);
 					itemSectionListOptionsLabel.setAttribute("data-name", name.toLowerCase());
-					itemSectionListOptionsLabel.setAttribute("data-title", finaldataItems[q]["Item"].toLowerCase());
+					itemSectionListOptionsLabel.setAttribute("data-title", finaldata["Items"]["Reference"][q]["Item"].toLowerCase());
 
 
-					if (returnAppArrData(finaldataItemsPrice,"Item",finaldataItems[q]["Item"]).length > 0) {
-						if (returnAppArrData(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"] != undefined) {
-							itemSectionListOptionsLabel.setAttribute("data-search-price",returnAppArrData(finaldataItemsPrice,"Item",finaldataItems[q]["Item"])[0]["Sell Amount"]);
+					if (returnAppArrData(finaldata["Items"]["Price"],"Item",finaldata["Items"]["Reference"][q]["Item"]).length > 0) {
+						if (returnAppArrData(finaldata["Items"]["Price"],"Item",finaldata["Items"]["Reference"][q]["Item"])[0]["Sell Amount"] != undefined) {
+							itemSectionListOptionsLabel.setAttribute("data-search-price",returnAppArrData(finaldata["Items"]["Price"],"Item",finaldata["Items"]["Reference"][q]["Item"])[0]["Sell Amount"]);
 						}
 						else {
 							itemSectionListOptionsLabel.setAttribute("data-search-price",0);
@@ -204,14 +204,14 @@ var createItem = function() {
 					}
 					
 
-					if (finaldataItems[q]["Pocket"] != undefined) {
-						itemSectionListOptionsLabel.setAttribute("data-pocket",finaldataItems[q]["Pocket"].toLowerCase());
+					if (finaldata["Items"]["Reference"][q]["Pocket"] != undefined) {
+						itemSectionListOptionsLabel.setAttribute("data-pocket",finaldata["Items"]["Reference"][q]["Pocket"].toLowerCase());
 					}
 					itemSectionListOptionsLabel.setAttribute("type","medium");
-					if (finaldataItems[q]["Icon"] != undefined) {
+					if (finaldata["Items"]["Reference"][q]["Icon"] != undefined) {
 						var itemSectionListOptionsLabelImageOuter = document.createElement("span");
 						var itemSectionListOptionsLabelImage = document.createElement("img");
-						itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldataItems[q]["Icon"]+".png";
+						itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldata["Items"]["Reference"][q]["Icon"]+".png";
 						itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
 						itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
 						itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
@@ -258,18 +258,18 @@ var createItem = function() {
 		if (this.value != undefined) {
 			i = this.value;
 		}
-		var item = finaldataItems[i]["Item"];
+		var item = finaldata["Items"]["Reference"][i]["Item"];
 
-		itemSectionHeaderTitleName.innerText = finaldataItems[i]["Item"];
+		itemSectionHeaderTitleName.innerText = finaldata["Items"]["Reference"][i]["Item"];
 
-		if (finaldataItems[i]["Alias"] != undefined) {
-			itemSectionHeaderTitleName.innerText += " ("+finaldataItems[i]["Alias"]+")";
+		if (finaldata["Items"]["Reference"][i]["Alias"] != undefined) {
+			itemSectionHeaderTitleName.innerText += " ("+finaldata["Items"]["Reference"][i]["Alias"]+")";
 		}
 
-		itemSectionHeaderTitleID.innerText = "#"+finaldataItems[i]["ID"];
-		itemSectionHeaderTitleID.setAttribute("title",finaldataItems[i]["Index"]);
+		itemSectionHeaderTitleID.innerText = "#"+finaldata["Items"]["Reference"][i]["ID"];
+		itemSectionHeaderTitleID.setAttribute("title",finaldata["Items"]["Reference"][i]["Index"]);
 
-		var priceArr = returnAppArrData(finaldataItemsPrice,"Item",item);
+		var priceArr = returnAppArrData(finaldata["Items"]["Price"],"Item",item);
 	
 		itemSectionHeaderDebutText.innerText = "Cannot be Sold";
 		if (priceArr.length > 0) {
@@ -302,19 +302,19 @@ var createItem = function() {
 			itemSectionContentDescriptionText.querySelector(":scope b").setAttribute("function","dataRedirect");
 		}
 		else {
-			for(var q = 0; q < finaldataItemsDescription.length; q++) {
-				if (finaldataItemsDescription[q]["Item"] == item) {
-					if (getApplicable(finaldataItemsDescription[q]["Game"])) {
+			for(var q = 0; q < finaldata["Items"]["Description"].length; q++) {
+				if (finaldata["Items"]["Description"][q]["Item"] == item) {
+					if (getApplicable(finaldata["Items"]["Description"][q]["Game"])) {
 						var check = true;
-						if (finaldataItemsDescription[q]["Index"] != undefined) {
-							check = finaldataItemsDescription[q]["Index"] == finaldataItems[i]["Index"];
+						if (finaldata["Items"]["Description"][q]["Index"] != undefined) {
+							check = finaldata["Items"]["Description"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 						}
 						if (check) {
 							var itemSectionContentDescriptionText = document.createElement("p");
-							itemSectionContentDescriptionText.innerText = finaldataItemsDescription[q]["Description"];
+							itemSectionContentDescriptionText.innerText = finaldata["Items"]["Description"][q]["Description"];
 							itemSectionContentDescription.appendChild(itemSectionContentDescriptionText);
-							if(finaldataItemsDescription[q]["Version"] != undefined) {
-								itemSectionContentDescriptionText.title = finaldataItemsDescription[q]["Version"];
+							if(finaldata["Items"]["Description"][q]["Version"] != undefined) {
+								itemSectionContentDescriptionText.title = finaldata["Items"]["Description"][q]["Version"];
 							}
 						}
 					}
@@ -329,15 +329,15 @@ var createItem = function() {
 
 		var effect = [];
 
-		for(var q = 0; q < finaldataItemsEffect.length; q++) {
-			if(getApplicable(finaldataItemsEffect[q]["Game"])) {
-				if(finaldataItemsEffect[q]["Item"] == finaldataItems[i]["Item"]) {
+		for(var q = 0; q < finaldata["Items"]["Effect"].length; q++) {
+			if(getApplicable(finaldata["Items"]["Effect"][q]["Game"])) {
+				if(finaldata["Items"]["Effect"][q]["Item"] == finaldata["Items"]["Reference"][i]["Item"]) {
 					var check = true;
-					if (finaldataItemsEffect[q]["Index"] != undefined) {
-						check = finaldataItemsEffect[q]["Index"] == finaldataItems[i]["Index"];
+					if (finaldata["Items"]["Effect"][q]["Index"] != undefined) {
+						check = finaldata["Items"]["Effect"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 					}
 					if (check) {
-						effect.push(finaldataItemsEffect[q]["Effect"])
+						effect.push(finaldata["Items"]["Effect"][q]["Effect"])
 					}
 				}
 			}
@@ -371,9 +371,9 @@ var createItem = function() {
 
 		
 
-		for(var q = 0; q < finaldataPokémonHeldItem.length; q++) {
+		for(var q = 0; q < finaldata["Pokémon"]["Held Item"].length; q++) {
 			for(var u = 0; u < JSONPath_HeldItemPercentage.length; u++) {
-				if(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem] == item) {
+				if(finaldata["Pokémon"]["Held Item"][q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem] == item) {
 
 					var itemSectionSidebarSidebarLi = document.createElement("li");
 					itemSectionSidebarSidebarLi.setAttribute("name","held");
@@ -407,10 +407,10 @@ var createItem = function() {
 					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 
 					if (HeldItem == false) {
-						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+" that was traded to Generation "+(Generation+1)+".";
+						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldata["Pokémon"]["Reference"][q]["Pokémon"]+" that was traded to Generation "+(Generation+1)+".";
 					}
 					else {
-						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldataPokémon[q]["Pokémon"]+".";
+						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldata["Pokémon"]["Reference"][q]["Pokémon"]+".";
 					}
 					
 
@@ -419,9 +419,9 @@ var createItem = function() {
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 					var itemSectionSidebarSidebarItemImg = document.createElement("img");
-					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
+					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Pokémon"]["Held Item"][q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
 					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none";')
-					itemSectionSidebarSidebarItemImg.title = finaldataPokémonHeldItem[q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
+					itemSectionSidebarSidebarItemImg.title = finaldata["Pokémon"]["Held Item"][q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
 					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 		
 				}
@@ -433,15 +433,15 @@ var createItem = function() {
 
 
 
-		for(var q = 0; q < finaldataLocationItems.length; q++) {
-			if (getApplicable(finaldataLocationItems[q]["Game"])) {
+		for(var q = 0; q < finaldata["Location Items"]["Items"].length; q++) {
+			if (getApplicable(finaldata["Location Items"]["Items"][q]["Game"])) {
 				var check = true;
-				if (finaldataLocationItems[q]["Index"] != undefined) {
-					check = finaldataLocationItems[q]["Index"] == finaldataItems[i]["Index"];
+				if (finaldata["Location Items"]["Items"][q]["Index"] != undefined) {
+					check = finaldata["Location Items"]["Items"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 				}
 				if (check) {
-					if(finaldataLocationItems[q]["Item"] == item) {
-						var quantity = finaldataLocationItems[q]["Quantity"];
+					if(finaldata["Location Items"]["Items"][q]["Item"] == item) {
+						var quantity = finaldata["Location Items"]["Items"][q]["Quantity"];
 						if (quantity == undefined) {
 							quantity = 1;
 						}
@@ -465,7 +465,7 @@ var createItem = function() {
 						var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
 						var itemSectionSidebarSidebarLocationText = document.createElement("h5");
 						itemSectionSidebarSidebarLocation.setAttribute("name","location");
-						itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItems[q]["Location"];
+						itemSectionSidebarSidebarLocationText.innerText = finaldata["Location Items"]["Items"][q]["Location"];
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
@@ -476,20 +476,20 @@ var createItem = function() {
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
 
 
-						if (finaldataLocationItems[q]["Area"] != undefined && finaldataLocationItems[q]["Area"] != finaldataLocationItems[q]["Location"]) {
+						if (finaldata["Location Items"]["Items"][q]["Area"] != undefined && finaldata["Location Items"]["Items"][q]["Area"] != finaldata["Location Items"]["Items"][q]["Location"]) {
 							var itemSectionSidebarSidebarAreaText = document.createElement("small");
-							itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItems[q]["Area"];
+							itemSectionSidebarSidebarAreaText.innerText = finaldata["Location Items"]["Items"][q]["Area"];
 							itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
 						}
 
 
 
-						if (finaldataLocationItems[q]["Description"] != undefined) {
+						if (finaldata["Location Items"]["Items"][q]["Description"] != undefined) {
 							var itemSectionSidebarSidebarDescription = document.createElement("span");
 							itemSectionSidebarSidebarDescription.setAttribute("name","description");
 							itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
 							var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-							itemSectionSidebarSidebarDescriptionText.innerText = finaldataLocationItems[q]["Description"];
+							itemSectionSidebarSidebarDescriptionText.innerText = finaldata["Location Items"]["Items"][q]["Description"];
 							itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 						}
 
@@ -497,34 +497,34 @@ var createItem = function() {
 						itemSectionSidebarSidebarRequirementOuter.setAttribute("name","requirement");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarRequirementOuter);
 
-						if (finaldataLocationItems[q]["Field"] != undefined) {
+						if (finaldata["Location Items"]["Items"][q]["Field"] != undefined) {
 		
 							var itemSectionSidebarSidebarRequirementTitle = document.createElement("h6");
 							itemSectionSidebarSidebarRequirementTitle.innerText = "Requires:";
 							itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarRequirementTitle);
 
 
-							if (finaldataLocationItems[q]["Field"].includes("/")) {
-								for(var y = 0; y < finaldataLocationItems[q]["Field"].split("/").length; y++) {
+							if (finaldata["Location Items"]["Items"][q]["Field"].includes("/")) {
+								for(var y = 0; y < finaldata["Location Items"]["Items"][q]["Field"].split("/").length; y++) {
 									var itemIcon;
 									var itm;
-									if (getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
-										itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]));
-										itm = getMoveMachine(finaldataLocationItems[q]["Field"].split("/")[y]);
+									if (getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]) != undefined) {
+										itemIcon = getItemIcon(getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]));
+										itm = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]);
 									}
-									else if (getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]) != undefined) {
-										itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split("/")[y]);
-										itm = finaldataLocationItems[q]["Field"].split("/")[y];
+									else if (getItemIcon(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]) != undefined) {
+										itemIcon = getItemIcon(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]);
+										itm = finaldata["Location Items"]["Items"][q]["Field"].split("/")[y];
 									}
 
 									var itemSectionSidebarSidebarField = document.createElement("b");
 									var itemSectionSidebarSidebarFieldText = document.createElement("small");
-									itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split("/")[y];
+									itemSectionSidebarSidebarFieldText.innerText = finaldata["Location Items"]["Items"][q]["Field"].split("/")[y];
 									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 									if (itemIcon != undefined) {
 										var itemSectionSidebarSidebarFieldImage = document.createElement("img");
 										itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-										itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split("/")[y];
+										itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"].split("/")[y];
 										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
 									}
@@ -533,34 +533,34 @@ var createItem = function() {
 									itemSectionSidebarSidebarField.setAttribute("value",itm);
 									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
 									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
-									if (y != finaldataLocationItems[q]["Field"].split("/").length - 1) {
+									if (y != finaldata["Location Items"]["Items"][q]["Field"].split("/").length - 1) {
 										var itemSectionSidebarSidebarFieldSpace = document.createElement("p");
 										itemSectionSidebarSidebarFieldSpace.innerText = " or ";
 										itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarFieldSpace)
 									}
 								}
 							}
-							else if (finaldataLocationItems[q]["Field"].includes(",")) {
-								for(var y = 0; y < finaldataLocationItems[q]["Field"].split(",").length; y++) {
+							else if (finaldata["Location Items"]["Items"][q]["Field"].includes(",")) {
+								for(var y = 0; y < finaldata["Location Items"]["Items"][q]["Field"].split(",").length; y++) {
 									var itemIcon;
 									var itm;
-									if (getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
-										itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]));
-										itm = getMoveMachine(finaldataLocationItems[q]["Field"].split(",")[y]);
+									if (getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]) != undefined) {
+										itemIcon = getItemIcon(getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]));
+										itm = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]);
 									}
-									else if (getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]) != undefined) {
-										itemIcon = getItemIcon(finaldataLocationItems[q]["Field"].split(",")[y]);
-										itm = finaldataLocationItems[q]["Field"].split(",")[y];
+									else if (getItemIcon(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]) != undefined) {
+										itemIcon = getItemIcon(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]);
+										itm = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 									}
 
 									var itemSectionSidebarSidebarField = document.createElement("b");
 									var itemSectionSidebarSidebarFieldText = document.createElement("small");
-									itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"].split(",")[y];
+									itemSectionSidebarSidebarFieldText.innerText = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 									if (itemIcon != undefined) {
 										var itemSectionSidebarSidebarFieldImage = document.createElement("img");
 										itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-										itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"].split(",")[y];
+										itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
 									}
@@ -575,23 +575,23 @@ var createItem = function() {
 							else {
 								var itemIcon;
 								var itm;
-								if (getMoveMachine(finaldataLocationItems[q]["Field"]) != undefined) {
-									itemIcon = getItemIcon(getMoveMachine(finaldataLocationItems[q]["Field"]));
-									itm = getMoveMachine(finaldataLocationItems[q]["Field"]);
+								if (getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"]) != undefined) {
+									itemIcon = getItemIcon(getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"]));
+									itm = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"]);
 								}
-								else if (getItemIcon(finaldataLocationItems[q]["Field"]) != undefined) {
-									itemIcon = getItemIcon(finaldataLocationItems[q]["Field"]);
-									itm = finaldataLocationItems[q]["Field"];
+								else if (getItemIcon(finaldata["Location Items"]["Items"][q]["Field"]) != undefined) {
+									itemIcon = getItemIcon(finaldata["Location Items"]["Items"][q]["Field"]);
+									itm = finaldata["Location Items"]["Items"][q]["Field"];
 								}
 
 								var itemSectionSidebarSidebarField = document.createElement("b");
 								var itemSectionSidebarSidebarFieldText = document.createElement("small");
-								itemSectionSidebarSidebarFieldText.innerText = finaldataLocationItems[q]["Field"];
+								itemSectionSidebarSidebarFieldText.innerText = finaldata["Location Items"]["Items"][q]["Field"];
 								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
 									var itemSectionSidebarSidebarFieldImage = document.createElement("img");
 									itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
-									itemSectionSidebarSidebarFieldImage.title = finaldataLocationItems[q]["Field"];
+									itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"];
 									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 									itemSectionSidebarSidebarFieldImage.setAttribute("name","item");
 									itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
@@ -611,16 +611,16 @@ var createItem = function() {
 
 						for(var u = 0; u < quantity; u++) {
 							var itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItems[q]["Item"])+".png";
+							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Location Items"]["Items"][q]["Item"])+".png";
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 						}
 
 						if (quantity != 1) { 
-							itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Quantity"]+"x "+finaldataLocationItems[q]["Item"];
+							itemSectionSidebarSidebarItem.title = finaldata["Location Items"]["Items"][q]["Quantity"]+"x "+finaldata["Location Items"]["Items"][q]["Item"];
 						}
 						else {
-							itemSectionSidebarSidebarItem.title = finaldataLocationItems[q]["Item"];
+							itemSectionSidebarSidebarItem.title = finaldata["Location Items"]["Items"][q]["Item"];
 						}
 
 
@@ -628,15 +628,15 @@ var createItem = function() {
 
 						var itemSectionSidebarSidebarItemText = document.createElement("h6");
 						if (quantity != 1) { 
-							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Quantity"]+"x <br>"+finaldataLocationItems[q]["Item"];
+							itemSectionSidebarSidebarItemText.innerHTML = finaldata["Location Items"]["Items"][q]["Quantity"]+"x <br>"+finaldata["Location Items"]["Items"][q]["Item"];
 						}
 						else {
-							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItems[q]["Item"];
+							itemSectionSidebarSidebarItemText.innerHTML = finaldata["Location Items"]["Items"][q]["Item"];
 						}
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
 						itemSectionSidebarSidebarItemText.style.display = "none";
 
-						if (finaldataLocationItems[q]["Hidden"] == "Hidden") {
+						if (finaldata["Location Items"]["Items"][q]["Hidden"] == "Hidden") {
 							itemSectionSidebarSidebarLi.classList.add("hide");
 							itemSectionSidebarSidebarItem.title += " (Hidden)";
 						}
@@ -647,15 +647,15 @@ var createItem = function() {
 			}
 		}
 
-		for(var q = 0; q < finaldataLocationItemsShops.length; q++) {
-			if (getApplicable(finaldataLocationItemsShops[q]["Game"])) {
+		for(var q = 0; q < finaldata["Location Items"]["Shop"].length; q++) {
+			if (getApplicable(finaldata["Location Items"]["Shop"][q]["Game"])) {
 				var check = true;
-				if (finaldataLocationItemsShops[q]["Index"] != undefined) {
-					check = finaldataLocationItemsShops[q]["Index"] == finaldataItems[i]["Index"];
+				if (finaldata["Location Items"]["Shop"][q]["Index"] != undefined) {
+					check = finaldata["Location Items"]["Shop"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 				}
 				if (check) {
-					if(finaldataLocationItemsShops[q]["Item"] == item) {
-						var quantity = finaldataLocationItemsShops[q]["Quantity"];
+					if(finaldata["Location Items"]["Shop"][q]["Item"] == item) {
+						var quantity = finaldata["Location Items"]["Shop"][q]["Quantity"];
 						if (quantity == undefined) {
 							quantity = 1;
 						}
@@ -678,7 +678,7 @@ var createItem = function() {
 						var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
 						var itemSectionSidebarSidebarLocationText = document.createElement("h5");
 						itemSectionSidebarSidebarLocation.setAttribute("name","location")
-						itemSectionSidebarSidebarLocationText.innerText = finaldataLocationItemsShops[q]["Location"];
+						itemSectionSidebarSidebarLocationText.innerText = finaldata["Location Items"]["Shop"][q]["Location"];
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("type","invert");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarLocation);
@@ -689,14 +689,14 @@ var createItem = function() {
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("function","dataRedirect");
 
 
-						if (finaldataLocationItemsShops[q]["Area"] != undefined && finaldataLocationItemsShops[q]["Area"] != finaldataLocationItemsShops[q]["Location"]) {
+						if (finaldata["Location Items"]["Shop"][q]["Area"] != undefined && finaldata["Location Items"]["Shop"][q]["Area"] != finaldata["Location Items"]["Shop"][q]["Location"]) {
 							var itemSectionSidebarSidebarAreaText = document.createElement("small");
-							itemSectionSidebarSidebarAreaText.innerText = finaldataLocationItemsShops[q]["Area"];
+							itemSectionSidebarSidebarAreaText.innerText = finaldata["Location Items"]["Shop"][q]["Area"];
 							itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
 						}
 
 
-						var currency = finaldataLocationItemsShops[q]["Currency"];
+						var currency = finaldata["Location Items"]["Shop"][q]["Currency"];
 
 						if (currency == "Pokémon Dollar") {
 							currency = '<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />';
@@ -709,18 +709,18 @@ var createItem = function() {
 						itemSectionSidebarSidebarDescription.setAttribute("name","description");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
 						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
-						if (finaldataLocationItemsShops[q]["Shop"] != undefined) {
-							itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldataLocationItemsShops[q]["Shop"]+" for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
+						if (finaldata["Location Items"]["Shop"][q]["Shop"] != undefined) {
+							itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldata["Location Items"]["Shop"][q]["Shop"]+" for "+numFormat(finaldata["Location Items"]["Shop"][q]["Cost"])+currency;
 						}
 						else {
-							itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+numFormat(finaldataLocationItemsShops[q]["Cost"])+currency;
+							itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased for "+numFormat(finaldata["Location Items"]["Shop"][q]["Cost"])+currency;
 						}
 						itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 				
 
 					
-						if (finaldataLocationItemsShops[q]["Requirement"] != undefined) {
-							itemSectionSidebarSidebarDescriptionText.title = finaldataLocationItemsShops[q]["Requirement"];
+						if (finaldata["Location Items"]["Shop"][q]["Requirement"] != undefined) {
+							itemSectionSidebarSidebarDescriptionText.title = finaldata["Location Items"]["Shop"][q]["Requirement"];
 						}
 
 
@@ -730,16 +730,16 @@ var createItem = function() {
 
 						for(var u = 0; u < quantity; u++) {
 							var itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsShops[q]["Item"])+".png";
+							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Location Items"]["Shop"][q]["Item"])+".png";
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 						}
 
 						if (quantity != 1) { 
-							itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Quantity"]+"x "+finaldataLocationItemsShops[q]["Item"];
+							itemSectionSidebarSidebarItem.title = finaldata["Location Items"]["Shop"][q]["Quantity"]+"x "+finaldata["Location Items"]["Shop"][q]["Item"];
 						}
 						else {
-							itemSectionSidebarSidebarItem.title = finaldataLocationItemsShops[q]["Item"];
+							itemSectionSidebarSidebarItem.title = finaldata["Location Items"]["Shop"][q]["Item"];
 						}
 
 
@@ -747,10 +747,10 @@ var createItem = function() {
 
 						var itemSectionSidebarSidebarItemText = document.createElement("h6");
 						if (quantity != 1) { 
-							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Quantity"]+"x <br>"+finaldataLocationItemsShops[q]["Item"];
+							itemSectionSidebarSidebarItemText.innerHTML = finaldata["Location Items"]["Shop"][q]["Quantity"]+"x <br>"+finaldata["Location Items"]["Shop"][q]["Item"];
 						}
 						else {
-							itemSectionSidebarSidebarItemText.innerHTML = finaldataLocationItemsShops[q]["Item"];
+							itemSectionSidebarSidebarItemText.innerHTML = finaldata["Location Items"]["Shop"][q]["Item"];
 						}
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
 						itemSectionSidebarSidebarItemText.style.display = "none";
@@ -763,14 +763,14 @@ var createItem = function() {
 		}
 
 
-		for(var q = 0; q < finaldataLocationItemsPickup.length; q++) {
-			if (getApplicable(finaldataLocationItemsPickup[q]["Game"])) {
+		for(var q = 0; q < finaldata["Location Items"]["Pickup"].length; q++) {
+			if (getApplicable(finaldata["Location Items"]["Pickup"][q]["Game"])) {
 				var check = true;
-				if (finaldataLocationItemsPickup[q]["Index"] != undefined) {
-					check = finaldataLocationItemsPickup[q]["Index"] == finaldataItems[i]["Index"];
+				if (finaldata["Location Items"]["Pickup"][q]["Index"] != undefined) {
+					check = finaldata["Location Items"]["Pickup"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 				}
 				if (check) {
-					if(finaldataLocationItemsPickup[q]["Item"] == item) {
+					if(finaldata["Location Items"]["Pickup"][q]["Item"] == item) {
 						var itemSectionSidebarSidebarLi = document.createElement("li");
 						itemSectionSidebarSidebarLi.setAttribute("name","pickup");
 						itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
@@ -808,17 +808,17 @@ var createItem = function() {
 
 		
 
-						if (finaldataLocationItemsPickup[q]["Level"] != undefined) {
-							PickupLevel = 'Level '+finaldataLocationItemsPickup[q]["Level"];
+						if (finaldata["Location Items"]["Pickup"][q]["Level"] != undefined) {
+							PickupLevel = 'Level '+finaldata["Location Items"]["Pickup"][q]["Level"];
 						}
-						if (finaldataLocationItemsPickup[q]["Rate"] != undefined) {
-							PickupRate = finaldataLocationItemsPickup[q]["Rate"];
+						if (finaldata["Location Items"]["Pickup"][q]["Rate"] != undefined) {
+							PickupRate = finaldata["Location Items"]["Pickup"][q]["Rate"];
 						}
-						if (finaldataLocationItemsPickup[q]["Location"] != undefined) {
-							PickupLocation = 'at <b name="map" title="'+finaldataLocationItemsPickup[q]["Location"]+'" onclick="dataRedirect()">'+finaldataLocationItemsPickup[q]["Location"]+'</b>';
+						if (finaldata["Location Items"]["Pickup"][q]["Location"] != undefined) {
+							PickupLocation = 'at <b name="map" title="'+finaldata["Location Items"]["Pickup"][q]["Location"]+'" onclick="dataRedirect()">'+finaldata["Location Items"]["Pickup"][q]["Location"]+'</b>';
 						}
-						if (finaldataLocationItemsPickup[q]["Additional"] != undefined) {
-							PickupAdditional = 'on '+finaldataLocationItemsPickup[q]["Additional"];
+						if (finaldata["Location Items"]["Pickup"][q]["Additional"] != undefined) {
+							PickupAdditional = 'on '+finaldata["Location Items"]["Pickup"][q]["Additional"];
 						}
 
 						PickupText = PickupRate+' chance to be found by a '+PickupLevel+' Pokémon '+PickupAdditional+' '+PickupLocation+' with the ability <b name="ability" title="Pickup" onclick="dataRedirect()">Pickup</b>';
@@ -830,17 +830,17 @@ var createItem = function() {
 
 						var itemSectionSidebarSidebarItem = document.createElement("span");
 						itemSectionSidebarSidebarItem.setAttribute("name","item");
-						itemSectionSidebarSidebarItem.title = finaldataLocationItemsPickup[q]["Item"];
+						itemSectionSidebarSidebarItem.title = finaldata["Location Items"]["Pickup"][q]["Item"];
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 				
 						var itemSectionSidebarSidebarItemImg = document.createElement("img");
-						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldataLocationItemsPickup[q]["Item"])+".png";
+						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Location Items"]["Pickup"][q]["Item"])+".png";
 						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 
 						var itemSectionSidebarSidebarItemText = document.createElement("p");
-						itemSectionSidebarSidebarItemText.innerText = finaldataLocationItemsPickup[q]["Item"];
+						itemSectionSidebarSidebarItemText.innerText = finaldata["Location Items"]["Pickup"][q]["Item"];
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
 						itemSectionSidebarSidebarItemText.style.display = "none";
 
