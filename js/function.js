@@ -37,10 +37,10 @@ function getShopLocationInt(obj,type,cost,location) {
 	var cost;
 
 	if (type == "pokémon") {
-		arr = finaldataLocationPokémonShops;
+		arr = finaldata["Location Pokémon"]["Shop"];
 	}
 	else if (type == "item") {
-		arr = finaldataLocationItemsShops;
+		arr = finaldata["Location Items"]["Shop"];
 		
 	}
 
@@ -64,7 +64,7 @@ function getItemLocationInt(obj,description,location) {
 	var description;
 	var location;
 
-	arr = finaldataLocationItems;
+	arr = finaldata["Location Items"]["Items"];
 
 
 	for(var i = 0; i < arr.length; i++) {
@@ -219,7 +219,7 @@ function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
 	var mechanic;
 	var location;
 
-	arr = finaldataLocationPokémon;
+	arr = finaldata["Location Pokémon"]["Pokémon"];
 	
 
 
@@ -253,26 +253,26 @@ function getEvolutionFamily(i) {
 	var specie = [];
 	var Previous = undefined;
 	var Next = undefined;
-	stage = finaldataPokémonEvolutionStage;
-	specie = finaldataPokémonEvolutionSpecie;
+	stage = finaldata["Pokémon"]["Evolution Stage"];
+	specie = finaldata["Pokémon"]["Evolution Specie"];
 	var result = [];
-	result.push(finaldataPokémon[i]["Pokémon"])
+	result.push(finaldata["Pokémon"]["Reference"][i]["Pokémon"])
 
 	for(var q = 0; q < 10; q++) {
-		Previous = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie];
-		Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie];
+		Previous = finaldata["Pokémon"]["Evolution Specie"][i]["Previous_"+JSONPath_EvolutionSpecie];
+		Next = finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie];
 		if(Previous != undefined && Previous != "None") {
 			result.push(Previous);
-			Previous = finaldataPokémonEvolutionSpecie[i]["Previous_"+JSONPath_EvolutionSpecie];
+			Previous = finaldata["Pokémon"]["Evolution Specie"][i]["Previous_"+JSONPath_EvolutionSpecie];
 		}
 		if(Next != undefined && Next != "None") {
-			if(finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].includes(",")) {
-				for(var y = 0; y < finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",").length; y++) {
-					Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie].split(",")[y];
+			if(finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie].includes(",")) {
+				for(var y = 0; y < finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie].split(",").length; y++) {
+					Next = finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie].split(",")[y];
 					result.push(Next);
 				}
 			} else {
-				Next = finaldataPokémonEvolutionSpecie[i]["Next_"+JSONPath_EvolutionSpecie];
+				Next = finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie];
 				result.push(Next);
 			}
 		}
@@ -306,14 +306,14 @@ function getIntID(int, id) {
 	var int;
 	var id;
 	if(id == undefined || id == "") { // int --> id
-		for(var i = 0; i < finaldataPokémon.length; i++) {
+		for(var i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
 			if(int == i) {
-				return finaldataPokémon[i]["ID"];
+				return finaldata["Pokémon"]["Reference"][i]["ID"];
 			}
 		}
 	} else if(int == undefined || int == "") { // id --> int
-		for(var i = 0; i < finaldataPokémon.length; i++) {
-			if(id == finaldataPokémon[i]["ID"]) {
+		for(var i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
+			if(id == finaldata["Pokémon"]["Reference"][i]["ID"]) {
 				return i;
 			}
 		}
@@ -323,7 +323,7 @@ function getIntID(int, id) {
 function getPokémonMediaPath(int,type) {
 	var int;
 	var type;
-	var arr = finaldataPokémonPath;
+	var arr = finaldata["Pokémon"]["Path"];
 	var result;
 	var column;
 
@@ -353,7 +353,7 @@ function getPokémonMediaPath(int,type) {
 
 function getMachineMove(machine) {
 	var machine;
-	var arr = finaldataMoveMachine;
+	var arr = finaldata["Moves"]["Machine"];
 	var result;
 	for(i = 0; i < arr.length; i++) {
 		if(arr[i]["Machine_"+JSONPath_MoveMachine] == machine) {
@@ -365,7 +365,7 @@ function getMachineMove(machine) {
 
 function getMoveMachine(move) {
 	var move;
-	var arr = finaldataMoveMachine;
+	var arr = finaldata["Moves"]["Machine"];
 	var result;
 	for(i = 0; i < arr.length; i++) {
 		if(arr[i]["Name_"+JSONPath_MoveName] == move) {
@@ -400,26 +400,26 @@ function Continuation(arr, column, style) {
 			}
 		}
 	} else if(style == "Multiple") {
-		for(i = 0; i < finaldataGame.length; i++) {
-			if(parseInt(finaldataGame[i]["ID"]) <= GameID) {
-				names.push(finaldataGame[i]["Name"]);
+		for(i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+			if(parseInt(finaldata["Game"]["Reference"][i]["ID"]) <= GameID) {
+				names.push(finaldata["Game"]["Reference"][i]["Name"]);
 			}
 		}
-		for(i = 0; i < finaldataGame.length; i++) {
-			if(finaldataGame[i]["Name"] == GameName) {
-				if(finaldataGame[i]["Sibling"] != undefined) {
-					if(finaldataGame[i]["Sibling"].includes(",")) {
-						for(q = 0; q < finaldataGame[i]["Sibling"].split(",").length; q++) {
-							for(u = 0; u < finaldataGame.length; u++) {
-								if(finaldataGame[u]["ID"] == finaldataGame[i]["Sibling"].split(",")[q]) {
-									names.push(finaldataGame[u]["Name"]);
+		for(i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+			if(finaldata["Game"]["Reference"][i]["Name"] == GameName) {
+				if(finaldata["Game"]["Reference"][i]["Sibling"] != undefined) {
+					if(finaldata["Game"]["Reference"][i]["Sibling"].includes(",")) {
+						for(q = 0; q < finaldata["Game"]["Reference"][i]["Sibling"].split(",").length; q++) {
+							for(u = 0; u < finaldata["Game"]["Reference"].length; u++) {
+								if(finaldata["Game"]["Reference"][u]["ID"] == finaldata["Game"]["Reference"][i]["Sibling"].split(",")[q]) {
+									names.push(finaldata["Game"]["Reference"][u]["Name"]);
 								}
 							}
 						}
 					} else {
-						for(u = 0; u < finaldataGame.length; u++) {
-							if(finaldataGame[u]["ID"] == finaldataGame[i]["Sibling"]) {
-								names.push(finaldataGame[u]["Name"]);
+						for(u = 0; u < finaldata["Game"]["Reference"].length; u++) {
+							if(finaldata["Game"]["Reference"][u]["ID"] == finaldata["Game"]["Reference"][i]["Sibling"]) {
+								names.push(finaldata["Game"]["Reference"][u]["Name"]);
 							}
 						}
 					}
@@ -444,16 +444,16 @@ function Continuation(arr, column, style) {
 		for(i = 0; i < temparr1.length; i++) {
 			var boolean = [];
 			if(temparrtype[i] == "-") {
-				for(q = 0; q < finaldataGame.length; q++) {
-					if(finaldataGame[q]["Name"] == temparr1[i][0]) {
+				for(q = 0; q < finaldata["Game"]["Reference"].length; q++) {
+					if(finaldata["Game"]["Reference"][q]["Name"] == temparr1[i][0]) {
 						temprun = true;
 					}
-					if(finaldataGame[q]["Name"] == temparr1[i][1]) {
-						tempres.push(finaldataGame[q]["Name"])
+					if(finaldata["Game"]["Reference"][q]["Name"] == temparr1[i][1]) {
+						tempres.push(finaldata["Game"]["Reference"][q]["Name"])
 						temprun = false;
 					}
 					if(temprun == true) {
-						tempres.push(finaldataGame[q]["Name"])
+						tempres.push(finaldata["Game"]["Reference"][q]["Name"])
 					}
 				}
 				for(q = 0; q < tempres.length; q++) {
@@ -488,7 +488,7 @@ function getRegionalID(seperator,id,dex) {
 	var seperator;
 	var id;
 	var dex;
-	var arr = finaldataPokémonPokédexID;
+	var arr = finaldata["Pokémon"]["Pokédex ID"];
 	var tempid;
     var result;
 
@@ -530,7 +530,7 @@ function getRegionalID(seperator,id,dex) {
 
 function getFullGameName(name) {
 	var name;
-	var arr = finaldataGame;
+	var arr = finaldata["Game"]["Reference"];
 	for(var q = 0; q < arr.length; q++) {
 		if(arr[q]["Name"] == name) {
 			return arr[q]["Full Name"];
@@ -540,7 +540,7 @@ function getFullGameName(name) {
 
 function getPokémonID(name) {
 	var name;
-	var arr = finaldataPokémon;
+	var arr = finaldata["Pokémon"]["Reference"];
 	for(var q = 0; q < arr.length; q++) {
 		if(arr[q]["Pokémon"] == name) {
 			return arr[q]["ID"];
@@ -550,7 +550,7 @@ function getPokémonID(name) {
 
 function getEvolutionStage(name) {
 	var name;
-	var arr = finaldataPokémonEvolutionStage;
+	var arr = finaldata["Pokémon"]["Evolution Stage"];
 	for(var q = 0; q < arr.length; q++) {
 		if(arr[q]["Pokémon"] == name) {
 			return arr[q]["Pokémon Stage_"+JSONPath_EvolutionStage];
@@ -615,7 +615,7 @@ function findUpTag(el, tag) {
 
 function getPokémonInt(name) {
 	var name;
-	var arr = finaldataPokémonForm;
+	var arr = finaldata["Pokémon"]["Form"];
 	for(var q = 0; q < arr.length; q++) {
 		if(arr[q]["Pokémon"] == name || arr[q]["Form_"+JSONPath_Form] == name) {
 			return q;
@@ -626,20 +626,20 @@ function returnSortedItemsList(i) {
 
 	var i;
 	var items = [];
-	var result = finaldataItems.map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
+	var result = finaldata["Items"]["Reference"].map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
 
 	items = sortObjectArray(result,"Pocket",true);
 
 	var result = [];
 	
-	if (finaldataPokémonFormItem[i] != undefined) {
-		if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"] != undefined) {
+	if (finaldata["Pokémon"]["Form Item"][i] != undefined) {
+		if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"] != undefined) {
 			var req = [];
-			if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"].includes(",")) {
-				req = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"].split(",")
+			if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"].includes(",")) {
+				req = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"].split(",")
 			}
 			else {
-				req[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Required"];
+				req[0] = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"];
 			}
 
 			for (var r = 0; r < req.length; r++) {
@@ -656,13 +656,13 @@ function returnSortedItemsList(i) {
 				}
 			}
 		}
-		else if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"] != undefined) {
+		else if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"] != undefined) {
 			var notreq = [];
-			if (finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"].includes(",")) {
-				notreq = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"].split(",")
+			if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"].includes(",")) {
+				notreq = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"].split(",")
 			}
 			else {
-				notreq[0] = finaldataPokémonFormItem[i][JSONPath_FormItem+"_Not"];
+				notreq[0] = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"];
 			}
 
 
@@ -808,7 +808,7 @@ function dataStringToObj(data) {
 
 function getPokémonName(int,alt) {
 	var int;
-	var arr = finaldataPokémonForm;
+	var arr = finaldata["Pokémon"]["Form"];
 	if (alt == "Alt") {
 		for(var i = 0; i < arr.length; i++) {
 			if(int == i) {
@@ -864,13 +864,13 @@ function getPokémonForm(i) {
     var id = getIntID(i,"");
     var result = [];
 
-    for(var u = 0; u < finaldataPokémonForm.length; u++) {
-		if(finaldataPokémonForm[u]["ID"] == id && finaldataPokémon[u][JSONPath_Reference] == "true") {
-            if (finaldataPokémonForm[u]["Form_"+JSONPath_Form] != undefined) {
-                result.push(finaldataPokémonForm[u]["Form_"+JSONPath_Form]);
+    for(var u = 0; u < finaldata["Pokémon"]["Form"].length; u++) {
+		if(finaldata["Pokémon"]["Form"][u]["ID"] == id && finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
+            if (finaldata["Pokémon"]["Form"][u]["Form_"+JSONPath_Form] != undefined) {
+                result.push(finaldata["Pokémon"]["Form"][u]["Form_"+JSONPath_Form]);
             }
             else {
-                result.push(finaldataPokémonForm[u]["Pokémon"]);
+                result.push(finaldata["Pokémon"]["Form"][u]["Pokémon"]);
             }
 		}
 	}
@@ -879,7 +879,7 @@ function getPokémonForm(i) {
 }
 
 function getPositionAbility(i,column) {
-    var arr = finaldataPokémonAbility;
+    var arr = finaldata["Pokémon"]["Ability"];
     var column;
     var i;
     var result;
@@ -907,7 +907,7 @@ function getPositionAbility(i,column) {
 
 
 function getAbilityPosition(i,ability) {
-    var arr = finaldataPokémonAbility;
+    var arr = finaldata["Pokémon"]["Ability"];
 	var i;
     var ability;
     var result;
@@ -945,7 +945,7 @@ function getDefaultInt(i) {
 
     var i;
     var id = getIntID(i,"");
-    var arr = finaldataPokémon;
+    var arr = finaldata["Pokémon"]["Reference"];
     var result;
 
     for (var q = 0; q < arr.length; q++) {
@@ -961,7 +961,7 @@ function getDefaultInt(i) {
 
 function getLocationTrainers(location) {
 
-	var arr = finaldataLocationTrainers;
+	var arr = finaldata["Location Trainers"]["Trainers"];
 	var location;
 	var result = [];
 
@@ -980,7 +980,7 @@ function getLocationTrainers(location) {
 
 function getLocationItems(location) {
 
-	var arr = finaldataLocationItems;
+	var arr = finaldata["Location Items"]["Items"];
 	var location;
 	var result = [];
 
@@ -997,7 +997,7 @@ function getLocationItems(location) {
 
 function getLocationPokémon(location) {
 
-	var arr = finaldataLocationPokémon;
+	var arr = finaldata["Location Pokémon"]["Pokémon"];
 	var location;
 	var result = [];
 
@@ -1614,7 +1614,7 @@ function sortObjectArray(objectsArr,prop,ascending) {
 function getTutorData(val,column) {
 	var val;
 	var column;
-	var arr = finaldataLocationTutor;
+	var arr = finaldata["Locations"]["Move Tutor"];
 	var result = [];
 
 	for (var q = 0; q < arr.length; q++) {
@@ -1685,7 +1685,7 @@ function classSwitch(cla) {
 
 function getItemIcon(item) {
     var item;
-	var arr = finaldataItems;
+	var arr = finaldata["Items"]["Reference"];
 
 	for (var q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"])) {
@@ -1926,9 +1926,9 @@ function joinObj(arr, attr,type){
 function getEvolutionData(i,column) {
 	var i;
 	var column;
-	var arrName = finaldataPokémonEvolutionSpecie;
-	var arrStage = finaldataPokémonEvolutionStage;
-	var arrMethod = finaldataPokémonEvolutionMethod;
+	var arrName = finaldata["Pokémon"]["Evolution Specie"];
+	var arrStage = finaldata["Pokémon"]["Evolution Stage"];
+	var arrMethod = finaldata["Pokémon"]["Evolution Method"];
 
 	var result = [];
 	var pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
@@ -2295,7 +2295,7 @@ function shinyTest(ivs) {
 
 function getOffspringData(i) {
 	var i;
-	var arr = finaldataPokémonOffspring;
+	var arr = finaldata["Pokémon"]["Offspring"];
 	var result = [];
 
 	var pok = getPokémonName(i);
@@ -2343,11 +2343,11 @@ function formatEvoBreedText(i,type) {
 	if (type == "Breed") {
 		var poks = [];
 
-		for (var q = 0; q < finaldataPokémonOffspring.length; q++) {
-			if (finaldataPokémon[i][JSONPath_Reference] == "true") {
-				if (finaldataPokémonOffspring[q]["Offspring_"+JSONPath_Offspring] != undefined) {
-					if (finaldataPokémonOffspring[q]["Offspring_"+JSONPath_Offspring].includes(",")) {
-						var ofs = finaldataPokémonOffspring[q]["Offspring_"+JSONPath_Offspring].split(",");
+		for (var q = 0; q < finaldata["Pokémon"]["Offspring"].length; q++) {
+			if (finaldata["Pokémon"]["Reference"][i][JSONPath_Reference] == "true") {
+				if (finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring] != undefined) {
+					if (finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring].includes(",")) {
+						var ofs = finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring].split(",");
 						for (var u = 0; u < ofs.length; u++) {
 							if (getPokémonInt(ofs[u]) == i) {
 								if (q != i) {
@@ -2357,12 +2357,12 @@ function formatEvoBreedText(i,type) {
 									obj["Gender Ratio"] = returnData(q,"Gender Ratio","").join("/");
 									obj["Primary Egg Group"] = returnData(q,"Egg Group","")[0];
 									obj["Secondary Egg Group"] = returnData(q,"Egg Group","")[1];
-									if (finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring] != undefined) {
-										if (finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring].split(",").includes(",")) {
-											obj["Offspring Factor"] = finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring].split(",")[u];
+									if (finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring] != undefined) {
+										if (finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring].split(",").includes(",")) {
+											obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring].split(",")[u];
 										}
 										else {
-											obj["Offspring Factor"] = finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring];
+											obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring];
 										}
 									}
 									else {
@@ -2374,7 +2374,7 @@ function formatEvoBreedText(i,type) {
 						}
 					}
 					else {
-						if (getPokémonInt(finaldataPokémonOffspring[q]["Offspring_"+JSONPath_Offspring]) == i) {
+						if (getPokémonInt(finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring]) == i) {
 							if (q != i) {
 								var obj = new Object();
 								obj["Integer"] = q;
@@ -2382,7 +2382,7 @@ function formatEvoBreedText(i,type) {
 								obj["Gender Ratio"] = returnData(q,"Gender Ratio","").join("/");
 								obj["Primary Egg Group"] = returnData(q,"Egg Group","")[0];
 								obj["Secondary Egg Group"] = returnData(q,"Egg Group","")[1];
-								obj["Offspring Factor"] = finaldataPokémonOffspring[q]["Factor_"+JSONPath_Offspring];
+								obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring];
 								poks.push(obj)
 							}
 						}
@@ -2516,7 +2516,7 @@ function getItemData(item,type) {
 	var column;
 	var result = [];
 	if (type == "Description") {
-		arr = finaldataItemsDescription;
+		arr = finaldata["Items"]["Description"];
 		column = "Description";
 	}
 
@@ -2567,10 +2567,10 @@ function uniqueValueSelect(selects) {
 function returnMoveLearnset(move,conditions) {
 	var move;
 	var conditions;
-	var arr1 = finaldataLearnsetLevel;
-	var arr2 = finaldataLearnsetEvolution;
-	var arr3 = finaldataLearnsetMachine;
-	var arr4 = finaldataLearnsetBreed;
+	var arr1 = finaldata["Pokémon Learnset"]["Level Up"];
+	var arr2 = finaldata["Pokémon Learnset"]["Evolution"];
+	var arr3 = finaldata["Pokémon Learnset"]["Machine"];
+	var arr4 = finaldata["Pokémon Learnset"]["Breeding"];
 
 	var result = [];
 
@@ -2613,10 +2613,10 @@ function returnMoveLearnset(move,conditions) {
 function referenceLink(text) {
 
 	var text;
-	var items = finaldataItems;
-	var abilities = finaldataAbility;
-	var moves = finaldataMove;
-	var poks = finaldataPokémon;
+	var items = finaldata["Items"]["Reference"];
+	var abilities = finaldata["Abilities"]["Reference"];
+	var moves = finaldata["Moves"]["Reference"];
+	var poks = finaldata["Pokémon"]["Reference"];
 
 	var itemArr = [];
 	var abilityArr = [];
@@ -2756,7 +2756,7 @@ function referenceLink(text) {
 		var i3 = " "+move+",";
 		var i4 = '"'+move+'"';
 
-		var type = returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,move);
+		var type = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,move);
 
 		var first = "<b type='invert' onclick='dataRedirect()' name='move' style='color:var(--type"+type+");font-weight:bold;text-shadow:1px 1px #000;'>";
 		var last = "</b>";
