@@ -1,7 +1,7 @@
 function config() {
-	GameFullName = finaldataGame[GameID - 1]["Full Name"];
-	GameName = finaldataGame[GameID - 1]["Name"];
-	Region = finaldataGame[GameID - 1]["Region"];
+	GameFullName = finaldata["Game"]["Reference"][GameID - 1]["Full Name"];
+	GameName = finaldata["Game"]["Reference"][GameID - 1]["Name"];
+	Region = finaldata["Game"]["Reference"][GameID - 1]["Region"];
 	document.title = GameFullName;
 	document.body.setAttribute("Game",GameName);
 	document.body.setAttribute("Generation",Generation);
