@@ -398,7 +398,6 @@ var createTool = function() {
 			typeSidebarDescriptionSelectorLabel.appendChild(typeSidebarDescriptionSelectorLabelText);
 		}
 		var typeContentTypeChartMatrixTable = document.createElement("table");
-
 		typeContentTypeChartMatrixTable.setAttribute("name", 'matrix');
 		typeContentTypeChartMatrixTable.setAttribute("type", MEDIAPath_Type_Icon);
 		var typeContentTypeChartMatrixTableTR = document.createElement("tr");
@@ -408,47 +407,47 @@ var createTool = function() {
 		var typeContentTypeChartMatrixTableTH0 = document.createElement("th");
 		typeContentTypeChartMatrixTableTH0.setAttribute("title","");
 		typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH0);
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
 			var typeContentTypeChartMatrixTableTH = document.createElement("th");
 			var typeContentTypeChartMatrixTableTHIMG = document.createElement("img");
-			typeContentTypeChartMatrixTableTH.innerText = finaldataTypeChartTitle[i];
-			typeContentTypeChartMatrixTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
-			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartMatrixTableTH.innerText = typechartTitle[i];
+			typeContentTypeChartMatrixTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
+			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
 			typeContentTypeChartMatrixTableTH.appendChild(typeContentTypeChartMatrixTableTHIMG);
 		}
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
 			var typeContentTypeChartMatrixTableTR = document.createElement("tr");
 			var typeContentTypeChartMatrixTableTH = document.createElement("th");
 			var typeContentTypeChartMatrixTableTHIMG = document.createElement("img");
 			typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableTR);
-			typeContentTypeChartMatrixTableTH.innerText = finaldataTypeChartTitle[i];
-			typeContentTypeChartMatrixTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
-			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartMatrixTableTH.innerText = typechartTitle[i];
+			typeContentTypeChartMatrixTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
+			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
+			for(var q = 0; q < typechartTitle.length; q++) {
 				var typeContentTypeChartMatrixTableTD = document.createElement("td");
 				var typeContentTypeChartMatrixTableTDText = document.createElement("small");
 
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
 					typeContentTypeChartMatrixTableTD.setAttribute("title", "Super Effective");
 				}
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "1×") {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "1×") {
 					typeContentTypeChartMatrixTableTD.setAttribute("title", "Normal Effectiveness");
 				}
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
 					typeContentTypeChartMatrixTableTD.setAttribute("title", "Not Very Effective");
 				}
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
 					typeContentTypeChartMatrixTableTD.setAttribute("title", "No Effect");
 				}
-				typeContentTypeChartMatrixTableTDText.innerText = finaldataTypeChart[i][finaldataTypeChartTitle[q]];
+				typeContentTypeChartMatrixTableTDText.innerText = finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]];
 				typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTD);
 				typeContentTypeChartMatrixTableTD.appendChild(typeContentTypeChartMatrixTableTDText);
 				typeContentTypeChartMatrixTableTD.addEventListener("mouseenter",matrixHoverClass);
@@ -473,18 +472,18 @@ var createTool = function() {
 		var tempEffectivenessArrRightMax = [];
 		var tempEffectivenessArrRightMaxCount = {};
 		var tempEffectivenessArrRightMaxResult = [];
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "2×") {
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "2×") {
 					tempEffectivenessArrLeftMax.push(i);
 				}
 			}
 			for(var num of tempEffectivenessArrLeftMax) {
 				tempEffectivenessArrLeftMaxCount[num] = tempEffectivenessArrLeftMaxCount[num] ? tempEffectivenessArrLeftMaxCount[num] + 1 : 1;
 			}
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
 					tempEffectivenessArrRightMax.push(i);
 				}
 			}
@@ -498,14 +497,14 @@ var createTool = function() {
 				tempEffectivenessArrRightMaxResult.push(tempEffectivenessArrRightMaxCount[i]);
 			}
 		}
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
 			var typeContentTypeChartEffectivenessTableTR = document.createElement("tr");
 			var typeContentTypeChartEffectivenessTableTH = document.createElement("th");
 			var typeContentTypeChartEffectivenessTableTHIMG = document.createElement("img");
 			typeContentTypeChartEffectivenessTable.appendChild(typeContentTypeChartEffectivenessTableTR);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "2×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "2×") {
 					tempEffectivenessArrLeft.push(i);
 				}
 			}
@@ -519,19 +518,19 @@ var createTool = function() {
 				var typeContentTypeChartEffectivenessTableTDLeft = document.createElement("td");
 				typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDLeft);
 			}
-			typeContentTypeChartEffectivenessTableTH.innerText = finaldataTypeChartTitle[i];
-			typeContentTypeChartEffectivenessTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartEffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
-			typeContentTypeChartEffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartEffectivenessTableTH.innerText = typechartTitle[i];
+			typeContentTypeChartEffectivenessTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartEffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
+			typeContentTypeChartEffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			typeContentTypeChartEffectivenessTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "2×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "2×") {
 					var typeContentTypeChartEffectivenessTableTHLeft = document.createElement("th");
 					var typeContentTypeChartEffectivenessTableTHLeftIMG = document.createElement("img");
-					typeContentTypeChartEffectivenessTableTHLeft.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
-					typeContentTypeChartEffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartEffectivenessTableTHLeft.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
+					typeContentTypeChartEffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
 					typeContentTypeChartEffectivenessTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHLeft);
 					typeContentTypeChartEffectivenessTableTHLeft.appendChild(typeContentTypeChartEffectivenessTableTHLeftIMG);
@@ -545,8 +544,8 @@ var createTool = function() {
 			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDLeftArrow);
 			typeContentTypeChartEffectivenessTableTDLeftArrow.appendChild(typeContentTypeChartEffectivenessTableTDLeftArrowText);
 			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTH);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
 					tempEffectivenessArrRight.push(i);
 				}
 			}
@@ -563,14 +562,14 @@ var createTool = function() {
 			}
 			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDRightArrow);
 			typeContentTypeChartEffectivenessTableTDRightArrow.appendChild(typeContentTypeChartEffectivenessTableTDRightArrowText);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "2×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
 					var typeContentTypeChartEffectivenessTableTHRight = document.createElement("th");
 					var typeContentTypeChartEffectivenessTableTHRightIMG = document.createElement("img");
-					typeContentTypeChartEffectivenessTableTHRight.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartEffectivenessTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartEffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
-					typeContentTypeChartEffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartEffectivenessTableTHRight.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartEffectivenessTableTHRight.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartEffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
+					typeContentTypeChartEffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
 					typeContentTypeChartEffectivenessTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHRight);
 					typeContentTypeChartEffectivenessTableTHRight.appendChild(typeContentTypeChartEffectivenessTableTHRightIMG);
@@ -598,18 +597,18 @@ var createTool = function() {
 		var tempIneffectivenessArrRightMax = [];
 		var tempIneffectivenessArrRightMaxCount = {};
 		var tempIneffectivenessArrRightMaxResult = [];
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "½×") {
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "½×") {
 					tempIneffectivenessArrLeftMax.push(i);
 				}
 			}
 			for(var num of tempIneffectivenessArrLeftMax) {
 				tempIneffectivenessArrLeftMaxCount[num] = tempIneffectivenessArrLeftMaxCount[num] ? tempIneffectivenessArrLeftMaxCount[num] + 1 : 1;
 			}
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
 					tempIneffectivenessArrRightMax.push(i);
 				}
 			}
@@ -623,14 +622,14 @@ var createTool = function() {
 				tempIneffectivenessArrRightMaxResult.push(tempIneffectivenessArrRightMaxCount[i]);
 			}
 		}
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
 			var typeContentTypeChartIneffectivenessTableTR = document.createElement("tr");
 			var typeContentTypeChartIneffectivenessTableTH = document.createElement("th");
 			var typeContentTypeChartIneffectivenessTableTHIMG = document.createElement("img");
 			typeContentTypeChartIneffectivenessTable.appendChild(typeContentTypeChartIneffectivenessTableTR);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "½×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "½×") {
 					tempIneffectivenessArrLeft.push(i);
 				}
 			}
@@ -644,19 +643,19 @@ var createTool = function() {
 				var typeContentTypeChartIneffectivenessTableTDLeft = document.createElement("td");
 				typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDLeft);
 			}
-			typeContentTypeChartIneffectivenessTableTH.innerText = finaldataTypeChartTitle[i];
-			typeContentTypeChartIneffectivenessTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartIneffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
-			typeContentTypeChartIneffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartIneffectivenessTableTH.innerText = typechartTitle[i];
+			typeContentTypeChartIneffectivenessTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartIneffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
+			typeContentTypeChartIneffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			typeContentTypeChartIneffectivenessTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "½×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "½×") {
 					var typeContentTypeChartIneffectivenessTableTHLeft = document.createElement("th");
 					var typeContentTypeChartIneffectivenessTableTHLeftIMG = document.createElement("img");
-					typeContentTypeChartIneffectivenessTableTHLeft.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
-					typeContentTypeChartIneffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartIneffectivenessTableTHLeft.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
+					typeContentTypeChartIneffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
 					typeContentTypeChartIneffectivenessTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHLeft);
 					typeContentTypeChartIneffectivenessTableTHLeft.appendChild(typeContentTypeChartIneffectivenessTableTHLeftIMG);
@@ -670,8 +669,8 @@ var createTool = function() {
 			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDLeftArrow);
 			typeContentTypeChartIneffectivenessTableTDLeftArrow.appendChild(typeContentTypeChartIneffectivenessTableTDLeftArrowText);
 			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTH);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
 					tempIneffectivenessArrRight.push(i);
 				}
 			}
@@ -688,14 +687,14 @@ var createTool = function() {
 			}
 			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDRightArrow);
 			typeContentTypeChartIneffectivenessTableTDRightArrow.appendChild(typeContentTypeChartIneffectivenessTableTDRightArrowText);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "½×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
 					var typeContentTypeChartIneffectivenessTableTHRight = document.createElement("th");
 					var typeContentTypeChartIneffectivenessTableTHRightIMG = document.createElement("img");
-					typeContentTypeChartIneffectivenessTableTHRight.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
-					typeContentTypeChartIneffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartIneffectivenessTableTHRight.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
+					typeContentTypeChartIneffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
 					typeContentTypeChartIneffectivenessTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHRight);
 					typeContentTypeChartIneffectivenessTableTHRight.appendChild(typeContentTypeChartIneffectivenessTableTHRightIMG);
@@ -723,18 +722,18 @@ var createTool = function() {
 		var tempImmunityArrRightMax = [];
 		var tempImmunityArrRightMaxCount = {};
 		var tempImmunityArrRightMaxResult = [];
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "0×") {
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "0×") {
 					tempImmunityArrLeftMax.push(i);
 				}
 			}
 			for(var num of tempImmunityArrLeftMax) {
 				tempImmunityArrLeftMaxCount[num] = tempImmunityArrLeftMaxCount[num] ? tempImmunityArrLeftMaxCount[num] + 1 : 1;
 			}
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
 					tempImmunityArrRightMax.push(i);
 				}
 			}
@@ -748,14 +747,14 @@ var createTool = function() {
 				tempImmunityArrRightMaxResult.push(tempImmunityArrRightMaxCount[i]);
 			}
 		}
-		for(var i = 0; i < finaldataTypeChart.length; i++) {
-			var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[i]);
+		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
 			var typeContentTypeChartImmunityTableTR = document.createElement("tr");
 			var typeContentTypeChartImmunityTableTH = document.createElement("th");
 			var typeContentTypeChartImmunityTableTHIMG = document.createElement("img");
 			typeContentTypeChartImmunityTable.appendChild(typeContentTypeChartImmunityTableTR);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "0×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "0×") {
 					tempImmunityArrLeft.push(i);
 				}
 			}
@@ -769,19 +768,19 @@ var createTool = function() {
 				var typeContentTypeChartImmunityTableTDLeft = document.createElement("td");
 				typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDLeft);
 			}
-			typeContentTypeChartImmunityTableTH.innerText = finaldataTypeChartTitle[i];
-			typeContentTypeChartImmunityTableTH.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartImmunityTableTH.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
-			typeContentTypeChartImmunityTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			typeContentTypeChartImmunityTableTH.innerText = typechartTitle[i];
+			typeContentTypeChartImmunityTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			typeContentTypeChartImmunityTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
+			typeContentTypeChartImmunityTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			typeContentTypeChartImmunityTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[q][finaldataTypeChartTitle[i]] == "0×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "0×") {
 					var typeContentTypeChartImmunityTableTHLeft = document.createElement("th");
 					var typeContentTypeChartImmunityTableTHLeftIMG = document.createElement("img");
-					typeContentTypeChartImmunityTableTHLeft.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartImmunityTableTHLeft.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartImmunityTableTHLeft.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
-					typeContentTypeChartImmunityTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartImmunityTableTHLeft.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartImmunityTableTHLeft.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartImmunityTableTHLeft.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
+					typeContentTypeChartImmunityTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
 					typeContentTypeChartImmunityTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHLeft);
 					typeContentTypeChartImmunityTableTHLeft.appendChild(typeContentTypeChartImmunityTableTHLeftIMG);
@@ -795,8 +794,8 @@ var createTool = function() {
 			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDLeftArrow);
 			typeContentTypeChartImmunityTableTDLeftArrow.appendChild(typeContentTypeChartImmunityTableTDLeftArrowText);
 			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTH);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
 					tempImmunityArrRight.push(i);
 				}
 			}
@@ -813,14 +812,14 @@ var createTool = function() {
 			}
 			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDRightArrow);
 			typeContentTypeChartImmunityTableTDRightArrow.appendChild(typeContentTypeChartImmunityTableTDRightArrowText);
-			for(var q = 0; q < finaldataTypeChartTitle.length; q++) {
-				if(finaldataTypeChart[i][finaldataTypeChartTitle[q]] == "0×") {
+			for(var q = 0; q < typechartTitle.length; q++) {
+				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
 					var typeContentTypeChartImmunityTableTHRight = document.createElement("th");
 					var typeContentTypeChartImmunityTableTHRightIMG = document.createElement("img");
-					typeContentTypeChartImmunityTableTHRight.innerText = finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartImmunityTableTHRight.setAttribute("title", finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartImmunityTableTHRight.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[q] + '")');
-					typeContentTypeChartImmunityTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + finaldataTypeChartTitle[q].charAt(0).toUpperCase() + finaldataTypeChartTitle[q].slice(1).toLowerCase() + ".png";
+					typeContentTypeChartImmunityTableTHRight.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
+					typeContentTypeChartImmunityTableTHRight.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
+					typeContentTypeChartImmunityTableTHRight.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
+					typeContentTypeChartImmunityTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
 					typeContentTypeChartImmunityTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
 					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHRight);
 					typeContentTypeChartImmunityTableTHRight.appendChild(typeContentTypeChartImmunityTableTHRightIMG);
@@ -1151,10 +1150,10 @@ var createTool = function() {
 
 		var tempMoves = [];
 
-		for(var m = 0; m < finaldataMove.length; m++) {
-			if(finaldataMove[m][JSONPath_MoveReference] == "true") {
-				if (finaldataMoveGroup[m]["Group"] != "Z-Move" && finaldataMoveGroup[m]["Group"] != "Max Move") {
-					tempMoves.push(finaldataMove[m]["Name_"+JSONPath_MoveName])
+		for(var m = 0; m < finaldata["Moves"]["Reference"].length; m++) {
+			if(finaldata["Moves"]["Reference"][m][JSONPath_MoveReference] == "true") {
+				if (finaldata["Moves"]["Group"][m]["Group"] != "Z-Move" && finaldata["Moves"]["Group"][m]["Group"] != "Max Move") {
+					tempMoves.push(finaldata["Moves"]["Reference"][m]["Name_"+JSONPath_MoveName])
 				}
 			}
 		}
@@ -1162,7 +1161,7 @@ var createTool = function() {
 		tempMoves.sort();
 
 		for(var m = 0; m < tempMoves.length; m++) {
-			let moveCategory = returnArrValue(finaldataMoveCategory,"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,tempMoves[m]);
+			let moveCategory = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,tempMoves[m]);
 			moveCategory = undwsDel(moveCategory,"")
 			if (moveCategory != undefined && moveCategory != "Status") {
 				var toolSectionContentDMGMenuMoveTopOption = document.createElement("option");
@@ -1175,7 +1174,7 @@ var createTool = function() {
 				movd = undDel(movd,"");
 				toolSectionContentDMGMenuMoveTopOption.title = movd;
 
-				toolSectionContentDMGMenuMoveTopOption.style.background = "var(--type"+returnArrValue(finaldataMoveType,"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempMoves[m])+")";
+				toolSectionContentDMGMenuMoveTopOption.style.background = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempMoves[m])+")";
 			}
 		}
 
@@ -2412,106 +2411,106 @@ function typeSwitch(type) {
 
 
 
-	var finaldataTypeChartTitle = Object.getOwnPropertyNames(finaldataTypeChart[0]).toString().split(",");
-	var index = finaldataTypeChartTitle.indexOf(type);
-	for(var i = 0; i < finaldataTypeChart.length; i++) {
-		if(finaldataTypeChart[i][type] == "0×") {
+	var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0]).toString().split(",");
+	var index = typechartTitle.indexOf(type);
+	for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "0×") {
 			var ImmunityType = document.createElement("img");
-			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			ImmunityType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			ImmunityType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			ImmunityType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			ImmunityType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			againstImmune.appendChild(ImmunityType);
 			var ImmunityTypeText = document.createElement("p");
-			ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			ImmunityTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			againstImmune.appendChild(ImmunityTypeText);
 		}
-		if(finaldataTypeChart[i][type] == "½×") {
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "½×") {
 			var IneffectivenessType = document.createElement("img");
-			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			IneffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			IneffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			againstIneffective.appendChild(IneffectivenessType);
 			var IneffectivenessTypeText = document.createElement("p");
-			IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			IneffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			againstIneffective.appendChild(IneffectivenessTypeText);
 		}
-		if(finaldataTypeChart[i][type] == "1×") {
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "1×") {
 			var DefaultType = document.createElement("img");
-			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			DefaultType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			DefaultType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			DefaultType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			DefaultType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			againstDefault.appendChild(DefaultType);
 			var DefaultTypeText = document.createElement("p");
-			DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			DefaultTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			againstDefault.appendChild(DefaultTypeText);
 		}
-		if(finaldataTypeChart[i][type] == "2×") {
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "2×") {
 			var EffectivenessType = document.createElement("img");
-			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			EffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			EffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			againstEffective.appendChild(EffectivenessType);
 			var EffectivenessTypeText = document.createElement("p");
-			EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			EffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			againstEffective.appendChild(EffectivenessTypeText);
 		}
 	}
-	for(var i = 0; i < finaldataTypeChart.length; i++) {
-		if(finaldataTypeChart[index][
-				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+	for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
+				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
 			] == "0×") {
 			var ImmunityType = document.createElement("img");
-			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			ImmunityType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			ImmunityType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			ImmunityType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			ImmunityType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			opposedImmune.appendChild(ImmunityType);
 			var ImmunityTypeText = document.createElement("p");
-			ImmunityTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			ImmunityTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			opposedImmune.appendChild(ImmunityTypeText);
 		}
-		if(finaldataTypeChart[index][
-				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
+				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
 			] == "½×") {
 			var IneffectivenessType = document.createElement("img");
-			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			IneffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			IneffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			opposedIneffective.appendChild(IneffectivenessType);
 			var IneffectivenessTypeText = document.createElement("p");
-			IneffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			IneffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			opposedIneffective.appendChild(IneffectivenessTypeText);
 		}
-		if(finaldataTypeChart[index][
-				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
+				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
 			] == "1×") {
 			var DefaultType = document.createElement("img");
-			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			DefaultType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			DefaultType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			DefaultType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			DefaultType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			opposedDefault.appendChild(DefaultType);
 			var DefaultTypeText = document.createElement("p");
-			DefaultTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			DefaultTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			opposedDefault.appendChild(DefaultTypeText);
 
 		}
-		if(finaldataTypeChart[index][
-				Object.getOwnPropertyNames(finaldataTypeChart[0])[i]
+		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
+				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
 			] == "2×") {
 			var EffectivenessType = document.createElement("img");
-			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + ".png";
+			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
 			EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			EffectivenessType.setAttribute("title", finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase());
-			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + finaldataTypeChartTitle[i] + '")');
+			EffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
+			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
 			opposedEffective.appendChild(EffectivenessType);
 			var EffectivenessTypeText = document.createElement("p");
-			EffectivenessTypeText.innerText = finaldataTypeChartTitle[i].charAt(0).toUpperCase() + finaldataTypeChartTitle[i].slice(1).toLowerCase() + " ";
+			EffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
 			opposedEffective.appendChild(EffectivenessTypeText);
 		}
 	}
