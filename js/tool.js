@@ -943,8 +943,8 @@ var createTool = function() {
 
 
 
-		toolSectionContentDMGMenuMoveBottomDamage.setAttribute("name","damage");
-		toolSectionContentDMGMenuMoveBottomDamageTitle.innerText = "Damage";
+		toolSectionContentDMGMenuMoveBottomDamage.setAttribute("name","power");
+		toolSectionContentDMGMenuMoveBottomDamageTitle.innerText = "Power";
 		toolSectionContentDMGMenuMoveBottomDamageText.innerText = "";
 
 		toolSectionContentDMGMenuMoveBottomAccuracy.setAttribute("name","accuracy");
