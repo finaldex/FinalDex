@@ -123,7 +123,7 @@ function DMGCalcStart() {
 	let randomPath = menuBase.querySelector(":scope *[name='roll'] input[type='range']");
 	let criticalPath = menuBase.querySelector(":scope *[name='critical'] input")
 
-	let moveDamageTextPath = menuBase.querySelector(":scope *[name='move'] *[name='damage'] > *:last-child");
+	let movePowerTextPath = menuBase.querySelector(":scope *[name='move'] *[name='power'] > *:last-child");
 	let moveAccuracyTextPath = menuBase.querySelector(":scope *[name='move'] *[name='accuracy'] > *:last-child");
 	let moveCriticalTextPath = menuBase.querySelector(":scope *[name='move'] *[name='critical'] > *:last-child");
 
@@ -347,7 +347,7 @@ function DMGCalcStart() {
 	let critRes = [];
 
 	moveAccuracyTextPath.innerText = "0%";
-	moveDamageTextPath.innerText = "0";
+	movePowerTextPath.innerText = "0";
 	moveCriticalTextPath.innerText = "0%";
 
 	DMGCalculation = [];
@@ -386,9 +386,11 @@ function DMGCalcStart() {
                 let tarPartyBase = document.querySelector("#contain > div#tool div#dmg span[name='party'] span[name='"+tarTeam+"']")
      
                 // Target Div
+				let tarHPBasePath = tarDivBase.querySelector(":scope *[name='hp']");
 				let tarHPCurrentPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='current']");
 				let tarHPMaxPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='max']");
 				let tarHPPercentagePath = tarDivBase.querySelector(":scope *[name='hp'] *[name='percentage']");
+				let tarHPResultPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='result']");
 				let tarEffectPath = tarDivBase.querySelector(":scope *[name='effect']");
 				let tarSTABPath = tarDivBase.querySelector(":scope *[name='stab']");
 
@@ -450,6 +452,13 @@ function DMGCalcStart() {
 				tarSTABPath.innerText = "";
 				tarActive.style.removeProperty("background");
 				tarActive.style.background = "linear-gradient(90deg, limegreen 0%, limegreen "+((tarHPPath.value/tarHPPath.max)*100)+"%, Darkred "+((tarHPPath.value/tarHPPath.max)*100)+"%, Darkred 100%)";
+				tarHPCurrentPath.innerText = tarHPPath.max-(tarHPPath.max-tarHPPath.value);
+				tarHPMaxPath.innerText = tarHPPath.max;
+				tarHPPercentagePath.innerText = parseInt((tarHPPath.value/tarHPPath.max)*100);
+				tarHPPercentagePath.innerText = tarHPPercentagePath.innerText+"%";
+				tarHPResultPath.innerText = "0";
+				tarHPResultPath.innerHTML = "&nbsp;"+"("+tarHPResultPath.innerText+")";
+				tarHPBasePath.removeAttribute("title");
 
 
 				var check = false;
@@ -654,6 +663,24 @@ function DMGCalcStart() {
 							}
 						}
 					}
+
+					for (let u = 0; u < finaldata["Moves"]["Additional"].length; u++) {
+						if (getApplicable(finaldata["Moves"]["Additional"][u]["Game"])) {
+							if (finaldata["Moves"]["Additional"][u]["Move"] == movePath.value) {
+								if (finaldata["Moves"]["Additional"][u]["Additional"] == "Aura" || finaldata["Moves"]["Additional"][u]["Additional"] == "Pulse") {
+									if (userAbilityPath != undefined && userAbilityPath.value == "Mega Launcher") {
+										movePower = movePower*1.5;
+									}
+								}
+								if (finaldata["Moves"]["Additional"][u]["Additional"] == "Bite") {
+									if (userAbilityPath != undefined && userAbilityPath.value == "Strong Jaw") {
+										movePower = movePower*1.5;
+									}
+								}
+							}
+						}
+					}
+
 					movePower = Math.ceil(movePower)
 
 					// Factors
@@ -1931,6 +1958,18 @@ function DMGCalcStart() {
 							Weather = 1;
 						}
 					}
+					
+					for (let u = 0; u < finaldata["Moves"]["Additional"].length; u++) {
+						if (getApplicable(finaldata["Moves"]["Additional"][u]["Game"])) {
+							if (finaldata["Moves"]["Additional"][u]["Move"] == movePath.value) {
+								if (finaldata["Moves"]["Additional"][u]["Additional"] == "Explosive") {
+									if (DMGFindScenario(user,"Damp","Ability","Enemy","") > 0) {
+										Immune = true;
+									}
+								}
+							}
+						}
+					}
 
 
 
@@ -2350,12 +2389,6 @@ function DMGCalcStart() {
 					critRes.push(critCalc+"%")
 
 
-
-
-
-
-
-
 					// Calculation
 					if (Generation == 1) {
 						calculation = ((((((2*Level*Critical)/5)+2)*Power*(Attack/Defense))/50)+2)*STAB*Type1*Type2;
@@ -2379,6 +2412,8 @@ function DMGCalcStart() {
 
 					if (!Immune && accCalc != 0) {
 
+						calculation = Math.max(calculation,1);
+
 						if (movePower == 0) {
 							calculation = 0;
 						}
@@ -2392,14 +2427,9 @@ function DMGCalcStart() {
 							}
 							calculation = val1;
 						}
+
 				
-						if (movePath.value == "Dragon Rage") {
-							DMGCalcApply(tar,40,"Damage");
-						}
-						else if (movePath.value == "Sonic Boom" || movePath.value == "SonicBoom") {
-							DMGCalcApply(tar,20,"Damage");
-						}
-						else if (movePath.value == "Triple Kick" && Generation == 2) {
+						if (movePath.value == "Triple Kick" && Generation == 2) {
 							DMGCalcApply(tar,calculation,"Damage");
 						}
 						else if (userAbilityPath != undefined && userAbilityPath.value == "Parental Bond") {
@@ -2444,6 +2474,7 @@ function DMGCalcStart() {
 							}
 						}
 				
+
 						for (let u = 0; u < finaldata["Moves"]["Additional"].length; u++) {
 							if (getApplicable(finaldata["Moves"]["Additional"][u]["Game"])) {
 								if (finaldata["Moves"]["Additional"][u]["Move"] == movePath.value) {
@@ -2504,6 +2535,12 @@ function DMGCalcStart() {
 											}
 										}
 									}
+									if (finaldata["Moves"]["Additional"][u]["Additional"] == "Set Damage") {
+										if (finaldata["Moves"]["Additional"][u]["Value"] != undefined) {
+											let val = parseInt(finaldata["Moves"]["Additional"][u]["Value"]);
+											DMGCalcApply(user,val,"Damage");
+										}
+									}
 								}
 							}
 						}
@@ -2514,6 +2551,9 @@ function DMGCalcStart() {
 						Type = 1;
 					}
 	
+
+
+
 
 
 
@@ -2567,7 +2607,20 @@ function DMGCalcStart() {
 
 
 
-
+				// User
+				if (allDivBase[i] == user) {
+					for (let u = 0; u < finaldata["Moves"]["Additional"].length; u++) {
+						if (getApplicable(finaldata["Moves"]["Additional"][u]["Game"])) {
+							if (finaldata["Moves"]["Additional"][u]["Move"] == movePath.value) {
+								if (finaldata["Moves"]["Additional"][u]["Additional"] == "Explosive") {
+									if (DMGFindScenario(user,"Damp","Ability","Enemy","") == 0) {
+										DMGCalcApply(user,userHPPath.value,"Damage");
+									}
+								}
+							}
+						}
+					}
+				}
                 
 				// All
 				var check = true;
@@ -2861,260 +2914,162 @@ function DMGCalcStart() {
 			}
 		}
 
-		console.log(DMGCalculation)
 
+		
+		for (let i = 0; i < DMGCalculation.length; i++) {
 
+			let dmg = 0;
+			let heal = 0;
+		
+
+			let Team;
+			let ID;
+
+			let divBase;
+			let pokBase;
+			let HPPath;
+			let HPCurrentPath;
+			let HPMaxPath;
+			let HPPercentagePath;
+			let HPResultPath;
+
+			for (let q = 0; q < DMGCalculation[i].length; q++) {
+
+				Team = DMGCalculation[i][q]["Target"].parentElement.getAttribute("name");
+				ID = DMGCalculation[i][q]["Target"].getAttribute("name");
+
+				divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+Team+"'] > div[name='"+ID+"']");
+				pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+Team+"'] > ul[name='"+ID+"']");
+				HPPath = pokBase.querySelector(":scope *[name='hp'] > input");
+				HPCurrentPath = divBase.querySelector(":scope *[name='hp'] *[name='current']");
+				HPMaxPath = divBase.querySelector(":scope *[name='hp'] *[name='max']");
+				HPPercentagePath = divBase.querySelector(":scope *[name='hp'] *[name='percentage']");
+				HPResultPath = divBase.querySelector(":scope *[name='hp'] *[name='result']");
 
 	
-
-		for (let q = 0; q < DMGCalculation.length; q++) {
-			let Team = DMGCalculation[q]["Target"].parentElement.getAttribute("name");
-			let ID = DMGCalculation[q]["Target"].getAttribute("name");
-
-			let divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+Team+"'] > div[name='"+ID+"']");
-			let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+Team+"'] > ul[name='"+ID+"']");
-
-			let HPPath = pokBase.querySelector(":scope *[name='hp'] > input");
-
-			let HPCurrentPath = divBase.querySelector(":scope *[name='hp'] *[name='current']");
-			let HPMaxPath = divBase.querySelector(":scope *[name='hp'] *[name='max']");
-			let HPPercentagePath = divBase.querySelector(":scope *[name='hp'] *[name='percentage']");
-			let HPResultPath = divBase.querySelector(":scope *[name='hp'] *[name='result']");
-
-			HPCurrentPath.innerText = HPPath.value;
-			HPMaxPath.innerText = HPPath.max;
-			HPPercentagePath.innerText = Math.round((parseInt(HPPath.value)/parseInt(HPPath.max))*100)+"%";
-			HPResultPath.innerText = "";
-	
-
-			if (HPPath.value == 0) {
-				break;
+				if (DMGCalculation[i][q]["Type"] == "Damage") {
+					dmg = dmg+DMGCalculation[i][q]["Value"]
+				}
+				if (DMGCalculation[i][q]["Type"] == "Heal") {
+					heal = heal+DMGCalculation[i][q]["Value"]
+				}
 			}
 
 
-			HPCurrentPath.innerText = DMGCalculation[q]["HP"];
-			HPMaxPath.innerText = HPPath.max;
-			HPPercentagePath.innerText = Math.round((parseInt(DMGCalculation[q]["HP"])/parseInt(HPPath.max))*100);
-			HPPercentagePath.innerText = HPPercentagePath.innerText+"%";
-			HPResultPath.innerText = parseInt(DMGCalculation[q]["HP"])-parseInt(HPPath.value);
-			HPResultPath.innerText = "+"+HPResultPath.innerText;
-			HPResultPath.innerText = "("+HPResultPath.innerText+")";
-			HPResultPath.innerText = HPResultPath.innerText.replaceAll("+-","");
-			HPResultPath.innerText = HPResultPath.innerText.replaceAll("+0","0");
-			HPResultPath.innerHTML = "&nbsp;"+HPResultPath.innerHTML;
-			HPResultPath.innerHTML = HPResultPath.innerHTML.replaceAll("&nbsp;(0)","");
 
-			let val1 = Math.round((parseInt(DMGCalculation[q]["HP"])/parseInt(HPPath.max))*100);
-			let val2 = (parseInt(HPPath.value)/parseInt(HPPath.max))*100;	
+			let val0 = (HPPath.value/HPPath.max)*100;
+			let val1 = ((HPPath.value-dmg)/HPPath.max)*100
 
-			if (val1 < val2) {
-				divBase.lastChild.style.background = "linear-gradient(90deg, Limegreen 0%, Limegreen "+val1+"%, Orangered "+val1+"%, Orangered "+val2+"%, Darkred "+val2+"%, Darkred 100%)";
+			let tempStr = "";
+
+		
+			if (heal > 0 && val1 > 0) {
+				let val2 = (((HPPath.value-dmg)+heal)/HPPath.max)*100;
+				tempStr = "linear-gradient(90deg, Limegreen 0%, Limegreen "+val1+"%, Greenyellow "+val1+"%, Greenyellow "+val2+"%, Orangered "+val2+"%, Orangered "+val0+"%, Darkred "+val0+"%, Darkred 100%";
 			}
 			else {
-				divBase.lastChild.style.background = "linear-gradient(90deg, Limegreen 0%, Limegreen "+val2+"%, Greenyellow "+val2+"%, Greenyellow "+val1+"%, Darkred "+val1+"%, Darkred 100%)";
+				tempStr = "linear-gradient(90deg, Limegreen 0%, Limegreen "+val1+"%, Orangered "+val1+"%, Orangered "+val0+"%, Darkred "+val0+"%, Darkred 100%";
 			}
 
-			if (DMGCalculation[q]["HP"] <= 0) {
-				break;
+			let hpval = HPPath.max;
+			let dmgval = 0;
+			if (hpval > 0) {
+				hpval = hpval-(HPPath.max-HPPath.value);
+				dmgval = dmgval;
 			}
-		
+			if (hpval > 0) {
+				hpval = hpval-dmg;
+				dmgval = dmgval+dmg;
+			}
+			if (hpval > 0) {
+				hpval = hpval+heal;
+				dmgval = dmgval-heal;
+			}
+			hpval = Math.max(hpval,0);
+			hpval = Math.min(hpval,HPPath.max);
+
+			//dmgRes.push(HPPath.value-hpval);
+
+			HPCurrentPath.innerText = hpval;
+			HPMaxPath.innerText = HPPath.max;
+			HPPercentagePath.innerText = (hpval/HPPath.max)*100;
+			HPPercentagePath.innerText = parseInt(HPPercentagePath.innerText)+"%";
+			HPResultPath.innerText = HPPath.value-hpval;
+			HPResultPath.innerHTML = "&nbsp;("+HPResultPath.innerText+")";
+			HPResultPath.innerText = HPResultPath.innerText.replaceAll("-","+");
+
+			DMGCalculation[i][0]["Target"].lastChild.style.background = tempStr;
 		}
 
-
-		let tempArr = [];
-		let tempStr = "";
-		console.log(DMGCalculation)
-
-		if (true) {
-			tempArr.push({Color:"Limegreen",Percent:0});
-			tempArr.push({Color:"Limegreen",Percent:0});
-
-			for (let r = 0; r < 2; r++) {
-				for (let q = 0; q < DMGCalculation.length; q++) {
-
-					let Team = DMGCalculation[q]["Target"].parentElement.getAttribute("name");
-					let ID = DMGCalculation[q]["Target"].getAttribute("name");
-
-					let divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+Team+"'] > div[name='"+ID+"']");
-					let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+Team+"'] > ul[name='"+ID+"']");
-
-					let HPPath = pokBase.querySelector(":scope *[name='hp'] > input");
-
-					let HPCurrentPath = divBase.querySelector(":scope *[name='hp'] *[name='current']");
-					let HPMaxPath = divBase.querySelector(":scope *[name='hp'] *[name='max']");
-					let HPPercentagePath = divBase.querySelector(":scope *[name='hp'] *[name='percentage']");
-					let HPResultPath = divBase.querySelector(":scope *[name='hp'] *[name='result']");
-
-					
-
-					for (let u = 0; u < 2; u++) {
-						if (r == 0 && DMGCalculation[q]["Type"] == "Heal" || r == 1 && DMGCalculation[q]["Type"] == "Damage") {
-							let color = "";
-							let val = 0;
-				
-							val = (DMGCalculation[q]["HP"]/HPPath.max)*100;
-							val = Math.max(val,0);
-							
-							if (DMGCalculation[q]["Type"] == "Heal") {
-								color = "Greenyellow";
-							}
-							else if (DMGCalculation[q]["Type"] == "Damage") {
-								color = "Orangered";
-							}
-							
-							tempArr.push({Color:color,Percent:val})
-						}
-					}
-
-					if (r == 1 && q == DMGCalculation.length-1) {
-						tempArr.push({Color:"Darkred ",Percent:((HPPath.value/HPPath.max)*100)})
-					}
-				}
-			}
-
 			
-			tempArr.push({Color:"Darkred",Percent:100});
-
-			tempArr = sortObjectArray(tempArr,"Percent",true);
+	
 		
-			for (let q = 0; q < tempArr.length; q++) {
-				let Color = tempArr[q]["Color"];
-				let Val = tempArr[q]["Percent"];
-				
-				if (tempArr.length-1 > q) {
-					let nextColor = tempArr[q+1]["Color"];
-					let nextVal = tempArr[q+1]["Percent"];
-					if (q % 2 != 0) {
+	
 
-						console.log(tempArr[q])
-						tempArr[q] = {Color:Color,Percent:nextVal};
-						console.log(tempArr[q])
-					}
-				}
-				if (q != 0) {
-					let prevColor = tempArr[q-1]["Color"];
-					let prevVal = tempArr[q-1]["Percent"];
-				}
-			}
+		for (let i = 0; i < DMGCalculation.length; i++) {
 
-			tempStr = "linear-gradient(90deg,";
+			let dmg = 0;
+			let heal = 0;
+			let int = Infinity;
 
-			for (let q = 0; q < tempArr.length; q++) {
-				tempStr = tempStr+tempArr[q]["Color"]+" "+tempArr[q]["Percent"]+"%,";
-			}
-			tempStr = tempStr+")";
-			tempStr = tempStr.replaceAll(",)",")");
-		
-			
-		}
-		//allDivBase[0].lastChild.style.background = tempStr;
-		
-		console.log(tempStr)
-		console.log(tempArr)
+			let Team;
+			let ID;
 
-		//divBase.lastChild.style.background = 
-		
-
-		for (let i = 0; i < allDivBase.length; i++) {
-			let Team = allDivBase[i].parentElement.getAttribute("name");
-			let ID = allDivBase[i].getAttribute("name");
-
-			let divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+Team+"'] > div[name='"+ID+"']");
-			let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+Team+"'] > ul[name='"+ID+"']");
-
-			let HPBasePath = divBase.querySelector(":scope *[name='hp']");
-			let HPPath = pokBase.querySelector(":scope *[name='hp'] > input");
-
-			HPBasePath.removeAttribute("title");
-
-			let val = 0;
-			let brk = false;
+			let divBase;
+			let pokBase;
+			let HPPath;
+			let HPBasePath;
+			let HPCurrentPath;
+			let HPMaxPath;
+			let HPPercentagePath;
+			let HPResultPath;
 
 			for (let u = 0; u < 100; u++) {
-				let x = u+1;
+				let brk = false;
+
+				for (let q = 0; q < DMGCalculation[i].length; q++) {
+
+					Team = DMGCalculation[i][q]["Target"].parentElement.getAttribute("name");
+					ID = DMGCalculation[i][q]["Target"].getAttribute("name");
+
+					divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+Team+"'] > div[name='"+ID+"']");
+					pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+Team+"'] > ul[name='"+ID+"']");
+					HPPath = pokBase.querySelector(":scope *[name='hp'] > input");
+					HPBasePath = divBase.querySelector(":scope *[name='hp']");
+					HPCurrentPath = divBase.querySelector(":scope *[name='hp'] *[name='current']");
+					HPMaxPath = divBase.querySelector(":scope *[name='hp'] *[name='max']");
+					HPPercentagePath = divBase.querySelector(":scope *[name='hp'] *[name='percentage']");
+					HPResultPath = divBase.querySelector(":scope *[name='hp'] *[name='result']");
+
+		
+					if (DMGCalculation[i][q]["Type"] == "Damage") {
+						dmg = dmg+DMGCalculation[i][q]["Value"]
+					}
+					if (HPPath.value-dmg <= 0) {
+						brk = true;
+						break;
+					}
+					if (DMGCalculation[i][q]["Type"] == "Heal") {
+						heal = heal+DMGCalculation[i][q]["Value"]
+					}
+				}
 
 				if (brk) {
+					int = u;
 					break;
 				}
-				
-				for (let q = 0; q < DMGCalculation.length; q++) {
-					if (DMGCalculation[q]["Target"] == allDivBase[i]) {
-						if (DMGCalculation[q]["Uses"] > x) {
-							
-							if (DMGCalculation[q]["Type"] == "Heal") {
-								val = val-parseInt(DMGCalculation[q]["Value"])
-							}
-							else if (DMGCalculation[q]["Type"] == "Damage") {
-								val = val+parseInt(DMGCalculation[q]["Value"])
-							}
 
-							if ((HPPath.value-val) <= 0) {
-								HPBasePath.title = x+"x turns before fainting.";
-								
-								if (x == 1) {
-									HPBasePath.title = HPBasePath.title.replaceAll("turns","turn");
-								}
-
-								brk = true;
-								break;
-							}
-						}
-					}
-				}
 			}
-		}
 
-
-		dmgRes = [];
-		
-		for (let i = 0; i < allDivBase.length; i++) {
-			let Team = allDivBase[i].parentElement.getAttribute("name");
-			let ID = allDivBase[i].getAttribute("name");
-
-			let divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+Team+"'] > div[name='"+ID+"']");
-			let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+Team+"'] > ul[name='"+ID+"']");
-
-			let HPPath = pokBase.querySelector(":scope *[name='hp'] > input");
-
-
-			let val = 0;
-			for (let q = 0; q < DMGCalculation.length; q++) {
-				if (HPPath.value == 0) {
-					break;
-				}
-				if (DMGCalculation[q]["Target"] == allDivBase[i]) {
-					if (DMGCalculation[q]["Type"] == "Heal") {
-						val = val+parseInt(DMGCalculation[q]["Value"]);
-					}
-					if (DMGCalculation[q]["Type"] == "Damage") {
-						val = val-parseInt(DMGCalculation[q]["Value"]);
-					}
-				}
+			if (int != Infinity) {
+				HPBasePath.title = (int+1)+"x turns before fainting.";
+				HPBasePath.title = HPBasePath.title.replaceAll("1x turns","1x turn");
 			}
-			val = "+"+val;
-			val = val.replaceAll("+-","");
-			val = val.replaceAll("+0","0");
-			dmgRes.push(val)
 		}
 
 	
-		let dmgResult = 0;
 
-	
-		let zeroCount = 0;
-		for (let u = 0; u < dmgRes.length; u++) {
-			if (dmgRes[u] == 0) {
-				zeroCount = zeroCount+1;
-			}
-		}
 
-		if (zeroCount >= (dmgRes.length-1)) {
-			dmgRes = dmgRes.filter(e => e != 0);
-		}
-
-		if (dmgRes.length > 0) {
-			dmgResult = dmgRes.join(" / ");
-		}
 
 
 		let accResult;
@@ -3159,7 +3114,7 @@ function DMGCalcStart() {
 			critResult = "0%";
 		}
 
-		moveDamageTextPath.innerText = dmgResult;
+		movePowerTextPath.innerText = movePower;
 		moveAccuracyTextPath.innerText = accResult;
 		moveCriticalTextPath.innerText = critResult;
 	}
@@ -3167,7 +3122,7 @@ function DMGCalcStart() {
 
 	movePath.style.color = "var(--type"+moveType+")";
 
-	movePath.title = formatMoveData(movePath.value,{Power:movePower,Category:moveCategory});
+	movePath.title = formatMoveData(movePath.value,{Power:movePower,Category:moveCategory,Type:moveType});
 
 
 }
@@ -3193,32 +3148,18 @@ function DMGCalcApply(base,val,type,charge) {
     let HPInputPath = pokBase.querySelector(":scope *[name='hp'] > input");
 
 
-
-
-	let check = false;
+	let int = undefined;
 	for(var t = 0; t < DMGCalculation.length; t++) {
-		if (DMGCalculation[t]["Target"] == base) {
-			check = true;
+		if (DMGCalculation[t][0]["Target"] == base) {
+			int = t;
+			break;
 		}
 	}
-	let HP = HPInputPath.value;
-	if (check) {
-		HP = DMGCalculation[DMGCalculation.length-1]["HP"];
-	}
+
 
 	val = Math.floor(val);
-	val = Math.max(val,1)
+	val = Math.max(val,0)
 
-	let NewHP;
-	
-	if (type == "Damage") {
-		NewHP = parseInt(HP)-val;
-	}
-	if (type == "Heal") {
-		NewHP = parseInt(HP)+val;
-	}
-
-	NewHP = Math.min(Math.max(NewHP,0),HPInputPath.max);
 
 	if (charge == undefined) {
 		charge = Infinity;
@@ -3227,10 +3168,17 @@ function DMGCalcApply(base,val,type,charge) {
 	let obj = new Object();
 	obj["Type"] = type;
 	obj["Value"] = val;
-	obj["HP"] = NewHP;
 	obj["Target"] = base;
 	obj["Uses"] = charge;
-	DMGCalculation.push(obj)
+	
+	if (int == undefined) {
+		DMGCalculation.push([obj])
+	}
+	else {
+		DMGCalculation[int].push(obj)
+	}
+
+
 
 
 
@@ -4220,8 +4168,6 @@ function DMGSetActive(val) {
 
 }
 function DMGSetPossible() {
-
-
 	var tars = [];
 	var divWrap = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div");
 
@@ -4502,8 +4448,16 @@ function DMGSetPossible() {
 			for(var a = 0; a < targets.length; a++) {
 				if (targets[a] != user) {
 					targets[a].classList.add("target");
+					added = true;
 					break;
 				}
+			}
+		}
+		if (!added) {
+			for(var a = 0; a < targets.length; a++) {
+				targets[a].classList.add("target");
+				added = true;
+				break;
 			}
 		}
 	
@@ -4568,7 +4522,7 @@ function DMGPokSpecific(base) {
 			let val = "ab:"+pokNameVal["ab"];
 			let pos = getAbilityPosition(int,pokNameVal["ab"]);
 
-			tar.setAttribute("data-string",tar.getAttribute("data-string").replaceAll(val,"ab:"+pos))
+			divBase.setAttribute("data-string",divBase.getAttribute("data-string").replaceAll(val,"ab:"+pos))
 		}
 	}
 	
@@ -4788,6 +4742,7 @@ function DMGClearData(base) {
     var ivsPath = statsBase.querySelectorAll(":scope *[name='IV'] input:not(:first-child)");
     var evsPath = statsBase.querySelectorAll(":scope *[name='EV'] input:not(:first-child)");
     var avsPath = statsBase.querySelectorAll(":scope *[name='AV'] input:not(:first-child)");
+	var modsPath = statsBase.querySelectorAll(":scope *[name='Mod'] input:not(:first-child)");
     var totalPath = statsBase.querySelectorAll(":scope > *:last-child input:not(:first-child)");
 
     pokPath.value = pokPath.firstChild.value;
@@ -4827,6 +4782,9 @@ function DMGClearData(base) {
     }
     for(var e = 0; e < avsPath.length; e++) {
         avsPath[e].value = "";
+    }
+	for(var e = 0; e < modsPath.length; e++) {
+        modsPath[e].value = "";
     }
     for(var e = 0; e < totalPath.length; e++) {
         totalPath[e].value = 0;
@@ -4961,10 +4919,11 @@ function DMGSaveData(base) {
 
     var keys = Object.keys(stringObj)
     var tempArr = [];
+
     for (var e = 0; e < keys.length; e++) {
         var val1 = keys[e];
         var val2 = stringObj[keys[e]];
-        if (val2 != "") {
+        if (val2 != undefined && val2 != "") {
             if (val2.replaceAll(",","") != "") {
                 tempArr.push(val1+":"+val2)
             }
