@@ -2589,6 +2589,7 @@ function formatMoveData(move,obj) {
         obj = {};
     }
 
+    let type = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,move);
     let cate = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,move);
     let ppmin = returnArrValue(finaldata["Moves"]["PP"],"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,move);
     let pwr = returnArrValue(finaldata["Moves"]["Power"],"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,move);
@@ -2601,6 +2602,9 @@ function formatMoveData(move,obj) {
     }
     if (obj["Category"] != undefined) {
         cate = obj["Category"];
+    }
+    if (obj["Type"] != undefined) {
+        type = obj["Type"];
     }
 
     prio = undwsDel(prio,"0");
@@ -2616,6 +2620,9 @@ function formatMoveData(move,obj) {
         prio = "-"+prio.replaceAll("-","")
     }
 
+    if (type != undefined) {
+        tempArr.push("Type: "+type);
+    }
 
     if (cate != undefined) {
         tempArr.push("Category: "+cate);
