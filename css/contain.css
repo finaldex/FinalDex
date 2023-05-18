@@ -1722,7 +1722,7 @@
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div img[name='item'] {
 	position: absolute;
     top: 0;
-    left: 0;
+    margin-right: 20%;
 }
 
 
