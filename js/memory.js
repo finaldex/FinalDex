@@ -79,9 +79,6 @@ function memory(action,suffix,elements) {
 		var setName = tempArr.join("-")+"-"+elements[i].getAttribute("name");
 		var setValue;
 
-   
-    
-
 		if (elements[i].tagName == "INPUT" && elements[i].getAttribute("type") == "checkbox") {
 			setValue = elements[i].checked;
 		}
