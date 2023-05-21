@@ -1205,6 +1205,9 @@ body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 #contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:last-child > span > span {
 	padding: 2px 0;
 }
+#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:last-child > span > span img {
+	max-width: 80px;
+}
 
 #contain div#tool div#dmg div[name='menu'] > div[name='move'] > span select {
 	width: 80%;
@@ -1219,7 +1222,27 @@ body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     font-weight: bold;
 	border: none;
 	text-shadow: 2px 2px 0px #000;
+	color: inherit;
 }
+
+#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:first-child::before {
+    content: attr(data-special);
+    position: absolute;
+    top: 0;
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px #000;
+    font-size: var(--sizeFontXL);
+	color: inherit;
+	user-select: none;
+	pointer-events: none;
+	background: var(--color17);
+}
+
 
 #contain div#tool div#dmg div[name='menu'] > div[name='move'] > span option {
 	color: var(--fontDark);
