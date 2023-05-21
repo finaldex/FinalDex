@@ -1553,8 +1553,7 @@
 }
 
 #data aside[name="evolution"] > div > div.active > span > * {
-	padding: 0 10px;
-	font-weight:normal;
+	font-weight: normal;
 }
 
 
