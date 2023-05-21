@@ -8,6 +8,9 @@ function getAllIndexes(arr, val) {
 }
 
 function titleCase(str) {
+	if (str == undefined) {
+		return str;
+	}
 	if(isNaN(str)) {
 		var splitStr = str.toLowerCase().split(' ');
 		for(var i = 0; i < splitStr.length; i++) {
