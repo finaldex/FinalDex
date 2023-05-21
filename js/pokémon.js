@@ -1655,7 +1655,7 @@ function createContain(condition) {
                         contentDiv.setAttribute("data-search-ability", ab);
                     }
 
-                    if (Gender == true) {
+                    if (Gender) {
                         var ratio = returnData(i, "Gender Ratio","lower,undefined");
                         if(ratio[0] == "1" && ratio[1] == "0") { // Always Male
                             contentDiv.setAttribute("data-search-genderratio", "always male");
@@ -1678,7 +1678,9 @@ function createContain(condition) {
                         }
                     }
 
-                    if (Egg == true) {
+
+
+                    if (Egg) {
                         var hr = returnData(i, "Hatch Rate","lower,undefined")[0];
                         var eg = returnData(i, "Egg Group","lower,undefined");
                         if (hr == "") {
@@ -1692,13 +1694,25 @@ function createContain(condition) {
                         contentDiv.setAttribute("data-search-egggroup", eg);
                     }
                 
-                    if (HeldItem == true) {
+                    if (HeldItem) {
                         var hld = returnData(i, "Held Item","lower,undefined");
                         if (hld == "") {
                             hld = "none";
                         }
                         contentDiv.setAttribute("data-search-helditem", hld);
                     }
+
+                    let weight = getIntData(i,finaldata["Pokémon"]["Weight"],"Metric Values_1-8");
+
+                    if (weight != undefined) {
+                        weight = weight.replaceAll(" kg","");
+                        weight = parseFloat(weight);
+                        contentDiv.setAttribute("data-search-weight",weight);
+                    }
+                    else {
+                        contentDiv.setAttribute("data-search-weight",0);
+                    }
+
                     //contentDiv.setAttribute("data-search-learnset",returnMoveSet(i,"onlymoves,noduplicate,lower"));
 
                     var xpyd = returnData(i, "Experience Yield","lower,undefined");
