@@ -799,9 +799,14 @@ var createTool = function() {
 
 		for(var m = 0; m < finaldata["Moves"]["Reference"].length; m++) {
 			if(finaldata["Moves"]["Reference"][m][JSONPath_MoveReference] == "true") {
-				if (finaldata["Moves"]["Group"][m]["Group"] != "Z-Move" && finaldata["Moves"]["Group"][m]["Group"] != "Max Move") {
+				if (finaldata["Moves"]["Group"][m]["Group"] != "Z-Move" && finaldata["Moves"]["Group"][m]["Group"] != "Max Move" && finaldata["Moves"]["Group"][m]["Group"] != "G-Max Move") {
 					tempMoves.push(finaldata["Moves"]["Reference"][m]["Name_"+JSONPath_MoveName])
 				}
+			}
+		}
+		for(var m = 0; m < finaldata["Moves"]["Additional"].length; m++) {
+			if (finaldata["Moves"]["Additional"][m]["Additional"] == "Counterattack") {
+				tempMoves = tempMoves.filter(function(v) {return v != finaldata["Moves"]["Additional"][m]["Move"]})
 			}
 		}
 
@@ -826,9 +831,8 @@ var createTool = function() {
 		}
 
 		if (toolSectionContentDMGMenuMoveSelect.querySelector(":scope option[value='Pound']") != undefined) {
-
 			toolSectionContentDMGMenuMoveSelect.value = "Pound";
-			toolSectionContentDMGMenuMoveSelect.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value)+")";
+			toolSectionContentDMGMenuMoveSelect.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value)+")";
 			toolSectionContentDMGMenuMoveBottomTypeImg.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value)+".png";
 			toolSectionContentDMGMenuMoveBottomTypeText.innerText = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value);
 			toolSectionContentDMGMenuMoveBottomCategoryImg.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,toolSectionContentDMGMenuMoveSelect.value)+".png";
@@ -840,7 +844,7 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGSetInfo);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",function(){
-			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;this.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value)+")";
+			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;this.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value)+")";
 		});
 
 
