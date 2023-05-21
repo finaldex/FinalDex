@@ -258,29 +258,64 @@ nav > div > div.active {
     font-size: 20px;
     position: relative;
 }
+/*
+#Home > span {
+    background: repeating-linear-gradient(0deg, var(--background) 0px, var(--background) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em var(--background);
+    padding: 20px;
+    text-align: center;
+    border: 4px solid;
+}
+*/
 
-#Home > h5 {
+
+
+#Home > span h5 {
     padding: 10px 0;
     font-size: .8em;
-    text-shadow: 1px 1px black;
+    text-shadow: -1px 1px 0px black;
     color: var(--color18);
     text-align:center;
 }
 
-#Home > strong {
+#Home > span strong {
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
 }
 
-#Home > strong:hover {
+#Home > span strong:hover {
     opacity: 0.8;
 }
 
 
+#Home > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    z-index: -1;
+    display: flex;
+    background: black;
+    overflow: hidden;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+#Home > div img {
+    height: 2vw;
+    width: 2vw;
+    background: black;
+    object-fit: cover;
+}
 
-#Home > strong,
+
+
+
+
+#Home > span strong,
 nav > div:first-child > span > h2 {
     background: -webkit-linear-gradient(left, #3F3F3F, #7F7F7F);
     background: -moz-linear-gradient(left, #3F3F3F, #7F7F7F);
@@ -293,13 +328,6 @@ nav > div:first-child > span > h2 {
 }
 
 
-#Home > span {
-    font-weight: normal;
-    font-size: 12px;
-    position: absolute;
-    bottom: 2px;
-    right: 15px;
-}
 
 #Games > span,
 #FAQ > span,
