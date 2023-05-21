@@ -2615,6 +2615,7 @@ function DMGCalcStart() {
 									calculation = 0;
 								}
 
+								// Varied Calculation //
 								if (movePath.value == "Endeavor") {
 									let val1 = (parseInt(tarHPPath.value) - parseInt(userHPPath.value));
 
@@ -2636,20 +2637,19 @@ function DMGCalcStart() {
 								}
 								else if (movePath.value == "Psywave") {
 									if (Generation == 1 || Generation == 2) {
-										let val1 = 1;
-										let val2 = userLevelPath.value*1.5;
-										let val = Math.floor(Math.random() * (val2 - val1)) + val1;
-										calculation = val;
+										calculation = Math.max(1,randomPath.value);
 									}
 									else if (Generation >= 3 && Generation <= 4) {
-										calculation = Math.max(1,Math.floor((userLevelPath.value*((10*specInputPath.value)+50))/100));
+										calculation = Math.max(1,Math.floor((userLevelPath.value*((10*randomPath.value)+50))/100));
 									}
 									else if (Generation >= 5) {
-										calculation = Math.max(1,Math.floor((userLevelPath.value*((specInputPath.value)+50))/100));
+										calculation = Math.max(1,Math.floor((userLevelPath.value*((randomPath.value)+50))/100));
 									}
 								}
 
-								if (movePath.value == "Triple Kick" && Generation == 2 || movePath.value == "Spit Up" || movePath.value == "Magnitude") { // Variable Power (Break Multiple Hits Loop)
+
+								// Calculation Apply //
+								if (movePath.value == "Triple Kick" && Generation == 2 || movePath.value == "Spit Up" || movePath.value == "Magnitude" || movePath.value == "Psywave") { // Variable Power (Break Multiple Hits Loop)
 									DMGCalcApply(tar,calculation,"Damage");
 									h = specInputPath.value-1;
 								}
@@ -3886,6 +3886,7 @@ function DMGSetInfo() {
 
 	let userAbilityPath = userPokBase.querySelector(":scope *[name='ability'] select");
 	let userPokPath = userPokBase.querySelector(":scope *[name='pokémon'] select");
+	let userLevelPath = userPokBase.querySelector(":scope *[name='level'] input");
 	let userItemPath = userPokBase.querySelector(":scope *[name='item'] select");
 
 	let baseDiv = document.querySelector("#contain > div#tool div#dmg > div");
@@ -3903,6 +3904,13 @@ function DMGSetInfo() {
 	let moveGroup = returnArrValue(finaldata["Moves"]["Group"],"Name_"+JSONPath_MoveName,"Group",moveSelect.value)
 	let moveRange = returnArrValue(finaldata["Moves"]["Range"],"Name_"+JSONPath_MoveName,"Range",moveSelect.value);
 
+
+	let rollPath = document.querySelector("#contain div#tool div#dmg div[name='menu'] > div[name='roll']")
+	let rollRandomPath = rollPath.querySelector(":scope input[type='range']")
+	let rollMinTextPath = rollPath.querySelector(":scope *[name='min']");
+	let rollValTextPath = rollPath.querySelector(":scope *[name='val']");
+	let rollMaxTextPath = rollPath.querySelector(":scope *[name='max']")
+	
 
     let battleSizes = battleSelect.getAttribute("pokémon");
     battleSizes = undDel(battleSizes,"")
@@ -3954,6 +3962,39 @@ function DMGSetInfo() {
 		}
 	}
 
+	if (moveSelect.value == "Psywave") {
+		if (Generation >= 1 && Generation <= 2) {
+			rollRandomPath.min = 0;
+			rollRandomPath.max = Math.floor(1.5*userLevelPath);
+		}
+		else if (Generation >= 3 && Generation <= 4) {
+			rollRandomPath.min = 0;
+			rollRandomPath.max = 10;
+		}
+		else if (Generation >= 5) {
+			rollRandomPath.min = 0;
+			rollRandomPath.max = 100;
+		}
+		rollRandomPath.value = rollRandomPath.min;
+	}
+	else {
+		if (Generation >= 1 && Generation <= 2) {
+            rollRandomPath.min = 217;
+            rollRandomPath.max = 255;
+        }
+        else if (Generation >= 3) {
+            rollRandomPath.min = 85;
+            rollRandomPath.max = 100;
+        }
+		rollRandomPath.value = rollRandomPath.min;
+	}
+
+	let pcent = ((rollRandomPath.value-rollRandomPath.min)/(rollRandomPath.max-rollRandomPath.min))*100;
+	rollValTextPath.innerText = rollRandomPath.value-rollRandomPath.min;
+	rollValTextPath.innerText = rollValTextPath.innerText+" ("+parseInt(pcent)+"%)";
+	rollRandomPath.style.background = "linear-gradient(to right, var(--colorBlue) 0%, var(--colorBlue) "+pcent+"%, var(--color_90) "+pcent+"%, var(--color_90) 100%)"
+	rollMinTextPath.innerText = rollRandomPath.min-rollRandomPath.min;
+	rollMaxTextPath.innerText = rollRandomPath.max-rollRandomPath.min;
 
 
 	for (var l = 0; l < specLis.length; l++) {
@@ -7536,35 +7577,7 @@ function buildDMG(preval) {
 	}
 
 
-    if ("Random") {
-        let randomPath = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div > span > input[type='range']");
-        let randomMinText = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div > span > *[name='min']");
-		let randomValText = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div > span > *[name='val']");
-        let randomMaxText = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div > span > *[name='max']");
 
-        randomPath.setAttribute("min",0);
-        randomPath.setAttribute("max",0);
-
-        if (Generation == 1 || Generation == 2) {
-            randomPath.setAttribute("min",85);
-            randomPath.setAttribute("max",100);
-        }
-        if (Generation >= 3) {
-            randomPath.setAttribute("min",85);
-            randomPath.setAttribute("max",100);
-        }
-
-        randomPath.setAttribute("step",1);
-        randomPath.value = Math.ceil(((parseInt(randomPath.getAttribute("max"))-parseInt(randomPath.getAttribute("min")))/2))+parseInt(randomPath.getAttribute("min"));
-
-        let halfway = ((randomPath.value-parseInt(randomPath.getAttribute("min")))/(parseInt(randomPath.getAttribute("max"))-parseInt(randomPath.getAttribute("min"))))*100;
-        randomValText.innerText = Math.ceil(((parseInt(randomPath.getAttribute("max"))-parseInt(randomPath.getAttribute("min")))/2))+parseInt(randomPath.getAttribute("min"))-parseInt(randomPath.getAttribute("min"));
-		randomValText.innerText = randomValText.innerText+" ("+parseInt(halfway)+"%)";
-        randomPath.style.background = "linear-gradient(to right, var(--colorBlue) 0%, var(--colorBlue) "+halfway+"%, var(--color_90) "+halfway+"%, var(--color_90) 100%)"
-        randomMinText.innerText = randomPath.getAttribute("min")-randomPath.getAttribute("min");
-        randomMaxText.innerText = randomPath.getAttribute("max")-randomPath.getAttribute("min");
-
-    }
 
 	if (fieldPath.firstChild != undefined) {
 		fieldPath.style.removeProperty("display");
