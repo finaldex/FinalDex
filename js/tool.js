@@ -837,7 +837,7 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGSetInfo);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",function(){
-			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;
+			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;this.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value)+")";
 		});
 
 
