@@ -76,7 +76,6 @@ function initialize() {
 
 		countdown();
 		stopwatch();
-		typeSwitch("NORMAL");
 		RNG();
 
 		window.addEventListener('resize', resize);
