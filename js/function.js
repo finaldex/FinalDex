@@ -2058,6 +2058,46 @@ function binaryHPCalc(ivs) {
 	return val;
 }
 
+function naturalGiftPowerCalc(item) {
+	let p60 = [];
+	let p70 = [];
+	let p80 = [];
+	let p90 = [];
+	let p100 = [];
+	
+	if (Generation >= 4 && Generation <= 5) {
+		p60 = ["Cheri Berry","Chesto Berry","Pecha Berry","Rawst Berry","Aspear Berry","Leppa Berry","Oran Berry","Persim Berry","Lum Berry","Sitrus Berry","Figy Berry","Wiki Berry","Mago Berry","Aguav Berry","Iapapa Berry","Razz Berry","Occa Berry","Passho Berry","Wacan Berry","Rindo Berry","Yache Berry","Chople Berry","Kebia Berry","Shuca Berry","Coba Berry","Payapa Berry","Tanga Berry","Charti Berry","Kasib Berry","Haban Berry","Colbur Berry","Babiri Berry","Chilan Berry"];
+		p70 = ["Bluk Berry","Nanab Berry","Wepear Berry","Pinap Berry","Pomeg Berry","Kelpsy Berry","Qualot Berry","Hondew Berry","Grepa Berry","Tamato Berry","Cornn Berry","Magost Berry","Rabuta Berry","Nomel Berry","Spelon Berry","Pamtre Berry"];
+		p80 = ["Watmel Berry","Durin Berry","Belue Berry","Liechi Berry","Ganlon Berry","Salac Berry","Petaya Berry","Apicot Berry","Lansat Berry","Starf Berry","Enigma Berry","Micle Berry","Custap Berry","Jaboca Berry","Rowap Berry"];
+	}
+	else if (Generation >= 6) {
+		p80 = ["Cheri Berry","Chesto Berry","Pecha Berry","Rawst Berry","Aspear Berry","Leppa Berry","Oran Berry","Persim Berry","Lum Berry","Sitrus Berry","Figy Berry","Wiki Berry","Mago Berry","Aguav Berry","Iapapa Berry","Razz Berry","Occa Berry","Passho Berry","Wacan Berry","Rindo Berry","Yache Berry","Chople Berry","Kebia Berry","Shuca Berry","Coba Berry","Payapa Berry","Tanga Berry","Charti Berry","Kasib Berry","Haban Berry","Colbur Berry","Babiri Berry","Chilan Berry","Roseli Berry"]
+		p90 = ["Bluk Berry","Nanab Berry","Wepear Berry","Pinap Berry","Pomeg Berry","Kelpsy Berry","Qualot Berry","Hondew Berry","Grepa Berry","Tamato Berry","Cornn Berry","Magost Berry","Rabuta Berry","Nomel Berry","Spelon Berry","Pamtre Berry"]
+		p100 = ["Watmel Berry","Durin Berry","Belue Berry","Liechi Berry","Ganlon Berry","Salac Berry","Petaya Berry","Apicot Berry","Lansat Berry","Starf Berry","Enigma Berry","Micle Berry","Custap Berry","Jaboca Berry","Rowap Berry","Kee Berry","Maranga Berry"]
+	}
+
+
+	if (p60.includes(item)) {
+		return 60;
+	}
+	else if (p70.includes(item)) {
+		return 70;
+	}
+	else if (p80.includes(item)) {
+		return 80;
+	}
+	else if (p90.includes(item)) {
+		return 90;
+	}
+	else if (p100.includes(item)) {
+		return 100;
+	}
+	else {
+		return 0;
+	}
+
+}
+
 function hiddenPowerCalc(ivs) {
 
 	ivs = splitStr(ivs,",");
