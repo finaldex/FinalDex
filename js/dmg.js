@@ -604,27 +604,41 @@ function DMGCalcStart() {
 									}
 								}
 								else if (movePath.value == "Magnitude") {
-									if (h == 3) { // Magnitude 4
+									if (specInputPath.value == 4) { // Magnitude 4
 										Power = 10;
 									}
-									else if (h == 4) { // Magnitude 5
+									else if (specInputPath.value == 5) { // Magnitude 5
 										Power = 30;
 									}
-									else if (h == 5) { // Magnitude 6
+									else if (specInputPath.value == 6) { // Magnitude 6
 										Power = 50;
 									}
-									else if (h == 6) { // Magnitude 7
+									else if (specInputPath.value == 7) { // Magnitude 7
 										Power = 70;
 									}
-									else if (h == 7) { // Magnitude 8
+									else if (specInputPath.value == 8) { // Magnitude 8
 										Power = 90;
 									}
-									else if (h == 8) { // Magnitude 9
+									else if (specInputPath.value == 9) { // Magnitude 9
 										Power = 110;
 									}
-									else if (h == 9) { // Magnitude 10
+									else if (specInputPath.value == 10) { // Magnitude 10
 										Power = 150;
 									}
+								}
+								else if (movePath.value == "Present") {
+									if (specInputPath.value == 1) { // Present Scenario 1 (40% Probability)
+										Power = 40;
+									}
+									else if (specInputPath.value == 2) { // Present Scenario 2 (30% Probability)
+										Power = 80;
+									}
+									else if (specInputPath.value == 3) { // Present Scenario 3 (10% Probability)
+										Power = 120;
+									}
+								}
+								else if (movePath.value == "Natural Gift") {
+									Power = naturalGiftPowerCalc(userItemPath.value);
 								}
 								else if (movePath.value == "Gyro Ball") {
 									Power = Math.min(150,((25*tarSpeedStatPath.value)/userSpeedStatPath.value)+1);
@@ -2146,6 +2160,13 @@ function DMGCalcStart() {
 								}
 							}
 
+							if (movePath.value == "Night Shade" || movePath.value == "Seismic Toss" || movePath.value == "Endeavor" || movePath.value == "Nature's Madness" || movePath.value == "Super Fang" || movePath.value == "Ruination" || movePath.value == "Final Gambit") { // No Stab/Type Boost
+								STAB = 1;
+								Type = 1;
+								Type1 = 1;
+								Type2 = 1;
+							}
+
 						}
 
 						if ("Accuracy") {
@@ -2580,6 +2601,12 @@ function DMGCalcStart() {
 								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)+2)*Targets*Weather*GlaiveRush*Critical*HelpingHand*random*STAB*Type*Burn*Screen*(SolidRockFilter*BehemothBladeBehemothBashDynamaxCannon*Minimize*SurfWhirlpool*EarthquakeMagnitude*Screen*ColissionCourseElectroDrift*MultiscaleShadowShield*Fluffy1*PunkRock*IceScales*FriendGuard*FilterPrismArmorSolidRock*Neuroforce*Sniper*TintedLens*Fluffy2*(Item*LifeOrb*ExpertBelt*Metronome)*Berry)*ZMove*(MeFirst*Rollout*FuryCutter*Rage*StompNeedleArmAstonishExtrasensory*Pursuit);
 							}
 
+							if (Generation == 1) {
+								if (movePath.value == "Night Shade" || movePath.value == "Seismic Toss") { // Bypass Immunity Check
+									Immune = false;
+								}
+							}
+
 							if (!Immune && Affected && accCalc != 0) {
 
 								calculation = Math.max(calculation,1);
@@ -2601,13 +2628,28 @@ function DMGCalcStart() {
 									calculation = userHPPath.value;
 									DMGCalcApply(user,calculation,"Damage");
 								}
-
-						
-								if (movePath.value == "Triple Kick" && Generation == 2 || movePath.value == "Spit Up" || movePath.value == "Magnitude") {
-									DMGCalcApply(tar,calculation,"Damage");
-									break;
+								else if (movePath.value == "Nature's Madness" || movePath.value == "Super Fang" || movePath.value == "Ruination") {
+									calculation = Math.max(1,Math.floor(tarHPPath.value/2));
 								}
-								else if (userAbilityPath != undefined && userAbilityPath.value == "Parental Bond") {
+								else if (movePath.value == "Night Shade" || movePath.value == "Seismic Toss") {
+									calculation = userLevelPath.value;
+								}
+
+								if (movePath.value == "Triple Kick" && Generation == 2 || movePath.value == "Spit Up" || movePath.value == "Magnitude") { // Variable Power (Break Multiple Hits Loop)
+									DMGCalcApply(tar,calculation,"Damage");
+									h = specInputPath.value-1;
+								}
+								else if (movePath.value == "Present") { // Present
+									if (specInputPath.value == 4) { // Heal
+										let val = tarHPPath.max/4
+										DMGCalcApply(tar,val,"Heal");
+									}
+									else { // Damage
+										DMGCalcApply(tar,calculation,"Damage");
+									}
+									h = specInputPath.value-1;
+								}
+								else if (userAbilityPath != undefined && userAbilityPath.value == "Parental Bond") { // Parental Bond
 									var check = true;
 									for (let u = 0; u < finaldata["Moves"]["Additional"].length; u++) {
 										if (getApplicable(finaldata["Moves"]["Additional"][u]["Game"])) {
@@ -2638,9 +2680,9 @@ function DMGCalcStart() {
 											}
 										}
 									}
-									break;
+									h = specInputPath.value-1;
 								}
-								else {
+								else { // Default
 									DMGCalcApply(tar,calculation,"Damage");
 								}
 
@@ -3833,12 +3875,11 @@ function DMGSetInfo() {
 	let userItemPath = userPokBase.querySelector(":scope *[name='item'] select");
 
 	let baseDiv = document.querySelector("#contain > div#tool div#dmg > div");
-
-	let moveSelect = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");
+	let moveSelect = document.querySelector("#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span select");
 
 	let specInput = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child input");
 	let specSelect = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child select");
-	let specLis = document.querySelectorAll("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child > li");
+	let specLis = document.querySelectorAll("#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child > li");
 
     let battleSelect = document.querySelector("#contain > div#tool div#dmg div[name='options'] > div:first-child > span:first-child > select")
 
@@ -3869,6 +3910,7 @@ function DMGSetInfo() {
 	specSelect.innerHTML = "";
 	specSelect.style.display = "none";
 
+	
 	for (var a = 0; a < finaldata["Moves"]["Additional"].length; a++) {
 		if (finaldata["Moves"]["Additional"][a]["Move"] == moveSelect.value) {
 			if (getApplicable(finaldata["Moves"]["Additional"][a]["Game"])) {
@@ -3891,6 +3933,9 @@ function DMGSetInfo() {
 				else if (finaldata["Moves"]["Additional"][a]["Additional"] == "Ramping") {
 					specInput.title = "Consecutive Turns of Hits";
 				}
+				else if (finaldata["Moves"]["Additional"][a]["Additional"] == "Variable") {
+					specInput.title = "Variable Power";
+				}
 			}
 		}
 	}
@@ -3902,145 +3947,142 @@ function DMGSetInfo() {
 		specLis[l].firstChild.checked = false;
 	}
 
-
 	for (var l = 0; l < specLis.length; l++) {
-		if (parseInt(movePower) > 0) {
-			if (specLis[l].getAttribute("name") == "Semi-Invulnerable Flight") {
-				if (moveSelect.value == "Twister" || moveSelect.value == "Gust") {
-					specLis[l].style.removeProperty("display");
-				}
+		if (specLis[l].getAttribute("name") == "Semi-Invulnerable Flight") {
+			if (moveSelect.value == "Twister" || moveSelect.value == "Gust") {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Semi-Invulnerable Dig") {
-				if (moveSelect.value == "Earthquake" || moveSelect.value == "Magnitude") {
-					specLis[l].style.removeProperty("display");
-				}
+		}
+		else if (specLis[l].getAttribute("name") == "Semi-Invulnerable Dig") {
+			if (moveSelect.value == "Earthquake" || moveSelect.value == "Magnitude") {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Semi-Invulnerable Dive") {
-				if (moveSelect.value == "Surf" || moveSelect.value == "Whirlpool") {
-					specLis[l].style.removeProperty("display");
-				}
+		}
+		else if (specLis[l].getAttribute("name") == "Semi-Invulnerable Dive") {
+			if (moveSelect.value == "Surf" || moveSelect.value == "Whirlpool") {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Switching") {
-				if (moveSelect.value == "Pursuit") {
-					specLis[l].style.removeProperty("display");
-				}
+		}
+		else if (specLis[l].getAttribute("name") == "Switching") {
+			if (moveSelect.value == "Pursuit") {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Minimize") {
-				var tempOtherMoves = [];
-				if (Generation == 2) {
-					tempOtherMoves = ["Stomp"];
-				}
-				else if (Generation == 3) {
-					tempOtherMoves = ["Stomp","Astonish","Extrasensory","Needle Arm"];
-				}
-				else if (Generation == 4) {
-					tempOtherMoves = ["Stomp"];
-				}
-				else if (Generation == 5) {
-					tempOtherMoves = ["Stomp","Steamroller"];
-				}
-				else if (Generation == 6) {
-					tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Shadow Force","Steamroller","Heat Crash","Phantom Force","Flying Press"];
-				}
-				else if (Generation == 7) {
-					tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Steamroller","Heat Crash","Heavy Slam","Flying Press","Malicious Moonsault","Double Iron Bash"];
-				}
-				else if (Generation == 8) {
-					tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Heat Crash","Heavy Slam","Flying Press"];
-				}
+		}
+		else if (specLis[l].getAttribute("name") == "Minimize") {
+			var tempOtherMoves = [];
+			if (Generation == 2) {
+				tempOtherMoves = ["Stomp"];
+			}
+			else if (Generation == 3) {
+				tempOtherMoves = ["Stomp","Astonish","Extrasensory","Needle Arm"];
+			}
+			else if (Generation == 4) {
+				tempOtherMoves = ["Stomp"];
+			}
+			else if (Generation == 5) {
+				tempOtherMoves = ["Stomp","Steamroller"];
+			}
+			else if (Generation == 6) {
+				tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Shadow Force","Steamroller","Heat Crash","Phantom Force","Flying Press"];
+			}
+			else if (Generation == 7) {
+				tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Steamroller","Heat Crash","Heavy Slam","Flying Press","Malicious Moonsault","Double Iron Bash"];
+			}
+			else if (Generation == 8) {
+				tempOtherMoves = ["Body Slam","Stomp","Dragon Rush","Heat Crash","Heavy Slam","Flying Press"];
+			}
 
-				if (tempOtherMoves.includes(moveSelect.value)) {
-					specLis[l].style.removeProperty("display");
-				}
+			if (tempOtherMoves.includes(moveSelect.value)) {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Charge") {
-				if (moveType == "Electric") {
-					specLis[l].style.removeProperty("display");
-				}
+		}
+		else if (specLis[l].getAttribute("name") == "Charge") {
+			if (moveType == "Electric") {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Me First") {
-				var uncallable = [];
-				if (Generation == 4 || Generation == 5) {
-					uncallable = ["Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
-				}
-				else if (Generation == 6) {
-					uncallable = ["Belch","Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
-				}
-				else if (Generation == 7) {
-					uncallable = ["Beak Blast","Belch","Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Shell Trap","Struggle","Thief"]
-				}
-				if (!uncallable.includes(moveSelect.value)) {
-					specLis[l].style.removeProperty("display");
-				}
+		}
+		else if (specLis[l].getAttribute("name") == "Me First") {
+			var uncallable = [];
+			if (Generation == 4 || Generation == 5) {
+				uncallable = ["Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
 			}
-			else if (specLis[l].getAttribute("name") == "Flash Fire") {
-				if (userAbilityPath != undefined && userAbilityPath.value == "Flash Fire") {
-					specLis[l].style.removeProperty("display");
-				}
+			else if (Generation == 6) {
+				uncallable = ["Belch","Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
 			}
-			else if (specLis[l].getAttribute("name") == "Tar Shot") {
-				if (moveType == "Fire") {
-					specLis[l].style.removeProperty("display");
-				}
+			else if (Generation == 7) {
+				uncallable = ["Beak Blast","Belch","Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Shell Trap","Struggle","Thief"]
 			}
-			else if (specLis[l].getAttribute("name") == "Defense Curl") {
-				if (moveSelect.value == "Rollout") {
-					specLis[l].style.removeProperty("display");
-				}
+			if (!uncallable.includes(moveSelect.value)) {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Helping Hand") {
-				if (battleSize > 2) {
-					specLis[l].style.removeProperty("display");
-				}
+		}
+		else if (specLis[l].getAttribute("name") == "Flash Fire") {
+			if (userAbilityPath != undefined && userAbilityPath.value == "Flash Fire") {
+				specLis[l].style.removeProperty("display");
 			}
-			else if (specLis[l].getAttribute("name") == "Z-Move") {
-				if (moveSelect.value != "Struggle") {
-					var check1 = false;
-					var check2 = false;
-					var check3 = false;
-				
-					for (var r = 0; r < finaldata["Moves"]["Call"].length; r++) {
-						if (finaldata["Moves"]["Call"][r]["Call"] == moveSelect.value) {
-							if (finaldata["Moves"]["Call"][r]["Type"] == "Z-Move") {
-								if (finaldata["Moves"]["Call"][r]["Pokémon"] != undefined) {
-									if (finaldata["Moves"]["Call"][r]["Pokémon"].includes(",")) {
-										var vals = finaldata["Moves"]["Call"][r]["Pokémon"].split(",");
-										for (var u = 0; u < vals.length; u++) {
-											if (vals[u] == userPokPath.value) {
-												check1 = true;
-											}
-										}
-									}
-									else {
-										if (finaldata["Moves"]["Call"][r]["Pokémon"] == userPokPath.value) {
+		}
+		else if (specLis[l].getAttribute("name") == "Tar Shot") {
+			if (moveType == "Fire") {
+				specLis[l].style.removeProperty("display");
+			}
+		}
+		else if (specLis[l].getAttribute("name") == "Defense Curl") {
+			if (moveSelect.value == "Rollout") {
+				specLis[l].style.removeProperty("display");
+			}
+		}
+		else if (specLis[l].getAttribute("name") == "Helping Hand") {
+			if (battleSize > 2) {
+				specLis[l].style.removeProperty("display");
+			}
+		}
+		else if (specLis[l].getAttribute("name") == "Z-Move") {
+			if (moveSelect.value != "Struggle") {
+				var check1 = false;
+				var check2 = false;
+				var check3 = false;
+			
+				for (var r = 0; r < finaldata["Moves"]["Call"].length; r++) {
+					if (finaldata["Moves"]["Call"][r]["Call"] == moveSelect.value) {
+						if (finaldata["Moves"]["Call"][r]["Type"] == "Z-Move") {
+							if (finaldata["Moves"]["Call"][r]["Pokémon"] != undefined) {
+								if (finaldata["Moves"]["Call"][r]["Pokémon"].includes(",")) {
+									var vals = finaldata["Moves"]["Call"][r]["Pokémon"].split(",");
+									for (var u = 0; u < vals.length; u++) {
+										if (vals[u] == userPokPath.value) {
 											check1 = true;
 										}
 									}
 								}
-								if (finaldata["Moves"]["Call"][r]["Item"] != undefined) {
-									if (finaldata["Moves"]["Call"][r]["Item"] == userItemPath.value) {
-										check2 = true;
+								else {
+									if (finaldata["Moves"]["Call"][r]["Pokémon"] == userPokPath.value) {
+										check1 = true;
 									}
+								}
+							}
+							if (finaldata["Moves"]["Call"][r]["Item"] != undefined) {
+								if (finaldata["Moves"]["Call"][r]["Item"] == userItemPath.value) {
+									check2 = true;
 								}
 							}
 						}
 					}
+				}
 
 
 
-					if (userItemPath.value.includes(" Z") && userItemPath.value.includes(moveType.replace(/.$/, ''))) {
-						check3 = true;
-					}
-					
+				if (userItemPath.value.includes(" Z") && userItemPath.value.includes(moveType.replace(/.$/, ''))) {
+					check3 = true;
+				}
+				
 
-					if (check1 && check2 || check3) {
-						specLis[l].style.removeProperty("display");
-					}
+				if (check1 && check2 || check3) {
+					specLis[l].style.removeProperty("display");
 				}
 			}
-			else if (specLis[l].getAttribute("name") == "Max Move") {
-				specLis[l].style.removeProperty("display");
-			}
+		}
+		else if (specLis[l].getAttribute("name") == "Max Move") {
+			specLis[l].style.removeProperty("display");
 		}
 	}
 
