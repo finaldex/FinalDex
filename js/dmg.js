@@ -272,6 +272,53 @@ function DMGCalcStart() {
 				moveType = undwsDel(moveType,"");
 				movePriority = undwsDel(movePriority,0);
 
+				movePath.parentElement.setAttribute("data-special","");
+
+
+				if ("Type" && "Category") {
+					if (movePath.value == "Weather Ball") {
+						if (DMGFindScenario(user,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(user,"Air Lock","Ability","All","") == 0) {
+							if (weatherHarshSunlightPath != undefined && weatherHarshSunlightPath.checked) {
+								moveType = "Fire";
+							}
+							else if (weatherRainPath != undefined && weatherRainPath.checked) {
+								moveType = "Water";
+							}
+							else if (weatherHailPath != undefined && weatherHailPath.checked || weatherSnowPath != undefined && weatherSnowPath.checked) {
+								moveType = "Ice";
+							}
+							else if (weatherSandstormPath != undefined && weatherSandstormPath.checked) {
+								moveType = "Rock";
+							}
+							else if (weatherShadowyAuraPath != undefined && weatherShadowyAuraPath.checked) {
+								moveType = "???";
+								moveCategory = "Physical";
+							}
+						}
+						if (weatherExtremelyHarshSunlightPath != undefined && weatherExtremelyHarshSunlightPath.checked) {
+							moveType = "Fire";
+						}
+						if (weatherHeavyRainPath != undefined && weatherHeavyRainPath.checked) {
+							moveType = "Water";
+						}
+					}
+					else if (movePath.value == "Hidden Power") {
+						moveType = hiddenPowerCalc(ivs)["Type"];
+					}
+
+					for (let u = 0; u < finaldata["Moves"]["Additional"].length; u++) {
+						if (getApplicable(finaldata["Moves"]["Additional"][u]["Game"])) {
+							if (finaldata["Moves"]["Additional"][u]["Move"] == movePath.value) {
+								if (finaldata["Moves"]["Additional"][u]["Additional"] == "Sound") {
+									if (userAbilityPath != undefined && userAbilityPath.value == "Liquid Voice") {
+										moveType = "Water";
+									}
+								}
+							}
+						}
+					}
+
+				}
 
 
 				if (Generation < 4) {
@@ -355,7 +402,6 @@ function DMGCalcStart() {
 						let Facade = 1;
 						let SmellingSalt = 1;
 						let Revenge = 1;
-						let WeatherBall = 1;
 
 						// Items
 						let Item = 1;
@@ -387,24 +433,18 @@ function DMGCalcStart() {
 										
 							if ("Z-Move") {
 								if (ZMovePath != undefined && ZMovePath.checked) {
-									var check1 = false;
-									var check2 = false;
-									var check3 = false;
+									let check1 = false;
+									let check2 = false;
+									let check3 = false;
+									let val = "";
 								
 									for (let r = 0; r < finaldata["Moves"]["Call"].length; r++) {
 										if (finaldata["Moves"]["Call"][r]["Call"] == movePath.value) {
 											if (finaldata["Moves"]["Call"][r]["Type"] == "Z-Move") {
 												if (finaldata["Moves"]["Call"][r]["Pokémon"] != undefined) {
-													if (finaldata["Moves"]["Call"][r]["Pokémon"].includes(",")) {
-														let vals = finaldata["Moves"]["Call"][r]["Pokémon"].split(",");
-														for (let u = 0; u < vals.length; u++) {
-															if (vals[u] == userPokémonPath.value) {
-																check1 = true;
-															}
-														}
-													}
-													else {
-														if (finaldata["Moves"]["Call"][r]["Pokémon"] == userPokémonPath.value) {
+													let vals = splitStr(finaldata["Moves"]["Call"][r]["Pokémon"],",");
+													for (let t = 0; t < vals.length; t++) {
+														if (vals[t] == userPokémonPath.value) {
 															check1 = true;
 														}
 													}
@@ -413,6 +453,12 @@ function DMGCalcStart() {
 													if (finaldata["Moves"]["Call"][r]["Item"] == userItemPath.value) {
 														check2 = true;
 													}
+												}
+
+
+												if (check1 && check2) {
+													val = finaldata["Moves"]["Call"][r]["Move"];
+													break;
 												}
 											}
 										}
@@ -469,6 +515,8 @@ function DMGCalcStart() {
 											Power = 195;
 										}
 
+										movePath.parentElement.setAttribute("data-special",val);
+							
 									}
 									else if (check3) {
 										if (Power >= 0 && Power <= 55) {
@@ -536,23 +584,24 @@ function DMGCalcStart() {
 												}
 											}
 										}
-										
-										
+
+
+																				
 										for (let u = 0; u < finaldata["Moves"]["Type"].length; u++) {
 											if (finaldata["Moves"]["Type"][u]["Name_"+JSONPath_MoveName].includes("(")) {
 												if (returnArrValue(finaldata["Moves"]["Group"],"Name_"+JSONPath_MoveName,"Group",finaldata["Moves"]["Type"][u]["Name_"+JSONPath_MoveName]) == "Z-Move") {
 													if (finaldata["Moves"]["Type"][u]["Type_"+JSONPath_MoveType] == moveType) {
 														if (finaldata["Moves"]["Type"][u]["Name_"+JSONPath_MoveName].includes(moveCategory)) {
-															consoleText(movePath.value+" ("+finaldata["Moves"]["Type"][u]["Name_"+JSONPath_MoveName].replaceAll(" ("+moveCategory+")","")+")");
+															movePath.parentElement.setAttribute("data-special",finaldata["Moves"]["Type"][u]["Name_"+JSONPath_MoveName].replaceAll(" ("+moveCategory+")",""));
 															break;
 														}
 													}
 												}
 											}
 										}
-
-										
 									}
+
+					
 								}
 							}
 
@@ -568,7 +617,6 @@ function DMGCalcStart() {
 										}
 									}
 								
-									moveType = hiddenPowerCalc(ivs)["Type"];
 									Power = hiddenPowerCalc(ivs)["Power"];
 								}
 								else if (movePath.value == "Return") {
@@ -622,6 +670,9 @@ function DMGCalcStart() {
 										Power = 200;
 									}
 								}
+								else if (movePath.value == "Water Spout") {
+									Power = Math.max(1,Math.floor(150*parseInt(userHPPath.value)/parseInt(userHPPath.max)));
+								}
 								else if (movePath.value == "Magnitude") {
 									if (specInputPath.value == 4) { // Magnitude 4
 										Power = 10;
@@ -674,6 +725,13 @@ function DMGCalcStart() {
 									}
 									let val = Math.min((20*it),200);
 									Power = val;
+								}
+								else if (movePath.value == "Acrobatics") {
+									if (userItemPath != undefined) {
+										if (userItemPath.value == "" || userItemPath.value == "Flying Gem") {
+											Power = Power*2;
+										}
+									}
 								}
 								else if (movePath.value == "Gyro Ball") {
 									Power = Math.min(150,((25*tarSpeedStatPath.value)/userSpeedStatPath.value)+1);
@@ -758,9 +816,17 @@ function DMGCalcStart() {
 										Power = 150;
 									}
 								}
+								else if (movePath.value == "Wring Out") {
+									if (Generation == 4) {
+										Power = 1+120*(parseInt(tarHPPath.value)/parseInt(tarHPPath.max))
+									}
+									else if (Generation >= 5) {
+										Power = Math.max(1,120*(parseInt(tarHPPath.value)/parseInt(tarHPPath.max)))
+									}
+									
+								}
 								else if (movePath.value == "Eruption") {
-									Power = Math.floor((150*userHPPath.value)/userHPPath.max);
-									Power = Math.max(Power,1);
+									Power = Math.max(1,Math.floor((150*userHPPath.value)/userHPPath.max));
 								}
 								else if (movePath.value == "Flail" || movePath.value == "Reversal") {
 									let val = userHPPath.value/userHPPath.max;
@@ -850,9 +916,6 @@ function DMGCalcStart() {
 												if (tarAbilityPath != undefined && tarAbilityPath.value == "Punk Rock") {
 													Power = Power*0.5;
 												}
-												if (userAbilityPath != undefined && userAbilityPath.value == "Liquid Voice") {
-													moveType = "Water";
-												}
 											}
 										}
 									}
@@ -861,6 +924,37 @@ function DMGCalcStart() {
 								Power = Math.ceil(Power)
 							}
 
+							if (movePath.value == "Weather Ball") {
+								let check = false;
+								if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
+									if (weatherHarshSunlightPath != undefined && weatherHarshSunlightPath.checked) {
+										check = true;
+									}
+									else if (weatherRainPath != undefined && weatherRainPath.checked) {
+										check = true;
+									}
+									else if (weatherHailPath != undefined && weatherHailPath.checked || weatherSnowPath != undefined && weatherSnowPath.checked) {
+										check = true;
+									}
+									else if (weatherSandstormPath != undefined && weatherSandstormPath.checked) {
+										check = true;
+									}
+									else if (weatherShadowyAuraPath != undefined && weatherShadowyAuraPath.checked) {
+										check = true;
+									}
+									else if (weatherFogPath != undefined && weatherFogPath.checked) {
+										check = true;
+									}
+								}
+								
+								if (weatherExtremelyHarshSunlightPath != undefined && weatherExtremelyHarshSunlightPath.checked || weatherHeavyRainPath != undefined && weatherHeavyRainPath.checked) {
+									check = true;
+								}
+								
+								if (check) {
+									Power = Power*2;
+								}
+							}
 							if (userTypes[0] == moveType || userTypes[1] == moveType) {
 								if (userAbilityPath != undefined && userAbilityPath.value == "Adaptability") {
 									STAB = 2;
@@ -900,6 +994,16 @@ function DMGCalcStart() {
 									if (movePath.value != "Hydro Steam") {
 										Weather = 0.5;
 									}
+								}
+							}
+							if (weatherExtremelyHarshSunlightPath != undefined && weatherExtremelyHarshSunlightPath.checked) {
+								if (moveType == "Water") {
+									Affected = false;
+								}
+							}
+							if (weatherHeavyRainPath != undefined && weatherHeavyRainPath.checked) {
+								if (moveType == "Fire") {
+									Affected = false;
 								}
 							}
 							if (movePath.value == "Rollout") {
@@ -992,11 +1096,7 @@ function DMGCalcStart() {
 									SmellingSalt = 2;
 								}
 							}
-							if (movePath.value == "Weather Ball") {
-								if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
-									WeatherBall = 2;
-								}
-							}
+
 							if (battleSize > 2) {
 								if (HelpingHandPath.checked) {
 									HelpingHand = 1.5;
@@ -2632,7 +2732,7 @@ function DMGCalcStart() {
 								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Item*Critical+2)*TripleKick*Weather*Badge*STAB*Type*(Rollout*FuryCutter*Rage*Pursuit*StompNeedleArmAstonishExtrasensory*GustTwister*EarthquakeMagnitude)*random;
 							}
 							else if (Generation == 3) {
-								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*(Item)*(GustTwister*StompNeedleArmAstonishExtrasensory*SurfWhirlpool*EarthquakeMagnitude*Pursuit*Facade*SmellingSalt*Revenge*WeatherBall)*Charge*HelpingHand*STAB*Type*random*(Rollout*FuryCutter*Rage);
+								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*(Item)*(GustTwister*StompNeedleArmAstonishExtrasensory*SurfWhirlpool*EarthquakeMagnitude*Pursuit*Facade*SmellingSalt*Revenge)*Charge*HelpingHand*STAB*Type*random*(Rollout*FuryCutter*Rage);
 							}
 							else if (Generation == 4) {
 								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*(Item*LifeOrb*Metronome)*(MeFirst*Rollout*FuryCutter*Rage*StompNeedleArmAstonishExtrasensory*Pursuit)*HelpingHand*random*STAB*Type1*Type2*SolidRockFilter*ExpertBelt*TintedLens*Berry;
@@ -2876,7 +2976,7 @@ function DMGCalcStart() {
 							}
 
 							pwrRes.push(Power);
-							movePath.style.color = "var(--type"+moveType+")";
+							movePath.parentElement.style.color = "var(--type"+moveType+")";
 							moveTypeImgPath.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+moveType+".png";
 							moveCategoryImgPath.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+moveCategory+".png";
 							moveTypeTextPath.innerText = moveType;
@@ -4213,7 +4313,14 @@ function DMGSetInfo() {
 
 	specInput.setAttribute("min",strikes[0]);
 	specInput.setAttribute("max",strikes[1]);
-	specInput.value = strikes[0];
+	
+
+	if (moveSelect.value == "Present") {
+		specInput.value = strikes[0];
+	}
+	else {
+		specInput.value = strikes[1];
+	}
 
 
 	if (strikes[0] == strikes[1]) {
@@ -6137,7 +6244,7 @@ function buildDMG(preval) {
 					contentActiveMove.setAttribute("type","invert");
 					contentActiveBottom.appendChild(contentActiveMove)
 					contentActiveMove.appendChild(contentActiveMoveText);
-					contentActiveMove.addEventListener("click",function(){let val = this.firstChild.innerText;var tar = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");var tarTemp = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select > option[value='"+val+"']"); if (val != "") {tar.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,val)+")"; if (tarTemp != undefined) {tar.value = val;} DMGSetInfo();DMGCalcStart();let movd = formatMoveData(val);movd = undDel(movd,"");tar.title = movd;}});
+					contentActiveMove.addEventListener("click",function(){let val = this.firstChild.innerText;var tar = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");var tarTemp = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select > option[value='"+val+"']"); if (val != "") {tar.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,val)+")"; if (tarTemp != undefined) {tar.value = val;} DMGSetInfo();DMGCalcStart();let movd = formatMoveData(val);movd = undDel(movd,"");tar.title = movd;}});
 				}
 			}
 			// Sortable Pokémon //
@@ -6842,11 +6949,12 @@ function buildDMG(preval) {
 
                         for(var t = 0; t < finaldata["Moves"]["Reference"].length; t++) {
                             if(finaldata["Moves"]["Reference"][t][JSONPath_MoveReference] == "true") {
-                                if (finaldata["Moves"]["Group"][t]["Group"] != "Z-Move" && finaldata["Moves"]["Group"][t]["Group"] != "Max Move") {
+                                if (finaldata["Moves"]["Group"][t]["Group"] != "Z-Move" && finaldata["Moves"]["Group"][t]["Group"] != "Max Move" && finaldata["Moves"]["Group"][t]["Group"] != "G-Max Move") {
                                     tempMoves.push(finaldata["Moves"]["Reference"][t]["Name_"+JSONPath_MoveName])
                                 }
                             }
                         }
+
                 
                         tempMoves.sort();
 
