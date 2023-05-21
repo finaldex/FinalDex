@@ -1,10 +1,3 @@
-#contain div#tool > section[name='header'] h1 {
-	text-align: left;
-	position: absolute;
-	bottom: 5px;
-	left: 15px;
-	/*width: 100%;*/
-}
 #contain > div#tool > section[name='list'] div:first-child {
 	box-shadow: 0px 1px 1px var(--border1);
 }
@@ -25,36 +18,23 @@
 }
 
 
-#contain > div#tool section[name='content'] *[name='type'] > div[name='header'] {
-	height: 5%;
-    width: 75%;
-    box-shadow: 0 1px 1px var(--border1);
-	display: flex;
-	float: left;
-}
 
-
-#contain > div#tool section[name='content'] *[name='type'] > div[name='content'] {
+#contain > div#tool div#type > div[name='content'] {
 	width: 75%;
-	height: 95%;
+	height: 100%;
 	float: left;
-	overflow: hidden;
-	display: flex;
-    justify-content: center;
-    align-items: center;
 	background: var(--color14);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] > div[name='sidebar'] {
+#contain > div#tool div#type > div[name='sidebar'] {
 	width: 25%;
 	height: 100%;
 	float: right;
 	position: inherit;
-	overflow: hidden;
 	background: var(--color16);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] > div[name='header'] label {
+#contain > div#tool div#type > div[name='header'] label {
 	width: 100%;
     height: 100%;
     display: flex;
@@ -62,7 +42,7 @@
     justify-content: center;
 	background: var(--color12);
 }
-#contain > div#tool section[name='content'] *[name='type'] > div[name='header'] input:checked + label {
+#contain > div#tool div#type > div[name='header'] input:checked + label {
 	background: var(--color10);
     color: var(--font2);
 }
@@ -70,13 +50,11 @@
 
 
 
-#contain > div#tool section[name='content'] *[name='type'] table {
+#contain > div#tool div#type table {
 	width: 100%;
 	height: 100%;
 	position: relative;
 	text-align: center;
-	padding: 5px;
-	color: var(--font2);
 	text-transform: uppercase;
 	border-collapse: collapse;
 }
@@ -86,351 +64,189 @@
 
 
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] img {
-	display: block;
-	width: 16px;
-	height: 16px;
-	margin: 0 auto;
+#contain > div#tool div#type table img {
+	max-width: 20px;
+	max-height: 20px;
+	vertical-align: middle;
+}
+#contain > div#tool div#type table th {
+	border: 1px solid;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] td:hover,
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] td:active {
+
+#contain > div#tool div#type table th {
+	user-select: none;
+}
+#contain > div#tool div#type table tr th span {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	cursor: pointer;
+}
+#contain > div#tool div#type table tr th span:active {
+	transform:scale(0.8);
+}
+
+
+
+
+#contain > div#tool div#type table tr:not(:first-child) th:not(:first-child):hover,
+#contain > div#tool div#type table tr:not(:first-child) th:not(:first-child):active {
 	filter: brightness(0.7);
 }
 
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr:not(:first-child):hover > th img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='1'] > th:nth-child(2) img {
-	filter: invert(1);
-}
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='2'] > th:nth-child(3) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='3'] > th:nth-child(4) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='4'] > th:nth-child(5) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='5'] > th:nth-child(6) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='6'] > th:nth-child(7) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='7'] > th:nth-child(8) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='8'] > th:nth-child(9) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='9'] > th:nth-child(10) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='10'] > th:nth-child(11) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='11'] > th:nth-child(12) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='12'] > th:nth-child(13) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='13'] > th:nth-child(14) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='14'] > th:nth-child(15) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='15'] > th:nth-child(16) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='16'] > th:nth-child(17) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='17'] > th:nth-child(18) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='18'] > th:nth-child(19) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='19'] > th:nth-child(20) img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr[class='20'] > th:nth-child(21) img {
-	filter: invert(1);
-}
-
-
-
-
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] th,
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] td {
-	position: relative;
-	border: 1px solid;
-	height: 10px;
-	width: 40px;
-	background: var(--color10);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] td > * {
-	font-weight: normal;
-	cursor: default;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] th:first-child {
-	border-left: none;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix']:first-child th {
-	border-top: none;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] th:last-child,
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] td:last-child {
-	border-right: none;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table th {
-	z-index: 1;
-	cursor: pointer;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table th:hover img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table th:active img {
-	filter: invert(1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table th[title=''],
-#contain > div#tool section[name='content'] *[name='type'] table th[title='']:hover,
-#contain > div#tool section[name='content'] *[name='type'] table th[title='']:active {
-	filter: unset !important;
-	cursor: unset !important;
-}
-
-
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='matrix'] tr:first-child th:nth-child(1) {
+#contain > div#tool div#type table[name='matrix'] tr:first-child th,
+#contain > div#tool div#type table[name='matrix'] tr th:first-child {
 	background: var(--color7);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table th[title=''] {
-	background: var(--color_70);
-	font-weight: unset;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table * {
-	color: var(--fontLight);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table td[title='Normal Effectiveness'] {
-	background: var(--color13);
-    color: var(--font1);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table td[title='Super Effective'] {
+#contain > div#tool div#type table th[title='Super Effective'] {
 	background: var(--colorGreen);
 }
-
-#contain > div#tool section[name='content'] *[name='type'] table td[title='Not Very Effective'] {
+#contain > div#tool div#type table th[title='Not Very Effective'] {
 	background: var(--colorRed);
 }
-
-#contain > div#tool section[name='content'] *[name='type'] table td[title='No Effect'] {
+#contain > div#tool div#type table th[title='Immune'] {
 	background: var(--color_20);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Normal'] {
-	background: var(--typeNormal);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Fighting'] {
-	background: var(--typeFighting);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Flying'] {
-	background: var(--typeFlying);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Poison'] {
-	background: var(--typePoison);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Ground'] {
-	background: var(--typeGround);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Rock'] {
-	background: var(--typeRock);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Bug'] {
-	background: var(--typeBug);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Ghost'] {
-	background: var(--typeGhost);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Steel'] {
-	background: var(--typeSteel);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Fire'] {
-	background: var(--typeFire);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Water'] {
-	background: var(--typeWater);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Grass'] {
-	background: var(--typeGrass);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Electric'] {
-	background: var(--typeElectric);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Psychic'] {
-	background: var(--typePsychic);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Ice'] {
-	background: var(--typeIce);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Dragon'] {
-	background: var(--typeDragon);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Dark'] {
-	background: var(--typeDark);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[type='SwSh'] th[title='Fairy'] {
-	background: var(--typeFairy);
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table th {
-	font-size: 0;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table th[title=''] {
-	font-size: unset;
-}
 
 
 
-
-
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='effectiveness'] img,
-#contain > div#tool section[name='content'] *[name='type'] table[name='ineffectiveness'] img,
-#contain > div#tool section[name='content'] *[name='type'] table[name='immunity'] img {
-	width: 25px;
-	height: 20px;
-	margin: 0 auto;
-	object-fit: scale-down;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='effectiveness'] th,
-#contain > div#tool section[name='content'] *[name='type'] table[name='ineffectiveness'] th,
-#contain > div#tool section[name='content'] *[name='type'] table[name='immunity'] th {
-	border-width: 1px;
-	border-style: solid;
-	border-color: var(--font2);
-	position: relative;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='effectiveness'],
-#contain > div#tool section[name='content'] *[name='type'] table[name='ineffectiveness'],
-#contain > div#tool section[name='content'] *[name='type'] table[name='immunity'] {
-	height: 95%;
-	width: 95%;
-	border-collapse: collapse;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] table[name='immunity'] {
-	width: 50%;
-}
-
-
-
-
-
-
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] > div {
+#contain > div#tool div#type *[name='sidebar'] > div {
 	height: 100%;
 	width: 100%;
-	border-left: 1px solid;
 	position: inherit;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] > div data span {
-	display: none;
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div {
+	position: absolute;
+    top: 100%;
+    left: 0;
+    max-width: 500px;
+    min-width: 100px;
+    max-height: 40vh;
+    width: 100%;
+    color: var(--fontDark);
+	overflow: auto;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] > div data img {
-	max-width: 64px;
-	padding: 0 2px;
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b {
+	display: flex;
+    border-top: 1px solid;
+    width: 100%;
+    border-bottom: 0;
+    flex-direction: row;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+	background: #fff;
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] img {
+	max-width: 80px;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] > div data[value='SwSh'] img {
-	max-width: 75px;
-	min-width: 60px;
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b:active > * {
+	transform:scale(0.9);
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b * {
+	font-weight: normal;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+	padding: 5px 0;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b:hover,
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b:active {
+	background: var(--colorBlue);
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b img {
+	max-width: 20px;
+    max-height: 20px;
+    margin-left: 20px;
 }
 
 
-
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='title'] img {
-	height: 80%;
-	width: 80%;
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span img {
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
 }
 
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] {
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] {
 	height: 80%;
 	width: 100%;
-	position: relative;
+	z-index: 4;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] {
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] > *:first-child {
+	width: 100%;
+    height: 10%;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] > *:last-child {
 	width: 100%;
 	height: 90%;
-	position: inherit;
+	overflow: auto;
 }
-
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name='opposed'] {
+#contain > div#tool div#type *[name='sidebar'][data-type] *[name='description'] ul[name='Attacking'],
+#contain > div#tool div#type *[name='sidebar'][data-type] *[name='description'] ul[name='Defending'] {
 	display: none;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] label {
+#contain > div#tool div#type *[name='sidebar'][data-type='Attacking'] *[name='description'] ul[name='Attacking'],
+#contain > div#tool div#type *[name='sidebar'][data-type='Defending'] *[name='description'] ul[name='Defending']  {
+	display: block;
+	padding: 10px;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li {
+	display: none;
+	padding: 5px 0;
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li > span > span {
+	display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0px;
+	cursor: pointer;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li > span > span:active {
+	transform:scale(0.9);
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li *:first-child {
+	padding: 2px 0;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li > span > span:not(:first-child) {
+	padding: 2px 2px;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'][data-type='Attacking'] *[name='title'] > span:last-child {
+	width: 0;
+	transform: rotateY(90deg);
+	opacity: 0;
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span {
+	transition: .5s ease;
+	transition-property: transform, width;
+	transform: rotateY(0deg);
+}
+
+
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] label {
 	background: var(--color14);
     height: 100%;
     width: 50%;
@@ -443,26 +259,22 @@
 }
 
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] input:checked + label {
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] input:checked + label {
 	background: var(--color13);
     color: var(--font1);
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div:first-child {
-	width: 100%;
-    height: 10%;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='title'] {
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] {
 	width: 100%;
 	height: 20%;
 	position: relative;
 	display: flex;
 	justify-content: center;
     align-items: center;
+	z-index: 5;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='title'] span {
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span {
 	height: 100%;
 	width: 50%;
     display: flex;
@@ -471,55 +283,45 @@
     align-items: center;
 }
 
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='title'] span:first-child {
-	align-items: end;
-    justify-content: flex-start;
-}
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='title'] span > * {
-	padding: 5px;
-}
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='title'] h1 {
-	position: absolute;
-	bottom: 0;
-	padding: 5px 10px;
-}
-
-
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > * {
-	display: block;
-}
-
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > *:first-child {
-	padding: 20px 0 0 0;
-}
-
-
-
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > * > *:first-child {
-	padding: 0 10px;
-	width:fit-content;
-}
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > * > *:last-child {
-    display: block;
-    padding: 5px 10px;
-}
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > * > *:last-child p {
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span > img + b {
 	display: none;
 }
-#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > * > *:last-child img {
-	padding: 0 2px;
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px inset;
+    background: var(--color13);
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	z-index: 100;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span:not(.active) > div {
+	display: none;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div img {
+	max-width: 20px;
 	max-height: 20px;
 }
 
 
 
 
-#contain div#tool > section[name='content'] > div[name='rng'] {
+
+
+#contain div#tool div#rng {
 	width: 100%;
 	height: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div {
+#contain div#tool div#rng > div {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -528,7 +330,7 @@
 	flex-direction: row;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] {
+#contain div#tool div#rng div[name='result'] {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -537,7 +339,7 @@
 	flex-wrap: wrap;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div button {
+#contain div#tool div#rng > div button {
 	align-self: center;
 	background: var(--color15);
 	font-weight: bold;
@@ -546,7 +348,7 @@
 	cursor: pointer;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div {
+#contain div#tool div#rng div[name='result'] div {
 	margin: 10px;
     padding: 5px;
     border-radius: 10px;
@@ -562,20 +364,20 @@
     justify-content: center;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.min,
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.max  {
+#contain div#tool div#rng div[name='result'] div.min,
+#contain div#tool div#rng div[name='result'] div.max  {
 	text-decoration-line:underline;
 }
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.min {
+#contain div#tool div#rng div[name='result'] div.min {
 	text-decoration-color: var(--colorGreen);
 }
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='result'] div.max  {
+#contain div#tool div#rng div[name='result'] div.max  {
 	text-decoration-color: var(--colorRed);
 }
 
 
 
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='iterations'] {
+#contain div#tool div#rng span[name='iterations'] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -585,28 +387,28 @@
 	padding: 10px 0;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='iterations'] p,
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='iterations'] input {
+#contain div#tool div#rng span[name='iterations'] p,
+#contain div#tool div#rng span[name='iterations'] input {
 	text-align: center;
 	width: 80%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='title'] {
+#contain div#tool div#rng span[name='title'] {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='title'] > span {
+#contain div#tool div#rng span[name='title'] > span {
 	text-align: center;
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='title'] > span:first-child {
+#contain div#tool div#rng span[name='title'] > span:first-child {
 	width: 30%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='options'] {
+#contain div#tool div#rng div[name='options'] {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -619,7 +421,7 @@
 
 
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div ul {
+#contain div#tool div#rng > div ul {
 	overflow: auto;
 	height: 100%;
 	width: 100%;
@@ -627,38 +429,38 @@
 	/*border: 1px solid var(--border1);*/
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div li div {
+#contain div#tool div#rng > div li div {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div li div[name='it'] {
+#contain div#tool div#rng > div li div[name='it'] {
 	width: 30%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div li p:nth-child(1) {
+#contain div#tool div#rng > div li p:nth-child(1) {
 	text-align: center;
 }
 
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div li p,
-#contain div#tool > section[name='content'] > div[name='rng'] > div li input {
+#contain div#tool div#rng > div li p,
+#contain div#tool div#rng > div li input {
 	width: 100%;
 	text-align: center;
 	margin: 0 5px;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div input {
+#contain div#tool div#rng > div input {
 	color: var(--fontDark);
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='options'] {
+#contain div#tool div#rng div[name='options'] {
 	flex-direction: column;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div li {
+#contain div#tool div#rng > div li {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -667,15 +469,15 @@
 	padding: 1px 0;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div li > div p {
+#contain div#tool div#rng > div li > div p {
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='execute'] > button:active {
+#contain div#tool div#rng span[name='execute'] > button:active {
 	transform: scale(0.95);
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] span[name='execute'] {
+#contain div#tool div#rng span[name='execute'] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -683,16 +485,16 @@
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] div[name='options'] > div {
+#contain div#tool div#rng div[name='options'] > div {
 	background: var(--color18);
 	width: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div ul > li:nth-child(1) {
+#contain div#tool div#rng > div ul > li:nth-child(1) {
 	padding-top: 10px;
 }
 
-#contain div#tool > section[name='content'] > div[name='rng'] > div ul > li:last-child {
+#contain div#tool div#rng > div ul > li:last-child {
 	padding-bottom: 10px;
 }
 
@@ -967,7 +769,7 @@
 
 
 
-#contain div#tool div#dmg > div[data-range*="Affects"] div[name='battle'] > span[name] > div[data-string].viable figure[name='target'] {
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable figure[name='target'] {
 	display: none;
 }
 
@@ -1042,11 +844,11 @@
 
 
 
-body[Generation="1"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation="2"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation="3"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation="4"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'] {
+body[Generation='1'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
+body[Generation='2'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
+body[Generation='3'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
+body[Generation='4'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
+body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'] {
 	image-rendering: pixelated;
 }
 
@@ -1055,7 +857,7 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 }
 
 
-#contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='item'][title]:not([title=""]) {
+#contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='item'][title]:not([title='']) {
 	cursor: help;
 }
 
@@ -1127,11 +929,11 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     user-select: none;
 }
 
-#contain div#tool div#dmg > div:not([data-battle="Single Battle"]) div[name='result'] *[name='imgs'] > img[name='img'] {
+#contain div#tool div#dmg > div:not([data-battle='Single Battle']) div[name='result'] *[name='imgs'] > img[name='img'] {
 	cursor: pointer;
 }
 
-#contain div#tool div#dmg > div:not([data-battle="Single Battle"]) div[name='result'] *[name='imgs']:active > img[name='img'] {
+#contain div#tool div#dmg > div:not([data-battle='Single Battle']) div[name='result'] *[name='imgs']:active > img[name='img'] {
 	transform:scale(0.9);
 }
 
@@ -1400,9 +1202,13 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     flex-direction: column;
 }
 
+#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:last-child > span > span {
+	padding: 2px 0;
+}
+
 #contain div#tool div#dmg div[name='menu'] > div[name='move'] > span select {
-	width: 75%;
-    padding: 5px 10px;
+	width: 80%;
+	height: 100%;
     outline: none;
     text-align: center;
     -webkit-appearance: none;
@@ -1412,6 +1218,7 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     font-size: var(--sizeFontXL);
     font-weight: bold;
 	border: none;
+	text-shadow: 2px 2px 0px #000;
 }
 
 #contain div#tool div#dmg div[name='menu'] > div[name='move'] > span option {
@@ -1512,8 +1319,8 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 	cursor:unset;
 }
 
-#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name]:not([name=""]):not(:last-child) input[name][disabled],
-#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name]:not([name=""]):not(:last-child) input[name][disabled]::placeholder {
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name]:not([name='']):not(:last-child) input[name][disabled],
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name]:not([name='']):not(:last-child) input[name][disabled]::placeholder {
 	color: gray !important;
 }
 
@@ -1955,7 +1762,6 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     height: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
 }
 #contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'].on {
@@ -1967,6 +1773,16 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 }
 
 
+#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'] > * {
+	display: flex;
+    flex-direction: column-reverse;
+}
+#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'] > *[name='stab'] {
+	text-align:left;
+}
+#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'] > *[name='effect'] {
+	text-align:right;
+}
 
 #contain div#tool div#dmg div[name='result'] > span[name='party'] {
 	width: 100%;
@@ -2025,7 +1841,7 @@ body[Generation="5"] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 
 
 #contain div#tool div#dmg div[name='result'] > span[name='party'] li.add:not(.active),
-#contain div#tool div#dmg div[name='result'] > span[name='party'] li[data-string=""] {
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[data-string=''] {
 	display: none;
 }
 #contain div#tool div#dmg div[name='result'] > span[name='party'] li {
@@ -2551,12 +2367,12 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] {
+#contain div#tool div#timer {
 	width: 100%;
 	height: 100%;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child {
+#contain div#tool div#timer > *:first-child {
 	width: 100%;
 	height: 10%;
 	display: flex;
@@ -2565,7 +2381,7 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child label {
+#contain div#tool div#timer > *:first-child label {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -2576,19 +2392,19 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 	color: var(--font2);
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child label:active {
+#contain div#tool div#timer > *:first-child label:active {
 	filter: brightness(1.1);
 	color: var(--font1);
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *:first-child input:checked + label {
+#contain div#tool div#timer > *:first-child input:checked + label {
 	background: var(--color13);
 	color: var(--font1);
 }
 
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] {
+#contain div#tool div#timer > *[name] {
 	background: var(--color15);
 	/*display: inline-block;*/
 	margin: auto;
@@ -2597,44 +2413,44 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 	position: relative;
 	overflow: hidden;
 }
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name='countdown'] {
+#contain div#tool div#timer > *[name='countdown'] {
 	display: none;
 }
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b {
+#contain div#tool div#timer > *[name] b {
 	display: flex;
     align-items: center;
     justify-content: center;
     color: var(--font2);
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] input {
+#contain div#tool div#timer > *[name] input {
 	background: var(--color_95);
     font-size: var(--sizeFontXL);
     color: var(--fontDark);
 	padding: 5px 10px;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] input::placeholder {
+#contain div#tool div#timer > *[name] input::placeholder {
 	color: var(--fontDark);
 }
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > span > p {
+#contain div#tool div#timer > *[name] > div > div > span > p {
 	padding: 0 5px;
 }
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b {
+#contain div#tool div#timer > *[name] b {
 	height: 40%;
 	width: 100%;
 	color:var(--fontDark);
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b:active {
+#contain div#tool div#timer > *[name] b:active {
 	color:var(--fontLight);
 }
 
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] figure {
+#contain div#tool div#timer > *[name] figure {
 	height: 100%;
 	width: 10%;
 	display: flex;
@@ -2643,21 +2459,21 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 }
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b[title='Play'] {
+#contain div#tool div#timer > *[name] b[title='Play'] {
 	background: var(--colorGreen);
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b[title='Pause'] {
+#contain div#tool div#timer > *[name] b[title='Pause'] {
 	background: var(--colorRed);
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] b:active {
+#contain div#tool div#timer > *[name] b:active {
 	color: var(--fontDark);
 }
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div,
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > data {
+#contain div#tool div#timer > *[name] > div > div,
+#contain div#tool div#timer > *[name] > div > div > data {
     text-align: center;
     width: 100%;
     height: 60%;
@@ -2668,7 +2484,7 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 }
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > span {
+#contain div#tool div#timer > *[name] > div > div > span {
 	display:flex;
 	align-items:center;
 	justify-content:center;
@@ -2677,18 +2493,18 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div > div > data {
+#contain div#tool div#timer > *[name] > div > div > data {
 	width: 80%;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] > div {
+#contain div#tool div#timer > *[name] > div {
 	width: 100%;
 	height: 30%;
 	background: var(--color17);
 	border-bottom: 1px solid;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul {
+#contain div#tool div#timer > *[name] ul {
 	width: 100%;
 	height: 70%;
 	overflow-y: auto;
@@ -2697,7 +2513,7 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 	padding: 0;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li {
+#contain div#tool div#timer > *[name] ul > li {
 	width: 100%;
     display: inline-block;
     text-align: center;
@@ -2707,15 +2523,15 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
     border-top: 1px solid;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li:first-child {
+#contain div#tool div#timer > *[name] ul > li:first-child {
 	border-top: none;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li:last-child {
+#contain div#tool div#timer > *[name] ul > li:last-child {
 	border-bottom: 1px solid;
 }
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[name] ul > li span {
+#contain div#tool div#timer > *[name] ul > li span {
 	position: absolute;
 	left: 10px;
 }
@@ -2724,10 +2540,10 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 
 
 
-#contain div#tool > section[name='content'] > div[name='timer'] > *[state='play'] b[title='Play'],
-#contain div#tool > section[name='content'] > div[name='timer'] > *[state='stop'] b[title='Pause'],
-#contain div#tool > section[name='content'] > div[name='timer'] > *[state='stop'] data,
-#contain div#tool > section[name='content'] > div[name='timer'] > *[state='play'] > div > div > span {
+#contain div#tool div#timer > *[state='play'] b[title='Play'],
+#contain div#tool div#timer > *[state='stop'] b[title='Pause'],
+#contain div#tool div#timer > *[state='stop'] data,
+#contain div#tool div#timer > *[state='play'] > div > div > span {
 	display: none !important;
 }
 
