@@ -273,6 +273,19 @@ function dataRedirect() {
 
 }
 
+
+
+function getIntData(int,arr,column) {
+    let val = undefined;
+    if (arr[int][column] != undefined) {
+        val = arr[int][column];
+    }
+    else if (arr[getDefaultInt(int)][column] != undefined) {
+        val = arr[getDefaultInt(int)][column];
+    }
+    return val;
+}
+
 function returnData(int, type, additional) {
 	var int;
 	var arr;
@@ -3282,6 +3295,183 @@ function fullscreenMove(dir) {
 function exitFullscreen(base) {
     var base = document.querySelector("#fullscreen");
     base.classList.remove("open");
+}
+
+function calcTypeAdv(types,condition) {
+
+
+    let adv = [];
+    let used = [];
+
+    if (condition == "Defending") {
+        for (var i = 0; i < types.length; i++) {
+            let arr = returnTypeAdvantage(types[i],"Defending");
+
+            for (var q = 0; q < arr.length; q++) {
+                
+                for (var r = 0; r < arr[q].length; r++) {
+    
+                    if (q == 0) { // Normal
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 1;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = adv[t]["Value"]*1;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                    if (q == 1) { // Not Very Effective
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 1*0.5;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = adv[t]["Value"]*0.5;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                    if (q == 2) { // Super Effective
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 1*2;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = adv[t]["Value"]*2;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                    if (q == 3) { // Immune
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 0;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = 0;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                }
+
+            }
+
+        }
+    }
+    if (condition == "Attacking") {
+        for (var i = 0; i < types.length; i++) {
+            let arr = returnTypeAdvantage(types[i],"Attacking");
+
+            for (var q = 0; q < arr.length; q++) {
+                
+                for (var r = 0; r < arr[q].length; r++) {
+    
+                    if (q == 0) { // Normal
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 1;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = adv[t]["Value"]*1;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                    if (q == 1) { // Not Very Effective
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 1*0.5;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = adv[t]["Value"]*0.5;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                    if (q == 2) { // Super Effective
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 1*2;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = adv[t]["Value"]*2;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                    if (q == 3) { // Immune
+                        if (!used.includes(arr[q][r])) {
+                            let obj = new Object();
+                            obj["Type"] = arr[q][r];
+                            obj["Value"] = 0;
+                            adv.push(obj);
+                        }
+                        else {
+                            for (var t = 0; t < adv.length; t++) {
+                                if (adv[t]["Type"] == arr[q][r]) {
+                                    adv[t]["Value"] = 0;
+                                }
+                            }
+                        }
+                        used.push(arr[q][r])
+                    }
+                }
+
+            }
+
+        }
+    }
+
+
+    let result = [];
+    for (var i = 0; i < Types.length; i++) {
+        for (var q = 0; q < adv.length; q++) {
+            if (adv[q]["Type"] == Types[i].toUpperCase()) {
+                result.push(adv[q]);
+            }
+        }
+    }
+
+    return result;
+
 }
 
 
