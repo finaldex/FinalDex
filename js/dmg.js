@@ -340,7 +340,6 @@ function DMGCalcStart() {
 						let MeFirst = 1;
 						let Charge = 1;
 						let GlaiveRush = 1;
-						let Stockpile = 1;
 						let TripleKick = 1;
 						let BehemothBladeBehemothBashDynamaxCannon = 1;
 						let Minimize = 1;
@@ -601,6 +600,26 @@ function DMGCalcStart() {
 									}
 									else if (val >= 200) {
 										Power = 120;
+									}
+								}
+								else if (movePath.value == "Triple Kick" && Generation >= 3) {
+									Power = Power*(h+1);
+								}
+								else if (movePath.value == "Trump Card") {
+									if (specInputPath.value == 5) { // 5 PP
+										Power = 40;
+									}
+									else if (specInputPath.value == 4) { // 4 PP
+										Power = 50;
+									}
+									else if (specInputPath.value == 3) { // 3 PP
+										Power = 60;
+									}
+									else if (specInputPath.value == 2) { // 2 PP
+										Power = 80;
+									}
+									else if (specInputPath.value == 1) { // 1 PP
+										Power = 200;
 									}
 								}
 								else if (movePath.value == "Magnitude") {
@@ -1316,7 +1335,6 @@ function DMGCalcStart() {
 								}
 							}
 							else if (Generation == 3) { // DMG Generation 3
-						
 								random = randomPath.value/100;
 								
 								if (moveCategory == "Physical") {
@@ -1435,9 +1453,12 @@ function DMGCalcStart() {
 										Charge = 2;
 									}
 								}
+								if (movePath.value == "Spit Up") { // No Random
+									random = 1;
+								}
 							}
 							else if (Generation == 4) { // DMG Generation 4
-							
+						
 								random = randomPath.value/100;
 								
 								if (moveCategory == "Physical") {
@@ -1654,6 +1675,9 @@ function DMGCalcStart() {
 									if (ChargePath.checked) {
 										Power = Power*2;
 									}
+								}
+								if (movePath.value == "Spit Up") { // No Random
+									random = 1;
 								}
 							}
 							else if (Generation >= 5) { // DMG Generation 5+
@@ -2179,10 +2203,7 @@ function DMGCalcStart() {
 								Type1 = 1;
 								Type2 = 1;
 							}
-					
-							if (movePath.value == "Spit Up" && Generation >= 3 && Generation <= 4) { // No Random Calc
-								random = 1;
-							}
+
 			
 
 
@@ -2611,7 +2632,7 @@ function DMGCalcStart() {
 								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Item*Critical+2)*TripleKick*Weather*Badge*STAB*Type*(Rollout*FuryCutter*Rage*Pursuit*StompNeedleArmAstonishExtrasensory*GustTwister*EarthquakeMagnitude)*random;
 							}
 							else if (Generation == 3) {
-								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Stockpile*Critical*(Item)*(GustTwister*StompNeedleArmAstonishExtrasensory*SurfWhirlpool*EarthquakeMagnitude*Pursuit*Facade*SmellingSalt*Revenge*WeatherBall)*Charge*HelpingHand*STAB*Type*random*(Rollout*FuryCutter*Rage);
+								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*(Item)*(GustTwister*StompNeedleArmAstonishExtrasensory*SurfWhirlpool*EarthquakeMagnitude*Pursuit*Facade*SmellingSalt*Revenge*WeatherBall)*Charge*HelpingHand*STAB*Type*random*(Rollout*FuryCutter*Rage);
 							}
 							else if (Generation == 4) {
 								calculation = ((((((2*Level)/5)+2)*Power*(Attack/Defense))/50)*Burn*Screen*Targets*Weather*FlashFire+2)*Critical*(Item*LifeOrb*Metronome)*(MeFirst*Rollout*FuryCutter*Rage*StompNeedleArmAstonishExtrasensory*Pursuit)*HelpingHand*random*STAB*Type1*Type2*SolidRockFilter*ExpertBelt*TintedLens*Berry;
