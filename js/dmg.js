@@ -1,6 +1,7 @@
 function DMGCalcStart() {
 
 	DMGSetPossible();
+	DMGSpeedCalc();
 
     // Paths //
 	let user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div.user");
@@ -301,77 +302,76 @@ function DMGCalcStart() {
 					}
 				}
 				if (check) {
-
-					// Defaults
-					let calculation = 0;
-					let Immune = false;
-					let Affected = true;
-					let Level = 1;
-					let Critical = 1;
-					let Attack = 0;		
-					let Defense = 0;
-					let NoModAttack = 0;
-					let NoModDefense = 0;
-					let Power = 0;
-					let STAB = 1;
-					let Type = 1;
-					let Type1 = 1;
-					let Type2 = 1;
-					let random = 1;
-					let Targets = 1;
-					
-					// Abilities
-					let FlashFire = 1;
-					let Fluffy1 = 1;
-					let Fluffy2 = 1;
-					let TintedLens = 1;
-					let SolidRockFilter = 1;
-					let FilterPrismArmorSolidRock = 1;
-					let PunkRock = 1;
-					let IceScales = 1;
-					let FriendGuard = 1;
-					let Neuroforce = 1;
-					let Sniper = 1;
-					let MultiscaleShadowShield = 1;
-
-					// Moves
-					let HelpingHand = 1;
-					let MeFirst = 1;
-					let Charge = 1;
-					let GlaiveRush = 1;
-					let Stockpile = 1;
-					let TripleKick = 1;
-					let BehemothBladeBehemothBashDynamaxCannon = 1;
-					let Minimize = 1;
-					let SurfWhirlpool = 1;
-					let EarthquakeMagnitude = 1;
-					let GustTwister = 1;
-					let ColissionCourseElectroDrift = 1;
-					let Rollout = 1;
-					let FuryCutter = 1;
-					let Rage = 1;
-					let Pursuit = 1;
-					let StompNeedleArmAstonishExtrasensory = 1;
-					let Facade = 1;
-					let SmellingSalt = 1;
-					let Revenge = 1;
-					let WeatherBall = 1;
-
-					// Items
-					let Item = 1;
-					let ExpertBelt = 1;
-					let LifeOrb = 1;
-					let Metronome = 1;
-
-					// Other
-					let Weather = 1;
-					let Badge = 1;
-					let Burn = 1;
-					let Screen = 1;
-					let Berry = 1;
-					let ZMove = 1;
-
 					for (let h = 0; h < specInputPath.value; h++) {
+						// Defaults
+						let calculation = 0;
+						let Immune = false;
+						let Affected = true;
+						let Level = 1;
+						let Critical = 1;
+						let Attack = 0;		
+						let Defense = 0;
+						let NoModAttack = 0;
+						let NoModDefense = 0;
+						let Power = 0;
+						let STAB = 1;
+						let Type = 1;
+						let Type1 = 1;
+						let Type2 = 1;
+						let random = 1;
+						let Targets = 1;
+						
+						// Abilities
+						let FlashFire = 1;
+						let Fluffy1 = 1;
+						let Fluffy2 = 1;
+						let TintedLens = 1;
+						let SolidRockFilter = 1;
+						let FilterPrismArmorSolidRock = 1;
+						let PunkRock = 1;
+						let IceScales = 1;
+						let FriendGuard = 1;
+						let Neuroforce = 1;
+						let Sniper = 1;
+						let MultiscaleShadowShield = 1;
+
+						// Moves
+						let HelpingHand = 1;
+						let MeFirst = 1;
+						let Charge = 1;
+						let GlaiveRush = 1;
+						let Stockpile = 1;
+						let TripleKick = 1;
+						let BehemothBladeBehemothBashDynamaxCannon = 1;
+						let Minimize = 1;
+						let SurfWhirlpool = 1;
+						let EarthquakeMagnitude = 1;
+						let GustTwister = 1;
+						let ColissionCourseElectroDrift = 1;
+						let Rollout = 1;
+						let FuryCutter = 1;
+						let Rage = 1;
+						let Pursuit = 1;
+						let StompNeedleArmAstonishExtrasensory = 1;
+						let Facade = 1;
+						let SmellingSalt = 1;
+						let Revenge = 1;
+						let WeatherBall = 1;
+
+						// Items
+						let Item = 1;
+						let ExpertBelt = 1;
+						let LifeOrb = 1;
+						let Metronome = 1;
+
+						// Other
+						let Weather = 1;
+						let Badge = 1;
+						let Burn = 1;
+						let Screen = 1;
+						let Berry = 1;
+						let ZMove = 1;
+
 
 						if ("Factors Pre") {
 							Level = parseInt(userLevelPath.value);
@@ -640,6 +640,22 @@ function DMGCalcStart() {
 								else if (movePath.value == "Natural Gift") {
 									Power = naturalGiftPowerCalc(userItemPath.value);
 								}
+								else if (movePath.value == "Spit Up") {
+									Power = parseInt(specInputPath.value)*100;
+								}
+								else if (movePath.value == "Punishment") {
+									let it = 1;
+									for (var t = 0; t < tarModPath.length; t++) {
+										if (tarModPath[t].value != undefined && tarModPath[t].value != "") {
+											let val = parseInt(tarModPath[t].value);
+											if (val > 0) {
+												it = it+val;
+											}
+										}
+									}
+									let val = Math.min((20*it),200);
+									Power = val;
+								}
 								else if (movePath.value == "Gyro Ball") {
 									Power = Math.min(150,((25*tarSpeedStatPath.value)/userSpeedStatPath.value)+1);
 								}
@@ -727,7 +743,7 @@ function DMGCalcStart() {
 									Power = Math.floor((150*userHPPath.value)/userHPPath.max);
 									Power = Math.max(Power,1);
 								}
-								else if (movePath.value == "Flail") {
+								else if (movePath.value == "Flail" || movePath.value == "Reversal") {
 									let val = userHPPath.value/userHPPath.max;
 									if (Generation == 4) {
 										if (val >= 0.6719) {
@@ -943,9 +959,6 @@ function DMGCalcStart() {
 										FlashFire = 1.5;
 									}
 								}
-							}
-							if (movePath.value == "Spit Up") {
-								Stockpile = specInputPath.value;
 							}
 							if (movePath.value == "Facade") {
 								if (userStatusPoisonPath.checked || userStatusBurnPath.checked || userStatusParalyzePath.checked) {
@@ -2166,6 +2179,12 @@ function DMGCalcStart() {
 								Type1 = 1;
 								Type2 = 1;
 							}
+					
+							if (movePath.value == "Spit Up" && Generation >= 3 && Generation <= 4) { // No Random Calc
+								random = 1;
+							}
+			
+
 
 						}
 
@@ -2637,19 +2656,19 @@ function DMGCalcStart() {
 								}
 								else if (movePath.value == "Psywave") {
 									if (Generation == 1 || Generation == 2) {
-										calculation = Math.max(1,randomPath.value);
+										calculation = Math.max(1,parseFloat(randomPath.value));
 									}
 									else if (Generation >= 3 && Generation <= 4) {
-										calculation = Math.max(1,Math.floor((userLevelPath.value*((10*randomPath.value)+50))/100));
+										calculation = Math.max(1,Math.floor((parseFloat(userLevelPath.value)*((10*parseFloat(randomPath.value))+50))/100));
 									}
 									else if (Generation >= 5) {
-										calculation = Math.max(1,Math.floor((userLevelPath.value*((randomPath.value)+50))/100));
+										calculation = Math.max(1,Math.floor((parseFloat(userLevelPath.value)*((parseFloat(randomPath.value))+50))/100));
 									}
 								}
 
 
 								// Calculation Apply //
-								if (movePath.value == "Triple Kick" && Generation == 2 || movePath.value == "Spit Up" || movePath.value == "Magnitude" || movePath.value == "Psywave") { // Variable Power (Break Multiple Hits Loop)
+								if (movePath.value == "Triple Kick" && Generation == 2 || movePath.value == "Spit Up" || movePath.value == "Magnitude") { // Variable Power (Break Multiple Hits Loop)
 									DMGCalcApply(tar,calculation,"Damage");
 									h = specInputPath.value-1;
 								}
@@ -2772,6 +2791,7 @@ function DMGCalcStart() {
 													}
 												}
 											}	
+											break;
 										}
 									}
 								}
@@ -3374,7 +3394,6 @@ function DMGCalcStart() {
 
 
 
-
 }
 let DMGCalculation = [];
 
@@ -3877,6 +3896,9 @@ function DMGCalcPokStats(base) {
 
 	DMGSpeedCalc();	
 }
+
+let DMGRandomLeave = false;
+
 function DMGSetInfo() {
 	
 	let user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string].user");
@@ -3962,6 +3984,13 @@ function DMGSetInfo() {
 		}
 	}
 
+
+	let firstIteration = false;
+	if (rollRandomPath.value == -1) {
+		firstIteration = true;
+	}
+
+
 	if (moveSelect.value == "Psywave") {
 		if (Generation >= 1 && Generation <= 2) {
 			rollRandomPath.min = 0;
@@ -3975,7 +4004,7 @@ function DMGSetInfo() {
 			rollRandomPath.min = 0;
 			rollRandomPath.max = 100;
 		}
-		rollRandomPath.value = rollRandomPath.min;
+		DMGRandomLeave = true;
 	}
 	else {
 		if (Generation >= 1 && Generation <= 2) {
@@ -3986,15 +4015,31 @@ function DMGSetInfo() {
             rollRandomPath.min = 85;
             rollRandomPath.max = 100;
         }
-		rollRandomPath.value = rollRandomPath.min;
 	}
 
-	let pcent = ((rollRandomPath.value-rollRandomPath.min)/(rollRandomPath.max-rollRandomPath.min))*100;
-	rollValTextPath.innerText = rollRandomPath.value-rollRandomPath.min;
+
+	if (DMGRandomLeave || firstIteration || rollRandomPath.value > parseFloat(rollRandomPath.max) || rollRandomPath.value < parseFloat(rollRandomPath.min)) {
+		rollRandomPath.value = Math.round((parseFloat(rollRandomPath.max)-parseFloat(rollRandomPath.min))/2)+parseFloat(rollRandomPath.min);
+	}
+
+
+
+	let tempArr = ["Psywave"];
+	if (DMGRandomLeave) {
+		DMGRandomLeave = false;
+	}
+	if (tempArr.includes(moveSelect.value)) {
+		DMGRandomLeave = true;
+	}
+	
+
+
+	let pcent = ((rollRandomPath.value-parseFloat(rollRandomPath.min))/(parseFloat(rollRandomPath.max)-parseFloat(rollRandomPath.min)))*100;
+	rollValTextPath.innerText = rollRandomPath.value-parseFloat(rollRandomPath.min);
 	rollValTextPath.innerText = rollValTextPath.innerText+" ("+parseInt(pcent)+"%)";
 	rollRandomPath.style.background = "linear-gradient(to right, var(--colorBlue) 0%, var(--colorBlue) "+pcent+"%, var(--color_90) "+pcent+"%, var(--color_90) 100%)"
-	rollMinTextPath.innerText = rollRandomPath.min-rollRandomPath.min;
-	rollMaxTextPath.innerText = rollRandomPath.max-rollRandomPath.min;
+	rollMinTextPath.innerText = parseFloat(rollRandomPath.min)-parseFloat(rollRandomPath.min);
+	rollMaxTextPath.innerText = parseFloat(rollRandomPath.max)-parseFloat(rollRandomPath.min);
 
 
 	for (var l = 0; l < specLis.length; l++) {
@@ -5409,13 +5454,21 @@ function DMGExportDataString() {
 	consoleText("Copied Data String!")
 }
 function DMGSpeedCalc() {
+
+	let user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string].user");
+    let userTeam = user.parentElement.getAttribute("name");
+	let userID = user.getAttribute("name");
+
 	let divBases = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name] > div[data-string]");
 	let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name] > ul[name]");
 	let statsBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='stats'] span[name] > ul[name]");
 
 	let fieldPath = document.querySelector("#contain > div#tool div#dmg div[name='content'] > div[name='field']");
 
-	var TrickRoomPath = fieldPath.querySelector(":scope *[name='Trick Room'] input");
+	let TrickRoomPath = fieldPath.querySelector(":scope *[name='Trick Room'] input");
+
+	var movePath = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select")
+	var movePriority = returnArrValue(finaldata["Moves"]["Priority"],"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,movePath.value);
 
 	if (divBases.length == statsBases.length) {
 		var eles = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name] > div[data-string] *[name='speed'] > *");
@@ -5431,6 +5484,17 @@ function DMGSpeedCalc() {
 			var obj = new Object();
 			obj["Speed"] = ele.value;
 			obj["Int"] = s;
+
+			if (statsBases[s].getAttribute("name") == userID && statsBases[s].parentElement.getAttribute("name") == userTeam) {
+				if (movePriority != undefined && movePriority != "") {
+					if (movePriority.includes("+")) {
+						obj["Speed"] = 99999;
+					}
+					else if (movePriority.includes("-")) {
+						obj["Speed"] = -99999;
+					}
+				}
+			}
 			speed.push(obj)
 		}
 
