@@ -1039,7 +1039,7 @@ body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 
 
 #contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child > * {
-	display: none;
+	display: flex;
     flex-direction: column;
 	padding: 0 10px;
 }
