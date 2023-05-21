@@ -617,6 +617,9 @@ var createTool = function() {
 		toolSectionContentDMGMenuRollRange.setAttribute("type","range");
 		toolSectionContentDMGMenuRollRange.setAttribute("name","dmg-roll-range")
 		toolSectionContentDMGMenuRollRange.setAttribute("id","dmg-roll-range")
+		toolSectionContentDMGMenuRollRange.min = -1;
+		toolSectionContentDMGMenuRollRange.max = -1;
+		toolSectionContentDMGMenuRollRange.value = -1;
 	
 
 		toolSectionContentDMGOptionsContentPok.setAttribute("name","pokémon");
