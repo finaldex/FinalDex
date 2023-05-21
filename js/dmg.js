@@ -2160,7 +2160,7 @@ function DMGCalcStart() {
 								}
 							}
 
-							if (movePath.value == "Night Shade" || movePath.value == "Seismic Toss" || movePath.value == "Endeavor" || movePath.value == "Nature's Madness" || movePath.value == "Super Fang" || movePath.value == "Ruination" || movePath.value == "Final Gambit") { // No Stab/Type Boost
+							if (movePath.value == "Night Shade" || movePath.value == "Seismic Toss" || movePath.value == "Endeavor" || movePath.value == "Nature's Madness" || movePath.value == "Super Fang" || movePath.value == "Ruination" || movePath.value == "Final Gambit" || movePath.value == "Psywave") { // No Stab/Type Boost
 								STAB = 1;
 								Type = 1;
 								Type1 = 1;
@@ -2633,6 +2633,20 @@ function DMGCalcStart() {
 								}
 								else if (movePath.value == "Night Shade" || movePath.value == "Seismic Toss") {
 									calculation = userLevelPath.value;
+								}
+								else if (movePath.value == "Psywave") {
+									if (Generation == 1 || Generation == 2) {
+										let val1 = 1;
+										let val2 = userLevelPath.value*1.5;
+										let val = Math.floor(Math.random() * (val2 - val1)) + val1;
+										calculation = val;
+									}
+									else if (Generation >= 3 && Generation <= 4) {
+										calculation = Math.max(1,Math.floor((userLevelPath.value*((10*specInputPath.value)+50))/100));
+									}
+									else if (Generation >= 5) {
+										calculation = Math.max(1,Math.floor((userLevelPath.value*((specInputPath.value)+50))/100));
+									}
 								}
 
 								if (movePath.value == "Triple Kick" && Generation == 2 || movePath.value == "Spit Up" || movePath.value == "Magnitude") { // Variable Power (Break Multiple Hits Loop)
