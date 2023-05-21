@@ -17,9 +17,8 @@ var createTool = function() {
 	toolSectionListOptionsOuter.classList.add("scroll");
 	toolSectionHeaderTitleText.innerText = "Tools";
 
-	toolSectionContentTimersOuter.setAttribute("name","timer");
 	toolSectionContentTimersOuter.setAttribute("id","timer");
-	toolSectionContentTimersOuter.setAttribute("value","2");
+	toolSectionContentTimersOuter.setAttribute("name","Timers");
 
 	document.querySelector("#contain").appendChild(toolOuter);
 	toolOuter.appendChild(toolSectionList);
@@ -172,9 +171,8 @@ var createTool = function() {
 		var toolSectionContentRNGOptionsExecuteButton = document.createElement("button");
 		var toolSectionContentRNGResult = document.createElement("div");
 
-		toolSectionContentRNGOuter.setAttribute("name","rng");
 		toolSectionContentRNGOuter.setAttribute("id","rng");
-		toolSectionContentRNGOuter.setAttribute("value","3");
+		toolSectionContentRNGOuter.setAttribute("name","Random Number Generator");
 
 		toolSectionContentRNGResult.setAttribute("name","result");
 		toolSectionContentRNGResult.classList.add("scroll");
@@ -216,656 +214,276 @@ var createTool = function() {
 
 
 		var typeOuter = document.createElement("div");
-		var typeTitle = document.createElement("div");
-
 		var typeContent = document.createElement("div");
-		
 		var typeSidebar = document.createElement("div");
+		var typeSidebarTitle = document.createElement("div");
 		var typeSidebarDescription = document.createElement("div");
 		var typeSidebarDescriptionSelector = document.createElement("div");
-		var typeSidebarDescriptionTitleOuter = document.createElement("div");
-		var typeSidebarDescriptionTitleTitle = document.createElement("span");
-		var typeSidebarDescriptionTitleTitleText = document.createElement("h4");
-		var typeSidebarDescriptionTitleImageOuter = document.createElement("span");
-		var typeSidebarDescriptionTitleImage = document.createElement("img");
-		var typeSidebarDescriptionAgainstOpposed = document.createElement("div");
-		var typeSidebarDescriptionAgainst = document.createElement("div");
-		var typeSidebarDescriptionAgainstEffective = document.createElement("span");
-		var typeSidebarDescriptionAgainstEffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstEffectiveContain = document.createElement("span");
-		var typeSidebarDescriptionAgainstIneffective = document.createElement("span");
-		var typeSidebarDescriptionAgainstIneffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstIneffectiveContain = document.createElement("span");
-		var typeSidebarDescriptionAgainstImmune = document.createElement("span");
-		var typeSidebarDescriptionAgainstImmuneTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstImmuneContain = document.createElement("span");
-		var typeSidebarDescriptionAgainstDefault = document.createElement("span");
-		var typeSidebarDescriptionAgainstDefaultTitle = document.createElement("h4");
-		var typeSidebarDescriptionAgainstDefaultContain = document.createElement("span");
-		var typeSidebarDescriptionOpposed = document.createElement("div");
-		var typeSidebarDescriptionOpposedEffective = document.createElement("span");
-		var typeSidebarDescriptionOpposedEffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedEffectiveContain = document.createElement("span");
-		var typeSidebarDescriptionOpposedIneffective = document.createElement("span");
-		var typeSidebarDescriptionOpposedIneffectiveTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedIneffectiveContain = document.createElement("span");
-		var typeSidebarDescriptionOpposedImmune = document.createElement("span");
-		var typeSidebarDescriptionOpposedImmuneTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedImmuneContain = document.createElement("span");
-		var typeSidebarDescriptionOpposedDefault = document.createElement("span");
-		var typeSidebarDescriptionOpposedDefaultTitle = document.createElement("h4");
-		var typeSidebarDescriptionOpposedDefaultContain = document.createElement("span");
+		var typeSidebarDescriptionAttackDefend = document.createElement("div");
 
-
-		typeTitle.setAttribute("name","header");
-
-		typeSidebarDescriptionTitleOuter.setAttribute("name","title");
-		typeSidebarDescriptionAgainstOpposed.setAttribute("name","description");
-
+		typeSidebarTitle.setAttribute("name","title");
+		typeSidebarDescription.setAttribute("name","description");
 		typeContent.setAttribute("name","content");
-		typeContent.classList.add("scroll");
-
-		
-		
 		typeSidebar.setAttribute("name","sidebar");
-
-
-		typeOuter.setAttribute("name","type");
 		typeOuter.setAttribute("id","type");
-
-		typeOuter.setAttribute("value","1");
-
-		typeSidebarDescriptionTitleImage.setAttribute("onerror","this.style.display='none';");
-		typeSidebarDescriptionTitleImage.setAttribute("alt", MEDIAPath_Type_Icon);
-
-		typeSidebarDescriptionAgainst.setAttribute("name","against");
-		typeSidebarDescriptionAgainst.classList.add("scroll");
-
-		typeSidebarDescriptionAgainstEffective.setAttribute("name","effective");
-		typeSidebarDescriptionAgainstIneffective.setAttribute("name","ineffective");
-		typeSidebarDescriptionAgainstImmune.setAttribute("name","immune");
-		typeSidebarDescriptionAgainstDefault.setAttribute("name","default");
-
-		typeSidebarDescriptionOpposedEffective.setAttribute("name","effective");
-		typeSidebarDescriptionOpposedIneffective.setAttribute("name","ineffective");
-		typeSidebarDescriptionOpposedImmune.setAttribute("name","immune");
-		typeSidebarDescriptionOpposedDefault.setAttribute("name","default");
-
-		typeSidebarDescriptionAgainstEffectiveTitle.setAttribute("title","Super Effective when used by a Move with with following types:");
-		typeSidebarDescriptionAgainstEffectiveTitle.innerText = "Super Effective";
-
-		typeSidebarDescriptionAgainstIneffectiveTitle.setAttribute("title","Not Very Effective when used by a Move with with following types:");
-		typeSidebarDescriptionAgainstIneffectiveTitle.innerText = "Not Very Effective";
-
-		typeSidebarDescriptionAgainstImmuneTitle.setAttribute("title","No Effect when used by a Move with following types:");
-		typeSidebarDescriptionAgainstImmuneTitle.innerText = "No Effect";
-
-		typeSidebarDescriptionAgainstDefaultTitle.setAttribute("title","Normal Effectiveness when used by a Move with following types:");
-		typeSidebarDescriptionAgainstDefaultTitle.innerText = "Normal Effectiveness";
-
-		typeSidebarDescriptionOpposed.setAttribute("name","opposed");
-
-		typeSidebarDescriptionOpposed.classList.add("scroll");
-
-		typeSidebarDescriptionOpposedEffectiveTitle.setAttribute("title","Super Effective when used against an opposing Pokémon with following types:");
-		typeSidebarDescriptionOpposedEffectiveTitle.innerText = "Super Effective";
-
-		typeSidebarDescriptionOpposedEffectiveContain.value = MEDIAPath_Type_Text;
-
-		typeSidebarDescriptionOpposedIneffectiveTitle.setAttribute("title","Not Very Effective when used against an opposing Pokémon with following types:");
-		typeSidebarDescriptionOpposedIneffectiveTitle.innerText = "Not Very Effective";
-
-		typeSidebarDescriptionOpposedIneffectiveContain.value = MEDIAPath_Type_Text;
-
-		typeSidebarDescriptionOpposedImmuneTitle.setAttribute("title","No Effect when used against an opposing Pokémon with following types:");
-		typeSidebarDescriptionOpposedImmuneTitle.innerText = "No Effect";
-
-		typeSidebarDescriptionOpposedImmuneContain.value = MEDIAPath_Type_Text;
-
-		typeSidebarDescriptionOpposedDefaultTitle.setAttribute("title","Normal Effectiveness when used against an opposing Pokémon with following types:");
-		typeSidebarDescriptionOpposedDefaultTitle.innerText = "Normal Effectiveness";
-
-		typeSidebarDescriptionOpposedDefaultContain.value = MEDIAPath_Type_Text;
+		typeOuter.setAttribute("name","Type Advantage");
 
 		toolSectionContent.appendChild(typeOuter);
-
-		typeOuter.appendChild(typeTitle);
-
 		typeOuter.appendChild(typeSidebar);
-
 		typeOuter.appendChild(typeContent);
-
-
-
-
-
+		typeSidebar.appendChild(typeSidebarTitle);
 		typeSidebar.appendChild(typeSidebarDescription);
-		typeSidebarDescription.appendChild(typeSidebarDescriptionTitleOuter);
-		typeSidebarDescriptionTitleOuter.appendChild(typeSidebarDescriptionTitleTitle);
-		typeSidebarDescriptionTitleTitle.appendChild(typeSidebarDescriptionTitleTitleText);
-		typeSidebarDescriptionTitleOuter.appendChild(typeSidebarDescriptionTitleImageOuter);
-		typeSidebarDescriptionTitleImageOuter.appendChild(typeSidebarDescriptionTitleImage);
-		typeSidebarDescription.appendChild(typeSidebarDescriptionAgainstOpposed);
-		typeSidebarDescriptionAgainstOpposed.appendChild(typeSidebarDescriptionSelector);
-		typeSidebarDescriptionAgainstOpposed.appendChild(typeSidebarDescriptionAgainst);
-		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstEffective);
-		typeSidebarDescriptionAgainstEffective.appendChild(typeSidebarDescriptionAgainstEffectiveTitle);
-		typeSidebarDescriptionAgainstEffective.appendChild(typeSidebarDescriptionAgainstEffectiveContain);
-		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstIneffective);
-		typeSidebarDescriptionAgainstIneffective.appendChild(typeSidebarDescriptionAgainstIneffectiveTitle);
-		typeSidebarDescriptionAgainstIneffective.appendChild(typeSidebarDescriptionAgainstIneffectiveContain);
-		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstImmune);
-		typeSidebarDescriptionAgainstImmune.appendChild(typeSidebarDescriptionAgainstImmuneTitle);
-		typeSidebarDescriptionAgainstImmune.appendChild(typeSidebarDescriptionAgainstImmuneContain);
-		typeSidebarDescriptionAgainst.appendChild(typeSidebarDescriptionAgainstDefault);
-		typeSidebarDescriptionAgainstDefault.appendChild(typeSidebarDescriptionAgainstDefaultTitle);
-		typeSidebarDescriptionAgainstDefault.appendChild(typeSidebarDescriptionAgainstDefaultContain);
-		typeSidebarDescriptionAgainstOpposed.appendChild(typeSidebarDescriptionOpposed);
-		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedEffective);
-		typeSidebarDescriptionOpposedEffective.appendChild(typeSidebarDescriptionOpposedEffectiveTitle);
-		typeSidebarDescriptionOpposedEffective.appendChild(typeSidebarDescriptionOpposedEffectiveContain);
-		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedIneffective);
-		typeSidebarDescriptionOpposedIneffective.appendChild(typeSidebarDescriptionOpposedIneffectiveTitle);
-		typeSidebarDescriptionOpposedIneffective.appendChild(typeSidebarDescriptionOpposedIneffectiveContain);
-		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedImmune);
-		typeSidebarDescriptionOpposedImmune.appendChild(typeSidebarDescriptionOpposedImmuneTitle);
-		typeSidebarDescriptionOpposedImmune.appendChild(typeSidebarDescriptionOpposedImmuneContain);
-		typeSidebarDescriptionOpposed.appendChild(typeSidebarDescriptionOpposedDefault);
-		typeSidebarDescriptionOpposedDefault.appendChild(typeSidebarDescriptionOpposedDefaultTitle);
-		typeSidebarDescriptionOpposedDefault.appendChild(typeSidebarDescriptionOpposedDefaultContain);
+		typeSidebarDescription.appendChild(typeSidebarDescriptionSelector);
+		typeSidebarDescription.appendChild(typeSidebarDescriptionAttackDefend)
+
+
+
+
 	
+
 		for(var i = 0; i < 2; i++) {
+			var typeSidebarTitleWrap = document.createElement("span");
+			var typeSidebarTitleInner = document.createElement("span");
+			var typeSidebarTitleTrigger = document.createElement("b");
+			var typeSidebarTitleTriggerText = document.createElement("strong");
+			var typeSidebarTitleDrop = document.createElement("div");
+			typeSidebarTitleTriggerText.innerText = "+";
+			typeSidebarTitleTrigger.setAttribute("type","invert");
+			typeSidebarTitle.appendChild(typeSidebarTitleWrap);
+			typeSidebarTitleWrap.appendChild(typeSidebarTitleInner);
+			typeSidebarTitleInner.appendChild(typeSidebarTitleTrigger);
+			typeSidebarTitleTrigger.appendChild(typeSidebarTitleTriggerText);
+			typeSidebarTitleWrap.appendChild(typeSidebarTitleDrop);
+
+			typeSidebarTitleTrigger.addEventListener("click",function(){let base = this.parentElement.parentElement; if (base.classList.contains("active")) {base.classList.remove("active");} else {base.classList.add("active");}})
+
+			for(var q = 0; q < Types.length; q++) {
+				var typeSidebarTitleDropOption = document.createElement("b");
+				var typeSidebarTitleDropOptionImg = document.createElement("img");
+				var typeSidebarTitleDropOptionTxt = document.createElement("p");
+				typeSidebarTitleDropOption.setAttribute("name",Types[q]);
+				typeSidebarTitleDropOptionImg.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+Types[q]+".png";
+				typeSidebarTitleDropOptionImg.title = Types[q];
+				typeSidebarTitleDropOptionImg.setAttribute("onerror","this.style.display='none';");
+				typeSidebarTitleDropOptionTxt.innerText = Types[q];
+				typeSidebarTitleDrop.appendChild(typeSidebarTitleDropOption);
+				typeSidebarTitleDropOption.appendChild(typeSidebarTitleDropOptionImg);
+				typeSidebarTitleDropOption.appendChild(typeSidebarTitleDropOptionTxt);
+				typeSidebarTitleDropOption.addEventListener("click",function(){
+					let base = findUpTag(this,"DIV").parentElement;
+					let el = this.querySelector(":scope > *:last-child");
+					let prev = base.querySelector(":scope > span img");
+					if (prev != undefined) {
+						prev.remove();
+					}
+
+					let img = document.createElement("img");
+					img.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+el.innerText+".png";
+					img.setAttribute("name",el.innerText);
+					img.title = el.innerText;
+					img.setAttribute("onclick","this.remove();typeSwitch();");
+					base.querySelector(":scope > span").prepend(img);
+					base.classList.remove("active");
+					typeSwitch();
+				})
+			}
+		}
+
+		let defAtt = ["Defending","Attacking"];
+
+
+		for(var i = 0; i < defAtt.length; i++) {
+			var DefAtt = document.createElement("ul");
+
+			var DefAttSuperEffective = document.createElement("li");
+			var DefAttSuperEffectiveTitle = document.createElement("h6");
+			var DefAttSuperEffectiveContain = document.createElement("span");
+			var DefAttEffective = document.createElement("li");
+			var DefAttEffectiveTitle = document.createElement("h6");
+			var DefAttEffectiveContain = document.createElement("span");
+			var DefAttSuperIneffective = document.createElement("li");
+			var DefAttSuperIneffectiveTitle = document.createElement("h6");
+			var DefAttSuperIneffectiveContain = document.createElement("span");
+			var DefAttIneffective = document.createElement("li");
+			var DefAttIneffectiveTitle = document.createElement("h6");
+			var DefAttIneffectiveContain = document.createElement("span");
+			var DefAttImmune = document.createElement("li");
+			var DefAttImmuneTitle = document.createElement("h6");
+			var DefAttImmuneContain = document.createElement("span");
+			var DefAttNormal = document.createElement("li");
+			var DefAttNormalTitle = document.createElement("h6");
+			var DefAttNormalContain = document.createElement("span");
+
+			DefAtt.setAttribute("name",defAtt[i]);
+			DefAttSuperEffective.setAttribute("name","super effective");
+			DefAttEffective.setAttribute("name","effective");
+			DefAttSuperIneffective.setAttribute("name","super ineffective");
+			DefAttIneffective.setAttribute("name","ineffective");
+			DefAttImmune.setAttribute("name","immune");
+			DefAttNormal.setAttribute("name","normal");
+
+
+			DefAttSuperEffectiveTitle.innerText = "4× • Super Effective";
+			DefAttEffectiveTitle.innerText = "2× • Super Effective";
+			DefAttIneffectiveTitle.innerText = "½ • Not Very Effective";
+			DefAttSuperIneffectiveTitle.innerText = "¼ • Not Very Effective";
+			DefAttImmuneTitle.innerText = "0× • No Effect";
+			DefAttNormalTitle.innerText = "1× • Normal Effectiveness";
+
+
+			typeSidebarDescriptionAttackDefend.appendChild(DefAtt);
+			DefAtt.appendChild(DefAttSuperEffective);
+			DefAttSuperEffective.appendChild(DefAttSuperEffectiveTitle);
+			DefAttSuperEffective.appendChild(DefAttSuperEffectiveContain);
+			DefAtt.appendChild(DefAttEffective);
+			DefAttEffective.appendChild(DefAttEffectiveTitle);
+			DefAttEffective.appendChild(DefAttEffectiveContain);
+			DefAtt.appendChild(DefAttNormal);
+			DefAttNormal.appendChild(DefAttNormalTitle);
+			DefAttNormal.appendChild(DefAttNormalContain);
+			DefAtt.appendChild(DefAttIneffective);
+			DefAttIneffective.appendChild(DefAttIneffectiveTitle);
+			DefAttIneffective.appendChild(DefAttIneffectiveContain);
+			DefAtt.appendChild(DefAttSuperIneffective);
+			DefAttSuperIneffective.appendChild(DefAttSuperIneffectiveTitle);
+			DefAttSuperIneffective.appendChild(DefAttSuperIneffectiveContain);
+			DefAtt.appendChild(DefAttImmune);
+			DefAttImmune.appendChild(DefAttImmuneTitle);
+			DefAttImmune.appendChild(DefAttImmuneContain);
+			
+			
+			let cont = ""
+
+			if (i == 0) {
+				cont = "when used by a Move with following types:";
+			}
+			else if (i == 1) {
+				cont = "when used against an opposing Pokémon with following types:";
+			}
+
+			DefAttSuperEffectiveTitle.setAttribute("title","Super Effective (4×) "+cont);
+			DefAttEffectiveTitle.setAttribute("title","Super Effective (2×) "+cont);
+			DefAttIneffectiveTitle.setAttribute("title","Not Very Effective (½) "+cont);
+			DefAttSuperIneffectiveTitle.setAttribute("title","Not Very Effective (¼) "+cont);
+			DefAttImmuneTitle.setAttribute("title","No Effect (0×) "+cont);
+			DefAttNormalTitle.setAttribute("title","Normal Effectiveness (1×) "+cont);
+ 		}
+
+		for(var i = 0; i < defAtt.length; i++) {
 			var typeSidebarDescriptionSelectorInput = document.createElement("input");
 			var typeSidebarDescriptionSelectorLabel = document.createElement("label");
 			var typeSidebarDescriptionSelectorLabelText = document.createElement("p");
 			typeSidebarDescriptionSelectorInput.setAttribute("type","radio");
-			typeSidebarDescriptionSelectorInput.setAttribute("value", i);
+			typeSidebarDescriptionSelectorInput.setAttribute("value", defAtt[i]);
 			typeSidebarDescriptionSelectorInput.setAttribute("name","type-selector");
 			typeSidebarDescriptionSelectorInput.setAttribute("id","type-selector" + i);
 			typeSidebarDescriptionSelectorInput.setAttribute("autocomplete","off");
 			typeSidebarDescriptionSelectorLabel.setAttribute("for","type-selector" + i);
-			if(i == 0) {
-				typeSidebarDescriptionSelectorInput.setAttribute("checked","");
-				typeSidebarDescriptionSelectorInput.setAttribute("onclick","this.parentElement.nextElementSibling.style.display='block';this.parentElement.nextElementSibling.nextElementSibling.style.display='none'");
-				typeSidebarDescriptionSelectorLabelText.innerText = "Defending";
-			}
-			if(i == 1) {
-				typeSidebarDescriptionSelectorInput.setAttribute("onclick","this.parentElement.nextElementSibling.style.display='none';this.parentElement.nextElementSibling.nextElementSibling.style.display='block'");
-				typeSidebarDescriptionSelectorLabelText.innerText = "Attacking";
-			}
+			typeSidebarDescriptionSelectorLabelText.innerText = defAtt[i];
+			
+
+			typeSidebarDescriptionSelectorInput.setAttribute("onclick","this.parentElement.parentElement.parentElement.setAttribute('data-type','"+defAtt[i]+"');typeSwitch();");
+
+
 			typeSidebarDescriptionSelector.appendChild(typeSidebarDescriptionSelectorInput);
 			typeSidebarDescriptionSelector.appendChild(typeSidebarDescriptionSelectorLabel);
 			typeSidebarDescriptionSelectorLabel.appendChild(typeSidebarDescriptionSelectorLabelText);
-		}
-		var typeContentTypeChartMatrixTable = document.createElement("table");
-		typeContentTypeChartMatrixTable.setAttribute("name", 'matrix');
-		typeContentTypeChartMatrixTable.setAttribute("type", MEDIAPath_Type_Icon);
-		var typeContentTypeChartMatrixTableTR = document.createElement("tr");
+
+			if(i == 0) {
+				typeSidebarDescriptionSelectorInput.setAttribute("checked","");
+				typeSidebar.setAttribute("data-type",defAtt[i]);
+			}
 	
+		}
 
-		typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableTR);
-		var typeContentTypeChartMatrixTableTH0 = document.createElement("th");
-		typeContentTypeChartMatrixTableTH0.setAttribute("title","");
-		typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH0);
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			var typeContentTypeChartMatrixTableTH = document.createElement("th");
-			var typeContentTypeChartMatrixTableTHIMG = document.createElement("img");
-			typeContentTypeChartMatrixTableTH.innerText = typechartTitle[i];
-			typeContentTypeChartMatrixTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
-			typeContentTypeChartMatrixTableTH.appendChild(typeContentTypeChartMatrixTableTHIMG);
-		}
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			var typeContentTypeChartMatrixTableTR = document.createElement("tr");
-			var typeContentTypeChartMatrixTableTH = document.createElement("th");
-			var typeContentTypeChartMatrixTableTHIMG = document.createElement("img");
-			typeContentTypeChartMatrixTable.appendChild(typeContentTypeChartMatrixTableTR);
-			typeContentTypeChartMatrixTableTH.innerText = typechartTitle[i];
-			typeContentTypeChartMatrixTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartMatrixTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			typeContentTypeChartMatrixTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartMatrixTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTH);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				var typeContentTypeChartMatrixTableTD = document.createElement("td");
-				var typeContentTypeChartMatrixTableTDText = document.createElement("small");
 
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
-					typeContentTypeChartMatrixTableTD.setAttribute("title", "Super Effective");
-				}
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "1×") {
-					typeContentTypeChartMatrixTableTD.setAttribute("title", "Normal Effectiveness");
-				}
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
-					typeContentTypeChartMatrixTableTD.setAttribute("title", "Not Very Effective");
-				}
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
-					typeContentTypeChartMatrixTableTD.setAttribute("title", "No Effect");
-				}
-				typeContentTypeChartMatrixTableTDText.innerText = finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]];
-				typeContentTypeChartMatrixTableTR.appendChild(typeContentTypeChartMatrixTableTD);
-				typeContentTypeChartMatrixTableTD.appendChild(typeContentTypeChartMatrixTableTDText);
-				typeContentTypeChartMatrixTableTD.addEventListener("mouseenter",matrixHoverClass);
-				typeContentTypeChartMatrixTableTD.addEventListener("mouseleave",function() {this.parentElement.parentElement.querySelector(":scope > *:first-child").className = "";});
-			}
-			typeContentTypeChartMatrixTableTH.appendChild(typeContentTypeChartMatrixTableTHIMG);
-		}
-		typeContent.appendChild(typeContentTypeChartMatrixTable);
 
-		var typeContentTypeChartEffectivenessTable = document.createElement("table");
-		typeContentTypeChartEffectivenessTable.setAttribute("name", 'effectiveness');
-		typeContentTypeChartEffectivenessTable.setAttribute("type", MEDIAPath_Type_Icon);
-		var typeContentTypeChartEffectivenessTableTR = document.createElement("tr");
-		typeContentTypeChartEffectivenessTable.appendChild(typeContentTypeChartEffectivenessTableTR);
-		var tempEffectivenessArrLeft = [];
-		var tempEffectivenessArrLeftCount = {};
-		var tempEffectivenessArrRight = [];
-		var tempEffectivenessArrRightCount = {};
-		var tempEffectivenessArrLeftMax = [];
-		var tempEffectivenessArrLeftMaxCount = {};
-		var tempEffectivenessArrLeftMaxResult = [];
-		var tempEffectivenessArrRightMax = [];
-		var tempEffectivenessArrRightMaxCount = {};
-		var tempEffectivenessArrRightMaxResult = [];
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "2×") {
-					tempEffectivenessArrLeftMax.push(i);
-				}
-			}
-			for(var num of tempEffectivenessArrLeftMax) {
-				tempEffectivenessArrLeftMaxCount[num] = tempEffectivenessArrLeftMaxCount[num] ? tempEffectivenessArrLeftMaxCount[num] + 1 : 1;
-			}
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
-					tempEffectivenessArrRightMax.push(i);
-				}
-			}
-			for(var num of tempEffectivenessArrRightMax) {
-				tempEffectivenessArrRightMaxCount[num] = tempEffectivenessArrRightMaxCount[num] ? tempEffectivenessArrRightMaxCount[num] + 1 : 1;
-			}
-			if(tempEffectivenessArrLeftMaxCount[i] != undefined) {
-				tempEffectivenessArrLeftMaxResult.push(tempEffectivenessArrLeftMaxCount[i]);
-			}
-			if(tempEffectivenessArrRightMaxCount[i] != undefined) {
-				tempEffectivenessArrRightMaxResult.push(tempEffectivenessArrRightMaxCount[i]);
-			}
-		}
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			var typeContentTypeChartEffectivenessTableTR = document.createElement("tr");
-			var typeContentTypeChartEffectivenessTableTH = document.createElement("th");
-			var typeContentTypeChartEffectivenessTableTHIMG = document.createElement("img");
-			typeContentTypeChartEffectivenessTable.appendChild(typeContentTypeChartEffectivenessTableTR);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "2×") {
-					tempEffectivenessArrLeft.push(i);
-				}
-			}
-			for(var num of tempEffectivenessArrLeft) {
-				tempEffectivenessArrLeftCount[num] = tempEffectivenessArrLeftCount[num] ? tempEffectivenessArrLeftCount[num] + 1 : 1;
-			}
-			if(tempEffectivenessArrLeftCount[i] == undefined) {
-				tempEffectivenessArrLeftCount[i] = 0;
-			}
-			for(var q = 0; q < Math.max.apply(Math, tempEffectivenessArrLeftMaxResult) - tempEffectivenessArrLeftCount[i]; q++) {
-				var typeContentTypeChartEffectivenessTableTDLeft = document.createElement("td");
-				typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDLeft);
-			}
-			typeContentTypeChartEffectivenessTableTH.innerText = typechartTitle[i];
-			typeContentTypeChartEffectivenessTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartEffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			typeContentTypeChartEffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartEffectivenessTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "2×") {
-					var typeContentTypeChartEffectivenessTableTHLeft = document.createElement("th");
-					var typeContentTypeChartEffectivenessTableTHLeftIMG = document.createElement("img");
-					typeContentTypeChartEffectivenessTableTHLeft.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartEffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
-					typeContentTypeChartEffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartEffectivenessTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHLeft);
-					typeContentTypeChartEffectivenessTableTHLeft.appendChild(typeContentTypeChartEffectivenessTableTHLeftIMG);
-				}
-			}
-			var typeContentTypeChartEffectivenessTableTDLeftArrow = document.createElement("td");
-			var typeContentTypeChartEffectivenessTableTDLeftArrowText = document.createElement("p");
-			if(tempEffectivenessArrLeftCount[i] != 0) {
-				typeContentTypeChartEffectivenessTableTDLeftArrowText.innerText = "→";
-			}
-			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDLeftArrow);
-			typeContentTypeChartEffectivenessTableTDLeftArrow.appendChild(typeContentTypeChartEffectivenessTableTDLeftArrowText);
-			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTH);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
-					tempEffectivenessArrRight.push(i);
-				}
-			}
-			for(var num of tempEffectivenessArrRight) {
-				tempEffectivenessArrRightCount[num] = tempEffectivenessArrRightCount[num] ? tempEffectivenessArrRightCount[num] + 1 : 1;
-			}
-			if(tempEffectivenessArrRightCount[i] == undefined) {
-				tempEffectivenessArrRightCount[i] = 0;
-			}
-			var typeContentTypeChartEffectivenessTableTDRightArrow = document.createElement("td");
-			var typeContentTypeChartEffectivenessTableTDRightArrowText = document.createElement("td");
-			if(tempEffectivenessArrRightCount[i] != 0) {
-				typeContentTypeChartEffectivenessTableTDRightArrowText.innerText = "→";
-			}
-			typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDRightArrow);
-			typeContentTypeChartEffectivenessTableTDRightArrow.appendChild(typeContentTypeChartEffectivenessTableTDRightArrowText);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "2×") {
-					var typeContentTypeChartEffectivenessTableTHRight = document.createElement("th");
-					var typeContentTypeChartEffectivenessTableTHRightIMG = document.createElement("img");
-					typeContentTypeChartEffectivenessTableTHRight.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartEffectivenessTableTHRight.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartEffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
-					typeContentTypeChartEffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartEffectivenessTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-					typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTHRight);
-					typeContentTypeChartEffectivenessTableTHRight.appendChild(typeContentTypeChartEffectivenessTableTHRightIMG);
-				}
-			}
-			typeContentTypeChartEffectivenessTableTH.appendChild(typeContentTypeChartEffectivenessTableTHIMG);
-			for(var q = 0; q < Math.max.apply(Math, tempEffectivenessArrRightMaxResult) - tempEffectivenessArrRightCount[i]; q++) {
-				var typeContentTypeChartEffectivenessTableTDRight = document.createElement("td");
-				typeContentTypeChartEffectivenessTableTR.appendChild(typeContentTypeChartEffectivenessTableTDRight);
-			}
-		}
-		typeContent.appendChild(typeContentTypeChartEffectivenessTable);
-		var typeContentTypeChartIneffectivenessTable = document.createElement("table");
-		typeContentTypeChartIneffectivenessTable.setAttribute("name", 'ineffectiveness');
-		typeContentTypeChartIneffectivenessTable.setAttribute("type", MEDIAPath_Type_Icon);
-		var typeContentTypeChartIneffectivenessTableTR = document.createElement("tr");
-		typeContentTypeChartIneffectivenessTable.appendChild(typeContentTypeChartIneffectivenessTableTR);
-		var tempIneffectivenessArrLeft = [];
-		var tempIneffectivenessArrLeftCount = {};
-		var tempIneffectivenessArrRight = [];
-		var tempIneffectivenessArrRightCount = {};
-		var tempIneffectivenessArrLeftMax = [];
-		var tempIneffectivenessArrLeftMaxCount = {};
-		var tempIneffectivenessArrLeftMaxResult = [];
-		var tempIneffectivenessArrRightMax = [];
-		var tempIneffectivenessArrRightMaxCount = {};
-		var tempIneffectivenessArrRightMaxResult = [];
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "½×") {
-					tempIneffectivenessArrLeftMax.push(i);
-				}
-			}
-			for(var num of tempIneffectivenessArrLeftMax) {
-				tempIneffectivenessArrLeftMaxCount[num] = tempIneffectivenessArrLeftMaxCount[num] ? tempIneffectivenessArrLeftMaxCount[num] + 1 : 1;
-			}
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
-					tempIneffectivenessArrRightMax.push(i);
-				}
-			}
-			for(var num of tempIneffectivenessArrRightMax) {
-				tempIneffectivenessArrRightMaxCount[num] = tempIneffectivenessArrRightMaxCount[num] ? tempIneffectivenessArrRightMaxCount[num] + 1 : 1;
-			}
-			if(tempIneffectivenessArrLeftMaxCount[i] != undefined) {
-				tempIneffectivenessArrLeftMaxResult.push(tempIneffectivenessArrLeftMaxCount[i]);
-			}
-			if(tempIneffectivenessArrRightMaxCount[i] != undefined) {
-				tempIneffectivenessArrRightMaxResult.push(tempIneffectivenessArrRightMaxCount[i]);
-			}
-		}
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			var typeContentTypeChartIneffectivenessTableTR = document.createElement("tr");
-			var typeContentTypeChartIneffectivenessTableTH = document.createElement("th");
-			var typeContentTypeChartIneffectivenessTableTHIMG = document.createElement("img");
-			typeContentTypeChartIneffectivenessTable.appendChild(typeContentTypeChartIneffectivenessTableTR);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "½×") {
-					tempIneffectivenessArrLeft.push(i);
-				}
-			}
-			for(var num of tempIneffectivenessArrLeft) {
-				tempIneffectivenessArrLeftCount[num] = tempIneffectivenessArrLeftCount[num] ? tempIneffectivenessArrLeftCount[num] + 1 : 1;
-			}
-			if(tempIneffectivenessArrLeftCount[i] == undefined) {
-				tempIneffectivenessArrLeftCount[i] = 0;
-			}
-			for(var q = 0; q < Math.max.apply(Math, tempIneffectivenessArrLeftMaxResult) - tempIneffectivenessArrLeftCount[i]; q++) {
-				var typeContentTypeChartIneffectivenessTableTDLeft = document.createElement("td");
-				typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDLeft);
-			}
-			typeContentTypeChartIneffectivenessTableTH.innerText = typechartTitle[i];
-			typeContentTypeChartIneffectivenessTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartIneffectivenessTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			typeContentTypeChartIneffectivenessTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartIneffectivenessTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "½×") {
-					var typeContentTypeChartIneffectivenessTableTHLeft = document.createElement("th");
-					var typeContentTypeChartIneffectivenessTableTHLeftIMG = document.createElement("img");
-					typeContentTypeChartIneffectivenessTableTHLeft.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartIneffectivenessTableTHLeft.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
-					typeContentTypeChartIneffectivenessTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartIneffectivenessTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHLeft);
-					typeContentTypeChartIneffectivenessTableTHLeft.appendChild(typeContentTypeChartIneffectivenessTableTHLeftIMG);
-				}
-			}
-			var typeContentTypeChartIneffectivenessTableTDLeftArrow = document.createElement("td");
-			var typeContentTypeChartIneffectivenessTableTDLeftArrowText = document.createElement("p");
-			if(tempIneffectivenessArrLeftCount[i] != 0) {
-				typeContentTypeChartIneffectivenessTableTDLeftArrowText.innerText = "→";
-			}
-			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDLeftArrow);
-			typeContentTypeChartIneffectivenessTableTDLeftArrow.appendChild(typeContentTypeChartIneffectivenessTableTDLeftArrowText);
-			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTH);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
-					tempIneffectivenessArrRight.push(i);
-				}
-			}
-			for(var num of tempIneffectivenessArrRight) {
-				tempIneffectivenessArrRightCount[num] = tempIneffectivenessArrRightCount[num] ? tempIneffectivenessArrRightCount[num] + 1 : 1;
-			}
-			if(tempIneffectivenessArrRightCount[i] == undefined) {
-				tempIneffectivenessArrRightCount[i] = 0;
-			}
-			var typeContentTypeChartIneffectivenessTableTDRightArrow = document.createElement("td");
-			var typeContentTypeChartIneffectivenessTableTDRightArrowText = document.createElement("p");
-			if(tempIneffectivenessArrRightCount[i] != 0) {
-				typeContentTypeChartIneffectivenessTableTDRightArrowText.innerText = "→";
-			}
-			typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDRightArrow);
-			typeContentTypeChartIneffectivenessTableTDRightArrow.appendChild(typeContentTypeChartIneffectivenessTableTDRightArrowText);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "½×") {
-					var typeContentTypeChartIneffectivenessTableTHRight = document.createElement("th");
-					var typeContentTypeChartIneffectivenessTableTHRightIMG = document.createElement("img");
-					typeContentTypeChartIneffectivenessTableTHRight.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartIneffectivenessTableTHRight.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
-					typeContentTypeChartIneffectivenessTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartIneffectivenessTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-					typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTHRight);
-					typeContentTypeChartIneffectivenessTableTHRight.appendChild(typeContentTypeChartIneffectivenessTableTHRightIMG);
-				}
-			}
-			typeContentTypeChartIneffectivenessTableTH.appendChild(typeContentTypeChartIneffectivenessTableTHIMG);
-			for(var q = 0; q < Math.max.apply(Math, tempIneffectivenessArrRightMaxResult) - tempIneffectivenessArrRightCount[i]; q++) {
-				var typeContentTypeChartIneffectivenessTableTDRight = document.createElement("td");
-				typeContentTypeChartIneffectivenessTableTR.appendChild(typeContentTypeChartIneffectivenessTableTDRight);
-			}
-		}
-		typeContent.appendChild(typeContentTypeChartIneffectivenessTable);
-		var typeContentTypeChartImmunityTable = document.createElement("table");
-		typeContentTypeChartImmunityTable.setAttribute("name", 'immunity');
-		typeContentTypeChartImmunityTable.setAttribute("type", MEDIAPath_Type_Icon);
-		var typeContentTypeChartImmunityTableTR = document.createElement("tr");
-		typeContentTypeChartImmunityTable.appendChild(typeContentTypeChartImmunityTableTR);
-		var tempImmunityArrLeft = [];
-		var tempImmunityArrLeftCount = {};
-		var tempImmunityArrRight = [];
-		var tempImmunityArrRightCount = {};
-		var tempImmunityArrLeftMax = [];
-		var tempImmunityArrLeftMaxCount = {};
-		var tempImmunityArrLeftMaxResult = [];
-		var tempImmunityArrRightMax = [];
-		var tempImmunityArrRightMaxCount = {};
-		var tempImmunityArrRightMaxResult = [];
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "0×") {
-					tempImmunityArrLeftMax.push(i);
-				}
-			}
-			for(var num of tempImmunityArrLeftMax) {
-				tempImmunityArrLeftMaxCount[num] = tempImmunityArrLeftMaxCount[num] ? tempImmunityArrLeftMaxCount[num] + 1 : 1;
-			}
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
-					tempImmunityArrRightMax.push(i);
-				}
-			}
-			for(var num of tempImmunityArrRightMax) {
-				tempImmunityArrRightMaxCount[num] = tempImmunityArrRightMaxCount[num] ? tempImmunityArrRightMaxCount[num] + 1 : 1;
-			}
-			if(tempImmunityArrLeftMaxCount[i] != undefined) {
-				tempImmunityArrLeftMaxResult.push(tempImmunityArrLeftMaxCount[i]);
-			}
-			if(tempImmunityArrRightMaxCount[i] != undefined) {
-				tempImmunityArrRightMaxResult.push(tempImmunityArrRightMaxCount[i]);
-			}
-		}
-		for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-			var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i]);
-			var typeContentTypeChartImmunityTableTR = document.createElement("tr");
-			var typeContentTypeChartImmunityTableTH = document.createElement("th");
-			var typeContentTypeChartImmunityTableTHIMG = document.createElement("img");
-			typeContentTypeChartImmunityTable.appendChild(typeContentTypeChartImmunityTableTR);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "0×") {
-					tempImmunityArrLeft.push(i);
-				}
-			}
-			for(var num of tempImmunityArrLeft) {
-				tempImmunityArrLeftCount[num] = tempImmunityArrLeftCount[num] ? tempImmunityArrLeftCount[num] + 1 : 1;
-			}
-			if(tempImmunityArrLeftCount[i] == undefined) {
-				tempImmunityArrLeftCount[i] = 0;
-			}
-			for(var q = 0; q < Math.max.apply(Math, tempImmunityArrLeftMaxResult) - tempImmunityArrLeftCount[i]; q++) {
-				var typeContentTypeChartImmunityTableTDLeft = document.createElement("td");
-				typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDLeft);
-			}
-			typeContentTypeChartImmunityTableTH.innerText = typechartTitle[i];
-			typeContentTypeChartImmunityTableTH.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			typeContentTypeChartImmunityTableTH.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			typeContentTypeChartImmunityTableTHIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			typeContentTypeChartImmunityTableTHIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][q][typechartTitle[i]] == "0×") {
-					var typeContentTypeChartImmunityTableTHLeft = document.createElement("th");
-					var typeContentTypeChartImmunityTableTHLeftIMG = document.createElement("img");
-					typeContentTypeChartImmunityTableTHLeft.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartImmunityTableTHLeft.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartImmunityTableTHLeft.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
-					typeContentTypeChartImmunityTableTHLeftIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartImmunityTableTHLeftIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHLeft);
-					typeContentTypeChartImmunityTableTHLeft.appendChild(typeContentTypeChartImmunityTableTHLeftIMG);
-				}
-			}
-			var typeContentTypeChartImmunityTableTDLeftArrow = document.createElement("td");
-			var typeContentTypeChartImmunityTableTDLeftArrowText = document.createElement("p");
-			if(tempImmunityArrLeftCount[i] != 0) {
-				typeContentTypeChartImmunityTableTDLeftArrowText.innerText = "→";
-			}
-			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDLeftArrow);
-			typeContentTypeChartImmunityTableTDLeftArrow.appendChild(typeContentTypeChartImmunityTableTDLeftArrowText);
-			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTH);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
-					tempImmunityArrRight.push(i);
-				}
-			}
-			for(var num of tempImmunityArrRight) {
-				tempImmunityArrRightCount[num] = tempImmunityArrRightCount[num] ? tempImmunityArrRightCount[num] + 1 : 1;
-			}
-			if(tempImmunityArrRightCount[i] == undefined) {
-				tempImmunityArrRightCount[i] = 0;
-			}
-			var typeContentTypeChartImmunityTableTDRightArrow = document.createElement("td");
-			var typeContentTypeChartImmunityTableTDRightArrowText = document.createElement("td");
-			if(tempImmunityArrRightCount[i] != 0) {
-				typeContentTypeChartImmunityTableTDRightArrowText.innerText = "→";
-			}
-			typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDRightArrow);
-			typeContentTypeChartImmunityTableTDRightArrow.appendChild(typeContentTypeChartImmunityTableTDRightArrowText);
-			for(var q = 0; q < typechartTitle.length; q++) {
-				if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][typechartTitle[q]] == "0×") {
-					var typeContentTypeChartImmunityTableTHRight = document.createElement("th");
-					var typeContentTypeChartImmunityTableTHRightIMG = document.createElement("img");
-					typeContentTypeChartImmunityTableTHRight.innerText = typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase();
-					typeContentTypeChartImmunityTableTHRight.setAttribute("title", typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase());
-					typeContentTypeChartImmunityTableTHRight.setAttribute("onclick", 'typeSwitch("' + typechartTitle[q] + '")');
-					typeContentTypeChartImmunityTableTHRightIMG.src = "./media/Images/Misc/Type/Icon/" + MEDIAPath_Type_Icon + "/" + typechartTitle[q].charAt(0).toUpperCase() + typechartTitle[q].slice(1).toLowerCase() + ".png";
-					typeContentTypeChartImmunityTableTHRightIMG.setAttribute("onerror","this.style.display='none';this.parentElement.style.fontSize='0.45vw';");
-					typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTHRight);
-					typeContentTypeChartImmunityTableTHRight.appendChild(typeContentTypeChartImmunityTableTHRightIMG);
-				}
-			}
-			typeContentTypeChartImmunityTableTH.appendChild(typeContentTypeChartImmunityTableTHIMG);
-			for(var q = 0; q < Math.max.apply(Math, tempImmunityArrRightMaxResult) - tempImmunityArrRightCount[i]; q++) {
-				var typeContentTypeChartImmunityTableTDRight = document.createElement("td");
-				typeContentTypeChartImmunityTableTR.appendChild(typeContentTypeChartImmunityTableTDRight);
-			}
-		}
-		typeContent.appendChild(typeContentTypeChartImmunityTable);
-		
-		var typeOptionsTitle = ["Matrix","Effectiveness","Ineffectiveness","Immunity"];
-		for(var q = 0; q < typeOptionsTitle.length; q++) {
-			var typeTitleOptionsInput = document.createElement("input");
-			var typeTitleOptionsLabel = document.createElement("label");
-			var typeTitleOptionsLabelText = document.createElement("p");
-			typeTitleOptionsInput.setAttribute("type","radio");
-			typeTitleOptionsInput.setAttribute("name","type-options");
-			typeTitleOptionsInput.setAttribute("id","type-options-" + q);
-			typeTitleOptionsInput.setAttribute("autocomplete","off");
-			typeTitleOptionsInput.value = typeOptionsTitle[q].toLowerCase();
-			typeTitleOptionsLabel.setAttribute("for","type-options-" + q);
-			typeTitleOptionsLabelText.innerText = typeOptionsTitle[q];
-			typeTitle.appendChild(typeTitleOptionsInput);
-			typeTitle.appendChild(typeTitleOptionsLabel);
-			typeTitleOptionsLabel.appendChild(typeTitleOptionsLabelText);
-			typeTitleOptionsInput.addEventListener("click", typeOptionsSelector);
+		let table = document.createElement("table");
+		table.setAttribute("name","matrix");
+		typeContent.appendChild(table)
+
+		let tempTypes = [...Types];
+		tempTypes.unshift("");
+
+		for(var q = 0; q < tempTypes.length; q++) {
+			let tr = document.createElement("tr");
+			tr.setAttribute("name",tempTypes[q]);
+			table.appendChild(tr);
+
+			for(var r = 0; r < tempTypes.length; r++) {
+
+				let tempAdv = calcTypeAdv([tempTypes[q].toUpperCase()],"Attacking");
+
+				let th = document.createElement("th");
+				tr.appendChild(th);
+				
+			
 	
-			function typeOptionsSelector() {
-				var typechartContents = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='type'] > div[name='content'] table[name]");
-				var typechartContent = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='type'] > div[name='content'] table[name='"+this.value+"']");
-				for(var q = 0; q < typechartContents.length; q++) {
-					typechartContents[q].style.display = "none";
+				if (q == 0 || r == 0) {
+					let val = "";
+					if (q == 0) {
+						val = tempTypes[r];
+					}
+					else if (r == 0) {
+						val = tempTypes[q];
+					}
+
+					if (val != "") {
+						let wrap = document.createElement("span"); 
+						let txt = document.createElement("p");
+						let img = document.createElement("img");
+						wrap.setAttribute("name",val);
+						txt.innerText = val;
+						img.src = "./media/Images/Misc/Type/Icon/"+MEDIAPath_Type_Icon+"/"+val+".png";
+						img.setAttribute("onload","this.previousElementSibling.style.display = 'none'");
+						img.setAttribute("onerror","this.style.display = 'none'");
+						th.appendChild(wrap);
+						wrap.appendChild(txt);
+						wrap.appendChild(img);
+						th.style.background = "var(--type"+val+")";
+						th.setAttribute("name",val);
+
+						wrap.addEventListener("click",typeSet);
+
+					}
+
 				}
-				for(var q = 0; q < typechartContent.length; q++) {
-					typechartContent[q].style.removeProperty("display");
+				else {
+					let val = tempAdv[r-1]["Value"];
+					val = val+"×";
+					if (val == "0.5×") {
+						val = "½";
+					}
+
+					let txt = document.createElement("small");
+					txt.innerText = val;
+					th.appendChild(txt);
+
+
+					if (val.includes("0")) {
+						th.title = "Immune";
+					}
+					else if (val.includes("½")) {
+						th.title = "Not Very Effective";
+					}
+					else if (val.includes("1")) {
+						th.title = "Normal Effectiveness";
+					}
+					else if (val.includes("2")) {
+						th.title = "Super Effective";
+					}
+
 				}
-			}
-			if(q == 0) {
-				typeTitleOptionsLabel.click();
+			
+			
+
+		
+				
 			}
 		}
-		
-	};
+	
+	}
+
 
 
 	function createDamageCalc() {
@@ -920,6 +538,17 @@ var createTool = function() {
 		var toolSectionContentDMGMenuMoveBottomCriticalTitle = document.createElement("h6");
 		var toolSectionContentDMGMenuMoveBottomCriticalText = document.createElement("small");
 
+		var toolSectionContentDMGMenuMoveBottomTypeCategory = document.createElement("span");
+
+		var toolSectionContentDMGMenuMoveBottomType = document.createElement("span");
+		var toolSectionContentDMGMenuMoveBottomTypeImg = document.createElement("img");
+		var toolSectionContentDMGMenuMoveBottomTypeText = document.createElement("small");
+
+		var toolSectionContentDMGMenuMoveBottomCategory = document.createElement("span");
+		var toolSectionContentDMGMenuMoveBottomCategoryImg = document.createElement("img");
+		var toolSectionContentDMGMenuMoveBottomCategoryText = document.createElement("small");
+
+
 		var toolSectionContentDMGMenuRollTop = document.createElement("span");
 		var toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("span");
 		var toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("span");
@@ -941,6 +570,13 @@ var createTool = function() {
 		toolSectionContentDMGMenuSpecificTopInput.setAttribute("value","1");
 		toolSectionContentDMGMenuSpecificTopInput.setAttribute("max","1");
 
+		toolSectionContentDMGMenuMoveBottomType.setAttribute("name","type");
+		toolSectionContentDMGMenuMoveBottomTypeImg.setAttribute("onload","this.style.removeProperty('display');this.previousElementSibling.style.display='none';");
+		toolSectionContentDMGMenuMoveBottomTypeImg.setAttribute("onerror","this.style.display='none';this.previousElementSibling.style.removeProperty('display');");
+
+		toolSectionContentDMGMenuMoveBottomCategory.setAttribute("name","category");
+		toolSectionContentDMGMenuMoveBottomCategoryImg.setAttribute("onload","this.style.removeProperty('display');this.previousElementSibling.style.display='none';");
+		toolSectionContentDMGMenuMoveBottomCategoryImg.setAttribute("onerror","this.style.display='none';this.previousElementSibling.style.removeProperty('display');");
 
 
 		toolSectionContentDMGMenuMoveBottomDamage.setAttribute("name","power");
@@ -986,9 +622,8 @@ var createTool = function() {
 		toolSectionContentDMGOptionsContentPok.setAttribute("name","pokémon");
 		toolSectionContentDMGOptionsContentTeam.setAttribute("name","team");
 
-		toolSectionContentDMGOuter.setAttribute("name","dmg");
 		toolSectionContentDMGOuter.setAttribute("id","dmg");
-		toolSectionContentDMGOuter.setAttribute("value","0");
+		toolSectionContentDMGOuter.setAttribute("name","Damage Calculator (Development)");
 
 		toolSectionContentDMGContent.setAttribute("name","content");
 
@@ -1057,6 +692,13 @@ var createTool = function() {
 		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalText);
 	
 
+		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomTypeCategory);
+		toolSectionContentDMGMenuMoveBottomTypeCategory.appendChild(toolSectionContentDMGMenuMoveBottomType);
+		toolSectionContentDMGMenuMoveBottomType.appendChild(toolSectionContentDMGMenuMoveBottomTypeText);
+		toolSectionContentDMGMenuMoveBottomType.appendChild(toolSectionContentDMGMenuMoveBottomTypeImg);
+		toolSectionContentDMGMenuMoveBottomTypeCategory.appendChild(toolSectionContentDMGMenuMoveBottomCategory);
+		toolSectionContentDMGMenuMoveBottomCategory.appendChild(toolSectionContentDMGMenuMoveBottomCategoryText);
+		toolSectionContentDMGMenuMoveBottomCategory.appendChild(toolSectionContentDMGMenuMoveBottomCategoryImg);
 
 		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollTop)
 		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextTopLeft)
@@ -1070,6 +712,8 @@ var createTool = function() {
 		toolSectionContentDMGMenuRollCritical.appendChild(toolSectionContentDMGMenuRollCriticalText);
 		toolSectionContentDMGMenuRollCritical.appendChild(toolSectionContentDMGMenuRollCriticalInput);
 
+		toolSectionContentDMGMenuMoveBottomTypeText.style.display = "none";
+		toolSectionContentDMGMenuMoveBottomCategoryText.style.display = "none";
 
 		toolSectionContentDMGMenuRollRange.addEventListener("input",DMGCalcStart);
 		toolSectionContentDMGMenuRollRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`; let z = this.parentElement.querySelector(":scope *[name='val']"); z.innerText = (this.value-this.min);z.innerText = z.innerText+" ("+parseInt(v)+"%)";})
@@ -1179,7 +823,13 @@ var createTool = function() {
 		}
 
 		if (toolSectionContentDMGMenuMoveSelect.querySelector(":scope option[value='Pound']") != undefined) {
+
 			toolSectionContentDMGMenuMoveSelect.value = "Pound";
+			toolSectionContentDMGMenuMoveSelect.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value)+")";
+			toolSectionContentDMGMenuMoveBottomTypeImg.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value)+".png";
+			toolSectionContentDMGMenuMoveBottomTypeText.innerText = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value);
+			toolSectionContentDMGMenuMoveBottomCategoryImg.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,toolSectionContentDMGMenuMoveSelect.value)+".png";
+			toolSectionContentDMGMenuMoveBottomCategoryText.innerText = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,toolSectionContentDMGMenuMoveSelect.value);
 		}
 	
 		toolSectionContentDMGMenuSpecificTopInput.addEventListener("change",DMGCalcStart);
@@ -1255,7 +905,7 @@ var createTool = function() {
 	createDamageCalc();
 
 
-	var toolOptionsTitle = ["Damage Calculator","Type Advantage","Timers","Random Number Generator"];
+	var toolOptionsTitle = ["Damage Calculator (Development)","Type Advantage","Timers","Random Number Generator"];
 
 	// Counter, Damage Calculator, Catch Rate Calculator, Shiny Odds Calculator, Item/Move/Type/Ability/Location Checklist
 
@@ -1266,7 +916,7 @@ var createTool = function() {
 		toolSectionListOptionsInput.setAttribute("name","tool-options");
 		toolSectionListOptionsInput.setAttribute("id","tool-options-" + q);
 		toolSectionListOptionsInput.setAttribute("autocomplete","off");
-		toolSectionListOptionsInput.value = q;
+		toolSectionListOptionsInput.value = toolOptionsTitle[q];
 		toolSectionListOptionsLabel.setAttribute("for","tool-options-" + q);
 		toolSectionListOptionsLabel.setAttribute("type","medium");
 		toolSectionListOptionsLabel.innerHTML = toolOptionsTitle[q];
@@ -1275,10 +925,9 @@ var createTool = function() {
 		toolSectionListOptionsInput.addEventListener("click", toolOptionsSelector);
 
 		function toolOptionsSelector() {
-			var i = this.value;
-			toolSectionHeaderTitleText.innerText = toolOptionsTitle[i];
-			var toolContents = document.querySelectorAll("#tool section[name='content'] > div[value]");
-			var toolContent = document.querySelectorAll("#tool section[name='content'] > div[value='"+i+"']");
+			toolSectionHeaderTitleText.innerText = this.value;
+			var toolContents = document.querySelectorAll("#tool section[name='content'] > div[name]");
+			var toolContent = document.querySelectorAll("#tool section[name='content'] > div[name='"+this.value+"']");
 			for(var q = 0; q < toolContents.length; q++) {
 				toolContents[q].style.display = "none";
 			}
@@ -1296,7 +945,7 @@ var createTool = function() {
 
 function countdown() {
 
-	var base = document.querySelector('#contain div#tool > section[name="content"] > div[name="timer"] > *[name="countdown"]')
+	var base = document.querySelector('#contain div#tool > section[name="content"] > div#timer > *[name="countdown"]')
 	var audiopath = "./media/Sounds/FinalDex/Complete.wav";
 
 	var countdownInput = base.querySelectorAll(":scope input");
@@ -1759,7 +1408,7 @@ function countdown() {
 
 function stopwatch() {
 
-	var base = document.querySelector('#contain div#tool > section[name="content"] > div[name="timer"] > *[name="stopwatch"]')
+	var base = document.querySelector('#contain div#tool > section[name="content"] > div[name="Timers"] > *[name="stopwatch"]')
 
 	var stopwatchInput = base.querySelectorAll(":scope input");
 	var stopwatchPlayButton = base.querySelector(":scope b[title='Play']");
@@ -2178,7 +1827,7 @@ function RNG() {
 	var lastMin = 1;
 	var lastMax = 100;
 
-	var base = document.querySelector("#contain > div#tool section[name='content'] *[name='rng']");
+	var base = document.querySelector("#contain > div#tool section[name='content'] *#rng");
 
 	function rollNumber() {
 
@@ -2342,14 +1991,14 @@ function RNG() {
 
 function timerSelector() {
 	if(document.querySelector("#timerselector1").checked == true) {
-		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='stopwatch']").style.display = "block";
-		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='countdown']").style.display = "none";
-		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='countdown'] *[name='reset']").click();
+		document.querySelector("#contain > div#tool div#timer > *[name='stopwatch']").style.display = "block";
+		document.querySelector("#contain > div#tool div#timer > *[name='countdown']").style.display = "none";
+		document.querySelector("#contain > div#tool div#timer > *[name='countdown'] *[name='reset']").click();
 	}
 	if(document.querySelector("#timerselector2").checked == true) {
-		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='stopwatch']").style.display = "none";
-		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='countdown']").style.display = "block";
-		document.querySelector("#contain > div#tool section[name='content'] > *[name='timer'] > *[name='stopwatch'] *[name='reset']").click();
+		document.querySelector("#contain > div#tool div#timer > *[name='stopwatch']").style.display = "none";
+		document.querySelector("#contain > div#tool div#timer > *[name='countdown']").style.display = "block";
+		document.querySelector("#contain > div#tool div#timer > *[name='stopwatch'] *[name='reset']").click();
 	}
 }
 
@@ -2363,156 +2012,303 @@ $("body").click(function(event) {
 	if(!$(event.target).closest("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span > span > span").length && !$(event.target).is("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span > span > span") && !$(event.target).closest("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span figure.open").length && !$(event.target).is("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span figure.open") && $(event.target).closest("#contain div#tool").length) {
 		$("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span span[name]").removeClass("active");
 	}
+
+	if(!$(event.target).closest("#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span").length && !$(event.target).is("#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span")) {
+		$("#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span").removeClass("active");
+	}
 });
 
 
 
 
+function typeSet() {
 
+	let val = this.getAttribute("name");
+	let condition = document.querySelector("#contain > div#tool div#type *[name='sidebar']").getAttribute("data-type");
+	let els;
 
-function typeSwitch(type) {
-	var type;
-	var typeTitle = type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
-	var stuff = document.querySelectorAll("#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] > div[name] > span > span");
-	for(var i = 0; i < stuff.length; i++) {
-		stuff[i].innerHTML = "";
+	if (condition == "Defending") {
+		els = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span");
+	}
+	else if (condition == "Attacking") {
+		els = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span:first-child > span");
 	}
 
-	var base = document.querySelector("#contain > div#tool section[name='content'] *[name='type']");
-	var typetitle = base.querySelector(":scope div[name='sidebar'] div[name='title'] > *:first-child > *");
-	var typeicon = base.querySelector(":scope div[name='sidebar'] div[name='title'] img");
-	var againstEffective = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='effective'] > *:last-child");
-	var againstIneffective = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='ineffective'] > *:last-child");
-	var againstImmune = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='immune'] > *:last-child");
-	var againstDefault = base.querySelector(":scope div[name='sidebar'] div[name='against'] span[name='default'] > *:last-child");
-	var opposedEffective = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='effective'] > *:last-child");
-	var opposedIneffective = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='ineffective'] > *:last-child");
-	var opposedImmune = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='immune'] > *:last-child");
-	var opposedDefault = base.querySelector(":scope div[name='sidebar'] div[name='opposed'] span[name='default'] > *:last-child");
+	let el1 = document.querySelector("#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span:first-child > span");
+	let el2 = document.querySelector("#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span:last-child > span");
+	el1.parentElement.classList.remove("active");
+	el2.parentElement.classList.remove("active");
 
 
-
-	typetitle.innerText = typeTitle;
-	typeicon.src = "./media/Images/Misc/Type/Symbol/" + typeicon.alt + "/" + typeTitle + ".png";
-	typeicon.title = typetitle.innerText;
-
-
-
-	var selectors = document.querySelectorAll("#contain > div#tool section[name='content'] *[name='type'] *[name='sidebar'] *[name='description'] label");
-	for(var i = 0; i < selectors.length; i++) {
-		if(i == 0) {
-			selectors[i].setAttribute("title","When used on a " + typeTitle + "-type Pokémon");
+	let check1 = false;
+	let check2 = false;
+	for(var q = 0; q < els.length; q++) {
+		let img = els[q].querySelector(":scope img")
+		if (q == 0) {
+			if (img == undefined) {
+				check1 = true;
+			}
 		}
-		if(i == 1) {
-			selectors[i].setAttribute("title","When used by a " + typeTitle + "-type Move");
+		else if (q == 1) {
+			if (img == undefined) {
+				check2 = true;
+			}
+		}
+
+		if (img != undefined && img.getAttribute("name").toUpperCase() == val.toUpperCase()) {
+			check1 = false;
+			check2 = false;
+			return;
+		}
+	}
+	
+
+
+	if (check1) {
+		let img = document.createElement("img");
+		img.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+val+".png";
+		img.setAttribute("name",val);
+		img.title = val;
+		img.setAttribute("onclick","this.remove();typeSwitch();");
+		els[0].prepend(img);
+		typeSwitch();
+	}
+	else if (check2) {
+		let img = document.createElement("img");
+		img.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+val+".png";
+		img.setAttribute("name",val);
+		img.title = val;
+		img.setAttribute("onclick","this.remove();typeSwitch();");
+		els[1].prepend(img);
+		typeSwitch();
+	}
+}
+
+function typeSwitch() {
+	let types = [];
+
+	let typesPath;
+	let base;
+	let drops;
+
+	let condition = document.querySelector("#contain > div#tool div#type *[name='sidebar']").getAttribute("data-type");
+
+	if (condition == "Defending") {
+		base = document.querySelector("#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name='Defending']");
+		typesPath = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'][data-type='Defending'] *[name='title'] > span > span img");
+		drops = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'][data-type='Defending'] *[name='title'] > span > div > b[name]")
+	}
+	else if (condition == "Attacking") {
+		base = document.querySelector("#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name='Attacking']");
+		typesPath = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'][data-type='Attacking'] *[name='title'] > span:first-child > span img");
+		drops = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'][data-type='Attacking'] *[name='title'] > span:first-child > div > b[name]");
+	}
+		
+
+
+	for(var q = 0; q < typesPath.length; q++) {
+		types.push(typesPath[q].getAttribute("title").toUpperCase());
+	}
+
+
+	if (typesPath[0] != undefined && typesPath[1] != undefined && typesPath[0].getAttribute("name") == typesPath[1].getAttribute("name")) {
+		typesPath[1].remove();
+		typeSwitch();
+		return;
+	}
+
+	let els = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li[name] > span:last-child")
+	for (var i = 0; i < els.length; i++) {
+		els[i].innerHTML = "";
+		els[i].parentElement.style.removeProperty("display");
+	}
+
+
+
+	for (var i = 0; i < drops.length; i++) {
+		drops[i].style.removeProperty("display");
+		for (var q = 0; q < types.length; q++) {
+			if (drops[i].getAttribute("name") == titleCase(types[q])) {
+				drops[i].style.display = "none";
+			}
 		}
 	}
 
 
 
+	if (types.length > 0) {
+		console.log(types)
+		
+		let arr = calcTypeAdv(types,condition);
 
-	var typechartTitle = Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0]).toString().split(",");
-	var index = typechartTitle.indexOf(type);
-	for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "0×") {
-			var ImmunityType = document.createElement("img");
-			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			ImmunityType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			ImmunityType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			againstImmune.appendChild(ImmunityType);
-			var ImmunityTypeText = document.createElement("p");
-			ImmunityTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			againstImmune.appendChild(ImmunityTypeText);
-		}
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "½×") {
-			var IneffectivenessType = document.createElement("img");
-			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			IneffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			againstIneffective.appendChild(IneffectivenessType);
-			var IneffectivenessTypeText = document.createElement("p");
-			IneffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			againstIneffective.appendChild(IneffectivenessTypeText);
-		}
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "1×") {
-			var DefaultType = document.createElement("img");
-			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			DefaultType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			DefaultType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			againstDefault.appendChild(DefaultType);
-			var DefaultTypeText = document.createElement("p");
-			DefaultTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			againstDefault.appendChild(DefaultTypeText);
-		}
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][i][type] == "2×") {
-			var EffectivenessType = document.createElement("img");
-			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			EffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			againstEffective.appendChild(EffectivenessType);
-			var EffectivenessTypeText = document.createElement("p");
-			EffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			againstEffective.appendChild(EffectivenessTypeText);
-		}
-	}
-	for(var i = 0; i < finaldata["Game"]["Type Chart_"+JSONPath_Typechart].length; i++) {
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
-				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
-			] == "0×") {
-			var ImmunityType = document.createElement("img");
-			ImmunityType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			ImmunityType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			ImmunityType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			ImmunityType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			opposedImmune.appendChild(ImmunityType);
-			var ImmunityTypeText = document.createElement("p");
-			ImmunityTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			opposedImmune.appendChild(ImmunityTypeText);
-		}
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
-				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
-			] == "½×") {
-			var IneffectivenessType = document.createElement("img");
-			IneffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			IneffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			IneffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			IneffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			opposedIneffective.appendChild(IneffectivenessType);
-			var IneffectivenessTypeText = document.createElement("p");
-			IneffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			opposedIneffective.appendChild(IneffectivenessTypeText);
-		}
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
-				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
-			] == "1×") {
-			var DefaultType = document.createElement("img");
-			DefaultType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			DefaultType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			DefaultType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			DefaultType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			opposedDefault.appendChild(DefaultType);
-			var DefaultTypeText = document.createElement("p");
-			DefaultTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			opposedDefault.appendChild(DefaultTypeText);
+		let arrImmune = [];
+		let arrSuperIneffective = [];
+		let arrIneffective = [];
+		let arrNormal = [];
+		let arrEffective = [];
+		let arrSuperEffective = [];
 
+		for (var q = 0; q < arr.length; q++) {
+			if (arr[q]["Value"] == 0) { // Immune
+				arrImmune.push(arr[q]["Type"]);
+			}
+			if (arr[q]["Value"] == 0.25) { // Not Very Effective (¼)
+				arrSuperIneffective.push(arr[q]["Type"]);
+			}
+			if (arr[q]["Value"] == 0.5) { // Not Very Effective (½)
+				arrIneffective.push(arr[q]["Type"]);
+			}
+			if (arr[q]["Value"] == 1) { // Normal (0x)
+				arrNormal.push(arr[q]["Type"]);
+			}
+			if (arr[q]["Value"] == 2) { // Super Effective (2x)
+				arrEffective.push(arr[q]["Type"]);
+			}
+			if (arr[q]["Value"] == 4) { // Super Effective (4x)
+				arrSuperEffective.push(arr[q]["Type"]);
+			}
 		}
-		if(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][index][
-				Object.getOwnPropertyNames(finaldata["Game"]["Type Chart_"+JSONPath_Typechart][0])[i]
-			] == "2×") {
-			var EffectivenessType = document.createElement("img");
-			EffectivenessType.src = "./media/Images/Misc/Type/Text/" + MEDIAPath_Type_Text + "/" + typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + ".png";
-			EffectivenessType.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='inline'");
-			EffectivenessType.setAttribute("title", typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase());
-			EffectivenessType.setAttribute("onclick", 'typeSwitch("' + typechartTitle[i] + '")');
-			opposedEffective.appendChild(EffectivenessType);
-			var EffectivenessTypeText = document.createElement("p");
-			EffectivenessTypeText.innerText = typechartTitle[i].charAt(0).toUpperCase() + typechartTitle[i].slice(1).toLowerCase() + " ";
-			opposedEffective.appendChild(EffectivenessTypeText);
+
+
+
+
+		for (var q = 0; q < arrImmune.length; q++) {
+			let val = titleCase(arrImmune[q]);
+			let based = base.querySelector(":scope li[name='immune']");
+
+			let wrap = document.createElement("span");
+			let txt = document.createElement("p");
+			let img = document.createElement("img");
+			wrap.setAttribute("name",val);
+			txt.innerText = val;
+			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.title = val;
+			img.setAttribute("onerror","this.style.display = 'none'");
+			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
+			based.querySelector(":scope > span:last-child").appendChild(wrap);
+			wrap.appendChild(txt);
+			wrap.appendChild(img);
+			based.style.display = "block";
+
+			wrap.addEventListener("click",typeSet);
 		}
+
+
+		for (var q = 0; q < arrSuperEffective.length; q++) {
+			let val = titleCase(arrSuperEffective[q]);
+			let based = base.querySelector(":scope li[name='super effective']");
+
+			let wrap = document.createElement("span");
+			let txt = document.createElement("p");
+			let img = document.createElement("img");
+			wrap.setAttribute("name",val);
+			txt.innerText = val;
+			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.title = val;
+			img.setAttribute("onerror","this.style.display = 'none'");
+			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
+			based.querySelector(":scope > span:last-child").appendChild(wrap);
+			wrap.appendChild(txt);
+			wrap.appendChild(img);
+			based.style.display = "block";
+
+			wrap.addEventListener("click",typeSet);
+		}
+
+		for (var q = 0; q < arrEffective.length; q++) {
+			let val = titleCase(arrEffective[q]);
+			let based = base.querySelector(":scope li[name='effective']");
+
+			let wrap = document.createElement("span");
+			let txt = document.createElement("p");
+			let img = document.createElement("img");
+			wrap.setAttribute("name",val);
+			txt.innerText = val;
+			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.title = val;
+			img.setAttribute("onerror","this.style.display = 'none'");
+			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
+			based.querySelector(":scope > span:last-child").appendChild(wrap);
+			wrap.appendChild(txt);
+			wrap.appendChild(img);
+			based.style.display = "block";
+
+			wrap.addEventListener("click",typeSet);
+		}
+
+		for (var q = 0; q < arrNormal.length; q++) {
+			let val = titleCase(arrNormal[q]);
+			let based = base.querySelector(":scope li[name='normal']");
+
+			let wrap = document.createElement("span");
+			let txt = document.createElement("p");
+			let img = document.createElement("img");
+			wrap.setAttribute("name",val);
+			txt.innerText = val;
+			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.title = val;
+			img.setAttribute("onerror","this.style.display = 'none'");
+			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
+			based.querySelector(":scope > span:last-child").appendChild(wrap);
+			wrap.appendChild(txt);
+			wrap.appendChild(img);
+			based.style.display = "block";
+
+			wrap.addEventListener("click",typeSet);
+		}
+
+		for (var q = 0; q < arrIneffective.length; q++) {
+			let val = titleCase(arrIneffective[q]);
+			let based = base.querySelector(":scope li[name='ineffective']");
+
+			let wrap = document.createElement("span");
+			let txt = document.createElement("p");
+			let img = document.createElement("img");
+			wrap.setAttribute("name",val);
+			txt.innerText = val;
+			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.title = val;
+			img.setAttribute("onerror","this.style.display = 'none'");
+			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
+			based.querySelector(":scope > span:last-child").appendChild(wrap);
+			wrap.appendChild(txt);
+			wrap.appendChild(img);
+			based.style.display = "block";
+
+			wrap.addEventListener("click",typeSet);
+		}
+
+		for (var q = 0; q < arrSuperIneffective.length; q++) {
+			let val = titleCase(arrSuperIneffective[q]);
+			let based = base.querySelector(":scope li[name='super ineffective']");
+
+			let wrap = document.createElement("span");
+			let txt = document.createElement("p");
+			let img = document.createElement("img");
+			wrap.setAttribute("name",val);
+			txt.innerText = val;
+			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.title = val;
+			img.setAttribute("onerror","this.style.display = 'none'");
+			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
+			based.querySelector(":scope > span:last-child").appendChild(wrap);
+			wrap.appendChild(txt);
+			wrap.appendChild(img);
+			based.style.display = "block";
+
+			wrap.addEventListener("click",typeSet);
+		}
+
+		
+
+
+
+	
+
+
+		
+	
+
 	}
 }
 
