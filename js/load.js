@@ -66,6 +66,7 @@ function initialize() {
 
 		console.log(finaldata)
 
+		
 		createNav();
 		createPokémon();
 		createMap();
