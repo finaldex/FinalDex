@@ -509,6 +509,10 @@ var createTool = function() {
 		var toolSectionContentDMGContent = document.createElement("div");
 		var toolSectionContentDMGResult = document.createElement("div");
 		var toolSectionContentDMGResultContent = document.createElement("div");
+		var toolSectionContentDMGResultContentObject = document.createElement("figure");
+		var toolSectionContentDMGResultContentUser = document.createElement("span");
+		var toolSectionContentDMGResultContentTarget = document.createElement("span");
+
 
 		var toolSectionContentDMGResultParty = document.createElement("span");
 
@@ -636,7 +640,11 @@ var createTool = function() {
 		toolSectionContentDMGMenu.setAttribute("name","menu");
 
 		toolSectionContentDMGResultContent.setAttribute("name","battle");
-	
+
+		toolSectionContentDMGResultContentObject.setAttribute("name","object");
+		toolSectionContentDMGResultContentUser.setAttribute("name","user");
+		toolSectionContentDMGResultContentTarget.setAttribute("name","target");
+
 		toolSectionContentDMGOptionsContent.classList.add("scroll");
 		toolSectionContentDMGField.setAttribute("name","field");
 		toolSectionContentDMGOptionsStatsContent.setAttribute("name","stats");
@@ -649,6 +657,9 @@ var createTool = function() {
 		toolSectionContentDMGContent.appendChild(toolSectionContentDMGField);
 		toolSectionContentDMGContent.appendChild(toolSectionContentDMGResult);
 		toolSectionContentDMGResult.appendChild(toolSectionContentDMGResultContent);
+		toolSectionContentDMGResultContent.appendChild(toolSectionContentDMGResultContentObject);
+		toolSectionContentDMGResultContent.appendChild(toolSectionContentDMGResultContentUser);
+		toolSectionContentDMGResultContent.appendChild(toolSectionContentDMGResultContentTarget);
 		toolSectionContentDMGResult.appendChild(toolSectionContentDMGResultParty);
 		toolSectionContentDMGContent.appendChild(toolSectionContentDMGMenu);
 		toolSectionContentDMG.appendChild(toolSectionContentDMGOptions);
@@ -879,7 +890,7 @@ var createTool = function() {
 
 
 		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function(){const preval = this.getAttribute("name");let x = this.value;let el = this.querySelector(":scope option[value='"+x+"']");let keys = el.getAttributeNames();for(var q = 0; q < keys.length; q++) {let val1 = keys[q];let val2 = el.getAttribute(keys[q]);this.setAttribute(val1,val2);}buildDMG(preval)})
-		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function() {document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div").setAttribute("data-battle",this.value)})
+		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function() {document.querySelector("#contain div#tool div#dmg > div").setAttribute("data-battle",this.value)})
 		
 		
 		buildDMG();
@@ -890,7 +901,7 @@ var createTool = function() {
 
 
 
-		$(toolSectionContentDMGResultContent).sortable({
+		$(toolSectionContentDMGResultContentTarget).sortable({
 			stop: function(e,ui) {
 				DMGMatchPosition();
 				DMGCalcStart();
