@@ -4410,9 +4410,11 @@ function DMGUpdateSRC() {
 		var pokPath = pokBase.querySelector(":scope *[name='pokémon'] select");
 
 		if (pokPath.value != "") {
-			let rev = 'Front'
+			let ang1 = 'Front'
+			let ang2 = 'Back'
 			if (bases[i].parentElement.parentElement.getAttribute("name") == "user") {
-				rev = 'Back'
+				ang1 = 'Back'
+				ang2 = 'Front'
 			}
 			let gen = [];
 			if (genderPath != undefined) {
@@ -4428,8 +4430,16 @@ function DMGUpdateSRC() {
 			let it = [...ImageTypes]
 			it = sortObjectArray(it,"extension",true);
 			for (var q = 0; q < it.length; q++) {
-				if (it[q]["category"] == "Battle" && it[q]["angle"] == rev) {
+				if (it[q]["category"] == "Battle" && it[q]["angle"] == ang1) {
 					opts.push("./media/Images/Pokémon/"+it[q]["category"]+"/"+it[q]["extension"]+"/"+it[q]["type"]+"/"+it[q]["angle"]+"/"+it[q]["path"])
+				}
+			}
+
+			if (opts.length == 0) {
+				for (var q = 0; q < it.length; q++) {
+					if (it[q]["category"] == "Battle" && it[q]["angle"] == ang2) {
+						opts.push("./media/Images/Pokémon/"+it[q]["category"]+"/"+it[q]["extension"]+"/"+it[q]["type"]+"/"+it[q]["angle"]+"/"+it[q]["path"])
+					}
 				}
 			}
 			
