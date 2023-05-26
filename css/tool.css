@@ -2616,11 +2616,11 @@ body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='te
     top: calc(100% + -2px);
     width: 100%;
     z-index: 10;
-    background: var(--color15);
+    background: var(--color10);
     box-shadow: 0px 0px 1px #000;
     border-top: none;
-	border-bottom-left-radius: 2px;
-	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
 }
 
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b {
@@ -2635,20 +2635,15 @@ body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='te
 	cursor: pointer;
 }
 
-#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(1),
-#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(2) {
-	padding: 5px 0 2px;
-}
-
-#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(3),
-#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(4) {
-	padding: 2px 0 5px;
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]{
+	padding: 5px 0;
 }
 
 
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] b[data-category='Status'] {
     pointer-events: none;
     opacity: 0.5;
+	color:unset !important;
 }
 
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] {
