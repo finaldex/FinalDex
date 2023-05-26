@@ -4,30 +4,30 @@ let drag;
 let savedtar;
 let saveddrag;
 let boxDrag;
-let loads = ["Game","Pokémon","Pokémon Learnset","Locations","Location Pokémon","Location Items","Location Trainers","Moves","Abilities","Items","Trainers"];
+let loads = ["Game Metadata","Pokémon Metadata","Pokémon Learnset Metadata","Locations Metadata","Location Pokémon Metadata","Location Items Metadata","Location Trainers Metadata","Moves Metadata","Abilities Metadata","Items Metadata","Trainers Metadata","Directory"];
 let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
 let baseextension = "json";
-let baseextra = "Metadata"
 
 let initStart = 1;
 let initLength = loads.length;
 let initTimeStart;
 
 for(let i = 0; i < loads.length; i++) {
-	let url = baseurl+loads[i]+" "+baseextra+"."+baseextension;
+	let url = baseurl+loads[i]+"."+baseextension;
 	requestLoad(i,url);
 }
 
 function requestLoad(i,url) {
 	let gameRequest = new XMLHttpRequest();
-	gameRequest.open('GET', baseurl+loads[0]+" "+baseextra+"."+baseextension);
+	gameRequest.open('GET', baseurl+loads[0]+"."+baseextension);
 	gameRequest.responseType = 'json';
 	gameRequest.send();
 	gameRequest.onload = function() {
 		let Gamedata = gameRequest.response;
 
-		if (loads[i] == "Game") {
-			finaldata[loads[i]] = Gamedata;
+		if (loads[i] == "Game Metadata") {
+			let val = loads[i].replace(" Metadata","")
+			finaldata[val] = Gamedata;
 
 			let urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","");
 			GameID = getGameName("",urlid);
@@ -42,8 +42,8 @@ function requestLoad(i,url) {
 			request.send();
 			request.onload = function() {
 				let Metadata = request.response;
-
-				finaldata[loads[i]] = Metadata;	
+				let val = loads[i].replace(" Metadata","")
+				finaldata[val] = Metadata;	
 				initialize();
 			}
 		}
