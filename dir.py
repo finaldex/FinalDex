@@ -31,3 +31,4 @@ with open("Directory.json","w") as outfile:
     outfile.write(json_object)
 
 print("Time Elapsed: "+str(datetime.timedelta(seconds=(round(time.time() - timeStart,0)))))
+input('Complete!')
