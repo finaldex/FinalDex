@@ -610,7 +610,7 @@ var createMove = function() {
 			moveSectionSidebarLearnsetLiSourceOuter.title = "Level Up";
 			moveSectionSidebarLearnsetLiSource.innerHTML = "Level Up: "+learnsetlevelarr[q]["Factor"];
 			moveSectionSidebarLearnsetLiText.innerText = learnsetlevelarr[q]["Pokémon"];
-			moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(learnsetlevelarr[q]["Pokémon"]),"Box")+".png";
+			moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetlevelarr[q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 			moveSectionSidebarLearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
 			moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
@@ -638,7 +638,7 @@ var createMove = function() {
 				if(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].includes(",")) {
 					for(var r = 0; r < finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",").length; r++) {
 						var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r]),"Box")+".png";
+						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r];
 						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
@@ -650,7 +650,7 @@ var createMove = function() {
 					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
 				} else {
 					var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"]),"Box")+".png";
+					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
 					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
@@ -659,8 +659,7 @@ var createMove = function() {
 					moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
 				}
 		
-				
-				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];				
 				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
@@ -707,7 +706,7 @@ var createMove = function() {
 				}
 				
 
-				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
@@ -733,7 +732,7 @@ var createMove = function() {
 				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
 				var moveSectionSidebarLearnsetLiText = document.createElement("small");
 
-				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
@@ -789,7 +788,8 @@ var createMove = function() {
 				if(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].includes(",")) {
 					for(var r = 0; r < finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",").length; r++) {
 						var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r]),"Box")+".png";
+						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+
 						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r];
 						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
@@ -801,12 +801,14 @@ var createMove = function() {
 					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
 				} else {
 					var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"]),"Box")+".png";
+					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
 					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 				}
 
-				moveSectionSidebarLearnsetLiImg.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"]),"Box")+".png";
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+
+
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"];
 
