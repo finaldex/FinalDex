@@ -288,22 +288,41 @@ function getMediaPath(names,paths,gender) {
             gender[g] = '_F'
         }
     }
+
+
+
     //./media/Images/Pokémon/Battle/PNG/Default/Front/Platinum/201_J.png
     //./media/Images/Pokémon/Battle/PNG/Default/Front/VI-VII/201_J.png
  
     let dirs = Object.keys(finaldata['Directory'])
     for (n = 0; n < names.length; n++) {
         for (i = 0; i < paths.length; i++) {
+            let name = names[n];
+            if (typeof names[n] == 'number') {
+                let column = 'Battle';
+                let json = JSONPath_BattlePath;
+                if (paths[i].includes('/Box/')) {
+                    column = 'Box';
+                    json = JSONPath_BoxPath;
+                }
+
+                if(finaldata["Pokémon"]["Path"][names[n]][column+" Folder_"+json] == undefined) {
+                    name = finaldata["Pokémon"]["Path"][names[n]][column+" File_"+json];
+                } else {
+                    name = finaldata["Pokémon"]["Path"][names[n]][column+" Folder_"+json]+finaldata["Pokémon"]["Path"][i][column+" File_"+json];
+                }
+            }
+
             for (q = 0; q < dirs.length; q++) {
                 if (dirs[q].includes(paths[i])) {
                     let vals = finaldata['Directory'][dirs[q]]
                     for (r = 0; r < vals.length; r++) {
                         let val  = vals[r].split(".")[0]
-                        if (names[n] == val) {
+                        if (name == val) {
                             return paths[i]+"/"+vals[r]
                         }
                         for (g = 0; g < gender.length; g++) {
-                            if (names[n]+gender[g] == val) {
+                            if (name+gender[g] == val) {
                                 return paths[i]+"/"+vals[r]
                             }
                         }
