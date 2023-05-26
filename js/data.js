@@ -409,7 +409,7 @@ var createData = function(id, i) {
 	  
 	          dataPreviousRegional.setAttribute("name","regional"+y);
 	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
-	          dataPreviousRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldata["Pokémon"]["Reference"][getInt1ID("",previousID)]["Pokémon"];
+	          dataPreviousRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",previousID)]["Pokémon"];
 			  dataPreviousRegionalImg.src = getPokémonMediaPath([getIntID("",previousID)],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 	          dataPreviousRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 	          
