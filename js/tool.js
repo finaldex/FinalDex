@@ -509,6 +509,7 @@ var createTool = function() {
 		var toolSectionContentDMGContent = document.createElement("div");
 		var toolSectionContentDMGResult = document.createElement("div");
 		var toolSectionContentDMGResultContent = document.createElement("div");
+		var toolSectionContentDMGResultContentWrap = document.createElement("span");
 		var toolSectionContentDMGResultContentObject = document.createElement("figure");
 		var toolSectionContentDMGResultContentUser = document.createElement("span");
 		var toolSectionContentDMGResultContentTarget = document.createElement("span");
@@ -635,7 +636,7 @@ var createTool = function() {
 		toolSectionContentDMGContent.setAttribute("name","content");
 
 		toolSectionContentDMGResult.setAttribute("name","result");
-		toolSectionContentDMGResultContent.classList.add("scroll");
+		toolSectionContentDMGResultContentWrap.classList.add("scroll");
 		toolSectionContentDMGOptions.setAttribute("name","options");
 		toolSectionContentDMGMenu.setAttribute("name","menu");
 
@@ -657,9 +658,10 @@ var createTool = function() {
 		toolSectionContentDMGContent.appendChild(toolSectionContentDMGField);
 		toolSectionContentDMGContent.appendChild(toolSectionContentDMGResult);
 		toolSectionContentDMGResult.appendChild(toolSectionContentDMGResultContent);
-		toolSectionContentDMGResultContent.appendChild(toolSectionContentDMGResultContentObject);
-		toolSectionContentDMGResultContent.appendChild(toolSectionContentDMGResultContentUser);
-		toolSectionContentDMGResultContent.appendChild(toolSectionContentDMGResultContentTarget);
+		toolSectionContentDMGResultContent.appendChild(toolSectionContentDMGResultContentWrap);
+		toolSectionContentDMGResultContentWrap.appendChild(toolSectionContentDMGResultContentObject);
+		toolSectionContentDMGResultContentWrap.appendChild(toolSectionContentDMGResultContentUser);
+		toolSectionContentDMGResultContentWrap.appendChild(toolSectionContentDMGResultContentTarget);
 		toolSectionContentDMGResult.appendChild(toolSectionContentDMGResultParty);
 		toolSectionContentDMGContent.appendChild(toolSectionContentDMGMenu);
 		toolSectionContentDMG.appendChild(toolSectionContentDMGOptions);
@@ -832,7 +834,6 @@ var createTool = function() {
 				toolSectionContentDMGMenuMoveTopOption.innerText = tempMoves[m];
 				toolSectionContentDMGMenuMoveSelect.appendChild(toolSectionContentDMGMenuMoveTopOption);
 
-
 				let movd = formatMoveData(tempMoves[m]);
 				movd = undDel(movd,"");
 				toolSectionContentDMGMenuMoveTopOption.title = movd;
@@ -853,11 +854,10 @@ var createTool = function() {
 		toolSectionContentDMGMenuSpecificTopInput.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuSpecificTopSelect.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGSetInfo);
-		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",function(){
 			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;this.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value)+")";
 		});
-
+		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGCalcStart);
 
 		let movd = formatMoveData(toolSectionContentDMGMenuMoveSelect.value);
 		movd = undDel(movd,"");
