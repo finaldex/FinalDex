@@ -4388,6 +4388,57 @@ function DMGSetInfo() {
 
 	DMGSetPossible();
 }
+function DMGUpdateSRC() {
+
+
+    let bases = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]");
+
+	for (var i = 0; i < bases.length; i++) {
+
+		let team = bases[i].parentElement.getAttribute("name");
+		let id = bases[i].getAttribute("name");
+	
+		let divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+team+"'] > div[name='"+id+"']");
+		let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name='"+id+"']");
+		let teamBase = document.querySelector("#contain > div#tool div#dmg ol[name='team'] span[name='"+team+"']");
+		let statsBase = document.querySelector("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name='"+id+"']");
+		let partyBase = document.querySelector("#contain > div#tool div#dmg span[name='party'] span[name='"+team+"']")
+		let fieldBase = document.querySelector("#contain > div#tool div#dmg div[name='field']");
+	
+		var pokImgPath = divBase.querySelector(":scope *[name='img']");
+		var genderPath = pokBase.querySelector(":scope *[name='gender'] select");
+		var pokPath = pokBase.querySelector(":scope *[name='pokémon'] select");
+
+		if (pokPath.value != "") {
+			let rev = 'Front'
+			if (bases[i].parentElement.parentElement.getAttribute("name") == "user") {
+				rev = 'Back'
+			}
+			let gen = [];
+			if (genderPath != undefined) {
+				if (genderPath.value == "♂") {
+					gen = ["Male"];
+				}
+				else if (genderPath.value == "♀") {
+					gen = ["Female"];
+				}
+			}
+
+			let opts = []
+			let it = [...ImageTypes]
+			it = sortObjectArray(it,"extension",true);
+			for (var q = 0; q < it.length; q++) {
+				if (it[q]["category"] == "Battle" && it[q]["angle"] == rev) {
+					opts.push("./media/Images/Pokémon/"+it[q]["category"]+"/"+it[q]["extension"]+"/"+it[q]["type"]+"/"+it[q]["angle"]+"/"+it[q]["path"])
+				}
+			}
+			
+			pokImgPath.src = getPokémonMediaPath([getPokémonInt(pokPath.value)],opts,gen);
+		}
+	}
+
+
+}
 function DMGSetChange(base) {
 
 	var base;
@@ -4519,7 +4570,19 @@ function DMGSetChange(base) {
 				pokName = getPokémonName(int);
 			}
 
-			pokImgPath.src = "./media/Images/Pokémon/"+itCategory+"/"+itExt+"/"+itType+"/"+itAngle+"/"+itPath+"/"+getPokémonMediaPath(int,"Battle")+"."+itExt;
+
+			let opts = []
+			let it = [...ImageTypes]
+			it = sortObjectArray(it,"extension",true);
+			for (var q = 0; q < it.length; q++) {
+				if (it[q]["category"] == "Battle" && it[q]["angle"] == "Front") {
+					opts.push("./media/Images/Pokémon/"+it[q]["category"]+"/"+it[q]["extension"]+"/"+it[q]["type"]+"/"+it[q]["angle"]+"/"+it[q]["path"])
+				}
+			}
+
+			pokImgPath.src = getPokémonMediaPath([int],opts);
+
+
 
 			var titles = [];
 			if (level != undefined) {
@@ -4694,7 +4757,7 @@ function DMGSetChange(base) {
 	}
 
 	divBase.title = dataStringTitle(divBase.getAttribute("data-string"));;
-
+	DMGUpdateSRC();
 }
 function DMGSetActive(val) {
 	var x = findUpTag(event.target,"DIV");
@@ -4708,7 +4771,7 @@ function DMGSetActive(val) {
 
 	DMGSetPossible();
 	DMGCalcStart();
-
+	DMGUpdateSRC();
 }
 function DMGSetPossible() {
 	var tars = [];
@@ -6011,7 +6074,7 @@ function DMGPartyRow(base) {
 					if (x >= val1 && x <= val2) {
 						li.setAttribute("data-string",dataStrings[r]);
 						li.setAttribute("title",dataStringTitle(dataStrings[r]));
-						img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(int,"Box")+".png";
+						img.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 						used.push(r);
 						break;
 					}
@@ -6939,6 +7002,7 @@ function buildDMG(preval) {
                         genderSelect.addEventListener("change",DMGSaveData);
                         genderSelect.addEventListener("change",DMGCalcPokStats);
                         genderSelect.addEventListener("change",DMGCalcStart);
+						genderSelect.addEventListener("change",DMGUpdateSRC);
 
                         genderSelect.addEventListener("change",function(){this.style.removeProperty("color"); if (this.value == "♂") {this.style.color = "blue";}else if (this.value == "♀") {this.style.color = "red";}});
 
