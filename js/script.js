@@ -273,7 +273,7 @@ function dataRedirect() {
 
 }
 
-function getMediaPath(names,paths,gender) {
+function getPokémonMediaPath(names,paths,gender) {
 
 
     if (gender == undefined || gender.length == 0) {
@@ -319,10 +319,12 @@ function getMediaPath(names,paths,gender) {
                     for (r = 0; r < vals.length; r++) {
                         let val  = vals[r].split(".")[0]
                         if (name == val) {
+                            console.log(paths[i]+"/"+vals[r])
                             return paths[i]+"/"+vals[r]
                         }
                         for (g = 0; g < gender.length; g++) {
                             if (name+gender[g] == val) {
+                                console.log(paths[i]+"/"+vals[r])
                                 return paths[i]+"/"+vals[r]
                             }
                         }
@@ -1281,7 +1283,7 @@ function createParty(base,data) {
         base.querySelector(":scope > aside:first-child").setAttribute("name",type1);
     }
 
-    basePok.src = "./media/Images/Pokémon/"+imgtypeCategory+"/"+imgtypeExtension+"/"+imgtypeType+"/"+imgtypeAngle+"/"+imgtypePath+"/"+getPokémonMediaPath(i,imgtypeCategory)+"."+imgtypeExtension;
+    basePok.src = getPokémonMediaPath([i],["./media/Images/Pokémon/"+imgtypeCategory+"/"+imgtypeExtension+"/"+imgtypeType+"/"+imgtypeAngle+"/"+imgtypePath+"/"]);
    
 
     basePok.setAttribute("value",i);
@@ -2102,7 +2104,7 @@ function storeInBox(data) {
     var li = document.createElement("li");
     var shadow = document.createElement("span");
     var img = document.createElement("img");
-    img.src = "./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/"+getPokémonMediaPath(i,"Box")+".png";
+    img.src = getPokémonMediaPath([i],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
     img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
     img.setAttribute("value",i);
     box.appendChild(li)
@@ -4452,12 +4454,16 @@ function ImageType(action) {
             
 
             for (var q = 0; q < conimg.length; q++) {
-                conimg[q].src = './media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath+'/'+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataCategory)+"."+dataExtension;
-                conimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataCategory)+"."+dataExtension);
+                let p = getPokémonMediaPath([getPokémonInt(conimg[q].id)],['./media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath]);
+      
+                conimg[q].src = p
+                conimg[q].setAttribute("path",p);
             }
             for (var q = 0; q < parimg.length; q++) {
-                parimg[q].src = './media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath+'/'+getPokémonMediaPath(parimg[q].getAttribute("value"),dataCategory)+"."+dataExtension;
-                parimg[q].setAttribute("path",dataPath+"/"+getPokémonMediaPath(parimg[q].getAttribute("value"),dataCategory)+"."+dataExtension);
+                let p = getPokémonMediaPath([parseInt(parimg[q].getAttribute("value"))],['./media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath]);
+
+                parimg[q].src = p
+                parimg[q].setAttribute("path",p);
             }
         }
 
