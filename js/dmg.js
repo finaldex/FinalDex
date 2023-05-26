@@ -4709,11 +4709,16 @@ function DMGSetChange(base) {
 							var val = movesPath[v].value;
 							if(val != undefined && !val.includes("#") && val != "") {
 								let category = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,val);
-								
+								let type = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,val)
+
 								pokMovesPath[v].firstChild.innerText = val;
 								pokMovesPath[v].firstChild.setAttribute("name",val);
 								pokMovesPath[v].setAttribute("data-category",category);
 
+								
+							
+								pokMovesPath[v].style.color = "var(--type"+type+")";
+								
 
 								let movd = formatMoveData(pokMovesPath[v].firstChild.innerText);
 								movd = undDel(movd,"");
