@@ -323,6 +323,7 @@ function getIntID(int, id) {
 	}
 }
 
+/*
 function getPokémonMediaPath(int,type) {
 	var int;
 	var type;
@@ -351,7 +352,7 @@ function getPokémonMediaPath(int,type) {
 	return result;
 }
 
-
+*/
 
 
 function getMachineMove(machine) {
