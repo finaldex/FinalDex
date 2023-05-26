@@ -124,7 +124,8 @@ def tableToArr(data):
 
             for q in range(0,len(title)): # Column
                 try:
-                    obj[title[q]] = values[i][q]
+                    if values[i][q] != '':
+                        obj[title[q]] = values[i][q]
                 except:
                     break
             if i != 0:
