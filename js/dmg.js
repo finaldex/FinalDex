@@ -139,6 +139,22 @@ function DMGCalcStart() {
 
 	// Values //
 
+	// Move
+	let movePower = returnArrValue(finaldata["Moves"]["Power"],"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,movePath.value);
+	let moveAccuracy = returnArrValue(finaldata["Moves"]["Accuracy"],"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,movePath.value);
+	let moveCategory = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,movePath.value);
+	let moveType = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movePath.value);
+	let movePriority = returnArrValue(finaldata["Moves"]["Priority"],"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,movePath.value);
+	let moveGroup = returnArrValue(finaldata["Moves"]["Group"],"Name_"+JSONPath_MoveName,"Group",movePath.value);
+	let moveRange = returnArrValue(finaldata["Moves"]["Range"],"Name_"+JSONPath_MoveName,"Range",movePath.value);
+	movePower = undwsDel(movePower,0);
+	moveAccuracy = undwsDel(moveAccuracy,"100%");
+	moveCategory = undwsDel(moveCategory,"");
+	moveType = undwsDel(moveType,"");
+	movePriority = undwsDel(movePriority,0);
+
+	movePath.parentElement.setAttribute("data-special","");
+
 	// Types
 	let userTypes = [];
 	for (let t = 0; t < userTypesPath.length; t++) {
@@ -194,7 +210,6 @@ function DMGCalcStart() {
 				let tarHPResultPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='result'] > *");
 				let tarEffectPositivePath = tarDivBase.querySelector(":scope *[name='effect'] *[name='positive']");
 				let tarEffectNegativePath = tarDivBase.querySelector(":scope *[name='effect'] *[name='negative']");
-
 
                 // Target Pokémon
 				let tarPokémonPath = tarPokBase.querySelector(":scope *[name='pokémon'] select");
@@ -254,6 +269,7 @@ function DMGCalcStart() {
 				tarEffectPositivePath.innerHTML = "";
 				tarHPBasePath.style.setProperty("--heal",((tarHPPath.value/tarHPPath.max)*100)+"%")
 				tarHPBasePath.style.setProperty("--dmg",((tarHPPath.value/tarHPPath.max)*100)+"%")
+				tarHPBasePath.style.setProperty("--hp",((tarHPPath.value/tarHPPath.max)*100)+"%")
 
 				tarHPCurrentPath.innerText = tarHPPath.max-(tarHPPath.max-tarHPPath.value);
 				tarHPMaxPath.innerText = tarHPPath.max;
@@ -262,21 +278,6 @@ function DMGCalcStart() {
 				tarHPResultPath.innerText = "";
 				tarHPBasePath.removeAttribute("title");
 
-				// Move
-				let movePower = returnArrValue(finaldata["Moves"]["Power"],"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,movePath.value);
-				let moveAccuracy = returnArrValue(finaldata["Moves"]["Accuracy"],"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,movePath.value);
-				let moveCategory = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,movePath.value);
-				let moveType = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movePath.value);
-				let movePriority = returnArrValue(finaldata["Moves"]["Priority"],"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,movePath.value);
-				let moveGroup = returnArrValue(finaldata["Moves"]["Group"],"Name_"+JSONPath_MoveName,"Group",movePath.value);
-				let moveRange = returnArrValue(finaldata["Moves"]["Range"],"Name_"+JSONPath_MoveName,"Range",movePath.value);
-				movePower = undwsDel(movePower,0);
-				moveAccuracy = undwsDel(moveAccuracy,"100%");
-				moveCategory = undwsDel(moveCategory,"");
-				moveType = undwsDel(moveType,"");
-				movePriority = undwsDel(movePriority,0);
-
-				movePath.parentElement.setAttribute("data-special","");
 
 
 				if ("Type" && "Category") {
@@ -1203,7 +1204,7 @@ function DMGCalcStart() {
 							}
 						}
 					
-						if ("Factors Per Generation") {
+						if ("Factors Generation") {
 							if (Generation == 1) { // DMG Generation 1
 								if (moveCategory == "Physical") {
 									for(let u = 0; u < userStatsPath.length; u++) {
@@ -1680,26 +1681,27 @@ function DMGCalcStart() {
 									}
 									Metronome = 1+(val/10);
 								}
-								for(let u = 0; u < tarTypes.length; u++) {
+								
+								if (tarTypes.length > 0) {
 									let typeadv = returnTypeAdvantage(moveType,"Attacking");
 
-									if (typeadv[2].includes(tarTypes[u].toUpperCase())) {
+									if (typeadv[2].includes(tarTypes[0].toUpperCase())) {
 										Type1 = Type1*2;
 									}
-									if (typeadv[2].includes(tarTypes[u].toUpperCase())) {
+									if (typeadv[2].includes(tarTypes[0].toUpperCase())) {
 										Type1 = Type1*0.5;
 									}
-									if (typeadv[3].includes(tarTypes[u].toUpperCase())) {
+									if (typeadv[3].includes(tarTypes[0].toUpperCase())) {
 										Immune = true;
 									}
 
-									if (typeadv[2].includes(tarTypes[u].toUpperCase())) {
+									if (typeadv[2].includes(tarTypes[1].toUpperCase())) {
 										Type2 = Type2*2;
 									}
-									if (typeadv[2].includes(tarTypes[u].toUpperCase())) {
+									if (typeadv[2].includes(tarTypes[1].toUpperCase())) {
 										Type2 = Type2*0.5;
 									}
-									if (typeadv[3].includes(tarTypes[u].toUpperCase())) {
+									if (typeadv[3].includes(tarTypes[1].toUpperCase())) {
 										Immune = true;
 									}
 								}
@@ -2991,6 +2993,10 @@ function DMGCalcStart() {
 								txt.innerText = negativeEffect[e];
 								tarEffectNegativePath.appendChild(txt)
 							}
+							console.log(negativeEffect)
+							console.log(Type)
+							console.log(Type1)
+							console.log(Type2)
 							
 
 							if (STAB > 1) {
@@ -3004,13 +3010,7 @@ function DMGCalcStart() {
 								userEffectPositivePath.appendChild(txt)
 							}
 							
-
 							pwrRes.push(Power);
-							movePath.parentElement.style.color = "var(--type"+moveType+")";
-							moveTypeImgPath.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+moveType+".png";
-							moveCategoryImgPath.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+moveCategory+".png";
-							moveTypeTextPath.innerText = moveType;
-							moveCategoryTextPath.innerText = moveCategory;
 						}
 
 					}
@@ -3317,18 +3317,25 @@ function DMGCalcStart() {
 						}
 					}
 				}
-
 			}
+		}
+
+		
+		
+		if ('Extra') {
+			movePath.parentElement.style.color = "var(--type"+moveType+")";
+			moveTypeImgPath.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+moveType+".png";
+			moveCategoryImgPath.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+moveCategory+".png";
+			moveTypeTextPath.innerText = moveType;
+			moveCategoryTextPath.innerText = moveCategory;
 		}
 
 
 
 		for (let i = 0; i < DMGCalculation.length; i++) {
-
 			let dmg = 0;
 			let heal = 0;
 		
-
 			let Team;
 			let ID;
 
@@ -4266,7 +4273,7 @@ function DMGSetInfo() {
 				specLis[l].style.removeProperty("display");
 			}
 		}
-		else if (specLis[l].getAttribute("name") == "Me First") {
+		/*else if (specLis[l].getAttribute("name") == "Me First") {
 			var uncallable = [];
 			if (Generation == 4 || Generation == 5) {
 				uncallable = ["Chatter","Counter","Covet","Focus Punch","Metal Burst","Mirror Coat","Struggle","Thief"]
@@ -4280,7 +4287,7 @@ function DMGSetInfo() {
 			if (!uncallable.includes(moveSelect.value)) {
 				specLis[l].style.removeProperty("display");
 			}
-		}
+		}*/
 		else if (specLis[l].getAttribute("name") == "Flash Fire") {
 			if (userAbilityPath != undefined && userAbilityPath.value == "Flash Fire") {
 				specLis[l].style.removeProperty("display");
@@ -6243,8 +6250,8 @@ function buildDMG(preval) {
     
 	let optionsPokTitle = document.querySelector("#contain > div#tool div#dmg div[name='options'] > div[name='header'] > span:last-child");
 	let fieldPath = document.querySelector("#contain > div#tool div#dmg div[name='content'] > div[name='field']");
-	let contentPath = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div[name='battle'] > span[name='target']");
-	let contentPath2 = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div[name='battle'] > span[name='user']");
+	let contentPath = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div[name='battle'] span[name='target']");
+	let contentPath2 = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div[name='battle'] span[name='user']");
 	let partyPath = document.querySelector("#contain > div#tool div#dmg div[name='result'] > span[name='party']");
 	let specificPath = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child");
 
