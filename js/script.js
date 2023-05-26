@@ -273,6 +273,49 @@ function dataRedirect() {
 
 }
 
+function getMediaPath(names,paths,gender) {
+
+
+    if (gender == undefined || gender.length == 0) {
+        gender = ["Male","Female"]
+    }
+
+    for (g = 0; g < gender.length; g++) {
+        if (gender[g].includes == "Male" || gender[g].includes == "M") {
+            gender[g] = '_M'
+        }
+        else if (gender[g].includes == "Female" || gender[g].includes == "F") {
+            gender[g] = '_F'
+        }
+    }
+    //./media/Images/Pokémon/Battle/PNG/Default/Front/Platinum/201_J.png
+    //./media/Images/Pokémon/Battle/PNG/Default/Front/VI-VII/201_J.png
+ 
+    let dirs = Object.keys(finaldata['Directory'])
+    for (n = 0; n < names.length; n++) {
+        for (i = 0; i < paths.length; i++) {
+            for (q = 0; q < dirs.length; q++) {
+                if (dirs[q].includes(paths[i])) {
+                    let vals = finaldata['Directory'][dirs[q]]
+                    for (r = 0; r < vals.length; r++) {
+                        let val  = vals[r].split(".")[0]
+                        if (names[n] == val) {
+                            return paths[i]+"/"+vals[r]
+                        }
+                        for (g = 0; g < gender.length; g++) {
+                            if (names[n]+gender[g] == val) {
+                                return paths[i]+"/"+vals[r]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return
+
+}
+
 
 
 function getIntData(int,arr,column) {
