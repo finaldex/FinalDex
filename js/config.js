@@ -999,7 +999,7 @@ function define() {
 		JSONPath_ExperienceYield = "5";
 		MEDIAPath_Type_Text = "V";
 		MEDIAPath_Pokémon_Overworld = "V";
-		ImageTypes = [{name:"Battle Sprites",path:"V",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"V",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
+		ImageTypes = [{name:"Battle Sprites",path:"V",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"V",category:"Battle",angle:"Front",type:"Default",extension:"GIF"},{name:"Battle Sprites",path:"V",category:"Battle",angle:"Back",type:"Default",extension:"GIF"}];
 		JSONPath_AbilityFlavor = "5";
 		JSONPath_AbilityReference = "5";
 		JSONPath_MoveMachine = "5";
