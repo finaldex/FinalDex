@@ -2,15 +2,16 @@ function DMGCalcStart() {
 
 	DMGSetPossible();
 	DMGSpeedCalc();
+	DMGSetWeatherTerrain();
 
     // Paths //
-	let user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div.user");
+	let user = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].user");
 	let userID = user.getAttribute("name");
 	let userTeam = user.parentElement.getAttribute("name");
 
 	// Path Scopes
-    let allPokBase = document.querySelectorAll("#contain > div#tool div#dmg > div span[name] ul[name]");
-	let allDivBase = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[name]");
+    let allPokBase = document.querySelectorAll("#contain > div#tool div#dmg > div span[name*='team'] ul[name]");
+	let allDivBase = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]");
     
     let userDivBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+userTeam+"'] > div[name='"+userID+"']");
     let userPokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+userTeam+"'] > ul[name='"+userID+"']");
@@ -34,11 +35,15 @@ function DMGCalcStart() {
         battleSize = battleSize+parseInt(battleSizes[u]);
     }
 
+
     // User Div
     let userMaxHPPath = userDivBase.querySelector(":scope *[name='hp'] *[name='max']");
 	let userCurrentHPPath = userDivBase.querySelector(":scope *[name='hp'] *[name='current']");
 	let userPercentageHPPath = userDivBase.querySelector(":scope *[name='hp'] *[name='percentage']");
-	let userStabPath = userDivBase.querySelector(":scope *[name='stab']");
+	let userEffectPositivePath = userDivBase.querySelector(":scope *[name='effect'] *[name='positive']");
+	let userEffectNegativePath = userDivBase.querySelector(":scope *[name='effect'] *[name='negative']");
+
+
 
     // User Stats
     let userModAccuracyPath = userStatsBase.querySelector(":scope span[name='Mod'] input[name='Accuracy']");
@@ -159,8 +164,6 @@ function DMGCalcStart() {
 
 	DMGCalculation = [];
 
-
-
 	var check = true;
 	if (user == undefined || target == undefined) {
 		check = false;
@@ -187,10 +190,11 @@ function DMGCalcStart() {
 				let tarHPBasePath = tarDivBase.querySelector(":scope *[name='hp']");
 				let tarHPCurrentPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='current']");
 				let tarHPMaxPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='max']");
-				let tarHPPercentagePath = tarDivBase.querySelector(":scope *[name='hp'] *[name='percentage']");
-				let tarHPResultPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='result']");
-				let tarEffectPath = tarDivBase.querySelector(":scope *[name='effect']");
-				let tarSTABPath = tarDivBase.querySelector(":scope *[name='stab']");
+				let tarHPPercentagePath = tarDivBase.querySelector(":scope *[name='hp'] *[name='percentage'] > *");
+				let tarHPResultPath = tarDivBase.querySelector(":scope *[name='hp'] *[name='result'] > *");
+				let tarEffectPositivePath = tarDivBase.querySelector(":scope *[name='effect'] *[name='positive']");
+				let tarEffectNegativePath = tarDivBase.querySelector(":scope *[name='effect'] *[name='negative']");
+
 
                 // Target Pokémon
 				let tarPokémonPath = tarPokBase.querySelector(":scope *[name='pokémon'] select");
@@ -246,16 +250,16 @@ function DMGCalcStart() {
 				}
 
 				// Defaults
-				tarEffectPath.innerText = "";
-				tarSTABPath.innerText = "";
-				tarActive.style.removeProperty("background");
-				tarActive.style.background = "linear-gradient(90deg, limegreen 0%, limegreen "+((tarHPPath.value/tarHPPath.max)*100)+"%, Darkred "+((tarHPPath.value/tarHPPath.max)*100)+"%, Darkred 100%)";
+				tarEffectNegativePath.innerHTML = "";
+				tarEffectPositivePath.innerHTML = "";
+				tarHPBasePath.style.setProperty("--heal",((tarHPPath.value/tarHPPath.max)*100)+"%")
+				tarHPBasePath.style.setProperty("--dmg",((tarHPPath.value/tarHPPath.max)*100)+"%")
+
 				tarHPCurrentPath.innerText = tarHPPath.max-(tarHPPath.max-tarHPPath.value);
 				tarHPMaxPath.innerText = tarHPPath.max;
 				tarHPPercentagePath.innerText = parseInt((tarHPPath.value/tarHPPath.max)*100);
 				tarHPPercentagePath.innerText = tarHPPercentagePath.innerText+"%";
-				tarHPResultPath.innerText = "0";
-				tarHPResultPath.innerHTML = "&nbsp;"+"("+tarHPResultPath.innerText+")";
+				tarHPResultPath.innerText = "";
 				tarHPBasePath.removeAttribute("title");
 
 				// Move
@@ -303,6 +307,16 @@ function DMGCalcStart() {
 						}
 					}
 					else if (movePath.value == "Hidden Power") {
+						let ivs = [];
+						for (let q = 0; q < userStatsIVPath.length; q++) {
+							if (userStatsIVPath[q].value != undefined && userStatsIVPath[q].value != "") {
+								ivs.push(userStatsIVPath[q].value);
+							}
+							else {
+								ivs.push(0);
+							}
+						}
+								
 						moveType = hiddenPowerCalc(ivs)["Type"];
 					}
 
@@ -348,6 +362,7 @@ function DMGCalcStart() {
 						check = true;
 					}
 				}
+	
 				if (check) {
 					for (let h = 0; h < specInputPath.value; h++) {
 						// Defaults
@@ -1026,7 +1041,7 @@ function DMGCalcStart() {
 								}
 							}
 							if (movePath.value == "Stomp" || movePath.value == "Needle Arm" || movePath.value == "Astonish" || movePath.value == "Extrasensory") {
-								if (MinimizePath.checked) {
+								if (MinimizePath != undefined && MinimizePath.checked) {
 									StompNeedleArmAstonishExtrasensory = 2;
 								}
 							}
@@ -2924,56 +2939,71 @@ function DMGCalcStart() {
 							}
 						}
 
-						if ("Info") {
-							let effect = "Normal";
+						if ("Info" && h == 0) {
+							let positiveEffect = [];
+							let negativeEffect = [];
 							if (Generation == 1 || Generation == 4) {
 								if (Type1*Type2 == 2) {
-									effect = "Super Effective"
+									negativeEffect.push("Super Effective");
 								}
 								else if (Type1*Type2 == 4) {
-									effect = "Super Effective!!"
+									negativeEffect.push("Super Effective!!");
 								}
 								else if (Type1*Type2 == 0.5) {
-									effect = "Not Very Effective"
+									negativeEffect.push("Not Very Effective");
 								}
 								else if (Type1*Type2 == 0.25) {
-									effect = "Not Very Effective!!"
+									negativeEffect.push("Not Very Effective!!");
+								}
+								else {
+									negativeEffect.push("Normal");
 								}
 								if (Immune) {
-									effect = "Immune"
+									negativeEffect.push("Immune");
 								}
 							}
 							else {
 								if (Type == 2) {
-									effect = "Super Effective"
+									negativeEffect.push("Super Effective");
 								}
 								else if (Type == 4) {
-									effect = "Super Effective!!"
+									negativeEffect.push("Super Effective!!");
 								}
 								else if (Type == 0.5) {
-									effect = "Not Very Effective"
+									negativeEffect.push("Not Very Effective");
 								}
 								else if (Type == 0.25) {
-									effect = "Not Very Effective!"
+									negativeEffect.push("Not Very Effective!");
 								}
-								if (Immune && !Affected) {
-									effect = "Immune<br>Unaffected";
+								if (!Affected) {
+									negativeEffect.push("Unaffected");
 								}
-								else if (Immune && Affected) {
-									effect = "Immune";
-								}
-								else if (!Immune && !Affected) {
-									effect = "Unaffected";
+								if (Immune) {
+									negativeEffect.push("Immune");
 								}
 							}
 
-							if (effect != "Normal") {
-								tarEffectPath.innerHTML = effect;
+							negativeEffect = negativeEffect.filter(e => e != "Normal");
+
+							for (var e = 0; e < negativeEffect.length; e++) {
+								let txt = document.createElement("small");
+								txt.setAttribute("name",negativeEffect[e])
+								txt.innerText = negativeEffect[e];
+								tarEffectNegativePath.appendChild(txt)
 							}
+							
 
 							if (STAB > 1) {
-								userStabPath.innerText = "Same Type Attack Bonus";
+								positiveEffect.push("STAB");
 							}
+							
+							for (var e = 0; e < positiveEffect.length; e++) {
+								let txt = document.createElement("small");
+								txt.setAttribute("name",positiveEffect[e])
+								txt.innerText = positiveEffect[e];
+								userEffectPositivePath.appendChild(txt)
+							}
+							
 
 							pwrRes.push(Power);
 							movePath.parentElement.style.color = "var(--type"+moveType+")";
@@ -3292,6 +3322,7 @@ function DMGCalcStart() {
 		}
 
 
+
 		for (let i = 0; i < DMGCalculation.length; i++) {
 
 			let dmg = 0;
@@ -3319,8 +3350,8 @@ function DMGCalcStart() {
 				HPPath = pokBase.querySelector(":scope *[name='hp'] > input");
 				HPCurrentPath = divBase.querySelector(":scope *[name='hp'] *[name='current']");
 				HPMaxPath = divBase.querySelector(":scope *[name='hp'] *[name='max']");
-				HPPercentagePath = divBase.querySelector(":scope *[name='hp'] *[name='percentage']");
-				HPResultPath = divBase.querySelector(":scope *[name='hp'] *[name='result']");
+				HPPercentagePath = divBase.querySelector(":scope *[name='hp'] *[name='percentage'] > *");
+				HPResultPath = divBase.querySelector(":scope *[name='hp'] *[name='result'] > *");
 
 	
 				if (DMGCalculation[i][q]["Type"] == "Damage") {
@@ -3358,28 +3389,42 @@ function DMGCalcStart() {
 			HPPercentagePath.innerText = (hpval/HPPath.max)*100;
 			HPPercentagePath.innerText = parseInt(HPPercentagePath.innerText)+"%";
 			HPResultPath.innerText = HPPath.value-hpval;
-			HPResultPath.innerHTML = "&nbsp;("+HPResultPath.innerText+")";
-			HPResultPath.innerText = HPResultPath.innerText.replaceAll("-","+");
+			HPResultPath.innerHTML = "-"+HPResultPath.innerText+"";
+			HPResultPath.innerText = HPResultPath.innerText.replaceAll("--","+");
+
+			if (HPResultPath.innerText == "-0") {
+				HPResultPath.innerText = "";
+			}
 
 
 
 
 
-			let tempStr = "";
+
+	
+			let valStart = ((HPPath.value-dmg)/HPPath.max)*100;
+			let valHeal = (((HPPath.value-dmg)+heal)/HPPath.max)*100;
+			let valEnd = (HPPath.value/HPPath.max)*100;
 		
-			if (HPResultPath.innerText.includes("+")) {
-				let valStart = ((HPPath.value-dmg)/HPPath.max)*100;
-				let valHeal = (((HPPath.value-dmg)+heal)/HPPath.max)*100;
-				let valEnd = ((HPPath.value)/HPPath.max)*100;
-				tempStr = "linear-gradient(90deg, Limegreen 0%, Limegreen "+valStart+"%, Greenyellow "+valStart+"%, Greenyellow "+valHeal+"%, Orangered "+valHeal+"%, Orangered "+valEnd+"%, Darkred "+valEnd+"%, Darkred 100%";
+			DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp']").style.setProperty("--dmg",valStart+"%");
+			DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp']").style.setProperty("--heal",valHeal+"%");
+			DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp']").style.setProperty("--hp",valEnd+"%");
+
+			let val = (hpval/HPPath.max)*100;
+			if (val > 80) {
+				let resw = DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp'] *[name='result']").offsetWidth;
+				if (resw != undefined && resw != "" && resw != 0) {
+					DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp'] *[name='result']").style.marginLeft = "-"+(resw+5)+"px";
+				}
+				else {
+					DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp'] *[name='result']").style.marginLeft = "-15px";
+				}
 			}
 			else {
-				let valStart = ((HPPath.value-dmg)/HPPath.max)*100;
-				let valEnd = (HPPath.value/HPPath.max)*100;
-				tempStr = "linear-gradient(90deg, Limegreen 0%, Limegreen "+valStart+"%, Orangered "+valStart+"%, Orangered "+valEnd+"%, Darkred "+valEnd+"%, Darkred 100%";
+				DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp'] *[name='result']").style.marginLeft = "5px";
 			}
 
-			DMGCalculation[i][0]["Target"].lastChild.style.background = tempStr;
+			DMGCalculation[i][0]["Target"].querySelector(":scope *[name='hp'] *[name='result']").style.left = val+"%";
 		}
 
 		for (let i = 0; i < DMGCalculation.length; i++) {
@@ -3512,7 +3557,6 @@ function DMGCalcStart() {
 		moveAccuracyTextPath.innerText = accResult;
 		moveCriticalTextPath.innerText = critResult;
 	}
-
 
 
 }
@@ -4022,7 +4066,7 @@ let DMGRandomLeave = false;
 
 function DMGSetInfo() {
 	
-	let user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string].user");
+	let user = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].user");
 	let userID = user.getAttribute("name");
 	let userTeam = user.parentElement.getAttribute("name");
     let userPokBase = document.querySelector("#contain > div#tool div#dmg > div span[name='"+userTeam+"'] ul[name='"+userID+"']");
@@ -4115,7 +4159,7 @@ function DMGSetInfo() {
 	if (moveSelect.value == "Psywave") {
 		if (Generation >= 1 && Generation <= 2) {
 			rollRandomPath.min = 0;
-			rollRandomPath.max = Math.floor(1.5*userLevelPath);
+			rollRandomPath.max = Math.floor(1.5*userLevelPath.value);
 		}
 		else if (Generation >= 3 && Generation <= 4) {
 			rollRandomPath.min = 0;
@@ -4387,7 +4431,7 @@ function DMGSetChange(base) {
 	var dataString = dataStringToObj(divBase.getAttribute("data-string"));
 
 
-	divBase.lastChild.title = "";
+	divBase.title = "";
 
 	pokImgPath.removeAttribute("src");
 	pokImgPath.removeAttribute("title");
@@ -4649,19 +4693,18 @@ function DMGSetChange(base) {
 		uniqueValueSelect(mov);
 	}
 
-	divBase.lastChild.title = dataStringTitle(divBase.getAttribute("data-string"));;
+	divBase.title = dataStringTitle(divBase.getAttribute("data-string"));;
 
 }
 function DMGSetActive(val) {
-	var val;
-
 	var x = findUpTag(event.target,"DIV");
-	var all = x.parentElement.parentElement.querySelectorAll(":scope div[data-string]")			
-	
+	var all = x.parentElement.parentElement.parentElement.querySelectorAll(":scope div[data-string]");
+
 	for(var a = 0; a < all.length; a++) {
 		all[a].classList.remove(val);
 	}
 	x.classList.add(val);
+
 
 	DMGSetPossible();
 	DMGCalcStart();
@@ -4682,25 +4725,34 @@ function DMGSetPossible() {
 	var moveType = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,movePath.value);
 	var moveRange = returnArrValue(finaldata["Moves"]["Range"],"Name_"+JSONPath_MoveName,"Range",movePath.value);
 
-	var user = divWrap.querySelectorAll(":scope > span[name] > div[data-string].user");
-	var userTemp = divWrap.querySelectorAll(":scope > span[name='team 1'] > div[data-string]");
+	var all = divWrap.querySelectorAll(":scope *[name*='team'] > div[data-string]");
+	var userWrap = divWrap.querySelector(":scope span[name='user']");
+	var tarWrap = divWrap.querySelector(":scope span[name='target']");
+	var user = divWrap.querySelector(":scope span[name*='team'] > div[data-string].user");
+	var userTemp = divWrap.querySelector(":scope span[name='team 1'] > div[data-string]");
 	
-	if (user.length == 0) {
-		if (userTemp.length > 0) {
-			userTemp[0].classList.add("user");
+	if (user == undefined) {
+		userTemp.classList.add("user");
+		for(var a = 0; a < all.length; a++) {
+			all[a].classList.remove("target");
 		}
 	}
 
-	user = divWrap.querySelectorAll(":scope > *[name] > *[name].user");
+	user = divWrap.querySelector(":scope span[name*='team'] > div[data-string].user");
 
-	if (user.length > 1) {
-		for(var a = 0; a < user.length; a++) {
-			user[a].classList.remove("user");
+
+	document.querySelector("#contain > div#tool div#dmg > div").setAttribute("data-range",moveRange);
+
+	if (user.parentElement.parentElement.getAttribute("name") == "target") {
+		let els = userWrap.querySelectorAll(":scope > *");
+		for(var a = 0; a < els.length; a++) {
+			tarWrap.appendChild(els[a])
 		}
-		usertemp[0].classList.add("user");
+		userWrap.appendChild(user.parentElement);
+		for(var a = 0; a < all.length; a++) {
+			all[a].classList.remove("target");
+		}
 	}
-
-	user = divWrap.querySelector(":scope > *[name] > *[name].user");
 
 	var team = user.parentElement.getAttribute("name");
 	var id = undefined;
@@ -4714,18 +4766,17 @@ function DMGSetPossible() {
 
 
 
+
 	var idPrevious = parseInt(id)-1;
 	var idNext = parseInt(id)+1;
 
 	var adjacent = [];
 
-	var allies = divWrap.querySelectorAll(":scope > *[name='"+team+"'] > *[name]:not([name='"+id+"'])");
-	var enemies = divWrap.querySelectorAll(":scope > *[name]:not([name='"+team+"']) > *[name]");
-	var all = divWrap.querySelectorAll(":scope > *[name] > *[name]");
+	var allies = divWrap.querySelectorAll(":scope [name='"+team+"'] > div[data-string]:not([name='"+id+"'])");
+	var enemies = divWrap.querySelectorAll(":scope *[name*='team']:not([name='"+team+"']) > div[data-string]");
 
 
-
-	var adjThis = user.parentElement.querySelectorAll(":scope > *[name]");
+	var adjThis = user.parentElement.querySelectorAll(":scope > div[data-string]");
 	for(var a = 0; a < adjThis.length; a++) {
 		if (a == idNext || a == idPrevious) {
 			adjacent.push(adjThis[a])
@@ -4733,7 +4784,7 @@ function DMGSetPossible() {
 	}
 
 	if (user.parentElement.previousElementSibling != undefined) {
-		var adjLeft = user.parentElement.previousElementSibling.querySelectorAll(":scope > *[name]");
+		var adjLeft = user.parentElement.previousElementSibling.querySelectorAll(":scope > div[data-string]");
 		for(var a = 0; a < adjLeft.length; a++) {
 			if (a == id || a == idNext || a == idPrevious) {
 				adjacent.push(adjLeft[a])
@@ -4742,13 +4793,42 @@ function DMGSetPossible() {
 	}
 	
 	if (user.parentElement.nextElementSibling != undefined) {
-		var adjRight = user.parentElement.nextElementSibling.querySelectorAll(":scope > *[name]");
+		var adjRight = user.parentElement.nextElementSibling.querySelectorAll(":scope > div[data-string]");
 		for(var a = 0; a < adjRight.length; a++) {
 			if (a == id || a == idNext || a == idPrevious) {
 				adjacent.push(adjRight[a])
 			}
 		}
 	}
+
+
+
+
+	if (user.parentElement.parentElement.previousElementSibling != undefined) {
+		let adjTopLeftWrap = user.parentElement.parentElement.previousElementSibling.querySelectorAll(":scope > *[name*='team']");
+		for(var t = 0; t < adjTopLeftWrap.length; t++) {
+			let adjTopLeft = adjTopLeftWrap[t].querySelectorAll(":scope > div[data-string]");
+			for(var a = 0; a < adjTopLeft.length; a++) {
+				if (a == id || a == idNext || a == idPrevious) {
+					adjacent.push(adjTopLeft[a])
+				}
+			}
+		}
+	}
+
+	
+	if (user.parentElement.parentElement.nextElementSibling != undefined) {
+		let adjTopRightWrap = user.parentElement.parentElement.nextElementSibling.querySelectorAll(":scope > *[name*='team']");
+		for(var t = 0; t < adjTopRightWrap.length; t++) {
+			let adjTopRight = adjTopRightWrap[t].querySelectorAll(":scope > div[data-string]");
+			for(var a = 0; a < adjTopRight.length; a++) {
+				if (a == id || a == idNext || a == idPrevious) {
+					adjacent.push(adjTopRight[a])
+				}
+			}
+		}
+	}
+
 
 	if (moveRange == "May affect anyone adjacent to the user") {
 		for(var a = 0; a < adjacent.length; a++) {
@@ -4909,38 +4989,56 @@ function DMGSetPossible() {
 	}
 
 
-	
+	for(var a = 0; a < all.length; a++) {
+		all[a].classList.remove("viable");
+	}
+
 	for(var a = 0; a < tars.length; a++) {
 		tars[a].classList.add("viable");
 	}
+	
 
-	var check = false;
+
+	var check1 = false;
 	var check2 = true;
 	for(var a = 0; a < all.length; a++) {
 		if (all[a].classList.contains("target") && !all[a].classList.contains("viable")) {
-			check = true;
+			check1 = true;
 		}
 		if (all[a].classList.contains("target")) {
 			check2 = false;
 		}
 	}
 	if (check2) {
-		check = true;
+		check1 = true;
 	}
 
-	if (check) {
+	
+
+	if (check1) {
 		for(var a = 0; a < all.length; a++) {
 			all[a].classList.remove("target");
 		}
 
-		var targets = divWrap.querySelectorAll(":scope > span[name] > div[data-string].viable");
+		let targets = divWrap.querySelectorAll(":scope span[name*='team'] > div[data-string].viable");
 		let added = false;
 		for(var a = 0; a < targets.length; a++) {
 			if (targets[a] != user) {
-				if (targets[a].parentElement.getAttribute("name") != "team 1") {
+				if (targets[a].parentElement.getAttribute("name") != user.parentElement.getAttribute("name")) {
 					targets[a].classList.add("target");
 					added = true;
 					break;
+				}
+			}
+		}
+		if (!added) {
+			for(var a = 0; a < targets.length; a++) {
+				if (targets[a] != user) {
+					if (targets[a].parentElement.getAttribute("name") != "team 1") {
+						targets[a].classList.add("target");
+						added = true;
+						break;
+					}
 				}
 			}
 		}
@@ -4960,10 +5058,11 @@ function DMGSetPossible() {
 				break;
 			}
 		}
+
 	
 		
 	}
-
+	DMGMatchPosition();
 }
 function DMGPokSpecific(base) {
     var base;
@@ -5228,22 +5327,25 @@ function DMGClearData(base) {
     let partyBase = document.querySelector("#contain > div#tool div#dmg span[name='party'] span[name='"+team+"']")
     let fieldBase = document.querySelector("#contain > div#tool div#dmg div[name='field']");
 
+    let pokPath = pokBase.querySelector(":scope *[name='pokémon'] select");
+    let lvlPath = pokBase.querySelector(":scope *[name='level'] input");
+    let typesPath = pokBase.querySelectorAll(":scope *[name='type'] select");
+    let abilityPath = pokBase.querySelector(":scope *[name='ability'] select");
+    let genderPath = pokBase.querySelector(":scope *[name='gender'] select");
+    let itemPath = pokBase.querySelector(":scope *[name='item'] select");
+    let friendshipPath = pokBase.querySelector(":scope *[name='friendship'] input");
+    let naturePath = pokBase.querySelector(":scope *[name='nature'] select");
+    let movesPath = pokBase.querySelectorAll(":scope *[name='moves'] select");
 
-    var pokPath = pokBase.querySelector(":scope *[name='pokémon'] select");
-    var lvlPath = pokBase.querySelector(":scope *[name='level'] input");
-    var typesPath = pokBase.querySelectorAll(":scope *[name='type'] select");
-    var abilityPath = pokBase.querySelector(":scope *[name='ability'] select");
-    var genderPath = pokBase.querySelector(":scope *[name='gender'] select");
-    var itemPath = pokBase.querySelector(":scope *[name='item'] select");
-    var friendshipPath = pokBase.querySelector(":scope *[name='friendship'] input");
-    var naturePath = pokBase.querySelector(":scope *[name='nature'] select");
-    var movesPath = pokBase.querySelectorAll(":scope *[name='moves'] select");
+	let namePath = divBase.querySelector(":scope *[name='name'] > *");
+	let pokImgPath = divBase.querySelector(":scope img[name='img']");
+	let itemImgPath = divBase.querySelector(":scope img[name='item']");
     
-    var ivsPath = statsBase.querySelectorAll(":scope *[name='IV'] input:not(:first-child)");
-    var evsPath = statsBase.querySelectorAll(":scope *[name='EV'] input:not(:first-child)");
-    var avsPath = statsBase.querySelectorAll(":scope *[name='AV'] input:not(:first-child)");
-	var modsPath = statsBase.querySelectorAll(":scope *[name='Mod'] input:not(:first-child)");
-    var totalPath = statsBase.querySelectorAll(":scope > *:last-child input:not(:first-child)");
+    let ivsPath = statsBase.querySelectorAll(":scope *[name='IV'] input:not(:first-child)");
+    let evsPath = statsBase.querySelectorAll(":scope *[name='EV'] input:not(:first-child)");
+    let avsPath = statsBase.querySelectorAll(":scope *[name='AV'] input:not(:first-child)");
+	let modsPath = statsBase.querySelectorAll(":scope *[name='Mod'] input:not(:first-child)");
+    let totalPath = statsBase.querySelectorAll(":scope > *:last-child input:not(:first-child)");
 
     pokPath.value = pokPath.firstChild.value;
     lvlPath.value = lvlPath.getAttribute("min");
@@ -5289,7 +5391,9 @@ function DMGClearData(base) {
     for(var e = 0; e < totalPath.length; e++) {
         totalPath[e].value = 0;
     }
-
+	namePath.innerText = "";
+	pokImgPath.removeAttribute("src");
+	itemImgPath.removeAttribute("src");
 
     divBase.setAttribute("data-string","");
     pokBase.classList.remove("active");
@@ -5332,7 +5436,7 @@ function DMGSaveData(base) {
     let ivsPath = statsBase.querySelectorAll(":scope *[name='IV'] input:not(:first-child)");
     let evsPath = statsBase.querySelectorAll(":scope *[name='EV'] input:not(:first-child)");
 
-    divBase.lastChild.title = "";
+    divBase.title = "";
 
     let datas = divBase.getAttribute("data-string");
     let stringObj = dataStringToObj(datas);
@@ -5430,13 +5534,13 @@ function DMGSaveData(base) {
         }
     }
 
-    divBase.lastChild.title = dataStringTitle(divBase.getAttribute("data-string"));
+    divBase.title = dataStringTitle(divBase.getAttribute("data-string"));
     divBase.setAttribute("data-string",tempArr.join("|"))
 
 
 
 
-	var tars = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span > div[data-string]");
+	var tars = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]");
 	var tarsint = 0;
 	for (var t = 0; t < tars.length; t++) {
 		var val = tars[t].getAttribute("data-string");
@@ -5450,12 +5554,12 @@ function DMGSaveData(base) {
 	DMGPartyActiveSet();
 }
 function DMGMatchPosition() {
-	var teams = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span[name]");
-	var poks = document.querySelectorAll("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string]");
+	var teams = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team']");
+	var poks = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]");
 
 
 
-    let divBases = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] > span[name] > div[data-string]");
+    let divBases = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]");
     let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] > span[name] > ul[name]");
 	let pokTopBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] > span[name]");
     let teamBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='team'] > span[name]");
@@ -5543,9 +5647,6 @@ function DMGMatchPosition() {
 		
 	}
 
-
-	DMGSetPossible();
-	
 }
 function DMGRemoveDataString(base) {
     var base;
@@ -5583,11 +5684,11 @@ function DMGExportDataString() {
 }
 function DMGSpeedCalc() {
 
-	let user = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name] > div[data-string].user");
+	let user = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].user");
     let userTeam = user.parentElement.getAttribute("name");
 	let userID = user.getAttribute("name");
 
-	let divBases = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name] > div[data-string]");
+	let divBases = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]");
 	let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name] > ul[name]");
 	let statsBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='stats'] span[name] > ul[name]");
 
@@ -5598,14 +5699,19 @@ function DMGSpeedCalc() {
 	var movePath = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select")
 	var movePriority = returnArrValue(finaldata["Moves"]["Priority"],"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,movePath.value);
 
-	if (divBases.length == statsBases.length) {
-		var eles = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name] > div[data-string] *[name='speed'] > *");
+	let eles = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] *[name='effect'] *[name='speed']");
+
+
+	if (eles.length == statsBases.length) {
+
 
 		for (var s = 0; s < eles.length; s++) {
 			eles[s].innerHTML = "";
 			eles[s].style.removeProperty("text-decoration");
 		}
 
+
+	
 		var speed = [];
 		for (var s = 0; s < statsBases.length; s++) {
 			var ele = statsBases[s].querySelector(":scope > span:last-child > *[name='Speed']");
@@ -5625,6 +5731,8 @@ function DMGSpeedCalc() {
 			}
 			speed.push(obj)
 		}
+		
+
 
 		if (TrickRoomPath != undefined && TrickRoomPath.checked) {
 			speed = sortObjectArray(speed,"Speed",true);
@@ -5671,15 +5779,22 @@ function DMGSpeedCalc() {
 			}
 		}
 
+
+		
+
+
 		for (var s = 0; s < eles.length; s++) {	
 			for (var d = 0; d < speed.length; d++) {
-				if (speed[d]["Int"] == s) {
+				if (speed[d]["Int"] == s) {	
 					eles[s].innerText = result[d];
 					break;
 				}
 			}
 		}
-	
+
+
+
+
 		for (var s = 0; s < eles.length; s++) {
 			if (s != 0) {
 				if (eles[s].innerText == eles[s-1].innerText) {
@@ -6055,12 +6170,13 @@ function buildDMG(preval) {
     
 	let optionsPokTitle = document.querySelector("#contain > div#tool div#dmg div[name='options'] > div[name='header'] > span:last-child");
 	let fieldPath = document.querySelector("#contain > div#tool div#dmg div[name='content'] > div[name='field']");
-	let contentPath = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div[name='battle']");
+	let contentPath = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div[name='battle'] > span[name='target']");
+	let contentPath2 = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div[name='battle'] > span[name='user']");
 	let partyPath = document.querySelector("#contain > div#tool div#dmg div[name='result'] > span[name='party']");
 	let specificPath = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child");
 
 	
-
+	contentPath2.innerHTML = "";
 	optionsPokPath.innerHTML = "";
 	optionsTeamPath.innerHTML = "";
 	optionsStatsPath.innerHTML = "";
@@ -6091,13 +6207,13 @@ function buildDMG(preval) {
 			for(var q = 0; q < pokCount; q++) {
 				let y = q+1;
 
-				var contentPokWrap = document.createElement("div");
-				contentPokWrap.setAttribute("name",q);
-				contentPokWrap.setAttribute("data-string","")
-				contentPokPath.appendChild(contentPokWrap);
+				var content = document.createElement("div");
+				content.setAttribute("name",q);
+				content.setAttribute("data-string","")
+				contentPokPath.appendChild(content);
 
 				
-				$(contentPokWrap).droppable({
+				$(content).droppable({
 					drop: function(e,ui) {
 						var tar = ui.helper[0];
 						if (tar.tagName == "LI") {
@@ -6119,135 +6235,180 @@ function buildDMG(preval) {
 						}
 					}
 				});
+				
 
-				var contentInactive = document.createElement("span");
-				var contentInactiveImport = document.createElement("b");
-				var contentActive = document.createElement("span");
-				var contentActiveTop = document.createElement("span");
-				var contentActiveBottom = document.createElement("span");
-				var contentActivePok = document.createElement("span");
-				var contentActivePokHealth = document.createElement("span");
-				var contentActivePokHealthPercentage = document.createElement("small");
-				var contentActivePokHealthWrap = document.createElement("span");
-				var contentActivePokHealthCurrent = document.createElement("small");
-				var contentActivePokHealthDash = document.createElement("small");
-				var contentActivePokHealthMax = document.createElement("small");
-				var contentActivePokHealthResult = document.createElement("small");
 
-				var contentActivePokImgWrap = document.createElement("span");
-				var contentActivePokImg = document.createElement("img");
-				var contentActivePokItem = document.createElement("img");
-				var contentActivePokName = document.createElement("span");
-				var contentActivePokNameText = document.createElement("small");
+				var contentName = document.createElement("span");
+				var contentNameText = document.createElement("small");
+
+				var contentHP = document.createElement("span");
+
+				var contentEffect = document.createElement("span");
+				var contentEffectWrap = document.createElement("span");
+				var contentEffectPositive = document.createElement("span");
+				var contentEffectNegative = document.createElement("span");
+				var contentEffectNeutral = document.createElement("span");
+
+				var contentEffectSpeed = document.createElement("small");
+
+
+				var contentPercentage = document.createElement("span");
+				var contentPercentageText = document.createElement("small");
+
+				var contentHealth = document.createElement("span");
+				var contentHealthCurrent = document.createElement("small");
+				var contentHealthDash = document.createElement("small");
+				var contentHealthMax = document.createElement("small");
+
+				var contentResult = document.createElement("span");
+				var contentResultText = document.createElement("small");
+
+
+				var contentPok = document.createElement("span");
+				var contentImg = document.createElement("img");
+				var contentItem = document.createElement("img");
+				var contentAdd = document.createElement("b");
+				var contentAddText = document.createElement("header");
+
+
+				var contentUser = document.createElement("figure");
+				var contentUserText = document.createElement("h6");
+				var contentTarget = document.createElement("figure");
+				var contentTargetText = document.createElement("h6");
+
+				var contentMovesWrap = document.createElement("span");
+				var contentMoves = document.createElement("span");
+
+				contentEffect.setAttribute("name","effect");
+				contentEffectNeutral.setAttribute("name","neutral");
+				contentEffectPositive.setAttribute("name","positive");
+				contentEffectNegative.setAttribute("name","negative");
+
+				contentName.setAttribute("name","name");
+				contentNameText.innerText = ""
+
+				contentMoves.setAttribute("name","moves")
+				contentHP.setAttribute("name","hp");
+
+				contentPercentage.setAttribute("name","percentage");
+				contentPercentageText.innerText = "100%";
+
+				contentEffectSpeed.setAttribute("name","speed");
+
+				contentHealth.setAttribute("name","health");
+				contentHealthCurrent.innerText = "0"
+				contentHealthCurrent.setAttribute("name","current");
+				contentHealthDash.innerText = "/";
+				contentHealthMax.innerText = "0"
+				contentHealthMax.setAttribute("name","max");
+
+				contentResultText.innerText = "0";
+				contentResult.setAttribute("name","result");
+				contentAdd.setAttribute("type","scale");
+				contentAddText.innerText = "+";
+
+				contentPok.setAttribute("name","pok")
+				contentImg.setAttribute("name","img");
+				contentItem.setAttribute("name","item");
+
+
+				
+				contentUser.setAttribute("name","user");
+				contentTarget.setAttribute("name","target");
+
+				contentUser.setAttribute("type","invert");
+				contentTarget.setAttribute("type","invert");
+
+				contentImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
+				contentItem.setAttribute("onerror","this.style.display = 'none';");
+				contentItem.setAttribute("onload","this.style.removeProperty('display');");
+		
+				contentUserText.innerText = "⚝";
+				contentTargetText.innerText = "⚀";
+
+	
+
+				content.appendChild(contentName);
+				contentName.appendChild(contentNameText);
+
+				content.appendChild(contentHP);
+
+				contentHP.appendChild(contentEffect);
+				contentEffect.appendChild(contentEffectWrap);
+				contentEffectWrap.appendChild(contentEffectPositive);
+				contentEffectWrap.appendChild(contentEffectNegative);
+				contentEffect.appendChild(contentEffectNeutral);
+				contentEffectNeutral.appendChild(contentEffectSpeed);
+
+				contentHP.appendChild(contentHealth);
+				contentHealth.appendChild(contentHealthCurrent);
+				contentHealth.appendChild(contentHealthDash);
+				contentHealth.appendChild(contentHealthMax);
+
+				contentHP.appendChild(contentPercentage);
+				contentPercentage.appendChild(contentPercentageText);
+
+	
+
+				contentHP.appendChild(contentResult);
+				contentResult.appendChild(contentResultText);
+			
+				content.appendChild(contentMovesWrap);
+				contentMovesWrap.appendChild(contentMoves);
+
+
+				content.appendChild(contentPok);
+				contentPok.appendChild(contentImg);
+				contentPok.appendChild(contentItem);
+				contentPok.appendChild(contentAdd);
+				contentAdd.appendChild(contentAddText);
+
+				content.appendChild(contentUser);
+				contentUser.appendChild(contentUserText);
+				content.appendChild(contentTarget);
+				contentTarget.appendChild(contentTargetText);
+
+
+
+				contentAdd.addEventListener("click",function(){ let el = findUpTag(this,"DIV"); let team = el.parentElement.getAttribute("name"); let id = el.getAttribute("name"); let els = el.parentElement.querySelectorAll(":scope > div[data-string]"); let int = id;  for (var m = 0; m < els.length; m++) { if (els[m] == el) { int = m; break; } }let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name]");let statsBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name]"); let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name='"+id+"']");let statsBase = document.querySelector("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name='"+id+"']"); if (pokBase.style.getPropertyValue("display") == "flex") { DMGSetDataString(el); } else { for (var m = 0; m < pokBases.length; m++) { pokBases[m].style.display = "none"; statsBases[m].style.display = "none";}  statsBase.style.display = "flex"; pokBase.style.display = "flex"; } });
+				contentUser.addEventListener("click",function(){DMGSetActive("user")});
+				contentTarget.addEventListener("click",function(){DMGSetActive("target")});
+				contentImg.addEventListener("click",function(){let el = findUpTag(this,"DIV"); let team = el.parentElement.getAttribute("name"); let id = el.getAttribute("name"); let els = el.parentElement.querySelectorAll(":scope > div[data-string]"); let int = id;for (var m = 0; m < els.length; m++) { if (els[m] == el) { int = m; break; } }let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name]");let statsBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name]"); let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name='"+id+"']");let statsBase = document.querySelector("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name='"+id+"']"); for (var m = 0; m < pokBases.length; m++) { pokBases[m].style.display = "none"; statsBases[m].style.display = "none";}pokBase.style.display = "flex";statsBase.style.display = "flex";let select = document.querySelector("#contain div#tool div#dmg div[name='options'] > div:first-child > span:last-child > select[name='"+team+"']"); select.value = int;});
+
+
+				/*
 				var contentActiveClose = document.createElement("figure");
 				var contentActiveCloseText = document.createElement("small");
 				var contentActiveExport = document.createElement("figure");
 				var contentActiveExportText = document.createElement("small");
-				var contentActiveUserSelect = document.createElement("figure");
-				var contentActiveUserSelectText = document.createElement("small");
-				var contentActiveTargetSelect = document.createElement("figure");
-				var contentActiveTargetSelectText = document.createElement("small");
-				var contentActiveSpeed = document.createElement("span");
-				var contentActiveSpeedText = document.createElement("h6");
-				var contentActiveBar = document.createElement("span");
-				var contentActiveBarSTAB = document.createElement("small");
-				var contentActiveBarEffect = document.createElement("small");
-
-				contentInactiveImport.innerHTML = "<strong>+</strong>";
-				contentActivePok.setAttribute("name","pok");
-				contentActivePokHealth.setAttribute("name","hp");
-
-				contentActivePokHealthPercentage.innerText = "100%"
-				contentActivePokHealthPercentage.setAttribute("name","percentage");
-				contentActivePokHealthCurrent.innerText = "0"
-				contentActivePokHealthCurrent.setAttribute("name","current");
-				contentActivePokHealthDash.innerText = "/";
-				contentActivePokHealthMax.innerText = "0"
-				contentActivePokHealthMax.setAttribute("name","max");
-				contentActivePokHealthResult.innerText = "(0)";
-				contentActivePokHealthResult.setAttribute("name","result");
-
-				contentActivePokImgWrap.setAttribute("name","imgs")
-				contentActivePokImg.setAttribute("name","img");
-				contentActivePokItem.setAttribute("name","item");
-				contentActivePokName.setAttribute("name","name");
-				contentActivePokNameText.innerText = "Bulbasaur"
-
 				contentActiveClose.setAttribute("name","close");
 				contentActiveExport.setAttribute("name","export");
-				contentActiveUserSelect.setAttribute("name","user");
-				contentActiveTargetSelect.setAttribute("name","target");
-				contentInactive.setAttribute("name","inactive");
-				contentActive.setAttribute("name","active");
-
-
-				contentActivePokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
-				contentActivePokItem.setAttribute("onerror","this.style.display = 'none';");
-				contentActivePokItem.setAttribute("onload","this.style.removeProperty('display');");
 				contentActiveCloseText.innerText = "❌";
 				contentActiveExportText.innerText = "⮟";
-				contentActiveUserSelectText.innerText = "⍟";
-				contentActiveTargetSelectText.innerText = "⨀";
-
-				contentActiveBottom.setAttribute("name","moves");
-				contentActiveSpeed.setAttribute("name","speed");
-
-				contentActiveBar.setAttribute("name","bar");
-				contentActiveBarSTAB.setAttribute("name","stab");
-				contentActiveBarEffect.setAttribute("name","effect");
-
-
-				contentPokWrap.appendChild(contentActiveBar);
-				contentActiveBar.appendChild(contentActiveBarSTAB);
-				contentActiveBar.appendChild(contentActiveBarEffect);
-				contentPokWrap.appendChild(contentInactive);
-				contentInactive.appendChild(contentInactiveImport)
-				contentPokWrap.appendChild(contentActive);
-				contentActive.appendChild(contentActiveTop);
-				contentActive.appendChild(contentActiveBottom);
-				contentActiveTop.appendChild(contentActivePok);
-				contentActiveTop.appendChild(contentActivePok);
 				contentActiveTop.appendChild(contentActiveClose);
 				contentActiveClose.appendChild(contentActiveCloseText);
 				contentActiveTop.appendChild(contentActiveExport);
 				contentActiveExport.appendChild(contentActiveExportText);
-				contentActiveTop.appendChild(contentActiveUserSelect);
-				contentActiveUserSelect.appendChild(contentActiveUserSelectText);
-				contentActiveTop.appendChild(contentActiveTargetSelect);
-				contentActiveTargetSelect.appendChild(contentActiveTargetSelectText);
-				contentActiveTop.appendChild(contentActivePokHealth);
-				contentActivePokHealth.appendChild(contentActivePokHealthPercentage);
-				contentActivePokHealth.appendChild(contentActivePokHealthWrap);
-				contentActivePokHealthWrap.appendChild(contentActivePokHealthCurrent);
-				contentActivePokHealthWrap.appendChild(contentActivePokHealthDash);
-				contentActivePokHealthWrap.appendChild(contentActivePokHealthMax);
-				contentActivePokHealthWrap.appendChild(contentActivePokHealthResult);
-				contentActiveTop.appendChild(contentActiveSpeed);
-				contentActiveSpeed.appendChild(contentActiveSpeedText);
-				contentActivePok.appendChild(contentActivePokName);
-				contentActivePokName.appendChild(contentActivePokNameText);
-				contentActivePok.appendChild(contentActivePokImgWrap);
-				contentActivePokImgWrap.appendChild(contentActivePokImg);
-				contentActivePokImgWrap.appendChild(contentActivePokItem);
-				contentInactiveImport.addEventListener("click",function(){ let el = findUpTag(this,"DIV"); let team = el.parentElement.getAttribute("name"); let id = el.getAttribute("name"); let els = el.parentElement.querySelectorAll(":scope > div[data-string]"); let int = id;  for (var m = 0; m < els.length; m++) { if (els[m] == el) { int = m; break; } }let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name]");let statsBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name]"); let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name='"+id+"']");let statsBase = document.querySelector("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name='"+id+"']"); if (pokBase.style.getPropertyValue("display") == "flex") { DMGSetDataString(el); } else { for (var m = 0; m < pokBases.length; m++) { pokBases[m].style.display = "none"; statsBases[m].style.display = "none";}  statsBase.style.display = "flex"; pokBase.style.display = "flex"; } });
 				contentActiveClose.addEventListener("click",DMGRemoveDataString);
 				contentActiveExport.addEventListener("click",DMGExportDataString);
-				contentActiveUserSelect.addEventListener("click",function(){DMGSetActive("user")});
-				contentActiveTargetSelect.addEventListener("click",function(){DMGSetActive("target")});
-				contentActivePokImgWrap.addEventListener("click",function(){let el = findUpTag(this,"DIV"); let team = el.parentElement.getAttribute("name"); let id = el.getAttribute("name"); let els = el.parentElement.querySelectorAll(":scope > div[data-string]"); let int = id;for (var m = 0; m < els.length; m++) { if (els[m] == el) { int = m; break; } }let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name]");let statsBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name]"); let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name='"+id+"']");let statsBase = document.querySelector("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name='"+id+"']"); for (var m = 0; m < pokBases.length; m++) { pokBases[m].style.display = "none"; statsBases[m].style.display = "none";}pokBase.style.display = "flex";statsBase.style.display = "flex";let select = document.querySelector("#contain div#tool div#dmg div[name='options'] > div:first-child > span:last-child > select[name='"+team+"']"); select.value = int;});
-
+				*/
 
 				for (var m = 0; m < 4; m++) {
-					var contentActiveMove = document.createElement("b");
-					var contentActiveMoveText = document.createElement("small");
-					contentActiveMove.setAttribute("name",m);
-					contentActiveMove.setAttribute("type","invert");
-					contentActiveBottom.appendChild(contentActiveMove)
-					contentActiveMove.appendChild(contentActiveMoveText);
-					contentActiveMove.addEventListener("click",function(){let val = this.firstChild.innerText;var tar = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");var tarTemp = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select > option[value='"+val+"']"); if (val != "") {tar.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,val)+")"; if (tarTemp != undefined) {tar.value = val;} DMGSetInfo();DMGCalcStart();let movd = formatMoveData(val);movd = undDel(movd,"");tar.title = movd;}});
+					var contentMove = document.createElement("b");
+					var contentMoveText = document.createElement("small");
+					contentMove.setAttribute("name",m);
+					contentMove.setAttribute("type","invert");
+					contentMoves.appendChild(contentMove)
+					contentMove.appendChild(contentMoveText);
+					contentMove.addEventListener("click",function(){DMGSetActive("user")});
+					contentMove.addEventListener("click",function(){let val = this.firstChild.innerText;var tar = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select");var tarTemp = document.querySelector("#contain > div#tool div#dmg div[name='menu'] > div[name='move'] > span select > option[value='"+val+"']"); if (val != "") {tar.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,val)+")"; if (tarTemp != undefined) {tar.value = val;} DMGSetInfo();DMGCalcStart();let movd = formatMoveData(val);movd = undDel(movd,"");tar.title = movd;}});1
+					contentMove.addEventListener("click",function(){let el = findUpTag(this,"DIV"); let team = el.parentElement.getAttribute("name"); let id = el.getAttribute("name"); let els = el.parentElement.querySelectorAll(":scope > div[data-string]"); let int = id;for (var m = 0; m < els.length; m++) { if (els[m] == el) { int = m; break; } }let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name]");let statsBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name]"); let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+team+"'] > ul[name='"+id+"']");let statsBase = document.querySelector("#contain > div#tool div#dmg ol[name='stats'] span[name='"+team+"'] > ul[name='"+id+"']"); for (var m = 0; m < pokBases.length; m++) { pokBases[m].style.display = "none"; statsBases[m].style.display = "none";}pokBase.style.display = "flex";statsBase.style.display = "flex";let select = document.querySelector("#contain div#tool div#dmg div[name='options'] > div:first-child > span:last-child > select[name='"+team+"']"); select.value = int;});
+
 				}
 			}
 			// Sortable Pokémon //
+
+			/*
 			if (pokCount > 1) {
 				let els = contentPokPath.querySelectorAll(":scope *[name='bar']");
 				for(var r = 0; r < els.length; r++) {
@@ -6265,14 +6426,17 @@ function buildDMG(preval) {
 					scroll: false,
 				});
 			}
+			*/
 		
 
 
+			/*
 			var contentPokOverlay = document.createElement("span");
 			var contentPokOverlayText = document.createElement("p");
 			contentPokOverlayText.innerText = "⋮⋮⋮";
 			contentPokPath.appendChild(contentPokOverlay)
 			contentPokOverlay.appendChild(contentPokOverlayText);
+			*/
 		}
 		if ("Party") {
 			var partyTeam = document.createElement("span");
@@ -6528,7 +6692,7 @@ function buildDMG(preval) {
                     pok.appendChild(pokSelect);
                     
                     //pokSelect.addEventListener("change",function(){if(this.value == ""){DMGRemoveDataString(findUpTag(this,"UL"))}});
-                    pokSelect.addEventListener("change",function(){let ulbase = findUpTag(this,"UL");let team = ulbase.parentElement.getAttribute("name");let id = ulbase.getAttribute("name"); let tar = document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name='"+team+"'] > div[data-string][name='"+id+"']"); let dstring = tar.getAttribute("data-string"); if (dstring != "") {var ds = tar.getAttribute("data-string").replaceAll("pok:"+dataStringToObj(tar.getAttribute("data-string"))["pok"],"pok:"+this.value); tar.setAttribute("data-string",ds);} else {tar.setAttribute("data-string","pok:"+this.value)}let el1 = ulbase.querySelector(":scope *[name='hp'] > input");let el2 = ulbase.querySelector(":scope *[name='hp'] input[name='current']");el1.value = el1.max; el2.value = el1.max;el1.style.background = "var(--colorBlue)";});
+                    pokSelect.addEventListener("change",function(){let ulbase = findUpTag(this,"UL");let team = ulbase.parentElement.getAttribute("name");let id = ulbase.getAttribute("name"); let tar = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+team+"'] > div[data-string][name='"+id+"']"); let dstring = tar.getAttribute("data-string"); if (dstring != "") {var ds = tar.getAttribute("data-string").replaceAll("pok:"+dataStringToObj(tar.getAttribute("data-string"))["pok"],"pok:"+this.value); tar.setAttribute("data-string",ds);} else {tar.setAttribute("data-string","pok:"+this.value)}let el1 = ulbase.querySelector(":scope *[name='hp'] > input");let el2 = ulbase.querySelector(":scope *[name='hp'] input[name='current']");el1.value = el1.max; el2.value = el1.max;el1.style.background = "var(--colorBlue)";});
                     pokSelect.addEventListener("change",DMGPokSpecific);
                     pokSelect.addEventListener("change",DMGSaveData);
                     pokSelect.addEventListener("change",DMGSetChange);
@@ -6700,6 +6864,7 @@ function buildDMG(preval) {
 
                     levelInput.addEventListener("input",iMinMax);
 					levelInput.addEventListener("click",function(){this.select();})
+					levelInput.addEventListener("input",DMGSetInfo);
                     levelInput.addEventListener("input",DMGSaveData);
                     levelInput.addEventListener("input",DMGCalcPokStats);
                     levelInput.addEventListener("input",DMGCalcStart);
@@ -7012,7 +7177,7 @@ function buildDMG(preval) {
                     reset.setAttribute("name","reset");
                     optionsPok.appendChild(reset)
                     reset.appendChild(resetText)
-                    reset.addEventListener("click",function(){var base = findUpTag(this,"UL");DMGRemoveDataString(document.querySelector("#contain > div#tool div#dmg div[name='result'] > div > span[name='"+base.parentElement.getAttribute("name")+"'] > div[name='"+base.getAttribute("name")+"']"))})
+                    reset.addEventListener("click",function(){var base = findUpTag(this,"UL");DMGRemoveDataString(document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+base.parentElement.getAttribute("name")+"'] > div[name='"+base.getAttribute("name")+"']"))})
                 }
                 if ("Export") {
                     var exportTeam = document.createElement("figure");
@@ -7630,6 +7795,7 @@ function buildDMG(preval) {
 						
 						if (battleCondition[c]["Group"] == "Weather" || battleCondition[c]["Group"] == "Terrain") {
 							conditionInput.addEventListener("change",function(){onlyOneInput(this.parentElement.parentElement.querySelectorAll(":scope input"),this)})
+			
 						}
 
 
@@ -7728,39 +7894,8 @@ function buildDMG(preval) {
 						}
 					}
 
-					if (battleCondition[c]["Group"] == "Weather") {
-						var img = document.createElement("img");
-						img.src = "./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/"+battleCondition[c]["Name"]+".png"
-						img.title = battleCondition[c]["Name"];
-						img.setAttribute("name",MEDIAPath_Weather);
-						img.setAttribute("onload","this.parentElement.parentElement.firstChild.style.display=`none`;");
-						img.setAttribute("onerror","this.parentElement.parentElement.firstChild.style.display=`unset`;this.style.display=`none`");
-						conditionLabel.appendChild(img)
-					}
-					if (battleCondition[c]["Group"] == "Terrain") {
-						var terrtype = undefined;
-						if (battleCondition[c]["Name"] == "Misty Terrain") {
-							terrtype = "Fairy";
-						}
-						if (battleCondition[c]["Name"] == "Grassy Terrain") {
-							terrtype = "Grass";
-						}
-						if (battleCondition[c]["Name"] == "Psychic Terrain") {
-							terrtype = "Psychic";
-						}
-						if (battleCondition[c]["Name"] == "Electric Terrain") {
-							terrtype = "Electric";
-						}
-						var img = document.createElement("img");
-						img.src = "./media/Images/Misc/Type/Symbol/GO/"+terrtype+".png";
-						img.title = battleCondition[c]["Name"];
-						img.setAttribute("onload","this.parentElement.firstChild.style.display='none'");
-						img.setAttribute("onerror","this.parentElement.parentElement.firstChild.style.display=`unset`; this.parentElement.firstChild.style.display='unset';this.style.display=`none`");
-						conditionLabel.appendChild(img)
-					}
 
-
-
+			
 					
 					conditionInput.addEventListener("change",DMGCalcStart);	
 				}
@@ -8008,11 +8143,11 @@ function DMGFindScenario(base,val,what,which,exclude) {
 		helper2 = "user";
 	}
 
-	let user = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name] > div[name]."+helper1);
+	let user = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]."+helper1);
 	let userTeam = user.parentElement.getAttribute("name");
 	let userID = user.getAttribute("name");
 
-	let target = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name] > div[name]."+helper2);
+	let target = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]."+helper2);
 	let tarTeam = target.parentElement.getAttribute("name");
 	let tarID = target.getAttribute("name");
 
@@ -8175,3 +8310,63 @@ function DMGCheckGrounded(base) {
 
 	return Grounded;
 }
+		
+function DMGSetWeatherTerrain(){
+						
+	let weather = [{Name:"Harsh Sunlight",Color:"Orange"},{Name:"Rain",Color:"Slateblue"},{Name:"Sandstorm",Color:"Sandybrown"},{Name:"Snow",Color:"Powderblue"},{Name:"Fog",Color:"Lightblue"},{Name:"Hail",Color:"Powderblue"},{Name:"Extremely Harsh Sunlight",Color:"Darkorange"},{Name:"Heavy Rain",Color:"MidnightBlue"},{Name:"Strong Winds",Color:"Slategray"},{Name:"Shadowy Aura",Color:"Darkslategrey"}];
+	let terrain = [{Name:"Electric Terrain",Color:"Yellow"},{Name:"Grassy Terrain",Color:"Greenyellow"},{Name:"Misty Terrain",Color:"Pink"},{Name:"Psychic Terrain",Color:"Fuchsia"}];
+	let el1 = document.querySelector("#contain div#tool div#dmg div[name='battle']");
+	let el2 = document.querySelector("#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string]")
+	let weatherDefault = "Lightskyblue";
+	let terrainDefault = "Silver";
+
+	let els1 = document.querySelectorAll("#contain div#tool div#dmg div[name='content'] > div[name='field'] *[name='Weather-Group'] input");
+	let els2 = document.querySelectorAll("#contain div#tool div#dmg div[name='content'] > div[name='field'] *[name='Terrain-Group'] input");
+
+	let check1 = true;
+	for (var i = 0; i < els1.length; i++) {
+		let tar = els1[i];
+		let tarName = tar.getAttribute("id");
+		tarName = tarName.split("-")[0];
+
+		if (tar.checked) {
+			for (var q = 0; q < weather.length; q++) {
+				if (weather[q]["Name"] == tarName) {
+					if (DMGFindScenario(el2,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(el2,"Air Lock","Ability","All","") == 0) {
+						el1.style.setProperty("--weather",weather[q]["Color"]);
+						el1.setAttribute("data-weather",weather[q]["Name"]);
+						check1 = false;
+						break;
+					}
+				}
+			}
+		}
+		
+	}
+	if (check1) {
+		el1.style.setProperty("--weather",weatherDefault);
+		el1.setAttribute("data-weather","");
+	}
+	let check2 = true;
+	for (var i = 0; i < els2.length; i++) {
+		let tar = els2[i];
+		let tarName = tar.getAttribute("id");
+		tarName = tarName.split("-")[0];
+
+		if (tar.checked) {
+			for (var q = 0; q < terrain.length; q++) {
+				if (terrain[q]["Name"] == tarName) {
+					el1.style.setProperty("--terrain",terrain[q]["Color"]);
+					el1.setAttribute("data-terrain",terrain[q]["Name"]);
+					check2 = false;
+					break;
+				}
+			}
+		}
+		
+	}
+	if (check2){
+		el1.style.setProperty("--terrain",terrainDefault);
+		el1.setAttribute("data-terrain","");
+	}
+};
