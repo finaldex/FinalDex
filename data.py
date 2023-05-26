@@ -94,7 +94,7 @@ def gsheet(id,name):
         obj = {}
         for sheet in sheets:
             sheetid = sheet['properties']['title']
-            if not '//' in sheetid:
+            if not '//' in sheetid and not 'sheet' in sheetid and not 'Sheet' in sheetid:
                 print(sheetid)
                 data = spreadsheet.values().get(spreadsheetId=id,range=sheetid).execute()
                 table = tableToArr(data)
@@ -124,7 +124,7 @@ def tableToArr(data):
 
             for q in range(0,len(title)): # Column
                 try:
-                    if values[i][q] != '':
+                    if values[i][q] != '' and title[q] != '':
                         obj[title[q]] = values[i][q]
                 except:
                     break
