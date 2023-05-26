@@ -6,6 +6,7 @@ import io
 import google.auth
 import json
 import time
+import datetime
 from googleapiclient.http import MediaIoBaseDownload
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -17,7 +18,7 @@ from googleapiclient.errors import HttpError
 
 os.chdir(os.getcwd()+'\\'+'data')
 
-
+timeStart = time.time()
 
 def gdrive():
     SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly']
@@ -143,3 +144,4 @@ if __name__ == '__main__':
         gsheet(id,name)
 
         time.sleep(10) # To not exceed api quota
+    print("Time Elapsed: "+str(datetime.timedelta(seconds=(round(time.time() - timeStart,0)))))
