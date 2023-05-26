@@ -66,7 +66,8 @@ function initialize() {
 
 		console.log(finaldata)
 
-		console.log(getMediaPath(['666','666_Jungle'],['./media/Images/Pokémon/Battle/PNG/Default/Front/VI-VII','./media/Images/Pokémon/Battle/GIF/Default/Front/VI-VII'],[]))
+		console.log(getPokémonName(523))
+		console.log(getMediaPath([520,252],['./media/Images/Pokémon/sdaas/PNG/Default/Front/Crystal','./media/Images/Pokémon/Battle/PNG/Default/Front/VI-VII'],[]))
 		
 		createNav();
 		createPokémon();
