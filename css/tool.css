@@ -546,13 +546,18 @@
     align-items: center;
     justify-content: space-between;
 }
-#contain div#tool div#dmg div[name='result'] > div {
+#contain div#tool div#dmg div[name='battle'] {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+	position: relative;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure > *:first-child {
+	text-shadow: 0px 0px 1px #000;
 }
 
 #contain div#tool div#dmg div[name='content'] > div[name='result'] > figure {
@@ -655,37 +660,9 @@
 
 
 
-#contain div#tool div#dmg div[name='result'] > div > span[name] {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-	flex-direction: column;
-    position:relative;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span[name] > span:active {
-    cursor: grabbing;
-}
-#contain div#tool div#dmg div[name='result'] > div > span[name] > span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-    z-index: 5;
-    cursor: grab;
-    padding: 5px 0;
-	user-select: none;
-}
-#contain div#tool div#dmg div[name='result'] > div > span[name] > span > * {
-    pointer-events: none;
-}
 
 
-
-
-#contain div#tool div#dmg div[name='result'] > div > span > div {
+#contain div#tool div#dmg div[name='battle'] > span > div {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -700,295 +677,18 @@
 }
 
 
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'],
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='active'] {
-	position: relative;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-	background: limegreen;
-	text-shadow: 0px 0px 1px var(--fontDark);
-	color: var(--fontLight);
-	border-radius: inherit;
-	flex-direction: column;
-    border: 2px solid;
-}
 
 
 
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'],
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='active'] > span:first-child {
-	width: 320px;
-	height: 120px;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span > span {
-	width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-	flex-direction: row;
-}
 
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span > span:last-child > * {
-	width: 25%;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: -1px 1px 0px #000;
-}
 
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span > span:last-child > * > *[name] {
-	padding: 10px 0;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span > span:last-child > b[data-category='Status'] {
-    pointer-events: none;
-    opacity: 0.5;
-}
 
 
 
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] *[name='pok'] {
-	height: 100%;
-}
 
 
 
 
-
-
-
-
-
-
-
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].user figure[name='user'] {
-	display: none;
-}
-
-
-
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable figure[name='target'] {
-	display: none;
-}
-
-
-#contain div#tool div#dmg > div[data-range] div[name='battle'] > span[name] > div[data-string].target figure[name='target'] {
-	display: none;
-}
-
-#contain div#tool div#dmg > div[data-range] div[name='battle'] > span[name] > div[data-string]:not(.viable) figure[name='target'] {
-	display: none;
-}
-
-
-
-
-
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable > span[name='inactive'],
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable > span[name='active'] {
-	outline: 4px solid var(--colorRed);
-}
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable.user > span[name='inactive'],
-#contain div#tool div#dmg > div[data-range*='Affects'] div[name='battle'] > span[name] > div[data-string].viable.user > span[name='active'] {
-	outline: 4px solid var(--colorRed) !important;
-    border: 4px solid var(--colorBlue) !important;
-}
-
-
-
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].target > span[name='inactive'],
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].target > span[name='active'] {
-	outline: 4px solid var(--colorRed);
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].user > span[name='inactive'],
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].user > span[name='active'] {
-	outline: 4px solid var(--colorBlue);
-}
-
-
-
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].user.target > span[name='inactive'],
-#contain div#tool div#dmg div[name='result'] > div > span[name] > div[name].user.target > span[name='active'] {
-	outline: 4px solid var(--colorRed) !important;
-    border: 4px solid var(--colorBlue) !important;
-}
-
-
-
-
-
-
-
-
-
-
-
-#contain div#tool div#dmg div[name='result'] *[name='hp'] {
-	display: flex;
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    flex-direction: column;
-}
-#contain div#tool div#dmg div[name='result'] *[name='hp'] > span {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'] {
-	max-height: 100%;
-}
-
-
-
-body[Generation='1'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation='2'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation='3'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation='4'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'],
-body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='img'] {
-	image-rendering: pixelated;
-}
-
-#contain div#tool div#dmg div[name='battle'] div[data-string] *[name='hp'][title] {
-	cursor: help;
-}
-
-
-#contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='item'][title]:not([title='']) {
-	cursor: help;
-}
-
-#contain div#tool div#dmg div[name='result'] *[name='imgs'] img[name='item'] {
-	position:absolute;
-	left:-5px;
-	top:5px;
-}
-
-
-
-
-
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'] {
-	background: linear-gradient(to right, Skyblue, var(--color_50));
-	user-select: none;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'] b {
-	width:100%;
-	height:100%;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'] b:hover {
-	filter: brightness(0.8);
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span[name='inactive'] b:active {
-	transform: scale(0.9);
-}
-
-
-
-
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string].active > span[name='inactive'] {
-	display: none;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string]:not(.active) > *[name='bar'] {
-	opacity: 0;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string]:not(.active) > span[name='active'] {
-	display: none;
-}
-
-
-
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[name] > span > span[name='pok'] {
-	height: 100%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    flex-direction: column;
-    text-align: center;
-}
-#contain div#tool div#dmg div[name='result'] *[name='imgs'] {
-	position: relative;
-    height: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-}
-
-#contain div#tool div#dmg > div:not([data-battle='Single Battle']) div[name='result'] *[name='imgs'] > img[name='img'] {
-	cursor: pointer;
-}
-
-#contain div#tool div#dmg > div:not([data-battle='Single Battle']) div[name='result'] *[name='imgs']:active > img[name='img'] {
-	transform:scale(0.9);
-}
-
-#contain div#tool div#dmg div[name='result'] *[name='name'] {
-	height: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#contain div#tool div#dmg div[name='result'] *[name='hp'] small {
-	display: block;
-}
-
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] figure {
-	position: absolute;
-    text-shadow: unset;
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] figure[name='close'] {
-	top: 10px;
-	left: 10px;
-	text-shadow: none;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] figure[name='export'] {
-	bottom: 10px;
-    right: 10px;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] figure[name='user'] {
-	left: 10px;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] figure[name='target'] {
-	right: 10px;
-}
-
-
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] figure > * {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] figure:active > * {
-	transform:scale(0.8)
-}
 
 #contain div#tool > section[name='content'] {
 	z-index: unset;
@@ -1074,7 +774,7 @@ body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs']
     align-items: center;
     flex-direction: row;
     position: relative;
-	padding: 10px;
+	padding: 5px;
 }
 
 #contain div#tool div#dmg div[name='menu'] > div[name='move'] > span {
@@ -1267,8 +967,8 @@ body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 
 
 
-#contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='battle'] > span[name] > div[data-string] span[name='inactive'],
-#contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='battle'] > span[name] > div[data-string] span[name='active'] > span:first-child {
+#contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='battle'] span[name*='team'] > div[data-string] span[name='inactive'],
+#contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='battle'] span[name*='team'] > div[data-string] span[name='active'] > span:first-child {
 	width: 250px;
 }
 
@@ -1771,41 +1471,6 @@ body[Generation='5'] #contain div#tool div#dmg div[name='result'] *[name='imgs']
 	opacity: 0.5;
 }
 
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] span[name='speed'] { 
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'] { 
-    padding: 7px 0;
-    height: 10px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'].on {
-    cursor:grab;
-}
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'].on:active {
-    cursor:grabbing;
-}
-
-
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'] > * {
-	display: flex;
-    flex-direction: column-reverse;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'] > *[name='stab'] {
-	text-align:left;
-}
-#contain div#tool div#dmg div[name='result'] > div > span > div[data-string] *[name='bar'] > *[name='effect'] {
-	text-align:right;
-}
 
 #contain div#tool div#dmg div[name='result'] > span[name='party'] {
 	width: 100%;
@@ -2027,28 +1692,6 @@ body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] 
 
 
 
-body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[data-string].ui-droppable.ui-droppable-active::after {
-    content: '';
-    position: absolute;
-    top: 24px;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: calc(100% - 24px);
-    background: linear-gradient(90deg, var(--border1) 50%, transparent 50%), linear-gradient(90deg, var(--border1) 50%, transparent 50%), linear-gradient(0deg, var(--border1) 50%, transparent 50%), linear-gradient(0deg, var(--border1) 50%, transparent 50%);
-    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    background-size: 16px 4px, 16px 4px, 4px 16px, 4px 16px;
-    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
-    animation: dash 10s linear infinite;
-}
-
-body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[data-string].ui-droppable.ui-droppable-active.ui-droppable-hover::after {
-    background: linear-gradient(90deg, var(--colorGreen) 50%, transparent 50%), linear-gradient(90deg, var(--colorGreen) 50%, transparent 50%), linear-gradient(0deg, var(--colorGreen) 50%, transparent 50%), linear-gradient(0deg, var(--colorGreen) 50%, transparent 50%);
-    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
-    background-size: 16px 4px, 16px 4px, 4px 16px, 4px 16px;
-    background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0px;
-    animation: dash 10s linear infinite;
-}
 
 
 
@@ -2580,6 +2223,15 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
     width: unset;
 }
 
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] li {
+	height: 100%;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] li label {
+	justify-content: space-between;
+	height: 100%;
+}
+
+
 #contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name] img {
 	max-height: 40px;
     max-width: 70px;
@@ -2599,3 +2251,558 @@ body.dragging #contain div#tool div#dmg div[name='result'] > div > span > div[da
 #contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] {
 	width: 200%;	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin: 0 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#contain div#tool div#dmg div[name='battle'] {
+	--weather: Lightskyblue;
+	--terrain: Silver;
+}
+
+
+#contain div#tool div#dmg div[name='battle']::before,
+#contain div#tool div#dmg div[name='battle']::after {
+	content: '';
+	width:100%;
+	position:absolute;
+	-webkit-mask: var(--mask);
+	mask: var(--mask);
+}
+
+#contain div#tool div#dmg div[name='battle']::before {
+	top: 0;
+    height: 60%;
+    --mask: linear-gradient(to bottom, rgba(0,0,0, 1) 0, rgba(0,0,0, 1) 90%, rgba(0,0,0, 0) 100%, rgba(0,0,0, 0) 0 ) 100% 50% / 100% 100% repeat-x;
+    background-color: var(--weather);
+    background-position-y: 0%;
+    background-position-x: 0%;
+	z-index: 2;
+}
+
+
+body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'] {
+	animation: dropshadow infinite 1.5s linear;
+	animation-delay: 1s;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].ui-droppable-hover span[name='pok'] b,
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].ui-droppable-hover span[name='pok'] img[name='img'] {
+	animation: none;
+	filter:brightness(0);
+}
+
+@keyframes dropshadow {
+    0% {
+        filter: drop-shadow(0px 1px 0px #000);
+    }
+	50% {
+        filter: drop-shadow(4px 1px 0px #000);
+    }
+	100% {
+        filter: drop-shadow(0px 1px 0px #000);
+    }
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Extremely Harsh Sunlight"] figure[name='object'],
+#contain div#tool div#dmg div[name='battle'][data-weather="Harsh Sunlight"] figure[name='object'] {
+	display: unset;
+    position: absolute;
+    content: "";
+    left: 50px;
+    top: 15px;
+    width: 100px;
+    height: 100px;
+    background-image: url("../media/Images/Misc/FinalDex/Light.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    transform-origin: center;
+    z-index: 100;
+	filter: brightness(1.2);
+	opacity: 0.5;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Harsh Sunlight"] figure[name='object'] {
+	animation: sun infinite 60s linear;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Extremely Harsh Sunlight"] figure[name='object'] {
+	animation: sun infinite 30s linear;
+}
+
+@keyframes sun {
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+
+
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Strong Winds"]::before {
+	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size: var(--depth) var(--depth);
+    background-color: var(--weather);
+    background-position-y: 0%;
+    animation: weather2 infinite 1s linear;
+    --c1: rgba(255, 255, 255, .015);
+    --angle: 0deg;
+    --depth: 92px;
+    --h: 15%;
+    --w: 49%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Heavy Rain"]::before {
+	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size: var(--depth) var(--depth);
+    background-color: var(--weather);
+    animation: weather1 infinite .8s linear;
+    --c1: rgba(255, 255, 255, .09);
+    --angle: 0deg;
+    --depth: 34px;
+    --h: 61%;
+    --w: 48%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Rain"]::before {
+	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+	background-size: var(--depth) var(--depth);
+	background-color: var(--weather);
+	animation: weather1 infinite 1s linear;
+	--c1: rgba(255, 255, 255, .09);
+	--angle: 0deg;
+	--depth: 34px;
+	--h: 72%;
+	--w: 46%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Snow"]::before {
+	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size: var(--depth) var(--depth);
+    background-color: var(--weather);
+    animation: weather1 infinite 3s linear;
+    --c1: rgba(255, 255, 255, .05);
+    --angle: 0deg;
+    --depth: 34px;
+    --h: 92%;
+    --w: 52%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Hail"]::before {
+    background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size: var(--depth) var(--depth);
+    background-color: var(--weather);
+    animation: weather1 infinite 1.2s linear;
+    --c1: rgba(255, 255, 255, .3);
+    --angle: 0deg;
+    --depth: 55px;
+    --h: 89%;
+    --w: 53%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather="Sandstorm"]::before {
+	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+	background-size: var(--depth) var(--depth);
+	background-color: var(--weather);
+	animation: weather3 infinite 25s linear;
+	--c1: rgba(0, 0, 0, .075);
+	--angle: 0deg;
+	--depth: 9px;
+	--h: 88%;
+	--w: 65%;
+}
+
+
+@keyframes weather1 {
+    to {
+        background-position-y:100%;
+    }
+}
+
+
+@keyframes weather2 {
+    to {
+        background-position-y:-100%;
+    }
+}
+
+@keyframes weather3 {
+    to {
+        background-position-y:200%;
+		background-position-x:100%;
+    }
+}
+
+
+
+
+#contain div#tool div#dmg div[name='battle']::after {
+	bottom: 0;
+	height:65%;
+	--mask: linear-gradient(to top, rgba(0,0,0, 1) 0, rgba(0,0,0, 1) 75%, rgba(0,0,0, 0) 100%, rgba(0,0,0, 0) 0 ) 100% 50% / 100% 100% repeat-x;
+	background-color: var(--terrain);
+	z-index: 1;
+}
+#contain div#tool div#dmg div[name='battle'] > span {
+    display: flex;
+    flex-direction: row;
+    z-index: 2;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] {
+	display: flex;
+    flex-direction: column;
+    position: relative;
+    text-shadow: 1px 1px 1px #000;
+	min-width: 150px;
+	margin: 0 10px;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span {
+	position:relative;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+	transition: .2s ease opacity;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name]:not([name='pok']) {
+	margin: 2px 0;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='wrap'] {
+    flex-direction: column;
+}
+
+
+
+#contain div#tool div#dmg > div:not([data-battle='Single Battle']) div[name='result'] *[name='imgs']:active > img[name='img'] {
+	transform:scale(0.9);
+}
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure {
+	position: absolute;
+    cursor: pointer;
+    bottom: 0;
+    padding: 5px;
+    z-index: 10;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure > * {
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure[name='user'] {
+	left: 0px;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure[name='target'] {
+	right: 0px;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure:active > * {
+	transform:scale(0.8)
+}
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] span[name='hp'][title]:not([title='']), 
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='item'][title]:not([title='']) {
+	cursor: help;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='item'] {
+	position:absolute;
+	left:5px;
+	top:5px;
+}
+
+
+body[Generation='1'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'],
+body[Generation='2'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'],
+body[Generation='3'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'],
+body[Generation='4'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'],
+body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'] {
+	image-rendering: pixelated;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] *[name='pok'] b {
+	width: 100%;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] *[name='pok'] b:active {
+	transform:scale(1.1)
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:not(.active) span[name='hp'],
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]:not(.active) figure,
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]:not(.active) *[name='pok'] img,
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].active *[name='pok'] b {
+	display: none;
+}
+
+#contain div#tool div#dmg > div:not([data-count='0']):not([data-count='1']):not([data-count='2']) div[name='battle'] span[name*='team'] > div[data-string] *[name='pok'] img[name='img'] {
+	cursor: pointer;
+}
+
+#contain div#tool div#dmg > div:not([data-count='0']):not([data-count='1']):not([data-count='2']) div[name='battle'] span[name*='team'] > div[data-string] *[name='pok'] img[name='img']:active {
+	transform:scale(0.95);
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='info'] {
+	position:absolute;
+	top: 0;
+	width:100%;
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp']:hover ~ span > span[name='moves'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves']:hover {
+	display:flex;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] {
+	display: none;
+    flex-wrap: wrap;
+    position: absolute;
+    top: calc(100% + -2px);
+    width: 100%;
+    z-index: 10;
+    background: var(--color15);
+    box-shadow: 0px 0px 1px #000;
+    border-top: none;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b {
+	width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	cursor: default;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category] {
+	cursor: pointer;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(1),
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(2) {
+	padding: 5px 0 2px;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(3),
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]:nth-child(4) {
+	padding: 2px 0 5px;
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] b[data-category='Status'] {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] {
+	--dmg: 100%;
+	--heal: 100%;
+	--hp: 100%;
+	background: linear-gradient(to right, limegreen 0%, limegreen var(--dmg), greenyellow var(--dmg), greenyellow var(--heal), orangered var(--heal), orangered var(--hp), darkred var(--hp), darkred 100%);
+	position:relative;
+	border: 1px solid;
+	transition: 2s ease opacity;
+	padding: 2px 0;
+	justify-content: space-between;
+	border-radius: 3px;
+	height: 15px;
+	width: 100%;
+}
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='effect'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='health'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='percentage'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='result'] {
+	pointer-events: none;
+	cursor: default;
+	position:absolute;
+	user-select: none;
+}
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='health'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='percentage'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='result'] {
+	display:flex;
+	justify-content: center;
+    align-items: center;
+}
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='effect'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='name'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='health'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='percentage'] {
+	opacity: 0;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='name'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='health'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='percentage'] {
+	opacity: 1;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='result'] {
+	left: 100% !important;
+	margin-left: -20px !important;
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] > span[name='health'] {
+	left: 5px;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] > span[name='percentage'] {
+    right: 50%;
+    left: 50%;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] > span[name='result'] {
+	left: 100%;
+	margin-left: -20px;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user figure[name='target'] {
+	display: none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user figure[name='user'] {
+	display: none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].target figure[name='target'] {
+	display: none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:not(.viable) figure[name='target'] {
+	display: none;
+}
+
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] span[name*='team'] > div[data-string].viable figure[name='target'] {
+	display: none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user span[name='hp'] {
+	outline: 2px solid var(--colorBlue);
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].target span[name='hp'] {
+	outline: 2px solid var(--colorRed);
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user.target span[name='hp'] {
+	border: 2px solid var(--colorBlue) !important;
+    outline: 2px solid var(--colorRed);
+}
+
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] span[name*='team'] > div[data-string].viable span[name='hp'] {
+	outline: 2px solid var(--colorRed) !important;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'] {
+	min-height: 100px;
+}
+
+#contain div#tool div#dmg div[name='battle'] > span[name='user'] {
+	align-items: flex-end;
+}
+
+body[Generation="1"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
+body[Generation="2"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
+body[Generation="3"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
+body[Generation="4"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'] {
+    align-items: flex-end;
+}
+
+body:not([Generation="4"]):not([Generation="2"]):not([Generation="3"]):not([Generation="4"]) #contain div#tool div#dmg div[name='battle'] > span[name='user'] > * {
+	transform: translate(0px, -30%);
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] {
+	display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: calc(100% + 5px);
+    width: 100%;
+    align-items: flex-end;
+    font-size: 100%;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] > span:not([name]) {
+	display: flex;
+    justify-content: space-between;
+	width:100%;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] span[name] {
+    display: flex;
+    flex-direction: column-reverse;
+	max-width:40%;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] *[name='positive'] {
+    align-items: flex-start;
+	text-align: left;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] *[name='negative'] {
+    align-items: flex-end;
+	text-align: right;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] *[name='neutral'] {
+	position:absolute;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] span[name] > * {
+	padding: 1px 0;
+}
+
