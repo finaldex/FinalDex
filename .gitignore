@@ -1,2 +1,5 @@
 media/
 **/desktop*
+credentials.json
+token-drive.json
+token-sheet.json
