@@ -365,6 +365,9 @@ function DMGCalcStart() {
 				}
 	
 				if (check) {
+					let positiveEffect = [];
+					let negativeEffect = [];
+
 					for (let h = 0; h < specInputPath.value; h++) {
 						// Defaults
 						let calculation = 0;
@@ -2942,8 +2945,6 @@ function DMGCalcStart() {
 						}
 
 						if ("Info" && h == 0) {
-							let positiveEffect = [];
-							let negativeEffect = [];
 							if (Generation == 1 || Generation == 4) {
 								if (Type1*Type2 == 2) {
 									negativeEffect.push("Super Effective");
@@ -2987,33 +2988,41 @@ function DMGCalcStart() {
 
 							negativeEffect = negativeEffect.filter(e => e != "Normal");
 
-							for (var e = 0; e < negativeEffect.length; e++) {
-								let txt = document.createElement("small");
-								txt.setAttribute("name",negativeEffect[e])
-								txt.innerText = negativeEffect[e];
-								tarEffectNegativePath.appendChild(txt)
-							}
-							console.log(negativeEffect)
-							console.log(Type)
-							console.log(Type1)
-							console.log(Type2)
-							
-
 							if (STAB > 1) {
 								positiveEffect.push("STAB");
 							}
-							
-							for (var e = 0; e < positiveEffect.length; e++) {
-								let txt = document.createElement("small");
-								txt.setAttribute("name",positiveEffect[e])
-								txt.innerText = positiveEffect[e];
-								userEffectPositivePath.appendChild(txt)
-							}
-							
+		
+		
 							pwrRes.push(Power);
 						}
 
+						
 					}
+				
+					positiveEffect = [...new Set(positiveEffect)];
+					negativeEffect = [...new Set(negativeEffect)];
+
+					for (var e = 0; e < negativeEffect.length; e++) {
+						let el = tarEffectNegativePath.querySelector(":scope > *[name='"+negativeEffect[e]+"']");
+						if (el == undefined) {
+							let txt = document.createElement("small");
+							txt.setAttribute("name",negativeEffect[e])
+							txt.innerText = negativeEffect[e];
+							tarEffectNegativePath.appendChild(txt)
+						}
+					}
+					
+					for (var e = 0; e < positiveEffect.length; e++) {
+						let el = userEffectPositivePath.querySelector(":scope > *[name='"+positiveEffect[e]+"']");
+						if (el == undefined) {
+							let txt = document.createElement("small");
+							txt.setAttribute("name",positiveEffect[e])
+							txt.innerText = positiveEffect[e];
+							userEffectPositivePath.appendChild(txt)
+						}
+					}
+
+					
 				}
 
 
