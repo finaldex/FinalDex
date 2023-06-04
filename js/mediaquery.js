@@ -1,20 +1,23 @@
 let finaldata = [];
 let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
 let baseextension = "json";
-let url = baseurl+"Directory"+"."+baseextension;
 
-
-
-let gameRequest = new XMLHttpRequest();
-gameRequest.open('GET', baseurl+"Directory"+"."+baseextension);
-gameRequest.responseType = 'json';
-gameRequest.send();
-gameRequest.onload = function() {
-    finaldata["Directory"] = gameRequest.response;
-    console.log(finaldata)
+let datas = ["Directory","Game Metadata"]
+for(var i = 0; i < datas.length; i++) {
+    loadData(i)
 }
 
 
+function loadData(i) {
+    var val = datas[i]
+    let gameRequest = new XMLHttpRequest();
+    gameRequest.open('GET', baseurl+datas[i]+"."+baseextension);
+    gameRequest.responseType = 'json';
+    gameRequest.send();
+    gameRequest.onload = function() {
+        finaldata[val] = gameRequest.response;
+    }
+}
 document.querySelector("span[name='Start'] button").addEventListener("click",dirGet);
 document.querySelector("input[type='text']").addEventListener("keydown",function(event) { if (event.keyCode == 13) {dirGet()} });
 
@@ -116,10 +119,12 @@ function getGeneration(game) {
     return 0
 }
 
+function getGameID(id) {
+    let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Legend Arceus","Brilliant Diamond","Shining Pearl","Scarlet","Violet"];
+    return games.findIndex(id+1)
+}
 function getApplicable(val) {
 	var val;
-    let game = document.querySelector("select").value
-
     let adds = [];
 
     let labin = document.querySelectorAll("label input");
@@ -131,6 +136,56 @@ function getApplicable(val) {
     if (adds.length == 0) {
         adds.push("All")
     }
+ 
+
+    let gamePath = document.querySelector("select");
+
+    let games = [];
+
+    if (gamePath.value.includes("-")) {
+        let valStart = val.split("-")[0];
+        let valEnd = val.split("-")[1];
+        if (isNaN(parseInt(valStart)) || isNaN(parseInt(valEnd))) {
+            valStart = getGameID(valStart)
+            valEnd = getGameID(valEnd)
+            for (var i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+                if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
+                    let x = parseInt(finaldata["Game"]["Reference"][i]["ID"]);
+                    if (x >= valStart && x <= valEnd) {
+                        games.push(finaldata["Game"]["Reference"][i]["Name"])
+                    }
+                }
+            }
+        }
+        else {
+            for (var i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+                if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
+                    let x = parseInt(finaldata["Game"]["Reference"][i]["Generation"]);
+                    if (x >= valStart && x <= valEnd) {
+                        games.push(finaldata["Game"]["Reference"][i]["Name"])
+                    }
+                }
+            }
+        }
+        
+    }
+    else if (!isNaN(parseInt(gamePath.value))) {
+        for (var i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+            if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
+                let x = parseInt(finaldata["Game"]["Reference"][i]["Generation"]);
+                if (x == parseInt(gamePath.value)) {
+                    games.push(finaldata["Game"]["Reference"][i]["Name"])
+                }
+            }
+        }
+    }
+    else {
+        games.push(gamePath.value);
+    }
+
+    console.log(games)
+
+
 
 
     val = val.replaceAll("_",",");
@@ -159,25 +214,29 @@ function getApplicable(val) {
             }
         }
         if (check) {
+            for (var g = 0; g < games.length; g++) {
+                let game = games[g];
+                let gen = getGeneration(games[g])
         
-            if (val == "All") {
-                return true;
-            }
-            else if (val.includes("-")) {
-                let valStart = parseInt(val.split("-")[0]);
-                let valEnd = parseInt(val.split("-")[1]);
-                let valCurrent = getGeneration(game)
-                if (valCurrent >= valStart && valCurrent <= valEnd) {
+                if (val == "All") {
                     return true;
                 }
-            }
-            else if (!isNaN(parseInt(val))) {
-                if (parseInt(val) == getGeneration(game)) {
+                else if (val.includes("-")) {
+                    let valStart = parseInt(val.split("-")[0]);
+                    let valEnd = parseInt(val.split("-")[1]);
+                    let valCurrent = gen
+                    if (valCurrent >= valStart && valCurrent <= valEnd) {
+                        return true;
+                    }
+                }
+                else if (!isNaN(parseInt(val))) {
+                    if (parseInt(val) == gen) {
+                        return true;
+                    }
+                }
+                else if (val == game) {
                     return true;
                 }
-            }
-            else if (val == game) {
-                return true;
             }
         }
     }
