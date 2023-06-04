@@ -1,0 +1,104 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    height: 10vh;
+    box-shadow: 1px 1px 1px #000;
+    background: var(--color18);
+}
+nav > span {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+nav > span:nth-child(1) {
+    width:25%;
+}
+nav > span:nth-child(2) {
+    width:50%;
+    flex-direction: column;
+    justify-content: center;
+}
+nav > span:nth-child(3) {
+    width:25%;
+}
+nav > span:nth-child(1) > span:last-child {
+    display: flex;
+    flex-direction: column;
+}
+ul {
+    height: 90vh;
+    overflow:auto;
+}
+ul img {
+    max-height: 40vh;
+}
+ul li {
+    width: fit-content;
+    list-style: decimal-leading-zero;
+    display: -webkit-inline-box;
+    padding: 5px 10px;
+}
+ul li span {
+    position:relative;
+    display: inline-block;
+}
+ul li span::after {
+    content: attr(title);
+    top: 5px;
+    right: 5px;
+    position: absolute;
+    text-align: right;
+    font-weight: bold;
+    width: calc(100% - 5px);
+    opacity: 0;
+    transition: .5s ease opacity;
+    font-family: fantasy;
+    font-size: large;
+    line-break: anywhere;
+    -webkit-text-stroke: 0.1px white;
+}
+ul li span:hover::after {
+    opacity: 1;
+}
+
+input[type="text"] {
+    width: 90%;
+    height:40%;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    outline: none;
+    text-align:center;
+}
+
+input[type="text"] + button {
+    width: 90%;
+    background:var(--color15);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 2px 0;
+}
+input[type="text"] + button:active {
+    transform: none;
+}
+input[type="text"] + button:active > * {
+    font-size: xx-small
+}
+
+button,
+label {
+    padding: 0 10px;
+}
+label:has(input:checked) {
+    font-weight:bold;
+}
+p {
+    display: inline;
+}
+
+nav > span:not(:nth-child(2)) > * {
+    margin: 5px 0;
+}
