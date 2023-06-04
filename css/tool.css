@@ -129,7 +129,7 @@
     left: 0;
     max-width: 500px;
     min-width: 100px;
-    max-height: 40vh;
+    max-height: 40dvh;
     width: 100%;
     color: var(--fontDark);
 	overflow: auto;
@@ -2324,6 +2324,11 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
     }
 }
 
+#contain div#tool div#dmg div[name='battle'] figure[name='object'] {
+	user-select: none;
+	pointer-events:none;
+}
+
 #contain div#tool div#dmg div[name='battle'][data-weather="Extremely Harsh Sunlight"] figure[name='object'],
 #contain div#tool div#dmg div[name='battle'][data-weather="Harsh Sunlight"] figure[name='object'] {
 	display: unset;
@@ -2698,8 +2703,8 @@ body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='te
 }
 
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='result'] {
-	left: 100% !important;
-	margin-left: -20px !important;
+	right: 5px !important;
+    left: unset !important;
 }
 
 
