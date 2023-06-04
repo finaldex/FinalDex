@@ -12,7 +12,7 @@ dir = {}
 
 
 for path, subdirs, files in os.walk(root):
-    if 'media' in path:
+    if 'media' in path and not 'Images_old' in path:
         path = path.replace('\\','/')
         path = path.replace(base,'.')
         for name in files:
