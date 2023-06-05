@@ -2125,7 +2125,6 @@ function storeInBox(data) {
     var shadow = document.createElement("span");
     var img = document.createElement("img");
     img.src = getPokémonMediaPath([i],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-    img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
     img.setAttribute("value",i);
     box.appendChild(li)
     li.appendChild(shadow)
