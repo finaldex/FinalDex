@@ -6413,7 +6413,6 @@ function buildDMG(preval) {
 				contentUser.setAttribute("type","invert");
 				contentTarget.setAttribute("type","invert");
 
-				contentImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 				contentItem.setAttribute("onerror","this.style.display = 'none';");
 				contentItem.setAttribute("onload","this.style.removeProperty('display');");
 		
@@ -6661,7 +6660,6 @@ function buildDMG(preval) {
 				partyTeamPok.setAttribute("data-string","");
 				partyTeamPok.setAttribute("name",q);
 				partyTeamPokImg.title = "";
-				partyTeamPokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 				partyTeamWrap.appendChild(partyTeamPok);
 				partyTeamPok.appendChild(partyTeamPokImg);
 
