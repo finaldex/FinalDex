@@ -247,6 +247,176 @@ function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
 	}
 }
 
+function getMedia(userFile,userPath,set) {
+
+	if (userFile == undefined) {
+		userFile = "";
+	}
+	if (userPath == undefined) {
+		userPath = "";
+	}
+
+	let result = [];
+	for (var i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
+        let path = Object.keys(finaldata["Directory"])[i]
+        let source = path.split("/")[path.split("/").length-1]
+
+        for (var q = 0; q < finaldata["Directory"][path].length; q++) {
+            let file = finaldata["Directory"][path][q];
+            let fileName = finaldata["Directory"][path][q].split(".")[0]
+
+            if (file.includes(".png") || file.includes(".gif")) {
+                if (getApplicable(source)) {
+                    let vals1 = splitStr(userPath,",");
+                    let vals2 = splitStr(userFile,",");
+
+                    for(var r = 0; r < vals1.length; r++) {
+                        if (path.includes(vals1[r]) || vals1[r] == "") {
+                            for(var t = 0; t < vals2.length; t++) {
+                                let check = false;
+                                if (set && fileName.includes(vals2[t].replaceAll('"',''))) {
+                                    check = true;
+                                }
+                                if (splitStr(fileName,"_")[0] == vals2[t] || vals2[t] == "") {
+                                    check = true;
+                                }
+                                if (check) {
+                                    result.push(path+"/"+file)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+	return result;
+}
+
+
+function getGeneration(game) {
+    let gen1 = ["Red","Blue","Yellow"];
+    let gen2 = ["Gold","Silver","Crystal"];
+    let gen3 = ["Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD"];
+    let gen4 = ["Diamond","Pearl","Platinum","HeartGold","SoulSilver"];
+    let gen5 = ["Black","White","Black 2","White 2"];
+    let gen6 = ["X","Y","Omega Ruby","Alpha Sapphire"];
+    let gen7 = ["Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee"];
+    let gen8 = ["Sword","Shield","Legend Arceus","Brilliant Diamond","Shining Pearl"];
+    let gen9 = ["Scarlet","Violet"];
+
+    if (gen1.includes(game)) {
+        return 1;
+    }
+    if (gen2.includes(game)) {
+        return 2;
+    }
+    if (gen3.includes(game)) {
+        return 3;
+    }
+    if (gen4.includes(game)) {
+        return 4;
+    }
+    if (gen5.includes(game)) {
+        return 5;
+    }
+    if (gen6.includes(game)) {
+        return 6;
+    }
+    if (gen7.includes(game)) {
+        return 7;
+    }
+    if (gen8.includes(game)) {
+        return 8;
+    }
+    if (gen9.includes(game)) {
+        return 9;
+    }
+    return 0
+}
+
+function getGameID(name) {
+    let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Legend Arceus","Brilliant Diamond","Shining Pearl","Scarlet","Violet"];
+    return games.indexOf(name)+1
+}
+function getApplicable(val) {
+	var val;
+
+    let adds = ["All"];
+
+    val = val.replaceAll("_",",");
+    let vals = splitStr(val,",");
+    for (var i = 0; i < vals.length; i++) {
+        let val = vals[i];
+		
+        let check = true;
+		
+		/*
+        let additional = []
+        if (vals[i].includes(" [")) {
+            additional = splitStr(vals[i].split(" [")[vals[i].split(" [").length-1],"][")
+            additional[additional.length-1] = additional[additional.length-1].replaceAll("]","")
+            val = val.replace(vals[i].split(" [")[vals[i].split(" [").length-1],"").replace(" [","")
+        }
+
+	
+        if (adds[0] != "All") {
+            check = false;
+            for (var q = 0; q < additional.length; q++) {
+                if (adds.includes(additional[q])) {
+                    check = true;
+                    break;
+                }
+            }
+        }
+		*/
+       
+        if (check) {
+			if (val == "All") {
+				return true;
+			}
+			else if (val == GameName) {
+				return true;
+			}
+			else if (!isNaN(parseInt(val))) {
+				if (parseInt(val) == Generation) {
+					return true;
+				}
+			}
+			else if (val.includes("-")) {
+				let val1 = val.split("-")[0];
+				let val2 = val.split("-")[1];
+				
+				if (!isNaN(parseInt(val1)) || !isNaN(parseInt(val2))) { // Generation
+					let valCurrent = Generation;
+					valStart = Math.min(val1,val2)
+					valEnd = Math.max(val1,val2)
+					if (valCurrent >= valStart && valCurrent <= valEnd) {
+						return true;
+					}
+				}
+				else {
+					let valCurrent = getGameID(GameName);
+					val1 = getGameID(val1);
+					val2 = getGameID(val2);
+					valStart = Math.min(val1,val2)
+					valEnd = Math.max(val1,val2)
+
+					if (valCurrent >= valStart && valCurrent <= valEnd) {
+						return true;
+					}
+				}
+				
+			}
+			
+            
+        }
+    }
+	
+	
+	return false;
+}
 
 
 
@@ -1634,7 +1804,7 @@ function getTutorData(val,column) {
 
 
 
-function getApplicable(val) {
+function getApplicable_old(val) {
 	var val;
 
 	if (val != undefined) {
