@@ -69,6 +69,12 @@ function initialize() {
 		console.log(getPokémonMediaPath([520,252],['./media/Images/Pokémon/Battle/PNG/Default/Front/VI-VII']))
 		
 
+		console.log(getApplicable("All"))
+		console.log(getApplicable("Yellow"))
+		console.log(getApplicable("Crystal-Red"))
+		console.log(getApplicable("Crystal-Emerald"))
+		console.log(getMedia("151","./media/Images/Pokémon/Battle/Default/Front/PNG/"))
+		console.log(getMedia("201-A"))
 
 		createNav();
 		createPokémon();
