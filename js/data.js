@@ -44,7 +44,6 @@ var createData = function(id, i) {
 			dataFormInput.value = u;
 			dataFormLabel.setAttribute("for","data-form-selector-"+u);
 			dataFormImg.src = getPokémonMediaPath([u],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-			dataFormImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 			dataForm.appendChild(dataFormInput);
 			dataForm.appendChild(dataFormLabel);
 			dataFormLabel.appendChild(dataFormImg);
@@ -153,7 +152,6 @@ var createData = function(id, i) {
 		dataNavigationInput.addEventListener("click", showMetadataLearnsetArea);
 	}
 
-	dataSectionHeaderPortrait.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 
 	dataSectionHeaderIDNational.innerText = "#"+id;
 	dataSectionHeaderIDNational.setAttribute("name","national");
@@ -369,7 +367,6 @@ var createData = function(id, i) {
         dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
         dataPreviousNational.title = "#"+(parseInt(getIntID(d,"")) - 1)+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
         dataPreviousNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))-1))],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-        dataPreviousNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
         
         dataPrevious.appendChild(dataPreviousNational);
         dataPreviousNational.appendChild(dataPreviousNationalImg);
@@ -387,7 +384,6 @@ var createData = function(id, i) {
         dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,""))+1)));
         dataNextNational.title = "#"+(parseInt(getIntID(d,""))+1)+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,""))+1))]["Pokémon"];
         dataNextNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))+1))],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-        dataNextNationalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
         
         dataNext.appendChild(dataNextNational);
         dataNextNational.appendChild(dataNextNationalImg);
@@ -411,7 +407,6 @@ var createData = function(id, i) {
 	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
 	          dataPreviousRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",previousID)]["Pokémon"];
 			  dataPreviousRegionalImg.src = getPokémonMediaPath([getIntID("",previousID)],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-	          dataPreviousRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 	          
 	          dataPrevious.appendChild(dataPreviousRegional);
 	          dataPreviousRegional.appendChild(dataPreviousRegionalImg);
@@ -428,7 +423,6 @@ var createData = function(id, i) {
 	          dataNextRegional.setAttribute("value",getIntID("",nextID));
 	          dataNextRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",nextID)][JSONPath_Pokédex[q]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",nextID)]["Pokémon"];
 			  dataNextRegionalImg.src = getPokémonMediaPath([getIntID("",nextID)],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]); 
-	          dataNextRegionalImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 	          
 	          dataNext.appendChild(dataNextRegional);
 	          dataNextRegional.appendChild(dataNextRegionalImg);
@@ -757,7 +751,6 @@ function loadData() {
 				evoImg.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
                 evoImg.title = evoArr[q][u]["Pokémon"];
 
-                evoImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
                 if (getPokémonID(evoArr[q][u]["Pokémon"]) == undefined) {
                     evoNationalID.innerText = "#"+getPokémonID(getPokémonName(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])),"Alt"));
                 }
@@ -1015,7 +1008,6 @@ function loadData() {
                         pokPok.setAttribute("name","pokémon");
                         pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Pokémon"][q]["Level"];
 						pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-						pokPokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 				
 						pokPokImg.setAttribute("title",finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]);
                 
@@ -1222,7 +1214,6 @@ function loadData() {
                                     pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Pokémon"][q]["Level"];
 									pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
                                     pokPokImg.setAttribute("value",getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]));
-									pokPokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 				
 
                                     if(finaldata["Location Pokémon"]["Pokémon"][q]["Note"] != undefined) {
@@ -1349,7 +1340,6 @@ function loadData() {
 					pokPok.setAttribute("name","pokémon");
 					pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Shop"][q]["Level"];
 					pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Shop"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-					pokPokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 			
 					pokPokImg.setAttribute("title",finaldata["Location Pokémon"]["Shop"][q]["Pokémon"]);
 			
@@ -2491,7 +2481,6 @@ function callPopUp(type) {
             img.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
             img.title = name;
             img.setAttribute("value",int);
-			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 
 			if(getIntID(int,"") == x) {
 				li.classList.add("select");
@@ -2611,7 +2600,6 @@ function callPopUp(type) {
 			if(type == "Held Item") {
 				li.setAttribute("name", json.length);
 			}
-			img.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 			if(getIntID(int,"") == x) {
 				img.classList.add("select");
 			}
@@ -2626,7 +2614,6 @@ function callPopUp(type) {
 				var pimg = document.createElement("img");
 				if(result[u][json[q]] != undefined) {
 					pimg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(result[u][json[q]])+".png";
-					pimg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 					pimg.title = result[u][json[q]];
 					if(json[q].includes("_")) {
 						span2.innerText = json[q].split("_")[0];
