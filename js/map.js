@@ -860,7 +860,6 @@ var createMap = function() {
 						}
 						else if (type == "pokémon") {
 							mapSectionSidebarDescriptionShopIcon.src = getPokémonMediaPath([getPokémonInt(main)],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-							mapSectionSidebarDescriptionShopIcon.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 						}
 						mapSectionSidebarDescriptionShopIconInner.appendChild(mapSectionSidebarDescriptionShopIcon);
 					}
@@ -1371,7 +1370,6 @@ var createMap = function() {
 					mapSectionSidebarDescriptionPokOuter.setAttribute("name","pok");
 					mapSectionSidebarDescriptionPokLvlText.innerText = "Lv. "+poks[u]["Level"];
 					mapSectionSidebarDescriptionPokIcon.src = getPokémonMediaPath([getPokémonInt(poks[u]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-					mapSectionSidebarDescriptionPokIcon.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 					mapSectionSidebarDescriptionPokWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
 					mapSectionSidebarDescriptionPokNameText.innerText = poks[u]["Pokémon"];
 
@@ -1424,7 +1422,6 @@ var createMap = function() {
 								var mapSectionSidebarDescriptionPokAlliesIMG = document.createElement("img");
 								mapSectionSidebarDescriptionPokAlliesIMG.src = getPokémonMediaPath([getPokémonInt(allies[r])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 								mapSectionSidebarDescriptionPokAlliesIMG.title = allies[r];
-								mapSectionSidebarDescriptionPokAlliesIMG.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 								mapSectionSidebarDescriptionPokAlliesIMG.setAttribute("value",getPokémonInt(allies[r]));
 								mapSectionSidebarDescriptionPokAllies.appendChild(mapSectionSidebarDescriptionPokAlliesIMG);
 								mapSectionSidebarDescriptionPokAlliesIMG.addEventListener("click",modalData);
@@ -2311,9 +2308,6 @@ function updateTrainer(trainers,condition) {
 		nextPath.removeAttribute("title");
 	}
 
-	previousImg.setAttribute("onerror","this.classList.add('error');this.src='./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+MEDIAPath_Character_Fallback+".png';");
-	currentImg.setAttribute("onerror","this.classList.add('error');this.src='./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+MEDIAPath_Character_Fallback+".png';");
-	nextImg.setAttribute("onerror","this.classList.add('error');this.src='./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+MEDIAPath_Character_Fallback+".png';");
 
 
 
@@ -2876,7 +2870,6 @@ function updateTrainer(trainers,condition) {
 		if (item != undefined) {
 			var heldImg = document.createElement("img");
 			heldImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(item)+".png";
-			heldImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 			heldImg.setAttribute("title",item);
 			heldImg.setAttribute("name","item");
 			heldImg.setAttribute("value",item);
@@ -2887,7 +2880,6 @@ function updateTrainer(trainers,condition) {
 
 		var pokImg = document.createElement("img");
 		pokImg.src = getPokémonMediaPath([getPokémonInt(pok)],["./media/Images/Pokémon/Battle/PNG/Default/Front/"+ImageTypes[0]["path"]+"/"]);
-		pokImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 		pokImg.setAttribute("title", pok);
 		pokCenterWrap.setAttribute("value",getPokémonInt(pok));
 		pokCenterWrap.appendChild(pokImg);
