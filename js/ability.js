@@ -292,7 +292,6 @@ var createAbility = function() {
 					var abilitySectionSidebarSidebarLiText = document.createElement("small");
 					abilitySectionSidebarSidebarLiImg.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
 					abilitySectionSidebarSidebarLiImg.setAttribute("title", name);
-					abilitySectionSidebarSidebarLiImg.setAttribute("onerror","this.src='./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box+"/0.png';");
 					abilitySectionSidebarSidebarLiText.innerText = name;
 					abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiImgOuter);
 					abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiImg);
