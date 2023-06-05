@@ -147,7 +147,9 @@ ul#roof li span[name="execute"] button {
 
 
 
-
+input::placeholder {
+    opacity: 0.5;
+}
 
 ul#roof li span[data-state]:active {
     filter:brightness(0.8);
