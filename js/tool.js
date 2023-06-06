@@ -1,16 +1,16 @@
-var createTool = function() {
-	var toolOuter = document.createElement("div");
-	var toolSectionList = document.createElement("section");
-	var toolSectionListOptionsTitleOuter = document.createElement("div");
-	var toolSectionListOptionsTitle = document.createElement("h3");
-	var toolSectionListOptionsOuter = document.createElement("div");
-	var toolSectionListOptions = document.createElement("ol");
-	var toolSectionHeader = document.createElement("section");
-	var toolSectionHeaderTitle = document.createElement("span");
-	var toolSectionHeaderTitleText = document.createElement("h3");
-	var toolSectionContent = document.createElement("section");
-	var toolSectionContentTimersOuter = document.createElement("div");
-	var toolSectionContentTimerSelectorOuter = document.createElement("div");
+let createTool = function() {
+	let toolOuter = document.createElement("div");
+	let toolSectionList = document.createElement("section");
+	let toolSectionListOptionsTitleOuter = document.createElement("div");
+	let toolSectionListOptionsTitle = document.createElement("h3");
+	let toolSectionListOptionsOuter = document.createElement("div");
+	let toolSectionListOptions = document.createElement("ol");
+	let toolSectionHeader = document.createElement("section");
+	let toolSectionHeaderTitle = document.createElement("span");
+	let toolSectionHeaderTitleText = document.createElement("h3");
+	let toolSectionContent = document.createElement("section");
+	let toolSectionContentTimersOuter = document.createElement("div");
+	let toolSectionContentTimerSelectorOuter = document.createElement("div");
 	toolOuter.setAttribute("id","tool")
 	toolOuter.setAttribute("value","tools");
 	toolSectionListOptionsTitle.innerText = "Tools";
@@ -38,9 +38,9 @@ var createTool = function() {
 	toolSectionContent.setAttribute("name","content");
 
 
-	var toolSectionHeaderGame = document.createElement("span");
-	var toolSectionHeaderGameImage = document.createElement("img");
-	toolSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",","").replaceAll("!","").replaceAll("'","").replaceAll(":","") + ".png";
+	let toolSectionHeaderGame = document.createElement("span");
+	let toolSectionHeaderGameImage = document.createElement("img");
+	toolSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
 	toolSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
 	toolSectionHeader.appendChild(toolSectionHeaderGame);
 	toolSectionHeaderGame.appendChild(toolSectionHeaderGameImage);
@@ -48,25 +48,25 @@ var createTool = function() {
 
 	
 	function createTimer() {
-		var stopwatchcountdown = ["stopwatch","countdown"];
-		for(var q = 0; q < stopwatchcountdown.length; q++) {
-			var toolSectionContentTimerOuter = document.createElement("div");
-			var toolSectionContentTimer = document.createElement("div");
-			var toolSectionContentTimerPlay = document.createElement("b");
-			var toolSectionContentTimerPlayText = document.createElement("h1");
-			var toolSectionContentTimerPause = document.createElement("b");
-			var toolSectionContentTimerPauseText = document.createElement("h1");
-			var toolSectionContentTimerTime = document.createElement("data");
-			var toolSectionContentTimerTimeText = document.createElement("h2");
-			var toolSectionContentTimerSet = document.createElement("div");
-			var toolSectionContentTimerSetSpan = document.createElement("span");
-			var toolSectionContentTimerSetInputHours = document.createElement("input");
-			var toolSectionContentTimerSetInputMinutes = document.createElement("input");
-			var toolSectionContentTimerSetInputSeconds = document.createElement("input");
-			var toolSectionContentTimerSetInputMilliseconds = document.createElement("input");
-			var toolSectionContentTimerList = document.createElement("ul");
-			var toolSectionContentTimerLaps = document.createElement("figure");
-			var toolSectionContentTimerReset = document.createElement("figure");
+		let stopwatchcountdown = ["stopwatch","countdown"];
+		for(let q = 0; q < stopwatchcountdown.length; q++) {
+			let toolSectionContentTimerOuter = document.createElement("div");
+			let toolSectionContentTimer = document.createElement("div");
+			let toolSectionContentTimerPlay = document.createElement("b");
+			let toolSectionContentTimerPlayText = document.createElement("h1");
+			let toolSectionContentTimerPause = document.createElement("b");
+			let toolSectionContentTimerPauseText = document.createElement("h1");
+			let toolSectionContentTimerTime = document.createElement("data");
+			let toolSectionContentTimerTimeText = document.createElement("h2");
+			let toolSectionContentTimerSet = document.createElement("div");
+			let toolSectionContentTimerSetSpan = document.createElement("span");
+			let toolSectionContentTimerSetInputHours = document.createElement("input");
+			let toolSectionContentTimerSetInputMinutes = document.createElement("input");
+			let toolSectionContentTimerSetInputSeconds = document.createElement("input");
+			let toolSectionContentTimerSetInputMilliseconds = document.createElement("input");
+			let toolSectionContentTimerList = document.createElement("ul");
+			let toolSectionContentTimerLaps = document.createElement("figure");
+			let toolSectionContentTimerReset = document.createElement("figure");
 			toolSectionContentTimerOuter.setAttribute("name",stopwatchcountdown[q]);
 			toolSectionContentTimerOuter.setAttribute("state","stop");
 			toolSectionContentTimerPlay.setAttribute("title","Play");
@@ -129,12 +129,12 @@ var createTool = function() {
 
 			toolSectionContentTimerSet.appendChild(toolSectionContentTimerLaps);
 		}
-		for(var q = 0; q < stopwatchcountdown.length; q++) {
-			var x = q + 1;
+		for(let q = 0; q < stopwatchcountdown.length; q++) {
+			let x = q + 1;
 
-			var toolSectionContentTimerSelectorInput = document.createElement("input");
-			var toolSectionContentTimerSelectorLabel = document.createElement("label");
-			var toolSectionContentTimerSelectorLabelText = document.createElement("h5");
+			let toolSectionContentTimerSelectorInput = document.createElement("input");
+			let toolSectionContentTimerSelectorLabel = document.createElement("label");
+			let toolSectionContentTimerSelectorLabelText = document.createElement("h5");
 			toolSectionContentTimerSelectorInput.setAttribute("type","radio");
 			toolSectionContentTimerSelectorInput.setAttribute("id","timerselector" + x);
 			toolSectionContentTimerSelectorInput.setAttribute("name","timerselector");
@@ -152,24 +152,24 @@ var createTool = function() {
 	}
 
 	function createRNG() {
-		var toolSectionContentRNGOuter = document.createElement("div");
-		var toolSectionContentRNG = document.createElement("div");
-		var toolSectionContentRNGOptions = document.createElement("div");
-		var toolSectionContentRNGOptionsTop = document.createElement("div");
-		var toolSectionContentRNGOptionsIterations = document.createElement("span");
-		var toolSectionContentRNGOptionsIterationsText = document.createElement("p");
-		var toolSectionContentRNGOptionsIterationsInput = document.createElement("input");
-		var toolSectionContentRNGOptionsTitle = document.createElement("span");
-		var toolSectionContentRNGOptionsTitleIterations = document.createElement("span");
-		var toolSectionContentRNGOptionsTitleIterationsText = document.createElement("p");
-		var toolSectionContentRNGOptionsTitleMin = document.createElement("span");
-		var toolSectionContentRNGOptionsTitleMinText = document.createElement("p");
-		var toolSectionContentRNGOptionsTitleMax = document.createElement("span");
-		var toolSectionContentRNGOptionsTitleMaxText = document.createElement("p");
-		var toolSectionContentRNGOptionsUl = document.createElement("ul");
-		var toolSectionContentRNGOptionsExecute = document.createElement("span");
-		var toolSectionContentRNGOptionsExecuteButton = document.createElement("button");
-		var toolSectionContentRNGResult = document.createElement("div");
+		let toolSectionContentRNGOuter = document.createElement("div");
+		let toolSectionContentRNG = document.createElement("div");
+		let toolSectionContentRNGOptions = document.createElement("div");
+		let toolSectionContentRNGOptionsTop = document.createElement("div");
+		let toolSectionContentRNGOptionsIterations = document.createElement("span");
+		let toolSectionContentRNGOptionsIterationsText = document.createElement("p");
+		let toolSectionContentRNGOptionsIterationsInput = document.createElement("input");
+		let toolSectionContentRNGOptionsTitle = document.createElement("span");
+		let toolSectionContentRNGOptionsTitleIterations = document.createElement("span");
+		let toolSectionContentRNGOptionsTitleIterationsText = document.createElement("p");
+		let toolSectionContentRNGOptionsTitleMin = document.createElement("span");
+		let toolSectionContentRNGOptionsTitleMinText = document.createElement("p");
+		let toolSectionContentRNGOptionsTitleMax = document.createElement("span");
+		let toolSectionContentRNGOptionsTitleMaxText = document.createElement("p");
+		let toolSectionContentRNGOptionsUl = document.createElement("ul");
+		let toolSectionContentRNGOptionsExecute = document.createElement("span");
+		let toolSectionContentRNGOptionsExecuteButton = document.createElement("button");
+		let toolSectionContentRNGResult = document.createElement("div");
 
 		toolSectionContentRNGOuter.setAttribute("id","rng");
 		toolSectionContentRNGOuter.setAttribute("name","Random Number Generator");
@@ -213,13 +213,13 @@ var createTool = function() {
 	function createType() {
 
 
-		var typeOuter = document.createElement("div");
-		var typeContent = document.createElement("div");
-		var typeSidebar = document.createElement("div");
-		var typeSidebarTitle = document.createElement("div");
-		var typeSidebarDescription = document.createElement("div");
-		var typeSidebarDescriptionSelector = document.createElement("div");
-		var typeSidebarDescriptionAttackDefend = document.createElement("div");
+		let typeOuter = document.createElement("div");
+		let typeContent = document.createElement("div");
+		let typeSidebar = document.createElement("div");
+		let typeSidebarTitle = document.createElement("div");
+		let typeSidebarDescription = document.createElement("div");
+		let typeSidebarDescriptionSelector = document.createElement("div");
+		let typeSidebarDescriptionAttackDefend = document.createElement("div");
 
 		typeSidebarTitle.setAttribute("name","title");
 		typeSidebarDescription.setAttribute("name","description");
@@ -241,12 +241,12 @@ var createTool = function() {
 
 	
 
-		for(var i = 0; i < 2; i++) {
-			var typeSidebarTitleWrap = document.createElement("span");
-			var typeSidebarTitleInner = document.createElement("span");
-			var typeSidebarTitleTrigger = document.createElement("b");
-			var typeSidebarTitleTriggerText = document.createElement("strong");
-			var typeSidebarTitleDrop = document.createElement("div");
+		for(let i = 0; i < 2; i++) {
+			let typeSidebarTitleWrap = document.createElement("span");
+			let typeSidebarTitleInner = document.createElement("span");
+			let typeSidebarTitleTrigger = document.createElement("b");
+			let typeSidebarTitleTriggerText = document.createElement("strong");
+			let typeSidebarTitleDrop = document.createElement("div");
 			typeSidebarTitleTriggerText.innerText = "+";
 			typeSidebarTitleTrigger.setAttribute("type","invert");
 			typeSidebarTitle.appendChild(typeSidebarTitleWrap);
@@ -256,13 +256,13 @@ var createTool = function() {
 			typeSidebarTitleWrap.appendChild(typeSidebarTitleDrop);
 
 			typeSidebarTitleTrigger.addEventListener("click",function(){let base = this.parentElement.parentElement; if (base.classList.contains("active")) {base.classList.remove("active");} else {base.classList.add("active");}})
-
-			for(var q = 0; q < Types.length; q++) {
-				var typeSidebarTitleDropOption = document.createElement("b");
-				var typeSidebarTitleDropOptionImg = document.createElement("img");
-				var typeSidebarTitleDropOptionTxt = document.createElement("p");
+			
+			for(let q = 0; q < Types.length; q++) {
+				let typeSidebarTitleDropOption = document.createElement("b");
+				let typeSidebarTitleDropOptionImg = document.createElement("img");
+				let typeSidebarTitleDropOptionTxt = document.createElement("p");
 				typeSidebarTitleDropOption.setAttribute("name",Types[q]);
-				typeSidebarTitleDropOptionImg.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+Types[q]+".png";
+				typeSidebarTitleDropOptionImg.src = getMedia([Types[q]],[PATH_Type_Icon])[0]
 				typeSidebarTitleDropOptionImg.title = Types[q];
 				typeSidebarTitleDropOptionImg.setAttribute("onerror","this.style.display='none';");
 				typeSidebarTitleDropOptionTxt.innerText = Types[q];
@@ -278,7 +278,7 @@ var createTool = function() {
 					}
 
 					let img = document.createElement("img");
-					img.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+el.innerText+".png";
+					img.src = getMedia([el.innerText],[PATH_Type_Icon])[0]
 					img.setAttribute("name",el.innerText);
 					img.title = el.innerText;
 					img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -292,27 +292,27 @@ var createTool = function() {
 		let defAtt = ["Defending","Attacking"];
 
 
-		for(var i = 0; i < defAtt.length; i++) {
-			var DefAtt = document.createElement("ul");
+		for(let i = 0; i < defAtt.length; i++) {
+			let DefAtt = document.createElement("ul");
 
-			var DefAttSuperEffective = document.createElement("li");
-			var DefAttSuperEffectiveTitle = document.createElement("h6");
-			var DefAttSuperEffectiveContain = document.createElement("span");
-			var DefAttEffective = document.createElement("li");
-			var DefAttEffectiveTitle = document.createElement("h6");
-			var DefAttEffectiveContain = document.createElement("span");
-			var DefAttSuperIneffective = document.createElement("li");
-			var DefAttSuperIneffectiveTitle = document.createElement("h6");
-			var DefAttSuperIneffectiveContain = document.createElement("span");
-			var DefAttIneffective = document.createElement("li");
-			var DefAttIneffectiveTitle = document.createElement("h6");
-			var DefAttIneffectiveContain = document.createElement("span");
-			var DefAttImmune = document.createElement("li");
-			var DefAttImmuneTitle = document.createElement("h6");
-			var DefAttImmuneContain = document.createElement("span");
-			var DefAttNormal = document.createElement("li");
-			var DefAttNormalTitle = document.createElement("h6");
-			var DefAttNormalContain = document.createElement("span");
+			let DefAttSuperEffective = document.createElement("li");
+			let DefAttSuperEffectiveTitle = document.createElement("h6");
+			let DefAttSuperEffectiveContain = document.createElement("span");
+			let DefAttEffective = document.createElement("li");
+			let DefAttEffectiveTitle = document.createElement("h6");
+			let DefAttEffectiveContain = document.createElement("span");
+			let DefAttSuperIneffective = document.createElement("li");
+			let DefAttSuperIneffectiveTitle = document.createElement("h6");
+			let DefAttSuperIneffectiveContain = document.createElement("span");
+			let DefAttIneffective = document.createElement("li");
+			let DefAttIneffectiveTitle = document.createElement("h6");
+			let DefAttIneffectiveContain = document.createElement("span");
+			let DefAttImmune = document.createElement("li");
+			let DefAttImmuneTitle = document.createElement("h6");
+			let DefAttImmuneContain = document.createElement("span");
+			let DefAttNormal = document.createElement("li");
+			let DefAttNormalTitle = document.createElement("h6");
+			let DefAttNormalContain = document.createElement("span");
 
 			DefAtt.setAttribute("name",defAtt[i]);
 			DefAttSuperEffective.setAttribute("name","super effective");
@@ -369,10 +369,10 @@ var createTool = function() {
 			DefAttNormalTitle.setAttribute("title","Normal Effectiveness (1×) "+cont);
  		}
 
-		for(var i = 0; i < defAtt.length; i++) {
-			var typeSidebarDescriptionSelectorInput = document.createElement("input");
-			var typeSidebarDescriptionSelectorLabel = document.createElement("label");
-			var typeSidebarDescriptionSelectorLabelText = document.createElement("p");
+		for(let i = 0; i < defAtt.length; i++) {
+			let typeSidebarDescriptionSelectorInput = document.createElement("input");
+			let typeSidebarDescriptionSelectorLabel = document.createElement("label");
+			let typeSidebarDescriptionSelectorLabelText = document.createElement("p");
 			typeSidebarDescriptionSelectorInput.setAttribute("type","radio");
 			typeSidebarDescriptionSelectorInput.setAttribute("value", defAtt[i]);
 			typeSidebarDescriptionSelectorInput.setAttribute("name","type-selector");
@@ -405,12 +405,12 @@ var createTool = function() {
 		let tempTypes = [...Types];
 		tempTypes.unshift("");
 
-		for(var q = 0; q < tempTypes.length; q++) {
+		for(let q = 0; q < tempTypes.length; q++) {
 			let tr = document.createElement("tr");
 			tr.setAttribute("name",tempTypes[q]);
 			table.appendChild(tr);
 
-			for(var r = 0; r < tempTypes.length; r++) {
+			for(let r = 0; r < tempTypes.length; r++) {
 
 				let tempAdv = calcTypeAdv([tempTypes[q].toUpperCase()],"Attacking");
 
@@ -434,7 +434,7 @@ var createTool = function() {
 						let img = document.createElement("img");
 						wrap.setAttribute("name",val);
 						txt.innerText = val;
-						img.src = "./media/Images/Misc/Type/Icon/"+MEDIAPath_Type_Icon+"/"+val+".png";
+						img.src = getMedia([val],[PATH_Type_Icon])[0]
 						img.setAttribute("onload","this.previousElementSibling.style.display = 'none'");
 						img.setAttribute("onerror","this.style.display = 'none'");
 						th.appendChild(wrap);
@@ -487,85 +487,85 @@ var createTool = function() {
 
 
 	function createDamageCalc() {
-		var toolSectionContentDMGOuter = document.createElement("div");
-		var toolSectionContentDMG = document.createElement("div");
-		var toolSectionContentDMGOptions = document.createElement("div");
-		var toolSectionContentDMGOptionsTop = document.createElement("div");
+		let toolSectionContentDMGOuter = document.createElement("div");
+		let toolSectionContentDMG = document.createElement("div");
+		let toolSectionContentDMGOptions = document.createElement("div");
+		let toolSectionContentDMGOptionsTop = document.createElement("div");
 
-		var toolSectionContentDMGOptionsBattles = document.createElement("span");
-		var toolSectionContentDMGOptionsBattlesSelect = document.createElement("select");
+		let toolSectionContentDMGOptionsBattles = document.createElement("span");
+		let toolSectionContentDMGOptionsBattlesSelect = document.createElement("select");
 
-		var toolSectionContentDMGOptionsTitle = document.createElement("span");
+		let toolSectionContentDMGOptionsTitle = document.createElement("span");
 
-		var toolSectionContentDMGOptionsContent = document.createElement("div");
-		var toolSectionContentDMGOptionsContentPok = document.createElement("ol");
-		var toolSectionContentDMGOptionsContentTeam = document.createElement("ol");
+		let toolSectionContentDMGOptionsContent = document.createElement("div");
+		let toolSectionContentDMGOptionsContentPok = document.createElement("ol");
+		let toolSectionContentDMGOptionsContentTeam = document.createElement("ol");
 
-		var toolSectionContentDMGOptionsStats = document.createElement("div");
-		var toolSectionContentDMGOptionsStatsContent = document.createElement("ol");
-
-
-		var toolSectionContentDMGField = document.createElement("div");
-		var toolSectionContentDMGContent = document.createElement("div");
-		var toolSectionContentDMGResult = document.createElement("div");
-		var toolSectionContentDMGResultContent = document.createElement("div");
-		var toolSectionContentDMGResultContentWrap = document.createElement("span");
-		var toolSectionContentDMGResultContentObject = document.createElement("figure");
-		var toolSectionContentDMGResultContentUser = document.createElement("span");
-		var toolSectionContentDMGResultContentTarget = document.createElement("span");
+		let toolSectionContentDMGOptionsStats = document.createElement("div");
+		let toolSectionContentDMGOptionsStatsContent = document.createElement("ol");
 
 
-		var toolSectionContentDMGResultParty = document.createElement("span");
-
-		var toolSectionContentDMGMenu = document.createElement("div");
-
-		var toolSectionContentDMGMenuRoll = document.createElement("div");
-		var toolSectionContentDMGMenuMove = document.createElement("div");
-		var toolSectionContentDMGMenuSpecific = document.createElement("div");
-
-		var toolSectionContentDMGMenuSpecificTop = document.createElement("span");
-		var toolSectionContentDMGMenuSpecificBottom = document.createElement("span");
-
-		var toolSectionContentDMGMenuMoveTop = document.createElement("span");
-		var toolSectionContentDMGMenuMoveBottom = document.createElement("span");
-
-		var toolSectionContentDMGMenuMoveSelect = document.createElement("select");
-		var toolSectionContentDMGMenuSpecificTopInput = document.createElement("input");
-		var toolSectionContentDMGMenuSpecificTopSelect = document.createElement("select");
-
-		var toolSectionContentDMGMenuMoveBottomDamage = document.createElement("span");
-		var toolSectionContentDMGMenuMoveBottomDamageTitle = document.createElement("h6");
-		var toolSectionContentDMGMenuMoveBottomDamageText = document.createElement("small");
-		var toolSectionContentDMGMenuMoveBottomAccuracy = document.createElement("span");
-		var toolSectionContentDMGMenuMoveBottomAccuracyTitle = document.createElement("h6");
-		var toolSectionContentDMGMenuMoveBottomAccuracyText = document.createElement("small");
-		var toolSectionContentDMGMenuMoveBottomCritical = document.createElement("span");
-		var toolSectionContentDMGMenuMoveBottomCriticalTitle = document.createElement("h6");
-		var toolSectionContentDMGMenuMoveBottomCriticalText = document.createElement("small");
-
-		var toolSectionContentDMGMenuMoveBottomTypeCategory = document.createElement("span");
-
-		var toolSectionContentDMGMenuMoveBottomType = document.createElement("span");
-		var toolSectionContentDMGMenuMoveBottomTypeImg = document.createElement("img");
-		var toolSectionContentDMGMenuMoveBottomTypeText = document.createElement("small");
-
-		var toolSectionContentDMGMenuMoveBottomCategory = document.createElement("span");
-		var toolSectionContentDMGMenuMoveBottomCategoryImg = document.createElement("img");
-		var toolSectionContentDMGMenuMoveBottomCategoryText = document.createElement("small");
+		let toolSectionContentDMGField = document.createElement("div");
+		let toolSectionContentDMGContent = document.createElement("div");
+		let toolSectionContentDMGResult = document.createElement("div");
+		let toolSectionContentDMGResultContent = document.createElement("div");
+		let toolSectionContentDMGResultContentWrap = document.createElement("span");
+		let toolSectionContentDMGResultContentObject = document.createElement("figure");
+		let toolSectionContentDMGResultContentUser = document.createElement("span");
+		let toolSectionContentDMGResultContentTarget = document.createElement("span");
 
 
-		var toolSectionContentDMGMenuRollTop = document.createElement("span");
-		var toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("span");
-		var toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("span");
-		var toolSectionContentDMGMenuRollRangeTextBottomLeft = document.createElement("small");
-		var toolSectionContentDMGMenuRollRangeTextBottomCenter = document.createElement("small");
-		var toolSectionContentDMGMenuRollRangeTextBottomRight = document.createElement("small");
-		var toolSectionContentDMGMenuRollRange = document.createElement("input");
+		let toolSectionContentDMGResultParty = document.createElement("span");
+
+		let toolSectionContentDMGMenu = document.createElement("div");
+
+		let toolSectionContentDMGMenuRoll = document.createElement("div");
+		let toolSectionContentDMGMenuMove = document.createElement("div");
+		let toolSectionContentDMGMenuSpecific = document.createElement("div");
+
+		let toolSectionContentDMGMenuSpecificTop = document.createElement("span");
+		let toolSectionContentDMGMenuSpecificBottom = document.createElement("span");
+
+		let toolSectionContentDMGMenuMoveTop = document.createElement("span");
+		let toolSectionContentDMGMenuMoveBottom = document.createElement("span");
+
+		let toolSectionContentDMGMenuMoveSelect = document.createElement("select");
+		let toolSectionContentDMGMenuSpecificTopInput = document.createElement("input");
+		let toolSectionContentDMGMenuSpecificTopSelect = document.createElement("select");
+
+		let toolSectionContentDMGMenuMoveBottomDamage = document.createElement("span");
+		let toolSectionContentDMGMenuMoveBottomDamageTitle = document.createElement("h6");
+		let toolSectionContentDMGMenuMoveBottomDamageText = document.createElement("small");
+		let toolSectionContentDMGMenuMoveBottomAccuracy = document.createElement("span");
+		let toolSectionContentDMGMenuMoveBottomAccuracyTitle = document.createElement("h6");
+		let toolSectionContentDMGMenuMoveBottomAccuracyText = document.createElement("small");
+		let toolSectionContentDMGMenuMoveBottomCritical = document.createElement("span");
+		let toolSectionContentDMGMenuMoveBottomCriticalTitle = document.createElement("h6");
+		let toolSectionContentDMGMenuMoveBottomCriticalText = document.createElement("small");
+
+		let toolSectionContentDMGMenuMoveBottomTypeCategory = document.createElement("span");
+
+		let toolSectionContentDMGMenuMoveBottomType = document.createElement("span");
+		let toolSectionContentDMGMenuMoveBottomTypeImg = document.createElement("img");
+		let toolSectionContentDMGMenuMoveBottomTypeText = document.createElement("small");
+
+		let toolSectionContentDMGMenuMoveBottomCategory = document.createElement("span");
+		let toolSectionContentDMGMenuMoveBottomCategoryImg = document.createElement("img");
+		let toolSectionContentDMGMenuMoveBottomCategoryText = document.createElement("small");
+
+
+		let toolSectionContentDMGMenuRollTop = document.createElement("span");
+		let toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("span");
+		let toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("span");
+		let toolSectionContentDMGMenuRollRangeTextBottomLeft = document.createElement("small");
+		let toolSectionContentDMGMenuRollRangeTextBottomCenter = document.createElement("small");
+		let toolSectionContentDMGMenuRollRangeTextBottomRight = document.createElement("small");
+		let toolSectionContentDMGMenuRollRange = document.createElement("input");
 		
-		var toolSectionContentDMGMenuRollBottom = document.createElement("span");
-		var toolSectionContentDMGMenuRollCritical = document.createElement("label");
-		var toolSectionContentDMGMenuRollCriticalText = document.createElement("h6");
-		var toolSectionContentDMGMenuRollCriticalInput = document.createElement("input");
+		let toolSectionContentDMGMenuRollBottom = document.createElement("span");
+		let toolSectionContentDMGMenuRollCritical = document.createElement("label");
+		let toolSectionContentDMGMenuRollCriticalText = document.createElement("h6");
+		let toolSectionContentDMGMenuRollCriticalInput = document.createElement("input");
 
 
 		toolSectionContentDMGOptionsTop.setAttribute("name","header");
@@ -736,24 +736,24 @@ var createTool = function() {
 
 		toolSectionContentDMGMenuRollCriticalInput.addEventListener("change",DMGCalcStart);
 
-		var toolSectionContentDMGImport = document.createElement("figure");
-		var toolSectionContentDMGImportText = document.createElement("h5");
+		let toolSectionContentDMGImport = document.createElement("figure");
+		let toolSectionContentDMGImportText = document.createElement("h5");
 		toolSectionContentDMGImport.setAttribute("name","import");
 		toolSectionContentDMGImportText.innerText = "⮟";
 		toolSectionContentDMGResult.appendChild(toolSectionContentDMGImport);
 		toolSectionContentDMGImport.appendChild(toolSectionContentDMGImportText);
-		var toolSectionContentDMGImportWrapTop = document.createElement("div");
-		var toolSectionContentDMGImportWrap = document.createElement("span");
+		let toolSectionContentDMGImportWrapTop = document.createElement("div");
+		let toolSectionContentDMGImportWrap = document.createElement("span");
 		toolSectionContentDMGImport.appendChild(toolSectionContentDMGImportWrapTop);
 		toolSectionContentDMGImportWrapTop.appendChild(toolSectionContentDMGImportWrap);
 
 		toolSectionContentDMGImport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
 
-		var impopts = ["Import Pokémon","Copy Data Strings"];
-		for (var r = 0; r < impopts.length; r++) {
-			var toolSectionContentDMGImportWrapSpan = document.createElement("span");
-			var toolSectionContentDMGImportWrapTrigger = document.createElement("b");
-			var toolSectionContentDMGImportWrapText = document.createElement("small");
+		let impopts = ["Import Pokémon","Copy Data Strings"];
+		for (let r = 0; r < impopts.length; r++) {
+			let toolSectionContentDMGImportWrapSpan = document.createElement("span");
+			let toolSectionContentDMGImportWrapTrigger = document.createElement("b");
+			let toolSectionContentDMGImportWrapText = document.createElement("small");
 			toolSectionContentDMGImportWrapText.innerText = impopts[r];
 			toolSectionContentDMGImportWrapTrigger.setAttribute("type","invert");
 			toolSectionContentDMGImportWrapSpan.setAttribute("name",impopts[r])
@@ -779,15 +779,15 @@ var createTool = function() {
 				DMGSetDataString(divBases);
 			}
 			if (val == "Copy Data Strings") {
-				var res = [];
-				for(var t = 0; t < divBases.length; t++) {
-					var ds = divBases[t].getAttribute("data-string"); 
+				let res = [];
+				for(let t = 0; t < divBases.length; t++) {
+					let ds = divBases[t].getAttribute("data-string"); 
 					if (ds != undefined && ds != "") {
 						res.push(ds)
 					}
 				}
 				
-				var resStr = res.join("\n");
+				let resStr = res.join("\n");
 
 				if (res.length > 0 && resStr.includes("pok:") && !resStr.includes("pok:|") && !resStr.includes("pok:\n")) {
 					navigator.clipboard.writeText(resStr);
@@ -796,28 +796,28 @@ var createTool = function() {
 			}
 		}
 
-		var toolSectionContentDMGReset = document.createElement("figure");
-		var toolSectionContentDMGResetText = document.createElement("h5");
+		let toolSectionContentDMGReset = document.createElement("figure");
+		let toolSectionContentDMGResetText = document.createElement("h5");
 		toolSectionContentDMGReset.setAttribute("type","scale");
 		toolSectionContentDMGReset.setAttribute("name","reset");
 		toolSectionContentDMGResetText.innerText = "❌";
 		toolSectionContentDMGResult.appendChild(toolSectionContentDMGReset);
 		toolSectionContentDMGReset.appendChild(toolSectionContentDMGResetText);
-		toolSectionContentDMGReset.addEventListener("click",function(){var x = findUpTag(this,"DIV"); var z = x.querySelectorAll(":scope div[data-string]"); var lock = confirm("The Pokémon's data will not be saved.\nDo you want to continue?"); if (lock) {for(var p = 0; p < z.length; p++) {z[p].setAttribute("data-string","");var tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z[p].parentElement.getAttribute("name")+"'] ul[name='"+z[p].getAttribute("name")+"']");DMGClearData(tar);}}})
+		toolSectionContentDMGReset.addEventListener("click",function(){let x = findUpTag(this,"DIV"); let z = x.querySelectorAll(":scope div[data-string]"); let lock = confirm("The Pokémon's data will not be saved.\nDo you want to continue?"); if (lock) {for(let p = 0; p < z.length; p++) {z[p].setAttribute("data-string","");let tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z[p].parentElement.getAttribute("name")+"'] ul[name='"+z[p].getAttribute("name")+"']");DMGClearData(tar);}}})
 
 
 
 
-		var tempMoves = [];
+		let tempMoves = [];
 
-		for(var m = 0; m < finaldata["Moves"]["Reference"].length; m++) {
-			if(finaldata["Moves"]["Reference"][m][JSONPath_MoveReference] == "true") {
+		for(let m = 0; m < finaldata["Moves"]["Reference"].length; m++) {
+			if(finaldata["Moves"]["Reference"][m][DATA_Move_Reference["Reference"]] == "true") {
 				if (finaldata["Moves"]["Group"][m]["Group"] != "Z-Move" && finaldata["Moves"]["Group"][m]["Group"] != "Max Move" && finaldata["Moves"]["Group"][m]["Group"] != "G-Max Move") {
-					tempMoves.push(finaldata["Moves"]["Reference"][m]["Name_"+JSONPath_MoveName])
+					tempMoves.push(finaldata["Moves"]["Reference"][m][DATA_Move_Reference["Name"]])
 				}
 			}
 		}
-		for(var m = 0; m < finaldata["Moves"]["Additional"].length; m++) {
+		for(let m = 0; m < finaldata["Moves"]["Additional"].length; m++) {
 			if (finaldata["Moves"]["Additional"][m]["Additional"] == "Counterattack") {
 				tempMoves = tempMoves.filter(function(v) {return v != finaldata["Moves"]["Additional"][m]["Move"]})
 			}
@@ -825,11 +825,11 @@ var createTool = function() {
 
 		tempMoves.sort();
 
-		for(var m = 0; m < tempMoves.length; m++) {
-			let moveCategory = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,tempMoves[m]);
+		for(let m = 0; m < tempMoves.length; m++) {
+			let moveCategory = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],tempMoves[m]);
 			moveCategory = undwsDel(moveCategory,"")
 			if (moveCategory != undefined && moveCategory != "Status") {
-				var toolSectionContentDMGMenuMoveTopOption = document.createElement("option");
+				let toolSectionContentDMGMenuMoveTopOption = document.createElement("option");
 				toolSectionContentDMGMenuMoveTopOption.setAttribute("value",tempMoves[m]);
 				toolSectionContentDMGMenuMoveTopOption.innerText = tempMoves[m];
 				toolSectionContentDMGMenuMoveSelect.appendChild(toolSectionContentDMGMenuMoveTopOption);
@@ -838,24 +838,24 @@ var createTool = function() {
 				movd = undDel(movd,"");
 				toolSectionContentDMGMenuMoveTopOption.title = movd;
 
-				toolSectionContentDMGMenuMoveTopOption.style.background = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempMoves[m])+")";
+				toolSectionContentDMGMenuMoveTopOption.style.background = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempMoves[m])+")";
 			}
 		}
 
 		if (toolSectionContentDMGMenuMoveSelect.querySelector(":scope option[value='Pound']") != undefined) {
 			toolSectionContentDMGMenuMoveSelect.value = "Pound";
-			toolSectionContentDMGMenuMoveSelect.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value)+")";
-			toolSectionContentDMGMenuMoveBottomTypeImg.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value)+".png";
-			toolSectionContentDMGMenuMoveBottomTypeText.innerText = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,toolSectionContentDMGMenuMoveSelect.value);
-			toolSectionContentDMGMenuMoveBottomCategoryImg.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,toolSectionContentDMGMenuMoveSelect.value)+".png";
-			toolSectionContentDMGMenuMoveBottomCategoryText.innerText = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,toolSectionContentDMGMenuMoveSelect.value);
+			toolSectionContentDMGMenuMoveSelect.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuMoveSelect.value)+")";
+			toolSectionContentDMGMenuMoveBottomTypeImg.src = getMedia([returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuMoveSelect.value)],[PATH_Type_Icon])[0]
+			toolSectionContentDMGMenuMoveBottomTypeText.innerText = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuMoveSelect.value);
+			toolSectionContentDMGMenuMoveBottomCategoryImg.src = getMedia([returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuMoveSelect.value)],[PATH_Type_Icon])[0]
+			toolSectionContentDMGMenuMoveBottomCategoryText.innerText = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuMoveSelect.value);
 		}
 	
 		toolSectionContentDMGMenuSpecificTopInput.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuSpecificTopSelect.addEventListener("change",DMGCalcStart);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGSetInfo);
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",function(){
-			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;this.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value)+")";
+			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;this.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],this.value)+")";
 		});
 		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGCalcStart);
 
@@ -867,16 +867,16 @@ var createTool = function() {
 
 
 
-		for(var q = 0; q < battleVariation.length; q++) {
+		for(let q = 0; q < battleVariation.length; q++) {
 			if (getApplicable(battleVariation[q]["Game"])) {
-				var toolSectionContentDMGOptionsBattlesOption = document.createElement("option");
+				let toolSectionContentDMGOptionsBattlesOption = document.createElement("option");
 				toolSectionContentDMGOptionsBattlesOption.innerText = battleVariation[q]["Name"];
 				toolSectionContentDMGOptionsBattlesOption.value = battleVariation[q]["Name"];
 				toolSectionContentDMGOptionsBattlesOption.setAttribute("name",q);
 				toolSectionContentDMGOptionsBattlesSelect.appendChild(toolSectionContentDMGOptionsBattlesOption)
 
-				var keys = Object.keys(battleVariation[q])
-				for(var r = 0; r < keys.length; r++) {
+				let keys = Object.keys(battleVariation[q])
+				for(let r = 0; r < keys.length; r++) {
 					if (keys[r] != "Name" && keys[r] != "Game") {
 						toolSectionContentDMGOptionsBattlesOption.setAttribute(keys[r],battleVariation[q][keys[r]])
 					}
@@ -889,7 +889,7 @@ var createTool = function() {
 		toolSectionContentDMGOptionsBattlesSelect.setAttribute("name",0)
 
 
-		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function(){const preval = this.getAttribute("name");let x = this.value;let el = this.querySelector(":scope option[value='"+x+"']");let keys = el.getAttributeNames();for(var q = 0; q < keys.length; q++) {let val1 = keys[q];let val2 = el.getAttribute(keys[q]);this.setAttribute(val1,val2);}buildDMG(preval)})
+		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function(){const preval = this.getAttribute("name");let x = this.value;let el = this.querySelector(":scope option[value='"+x+"']");let keys = el.getAttributeNames();for(let q = 0; q < keys.length; q++) {let val1 = keys[q];let val2 = el.getAttribute(keys[q]);this.setAttribute(val1,val2);}buildDMG(preval)})
 		toolSectionContentDMGOptionsBattlesSelect.addEventListener("change",function() {document.querySelector("#contain div#tool div#dmg > div").setAttribute("data-battle",this.value)})
 		
 		
@@ -923,13 +923,13 @@ var createTool = function() {
 	createDamageCalc();
 
 
-	var toolOptionsTitle = ["Damage Calculator (Development)","Type Advantage","Timers","Random Number Generator"];
+	let toolOptionsTitle = ["Damage Calculator (Development)","Type Advantage","Timers","Random Number Generator"];
 
 	// Counter, Damage Calculator, Catch Rate Calculator, Shiny Odds Calculator, Item/Move/Type/Ability/Location Checklist
 
-	for(var q = 0; q < toolOptionsTitle.length; q++) {
-		var toolSectionListOptionsInput = document.createElement("input");
-		var toolSectionListOptionsLabel = document.createElement("label");
+	for(let q = 0; q < toolOptionsTitle.length; q++) {
+		let toolSectionListOptionsInput = document.createElement("input");
+		let toolSectionListOptionsLabel = document.createElement("label");
 		toolSectionListOptionsInput.setAttribute("type","radio");
 		toolSectionListOptionsInput.setAttribute("name","tool-options");
 		toolSectionListOptionsInput.setAttribute("id","tool-options-" + q);
@@ -944,12 +944,12 @@ var createTool = function() {
 
 		function toolOptionsSelector() {
 			toolSectionHeaderTitleText.innerText = this.value;
-			var toolContents = document.querySelectorAll("#tool section[name='content'] > div[name]");
-			var toolContent = document.querySelectorAll("#tool section[name='content'] > div[name='"+this.value+"']");
-			for(var q = 0; q < toolContents.length; q++) {
+			let toolContents = document.querySelectorAll("#tool section[name='content'] > div[name]");
+			let toolContent = document.querySelectorAll("#tool section[name='content'] > div[name='"+this.value+"']");
+			for(let q = 0; q < toolContents.length; q++) {
 				toolContents[q].style.display = "none";
 			}
-			for(var q = 0; q < toolContent.length; q++) {
+			for(let q = 0; q < toolContent.length; q++) {
 				toolContent[q].style.display = "block";
 			}
 		}
@@ -963,25 +963,25 @@ var createTool = function() {
 
 function countdown() {
 
-	var base = document.querySelector('#contain div#tool > section[name="content"] > div#timer > *[name="countdown"]')
-	var audiopath = "./media/Sounds/FinalDex/Complete.wav";
+	let base = document.querySelector('#contain div#tool > section[name="content"] > div#timer > *[name="countdown"]')
+	let audiopath = "./media/Sounds/FinalDex/Complete.wav";
 
-	var countdownInput = base.querySelectorAll(":scope input");
-	var countdownPlayButton = base.querySelector(":scope b[title='Play']");
-	var countdownPauseButton = base.querySelector(":scope b[title='Pause']");
-	var countdownResetButton = base.querySelector(":scope *[name='reset']");
-	var countdownLapsButton = base.querySelector(":scope *[name='lap']");
+	let countdownInput = base.querySelectorAll(":scope input");
+	let countdownPlayButton = base.querySelector(":scope b[title='Play']");
+	let countdownPauseButton = base.querySelector(":scope b[title='Pause']");
+	let countdownResetButton = base.querySelector(":scope *[name='reset']");
+	let countdownLapsButton = base.querySelector(":scope *[name='lap']");
 
-	var countdownTimeContainer = base.querySelector(':scope > div > div > data > *');
-	var countdownInputContainer = base.querySelector(':scope > div > div > span');
-	var countdownSetContainer = base.querySelector(':scope > div > div');
+	let countdownTimeContainer = base.querySelector(':scope > div > div > data > *');
+	let countdownInputContainer = base.querySelector(':scope > div > div > span');
+	let countdownSetContainer = base.querySelector(':scope > div > div');
 
-	var countdownHoursInput = base.querySelector(":scope input[title='Hours']");
-	var countdownMinutesInput = base.querySelector(":scope input[title='Minutes']");
-	var countdownSecondsInput = base.querySelector(":scope input[title='Seconds']");
-	var countdownMillisecondsInput = base.querySelector(":scope input[title='Milliseconds']");
+	let countdownHoursInput = base.querySelector(":scope input[title='Hours']");
+	let countdownMinutesInput = base.querySelector(":scope input[title='Minutes']");
+	let countdownSecondsInput = base.querySelector(":scope input[title='Seconds']");
+	let countdownMillisecondsInput = base.querySelector(":scope input[title='Milliseconds']");
 
-	var countdownList = base.querySelector(":scope ul");
+	let countdownList = base.querySelector(":scope ul");
 
 
 	/*
@@ -989,51 +989,51 @@ function countdown() {
 	*/
 	if(!Array.prototype.forEach) {
 		Array.prototype.forEach = function(countdownCallback) {
-			for(var i = 0; i < this.length; i++) {
+			for(let i = 0; i < this.length; i++) {
 				countdownCallback(this[i]);
 			}
 		};
 	}
 	if(!Array.prototype.map) {
 		Array.prototype.map = function(countdownCallback) {
-			var countdownItems = [];
-			for(var i = 0; i < this.length; i++) {
+			let countdownItems = [];
+			for(let i = 0; i < this.length; i++) {
 				countdownItems.push(countdownCallback(this[i]));
 			}
 			return countdownItems;
 		};
 	}
-	var countdownSecondInMilliseconds = 1000;
-	var countdownMinuteInMilliseconds = 60 * countdownSecondInMilliseconds;
-	var countdownHourInMilliseconds = 60 * countdownMinuteInMilliseconds;
-	var countdownFloor = Math.floor;
-	var countdownExtractMilliseconds = function(countdownTimeInMilliseconds) {
+	let countdownSecondInMilliseconds = 1000;
+	let countdownMinuteInMilliseconds = 60 * countdownSecondInMilliseconds;
+	let countdownHourInMilliseconds = 60 * countdownMinuteInMilliseconds;
+	let countdownFloor = Math.floor;
+	let countdownExtractMilliseconds = function(countdownTimeInMilliseconds) {
 		return countdownTimeInMilliseconds % 1000;
 	};
-	var countdownExtractSeconds = function(countdownTimeInMilliseconds) {
+	let countdownExtractSeconds = function(countdownTimeInMilliseconds) {
 		return countdownFloor(countdownTimeInMilliseconds / countdownSecondInMilliseconds);
 	};
-	var countdownExtractMinutes = function(countdownTimeInMilliseconds) {
+	let countdownExtractMinutes = function(countdownTimeInMilliseconds) {
 		return countdownFloor(countdownTimeInMilliseconds / countdownMinuteInMilliseconds);
 	};
-	var countdownExtractHours = function(countdownTimeInMilliseconds) {
+	let countdownExtractHours = function(countdownTimeInMilliseconds) {
 		return countdownFloor(countdownTimeInMilliseconds / countdownHourInMilliseconds);
 	};
-	var countdownPad = function(countdownNumber) {
+	let countdownPad = function(countdownNumber) {
 		if(countdownNumber < 10) {
 			return "0" + countdownNumber;
 		} else {
 			return countdownNumber;
 		}
 	};
-	var countdownExtractTime = function(countdownTimeInMilliseconds) {
-		var countdownMilliseconds = countdownExtractHours(countdownTimeInMilliseconds);
+	let countdownExtractTime = function(countdownTimeInMilliseconds) {
+		let countdownHours = countdownExtractHours(countdownTimeInMilliseconds);
 		countdownTimeInMilliseconds -= countdownHours * countdownHourInMilliseconds;
-		var countdownMilliseconds = countdownExtractMinutes(countdownTimeInMilliseconds);
+		let countdownMinutes = countdownExtractMinutes(countdownTimeInMilliseconds);
 		countdownTimeInMilliseconds -= countdownMinutes * countdownMinuteInMilliseconds;
-		var countdownMilliseconds = countdownExtractSeconds(countdownTimeInMilliseconds);
+		let countdownSeconds = countdownExtractSeconds(countdownTimeInMilliseconds);
 		countdownTimeInMilliseconds -= countdownSeconds * countdownSecondInMilliseconds;
-		var countdownMilliseconds = countdownTimeInMilliseconds;
+		let countdownMilliseconds = countdownTimeInMilliseconds;
 		return {
 			countdownHours: countdownHours,
 			countdownMinutes: countdownMinutes,
@@ -1041,14 +1041,14 @@ function countdown() {
 			countdownMilliseconds: countdownMilliseconds,
 		};
 	};
-	var countdownLap = function(countdownNetTime, countdownPreviousLap) {
+	let countdownLap = function(countdownNetTime, countdownPreviousLap) {
 		this.countdownPreviousLap = countdownPreviousLap;
 		this.countdownNetTime = countdownNetTime;
 	};
 	countdownLap.prototype = {
 		countdownMilitaryTime: function(countdownTimeInMilliseconds) {
-			var countdownTimeSeparator = ":";
-			var countdownTime = countdownExtractTime(countdownTimeInMilliseconds);
+			let countdownTimeSeparator = ":";
+			let countdownTime = countdownExtractTime(countdownTimeInMilliseconds);
 			countdownTime.countdownMilliseconds = countdownTime.countdownMilliseconds / 10;
 			return ["countdownHours", "countdownMinutes", "countdownSeconds", "countdownMilliseconds", ].map(function(countdownProperty) {
 				return countdownPad(countdownTime[countdownProperty]);
@@ -1056,22 +1056,22 @@ function countdown() {
 		},
 		countdownSplitString: function() {
 			if(this.countdownPreviousLap != null) {
-				var countdownTimeDifference = this.countdownNetTime - this.countdownPreviousLap.countdownNetTime;
+				let countdownTimeDifference = this.countdownNetTime - this.countdownPreviousLap.countdownNetTime;
 				return this.countdownMilitaryTime(countdownTimeDifference);
 			} else {
 				return this.countdownMilitaryTime(this.countdownNetTime);
 			}
 		},
 	};
-	var CountDown = (window.CountDown = function(countdownOptions) {
+	let CountDown = (window.CountDown = function(countdownOptions) {
 		if(countdownOptions == null) {
 			countdownOptions = {};
 		}
-		var countdown_this = this;
-		var countdownCallbackProperties = ["countdownCallback", "countdownCallbackTarget", "countdownLapCallback", "countdownLapCallbackTarget", ];
-		var countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
+		let countdown_this = this;
+		let countdownCallbackProperties = ["countdownCallback", "countdownCallbackTarget", "countdownLapCallback", "countdownLapCallbackTarget", ];
+		let countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
 	
-		for(var i = 0; i < countdownInput.length; i++) {
+		for(let i = 0; i < countdownInput.length; i++) {
 			countdownInput[i].addEventListener("click", countdownSetTime);
 			countdownInput[i].addEventListener("click", countdownSelect);
 			countdownInput[i].addEventListener("focus", countdownSetTime);
@@ -1089,7 +1089,7 @@ function countdown() {
 			countdownMinutesInput.value = "";
 			countdownSecondsInput.value = "";
 			countdownMillisecondsInput.value = "";
-			var countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
+			let countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
 			countdownLaps = [];
 			countdownLapDidChange(null, true);
 		
@@ -1106,10 +1106,10 @@ function countdown() {
 			countdownMillisecondsInput.value = [
 				countdownPad(countdownMilliseconds / 10),
 			];
-			var a = parseInt(countdownHoursInput.value);
-			var b = parseInt(countdownMinutesInput.value);
-			var c = parseInt(countdownSecondsInput.value);
-			var d = parseInt(countdownMillisecondsInput.value);
+			let a = parseInt(countdownHoursInput.value);
+			let b = parseInt(countdownMinutesInput.value);
+			let c = parseInt(countdownSecondsInput.value);
+			let d = parseInt(countdownMillisecondsInput.value);
 			a = a || 0;
 			b = b || 0;
 			c = c || 0;
@@ -1153,39 +1153,39 @@ function countdown() {
 			}
 			if(!countdown.countdownRunning()) {
 				if(this.getAttribute("title") == "Hours") {
-					var countdownNetTime = (countdownHours = parseInt(this.value));
+					let countdownNetTime = (countdownHours = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var countdownNetTime = (countdownHours = parseInt(this.max));
+						let countdownNetTime = (countdownHours = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
 				if(this.getAttribute("title") == "Minutes") {
-					var countdownNetTime = (countdownMinutes = parseInt(this.value));
+					let countdownNetTime = (countdownMinutes = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var countdownNetTime = (countdownMinutes = parseInt(this.max));
+						let countdownNetTime = (countdownMinutes = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
 				if(this.getAttribute("title") == "Seconds") {
-					var countdownNetTime = (countdownSeconds = parseInt(this.value));
+					let countdownNetTime = (countdownSeconds = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var countdownNetTime = (countdownSeconds = parseInt(this.max));
+						let countdownNetTime = (countdownSeconds = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
 				if(this.getAttribute("title") == "Milliseconds") {
-					var countdownNetTime = (countdownMilliseconds = parseInt(this.value) * 10);
+					let countdownNetTime = (countdownMilliseconds = parseInt(this.value) * 10);
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var countdownNetTime = (countdownMilliseconds = parseInt(this.max) * 10);
+						let countdownNetTime = (countdownMilliseconds = parseInt(this.max) * 10);
 						this.value = this.max;
 					}
 				}
 			}
 
-			var hours = countdownHoursInput.value;
-			var minutes = countdownMinutesInput.value;
-			var seconds = countdownSecondsInput.value;
-			var milliseconds = countdownMillisecondsInput.value;
+			let hours = countdownHoursInput.value;
+			let minutes = countdownMinutesInput.value;
+			let seconds = countdownSecondsInput.value;
+			let milliseconds = countdownMillisecondsInput.value;
 
 			if (countdownHoursInput.value == "") {
 				hours = "00";
@@ -1201,8 +1201,8 @@ function countdown() {
 			}
 			countdownTimeContainer.innerHTML = hours+":"+minutes+":"+seconds+":"+milliseconds;
 		}
-		var countdownRunning = false;
-		var countdownLaps = [];
+		let countdownRunning = false;
+		let countdownLaps = [];
 		countdownCallbackProperties.forEach(function(countdownProperty) {
 			if(countdownOptions[countdownProperty] != null) {
 				countdown_this[countdownProperty] = countdownOptions[countdownProperty];
@@ -1235,10 +1235,10 @@ function countdown() {
 			].join(":");
 		};
 		this.countdownCallbackArgument = this.countdownMilitaryTime;
-		var countdownTimeDidChange = function() {
-			var countdownCallback = countdown_this.countdownCallback;
+		let countdownTimeDidChange = function() {
+			let countdownCallback = countdown_this.countdownCallback;
 			if(countdownCallback != null) {
-				var countdownCallbackTarget = countdown_this.countdownCallbackTarget || window;
+				let countdownCallbackTarget = countdown_this.countdownCallbackTarget || window;
 				if(typeof countdownCallback === "string") {
 					countdownCallback = countdownCallbackTarget[countdownCallback];
 				}
@@ -1247,10 +1247,10 @@ function countdown() {
 				}
 			}
 		};
-		var countdownLapDidChange = function(countdownLap, countdownIsReset) {
+		let countdownLapDidChange = function(countdownLap, countdownIsReset) {
 			if(countdown_this.countdownLapCallback != null) {
-				var countdownLapCallbackTarget = countdown_this.countdownLapCallbackTarget || window;
-				var countdownLapCallback = countdown_this.countdownLapCallback;
+				let countdownLapCallbackTarget = countdown_this.countdownLapCallbackTarget || window;
+				let countdownLapCallback = countdown_this.countdownLapCallback;
 				if(typeof countdownLapCallback === "string") {
 					countdownLapCallback = countdownLapCallbackTarget[countdownLapCallback];
 				}
@@ -1259,8 +1259,8 @@ function countdown() {
 				}
 			}
 		};
-		var countdownInitializeTimer = function(countdownTimeInMilliseconds) {
-			var countdownTime = countdownExtractTime(countdownTimeInMilliseconds);
+		let countdownInitializeTimer = function(countdownTimeInMilliseconds) {
+			let countdownTime = countdownExtractTime(countdownTimeInMilliseconds);
 			countdownHours = countdownTime.countdownHours;
 			countdownMinutes = countdownTime.countdownMinutes;
 			countdownSeconds = countdownTime.countdownSeconds;
@@ -1269,7 +1269,7 @@ function countdown() {
 			countdownTimeDidChange();
 			return countdown_this;
 		};
-		var countdownIncrementByTenMilliseconds = function() {
+		let countdownIncrementByTenMilliseconds = function() {
 			if(countdownMilliseconds === 0) {
 				countdownMilliseconds = 990;
 				if(countdownSeconds === 0) {
@@ -1289,12 +1289,12 @@ function countdown() {
 			if(countdownHours + countdownMinutes + countdownSeconds + countdownMilliseconds <= 0) {
 				countdown.stop();
 				if (audiopath != undefined && audiopath != "") {
-					var countdownCompletedAudio = new Audio(audiopath);
+					let countdownCompletedAudio = new Audio(audiopath);
 					countdownCompletedAudio.play();
 				}
 			
 	
-				var countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
+				let countdownNetTime = (countdownHours = countdownMinutes = countdownSeconds = countdownMilliseconds = 0);
 				countdownHoursInput.value = "";
 				countdownMinutesInput.value = "";
 				countdownSecondsInput.value = "";
@@ -1330,8 +1330,8 @@ function countdown() {
 		    Captures a lap
 		  */
 		this.countdownAddLap = function() {
-			var countdownPreviousLap = countdownLaps[countdownLaps.length - 1];
-			var countdownCurrentLap = new countdownLap(countdownNetTime);
+			let countdownPreviousLap = countdownLaps[countdownLaps.length - 1];
+			let countdownCurrentLap = new countdownLap(countdownNetTime);
 			countdownLaps.push(countdownCurrentLap);
 			countdownLapDidChange(countdownCurrentLap, false);
 		};
@@ -1359,7 +1359,7 @@ function countdown() {
 		}
 	});
 
-	var countdownLapCount = 0;
+	let countdownLapCount = 0;
 	window.countdownUpdateCount = function(countdownMilitaryTime) {
 		countdownTimeContainer.innerHTML = countdownMilitaryTime;
 	};
@@ -1369,28 +1369,28 @@ function countdown() {
 			countdownList.innerHTML = "";
 			countdownLapCount = 0;
 		} else {
-			var countdownli = document.createElement("li");
+			let countdownli = document.createElement("li");
 			countdownLapCount += 1;
 			countdownli.innerHTML = "<span>#" + countdownLapCount + "</span>" + countdownTimeContainer.innerHTML;
 			countdownList.appendChild(countdownli);
 		}
 	};
-	var replaceClass = function(ele, class1, class2) {
+	let replaceClass = function(ele, class1, class2) {
 		if(ele.className.indexOf(class1) > 1) {
 			ele.className = ele.className.replace(class1, class2);
 		}
 	};
-	var countdown = new CountDown({
+	let countdown = new CountDown({
 		countdownCallback: "countdownUpdateCount",
 		countdownLapCallback: "countdownUpdateLap",
 	});
 
 
-	var countdownStartStopButtonEvent = function() {
-		var a = parseInt(countdownHoursInput.value);
-		var b = parseInt(countdownMinutesInput.value);
-		var c = parseInt(countdownSecondsInput.value);
-		var d = parseInt(countdownMillisecondsInput.value);
+	let countdownStartStopButtonEvent = function() {
+		let a = parseInt(countdownHoursInput.value);
+		let b = parseInt(countdownMinutesInput.value);
+		let c = parseInt(countdownSecondsInput.value);
+		let d = parseInt(countdownMillisecondsInput.value);
 		a = a || 0;
 		b = b || 0;
 		c = c || 0;
@@ -1403,11 +1403,11 @@ function countdown() {
 			countdown.stop();
 		}
 	};
-	var countdownResetButtonEvent = function() {
+	let countdownResetButtonEvent = function() {
 		countdownTimeContainer.innerHTML = "";
 		countdown.reset();
 	};
-	var countdownLapsButtonEvent = function() {
+	let countdownLapsButtonEvent = function() {
 		if (countdownTimeContainer.innerHTML != "00:00:00:00" && countdownTimeContainer.innerHTML != "") {
 			countdown.countdownAddLap();
 		}
@@ -1426,24 +1426,24 @@ function countdown() {
 
 function stopwatch() {
 
-	var base = document.querySelector('#contain div#tool > section[name="content"] > div[name="Timers"] > *[name="stopwatch"]')
+	let base = document.querySelector('#contain div#tool > section[name="content"] > div[name="Timers"] > *[name="stopwatch"]')
 
-	var stopwatchInput = base.querySelectorAll(":scope input");
-	var stopwatchPlayButton = base.querySelector(":scope b[title='Play']");
-	var stopwatchPauseButton = base.querySelector(":scope b[title='Pause']");
-	var stopwatchResetButton = base.querySelector(":scope *[name='reset']");
-	var stopwatchLapsButton = base.querySelector(":scope *[name='lap']");
+	let stopwatchInput = base.querySelectorAll(":scope input");
+	let stopwatchPlayButton = base.querySelector(":scope b[title='Play']");
+	let stopwatchPauseButton = base.querySelector(":scope b[title='Pause']");
+	let stopwatchResetButton = base.querySelector(":scope *[name='reset']");
+	let stopwatchLapsButton = base.querySelector(":scope *[name='lap']");
 
-	var stopwatchTimeContainer = base.querySelector(':scope > div > div > data > *');
-	var stopwatchInputContainer = base.querySelector(':scope > div > div > span');
-	var stopwatchSetContainer = base.querySelector(':scope > div > div');
+	let stopwatchTimeContainer = base.querySelector(':scope > div > div > data > *');
+	let stopwatchInputContainer = base.querySelector(':scope > div > div > span');
+	let stopwatchSetContainer = base.querySelector(':scope > div > div');
 
-	var stopwatchHoursInput = base.querySelector(":scope input[title='Hours']");
-	var stopwatchMinutesInput = base.querySelector(":scope input[title='Minutes']");
-	var stopwatchSecondsInput = base.querySelector(":scope input[title='Seconds']");
-	var stopwatchMillisecondsInput = base.querySelector(":scope input[title='Milliseconds']");
+	let stopwatchHoursInput = base.querySelector(":scope input[title='Hours']");
+	let stopwatchMinutesInput = base.querySelector(":scope input[title='Minutes']");
+	let stopwatchSecondsInput = base.querySelector(":scope input[title='Seconds']");
+	let stopwatchMillisecondsInput = base.querySelector(":scope input[title='Milliseconds']");
 
-	var stopwatchList = base.querySelector(":scope ul");
+	let stopwatchList = base.querySelector(":scope ul");
 
 
 
@@ -1453,51 +1453,51 @@ function stopwatch() {
 	  */
 	if(!Array.prototype.forEach) {
 		Array.prototype.forEach = function(stopwatchCallback) {
-			for(var i = 0; i < this.length; i++) {
+			for(let i = 0; i < this.length; i++) {
 				stopwatchCallback(this[i]);
 			}
 		};
 	}
 	if(!Array.prototype.map) {
 		Array.prototype.map = function(stopwatchCallback) {
-			var stopwatchItems = [];
-			for(var i = 0; i < this.length; i++) {
+			let stopwatchItems = [];
+			for(let i = 0; i < this.length; i++) {
 				stopwatchItems.push(stopwatchCallback(this[i]));
 			}
 			return stopwatchItems;
 		};
 	}
-	var stopwatchSecondInMilliseconds = 1000;
-	var stopwatchMinuteInMilliseconds = 60 * stopwatchSecondInMilliseconds;
-	var stopwatchHourInMilliseconds = 60 * stopwatchMinuteInMilliseconds;
-	var stopwatchFloor = Math.floor;
-	var stopwatchExtractMilliseconds = function(stopwatchTimeInMilliseconds) {
+	let stopwatchSecondInMilliseconds = 1000;
+	let stopwatchMinuteInMilliseconds = 60 * stopwatchSecondInMilliseconds;
+	let stopwatchHourInMilliseconds = 60 * stopwatchMinuteInMilliseconds;
+	let stopwatchFloor = Math.floor;
+	let stopwatchExtractMilliseconds = function(stopwatchTimeInMilliseconds) {
 		return stopwatchTimeInMilliseconds % 1000;
 	};
-	var stopwatchExtractSeconds = function(stopwatchTimeInMilliseconds) {
+	let stopwatchExtractSeconds = function(stopwatchTimeInMilliseconds) {
 		return stopwatchFloor(stopwatchTimeInMilliseconds / stopwatchSecondInMilliseconds);
 	};
-	var stopwatchExtractMinutes = function(stopwatchTimeInMilliseconds) {
+	let stopwatchExtractMinutes = function(stopwatchTimeInMilliseconds) {
 		return stopwatchFloor(stopwatchTimeInMilliseconds / stopwatchMinuteInMilliseconds);
 	};
-	var stopwatchExtractHours = function(stopwatchTimeInMilliseconds) {
+	let stopwatchExtractHours = function(stopwatchTimeInMilliseconds) {
 		return stopwatchFloor(stopwatchTimeInMilliseconds / stopwatchHourInMilliseconds);
 	};
-	var stopwatchPad = function(stopwatchNumber) {
+	let stopwatchPad = function(stopwatchNumber) {
 		if(stopwatchNumber < 10) {
 			return "0" + stopwatchNumber;
 		} else {
 			return stopwatchNumber;
 		}
 	};
-	var stopwatchExtractTime = function(stopwatchTimeInMilliseconds) {
-		var stopwatchMilliseconds = stopwatchExtractHours(stopwatchTimeInMilliseconds);
+	let stopwatchExtractTime = function(stopwatchTimeInMilliseconds) {
+		let stopwatchHours = stopwatchExtractHours(stopwatchTimeInMilliseconds);
 		stopwatchTimeInMilliseconds -= stopwatchHours * stopwatchHourInMilliseconds;
-		var stopwatchMilliseconds = stopwatchExtractMinutes(stopwatchTimeInMilliseconds);
+		let stopwatchMinutes = stopwatchExtractMinutes(stopwatchTimeInMilliseconds);
 		stopwatchTimeInMilliseconds -= stopwatchMinutes * stopwatchMinuteInMilliseconds;
-		var stopwatchMilliseconds = stopwatchExtractSeconds(stopwatchTimeInMilliseconds);
+		let stopwatchSeconds = stopwatchExtractSeconds(stopwatchTimeInMilliseconds);
 		stopwatchTimeInMilliseconds -= stopwatchSeconds * stopwatchSecondInMilliseconds;
-		var stopwatchMilliseconds = stopwatchTimeInMilliseconds;
+		let stopwatchMilliseconds = stopwatchTimeInMilliseconds;
 		return {
 			stopwatchHours: stopwatchHours,
 			stopwatchMinutes: stopwatchMinutes,
@@ -1505,14 +1505,14 @@ function stopwatch() {
 			stopwatchMilliseconds: stopwatchMilliseconds,
 		};
 	};
-	var stopwatchLap = function(stopwatchNetTime, stopwatchPreviousLap) {
+	let stopwatchLap = function(stopwatchNetTime, stopwatchPreviousLap) {
 		this.stopwatchPreviousLap = stopwatchPreviousLap;
 		this.stopwatchNetTime = stopwatchNetTime;
 	};
 	stopwatchLap.prototype = {
 		stopwatchMilitaryTime: function(stopwatchTimeInMilliseconds) {
-			var stopwatchTimeSeparator = ":";
-			var stopwatchTime = stopwatchExtractTime(stopwatchTimeInMilliseconds);
+			let stopwatchTimeSeparator = ":";
+			let stopwatchTime = stopwatchExtractTime(stopwatchTimeInMilliseconds);
 			stopwatchTime.stopwatchMilliseconds = stopwatchTime.stopwatchMilliseconds / 10;
 			return ["stopwatchHours","stopwatchMinutes","stopwatchSeconds","stopwatchMilliseconds", ].map(function(stopwatchProperty) {
 				return stopwatchPad(stopwatchTime[stopwatchProperty]);
@@ -1520,29 +1520,29 @@ function stopwatch() {
 		},
 		stopwatchSplitString: function() {
 			if(this.stopwatchPreviousLap != null) {
-				var stopwatchTimeDifference = this.stopwatchNetTime - this.stopwatchPreviousLap.stopwatchNetTime;
+				let stopwatchTimeDifference = this.stopwatchNetTime - this.stopwatchPreviousLap.stopwatchNetTime;
 				return this.stopwatchMilitaryTime(stopwatchTimeDifference);
 			} else {
 				return this.stopwatchMilitaryTime(this.stopwatchNetTime);
 			}
 		},
 	};
-	var StopWatch = (window.StopWatch = function(stopwatchOptions) {
+	let StopWatch = (window.StopWatch = function(stopwatchOptions) {
 		if(stopwatchOptions == null) {
 			stopwatchOptions = {};
 		}
-		var stopwatch_this = this;
+		let stopwatch_this = this;
 
 
 
 
 
-		var stopwatchCallbackProperties = ["stopwatchCallback","stopwatchCallbackTarget","stopwatchLapCallback","stopwatchLapCallbackTarget", ];
-		var stopwatchNetTime = (stopwatchHours = stopwatchMinutes = stopwatchSeconds = stopwatchMilliseconds = 0);
+		let stopwatchCallbackProperties = ["stopwatchCallback","stopwatchCallbackTarget","stopwatchLapCallback","stopwatchLapCallbackTarget", ];
+		let stopwatchNetTime = (stopwatchHours = stopwatchMinutes = stopwatchSeconds = stopwatchMilliseconds = 0);
 
 
 
-		for(var i = 0; i < stopwatchInput.length; i++) {
+		for(let i = 0; i < stopwatchInput.length; i++) {
 			stopwatchInput[i].addEventListener("click", stopwatchSetTime);
 			stopwatchInput[i].addEventListener("click", stopwatchSelect);
 			stopwatchInput[i].addEventListener("focus", stopwatchSetTime);
@@ -1561,7 +1561,7 @@ function stopwatch() {
 			stopwatchMinutesInput.value = "";
 			stopwatchSecondsInput.value = "";
 			stopwatchMillisecondsInput.value = "";
-			var stopwatchNetTime = (stopwatchHours = stopwatchMinutes = stopwatchSeconds = stopwatchMilliseconds = 0);
+			let stopwatchNetTime = (stopwatchHours = stopwatchMinutes = stopwatchSeconds = stopwatchMilliseconds = 0);
 			stopwatchLaps = [];
 			stopwatchLapDidChange(null, true);
 
@@ -1595,39 +1595,39 @@ function stopwatch() {
 			}
 			if(!stopwatch.stopwatchRunning()) {
 				if(this.getAttribute("title") == "Hours") {
-					var stopwatchNetTime = (stopwatchHours = parseInt(this.value));
+					let stopwatchNetTime = (stopwatchHours = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var stopwatchNetTime = (stopwatchHours = parseInt(this.max));
+						let stopwatchNetTime = (stopwatchHours = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
 				if(this.getAttribute("title") == "Minutes") {
-					var stopwatchNetTime = (stopwatchMinutes = parseInt(this.value));
+					let stopwatchNetTime = (stopwatchMinutes = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var stopwatchNetTime = (stopwatchMinutes = parseInt(this.max));
+						let stopwatchNetTime = (stopwatchMinutes = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
 				if(this.getAttribute("title") == "Seconds") {
-					var stopwatchNetTime = (stopwatchSeconds = parseInt(this.value));
+					let stopwatchNetTime = (stopwatchSeconds = parseInt(this.value));
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var stopwatchNetTime = (stopwatchSeconds = parseInt(this.max));
+						let stopwatchNetTime = (stopwatchSeconds = parseInt(this.max));
 						this.value = this.max;
 					}
 				}
 				if(this.getAttribute("title") == "Milliseconds") {
-					var stopwatchNetTime = (stopwatchMilliseconds = parseInt(this.value) * 10);
+					let stopwatchNetTime = (stopwatchMilliseconds = parseInt(this.value) * 10);
 					if(parseInt(this.value) > parseInt(this.max)) {
-						var stopwatchNetTime = (stopwatchMilliseconds = parseInt(this.max) * 10);
+						let stopwatchNetTime = (stopwatchMilliseconds = parseInt(this.max) * 10);
 						this.value = this.max;
 					}
 				}
 			}
 
-			var hours = stopwatchHoursInput.value;
-			var minutes = stopwatchMinutesInput.value;
-			var second = stopwatchSecondsInput.value;
-			var millisecond = stopwatchMillisecondsInput.value;
+			let hours = stopwatchHoursInput.value;
+			let minutes = stopwatchMinutesInput.value;
+			let second = stopwatchSecondsInput.value;
+			let millisecond = stopwatchMillisecondsInput.value;
 
 			if (hours == "") {
 				hours = "00";
@@ -1643,8 +1643,8 @@ function stopwatch() {
 			}
 			stopwatchTimeContainer.innerHTML = hours+":"+minutes+":"+second+":"+millisecond;
 		}
-		var stopwatchRunning = false;
-		var stopwatchLaps = [];
+		let stopwatchRunning = false;
+		let stopwatchLaps = [];
 		stopwatchCallbackProperties.forEach(function(stopwatchProperty) {
 			if(stopwatchOptions[stopwatchProperty] != null) {
 				stopwatch_this[stopwatchProperty] = stopwatchOptions[stopwatchProperty];
@@ -1677,10 +1677,10 @@ function stopwatch() {
 			].join(":");
 		};
 		this.stopwatchCallbackArgument = this.stopwatchMilitaryTime;
-		var stopwatchTimeDidChange = function() {
-			var stopwatchCallback = stopwatch_this.stopwatchCallback;
+		let stopwatchTimeDidChange = function() {
+			let stopwatchCallback = stopwatch_this.stopwatchCallback;
 			if(stopwatchCallback != null) {
-				var stopwatchCallbackTarget = stopwatch_this.stopwatchCallbackTarget || window;
+				let stopwatchCallbackTarget = stopwatch_this.stopwatchCallbackTarget || window;
 				if(typeof stopwatchCallback === "string") {
 					stopwatchCallback = stopwatchCallbackTarget[stopwatchCallback];
 				}
@@ -1689,10 +1689,10 @@ function stopwatch() {
 				}
 			}
 		};
-		var stopwatchLapDidChange = function(stopwatchLap, stopwatchIsReset) {
+		let stopwatchLapDidChange = function(stopwatchLap, stopwatchIsReset) {
 			if(stopwatch_this.stopwatchLapCallback != null) {
-				var stopwatchLapCallbackTarget = stopwatch_this.stopwatchLapCallbackTarget || window;
-				var stopwatchLapCallback = stopwatch_this.stopwatchLapCallback;
+				let stopwatchLapCallbackTarget = stopwatch_this.stopwatchLapCallbackTarget || window;
+				let stopwatchLapCallback = stopwatch_this.stopwatchLapCallback;
 				if(typeof stopwatchLapCallback === "string") {
 					stopwatchLapCallback = stopwatchLapCallbackTarget[stopwatchLapCallback];
 				}
@@ -1701,8 +1701,8 @@ function stopwatch() {
 				}
 			}
 		};
-		var stopwatchInitializeTimer = function(stopwatchTimeInMilliseconds) {
-			var stopwatchTime = stopwatchExtractTime(stopwatchTimeInMilliseconds);
+		let stopwatchInitializeTimer = function(stopwatchTimeInMilliseconds) {
+			let stopwatchTime = stopwatchExtractTime(stopwatchTimeInMilliseconds);
 			stopwatchHours = stopwatchTime.stopwatchHours;
 			stopwatchMinutes = stopwatchTime.stopwatchMinutes;
 			stopwatchSeconds = stopwatchTime.stopwatchSeconds;
@@ -1711,7 +1711,7 @@ function stopwatch() {
 			stopwatchTimeDidChange();
 			return stopwatch_this;
 		};
-		var stopwatchIncrementByTenMilliseconds = function() {
+		let stopwatchIncrementByTenMilliseconds = function() {
 			if(stopwatchMilliseconds === 990) {
 				stopwatchMilliseconds = 0;
 				if(stopwatchSeconds === 59) {
@@ -1754,8 +1754,8 @@ function stopwatch() {
 		    Captures a lap
 		  */
 		this.stopwatchAddLap = function() {
-			var stopwatchPreviousLap = stopwatchLaps[stopwatchLaps.length - 1];
-			var stopwatchCurrentLap = new stopwatchLap(stopwatchNetTime);
+			let stopwatchPreviousLap = stopwatchLaps[stopwatchLaps.length - 1];
+			let stopwatchCurrentLap = new stopwatchLap(stopwatchNetTime);
 			stopwatchLaps.push(stopwatchCurrentLap);
 			stopwatchLapDidChange(stopwatchCurrentLap, false);
 		};
@@ -1784,7 +1784,7 @@ function stopwatch() {
 	});
 
 
-	var stopwatchLapCount = 0;
+	let stopwatchLapCount = 0;
 	window.stopwatchUpdateWatch = function(stopwatchMilitaryTime) {
 		stopwatchTimeContainer.innerHTML = stopwatchMilitaryTime;
 	};
@@ -1794,24 +1794,24 @@ function stopwatch() {
 			stopwatchList.innerHTML = "";
 			stopwatchLapCount = 0;
 		} else {
-			var stopwatchli = document.createElement("li");
+			let stopwatchli = document.createElement("li");
 			stopwatchLapCount += 1;
 			stopwatchli.innerHTML = "<span>#" + stopwatchLapCount + "</span>" + stopwatchTimeContainer.innerHTML;
 			stopwatchList.appendChild(stopwatchli);
 		}
 	};
-	var replaceClass = function(ele, class1, class2) {
+	let replaceClass = function(ele, class1, class2) {
 		if(ele.className.indexOf(class1) > 1) {
 			ele.className = ele.className.replace(class1, class2);
 		}
 	};
-	var stopwatch = new StopWatch({
+	let stopwatch = new StopWatch({
 		stopwatchCallback: "stopwatchUpdateWatch",
 		stopwatchLapCallback: "stopwatchUpdateLap",
 	});
 
 
-	var stopwatchStartStopButtonEvent = function() {
+	let stopwatchStartStopButtonEvent = function() {
 		if(!stopwatch.stopwatchRunning()) {
 			base.setAttribute("state","play");
 			stopwatch.start();
@@ -1820,11 +1820,11 @@ function stopwatch() {
 			stopwatch.stop();
 		}
 	};
-	var stopwatchResetButtonEvent = function() {
+	let stopwatchResetButtonEvent = function() {
 		stopwatchTimeContainer.innerHTML = "";
 		stopwatch.reset();
 	};
-	var stopwatchLapsButtonEvent = function() {
+	let stopwatchLapsButtonEvent = function() {
 		if (stopwatchTimeContainer.innerHTML != "00:00:00:00" && stopwatchTimeContainer.innerHTML != "") {
 			stopwatch.stopwatchAddLap();
 		}
@@ -1842,33 +1842,33 @@ function stopwatch() {
 }
 
 function RNG() {
-	var lastMin = 1;
-	var lastMax = 100;
+	let lastMin = 1;
+	let lastMax = 100;
 
-	var base = document.querySelector("#contain > div#tool section[name='content'] *#rng");
+	let base = document.querySelector("#contain > div#tool section[name='content'] *#rng");
 
 	function rollNumber() {
 
-		var it = 0;
+		let it = 0;
 
 		addIteration();
-		var iteration = base.querySelector(":scope span[name='iterations'] input").value;
-		for(var i = 0; i < iteration; i++) {
-			var x = i + 1;
+		let iteration = base.querySelector(":scope span[name='iterations'] input").value;
+		for(let i = 0; i < iteration; i++) {
+			let x = i + 1;
 
 			function generateNumber(x) {
-				var min = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(2) input").value);
-				var max = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(3) input").value) + 1;
-				var random1 = Math.floor(Math.random() * (max - min)) + min;
-				var output = base.querySelector(":scope *[name='result'] div[name='" + x + "'] > *");
-				var intervalRandom = setInterval(genRandom, 100);
-				var startDate = new Date();
-				var durationMin = 1000;
-				var durationMax = 3000;
+				let min = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(2) input").value);
+				let max = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(3) input").value) + 1;
+				let random1 = Math.floor(Math.random() * (max - min)) + min;
+				let output = base.querySelector(":scope *[name='result'] div[name='" + x + "'] > *");
+				let intervalRandom = setInterval(genRandom, 100);
+				let startDate = new Date();
+				let durationMin = 1000;
+				let durationMax = 3000;
 
 				function genRandom() {
-					var random2 = Math.floor(Math.random() * (max - min)) + min;
-					var currentDate = new Date();
+					let random2 = Math.floor(Math.random() * (max - min)) + min;
+					let currentDate = new Date();
 					output.innerText = random2;
 					if(currentDate - startDate > durationMax) {
 						stopcount();
@@ -1895,17 +1895,17 @@ function RNG() {
 
 			it = it+1;
 			if (it == iteration) {
-				var nums = [];
-				var num = base.querySelectorAll(":scope div[name='result'] > *")
-				for(var r = 0; r < num.length; r++) {
+				let nums = [];
+				let num = base.querySelectorAll(":scope div[name='result'] > *")
+				for(let r = 0; r < num.length; r++) {
 					nums.push(num[r].firstElementChild.innerText);
 				}
 			
-				var max = Math.max(...nums);
-				var min = Math.min(...nums);
+				let max = Math.max(...nums);
+				let min = Math.min(...nums);
 
 
-				for(var r = 0; r < num.length; r++) {
+				for(let r = 0; r < num.length; r++) {
 					if (parseInt(num[r].firstElementChild.innerText) == max) {
 						num[r].classList.add("max");
 					}
@@ -1924,30 +1924,30 @@ function RNG() {
 	addIteration();
 
 	function addIteration() {
-		var iteration = base.querySelector(":scope span[name='iterations'] input").value;
-		var themin = [];
-		var themax = [];
-		var lis = base.querySelectorAll(":scope ul li");
-		for(var q = 0; q < lis.length; q++) {
+		let iteration = base.querySelector(":scope span[name='iterations'] input").value;
+		let themin = [];
+		let themax = [];
+		let lis = base.querySelectorAll(":scope ul li");
+		for(let q = 0; q < lis.length; q++) {
 			themin.push(lis[q].lastElementChild.previousElementSibling.firstChild.value);
 			themax.push(lis[q].lastElementChild.firstChild.value);
 			lis[q].remove();
 		}
 
-		var outs = base.querySelectorAll(":scope div[name='result'] > div");
-		for(var q = 0; q < outs.length; q++) {
+		let outs = base.querySelectorAll(":scope div[name='result'] > div");
+		for(let q = 0; q < outs.length; q++) {
 			outs[q].remove();
 		}
 		
-		for(var i = 0; i < iteration; i++) {
-			var x = i + 1;
-			var li = document.createElement("li");
-			var it = document.createElement("div");
-			var itText = document.createElement("p");
-			var min = document.createElement("div");
-			var minInput = document.createElement("input");
-			var max = document.createElement("div");
-			var maxInput = document.createElement("input");
+		for(let i = 0; i < iteration; i++) {
+			let x = i + 1;
+			let li = document.createElement("li");
+			let it = document.createElement("div");
+			let itText = document.createElement("p");
+			let min = document.createElement("div");
+			let minInput = document.createElement("input");
+			let max = document.createElement("div");
+			let maxInput = document.createElement("input");
 			li.setAttribute("name", x);
 			it.setAttribute("name","it");
 			itText.innerText = "#" + x;
@@ -1986,7 +1986,7 @@ function RNG() {
 			min.appendChild(minInput);
 			li.appendChild(max);
 			max.appendChild(maxInput);
-			var out = document.createElement("div");
+			let out = document.createElement("div");
 			out.setAttribute("name", x);
 			out.title = "#" + x + "\n" + "Number between " + minInput.value + "-" + maxInput.value;
 			out.innerHTML = "<header>-</header>";
@@ -1998,8 +1998,8 @@ function RNG() {
 	}
 
 	function minmaxChange() {
-		var Min = this.parentElement.parentElement.querySelector(':scope > div[name="min"] > input');
-		var Max = this.parentElement.parentElement.querySelector(':scope > div[name="max"] > input');
+		let Min = this.parentElement.parentElement.querySelector(':scope > div[name="min"] > input');
+		let Max = this.parentElement.parentElement.querySelector(':scope > div[name="max"] > input');
 		Min.max = parseInt(Max.value) - 1;
 		Max.min = parseInt(Min.value) + 1;
 		lastMin = Min.value;
@@ -2060,7 +2060,7 @@ function typeSet() {
 
 	let check1 = false;
 	let check2 = false;
-	for(var q = 0; q < els.length; q++) {
+	for(let q = 0; q < els.length; q++) {
 		let img = els[q].querySelector(":scope img")
 		if (q == 0) {
 			if (img == undefined) {
@@ -2084,7 +2084,7 @@ function typeSet() {
 
 	if (check1) {
 		let img = document.createElement("img");
-		img.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+val+".png";
+		img.src = getMedia([val],[PATH_Type_Icon])[0]
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2093,7 +2093,7 @@ function typeSet() {
 	}
 	else if (check2) {
 		let img = document.createElement("img");
-		img.src = "./media/Images/Misc/Type/Symbol/"+MEDIAPath_Type_Symbol+"/"+val+".png";
+		img.src = getMedia([val],[PATH_Type_Icon])[0]
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2124,7 +2124,7 @@ function typeSwitch() {
 		
 
 
-	for(var q = 0; q < typesPath.length; q++) {
+	for(let q = 0; q < typesPath.length; q++) {
 		types.push(typesPath[q].getAttribute("title").toUpperCase());
 	}
 
@@ -2136,16 +2136,16 @@ function typeSwitch() {
 	}
 
 	let els = document.querySelectorAll("#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li[name] > span:last-child")
-	for (var i = 0; i < els.length; i++) {
+	for (let i = 0; i < els.length; i++) {
 		els[i].innerHTML = "";
 		els[i].parentElement.style.removeProperty("display");
 	}
 
 
 
-	for (var i = 0; i < drops.length; i++) {
+	for (let i = 0; i < drops.length; i++) {
 		drops[i].style.removeProperty("display");
-		for (var q = 0; q < types.length; q++) {
+		for (let q = 0; q < types.length; q++) {
 			if (drops[i].getAttribute("name") == titleCase(types[q])) {
 				drops[i].style.display = "none";
 			}
@@ -2166,7 +2166,7 @@ function typeSwitch() {
 		let arrEffective = [];
 		let arrSuperEffective = [];
 
-		for (var q = 0; q < arr.length; q++) {
+		for (let q = 0; q < arr.length; q++) {
 			if (arr[q]["Value"] == 0) { // Immune
 				arrImmune.push(arr[q]["Type"]);
 			}
@@ -2190,7 +2190,7 @@ function typeSwitch() {
 
 
 
-		for (var q = 0; q < arrImmune.length; q++) {
+		for (let q = 0; q < arrImmune.length; q++) {
 			let val = titleCase(arrImmune[q]);
 			let based = base.querySelector(":scope li[name='immune']");
 
@@ -2199,7 +2199,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2212,7 +2212,7 @@ function typeSwitch() {
 		}
 
 
-		for (var q = 0; q < arrSuperEffective.length; q++) {
+		for (let q = 0; q < arrSuperEffective.length; q++) {
 			let val = titleCase(arrSuperEffective[q]);
 			let based = base.querySelector(":scope li[name='super effective']");
 
@@ -2221,7 +2221,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2233,7 +2233,7 @@ function typeSwitch() {
 			wrap.addEventListener("click",typeSet);
 		}
 
-		for (var q = 0; q < arrEffective.length; q++) {
+		for (let q = 0; q < arrEffective.length; q++) {
 			let val = titleCase(arrEffective[q]);
 			let based = base.querySelector(":scope li[name='effective']");
 
@@ -2242,7 +2242,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2254,7 +2254,7 @@ function typeSwitch() {
 			wrap.addEventListener("click",typeSet);
 		}
 
-		for (var q = 0; q < arrNormal.length; q++) {
+		for (let q = 0; q < arrNormal.length; q++) {
 			let val = titleCase(arrNormal[q]);
 			let based = base.querySelector(":scope li[name='normal']");
 
@@ -2263,7 +2263,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2275,7 +2275,7 @@ function typeSwitch() {
 			wrap.addEventListener("click",typeSet);
 		}
 
-		for (var q = 0; q < arrIneffective.length; q++) {
+		for (let q = 0; q < arrIneffective.length; q++) {
 			let val = titleCase(arrIneffective[q]);
 			let based = base.querySelector(":scope li[name='ineffective']");
 
@@ -2284,7 +2284,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2296,7 +2296,7 @@ function typeSwitch() {
 			wrap.addEventListener("click",typeSet);
 		}
 
-		for (var q = 0; q < arrSuperIneffective.length; q++) {
+		for (let q = 0; q < arrSuperIneffective.length; q++) {
 			let val = titleCase(arrSuperIneffective[q]);
 			let based = base.querySelector(":scope li[name='super ineffective']");
 
@@ -2305,7 +2305,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+val+".png";
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2331,13 +2331,13 @@ function typeSwitch() {
 }
 
 function matrixHoverClass(event) {
-	var base = event.target;
+	let base = event.target;
 	
-	var tar = base.parentElement.parentElement.firstChild;
-	var els = base.parentElement.querySelectorAll(":scope > *");
+	let tar = base.parentElement.parentElement.firstChild;
+	let els = base.parentElement.querySelectorAll(":scope > *");
 
-	var num = 0;
-	for(var q = 0; q < els.length; q++) {
+	let num = 0;
+	for(let q = 0; q < els.length; q++) {
 		if (els[q] == base) {
 			num = q;
 			break;
