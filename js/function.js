@@ -1,5 +1,5 @@
 function getAllIndexes(arr, val) {
-	var indexes = [],
+	let indexes = [],
 		i = -1;
 	while((i = arr.indexOf(val, i+1)) != -1) {
 		indexes.push(i);
@@ -12,8 +12,8 @@ function titleCase(str) {
 		return str;
 	}
 	if(isNaN(str)) {
-		var splitStr = str.toLowerCase().split(' ');
-		for(var i = 0; i < splitStr.length; i++) {
+		let splitStr = str.toLowerCase().split(' ');
+		for(let i = 0; i < splitStr.length; i++) {
 			splitStr[i] = splitStr[i].charAt(0).toUpperCase()+splitStr[i].substring(1);
 		}
 		splitStr = splitStr.join(' ');
@@ -33,21 +33,16 @@ function numFormat(num) {
 }
 
 function getShopLocationInt(obj,type,cost,location) {
-	var arr;
-	var location;
-	var obj;
-	var type;
-	var cost;
+	let arr;
 
 	if (type == "pokémon") {
 		arr = finaldata["Location Pokémon"]["Shop"];
 	}
 	else if (type == "item") {
 		arr = finaldata["Location Items"]["Shop"];
-		
 	}
 
-	for(var i = 0; i < arr.length; i++) {
+	for(let i = 0; i < arr.length; i++) {
 		if (getApplicable(arr[i]["Game"])) {
 			if (arr[i]["Location"] == location) {
 				if (arr[i][titleCase(type)] == obj) {
@@ -62,15 +57,10 @@ function getShopLocationInt(obj,type,cost,location) {
 
 
 function getItemLocationInt(obj,description,location) {
-	var arr;
-	var obj;
-	var description;
-	var location;
 
-	arr = finaldata["Location Items"]["Items"];
+	let arr = finaldata["Location Items"]["Items"];
 
-
-	for(var i = 0; i < arr.length; i++) {
+	for(let i = 0; i < arr.length; i++) {
 		if (getApplicable(arr[i]["Game"])) {
 			if (arr[i]["Location"] == location) {
 				if (arr[i]["Item"] == obj) {
@@ -153,7 +143,7 @@ function linGradCalc() {
 	/*
 	for (let q = 0; q < 20; q++) {
 		for (let i = 0; i < perArr1.length; i++) {
-			var x = i+1;
+			let x = i+1;
 			if (perArr1[x] != undefined) {
 				if (perArr1[i] < perArr1[x]) {
 					perArr1.splice(i,1);
@@ -164,8 +154,8 @@ function linGradCalc() {
 	}
 	*/
 
-	var perArr2 = [];
-	var colArr2 = [];
+	let perArr2 = [];
+	let colArr2 = [];
 
 	for (let i = 0; i < perArr1.length; i++) {
 		for (let q = 0; q < 2; q++) {
@@ -195,13 +185,13 @@ function linGradCalc() {
 	colArr2.push("Limegreen")
 
 
-	var tempArr = [];
+	let tempArr = [];
 	for (let i = 0; i < perArr2.length; i++) {
 		tempArr.push(" "+colArr2[i]+" "+perArr2[i]+"%")
 	}
 	tempArr.reverse();
 
-	var tempStr = "linear-gradient(90deg,"+tempArr.join(",")+")";
+	let tempStr = "linear-gradient(90deg,"+tempArr.join(",")+")";
 
 
 
@@ -213,20 +203,9 @@ function linGradCalc() {
 
 
 function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
-	var arr;
-	var obj;
-	var lvl;
-	var rate;
-	var tile;
-	var encounter;
-	var mechanic;
-	var location;
+	let arr = finaldata["Location Pokémon"]["Pokémon"]
 
-	arr = finaldata["Location Pokémon"]["Pokémon"];
-	
-
-
-	for(var i = 0; i < arr.length; i++) {
+	for(let i = 0; i < arr.length; i++) {
 		if (getApplicable(arr[i]["Game"])) {
 			if (arr[i]["Location"] == location) {
 				if (arr[i]["Pokémon"] == obj) {
@@ -250,34 +229,31 @@ function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
 function getMedia(userFile,userPath,set) {
 
 	if (userFile == undefined) {
-		userFile = "";
+		userFile = [];
 	}
 	if (userPath == undefined) {
-		userPath = "";
+		userPath = [];
 	}
 
 	let result = [];
-	for (var i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
+	for (let i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
         let path = Object.keys(finaldata["Directory"])[i]
         let source = path.split("/")[path.split("/").length-1]
 
-        for (var q = 0; q < finaldata["Directory"][path].length; q++) {
+        for (let q = 0; q < finaldata["Directory"][path].length; q++) {
             let file = finaldata["Directory"][path][q];
             let fileName = finaldata["Directory"][path][q].split(".")[0]
 
             if (file.includes(".png") || file.includes(".gif")) {
                 if (getApplicable(source)) {
-                    let vals1 = splitStr(userPath,",");
-                    let vals2 = splitStr(userFile,",");
-
-                    for(var r = 0; r < vals1.length; r++) {
-                        if (path.includes(vals1[r]) || vals1[r] == "") {
-                            for(var t = 0; t < vals2.length; t++) {
+                    for(let r = 0; r < userPath.length; r++) {
+                        if (path.includes(userPath[r]) || userPath[r] == "") {
+                            for(let t = 0; t < userFile.length; t++) {
                                 let check = false;
-                                if (set && fileName.includes(vals2[t].replaceAll('"',''))) {
+                                if (set && fileName.includes(userFile[t].replaceAll('"',''))) {
                                     check = true;
                                 }
-                                if (splitStr(fileName,"_")[0] == vals2[t] || vals2[t] == "") {
+                                if (splitStr(fileName,"_")[0] == userFile[t] || userFile[t] == "") {
                                     check = true;
                                 }
                                 if (check) {
@@ -290,6 +266,10 @@ function getMedia(userFile,userPath,set) {
             }
         }
     }
+
+	if (result.length == 0) {
+		result.push("");
+	}
 
 	return result;
 }
@@ -341,13 +321,12 @@ function getGameID(name) {
     return games.indexOf(name)+1
 }
 function getApplicable(val) {
-	var val;
 
     let adds = ["All"];
 
     val = val.replaceAll("_",",");
     let vals = splitStr(val,",");
-    for (var i = 0; i < vals.length; i++) {
+    for (let i = 0; i < vals.length; i++) {
         let val = vals[i];
 		
         let check = true;
@@ -363,7 +342,7 @@ function getApplicable(val) {
 	
         if (adds[0] != "All") {
             check = false;
-            for (var q = 0; q < additional.length; q++) {
+            for (let q = 0; q < additional.length; q++) {
                 if (adds.includes(additional[q])) {
                     check = true;
                     break;
@@ -421,31 +400,30 @@ function getApplicable(val) {
 
 
 function getEvolutionFamily(i) {
-	var i;
-	var stage = [];
-	var specie = [];
-	var Previous = undefined;
-	var Next = undefined;
+	let stage = [];
+	let specie = [];
+	let Previous = undefined;
+	let Next = undefined;
 	stage = finaldata["Pokémon"]["Evolution Stage"];
 	specie = finaldata["Pokémon"]["Evolution Specie"];
-	var result = [];
+	let result = [];
 	result.push(finaldata["Pokémon"]["Reference"][i]["Pokémon"])
 
-	for(var q = 0; q < 10; q++) {
-		Previous = finaldata["Pokémon"]["Evolution Specie"][i]["Previous_"+JSONPath_EvolutionSpecie];
-		Next = finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie];
+	for(let q = 0; q < 10; q++) {
+		Previous = finaldata["Pokémon"]["Evolution Specie"][i][DATA_Pokémon_EvolutionSpecie["Previous"]];
+		Next = finaldata["Pokémon"]["Evolution Specie"][i][DATA_Pokémon_EvolutionSpecie["Next"]];
 		if(Previous != undefined && Previous != "None") {
 			result.push(Previous);
-			Previous = finaldata["Pokémon"]["Evolution Specie"][i]["Previous_"+JSONPath_EvolutionSpecie];
+			Previous = finaldata["Pokémon"]["Evolution Specie"][i][DATA_Pokémon_EvolutionSpecie["Previous"]];
 		}
 		if(Next != undefined && Next != "None") {
-			if(finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie].includes(",")) {
-				for(var y = 0; y < finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie].split(",").length; y++) {
-					Next = finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie].split(",")[y];
+			if(finaldata["Pokémon"]["Evolution Specie"][i][DATA_Pokémon_EvolutionSpecie["Next"]].includes(",")) {
+				for(let y = 0; y < finaldata["Pokémon"]["Evolution Specie"][i][DATA_Pokémon_EvolutionSpecie["Next"]].split(",").length; y++) {
+					Next = finaldata["Pokémon"]["Evolution Specie"][i][DATA_Pokémon_EvolutionSpecie["Next"]].split(",")[y];
 					result.push(Next);
 				}
 			} else {
-				Next = finaldata["Pokémon"]["Evolution Specie"][i]["Next_"+JSONPath_EvolutionSpecie];
+				Next = finaldata["Pokémon"]["Evolution Specie"][i][DATA_Pokémon_EvolutionSpecie["Next"]];
 				result.push(Next);
 			}
 		}
@@ -454,8 +432,8 @@ function getEvolutionFamily(i) {
 			i = parseInt(getPokémonInt(result[q]));
 		}
 	}
-	for(var q = 0; q < result.length; q++) {
-		var obj = new Object();
+	for(let q = 0; q < result.length; q++) {
+		let obj = new Object();
 		obj["Pokémon"] = result[q];
 		obj["ID"] = getPokémonID(result[q]);
 		obj["Stage"] = getEvolutionStage(result[q]);
@@ -476,16 +454,15 @@ function getEvolutionFamily(i) {
 }
 
 function getIntID(int, id) {
-	var int;
-	var id;
+
 	if(id == undefined || id == "") { // int --> id
-		for(var i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
+		for(let i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
 			if(int == i) {
 				return finaldata["Pokémon"]["Reference"][i]["ID"];
 			}
 		}
 	} else if(int == undefined || int == "") { // id --> int
-		for(var i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
+		for(let i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
 			if(id == finaldata["Pokémon"]["Reference"][i]["ID"]) {
 				return i;
 			}
@@ -493,57 +470,27 @@ function getIntID(int, id) {
 	}
 }
 
-/*
-function getPokémonMediaPath(int,type) {
-	var int;
-	var type;
-	var arr = finaldata["Pokémon"]["Path"];
-	var result;
-	var column;
-
-	if(type == "Battle" || type == "Art") {
-		json = JSONPath_BattlePath;
-		column = "Battle";
-	}
-	else if (type == "Box") {
-		json = JSONPath_BoxPath;
-		column = "Box";
-	}
-
-	for(i = 0; i < arr.length; i++) {
-		if(i == int) {
-			if(arr[i][column+" Folder_"+json] == undefined) {
-				result = arr[i][column+" File_"+json];
-			} else {
-				result = arr[i][column+" Folder_"+json]+arr[i][column+" File_"+json];
-			}
-		}
-	}
-	return result;
-}
-
-*/
-
 
 function getMachineMove(machine) {
-	var machine;
-	var arr = finaldata["Moves"]["Machine"];
-	var result;
+
+	let arr = finaldata["Moves"]["Machine"];
+	let result;
 	for(i = 0; i < arr.length; i++) {
-		if(arr[i]["Machine_"+JSONPath_MoveMachine] == machine) {
-			result = arr[i]["Name_"+JSONPath_MoveName]
+		
+		if(arr[i][DATA_Move_Machine["Machine"]] == machine) {
+			result = arr[i][DATA_Move_Reference["Name"]]
 		}
 	}
 	return result;
 }
 
 function getMoveMachine(move) {
-	var move;
-	var arr = finaldata["Moves"]["Machine"];
-	var result;
+
+	let arr = finaldata["Moves"]["Machine"];
+	let result;
 	for(i = 0; i < arr.length; i++) {
-		if(arr[i]["Name_"+JSONPath_MoveName] == move) {
-			result = arr[i]["Machine_"+JSONPath_MoveMachine]
+		if(arr[i][DATA_Move_Reference["Name"]] == move) {
+			result = arr[i][DATA_Move_Machine["Machine"]]
 		}
 	}
 	return result;
@@ -552,12 +499,10 @@ function getMoveMachine(move) {
 
 
 function Continuation(arr, column, style) {
-	var arr;
-	var column;
-	var style;
-	var temparr1 = [];
-	var result = [];
-	var names = [];
+
+	let temparr1 = [];
+	let result = [];
+	let names = [];
 	if(style == "Single") {
 		for(i = 0; i < arr.length; i++) {
 			if(arr[i][column].includes(",")) {
@@ -600,9 +545,9 @@ function Continuation(arr, column, style) {
 				}
 			}
 		}
-		var temprun;
-		var tempres = [];
-		var temparrtype = [];
+		let temprun;
+		let tempres = [];
+		let temparrtype = [];
 		for(i = 0; i < arr.length; i++) {
 			if(arr[i][column].includes(",")) {
 				temparr1.push(arr[i][column].split(","));
@@ -616,7 +561,7 @@ function Continuation(arr, column, style) {
 			}
 		}
 		for(i = 0; i < temparr1.length; i++) {
-			var boolean = [];
+			let boolean = [];
 			if(temparrtype[i] == "-") {
 				for(q = 0; q < finaldata["Game"]["Reference"].length; q++) {
 					if(finaldata["Game"]["Reference"][q]["Name"] == temparr1[i][0]) {
@@ -659,12 +604,10 @@ function Continuation(arr, column, style) {
 }
 
 function getRegionalID(seperator,id,dex) {
-	var seperator;
-	var id;
-	var dex;
-	var arr = finaldata["Pokémon"]["Pokédex ID"];
-	var tempid;
-    var result;
+
+	let arr = finaldata["Pokémon"]["Pokédex ID"];
+	let tempid;
+    let result;
 
 	if(seperator == "-") {
 		seperator = -1;
@@ -676,20 +619,20 @@ function getRegionalID(seperator,id,dex) {
 		seperator = "";
 	}
 	if(seperator != "") {
-		for(var q = 0; q < arr.length; q++) {
+		for(let q = 0; q < arr.length; q++) {
 			if(arr[q]["ID"] == id) {
 				tempid = parseInt(arr[q][dex])+seperator;
                 break;
 			}
 		}
-		for(var q = 0; q < arr.length; q++) {
+		for(let q = 0; q < arr.length; q++) {
 			if(arr[q][dex] == tempid) {
 				result = arr[q]["ID"];
                 break;
 			}
 		}
 	} else {
-		for(var q = 0; q < arr.length; q++) {
+		for(let q = 0; q < arr.length; q++) {
 			if(arr[q]["ID"] == id) {
 				result = arr[q][dex];
                 break;
@@ -703,9 +646,9 @@ function getRegionalID(seperator,id,dex) {
 
 
 function getFullGameName(name) {
-	var name;
-	var arr = finaldata["Game"]["Reference"];
-	for(var q = 0; q < arr.length; q++) {
+
+	let arr = finaldata["Game"]["Reference"];
+	for(let q = 0; q < arr.length; q++) {
 		if(arr[q]["Name"] == name) {
 			return arr[q]["Full Name"];
 		}
@@ -713,9 +656,9 @@ function getFullGameName(name) {
 }
 
 function getPokémonID(name) {
-	var name;
-	var arr = finaldata["Pokémon"]["Reference"];
-	for(var q = 0; q < arr.length; q++) {
+
+	let arr = finaldata["Pokémon"]["Reference"];
+	for(let q = 0; q < arr.length; q++) {
 		if(arr[q]["Pokémon"] == name) {
 			return arr[q]["ID"];
 		}
@@ -723,17 +666,17 @@ function getPokémonID(name) {
 }
 
 function getEvolutionStage(name) {
-	var name;
-	var arr = finaldata["Pokémon"]["Evolution Stage"];
-	for(var q = 0; q < arr.length; q++) {
+
+	let arr = finaldata["Pokémon"]["Evolution Stage"];
+	for(let q = 0; q < arr.length; q++) {
 		if(arr[q]["Pokémon"] == name) {
-			return arr[q]["Pokémon Stage_"+JSONPath_EvolutionStage];
+			return arr[q][DATA_Pokémon_EvolutionStage["Pokémon Stage"]];
 		}
 	}
 }
 
 function abbreviateStats(stats) {
-    var stats;
+
     if (stats == "Attack") {
         return "Atk";
     }
@@ -788,36 +731,34 @@ function findUpTag(el, tag) {
 }
 
 function getPokémonInt(name) {
-	var name;
-	var arr = finaldata["Pokémon"]["Form"];
-	for(var q = 0; q < arr.length; q++) {
-		if(arr[q]["Pokémon"] == name || arr[q]["Form_"+JSONPath_Form] == name) {
+
+	let arr = finaldata["Pokémon"]["Form"];
+	for(let q = 0; q < arr.length; q++) {
+		if(arr[q]["Pokémon"] == name || arr[q][DATA_Pokémon_Form["Form"]] == name) {
 			return q;
 		}
 	}
 }
 function returnSortedItemsList(i) {
 
-	var i;
-	var items = [];
-	var result = finaldata["Items"]["Reference"].map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
+	let items = finaldata["Items"]["Reference"].map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
 
-	items = sortObjectArray(result,"Pocket",true);
+	items = sortObjectArray(items,"Pocket",true);
 
-	var result = [];
+	let result = [];
 	
 	if (finaldata["Pokémon"]["Form Item"][i] != undefined) {
-		if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"] != undefined) {
-			var req = [];
-			if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"].includes(",")) {
-				req = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"].split(",")
+		if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]] != undefined) {
+			let req = [];
+			if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]].includes(",")) {
+				req = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]].split(",")
 			}
 			else {
-				req[0] = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"];
+				req[0] = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]];
 			}
 
-			for (var r = 0; r < req.length; r++) {
-				for (var q = 0; q < items.length; q++) {
+			for (let r = 0; r < req.length; r++) {
+				for (let q = 0; q < items.length; q++) {
 					if (getApplicable(items[q]["Game"])) {
 						if (items[q]["Use"] == "true") {
 							if (items[q]["Item"] != undefined) {
@@ -830,23 +771,23 @@ function returnSortedItemsList(i) {
 				}
 			}
 		}
-		else if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"] != undefined) {
-			var notreq = [];
-			if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"].includes(",")) {
-				notreq = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"].split(",")
+		else if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]] != undefined) {
+			let notreq = [];
+			if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]].includes(",")) {
+				notreq = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]].split(",")
 			}
 			else {
-				notreq[0] = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"];
+				notreq[0] = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]];
 			}
 
 
-			var obj = new Object();
+			let obj = new Object();
 			obj["Item"] = "";
 			obj["Game"] = "All";
 			items.unshift(obj);
 
-			for (var r = 0; r < notreq.length; r++) {
-				for (var q = 0; q < items.length; q++) {
+			for (let r = 0; r < notreq.length; r++) {
+				for (let q = 0; q < items.length; q++) {
 					if (getApplicable(items[q]["Game"])) {
 						if (items[q]["Use"] == "true") {
 							if (items[q]["Item"] != undefined) {
@@ -861,12 +802,12 @@ function returnSortedItemsList(i) {
 			
 		}
 		else {
-			var obj = new Object();
+			let obj = new Object();
 			obj["Item"] = "";
 			obj["Game"] = "All";
 			items.unshift(obj);
 
-			for (var q = 0; q < items.length; q++) {
+			for (let q = 0; q < items.length; q++) {
 				if (getApplicable(items[q]["Game"])) {
 					if (items[q]["Use"] == "true") {
 						if (items[q]["Item"] != undefined) {
@@ -883,12 +824,11 @@ function returnSortedItemsList(i) {
 }
 
 function dataStringTitle(data) {
-	var data;
 
-	var obj = dataStringToObj(data);
+	let obj = dataStringToObj(data);
 	if (obj != undefined) {
 
-		var titlearr = [];
+		let titlearr = [];
 
 		let pok = obj["pok"];
 
@@ -940,7 +880,7 @@ function dataStringTitle(data) {
 			if (move != undefined) {
 				if (move.includes(",")) {
 					titlearr.push("")
-					for (var q = 0; q < move.split(",").length; q++) {
+					for (let q = 0; q < move.split(",").length; q++) {
 						if (move.split(",")[q] != "" && !move.split(",")[q].includes("Move")) {
 							titlearr.push(move.split(",")[q]);
 						}
@@ -955,8 +895,8 @@ function dataStringTitle(data) {
 }
 
 function dataStringToObj(data) {
-	var data
-	var tempArr;
+
+	let tempArr;
 
 	if (data != "") {
 		if (data.includes("|")) {
@@ -969,10 +909,10 @@ function dataStringToObj(data) {
 	else {
 		tempArr = [];
 	}
-	var obj = new Object();
-	for (var i = 0; i < tempArr.length; i++) {
-		var val1 = tempArr[i].split(":")[0];
-		var val2 = tempArr[i].split(":")[1];
+	let obj = new Object();
+	for (let i = 0; i < tempArr.length; i++) {
+		let val1 = tempArr[i].split(":")[0];
+		let val2 = tempArr[i].split(":")[1];
 		
 		obj[val1] = val2;
 	}
@@ -981,13 +921,13 @@ function dataStringToObj(data) {
 }
 
 function getPokémonName(int,alt) {
-	var int;
-	var arr = finaldata["Pokémon"]["Form"];
+
+	let arr = finaldata["Pokémon"]["Form"];
 	if (alt == "Alt") {
-		for(var i = 0; i < arr.length; i++) {
+		for(let i = 0; i < arr.length; i++) {
 			if(int == i) {
-				if(arr[i]["Form_"+JSONPath_Form] != undefined && !arr[i]["Variant"].includes("Default")) {
-					return arr[i]["Form_"+JSONPath_Form];
+				if(arr[i][DATA_Pokémon_Form["Form"]] != undefined && !arr[i]["Variant"].includes("Default")) {
+					return arr[i][DATA_Pokémon_Form["Form"]];
 				} else {
 					return arr[i]["Pokémon"];
 				}
@@ -995,10 +935,10 @@ function getPokémonName(int,alt) {
 		}
 	}
 	else {
-		for(var i = 0; i < arr.length; i++) {
+		for(let i = 0; i < arr.length; i++) {
 			if(int == i) {
-				if(arr[i]["Form_"+JSONPath_Form] != undefined) {
-					return arr[i]["Form_"+JSONPath_Form];
+				if(arr[i][DATA_Pokémon_Form["Form"]] != undefined) {
+					return arr[i][DATA_Pokémon_Form["Form"]];
 				} else {
 					return arr[i]["Pokémon"];
 				}
@@ -1027,21 +967,19 @@ function removeDuplicateObjectFromArray(array, key) {
 }
 
 function friendshipModifer(friendship) {
-    var friendship;
-
     return 1+(Math.floor((10*friendship)/255)/100)
 }
 
 
 function getPokémonForm(i) {
-    var i;
-    var id = getIntID(i,"");
-    var result = [];
 
-    for(var u = 0; u < finaldata["Pokémon"]["Form"].length; u++) {
-		if(finaldata["Pokémon"]["Form"][u]["ID"] == id && finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-            if (finaldata["Pokémon"]["Form"][u]["Form_"+JSONPath_Form] != undefined) {
-                result.push(finaldata["Pokémon"]["Form"][u]["Form_"+JSONPath_Form]);
+    let id = getIntID(i,"");
+    let result = [];
+
+    for(let u = 0; u < finaldata["Pokémon"]["Form"].length; u++) {
+		if(finaldata["Pokémon"]["Form"][u]["ID"] == id && finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+            if (finaldata["Pokémon"]["Form"][u][DATA_Pokémon_Form["Form"]] != undefined) {
+                result.push(finaldata["Pokémon"]["Form"][u][DATA_Pokémon_Form["Form"]]);
             }
             else {
                 result.push(finaldata["Pokémon"]["Form"][u]["Pokémon"]);
@@ -1053,24 +991,22 @@ function getPokémonForm(i) {
 }
 
 function getPositionAbility(i,column) {
-    var arr = finaldata["Pokémon"]["Ability"];
-    var column;
-    var i;
-    var result;
+    let arr = finaldata["Pokémon"]["Ability"];
+    let result;
 	
-    for (var q = 0; q < arr.length; q++) {
+    for (let q = 0; q < arr.length; q++) {
         if (q == i) {
-            if (arr[q][column+"_"+JSONPath_Ability] != undefined) {
-                result = arr[q][column+"_"+JSONPath_Ability];
+            if (arr[q][DATA_Pokémon_Ability[column]] != undefined) {
+                result = arr[q][DATA_Pokémon_Ability[column]];
                 break;
             }
         }
     }
 
     if (result == undefined) {
-        for (var q = 0; q < arr.length; q++) {
+        for (let q = 0; q < arr.length; q++) {
             if (q == getDefaultInt(i)) {
-                result = arr[q][column+"_"+JSONPath_Ability];
+                result = arr[q][DATA_Pokémon_Ability[column]];
                 break;
             }
         }
@@ -1081,15 +1017,13 @@ function getPositionAbility(i,column) {
 
 
 function getAbilityPosition(i,ability) {
-    var arr = finaldata["Pokémon"]["Ability"];
-	var i;
-    var ability;
-    var result;
+    let arr = finaldata["Pokémon"]["Ability"];
+    let result;
 
-    for (var q = 0; q < arr.length; q++) {
+    for (let q = 0; q < arr.length; q++) {
         if (q == i) {
-			var keys = Object.keys(arr[q]);
-			for (var u = 0; u < keys.length; u++) {
+			let keys = Object.keys(arr[q]);
+			for (let u = 0; u < keys.length; u++) {
 				if (arr[q][keys[u]] == ability && keys[u].includes(JSONPath_Ability)) {
 					result = keys[u].replaceAll("_"+JSONPath_Ability,"");
 					break;
@@ -1099,10 +1033,10 @@ function getAbilityPosition(i,ability) {
     }
 
     if (result == undefined) {
-        for (var q = 0; q < arr.length; q++) {
+        for (let q = 0; q < arr.length; q++) {
 			if (q == getDefaultInt(i)) {
-				var keys = Object.keys(arr[q]);
-				for (var u = 0; u < keys.length; u++) {
+				let keys = Object.keys(arr[q]);
+				for (let u = 0; u < keys.length; u++) {
 					if (arr[q][keys[u]] == ability && keys[u].includes(JSONPath_Ability)) {
 						result = keys[u].replaceAll("_"+JSONPath_Ability,"");
 						break;
@@ -1116,13 +1050,11 @@ function getAbilityPosition(i,ability) {
 }
 
 function getDefaultInt(i) {
+    let id = getIntID(i,"");
+    let arr = finaldata["Pokémon"]["Reference"];
+    let result;
 
-    var i;
-    var id = getIntID(i,"");
-    var arr = finaldata["Pokémon"]["Reference"];
-    var result;
-
-    for (var q = 0; q < arr.length; q++) {
+    for (let q = 0; q < arr.length; q++) {
         if (arr[q]["ID"] == id) {
             result = q;
             break;
@@ -1135,11 +1067,10 @@ function getDefaultInt(i) {
 
 function getLocationTrainers(location) {
 
-	var arr = finaldata["Location Trainers"]["Trainers"];
-	var location;
-	var result = [];
+	let arr = finaldata["Location Trainers"]["Trainers"];
+	let result = [];
 
-    for (var q = 0; q < arr.length; q++) {
+    for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"]) == true) {
 			if(arr[q]["Location"] == location) {
 				result.push(arr[q]);
@@ -1154,11 +1085,10 @@ function getLocationTrainers(location) {
 
 function getLocationItems(location) {
 
-	var arr = finaldata["Location Items"]["Items"];
-	var location;
-	var result = [];
+	let arr = finaldata["Location Items"]["Items"];
+	let result = [];
 
-    for (var q = 0; q < arr.length; q++) {
+    for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"]) == true) {
 			if(arr[q]["Location"] == location) {
 				result.push(arr[q]);
@@ -1171,11 +1101,10 @@ function getLocationItems(location) {
 
 function getLocationPokémon(location) {
 
-	var arr = finaldata["Location Pokémon"]["Pokémon"];
-	var location;
-	var result = [];
+	let arr = finaldata["Location Pokémon"]["Pokémon"];
+	let result = [];
 
-    for (var q = 0; q < arr.length; q++) {
+    for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"]) == true) {
 			if(arr[q]["Location"] == location) {
 				result.push(arr[q]);
@@ -1190,8 +1119,7 @@ function getLocationPokémon(location) {
 
 
 function undDel(string,replacement) {
-	var string;
-	var replacement;
+
 	if (string == undefined) {
 		return replacement
 	}
@@ -1200,8 +1128,7 @@ function undDel(string,replacement) {
 	}
 }
 function undwsDel(string,replacement) {
-	var string;
-	var replacement;
+
 	if (string == undefined || string == "") {
 		return replacement
 	}
@@ -1210,8 +1137,7 @@ function undwsDel(string,replacement) {
 	}
 }
 function undwsnullDel(string,replacement) {
-	var string;
-	var replacement;
+
 	if (string == undefined || string == null || string == "") {
 		return replacement
 	}
@@ -1220,8 +1146,7 @@ function undwsnullDel(string,replacement) {
 	}
 }
 function undwsnullnanDel(string,replacement) {
-	var string;
-	var replacement;
+
 	if (string == undefined || string == "" || string == null || isNaN(string)) {
 		return replacement;
 	}
@@ -1233,8 +1158,7 @@ function undwsnullnanDel(string,replacement) {
 
 
 function modStageCalc(type,mod) {
-	var type;
-	var mod;
+
 	if (type == "Accuracy") {
 		if (Generation == 1) {
 			if (mod == 6) {
@@ -1656,12 +1580,8 @@ function modStageCalc(type,mod) {
 }
 
 function returnArrValue(arr,valColumn,tarColumn,val) {
-	var arr;
-	var valColumn;
-	var tarColumn;
-	var val;
 
-    for (var q = 0; q < arr.length; q++) {
+    for (let q = 0; q < arr.length; q++) {
 		if(arr[q][valColumn] == val) {
 			return arr[q][tarColumn];
 		}
@@ -1672,12 +1592,10 @@ function returnArrValue(arr,valColumn,tarColumn,val) {
 
 
 function returnArrData(arr,column,target) {
-	var arr;
-	var column;
-	var target;
-	var result = [];
 
-    for (var q = 0; q < arr.length; q++) {
+	let result = [];
+
+    for (let q = 0; q < arr.length; q++) {
 		if(arr[q][column] == target) {
 			result.push(arr[q]);
 		}
@@ -1687,12 +1605,10 @@ function returnArrData(arr,column,target) {
 }
 
 function returnAppArrData(arr,column,target) {
-	var arr;
-	var column;
-	var target;
-	var result = [];
 
-    for (var q = 0; q < arr.length; q++) {
+	let result = [];
+
+    for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"])) {
 			if(arr[q][column] == target) {
 				result.push(arr[q]);
@@ -1710,7 +1626,7 @@ function SwitchTab(tab,sub) {
 		let inputs = document.querySelectorAll("#navigation input");
 		let input = document.querySelector("#navigation input[value='"+tab+"']");
 
-		for (var q = 0; q < inputs.length; q++) {
+		for (let q = 0; q < inputs.length; q++) {
 			inputs[q].checked = false;
 		}
 		input.checked = true;
@@ -1719,7 +1635,7 @@ function SwitchTab(tab,sub) {
 		let tars = document.querySelectorAll("#contain > div");
 		let tar = document.querySelector("#contain > div[value='"+tab.toLowerCase()+"']");
 
-		for (var q = 0; q < tars.length; q++) {
+		for (let q = 0; q < tars.length; q++) {
 			tars[q].style.display = "none";
 		}
 		tar.style.display = "block";
@@ -1729,13 +1645,13 @@ function SwitchTab(tab,sub) {
 			let contents = tar.querySelectorAll(":scope section[name='content'] > div[name]")
 			if (sub == "Damage Calculator") {
 				let input = tar.querySelector(":scope section[name='list'] ol input[value='0']");
-				for (var q = 0; q < inputs.length; q++) {
+				for (let q = 0; q < inputs.length; q++) {
 					inputs[q].checked = false;
 				}
 				input.checked = true;
 
 				let content = tar.querySelector(":scope div#dmg");
-				for (var q = 0; q < contents.length; q++) {
+				for (let q = 0; q < contents.length; q++) {
 					contents[q].style.display = "none";
 				}
 				content.style.display = "block";
@@ -1750,9 +1666,6 @@ function SwitchTab(tab,sub) {
 
 
 function sortObjectArray(objectsArr,prop,ascending) {
-	var objectsArr;
-	var prop;
-	var ascending;
 
 	let objectsHaveProp = objectsArr.every(object => object.hasOwnProperty(prop));
 
@@ -1786,12 +1699,11 @@ function sortObjectArray(objectsArr,prop,ascending) {
 
 
 function getTutorData(val,column) {
-	var val;
-	var column;
-	var arr = finaldata["Locations"]["Move Tutor"];
-	var result = [];
 
-	for (var q = 0; q < arr.length; q++) {
+	let arr = finaldata["Locations"]["Move Tutor"];
+	let result = [];
+
+	for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"]) == true) {
 			if (arr[q][column] == val) {
 				result.push(arr[q])
@@ -1805,15 +1717,14 @@ function getTutorData(val,column) {
 
 
 function getApplicable_old(val) {
-	var val;
 
 	if (val != undefined) {
 		if (val == "All") {
 			return true;
 		}
 		if (val.includes(",")) {
-			var valArr = val.split(",");
-			for (var q = 0; q < valArr.length; q++) {
+			let valArr = val.split(",");
+			for (let q = 0; q < valArr.length; q++) {
 				if (valArr[q] == GameName) {
 					return true;
 				}
@@ -1830,10 +1741,8 @@ function getApplicable_old(val) {
 
 
 function classSwitches(cla,tar) {
-	var cla;
-	var tar;
 
-	for (var q = 0; q < tar.length; q++) {
+	for (let q = 0; q < tar.length; q++) {
 		if(tar[q].classList.contains(cla)) {
 			tar[q].classList.remove(cla);
 		}
@@ -1844,8 +1753,7 @@ function classSwitches(cla,tar) {
 }
 
 function classSwitch(cla) {
-	var cla;
-	var tar = event.target;
+	let tar = event.target;
 
 	if(tar.classList.contains(cla)) {
 		tar.classList.remove(cla);
@@ -1858,10 +1766,10 @@ function classSwitch(cla) {
 
 
 function getItemIcon(item) {
-    var item;
-	var arr = finaldata["Items"]["Reference"];
 
-	for (var q = 0; q < arr.length; q++) {
+	let arr = finaldata["Items"]["Reference"];
+
+	for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"])) {
 			if (arr[q]["Item"] == item) {
 				return arr[q]["Icon"]
@@ -1873,17 +1781,17 @@ function getItemIcon(item) {
 
 
 
-var searchPokémonAttributes = [];
-var searchMoveAttributes = [];
-var searchAbilityAttributes = [];
-var searchItemAttributes = [];
-var searchMapAttributes = [];
-var searchNotFirst = false;
+let searchPokémonAttributes = [];
+let searchMoveAttributes = [];
+let searchAbilityAttributes = [];
+let searchItemAttributes = [];
+let searchMapAttributes = [];
+let searchNotFirst = false;
 
 function search(type) {
-    var type;
-	var tag;
-	var searchAttributes;
+
+	let tag;
+	let searchAttributes;
 
     if (type == "Pokémon") {
         base = document.querySelector("#contain > div#"+type.toLowerCase()+" > div ul");
@@ -1912,35 +1820,35 @@ function search(type) {
     }
 
 
-	var tar = event.target;
-    var searchValue = (tar.value).toLowerCase();
-    var searchPositive = [];
-    var searchNegative = [];
-    var searchGreater = [];
-    var searchLower = [];
-	var searchVar = [];
+	let tar = event.target;
+    let searchValue = (tar.value).toLowerCase();
+    let searchPositive = [];
+    let searchNegative = [];
+    let searchGreater = [];
+    let searchLower = [];
+	let searchlet = [];
 
     if (searchValue.includes("::") && searchAttributes.includes(searchValue.split("::")[0])) {
         searchPositive = searchValue.split("::");
-		searchVar = searchValue.split("::");
+		searchlet = searchValue.split("::");
     }
     else if (searchValue.includes(":!") && searchAttributes.includes(searchValue.split(":!")[0])) {
         searchNegative = searchValue.split(":!");
-		searchVar = searchValue.split(":!");
+		searchlet = searchValue.split(":!");
     }
     else if (searchValue.includes(":>") && searchAttributes.includes(searchValue.split(":>")[0])) {
         searchGreater = searchValue.split(":>");
-		searchVar = searchValue.split(":>");
+		searchlet = searchValue.split(":>");
     }
     else if (searchValue.includes(":<") && searchAttributes.includes(searchValue.split(":<")[0])) {
         searchLower = searchValue.split(":<");
-		searchVar = searchValue.split(":<");
+		searchlet = searchValue.split(":<");
     }
     else {
-        var searchName = (event.target.value).toLowerCase();
+        let searchName = (event.target.value).toLowerCase();
     }
 
-	var tags =  base.querySelectorAll(':scope > '+tag);
+	let tags =  base.querySelectorAll(':scope > '+tag);
 	for(i = 0; i < tags.length; i++) {
 		tags[i].classList.remove("hidden");
 	}
@@ -1948,7 +1856,7 @@ function search(type) {
     tar.style.color = "var(--fontDark)";
 
 
-	var check;
+	let check;
 
 	if (searchVar.length > 0) {
 		if (tags[0].getAttribute('data-search-'+searchVar[0]).match(/[a-z]/g) ) {
@@ -1960,13 +1868,13 @@ function search(type) {
 	}
     if (searchPositive.length > 0 && searchAttributes.includes(searchPositive[0])) {
         if (parseInt(searchPositive[1]) != NaN) {
-            var tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'*="'+searchPositive[1]+'"])');
+            let tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'*="'+searchPositive[1]+'"])');
 			for(i = 0; i < tags.length; i++) {
 				tags[i].classList.add("hidden");
 			}
         }
         else {
-            var tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'="'+searchPositive[1]+'"])');
+            let tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'="'+searchPositive[1]+'"])');
 			for(i = 0; i < tags.length; i++) {
 				tags[i].classList.add("hidden");
 			}
@@ -1975,13 +1883,13 @@ function search(type) {
     }
     else if (searchNegative.length > 0 && searchAttributes.includes(searchNegative[0])) {
         if (parseInt(searchNegative[1]) != NaN) {
-            var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'*="'+searchNegative[1]+'"]');
+            let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'*="'+searchNegative[1]+'"]');
 			for(i = 0; i < tags.length; i++) {
 				tags[i].classList.add("hidden");
 			}
         }
         else {
-            var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'="'+searchNegative[1]+'"]');
+            let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'="'+searchNegative[1]+'"]');
 			for(i = 0; i < tags.length; i++) {
 				tags[i].classList.add("hidden");
 			}
@@ -1989,7 +1897,7 @@ function search(type) {
         tar.style.color = "var(--colorRed)";
     }
 	else if (searchLower.length > 0 && searchAttributes.includes(searchLower[0]) && check) {
-        var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchLower[0]+']');
+        let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchLower[0]+']');
 		for(i = 0; i < tags.length; i++) {
 			tags[i].classList.add("hidden");
 		}
@@ -2003,7 +1911,7 @@ function search(type) {
         tar.style.color = "var(--colorRed)";
     }
     else if (searchGreater.length > 0 && searchAttributes.includes(searchGreater[0]) && check) {
-        var tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchGreater[0]+']');
+        let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchGreater[0]+']');
 		for(i = 0; i < tags.length; i++) {
 			tags[i].classList.add("hidden");
 		}
@@ -2017,7 +1925,7 @@ function search(type) {
         tar.style.color = "var(--colorRed)";
     }
     else if (event.target.value.length > 0) {
-        var tags = base.querySelectorAll(':scope > '+tag+':not([data-name*="'+searchName+'"])');
+        let tags = base.querySelectorAll(':scope > '+tag+':not([data-name*="'+searchName+'"])');
 		for(i = 0; i < tags.length; i++) {
 			tags[i].classList.add("hidden");
 		}
@@ -2054,8 +1962,8 @@ function search(type) {
     count();
 }
 function exitSearch(base) {
-    var base;
-	var tar = event.target;
+
+	let tar = event.target;
 
     if (base == "Pokémon") {
 		base = document.querySelector("#contain > div#"+base.toLowerCase()+" > div ul");
@@ -2064,12 +1972,12 @@ function exitSearch(base) {
 		base = document.querySelector("#contain > div#"+base.toLowerCase()+" section[name='list'] ol");
 	}
     
-    var items = base.querySelectorAll(":scope > *:not(input)");
+    let items = base.querySelectorAll(":scope > *:not(input)");
     for (i = 0; i < items.length; i++) {
         items[i].classList.remove("hidden");
     }
 
-    var search = tar.parentElement.querySelector(':scope > input[type="text"]');
+    let search = tar.parentElement.querySelector(':scope > input[type="text"]');
 
 	search.style.color = "var(--fontDark)";
 	search.style.removeProperty("outline-color");
@@ -2082,13 +1990,11 @@ function exitSearch(base) {
 }
 
 function joinObj(arr, attr,type){
-	var arr;
-	var attr;
-	var type;
 
-	var result = [];
+
+	let result = [];
   
-	for (var i = 0; i < arr.length; i++){
+	for (let i = 0; i < arr.length; i++){
 		result.push(arr[i][attr]);
 	}
   
@@ -2098,18 +2004,17 @@ function joinObj(arr, attr,type){
 
 
 function getEvolutionData(i,column) {
-	var i;
-	var column;
-	var arrName = finaldata["Pokémon"]["Evolution Specie"];
-	var arrStage = finaldata["Pokémon"]["Evolution Stage"];
-	var arrMethod = finaldata["Pokémon"]["Evolution Method"];
 
-	var result = [];
-	var pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
+	let arrName = finaldata["Pokémon"]["Evolution Specie"];
+	let arrStage = finaldata["Pokémon"]["Evolution Stage"];
+	let arrMethod = finaldata["Pokémon"]["Evolution Method"];
+
+	let result = [];
+	let pokémon = arrName[i][DATA_Pokémon_EvolutionSpecie[column]];
 
 	if (pokémon == undefined) {
 		i = getDefaultInt(i);
-		pokémon = arrName[i][column+"_"+JSONPath_EvolutionSpecie];
+		pokémon = arrName[i][DATA_Pokémon_EvolutionSpecie[column]];
 	}
 
 
@@ -2117,28 +2022,28 @@ function getEvolutionData(i,column) {
 		if (pokémon.includes(",")) {
 			pokémon = pokémon.split(",");
 			for(q = 0; q < pokémon.length; q++) {
-				var stage = arrStage[getPokémonInt(pokémon[q])]["Pokémon Stage_"+JSONPath_EvolutionStage];
-				var method = arrMethod[getPokémonInt(pokémon[q])]["Type_"+JSONPath_EvolutionMethod];
-				var factor = arrMethod[getPokémonInt(pokémon[q])]["Factor_"+JSONPath_EvolutionMethod];
-				var additional = arrMethod[getPokémonInt(pokémon[q])]["Additional_"+JSONPath_EvolutionMethod];
-				var gender = arrMethod[getPokémonInt(pokémon[q])]["Gender_"+JSONPath_EvolutionMethod];
+				let stage = arrStage[getPokémonInt(pokémon[q])][DATA_Pokémon_EvolutionStage["Pokémon Stage"]];
+				let method = arrMethod[getPokémonInt(pokémon[q])][DATA_Pokémon_EvolutionMethod["Type"]];
+				let factor = arrMethod[getPokémonInt(pokémon[q])][DATA_Pokémon_EvolutionMethod["Factor"]];
+				let additional = arrMethod[getPokémonInt(pokémon[q])][DATA_Pokémon_EvolutionMethod["Additional"]];
+				let gender = arrMethod[getPokémonInt(pokémon[q])][DATA_Pokémon_EvolutionMethod["Gender"]];
 		
 				if (pokémon[q] == undefined) {
-					pokémon[q] = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
+					pokémon[q] = arrName[getDefaultInt(i)][DATA_Pokémon_EvolutionSpecie[column]];
 				}
 				if (stage == undefined) {
-					stage = arrStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+					stage = arrStage[getDefaultInt(i)][DATA_Pokémon_EvolutionStage["Pokémon Stage"]];
 				}
 
 				if (method == undefined && factor == undefined && additional == undefined && gender == undefined) {
-					method = arrMethod[getDefaultInt(i)]["Type_"+JSONPath_EvolutionMethod];	
-					factor = arrMethod[getDefaultInt(i)]["Factor_"+JSONPath_EvolutionMethod];
-					additional = arrMethod[getDefaultInt(i)]["Additional_"+JSONPath_EvolutionMethod];
-					gender = arrMethod[getDefaultInt(i)]["Gender_"+JSONPath_EvolutionMethod];
+					method = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Type"]];	
+					factor = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Factor"]];
+					additional = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Additional"]];
+					gender = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Gender"]];
 				}
 
 				if (pokémon != undefined) {
-					var obj = new Object();
+					let obj = new Object();
 					obj["Integer"] = getPokémonInt(pokémon[q]);
 					obj["Pokémon"] = pokémon[q];
 					obj["Stage"] = stage;
@@ -2151,27 +2056,27 @@ function getEvolutionData(i,column) {
 			}
 		}
 		else {
-			var stage = arrStage[getPokémonInt(pokémon)]["Pokémon Stage_"+JSONPath_EvolutionStage];
-			var method = arrMethod[getPokémonInt(pokémon)]["Type_"+JSONPath_EvolutionMethod];
-			var factor = arrMethod[getPokémonInt(pokémon)]["Factor_"+JSONPath_EvolutionMethod];
-			var additional = arrMethod[getPokémonInt(pokémon)]["Additional_"+JSONPath_EvolutionMethod];
-			var gender = arrMethod[getPokémonInt(pokémon)]["Gender_"+JSONPath_EvolutionMethod];
+			let stage = arrStage[getPokémonInt(pokémon)][DATA_Pokémon_EvolutionStage["Pokémon Stage"]];
+			let method = arrMethod[getPokémonInt(pokémon)][DATA_Pokémon_EvolutionMethod["Type"]];
+			let factor = arrMethod[getPokémonInt(pokémon)][DATA_Pokémon_EvolutionMethod["Factor"]];
+			let additional = arrMethod[getPokémonInt(pokémon)][DATA_Pokémon_EvolutionMethod["Additional"]];
+			let gender = arrMethod[getPokémonInt(pokémon)][DATA_Pokémon_EvolutionMethod["Gender"]];
 	
 			if (pokémon == undefined) {
-				pokémon = arrName[getDefaultInt(i)][column+"_"+JSONPath_EvolutionSpecie];
+				pokémon = arrName[getDefaultInt(i)][DATA_Pokémon_EvolutionSpecie[column]];
 			}
 			if (stage == undefined) {
-				stage = arrStage[getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage];
+				stage = arrStage[getDefaultInt(i)][DATA_Pokémon_EvolutionStage["Pokémon Stage"]];
 			}
 			if (method == undefined && factor == undefined && additional == undefined && gender == undefined) {
-				method = arrMethod[getDefaultInt(i)]["Type_"+JSONPath_EvolutionMethod];	
-				factor = arrMethod[getDefaultInt(i)]["Factor_"+JSONPath_EvolutionMethod];
-				additional = arrMethod[getDefaultInt(i)]["Additional_"+JSONPath_EvolutionMethod];
-				gender = arrMethod[getDefaultInt(i)]["Gender_"+JSONPath_EvolutionMethod];
+				method = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Type"]];	
+				factor = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Factor"]];
+				additional = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Additional"]];
+				gender = arrMethod[getDefaultInt(i)][DATA_Pokémon_EvolutionMethod["Gender"]];
 			}
 	
 			if (pokémon != undefined) {
-				var obj = new Object();
+				let obj = new Object();
 				obj["Integer"] = getPokémonInt(pokémon);
 				obj["Pokémon"] = pokémon;
 				obj["Stage"] = stage;
@@ -2508,36 +2413,36 @@ function shinyTest(ivs) {
 
 
 function getOffspringData(i) {
-	var i;
-	var arr = finaldata["Pokémon"]["Offspring"];
-	var result = [];
 
-	var pok = getPokémonName(i);
+	let arr = finaldata["Pokémon"]["Offspring"];
+	let result = [];
+
+	let pok = getPokémonName(i);
 
 	for(q = 0; q < arr.length; q++) {
-		if (arr[q]["Offspring_"+JSONPath_Offspring] != undefined) {
-			if(arr[q]["Offspring_"+JSONPath_Offspring].includes(",")) {
-				var tempArr1 = arr[q]["Offspring_"+JSONPath_Offspring].split(",");
+		if (arr[q][DATA_Pokémon_Offspring["Offspring"]] != undefined) {
+			if(arr[q][DATA_Pokémon_Offspring["Offspring"]].includes(",")) {
+				let tempArr1 = arr[q][DATA_Pokémon_Offspring["Offspring"]].split(",");
 	
 				for(u = 0; u < tempArr1.length; u++) {
 					if(tempArr1[u] == pok) {
-						var obj = new Object();
+						let obj = new Object();
 						obj["Integer"] = q;
 						obj["Pokémon"] = getPokémonName(q);
-						if (arr[q]["Factor_"+JSONPath_Offspring] != undefined) {
-							obj["Factor"] = arr[q]["Factor_"+JSONPath_Offspring].split(",")[u];
+						if (arr[q][DATA_Pokémon_Offspring["Factor"]] != undefined) {
+							obj["Factor"] = arr[q][DATA_Pokémon_Offspring["Factor"]].split(",")[u];
 						}
 						result.push(obj)
 					}
 				}
 			}
 			else {
-				if (arr[q]["Offspring_"+JSONPath_Offspring] == pok) {
-					var obj = new Object();
+				if (arr[q][DATA_Pokémon_Offspring["Offspring"]] == pok) {
+					let obj = new Object();
 					obj["Integer"] = q;
 					obj["Pokémon"] = getPokémonName(q);
-					if (arr[q]["Factor_"+JSONPath_Offspring] != undefined) {
-						obj["Factor"] = arr[q]["Factor_"+JSONPath_Offspring];
+					if (arr[q][DATA_Pokémon_Offspring["Factor"]] != undefined) {
+						obj["Factor"] = arr[q][DATA_Pokémon_Offspring["Factor"]];
 					}
 					result.push(obj)
 				}
@@ -2550,33 +2455,32 @@ function getOffspringData(i) {
 
 
 function formatEvoBreedText(i,type) {
-	var i;
-	var type;
-	var Text = [];
+
+	let Text = [];
 
 	if (type == "Breed") {
-		var poks = [];
+		let poks = [];
 
-		for (var q = 0; q < finaldata["Pokémon"]["Offspring"].length; q++) {
-			if (finaldata["Pokémon"]["Reference"][i][JSONPath_Reference] == "true") {
-				if (finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring] != undefined) {
-					if (finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring].includes(",")) {
-						var ofs = finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring].split(",");
-						for (var u = 0; u < ofs.length; u++) {
+		for (let q = 0; q < finaldata["Pokémon"]["Offspring"].length; q++) {
+			if (finaldata["Pokémon"]["Reference"][i][DATA_Pokémon_Reference["Reference"]] == "true") {
+				if (finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Offspring"]] != undefined) {
+					if (finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Offspring"]].includes(",")) {
+						let ofs = finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Offspring"]].split(",");
+						for (let u = 0; u < ofs.length; u++) {
 							if (getPokémonInt(ofs[u]) == i) {
 								if (q != i) {
-									var obj = new Object();
+									let obj = new Object();
 									obj["Integer"] = q;
 									obj["Pokémon"] = getPokémonName(q);
 									obj["Gender Ratio"] = returnData(q,"Gender Ratio","").join("/");
 									obj["Primary Egg Group"] = returnData(q,"Egg Group","")[0];
 									obj["Secondary Egg Group"] = returnData(q,"Egg Group","")[1];
-									if (finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring] != undefined) {
-										if (finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring].split(",").includes(",")) {
-											obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring].split(",")[u];
+									if (finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Factor"]] != undefined) {
+										if (finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Factor"]].split(",").includes(",")) {
+											obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Factor"]].split(",")[u];
 										}
 										else {
-											obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring];
+											obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Factor"]];
 										}
 									}
 									else {
@@ -2588,15 +2492,15 @@ function formatEvoBreedText(i,type) {
 						}
 					}
 					else {
-						if (getPokémonInt(finaldata["Pokémon"]["Offspring"][q]["Offspring_"+JSONPath_Offspring]) == i) {
+						if (getPokémonInt(finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Offspring"]]) == i) {
 							if (q != i) {
-								var obj = new Object();
+								let obj = new Object();
 								obj["Integer"] = q;
 								obj["Pokémon"] = getPokémonName(q);
 								obj["Gender Ratio"] = returnData(q,"Gender Ratio","").join("/");
 								obj["Primary Egg Group"] = returnData(q,"Egg Group","")[0];
 								obj["Secondary Egg Group"] = returnData(q,"Egg Group","")[1];
-								obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q]["Factor_"+JSONPath_Offspring];
+								obj["Offspring Factor"] = finaldata["Pokémon"]["Offspring"][q][DATA_Pokémon_Offspring["Factor"]];
 								poks.push(obj)
 							}
 						}
@@ -2605,22 +2509,22 @@ function formatEvoBreedText(i,type) {
 			}
 		}
 
-		var res = divideDifferenceArr(poks,["Primary Egg Group","Secondary Egg Group","Offspring Factor"],[["Gender Ratio","1/0","0/0"]]);
+		let res = divideDifferenceArr(poks,["Primary Egg Group","Secondary Egg Group","Offspring Factor"],[["Gender Ratio","1/0","0/0"]]);
 
-		for (var q = 0; q < res.length; q++) {
-			var pks = [];
-			var egg;
-			var egg1 = res[q][0]["Primary Egg Group"];
-			var egg2 = res[q][0]["Secondary Egg Group"];
-			var factor = res[q][0]["Offspring Factor"];
+		for (let q = 0; q < res.length; q++) {
+			let pks = [];
+			let egg;
+			let egg1 = res[q][0]["Primary Egg Group"];
+			let egg2 = res[q][0]["Secondary Egg Group"];
+			let factor = res[q][0]["Offspring Factor"];
 
 
-			var att1 = "type='invert' onclick='callPopUp(`Egg Group`)' name='eggText"+egg1+"' dataname='value'";
-			var att2 = "type='invert' onclick='callPopUp(`Egg Group`)' name='eggText"+egg2+"' dataname='value'";
+			let att1 = "type='invert' onclick='callPopUp(`Egg Group`)' name='eggText"+egg1+"' dataname='value'";
+			let att2 = "type='invert' onclick='callPopUp(`Egg Group`)' name='eggText"+egg2+"' dataname='value'";
 			
 
 
-			for (var u = 0; u < res[q].length; u++) {
+			for (let u = 0; u < res[q].length; u++) {
 				pks.push(res[q][u]["Pokémon"]);
 			}
 	
@@ -2629,8 +2533,8 @@ function formatEvoBreedText(i,type) {
 			}
 		
 
-			for (var u = 0; u < pks.length; u++) {
-				var att = "type='invert' onclick='modalData()' value='"+getPokémonInt(pks[u])+"'";
+			for (let u = 0; u < pks.length; u++) {
+				let att = "type='invert' onclick='modalData()' value='"+getPokémonInt(pks[u])+"'";
 				pks[u] = "<b "+att+">"+pks[u]+"</b>";
 			}
 
@@ -2645,33 +2549,33 @@ function formatEvoBreedText(i,type) {
 				egg = "<b "+att1+">"+"Ditto"+"</b>";
 			}
 
-			var txt = "Breed "+pks.join(", ").replace(/,([^,]*)$/, ' or $1')+" with "+egg+" "+factor+".";
+			let txt = "Breed "+pks.join(", ").replace(/,([^,]*)$/, ' or $1')+" with "+egg+" "+factor+".";
 			txt = txt.replaceAll("  "," ").replaceAll(" .",".");
 			Text.push(txt);
 		}
 
 	}
 	else if(type == "Evolution") {
-		var previous = getEvolutionData(i,"Previous");
-		var next = getEvolutionData(i,"Next");
+		let previous = getEvolutionData(i,"Previous");
+		let next = getEvolutionData(i,"Next");
 		if (previous.length == 0) {
 			previous = getEvolutionData(getDefaultInt(i),"Previous")
 		}
 
 		if (previous.length > 0) {
-			var poks = getEvolutionData(previous[0]["Integer"],"Next");
+			let poks = getEvolutionData(previous[0]["Integer"],"Next");
 			
-			for (var q = 0; q < poks.length; q++) {
-				var pok = previous[0]["Pokémon"];
-				var method = poks[q]["Method"];
-				var factor = poks[q]["Factor"];
-				var gender = poks[q]["Gender"];
-				var add = poks[q]["Additional"];
+			for (let q = 0; q < poks.length; q++) {
+				let pok = previous[0]["Pokémon"];
+				let method = poks[q]["Method"];
+				let factor = poks[q]["Factor"];
+				let gender = poks[q]["Gender"];
+				let add = poks[q]["Additional"];
 
-				var dash = "by";
+				let dash = "by";
 
-				var att1 = "type='invert' onclick='modalData()' value='"+previous[0]["Integer"]+"'"
-				var att2 = "type='invert' onclick='dataRedirect()' name='item'"
+				let att1 = "type='invert' onclick='modalData()' value='"+previous[0]["Integer"]+"'"
+				let att2 = "type='invert' onclick='dataRedirect()' name='item'"
 
 				pok = "<b "+att1+">"+pok+"</b>"
 
@@ -2705,7 +2609,7 @@ function formatEvoBreedText(i,type) {
 
 				method = method.replaceAll("Special ","").replaceAll("Item","").replaceAll("Unique","");
 
-				var txt = "Evolve  "+pok+" "+gender+" "+dash+" "+method+" "+factor+" "+add+".";
+				let txt = "Evolve  "+pok+" "+gender+" "+dash+" "+method+" "+factor+" "+add+".";
 
 				if (method == "Unavailable") {
 					txt = "Unavailable";
@@ -2724,17 +2628,16 @@ function formatEvoBreedText(i,type) {
 
 
 function getItemData(item,type) {
-	var item;
-	var type;
-	var arr;
-	var column;
-	var result = [];
+
+	let arr;
+	let column;
+	let result = [];
 	if (type == "Description") {
 		arr = finaldata["Items"]["Description"];
 		column = "Description";
 	}
 
-	for (var q = 0; q < arr.length; q++) {
+	for (let q = 0; q < arr.length; q++) {
 		if(getApplicable(arr[q]["Game"])) {
 			if(arr[q]["Item"] == item) {
 				result.push(arr[q][column])
@@ -2746,27 +2649,26 @@ function getItemData(item,type) {
 }
 
 function uniqueValueSelect(selects) {
-	var selects;
 
-	var vals = [];
+	let vals = [];
 
-	for (var i = 0; i < selects.length; i++) {
+	for (let i = 0; i < selects.length; i++) {
 		vals.push(selects[i].value);
 	}
 
-	for (var i = 0; i < selects.length; i++) {
-		var opt = selects[i].querySelectorAll(":scope option")
-		for (var u = 0; u < opt.length; u++) {
+	for (let i = 0; i < selects.length; i++) {
+		let opt = selects[i].querySelectorAll(":scope option")
+		for (let u = 0; u < opt.length; u++) {
 			opt[u].style.removeProperty("display");
 			opt[u].removeAttribute("disabled");
 		}
 	}
 
-	for (var i = 0; i < selects.length; i++) {
-		for (var u = 0; u < vals.length; u++) {
+	for (let i = 0; i < selects.length; i++) {
+		for (let u = 0; u < vals.length; u++) {
 			if (vals[u] != "") {
 				if (i != u) {
-					var opt = selects[i].querySelector(":scope option[value='"+vals[u]+"']")
+					let opt = selects[i].querySelector(":scope option[value='"+vals[u]+"']")
 					if (opt != undefined) {
 						opt.style.display = "none";
 						opt.setAttribute("disabled","");
@@ -2779,37 +2681,36 @@ function uniqueValueSelect(selects) {
 
 
 function returnMoveLearnset(move,conditions) {
-	var move;
-	var conditions;
-	var arr1 = finaldata["Pokémon Learnset"]["Level Up"];
-	var arr2 = finaldata["Pokémon Learnset"]["Evolution"];
-	var arr3 = finaldata["Pokémon Learnset"]["Machine"];
-	var arr4 = finaldata["Pokémon Learnset"]["Breeding"];
 
-	var result = [];
+	let arr1 = finaldata["Pokémon Learnset"]["Level Up"];
+	let arr2 = finaldata["Pokémon Learnset"]["Evolution"];
+	let arr3 = finaldata["Pokémon Learnset"]["Machine"];
+	let arr4 = finaldata["Pokémon Learnset"]["Breeding"];
 
-	for (var i = 0; i < arr1.length; i++) {
+	let result = [];
+
+	for (let i = 0; i < arr1.length; i++) {
 		if (getApplicable(arr1[i]["Game"])) {
 			if(arr1[i]["Move"] == move) {
 				result.push(arr1[i]["Pokémon"]);
 			}
 		}
 	}
-	for (var i = 0; i < arr2.length; i++) {
+	for (let i = 0; i < arr2.length; i++) {
 		if (getApplicable(arr2[i]["Game"])) {
 			if(arr2[i]["Move"] == move) {
 				result.push(arr2[i]["Pokémon"]);
 			}
 		}
 	}
-	for (var i = 0; i < arr3.length; i++) {
+	for (let i = 0; i < arr3.length; i++) {
 		if (getApplicable(arr3[i]["Game"])) {
 			if(arr3[i]["Move"] == move) {
 				result.push(arr3[i]["Pokémon"]);
 			}
 		}
 	}
-	for (var i = 0; i < arr4.length; i++) {
+	for (let i = 0; i < arr4.length; i++) {
 		if (getApplicable(arr4[i]["Game"])) {
 			if(arr4[i]["Move"] == move) {
 				result.push(arr4[i]["Pokémon"]);
@@ -2826,28 +2727,27 @@ function returnMoveLearnset(move,conditions) {
 
 function referenceLink(text) {
 
-	var text;
-	var items = finaldata["Items"]["Reference"];
-	var abilities = finaldata["Abilities"]["Reference"];
-	var moves = finaldata["Moves"]["Reference"];
-	var poks = finaldata["Pokémon"]["Reference"];
+	let items = finaldata["Items"]["Reference"];
+	let abilities = finaldata["Abilities"]["Reference"];
+	let moves = finaldata["Moves"]["Reference"];
+	let poks = finaldata["Pokémon"]["Reference"];
 
-	var itemArr = [];
-	var abilityArr = [];
-	var moveArr = [];
-	var pokArr = [];
+	let itemArr = [];
+	let abilityArr = [];
+	let moveArr = [];
+	let pokArr = [];
 
 
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i]["Item"];
+	for (let i = 0; i < items.length; i++) {
+		let item = items[i]["Item"];
 		if (item != undefined) {
 			if (item.includes(" ")) {
 				itemArr.push(item)
 			}
 		}
 	}
-	for (var i = 0; i < items.length; i++) {
-		var item = items[i]["Item"];
+	for (let i = 0; i < items.length; i++) {
+		let item = items[i]["Item"];
 		if (item != undefined) {
 			if (!item.includes(" ")) {
 				itemArr.push(item)
@@ -2856,34 +2756,34 @@ function referenceLink(text) {
 	}
 
 
-	for (var i = 0; i < abilities.length; i++) {
+	for (let i = 0; i < abilities.length; i++) {
 		if (getApplicable(abilities[i]["Game"])) {
-			var ability = abilities[i]["Ability"];
+			let ability = abilities[i]["Ability"];
 			if (ability.includes(" ")) {
 				abilityArr.push(ability)
 			}
 		}
 	}
-	for (var i = 0; i < abilities.length; i++) {
+	for (let i = 0; i < abilities.length; i++) {
 		if (getApplicable(abilities[i]["Game"])) {
-			var ability = abilities[i]["Ability"];
+			let ability = abilities[i]["Ability"];
 			if (!ability.includes(" ")) {
 				abilityArr.push(ability)
 			}
 		}
 	}
 
-	for (var i = 0; i < moves.length; i++) {
-		if (moves[i][JSONPath_MoveReference]) {
-			var move = moves[i]["Name_"+JSONPath_MoveName];
+	for (let i = 0; i < moves.length; i++) {
+		if (moves[i][DATA_Move_Reference["Reference"]]) {
+			let move = moves[i][DATA_Move_Reference["Name"]];
 			if (move.includes(" ")) {
 				moveArr.push(move)
 			}
 		}
 	}
-	for (var i = 0; i < moves.length; i++) {
-		if (moves[i][JSONPath_MoveReference]) {
-			var move = moves[i]["Name_"+JSONPath_MoveName];
+	for (let i = 0; i < moves.length; i++) {
+		if (moves[i][DATA_Move_Reference["Reference"]]) {
+			let move = moves[i][DATA_Move_Reference["Name"]];
 			if (!move.includes(" ")) {
 				moveArr.push(move)
 			}
@@ -2891,17 +2791,17 @@ function referenceLink(text) {
 	}
 
 
-	for (var i = 0; i < poks.length; i++) {
-		if (poks[i][JSONPath_MoveReference]) {
-			var pok = poks[i]["Pokémon"];
+	for (let i = 0; i < poks.length; i++) {
+		if (poks[i][DATA_Move_Reference["Reference"]]) {
+			let pok = poks[i]["Pokémon"];
 			if (pok.includes(" ")) {
 				pokArr.push(pok)
 			}
 		}
 	}
-	for (var i = 0; i < poks.length; i++) {
-		if (poks[i][JSONPath_MoveReference]) {
-			var pok = poks[i]["Pokémon"];
+	for (let i = 0; i < poks.length; i++) {
+		if (poks[i][DATA_Move_Reference["Reference"]]) {
+			let pok = poks[i]["Pokémon"];
 			if (!pok.includes(" ")) {
 				pokArr.push(pok)
 			}
@@ -2911,41 +2811,15 @@ function referenceLink(text) {
 
 
 
-	for (var i = 0; i < itemArr.length; i++) {
-		var item = itemArr[i];
-		var i1 = " "+item+" ";
-		var i2 = " "+item+".";
-		var i3 = " "+item+",";
-		var i4 = '"'+item+'"';
+	for (let i = 0; i < itemArr.length; i++) {
+		let item = itemArr[i];
+		let i1 = " "+item+" ";
+		let i2 = " "+item+".";
+		let i3 = " "+item+",";
+		let i4 = '"'+item+'"';
 
-		var first = "<b type='invert' onclick='dataRedirect()' name='item' style='font-weight:bold;text-shadow:1px 1px #000;'>";
-		var last = "</b>";
-
-		if (text.includes(i1)) {
-			text = text.replaceAll(i1,first+i1+last)
-		}
-		if (text.includes(i2)) {
-			text = text.replaceAll(i2,first+i2+last)
-		}
-		if (text.includes(i3)) {
-			text = text.replaceAll(i3,first+i3+last)
-		}
-		if (text.includes(i4)) {
-			text = text.replaceAll(i4,first+i4+last)
-		}
-		text = text.replaceAll(first+' ',' '+first);
-		text = text.replaceAll(first+'"','"'+first);
-	}
-
-	for (var i = 0; i < abilityArr.length; i++) {
-		var ability = abilityArr[i];
-		var i1 = " "+ability+" ";
-		var i2 = " "+ability+".";
-		var i3 = " "+ability+",";
-		var i4 = '"'+ability+'"';
-
-		var first = "<b type='invert' onclick='dataRedirect()' name='ability' style='font-weight:bold;text-shadow:1px 1px #000;'>";
-		var last = "</b>";
+		let first = "<b type='invert' onclick='dataRedirect()' name='item' style='font-weight:bold;text-shadow:1px 1px #000;'>";
+		let last = "</b>";
 
 		if (text.includes(i1)) {
 			text = text.replaceAll(i1,first+i1+last)
@@ -2963,17 +2837,43 @@ function referenceLink(text) {
 		text = text.replaceAll(first+'"','"'+first);
 	}
 
-	for (var i = 0; i < moveArr.length; i++) {
-		var move = moveArr[i];
-		var i1 = " "+move+" ";
-		var i2 = " "+move+".";
-		var i3 = " "+move+",";
-		var i4 = '"'+move+'"';
+	for (let i = 0; i < abilityArr.length; i++) {
+		let ability = abilityArr[i];
+		let i1 = " "+ability+" ";
+		let i2 = " "+ability+".";
+		let i3 = " "+ability+",";
+		let i4 = '"'+ability+'"';
 
-		var type = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,move);
+		let first = "<b type='invert' onclick='dataRedirect()' name='ability' style='font-weight:bold;text-shadow:1px 1px #000;'>";
+		let last = "</b>";
 
-		var first = "<b type='invert' onclick='dataRedirect()' name='move' style='color:var(--type"+type+");font-weight:bold;text-shadow:1px 1px #000;'>";
-		var last = "</b>";
+		if (text.includes(i1)) {
+			text = text.replaceAll(i1,first+i1+last)
+		}
+		if (text.includes(i2)) {
+			text = text.replaceAll(i2,first+i2+last)
+		}
+		if (text.includes(i3)) {
+			text = text.replaceAll(i3,first+i3+last)
+		}
+		if (text.includes(i4)) {
+			text = text.replaceAll(i4,first+i4+last)
+		}
+		text = text.replaceAll(first+' ',' '+first);
+		text = text.replaceAll(first+'"','"'+first);
+	}
+
+	for (let i = 0; i < moveArr.length; i++) {
+		let move = moveArr[i];
+		let i1 = " "+move+" ";
+		let i2 = " "+move+".";
+		let i3 = " "+move+",";
+		let i4 = '"'+move+'"';
+
+		let type = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],move);
+
+		let first = "<b type='invert' onclick='dataRedirect()' name='move' style='color:var(--type"+type+");font-weight:bold;text-shadow:1px 1px #000;'>";
+		let last = "</b>";
 
 		if (text.includes(i1)) {
 			text = text.replaceAll(i1,first+i1+last)
@@ -2991,15 +2891,15 @@ function referenceLink(text) {
 		text = text.replaceAll(first+'"','"'+first);
 	}
 	
-	for (var i = 0; i < pokArr.length; i++) {
-		var pok = pokArr[i];
-		var i1 = " "+pok+" ";
-		var i2 = " "+pok+".";
-		var i3 = " "+pok+",";
-		var i4 = '"'+pok+'"';
+	for (let i = 0; i < pokArr.length; i++) {
+		let pok = pokArr[i];
+		let i1 = " "+pok+" ";
+		let i2 = " "+pok+".";
+		let i3 = " "+pok+",";
+		let i4 = '"'+pok+'"';
 
-		var first = "<b type='invert' onclick='modalData()' style='font-weight:bold;text-shadow:1px 1px #000;'>";
-		var last = "</b>";
+		let first = "<b type='invert' onclick='modalData()' style='font-weight:bold;text-shadow:1px 1px #000;'>";
+		let last = "</b>";
 
 		if (text.includes(i1)) {
 			text = text.replaceAll(i1,first+i1+last)
@@ -3031,7 +2931,7 @@ function referenceLink(text) {
 
 
 function doubleClicker(handler) {
-	var timeout = 0,
+	let timeout = 0,
 		clicked = false;
 	return function(e) {
 		e.preventDefault();
@@ -3050,18 +2950,18 @@ function doubleClicker(handler) {
 
 function importData() {
 
-	var lock = prompt("Enter Import String:");
+	let lock = prompt("Enter Import String:");
 
 	if (lock != undefined && lock != "") {
 		if (lock.charAt(0) == "[" && lock.includes("]") && lock.includes(":")) {
-			var conf = confirm("It's not recommended to transfer data cross-games.\nThis action cannot be reversed.\nDo you want to continue?")
+			let conf = confirm("It's not recommended to transfer data cross-games.\nThis action cannot be reversed.\nDo you want to continue?")
 			if (conf) {
-				var tempArr = lock.replaceAll("{","").replaceAll("}","").replaceAll("[","").replaceAll("]","").replaceAll('"','').split(",")
+				let tempArr = lock.replaceAll("{","").replaceAll("}","").replaceAll("[","").replaceAll("]","").replaceAll('"','').split(",")
 
-				for (var i = 0; i < tempArr.length; i++) {
+				for (let i = 0; i < tempArr.length; i++) {
 					if (tempArr[i].includes("finaldex")) {
-						var name = tempArr[i].split(":")[0];
-						var val = tempArr[i].split(":")[1];
+						let name = tempArr[i].split(":")[0];
+						let val = tempArr[i].split(":")[1];
 						localStorage.setItem(name,val);
 					}
 				}
@@ -3081,20 +2981,20 @@ function importData() {
 	}
 }
 function exportData() {
-	var res = [];
-	var tempArr = JSON.stringify(localStorage).replaceAll("{","").replaceAll("}","").replaceAll('"','').split(",");
+	let res = [];
+	let tempArr = JSON.stringify(localStorage).replaceAll("{","").replaceAll("}","").replaceAll('"','').split(",");
 
-	for (var i = 0; i < tempArr.length; i++) {
+	for (let i = 0; i < tempArr.length; i++) {
 		if (tempArr[i].includes("finaldex-")) {
-			var name = tempArr[i].split(":")[0];
-			var val = tempArr[i].split(":")[1];
-			var obj = new Object();
+			let name = tempArr[i].split(":")[0];
+			let val = tempArr[i].split(":")[1];
+			let obj = new Object();
 			obj[name] = val;
 			res.push(obj);
 		}
 	}
 
-	var resStr = JSON.stringify(res);
+	let resStr = JSON.stringify(res);
 
 	navigator.clipboard.writeText(resStr);
 	console.log(resStr)
@@ -3104,17 +3004,17 @@ function exportData() {
 
 
 function flingPowerCalc(item) {
-	var p10 = ["Air Balloon","Big Root","Bright Powder","Choice Band","Choice Scarf","Choice Specs","Destiny Knot","Discount Coupon","Electric Seed","Expert Belt","Focus Band","Focus Sash","Grassy Seed","Lagging Tail","Leftovers","Mental Herb","Metal Powder","Misty Seed","Muscle Band","Power Herb","Psychic Seed","Quick Powder","Reaper Cloth","Red Card","Ring Target","Shed Shell","Silk Scarf","Silver Powder","Smooth Rock","Soft Sand","Soothe Bell","White Herb","Wide Lens","Wise Glasses","Zoom Lens","Bread","Coconut Milk","Fresh Cream","Fried Food","Fruit Bunch","Instant Noodles","Mixed Mushrooms","Pack of Potatoes","Packaged Curry","Pasta","Precooked Burger","Pungent Root","Salad Mix","Sausages","Smoke-Poke Tail","Adamant Mint","Aguav Berry","Apicot Berry","Aspear Berry","Babiri Berry","Belue Berry","Berry Sweet","Blue Scarf","Bluk Berry","Bold Mint","Brave Mint","Calm Mint","Careful Mint","Charti Berry","Cheri Berry","Chesto Berry","Chilan Berry","Chople Berry","Clover Sweet","Coba Berry","Colbur Berry","Cornn Berry","Custap Berry","Durin Berry","Enigma Berry","Figy Berry","Flower Sweet","Full Incense","Ganlon Berry","Gentle Mint","Green Scarf","Grepa Berry","Haban Berry","Hasty Mint","Hondew Berry","Hopo Berry","Iapapa Berry","Impish Mint","Jaboca Berry","Jolly Mint","Kasib Berry","Kebia Berry","Kee Berry","Kelpsy Berry","Lansat Berry","Lax Incense","Lax Mint","Leppa Berry","Liechi Berry","Lonely Mint","Love Sweet","Luck Incense","Lum Berry","Mago Berry","Magost Berry","Maranga Berry","Micle Berry","Mild Mint","Modest Mint","Naive Mint","Nanab Berry","Naughty Mint","Nomel Berry","Occa Berry","Odd Incense","Oran Berry","Pamtre Berry","Passho Berry","Payapa Berry","Pecha Berry","Persim Berry","Petaya Berry","Pinap Berry","Pink Nectar","Pink Scarf","Pomeg Berry","Pure Incense","Purple Nectar","Qualot Berry","Quiet Mint","Rabuta Berry","Rash Mint","Rawst Berry","Razz Berry","Red Nectar","Red Scarf","Relaxed Mint","Ribbon Sweet","Rindo Berry","Rock Incense","Rose Incense","Roseli Berry","Rowap Berry","Salac Berry","Sassy Mint","Sea Incense","Serious Mint","Shuca Berry","Sitrus Berry","Spelon Berry","Star Sweet","Starf Berry","Strawberry Sweet","Tamato Berry","Tanga Berry","Timid Mint","Wacan Berry","Watmel Berry","Wave Incense","Wepear Berry","Wiki Berry","Yache Berry","Yellow Nectar","Yellow Scarf","Pumkin Berry","Drash Berry","Eggant Berry","Strib Berry","Chilan Berry","Nutpea Berry","Ginema Berry","Kuo Berry","Yago Berry","Touga Berry","Niniku Berry","Topo Berry"];
-	var p20 = ["Boiled Egg","Fancy Apple","Large Leek","Moomoo Cheese","Health Feather","Muscle Feather","Resist Feather","Genius Feather","Clever Feather","Swift Feather","Pretty Feather"];
-	var p30 = ["Ether","Elixir","Max Ether","Max Elixir","Repel","Super Repel","Max Repel","Ability Shield","Absorb Bulb","Adrenaline Orb","Amulet Coin","Armorite Ore","Auspicious Armor","Balm Mushroom","Berry Juice","Big Bamboo Shoot","Big Malasada","Big Mushroom","Big Nugget","Big Pearl","Binding Band","Black Belt","Black Glasses","Black Sludge","Booster Energy","Bottle Cap","Casteliacone","Cell Battery","Charcoal","Cleanse Tag","Clear Amulet","Comet Shard","Covert Cloak","Deep Sea Scale","Dragon Scale","Dynamax Candy","Eject Button","Escape Rope","Everstone","Fire Stone","Flame Orb","Float Stone","Fluffy Tail","Galarica Cuff","Galarica Twig","Galarica Wreath","Gold Bottle Cap","Heart Scale","Honey","Ice Stone","King's Rock","Lava Cookie","Leader's Crest","Leaf Stone","Life Orb","Light Ball","Light Clay","Loaded Dice","Lucky Egg","Luminous Moss","Lumiose Galette","Magnet","Malicious Armor","Max Mushrooms","Max Revive","Metal Coat","Metronome","Miracle Seed","Mirror Herb","Moon Stone","Mystic Water","Never-Melt Ice","Nugget","Old Gateau","Pass Orb","Pearl String","Pearl","Poké Doll","Poké Toy","Prism Scale","Protective Pads","Punching Glove","Rare Candy","Razor Fang","Relic Band","Relic Copper","Relic Crown","Relic Gold","Relic Silver","Relic Statue","Relic Vase","Revive","Sacred Ash","Scope Lens","Shalour Sable","Shell Bell","Shoal Salt","Shoal Shell","Smoke Ball","Snowball","Soul Dew","Spell Tag","Star Piece","Strange Souvenir","Stardust","Sun Stone","Sweet Apple","Sweet Heart","Tart Apple","Thunder Stone","Tiny Bamboo Shoot","Tiny Mushroom","Toxic Orb","Throat Spray","Twisted Spoon","Upgrade","Water Stone","Brittle Bones","Antidote","Aspear Berry","Awakening","Big Malasada","Bitter Berry","Blue Flute","Burn Heal","Burnt Berry","Casteliacone","Cheri Berry","Chesto Berry","Drash Berry","Eggant Berry","Full Heal","Full Restore","Heal Powder","Ice Berry","Ice Heal","Lava Cookie","Lum Berry","Lumiose Galette","Max Revive","Mental Herb","Mint Berry","MiracleBerry","Old Gateau","Paralyze Heal","Pecha Berry","Persim Berry","Pewter Crunchies","Poké Flute","PRZCureBerry","PSNCureBerry","Pumkin Berry","Rage Candy Bar","Rawst Berry","Red Flute","Revive","Revival Herb","Sacred Ash","Shalour Sable","Touga Berry","Yago Berry","Yellow Flute","Full Restore","Hyper Potion","Max Potion","Potion","Super Potion","Heal Powder","Energy Powder","Energy Root","Revival Herb","Fresh Water","Soda Pop","Lemonade","Moomoo Milk","Berry Juice","Tea","HP Up","Protein","Iron","Calcium","Zinc","Carbos","PP Up","PP Max","Red Shard","Green Shard","Blue Shard","Yellow Shard","Growth Mulch","Damp Mulch","Stable Mulch","Gooey Mulch","Amaze Mulch","Boost Mulch","Rich Mulch","Surprise Mulch","X Attack","X Defense","X Sp. Atk","X Sp. Def","X Speed","X Accuracy","Dire Hit","Guard Spec.","Blue Flute","Yellow Flute","Red Flute","Black Flute","White Flute","Exp. Candy XS","Exp. Candy S","Exp. Candy M","Exp. Candy L","Exp. Candy XL","Normal Tera Shard","Fire Tera Shard","Water Tera Shard","Electric Tera Shard","Grass Tera Shard","Ice Tera Shard","Fighting Tera Shard","Poison Tera Shard","Ground Tera Shard","Flying Tera Shard","Psychic Tera Shard","Bug Tera Shard","Rock Tera Shard","Ghost Tera Shard","Dragon Tera Shard","Dark Tera Shard","Steel Tera Shard","Fairy Tera Shard"];
-	var p40 = ["Eviolite","Icy Rock","Lucky Punch"];
-	var p50 = ["Dubious Disc","Eject Pack","Sharp Beak","Wishing Piece","Gigantamix","Spice Mix","Bug Memory","Dark Memory","Dragon Memory","Electric Memory","Fairy Memory","Fighting Memory","Fire Memory","Flying Memory","Ghost Memory","Grass Memory","Ground Memory","Ice Memory","Poison Memory","Psychic Memory","Rock Memory","Steel Memory","Water Memory"];
-	var p60 = ["Adamant Orb","Damp Rock","Griseous Orb","Heat Rock","Leek","Lustrous Orb","Macho Brace","Rocky Helmet","Terrain Extender","Utility Umbrella"];
-	var p70 = ["Dragon Fang","Poison Barb","Shock Drive","Burn Drive","Chill Drive","Douse Drive","Power Anklet","Power Band","Power Belt","Power Bracer","Power Lens","Power Weight"];
-	var p80 = ["Assault Vest","Blunder Policy","Chipped Pot","Cracked Pot","Dawn Stone","Dusk Stone","Electirizer","Heavy-Duty Boots","Magmarizer","Odd Keystone","Oval Stone","Protector","Quick Claw","Razor Claw","Sachet","Safety Goggles","Shiny Stone","Sticky Barb","Tin of Beans","Weakness Policy","Whipped Dream","Bach's Food Tin","Bob's Food Tin","Gengarite","Gardevoirite","Ampharosite","Venusaurite","Charizardite X","Blastoisinite","Mewtwonite X","Mewtwonite Y","Blazikenite","Medichamite","Houndoominite","Aggronite","Banettite","Tyranitarite","Scizorite","Pinsirite","Aerodactylite","Lucarionite","Abomasite","Kangaskhanite","Gyaradosite","Absolite","Charizardite Y","Alakazite","Heracronite","Mawilite","Manectite","Garchompite","Latiasite","Latiosite","Swampertite","Sceptilite","Sablenite","Altarianite","Galladite","Audinite","Metagrossite","Sharpedonite","Slowbronite","Steelixite","Pidgeotite","Glalitite","Diancite","Cameruptite","Lopunnite","Salamencite","Beedrillite"];
-	var p90 = ["Deep Sea Tooth","Grip Claw","Thick Club","Blank Plate","Draco Plate","Dread Plate","Earth Plate","Fist Plate","Flame Plate","Icicle Plate","Insect Plate","Iron Plate","Legend Plate","Meadow Plate","Mind Plate","Pixie Plate","Sky Plate","Splash Plate","Spooky Plate","Stone Plate","Toxic Plate","Zap Plate"];
-	var p100 = ["Hard Stone","Rare Bone","Room Service","Helix Fossil","Dome Fossil","Old Amber","Root Fossil","Claw Fossil","Skull Fossil","Armor Fossil","Cover Fossil","Plume Fossil","Jaw Fossil","Sail Fossil","Bird Fossil","Fish Fossil","Drake Fossil","Dino Fossil"];
-	var p130 = ["Iron Ball"];
+	let p10 = ["Air Balloon","Big Root","Bright Powder","Choice Band","Choice Scarf","Choice Specs","Destiny Knot","Discount Coupon","Electric Seed","Expert Belt","Focus Band","Focus Sash","Grassy Seed","Lagging Tail","Leftovers","Mental Herb","Metal Powder","Misty Seed","Muscle Band","Power Herb","Psychic Seed","Quick Powder","Reaper Cloth","Red Card","Ring Target","Shed Shell","Silk Scarf","Silver Powder","Smooth Rock","Soft Sand","Soothe Bell","White Herb","Wide Lens","Wise Glasses","Zoom Lens","Bread","Coconut Milk","Fresh Cream","Fried Food","Fruit Bunch","Instant Noodles","Mixed Mushrooms","Pack of Potatoes","Packaged Curry","Pasta","Precooked Burger","Pungent Root","Salad Mix","Sausages","Smoke-Poke Tail","Adamant Mint","Aguav Berry","Apicot Berry","Aspear Berry","Babiri Berry","Belue Berry","Berry Sweet","Blue Scarf","Bluk Berry","Bold Mint","Brave Mint","Calm Mint","Careful Mint","Charti Berry","Cheri Berry","Chesto Berry","Chilan Berry","Chople Berry","Clover Sweet","Coba Berry","Colbur Berry","Cornn Berry","Custap Berry","Durin Berry","Enigma Berry","Figy Berry","Flower Sweet","Full Incense","Ganlon Berry","Gentle Mint","Green Scarf","Grepa Berry","Haban Berry","Hasty Mint","Hondew Berry","Hopo Berry","Iapapa Berry","Impish Mint","Jaboca Berry","Jolly Mint","Kasib Berry","Kebia Berry","Kee Berry","Kelpsy Berry","Lansat Berry","Lax Incense","Lax Mint","Leppa Berry","Liechi Berry","Lonely Mint","Love Sweet","Luck Incense","Lum Berry","Mago Berry","Magost Berry","Maranga Berry","Micle Berry","Mild Mint","Modest Mint","Naive Mint","Nanab Berry","Naughty Mint","Nomel Berry","Occa Berry","Odd Incense","Oran Berry","Pamtre Berry","Passho Berry","Payapa Berry","Pecha Berry","Persim Berry","Petaya Berry","Pinap Berry","Pink Nectar","Pink Scarf","Pomeg Berry","Pure Incense","Purple Nectar","Qualot Berry","Quiet Mint","Rabuta Berry","Rash Mint","Rawst Berry","Razz Berry","Red Nectar","Red Scarf","Relaxed Mint","Ribbon Sweet","Rindo Berry","Rock Incense","Rose Incense","Roseli Berry","Rowap Berry","Salac Berry","Sassy Mint","Sea Incense","Serious Mint","Shuca Berry","Sitrus Berry","Spelon Berry","Star Sweet","Starf Berry","Strawberry Sweet","Tamato Berry","Tanga Berry","Timid Mint","Wacan Berry","Watmel Berry","Wave Incense","Wepear Berry","Wiki Berry","Yache Berry","Yellow Nectar","Yellow Scarf","Pumkin Berry","Drash Berry","Eggant Berry","Strib Berry","Chilan Berry","Nutpea Berry","Ginema Berry","Kuo Berry","Yago Berry","Touga Berry","Niniku Berry","Topo Berry"];
+	let p20 = ["Boiled Egg","Fancy Apple","Large Leek","Moomoo Cheese","Health Feather","Muscle Feather","Resist Feather","Genius Feather","Clever Feather","Swift Feather","Pretty Feather"];
+	let p30 = ["Ether","Elixir","Max Ether","Max Elixir","Repel","Super Repel","Max Repel","Ability Shield","Absorb Bulb","Adrenaline Orb","Amulet Coin","Armorite Ore","Auspicious Armor","Balm Mushroom","Berry Juice","Big Bamboo Shoot","Big Malasada","Big Mushroom","Big Nugget","Big Pearl","Binding Band","Black Belt","Black Glasses","Black Sludge","Booster Energy","Bottle Cap","Casteliacone","Cell Battery","Charcoal","Cleanse Tag","Clear Amulet","Comet Shard","Covert Cloak","Deep Sea Scale","Dragon Scale","Dynamax Candy","Eject Button","Escape Rope","Everstone","Fire Stone","Flame Orb","Float Stone","Fluffy Tail","Galarica Cuff","Galarica Twig","Galarica Wreath","Gold Bottle Cap","Heart Scale","Honey","Ice Stone","King's Rock","Lava Cookie","Leader's Crest","Leaf Stone","Life Orb","Light Ball","Light Clay","Loaded Dice","Lucky Egg","Luminous Moss","Lumiose Galette","Magnet","Malicious Armor","Max Mushrooms","Max Revive","Metal Coat","Metronome","Miracle Seed","Mirror Herb","Moon Stone","Mystic Water","Never-Melt Ice","Nugget","Old Gateau","Pass Orb","Pearl String","Pearl","Poké Doll","Poké Toy","Prism Scale","Protective Pads","Punching Glove","Rare Candy","Razor Fang","Relic Band","Relic Copper","Relic Crown","Relic Gold","Relic Silver","Relic Statue","Relic Vase","Revive","Sacred Ash","Scope Lens","Shalour Sable","Shell Bell","Shoal Salt","Shoal Shell","Smoke Ball","Snowball","Soul Dew","Spell Tag","Star Piece","Strange Souvenir","Stardust","Sun Stone","Sweet Apple","Sweet Heart","Tart Apple","Thunder Stone","Tiny Bamboo Shoot","Tiny Mushroom","Toxic Orb","Throat Spray","Twisted Spoon","Upgrade","Water Stone","Brittle Bones","Antidote","Aspear Berry","Awakening","Big Malasada","Bitter Berry","Blue Flute","Burn Heal","Burnt Berry","Casteliacone","Cheri Berry","Chesto Berry","Drash Berry","Eggant Berry","Full Heal","Full Restore","Heal Powder","Ice Berry","Ice Heal","Lava Cookie","Lum Berry","Lumiose Galette","Max Revive","Mental Herb","Mint Berry","MiracleBerry","Old Gateau","Paralyze Heal","Pecha Berry","Persim Berry","Pewter Crunchies","Poké Flute","PRZCureBerry","PSNCureBerry","Pumkin Berry","Rage Candy Bar","Rawst Berry","Red Flute","Revive","Revival Herb","Sacred Ash","Shalour Sable","Touga Berry","Yago Berry","Yellow Flute","Full Restore","Hyper Potion","Max Potion","Potion","Super Potion","Heal Powder","Energy Powder","Energy Root","Revival Herb","Fresh Water","Soda Pop","Lemonade","Moomoo Milk","Berry Juice","Tea","HP Up","Protein","Iron","Calcium","Zinc","Carbos","PP Up","PP Max","Red Shard","Green Shard","Blue Shard","Yellow Shard","Growth Mulch","Damp Mulch","Stable Mulch","Gooey Mulch","Amaze Mulch","Boost Mulch","Rich Mulch","Surprise Mulch","X Attack","X Defense","X Sp. Atk","X Sp. Def","X Speed","X Accuracy","Dire Hit","Guard Spec.","Blue Flute","Yellow Flute","Red Flute","Black Flute","White Flute","Exp. Candy XS","Exp. Candy S","Exp. Candy M","Exp. Candy L","Exp. Candy XL","Normal Tera Shard","Fire Tera Shard","Water Tera Shard","Electric Tera Shard","Grass Tera Shard","Ice Tera Shard","Fighting Tera Shard","Poison Tera Shard","Ground Tera Shard","Flying Tera Shard","Psychic Tera Shard","Bug Tera Shard","Rock Tera Shard","Ghost Tera Shard","Dragon Tera Shard","Dark Tera Shard","Steel Tera Shard","Fairy Tera Shard"];
+	let p40 = ["Eviolite","Icy Rock","Lucky Punch"];
+	let p50 = ["Dubious Disc","Eject Pack","Sharp Beak","Wishing Piece","Gigantamix","Spice Mix","Bug Memory","Dark Memory","Dragon Memory","Electric Memory","Fairy Memory","Fighting Memory","Fire Memory","Flying Memory","Ghost Memory","Grass Memory","Ground Memory","Ice Memory","Poison Memory","Psychic Memory","Rock Memory","Steel Memory","Water Memory"];
+	let p60 = ["Adamant Orb","Damp Rock","Griseous Orb","Heat Rock","Leek","Lustrous Orb","Macho Brace","Rocky Helmet","Terrain Extender","Utility Umbrella"];
+	let p70 = ["Dragon Fang","Poison Barb","Shock Drive","Burn Drive","Chill Drive","Douse Drive","Power Anklet","Power Band","Power Belt","Power Bracer","Power Lens","Power Weight"];
+	let p80 = ["Assault Vest","Blunder Policy","Chipped Pot","Cracked Pot","Dawn Stone","Dusk Stone","Electirizer","Heavy-Duty Boots","Magmarizer","Odd Keystone","Oval Stone","Protector","Quick Claw","Razor Claw","Sachet","Safety Goggles","Shiny Stone","Sticky Barb","Tin of Beans","Weakness Policy","Whipped Dream","Bach's Food Tin","Bob's Food Tin","Gengarite","Gardevoirite","Ampharosite","Venusaurite","Charizardite X","Blastoisinite","Mewtwonite X","Mewtwonite Y","Blazikenite","Medichamite","Houndoominite","Aggronite","Banettite","Tyranitarite","Scizorite","Pinsirite","Aerodactylite","Lucarionite","Abomasite","Kangaskhanite","Gyaradosite","Absolite","Charizardite Y","Alakazite","Heracronite","Mawilite","Manectite","Garchompite","Latiasite","Latiosite","Swampertite","Sceptilite","Sablenite","Altarianite","Galladite","Audinite","Metagrossite","Sharpedonite","Slowbronite","Steelixite","Pidgeotite","Glalitite","Diancite","Cameruptite","Lopunnite","Salamencite","Beedrillite"];
+	let p90 = ["Deep Sea Tooth","Grip Claw","Thick Club","Blank Plate","Draco Plate","Dread Plate","Earth Plate","Fist Plate","Flame Plate","Icicle Plate","Insect Plate","Iron Plate","Legend Plate","Meadow Plate","Mind Plate","Pixie Plate","Sky Plate","Splash Plate","Spooky Plate","Stone Plate","Toxic Plate","Zap Plate"];
+	let p100 = ["Hard Stone","Rare Bone","Room Service","Helix Fossil","Dome Fossil","Old Amber","Root Fossil","Claw Fossil","Skull Fossil","Armor Fossil","Cover Fossil","Plume Fossil","Jaw Fossil","Sail Fossil","Bird Fossil","Fish Fossil","Drake Fossil","Dino Fossil"];
+	let p130 = ["Iron Ball"];
 	
 
 	if (p10.includes(item)) {
