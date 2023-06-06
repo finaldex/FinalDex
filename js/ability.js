@@ -1,46 +1,46 @@
-var createAbility = function() {
+let createAbility = function() {
 	if(Ability.length >= 1) {
-		var abilityOuter = document.createElement("div");
-		var abilitySectionList = document.createElement("section");
-		var abilitySectionListOptionsTitleOuter = document.createElement("div");
-		var abilitySectionListOptionsSearchOuter = document.createElement("div");
-		var abilitySectionListOptionsSearch = document.createElement("input");
-		var abilitySectionListOptionsSearchExit = document.createElement("span");
-		var abilitySectionListOptionsOuter = document.createElement("div");
-		var abilitySectionListOptions = document.createElement("ol");
-		var abilitySectionHeader = document.createElement("section");
-		var abilitySectionHeaderTitle = document.createElement("span");
-		var abilitySectionHeaderTitleID = document.createElement("h4");
-		var abilitySectionHeaderTitleName = document.createElement("h3");
-		var abilitySectionHeaderDebut = document.createElement("span");
-		var abilitySectionHeaderDebutText = document.createElement("h5");
-		var abilitySectionContent = document.createElement("section");
-		var abilitySectionContentDescription = document.createElement("div");
-		var abilitySectionContentDescriptionText = document.createElement("p");
-		var abilitySectionContentEffectTitle = document.createElement("h4");
-		var abilitySectionContentEffectText = document.createElement("p");
-		var abilitySectionContentBreak = document.createElement("br");
-		var abilitySectionContentAffectTitle = document.createElement("h4");
-		var abilitySectionContentAffectText = document.createElement("p");
-		var abilitySectionSidebar = document.createElement("section");
-		var abilitySectionSidebarSidebar = document.createElement("div");
-		var abilitySectionSidebarSidebarTitle = document.createElement("div");
+		let abilityOuter = document.createElement("div");
+		let abilitySectionList = document.createElement("section");
+		let abilitySectionListOptionsTitleOuter = document.createElement("div");
+		let abilitySectionListOptionsSearchOuter = document.createElement("div");
+		let abilitySectionListOptionsSearch = document.createElement("input");
+		let abilitySectionListOptionsSearchExit = document.createElement("span");
+		let abilitySectionListOptionsOuter = document.createElement("div");
+		let abilitySectionListOptions = document.createElement("ol");
+		let abilitySectionHeader = document.createElement("section");
+		let abilitySectionHeaderTitle = document.createElement("span");
+		let abilitySectionHeaderTitleID = document.createElement("h4");
+		let abilitySectionHeaderTitleName = document.createElement("h3");
+		let abilitySectionHeaderDebut = document.createElement("span");
+		let abilitySectionHeaderDebutText = document.createElement("h5");
+		let abilitySectionContent = document.createElement("section");
+		let abilitySectionContentDescription = document.createElement("div");
+		let abilitySectionContentDescriptionText = document.createElement("p");
+		let abilitySectionContentEffectTitle = document.createElement("h4");
+		let abilitySectionContentEffectText = document.createElement("p");
+		let abilitySectionContentBreak = document.createElement("br");
+		let abilitySectionContentAffectTitle = document.createElement("h4");
+		let abilitySectionContentAffectText = document.createElement("p");
+		let abilitySectionSidebar = document.createElement("section");
+		let abilitySectionSidebarSidebar = document.createElement("div");
+		let abilitySectionSidebarSidebarTitle = document.createElement("div");
 
-		var abilitySectionSidebarSidebarUl = document.createElement("ul");
+		let abilitySectionSidebarSidebarUl = document.createElement("ul");
 		abilitySectionSidebar.appendChild(abilitySectionSidebarSidebar);
 		abilitySectionSidebarSidebar.appendChild(abilitySectionSidebarSidebarTitle);
 		abilitySectionSidebarSidebar.appendChild(abilitySectionSidebarSidebarUl);
 
-		var abilitySectionSidebarLearnsetPartyBox = document.createElement("div");
+		let abilitySectionSidebarLearnsetPartyBox = document.createElement("div");
 		abilitySectionSidebarSidebar.appendChild(abilitySectionSidebarLearnsetPartyBox);
 	
 		abilitySectionContentDescription.setAttribute("name","description");
 
-		var parbo = ["Party","Box"];
-		for(var q = 0; q < parbo.length; q++) {
-			var abilitySectionSidebarLearnsetInput = document.createElement("input");
-			var abilitySectionSidebarLearnsetLabel = document.createElement("label");
-			var abilitySectionSidebarLearnsetText = document.createElement("h6");
+		let parbo = ["Party","Box"];
+		for(let q = 0; q < parbo.length; q++) {
+			let abilitySectionSidebarLearnsetInput = document.createElement("input");
+			let abilitySectionSidebarLearnsetLabel = document.createElement("label");
+			let abilitySectionSidebarLearnsetText = document.createElement("h6");
 			abilitySectionSidebarLearnsetInput.setAttribute("type","checkbox");
 			abilitySectionSidebarLearnsetInput.setAttribute("id","ability-learnset-partybox-"+q);
 			abilitySectionSidebarLearnsetInput.setAttribute("name","ability-learnset-partybox");
@@ -58,14 +58,14 @@ var createAbility = function() {
 		abilitySectionContent.setAttribute("name","content");
 		abilitySectionSidebar.setAttribute("name","sidebar");
 
-		var abilitySectionSidebarSidebarTitleLiTopText = document.createElement("h4");
+		let abilitySectionSidebarSidebarTitleLiTopText = document.createElement("h4");
 		abilitySectionSidebarSidebarTitle.appendChild(abilitySectionSidebarSidebarTitleLiTopText);
 		
 		if(Generation <= 4) {
-			var sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability"];
+			let sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability"];
 		}
 		if(Generation >= 5) {
-			var sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability","Hidden Ability"];
+			let sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability","Hidden Ability"];
 		}
 
 		abilityOuter.setAttribute("id","ability");
@@ -111,20 +111,20 @@ var createAbility = function() {
 		abilitySectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Ability");});
 
 
-        var abilitySectionHeaderGame = document.createElement("span");
-        var abilitySectionHeaderGameImage = document.createElement("img");
-        abilitySectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",","").replaceAll("!","").replaceAll("'","").replaceAll(":","")+".png";
+        let abilitySectionHeaderGame = document.createElement("span");
+        let abilitySectionHeaderGameImage = document.createElement("img");
+        abilitySectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
         abilitySectionHeaderGameImage.setAttribute("onerror","this.display='none'");
         abilitySectionHeader.appendChild(abilitySectionHeaderGame);
         abilitySectionHeaderGame.appendChild(abilitySectionHeaderGameImage);
 
 
-		var firstabilityiteration;
-		for(var q = 0; q < finaldata["Abilities"]["Reference"].length; q++) {
+		let firstabilityiteration;
+		for(let q = 0; q < finaldata["Abilities"]["Reference"].length; q++) {
 			if(getApplicable(finaldata["Abilities"]["Reference"][q]["Game"])) {
-				var abilitySectionListOptionsInput = document.createElement("input");
-				var abilitySectionListOptionsLabel = document.createElement("label");
-				var abilitySectionListOptionsText = document.createElement("p");
+				let abilitySectionListOptionsInput = document.createElement("input");
+				let abilitySectionListOptionsLabel = document.createElement("label");
+				let abilitySectionListOptionsText = document.createElement("p");
 				abilitySectionListOptionsInput.setAttribute("type","radio");
 				abilitySectionListOptionsInput.setAttribute("name","ability-options");
 				abilitySectionListOptionsInput.setAttribute("id","ability-options-"+q);
@@ -152,7 +152,7 @@ var createAbility = function() {
 
 		abilitySectionListOptionsSearch.title = searchOptionsTitle(abilitySectionListOptions);
 		
-		var searchLis = document.querySelectorAll("#contain > div#ability > section[name='list'] ol > label");
+		let searchLis = document.querySelectorAll("#contain > div#ability > section[name='list'] ol > label");
 		searchAbilityAttributes = [];
 		for(q = 0; q < searchLis.length; q++) {
 			for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -172,10 +172,11 @@ var createAbility = function() {
 
 
 	function abilityOptionsSelector(i) {
-		var i;
 		if (this.value != undefined) {
 			i = this.value;
 		}
+		abilitySectionSidebarSidebarTitleLiTopText = document.querySelector("div#ability section h4")
+		abilitySectionHeaderTitleID = document.querySelector("div#ability section h4")
 	
 		abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldata["Abilities"]["Reference"][i]["Ability"]+"</u>";
 		abilitySectionHeaderTitleID.innerText = "#"+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["ID"];
@@ -184,9 +185,9 @@ var createAbility = function() {
 		abilitySectionHeaderTitleName.innerText = finaldata["Abilities"]["Reference"][i]["Ability"];
 		abilitySectionContentDescriptionText.innerText = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["Description"];
 
-		var effect = [];
+		let effect = [];
 
-		for(var q = 0; q < finaldata["Abilities"]["Effect"].length; q++) {
+		for(let q = 0; q < finaldata["Abilities"]["Effect"].length; q++) {
 			if(getApplicable(finaldata["Abilities"]["Effect"][q]["Game"])) {
 				if(finaldata["Abilities"]["Effect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
 					effect.push(finaldata["Abilities"]["Effect"][q]["Effect"])
@@ -196,7 +197,7 @@ var createAbility = function() {
 
 		abilitySectionContentEffectText.innerText = "";
 
-		for(var q = 0; q < effect.length; q++) {
+		for(let q = 0; q < effect.length; q++) {
 			abilitySectionContentEffectText.innerText += effect[q];
 			if (q != effect.length - 1) {
 				abilitySectionContentEffectText.innerHTML += "<br>"
@@ -212,19 +213,19 @@ var createAbility = function() {
 
 		//abilitySectionContentEffectText.innerHTML = referenceLink(abilitySectionContentEffectText.innerHTML);
 
-		var affect = [];
+		let affect = [];
 
-		for(var q = 0; q < finaldata["Abilities"]["Affect"].length; q++) {
+		for(let q = 0; q < finaldata["Abilities"]["Affect"].length; q++) {
 			if(getApplicable(finaldata["Abilities"]["Affect"][q]["Game"])) {
 				if(finaldata["Abilities"]["Affect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
 					if (finaldata["Abilities"]["Affect"][q]["Type"] == "Move") {
-						var move = returnArrValue(finaldata["Moves"]["Description"],"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,finaldata["Abilities"]["Affect"][q]["Name"]);
+						let move = returnArrValue(finaldata["Moves"]["Description"],DATA_Move_Reference["Name"],DATA_Move_Description["Description"],finaldata["Abilities"]["Affect"][q]["Name"]);
 						if (move != undefined) {
 							affect.push(finaldata["Abilities"]["Affect"][q]);
 						}
 					}
 					else if (finaldata["Abilities"]["Affect"][q]["Type"] == "Item") {
-						var item = getItemIcon(finaldata["Abilities"]["Affect"][q]["Name"]);
+						let item = getItemIcon(finaldata["Abilities"]["Affect"][q]["Name"]);
 						if (item != undefined) {
 							affect.push(finaldata["Abilities"]["Affect"][q]);
 						}
@@ -234,8 +235,8 @@ var createAbility = function() {
 		}
 
 		abilitySectionContentAffectText.innerText = "";
-		for(var q = 0; q < affect.length; q++) {
-			var b = document.createElement("b");
+		for(let q = 0; q < affect.length; q++) {
+			let b = document.createElement("b");
 			b.innerText = affect[q]["Name"];
 			abilitySectionContentAffectText.appendChild(b)
 			
@@ -243,7 +244,7 @@ var createAbility = function() {
 			b.setAttribute("type", "invert");
 			b.setAttribute("onclick", "dataRedirect()");
 			b.setAttribute("function","dataRedirect");
-			b.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,affect[q]["Name"])+")";
+			b.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],affect[q]["Name"])+")";
 			b.style.textShadow  = "1px 1px #000";
 			
 			if (q == affect.length - 2) {
@@ -268,29 +269,29 @@ var createAbility = function() {
 
 
 
-		var lis = document.querySelectorAll("#contain div#ability > section[name='sidebar'] ul li");
-		for(var q = 0; q < lis.length; q++) {
+		let lis = document.querySelectorAll("#contain div#ability > section[name='sidebar'] ul li");
+		for(let q = 0; q < lis.length; q++) {
 			lis[q].remove();
 		}
 
 
-		var sidebarAbilityListFull = sidebarAbilityList.map((v) => v+"_"+JSONPath_Ability);sidebarAbilityListFull = sidebarAbilityListFull.filter((item) => item !== "Pokémon"+"_"+JSONPath_Ability);
-		for(var q = 0; q < sidebarAbilityListFull.length; q++) {
+		let sidebarAbilityListFull = sidebarAbilityList.map((v) => v+"_"+JSONPath_Ability);sidebarAbilityListFull = sidebarAbilityListFull.filter((item) => item !== "Pokémon"+"_"+JSONPath_Ability);
+		for(let q = 0; q < sidebarAbilityListFull.length; q++) {
 			sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability","");
 		}
-		var AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"], finaldata["Abilities"]["Reference"][i]["Ability"], sidebarAbilityListFull);
+		let AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"], finaldata["Abilities"]["Reference"][i]["Ability"], sidebarAbilityListFull);
 	
-		for(var q = 0; q < AbilityResults.length; q++) {
-			var abilitySectionSidebarSidebarLi = document.createElement("li");
+		for(let q = 0; q < AbilityResults.length; q++) {
+			let abilitySectionSidebarSidebarLi = document.createElement("li");
 			abilitySectionSidebarSidebarUl.appendChild(abilitySectionSidebarSidebarLi);
-			for(var u = 0; u < sidebarAbilityList.length; u++) {
-				var int = AbilityResults[q]["Integer"];
-				var name = getPokémonName(int);
+			for(let u = 0; u < sidebarAbilityList.length; u++) {
+				let int = AbilityResults[q]["Integer"];
+				let name = getPokémonName(int);
 				if(u == 0) {
-					var abilitySectionSidebarSidebarLiImgOuter = document.createElement("div");
-					var abilitySectionSidebarSidebarLiImg = document.createElement("img");
-					var abilitySectionSidebarSidebarLiText = document.createElement("small");
-					abilitySectionSidebarSidebarLiImg.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					let abilitySectionSidebarSidebarLiImgOuter = document.createElement("div");
+					let abilitySectionSidebarSidebarLiImg = document.createElement("img");
+					let abilitySectionSidebarSidebarLiText = document.createElement("small");
+					abilitySectionSidebarSidebarLiImg.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
 					abilitySectionSidebarSidebarLiImg.setAttribute("title", name);
 					abilitySectionSidebarSidebarLiText.innerText = name;
 					abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiImgOuter);
@@ -305,8 +306,8 @@ var createAbility = function() {
 				
 
 					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
-						var abilitySectionSidebarSidebarLiTextOuter = document.createElement("span");
-						var abilitySectionSidebarSidebarLiText = document.createElement("h6");
+						let abilitySectionSidebarSidebarLiTextOuter = document.createElement("span");
+						let abilitySectionSidebarSidebarLiText = document.createElement("h6");
 						if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
 							abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][sidebarAbilityListFull[u - 1]];
 						}
@@ -317,9 +318,9 @@ var createAbility = function() {
 
 						abilitySectionSidebarSidebarLiTextOuter.classList.add("active");
 					} else {
-						var abilitySectionSidebarSidebarLiTextOuter = document.createElement("b");
+						let abilitySectionSidebarSidebarLiTextOuter = document.createElement("b");
 						abilitySectionSidebarSidebarLiTextOuter.setAttribute("type","invert");
-						var abilitySectionSidebarSidebarLiText = document.createElement("p");
+						let abilitySectionSidebarSidebarLiText = document.createElement("p");
 						if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
 							abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][sidebarAbilityListFull[u - 1]];
 						}
@@ -334,7 +335,7 @@ var createAbility = function() {
 			}
 		}
 	
-		var tempStr;
+		let tempStr;
 		if (abilityLearnsetPB.length > 1) {
 			tempStr = abilityLearnsetPB.join(",");
 		}
