@@ -1,36 +1,34 @@
-var createData = function(id, i) {
-	var i;
-	var id;
-	var dataDiv = document.createElement("div");
-	var dataDivOverlay = document.createElement("span");
-	var dataDivContent = document.createElement("div");
-	var dataNavigation = document.createElement("nav");
-	var dataSectionMainMapContain = document.createElement("div");
-	var dataSectionMainMapZoomIn = document.createElement("figure");
-	var dataSectionMainMapZoomInText = document.createElement("h3");
-	var dataSectionMainMapZoomOut = document.createElement("figure");
-	var dataSectionMainMapZoomOutText = document.createElement("h2");
-	var dataSectionMainMapFullscreen = document.createElement("figure");
-	var dataSectionMainMapFullscreenText = document.createElement("h5");
-	var dataSectionMainMapPause = document.createElement("figure");
-	var dataSectionMainMapPauseText = document.createElement("h3");
-	var dataSectionMainMapOuter = document.createElement("div");
-	var dataSectionMainMapImage = document.createElement("img");
-	var dataSectionMainMap = document.createElement("map");
+let createData = function(id, i) {
+	let dataDiv = document.createElement("div");
+	let dataDivOverlay = document.createElement("span");
+	let dataDivContent = document.createElement("div");
+	let dataNavigation = document.createElement("nav");
+	let dataSectionMainMapContain = document.createElement("div");
+	let dataSectionMainMapZoomIn = document.createElement("figure");
+	let dataSectionMainMapZoomInText = document.createElement("h3");
+	let dataSectionMainMapZoomOut = document.createElement("figure");
+	let dataSectionMainMapZoomOutText = document.createElement("h2");
+	let dataSectionMainMapFullscreen = document.createElement("figure");
+	let dataSectionMainMapFullscreenText = document.createElement("h5");
+	let dataSectionMainMapPause = document.createElement("figure");
+	let dataSectionMainMapPauseText = document.createElement("h3");
+	let dataSectionMainMapOuter = document.createElement("div");
+	let dataSectionMainMapImage = document.createElement("img");
+	let dataSectionMainMap = document.createElement("map");
 
-	var dataForm = document.createElement("section");
-	var variant = [];
-	for(var u = 0; u < finaldata["Pokémon"]["Reference"].length; u++) {
-		if(finaldata["Pokémon"]["Reference"][u]["ID"] == id && finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
+	let dataForm = document.createElement("section");
+	let variant = [];
+	for(let u = 0; u < finaldata["Pokémon"]["Reference"].length; u++) {
+		if(finaldata["Pokémon"]["Reference"][u]["ID"] == id && finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
 			variant.push(finaldata["Pokémon"]["Reference"][u]["Pokémon"]);
 		}
 	}
 
-	for(var u = 0; u < finaldata["Pokémon"]["Reference"].length; u++) {
-		if(finaldata["Pokémon"]["Reference"][u]["ID"] == id && finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-			var dataFormInput = document.createElement("input");
-			var dataFormLabel = document.createElement("label");
-			var dataFormImg = document.createElement("img");
+	for(let u = 0; u < finaldata["Pokémon"]["Reference"].length; u++) {
+		if(finaldata["Pokémon"]["Reference"][u]["ID"] == id && finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+			let dataFormInput = document.createElement("input");
+			let dataFormLabel = document.createElement("label");
+			let dataFormImg = document.createElement("img");
 			dataFormInput.setAttribute("type","radio");
 			dataFormInput.setAttribute("name","data-form-selector"+id);
 			dataFormInput.setAttribute("id","data-form-selector-"+u);
@@ -38,12 +36,12 @@ var createData = function(id, i) {
 			if (variant.length <= 1) {
 				dataFormLabel.title += "\n"+getPokémonName(u)+" cannot change form.";
 			}
-			else if (finaldata["Pokémon"]["Form Change"][u][JSONPath_FormChange] != undefined) {
-				dataFormLabel.title += "\n"+finaldata["Pokémon"]["Form Change"][u][JSONPath_FormChange];
+			else if (finaldata["Pokémon"]["Form Change"][u][DATA_Pokémon_FormChange["Change"]] != undefined) {
+				dataFormLabel.title += "\n"+finaldata["Pokémon"]["Form Change"][u][DATA_Pokémon_FormChange["Change"]];
 			}
 			dataFormInput.value = u;
 			dataFormLabel.setAttribute("for","data-form-selector-"+u);
-			dataFormImg.src = getPokémonMediaPath([u],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+			dataFormImg.src = getPokémonMediaPath([u],[PATH_Pokémon_Box_Default_PNG]);
 			dataForm.appendChild(dataFormInput);
 			dataForm.appendChild(dataFormLabel);
 			dataFormLabel.appendChild(dataFormImg);
@@ -73,48 +71,48 @@ var createData = function(id, i) {
 	dataSectionMainMapPauseText.innerText = "⏸︎";
 	dataSectionMainMapPause.setAttribute("name","pause");
 
-	var dataSectionHeader = document.createElement("section");
-	var dataSectionHeaderDivPortrait = document.createElement("div");
-	var dataSectionHeaderDivPortraitContent = document.createElement("div");
-	var dataSectionHeaderPortrait = document.createElement("img");
-	var dataSectionHeaderStatsEVSelector = document.createElement("ol");
-	var dataSectionHeaderDivIdNameOuter = document.createElement("div");
-	var dataSectionHeaderDivIdName = document.createElement("div");
-	var dataSectionHeaderIDNational = document.createElement("h5");
-	var dataSectionHeaderName = document.createElement("h3");
-	var dataSectionHeaderDebutCategoryOuter = document.createElement("div");
-	var dataSectionHeaderDebutCategory = document.createElement("span");
+	let dataSectionHeader = document.createElement("section");
+	let dataSectionHeaderDivPortrait = document.createElement("div");
+	let dataSectionHeaderDivPortraitContent = document.createElement("div");
+	let dataSectionHeaderPortrait = document.createElement("img");
+	let dataSectionHeaderStatsEVSelector = document.createElement("ol");
+	let dataSectionHeaderDivIdNameOuter = document.createElement("div");
+	let dataSectionHeaderDivIdName = document.createElement("div");
+	let dataSectionHeaderIDNational = document.createElement("h5");
+	let dataSectionHeaderName = document.createElement("h3");
+	let dataSectionHeaderDebutCategoryOuter = document.createElement("div");
+	let dataSectionHeaderDebutCategory = document.createElement("span");
 
-	var dataSectionHeaderDebut = document.createElement("p");
-	var dataSectionHeaderCategory = document.createElement("p");
-	var dataSectionHeaderType = document.createElement("div");
-	var dataSectionMain = document.createElement("section");
-	var dataSectionMainMetadata = document.createElement("div");
-	var dataSectionMainMetadataStats = document.createElement("div");
-	var dataSectionMainDescriptionOuter = document.createElement("div");
-	var dataSectionMainMetadataSidebarOuter = document.createElement("div");
-	var dataSectionMainMetadataSidebar = document.createElement("div");
-	var dataSectionMainMetadataSidebarRow1 = document.createElement("div");
-	var dataSectionMainMetadataSidebarRow2 = document.createElement("div");
-	var dataSectionMainMetadataSidebarRow3 = document.createElement("div");
-	var dataSectionMainMetadataSidebarRow4 = document.createElement("div");
-	var dataSectionMainMetadataSidebarCatchRateOuter = document.createElement("span");
-	var dataSectionMainMetadataSidebarCatchRateToggle = document.createElement("b");
+	let dataSectionHeaderDebut = document.createElement("p");
+	let dataSectionHeaderCategory = document.createElement("p");
+	let dataSectionHeaderType = document.createElement("div");
+	let dataSectionMain = document.createElement("section");
+	let dataSectionMainMetadata = document.createElement("div");
+	let dataSectionMainMetadataStats = document.createElement("div");
+	let dataSectionMainDescriptionOuter = document.createElement("div");
+	let dataSectionMainMetadataSidebarOuter = document.createElement("div");
+	let dataSectionMainMetadataSidebar = document.createElement("div");
+	let dataSectionMainMetadataSidebarRow1 = document.createElement("div");
+	let dataSectionMainMetadataSidebarRow2 = document.createElement("div");
+	let dataSectionMainMetadataSidebarRow3 = document.createElement("div");
+	let dataSectionMainMetadataSidebarRow4 = document.createElement("div");
+	let dataSectionMainMetadataSidebarCatchRateOuter = document.createElement("span");
+	let dataSectionMainMetadataSidebarCatchRateToggle = document.createElement("b");
 	dataSectionMainMetadataSidebarCatchRateToggle.setAttribute("type","invert");
-	var dataSectionMainMetadataSidebarCatchRateTitle = document.createElement("h6");
-	var dataSectionMainMetadataSidebarCatchRate = document.createElement("h5");
-	var dataSectionMainMetadataSidebarLevelRateOuter = document.createElement("span");
-	var dataSectionMainMetadataSidebarLevelRateToggle = document.createElement("b");
+	let dataSectionMainMetadataSidebarCatchRateTitle = document.createElement("h6");
+	let dataSectionMainMetadataSidebarCatchRate = document.createElement("h5");
+	let dataSectionMainMetadataSidebarLevelRateOuter = document.createElement("span");
+	let dataSectionMainMetadataSidebarLevelRateToggle = document.createElement("b");
 	dataSectionMainMetadataSidebarLevelRateToggle.setAttribute("type","invert");
-	var dataSectionMainMetadataSidebarLevelRateTitle = document.createElement("h6");
-	var dataSectionMainMetadataSidebarLevelRate = document.createElement("h5");
-	var dataSectionMainMetadataSidebarExpYieldOuter = document.createElement("span");
-	var dataSectionMainMetadataSidebarExpYieldToggle = document.createElement("b");
+	let dataSectionMainMetadataSidebarLevelRateTitle = document.createElement("h6");
+	let dataSectionMainMetadataSidebarLevelRate = document.createElement("h5");
+	let dataSectionMainMetadataSidebarExpYieldOuter = document.createElement("span");
+	let dataSectionMainMetadataSidebarExpYieldToggle = document.createElement("b");
 	dataSectionMainMetadataSidebarExpYieldToggle.setAttribute("type","invert");
-	var dataSectionMainMetadataSidebarExpYieldTitle = document.createElement("h6");
-	var dataSectionMainMetadataSidebarExpYield = document.createElement("h5");
-	var dataSectionMainAreaDiv = document.createElement("div");
-	var dataSectionMainArea = document.createElement("ul");
+	let dataSectionMainMetadataSidebarExpYieldTitle = document.createElement("h6");
+	let dataSectionMainMetadataSidebarExpYield = document.createElement("h5");
+	let dataSectionMainAreaDiv = document.createElement("div");
+	let dataSectionMainArea = document.createElement("ul");
 	dataSectionMain.setAttribute("name","main");
 	dataSectionHeader.setAttribute("name","header");
 
@@ -130,12 +128,12 @@ var createData = function(id, i) {
 
 	dataDivOverlay.addEventListener("click", modalData);
 
-	var navz = ["metadata","learnset","area"];
-	var navztitles = ["Data","Learnset","Area"];
-	for(var q = 0; q < navz.length; q++) {
-		var dataNavigationInput = document.createElement("input");
-		var dataNavigationLabel = document.createElement("label");
-		var dataNavigationLabelText = document.createElement("h6");
+	let navz = ["metadata","learnset","area"];
+	let navztitles = ["Data","Learnset","Area"];
+	for(let q = 0; q < navz.length; q++) {
+		let dataNavigationInput = document.createElement("input");
+		let dataNavigationLabel = document.createElement("label");
+		let dataNavigationLabelText = document.createElement("h6");
 		dataNavigationInput.setAttribute("type","radio");
 		dataNavigationInput.setAttribute("name","data-navigation"+id);
 		dataNavigationInput.setAttribute("id","data-navigation-"+navz[q]+id);
@@ -155,22 +153,22 @@ var createData = function(id, i) {
 
 	dataSectionHeaderIDNational.innerText = "#"+id;
 	dataSectionHeaderIDNational.setAttribute("name","national");
-	var dataSectionHeaderTypePrimaryOuter = document.createElement("span");
-	var dataSectionHeaderTypePrimary = document.createElement("b");
+	let dataSectionHeaderTypePrimaryOuter = document.createElement("span");
+	let dataSectionHeaderTypePrimary = document.createElement("b");
 	dataSectionHeaderTypePrimary.setAttribute("type","invert");
-	var dataSectionHeaderTypePrimaryImg = document.createElement("img");
-	var dataSectionHeaderTypePrimaryText = document.createElement("h5");
+	let dataSectionHeaderTypePrimaryImg = document.createElement("img");
+	let dataSectionHeaderTypePrimaryText = document.createElement("h5");
 	dataSectionHeaderTypePrimaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 	dataSectionHeaderTypePrimaryImg.setAttribute("dataname","value");
 	dataSectionHeaderType.appendChild(dataSectionHeaderTypePrimaryOuter);
 	dataSectionHeaderTypePrimaryOuter.appendChild(dataSectionHeaderTypePrimary);
 	dataSectionHeaderTypePrimary.appendChild(dataSectionHeaderTypePrimaryImg);
 	dataSectionHeaderTypePrimary.appendChild(dataSectionHeaderTypePrimaryText);
-	var dataSectionHeaderTypeSecondaryOuter = document.createElement("span");
-	var dataSectionHeaderTypeSecondary = document.createElement("b");
+	let dataSectionHeaderTypeSecondaryOuter = document.createElement("span");
+	let dataSectionHeaderTypeSecondary = document.createElement("b");
 	dataSectionHeaderTypeSecondary.setAttribute("type","invert");
-	var dataSectionHeaderTypeSecondaryImg = document.createElement("img");
-	var dataSectionHeaderTypeSecondaryText = document.createElement("h5");
+	let dataSectionHeaderTypeSecondaryImg = document.createElement("img");
+	let dataSectionHeaderTypeSecondaryText = document.createElement("h5");
 	dataSectionHeaderTypeSecondaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 	dataSectionHeaderTypeSecondaryImg.setAttribute("dataname","value");
 	dataSectionHeaderType.appendChild(dataSectionHeaderTypeSecondaryOuter);
@@ -179,11 +177,11 @@ var createData = function(id, i) {
 	dataSectionHeaderTypeSecondary.appendChild(dataSectionHeaderTypeSecondaryText);
 
 
-	dataSectionMainMapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
-	dataSectionMainMapImage.setAttribute("usemap", "#"+MEDIAPath_Map+"-"+id);
+	dataSectionMainMapImage.src = getMedia(["Map"],[PATH_Region_Map])[0];
+	dataSectionMainMapImage.setAttribute("usemap", "#"+Region.join(' & ')+"-"+id);
 	
-	dataSectionMainMap.setAttribute("name", MEDIAPath_Map+"-"+id);
-	dataSectionMainMap.setAttribute("id", MEDIAPath_Map+"-"+id);
+	dataSectionMainMap.setAttribute("name", Region.join(' & ')+"-"+id);
+	dataSectionMainMap.setAttribute("id", Region.join(' & ')+"-"+id);
 	dataSectionMainDescriptionOuter.classList.add("scroll");
 	dataSectionMainDescriptionOuter.setAttribute("name","description");
 
@@ -203,30 +201,31 @@ var createData = function(id, i) {
 	dataSectionMainMetadataSidebarExpYield.setAttribute("dataname","value");
 	dataSectionMainMetadataSidebarExpYield.setAttribute("value","");
 
+	let Pokédex = Object.keys(DATA_Pokémon_PokédexID)
 
-	for(q = 0; q < JSONPath_Pokédex.length; q++) {
-		var z = q+1;
-		var dataSectionHeaderIDRegional = document.createElement("h5");
-		if(finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]] != null) {
-			dataSectionHeaderIDRegional.innerText = "#"+finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]];
+	for(q = 0; q < Pokédex.length; q++) {
+		let z = q+1;
+		let dataSectionHeaderIDRegional = document.createElement("h5");
+		if(finaldata["Pokémon"]["Pokédex ID"][i][DATA_Pokémon_PokédexID[Pokédex[q]]] != null) {
+			dataSectionHeaderIDRegional.innerText = "#"+finaldata["Pokémon"]["Pokédex ID"][i][DATA_Pokémon_PokédexID[Pokédex[q]]];
 		}
 		dataSectionHeaderIDRegional.setAttribute("name","regional"+z)
 		dataSectionHeaderDivIdName.appendChild(dataSectionHeaderIDRegional);
 	}
 	if(Ability.length >= 1) {
-		var dataSectionMainMetadataSidebarRow1 = document.createElement("div");
-		var dataSectionMainMetadataSidebarAbilityOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarRow1 = document.createElement("div");
+		let dataSectionMainMetadataSidebarAbilityOuter = document.createElement("span");
 		dataSectionMainMetadataSidebarAbilityOuter.setAttribute("name", "ability");
 		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow1);
 		dataSectionMainMetadataSidebarRow1.appendChild(dataSectionMainMetadataSidebarAbilityOuter);
 		
-		var dataSectionMainMetadataSidebarAbilityPrimarySecondaryOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarAbilityPrimarySecondaryOuter = document.createElement("span");
 		dataSectionMainMetadataSidebarAbilityOuter.appendChild(dataSectionMainMetadataSidebarAbilityPrimarySecondaryOuter);
 
-		var dataSectionMainMetadataSidebarAbilityPrimaryContent = document.createElement("span");
-		var dataSectionMainMetadataSidebarAbilityPrimary = document.createElement("b");
+		let dataSectionMainMetadataSidebarAbilityPrimaryContent = document.createElement("span");
+		let dataSectionMainMetadataSidebarAbilityPrimary = document.createElement("b");
 		dataSectionMainMetadataSidebarAbilityPrimary.setAttribute("type","invert");
-		var dataSectionMainMetadataSidebarAbilityPrimaryText = document.createElement("small");
+		let dataSectionMainMetadataSidebarAbilityPrimaryText = document.createElement("small");
 		dataSectionMainMetadataSidebarAbilityPrimary.setAttribute("title","Primary Ability");
 		dataSectionMainMetadataSidebarAbilityPrimary.setAttribute("dataname","value");
 		dataSectionMainMetadataSidebarAbilityPrimaryText.innerText = "Primary Ability";
@@ -234,10 +233,10 @@ var createData = function(id, i) {
 		dataSectionMainMetadataSidebarAbilityPrimaryContent.appendChild(dataSectionMainMetadataSidebarAbilityPrimary);
 		dataSectionMainMetadataSidebarAbilityPrimary.appendChild(dataSectionMainMetadataSidebarAbilityPrimaryText);
 
-		var dataSectionMainMetadataSidebarAbilitySecondaryContent = document.createElement("span");
-		var dataSectionMainMetadataSidebarAbilitySecondary = document.createElement("b");
+		let dataSectionMainMetadataSidebarAbilitySecondaryContent = document.createElement("span");
+		let dataSectionMainMetadataSidebarAbilitySecondary = document.createElement("b");
 		dataSectionMainMetadataSidebarAbilitySecondary.setAttribute("type","invert");
-		var dataSectionMainMetadataSidebarAbilitySecondaryText = document.createElement("small");
+		let dataSectionMainMetadataSidebarAbilitySecondaryText = document.createElement("small");
 		dataSectionMainMetadataSidebarAbilitySecondary.setAttribute("title","Secondary Ability");
 		dataSectionMainMetadataSidebarAbilitySecondary.setAttribute("dataname","value");
 		dataSectionMainMetadataSidebarAbilitySecondaryText.innerText = "Secondary Ability";
@@ -246,11 +245,11 @@ var createData = function(id, i) {
 		dataSectionMainMetadataSidebarAbilitySecondary.appendChild(dataSectionMainMetadataSidebarAbilitySecondaryText);
 
 		if(Ability.length >= 3) {
-			var dataSectionMainMetadataSidebarAbilityHiddenOuter = document.createElement("span");
-			var dataSectionMainMetadataSidebarAbilityHiddenContent = document.createElement("span");
-			var dataSectionMainMetadataSidebarAbilityHidden = document.createElement("b");
+			let dataSectionMainMetadataSidebarAbilityHiddenOuter = document.createElement("span");
+			let dataSectionMainMetadataSidebarAbilityHiddenContent = document.createElement("span");
+			let dataSectionMainMetadataSidebarAbilityHidden = document.createElement("b");
 			dataSectionMainMetadataSidebarAbilityHidden.setAttribute("type","invert");
-			var dataSectionMainMetadataSidebarAbilityHiddenText = document.createElement("small");
+			let dataSectionMainMetadataSidebarAbilityHiddenText = document.createElement("small");
 			dataSectionMainMetadataSidebarAbilityHidden.setAttribute("title","Hidden Ability");
 			dataSectionMainMetadataSidebarAbilityHidden.setAttribute("dataname","value");
 			dataSectionMainMetadataSidebarAbilityHiddenText.innerText = "Hidden Ability";
@@ -262,7 +261,7 @@ var createData = function(id, i) {
 	}
 	dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow2);
 	dataSectionMainMetadataSidebarRow2.appendChild(dataSectionMainMetadataSidebarCatchRateOuter);
-	var EggCycleStep;
+	let EggCycleStep;
 	if((Generation >= 2 && Generation <= 3) || Generation == 7) {
 		EggCycleStep = "256";
 	}
@@ -273,11 +272,11 @@ var createData = function(id, i) {
 		EggCycleStep = "257";
 	}
 	if(Egg == true) {
-		var dataSectionMainMetadataSidebarHatchRateOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarHatchRateToggle = document.createElement("b");
+		let dataSectionMainMetadataSidebarHatchRateOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarHatchRateToggle = document.createElement("b");
 		dataSectionMainMetadataSidebarHatchRateToggle.setAttribute("type","invert");
-		var dataSectionMainMetadataSidebarHatchRateTitle = document.createElement("h6");
-		var dataSectionMainMetadataSidebarHatchRate = document.createElement("h5");
+		let dataSectionMainMetadataSidebarHatchRateTitle = document.createElement("h6");
+		let dataSectionMainMetadataSidebarHatchRate = document.createElement("h5");
 		dataSectionMainMetadataSidebarHatchRateOuter.setAttribute("name","hatchrate");
 		dataSectionMainMetadataSidebarHatchRateTitle.innerText = "Hatch Rate";
 		dataSectionMainMetadataSidebarHatchRate.setAttribute("dataname","value");
@@ -289,14 +288,14 @@ var createData = function(id, i) {
 	}
 	if(Gender == true) {
 		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow3);
-		var dataSectionMainMetadataSidebarGenderRatioOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarGenderRatioTitle = document.createElement("h6");
-		var dataSectionMainMetadataSidebarGenderRatioBar = document.createElement("span");
-		var dataSectionMainMetadataSidebarGenderRatioToggle = document.createElement("b");
+		let dataSectionMainMetadataSidebarGenderRatioOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarGenderRatioTitle = document.createElement("h6");
+		let dataSectionMainMetadataSidebarGenderRatioBar = document.createElement("span");
+		let dataSectionMainMetadataSidebarGenderRatioToggle = document.createElement("b");
 		dataSectionMainMetadataSidebarGenderRatioToggle.setAttribute("type","invert");
-		var dataSectionMainMetadataSidebarGenderRatioMale = document.createElement("span");
-		var dataSectionMainMetadataSidebarGenderRatioFemale = document.createElement("span");
-		var dataSectionMainMetadataSidebarGenderRatioGenderless = document.createElement("span");
+		let dataSectionMainMetadataSidebarGenderRatioMale = document.createElement("span");
+		let dataSectionMainMetadataSidebarGenderRatioFemale = document.createElement("span");
+		let dataSectionMainMetadataSidebarGenderRatioGenderless = document.createElement("span");
 		dataSectionMainMetadataSidebarGenderRatioOuter.setAttribute("name","genderratio");
 		dataSectionMainMetadataSidebarGenderRatioTitle.innerText = "Gender ratio";
 		dataSectionMainMetadataSidebarGenderRatioToggle.setAttribute("dataname","value");
@@ -314,18 +313,18 @@ var createData = function(id, i) {
 		dataSectionMainMetadataSidebarRow3.appendChild(dataSectionMainMetadataSidebarGenderRatioOuter);
 	}
 	if(Egg == true) {
-		var dataSectionMainMetadataSidebarEggGroupOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarEggGroupContent = document.createElement("span");
-		var dataSectionMainMetadataSidebarEggGroupTitle = document.createElement("h6");
-		var dataSectionMainMetadataSidebarEggGroupPrimarySecondaryOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarEggGroupPrimaryOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarEggGroupPrimary = document.createElement("b");
+		let dataSectionMainMetadataSidebarEggGroupOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarEggGroupContent = document.createElement("span");
+		let dataSectionMainMetadataSidebarEggGroupTitle = document.createElement("h6");
+		let dataSectionMainMetadataSidebarEggGroupPrimarySecondaryOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarEggGroupPrimaryOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarEggGroupPrimary = document.createElement("b");
 		dataSectionMainMetadataSidebarEggGroupPrimary.setAttribute("type","invert");
-		var dataSectionMainMetadataSidebarEggGroupPrimaryText = document.createElement("small");
-		var dataSectionMainMetadataSidebarEggGroupSecondaryOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarEggGroupSecondary = document.createElement("b");
+		let dataSectionMainMetadataSidebarEggGroupPrimaryText = document.createElement("small");
+		let dataSectionMainMetadataSidebarEggGroupSecondaryOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarEggGroupSecondary = document.createElement("b");
 		dataSectionMainMetadataSidebarEggGroupSecondary.setAttribute("type","invert");
-		var dataSectionMainMetadataSidebarEggGroupSecondaryText = document.createElement("small");
+		let dataSectionMainMetadataSidebarEggGroupSecondaryText = document.createElement("small");
 		dataSectionMainMetadataSidebarEggGroupOuter.setAttribute("name","egggroup");
 		dataSectionMainMetadataSidebarEggGroupTitle.innerText = "Egg Group";
 		dataSectionMainMetadataSidebarEggGroupPrimaryOuter.setAttribute("name","primary");
@@ -349,24 +348,24 @@ var createData = function(id, i) {
 	}
 	dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow4);
 
-      var d = getDefaultInt(i);
+      let d = getDefaultInt(i);
 
-      var dataPrevious = document.createElement("aside");
-      var dataNext = document.createElement("aside");
+      let dataPrevious = document.createElement("aside");
+      let dataNext = document.createElement("aside");
 	  dataPrevious.setAttribute("name","previous");
 	  dataNext.setAttribute("name","next");
       dataDivContent.appendChild(dataPrevious);
       dataDivContent.appendChild(dataNext);
 
 	  if ((parseInt(getIntID(d,"")) - 1) > 0) {
-        var dataPreviousNational = document.createElement("b");
+        let dataPreviousNational = document.createElement("b");
 		dataPreviousNational.setAttribute("type","invert");
-        var dataPreviousNationalImg = document.createElement("img");
+        let dataPreviousNationalImg = document.createElement("img");
         
         dataPreviousNational.setAttribute("name","national");
         dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
         dataPreviousNational.title = "#"+(parseInt(getIntID(d,"")) - 1)+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
-        dataPreviousNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))-1))],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+        dataPreviousNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))-1))],[PATH_Pokémon_Box_Default_PNG]);
         
         dataPrevious.appendChild(dataPreviousNational);
         dataPreviousNational.appendChild(dataPreviousNationalImg);
@@ -375,15 +374,15 @@ var createData = function(id, i) {
 		dataPreviousNational.setAttribute("function","modalData");
 	  }
 
-	  if (finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,""))+1))][JSONPath_Reference] == "true") {
-        var dataNextNational = document.createElement("b");
+	  if (finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,""))+1))][DATA_Pokémon_Reference["Reference"]] == "true") {
+        let dataNextNational = document.createElement("b");
 		dataNextNational.setAttribute("type","invert");
-        var dataNextNationalImg = document.createElement("img");
+        let dataNextNationalImg = document.createElement("img");
         
         dataNextNational.setAttribute("name","national");
         dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,""))+1)));
         dataNextNational.title = "#"+(parseInt(getIntID(d,""))+1)+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,""))+1))]["Pokémon"];
-        dataNextNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))+1))],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+        dataNextNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))+1))],[PATH_Pokémon_Box_Default_PNG]);
         
         dataNext.appendChild(dataNextNational);
         dataNextNational.appendChild(dataNextNationalImg);
@@ -392,45 +391,46 @@ var createData = function(id, i) {
 		dataNextNational.setAttribute("function","modalData");
 	  }
 	  
-
-	  for (q = 0; q < JSONPath_Pokédex.length; q++) {
-	      var y = q+1;
-	      var previousID = getRegionalID("-",getIntID(d,""),JSONPath_Pokédex[q]);
-	      var nextID = getRegionalID("+",getIntID(d,""),JSONPath_Pokédex[q]);
-
-	      if (previousID != undefined) {
-	          var dataPreviousRegional = document.createElement("b");
-			  dataPreviousRegional.setAttribute("type","invert");
-	          var dataPreviousRegionalImg = document.createElement("img");
 	  
-	          dataPreviousRegional.setAttribute("name","regional"+y);
-	          dataPreviousRegional.setAttribute("value",getIntID("",previousID));
-	          dataPreviousRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",previousID)][JSONPath_Pokédex[q]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",previousID)]["Pokémon"];
-			  dataPreviousRegionalImg.src = getPokémonMediaPath([getIntID("",previousID)],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-	          
-	          dataPrevious.appendChild(dataPreviousRegional);
-	          dataPreviousRegional.appendChild(dataPreviousRegionalImg);
 
-              dataPreviousRegional.addEventListener("click",modalData);
-			  dataPreviousRegional.setAttribute("function","modalData");
-	      }
-	      if (nextID != undefined) {
-	          var dataNextRegional = document.createElement("b");
-			  dataNextRegional.setAttribute("type","invert");
-	          var dataNextRegionalImg = document.createElement("img");
-	  
-	          dataNextRegional.setAttribute("name","regional"+y);
-	          dataNextRegional.setAttribute("value",getIntID("",nextID));
-	          dataNextRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",nextID)][JSONPath_Pokédex[q]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",nextID)]["Pokémon"];
-			  dataNextRegionalImg.src = getPokémonMediaPath([getIntID("",nextID)],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]); 
-	          
-	          dataNext.appendChild(dataNextRegional);
-	          dataNextRegional.appendChild(dataNextRegionalImg);
+	for (q = 0; q < Pokédex.length; q++) {
+		let y = q+1;
+		let previousID = getRegionalID("-",getIntID(d,""),DATA_Pokémon_PokédexID[Pokédex[q]]);
+		let nextID = getRegionalID("+",getIntID(d,""),DATA_Pokémon_PokédexID[Pokédex[q]]);
 
-              dataNextRegional.addEventListener("click",modalData);
-			  dataNextRegional.setAttribute("function","modalData");
-	      }
-	  }
+		if (previousID != undefined) {
+			let dataPreviousRegional = document.createElement("b");
+			dataPreviousRegional.setAttribute("type","invert");
+			let dataPreviousRegionalImg = document.createElement("img");
+	
+			dataPreviousRegional.setAttribute("name","regional"+y);
+			dataPreviousRegional.setAttribute("value",getIntID("",previousID));
+			dataPreviousRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",previousID)][DATA_Pokémon_PokédexID[Pokédex[q]]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",previousID)]["Pokémon"];
+			dataPreviousRegionalImg.src = getPokémonMediaPath([getIntID("",previousID)],[PATH_Pokémon_Box_Default_PNG]);
+			
+			dataPrevious.appendChild(dataPreviousRegional);
+			dataPreviousRegional.appendChild(dataPreviousRegionalImg);
+
+			dataPreviousRegional.addEventListener("click",modalData);
+			dataPreviousRegional.setAttribute("function","modalData");
+		}
+		if (nextID != undefined) {
+			let dataNextRegional = document.createElement("b");
+			dataNextRegional.setAttribute("type","invert");
+			let dataNextRegionalImg = document.createElement("img");
+	
+			dataNextRegional.setAttribute("name","regional"+y);
+			dataNextRegional.setAttribute("value",getIntID("",nextID));
+			dataNextRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",nextID)][DATA_Pokémon_PokédexID[Pokédex[q]]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",nextID)]["Pokémon"];
+			dataNextRegionalImg.src = getPokémonMediaPath([getIntID("",nextID)],[PATH_Pokémon_Box_Default_PNG]); 
+			
+			dataNext.appendChild(dataNextRegional);
+			dataNextRegional.appendChild(dataNextRegionalImg);
+
+			dataNextRegional.addEventListener("click",modalData);
+			dataNextRegional.setAttribute("function","modalData");
+		}
+	}
 	  
 	  
 	document.getElementById("data").appendChild(dataDiv);
@@ -476,7 +476,7 @@ var createData = function(id, i) {
 	dataSectionMainMapOuter.addEventListener("click", function() {zoom(dataSectionMainMapOuter,"pause",undefined)});
 	dataSectionMainMapZoomIn.addEventListener("click",function() {zoom(dataSectionMainMapOuter,"in",false)});
 	dataSectionMainMapZoomOut.addEventListener("click",function() {zoom(dataSectionMainMapOuter,"out",true)});
-	dataSectionMainMapOuter.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){zoom(dataSectionMainMapOuter,"in",false)}else if(!delta.includes("-")){zoom(dataSectionMainMapOuter,"out",true)}});
+	dataSectionMainMapOuter.addEventListener("wheel",function(event){let delta = event.deltaY.toString();if(delta.includes("-")){zoom(dataSectionMainMapOuter,"in",false)}else if(!delta.includes("-")){zoom(dataSectionMainMapOuter,"out",true)}});
 	dataSectionMainMapOuter.addEventListener("mouseleave", function() {zoom(dataSectionMainMapOuter,"out",undefined)});
 	dataSectionMainMapOuter.addEventListener("mouseenter", function() {zoom(dataSectionMainMapOuter,"in",undefined)});
 	dataSectionMainMapOuter.addEventListener("mousemove", function() {zoom(dataSectionMainMapOuter,"pan",undefined)});
@@ -484,20 +484,20 @@ var createData = function(id, i) {
 	dataSectionMainMetadataSidebarOuter.setAttribute("name","sidebar");
 
 
-	var dataSectionMainMetadataPopup = document.createElement("div");
-	var dataSectionMainMetadataPopupOuter = document.createElement("div");
-	var dataSectionMainMetadataPopupSpan1 = document.createElement("span");
-	var dataSectionMainMetadataPopupSpan1ID = document.createElement("h6");
-	var dataSectionMainMetadataPopupSpan1Icon = document.createElement("img");
-	var dataSectionMainMetadataPopupSpan2 = document.createElement("span");
-	var dataSectionMainMetadataPopupSpan2Title = document.createElement("h4");
-	var dataSectionMainMetadataPopupSpan2Description = document.createElement("p");
-	var dataSectionMainMetadataPopupTitleExitUp = document.createElement("figure");
-	var dataSectionMainMetadataPopupTitleExitUpText = document.createElement("h3");
-	var dataSectionMainMetadataPopupTitleExitDown = document.createElement("figure");
-	var dataSectionMainMetadataPopupTitleExitDownText = document.createElement("h3");
-	var dataSectionMainMetadataPopupListOuter = document.createElement("div");
-	var dataSectionMainMetadataPopupList = document.createElement("ul");
+	let dataSectionMainMetadataPopup = document.createElement("div");
+	let dataSectionMainMetadataPopupOuter = document.createElement("div");
+	let dataSectionMainMetadataPopupSpan1 = document.createElement("span");
+	let dataSectionMainMetadataPopupSpan1ID = document.createElement("h6");
+	let dataSectionMainMetadataPopupSpan1Icon = document.createElement("img");
+	let dataSectionMainMetadataPopupSpan2 = document.createElement("span");
+	let dataSectionMainMetadataPopupSpan2Title = document.createElement("h4");
+	let dataSectionMainMetadataPopupSpan2Description = document.createElement("p");
+	let dataSectionMainMetadataPopupTitleExitUp = document.createElement("figure");
+	let dataSectionMainMetadataPopupTitleExitUpText = document.createElement("h3");
+	let dataSectionMainMetadataPopupTitleExitDown = document.createElement("figure");
+	let dataSectionMainMetadataPopupTitleExitDownText = document.createElement("h3");
+	let dataSectionMainMetadataPopupListOuter = document.createElement("div");
+	let dataSectionMainMetadataPopupList = document.createElement("ul");
 	dataSectionMainMetadataPopupListOuter.setAttribute("name","list");
 	dataSectionMainMetadataPopupSpan1Icon.setAttribute("onerror","this.style.display='none'");
 	dataSectionMainMetadataPopupTitleExitUp.setAttribute("name","up");
@@ -535,17 +535,17 @@ var createData = function(id, i) {
 	dataSectionMainMetadataPopup.setAttribute("name","popup");
 
 
-	var baseev = ["Base Stats","EV Yield"];
-	for(var q = 0; q < baseev.length; q++) {
-		var dataSectionHeaderStatsEVSelectorInput = document.createElement("input");
-		var dataSectionHeaderStatsEVSelectorLabel = document.createElement("label");
-		var dataSectionHeaderStatsEVSelectorLabelText = document.createElement("h6");
+	let baseev = ["Base Stats","EV Yield"];
+	for(let q = 0; q < baseev.length; q++) {
+		let dataSectionHeaderStatsEVSelectorInput = document.createElement("input");
+		let dataSectionHeaderStatsEVSelectorLabel = document.createElement("label");
+		let dataSectionHeaderStatsEVSelectorLabelText = document.createElement("h6");
 		dataSectionHeaderStatsEVSelectorInput.setAttribute("type","radio");
 		dataSectionHeaderStatsEVSelectorInput.setAttribute("name","data-baseev-"+id);
 		dataSectionHeaderStatsEVSelectorInput.setAttribute("id","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
 		dataSectionHeaderStatsEVSelectorInput.setAttribute("alt", baseev[q].toLowerCase().replace(" ",""));
 		dataSectionHeaderStatsEVSelectorInput.setAttribute("value", q);
-		dataSectionHeaderStatsEVSelectorInput.setAttribute("onclick","var x=this.alt.replace('/','').replace(' ','');var nodes=this.parentElement.parentElement.querySelectorAll(':scope > ul[name]');var node=this.parentElement.parentElement.querySelector(':scope > ul[name='+x+']');for(var i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
+		dataSectionHeaderStatsEVSelectorInput.setAttribute("onclick","let x=this.alt.replace('/','').replace(' ','');let nodes=this.parentElement.parentElement.querySelectorAll(':scope > ul[name]');let node=this.parentElement.parentElement.querySelector(':scope > ul[name='+x+']');for(let i=0;i<nodes.length; i++){nodes[i].style.display='none';};node.style.display='flex';");
 		dataSectionHeaderStatsEVSelectorLabel.setAttribute("for","data-baseev-"+id+"-"+baseev[q].toLowerCase().replace(" ",""));
 		dataSectionHeaderStatsEVSelectorLabelText.innerText = baseev[q];
 		dataSectionHeaderStatsEVSelector.appendChild(dataSectionHeaderStatsEVSelectorInput);
@@ -554,17 +554,17 @@ var createData = function(id, i) {
 		if(q == 0) {
 			dataSectionHeaderStatsEVSelectorInput.setAttribute("checked","");
 		}
-		var dataSectionHeaderStatsEVUl = document.createElement("ul");
+		let dataSectionHeaderStatsEVUl = document.createElement("ul");
 		dataSectionHeaderStatsEVUl.setAttribute("name", baseev[q].toLowerCase().replace(" ",""));
 		dataSectionMainMetadataStats.appendChild(dataSectionHeaderStatsEVUl);
-		for(var u = 0; u < Stats.length; u++) {
-			var dataSectionHeaderStatEV = document.createElement("b");
+		for(let u = 0; u < Stats.length; u++) {
+			let dataSectionHeaderStatEV = document.createElement("b");
 			dataSectionHeaderStatEV.setAttribute("type","invert");
-			var dataSectionHeaderStatEVText = document.createElement("h6");
-			var dataSectionHeaderStatEVValue = document.createElement("li");
-			var dataSectionHeaderStatsEVSpan = document.createElement("b");
+			let dataSectionHeaderStatEVText = document.createElement("h6");
+			let dataSectionHeaderStatEVValue = document.createElement("li");
+			let dataSectionHeaderStatsEVSpan = document.createElement("b");
 			dataSectionHeaderStatsEVSpan.setAttribute("type","invert");
-			var dataSectionHeaderStatsEVSpanText = document.createElement("p");
+			let dataSectionHeaderStatsEVSpanText = document.createElement("p");
 			dataSectionHeaderStatEV.setAttribute("name", Stats[u].toLowerCase().replace(" ","").replace(".",""));
 			dataSectionHeaderStatEVText.innerText = Stats[u];
 			dataSectionHeaderStatEVText.setAttribute("dataname","value");
@@ -578,13 +578,13 @@ var createData = function(id, i) {
 			dataSectionHeaderStatsEVSpan.appendChild(dataSectionHeaderStatsEVSpanText);
 		}
 	}
-	var dataSectionMainLearnsetDiv = document.createElement("div");
-	var dataSectionMainLearnset = document.createElement("div");
+	let dataSectionMainLearnsetDiv = document.createElement("div");
+	let dataSectionMainLearnset = document.createElement("div");
 	dataSectionMain.appendChild(dataSectionMainLearnsetDiv);
 	dataSectionMainLearnsetDiv.appendChild(dataSectionMainLearnset);
-	var dataSectionMainLearnsetOuter = document.createElement("div");
-	var dataSectionMainLearnsetUl = document.createElement("ul");
-	var dataSectionMainLearnsetTitle = document.createElement("ol");
+	let dataSectionMainLearnsetOuter = document.createElement("div");
+	let dataSectionMainLearnsetUl = document.createElement("ul");
+	let dataSectionMainLearnsetTitle = document.createElement("ol");
 
 	dataSectionMainLearnset.appendChild(dataSectionMainLearnsetOuter);
 	dataSectionMainLearnsetOuter.appendChild(dataSectionMainLearnsetTitle);
@@ -598,10 +598,10 @@ var createData = function(id, i) {
 
 
 
-	var categoriez = ["Source","Move","Type","Category","Power","Accuracy","PP", ];
+	let categoriez = ["Source","Move","Type","Category","Power","Accuracy","PP", ];
 	for(u = 0; u < categoriez.length; u++) {
-		var dataSectionMainLearnsetTitleLi = document.createElement("li");
-		var dataSectionMainLearnsetTitleLiText = document.createElement("p");
+		let dataSectionMainLearnsetTitleLi = document.createElement("li");
+		let dataSectionMainLearnsetTitleLiText = document.createElement("p");
 		dataSectionMainLearnsetTitleLiText.innerText = categoriez[u];
 		dataSectionMainLearnsetTitle.appendChild(dataSectionMainLearnsetTitleLi);
 		dataSectionMainLearnsetTitleLi.appendChild(dataSectionMainLearnsetTitleLiText);
@@ -611,21 +611,23 @@ var createData = function(id, i) {
 	dataSectionMain.appendChild(dataSectionMainAreaDiv);
 	dataSectionMainAreaDiv.appendChild(dataSectionMainArea);
 	if(HeldItem == true) {
-		var dataSectionMainMetadataSidebarRow5 = document.createElement("div");
-		var dataSectionMainMetadataSidebarHeldItemOuter = document.createElement("span");
-		var dataSectionMainMetadataSidebarHeldItemTitle = document.createElement("h6");
+		let dataSectionMainMetadataSidebarRow5 = document.createElement("div");
+		let dataSectionMainMetadataSidebarHeldItemOuter = document.createElement("span");
+		let dataSectionMainMetadataSidebarHeldItemTitle = document.createElement("h6");
 		dataSectionMainMetadataSidebarHeldItemOuter.setAttribute("name","helditem");
 		dataSectionMainMetadataSidebarHeldItemTitle.innerText = "Held Item";
 		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow5);
 		dataSectionMainMetadataSidebarRow5.appendChild(dataSectionMainMetadataSidebarHeldItemOuter);
 		dataSectionMainMetadataSidebarHeldItemOuter.appendChild(dataSectionMainMetadataSidebarHeldItemTitle);
-		var dataSectionMainMetadataSidebarHeldItem = document.createElement("div");
+		let dataSectionMainMetadataSidebarHeldItem = document.createElement("div");
 		dataSectionMainMetadataSidebarHeldItemOuter.appendChild(dataSectionMainMetadataSidebarHeldItem);
-		for(q = 0; q < JSONPath_HeldItemPercentage.length; q++) {
-			var dataSectionMainMetadataSidebarHeldItemIcon = document.createElement("b");
-			var dataSectionMainMetadataSidebarHeldItemImg = document.createElement("img");
-			var dataSectionMainMetadataSidebarHeldItemText = document.createElement("small");
-			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("name", JSONPath_HeldItemPercentage[q]);
+		let hitms1 = Object.keys(DATA_Pokémon_HeldItem)
+		let hitms2 = DATA_Pokémon_HeldItem
+		for(q = 0; q < hitms1.length; q++) {
+			let dataSectionMainMetadataSidebarHeldItemIcon = document.createElement("b");
+			let dataSectionMainMetadataSidebarHeldItemImg = document.createElement("img");
+			let dataSectionMainMetadataSidebarHeldItemText = document.createElement("small");
+			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("name", hitms2[hitms1[q]]);
 			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("dataname","value");
 			dataSectionMainMetadataSidebarHeldItemImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("type","invert");
@@ -663,14 +665,14 @@ var createData = function(id, i) {
 
 
 	
-	var helditm = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] span[name='helditem'] > div > b");
+	let helditm = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] span[name='helditem'] > div > b");
 	for(q = 0; q < helditm.length; q++) {
 		helditm[q].addEventListener("click", function() {callPopUp("Held Item");});
 	}
 	dataSectionMainMetadataPopupTitleExitUp.addEventListener("click", function() {OpenExitPopUp(id, false);});
 	dataSectionMainMetadataPopupTitleExitDown.addEventListener("click", function() {OpenExitPopUp(id, true);});
 
-	var baseEV = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > li > b");
+	let baseEV = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > li > b");
 	for(q = 0; q < baseEV.length; q++) {
 		if(baseEV[q].parentElement.parentElement.getAttribute("name") == "basestats") {
 			baseEV[q].addEventListener("click", function() {callPopUp("Base Stats");});
@@ -678,7 +680,7 @@ var createData = function(id, i) {
 			baseEV[q].addEventListener("click", function() {callPopUp("EV Yield");});
 		}
 	}
-	var baseEVTotal = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > b");
+	let baseEVTotal = document.querySelectorAll("#data > div[value='"+id+"'] div[name='sidebar'] > div:first-child > ul > b");
 	for(q = 0; q < baseEVTotal.length; q++) {
 		if(baseEVTotal[q].parentElement.getAttribute("name") == "basestats") {
 			baseEVTotal[q].addEventListener("click", function() {callPopUp("Base Stats Total");});
@@ -690,65 +692,65 @@ var createData = function(id, i) {
 
 
 function loadData() {
-	var target = event.currentTarget;
-	var i = target.getAttribute("value");
-	var id = getIntID(i,"");
-    var base = document.querySelector("#data > div[value='"+id+"']");
-	var portrait = base.querySelector(":scope section[name='header'] *[name='portrait']");
-	var category = base.querySelector(":scope section[name='header'] *[name='category']");
-	var debut = base.querySelector(":scope section[name='header'] *[name='debut']");
-	var name = base.querySelector(":scope section[name='header'] *[name='idname'] *[name='name']");
-	var type = base.querySelector(":scope section[name='header'] *[name='debutcategorytype'] > *:last-child");
-	var description = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='description']");
-	var basestats = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] ul[name='basestats']");
-	var evyield = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] ul[name='evyield']");
-	var ability = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='ability']");
-	var catchrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='catchrate']");
-	var hatchrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='hatchrate']");
-	var genderratio = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='genderratio']");
-	var egggroup = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='egggroup']");
-	var expyield = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='experienceyield']");
-	var levelrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='levelingrate']");
-	var helditem = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='helditem']");
-    var area = base.querySelector(":scope section[name='main'] div[name='area'] ul");
-    var evolutionbase = base.querySelector(":scope > div");
+	let target = event.currentTarget;
+	let i = target.getAttribute("value");
+	let id = getIntID(i,"");
+    let base = document.querySelector("#data > div[value='"+id+"']");
+	let portrait = base.querySelector(":scope section[name='header'] *[name='portrait']");
+	let category = base.querySelector(":scope section[name='header'] *[name='category']");
+	let debut = base.querySelector(":scope section[name='header'] *[name='debut']");
+	let name = base.querySelector(":scope section[name='header'] *[name='idname'] *[name='name']");
+	let type = base.querySelector(":scope section[name='header'] *[name='debutcategorytype'] > *:last-child");
+	let description = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='description']");
+	let basestats = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] ul[name='basestats']");
+	let evyield = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] ul[name='evyield']");
+	let ability = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='ability']");
+	let catchrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='catchrate']");
+	let hatchrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='hatchrate']");
+	let genderratio = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='genderratio']");
+	let egggroup = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='egggroup']");
+	let expyield = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='experienceyield']");
+	let levelrate = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='levelingrate']");
+	let helditem = base.querySelector(":scope section[name='main'] div[name='metadata'] div[name='sidebar'] span[name='helditem']");
+    let area = base.querySelector(":scope section[name='main'] div[name='area'] ul");
+    let evolutionbase = base.querySelector(":scope > div");
 
 
 
     if (evolutionbase != undefined) {
-        var evos = evolutionbase.querySelectorAll(":scope aside[name='evolution']");
-        for(var q = 0; q < evos.length; q++) {
+        let evos = evolutionbase.querySelectorAll(":scope aside[name='evolution']");
+        for(let q = 0; q < evos.length; q++) {
             evos[q].remove();
         }
 
-        var previous = getEvolutionData(i,"Previous");
-        var next = getEvolutionData(i,"Next");
-        var evoArr = [previous,next];
-        var evoArrName = ["previous","next"];
+        let previous = getEvolutionData(i,"Previous");
+        let next = getEvolutionData(i,"Next");
+        let evoArr = [previous,next];
+        let evoArrName = ["previous","next"];
 
-        for(var q = 0; q < evoArr.length; q++) {
-            for(var u = 0; u < evoArr[q].length; u++) {
-                var int = getPokémonInt(evoArr[q][u]["Pokémon"]);
+        for(let q = 0; q < evoArr.length; q++) {
+            for(let u = 0; u < evoArr[q].length; u++) {
+                let int = getPokémonInt(evoArr[q][u]["Pokémon"]);
 
-                var x = u + 1;
-                var evo = document.createElement("aside");
-                var evoContent = document.createElement("div");
-                var evoToggle = document.createElement("figure");
-                var evoImg = document.createElement("img");
-                var evoMain = document.createElement("div");
-                var evoButton = document.createElement("b");
+                let x = u + 1;
+                let evo = document.createElement("aside");
+                let evoContent = document.createElement("div");
+                let evoToggle = document.createElement("figure");
+                let evoImg = document.createElement("img");
+                let evoMain = document.createElement("div");
+                let evoButton = document.createElement("b");
 				evoButton.setAttribute("type","invert");
-                var evoDescription = document.createElement("span");
-				var evoDescriptionText = document.createElement("small");
-                var evoID = document.createElement("span");
-                var evoNationalID = document.createElement("small");
-                var evoName = document.createElement("h6");
+                let evoDescription = document.createElement("span");
+				let evoDescriptionText = document.createElement("small");
+                let evoID = document.createElement("span");
+                let evoNationalID = document.createElement("small");
+                let evoName = document.createElement("h6");
 
                 evo.setAttribute("type",evoArrName[q]+"-"+x+"/"+evoArr[q].length);
 				evo.setAttribute("name","evolution");
          
                 evoButton.setAttribute("value",getPokémonInt(evoArr[q][u]["Pokémon"]));
-				evoImg.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+				evoImg.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
                 evoImg.title = evoArr[q][u]["Pokémon"];
 
                 if (getPokémonID(evoArr[q][u]["Pokémon"]) == undefined) {
@@ -769,19 +771,19 @@ function loadData() {
                     evoContent.appendChild(evoToggle);
                     evoToggle.setAttribute("onclick","this.previousElementSibling.classList.toggle('active')");
 
-					var os = finaldata["Pokémon"]["Offspring"][evoArr[q][u]["Integer"]]["Factor_"+JSONPath_Offspring];
+					let os = finaldata["Pokémon"]["Offspring"][evoArr[q][u]["Integer"]][DATA_Pokémon_Offspring["Factor"]];
 					if (os == undefined) {
-						os = finaldata["Pokémon"]["Offspring"][getDefaultInt(evoArr[q][u]["Integer"])]["Factor_"+JSONPath_Offspring];;
+						os = finaldata["Pokémon"]["Offspring"][getDefaultInt(evoArr[q][u]["Integer"])][DATA_Pokémon_Offspring["Factor"]];;
 					}
 					if (os == undefined) {
 						os = "";
 					}
 
 					if (os.includes(",")) {
-						var arr = [formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution"),formatEvoBreedText(evoArr[q][u]["Integer"],"Breed")];
+						let arr = [formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution"),formatEvoBreedText(evoArr[q][u]["Integer"],"Breed")];
 						evoDescriptionText.innerHTML = arr.join("<br>");
 					}
-                    else if (finaldata["Pokémon"]["Evolution Stage"][i]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Third-Stage" || finaldata["Pokémon"]["Evolution Stage"][getDefaultInt(i)]["Pokémon Stage_"+JSONPath_EvolutionStage] == "Third-Stage") {
+                    else if (finaldata["Pokémon"]["Evolution Stage"][i][DATA_Pokémon_EvolutionStage["Pokémon Stage"]] == "Third-Stage" || finaldata["Pokémon"]["Evolution Stage"][getDefaultInt(i)][DATA_Pokémon_EvolutionStage["Pokémon Stage"]] == "Third-Stage") {
                         evoDescriptionText.innerHTML = formatEvoBreedText(evoArr[q][u]["Integer"],"Evolution").join("<br>");
                     }
                     else {
@@ -806,35 +808,36 @@ function loadData() {
                 evoButton.addEventListener("click",modalData);
                 evoButton.setAttribute("function","modalData");
 
-                var eggSpan = evoDescription.querySelectorAll(':scope b[name*="egg"]');
+                let eggSpan = evoDescription.querySelectorAll(':scope b[name*="egg"]');
                 for(y = 0; y < eggSpan.length; y++) {
                     eggSpan[y].setAttribute("dataname","value")
                     eggSpan[y].addEventListener("click", function() {callPopUp("Egg Group");});
                 }
 
-                var pokSpan = evoDescription.querySelectorAll(':scope b[name="pokémon"]');
+                let pokSpan = evoDescription.querySelectorAll(':scope b[name="pokémon"]');
                 for(y = 0; y < pokSpan.length; y++) {
                     pokSpan[y].setAttribute("value",getPokémonInt(pokSpan[y].innerText))
                     pokSpan[y].addEventListener("click", modalData);
 					pokSpan[y].setAttribute("function","modalData");
                 }
 
-                var itmSpan = evoDescription.querySelectorAll(':scope b[name="item"]');
+                let itmSpan = evoDescription.querySelectorAll(':scope b[name="item"]');
                 for(y = 0; y < itmSpan.length; y++) {
                     itmSpan[y].addEventListener("click", dataRedirect);
 					itmSpan[y].setAttribute("function","dataRedirect");
                 }
 
 
-                for(y = 0; y < JSONPath_Pokédex.length; y++) {
-                    var z = y+1;
-                    var ID = getRegionalID("=",getPokémonID(evoArr[q][u]["Pokémon"]),JSONPath_Pokédex[y]);
-                    var evoRegionalID = document.createElement("small");
+                for(y = 0; y < Object.keys(DATA_Pokémon_PokédexID.length); y++) {
+                    let z = y+1;
+                    let ID = getRegionalID("=",getPokémonID(evoArr[q][u]["Pokémon"]),DATA_Pokémon_PokédexID[Object.keys(DATA_Pokémon_PokédexID)[y]]);
+					let defID = getRegionalID("=",getPokémonID(getPokémonName(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])),"Alt")),DATA_Pokémon_PokédexID[Object.keys(DATA_Pokémon_PokédexID)[y]]);
+                    let evoRegionalID = document.createElement("small");
                     if (ID != undefined) {
                         evoRegionalID.innerText = "#"+ID;
                     }
-                    else if (getRegionalID("=",getPokémonID(getPokémonName(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])),"Alt")),JSONPath_Pokédex[y]) != undefined) {
-                        evoRegionalID.innerText = "#"+getRegionalID("=",getPokémonID(getPokémonName(getDefaultInt(getPokémonInt(evoArr[q][u]["Pokémon"])),"Alt")),JSONPath_Pokédex[y]);
+                    else if (defID != undefined) {
+                        evoRegionalID.innerText = "#"+defID;
                     }
 					else {
 						evoRegionalID.innerText = "#";
@@ -850,17 +853,17 @@ function loadData() {
     }
 
     if (area != undefined) {
-        var arealis = area.querySelectorAll(':scope > li');
-        for(var t = 0; t < arealis.length; t++) {
+        let arealis = area.querySelectorAll(':scope > li');
+        for(let t = 0; t < arealis.length; t++) {
             arealis[t].remove();
         }
-        for(var q = 0; q < finaldata["Location Pokémon"]["Pokémon"].length; q++) { // Default
+        for(let q = 0; q < finaldata["Location Pokémon"]["Pokémon"].length; q++) { // Default
             if (getApplicable(finaldata["Location Pokémon"]["Pokémon"][q]["Game"])) {
                 if (getPokémonName(getDefaultInt((getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])))) == finaldata["Pokémon"]["Reference"][getDefaultInt(i)]["Pokémon"]) {
-                    var pokLi = document.createElement("li");
+                    let pokLi = document.createElement("li");
                     area.appendChild(pokLi)
 
-					var pokLiInput = document.createElement("input");
+					let pokLiInput = document.createElement("input");
 					pokLiInput.setAttribute("type","checkbox");
 					pokLiInput.setAttribute("id","location-pokémon");
 					pokLiInput.setAttribute("name","location-pokémon"+q);
@@ -868,7 +871,7 @@ function loadData() {
 					pokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
 
-                    var pokLocation = document.createElement("span");
+                    let pokLocation = document.createElement("span");
 					pokLocation.setAttribute("type","invert");
                     pokLocation.setAttribute("name","location");
                     if (finaldata["Location Pokémon"]["Pokémon"][q]["Title"] != undefined) {
@@ -877,8 +880,8 @@ function loadData() {
                     pokLi.appendChild(pokLocation);
 
                     if (finaldata["Location Pokémon"]["Pokémon"][q]["Location"] != undefined) {
-                        var pokLocationRedir = document.createElement("b");
-						var pokLocationRedirText = document.createElement("h6");
+                        let pokLocationRedir = document.createElement("b");
+						let pokLocationRedirText = document.createElement("h6");
                         pokLocationRedirText.innerText = finaldata["Location Pokémon"]["Pokémon"][q]["Location"];
                         pokLocationRedir.setAttribute("name","map");
                         pokLocation.appendChild(pokLocationRedir);
@@ -887,7 +890,7 @@ function loadData() {
                         pokLocationRedir.setAttribute("function","dataRedirect");
 
                         if (finaldata["Location Pokémon"]["Pokémon"][q]["Area"] != undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Area"] != finaldata["Location Pokémon"]["Pokémon"][q]["Location"]) {
-                            var pokAreaText = document.createElement("small");
+                            let pokAreaText = document.createElement("small");
                             pokAreaText.innerText = finaldata["Location Pokémon"]["Pokémon"][q]["Area"];
                             pokLocation.appendChild(pokAreaText);
                         }
@@ -897,7 +900,7 @@ function loadData() {
             
 
     
-                    var pokRate = document.createElement("span");
+                    let pokRate = document.createElement("span");
                     pokRate.setAttribute("name","rate");
                     if (finaldata["Location Pokémon"]["Pokémon"][q]["Criteria"] != undefined) {
                         pokRate.setAttribute("title",finaldata["Location Pokémon"]["Pokémon"][q]["Criteria"]);
@@ -906,18 +909,18 @@ function loadData() {
                     pokLi.appendChild(pokRate);
 
                     if (finaldata["Location Pokémon"]["Pokémon"][q]["Rate"] != undefined) {
-                        var pokRateText = document.createElement("h6");
+                        let pokRateText = document.createElement("h6");
                         pokRateText.innerHTML = finaldata["Location Pokémon"]["Pokémon"][q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("mon:",'<pre name="monday">Monday</pre>').replaceAll("tue:",'<pre name="tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="thursday">Thursday</pre>').replaceAll("fri:",'<pre name="friday">Friday</pre>').replaceAll("sat:",'<pre name="saturday">Saturday</pre>').replaceAll("sun:",'<pre name="sunday">Sunday</pre>');
                         pokRate.appendChild(pokRateText);
                     }
 
-                    var pokEncounter = document.createElement("span");
+                    let pokEncounter = document.createElement("span");
                     pokEncounter.setAttribute("name","encounter");
                     pokLi.appendChild(pokEncounter);
 
 
-                    var encounters = [];
-                    var enctitle = [];
+                    let encounters = [];
+                    let enctitle = [];
 
                     if (finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] != undefined) {
                         encounters.push(finaldata["Location Pokémon"]["Pokémon"][q]["Tile"]);
@@ -930,10 +933,10 @@ function loadData() {
                     
 
 
-                        var pokEncounterInner = document.createElement("span");
+                        let pokEncounterInner = document.createElement("span");
                         pokEncounter.appendChild(pokEncounterInner);
                         
-                        var pokEncounterText = document.createElement("span");
+                        let pokEncounterText = document.createElement("span");
                         pokEncounter.appendChild(pokEncounterText);
 
 
@@ -943,19 +946,19 @@ function loadData() {
 
 				
 
-                        var encounterTxtArr = [];
-                        for(var u = 0; u < encounters.length; u++) {
+                        let encounterTxtArr = [];
+                        for(let u = 0; u < encounters.length; u++) {
 
 
-                            var pokEncounterImage = document.createElement("img");
+                            let pokEncounterImage = document.createElement("img");
                             pokEncounterImage.setAttribute("onerror","this.remove();")
 
                             
                             if(encounters[u] == "Surfing") {
-                                pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+"Surfing_M"+".png";
+                                /*pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+"Surfing_M"+".png";*/
                             }
                             else {
-                                pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounters[u]+".png";
+                                /*pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounters[u]+".png";*/
                             }
 
                         
@@ -987,7 +990,7 @@ function loadData() {
 							pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
 							pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
 						}
-						else if (encounterTxtArr[t] == "Surfing") {
+						else if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == "Surfing") {
 							pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Surfing","Surfing</small><small>");
 							pokEncounterText.firstElementChild.setAttribute("name","move");
 							pokEncounterText.firstElementChild.setAttribute("value","Surf");
@@ -996,18 +999,18 @@ function loadData() {
 						}
 			
                         if (finaldata["Location Pokémon"]["Pokémon"][q]["Mechanic"] != undefined) {
-                            var pokMechanicText = document.createElement("h3");
+                            let pokMechanicText = document.createElement("h3");
                             pokMechanicText.innerText = finaldata["Location Pokémon"]["Pokémon"][q]["Mechanic"];
                             pokEncounter.appendChild(pokMechanicText);
                         }
 
-                        var pokPok = document.createElement("span");
-                        var pokPokLvl = document.createElement("small");
-                        var pokPokImg = document.createElement("img");
+                        let pokPok = document.createElement("span");
+                        let pokPokLvl = document.createElement("small");
+                        let pokPokImg = document.createElement("img");
             
                         pokPok.setAttribute("name","pokémon");
                         pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Pokémon"][q]["Level"];
-						pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+						pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 				
 						pokPokImg.setAttribute("title",finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]);
                 
@@ -1022,12 +1025,12 @@ function loadData() {
                 }
             }
         }
-        for(var q = 0; q < finaldata["Location Pokémon"]["Pokémon"].length; q++) { // Allies
+        for(let q = 0; q < finaldata["Location Pokémon"]["Pokémon"].length; q++) { // Allies
             if (getApplicable(finaldata["Location Pokémon"]["Pokémon"][q]["Game"])) {
                 if (Allies) {
 
-                    var ally = finaldata["Location Pokémon"]["Pokémon"][q]["Allies"];
-                    var allies = [ally];
+                    let ally = finaldata["Location Pokémon"]["Pokémon"][q]["Allies"];
+                    let allies = [ally];
                     if (ally != undefined) {
                         ally = ally.replaceAll(/\,[\S\s]*?\:/g,",");
                         if(ally.includes(",")) {
@@ -1036,15 +1039,15 @@ function loadData() {
                     }
                     
 
-                    for(var y = 0; y < allies.length; y++) {
+                    for(let y = 0; y < allies.length; y++) {
                         if (allies[y] != undefined) {
                             if (allies[y] == finaldata["Pokémon"]["Reference"][getDefaultInt(i)]["Pokémon"] && getPokémonName(getDefaultInt((getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])))) != finaldata["Pokémon"]["Reference"][getDefaultInt(i)]["Pokémon"] || allies[y] == finaldata["Pokémon"]["Reference"][i]["Form"] && getPokémonName(getDefaultInt((getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])))) != finaldata["Pokémon"]["Reference"][getDefaultInt(i)]["Pokémon"]) {
 
-                                var pokLi = document.createElement("li");
+                                let pokLi = document.createElement("li");
                                 area.appendChild(pokLi)
 
                         
-								var pokLiInput = document.createElement("input");
+								let pokLiInput = document.createElement("input");
 								pokLiInput.setAttribute("type","checkbox");
 								pokLiInput.setAttribute("id","location-pokémon");
 								pokLiInput.setAttribute("name","location-pokémon"+q);
@@ -1052,7 +1055,7 @@ function loadData() {
 								pokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
 
-								var pokLocation = document.createElement("span");
+								let pokLocation = document.createElement("span");
 								pokLocation.setAttribute("type","invert");
 								pokLocation.setAttribute("name","location");
 								if (finaldata["Location Pokémon"]["Pokémon"][q]["Title"] != undefined) {
@@ -1061,8 +1064,8 @@ function loadData() {
 								pokLi.appendChild(pokLocation);
 			
 								if (finaldata["Location Pokémon"]["Pokémon"][q]["Location"] != undefined) {
-									var pokLocationRedir = document.createElement("b");
-									var pokLocationRedirText = document.createElement("h6");
+									let pokLocationRedir = document.createElement("b");
+									let pokLocationRedirText = document.createElement("h6");
 									pokLocationRedirText.innerText = finaldata["Location Pokémon"]["Pokémon"][q]["Location"];
 									pokLocationRedir.setAttribute("name","map");
 									pokLocation.appendChild(pokLocationRedir);
@@ -1071,7 +1074,7 @@ function loadData() {
 									pokLocationRedir.setAttribute("function","dataRedirect");
 			
 									if (finaldata["Location Pokémon"]["Pokémon"][q]["Area"] != undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Area"] != finaldata["Location Pokémon"]["Pokémon"][q]["Location"]) {
-										var pokAreaText = document.createElement("small");
+										let pokAreaText = document.createElement("small");
 										pokAreaText.innerText = finaldata["Location Pokémon"]["Pokémon"][q]["Area"];
 										pokLocation.appendChild(pokAreaText);
 									}
@@ -1082,7 +1085,7 @@ function loadData() {
                         
 
                 
-                                var pokRate = document.createElement("span");
+                                let pokRate = document.createElement("span");
                                 pokRate.setAttribute("name","rate");
                                 if (finaldata["Location Pokémon"]["Pokémon"][q]["Criteria"] != undefined) {
                                     pokRate.setAttribute("title",finaldata["Location Pokémon"]["Pokémon"][q]["Criteria"]);
@@ -1090,18 +1093,18 @@ function loadData() {
                                 pokLi.appendChild(pokRate);
 
                                 if (finaldata["Location Pokémon"]["Pokémon"][q]["Rate"] != undefined) {
-                                    var pokRateText = document.createElement("h6");
-                                    pokRateText.innerHTML = finaldata["Location Pokémon"]["Pokémon"][q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("extremelyharshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Extremely Harsh Sunlight.png" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Hail.png" title="Hail">').replaceAll("harshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Harsh Sunlight.png" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Heavy Rain.png" title="Heavy Rain">').replaceAll("rain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Rain.png" title="Rain">').replaceAll("sandstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Sandstorm.png" title="Sandstorm">').replaceAll("strongwinds:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Strong Winds.png" title="Strong Winds">').replaceAll("fog:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Fog.png" title="Fog">').replaceAll("cloudy:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Cloudy.png" title="Cloudy">').replaceAll("clear:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Clear.png" title="Clear">').replaceAll("blizzard:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Blizzard.png" title="Blizzard">').replaceAll("snow:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Snow.png" title="Snow">').replaceAll("thunderstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"Thunderstorm/.png" title="Thunderstorm">');
+                                    let pokRateText = document.createElement("h6");
+                                    pokRateText.innerHTML = finaldata["Location Pokémon"]["Pokémon"][q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="'+getMedia([`Morning`],[`./media/Images/FinalDex/`])[0]+'" title="Morning">').replaceAll("da:",'<img src="'+getMedia([`Day`],[`./media/Images/FinalDex/`])[0]+'" title="Day">').replaceAll("ni:",'<img src="'+getMedia([`Night`],[`./media/Images/FinalDex/`])[0]+'" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("mon:",'<pre name="monday">Monday</pre>').replaceAll("tue:",'<pre name="tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="thursday">Thursday</pre>').replaceAll("fri:",'<pre name="friday">Friday</pre>').replaceAll("sat:",'<pre name="saturday">Saturday</pre>').replaceAll("sun:",'<pre name="sunday">Sunday</pre>').replaceAll("extremelyharshsunlight:",'<img src="'+getMedia([`Extremely Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="'+getMedia([`Hail`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Hail">').replaceAll("harshsunlight:",'<img src="'+getMedia([`Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="'+getMedia([`Heavy Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Heavy Rain">').replaceAll("rain:",'<img src="'+getMedia([`Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Rain">').replaceAll("sandstorm:",'<img src="'+getMedia([`Sandstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Sandstorm">').replaceAll("strongwinds:",'<img src="'+getMedia([`Strong Winds`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Strong Winds">').replaceAll("fog:",'<img src="'+getMedia([`Fog`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Fog">').replaceAll("cloudy:",'<img src="'+getMedia([`Cloudy`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Cloudy">').replaceAll("clear:",'<img src="'+getMedia([`Clear`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Clear">').replaceAll("blizzard:",'<img src="'+getMedia([`Blizzard`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Blizzard">').replaceAll("snow:",'<img src="'+getMedia([`Snow`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Snow">').replaceAll("thunderstorm:",'<img src="'+getMedia([`Thunderstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Thunderstorm">').replaceAll("%,","%");
                                     pokRate.appendChild(pokRateText);
                                 }
 
-                                var pokEncounter = document.createElement("span");
+                                let pokEncounter = document.createElement("span");
                                 pokEncounter.setAttribute("name","encounter");
                                 pokLi.appendChild(pokEncounter);
 
 
-                                var encounters = [];
-                                var enctitle = [];
+                                let encounters = [];
+                                let enctitle = [];
 
                                 if (finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] != undefined) {
                                     encounters.push(finaldata["Location Pokémon"]["Pokémon"][q]["Tile"]);
@@ -1114,117 +1117,117 @@ function loadData() {
                                 
 
             
-                                    var pokEncounterInner = document.createElement("span");
-                                    pokEncounter.appendChild(pokEncounterInner);
-                                    
-                                    var pokEncounterText = document.createElement("span");
-                                    pokEncounter.appendChild(pokEncounterText);
+								let pokEncounterInner = document.createElement("span");
+								pokEncounter.appendChild(pokEncounterInner);
+								
+								let pokEncounterText = document.createElement("span");
+								pokEncounter.appendChild(pokEncounterText);
 
-                                    var encounterTxtArr = [];
-                                    for(var u = 0; u < encounters.length; u++) {
+								let encounterTxtArr = [];
+								for(let u = 0; u < encounters.length; u++) {
 
 
-                                        var pokEncounterImage = document.createElement("img");
-                                        pokEncounterImage.title = encounters[u];
-                                        pokEncounterImage.setAttribute("onerror","this.remove();")
+									let pokEncounterImage = document.createElement("img");
+									pokEncounterImage.title = encounters[u];
+									pokEncounterImage.setAttribute("onerror","this.remove();")
 
-                                        
-                                        if(encounters[u] == "Surfing") {
-                                            pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+"Surfing_M"+".png";
-                                        }
-                                        else {
-                                            pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounters[u]+".png";
-                                        }
-
-                                    
-                                        if (enctitle[u] != "Tile" || enctitle.length == 1) {
-                                            encounterTxtArr.push(encounters[u])
-                                        }
-                
-                                        pokEncounterInner.appendChild(pokEncounterImage);
-                            
-                                    }
-
-									if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] != undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] != undefined) {
-										pokEncounterText.innerHTML = "<small>"+finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"]+" on "+finaldata["Location Pokémon"]["Pokémon"][q]["Tile"]+"</small>";
+									
+									if(encounters[u] == "Surfing") {
+										/*pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+"Surfing_M"+".png";*/
 									}
-									else if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] != undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] == undefined) {
-										pokEncounterText.innerHTML = "<small>"+finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"]+"</small>";
-									}
-									else if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] != undefined) {
-										pokEncounterText.innerHTML = "<small>"+finaldata["Location Pokémon"]["Pokémon"][q]["Tile"]+"</small>";
+									else {
+										/*pokEncounterImage.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounters[u]+".png";*/
 									}
 
-									if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == "Headbutt" || finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == "Rock Smash") {
-										pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Headbutt","Headbutt</small><small>").replaceAll("Rock Smash","Rock Smash</small><small>");
-										pokEncounterText.firstElementChild.setAttribute("name","move");
-										pokEncounterText.firstElementChild.setAttribute("value",finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"]);
-										pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
-										pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+								
+									if (enctitle[u] != "Tile" || enctitle.length == 1) {
+										encounterTxtArr.push(encounters[u])
 									}
-									else if (encounterTxtArr[t] == "Surfing") {
-										pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Surfing","Surfing</small><small>");
-										pokEncounterText.firstElementChild.setAttribute("name","move");
-										pokEncounterText.firstElementChild.setAttribute("value","Surf");
-										pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
-										pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+			
+									pokEncounterInner.appendChild(pokEncounterImage);
+						
+								}
+
+								if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] != undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] != undefined) {
+									pokEncounterText.innerHTML = "<small>"+finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"]+" on "+finaldata["Location Pokémon"]["Pokémon"][q]["Tile"]+"</small>";
+								}
+								else if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] != undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] == undefined) {
+									pokEncounterText.innerHTML = "<small>"+finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"]+"</small>";
+								}
+								else if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == undefined && finaldata["Location Pokémon"]["Pokémon"][q]["Tile"] != undefined) {
+									pokEncounterText.innerHTML = "<small>"+finaldata["Location Pokémon"]["Pokémon"][q]["Tile"]+"</small>";
+								}
+
+								if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == "Headbutt" || finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == "Rock Smash") {
+									pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Headbutt","Headbutt</small><small>").replaceAll("Rock Smash","Rock Smash</small><small>");
+									pokEncounterText.firstElementChild.setAttribute("name","move");
+									pokEncounterText.firstElementChild.setAttribute("value",finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"]);
+									pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
+									pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+								}
+								else if (finaldata["Location Pokémon"]["Pokémon"][q]["Encounter"] == "Surfing") {
+									pokEncounterText.innerHTML = pokEncounterText.innerHTML.replaceAll("Surfing","Surfing</small><small>");
+									pokEncounterText.firstElementChild.setAttribute("name","move");
+									pokEncounterText.firstElementChild.setAttribute("value","Surf");
+									pokEncounterText.firstElementChild.setAttribute("onclick","dataRedirect()");
+									pokEncounterText.firstElementChild.setAttribute("function","dataRedirect");
+								}
+
+								if (finaldata["Location Pokémon"]["Pokémon"][q]["Mechanic"] != undefined) {
+									let pokMechanicText = document.createElement("h3");
+									pokMechanicText.innerText = finaldata["Location Pokémon"]["Pokémon"][q]["Mechanic"];
+									pokEncounter.appendChild(pokMechanicText);
+								}
+								/*
+								let pokAllies = document.createElement("span");
+								let pokAllyHeader = document.createElement("h4");
+								pokAllies.setAttribute("name","allies");
+								pokAllyHeader.innerText = "Allies";
+								pokLi.appendChild(pokAllies);
+								pokAllies.appendChild(pokAllyHeader);
+
+								if (finaldata["Location Pokémon"]["Pokémon"][q]["Allies"] != undefined) {
+									let ally = finaldata["Location Pokémon"]["Pokémon"][q]["Allies"].replaceAll("extremelyharshsunlight:",'').replaceAll("hail:",'').replaceAll("harshsunlight:",'').replaceAll("heavyrain:",'').replaceAll("rain:",'').replaceAll("sandstorm:",'').replaceAll("strongwinds:",'').replaceAll("fog:",'').replaceAll("cloudy:",'').replaceAll("clear:",'').replaceAll("blizzard:",'').replaceAll("snow:",'').replaceAll("thunderstorm:",'');
+									let allies = [];
+									if (ally.includes(",")) {
+										allies = ally.split(",")
+									}
+									else {
+										allies = [ally];
 									}
 
-                                    if (finaldata["Location Pokémon"]["Pokémon"][q]["Mechanic"] != undefined) {
-                                        var pokMechanicText = document.createElement("h3");
-                                        pokMechanicText.innerText = finaldata["Location Pokémon"]["Pokémon"][q]["Mechanic"];
-                                        pokEncounter.appendChild(pokMechanicText);
-                                    }
-                                    /*
-                                    var pokAllies = document.createElement("span");
-                                    var pokAllyHeader = document.createElement("h4");
-                                    pokAllies.setAttribute("name","allies");
-                                    pokAllyHeader.innerText = "Allies";
-                                    pokLi.appendChild(pokAllies);
-                                    pokAllies.appendChild(pokAllyHeader);
+									for(let r = 0; r < allies.length; r++) {
+										let allyIMG = document.createElement("img");
+										allyIMG.src = getPokémonMediaPath([getPokémonInt(allies[r])],[PATH_Pokémon_Box_Default_PNG]);
+										allyIMG.title = allies[r];
+										pokAllies.appendChild(allyIMG);
+									}
+								
+								}
+								*/
 
-                                    if (finaldata["Location Pokémon"]["Pokémon"][q]["Allies"] != undefined) {
-                                        var ally = finaldata["Location Pokémon"]["Pokémon"][q]["Allies"].replaceAll("extremelyharshsunlight:",'').replaceAll("hail:",'').replaceAll("harshsunlight:",'').replaceAll("heavyrain:",'').replaceAll("rain:",'').replaceAll("sandstorm:",'').replaceAll("strongwinds:",'').replaceAll("fog:",'').replaceAll("cloudy:",'').replaceAll("clear:",'').replaceAll("blizzard:",'').replaceAll("snow:",'').replaceAll("thunderstorm:",'');
-                                        var allies = [];
-                                        if (ally.includes(",")) {
-                                            allies = ally.split(",")
-                                        }
-                                        else {
-                                            allies = [ally];
-                                        }
+					
+								let pokPok = document.createElement("span");
+								let pokPokIsAlly = document.createElement("h6");
+								let pokPokLvl = document.createElement("small");
+								let pokPokImg = document.createElement("img");
+					
+								pokPok.setAttribute("name","pokémon");
+								pokPokIsAlly.innerText = "Ally to "+finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"];
+								pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Pokémon"][q]["Level"];
+								pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+								pokPokImg.setAttribute("value",getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]));
+			
 
-                                        for(var r = 0; r < allies.length; r++) {
-                                            var allyIMG = document.createElement("img");
-											allyIMG.src = getPokémonMediaPath([getPokémonInt(allies[r])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-                                            allyIMG.title = allies[r];
-                                            pokAllies.appendChild(allyIMG);
-                                        }
-                                    
-                                    }
-                                    */
-
-                        
-                                    var pokPok = document.createElement("span");
-                                    var pokPokIsAlly = document.createElement("h6");
-                                    var pokPokLvl = document.createElement("small");
-                                    var pokPokImg = document.createElement("img");
-                        
-                                    pokPok.setAttribute("name","pokémon");
-                                    pokPokIsAlly.innerText = "Ally to "+finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"];
-                                    pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Pokémon"][q]["Level"];
-									pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
-                                    pokPokImg.setAttribute("value",getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]));
-				
-
-                                    if(finaldata["Location Pokémon"]["Pokémon"][q]["Note"] != undefined) {
-                                        pokEncounter.setAttribute("title",finaldata["Location Pokémon"]["Pokémon"][q]["Note"])
-                                    }
-                                    pokLi.appendChild(pokPok);
-                                    pokPok.appendChild(pokPokIsAlly);
-                                    pokPok.appendChild(pokPokLvl);
-                                    pokPok.appendChild(pokPokImg);
-                                    pokPokImg.addEventListener("click",modalData);
-                                    pokPokImg.setAttribute("function","modalData");
+								if(finaldata["Location Pokémon"]["Pokémon"][q]["Note"] != undefined) {
+									pokEncounter.setAttribute("title",finaldata["Location Pokémon"]["Pokémon"][q]["Note"])
+								}
+								pokLi.appendChild(pokPok);
+								pokPok.appendChild(pokPokIsAlly);
+								pokPok.appendChild(pokPokLvl);
+								pokPok.appendChild(pokPokImg);
+								pokPokImg.addEventListener("click",modalData);
+								pokPokImg.setAttribute("function","modalData");
                                 break;
                             }
                         }
@@ -1233,20 +1236,20 @@ function loadData() {
             }
         }
 
-		for(var q = 0; q < finaldata["Location Pokémon"]["Shop"].length; q++) { // Shop
+		for(let q = 0; q < finaldata["Location Pokémon"]["Shop"].length; q++) { // Shop
             if (getApplicable(finaldata["Location Pokémon"]["Shop"][q]["Game"])) {
                 if (getPokémonName(getDefaultInt((getPokémonInt(finaldata["Location Pokémon"]["Shop"][q]["Pokémon"])))) == finaldata["Pokémon"]["Reference"][getDefaultInt(i)]["Pokémon"]) {
-                    var pokLi = document.createElement("li");
+                    let pokLi = document.createElement("li");
                     area.appendChild(pokLi)
 
-					var pokLiInput = document.createElement("input");
+					let pokLiInput = document.createElement("input");
 					pokLiInput.setAttribute("type","checkbox");
 					pokLiInput.setAttribute("id","location-pokémon-shop");
 					pokLiInput.setAttribute("name","location-pokémon-shop"+q);
 					pokLi.appendChild(pokLiInput);
 					pokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
-                    var pokLocation = document.createElement("span");
+                    let pokLocation = document.createElement("span");
 					pokLocation.setAttribute("type","invert");
                     pokLocation.setAttribute("name","location");
                     if (finaldata["Location Pokémon"]["Shop"][q]["Title"] != undefined) {
@@ -1256,8 +1259,8 @@ function loadData() {
 					
 
                     if (finaldata["Location Pokémon"]["Shop"][q]["Location"] != undefined) {
-                        var pokLocationRedir = document.createElement("b");
-						var pokLocationRedirText = document.createElement("h6");
+                        let pokLocationRedir = document.createElement("b");
+						let pokLocationRedirText = document.createElement("h6");
                         pokLocationRedirText.innerText = finaldata["Location Pokémon"]["Shop"][q]["Location"];
                         pokLocationRedir.setAttribute("name","map");
                         pokLocation.appendChild(pokLocationRedir);
@@ -1266,7 +1269,7 @@ function loadData() {
                         pokLocationRedir.setAttribute("function","dataRedirect");
 
                         if (finaldata["Location Pokémon"]["Shop"][q]["Area"] != undefined && finaldata["Location Pokémon"]["Shop"][q]["Area"] != finaldata["Location Pokémon"]["Shop"][q]["Location"]) {
-                            var pokAreaText = document.createElement("small");
+                            let pokAreaText = document.createElement("small");
                             pokAreaText.innerText = finaldata["Location Pokémon"]["Shop"][q]["Area"];
                             pokLocation.appendChild(pokAreaText);
                         }
@@ -1276,7 +1279,7 @@ function loadData() {
             
 
     
-                    var pokDescription = document.createElement("span");
+                    let pokDescription = document.createElement("span");
                     pokDescription.setAttribute("name","description");
                     if (finaldata["Location Pokémon"]["Shop"][q]["Criteria"] != undefined) {
                         pokRate.setAttribute("title",finaldata["Location Pokémon"]["Shop"][q]["Criteria"]);
@@ -1287,12 +1290,12 @@ function loadData() {
 
 
           
-					var pokDescriptionText = document.createElement("h6");
+					let pokDescriptionText = document.createElement("h6");
 					pokDescription.appendChild(pokDescriptionText);
 
-					var currency = [finaldata["Location Pokémon"]["Shop"][q]["Currency"]];
-					var cost = finaldata["Location Pokémon"]["Shop"][q]["Cost"];
-					var quantity = finaldata["Location Pokémon"]["Shop"][q]["Quantity"];
+					let currency = [finaldata["Location Pokémon"]["Shop"][q]["Currency"]];
+					let cost = finaldata["Location Pokémon"]["Shop"][q]["Cost"];
+					let quantity = finaldata["Location Pokémon"]["Shop"][q]["Quantity"];
 
 					if (quantity == undefined) {
 						quantity = 1;
@@ -1306,9 +1309,9 @@ function loadData() {
 						currency = currency[0].split(",");
 					}
 
-					for(var r = 0; r < currency.length; r++) {
+					for(let r = 0; r < currency.length; r++) {
 						if (getItemIcon(currency[r]) != undefined) {
-							currency[r] = '<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/'+getItemIcon(currency[r])+'.png" onerror="this.style.display=´none´"; onclick="dataRedirect()" name="item" title="'+getItemIcon(currency[r])+'"/>';
+							currency[r] = '<img src="'+getMedia([getItemIcon(currency[r])],[PATH_Item_Bag])[0]+'" onerror="this.style.display=´none´"; onclick="dataRedirect()" name="item" title="'+getItemIcon(currency[r])+'"/>';
 						}
 						else {
 							if (currency[r] == "Pokémon Dollar") {
@@ -1333,13 +1336,13 @@ function loadData() {
 
 
    
-					var pokPok = document.createElement("span");
-					var pokPokLvl = document.createElement("small");
-					var pokPokImg = document.createElement("img");
+					let pokPok = document.createElement("span");
+					let pokPokLvl = document.createElement("small");
+					let pokPokImg = document.createElement("img");
 		
 					pokPok.setAttribute("name","pokémon");
 					pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Shop"][q]["Level"];
-					pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Shop"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Shop"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 			
 					pokPokImg.setAttribute("title",finaldata["Location Pokémon"]["Shop"][q]["Pokémon"]);
 			
@@ -1357,10 +1360,10 @@ function loadData() {
     }
 
 
-    var loc = area.querySelectorAll(":scope li span[name='location'] > *[function]");
-    var locs = [];
+    let loc = area.querySelectorAll(":scope li span[name='location'] > *[function]");
+    let locs = [];
 
-    for(var r = 0; r < loc.length; r++) {
+    for(let r = 0; r < loc.length; r++) {
         locs.push(loc[r].innerText)
     }
     
@@ -1372,12 +1375,12 @@ function loadData() {
 		description.innerHTML += "<p name='entry'>"+returnData(i,"Pokédex Entry","")[0]+"</p>";
 	}
 
-	var os = finaldata["Pokémon"]["Offspring"][i]["Offspring_"+JSONPath_Offspring];
+	let os = finaldata["Pokémon"]["Offspring"][i][DATA_Pokémon_Offspring["Offspring"]];
 	if (os != undefined) {
-		if (getEvolutionFamily(i).length == 1 && finaldata["Pokémon"]["Offspring"][i]["Offspring_"+JSONPath_Offspring].includes(",") || getEvolutionFamily(i).length == 1 && finaldata["Pokémon"]["Offspring"][getDefaultInt(i)]["Offspring_"+JSONPath_Offspring].includes(",")) {
-			var bd = finaldata["Pokémon"]["Offspring"][i]["Offspring_"+JSONPath_Offspring];
+		if (getEvolutionFamily(i).length == 1 && finaldata["Pokémon"]["Offspring"][i][DATA_Pokémon_Offspring["Offspring"]].includes(",") || getEvolutionFamily(i).length == 1 && finaldata["Pokémon"]["Offspring"][getDefaultInt(i)][DATA_Pokémon_Offspring["Offspring"]].includes(",")) {
+			let bd = finaldata["Pokémon"]["Offspring"][i][DATA_Pokémon_Offspring["Offspring"]];
 			if (bd == undefined) {
-				bd = finaldata["Pokémon"]["Offspring"][getDefaultInt(i)]["Offspring_"+JSONPath_Offspring];
+				bd = finaldata["Pokémon"]["Offspring"][getDefaultInt(i)][DATA_Pokémon_Offspring["Offspring"]];
 			}
 			bd = bd.replaceAll(getPokémonName(i),"");
 			bd = bd.replaceAll(getPokémonName(getDefaultInt(i)),"");
@@ -1489,29 +1492,32 @@ function loadData() {
 			egggroup.querySelector(':scope span[name="secondary"]').style.display = "none";
 		}
 	}
-	var baseev = ["Base Stats","EV Yield"];
-	var sts = [];
-	for(var y = 0; y < baseev.length; y++) {
-		for(var q = 0; q < Stats.length; q++) {
+	let baseev = ["Base Stats","EV Yield"];
+	let sts = [];
+	for(let y = 0; y < baseev.length; y++) {
+		for(let q = 0; q < Stats.length; q++) {
+			let arr;
+			let json;
+			let taq;
 			if(y == 0) {
-				var arr = finaldata["Pokémon"]["Base Stats"];
-				var json = JSONPath_BaseStats;
-				var taq = basestats;
+				arr = finaldata["Pokémon"]["Base Stats"];
+				json = DATA_Pokémon_BaseStats[Stats[q]];
+				taq = basestats;
 			} else if(y == 1) {
-				var arr = finaldata["Pokémon"]["Effort Value Yield"];
-				var json = JSONPath_EVYield;
-				var taq = evyield;
+				arr = finaldata["Pokémon"]["Effort Value Yield"];
+				json = DATA_Pokémon_EVYield[Stats[q]];
+				taq = evyield;
 			}
 
-			var temp = Stats[q].toLowerCase().replace(" ","").replace(".","");
-			for(var u = 0; u < finaldata["Pokémon"]["Reference"].length; u++) {
-				if(finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-					if(arr[u][Stats[q]+"_"+json] != undefined && arr[u][Stats[q]+"_"+json] != "") {
-						sts.push(parseInt(arr[u][Stats[q]+"_"+json]));
+			let temp = Stats[q].toLowerCase().replace(" ","").replace(".","");
+			for(let u = 0; u < finaldata["Pokémon"]["Reference"].length; u++) {
+				if(finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+					if(arr[u][json] != undefined && arr[u][json] != "") {
+						sts.push(parseInt(arr[u][json]));
 					}
 				}
 			}
-			var target = taq.querySelector(':scope li[name='+temp+']').querySelector(':scope *[dataname="value"]');
+			let target = taq.querySelector(':scope li[name='+temp+']').querySelector(':scope *[dataname="value"]');
 			target.innerHTML = returnData(i, baseev[y]+" "+Stats[q],"")[0]+"&nbsp;&nbsp;";
 			target.setAttribute("value", returnData(i, baseev[y]+" "+Stats[q],"")[0]);
 			target.parentElement.style.width = returnData(i, baseev[y]+" "+Stats[q],"")[0] / Math.max.apply(Math, sts) * 100+"%";
@@ -1536,11 +1542,14 @@ function loadData() {
 	}
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("value", returnData(i,"Experience Yield","")[0]);
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("title","Experience gained approximated upon defeating "+getPokémonName(i)+" in battle.");
-	if(getPokémonMediaPath([i],["./media/Images/Pokémon/Art/PNG/Default/Front/HOME/"]) != undefined) {
-		portrait.querySelector(":scope img").src = getPokémonMediaPath([i],["./media/Images/Pokémon/Art/PNG/Default/Front/HOME/"]);
+
+
+	if (getPokémonMediaPath([i],[PATH_Pokémon_Art_Default_Front_Official]) != undefined) {
+		portrait.querySelector(":scope img").src = getPokémonMediaPath([i],[PATH_Pokémon_Art_Default_Front_Official]);
 	}
-	if(returnData(i,"Catch Rate","") != undefined) {
-		var catchRateFormula;
+
+	if (returnData(i,"Catch Rate","") != undefined) {
+		let catchRateFormula;
 		if(Generation == 1) {
 			catchRateFormula = Math.round(((Math.min(parseInt(returnData(i,"Catch Rate",""))+1, 256)) / 256 * (85+1 / 256) / 256 * 100) * 10) / 10;
 		}
@@ -1558,19 +1567,21 @@ function loadData() {
 		catchrate.querySelector(':scope *[dataname="value"]').innerText = catchRateFormula+"%";
 	}
     if (HeldItem == true) {
-        for(var q = 0; q < JSONPath_HeldItemPercentage.length; q++) {
+		let percent1 = Object.keys(DATA_Pokémon_HeldItem)
+		let percent2 = DATA_Pokémon_HeldItem
+        for(let q = 0; q < percent1.length; q++) {
             if(returnData(i,"Held Item","")[q] != undefined) {
-                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("value", returnData(i,"Held Item","")[q]);
-                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] img').src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(returnData(i,"Held Item","")[q])+".png";
-                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"]').setAttribute("title",JSONPath_HeldItemPercentage[q]+"\n"+returnData(i,"Held Item","")[q]);
-                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "unset";
-                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] > *:last-child').innerText = returnData(i,"Held Item","")[q];
+                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"]').setAttribute("value", returnData(i,"Held Item","")[q]);
+                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] img').src = getMedia([getItemIcon(returnData(i,"Held Item","")[q])],[PATH_Item_Bag])[0];
+                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"]').setAttribute("title",percent2[percent1[q]]+"\n"+returnData(i,"Held Item","")[q]);
+                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] img').style.display = "unset";
+                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] > *:last-child').innerText = returnData(i,"Held Item","")[q];
             } else {
-                helditem.querySelector(':scope > div b[name="'+JSONPath_HeldItemPercentage[q]+'"] img').style.display = "none";
+                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] img').style.display = "none";
             }
         }
-        var heldcheck;
-        for(var q = 0; q < returnData(i,"Held Item","").length; q++) {
+        let heldcheck;
+        for(let q = 0; q < returnData(i,"Held Item","").length; q++) {
             if(returnData(i,"Held Item","")[q] == undefined) {
                 heldcheck = false;
             } else {
@@ -1595,7 +1606,7 @@ function loadData() {
 		type.querySelector(":scope > span:first-child").classList.add("active");
 		type.querySelector(":scope > span:first-child img").style.display = "inline";
 		type.querySelector(":scope > span:first-child > * > *:last-child").innerText = returnData(i,"Type","")[0];
-		type.querySelector(":scope > span:first-child img").setAttribute("src","./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnData(i,"Type","")[0]+".png");
+		type.querySelector(":scope > span:first-child img").src = getMedia([returnData(i,"Type","")[0]],[PATH_Type_Icon])[0];
         type.querySelector(":scope > span:first-child img").setAttribute("value", returnData(i,"Type","")[0]);
 	} else {
 		type.querySelector(":scope > span:first-child").classList.remove("active");
@@ -1606,7 +1617,7 @@ function loadData() {
 		type.querySelector(":scope > span:last-child").classList.add("active");
 		type.querySelector(":scope > span:last-child img").style.display = "inline";
 		type.querySelector(":scope > span:last-child > * > *:last-child").innerText = returnData(i,"Type","")[1];
-		type.querySelector(":scope > span:last-child img").setAttribute("src","./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+returnData(i,"Type","")[1]+".png");
+		type.querySelector(":scope > span:last-child img").src = getMedia([returnData(i,"Type","")[1]],[PATH_Type_Icon])[0];
         type.querySelector(":scope > span:last-child img").setAttribute("value", returnData(i,"Type","")[1]);
 	} else {
 		type.querySelector(":scope > span:last-child").classList.remove("active");
@@ -1617,17 +1628,17 @@ function loadData() {
 	} else {
 		type.removeAttribute("name");
 	}
-	var dataSectionMainLearnsetUl = document.querySelector("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ul");
-	var dataSectionMainLearnsetHeader = document.querySelectorAll("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ol li > p");
-	var dataSectionMainLearnsetList = document.querySelectorAll("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ul li");
+	let dataSectionMainLearnsetUl = document.querySelector("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ul");
+	let dataSectionMainLearnsetHeader = document.querySelectorAll("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ol li > p");
+	let dataSectionMainLearnsetList = document.querySelectorAll("#data > div[value='"+id+"'] > div section[name='main'] > div[name='learnset'] ul li");
 	for(u = 0; u < dataSectionMainLearnsetList.length; u++) {
 		dataSectionMainLearnsetList[u].remove();
 	}
 
-    var learnsetArr = returnMoveSet(this.value,"");
+    let learnsetArr = returnMoveSet(this.value,"");
     
 	for (u = 0; u < learnsetArr.length; u++) {
-        var dataSectionMainLearnsetLi = document.createElement("li");
+        let dataSectionMainLearnsetLi = document.createElement("li");
         dataSectionMainLearnsetUl.appendChild(dataSectionMainLearnsetLi);
 
         for(y = 0; y < dataSectionMainLearnsetHeader.length; y++) {
@@ -1640,18 +1651,19 @@ function loadData() {
                 if (learnsetArr[u]["Type"] == "Prior Evolution") {
 			
 
-					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
 					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
-					var dataSectionMainLearnsetLiText = document.createElement("small");
+					let dataSectionMainLearnsetLiText = document.createElement("small");
 					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+					dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
                     
                     dataSectionMainLearnsetLiText.innerText = "Prior Evolution";
                     
 
                     if(learnsetArr[u]["Evolution"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Evolution"].split(",").length; p++) {
-                            var dataSectionMainLearnsetLiImg = document.createElement("img");
-							dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+                            let dataSectionMainLearnsetLiImg = document.createElement("img");
+							dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p])],[PATH_Pokémon_Box_Default_PNG]);
                             dataSectionMainLearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
                             dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
                             dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -1659,8 +1671,8 @@ function loadData() {
 							dataSectionMainLearnsetLiImg.setAttribute("function","modalData");
                         }
                     } else {
-                        var dataSectionMainLearnsetLiImg = document.createElement("img");
-						dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Evolution"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+                        let dataSectionMainLearnsetLiImg = document.createElement("img");
+						dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Evolution"])],[PATH_Pokémon_Box_Default_PNG]);
                         dataSectionMainLearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
                         dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
                         dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -1670,10 +1682,11 @@ function loadData() {
                 }
 
                 if (learnsetArr[u]["Type"] == "Level Up") {
-					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					let dataSectionMainLearnsetLiText = document.createElement("h6");
 					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+					dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
 				
                     dataSectionMainLearnsetLiText.innerText = learnsetArr[u]["Factor"];
                     if (learnsetArr[u]["Factor"] == "Evolution") {
@@ -1681,26 +1694,28 @@ function loadData() {
                     }
                 }
                 else if (learnsetArr[u]["Type"] == "Machine") {
-					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					let dataSectionMainLearnsetLiText = document.createElement("h6");
 					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+					dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
 
                     dataSectionMainLearnsetLiText.innerText = learnsetArr[u]["Machine"];
                 }
                 else if (learnsetArr[u]["Type"] == "Breeding") {
-					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-					var dataSectionMainLearnsetLiText = document.createElement("small");
+					let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					let dataSectionMainLearnsetLiText = document.createElement("small");
 					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
+					dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
 
                     dataSectionMainLearnsetLiText.innerText = "via Breeding";
                     
 
                     if(learnsetArr[u]["Parent"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Parent"].split(",").length; p++) {
-                            var dataSectionMainLearnsetLiImg = document.createElement("img");
-							dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Parent"].split(",")[p])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+                            let dataSectionMainLearnsetLiImg = document.createElement("img");
+							dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Parent"].split(",")[p])],[PATH_Pokémon_Box_Default_PNG]);
                             dataSectionMainLearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"].split(",")[p]);
                             dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]));
                             dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -1708,8 +1723,8 @@ function loadData() {
 							dataSectionMainLearnsetLiImg.setAttribute("function","modalData");
                         }
                     } else {
-                        var dataSectionMainLearnsetLiImg = document.createElement("img");
-						dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Parent"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+                        let dataSectionMainLearnsetLiImg = document.createElement("img");
+						dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Parent"])],[PATH_Pokémon_Box_Default_PNG]);
                         dataSectionMainLearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"]);
                         dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"]));
                         dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -1718,11 +1733,11 @@ function loadData() {
                     }
                 }
 				else if (learnsetArr[u]["Type"] == "Tutor") {
-					var tutordata = getTutorData(learnsetArr[u]["Move"],"Move");
+					let tutordata = getTutorData(learnsetArr[u]["Move"],"Move");
 
 					if (tutordata.length > 0) {
-						var dataSectionMainLearnsetLiTextOuter = document.createElement("b");
-						var dataSectionMainLearnsetLiText = document.createElement("small");
+						let dataSectionMainLearnsetLiTextOuter = document.createElement("b");
+						let dataSectionMainLearnsetLiText = document.createElement("small");
 						dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 						dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
@@ -1731,31 +1746,33 @@ function loadData() {
 						dataSectionMainLearnsetLiTextOuter.setAttribute("value",tutordata[0]["Location"])
 						dataSectionMainLearnsetLiTextOuter.addEventListener("click",dataRedirect)
 						dataSectionMainLearnsetLiTextOuter.setAttribute("function","dataRedirect")
+						dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
 					}
 					else {
-						var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-						var dataSectionMainLearnsetLiText = document.createElement("small");
+						let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+						let dataSectionMainLearnsetLiText = document.createElement("small");
 						dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 						dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
 						dataSectionMainLearnsetLiText.innerText = "Move Tutor";
+						dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
 					}
 
                 }
-				dataSectionMainLearnsetLiText.title = "via "+learnsetArr[u]["Type"];
             }
             if(y == 1) {
 				
                 if(learnsetArr[u]["Move"] == undefined) {
-					var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+					let dataSectionMainLearnsetLiText = document.createElement("h6");
 					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
                     dataSectionMainLearnsetLiText.innerHTML = "–";
+					dataSectionMainLearnsetLiText.title = "Move";
                 } else {
-					var dataSectionMainLearnsetLiTextOuter = document.createElement("b");
-					var dataSectionMainLearnsetLiText = document.createElement("h6");
+					let dataSectionMainLearnsetLiTextOuter = document.createElement("b");
+					let dataSectionMainLearnsetLiText = document.createElement("h6");
 					dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 					dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 					
@@ -1764,16 +1781,17 @@ function loadData() {
                     dataSectionMainLearnsetLiText.setAttribute("name","move");
                     dataSectionMainLearnsetLiText.addEventListener("click", dataRedirect);
 					dataSectionMainLearnsetLiText.setAttribute("function","dataRedirect");
+					dataSectionMainLearnsetLiText.title = "Move";
                 }
-                dataSectionMainLearnsetLiText.title = "Move";
+
 
             }
             if(y == 2) {
-				var typ = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,learnsetArr[u]["Move"]);
+				let typ = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],learnsetArr[u]["Move"]);
 				typ = undDel(typ,"-");
 
-				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				let dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
@@ -1783,11 +1801,11 @@ function loadData() {
                 dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
             }
             if(y == 3) {
-				var cate = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,learnsetArr[u]["Move"])
+				let cate = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],learnsetArr[u]["Move"])
 				cate = undDel(cate,"-");
 
-				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				let dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
@@ -1797,11 +1815,11 @@ function loadData() {
                 dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
             }
             if(y == 4) {
-				var pwr = returnArrValue(finaldata["Moves"]["Power"],"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,learnsetArr[u]["Move"]);
+				let pwr = returnArrValue(finaldata["Moves"]["Power"],DATA_Move_Reference["Name"],DATA_Move_Power["Power"],learnsetArr[u]["Move"]);
 				pwr = undDel(pwr,"-");
 
-				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				let dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
@@ -1810,11 +1828,11 @@ function loadData() {
                 
             }
             if(y == 5) {
-				var acc = returnArrValue(finaldata["Moves"]["Accuracy"],"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,learnsetArr[u]["Move"]);
+				let acc = returnArrValue(finaldata["Moves"]["Accuracy"],DATA_Move_Reference["Name"],DATA_Move_Accuracy["Accuracy"],learnsetArr[u]["Move"]);
 				acc = undDel(acc,"-");
 
-				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				let dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
@@ -1823,11 +1841,11 @@ function loadData() {
                 
             }
             if(y == 6) {
-				var ppmin = returnArrValue(finaldata["Moves"]["PP"],"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,learnsetArr[u]["Move"])
-				var ppmax = returnArrValue(finaldata["Moves"]["PP"],"Name_"+JSONPath_MoveName,"PP Max_"+JSONPath_MovePP,learnsetArr[u]["Move"])
+				let ppmin = returnArrValue(finaldata["Moves"]["PP"],DATA_Move_Reference["Name"],DATA_Move_PP["Min"],learnsetArr[u]["Move"])
+				let ppmax = returnArrValue(finaldata["Moves"]["PP"],DATA_Move_Reference["Name"],DATA_Move_PP["Max"],learnsetArr[u]["Move"])
 
-				var dataSectionMainLearnsetLiTextOuter = document.createElement("span");
-				var dataSectionMainLearnsetLiText = document.createElement("h6");
+				let dataSectionMainLearnsetLiTextOuter = document.createElement("span");
+				let dataSectionMainLearnsetLiText = document.createElement("h6");
 				dataSectionMainLearnsetLi.appendChild(dataSectionMainLearnsetLiTextOuter);
 				dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiText);
 
@@ -1861,22 +1879,22 @@ $("body").click(function(event) {
 	}
 });
 
-var navChecker = [0];
+let navChecker = [0];
 
 function showMetadataLearnsetArea() {
 	
-	var int = this.getAttribute("name").replaceAll("data-navigation","");
-	var divs = document.querySelectorAll("#data > div[value='"+int+"'] section[name='main'] > div[name]");
-	var location = document.querySelectorAll("#data > div[value='"+int+"'] section[name='main'] > div[name='area'] ul li > *[name='location'] > *:first-child");
-	var mapOuter = document.querySelector("#data > div[value='"+int+"'] section[name='main'] > div[name='area'] > div > div");
-	var locations = [];
-	var img = mapOuter.querySelector(":scope img");
+	let int = this.getAttribute("name").replaceAll("data-navigation","");
+	let divs = document.querySelectorAll("#data > div[value='"+int+"'] section[name='main'] > div[name]");
+	let location = document.querySelectorAll("#data > div[value='"+int+"'] section[name='main'] > div[name='area'] ul li > *[name='location'] > *:first-child");
+	let mapOuter = document.querySelector("#data > div[value='"+int+"'] section[name='main'] > div[name='area'] > div > div");
+	let locations = [];
+	let img = mapOuter.querySelector(":scope img");
 
-	for(var i = 0; i < location.length; i++) {
+	for(let i = 0; i < location.length; i++) {
 		locations.push(location[i].innerText)
 	}
 
-	for(var i = 0; i < divs.length; i++) {
+	for(let i = 0; i < divs.length; i++) {
 		divs[i].style.display = "none";
 	}
 	divs[this.value].style.removeProperty("display");
@@ -1900,9 +1918,9 @@ function showMetadataLearnsetArea() {
 
 function navKeeper(id) { 
 
-	var MetadataButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='0']");
-	var LearnsetButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='1']");
-	var AreaButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='2']");
+	let MetadataButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='0']");
+	let LearnsetButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='1']");
+	let AreaButton = document.querySelector("#data > div[value='"+id+"'] nav input[value='2']");
 	if(navChecker == 0) {
 		MetadataButton.click();
 	}
@@ -1917,9 +1935,9 @@ function navKeeper(id) {
 
 
 function modalData() {
-	var int;
-	var id;
-	var def;
+	let int;
+	let id;
+	let def;
 
 	tar = this;
 	if (tar.tagName == undefined) {
@@ -1928,7 +1946,7 @@ function modalData() {
 	int = tar.getAttribute("value");
 	def = true;
 
-	for(var i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
+	for(let i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
 		if(int != undefined) {
 			if(i == int) {
 				id = finaldata["Pokémon"]["Reference"][i]["ID"];
@@ -1938,21 +1956,21 @@ function modalData() {
 			}
 		}
 	}
-	var activeWindow = document.querySelector("#data > div.open");
+	let activeWindow = document.querySelector("#data > div.open");
 	if(activeWindow != null) {
 		activeWindow.classList.remove("open");
 	}
 	if(id != undefined) {
-		var windowCount;
-		var maxWindowCount;
-		var currentWindow;
-		var formSpec;
-		var formFirst;
+		let windowCount;
+		let maxWindowCount;
+		let currentWindow;
+		let formSpec;
+		let formFirst;
 		maxWindowCount = 10;
 		windowCount = document.querySelectorAll("#data > div");
 		currentWindow = document.querySelector("#data"+id);
 		if (windowCount.length >= maxWindowCount) {
-			for (var u = 0; u < windowCount.length; u++) {
+			for (let u = 0; u < windowCount.length; u++) {
 				if (windowCount[u].getAttribute("value") != id) {
 					windowCount[u].remove();
 				}
@@ -1988,19 +2006,17 @@ function modalData() {
 
 
 function callPopUp(type) {
-	var x;
-	var arr;
-	var type;
-
-	var base = findUpEl(event.target,"class","open");
+	let x;
+	let arr;
+	let base = findUpEl(event.target,"class","open");
 	x = base.getAttribute("value");
-	var popup = base.querySelector(":scope section[name='main'] > div[name='metadata'] > div[name='popup']")
-	var ul = popup.querySelector(":scope ul");
-	var lis = popup.querySelectorAll(":scope li");
-	var idpath = popup.querySelector(":scope span > h6");
-	var iconpath = popup.querySelector(":scope span > img");
-	var titlepath = popup.querySelector(":scope span > h4");
-	var descriptionpath = popup.querySelector(":scope span > p");
+	let popup = base.querySelector(":scope section[name='main'] > div[name='metadata'] > div[name='popup']")
+	let ul = popup.querySelector(":scope ul");
+	let lis = popup.querySelectorAll(":scope li");
+	let idpath = popup.querySelector(":scope span > h6");
+	let iconpath = popup.querySelector(":scope span > img");
+	let titlepath = popup.querySelector(":scope span > h4");
+	let descriptionpath = popup.querySelector(":scope span > p");
 
 
     if (popup.classList.length == 0) {
@@ -2009,56 +2025,56 @@ function callPopUp(type) {
 	if(!popup.getAttribute("class").includes("open") && !popup.getAttribute("class").includes("close")) {
 		popup.classList.add("close");
 	}
-	var id;
-	var icon;
-	var title;
-	var description;
-	var additional;
-	var style;
-	var formula;
-	var abbreviation;
-	var alteration;
-	var target = event.currentTarget;
-	var enhancetarget;
+	let id;
+	let icon;
+	let title;
+	let description;
+	let additional;
+	let style;
+	let formula;
+	let abbreviation;
+	let alteration;
+	let target = event.currentTarget;
+	let enhancetarget;
 
 	if (type == "Gender Ratio") {
-		var arr = finaldata["Pokémon"]["Gender Ratio"];
+		let arr = finaldata["Pokémon"]["Gender Ratio"];
 	}
 	if (type == "Hatch Rate") {
-		var arr = finaldata["Pokémon"]["Hatch Rate"];
+		let arr = finaldata["Pokémon"]["Hatch Rate"];
 	}
 	if (type == "Catch Rate") {
-		var arr = finaldata["Pokémon"]["Catch Rate"];
+		let arr = finaldata["Pokémon"]["Catch Rate"];
 	}
 	if (type == "Base Stats") {
-		var arr = finaldata["Pokémon"]["Base Stats"];
+		let arr = finaldata["Pokémon"]["Base Stats"];
 	}
 	if (type == "Base Stats Total") {
-		var arr = finaldata["Pokémon"]["Base Stats"];
+		let arr = finaldata["Pokémon"]["Base Stats"];
 	}
 	if (type == "EV Yield") {
-		var arr = finaldata["Pokémon"]["Effort Value Yield"];
+		let arr = finaldata["Pokémon"]["Effort Value Yield"];
 	}
 	if (type == "EV Yield Total") {
-		var arr = finaldata["Pokémon"]["Effort Value Yield"];
+		let arr = finaldata["Pokémon"]["Effort Value Yield"];
 	}
 	if (type == "Experience Yield") {
-		var arr = finaldata["Pokémon"]["Experience Yield"];
+		let arr = finaldata["Pokémon"]["Experience Yield"];
 	}
 	if (type == "Leveling Rate") {
-		var arr = finaldata["Pokémon"]["Leveling Rate"];
+		let arr = finaldata["Pokémon"]["Leveling Rate"];
 	}
 	if (type == "Egg Group") {
-		var arr = finaldata["Pokémon"]["Egg Group"];
+		let arr = finaldata["Pokémon"]["Egg Group"];
 	}
 	if (type == "Type") {
-		var arr = finaldata["Pokémon"]["Type"];
+		let arr = finaldata["Pokémon"]["Type"];
 	}
 	if (type == "Ability") {
-		var arr = finaldata["Pokémon"]["Ability"];
+		let arr = finaldata["Pokémon"]["Ability"];
 	}
 	if (type == "Held Item") {
-		var arr = finaldata["Pokémon"]["Held Item"];
+		let arr = finaldata["Pokémon"]["Held Item"];
 	}
 
 
@@ -2173,7 +2189,7 @@ function callPopUp(type) {
 		}
 	}
 	if(type == "Held Item") {
-		icon = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(target.getAttribute("value"))+".png";
+		icon = getMedia([getItemIcon(target.getAttribute("value"))],[PATH_Item_Bag])[0];
 		iconpath.setAttribute("name","item");
 		iconpath.addEventListener("click", dataRedirect);
         iconpath.setAttribute("function","dataRedirect");
@@ -2202,57 +2218,40 @@ function callPopUp(type) {
 	}
 	
 	if(type == "Ability") {
-		var jsonpath = JSONPath_Ability;
 		if(Generation <= 4) {
-			var json = ["Primary","Secondary"];
+			let json = [DATA_Pokémon_Ability["Primary"],DATA_Pokémon_Ability["Primary"]];
 		} else {
-			var json = ["Primary","Secondary","Hidden"];
+			let json = [DATA_Pokémon_Ability["Primary"],DATA_Pokémon_Ability["Secondary"],DATA_Pokémon_Ability["Hidden"]];
 		}
-		json = json.map(i => i+"_"+jsonpath);
 	} else if(type == "Egg Group") {
-		var jsonpath = JSONPath_EggGroup;
-		var json = ["Primary","Secondary"];
-		json = json.map(i => i+"_"+jsonpath);
+		let json = [DATA_Pokémon_EggGroup["Primary"],DATA_Pokémon_EggGroup["Secondary"]];
 	} else if(type == "Catch Rate") {
-		var json = [JSONPath_CatchRate,"Percentage"];
+		let json = [DATA_Pokémon_CatchRate["Catch"],"Percentage"];
 	} else if(type == "Hatch Rate") {
-		var json = ["Egg Cycle_"+JSONPath_HatchRateEggCycle,"Steps_"+JSONPath_HatchRateSteps];
+		let json = [DATA_Pokémon_HatchRate["Cycle"],DATA_Pokémon_HatchRate["Steps"]];
 	} else if(type == "Experience Yield") {
-		var json = [JSONPath_ExperienceYield,"Category"];
+		let json = [DATA_Pokémon_ExperienceYield["Yield"],"Category"];
 	} else if(type == "Leveling Rate") {
-		var json = [JSONPath_LevelingRate];
+		let json = ["Leveling"];
 	} else if(type == "Type") {
-		var jsonpath = JSONPath_Type;
-		var json = ["Primary","Secondary"];
-		json = json.map(i => i+"_"+jsonpath);
+		let json = [DATA_Pokémon_Type["Primary"],DATA_Pokémon_Type["Secondary"]];
 	} else if(type == "Gender Ratio") {
-		var jsonpath = JSONPath_GenderRatio;
-		var json = ["Male","Female"];
-		json = json.map(i => i+"_"+jsonpath);
+		let json = ["Male","Female"];
 	} else if(type == "Base Stats" || type == "Base Stats Total") {
 		if(Generation <= 1) {
-			var jsonpath = JSONPath_BaseStats;
-			var json = ["HP","Attack","Defense","Special","Speed","Total"];
-			json = json.map(i => i+"_"+jsonpath);
+			let json = [DATA_Pokémon_BaseStats["HP"],DATA_Pokémon_BaseStats["Attack"],DATA_Pokémon_BaseStats["Defense"],DATA_Pokémon_BaseStats["Special"],DATA_Pokémon_BaseStats["Speed"],DATA_Pokémon_BaseStats["Total"]];
 		} else {
-			var jsonpath = JSONPath_BaseStats;
-			var json = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
-			json = json.map(i => i+"_"+jsonpath);
+			let json = [DATA_Pokémon_BaseStats["HP"],DATA_Pokémon_BaseStats["Attack"],DATA_Pokémon_BaseStats["Defense"],DATA_Pokémon_BaseStats["Sp. Atk"],DATA_Pokémon_BaseStats["Sp. Def"],DATA_Pokémon_BaseStats["Speed"],DATA_Pokémon_BaseStats["Total"]];
 		}
-	} else if(type == "EV Yield" || type == "EV Yield Total") {
+	}
+	else if(type == "EV Yield" || type == "EV Yield Total") {
 		if(Generation <= 1) {
-			var jsonpath = JSONPath_EVYield;
-			var json = ["HP","Attack","Defense","Special","Speed","Total"];
-			json = json.map(i => i+"_"+jsonpath);
+			let json = [DATA_Pokémon_EVYield["HP"],DATA_Pokémon_EVYield["Attack"],DATA_Pokémon_EVYield["Defense"],DATA_Pokémon_EVYield["Special"],DATA_Pokémon_EVYield["Speed"],DATA_Pokémon_EVYield["Total"]];
 		} else {
-			var jsonpath = JSONPath_EVYield;
-			var json = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
-			json = json.map(i => i+"_"+jsonpath);
+			let json = [DATA_Pokémon_EVYield["HP"],DATA_Pokémon_EVYield["Attack"],DATA_Pokémon_EVYield["Defense"],DATA_Pokémon_EVYield["Sp. Atk"],DATA_Pokémon_EVYield["Sp. Def"],DATA_Pokémon_EVYield["Speed"],DATA_Pokémon_EVYield["Total"]];
 		}
 	} else if(type == "Held Item") {
-		var jsonpath = JSONPath_HeldItem;
-		var json = JSONPath_HeldItemPercentage;
-		json = json.map(i => i+"_"+jsonpath);
+		let json = DATA_Pokémon_HeldItem;
 	}
 	if(id == undefined) {
 		idpath.innerText = "";
@@ -2300,15 +2299,15 @@ function callPopUp(type) {
 	}
 
     
-	var result = [];
+	let result = [];
 	if(style == "Single") {
 		for(q = 0; q < json.length; q++) {
 			for(u = 0; u < arr.length; u++) {
 				if(arr[u][json[q]] == title) {
-					if(finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-						var obj = new Object();
+					if(finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+						let obj = new Object();
 						obj["Integer"] = u;
-						for(var y = 0; y < json.length; y++) {
+						for(let y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
 							}
@@ -2336,10 +2335,10 @@ function callPopUp(type) {
 		for(q = 0; q < json.length; q++) {
 			for(u = 0; u < arr.length; u++) {
 				if(arr[u][additional+"_"+jsonpath] == title) {
-					if(finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-						var obj = new Object();
+					if(finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+						let obj = new Object();
 						obj["Integer"] = u;
-						for(var y = 0; y < json.length; y++) {
+						for(let y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
 							}
@@ -2353,10 +2352,10 @@ function callPopUp(type) {
 		for(q = 0; q < json.length; q++) {
 			for(u = 0; u < arr.length; u++) {
 				if(arr[u][json[q]] != undefined) {
-					if(finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-						var obj = new Object();
+					if(finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+						let obj = new Object();
 						obj["Integer"] = u;
-						for(var y = 0; y < json.length; y++) {
+						for(let y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
 							}
@@ -2370,10 +2369,10 @@ function callPopUp(type) {
 			return b[additional+"_"+jsonpath] - a[additional+"_"+jsonpath];
 		});
 	} else if(style == "Custom1") {
-		for(var q = 0; q < json.length; q++) {
-			for(var u = 0; u < arr.length; u++) {
-				var condition;
-				var abbreviation2;
+		for(let q = 0; q < json.length; q++) {
+			for(let u = 0; u < arr.length; u++) {
+				let condition;
+				let abbreviation2;
 				if(abbreviation == "Very High") {
 					condition = parseInt(arr[u][json[q]]) >= 300;
 					abbreviation2 = "Very High";
@@ -2395,11 +2394,11 @@ function callPopUp(type) {
 					abbreviation2 = "Very Low";
 				}
 				if(condition) {
-					if(finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-						var obj = new Object();
+					if(finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+						let obj = new Object();
 						obj["Integer"] = u;
 						obj["Category"] = abbreviation2;
-						for(var y = 0; y < json.length; y++) {
+						for(let y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
 							}
@@ -2413,10 +2412,10 @@ function callPopUp(type) {
 			return b[json[0]] - a[json[0]];
 		});
 	} else if(style == "Custom2") {
-		for(var q = 0; q < json.length; q++) {
-			for(var u = 0; u < arr.length; u++) {
-				var alteration2;
-				var abbreviation2;
+		for(let q = 0; q < json.length; q++) {
+			for(let u = 0; u < arr.length; u++) {
+				let alteration2;
+				let abbreviation2;
 				if(arr[u][json[0]] == "1" && arr[u][json[1]] == "0") { // Always Male
 					alteration2 = "<span name='male'>♂</span> 1 : 0 <span name='female'>♀</span>";
 					abbreviation2 = "Always Male";
@@ -2443,12 +2442,12 @@ function callPopUp(type) {
 					abbreviation2 = "Genderless";
 				}
 				if(alteration == alteration2) {
-					if(finaldata["Pokémon"]["Reference"][u][JSONPath_Reference] == "true") {
-						var obj = new Object();
+					if(finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
+						let obj = new Object();
 						obj["Integer"] = u;
 						obj["Alteration"] = alteration2;
 						obj["Abbreviation"] = abbreviation2;
-						for(var y = 0; y < json.length; y++) {
+						for(let y = 0; y < json.length; y++) {
 							if(arr[u][json[y]] != undefined) {
 								obj[json[y]] = arr[u][json[y]];
 							}
@@ -2465,11 +2464,11 @@ function callPopUp(type) {
 	result = result.filter(value => Object.keys(value).length !== 0);
 	if(icon == undefined) {
 		for(u = 0; u < result.length; u++) {
-            var int = result[u]["Integer"];
-            var name = getPokémonName(int);
+            let int = result[u]["Integer"];
+            let name = getPokémonName(int);
 
-			var li = document.createElement("li");
-			var span = document.createElement("span");
+			let li = document.createElement("li");
+			let span = document.createElement("span");
 			if(type == "Ability") {
 				if(Generation <= 4) {
 					li.setAttribute("name","2");
@@ -2477,8 +2476,8 @@ function callPopUp(type) {
 					li.setAttribute("name","3");
 				}
 			}
-			var img = document.createElement("img");
-            img.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+			let img = document.createElement("img");
+            img.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
             img.title = name;
             img.setAttribute("value",int);
 
@@ -2492,7 +2491,7 @@ function callPopUp(type) {
 			li.appendChild(span);
 			span.appendChild(img);
 			if(type == "Gender Ratio") {
-				var p = document.createElement("p");
+				let p = document.createElement("p");
 				p.title = result[u]["Abbreviation"];
 				if(result[u]["Category"] == formula) {
 					p.classList.add("select");
@@ -2505,7 +2504,7 @@ function callPopUp(type) {
 				li.appendChild(p);
 			} else {
 				for(q = 0; q < json.length; q++) {
-					var p = document.createElement("p");
+					let p = document.createElement("p");
 					if(type == "Hatch Rate" && q == 0) {
 						p.title = "Egg Cycles";
 					} else if(type == "Hatch Rate" && q == 1) {
@@ -2569,10 +2568,10 @@ function callPopUp(type) {
 							}
 						}
 					} else {
-						var img2 = document.createElement("img");
-						var text = document.createElement("p");
+						let img2 = document.createElement("img");
+						let text = document.createElement("p");
 						if(result[u][json[q]] != undefined) {
-							img2.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+result[u][json[q]]+".png";
+							img2.src = getMedia([result[u][json[q]]],[PATH_Type_Icon])[0];
 							img2.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 							text.innerText = result[u][json[q]];
 						}
@@ -2586,14 +2585,14 @@ function callPopUp(type) {
 		}
 	} else {
 		for(u = 0; u < result.length; u++) {
-            var int = result[u]["Integer"];
-            var name = getPokémonName(int);
+            let int = result[u]["Integer"];
+            let name = getPokémonName(int);
 
-			var li = document.createElement("li");
-			var span = document.createElement("span");
-			var img = document.createElement("img");
+			let li = document.createElement("li");
+			let span = document.createElement("span");
+			let img = document.createElement("img");
 	
-            img.src = getPokémonMediaPath([int],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+            img.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
             img.title = name;
             img.setAttribute("value",int);
 			
@@ -2609,11 +2608,11 @@ function callPopUp(type) {
 			li.appendChild(span);
 			span.appendChild(img);
 			for(q = 0; q < json.length; q++) {
-				var p = document.createElement("p");
-				var span2 = document.createElement("span");
-				var pimg = document.createElement("img");
+				let p = document.createElement("p");
+				let span2 = document.createElement("span");
+				let pimg = document.createElement("img");
 				if(result[u][json[q]] != undefined) {
-					pimg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(result[u][json[q]])+".png";
+					pimg.src = getMedia([getItemIcon(result[u][json[q]])],[PATH_Item_Bag])[0];
 					pimg.title = result[u][json[q]];
 					if(json[q].includes("_")) {
 						span2.innerText = json[q].split("_")[0];
@@ -2642,7 +2641,7 @@ function callPopUp(type) {
 			}
 		}
 	}
-	var select = ul.querySelector(":scope > li.select");
+	let select = ul.querySelector(":scope > li.select");
 	if (select != undefined) {
 		select.scrollIntoView();
 	}
