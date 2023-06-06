@@ -1,17 +1,17 @@
-var createMap = function() {
-	var mapOuter = document.createElement("div");
-	var mapSectionList = document.createElement("section");
-	var mapSectionListOptionsTitleOuter = document.createElement("div");
-	var mapSectionListOptionsSearchOuter = document.createElement("div");
-	var mapSectionListOptionsSearch = document.createElement("input");
-	var mapSectionListOptionsSearchExit = document.createElement("span");
-	var mapSectionHeader = document.createElement("section");
-	var mapSectionHeaderTitle = document.createElement("span");
-	var mapSectionHeaderTitleText = document.createElement("h3");
-	var mapSectionHeaderFlavor = document.createElement("span");
-	var mapSectionHeaderFlavorText = document.createElement("h5");
+let createMap = function() {
+	let mapOuter = document.createElement("div");
+	let mapSectionList = document.createElement("section");
+	let mapSectionListOptionsTitleOuter = document.createElement("div");
+	let mapSectionListOptionsSearchOuter = document.createElement("div");
+	let mapSectionListOptionsSearch = document.createElement("input");
+	let mapSectionListOptionsSearchExit = document.createElement("span");
+	let mapSectionHeader = document.createElement("section");
+	let mapSectionHeaderTitle = document.createElement("span");
+	let mapSectionHeaderTitleText = document.createElement("h3");
+	let mapSectionHeaderFlavor = document.createElement("span");
+	let mapSectionHeaderFlavorText = document.createElement("h5");
 
-	var mapSectionSidebar = document.createElement("section");
+	let mapSectionSidebar = document.createElement("section");
 	mapOuter.setAttribute("id","map");
 	mapOuter.setAttribute("value","map");
 
@@ -23,7 +23,7 @@ var createMap = function() {
 	mapSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Locations...'");
 	mapSectionListOptionsSearch.setAttribute("autocomplete", "off");
 	mapSectionListOptionsSearchExit.setAttribute("name","exit");
-	mapSectionHeaderTitleText.innerText = "Map of "+Region.replaceAll(","," & ");
+	/*mapSectionHeaderTitleText.innerText = "Map of "+Region.replaceAll(","," & ");*/
 	mapSectionHeaderFlavor.setAttribute("title", "Slogan")
 	document.querySelector("#contain").appendChild(mapOuter);
 	mapOuter.appendChild(mapSectionList);
@@ -41,21 +41,21 @@ var createMap = function() {
 
 
 
-	var mapSectionContent = document.createElement("section");
-	var mapSectionContentMapOuter = document.createElement("div");
-	var mapSectionContentMapOuter2 = document.createElement("div");
-	var mapSectionContentMapInner = document.createElement("div");
-	var mapSectionContentMapInner2 = document.createElement("div");
-	var mapSectionContentMapZoomReset = document.createElement("figure");
-	var mapSectionContentMapZoomResetText = document.createElement("h2");
-	var mapSectionContentMapZoomIn = document.createElement("figure");
-	var mapSectionContentMapZoomInText = document.createElement("h3");
-	var mapSectionContentMapFullscreen = document.createElement("figure");
-	var mapSectionContentMapFullscreenText = document.createElement("h5");
-	var mapSectionContentMapPause = document.createElement("figure");
-	var mapSectionContentMapPauseText = document.createElement("h2");
-	var mapSectionContentMapImg = document.createElement("img");
-	var mapSectionContentMap = document.createElement("map");
+	let mapSectionContent = document.createElement("section");
+	let mapSectionContentMapOuter = document.createElement("div");
+	let mapSectionContentMapOuter2 = document.createElement("div");
+	let mapSectionContentMapInner = document.createElement("div");
+	let mapSectionContentMapInner2 = document.createElement("div");
+	let mapSectionContentMapZoomReset = document.createElement("figure");
+	let mapSectionContentMapZoomResetText = document.createElement("h2");
+	let mapSectionContentMapZoomIn = document.createElement("figure");
+	let mapSectionContentMapZoomInText = document.createElement("h3");
+	let mapSectionContentMapFullscreen = document.createElement("figure");
+	let mapSectionContentMapFullscreenText = document.createElement("h5");
+	let mapSectionContentMapPause = document.createElement("figure");
+	let mapSectionContentMapPauseText = document.createElement("h2");
+	let mapSectionContentMapImg = document.createElement("img");
+	let mapSectionContentMap = document.createElement("map");
 
 	mapSectionContentMapZoomReset.setAttribute("type","scale");
 	mapSectionContentMapZoomReset.setAttribute("name","reset");
@@ -67,22 +67,24 @@ var createMap = function() {
 	mapSectionContentMapFullscreenText.innerText = "⛶";
 	mapSectionContentMapPause.setAttribute("name","pause");
 	mapSectionContentMapPauseText.innerText = "⏸︎";
-	mapSectionContentMapImg.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
-	mapSectionContentMapImg.setAttribute("usemap","#"+MEDIAPath_Map+"-map");
+
+	mapSectionContentMapImg.src = getMedia(["Map"],[PATH_Region_Map])[0]
+
+	mapSectionContentMapImg.setAttribute("usemap","#"+Region.join(" & ")+"-map");
 	mapOuter.appendChild(mapSectionContent);
 	mapSectionContent.appendChild(mapSectionContentMapOuter);
 
-	mapSectionContentMap.setAttribute("name",MEDIAPath_Map+"-map");
-	mapSectionContentMap.setAttribute("id",MEDIAPath_Map+"-map");
+	mapSectionContentMap.setAttribute("name",Region.join(" & ")+"-map");
+	mapSectionContentMap.setAttribute("id",Region.join(" & ")+"-map");
 
 	mapSectionContentMapOuter.setAttribute("name","map");
 
 
-	var dir1 = ["Left","Top"];
-	for(var q = 0; q < dir1.length; q++) {
-		var mapSectionContentMapDirection = document.createElement("span");
-		var mapSectionContentMapDirectionInner = document.createElement("figure");
-		var mapSectionContentMapDirectionInnerText = document.createElement("p");
+	let dir1 = ["Left","Top"];
+	for(let q = 0; q < dir1.length; q++) {
+		let mapSectionContentMapDirection = document.createElement("span");
+		let mapSectionContentMapDirectionInner = document.createElement("figure");
+		let mapSectionContentMapDirectionInnerText = document.createElement("p");
 		mapSectionContentMapDirection.setAttribute("name",dir1[q]);
 		mapSectionContentMapDirectionInner.setAttribute("name","map");
 		if (dir1[q] == "Left") {
@@ -139,7 +141,7 @@ var createMap = function() {
 	mapSectionContentMapInner2.addEventListener("click", function() {zoom(mapSectionContentMapInner2,"pause",undefined)});
 	mapSectionContentMapZoomIn.addEventListener("click",function() {zoom(mapSectionContentMapInner2,"in",false)});
 	mapSectionContentMapZoomReset.addEventListener("click",function() {zoom(mapSectionContentMapInner2,"out",true)});
-	mapSectionContentMapInner2.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){zoom(mapSectionContentMapInner2,"in",false)}else if(!delta.includes("-")){zoom(mapSectionContentMapInner2,"out",true)}});
+	mapSectionContentMapInner2.addEventListener("wheel",function(event){let delta = event.deltaY.toString();if(delta.includes("-")){zoom(mapSectionContentMapInner2,"in",false)}else if(!delta.includes("-")){zoom(mapSectionContentMapInner2,"out",true)}});
 	mapSectionContentMapInner2.addEventListener("mouseleave", function() {zoom(mapSectionContentMapInner2,"out",undefined)});
 	mapSectionContentMapInner2.addEventListener("mouseenter", function() {zoom(mapSectionContentMapInner2,"in",undefined)});
 	mapSectionContentMapInner2.addEventListener("mousemove", function() {zoom(mapSectionContentMapInner2,"pan",undefined)});
@@ -147,11 +149,11 @@ var createMap = function() {
 
 
 
-	var dir2 = ["Bottom","Right"];
-	for(var q = 0; q < dir2.length; q++) {
-		var mapSectionContentMapDirection = document.createElement("span");
-		var mapSectionContentMapDirectionInner = document.createElement("figure");
-		var mapSectionContentMapDirectionInnerText = document.createElement("p");
+	let dir2 = ["Bottom","Right"];
+	for(let q = 0; q < dir2.length; q++) {
+		let mapSectionContentMapDirection = document.createElement("span");
+		let mapSectionContentMapDirectionInner = document.createElement("figure");
+		let mapSectionContentMapDirectionInnerText = document.createElement("p");
 		mapSectionContentMapDirection.setAttribute("name",dir2[q]);
 		mapSectionContentMapDirectionInner.setAttribute("name","map");
 		if (dir2[q] == "Bottom") {
@@ -176,58 +178,58 @@ var createMap = function() {
 
 
 
-    var mapSectionHeaderGame = document.createElement("span");
-    var mapSectionHeaderGameImage = document.createElement("img");
-    mapSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
+    let mapSectionHeaderGame = document.createElement("span");
+    let mapSectionHeaderGameImage = document.createElement("img");
+    mapSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
     mapSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     mapSectionHeader.appendChild(mapSectionHeaderGame);
     mapSectionHeaderGame.appendChild(mapSectionHeaderGameImage);
 
-	var mapSectionContentAreaNavigation = document.createElement("div");
+	let mapSectionContentAreaNavigation = document.createElement("div");
 	mapSectionContentAreaNavigation.setAttribute("name","navigation");
 	mapSectionContent.appendChild(mapSectionContentAreaNavigation);
-	var mapSectionContentAreaOuter = document.createElement("div");
-	var mapSectionContentArea = document.createElement("span");
+	let mapSectionContentAreaOuter = document.createElement("div");
+	let mapSectionContentArea = document.createElement("span");
 	mapSectionContentAreaNavigation.appendChild(mapSectionContentAreaOuter);
 	mapSectionContentAreaOuter.appendChild(mapSectionContentArea);
-	var mapSectionContentAreaContent = document.createElement("span");
-	var mapSectionContentAreaTitle = document.createElement("h5");
+	let mapSectionContentAreaContent = document.createElement("span");
+	let mapSectionContentAreaTitle = document.createElement("h5");
 	mapSectionContentAreaTitle.innerText = "Sub Area/Location";
 	mapSectionContentArea.appendChild(mapSectionContentAreaContent);
 	mapSectionContentAreaContent.appendChild(mapSectionContentAreaTitle);
-	var mapSectionContentNavigationOuter = document.createElement("div");
-	var mapSectionContentNavigation = document.createElement("span");
-	var mapSectionContentNavigationContent = document.createElement("span");
-	var mapSectionContentNavigationTitle = document.createElement("h5");
+	let mapSectionContentNavigationOuter = document.createElement("div");
+	let mapSectionContentNavigation = document.createElement("span");
+	let mapSectionContentNavigationContent = document.createElement("span");
+	let mapSectionContentNavigationTitle = document.createElement("h5");
 	mapSectionContentNavigationTitle.innerText = "Required for Navigation";
 	mapSectionContentAreaNavigation.appendChild(mapSectionContentNavigationOuter);
 	mapSectionContentNavigationOuter.appendChild(mapSectionContentNavigation);
 	mapSectionContentNavigation.appendChild(mapSectionContentNavigationContent);
 	mapSectionContentNavigationContent.appendChild(mapSectionContentNavigationTitle);
 	mapOuter.appendChild(mapSectionSidebar);
-	var mapSectionSidebarDescription = document.createElement("div");
+	let mapSectionSidebarDescription = document.createElement("div");
 
 	mapSectionSidebar.appendChild(mapSectionSidebarDescription);
 
-	var DescriptionSelector = document.createElement("div");
+	let DescriptionSelector = document.createElement("div");
 	mapSectionSidebarDescription.appendChild(DescriptionSelector);
 
-	var mapSectionSidebarDescriptionOview = document.createElement("div");
+	let mapSectionSidebarDescriptionOview = document.createElement("div");
 
 	mapSectionSidebarDescriptionOview.setAttribute("name", "overview");
 	mapSectionSidebarDescription.appendChild(mapSectionSidebarDescriptionOview);
 
-	var mapSectionSidebarDescriptionOviewHeader = document.createElement("span");
-	var mapSectionSidebarDescriptionOviewHeaderText = document.createElement("h6");
+	let mapSectionSidebarDescriptionOviewHeader = document.createElement("span");
+	let mapSectionSidebarDescriptionOviewHeaderText = document.createElement("h6");
 	mapSectionSidebarDescriptionOview.appendChild(mapSectionSidebarDescriptionOviewHeader);
 	mapSectionSidebarDescriptionOviewHeader.appendChild(mapSectionSidebarDescriptionOviewHeaderText);
 
-	var mapSectionSidebarDescriptionOviewSelectorOuter = document.createElement("div");
+	let mapSectionSidebarDescriptionOviewSelectorOuter = document.createElement("div");
 	mapSectionSidebarDescriptionOview.appendChild(mapSectionSidebarDescriptionOviewSelectorOuter);
 
-	var mapSectionSidebarDescriptionOviewButtonLeft = document.createElement("span");
-	var mapSectionSidebarDescriptionOviewButtonLeftButton = document.createElement("figure");
-	var mapSectionSidebarDescriptionOviewButtonLeftButtonText = document.createElement("h3");
+	let mapSectionSidebarDescriptionOviewButtonLeft = document.createElement("span");
+	let mapSectionSidebarDescriptionOviewButtonLeftButton = document.createElement("figure");
+	let mapSectionSidebarDescriptionOviewButtonLeftButtonText = document.createElement("h3");
 	mapSectionSidebarDescriptionOviewButtonLeftButtonText.innerText = "‹";
 	mapSectionSidebarDescriptionOviewButtonLeftButton.setAttribute("value",0);
 	mapSectionSidebarDescriptionOviewSelectorOuter.appendChild(mapSectionSidebarDescriptionOviewButtonLeft);
@@ -235,13 +237,13 @@ var createMap = function() {
 	mapSectionSidebarDescriptionOviewButtonLeftButton.appendChild(mapSectionSidebarDescriptionOviewButtonLeftButtonText);
 	mapSectionSidebarDescriptionOviewButtonLeftButton.addEventListener("click", function() {overviewMove("left");});
 
-	var mapSectionSidebarDescriptionOviewSelector = document.createElement("ul");
-	mapSectionSidebarDescriptionOviewSelector.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){overviewMove("left")}else if(!delta.includes("-")){overviewMove("right")}});
+	let mapSectionSidebarDescriptionOviewSelector = document.createElement("ul");
+	mapSectionSidebarDescriptionOviewSelector.addEventListener("wheel",function(event){let delta = event.deltaY.toString();if(delta.includes("-")){overviewMove("left")}else if(!delta.includes("-")){overviewMove("right")}});
 	mapSectionSidebarDescriptionOviewSelectorOuter.appendChild(mapSectionSidebarDescriptionOviewSelector);
 
-	var mapSectionSidebarDescriptionOviewButtonRight = document.createElement("span");
-	var mapSectionSidebarDescriptionOviewButtonRightButton = document.createElement("figure");
-	var mapSectionSidebarDescriptionOviewButtonRightButtonText = document.createElement("h3");
+	let mapSectionSidebarDescriptionOviewButtonRight = document.createElement("span");
+	let mapSectionSidebarDescriptionOviewButtonRightButton = document.createElement("figure");
+	let mapSectionSidebarDescriptionOviewButtonRightButtonText = document.createElement("h3");
 	mapSectionSidebarDescriptionOviewButtonRightButtonText.innerText = "›";
 	mapSectionSidebarDescriptionOviewButtonRightButton.setAttribute("value",0);
 	mapSectionSidebarDescriptionOviewSelectorOuter.appendChild(mapSectionSidebarDescriptionOviewButtonRight);
@@ -252,25 +254,25 @@ var createMap = function() {
 	
 	mapSectionSidebarDescriptionOviewButtonRightButton.addEventListener("click", function() {overviewMove("right");});
 
-	var mapSectionSidebarDescriptionOviewDescription = document.createElement("span");
+	let mapSectionSidebarDescriptionOviewDescription = document.createElement("span");
 
 	mapSectionSidebarDescriptionOview.appendChild(mapSectionSidebarDescriptionOviewDescription);
 
 
 
 
-	var mapSectionSidebarDescriptionPok = document.createElement("div");
-	var mapSectionSidebarDescriptionPokHead = document.createElement("span");
-	var mapSectionSidebarDescriptionPokHeadText = document.createElement("h5");
+	let mapSectionSidebarDescriptionPok = document.createElement("div");
+	let mapSectionSidebarDescriptionPokHead = document.createElement("span");
+	let mapSectionSidebarDescriptionPokHeadText = document.createElement("h5");
 
 	mapSectionSidebarDescriptionPok.setAttribute("name", "pokémon");
 	mapSectionSidebarDescription.appendChild(mapSectionSidebarDescriptionPok);
 	mapSectionSidebarDescriptionPok.appendChild(mapSectionSidebarDescriptionPokHead);
 	mapSectionSidebarDescriptionPokHead.appendChild(mapSectionSidebarDescriptionPokHeadText);
 
-	var mapSectionSidebarDescriptionItem = document.createElement("div");
-	var mapSectionSidebarDescriptionItemHead = document.createElement("span");
-	var mapSectionSidebarDescriptionItemHeadText = document.createElement("h5");
+	let mapSectionSidebarDescriptionItem = document.createElement("div");
+	let mapSectionSidebarDescriptionItemHead = document.createElement("span");
+	let mapSectionSidebarDescriptionItemHeadText = document.createElement("h5");
 
 	mapSectionSidebarDescriptionItem.setAttribute("name", "items");
 	mapSectionSidebarDescription.appendChild(mapSectionSidebarDescriptionItem);
@@ -278,9 +280,9 @@ var createMap = function() {
 	mapSectionSidebarDescriptionItemHead.appendChild(mapSectionSidebarDescriptionItemHeadText);
 
 
-	var mapSectionSidebarDescriptionShop = document.createElement("div");
-	var mapSectionSidebarDescriptionShopHead = document.createElement("span");
-	var mapSectionSidebarDescriptionShopHeadText = document.createElement("h5");
+	let mapSectionSidebarDescriptionShop = document.createElement("div");
+	let mapSectionSidebarDescriptionShopHead = document.createElement("span");
+	let mapSectionSidebarDescriptionShopHeadText = document.createElement("h5");
 
 	mapSectionSidebarDescriptionShop.setAttribute("name", "shop");
 	mapSectionSidebarDescription.appendChild(mapSectionSidebarDescriptionShop);
@@ -288,28 +290,28 @@ var createMap = function() {
 	mapSectionSidebarDescriptionShopHead.appendChild(mapSectionSidebarDescriptionShopHeadText);
 
 
-	var mapSectionSidebarDescriptionTrainer = document.createElement("div");
+	let mapSectionSidebarDescriptionTrainer = document.createElement("div");
 
 	mapSectionSidebarDescriptionTrainer.setAttribute("name", "trainers");
 	mapSectionSidebarDescription.appendChild(mapSectionSidebarDescriptionTrainer);
 
 
-	var mapSectionSidebarDescriptionTutor = document.createElement("div");
+	let mapSectionSidebarDescriptionTutor = document.createElement("div");
 
 	mapSectionSidebarDescriptionTutor.setAttribute("name", "movetutor");
 	mapSectionSidebarDescription.appendChild(mapSectionSidebarDescriptionTutor);
 
-	var mapSectionListOptionsOuter = document.createElement("div");
-	var mapSectionListOptions = document.createElement("ol");
+	let mapSectionListOptionsOuter = document.createElement("div");
+	let mapSectionListOptions = document.createElement("ol");
 
 	mapSectionListOptionsOuter.setAttribute("name", "0");
 	mapSectionList.appendChild(mapSectionListOptionsOuter);
 	mapSectionListOptionsOuter.appendChild(mapSectionListOptions);
-	for(var q = 0; q < finaldata["Locations"]["Reference"].length; q++) {
+	for(let q = 0; q < finaldata["Locations"]["Reference"].length; q++) {
 		if (getApplicable(finaldata["Locations"]["Reference"][q]["Game"])) {
-			var mapSectionListOptionsInput = document.createElement("input");
-			var mapSectionListOptionsLabel = document.createElement("label");
-			var mapSectionListOptionsText = document.createElement("p");
+			let mapSectionListOptionsInput = document.createElement("input");
+			let mapSectionListOptionsLabel = document.createElement("label");
+			let mapSectionListOptionsText = document.createElement("p");
 			mapSectionListOptionsInput.setAttribute("type", "radio");
 			mapSectionListOptionsInput.setAttribute("name", "map-options");
 			mapSectionListOptionsInput.setAttribute("id", "map-options-"+q);
@@ -319,8 +321,8 @@ var createMap = function() {
 			mapSectionListOptionsLabel.setAttribute("type","medium");
 			mapSectionListOptionsLabel.setAttribute("data-name", finaldata["Locations"]["Reference"][q]["Location"].toLowerCase());
 			mapSectionListOptionsLabel.setAttribute("data-title", finaldata["Locations"]["Reference"][q]["Location"].toLowerCase());
-			var poi = [];
-			for(var u = 0; u < finaldata["Locations"]["Point of Interest"].length; u++) {
+			let poi = [];
+			for(let u = 0; u < finaldata["Locations"]["Point of Interest"].length; u++) {
 				if (getApplicable(finaldata["Locations"]["Point of Interest"][u]["Game"])) {
 					if (finaldata["Locations"]["Point of Interest"][u]["Location"] == finaldata["Locations"]["Reference"][q]["Location"]) {
 						poi.push(finaldata["Locations"]["Point of Interest"][u]["Point of Interest"]);
@@ -335,10 +337,10 @@ var createMap = function() {
 			}
 
 
-			var nav = [];
-			for(var u = 0; u < finaldata["Locations"]["Navigation"].length; u++) {
-				if (finaldata["Locations"]["Navigation"][u][JSONPath_LocationNavigation+"_Name"] == finaldata["Locations"]["Reference"][q]["Location"]) {
-					nav.push(finaldata["Locations"]["Navigation"][u][JSONPath_LocationNavigation+"_Navigation"]);
+			let nav = [];
+			for(let u = 0; u < finaldata["Locations"]["Navigation"].length; u++) {
+				if (finaldata["Locations"]["Navigation"][u]["Location"] == finaldata["Locations"]["Reference"][q]["Location"]) {
+					nav.push(finaldata["Locations"]["Navigation"][u]["Location"]);
 				}
 			}
 			if (nav.length > 0) {
@@ -358,7 +360,7 @@ var createMap = function() {
 		}
 	}
 
-	var searchLis = document.querySelectorAll("#contain > div#map > section[name='list'] ol > label");
+	let searchLis = document.querySelectorAll("#contain > div#map > section[name='list'] ol > label");
     searchMapAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
         for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -397,34 +399,33 @@ var createMap = function() {
 
 
 	function mapOptionsSelector(i) {
-		var i;
 		if (this.value != undefined) {
 			i = this.value;
 		}
-		var location = finaldata["Locations"]["Reference"][i]["Location"];
-		var trainers = getLocationTrainers(location);
-		var shops = [];
-		var items = [];
-		var poks = [];
-		var tutors = [];
-		var shop1 = [];
-		var shop2 = [];
+		let location = finaldata["Locations"]["Reference"][i]["Location"];
+		let trainers = getLocationTrainers(location);
+		let shops = [];
+		let items = [];
+		let poks = [];
+		let tutors = [];
+		let shop1 = [];
+		let shop2 = [];
 		items = getLocationItems(location);
 		poks = getLocationPokémon(location);
 		tutors = getTutorData(location,"Location");
 		shop1 = returnAppArrData(finaldata["Location Pokémon"]["Shop"],"Location",location);
 		shop2 = returnAppArrData(finaldata["Location Items"]["Shop"],"Location",location);
-		for(var q = 0; q < shop1.length; q++) {
+		for(let q = 0; q < shop1.length; q++) {
 			shops.push(shop1[q]);
 		}
-		for(var q = 0; q < shop2.length; q++) {
+		for(let q = 0; q < shop2.length; q++) {
 			shops.push(shop2[q]);
 		}
 
 
 
 
-		var mapImg = document.querySelector("#contain > div#map section[name='content'] *[name='map'] img[usemap]");
+		let mapImg = document.querySelector("#contain > div#map section[name='content'] *[name='map'] img[usemap]");
 
 		if (mapImg.classList.contains("mapify")) {
 			if (mapImg.naturalWidth == 0) {
@@ -443,7 +444,7 @@ var createMap = function() {
 
 		
 
-		var mapDescriptionTitles = ["Overview","Pokémon", "Items", "Shop", "Trainers", "Move Tutor"];
+		let mapDescriptionTitles = ["Overview","Pokémon", "Items", "Shop", "Trainers", "Move Tutor"];
 
 		if (poks.length == 0) {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Pokémon"));
@@ -461,22 +462,54 @@ var createMap = function() {
 			mapDescriptionTitles = mapDescriptionTitles.filter((v) => !v.includes("Move Tutor"));
 		}
 
-		var spans = DescriptionSelector.querySelectorAll(":scope span");
-		for(var q = 0; q < spans.length; q++) {
+		let spans = DescriptionSelector.querySelectorAll(":scope span");
+		for(let q = 0; q < spans.length; q++) {
 			spans[q].remove();
 		}
 
-		var DescriptionSelectorUp = document.createElement("span");
+		let DescriptionSelectorUp = document.createElement("span");
 		DescriptionSelector.appendChild(DescriptionSelectorUp);
 
 		if (mapDescriptionTitles.length > 1) {
-			var DescriptionSelectorDown = document.createElement("span");
+			let DescriptionSelectorDown = document.createElement("span");
 			DescriptionSelector.appendChild(DescriptionSelectorDown);
-		}
 
-		for(var q = 0; q < mapDescriptionTitles.length; q++) {
-			var DescriptionSelectorInput = document.createElement("input");
-			var DescriptionSelectorLabel = document.createElement("label");
+			for(let q = 0; q < mapDescriptionTitles.length; q++) {
+				let DescriptionSelectorInput = document.createElement("input");
+				let DescriptionSelectorLabel = document.createElement("label");
+	
+				DescriptionSelectorInput.setAttribute("type", "radio");
+				DescriptionSelectorInput.setAttribute("name", "map-description-selector");
+				DescriptionSelectorInput.setAttribute("id", "map-description-selector-"+q);
+				DescriptionSelectorInput.setAttribute("autocomplete", "off");
+				DescriptionSelectorInput.setAttribute("value", mapDescriptionTitles[q].replaceAll(" ","").toLowerCase());
+				DescriptionSelectorLabel.setAttribute("for", "map-description-selector-"+q);
+		
+	
+				if (q == 0) {
+					let DescriptionSelectorLabelText = document.createElement("h6");
+					DescriptionSelectorLabelText.innerText = mapDescriptionTitles[q];
+					DescriptionSelectorUp.appendChild(DescriptionSelectorInput);
+					DescriptionSelectorUp.appendChild(DescriptionSelectorLabel);
+					DescriptionSelectorLabelText.innerText = location;
+					DescriptionSelectorInput.setAttribute("checked","")
+					DescriptionSelectorLabel.appendChild(DescriptionSelectorLabelText);
+				}
+				else {
+					let DescriptionSelectorLabelText = document.createElement("p");
+					DescriptionSelectorLabelText.innerText = mapDescriptionTitles[q];
+					DescriptionSelectorDown.appendChild(DescriptionSelectorInput);
+					DescriptionSelectorDown.appendChild(DescriptionSelectorLabel);
+					DescriptionSelectorLabel.appendChild(DescriptionSelectorLabelText);
+				}
+	
+				DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);	  
+			}
+		}
+		else {
+		
+			let DescriptionSelectorInput = document.createElement("input");
+			let DescriptionSelectorLabel = document.createElement("label");
 
 			DescriptionSelectorInput.setAttribute("type", "radio");
 			DescriptionSelectorInput.setAttribute("name", "map-description-selector");
@@ -485,36 +518,28 @@ var createMap = function() {
 			DescriptionSelectorInput.setAttribute("value", mapDescriptionTitles[q].replaceAll(" ","").toLowerCase());
 			DescriptionSelectorLabel.setAttribute("for", "map-description-selector-"+q);
 	
-
-			if (q == 0) {
-				var DescriptionSelectorLabelText = document.createElement("h6");
-				DescriptionSelectorLabelText.innerText = mapDescriptionTitles[q];
-
-				DescriptionSelectorUp.appendChild(DescriptionSelectorInput);
-				DescriptionSelectorUp.appendChild(DescriptionSelectorLabel);
-				DescriptionSelectorLabelText.innerText = location;
-				DescriptionSelectorInput.setAttribute("checked","")
-			}
-			else {
-				var DescriptionSelectorLabelText = document.createElement("p");
-				DescriptionSelectorLabelText.innerText = mapDescriptionTitles[q];
-				DescriptionSelectorDown.appendChild(DescriptionSelectorInput);
-				DescriptionSelectorDown.appendChild(DescriptionSelectorLabel);
-			}
-
+			let DescriptionSelectorLabelText = document.createElement("h6");
+			DescriptionSelectorLabelText.innerText = mapDescriptionTitles[q];
+			DescriptionSelectorUp.appendChild(DescriptionSelectorInput);
+			DescriptionSelectorUp.appendChild(DescriptionSelectorLabel);
+			DescriptionSelectorLabelText.innerText = location;
+			DescriptionSelectorInput.setAttribute("checked","")
 			DescriptionSelectorLabel.appendChild(DescriptionSelectorLabelText);
+		
 			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);	  
+			
 		}
 
+
 		
-		var descs = mapSectionSidebarDescriptionOviewDescription.querySelectorAll(":scope > *");
-		for(var q = 0; q < descs.length; q++) {
+		let descs = mapSectionSidebarDescriptionOviewDescription.querySelectorAll(":scope > *");
+		for(let q = 0; q < descs.length; q++) {
 			descs[q].remove();
 		}
 
 		
-		var desc = [];
-		for(var q = 0; q < finaldata["Locations"]["Description"].length; q++) {
+		let desc = [];
+		for(let q = 0; q < finaldata["Locations"]["Description"].length; q++) {
 			if (getApplicable(finaldata["Locations"]["Description"][q]["Game"])) {
 				if (finaldata["Locations"]["Description"][q]["Location"] == location) {
 					desc.push(finaldata["Locations"]["Description"][q]["Description"]);
@@ -522,18 +547,18 @@ var createMap = function() {
 			}
 		}
 
-		for(var q = 0; q < desc.length; q++) {
-			var mapSectionSidebarDescriptionOviewDescriptionText = document.createElement("p");
+		for(let q = 0; q < desc.length; q++) {
+			let mapSectionSidebarDescriptionOviewDescriptionText = document.createElement("p");
 			mapSectionSidebarDescriptionOviewDescriptionText.innerText = desc[q];
 			mapSectionSidebarDescriptionOviewDescription.appendChild(mapSectionSidebarDescriptionOviewDescriptionText);
 		}
 
-		var poi = [];
-		for(var q = 0; q < finaldata["Locations"]["Point of Interest"].length; q++) {
+		let poi = [];
+		for(let q = 0; q < finaldata["Locations"]["Point of Interest"].length; q++) {
 			if (getApplicable(finaldata["Locations"]["Point of Interest"][q]["Game"])) {
 				if (finaldata["Locations"]["Point of Interest"][q]["Location"] == location) {
-					var areadesc = [];
-					var pointdesc = [];
+					let areadesc = [];
+					let pointdesc = [];
 					if (finaldata["Locations"]["Point of Interest"][q]["Area Description"] != undefined) {
 						areadesc.push(finaldata["Locations"]["Point of Interest"][q]["Area Description"]);
 					}
@@ -541,7 +566,7 @@ var createMap = function() {
 						pointdesc.push(finaldata["Locations"]["Point of Interest"][q]["Point Description"]);
 					}
 
-					var obj = new Object();
+					let obj = new Object();
 					obj["Header"] = finaldata["Locations"]["Point of Interest"][q]["Point of Interest"];
 					if (areadesc.length > 0) {
 						obj["Area Description"] = areadesc.join("\n");
@@ -554,17 +579,17 @@ var createMap = function() {
 			}
 		}
 
-		for(var q = 0; q < poi.length; q++) {
+		for(let q = 0; q < poi.length; q++) {
 			if (poi[q]["Point Description"] != undefined) {
-				var description = [];
+				let description = [];
 				if (poi[q]["Area Description"] != undefined) {
 					description.push(poi[q]["Area Description"]);
 				}
 				description.push(poi[q]["Point Description"]);
 
-				var span = document.createElement("span");
-				var header = document.createElement("h5");
-				var desc = document.createElement("p");
+				let span = document.createElement("span");
+				let header = document.createElement("h5");
+				let desc = document.createElement("p");
 				header.innerText = poi[q]["Header"];
 				desc.innerHTML = description.join("<br>");
 				mapSectionSidebarDescriptionOviewDescription.appendChild(span)
@@ -576,122 +601,57 @@ var createMap = function() {
 
 
 
-		var imgs = mapSectionSidebarDescriptionOviewSelector.querySelectorAll(":scope > span");
-		for (var q = 0; q < imgs.length; q++) {
-			imgs[q].remove();
-		}
-
+	
 
 		mapSectionSidebarDescriptionOviewHeaderText.innerText = "";
 		mapSectionSidebarDescriptionOviewSelector.style.removeProperty("transform");
 		mapSectionSidebarDescriptionOviewButtonLeftButton.setAttribute("value",0);
 		mapSectionSidebarDescriptionOviewButtonRightButton.setAttribute("value",0);
+		mapSectionSidebarDescriptionOviewSelector.innerHTML = ""
+	
 
 
 
-		var loadLocation;
-		var loadArea;
-		var loadImages = [];
-
-		for (var q = 0; q < tempLoadImages.length; q++) {
-			if (tempLoadImages[q].includes("_")) {
-				loadLocation = tempLoadImages[q].split("_")[0];
-				loadArea = tempLoadImages[q].replaceAll(loadLocation+"_","")
-			}
-			else {
-				loadLocation = tempLoadImages[q];
-			}
-			if (loadLocation == location) {
-				loadImages.push(tempLoadImages[q])
-			}
-		}
-
-		for (var q = 0; q < loadImages.length; q++) {
-			if (loadImages[q].includes("_")) {
-				loadLocation = loadImages[q].split("_")[0];
-				loadArea = loadImages[q].replaceAll(loadLocation+"_","")
-			}
-			else {
-				loadLocation = loadImages[q];
-				loadArea = undefined;
-			}
-
-			var mapSectionSidebarDescriptionOviewImageInner = document.createElement("li");
-			var mapSectionSidebarDescriptionOviewImage = document.createElement("img");
-			mapSectionSidebarDescriptionOviewImage.src = "./media/Images/Location/Load/"+MEDIAPath_LocationLoad+"/"+loadImages[q]+".png";
-			mapSectionSidebarDescriptionOviewSelector.appendChild(mapSectionSidebarDescriptionOviewImageInner);
-			mapSectionSidebarDescriptionOviewImageInner.appendChild(mapSectionSidebarDescriptionOviewImage);
-
-			//mapSectionSidebarDescriptionOviewImage.setAttribute("onerror","this.parentElement.remove()")
-
-			if (loadArea != undefined) {
-				mapSectionSidebarDescriptionOviewImage.setAttribute("title",loadArea);
-			}
-			else {
-				mapSectionSidebarDescriptionOviewImage.setAttribute("title",location);
-			}
-
-			if (q == 0) {
-				mapSectionSidebarDescriptionOviewImageInner.classList.add("open")
-				if (loadArea != undefined) {
-					mapSectionSidebarDescriptionOviewHeaderText.innerText = loadArea;
-				}
-				else {
-					mapSectionSidebarDescriptionOviewHeaderText.innerText = location;
-				}
-			}
-		}
+	
+		let loadImages = getMedia([location],[PATH_Location_Load]);
+		loadImages = loadImages.filter(x => x != null && x != undefined && x != '')
+	
+		let overviewImages = getMedia([location],[PATH_Location_Overview]);
+		overviewImages = overviewImages.filter(x => x != null && x != undefined && x != '')
 
 
 
+		let locationImages = loadImages.concat(overviewImages)
 
 
-		var overviewLocation;
-		var overviewArea;
-		var overviewImages = [];
-
-		for (var q = 0; q < tempOverviewImages.length; q++) {
-			if (tempOverviewImages[q].includes("_")) {
-				overviewLocation = tempOverviewImages[q].split("_")[0];
-				overviewArea = tempOverviewImages[q].replaceAll(overviewLocation+"_","")
-			}
-			else {
-				overviewLocation = tempOverviewImages[q];
-			}
-			if (overviewLocation == location) {
-				overviewImages.push(tempOverviewImages[q])
-			}
-		}
-
-
-		if (overviewImages.length <= 1) {
+		if (locationImages.length <= 1) {
 			mapSectionSidebarDescriptionOviewButtonRightButton.classList.add("last");
 		}
 		else {
 			mapSectionSidebarDescriptionOviewButtonRightButton.classList.remove("last");
 		}
 
-	
-
-		var lis = mapSectionSidebarDescriptionOviewSelector.querySelectorAll(":scope > li")
-		for (var q = 0; q < lis.length; q++) {
-			lis[q].remove();
-		}
 
 
-		for (var q = 0; q < overviewImages.length; q++) {
-			if (overviewImages[q].includes("_")) {
-				overviewLocation = overviewImages[q].split("_")[0];
-				overviewArea = overviewImages[q].replaceAll(overviewLocation+"_","")
+		for (let q = 0; q < locationImages.length; q++) {
+			let overviewLocation;
+			let overviewArea;
+			if (locationImages[q].includes("_")) {
+				overviewLocation = locationImages[q].split("_")[0];
+				overviewArea = locationImages[q].replaceAll(overviewLocation+"_","")
+				overviewArea = splitStr(overviewArea,"/")[splitStr(overviewArea,"/").length-1];
 			}
 			else {
-				overviewLocation = overviewImages[q];
+				overviewLocation = locationImages[q];
 				overviewArea = undefined;
 			}
 
-			var mapSectionSidebarDescriptionOviewImageInner = document.createElement("li");
-			var mapSectionSidebarDescriptionOviewImage = document.createElement("img");
-			mapSectionSidebarDescriptionOviewImage.src = "./media/Images/Location/Overview/"+MEDIAPath_LocationOverview+"/"+overviewImages[q]+".png";
+			overviewLocation = splitStr(overviewLocation,"/")[splitStr(overviewLocation,"/").length-1];
+			
+
+			let mapSectionSidebarDescriptionOviewImageInner = document.createElement("li");
+			let mapSectionSidebarDescriptionOviewImage = document.createElement("img");
+			mapSectionSidebarDescriptionOviewImage.src = locationImages[q];
 			mapSectionSidebarDescriptionOviewSelector.appendChild(mapSectionSidebarDescriptionOviewImageInner);
 			mapSectionSidebarDescriptionOviewImageInner.appendChild(mapSectionSidebarDescriptionOviewImage);
 
@@ -723,16 +683,16 @@ var createMap = function() {
 
 
 
-		var locimgs = mapSectionSidebarDescriptionOviewSelector.querySelectorAll(":scope img");
-		var buttons = mapSectionSidebarDescriptionOviewSelectorOuter.querySelectorAll(":scope figure");
-		for (var q = 0; q < locimgs.length; q++) {
+		let locimgs = mapSectionSidebarDescriptionOviewSelector.querySelectorAll(":scope img");
+		let buttons = mapSectionSidebarDescriptionOviewSelectorOuter.querySelectorAll(":scope figure");
+		for (let q = 0; q < locimgs.length; q++) {
 			locimgs[q].parentElement.setAttribute("name",q);
 			locimgs[q].addEventListener("mousedown", function(event) { if(event.button === 0 || event.button === 1) {fullscreenIMG(locimgs,buttons[0].getAttribute("value"))};});
 		}
 
 
-		for(var q = 0; q < shops.length; q++) {
-			var arr = [];
+		for(let q = 0; q < shops.length; q++) {
+			let arr = [];
 			if (shops[q]["Shop"] != undefined) {
 				arr.push(shops[q]["Shop"]);
 			}
@@ -753,34 +713,34 @@ var createMap = function() {
 
 		shops = sortObjectArray(shops,"Sort",true);
 
-		for(var q = 0; q < shops.length; q++) {
+		for(let q = 0; q < shops.length; q++) {
 			if (shops[q]["Sort"] == "a") {
 				shops[q]["Sort"] = location;
 			}
 		}
 
-		var shopArea = [];
-		for(var q = 0; q < shops.length; q++) {
+		let shopArea = [];
+		for(let q = 0; q < shops.length; q++) {
 			shopArea.push(shops[q]["Sort"]);
 		}
 		shopArea = [...new Set(shopArea)];
 
-		var uls = mapSectionSidebarDescriptionShop.querySelectorAll(":scope > ul");
-		for(var q = 0; q < uls.length; q++) {
-			uls[q].remove();
+		let shopuls = mapSectionSidebarDescriptionShop.querySelectorAll(":scope > ul");
+		for(let q = 0; q < shopuls.length; q++) {
+			shopuls[q].remove();
 		}
 
-		for(var q = 0; q < shopArea.length; q++) {
-			var ul;
+		for(let q = 0; q < shopArea.length; q++) {
+			let ul;
 			ul = mapSectionSidebarDescriptionShop.querySelector(':scope > ul[name="'+shopArea[q]+'"]');
 
 			if (ul == null) {
-				var mapSectionSidebarDescriptionShopUl = document.createElement("ul");
+				let mapSectionSidebarDescriptionShopUl = document.createElement("ul");
 				mapSectionSidebarDescriptionShopUl.setAttribute("name",shopArea[q])
 				mapSectionSidebarDescriptionShop.appendChild(mapSectionSidebarDescriptionShopUl);
 
 				if (shopArea[q] != location) {
-					var mapSectionSidebarDescriptionShopUlTitle = document.createElement("h4");
+					let mapSectionSidebarDescriptionShopUlTitle = document.createElement("h4");
 					mapSectionSidebarDescriptionShopUlTitle.innerHTML = shopArea[q];
 					mapSectionSidebarDescriptionShopUl.appendChild(mapSectionSidebarDescriptionShopUlTitle);
 				}
@@ -788,12 +748,12 @@ var createMap = function() {
 			}
 			ul = mapSectionSidebarDescriptionShop.querySelector(':scope > ul[name="'+shopArea[q]+'"]');
 
-			for(var u = 0; u < shops.length; u++) {
+			for(let u = 0; u < shops.length; u++) {
 				if (shops[u]["Sort"] == shopArea[q]) {
-					var quantity = shops[u]["Quantity"];
+					let quantity = shops[u]["Quantity"];
 
-					var main = undefined;
-					var type = undefined;
+					let main = undefined;
+					let type = undefined;
 
 					if (shops[u]["Item"] != undefined) {
 						main = shops[u]["Item"];
@@ -804,9 +764,9 @@ var createMap = function() {
 						type = "pokémon";
 					}
 
-					var mapSectionSidebarDescriptionShopLi = document.createElement("li");
+					let mapSectionSidebarDescriptionShopLi = document.createElement("li");
 
-					var mapSectionSidebarDescriptionShopLiInput = document.createElement("input");
+					let mapSectionSidebarDescriptionShopLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionShopLiInput.setAttribute("type","checkbox");
 					mapSectionSidebarDescriptionShopLiInput.setAttribute("id","location-"+type+"-shop"+type);
 					mapSectionSidebarDescriptionShopLiInput.setAttribute("name","location-"+type+"-shop"+getShopLocationInt(main,type,shops[u]["Cost"],location));
@@ -815,7 +775,7 @@ var createMap = function() {
 					mapSectionSidebarDescriptionShopLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
 
-					var mapSectionSidebarDescriptionShopIconOuter = document.createElement("span");
+					let mapSectionSidebarDescriptionShopIconOuter = document.createElement("span");
 					ul.appendChild(mapSectionSidebarDescriptionShopLi);
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopIconOuter);
 
@@ -844,22 +804,22 @@ var createMap = function() {
 
 
 					if (shops[u]["Level"] != undefined) {
-						var mapSectionSidebarDescriptionShopTitle = document.createElement("small");
+						let mapSectionSidebarDescriptionShopTitle = document.createElement("small");
 						mapSectionSidebarDescriptionShopTitle.innerText = "Lv. "+shops[u]["Level"];
 						mapSectionSidebarDescriptionShopIconOuter.appendChild(mapSectionSidebarDescriptionShopTitle);
 					}
 
-					var mapSectionSidebarDescriptionShopIconInner = document.createElement("span");
+					let mapSectionSidebarDescriptionShopIconInner = document.createElement("span");
 					mapSectionSidebarDescriptionShopIconOuter.appendChild(mapSectionSidebarDescriptionShopIconInner);
 
-					for(var y = 0; y < quantity; y++) {
-						var mapSectionSidebarDescriptionShopIcon = document.createElement("img");
+					for(let y = 0; y < quantity; y++) {
+						let mapSectionSidebarDescriptionShopIcon = document.createElement("img");
 						if (type == "item") {
-							mapSectionSidebarDescriptionShopIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(shops[u]["Item"])+".png";
+							mapSectionSidebarDescriptionShopIcon.src = getMedia([getItemIcon(shops[u]["Item"])],[PATH_Item_Bag])[0];
 							mapSectionSidebarDescriptionShopIcon.setAttribute("onerror", "this.style.display='none';");
 						}
 						else if (type == "pokémon") {
-							mapSectionSidebarDescriptionShopIcon.src = getPokémonMediaPath([getPokémonInt(main)],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+							mapSectionSidebarDescriptionShopIcon.src = getPokémonMediaPath([getPokémonInt(main)],[PATH_Pokémon_Box_Default_PNG]);
 						}
 						mapSectionSidebarDescriptionShopIconInner.appendChild(mapSectionSidebarDescriptionShopIcon);
 					}
@@ -873,7 +833,7 @@ var createMap = function() {
 
 	
 
-					var mapSectionSidebarDescriptionShopText = document.createElement("small");
+					let mapSectionSidebarDescriptionShopText = document.createElement("small");
 					mapSectionSidebarDescriptionShopText.innerText = main;
 					if (shops[u]["Citeria"] != undefined) {
 						mapSectionSidebarDescriptionShopText.setAttribute("title",shops[u]["Citeria"]);
@@ -887,11 +847,11 @@ var createMap = function() {
 		
 					
 
-					var mapSectionSidebarCostShopCostOuter = document.createElement("span");
+					let mapSectionSidebarCostShopCostOuter = document.createElement("span");
 					mapSectionSidebarCostShopCostOuter.setAttribute("name","Cost");
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarCostShopCostOuter);
-					var mapSectionSidebarCostShopCostTitle = document.createElement("h6");
-					var mapSectionSidebarCostShopCost = document.createElement("small");
+					let mapSectionSidebarCostShopCostTitle = document.createElement("h6");
+					let mapSectionSidebarCostShopCost = document.createElement("small");
 
 					if (shops[u]["Currency"].includes("Fossil") || shops[u]["Currency"].includes("Old Amber")) {
 						mapSectionSidebarCostShopCostTitle.innerText = "Revive:";
@@ -900,8 +860,8 @@ var createMap = function() {
 						mapSectionSidebarCostShopCostTitle.innerText = "Cost:";
 					}
 				
-					var currency = [shops[u]["Currency"]];
-					var cost = shops[u]["Cost"];
+					let currency = [shops[u]["Currency"]];
+					let cost = shops[u]["Cost"];
 
 					if (cost == undefined) {
 						if (quantity != undefined) {
@@ -917,13 +877,13 @@ var createMap = function() {
 					}
 
 
-					for(var r = 0; r < currency.length; r++) {
+					for(let r = 0; r < currency.length; r++) {
 						if (getItemIcon(currency[r]) != undefined) {
-							currency[r] = "<img src='./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(currency[r])+".png' onerror='this.style.display=´none´'; onclick='dataRedirect()' name='item' title='"+getItemIcon(currency[r])+"'/>";
+							currency[r] = "<img src='"+getMedia([getItemIcon(currency[r])],[PATH_Item_Bag])[0]+"' onerror='this.style.display=´none´'; onclick='dataRedirect()' name='item' title='"+getItemIcon(currency[r])+"'/>";
 						}
 						else {
 							if (currency[r] == "Pokémon Dollar") {
-								currency[r] = currency[r].replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />');
+								currency[r] = currency[r].replaceAll("Pokémon Dollar",'<img src="'+getMedia(["Pokémon Dollar"],[PATH_Currency_Icon])[0]+'" title="Pokémon Dollar" />');
 							}
 							else {
 								currency[r] = "<span title='"+currency[r]+"'>"+currency[r].replace(/[^A-Z]+/g,"")+"</span>";
@@ -945,9 +905,9 @@ var createMap = function() {
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCostTitle);
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCost);
 
-					var imgs = mapSectionSidebarCostShopCost.querySelectorAll(":scope > img:not([title='Pokémon Dollar'])");
+					let imgs = mapSectionSidebarCostShopCost.querySelectorAll(":scope > img:not([title='Pokémon Dollar'])");
 
-					for (var r = 0; r < imgs.length; r++) {
+					for (let r = 0; r < imgs.length; r++) {
 						mapSectionSidebarCostShopCostOuter.appendChild(imgs[r])
 					}
 
@@ -960,7 +920,7 @@ var createMap = function() {
 
 	
 	
-		for(var q = 0; q < items.length; q++) {
+		for(let q = 0; q < items.length; q++) {
 			if (items[q]["Area"] != undefined && items[q]["Title"] != undefined) {
 				items[q]["Sort"] = items[q]["Area"]+" "+items[q]["Title"];
 			}
@@ -978,34 +938,34 @@ var createMap = function() {
 
 		items = sortObjectArray(items,"Sort",true);
 
-		for(var q = 0; q < items.length; q++) {
+		for(let q = 0; q < items.length; q++) {
 			if (items[q]["Sort"] == "a") {
 				items[q]["Sort"] = location;
 			}
 		}
 
-		var itemArea = [];
-		for(var q = 0; q < items.length; q++) {
+		let itemArea = [];
+		for(let q = 0; q < items.length; q++) {
 			itemArea.push(items[q]["Sort"]);
 		}
 		itemArea = [...new Set(itemArea)];
 
-		var uls = mapSectionSidebarDescriptionItem.querySelectorAll(":scope > ul");
-		for(var q = 0; q < uls.length; q++) {
-			uls[q].remove();
+		let itemuls = mapSectionSidebarDescriptionItem.querySelectorAll(":scope > ul");
+		for(let q = 0; q < itemuls.length; q++) {
+			itemuls[q].remove();
 		}
 
-		for(var q = 0; q < itemArea.length; q++) {
-			var ul;
+		for(let q = 0; q < itemArea.length; q++) {
+			let ul;
 			ul = mapSectionSidebarDescriptionItem.querySelector(':scope > ul[name="'+itemArea[q]+'"]');
 
 			if (ul == null) {
-				var mapSectionSidebarDescriptionItemUl = document.createElement("ul");
+				let mapSectionSidebarDescriptionItemUl = document.createElement("ul");
 				mapSectionSidebarDescriptionItemUl.setAttribute("name",itemArea[q])
 				mapSectionSidebarDescriptionItem.appendChild(mapSectionSidebarDescriptionItemUl);
 
 				if (itemArea[q] != location) {
-					var mapSectionSidebarDescriptionItemUlTitle = document.createElement("h4");
+					let mapSectionSidebarDescriptionItemUlTitle = document.createElement("h4");
 					mapSectionSidebarDescriptionItemUlTitle.innerText = itemArea[q];
 					mapSectionSidebarDescriptionItemUl.appendChild(mapSectionSidebarDescriptionItemUlTitle);
 				}
@@ -1013,16 +973,16 @@ var createMap = function() {
 			}
 			ul = mapSectionSidebarDescriptionItem.querySelector(':scope > ul[name="'+itemArea[q]+'"]');
 
-			for(var u = 0; u < items.length; u++) {
+			for(let u = 0; u < items.length; u++) {
 				if (items[u]["Sort"] == itemArea[q]) {
-					var quantity = items[u]["Quantity"];
+					let quantity = items[u]["Quantity"];
 
-					var mapSectionSidebarDescriptionItemLi = document.createElement("li");
+					let mapSectionSidebarDescriptionItemLi = document.createElement("li");
 
-					var locint = getItemLocationInt(items[u]["Item"],items[u]["Description"],location);
+					let locint = getItemLocationInt(items[u]["Item"],items[u]["Description"],location);
 					if (locint == undefined) {
-						for(var r = 0; r < 10; r++) {
-							var ran = getRandomInt(50000,51000);
+						for(let r = 0; r < 10; r++) {
+							let ran = getRandomInt(50000,51000);
 							if (localStorage.getItem("location-item"+ran) == undefined) {
 								locint = ran;
 								break;
@@ -1033,7 +993,7 @@ var createMap = function() {
 					
 
 
-					var mapSectionSidebarDescriptionItemLiInput = document.createElement("input");
+					let mapSectionSidebarDescriptionItemLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionItemLiInput.setAttribute("type","checkbox");
 					mapSectionSidebarDescriptionItemLiInput.setAttribute("id","location-item");
 					mapSectionSidebarDescriptionItemLiInput.setAttribute("name","location-item"+locint);
@@ -1041,7 +1001,7 @@ var createMap = function() {
 					mapSectionSidebarDescriptionItemLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
 
-					var mapSectionSidebarDescriptionItemIconOuter = document.createElement("span");
+					let mapSectionSidebarDescriptionItemIconOuter = document.createElement("span");
 					mapSectionSidebarDescriptionItemIconOuter.setAttribute("name","item");
 					mapSectionSidebarDescriptionItemIconOuter.setAttribute("value",items[u]["Item"])
 					ul.appendChild(mapSectionSidebarDescriptionItemLi);
@@ -1057,12 +1017,12 @@ var createMap = function() {
 					}
 
 
-					var mapSectionSidebarDescriptionItemIconInner = document.createElement("span");
+					let mapSectionSidebarDescriptionItemIconInner = document.createElement("span");
 					mapSectionSidebarDescriptionItemIconOuter.appendChild(mapSectionSidebarDescriptionItemIconInner);
 
-					for(var y = 0; y < quantity; y++) {
-						var mapSectionSidebarDescriptionItemIcon = document.createElement("img");
-						mapSectionSidebarDescriptionItemIcon.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(items[u]["Item"])+".png";
+					for(let y = 0; y < quantity; y++) {
+						let mapSectionSidebarDescriptionItemIcon = document.createElement("img");
+						mapSectionSidebarDescriptionItemIcon.src = getMedia([getItemIcon(items[u]["Item"])],[PATH_Item_Bag])[0]
 						mapSectionSidebarDescriptionItemIcon.setAttribute("onerror", "this.style.display='none';");
 						mapSectionSidebarDescriptionItemIconInner.appendChild(mapSectionSidebarDescriptionItemIcon);
 					}
@@ -1080,7 +1040,7 @@ var createMap = function() {
 					}
 
 
-					var mapSectionSidebarDescriptionItemText = document.createElement("small");
+					let mapSectionSidebarDescriptionItemText = document.createElement("small");
 					mapSectionSidebarDescriptionItemText.innerText = items[u]["Item"];
 
 					if (getMachineMove(items[u]["Item"]) != undefined) {
@@ -1090,10 +1050,10 @@ var createMap = function() {
 					mapSectionSidebarDescriptionItemIconOuter.appendChild(mapSectionSidebarDescriptionItemText);
 		
 
-					var mapSectionSidebarDescriptionItemDescriptionOuter = document.createElement("span");
+					let mapSectionSidebarDescriptionItemDescriptionOuter = document.createElement("span");
 					mapSectionSidebarDescriptionItemDescriptionOuter.setAttribute("name","description");
 					mapSectionSidebarDescriptionItemLi.appendChild(mapSectionSidebarDescriptionItemDescriptionOuter);
-					var mapSectionSidebarDescriptionItemDescription = document.createElement("small");
+					let mapSectionSidebarDescriptionItemDescription = document.createElement("small");
 					mapSectionSidebarDescriptionItemDescriptionOuter.appendChild(mapSectionSidebarDescriptionItemDescription);
 
 					if (items[u]["Description"] != undefined) {
@@ -1103,11 +1063,11 @@ var createMap = function() {
 						mapSectionSidebarDescriptionItemDescription.innerText = "-";
 					}
 
-					var itemTime = "";
-					var itemDay = [];
-					var itemSeason = [];
+					let itemTime = "";
+					let itemDay = [];
+					let itemSeason = [];
 
-					var itemTimeResult = [];
+					let itemTimeResult = [];
 	
 					if (items[u]["Time"] != undefined) {
 						itemTime = items[u]["Time"];
@@ -1115,8 +1075,8 @@ var createMap = function() {
 
 					if (items[u]["Day"] != undefined) {
 						if (items[u]["Day"].includes(",")) {
-							var daySplit = items[u]["Day"].split(",");
-							for(var y = 0; y < daySplit.length; y++) {
+							let daySplit = items[u]["Day"].split(",");
+							for(let y = 0; y < daySplit.length; y++) {
 								itemDay.push(daySplit[y]);
 							}
 						}
@@ -1127,8 +1087,8 @@ var createMap = function() {
 
 					if (items[u]["Season"] != undefined) {
 						if (items[u]["Season"].includes(",")) {
-							var seasonSplit = items[u]["Season"].split(",");
-							for(var y = 0; y < seasonSplit.length; y++) {
+							let seasonSplit = items[u]["Season"].split(",");
+							for(let y = 0; y < seasonSplit.length; y++) {
 								itemSeason.push(seasonSplit[y]);
 							}
 						}
@@ -1139,19 +1099,19 @@ var createMap = function() {
 					}
 
 
-					for(var y = 0; y < itemSeason.length; y++) {
+					for(let y = 0; y < itemSeason.length; y++) {
 						itemTimeResult.push(itemSeason[y]);
 					}
 
-					for(var y = 0; y < itemDay.length; y++) {
+					for(let y = 0; y < itemDay.length; y++) {
 						itemTimeResult.push(itemDay[y]);
 					}
 
 					itemTimeResult = itemTimeResult.map(i => "("+i+" "+itemTime+")");
 					itemTimeResult = itemTimeResult.map(i => i.replaceAll(" )",")"));
-					var itemTimeResultFinish = "";
+					let itemTimeResultFinish = "";
 
-					for(var y = 0; y < itemTimeResult.length; y++) {
+					for(let y = 0; y < itemTimeResult.length; y++) {
 						itemTimeResultFinish += " "+itemTimeResult[y];
 					}
 					itemTimeResultFinish = itemTimeResultFinish.replaceAll(") (",", ");
@@ -1163,8 +1123,8 @@ var createMap = function() {
 			
 
 					if (items[u]["Field"] != undefined) {
-						var mapSectionSidebarDescriptionItemRequirementOuter = document.createElement("span");
-						var mapSectionSidebarDescriptionItemRequirementTitle = document.createElement("small");
+						let mapSectionSidebarDescriptionItemRequirementOuter = document.createElement("span");
+						let mapSectionSidebarDescriptionItemRequirementTitle = document.createElement("small");
 						mapSectionSidebarDescriptionItemRequirementOuter.setAttribute("name","requirement");
 						mapSectionSidebarDescriptionItemLi.appendChild(mapSectionSidebarDescriptionItemRequirementOuter);
 						mapSectionSidebarDescriptionItemRequirementOuter.appendChild(mapSectionSidebarDescriptionItemRequirementTitle);
@@ -1173,9 +1133,9 @@ var createMap = function() {
 
 
 						if (items[u]["Field"].includes("/")) {
-							for(var y = 0; y < items[u]["Field"].split("/").length; y++) {
-								var itemIcon;
-								var itm;
+							for(let y = 0; y < items[u]["Field"].split("/").length; y++) {
+								let itemIcon;
+								let itm;
 								if (getMoveMachine(items[u]["Field"].split("/")[y]) != undefined) {
 									itemIcon = getItemIcon(getMoveMachine(items[u]["Field"].split("/")[y]));
 									itm = getMoveMachine(items[u]["Field"].split("/")[y]);
@@ -1185,13 +1145,13 @@ var createMap = function() {
 									itm = items[u]["Field"].split("/")[y];
 								}
 
-								var mapSectionSidebarDescriptionItemField = document.createElement("span");
-								var mapSectionSidebarDescriptionItemFieldText = document.createElement("small");
+								let mapSectionSidebarDescriptionItemField = document.createElement("span");
+								let mapSectionSidebarDescriptionItemFieldText = document.createElement("small");
 								mapSectionSidebarDescriptionItemFieldText.innerText = items[u]["Field"].split("/")[y];
 								mapSectionSidebarDescriptionItemRequirementOuter.appendChild(mapSectionSidebarDescriptionItemField);
 								if (itemIcon != undefined) {
-									var mapSectionSidebarDescriptionItemFieldImage = document.createElement("img");
-									mapSectionSidebarDescriptionItemFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									let mapSectionSidebarDescriptionItemFieldImage = document.createElement("img");
+									mapSectionSidebarDescriptionItemFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0]
 									mapSectionSidebarDescriptionItemFieldImage.title = items[u]["Field"].split("/")[y];
 									mapSectionSidebarDescriptionItemField.appendChild(mapSectionSidebarDescriptionItemFieldImage);
 									mapSectionSidebarDescriptionItemField.setAttribute("name","item");
@@ -1201,16 +1161,16 @@ var createMap = function() {
 								}
 								mapSectionSidebarDescriptionItemField.appendChild(mapSectionSidebarDescriptionItemFieldText);
 								if (y != items[u]["Field"].split("/").length - 1) {
-									var mapSectionSidebarDescriptionItemFieldSpace = document.createElement("small");
+									let mapSectionSidebarDescriptionItemFieldSpace = document.createElement("small");
 									mapSectionSidebarDescriptionItemFieldSpace.innerText = " or ";
 									mapSectionSidebarDescriptionItemRequirementOuter.appendChild(mapSectionSidebarDescriptionItemFieldSpace)
 								}
 							}
 						}
 						else if (items[u]["Field"].includes(",")) {
-							for(var y = 0; y < items[u]["Field"].split(",").length; y++) {
-								var itemIcon;
-								var itm;
+							for(let y = 0; y < items[u]["Field"].split(",").length; y++) {
+								let itemIcon;
+								let itm;
 								if (getMoveMachine(items[u]["Field"].split(",")[y]) != undefined) {
 									itemIcon = getItemIcon(getMoveMachine(items[u]["Field"].split(",")[y]));
 									itm = getMoveMachine(items[u]["Field"].split(",")[y]);
@@ -1220,13 +1180,13 @@ var createMap = function() {
 									itm = items[u]["Field"].split(",")[y];
 								}
 
-								var mapSectionSidebarDescriptionItemField = document.createElement("span");
-								var mapSectionSidebarDescriptionItemFieldText = document.createElement("small");
+								let mapSectionSidebarDescriptionItemField = document.createElement("span");
+								let mapSectionSidebarDescriptionItemFieldText = document.createElement("small");
 								mapSectionSidebarDescriptionItemFieldText.innerText = items[u]["Field"].split(",")[y];
 								mapSectionSidebarDescriptionItemRequirementOuter.appendChild(mapSectionSidebarDescriptionItemField);
 								if (itemIcon != undefined) {
-									var mapSectionSidebarDescriptionItemFieldImage = document.createElement("img");
-									mapSectionSidebarDescriptionItemFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									let mapSectionSidebarDescriptionItemFieldImage = document.createElement("img");
+									mapSectionSidebarDescriptionItemFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0]
 									mapSectionSidebarDescriptionItemFieldImage.title = items[u]["Field"].split(",")[y];
 									mapSectionSidebarDescriptionItemField.appendChild(mapSectionSidebarDescriptionItemFieldImage);
 	
@@ -1239,8 +1199,8 @@ var createMap = function() {
 							}
 						}
 						else {
-							var itemIcon;
-							var itm;
+							let itemIcon;
+							let itm;
 							if (getMoveMachine(items[u]["Field"]) != undefined) {
 								itemIcon = getItemIcon(getMoveMachine(items[u]["Field"]));
 								itm = getMoveMachine(items[u]["Field"]);
@@ -1250,13 +1210,13 @@ var createMap = function() {
 								itm = items[u]["Field"];
 							}
 
-							var mapSectionSidebarDescriptionItemField = document.createElement("span");
-							var mapSectionSidebarDescriptionItemFieldText = document.createElement("small");
+							let mapSectionSidebarDescriptionItemField = document.createElement("span");
+							let mapSectionSidebarDescriptionItemFieldText = document.createElement("small");
 							mapSectionSidebarDescriptionItemFieldText.innerText = items[u]["Field"];
 							mapSectionSidebarDescriptionItemRequirementOuter.appendChild(mapSectionSidebarDescriptionItemField);
 							if (itemIcon != undefined) {
-								var mapSectionSidebarDescriptionItemFieldImage = document.createElement("img");
-								mapSectionSidebarDescriptionItemFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+								let mapSectionSidebarDescriptionItemFieldImage = document.createElement("img");
+								mapSectionSidebarDescriptionItemFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0]
 								mapSectionSidebarDescriptionItemFieldImage.title = items[u]["Field"];
 								mapSectionSidebarDescriptionItemFieldImage.setAttribute("name","item");
 								mapSectionSidebarDescriptionItemField.appendChild(mapSectionSidebarDescriptionItemFieldImage);
@@ -1275,8 +1235,8 @@ var createMap = function() {
 			}
 		}
 
-		for(var q = 0; q < poks.length; q++) {
-			var arr = [];
+		for(let q = 0; q < poks.length; q++) {
+			let arr = [];
 			if (poks[q]["Mechanic"] != undefined) {
 				arr.push(poks[q]["Mechanic"]);
 			}
@@ -1297,54 +1257,54 @@ var createMap = function() {
 
 		poks = sortObjectArray(poks,"Sort",true);
 
-		for(var q = 0; q < poks.length; q++) {
+		for(let q = 0; q < poks.length; q++) {
 			if (poks[q]["Sort"] == "a") {
 				poks[q]["Sort"] = location;
 			}
 		}
 	
 	
-		var pokArea = [];
-		for(var q = 0; q < poks.length; q++) {
+		let pokArea = [];
+		for(let q = 0; q < poks.length; q++) {
 			pokArea.push(poks[q]["Sort"]);
 		}
 		pokArea = [...new Set(pokArea)];
 		
 
-		var uls = mapSectionSidebarDescriptionPok.querySelectorAll(":scope > ul");
-		for(var q = 0; q < uls.length; q++) {
-			uls[q].remove();
+		let pokuls = mapSectionSidebarDescriptionPok.querySelectorAll(":scope > ul");
+		for(let q = 0; q < pokuls.length; q++) {
+			pokuls[q].remove();
 		}
 
 	
-		for(var q = 0; q < pokArea.length; q++) {
-			var ul;
+		for(let q = 0; q < pokArea.length; q++) {
+			let ul;
 			ul = mapSectionSidebarDescriptionPok.querySelector(':scope > ul[name="'+pokArea[q]+'"]');
 
 			if (ul == null) {
-				var mapSectionSidebarDescriptionPokUl = document.createElement("ul");
+				let mapSectionSidebarDescriptionPokUl = document.createElement("ul");
 				mapSectionSidebarDescriptionPokUl.setAttribute("name",pokArea[q])
 				mapSectionSidebarDescriptionPok.appendChild(mapSectionSidebarDescriptionPokUl);
 
 				if (pokArea[q] != location) {
-					var mapSectionSidebarDescriptionPokUlTitle = document.createElement("h4");
+					let mapSectionSidebarDescriptionPokUlTitle = document.createElement("h4");
 					mapSectionSidebarDescriptionPokUlTitle.innerHTML = pokArea[q];
 					mapSectionSidebarDescriptionPokUl.appendChild(mapSectionSidebarDescriptionPokUlTitle);
 				}
 			}
 			ul = mapSectionSidebarDescriptionPok.querySelector(':scope > ul[name="'+pokArea[q]+'"]');
 
-			for(var u = 0; u < poks.length; u++) {
+			for(let u = 0; u < poks.length; u++) {
 				if (poks[u]["Sort"] == pokArea[q]) {
 
 
-					var mapSectionSidebarDescriptionPokLi = document.createElement("li");
+					let mapSectionSidebarDescriptionPokLi = document.createElement("li");
 					ul.appendChild(mapSectionSidebarDescriptionPokLi);
 
-					var locint = getPokémonLocationInt(poks[u]["Pokémon"],poks[u]["Level"],poks[u]["Rate"],poks[u]["Tile"],poks[u]["Encounter"],poks[u]["Mechanic"],location);
+					let locint = getPokémonLocationInt(poks[u]["Pokémon"],poks[u]["Level"],poks[u]["Rate"],poks[u]["Tile"],poks[u]["Encounter"],poks[u]["Mechanic"],location);
 					if (locint == undefined) {
-						for(var r = 0; r < 10; r++) {
-							var ran = getRandomInt(50000,51000);
+						for(let r = 0; r < 10; r++) {
+							let ran = getRandomInt(50000,51000);
 							if (localStorage.getItem("location-pokémon"+ran) == undefined) {
 								locint = ran;
 								break;
@@ -1352,7 +1312,7 @@ var createMap = function() {
 						}
 					}
 
-					var mapSectionSidebarDescriptionPokLiInput = document.createElement("input");
+					let mapSectionSidebarDescriptionPokLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionPokLiInput.setAttribute("type","checkbox");
 					mapSectionSidebarDescriptionPokLiInput.setAttribute("id","location-pokémon");
 					mapSectionSidebarDescriptionPokLiInput.setAttribute("name","location-pokémon"+locint);
@@ -1360,16 +1320,16 @@ var createMap = function() {
 					mapSectionSidebarDescriptionPokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
 
-					var mapSectionSidebarDescriptionPokOuter = document.createElement("span");
-					var mapSectionSidebarDescriptionPokLvl = document.createElement("span");
-					var mapSectionSidebarDescriptionPokLvlText = document.createElement("small");
-					var mapSectionSidebarDescriptionPokWrap = document.createElement("b");
-					var mapSectionSidebarDescriptionPokIcon = document.createElement("img");
-					var mapSectionSidebarDescriptionPokName = document.createElement("span");
-					var mapSectionSidebarDescriptionPokNameText = document.createElement("small");
+					let mapSectionSidebarDescriptionPokOuter = document.createElement("span");
+					let mapSectionSidebarDescriptionPokLvl = document.createElement("span");
+					let mapSectionSidebarDescriptionPokLvlText = document.createElement("small");
+					let mapSectionSidebarDescriptionPokWrap = document.createElement("b");
+					let mapSectionSidebarDescriptionPokIcon = document.createElement("img");
+					let mapSectionSidebarDescriptionPokName = document.createElement("span");
+					let mapSectionSidebarDescriptionPokNameText = document.createElement("small");
 					mapSectionSidebarDescriptionPokOuter.setAttribute("name","pok");
 					mapSectionSidebarDescriptionPokLvlText.innerText = "Lv. "+poks[u]["Level"];
-					mapSectionSidebarDescriptionPokIcon.src = getPokémonMediaPath([getPokémonInt(poks[u]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					mapSectionSidebarDescriptionPokIcon.src = getPokémonMediaPath([getPokémonInt(poks[u]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 					mapSectionSidebarDescriptionPokWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
 					mapSectionSidebarDescriptionPokNameText.innerText = poks[u]["Pokémon"];
 
@@ -1389,13 +1349,13 @@ var createMap = function() {
 					mapSectionSidebarDescriptionPokWrap.addEventListener("click",modalData);
 					mapSectionSidebarDescriptionPokWrap.setAttribute("function","modalData");
 
-					var mapSectionSidebarDescriptionPokRate = document.createElement("span");
+					let mapSectionSidebarDescriptionPokRate = document.createElement("span");
 					mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokRate);
 
 					if (poks[u]["Rate"] != undefined) {
-						var mapSectionSidebarDescriptionPokRateText = document.createElement("h6");
+						let mapSectionSidebarDescriptionPokRateText = document.createElement("h6");
 						mapSectionSidebarDescriptionPokRate.setAttribute("name","rate")
-						mapSectionSidebarDescriptionPokRateText.innerHTML = poks[u]["Rate"].replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="./media/Images/Misc/FinalDex/Morning.png" title="Morning">').replaceAll("da:",'<img src="./media/Images/Misc/FinalDex/Day.png" title="Day">').replaceAll("ni:",'<img src="./media/Images/Misc/FinalDex/Night.png" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("mon:",'<pre name="monday">Monday</pre>').replaceAll("tue:",'<pre name="tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="thursday">Thursday</pre>').replaceAll("fri:",'<pre name="friday">Friday</pre>').replaceAll("sat:",'<pre name="saturday">Saturday</pre>').replaceAll("sun:",'<pre name="sunday">Sunday</pre>').replaceAll("extremelyharshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Extremely Harsh Sunlight.png" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Hail.png" title="Hail">').replaceAll("harshsunlight:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Harsh Sunlight.png" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Heavy Rain.png" title="Heavy Rain">').replaceAll("rain:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Rain.png" title="Rain">').replaceAll("sandstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Sandstorm.png" title="Sandstorm">').replaceAll("strongwinds:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Strong Winds.png" title="Strong Winds">').replaceAll("fog:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Fog.png" title="Fog">').replaceAll("cloudy:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Cloudy.png" title="Cloudy">').replaceAll("clear:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Clear.png" title="Clear">').replaceAll("blizzard:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Blizzard.png" title="Blizzard">').replaceAll("snow:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"/Snow.png" title="Snow">').replaceAll("thunderstorm:",'<img src="./media/Images/Misc/Weather/PNG/"+MEDIAPath_Weather+"Thunderstorm/.png" title="Thunderstorm">').replaceAll("%,","%");
+						mapSectionSidebarDescriptionPokRateText.innerHTML = poks[u]["Rate"].replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="'+getMedia([`Morning`],[`./media/Images/FinalDex/`])[0]+'" title="Morning">').replaceAll("da:",'<img src="'+getMedia([`Day`],[`./media/Images/FinalDex/`])[0]+'" title="Day">').replaceAll("ni:",'<img src="'+getMedia([`Night`],[`./media/Images/FinalDex/`])[0]+'" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("mon:",'<pre name="monday">Monday</pre>').replaceAll("tue:",'<pre name="tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="thursday">Thursday</pre>').replaceAll("fri:",'<pre name="friday">Friday</pre>').replaceAll("sat:",'<pre name="saturday">Saturday</pre>').replaceAll("sun:",'<pre name="sunday">Sunday</pre>').replaceAll("extremelyharshsunlight:",'<img src="'+getMedia([`Extremely Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="'+getMedia([`Hail`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Hail">').replaceAll("harshsunlight:",'<img src="'+getMedia([`Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="'+getMedia([`Heavy Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Heavy Rain">').replaceAll("rain:",'<img src="'+getMedia([`Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Rain">').replaceAll("sandstorm:",'<img src="'+getMedia([`Sandstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Sandstorm">').replaceAll("strongwinds:",'<img src="'+getMedia([`Strong Winds`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Strong Winds">').replaceAll("fog:",'<img src="'+getMedia([`Fog`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Fog">').replaceAll("cloudy:",'<img src="'+getMedia([`Cloudy`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Cloudy">').replaceAll("clear:",'<img src="'+getMedia([`Clear`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Clear">').replaceAll("blizzard:",'<img src="'+getMedia([`Blizzard`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Blizzard">').replaceAll("snow:",'<img src="'+getMedia([`Snow`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Snow">').replaceAll("thunderstorm:",'<img src="'+getMedia([`Thunderstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Thunderstorm">').replaceAll("%,","%");
 						mapSectionSidebarDescriptionPokRate.appendChild(mapSectionSidebarDescriptionPokRateText);
 					}
 
@@ -1404,23 +1364,23 @@ var createMap = function() {
 
 						if (poks[u]["Allies"] != undefined) {
 
-							var mapSectionSidebarDescriptionPokAllies = document.createElement("span");
-							var mapSectionSidebarDescriptionPokAlliesHeader = document.createElement("h6");
+							let mapSectionSidebarDescriptionPokAllies = document.createElement("span");
+							let mapSectionSidebarDescriptionPokAlliesHeader = document.createElement("h6");
 							mapSectionSidebarDescriptionPokAllies.setAttribute("name","allies");
 							mapSectionSidebarDescriptionPokAlliesHeader.innerText = "Allies";
 							mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokAllies);
 							mapSectionSidebarDescriptionPokAllies.appendChild(mapSectionSidebarDescriptionPokAlliesHeader);
 
-							var ally = poks[u]["Allies"].replaceAll("extremelyharshsunlight:",'').replaceAll("hail:",'').replaceAll("harshsunlight:",'').replaceAll("heavyrain:",'').replaceAll("rain:",'').replaceAll("sandstorm:",'').replaceAll("strongwinds:",'').replaceAll("fog:",'').replaceAll("cloudy:",'').replaceAll("clear:",'').replaceAll("blizzard:",'').replaceAll("snow:",'').replaceAll("thunderstorm:",'');
-							var allies = [ally];
+							let ally = poks[u]["Allies"].replaceAll("extremelyharshsunlight:",'').replaceAll("hail:",'').replaceAll("harshsunlight:",'').replaceAll("heavyrain:",'').replaceAll("rain:",'').replaceAll("sandstorm:",'').replaceAll("strongwinds:",'').replaceAll("fog:",'').replaceAll("cloudy:",'').replaceAll("clear:",'').replaceAll("blizzard:",'').replaceAll("snow:",'').replaceAll("thunderstorm:",'');
+							let allies = [ally];
 
 							if (ally.includes(",")) {
 								allies = ally.split(",");
 							}
 
-							for(var r = 0; r < allies.length; r++) {
-								var mapSectionSidebarDescriptionPokAlliesIMG = document.createElement("img");
-								mapSectionSidebarDescriptionPokAlliesIMG.src = getPokémonMediaPath([getPokémonInt(allies[r])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+							for(let r = 0; r < allies.length; r++) {
+								let mapSectionSidebarDescriptionPokAlliesIMG = document.createElement("img");
+								mapSectionSidebarDescriptionPokAlliesIMG.src = getPokémonMediaPath([getPokémonInt(allies[r])],[PATH_Pokémon_Box_Default_PNG]);
 								mapSectionSidebarDescriptionPokAlliesIMG.title = allies[r];
 								mapSectionSidebarDescriptionPokAlliesIMG.setAttribute("value",getPokémonInt(allies[r]));
 								mapSectionSidebarDescriptionPokAllies.appendChild(mapSectionSidebarDescriptionPokAlliesIMG);
@@ -1430,9 +1390,9 @@ var createMap = function() {
 						}
 					}
 
-					var mapSectionSidebarDescriptionPokType = document.createElement("span");
-					var mapSectionSidebarDescriptionPokTypeImgWrap = document.createElement("span");
-					var mapSectionSidebarDescriptionPokTypeTxtWrap = document.createElement("span");
+					let mapSectionSidebarDescriptionPokType = document.createElement("span");
+					let mapSectionSidebarDescriptionPokTypeImgWrap = document.createElement("span");
+					let mapSectionSidebarDescriptionPokTypeTxtWrap = document.createElement("span");
 					mapSectionSidebarDescriptionPokType.setAttribute("name","encounter")
 
 
@@ -1443,7 +1403,7 @@ var createMap = function() {
 		
 
 	
-					var encounters = [];
+					let encounters = [];
 					// Encounter
 					if (poks[u]["Encounter"] != undefined) {
 						if (poks[u]["Encounter"].includes(",")) {
@@ -1454,11 +1414,11 @@ var createMap = function() {
 						}
 					}
 
-					for(var r = 0; r < encounters.length; r++) {
-						var mapSectionSidebarDescriptionPokTypeEncounterImg = document.createElement("img");
-						var mapSectionSidebarDescriptionPokTypeEncounterText = document.createElement("small");
+					for(let r = 0; r < encounters.length; r++) {
+						let mapSectionSidebarDescriptionPokTypeEncounterImg = document.createElement("img");
+						let mapSectionSidebarDescriptionPokTypeEncounterText = document.createElement("small");
 
-						var encounter = encounters[r];
+						let encounter = encounters[r];
 
 						if (encounter.includes("Surfing")) {
 							encounter = encounter+"_M"
@@ -1471,7 +1431,7 @@ var createMap = function() {
 	
 							
 							if (encounter == "Static") {
-								mapSectionSidebarDescriptionPokTypeEncounterImg.src = getPokémonMediaPath([getPokémonInt(poks[u]["Pokémon"])],["./media/Images/Pokémon/Overworld/Front/Default/PNG/"+MEDIAPath_Encounter+"/"]);
+								mapSectionSidebarDescriptionPokTypeEncounterImg.src = getPokémonMediaPath([getPokémonInt(poks[u]["Pokémon"])],[PATH_Pokémon_Overworld_Default_PNG]);
 								mapSectionSidebarDescriptionPokTypeEncounterImg.title = encounters[r]+"\n"+poks[u]["Pokémon"];
 								mapSectionSidebarDescriptionPokTypeImgWrap.setAttribute("name","static");
 								mapSectionSidebarDescriptionPokTypeImgWrap.setAttribute("value",getPokémonInt(poks[u]["Pokémon"]));
@@ -1480,7 +1440,7 @@ var createMap = function() {
 								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = poks[u]["Pokémon"];
 							}
 							else {
-								mapSectionSidebarDescriptionPokTypeEncounterImg.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounter+".png";
+								/*mapSectionSidebarDescriptionPokTypeEncounterImg.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+encounter+".png";*/
 								mapSectionSidebarDescriptionPokTypeEncounterImg.title = encounters[r];
 								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = encounters[r];
 							}
@@ -1513,7 +1473,7 @@ var createMap = function() {
 								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
 							}
 					
-							if (returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,encounters[r]) != undefined) {
+							if (returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],encounters[r]) != undefined) {
 								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("name","move");
 								mapSectionSidebarDescriptionPokTypeEncounterImg.setAttribute("value",encounters[r]);
 								mapSectionSidebarDescriptionPokTypeEncounterImg.addEventListener("click",dataRedirect);
@@ -1531,16 +1491,16 @@ var createMap = function() {
 
 
 					if (poks[u]["Tile"] != undefined && poks[u]["Encounter"] != "Static") {
-						var mapSectionSidebarDescriptionPokTypeTileImg = document.createElement("img");
-						var mapSectionSidebarDescriptionPokTypeTileText = document.createElement("small");
+						let mapSectionSidebarDescriptionPokTypeTileImg = document.createElement("img");
+						let mapSectionSidebarDescriptionPokTypeTileText = document.createElement("small");
 
 					
 
-						var dash;
-						var entr;
-						var ti;
-						var res;
-						var space;
+						let dash;
+						let entr;
+						let ti;
+						let res;
+						let space;
 
 						if (poks[u]["Tile"].includes("Rod")) {
 							dash = "in";
@@ -1579,7 +1539,7 @@ var createMap = function() {
 						res = res.replaceAll(/^ /g,"").replaceAll(/ $/g,"");
 						res = space+res;
 
-						mapSectionSidebarDescriptionPokTypeTileImg.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";
+						/*mapSectionSidebarDescriptionPokTypeTileImg.src = "./media/Images/Misc/Encounter/"+MEDIAPath_Encounter+"/"+poks[u]["Tile"]+".png";*/
 						mapSectionSidebarDescriptionPokTypeTileImg.title = poks[u]["Tile"];
 						mapSectionSidebarDescriptionPokTypeTileImg.alt = poks[u]["Tile"];
 						mapSectionSidebarDescriptionPokTypeTileImg.setAttribute("onerror","this.style.display = 'none';");
@@ -1588,7 +1548,7 @@ var createMap = function() {
 
 					
 
-						var rgs;
+						let rgs;
 
 						if (Region.includes(",")) {
 							rgs = Region.split(",")
@@ -1596,7 +1556,7 @@ var createMap = function() {
 						else {
 							rgs = [Region];
 						}
-						for(var r = 0; r < rgs.length; r++) {
+						for(let r = 0; r < rgs.length; r++) {
 							mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
 						}
 						mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");				
@@ -1609,7 +1569,7 @@ var createMap = function() {
 
 
 					if (poks[u]["Mechanic"] != undefined) {
-						var mapSectionSidebarDescriptionPokTypeMechanicText = document.createElement("small");
+						let mapSectionSidebarDescriptionPokTypeMechanicText = document.createElement("small");
 						mapSectionSidebarDescriptionPokTypeMechanicText.innerText = poks[u]["Mechanic"];
 						mapSectionSidebarDescriptionPokTypeTxtWrap.appendChild(mapSectionSidebarDescriptionPokTypeMechanicText);
 					}
@@ -1621,7 +1581,7 @@ var createMap = function() {
 					}
 
 					if (poks[u]["Machine"] != undefined) {
-						var machine = poks[u]["Machine"].replace(/,([^,]*)$/, ', and $1').replaceAll(",",", ").replaceAll("/"," or ").replaceAll("  "," ");
+						let machine = poks[u]["Machine"].replace(/,([^,]*)$/, ', and $1').replaceAll(",",", ").replaceAll("/"," or ").replaceAll("  "," ");
 						
 						if (machine != "") {
 							mapSectionSidebarDescriptionPokType.setAttribute("title","Requires: "+machine);
@@ -1632,7 +1592,7 @@ var createMap = function() {
 			}
 		}
 
-		for(var q = 0; q < tutors.length; q++) {
+		for(let q = 0; q < tutors.length; q++) {
 			if (tutors[q]["Area"] == undefined) {
 				tutors[q]["Area"] = "a";
 			}
@@ -1640,34 +1600,34 @@ var createMap = function() {
 
 		tutors = sortObjectArray(tutors,"Area",true);
 
-		for(var q = 0; q < tutors.length; q++) {
+		for(let q = 0; q < tutors.length; q++) {
 			if (tutors[q]["Area"] == "a") {
 				tutors[q]["Area"] = location;
 			}
 		}
 
-		var tutorArea = [];
-		for(var q = 0; q < tutors.length; q++) {
+		let tutorArea = [];
+		for(let q = 0; q < tutors.length; q++) {
 			tutorArea.push(tutors[q]["Area"]);
 		}
 		tutorArea = [...new Set(tutorArea)];
 
-		var uls = mapSectionSidebarDescriptionTutor.querySelectorAll(":scope > ul");
-		for(var q = 0; q < uls.length; q++) {
+		let uls = mapSectionSidebarDescriptionTutor.querySelectorAll(":scope > ul");
+		for(let q = 0; q < uls.length; q++) {
 			uls[q].remove();
 		}
 
-		for(var q = 0; q < tutorArea.length; q++) {
-			var ul;
+		for(let q = 0; q < tutorArea.length; q++) {
+			let ul;
 			ul = mapSectionSidebarDescriptionTutor.querySelector(':scope > ul[name="'+tutorArea[q]+'"]');
 
 			if (ul == null) {
-				var mapSectionSidebarDescriptionTutorUl = document.createElement("ul");
+				let mapSectionSidebarDescriptionTutorUl = document.createElement("ul");
 				mapSectionSidebarDescriptionTutor.appendChild(mapSectionSidebarDescriptionTutorUl);
 				mapSectionSidebarDescriptionTutorUl.setAttribute("name",tutorArea[q])
 
 				if (tutorArea[q] != location) {
-					var mapSectionSidebarDescriptionTutorUlTitle = document.createElement("h4");
+					let mapSectionSidebarDescriptionTutorUlTitle = document.createElement("h4");
 					mapSectionSidebarDescriptionTutorUlTitle.innerText = tutorArea[q];
 					mapSectionSidebarDescriptionTutorUl.appendChild(mapSectionSidebarDescriptionTutorUlTitle);
 				}
@@ -1676,19 +1636,19 @@ var createMap = function() {
 			}
 			ul = mapSectionSidebarDescriptionTutor.querySelector(':scope > ul[name="'+tutorArea[q]+'"]');
 
-			for(var u = 0; u < tutors.length; u++) {
+			for(let u = 0; u < tutors.length; u++) {
 				if (tutors[u]["Area"] == tutorArea[q]) {
-					var mapSectionSidebarDescriptionTutorLi = document.createElement("li");
+					let mapSectionSidebarDescriptionTutorLi = document.createElement("li");
 					ul.appendChild(mapSectionSidebarDescriptionTutorLi);
 
-					var mapSectionSidebarDescriptionTutorMove = document.createElement("span");
-					var mapSectionSidebarDescriptionTutorMoveTrigger = document.createElement("b");
-					var mapSectionSidebarDescriptionTutorMoveText = document.createElement("h5");
+					let mapSectionSidebarDescriptionTutorMove = document.createElement("span");
+					let mapSectionSidebarDescriptionTutorMoveTrigger = document.createElement("b");
+					let mapSectionSidebarDescriptionTutorMoveText = document.createElement("h5");
 					mapSectionSidebarDescriptionTutorMoveText.innerText = tutors[u]["Move"];
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("name","move");
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("type","invert");
 					mapSectionSidebarDescriptionTutorMoveText.title = formatMoveData(tutors[u]["Move"]);
-					mapSectionSidebarDescriptionTutorMoveText.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tutors[u]["Move"])+")";
+					mapSectionSidebarDescriptionTutorMoveText.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tutors[u]["Move"])+")";
 					mapSectionSidebarDescriptionTutorLi.appendChild(mapSectionSidebarDescriptionTutorMove);
 					mapSectionSidebarDescriptionTutorMove.appendChild(mapSectionSidebarDescriptionTutorMoveTrigger);
 					mapSectionSidebarDescriptionTutorMoveTrigger.appendChild(mapSectionSidebarDescriptionTutorMoveText);
@@ -1696,14 +1656,14 @@ var createMap = function() {
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("function","dataRedirect");
 
 					if (tutors[u]["Requirement"] != undefined || tutors[u]["Cost"] != undefined || tutors[u]["Rate"] != undefined || tutors[u]["Time"]) {
-						var mapSectionSidebarDescriptionTutorAdditional = document.createElement("span");
+						let mapSectionSidebarDescriptionTutorAdditional = document.createElement("span");
 						mapSectionSidebarDescriptionTutorLi.appendChild(mapSectionSidebarDescriptionTutorAdditional);
 					}
 
 					if (tutors[u]["Requirement"] != undefined) {
-						var mapSectionSidebarDescriptionTutorReq = document.createElement("span");
-						var mapSectionSidebarDescriptionTutorReqHeader = document.createElement("h6");
-						var mapSectionSidebarDescriptionTutorReqText = document.createElement("p");
+						let mapSectionSidebarDescriptionTutorReq = document.createElement("span");
+						let mapSectionSidebarDescriptionTutorReqHeader = document.createElement("h6");
+						let mapSectionSidebarDescriptionTutorReqText = document.createElement("p");
 						mapSectionSidebarDescriptionTutorReqHeader.innerText = "Requires:";
 						mapSectionSidebarDescriptionTutorReqText.innerText = tutors[u]["Requirement"];
 						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorReq);
@@ -1712,9 +1672,9 @@ var createMap = function() {
 					}
 
 					if (tutors[u]["Time"] != undefined) {
-						var mapSectionSidebarDescriptionTutorTime = document.createElement("span");
-						var mapSectionSidebarDescriptionTutorTimeHeader = document.createElement("h6");
-						var mapSectionSidebarDescriptionTutorTimeText = document.createElement("p");
+						let mapSectionSidebarDescriptionTutorTime = document.createElement("span");
+						let mapSectionSidebarDescriptionTutorTimeHeader = document.createElement("h6");
+						let mapSectionSidebarDescriptionTutorTimeText = document.createElement("p");
 						mapSectionSidebarDescriptionTutorTimeHeader.innerText = "Time:"
 						mapSectionSidebarDescriptionTutorTimeText.innerText = tutors[u]["Time"].replaceAll(","," / ");
 						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorTime);
@@ -1723,9 +1683,9 @@ var createMap = function() {
 					}
 
 					if (tutors[u]["Rate"] != undefined) {
-						var mapSectionSidebarDescriptionTutorRate = document.createElement("span");
-						var mapSectionSidebarDescriptionTutorRateHeader = document.createElement("h6");
-						var mapSectionSidebarDescriptionTutorRateText = document.createElement("p");
+						let mapSectionSidebarDescriptionTutorRate = document.createElement("span");
+						let mapSectionSidebarDescriptionTutorRateHeader = document.createElement("h6");
+						let mapSectionSidebarDescriptionTutorRateText = document.createElement("p");
 						mapSectionSidebarDescriptionTutorRateHeader.innerText = "Available:"
 						mapSectionSidebarDescriptionTutorRateText.innerText = tutors[u]["Rate"];
 						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorRate);
@@ -1735,17 +1695,17 @@ var createMap = function() {
 
 
 					if (tutors[u]["Cost"] != undefined) {
-						var mapSectionSidebarDescriptionTutorCost = document.createElement("span");
-						var mapSectionSidebarDescriptionTutorCostHeader = document.createElement("h6");
-						var mapSectionSidebarDescriptionTutorCostText = document.createElement("p");
+						let mapSectionSidebarDescriptionTutorCost = document.createElement("span");
+						let mapSectionSidebarDescriptionTutorCostHeader = document.createElement("h6");
+						let mapSectionSidebarDescriptionTutorCostText = document.createElement("p");
 						mapSectionSidebarDescriptionTutorCostHeader.innerText = "Cost:";
-						mapSectionSidebarDescriptionTutorCostText.innerHTML = numFormat(tutors[u]["Cost"].replaceAll(",","\n")).replaceAll(" Yellow Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Yellow Shard.png" name="item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Red Shard.png" name="item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Blue Shard.png" name="item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="./media/Images/Item/Bag/'+MEDIAPath_Item_Bag+'/Green Shard.png" name="item" title="Green Shard">');
+						mapSectionSidebarDescriptionTutorCostText.innerHTML = numFormat(tutors[u]["Cost"].replaceAll(",","\n")).replaceAll(" Yellow Shard",'x<img src="'+getMedia([`Yellow Shard`],[PATH_Item_Bag])[0]+'" name="item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="'+getMedia([`Red Shard`],[PATH_Item_Bag])[0]+'" name="item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="'+getMedia([`Blue Shard`],[PATH_Item_Bag])[0]+'" name="item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="'+getMedia([`Green Shard`],[PATH_Item_Bag])[0]+'" name="item" title="Green Shard">');
 						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorCost);
 						mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostHeader);
 						mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostText);
 						
-						var costImages = mapSectionSidebarDescriptionTutorCost.querySelectorAll(":scope img");
-						for(var y = 0; y < costImages.length; y++) {
+						let costImages = mapSectionSidebarDescriptionTutorCost.querySelectorAll(":scope img");
+						for(let y = 0; y < costImages.length; y++) {
 							costImages[y].addEventListener("click",dataRedirect);
 							costImages[y].setAttribute("function","dataRedirect");
 						}
@@ -1766,7 +1726,7 @@ var createMap = function() {
 	
 
 		
-		for(var q = 0; q < finaldata["Locations"]["Slogan"].length; q++) {
+		for(let q = 0; q < finaldata["Locations"]["Slogan"].length; q++) {
 			if(getApplicable(finaldata["Locations"]["Slogan"][q]["Game"])) {
 				if(finaldata["Locations"]["Slogan"][q]["Location"] == location) {
 					mapSectionHeaderFlavorText.innerHTML = '"'+finaldata["Locations"]["Slogan"][q]["Slogan"]+'"';
@@ -1776,17 +1736,17 @@ var createMap = function() {
 
 
 
-		var subs = mapSectionContentAreaContent.querySelectorAll(":scope > p");
-		for(var q = 0; q < subs.length; q++) {
+		let subs = mapSectionContentAreaContent.querySelectorAll(":scope > p");
+		for(let q = 0; q < subs.length; q++) {
 			subs[q].remove();
 		}
 		mapSectionContentAreaTitle.innerText = "Sub Area/Location";
 
-		var areas = getAreasFromLocation(location);
-		var locations = getLocationFromArea(location);
+		let areas = getAreasFromLocation(location);
+		let locations = getLocationFromArea(location);
 
-		for(var q = 0; q < locations.length; q++) {
-			var mapSectionContentAreaText = document.createElement("p");
+		for(let q = 0; q < locations.length; q++) {
+			let mapSectionContentAreaText = document.createElement("p");
 			mapSectionContentAreaTitle.innerText = "Location";
 			mapSectionContentAreaText.innerText = locations[q];
 			mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
@@ -1795,8 +1755,8 @@ var createMap = function() {
 			mapSectionContentAreaText.setAttribute("function","dataRedirect");
 		}
 
-		for(var q = 0; q < areas.length; q++) {
-			var mapSectionContentAreaText = document.createElement("p");
+		for(let q = 0; q < areas.length; q++) {
+			let mapSectionContentAreaText = document.createElement("p");
 			mapSectionContentAreaTitle.innerText = "Sub Areas";
 			mapSectionContentAreaText.innerText = areas[q];
 			mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
@@ -1806,17 +1766,17 @@ var createMap = function() {
 		}
 
 
-		var navs = mapSectionContentNavigationContent.querySelectorAll(":scope > span");
-		for(var q = 0; q < navs.length; q++) {
+		let navs = mapSectionContentNavigationContent.querySelectorAll(":scope > span");
+		for(let q = 0; q < navs.length; q++) {
 			navs[q].remove();
 		}
-		for(var q = 0; q < finaldata["Locations"]["Navigation"].length; q++) {
+		for(let q = 0; q < finaldata["Locations"]["Navigation"].length; q++) {
 			if (getApplicable(finaldata["Locations"]["Navigation"][q]["Game"])) {
 				if(finaldata["Locations"]["Navigation"][q]["Location"] == location) {
-					for(var u = 0; u < finaldata["Locations"]["Navigation"][q]["Navigation"].split(",").length; u++) {
-						var mapSectionContentNavigationInnerContent = document.createElement("span")
-						var mapSectionContentNavigationInnerImg = document.createElement("img");
-						var mapSectionContentNavigationInnerText = document.createElement("p");
+					for(let u = 0; u < finaldata["Locations"]["Navigation"][q]["Navigation"].split(",").length; u++) {
+						let mapSectionContentNavigationInnerContent = document.createElement("span")
+						let mapSectionContentNavigationInnerImg = document.createElement("img");
+						let mapSectionContentNavigationInnerText = document.createElement("p");
 						mapSectionContentNavigationInnerContent.setAttribute("name","item");
 						if (getMoveMachine(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]) != undefined) {
 							mapSectionContentNavigationInnerContent.setAttribute("value",getMoveMachine(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]));
@@ -1826,15 +1786,15 @@ var createMap = function() {
 						}
 						mapSectionContentNavigationInnerText.innerText = finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u];
 						if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Cut" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Strength") {
-							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Normal"+".png";
+							mapSectionContentNavigationInnerImg.src = getMedia([`HM Normal`],[PATH_Item_Bag])[0]
 						} else if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Waterfall" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Surf" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Dive" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Whirlpool") {
-							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Water"+".png";
+							mapSectionContentNavigationInnerImg.src = getMedia([`HM Water`],[PATH_Item_Bag])[0];
 						} else if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Rock Smash" || finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Rock Climb") {
-							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Fighting"+".png";
+							mapSectionContentNavigationInnerImg.src = getMedia([`HM Fighting`],[PATH_Item_Bag])[0];
 						} else if(finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u] == "Defog") {
-							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+"HM Flying"+".png";
+							mapSectionContentNavigationInnerImg.src = getMedia([`HM Flying`],[PATH_Item_Bag])[0];
 						} else {
-							mapSectionContentNavigationInnerImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]+".png";
+							mapSectionContentNavigationInnerImg.src = getMedia([finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]],[PATH_Item_Bag])[0];
 						}
 						mapSectionContentNavigationInnerImg.setAttribute("title", finaldata["Locations"]["Navigation"][q]["Navigation"].split(",")[u]);
 						mapSectionContentNavigationInnerImg.setAttribute("onerror", "this.style.display='none'");
@@ -1849,10 +1809,10 @@ var createMap = function() {
 		}
 
 
-		var mapTop = mapSectionContentMapOuter.querySelector(':scope *[name="Top"]');
-		var mapBottom = mapSectionContentMapOuter.querySelector(':scope *[name="Bottom"]');
-		var mapLeft = mapSectionContentMapOuter.querySelector(':scope *[name="Left"]');
-		var mapRight = mapSectionContentMapOuter.querySelector(':scope *[name="Right"]');
+		let mapTop = mapSectionContentMapOuter.querySelector(':scope *[name="Top"]');
+		let mapBottom = mapSectionContentMapOuter.querySelector(':scope *[name="Bottom"]');
+		let mapLeft = mapSectionContentMapOuter.querySelector(':scope *[name="Left"]');
+		let mapRight = mapSectionContentMapOuter.querySelector(':scope *[name="Right"]');
 		
 
 		mapTop.setAttribute("title","");
@@ -1864,13 +1824,13 @@ var createMap = function() {
 		mapLeft.firstElementChild.setAttribute("value","");
 		mapRight.firstElementChild.setAttribute("value","");
 
-		for(var q = 0; q < finaldata["Locations"]["Connecting"].length; q++) {
+		for(let q = 0; q < finaldata["Locations"]["Connecting"].length; q++) {
 			if (getApplicable(finaldata["Locations"]["Connecting"][q]["Game"])) {
-				var name = finaldata["Locations"]["Connecting"][q]["Location"];
-				var north = finaldata["Locations"]["Connecting"][q]["North"];
-				var south = finaldata["Locations"]["Connecting"][q]["South"];
-				var west = finaldata["Locations"]["Connecting"][q]["West"];
-				var east = finaldata["Locations"]["Connecting"][q]["East"];
+				let name = finaldata["Locations"]["Connecting"][q]["Location"];
+				let north = finaldata["Locations"]["Connecting"][q]["North"];
+				let south = finaldata["Locations"]["Connecting"][q]["South"];
+				let west = finaldata["Locations"]["Connecting"][q]["West"];
+				let east = finaldata["Locations"]["Connecting"][q]["East"];
 
 				if(name == location) {
 					if (north != undefined) {
@@ -1895,35 +1855,35 @@ var createMap = function() {
 		
 
 		
-	var dvs = document.querySelectorAll("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > *");
-	for(var q = 0; q < dvs.length; q++) {
+	let dvs = document.querySelectorAll("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > *");
+	for(let q = 0; q < dvs.length; q++) {
 		dvs[q].remove();
 	}
 
 	
-	var mapSectionSidebarDescriptionTrainerWrap = document.createElement("div");
-	var mapSectionSidebarDescriptionTrainerData = document.createElement("div");
-	var mapSectionSidebarDescriptionTrainerDataTop = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataTopLeft = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataTopCenter = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataTopCenterSearch = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput = document.createElement("input");
-	var mapSectionSidebarDescriptionTrainerDataTopCenterSearchOl = document.createElement("ol");
-	var mapSectionSidebarDescriptionTrainerDataTopCenterCount = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft = document.createElement("input");
-	var mapSectionSidebarDescriptionTrainerDataTopCenterCountMiddle = document.createElement("small");
-	var mapSectionSidebarDescriptionTrainerDataTopCenterCountRight = document.createElement("input");
-	var mapSectionSidebarDescriptionTrainerDataTopRight = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataCenter = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataCenterLeft = document.createElement("b");
-	var mapSectionSidebarDescriptionTrainerDataCenterCenter = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataCenterRight = document.createElement("b");
-	var mapSectionSidebarDescriptionTrainerDataBottom = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataBottomLeft = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataBottomCenter = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerDataBottomCenterText = document.createElement("h6");
-	var mapSectionSidebarDescriptionTrainerDataBottomRight = document.createElement("span");
-	var mapSectionSidebarDescriptionTrainerUl = document.createElement("ul");
+	let mapSectionSidebarDescriptionTrainerWrap = document.createElement("div");
+	let mapSectionSidebarDescriptionTrainerData = document.createElement("div");
+	let mapSectionSidebarDescriptionTrainerDataTop = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataTopLeft = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataTopCenter = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataTopCenterSearch = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput = document.createElement("input");
+	let mapSectionSidebarDescriptionTrainerDataTopCenterSearchOl = document.createElement("ol");
+	let mapSectionSidebarDescriptionTrainerDataTopCenterCount = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft = document.createElement("input");
+	let mapSectionSidebarDescriptionTrainerDataTopCenterCountMiddle = document.createElement("small");
+	let mapSectionSidebarDescriptionTrainerDataTopCenterCountRight = document.createElement("input");
+	let mapSectionSidebarDescriptionTrainerDataTopRight = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataCenter = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataCenterLeft = document.createElement("b");
+	let mapSectionSidebarDescriptionTrainerDataCenterCenter = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataCenterRight = document.createElement("b");
+	let mapSectionSidebarDescriptionTrainerDataBottom = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataBottomLeft = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataBottomCenter = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerDataBottomCenterText = document.createElement("h6");
+	let mapSectionSidebarDescriptionTrainerDataBottomRight = document.createElement("span");
+	let mapSectionSidebarDescriptionTrainerUl = document.createElement("ul");
 
 
 	mapSectionSidebarDescriptionTrainerDataTopLeft.setAttribute("name","title");
@@ -1992,7 +1952,7 @@ var createMap = function() {
 
 	mapSectionListOptionsSearch.title = searchOptionsTitle(mapSectionListOptions);
 
-	var searchLis = document.querySelectorAll("#contain > div#map > section[name='list'] ol > label");
+	let searchLis = document.querySelectorAll("#contain > div#map > section[name='list'] ol > label");
     searchMapAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
         for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -2026,14 +1986,14 @@ var createMap = function() {
 
 
 
-	var mapdescriptionsel = document.querySelector('#contain > div#map > section[name="sidebar"] input[value="'+mapSelectorVal[0]+'"]');
-	var divs = document.querySelectorAll('#contain div#map > section[name="sidebar"] > div > *[name]')
+	let mapdescriptionsel = document.querySelector('#contain > div#map > section[name="sidebar"] input[value="'+mapSelectorVal[0]+'"]');
+	let divs = document.querySelectorAll('#contain div#map > section[name="sidebar"] > div > *[name]')
 
 	if (mapdescriptionsel != null) {
 		mapdescriptionsel.click();
 	}
 	else {
-		for(var y = 0; y < divs.length; y++) {
+		for(let y = 0; y < divs.length; y++) {
 			divs[y].style.display = "none";
 		}
 		divs[0].style.removeProperty("display");
@@ -2046,23 +2006,23 @@ var createMap = function() {
 	}
 
 
-	for (var i = 0; i < finaldata["Locations"]["Connecting"].length; i++) {
+	for (let i = 0; i < finaldata["Locations"]["Connecting"].length; i++) {
 		if (getApplicable(finaldata["Locations"]["Connecting"][i]["Game"])) {
-			var north = finaldata["Locations"]["Connecting"][i]["North"];
-			var south = finaldata["Locations"]["Connecting"][i]["South"];
-			var west = finaldata["Locations"]["Connecting"][i]["West"];
-			var east = finaldata["Locations"]["Connecting"][i]["East"];
+			let north = finaldata["Locations"]["Connecting"][i]["North"];
+			let south = finaldata["Locations"]["Connecting"][i]["South"];
+			let west = finaldata["Locations"]["Connecting"][i]["West"];
+			let east = finaldata["Locations"]["Connecting"][i]["East"];
 
-			var vals = [north,south,west,east];
-			var origin1 = ["North","South","West","East"];
-			var origin2 = ["South","North","East","West"];
-			for (var q = 0; q < vals.length; q++) {
-				var val = vals[q];
+			let vals = [north,south,west,east];
+			let origin1 = ["North","South","West","East"];
+			let origin2 = ["South","North","East","West"];
+			for (let q = 0; q < vals.length; q++) {
+				let val = vals[q];
 				if (val != undefined) {
 					if (val.includes(",")) {
 						val = val.split(",");
-						for (var u = 0; u < val.length; u++) {
-							for (var r = 0; r < finaldata["Locations"]["Connecting"].length; r++) {
+						for (let u = 0; u < val.length; u++) {
+							for (let r = 0; r < finaldata["Locations"]["Connecting"].length; r++) {
 								if (getApplicable(finaldata["Locations"]["Connecting"][r]["Game"])) {
 									if (finaldata["Locations"]["Connecting"][r]["Location"] == val[u]) {
 										if (finaldata["Locations"]["Connecting"][r][origin2[q]] != undefined) {
@@ -2079,9 +2039,9 @@ var createMap = function() {
 						}
 					}
 					else {
-						for (var r = 0; r < finaldata["Locations"]["Connecting"].length; r++) {
+						for (let r = 0; r < finaldata["Locations"]["Connecting"].length; r++) {
 							if (getApplicable(finaldata["Locations"]["Connecting"][r]["Game"])) {
-								if (finaldata["Locations"]["Connecting"][r]["Location"] == val[u]) {
+								if (finaldata["Locations"]["Connecting"][r]["Location"] == val) {
 									if (finaldata["Locations"]["Connecting"][r][origin2[q]] != undefined) {
 										if (!finaldata["Locations"]["Connecting"][r][origin2[q]].includes(finaldata["Locations"]["Connecting"][i]["Location"])) {
 											console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
@@ -2101,33 +2061,33 @@ var createMap = function() {
 		}
 	}
 }
-var mapSelectorVal = [0];
+let mapSelectorVal = [0];
 function mapDescriptionSelector() {
-	var i = this.getAttribute("value").toLowerCase();
-	var mapDescriptionOuters = document.querySelectorAll('#contain div#map > section[name="sidebar"] > div > *[name]');
-	var mapDescriptionOuter = document.querySelectorAll('#contain div#map > section[name="sidebar"] > div > *[name="'+i+'"]');
-	for(var y = 0; y < mapDescriptionOuters.length; y++) {
+	let i = this.getAttribute("value").toLowerCase();
+	let mapDescriptionOuters = document.querySelectorAll('#contain div#map > section[name="sidebar"] > div > *[name]');
+	let mapDescriptionOuter = document.querySelectorAll('#contain div#map > section[name="sidebar"] > div > *[name="'+i+'"]');
+	for(let y = 0; y < mapDescriptionOuters.length; y++) {
 		mapDescriptionOuters[y].style.display = "none";
 	}
-	for(var y = 0; y < mapDescriptionOuter.length; y++) {
+	for(let y = 0; y < mapDescriptionOuter.length; y++) {
 		mapDescriptionOuter[y].style.display = "flex";
 	}
 	mapSelectorVal.fill(i)
 }
 function trainerSearch() {
-	var tar = event.target;
-	var val = tar.value;
-	var base = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol")
-	var count = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input:first-child")
+	let tar = event.target;
+	let val = tar.value;
+	let base = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol")
+	let count = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input:first-child")
 	base.innerHTML = "";
 
 	if (val != undefined) {
 		base.classList.add("active");
-		var trainers = getLocationTrainers(tar.getAttribute("name"));
+		let trainers = getLocationTrainers(tar.getAttribute("name"));
 
-		var found = [];
-		for(var i = 0; i < trainers.length; i++) {
-			var nameVal = [];
+		let found = [];
+		for(let i = 0; i < trainers.length; i++) {
+			let nameVal = [];
 			if (trainers[i]["Class"] != undefined) {
 				nameVal.push(trainers[i]["Class"])
 			}
@@ -2136,18 +2096,18 @@ function trainerSearch() {
 			}
 			nameVal = nameVal.join(" ");
 			if (nameVal.toLowerCase().includes(val.toLowerCase())) {
-				var obj = new Object();
+				let obj = new Object();
 				obj["Name"] = nameVal;
 				obj["Integer"] = i;
 				found.push(obj)
 			}
 		}
 
-		for(var i = 0; i < found.length; i++) {
+		for(let i = 0; i < found.length; i++) {
 
-			var li = document.createElement("li");
-			var b = document.createElement("b");
-			var txt = document.createElement("h6");
+			let li = document.createElement("li");
+			let b = document.createElement("b");
+			let txt = document.createElement("h6");
 			li.setAttribute("name",found[i]["Name"]);
 			txt.innerText = found[i]["Name"];
 			b.setAttribute("type","invert");
@@ -2163,26 +2123,26 @@ function trainerSearch() {
 }
 function updateTrainer(trainers,condition) {
 
-	var base = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers']");
+	let base = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers']");
 
-	var input = base.querySelector(":scope *[name='count'] input[type='number']:first-child")
+	let input = base.querySelector(":scope *[name='count'] input[type='number']:first-child")
 
-	var titlePath = base.querySelector(":scope *[name='title']");
-	var itemsPath = base.querySelector(":scope *[name='items']");
-	var previousPath = base.querySelector(":scope *[name='previous']");
-	var currentPath = base.querySelector(":scope *[name='current']");
-	var nextPath = base.querySelector(":scope *[name='next']");
-	var pokCountPath = base.querySelector(":scope *[name='pokcount']");
-	var namePath = base.querySelector(":scope *[name='name']");
-	var rewardPath = base.querySelector(":scope *[name='reward']");
-	var ulPath = base.querySelector(":scope ul");
+	let titlePath = base.querySelector(":scope *[name='title']");
+	let itemsPath = base.querySelector(":scope *[name='items']");
+	let previousPath = base.querySelector(":scope *[name='previous']");
+	let currentPath = base.querySelector(":scope *[name='current']");
+	let nextPath = base.querySelector(":scope *[name='next']");
+	let pokCountPath = base.querySelector(":scope *[name='pokcount']");
+	let namePath = base.querySelector(":scope *[name='name']");
+	let rewardPath = base.querySelector(":scope *[name='reward']");
+	let ulPath = base.querySelector(":scope ul");
 
-	var paths = [titlePath,itemsPath,previousPath,currentPath,nextPath,pokCountPath,namePath,rewardPath,ulPath]
-	for(var y = 0; y < paths.length; y++) {
+	let paths = [titlePath,itemsPath,previousPath,currentPath,nextPath,pokCountPath,namePath,rewardPath,ulPath]
+	for(let y = 0; y < paths.length; y++) {
 		paths[y].innerHTML = "";
 	}
-	var trainers;
-	var q = input.value-1;
+
+	let q = input.value-1;
 
 
 	if (condition == "add") {
@@ -2200,26 +2160,26 @@ function updateTrainer(trainers,condition) {
 
 
 
-	var trainerName = trainers[q]["Trainer"];
-	var trainerClass = trainers[q]["Class"];
-	var trainerImage = trainers[q]["Image"];
-	var trainerItem = trainers[q]["Item"];
-	var trainerItemCount = trainers[q]["Item Quantity"];
-	var trainerReward = trainers[q]["Reward"];
-	var trainerRewardCount = trainers[q]["Reward Quantity"];
-	var trainerGender = trainers[q]["Gender"];
-	var trainerCount =  trainers[q]["Count"];
-	var trainerNote = trainers[q]["Note"];
-	var trainerArea = trainers[q]["Area"];
-	var trainerTitle = trainers[q]["Title"];
-	var trainerType = trainers[q]["Type"];
+	let trainerName = trainers[q]["Trainer"];
+	let trainerClass = trainers[q]["Class"];
+	let trainerImage = trainers[q]["Image"];
+	let trainerItem = trainers[q]["Item"];
+	let trainerItemCount = trainers[q]["Item Quantity"];
+	let trainerReward = trainers[q]["Reward"];
+	let trainerRewardCount = trainers[q]["Reward Quantity"];
+	let trainerGender = trainers[q]["Gender"];
+	let trainerCount =  trainers[q]["Count"];
+	let trainerNote = trainers[q]["Note"];
+	let trainerArea = trainers[q]["Area"];
+	let trainerTitle = trainers[q]["Title"];
+	let trainerType = trainers[q]["Type"];
 
 
 
 
 
 
-	var trainerInfo = [];
+	let trainerInfo = [];
 
 	if (trainerTitle != undefined) {
 		trainerInfo.push(trainerTitle)
@@ -2229,8 +2189,8 @@ function updateTrainer(trainers,condition) {
 	}
 	
 
-	var trainerPrevious = undefined;
-	var trainerNext = undefined;
+	let trainerPrevious = undefined;
+	let trainerNext = undefined;
 
 	if (q != 0) {
 		trainerPrevious = trainers[q-1];
@@ -2251,11 +2211,11 @@ function updateTrainer(trainers,condition) {
 
 
 
-	var previousImg = document.createElement("img");
-	var currentImg = document.createElement("img");
-	var nextImg = document.createElement("img");
-	var nameText = document.createElement("h6");
-	currentImg.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+trainerImage+".png";
+	let previousImg = document.createElement("img");
+	let currentImg = document.createElement("img");
+	let nextImg = document.createElement("img");
+	let nameText = document.createElement("h6");
+	currentImg.src = getMedia([trainerImage],[PATH_Character_Battle_Front_PNG])[0]
 
 
 
@@ -2268,7 +2228,7 @@ function updateTrainer(trainers,condition) {
 	}
 
 	if(trainerPrevious != undefined) {
-		var previmg = trainerPrevious["Image"];
+		let previmg = trainerPrevious["Image"];
 		if (previmg == undefined) {
 			previmg = trainerPrevious["Class"];
 
@@ -2279,7 +2239,7 @@ function updateTrainer(trainers,condition) {
 				previmg +=	"_F";
 			}
 		}
-		previousImg.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+previmg+".png";
+		previousImg.src = getMedia([previmg],[PATH_Character_Battle_Front_PNG])[0]
 		previousPath.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Trainer"];
 	}
 	else {
@@ -2288,7 +2248,7 @@ function updateTrainer(trainers,condition) {
 		previousPath.removeAttribute("title");
 	}
 	if(trainerNext != undefined) {
-		var nextimg = trainerNext["Image"];
+		let nextimg = trainerNext["Image"];
 		if (nextimg == undefined) {
 			nextimg = trainerNext["Class"];
 
@@ -2299,7 +2259,7 @@ function updateTrainer(trainers,condition) {
 				nextimg +=	"_F";
 			}
 		}
-		nextImg.src = "./media/Images/Character/Battle/PNG/Front/"+MEDIAPath_Character_Battle+"/"+nextimg+".png";
+		nextImg.src = getMedia([nextimg],[PATH_Character_Battle_Front_PNG])[0]
 		nextPath.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Trainer"];
 	}
 	else {
@@ -2341,7 +2301,7 @@ function updateTrainer(trainers,condition) {
 	if (trainerReward != undefined) {
 
 
-		var rwcount = trainerRewardCount;
+		let rwcount = trainerRewardCount;
 		if (rwcount == undefined) {
 			rwcount = 1;
 		}
@@ -2349,21 +2309,21 @@ function updateTrainer(trainers,condition) {
 			rwcount = 5;
 		}
 
-		var rewardTitleText = document.createElement("h6");
+		let rewardTitleText = document.createElement("h6");
 		rewardTitleText.innerText = "Reward:"
 		rewardPath.appendChild(rewardTitleText);
 
-		var rewardWrap = document.createElement("b");
+		let rewardWrap = document.createElement("b");
 		rewardPath.appendChild(rewardWrap);
 
 
-		var rewardValWrap = document.createElement("span");
+		let rewardValWrap = document.createElement("span");
 		rewardWrap.appendChild(rewardValWrap);
 		
 
-		for(var u = 0; u < rwcount; u++) {
-			var rewardImg = document.createElement("img");
-			rewardImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(trainerReward)+".png";
+		for(let u = 0; u < rwcount; u++) {
+			let rewardImg = document.createElement("img");
+			rewardImg.src = getMedia([getItemIcon(trainerReward)],[PATH_Item_Bag])[0];
 			if (rwcount != 1) {
 				rewardImg.title = trainerRewardCount+"x "+trainerReward;
 			}
@@ -2374,7 +2334,7 @@ function updateTrainer(trainers,condition) {
 			rewardValWrap.appendChild(rewardImg)
 		}
 
-		var rewardText = document.createElement("h6");
+		let rewardText = document.createElement("h6");
 		if (rwcount != 1) {
 			rewardText.innerText = trainerRewardCount+"x "+trainerReward;
 		}
@@ -2395,7 +2355,7 @@ function updateTrainer(trainers,condition) {
 	}
 
 	if (trainerInfo.length > 0) {
-		var titleText = document.createElement("small");
+		let titleText = document.createElement("small");
 		titleText.innerText = trainerInfo.join("\n");
 		titlePath.appendChild(titleText);
 	}
@@ -2403,7 +2363,7 @@ function updateTrainer(trainers,condition) {
 
 
 	if (trainerItem != undefined) {
-		var itcount = trainerItemCount;
+		let itcount = trainerItemCount;
 		if (itcount == undefined) {
 			itcount = 1;
 		}
@@ -2411,16 +2371,16 @@ function updateTrainer(trainers,condition) {
 			itcount = 5;
 		}
 		
-		var itemsWrap = document.createElement("b");
+		let itemsWrap = document.createElement("b");
 		itemsPath.appendChild(itemsWrap);
 
 
-		var itemsImgWrap = document.createElement("span");
+		let itemsImgWrap = document.createElement("span");
 		itemsWrap.appendChild(itemsImgWrap);
 
-		for(var u = 0; u < itcount; u++) {
-			var itemsImg = document.createElement("img");
-			itemsImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(trainerItem)+".png";
+		for(let u = 0; u < itcount; u++) {
+			let itemsImg = document.createElement("img");
+			itemsImg.src =  getMedia([getItemIcon(trainerItem)],[PATH_Item_Bag])[0];
 			if (itcount != 1) {
 				itemsImg.title = trainerItemCount+"x "+trainerItem;
 			}
@@ -2431,7 +2391,7 @@ function updateTrainer(trainers,condition) {
 			itemsImgWrap.appendChild(itemsImg);
 		}
 
-		var itemsText = document.createElement("h6");
+		let itemsText = document.createElement("h6");
 		if (itcount != 1) {
 			itemsText.innerText = trainerItemCount+"x "+trainerItem;
 		}
@@ -2447,8 +2407,8 @@ function updateTrainer(trainers,condition) {
 		itemsWrap.setAttribute("value",trainerItem);
 	}
 
-	var groups = [];
-	var datas = [];
+	let groups = [];
+	let datas = [];
 	if (trainers[q]["Pokémon"].includes("\n")) {
 		datas = trainers[q]["Pokémon"].split("\n");
 	}
@@ -2458,22 +2418,22 @@ function updateTrainer(trainers,condition) {
 
 
 
-	for(var u = 0; u < datas.length; u++) {
+	for(let u = 0; u < datas.length; u++) {
 	
-		var data = datas[u];
-		var pok = undefined;
-		var item = undefined;
-		var level = undefined;
-		var gender = undefined;
-		var move = undefined;
-		var ability = undefined;
-		var iv = undefined;
-		var ev = undefined;
-		var nature = undefined;
+		let data = datas[u];
+		let pok = undefined;
+		let item = undefined;
+		let level = undefined;
+		let gender = undefined;
+		let move = undefined;
+		let ability = undefined;
+		let iv = undefined;
+		let ev = undefined;
+		let nature = undefined;
 
 		if(data.includes("|")) {
 			data = data.split("|")
-			for (var r = 0; r < data.length; r++) {
+			for (let r = 0; r < data.length; r++) {
 				if (data[r].split(":")[0] == "pok") {
 					pok = data[r].replaceAll(data[r].split(":")[0]+":","")
 				}
@@ -2537,7 +2497,7 @@ function updateTrainer(trainers,condition) {
 
 
 		
-		var grp = trainers[q]["Grouping"];
+		let grp = trainers[q]["Grouping"];
 		if (u == 0) {
 			grp = undDel(grp,"Pokémon");
 		}
@@ -2545,30 +2505,30 @@ function updateTrainer(trainers,condition) {
 		if (grp != undefined) {
 			if (grp.includes("|")) {
 				if (!groups.includes(grp.split("|")[u])) {
-					var grpWrap = document.createElement("span");
-					var grpTxt = document.createElement("h6");
+					let grpWrap = document.createElement("span");
+					let grpTxt = document.createElement("h6");
 					grpTxt.innerText = grp.split("|")[u];
 					ulPath.appendChild(grpWrap);
 					grpWrap.appendChild(grpTxt);
 					
 
-					var grpFig = document.createElement("figure");
+					let grpFig = document.createElement("figure");
 					grpFig.setAttribute("name","export");
 					grpWrap.appendChild(grpFig)
 					grpFig.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-					var grpFigText = document.createElement("small");
+					let grpFigText = document.createElement("small");
 					grpFigText.innerText = "⮟";
 					grpFig.appendChild(grpFigText)
-					var grpFigTop = document.createElement("div");
+					let grpFigTop = document.createElement("div");
 					grpFig.appendChild(grpFigTop)
-					var grpFigTopWrap = document.createElement("span");
+					let grpFigTopWrap = document.createElement("span");
 					grpFigTop.appendChild(grpFigTopWrap)
-					var grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
+					let grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
 	
-					for(var e = 0; e < grpFigOpts.length; e++) {
-						var grpFigWrapTop = document.createElement("span");
-						var grpFigWrap = document.createElement("b");
-						var grpFigTxt = document.createElement("small");
+					for(let e = 0; e < grpFigOpts.length; e++) {
+						let grpFigWrapTop = document.createElement("span");
+						let grpFigWrap = document.createElement("b");
+						let grpFigTxt = document.createElement("small");
 						grpFigWrapTop.setAttribute("name",grpFigOpts[e]);
 						grpFigWrap.setAttribute("type","invert");
 						grpFigTxt.innerText = grpFigOpts[e];
@@ -2583,30 +2543,30 @@ function updateTrainer(trainers,condition) {
 			}
 			else {
 				if (!groups.includes(grp)) {
-					var grpWrap = document.createElement("span");
-					var grpTxt = document.createElement("h6");
+					let grpWrap = document.createElement("span");
+					let grpTxt = document.createElement("h6");
 					grpTxt.innerText = grp;
 					ulPath.appendChild(grpWrap);
 					grpWrap.appendChild(grpTxt);
 
 
-					var grpFig = document.createElement("figure");
+					let grpFig = document.createElement("figure");
 					grpFig.setAttribute("name","export");
 					grpWrap.appendChild(grpFig)
 					grpFig.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-					var grpFigText = document.createElement("small");
+					let grpFigText = document.createElement("small");
 					grpFigText.innerText = "⮟";
 					grpFig.appendChild(grpFigText)
-					var grpFigTop = document.createElement("div");
+					let grpFigTop = document.createElement("div");
 					grpFig.appendChild(grpFigTop)
-					var grpFigTopWrap = document.createElement("span");
+					let grpFigTopWrap = document.createElement("span");
 					grpFigTop.appendChild(grpFigTopWrap)
-					var grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
+					let grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
 	
-					for(var e = 0; e < grpFigOpts.length; e++) {
-						var grpFigWrapTop = document.createElement("span");
-						var grpFigWrap = document.createElement("b");
-						var grpFigTxt = document.createElement("small");
+					for(let e = 0; e < grpFigOpts.length; e++) {
+						let grpFigWrapTop = document.createElement("span");
+						let grpFigWrap = document.createElement("b");
+						let grpFigTxt = document.createElement("small");
 						grpFigWrapTop.setAttribute("name",grpFigOpts[e]);
 						grpFigWrap.setAttribute("type","invert");
 						grpFigTxt.innerText = grpFigOpts[e];
@@ -2635,7 +2595,7 @@ function updateTrainer(trainers,condition) {
 
 
 				if (battleType != undefined) {
-					for (var t = 0; t < els.length; t++) {
+					for (let t = 0; t < els.length; t++) {
 						if (els[t].getAttribute("value").includes(battleType)) {
 							el = els[t];
 							break;
@@ -2666,7 +2626,7 @@ function updateTrainer(trainers,condition) {
 						}
 					}
 				
-					for (var t = 0; t < dmgBoxes.length; t++) {
+					for (let t = 0; t < dmgBoxes.length; t++) {
 						if (dmgBoxes[t].getAttribute("data-string") == "") {
 							if (suggestChange) {
 								sel.value = el.value;
@@ -2674,7 +2634,7 @@ function updateTrainer(trainers,condition) {
 								let x = sel.value;
 								let y = sel.querySelector(":scope option[value='"+x+"']");
 								let keys = y.getAttributeNames();
-								for(var q = 0; q < keys.length; q++) {
+								for(let q = 0; q < keys.length; q++) {
 									let val1 = keys[q];
 									let val2 = y.getAttribute(keys[q]);
 									sel.setAttribute(val1,val2);
@@ -2701,7 +2661,7 @@ function updateTrainer(trainers,condition) {
 							let x = sel.value;
 							let y = sel.querySelector(":scope option[value='"+x+"']");
 							let keys = y.getAttributeNames();
-							for(var q = 0; q < keys.length; q++) {
+							for(let q = 0; q < keys.length; q++) {
 								let val1 = keys[q];
 								let val2 = y.getAttribute(keys[q]);
 								sel.setAttribute(val1,val2);
@@ -2722,7 +2682,7 @@ function updateTrainer(trainers,condition) {
 							let x = sel.value;
 							let y = sel.querySelector(":scope option[value='"+x+"']");
 							let keys = y.getAttributeNames();
-							for(var q = 0; q < keys.length; q++) {
+							for(let q = 0; q < keys.length; q++) {
 								let val1 = keys[q];
 								let val2 = y.getAttribute(keys[q]);
 								sel.setAttribute(val1,val2);
@@ -2741,12 +2701,12 @@ function updateTrainer(trainers,condition) {
 
 
 
-		var li = document.createElement("li");
+		let li = document.createElement("li");
 		ulPath.appendChild(li);
 
-		var liMain = document.createElement("div");
+		let liMain = document.createElement("div");
 		li.appendChild(liMain);
-		var liAdditional = document.createElement("div");
+		let liAdditional = document.createElement("div");
 		li.appendChild(liAdditional);
 
 
@@ -2756,28 +2716,28 @@ function updateTrainer(trainers,condition) {
 
 		if (u == 0) {
 
-			for (var t = 0; t < 6; t++) {
-				var outer = document.createElement("span");
+			for (let t = 0; t < 6; t++) {
+				let outer = document.createElement("span");
 				pokCountPath.appendChild(outer);
 
-				var empty = document.createElement("div");
+				let empty = document.createElement("div");
 				empty.classList.add("empty");
 				outer.appendChild(empty);
 				
 			}
 
 			if (trainerCount != undefined) {
-				for (var t = 0; t < trainerCount; t++) {
-					var x = t+1;
-					var span = pokCountPath.querySelector(":scope > span:nth-child("+x+")");
+				for (let t = 0; t < trainerCount; t++) {
+					let x = t+1;
+					let span = pokCountPath.querySelector(":scope > span:nth-child("+x+")");
 					span.firstChild.classList.remove("empty");
 					span.firstChild.classList.add("pokéball");
 				}
 			}
 			else {
-				for (var t = 0; t < 6; t++) {
-					var x = t+1;
-					var span = pokCountPath.querySelector(":scope > span:nth-child("+x+")");
+				for (let t = 0; t < 6; t++) {
+					let x = t+1;
+					let span = pokCountPath.querySelector(":scope > span:nth-child("+x+")");
 			
 					if (datas[t] != undefined) {
 						span.firstChild.classList.remove("empty");
@@ -2791,8 +2751,8 @@ function updateTrainer(trainers,condition) {
 		}
 
 		if (nature != undefined || ability != undefined || level != undefined || gender != undefined) {
-			var pokLeft = document.createElement("div");
-			var pokLeftWrap = document.createElement("span");
+			let pokLeft = document.createElement("div");
+			let pokLeftWrap = document.createElement("span");
 			pokLeft.setAttribute("name", "data");
 			liMain.appendChild(pokLeft);
 			pokLeft.appendChild(pokLeftWrap);
@@ -2802,7 +2762,7 @@ function updateTrainer(trainers,condition) {
 			}
 		
 			if (nature != undefined) {
-				var natureText = document.createElement("small");
+				let natureText = document.createElement("small");
 				natureText.innerText = nature;
 				if (getNatureTitle(nature) == "Neutral") {
 					natureText.title = "Neutral Nature";
@@ -2815,10 +2775,10 @@ function updateTrainer(trainers,condition) {
 			}
 
 			if (ability != undefined) {
-				var desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",ability);
+				let desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",ability);
 
-				var abilityWrap = document.createElement("b");
-				var abilityText = document.createElement("p");
+				let abilityWrap = document.createElement("b");
+				let abilityText = document.createElement("p");
 				abilityText.innerText = ability;
 				abilityWrap.title = getAbilityPosition(getPokémonInt(pok),ability)+" Ability";
 				if (desc.length > 0) {
@@ -2834,7 +2794,7 @@ function updateTrainer(trainers,condition) {
 				abilityWrap.setAttribute("function","dataRedirect");
 			}
 			if (level != undefined) {
-				var levelText = document.createElement("small");
+				let levelText = document.createElement("small");
 				if (level.includes("-")) {
 					levelText.innerText = "Lvls. "+level;
 				}
@@ -2844,7 +2804,7 @@ function updateTrainer(trainers,condition) {
 				pokLeftWrap.appendChild(levelText);
 			}
 			if (gender != undefined) {
-				var genderText = document.createElement("small");
+				let genderText = document.createElement("small");
 				genderText.setAttribute("name","gender");
 				if (gender == "♂") {
 					genderText.setAttribute("title", "Male");
@@ -2861,15 +2821,15 @@ function updateTrainer(trainers,condition) {
 		}
 
 
-		var pokCenter = document.createElement("div");
-		var pokCenterWrap = document.createElement("span");
+		let pokCenter = document.createElement("div");
+		let pokCenterWrap = document.createElement("span");
 		pokCenter.setAttribute("name", "pokémon");
 		liMain.appendChild(pokCenter);
 		pokCenter.appendChild(pokCenterWrap);
 
 		if (item != undefined) {
-			var heldImg = document.createElement("img");
-			heldImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(item)+".png";
+			let heldImg = document.createElement("img");
+			heldImg.src = getMedia([getItemIcon(item)],[PATH_Item_Bag])[0];
 			heldImg.setAttribute("title",item);
 			heldImg.setAttribute("name","item");
 			heldImg.setAttribute("value",item);
@@ -2878,7 +2838,7 @@ function updateTrainer(trainers,condition) {
 			heldImg.setAttribute("function","dataRedirect");
 		}
 
-		var pokImg = document.createElement("img");
+		let pokImg = document.createElement("img");
 		pokImg.src = getPokémonMediaPath([getPokémonInt(pok)],["./media/Images/Pokémon/Battle/PNG/Default/Front/"+ImageTypes[0]["path"]+"/"]);
 		pokImg.setAttribute("title", pok);
 		pokCenterWrap.setAttribute("value",getPokémonInt(pok));
@@ -2886,18 +2846,18 @@ function updateTrainer(trainers,condition) {
 		pokCenterWrap.addEventListener("click", modalData);
 		pokCenterWrap.setAttribute("function","modalData");
 
-		var pokName = document.createElement("small");
+		let pokName = document.createElement("small");
 		pokName.innerText = pok;
 		pokCenterWrap.appendChild(pokName);
 
 		if (move != undefined || iv != undefined || ev != undefined) {
-			var pokRight = document.createElement("div");
+			let pokRight = document.createElement("div");
 			pokRight.setAttribute("name","moves");
 			liMain.appendChild(pokRight);
 		}
 
 		if (move != undefined) {
-			var moves = undefined;
+			let moves = undefined;
 
 
 			if (move.includes(",")) {
@@ -2906,23 +2866,23 @@ function updateTrainer(trainers,condition) {
 			else {
 				moves = move;
 			}
-			for(var y = 0; y < moves.length; y++) {
-				var pokRightMovesWrap = document.createElement("b");
-				var pokRightMovesText = document.createElement("p");
+			for(let y = 0; y < moves.length; y++) {
+				let pokRightMovesWrap = document.createElement("b");
+				let pokRightMovesText = document.createElement("p");
 				pokRightMovesText.innerText = moves[y];
 				pokRightMovesWrap.title = formatMoveData(moves[y]);
-				pokRightMovesWrap.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y])+")";
+				pokRightMovesWrap.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moves[y])+")";
 				pokRightMovesWrap.setAttribute("name","move");
 				pokRight.appendChild(pokRightMovesWrap);
 				pokRightMovesWrap.appendChild(pokRightMovesText);
 				pokRightMovesWrap.addEventListener("click", dataRedirect);
 				pokRightMovesWrap.setAttribute("function","dataRedirect");
 				if (moves[y] != "") {
-					if(returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,moves[y]) == undefined) {
+					if(returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moves[y]) == undefined) {
 						console.log("#DEBUG# "+moves[y]+" needs formatting?");
 					}
 					
-					var moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
+					let moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
 					if (!moveset.includes(moves[y])) {
 						console.log("#DEBUG# "+pok+" cannot learn "+moves[y]+"?");
 					}
@@ -2932,18 +2892,18 @@ function updateTrainer(trainers,condition) {
 		}
 
 		if (iv != undefined) {
-			var ivs = undefined;
-			var pokRightIV = document.createElement("div");
+			let ivs = undefined;
+			let pokRightIV = document.createElement("div");
 			pokRightIV.setAttribute("name", "ivs");
 			liAdditional.appendChild(pokRightIV);
-			var pokRightIVTitle = document.createElement("span");
-			var pokRightIVTitleText = document.createElement("small");
+			let pokRightIVTitle = document.createElement("span");
+			let pokRightIVTitleText = document.createElement("small");
 			pokRightIVTitleText.innerText = "Individual Values:";
 			pokRightIV.appendChild(pokRightIVTitle);
 			pokRightIVTitle.appendChild(pokRightIVTitleText);
 
 
-			var pokRightIVMain = document.createElement("span");
+			let pokRightIVMain = document.createElement("span");
 			pokRightIV.appendChild(pokRightIVMain);
 			if (iv.includes(",")) {
 				ivs = iv.split(",");
@@ -2951,9 +2911,9 @@ function updateTrainer(trainers,condition) {
 			else {
 				ivs = iv;
 			}
-			for(var y = 0; y < ivs.length; y++) {
+			for(let y = 0; y < ivs.length; y++) {
 				if (ivs[y] != "") {
-					var pokRightIVText = document.createElement("small");
+					let pokRightIVText = document.createElement("small");
 					pokRightIVText.setAttribute("name","iv");
 					pokRightIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+ivs[y];
 					pokRightIVMain.appendChild(pokRightIVText);
@@ -2962,18 +2922,18 @@ function updateTrainer(trainers,condition) {
 		}
 
 		if (ev != undefined) {
-			var evs = undefined;
-			var pokRightEV = document.createElement("div");
+			let evs = undefined;
+			let pokRightEV = document.createElement("div");
 			pokRightEV.setAttribute("name", "evs");
 			liAdditional.appendChild(pokRightEV);
-			var pokRightEVTitle = document.createElement("span");
-			var pokRightEVTitleText = document.createElement("small");
+			let pokRightEVTitle = document.createElement("span");
+			let pokRightEVTitleText = document.createElement("small");
 			pokRightEVTitleText.innerText = "Effort Values:";
 			pokRightEV.appendChild(pokRightEVTitle);
 			pokRightEVTitle.appendChild(pokRightEVTitleText);
 
 
-			var pokRightEVMain = document.createElement("span");
+			let pokRightEVMain = document.createElement("span");
 			pokRightEV.appendChild(pokRightEVMain);
 			if (ev.includes(",")) {
 				evs = ev.split(",");
@@ -2981,9 +2941,9 @@ function updateTrainer(trainers,condition) {
 			else {
 				evs = ev;
 			}
-			for(var y = 0; y < evs.length; y++) {
+			for(let y = 0; y < evs.length; y++) {
 				if (evs[y] != "") {
-					var pokRightEVText = document.createElement("small");
+					let pokRightEVText = document.createElement("small");
 					pokRightEVText.setAttribute("name","ev");
 					pokRightEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+evs[y];
 					pokRightEVMain.appendChild(pokRightEVText);
@@ -2997,23 +2957,23 @@ function updateTrainer(trainers,condition) {
 
 
 
-		var exportButton = document.createElement("figure");
+		let exportButton = document.createElement("figure");
 		exportButton.setAttribute("name","export");
 		liMain.appendChild(exportButton)
 		exportButton.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-		var exportButtonText = document.createElement("small");
+		let exportButtonText = document.createElement("small");
 		exportButtonText.innerText = "⮟";
 		exportButton.appendChild(exportButtonText)
-		var exportButtonTop = document.createElement("div");
+		let exportButtonTop = document.createElement("div");
 		exportButton.appendChild(exportButtonTop)
-		var exportButtonTopWrap = document.createElement("span");
+		let exportButtonTopWrap = document.createElement("span");
 		exportButtonTop.appendChild(exportButtonTopWrap)
-		var exportButtonOpts = ["Copy Data String","Send to Damage Calculator"];
+		let exportButtonOpts = ["Copy Data String","Send to Damage Calculator"];
 
-		for(var e = 0; e < exportButtonOpts.length; e++) {
-			var exportButtonWrapTop = document.createElement("span");
-			var exportButtonWrap = document.createElement("b");
-			var exportButtonTxt = document.createElement("small");
+		for(let e = 0; e < exportButtonOpts.length; e++) {
+			let exportButtonWrapTop = document.createElement("span");
+			let exportButtonWrap = document.createElement("b");
+			let exportButtonTxt = document.createElement("small");
 			exportButtonWrapTop.setAttribute("name",exportButtonOpts[e]);
 			exportButtonWrap.setAttribute("type","invert");
 			exportButtonTxt.innerText = exportButtonOpts[e];
@@ -3037,7 +2997,7 @@ function updateTrainer(trainers,condition) {
 				let dmgSlots = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > div > span:not([name='team 1']) > div[data-string]");
             
                 let check = false;
-                for (var t = 0; t < dmgSlots.length; t++) {
+                for (let t = 0; t < dmgSlots.length; t++) {
                     let ds = dmgSlots[t].getAttribute("data-string");
                     let dsobj = dataStringToObj(ds);
     
@@ -3077,7 +3037,7 @@ function updateTrainer(trainers,condition) {
 
 		let eles = [];
 		let startEle = li;
-		for(var y = 0; y < 1000; y++) {
+		for(let y = 0; y < 1000; y++) {
 			if (startEle != undefined && startEle.tagName != "SPAN") {
 				eles.push(startEle);
 				startEle = startEle.previousElementSibling;
@@ -3087,7 +3047,7 @@ function updateTrainer(trainers,condition) {
 			}
 		}
 		startEle = li.nextElementSibling;
-		for(var y = 0; y < 1000; y++) {
+		for(let y = 0; y < 1000; y++) {
 			if (startEle != undefined && startEle.tagName != "SPAN") {
 				eles.push(startEle);
 				startEle = startEle.nextElementSibling;
@@ -3098,11 +3058,11 @@ function updateTrainer(trainers,condition) {
 		
 		}
 		eles = eles.reverse();
-		for(var y = 0; y < eles.length; y++) {
+		for(let y = 0; y < eles.length; y++) {
 			eles[y] = eles[y].getAttribute("data-string");
 		}
 		startEle = li;
-		for(var y = 0; y < 1000; y++) {
+		for(let y = 0; y < 1000; y++) {
 			if (startEle.tagName == "SPAN") {
 				if (eles.length > 0) {
 					startEle.setAttribute("data-string",eles.join("\n"));
@@ -3139,7 +3099,7 @@ function updateTrainer(trainers,condition) {
 
 
 function doubleClicker(handler) {
-	var timeout = 0,
+	let timeout = 0,
 		clicked = false;
 	return function(e) {
 		e.preventDefault();
@@ -3174,20 +3134,17 @@ $("body").click(function(event) {
 
 function updateTitleHeader(what) {
 
-	var what;
-	var id;
 
-	id = "#contain div#map > section[name='sidebar'] > div > *[name='"+what.toLowerCase()+"']"
-
-	var thetitle = $(id+' > *:first-child');
-	var objects = $(id+' > ul');
+	let id = "#contain div#map > section[name='sidebar'] > div > *[name='"+what.toLowerCase()+"']"
+	let thetitle = $(id+' > *:first-child');
+	let objects = $(id+' > ul');
 
 
-	for (var t = 0; t < objects.length; t++) {
-		var x = t+2;
-		var absoluteTop = $(id).offset().top;
-		var relativeTop = $(id+' > ul:nth-child('+x+')').offset().top;
-		var atitle = objects.get(t).querySelector(":scope > h4:first-child");
+	for (let t = 0; t < objects.length; t++) {
+		let x = t+2;
+		let absoluteTop = $(id).offset().top;
+		let relativeTop = $(id+' > ul:nth-child('+x+')').offset().top;
+		let atitle = objects.get(t).querySelector(":scope > h4:first-child");
 
 		if (absoluteTop > relativeTop) {
 			if (atitle != null) {
