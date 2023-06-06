@@ -1,14 +1,14 @@
-var createNav = function() {
-	var navOptions = ["Pokémon","Moves","Abilities","Items","Map","Mechanics","Type Advantage","Tools"];
+let createNav = function() {
+	let navOptions = ["Pokémon","Moves","Abilities","Items","Map","Mechanics","Type Advantage","Tools"];
 	if(Ability.length <= 0) {
-		for(var q = 0; q < navOptions.length; q++) {
+		for(let q = 0; q < navOptions.length; q++) {
 			if(navOptions[q].includes("Abilities")) {
 				navOptions.splice(q, 1);
 			}
 		}
 	}
 
-	for(var q = 0; q < navOptions.length; q++) {
+	for(let q = 0; q < navOptions.length; q++) {
 		if(navOptions[q].includes("Mechanics")) {
 			navOptions.splice(q, 1);
 		}
@@ -20,11 +20,11 @@ var createNav = function() {
 		}
 	}
 
-	for(var q = 0; q < navOptions.length; q++) {
-		var x = q + 1;
-		var navigationInput = document.createElement("input");
-		var navigationLabel = document.createElement("label");
-		var navigationLabelText = document.createElement("h6");
+	for(let q = 0; q < navOptions.length; q++) {
+		let x = q + 1;
+		let navigationInput = document.createElement("input");
+		let navigationLabel = document.createElement("label");
+		let navigationLabelText = document.createElement("h6");
 		navigationInput.setAttribute("type", "radio");
 		navigationInput.setAttribute("name", "navigation");
 		navigationInput.setAttribute("id", "navigation-" + x);
@@ -41,18 +41,18 @@ var createNav = function() {
 		navigationInput.addEventListener("change", navSelector);
 	}
 
-	var fullscreenButtonLeft = document.createElement("figure");
-	var fullscreenButtonLeftText = document.createElement("strong");
-	var fullscreenOverlay = document.createElement("span");
-	var fullscreenDiv = document.createElement("div");
-	var fullscreenUl = document.createElement("ul");
-	var fullscreenButtonRight = document.createElement("figure");
-	var fullscreenButtonRightText = document.createElement("strong");
+	let fullscreenButtonLeft = document.createElement("figure");
+	let fullscreenButtonLeftText = document.createElement("strong");
+	let fullscreenOverlay = document.createElement("span");
+	let fullscreenDiv = document.createElement("div");
+	let fullscreenUl = document.createElement("ul");
+	let fullscreenButtonRight = document.createElement("figure");
+	let fullscreenButtonRightText = document.createElement("strong");
 	fullscreenButtonLeftText.innerText = "«";
 	fullscreenButtonRightText.innerText = "»";
 	fullscreenButtonLeft.setAttribute("value",0);
 	fullscreenButtonRight.setAttribute("value",0);
-	var fullscreen = document.querySelector("#fullscreen");
+	let fullscreen = document.querySelector("#fullscreen");
     fullscreen.setAttribute("tabindex","0");
 	fullscreen.appendChild(fullscreenButtonLeft);
 	fullscreenButtonLeft.appendChild(fullscreenButtonLeftText);
@@ -64,7 +64,7 @@ var createNav = function() {
 
 
 	fullscreen.addEventListener("keyup",function(event){if(event.which === 37){fullscreenMove("left")}else if(event.which === 39){fullscreenMove("right")}});
-	fullscreen.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){fullscreenMove("left")}else if(!delta.includes("-")){fullscreenMove("right")}});
+	fullscreen.addEventListener("wheel",function(event){let delta = event.deltaY.toString();if(delta.includes("-")){fullscreenMove("left")}else if(!delta.includes("-")){fullscreenMove("right")}});
 
 	fullscreenOverlay.addEventListener("click",exitFullscreen);
 
@@ -73,21 +73,21 @@ var createNav = function() {
 }
 
 function navSelector() {
-	var val = (this.value).toLowerCase();
-    var navContents = document.querySelectorAll('#contain > div');
-    var navContent = document.querySelectorAll('#contain > div[value="'+val+'"]');
+	let val = (this.value).toLowerCase();
+    let navContents = document.querySelectorAll('#contain > div');
+    let navContent = document.querySelectorAll('#contain > div[value="'+val+'"]');
 
-	var mapOuter = document.querySelector("#contain > div#map > section[name='content'] > *[name='map'] > div > div > div");
-	var mapImg = mapOuter.querySelector(":scope img[usemap]");
+	let mapOuter = document.querySelector("#contain > div#map > section[name='content'] > *[name='map'] > div > div > div");
+	let mapImg = mapOuter.querySelector(":scope img[usemap]");
 
-	var itemOuter = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div");
-	var itemImg = itemOuter.querySelector(":scope img[usemap]");
+	let itemOuter = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div");
+	let itemImg = itemOuter.querySelector(":scope img[usemap]");
 
 
-    for(var u = 0; u < navContents.length; u++) {
+    for(let u = 0; u < navContents.length; u++) {
         navContents[u].style.display = "none";
     }
-    for(var u = 0; u < navContent.length; u++) {
+    for(let u = 0; u < navContent.length; u++) {
         navContent[u].style.display = "block";
     }
 
