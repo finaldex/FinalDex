@@ -1660,7 +1660,7 @@
 	height: 58px;
 	border-radius: 50%;
 	transition: 0.5s ease transform, 0.2s ease background, 0.2s ease opacity;
-	background-image: url("./../media/Images/Misc/FinalDex/Light.png");
+	background-image: url("./../media/Images/FinalDex/Icon/Light.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 27px;
@@ -1671,7 +1671,7 @@
 }
 #pokémon > aside[name='settings'] span[name="theme"] > div input:checked + span:after {
 	transform: translate(-17px, -15px);
-	background-image: url("./../media/Images/Misc/FinalDex/Dark.png");
+	background-image: url("./../media/Images/FinalDex/Icon/Dark.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 25px;
