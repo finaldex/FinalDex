@@ -1,21 +1,21 @@
-var createMove = function() {
-	var moveOuter = document.createElement("div");
-	var moveSectionList = document.createElement("section");
-	var moveSectionListOptionsTitleOuter = document.createElement("div");
-	var moveSectionListOptionsSearchOuter = document.createElement("div");
-	var moveSectionListOptionsSearch = document.createElement("input");
-	var moveSectionListOptionsSearchExit = document.createElement("span");
-	var moveSectionListOptionsOuter = document.createElement("div");
-	var moveSectionListOptions = document.createElement("ol");
-	var moveSectionHeader = document.createElement("section");
-	var moveSectionHeaderTitle = document.createElement("span");
-	var moveSectionHeaderTitleID = document.createElement("h4");
-	var moveSectionHeaderTitleName = document.createElement("h3");
-	var moveSectionHeaderDebut = document.createElement("span");
-	var moveSectionHeaderDebutText = document.createElement("h5");
-	var moveSectionContent = document.createElement("section");
-	var moveSectionContentDescription = document.createElement("div");
-	var moveSectionSidebar = document.createElement("section");
+let createMove = function() {
+	let moveOuter = document.createElement("div");
+	let moveSectionList = document.createElement("section");
+	let moveSectionListOptionsTitleOuter = document.createElement("div");
+	let moveSectionListOptionsSearchOuter = document.createElement("div");
+	let moveSectionListOptionsSearch = document.createElement("input");
+	let moveSectionListOptionsSearchExit = document.createElement("span");
+	let moveSectionListOptionsOuter = document.createElement("div");
+	let moveSectionListOptions = document.createElement("ol");
+	let moveSectionHeader = document.createElement("section");
+	let moveSectionHeaderTitle = document.createElement("span");
+	let moveSectionHeaderTitleID = document.createElement("h4");
+	let moveSectionHeaderTitleName = document.createElement("h3");
+	let moveSectionHeaderDebut = document.createElement("span");
+	let moveSectionHeaderDebutText = document.createElement("h5");
+	let moveSectionContent = document.createElement("section");
+	let moveSectionContentDescription = document.createElement("div");
+	let moveSectionSidebar = document.createElement("section");
 	moveOuter.setAttribute("id", "move");
 	moveOuter.setAttribute("value","moves");
 	moveSectionContentDescription.setAttribute("name","description");
@@ -57,41 +57,41 @@ var createMove = function() {
 	moveSectionListOptionsSearch.addEventListener("keyup", function() {search("Move");});
 	moveSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Move");});
 
-    var moveSectionHeaderGame = document.createElement("span");
-    var moveSectionHeaderGameImage = document.createElement("img");
-    moveSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")+".png";
+    let moveSectionHeaderGame = document.createElement("span");
+    let moveSectionHeaderGameImage = document.createElement("img");
+    moveSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
     moveSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     moveSectionHeader.appendChild(moveSectionHeaderGame);
     moveSectionHeaderGame.appendChild(moveSectionHeaderGameImage);
 
-	var moveSectionContentMenu = document.createElement("div");
-	var moveSectionContentMenuLeft = document.createElement("div");
-	var moveSectionContentMenuType = document.createElement("div");
-	var moveSectionContentMenuTypeText = document.createElement("span");
-	var moveSectionContentMenuTypeTextImg = document.createElement("img");
-	var moveSectionContentMenuTypeTextText = document.createElement("h6");
-	var moveSectionContentMenuTypeMove = document.createElement("span");
-	var moveSectionContentMenuAttribute = document.createElement("div");
-	var moveSectionContentMenuAttributePowerPoints = document.createElement("span");
-	var moveSectionContentMenuAttributePowerPointsContent = document.createElement("span");
-	var moveSectionContentMenuAttributePowerPointsTitle = document.createElement("h4");
-	var moveSectionContentMenuAttributePowerPointsText = document.createElement("p");
-	var moveSectionContentMenuAttributePower = document.createElement("span");
-	var moveSectionContentMenuAttributePowerContent = document.createElement("span");
-	var moveSectionContentMenuAttributePowerTitle = document.createElement("h4");
-	var moveSectionContentMenuAttributePowerText = document.createElement("p");
-	var moveSectionContentMenuAttributeAccuracy = document.createElement("span");
-	var moveSectionContentMenuAttributeAccuracyContent = document.createElement("span");
-	var moveSectionContentMenuAttributeAccuracyTitle = document.createElement("h4");
-	var moveSectionContentMenuAttributeAccuracyText = document.createElement("p");
-	var moveSectionContentMenuAttributePriority = document.createElement("span");
-	var moveSectionContentMenuAttributePriorityContent = document.createElement("span");
-	var moveSectionContentMenuAttributePriorityTitle = document.createElement("h4");
-	var moveSectionContentMenuAttributePriorityText = document.createElement("p");
-	var moveSectionContentMenuRight = document.createElement("div");
-	var moveSectionContentMenuContact = document.createElement("div");
-	var moveSectionContentMenuContactContent = document.createElement("span");
-	var moveSectionContentMenuContactText = document.createElement("h5");
+	let moveSectionContentMenu = document.createElement("div");
+	let moveSectionContentMenuLeft = document.createElement("div");
+	let moveSectionContentMenuType = document.createElement("div");
+	let moveSectionContentMenuTypeText = document.createElement("span");
+	let moveSectionContentMenuTypeTextImg = document.createElement("img");
+	let moveSectionContentMenuTypeTextText = document.createElement("h6");
+	let moveSectionContentMenuTypeMove = document.createElement("span");
+	let moveSectionContentMenuAttribute = document.createElement("div");
+	let moveSectionContentMenuAttributePowerPoints = document.createElement("span");
+	let moveSectionContentMenuAttributePowerPointsContent = document.createElement("span");
+	let moveSectionContentMenuAttributePowerPointsTitle = document.createElement("h4");
+	let moveSectionContentMenuAttributePowerPointsText = document.createElement("p");
+	let moveSectionContentMenuAttributePower = document.createElement("span");
+	let moveSectionContentMenuAttributePowerContent = document.createElement("span");
+	let moveSectionContentMenuAttributePowerTitle = document.createElement("h4");
+	let moveSectionContentMenuAttributePowerText = document.createElement("p");
+	let moveSectionContentMenuAttributeAccuracy = document.createElement("span");
+	let moveSectionContentMenuAttributeAccuracyContent = document.createElement("span");
+	let moveSectionContentMenuAttributeAccuracyTitle = document.createElement("h4");
+	let moveSectionContentMenuAttributeAccuracyText = document.createElement("p");
+	let moveSectionContentMenuAttributePriority = document.createElement("span");
+	let moveSectionContentMenuAttributePriorityContent = document.createElement("span");
+	let moveSectionContentMenuAttributePriorityTitle = document.createElement("h4");
+	let moveSectionContentMenuAttributePriorityText = document.createElement("p");
+	let moveSectionContentMenuRight = document.createElement("div");
+	let moveSectionContentMenuContact = document.createElement("div");
+	let moveSectionContentMenuContactContent = document.createElement("span");
+	let moveSectionContentMenuContactText = document.createElement("h5");
 	moveSectionContentMenuAttributePowerPointsTitle.innerText = "PP";
 	moveSectionContentMenuAttributePowerTitle.innerText = "Power";
 	moveSectionContentMenuAttributeAccuracyTitle.innerText = "Accuracy";
@@ -137,26 +137,26 @@ var createMove = function() {
 	moveSectionContentMenuRight.appendChild(moveSectionContentMenuContact);
 	moveSectionContentMenuContact.appendChild(moveSectionContentMenuContactContent);
 	moveSectionContentMenuContactContent.appendChild(moveSectionContentMenuContactText);
-	var moveSectionSidebarLearnset = document.createElement("div");
+	let moveSectionSidebarLearnset = document.createElement("div");
 	moveSectionSidebar.appendChild(moveSectionSidebarLearnset);
-	var moveSectionSidebarLearnsetTitle = document.createElement("div");
-	var moveSectionSidebarLearnsetTitleText = document.createElement("h4");
+	let moveSectionSidebarLearnsetTitle = document.createElement("div");
+	let moveSectionSidebarLearnsetTitleText = document.createElement("h4");
 	moveSectionSidebarLearnsetTitleText.innerHTML = "Learnset";
 	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetTitle);
 	moveSectionSidebarLearnsetTitle.appendChild(moveSectionSidebarLearnsetTitleText);
 	
 	
-	var moveSectionSidebarLearnsetUl = document.createElement("ul");
+	let moveSectionSidebarLearnsetUl = document.createElement("ul");
 	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetUl);
-	var moveSectionSidebarLearnsetPartyBox = document.createElement("div");
+	let moveSectionSidebarLearnsetPartyBox = document.createElement("div");
 	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetPartyBox);
 
 
-	var parbo = ["Party","Box"];
-	for(var q = 0; q < parbo.length; q++) {
-		var moveSectionSidebarLearnsetInput = document.createElement("input");
-		var moveSectionSidebarLearnsetLabel = document.createElement("label");
-		var moveSectionSidebarLearnsetText = document.createElement("h6");
+	let parbo = ["Party","Box"];
+	for(let q = 0; q < parbo.length; q++) {
+		let moveSectionSidebarLearnsetInput = document.createElement("input");
+		let moveSectionSidebarLearnsetLabel = document.createElement("label");
+		let moveSectionSidebarLearnsetText = document.createElement("h6");
 		moveSectionSidebarLearnsetInput.setAttribute("type","checkbox");
 		moveSectionSidebarLearnsetInput.setAttribute("id","move-learnset-partybox-"+q);
 		moveSectionSidebarLearnsetInput.setAttribute("name","move-learnset-partybox");
@@ -170,12 +170,12 @@ var createMove = function() {
 	}
 
 
-	var firstmoveiteration;
-	for(var q = 0; q < finaldata["Moves"]["Reference"].length; q++) {
-		if(finaldata["Moves"]["Reference"][q][JSONPath_MoveReference] == "true") {
-			var moveSectionListOptionsInput = document.createElement("input");
-			var moveSectionListOptionsLabel = document.createElement("label");
-			var moveSectionListOptionsText = document.createElement("h5");
+	let firstmoveiteration;
+	for(let q = 0; q < finaldata["Moves"]["Reference"].length; q++) {
+		if(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Reference"]] == "true") {
+			let moveSectionListOptionsInput = document.createElement("input");
+			let moveSectionListOptionsLabel = document.createElement("label");
+			let moveSectionListOptionsText = document.createElement("h5");
 			moveSectionListOptionsInput.setAttribute("type", "radio");
 			moveSectionListOptionsInput.setAttribute("name", "move-options");
 			moveSectionListOptionsInput.setAttribute("id", "move-options-"+q);
@@ -183,15 +183,15 @@ var createMove = function() {
 			moveSectionListOptionsInput.value = q;
 			moveSectionListOptionsLabel.setAttribute("for", "move-options-"+q);
 			moveSectionListOptionsLabel.setAttribute("type","medium");
-			if(finaldata["Moves"]["Reference"][q]["Name"+"_"+JSONPath_MoveName] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-name", finaldata["Moves"]["Reference"][q]["Name"+"_"+JSONPath_MoveName].toLowerCase());
-				moveSectionListOptionsLabel.setAttribute("data-title", finaldata["Moves"]["Reference"][q]["Name"+"_"+JSONPath_MoveName].toLowerCase());
+			if(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]] != undefined) {
+				moveSectionListOptionsLabel.setAttribute("data-name", finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]].toLowerCase());
+				moveSectionListOptionsLabel.setAttribute("data-title", finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]].toLowerCase());
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-name", "none");
 				moveSectionListOptionsLabel.setAttribute("data-title", "none");
 			}
 			/*
-			var moveset = returnMoveLearnset(finaldata["Moves"]["Reference"][q]["Name"+"_"+JSONPath_MoveName],"");
+			let moveset = returnMoveLearnset(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]],"");
 			if (moveset.length > 0) {
 				moveSectionListOptionsLabel.setAttribute("data-search-learnset", moveset.join(",").toLowerCase());
 			}
@@ -200,43 +200,43 @@ var createMove = function() {
 			}
 			*/
 
-			if(finaldata["Moves"]["Priority"][q]["Priority_"+JSONPath_MovePriority] != undefined) {
+			if(finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]] != undefined) {
 				
-				if (finaldata["Moves"]["Priority"][q]["Priority_"+JSONPath_MovePriority].includes("-")) {
-					moveSectionListOptionsLabel.setAttribute("data-search-priority", "-"+finaldata["Moves"]["Priority"][q]["Priority_"+JSONPath_MovePriority].replaceAll("-",""));
+				if (finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].includes("-")) {
+					moveSectionListOptionsLabel.setAttribute("data-search-priority", "-"+finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].replaceAll("-",""));
 				}
-				else if (finaldata["Moves"]["Priority"][q]["Priority_"+JSONPath_MovePriority].includes("+")) {
-					moveSectionListOptionsLabel.setAttribute("data-search-priority", "+"+finaldata["Moves"]["Priority"][q]["Priority_"+JSONPath_MovePriority].replaceAll("+",""));
+				else if (finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].includes("+")) {
+					moveSectionListOptionsLabel.setAttribute("data-search-priority", "+"+finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].replaceAll("+",""));
 				}
 				else {
-					moveSectionListOptionsLabel.setAttribute("data-search-priority", finaldata["Moves"]["Priority"][q]["Priority_"+JSONPath_MovePriority]);
+					moveSectionListOptionsLabel.setAttribute("data-search-priority", finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]]);
 				}
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-priority", "none");
 			}
 
-			if(finaldata["Moves"]["Type"][q]["Type_"+JSONPath_MoveType] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-type", finaldata["Moves"]["Type"][q]["Type_"+JSONPath_MoveType].toLowerCase());
+			if(finaldata["Moves"]["Type"][q][DATA_Move_Type["Type"]] != undefined) {
+				moveSectionListOptionsLabel.setAttribute("data-search-type", finaldata["Moves"]["Type"][q][DATA_Move_Type["Type"]].toLowerCase());
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-type", "none");
 			}
-			if(finaldata["Moves"]["Category"][q]["Category_"+JSONPath_MoveCategory] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-category", finaldata["Moves"]["Category"][q]["Category_"+JSONPath_MoveCategory].toLowerCase());
+			if(finaldata["Moves"]["Category"][q][DATA_Move_Category["Category"]] != undefined) {
+				moveSectionListOptionsLabel.setAttribute("data-search-category", finaldata["Moves"]["Category"][q][DATA_Move_Category["Category"]].toLowerCase());
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-category", "none");
 			}
-			if(finaldata["Moves"]["PP"][q]["PP Min_"+JSONPath_MovePP] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-pp", finaldata["Moves"]["PP"][q]["PP Min_"+JSONPath_MovePP].toLowerCase());
+			if(finaldata["Moves"]["PP"][q][DATA_Move_PP["Min"]] != undefined) {
+				moveSectionListOptionsLabel.setAttribute("data-search-pp", finaldata["Moves"]["PP"][q][DATA_Move_PP["Min"]].toLowerCase());
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-pp", "none");
 			}
-			if(finaldata["Moves"]["Power"][q]["Power_"+JSONPath_MovePower] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-power", finaldata["Moves"]["Power"][q]["Power_"+JSONPath_MovePower].toLowerCase());
+			if(finaldata["Moves"]["Power"][q][DATA_Move_Power["Power"]] != undefined) {
+				moveSectionListOptionsLabel.setAttribute("data-search-power", finaldata["Moves"]["Power"][q][DATA_Move_Power["Power"]].toLowerCase());
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-power", "none");
 			}
-			if(finaldata["Moves"]["Accuracy"][q]["Accuracy_"+JSONPath_MoveAccuracy] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-accuracy", finaldata["Moves"]["Accuracy"][q]["Accuracy_"+JSONPath_MoveAccuracy].toLowerCase());
+			if(finaldata["Moves"]["Accuracy"][q][DATA_Move_Accuracy["Accuracy"]] != undefined) {
+				moveSectionListOptionsLabel.setAttribute("data-search-accuracy", finaldata["Moves"]["Accuracy"][q][DATA_Move_Accuracy["Accuracy"]].toLowerCase());
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-accuracy", "none");
 			}
@@ -250,9 +250,9 @@ var createMove = function() {
 				moveSectionListOptionsLabel.setAttribute("data-search-contact", "none");
 			}
 
-			if(getTutorData(finaldata["Moves"]["Reference"][q]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
-				var tutors = getTutorData(finaldata["Moves"]["Reference"][q]["Name"+"_"+JSONPath_MoveName],"Move");
-				var res = [];
+			if(getTutorData(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]],"Move").length > 0) {
+				let tutors = getTutorData(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]],"Move");
+				let res = [];
 				for(y = 0; y < tutors.length; y++) {
 					res.push(tutors[y]["Location"].toLowerCase())
 				}
@@ -260,12 +260,12 @@ var createMove = function() {
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-tutor", "none");
 			}
-			if(finaldata["Moves"]["Machine"][q]["Machine_"+JSONPath_MoveMachine] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-machine", finaldata["Moves"]["Machine"][q]["Machine_"+JSONPath_MoveMachine].toLowerCase());
+			if(finaldata["Moves"]["Machine"][q][DATA_Move_Machine["Machine"]] != undefined) {
+				moveSectionListOptionsLabel.setAttribute("data-search-machine", finaldata["Moves"]["Machine"][q][DATA_Move_Machine["Machine"]].toLowerCase());
 			} else {
 				moveSectionListOptionsLabel.setAttribute("data-search-machine", "none");
 			}
-			moveSectionListOptionsText.innerText = finaldata["Moves"]["Reference"][q]["Name"+"_"+JSONPath_MoveName];
+			moveSectionListOptionsText.innerText = finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]];
 			moveSectionListOptions.appendChild(moveSectionListOptionsInput);
 			moveSectionListOptions.appendChild(moveSectionListOptionsLabel);
 			moveSectionListOptionsLabel.appendChild(moveSectionListOptionsText);
@@ -282,7 +282,7 @@ var createMove = function() {
 
 	moveSectionListOptionsSearch.title = searchOptionsTitle(moveSectionListOptions);
 
-	var searchLis = document.querySelectorAll("#contain > div#move > section[name='list'] ol > label");
+	let searchLis = document.querySelectorAll("#contain > div#move > section[name='list'] ol > label");
     searchMoveAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
         for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -299,13 +299,12 @@ var createMove = function() {
     }
 
 	function moveOptionsSelector(i) {
-		var i;
 		if (this.value != undefined) {
 			i = this.value;
 		}
 		
-		moveSectionHeaderTitleName.innerText = finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName];
-		moveSectionHeaderTitleID.innerText = "#"+finaldata["Moves"]["ID"][i]["ID"+"_"+JSONPath_MoveID];
+		moveSectionHeaderTitleName.innerText = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]];
+		moveSectionHeaderTitleID.innerText = "#"+finaldata["Moves"]["ID"][i][DATA_Move_ID["ID"]];
 		if(finaldata["Moves"]["ID"][i]["ID Type"] != undefined) {
 			moveSectionHeaderTitleID.title = finaldata["Moves"]["ID"][i]["ID Type"]+" Index number";
 		} else {
@@ -315,31 +314,31 @@ var createMove = function() {
 
 		moveSectionContentDescription.innerHTML = "";
 
-		if (finaldata["Moves"]["Description"][i]["Description_"+JSONPath_MoveDescription] != undefined) {
-			var text = document.createElement("p");
-			text.innerText = finaldata["Moves"]["Description"][i]["Description_"+JSONPath_MoveDescription];
+		if (finaldata["Moves"]["Description"][i][DATA_Move_Description["Description"]] != undefined) {
+			let text = document.createElement("p");
+			text.innerText = finaldata["Moves"]["Description"][i][DATA_Move_Description["Description"]];
 			moveSectionContentDescription.appendChild(text)
 			moveSectionContentDescription.innerHTML += "<br>"
 		}
 
 
-		if (finaldata["Moves"]["Machine"][i]["Machine_"+JSONPath_MoveMachine] != undefined) {
-			var text = document.createElement("p");
-			text.innerHTML = finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName]+" is <b type='invert' name='item' value='"+finaldata["Moves"]["Machine"][i]["Machine_"+JSONPath_MoveMachine]+"' onclick='dataRedirect()' function='dataRedirect'>"+finaldata["Moves"]["Machine"][i]["Machine_"+JSONPath_MoveMachine]+"</b>."
+		if (finaldata["Moves"]["Machine"][i][DATA_Move_Machine["Machine"]] != undefined) {
+			let text = document.createElement("p");
+			text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" is <b type='invert' name='item' value='"+finaldata["Moves"]["Machine"][i][DATA_Move_Machine["Machine"]]+"' onclick='dataRedirect()' function='dataRedirect'>"+finaldata["Moves"]["Machine"][i][DATA_Move_Machine["Machine"]]+"</b>."
 			moveSectionContentDescription.appendChild(text)
 			moveSectionContentDescription.innerHTML += "<br>"
 		}
 
 
-		if(getTutorData(finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName],"Move").length > 0) {
-			var text = document.createElement("p");
+		if(getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move").length > 0) {
+			let text = document.createElement("p");
 			moveSectionContentDescription.appendChild(text)
 
-			if (getTutorData(finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"].includes("Route")) {
-				text.innerHTML = finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor on <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."
+			if (getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"].includes("Route")) {
+				text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" can be taught by a Move Tutor on <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"</b>."
 			}
 			else {
-				text.innerHTML = finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName],"Move")[0]["Location"]+"</b>."	
+				text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"</b>."	
 			}
 
 			moveSectionContentDescription.innerHTML += "<br>"
@@ -348,11 +347,11 @@ var createMove = function() {
 
 
 
-		var effect = [];
+		let effect = [];
 
-		for(var q = 0; q < finaldata["Moves"]["Effect"].length; q++) {
+		for(let q = 0; q < finaldata["Moves"]["Effect"].length; q++) {
 			if(getApplicable(finaldata["Moves"]["Effect"][q]["Game"])) {
-				if(finaldata["Moves"]["Effect"][q]["Move"] == finaldata["Moves"]["Reference"][i]["Name_"+JSONPath_MoveName]) {
+				if(finaldata["Moves"]["Effect"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]) {
 					effect.push(finaldata["Moves"]["Effect"][q]["Effect"])
 				}
 			}
@@ -360,14 +359,14 @@ var createMove = function() {
 
 
 		if (effect.length > 0) {
-			var text = document.createElement("h4");
+			let text = document.createElement("h4");
 			text.innerText = "Effect";
 			moveSectionContentDescription.appendChild(text)
 		}
 
 
-		for(var q = 0; q < effect.length; q++) {
-			var text = document.createElement("p");
+		for(let q = 0; q < effect.length; q++) {
+			let text = document.createElement("p");
 			text.innerText = effect[q];
 			moveSectionContentDescription.appendChild(text)
 			if (q == effect.length - 1) {
@@ -389,54 +388,54 @@ var createMove = function() {
 
 
 		moveSectionContentMenuTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-		moveSectionContentMenuTypeTextImg.src = "./media/Images/Misc/Type/Text/"+MEDIAPath_Type_Text+"/"+finaldata["Moves"]["Type"][i]["Type_"+JSONPath_MoveType]+".png";
-		moveSectionContentMenuTypeTextImg.setAttribute("title", finaldata["Moves"]["Type"][i]["Type_"+JSONPath_MoveType]);
+		moveSectionContentMenuTypeTextImg.src = getMedia([finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]]],[PATH_Type_Icon])[0];
+		moveSectionContentMenuTypeTextImg.setAttribute("title", finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]]);
 		
-		if(finaldata["Moves"]["Type"][i]["Type_"+JSONPath_MoveType] == undefined) {
+		if(finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]] == undefined) {
 			moveSectionContentMenuTypeTextImg.style.display = "none";
 			moveSectionContentMenuTypeTextText.style.display = "block";
 		} else {
 			moveSectionContentMenuTypeTextImg.style.display = "block";
 			moveSectionContentMenuTypeTextText.style.display = "none";
 		}
-		moveSectionContentMenuTypeTextText.innerText = finaldata["Moves"]["Type"][i]["Type_"+JSONPath_MoveType];
-		var cate = moveSectionContentMenuTypeMove.querySelectorAll(":scope > *");
-		for(var u = 0; u < cate.length; u++) {
+		moveSectionContentMenuTypeTextText.innerText = finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]];
+		let cate = moveSectionContentMenuTypeMove.querySelectorAll(":scope > *");
+		for(let u = 0; u < cate.length; u++) {
 			cate[u].remove();
 		}
-		for(var u = 0; u < finaldata["Moves"]["Category"][i]["Category_"+JSONPath_MoveCategory].split(",").length; u++) {
-			var moveSectionContentMenuTypeMoveImg = document.createElement("img");
+		for(let u = 0; u < finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",").length; u++) {
+			let moveSectionContentMenuTypeMoveImg = document.createElement("img");
 			moveSectionContentMenuTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-			moveSectionContentMenuTypeMoveImg.src = "./media/Images/Misc/Type/Category/"+MEDIAPath_Type_Category+"/"+finaldata["Moves"]["Category"][i]["Category_"+JSONPath_MoveCategory].split(",")[u]+".png";
-			moveSectionContentMenuTypeMoveImg.setAttribute("title", finaldata["Moves"]["Category"][i]["Category_"+JSONPath_MoveCategory].split(",")[u]);
+			moveSectionContentMenuTypeMoveImg.src = getMedia([finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",")[u]],[PATH_Move_Category])[0];
+			moveSectionContentMenuTypeMoveImg.setAttribute("title", finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",")[u]);
 			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveImg);
-			var moveSectionContentMenuTypeMoveText = document.createElement("h6");
-			moveSectionContentMenuTypeMoveText.innerText = finaldata["Moves"]["Category"][i]["Category_"+JSONPath_MoveCategory].split(",")[u];
+			let moveSectionContentMenuTypeMoveText = document.createElement("h6");
+			moveSectionContentMenuTypeMoveText.innerText = finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",")[u];
 			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveText);
 			moveSectionContentMenuTypeMoveText.style.display = "none";
 
 		}
-		if(finaldata["Moves"]["PP"][i]["PP Min_"+JSONPath_MovePP] == undefined) {
+		if(finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]] == undefined) {
 			moveSectionContentMenuAttributePowerPointsText.innerHTML = "–";
-		} else if(finaldata["Moves"]["PP"][i]["PP Min_"+JSONPath_MovePP] != undefined && finaldata["Moves"]["PP"][i]["PP Max_"+JSONPath_MovePP] == undefined) {
-			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldata["Moves"]["PP"][i]["PP Min_"+JSONPath_MovePP];
+		} else if(finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]] != undefined && finaldata["Moves"]["PP"][i][DATA_Move_PP["Max"]] == undefined) {
+			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]];
 		} else {
-			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldata["Moves"]["PP"][i]["PP Min_"+JSONPath_MovePP]+" <span>(max. "+finaldata["Moves"]["PP"][i]["PP Max_"+JSONPath_MovePP]+")</span>";
+			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]]+" <span>(max. "+finaldata["Moves"]["PP"][i][DATA_Move_PP["Max"]]+")</span>";
 		}
-		if(finaldata["Moves"]["Power"][i]["Power_"+JSONPath_MovePower] == undefined) {
+		if(finaldata["Moves"]["Power"][i][DATA_Move_Power["Power"]] == undefined) {
 			moveSectionContentMenuAttributePowerText.innerText = "–";
 		} else {
-			moveSectionContentMenuAttributePowerText.innerText = finaldata["Moves"]["Power"][i]["Power_"+JSONPath_MovePower];
+			moveSectionContentMenuAttributePowerText.innerText = finaldata["Moves"]["Power"][i][DATA_Move_Power["Power"]];
 		}
-		if(finaldata["Moves"]["Accuracy"][i]["Accuracy_"+JSONPath_MoveAccuracy] == undefined) {
+		if(finaldata["Moves"]["Accuracy"][i][DATA_Move_Accuracy["Accuracy"]] == undefined) {
 			moveSectionContentMenuAttributeAccuracyText.innerText = "–";
 		} else {
-			moveSectionContentMenuAttributeAccuracyText.innerText = finaldata["Moves"]["Accuracy"][i]["Accuracy_"+JSONPath_MoveAccuracy];
+			moveSectionContentMenuAttributeAccuracyText.innerText = finaldata["Moves"]["Accuracy"][i][DATA_Move_Accuracy["Accuracy"]];
 		}
-		if(finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority] == undefined) {
+		if(finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]] == undefined) {
 			moveSectionContentMenuAttributePriorityText.innerText = "–";
 		} else {
-			if (finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority] == "0" || finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority] == undefined) {
+			if (finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]] == "0" || finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]] == undefined) {
 				moveSectionContentMenuAttributePriority.style.display = "none";
 			}
 			else {
@@ -444,14 +443,14 @@ var createMove = function() {
 			}
 
 
-			if (finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority].includes("-")) {
-				moveSectionContentMenuAttributePriorityText.innerText = "-"+finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority].replaceAll("-","");
+			if (finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].includes("-")) {
+				moveSectionContentMenuAttributePriorityText.innerText = "-"+finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].replaceAll("-","");
 			}
-			else if (finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority].includes("+")) {
-				moveSectionContentMenuAttributePriorityText.innerText = "+"+finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority].replaceAll("+","");
+			else if (finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].includes("+")) {
+				moveSectionContentMenuAttributePriorityText.innerText = "+"+finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].replaceAll("+","");
 			}
 			else {
-				moveSectionContentMenuAttributePriorityText.innerText = finaldata["Moves"]["Priority"][i]["Priority_"+JSONPath_MovePriority];
+				moveSectionContentMenuAttributePriorityText.innerText = finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]];
 			}
 		}
 		if(finaldata["Moves"]["Other Moves"][i]["Contact"] == "Makes contact") {
@@ -464,30 +463,31 @@ var createMove = function() {
 		} else {
 			moveSectionContentMenuContact.setAttribute("name", "positive");
 		}
-		var divs = moveSectionContentMenuRight.querySelectorAll(":scope > *");
-		for(var u = 0; u < divs.length; u++) {
-			divs[u].remove();
-		}
+		
+		moveSectionContentMenuRight.innerHTML = "";
+		
+		let othermove = [];
+
 		if(Generation == 1) {
-			var othermove = ["Mirror Move", "Sound-Based", "Outside Battle"];
+			othermove = ["Mirror Move", "Sound-Based", "Outside Battle"];
 		}
 		if(Generation == 2) {
-			var othermove = ["Protect", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
+			othermove = ["Protect", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
 		}
 		if(Generation >= 3 && Generation <= 4) {
-			var othermove = ["Protect", "Magic Coat", "Snatch", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
+			othermove = ["Protect", "Magic Coat", "Snatch", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
 		}
 		if(Generation >= 5 && Generation <= 8) {
-			var othermove = ["Protect", "Magic Coat/Magic Bounce", "Snatch", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
+			othermove = ["Protect", "Magic Coat/Magic Bounce", "Snatch", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
 		}
-		for(var u = 0; u < othermove.length; u++) {
+		for(let u = 0; u < othermove.length; u++) {
 			if(finaldata["Moves"]["Other Moves"][i][othermove[u]] != undefined) {
-				var moveSectionContentMenuOther = document.createElement("div");
-				var moveSectionContentMenuOtherContent = document.createElement("span");
-				var moveSectionContentMenuOtherText = document.createElement("h5");
+				let moveSectionContentMenuOther = document.createElement("div");
+				let moveSectionContentMenuOtherContent = document.createElement("span");
+				let moveSectionContentMenuOtherText = document.createElement("h5");
 
 				moveSectionContentMenuOther.setAttribute("name",othermove[u].toLowerCase());
-				for(var q = 0; q < othermove.length; q++) {
+				for(let q = 0; q < othermove.length; q++) {
 			
 					if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Affected by "+othermove[q]) {
 
@@ -539,8 +539,8 @@ var createMove = function() {
 				} else if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Affected by Magic Coat and Magic Bounce") {
 					moveSectionContentMenuOtherText.innerHTML = "Affected by <b>Magic Coat</b> and <b>Magic Bounce</b>";
 
-					var applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
-					for(var r = 0; r < applicables.length; r++) {
+					let applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
+					for(let r = 0; r < applicables.length; r++) {
 						applicables[r].setAttribute("name","move");
 						applicables[r].addEventListener("click",dataRedirect);
 						applicables[r].setAttribute("function","dataRedirect");
@@ -555,8 +555,8 @@ var createMove = function() {
 				else if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Not affected by Magic Coat or Magic Bounce") { 
 					moveSectionContentMenuOtherText.innerHTML = "Not affected by <b>Magic Coat</b> or <b>Magic Bounce</b>";
 
-					var applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
-					for(var r = 0; r < applicables.length; r++) {
+					let applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
+					for(let r = 0; r < applicables.length; r++) {
 						if (r == 0) {
 							applicables[r].setAttribute("name","move");
 						}
@@ -580,14 +580,14 @@ var createMove = function() {
 		}
 		
 	
-		var lis = moveSectionSidebarLearnsetUl.querySelectorAll(":scope > li");
-		for(var u = 0; u < lis.length; u++) {
+		let lis = moveSectionSidebarLearnsetUl.querySelectorAll(":scope > li");
+		for(let u = 0; u < lis.length; u++) {
 			lis[u].remove();
 		}
-		var learnsetlevelarr = [];
-		for(var q = 0; q < finaldata["Pokémon Learnset"]["Level Up"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Level Up"][q]["Move"] == finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldata["Pokémon Learnset"]["Level Up"][q]["Game"]) == true) {
-				var obj = new Object();
+		let learnsetlevelarr = [];
+		for(let q = 0; q < finaldata["Pokémon Learnset"]["Level Up"].length; q++) {
+			if(finaldata["Pokémon Learnset"]["Level Up"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Level Up"][q]["Game"]) == true) {
+				let obj = new Object();
 				obj["Pokémon"] = finaldata["Pokémon Learnset"]["Level Up"][q]["Pokémon"];
 				obj["Factor"] = finaldata["Pokémon Learnset"]["Level Up"][q]["Factor"];
 				learnsetlevelarr.push(obj);
@@ -599,18 +599,18 @@ var createMove = function() {
 			return parseInt(a["Factor"]) - parseInt(b["Factor"]);
 		});
 
-		for(var q = 0; q < learnsetlevelarr.length; q++) {
-			var moveSectionSidebarLearnsetLi = document.createElement("li");
+		for(let q = 0; q < learnsetlevelarr.length; q++) {
+			let moveSectionSidebarLearnsetLi = document.createElement("li");
 			moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-			var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-			var moveSectionSidebarLearnsetLiImg = document.createElement("img");
-			var moveSectionSidebarLearnsetLiText = document.createElement("small");
-			var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-			var moveSectionSidebarLearnsetLiSource = document.createElement("h5");
+			let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+			let moveSectionSidebarLearnsetLiImg = document.createElement("img");
+			let moveSectionSidebarLearnsetLiText = document.createElement("small");
+			let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+			let moveSectionSidebarLearnsetLiSource = document.createElement("h5");
 			moveSectionSidebarLearnsetLiSourceOuter.title = "Level Up";
 			moveSectionSidebarLearnsetLiSource.innerHTML = "Level Up: "+learnsetlevelarr[q]["Factor"];
 			moveSectionSidebarLearnsetLiText.innerText = learnsetlevelarr[q]["Pokémon"];
-			moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetlevelarr[q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+			moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetlevelarr[q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 			moveSectionSidebarLearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
 			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
 			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
@@ -622,22 +622,22 @@ var createMove = function() {
 			moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
 			moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
 		}
-		for(var q = 0; q < finaldata["Pokémon Learnset"]["Evolution"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Evolution"][q]["Move"] == finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldata["Pokémon Learnset"]["Evolution"][q]["Game"]) == true) {
-				var moveSectionSidebarLearnsetLi = document.createElement("li");
+		for(let q = 0; q < finaldata["Pokémon Learnset"]["Evolution"].length; q++) {
+			if(finaldata["Pokémon Learnset"]["Evolution"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Evolution"][q]["Game"]) == true) {
+				let moveSectionSidebarLearnsetLi = document.createElement("li");
 				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				var moveSectionSidebarLearnsetLiText = document.createElement("small");
-				var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-				var moveSectionSidebarLearnsetLiSourceText = document.createElement("h6");
-				var moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
+				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				let moveSectionSidebarLearnsetLiText = document.createElement("small");
+				let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+				let moveSectionSidebarLearnsetLiSourceText = document.createElement("h6");
+				let moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
 				moveSectionSidebarLearnsetLiSourceOuter.title = "Prior Evolution";
 				moveSectionSidebarLearnsetLiSourceText.innerText = "Prior Evolution:";
 				if(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].includes(",")) {
-					for(var r = 0; r < finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",").length; r++) {
-						var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					for(let r = 0; r < finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",").length; r++) {
+						let moveSectionSidebarLearnsetLiSource = document.createElement("img");
+						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r])],[PATH_Pokémon_Box_Default_PNG]);
 						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r];
 						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
@@ -648,8 +648,8 @@ var createMove = function() {
 				} else if(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"] == "None") {
 					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
 				} else {
-					var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					let moveSectionSidebarLearnsetLiSource = document.createElement("img");
+					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"])],[PATH_Pokémon_Box_Default_PNG]);
 					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
 					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
@@ -658,7 +658,7 @@ var createMove = function() {
 					moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
 				}
 		
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];				
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
@@ -674,15 +674,15 @@ var createMove = function() {
 
 			}
 		}
-		for(var q = 0; q < finaldata["Pokémon Learnset"]["Machine"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Machine"][q]["Move"] == finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldata["Pokémon Learnset"]["Machine"][q]["Game"]) == true) {
-				var moveSectionSidebarLearnsetLi = document.createElement("li");
+		for(let q = 0; q < finaldata["Pokémon Learnset"]["Machine"].length; q++) {
+			if(finaldata["Pokémon Learnset"]["Machine"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Machine"][q]["Game"]) == true) {
+				let moveSectionSidebarLearnsetLi = document.createElement("li");
 				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				var moveSectionSidebarLearnsetLiText = document.createElement("small");
-				var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-				var moveSectionSidebarLearnsetLiSource = document.createElement("h5");
+				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				let moveSectionSidebarLearnsetLiText = document.createElement("small");
+				let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+				let moveSectionSidebarLearnsetLiSource = document.createElement("h5");
 				if(finaldata["Pokémon Learnset"]["Machine"][q]["Machine"].includes("HM")) {
 					moveSectionSidebarLearnsetLiSource.innerHTML = "<b>"+finaldata["Pokémon Learnset"]["Machine"][q]["Machine"]+"</b>";
 					moveSectionSidebarLearnsetLiSource.setAttribute("name","hm");
@@ -704,7 +704,7 @@ var createMove = function() {
 				}
 				
 
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
@@ -719,17 +719,17 @@ var createMove = function() {
 
 			}
 		}
-		for(var q = 0; q < finaldata["Pokémon Learnset"]["Tutor"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Tutor"][q]["Move"] == finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldata["Pokémon Learnset"]["Tutor"][q]["Game"]) == true) {
-				var tutorData = getTutorData(finaldata["Pokémon Learnset"]["Tutor"][q]["Move"],"Move");
+		for(let q = 0; q < finaldata["Pokémon Learnset"]["Tutor"].length; q++) {
+			if(finaldata["Pokémon Learnset"]["Tutor"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Tutor"][q]["Game"]) == true) {
+				let tutorData = getTutorData(finaldata["Pokémon Learnset"]["Tutor"][q]["Move"],"Move");
 				
-				var moveSectionSidebarLearnsetLi = document.createElement("li");
+				let moveSectionSidebarLearnsetLi = document.createElement("li");
 				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				var moveSectionSidebarLearnsetLiText = document.createElement("small");
+				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				let moveSectionSidebarLearnsetLiText = document.createElement("small");
 
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
@@ -738,10 +738,10 @@ var createMove = function() {
 
 				if (tutorData.length > 0) {
 
-					var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-					var moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
-					var moveSectionSidebarLearnsetLiSourceWrap = document.createElement("b");
-					var moveSectionSidebarLearnsetLiSourceText = document.createElement("small");
+					let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+					let moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
+					let moveSectionSidebarLearnsetLiSourceWrap = document.createElement("b");
+					let moveSectionSidebarLearnsetLiSourceText = document.createElement("small");
 
 					moveSectionSidebarLearnsetLiSourceTitle.innerText = "Move Tutor";
 					moveSectionSidebarLearnsetLiSourceText.innerText = tutorData[0]["Location"];
@@ -756,8 +756,8 @@ var createMove = function() {
 					moveSectionSidebarLearnsetLiSourceWrap.appendChild(moveSectionSidebarLearnsetLiSourceText);
 				}
 				else {
-					var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-					var moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
+					let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+					let moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
 					moveSectionSidebarLearnsetLiSourceTitle.innerText = "Move Tutor";
 					moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
 					moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceTitle);
@@ -769,22 +769,22 @@ var createMove = function() {
 
 			}
 		}
-		for(var q = 0; q < finaldata["Pokémon Learnset"]["Breeding"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Breeding"][q]["Move"] == finaldata["Moves"]["Reference"][i]["Name"+"_"+JSONPath_MoveName] && getApplicable(finaldata["Pokémon Learnset"]["Breeding"][q]["Game"]) == true) {
-				var moveSectionSidebarLearnsetLi = document.createElement("li");
+		for(let q = 0; q < finaldata["Pokémon Learnset"]["Breeding"].length; q++) {
+			if(finaldata["Pokémon Learnset"]["Breeding"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Breeding"][q]["Game"]) == true) {
+				let moveSectionSidebarLearnsetLi = document.createElement("li");
 				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				var moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				var moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				var moveSectionSidebarLearnsetLiText = document.createElement("small");
-				var moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-				var moveSectionSidebarLearnsetLiSourceText = document.createElement("h5");
-				var moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
+				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
+				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
+				let moveSectionSidebarLearnsetLiText = document.createElement("small");
+				let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
+				let moveSectionSidebarLearnsetLiSourceText = document.createElement("h5");
+				let moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
 				moveSectionSidebarLearnsetLiSourceOuter.title = "Parent";
 				moveSectionSidebarLearnsetLiSourceText.innerText = "Parent:";
 				if(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].includes(",")) {
-					for(var r = 0; r < finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",").length; r++) {
-						var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					for(let r = 0; r < finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",").length; r++) {
+						let moveSectionSidebarLearnsetLiSource = document.createElement("img");
+						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r])],[PATH_Pokémon_Box_Default_PNG]);
 
 						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r];
 						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
@@ -796,13 +796,13 @@ var createMove = function() {
 				} else if(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"] == "None") {
 					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
 				} else {
-					var moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					let moveSectionSidebarLearnsetLiSource = document.createElement("img");
+					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"])],[PATH_Pokémon_Box_Default_PNG]);
 					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
 					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 				}
 
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"])],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
 
 
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"];
@@ -821,7 +821,7 @@ var createMove = function() {
 			}
 		}
 
-		var tempStr;
+		let tempStr;
 		if (moveLearnsetPB.length > 1) {
 			tempStr = moveLearnsetPB.join(",");
 		}
