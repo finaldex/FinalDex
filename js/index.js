@@ -1,20 +1,20 @@
-var wsrc = ["Home","Games","FAQ","Bug","Metadata","Sources","Changelog"]
+let wsrc = ["Home","Games","FAQ","Bug","Metadata","Sources","Changelog"]
 
 function build() {
 
-	var GamesFull = ["random","Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD: Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Let's Go, Pikachu!","Let's Go, Eevee!","Sword","Shield"];
-	var GamesSimple = ["random","Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield"];
-	var GamesGeneration = [0,1,1,1,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,7,7,8,8]
-	var GamesArt = ["","Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","Hoenn_RS","Hoenn_RS","","Kanto_FRLG","Kanto_FRLG","Hoenn_E","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","JohtoKanto_HGSS","JohtoKanto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
-	var GamesTitle = ["Random","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+	let GamesFull = ["random","Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD: Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Let's Go, Pikachu!","Let's Go, Eevee!","Sword","Shield"];
+	let GamesSimple = ["random","Red Version","Blue Version","Yellow Version","Gold Version","Silver Version","Crystal Version","Ruby Version","Sapphire Version","Colosseum","FireRed Version","LeafGreen Version","Emerald Version","XD Gale of Darkness","Diamond Version","Pearl Version","Platinum Version","HeartGold Version","SoulSilver Version","Black Version","White Version","Black Version 2","White Version 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield"];
+	let GamesGeneration = [0,1,1,1,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,7,7,8,8]
+	let GamesArt = ["","Kanto_RBY","Kanto_RBY","Kanto_RBY","JohtoKanto_GSC","JohtoKanto_GSC","JohtoKanto_GSC","Hoenn_RS","Hoenn_RS","","Kanto_FRLG","Kanto_FRLG","Hoenn_E","","Sinnoh_DP","Sinnoh_DP","Sinnoh_Pt","JohtoKanto_HGSS","JohtoKanto_HGSS","Unova_BW","Unova_BW","Unova_B2W2","Unova_B2W2","Kalos_XY","Kalos_XY","Hoenn_ORAS","Hoenn_ORAS","Alola_SM","Alola_SM","Alola_USUM","Alola_USUM","Kanto_LGPE","Kanto_LGPE","Galar_SwSh","Galar_SwSh"];
+	let GamesTitle = ["Random","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
 
 
 
 
 
-	for (var i = 0; i < GamesFull.length; i++) {
-			var x = i;
-			var li = document.createElement("li");
+	for (let i = 0; i < GamesFull.length; i++) {
+			let x = i;
+			let li = document.createElement("li");
 			li.name = x;
 			li.addEventListener("keyup",function(event){if(event.which === 13){event.target.querySelector(":scope a").click();}});
 			document.querySelector("#Games span ul[name='"+GamesGeneration[i]+"']").appendChild(li);
@@ -22,7 +22,7 @@ function build() {
 
 
 			if (GamesArt[i] != "") {
-					var art = document.createElement("img");
+					let art = document.createElement("img");
 					art.src = "./media/Images/Misc/Region/" + GamesArt[i] + ".png";
 					art.title = GamesArt[i];
 					art.setAttribute("onerror","this.style.display='none'");
@@ -34,8 +34,8 @@ function build() {
 
 
 
-			var titlewrap = document.createElement("a");
-			var title = document.createElement("img");
+			let titlewrap = document.createElement("a");
+			let title = document.createElement("img");
 			title.src = "./media/Images/Misc/Title/Text/" + GamesSimple[i] + ".png";
 			title.title = GamesSimple[i];
 			title.setAttribute("onerror","this.style.display='none'");
@@ -45,7 +45,7 @@ function build() {
 			titlewrap.appendChild(title)
 
 			if (GamesTitle[i] != "") {
-				var h = document.createElement("h1");
+				let h = document.createElement("h1");
 				h.innerText = GamesTitle[i];
 				titlewrap.appendChild(h);
 			}
@@ -53,21 +53,21 @@ function build() {
 	}
 
 	let arr1 = [];
-  let arr2 = [];
+  	let arr2 = [];
 
-	for (var i = 0; i < 35; i++) {
+	for (let i = 0; i < 35; i++) {
 		let x = i+1;
 		GameID = x;
-    define();
+    	define();
 		arr1.push(tempOverviewImages)
-    arr2.push(MEDIAPath_LocationOverview)
+    	arr2.push(MEDIAPath_LocationOverview)
 	}
 
   arr1.reverse();
   arr2.reverse();
   
-  for (var q = 0; q < 10; q++) {
-    for (var i = 0; i < arr1.length; i++) {
+  for (let q = 0; q < 10; q++) {
+    for (let i = 0; i < arr1.length; i++) {
       if (i != 0){
         if (arr1[i][0] == arr1[i-1][0]) {
           arr1.splice(i,1)
@@ -89,12 +89,12 @@ function build() {
     let div = document.createElement("div");
     document.getElementById("Home").append(div)
     let used = [];
-    for (var q = 0; q < 0; q++) {
+    for (let q = 0; q < 0; q++) {
       let ran1 = Math.floor(Math.random() * arr1.length);
       let ran2 = Math.floor(Math.random() * arr1[ran1].length);
 
 
-      for (var r = 0; r < 20; r++) {
+      for (let r = 0; r < 20; r++) {
         if (!used.includes(ran1+"-"+ran2)) {
           break;
         }
@@ -132,10 +132,10 @@ $(window).on('beforeunload', function() {
 (function() {
 		// get all data in form and return object
 		function getFormData(form) {
-			var elements = form.elements;
-			var honeypot;
+			let elements = form.elements;
+			let honeypot;
 	
-			var fields = Object.keys(elements).filter(function(k) {
+			let fields = Object.keys(elements).filter(function(k) {
 				if (elements[k].name === "hp") {
 					honeypot = elements[k].value;
 					return false;
@@ -152,18 +152,18 @@ $(window).on('beforeunload', function() {
 				return self.indexOf(item) == pos && item;
 			});
 	
-			var formData = {};
+			let formData = {};
 			fields.forEach(function(name){
-				var element = elements[name];
+				let element = elements[name];
 				
 				// singular form elements just have one value
 				formData[name] = element.value;
 	
 				// when our element has multiple items, get their values
 				if (element.length) {
-					var data = [];
-					for (var i = 0; i < element.length; i++) {
-						var item = element.item(i);
+					let data = [];
+					for (let i = 0; i < element.length; i++) {
+						let item = element.item(i);
 						if (item.checked || item.selected) {
 							data.push(item.value);
 						}
@@ -182,10 +182,10 @@ $(window).on('beforeunload', function() {
 	
 		function handleFormSubmit(event) {	// handles form submit without any jquery
 			event.preventDefault();					 // we are submitting via xhr below
-			var form = event.target;
-			var formData = getFormData(form);
-			var data = formData.data;
-			var textarea = form.querySelector(":scope textarea");
+			let form = event.target;
+			let formData = getFormData(form);
+			let data = formData.data;
+			let textarea = form.querySelector(":scope textarea");
 
 
 	
@@ -199,22 +199,22 @@ $(window).on('beforeunload', function() {
 			}
 			else {
 				buttonAction(form,true);
-				var url = form.action;
-				var xhr = new XMLHttpRequest();
+				let url = form.action;
+				let xhr = new XMLHttpRequest();
 				xhr.open('POST', url);
 				// xhr.withCredentials = true;
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				xhr.onreadystatechange = function() {
 						if (xhr.readyState === 4 && xhr.status === 200) {
 								form.reset();
-								var formElements = form.querySelector(".gform > span")
+								let formElements = form.querySelector(".gform > span")
 								if (formElements) {
 								formElements.classList.add("hide");
 								}
 						}
 				};
 				// url encode form data for sending as post data
-				var encoded = Object.keys(data).map(function(k) {
+				let encoded = Object.keys(data).map(function(k) {
 						return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
 				}).join('&');
 				xhr.send(encoded);
@@ -223,8 +223,8 @@ $(window).on('beforeunload', function() {
 		
 		function loaded() {
 			// bind to the submit event of our form
-			var forms = document.querySelectorAll("form.gform");
-			for (var i = 0; i < forms.length; i++) {
+			let forms = document.querySelectorAll("form.gform");
+			for (let i = 0; i < forms.length; i++) {
 				forms[i].addEventListener("submit", handleFormSubmit, false);
 			}
 		};
@@ -232,19 +232,19 @@ $(window).on('beforeunload', function() {
 })();
 
 function buttonAction(form,action) {
-		var action;
-		var buttons = form.querySelectorAll(":scope div:first-child button");
-		for (var i = 0; i < buttons.length; i++) {
+		let action;
+		let buttons = form.querySelectorAll(":scope div:first-child button");
+		for (let i = 0; i < buttons.length; i++) {
 		buttons[i].disabled = action;
 		}
 }
 
 $(document).ready(function() {
 
-		var stickyNavTop = $('#content').offset().top;
+		let stickyNavTop = $('#content').offset().top;
 
-		var stickyNav = function(){
-				var scrollTop = $('#content').scrollTop();
+		let stickyNav = function(){
+				let scrollTop = $('#content').scrollTop();
 								
 
 				if (scrollTop > stickyNavTop) {
