@@ -60,12 +60,13 @@ let createAbility = function() {
 
 		let abilitySectionSidebarSidebarTitleLiTopText = document.createElement("h4");
 		abilitySectionSidebarSidebarTitle.appendChild(abilitySectionSidebarSidebarTitleLiTopText);
-		
+
+		let sidebarAbilityList = [];
 		if(Generation <= 4) {
-			let sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability"];
+			sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability"];
 		}
 		if(Generation >= 5) {
-			let sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability","Hidden Ability"];
+			sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability","Hidden Ability"];
 		}
 
 		abilityOuter.setAttribute("id","ability");
@@ -167,183 +168,183 @@ let createAbility = function() {
 		for(q = 0; q < searchAbilityAttributes.length; q++) {
 			searchAbilityAttributes[q] = searchAbilityAttributes[q].replaceAll("data-search-","");
 		}
-	}
 
+		function abilityOptionsSelector(i) {
+			if (this.value != undefined) {
+				i = this.value;
+			}
 
-
-	function abilityOptionsSelector(i) {
-		if (this.value != undefined) {
-			i = this.value;
-		}
-		abilitySectionSidebarSidebarTitleLiTopText = document.querySelector("div#ability section h4")
-		abilitySectionHeaderTitleID = document.querySelector("div#ability section h4")
+			abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldata["Abilities"]["Reference"][i]["Ability"]+"</u>";
+			abilitySectionHeaderTitleID.innerText = "#"+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["ID"];
 	
-		abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+finaldata["Abilities"]["Reference"][i]["Ability"]+"</u>";
-		abilitySectionHeaderTitleID.innerText = "#"+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["ID"];
-
-		abilitySectionHeaderDebutText.innerText = "Introduced in "+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["Debut"];
-		abilitySectionHeaderTitleName.innerText = finaldata["Abilities"]["Reference"][i]["Ability"];
-		abilitySectionContentDescriptionText.innerText = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["Description"];
-
-		let effect = [];
-
-		for(let q = 0; q < finaldata["Abilities"]["Effect"].length; q++) {
-			if(getApplicable(finaldata["Abilities"]["Effect"][q]["Game"])) {
-				if(finaldata["Abilities"]["Effect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
-					effect.push(finaldata["Abilities"]["Effect"][q]["Effect"])
-				}
-			}
-		}
-
-		abilitySectionContentEffectText.innerText = "";
-
-		for(let q = 0; q < effect.length; q++) {
-			abilitySectionContentEffectText.innerText += effect[q];
-			if (q != effect.length - 1) {
-				abilitySectionContentEffectText.innerHTML += "<br>"
-			}
-		}
-		
-		if (effect.length > 0) {
-			abilitySectionContentEffectTitle.innerText = "Effect";
-		}
-		else {
-			abilitySectionContentEffectTitle.innerText = "";
-		}
-
-		//abilitySectionContentEffectText.innerHTML = referenceLink(abilitySectionContentEffectText.innerHTML);
-
-		let affect = [];
-
-		for(let q = 0; q < finaldata["Abilities"]["Affect"].length; q++) {
-			if(getApplicable(finaldata["Abilities"]["Affect"][q]["Game"])) {
-				if(finaldata["Abilities"]["Affect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
-					if (finaldata["Abilities"]["Affect"][q]["Type"] == "Move") {
-						let move = returnArrValue(finaldata["Moves"]["Description"],DATA_Move_Reference["Name"],DATA_Move_Description["Description"],finaldata["Abilities"]["Affect"][q]["Name"]);
-						if (move != undefined) {
-							affect.push(finaldata["Abilities"]["Affect"][q]);
-						}
-					}
-					else if (finaldata["Abilities"]["Affect"][q]["Type"] == "Item") {
-						let item = getItemIcon(finaldata["Abilities"]["Affect"][q]["Name"]);
-						if (item != undefined) {
-							affect.push(finaldata["Abilities"]["Affect"][q]);
-						}
+			abilitySectionHeaderDebutText.innerText = "Introduced in "+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["Debut"];
+			abilitySectionHeaderTitleName.innerText = finaldata["Abilities"]["Reference"][i]["Ability"];
+			abilitySectionContentDescriptionText.innerText = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",finaldata["Abilities"]["Reference"][i]["Ability"])[0]["Description"];
+	
+			let effect = [];
+	
+			for(let q = 0; q < finaldata["Abilities"]["Effect"].length; q++) {
+				if(getApplicable(finaldata["Abilities"]["Effect"][q]["Game"])) {
+					if(finaldata["Abilities"]["Effect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
+						effect.push(finaldata["Abilities"]["Effect"][q]["Effect"])
 					}
 				}
 			}
-		}
-
-		abilitySectionContentAffectText.innerText = "";
-		for(let q = 0; q < affect.length; q++) {
-			let b = document.createElement("b");
-			b.innerText = affect[q]["Name"];
-			abilitySectionContentAffectText.appendChild(b)
-			
-			b.setAttribute("name",affect[q]["Type"].toLowerCase());
-			b.setAttribute("type", "invert");
-			b.setAttribute("onclick", "dataRedirect()");
-			b.setAttribute("function","dataRedirect");
-			b.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],affect[q]["Name"])+")";
-			b.style.textShadow  = "1px 1px #000";
-			
-			if (q == affect.length - 2) {
-				abilitySectionContentAffectText.innerHTML += " and ";
+	
+			abilitySectionContentEffectText.innerText = "";
+	
+			for(let q = 0; q < effect.length; q++) {
+				abilitySectionContentEffectText.innerText += effect[q];
+				if (q != effect.length - 1) {
+					abilitySectionContentEffectText.innerHTML += "<br>"
+				}
 			}
-			else if (q == affect.length - 1) {
-				abilitySectionContentAffectText.innerHTML += ".";
+			
+			if (effect.length > 0) {
+				abilitySectionContentEffectTitle.innerText = "Effect";
 			}
 			else {
-				abilitySectionContentAffectText.innerHTML += ", ";
+				abilitySectionContentEffectTitle.innerText = "";
 			}
-		}
-
-		
-		if (affect.length > 0) {
-			abilitySectionContentAffectTitle.innerText = "Affected "+affect[0]["Type"]+"s";
-		}
-		else {
-			abilitySectionContentAffectTitle.innerText = "";
-		}
-		
-
-
-
-		let lis = document.querySelectorAll("#contain div#ability > section[name='sidebar'] ul li");
-		for(let q = 0; q < lis.length; q++) {
-			lis[q].remove();
-		}
-
-
-		let sidebarAbilityListFull = sidebarAbilityList.map((v) => v+"_"+JSONPath_Ability);sidebarAbilityListFull = sidebarAbilityListFull.filter((item) => item !== "Pokémon"+"_"+JSONPath_Ability);
-		for(let q = 0; q < sidebarAbilityListFull.length; q++) {
-			sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability","");
-		}
-		let AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"], finaldata["Abilities"]["Reference"][i]["Ability"], sidebarAbilityListFull);
 	
-		for(let q = 0; q < AbilityResults.length; q++) {
-			let abilitySectionSidebarSidebarLi = document.createElement("li");
-			abilitySectionSidebarSidebarUl.appendChild(abilitySectionSidebarSidebarLi);
-			for(let u = 0; u < sidebarAbilityList.length; u++) {
-				let int = AbilityResults[q]["Integer"];
-				let name = getPokémonName(int);
-				if(u == 0) {
-					let abilitySectionSidebarSidebarLiImgOuter = document.createElement("div");
-					let abilitySectionSidebarSidebarLiImg = document.createElement("img");
-					let abilitySectionSidebarSidebarLiText = document.createElement("small");
-					abilitySectionSidebarSidebarLiImg.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
-					abilitySectionSidebarSidebarLiImg.setAttribute("title", name);
-					abilitySectionSidebarSidebarLiText.innerText = name;
-					abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiImgOuter);
-					abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiImg);
-					abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiText);
-
-					abilitySectionSidebarSidebarLiImgOuter.setAttribute("value",int);
-					abilitySectionSidebarSidebarLiImgOuter.addEventListener("click", modalData);
-					abilitySectionSidebarSidebarLiImgOuter.setAttribute("function","modalData");
-
-				} else if(u != 0) {
-				
-
-					if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
-						let abilitySectionSidebarSidebarLiTextOuter = document.createElement("span");
-						let abilitySectionSidebarSidebarLiText = document.createElement("h6");
-						if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
-							abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][sidebarAbilityListFull[u - 1]];
+			//abilitySectionContentEffectText.innerHTML = referenceLink(abilitySectionContentEffectText.innerHTML);
+	
+			let affect = [];
+	
+			for(let q = 0; q < finaldata["Abilities"]["Affect"].length; q++) {
+				if(getApplicable(finaldata["Abilities"]["Affect"][q]["Game"])) {
+					if(finaldata["Abilities"]["Affect"][q]["Ability"] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
+						if (finaldata["Abilities"]["Affect"][q]["Type"] == "Move") {
+							let move = returnArrValue(finaldata["Moves"]["Description"],DATA_Move_Reference["Name"],DATA_Move_Description["Description"],finaldata["Abilities"]["Affect"][q]["Name"]);
+							if (move != undefined) {
+								affect.push(finaldata["Abilities"]["Affect"][q]);
+							}
 						}
-						abilitySectionSidebarSidebarLiTextOuter.setAttribute("name","ability");
-						abilitySectionSidebarSidebarLiTextOuter.setAttribute("title", sidebarAbilityList[u]);
-						abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiTextOuter);
-						abilitySectionSidebarSidebarLiTextOuter.appendChild(abilitySectionSidebarSidebarLiText);
-
-						abilitySectionSidebarSidebarLiTextOuter.classList.add("active");
-					} else {
-						let abilitySectionSidebarSidebarLiTextOuter = document.createElement("b");
-						abilitySectionSidebarSidebarLiTextOuter.setAttribute("type","invert");
-						let abilitySectionSidebarSidebarLiText = document.createElement("p");
-						if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
-							abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][sidebarAbilityListFull[u - 1]];
+						else if (finaldata["Abilities"]["Affect"][q]["Type"] == "Item") {
+							let item = getItemIcon(finaldata["Abilities"]["Affect"][q]["Name"]);
+							if (item != undefined) {
+								affect.push(finaldata["Abilities"]["Affect"][q]);
+							}
 						}
-						abilitySectionSidebarSidebarLiTextOuter.setAttribute("name","ability");
-						abilitySectionSidebarSidebarLiTextOuter.setAttribute("title", sidebarAbilityList[u]);
-						abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiTextOuter);
-						abilitySectionSidebarSidebarLiTextOuter.appendChild(abilitySectionSidebarSidebarLiText);
-						abilitySectionSidebarSidebarLiTextOuter.addEventListener("click", dataRedirect);
-						abilitySectionSidebarSidebarLiTextOuter.setAttribute("function","dataRedirect");
 					}
 				}
 			}
-		}
 	
-		let tempStr;
-		if (abilityLearnsetPB.length > 1) {
-			tempStr = abilityLearnsetPB.join(",");
+			abilitySectionContentAffectText.innerText = "";
+			for(let q = 0; q < affect.length; q++) {
+				let b = document.createElement("b");
+				b.innerText = affect[q]["Name"];
+				abilitySectionContentAffectText.appendChild(b)
+				
+				b.setAttribute("name",affect[q]["Type"].toLowerCase());
+				b.setAttribute("type", "invert");
+				b.setAttribute("onclick", "dataRedirect()");
+				b.setAttribute("function","dataRedirect");
+				b.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],affect[q]["Name"])+")";
+				b.style.textShadow  = "1px 1px #000";
+				
+				if (q == affect.length - 2) {
+					abilitySectionContentAffectText.innerHTML += " and ";
+				}
+				else if (q == affect.length - 1) {
+					abilitySectionContentAffectText.innerHTML += ".";
+				}
+				else {
+					abilitySectionContentAffectText.innerHTML += ", ";
+				}
+			}
+	
+			
+			if (affect.length > 0) {
+				abilitySectionContentAffectTitle.innerText = "Affected "+affect[0]["Type"]+"s";
+			}
+			else {
+				abilitySectionContentAffectTitle.innerText = "";
+			}
+			
+	
+	
+	
+			let lis = document.querySelectorAll("#contain div#ability > section[name='sidebar'] ul li");
+			for(let q = 0; q < lis.length; q++) {
+				lis[q].remove();
+			}
+	
+	
+			let sidebarAbilityListFull = sidebarAbilityList.map((v) => v+"_"+JSONPath_Ability);sidebarAbilityListFull = sidebarAbilityListFull.filter((item) => item !== "Pokémon"+"_"+JSONPath_Ability);
+			for(let q = 0; q < sidebarAbilityListFull.length; q++) {
+				sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability","");
+			}
+			let AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"], finaldata["Abilities"]["Reference"][i]["Ability"], sidebarAbilityListFull);
+		
+			for(let q = 0; q < AbilityResults.length; q++) {
+				let abilitySectionSidebarSidebarLi = document.createElement("li");
+				abilitySectionSidebarSidebarUl.appendChild(abilitySectionSidebarSidebarLi);
+				for(let u = 0; u < sidebarAbilityList.length; u++) {
+					let int = AbilityResults[q]["Integer"];
+					let name = getPokémonName(int);
+					if(u == 0) {
+						let abilitySectionSidebarSidebarLiImgOuter = document.createElement("div");
+						let abilitySectionSidebarSidebarLiImg = document.createElement("img");
+						let abilitySectionSidebarSidebarLiText = document.createElement("small");
+						abilitySectionSidebarSidebarLiImg.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
+						abilitySectionSidebarSidebarLiImg.setAttribute("title", name);
+						abilitySectionSidebarSidebarLiText.innerText = name;
+						abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiImgOuter);
+						abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiImg);
+						abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiText);
+	
+						abilitySectionSidebarSidebarLiImgOuter.setAttribute("value",int);
+						abilitySectionSidebarSidebarLiImgOuter.addEventListener("click", modalData);
+						abilitySectionSidebarSidebarLiImgOuter.setAttribute("function","modalData");
+	
+					} else if(u != 0) {
+					
+	
+						if(AbilityResults[q][sidebarAbilityListFull[u - 1]] == finaldata["Abilities"]["Reference"][i]["Ability"]) {
+							let abilitySectionSidebarSidebarLiTextOuter = document.createElement("span");
+							let abilitySectionSidebarSidebarLiText = document.createElement("h6");
+							if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
+								abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][sidebarAbilityListFull[u - 1]];
+							}
+							abilitySectionSidebarSidebarLiTextOuter.setAttribute("name","ability");
+							abilitySectionSidebarSidebarLiTextOuter.setAttribute("title", sidebarAbilityList[u]);
+							abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiTextOuter);
+							abilitySectionSidebarSidebarLiTextOuter.appendChild(abilitySectionSidebarSidebarLiText);
+	
+							abilitySectionSidebarSidebarLiTextOuter.classList.add("active");
+						} else {
+							let abilitySectionSidebarSidebarLiTextOuter = document.createElement("b");
+							abilitySectionSidebarSidebarLiTextOuter.setAttribute("type","invert");
+							let abilitySectionSidebarSidebarLiText = document.createElement("p");
+							if(AbilityResults[q][sidebarAbilityListFull[u - 1]] != undefined) {
+								abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][sidebarAbilityListFull[u - 1]];
+							}
+							abilitySectionSidebarSidebarLiTextOuter.setAttribute("name","ability");
+							abilitySectionSidebarSidebarLiTextOuter.setAttribute("title", sidebarAbilityList[u]);
+							abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiTextOuter);
+							abilitySectionSidebarSidebarLiTextOuter.appendChild(abilitySectionSidebarSidebarLiText);
+							abilitySectionSidebarSidebarLiTextOuter.addEventListener("click", dataRedirect);
+							abilitySectionSidebarSidebarLiTextOuter.setAttribute("function","dataRedirect");
+						}
+					}
+				}
+			}
+		
+			let tempStr;
+			if (abilityLearnsetPB.length > 1) {
+				tempStr = abilityLearnsetPB.join(",");
+			}
+			else {
+				tempStr = abilityLearnsetPB[0];
+			}
+			abilityLearnsetPartyBox(tempStr);
 		}
-		else {
-			tempStr = abilityLearnsetPB[0];
-		}
-		abilityLearnsetPartyBox(tempStr);
 	}
+
+
+
+	
 };
 
 
