@@ -3,17 +3,14 @@ function sleep(time) {
 }
 
 function getPokémonData(arr, name, game) {
-	var arr;
-	var name;
-	var game;
-	var result = [];
-	for(var i = 0; i < game.length; i++) {
-		for(var q = 0; q < arr.length; q++) {
+	let result = [];
+	for(let i = 0; i < game.length; i++) {
+		for(let q = 0; q < arr.length; q++) {
 			if(arr[q][game[i]] == name) {
-				if(finaldata["Pokémon"]["Reference"][q][JSONPath_Reference] == "true") {
-					var obj = new Object();
+				if(finaldata["Pokémon"]["Reference"][q][DATA_Pokémon_Reference["Reference"]] == "true") {
+					let obj = new Object();
 					obj["Integer"] = q;
-					for(var u = 0; u < game.length; u++) {
+					for(let u = 0; u < game.length; u++) {
 						if(arr[q][game[u]] != undefined) {
 							obj[game[u]] = arr[q][game[u]];
 						}
@@ -23,14 +20,12 @@ function getPokémonData(arr, name, game) {
 			}
 		}
 	}
-	var newResult = result.filter(value => Object.keys(value).length !== 0);
+	let newResult = result.filter(value => Object.keys(value).length !== 0);
 	return newResult;
 }
 
 function OpenExitPopUp(x, active) {
-	var x;
-	var active;
-	var popup = document.querySelector("#data > div[value='"+x+"'] div section[name='main'] > div[name='metadata'] > div[name='popup']");
+	let popup = document.querySelector("#data > div[value='"+x+"'] div section[name='main'] > div[name='metadata'] > div[name='popup']");
 	if(active == false) {
 		popup.classList.add("open");
 		popup.classList.remove("close");
@@ -42,66 +37,8 @@ function OpenExitPopUp(x, active) {
 
 
 
-var variantIteration;
-variantIteration = 0;
-
-function variantSelector() {
-
-
-    var inputs = document.querySelectorAll('#pokémon > aside[name="settings"] span[name="variant"] input:checked');
-
-	if(inputs.length > 0) {
-        var tempArr = [];
-        var tempStr;
-        for (var i = 0; i < inputs.length; i++) {
-            tempArr.push(inputs[i].nextElementSibling.innerText)
-        }
-        if (tempArr.length > 1) {
-            tempStr = tempArr.join(",");
-        }
-        else {
-            tempStr = tempArr[0];
-        }
-
-        searchFilter(document.querySelector("#pokémon nav ul li[name='search'] input"),document.querySelector("#pokémon > div ul"),"Remove");
-
-        createContain(tempStr);
-
-        memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
-
-        memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
-
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
-        ImageType("Populate");
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
-        ImageType("Execute");
-
-        resizeDiv();
-		dexSwitch();
-
-		document.querySelector("#pokémon nav li[name='search'] input").value = "";
-
-
-        if (variantIteration != 0) {
-            consoleText("Variants changed to "+tempStr.replace(/,([^,]*)$/, ' and $1').replaceAll(",",", ")+".");
-        }
-
-        variantIteration = variantIteration + 1;
-	}
-    
-
-}
-
-
 function preventCheckboxZero(base) {
-    var base;
-    var inputs = base.querySelectorAll(":scope input:checked");
+    let inputs = base.querySelectorAll(":scope input:checked");
 
     if (!inputs.length > 0) {
         event.target.checked = true;
@@ -125,13 +62,13 @@ function preventCheckboxZero(base) {
 
 function dataRedirect() {
 
-    var what;
+    let what;
 
-    var typevariant;
-    var lock;
-    var notval = ["⮜","⮝","⮟","⮞"];
+    let typevariant;
+    let lock;
+    let notval = ["⮜","⮝","⮟","⮞"];
 
-    var tar = this;
+    let tar = this;
 
     if (tar.tagName == undefined) {
         tar = event.target;
@@ -152,7 +89,7 @@ function dataRedirect() {
 
 
 
-    var where = (tar.getAttribute("name")).toLowerCase();
+    let where = (tar.getAttribute("name")).toLowerCase();
 
     
    
@@ -166,29 +103,29 @@ function dataRedirect() {
         typevariant = where+"s";
     }
     typevariant = typevariant.charAt(0).toUpperCase()+typevariant.slice(1);
-    var input = document.querySelector('#navigation input[value="'+typevariant+'"]:checked');
-    var modal = document.querySelector("#data > div.open");
+    let input = document.querySelector('#navigation input[value="'+typevariant+'"]:checked');
+    let modal = document.querySelector("#data > div.open");
 
 
 
 
     
     if (what.includes(",")) {
-        var y;
+        let y;
         y = what.split(",");
 
-        for (var q = 0; q < y.length; q++) {
-            var r = q+1;
+        for (let q = 0; q < y.length; q++) {
+            let r = q+1;
             y[q] = r+". "+y[q];
         }
         y = y.join("\n")
 
-        var selection = prompt("Enter Number:\n"+y,"");
+        let selection = prompt("Enter Number:\n"+y,"");
 
         y = y.split("\n");
         
-        for (var q = 0; q < y.length; q++) {
-            var num = q+1;
+        for (let q = 0; q < y.length; q++) {
+            let num = q+1;
             y[q] = y[q].split(num+". ")[1];
         }
 
@@ -233,18 +170,18 @@ function dataRedirect() {
 
 
     if (lock) {
-        var z = what.toLowerCase();
-        var modalOpen = document.querySelector("#data > div.open");
-        var navInput = document.querySelector("#navigation > input[value='"+typevariant+"']");
-        var searchExit = document.querySelector('#contain > div#'+where+' section[name="list"] span[name="exit"]');
-        var tar = document.querySelector('#contain > div#'+where+' ol label[data-title="'+z+'"]');
+        let z = what.toLowerCase();
+        let modalOpen = document.querySelector("#data > div.open");
+        let navInput = document.querySelector("#navigation > input[value='"+typevariant+"']");
+        let searchExit = document.querySelector('#contain > div#'+where+' section[name="list"] span[name="exit"]');
+        let tar = document.querySelector('#contain > div#'+where+' ol label[data-title="'+z+'"]');
 
         searchExit.click();
 
         if (tar != null) {
             if (where == "item") {
-                var pocket = tar.getAttribute("data-pocket");
-                var pocketInput = document.querySelector('#contain > div#item > section[name="list"] > div:first-child > *:last-child input[alt="'+pocket+'"]');
+                let pocket = tar.getAttribute("data-pocket");
+                let pocketInput = document.querySelector('#contain > div#item > section[name="list"] > div:first-child > *:last-child input[alt="'+pocket+'"]');
                 if (pocketInput != undefined) {
                     if (pocketInput.checked == false) {
                         pocketInput.click();
@@ -273,6 +210,32 @@ function dataRedirect() {
 
 }
 
+function getArrayKey(arr) {
+
+    let res = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        let keys = Object.keys(arr[i])
+     
+        for(let k = 0; k < keys.length; k++) {
+            if (keys[k].includes("\n")) {
+                res.push(keys[k])
+            }
+        }
+    }
+
+    res = [...new Set(res)];
+
+    let result = [];
+    for (let i = 0; i < res.length; i++) {
+        if (getApplicable(res[i].split("\n")[1])) {
+            result[res[i].split("\n")[0]] = res[i]
+        }
+    }
+    return result;
+
+}
+
 function getPokémonMediaPath(names,paths,gender) {
 
 
@@ -296,28 +259,77 @@ function getPokémonMediaPath(names,paths,gender) {
  
     let dirs = Object.keys(finaldata['Directory'])
 
+
     for (n = 0; n < names.length; n++) {
+        let int = parseInt(names[n]);
+        if (isNaN(int)) {
+            int = getPokémonInt(names[n])
+        }
+    
+        let mediaName = []
+    
+        let val1 = finaldata["Pokémon"]["Path"][int]["Number"];
+        let val2 = finaldata["Pokémon"]["Path"][int]["Text"];
+        
+        if (val1 != undefined) {
+            mediaName.push(val1)
+        }
+        if (val2 != undefined) {
+            mediaName.push(val2)
+        }
+        mediaName = mediaName.join("-")
+
+
         for (i = 0; i < paths.length; i++) {
-            let name = names[n];
-            if (typeof names[n] == 'number') {
-                let column = 'Battle';
-                let json = JSONPath_BattlePath;
-                if (paths[i].includes('/Box/')) {
-                    column = 'Box';
-                    json = JSONPath_BoxPath;
-                }
-
-                name = finaldata["Pokémon"]["Path"][names[n]][column+" File_"+json];
-            }
-
             for (q = 0; q < dirs.length; q++) {
                 if (dirs[q].includes(paths[i])) {
                     let vals = finaldata['Directory'][dirs[q]]
                     for (r = 0; r < vals.length; r++) {
-                        let val  = vals[r].split(".")[0]
-                        for (g = 0; g < gender.length; g++) {
-                            if (name+gender[g] == val) {
-                                return paths[i]+"/"+vals[r]
+                        let val = dirs[q].split("/")[dirs[q].split("/").length-1];
+                        if (getApplicable(val)) {
+                            let file  = vals[r].split(".")[0]
+                            for (g = 0; g < gender.length; g++) {
+                                if (mediaName+gender[g] == file) {
+                                    return dirs[q]+"/"+vals[r]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
+    for (n = 0; n < names.length; n++) {
+        let int = parseInt(names[n]);
+        if (isNaN(int)) {
+            int = getPokémonInt(names[n])
+        }
+
+        let mediaName = []
+    
+        let val1 = finaldata["Pokémon"]["Path"][int]["Number"];
+        let val2 = finaldata["Pokémon"]["Path"][int]["Text"];
+        
+        if (val1 != undefined) {
+            mediaName.push(val1)
+        }
+        if (val2 != undefined) {
+            mediaName.push(val2)
+        }
+        mediaName = mediaName.join("-")
+        
+        for (i = 0; i < paths.length; i++) {
+            for (q = 0; q < dirs.length; q++) {
+                if (dirs[q].includes(paths[i])) {
+                    let vals = finaldata['Directory'][dirs[q]]
+                    for (r = 0; r < vals.length; r++) {
+                        let val = dirs[q].split("/")[dirs[q].split("/").length-1];
+                        if (getApplicable(val)) {
+                            let file  = vals[r].split(".")[0]
+                            if (mediaName == file) {
+                                return dirs[q]+"/"+vals[r]
                             }
                         }
                     }
@@ -325,35 +337,8 @@ function getPokémonMediaPath(names,paths,gender) {
             }
         }
     }
-
-    for (n = 0; n < names.length; n++) {
-        for (i = 0; i < paths.length; i++) {
-            let name = names[n];
-            if (typeof names[n] == 'number') {
-                let column = 'Battle';
-                let json = JSONPath_BattlePath;
-                if (paths[i].includes('/Box/')) {
-                    column = 'Box';
-                    json = JSONPath_BoxPath;
-                }
-
-                name = finaldata["Pokémon"]["Path"][names[n]][column+" File_"+json];
-            }
-
-            for (q = 0; q < dirs.length; q++) {
-                if (dirs[q].includes(paths[i])) {
-                    let vals = finaldata['Directory'][dirs[q]]
-                    for (r = 0; r < vals.length; r++) {
-                        let val  = vals[r].split(".")[0]
-                        if (name == val) {
-                            return paths[i]+"/"+vals[r]
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return
+    
+    return ""
 
 }
 
@@ -371,115 +356,107 @@ function getIntData(int,arr,column) {
 }
 
 function returnData(int, type, additional) {
-	var int;
-	var arr;
-	var type;
-	var additional;
-	var column;
-	var check;
-	var result = [];
+	let arr;
+	let column;
+	let check;
+	let result = [];
 	if(type.includes("Type")) {
 		arr = finaldata["Pokémon"]["Type"];
-		column = ["Primary","Secondary"];
-		column = column.map(i => i+"_"+JSONPath_Type);
+		column = [DATA_Pokémon_Type["Primary"],DATA_Pokémon_Type["Secondary"]];
 	} else if(type.includes("Debut")) {
 		arr = finaldata["Pokémon"]["Reference"];
 		column = ["Debut"];
 	} else if(type.includes("Category")) {
 		arr = finaldata["Pokémon"]["Category"];
-		column = JSONPath_Category;
+		column = DATA_Pokémon_Category["Category"];
 	} else if(type.includes("Pokédex Entry")) {
 		arr = finaldata["Pokémon"]["Pokédex Entry"];
-		column = JSONPath_PokédexEntry;
+		column = DATA_Pokémon_PokédexEntry["Entry"];
 	} else if(type.includes("Ability")) {
 		arr = finaldata["Pokémon"]["Ability"];
 		if(Generation >= 5) {
-			column = ["Primary","Secondary","Hidden"];
+			column = [DATA_Pokémon_Ability["Primary"],DATA_Pokémon_Ability["Secondary"],DATA_Pokémon_Ability["Hidden"]];
 		} else {
-			column = ["Primary","Secondary"];
+			column = [DATA_Pokémon_Ability["Primary"],DATA_Pokémon_Ability["Secondary"]];
 		}
-		column = column.map(i => i+"_"+JSONPath_Ability);
 	} else if(type.includes("Catch Rate")) {
 		arr = finaldata["Pokémon"]["Catch Rate"];
-		column = JSONPath_CatchRate;
+		column = DATA_Pokémon_CatchRate["Catch"];
 	} else if(type.includes("Hatch Rate")) {
 		arr = finaldata["Pokémon"]["Hatch Rate"];
-		column = ["Egg Cycle_"+JSONPath_HatchRateEggCycle,"Steps_"+JSONPath_HatchRateSteps];
+		column = [DATA_Pokémon_HatchRate["Cycle"],DATA_Pokémon_HatchRate["Steps"]];
 	} else if(type.includes("Gender Ratio")) {
 		arr = finaldata["Pokémon"]["Gender Ratio"];
 		column = ["Male","Female"];
-		column = column.map(i => i+"_"+JSONPath_GenderRatio);
 	} else if(type.includes("Egg Group")) {
 		arr = finaldata["Pokémon"]["Egg Group"];
-		column = ["Primary","Secondary"];
-		column = column.map(i => i+"_"+JSONPath_EggGroup);
+		column = [DATA_Pokémon_EggGroup["Primary"],DATA_Pokémon_EggGroup["Secondary"]];
 	} else if(type.includes("Experience Yield")) {
 		arr = finaldata["Pokémon"]["Experience Yield"];
-		column = JSONPath_ExperienceYield;
+		column = DATA_Pokémon_ExperienceYield["Yield"];
 	} else if(type.includes("Leveling Rate")) {
 		arr = finaldata["Pokémon"]["Leveling Rate"];
-		column = JSONPath_LevelingRate;
+		column = "Leveling";
 	} else if(type.includes("Held Item")) {
 		arr = finaldata["Pokémon"]["Held Item"];
-		column = JSONPath_HeldItemPercentage;
-		column = column.map(i => i+"_"+JSONPath_HeldItem);
+		column = [DATA_Pokémon_HeldItem["100%"],DATA_Pokémon_HeldItem["2%"],DATA_Pokémon_HeldItem["23%"],DATA_Pokémon_HeldItem["5%"],DATA_Pokémon_HeldItem["50%"],DATA_Pokémon_HeldItem["1%"]];
 	} else if(type.includes("Base Friendship")) {
 		arr = finaldata["Pokémon"]["Base Friendship"];
-		column = JSONPath_Friendship;
+		column = DATA_Pokémon_Friendship["Friendship"];
 	} else if(type.includes("Base Stats HP")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "HP"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["HP"];
 	} else if(type.includes("Base Stats Attack")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "Attack"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["Attack"];
 	} else if(type.includes("Base Stats Defense")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "Defense"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["Defense"];
 	} else if(type.includes("Base Stats Special")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "Special"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["Special"];
 	} else if(type.includes("Base Stats Sp. Atk")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "Sp. Atk"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["Sp. Atk"];
 	} else if(type.includes("Base Stats Sp. Def")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "Sp. Def"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["Sp. Def"];
 	} else if(type.includes("Base Stats Speed")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "Speed"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["Speed"];
 	} else if(type.includes("Base Stats Total")) {
 		arr = finaldata["Pokémon"]["Base Stats"];
-		column = "Total"+"_"+JSONPath_BaseStats;
+		column = DATA_Pokémon_BaseStats["Total"];
 	} else if(type.includes("EV Yield HP")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "HP"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["HP"]
 	} else if(type.includes("EV Yield Attack")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "Attack"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["Attack"]
 	} else if(type.includes("EV Yield Defense")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "Defense"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["Defense"]
 	} else if(type.includes("EV Yield Special")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "Special"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["Special"]
 	} else if(type.includes("EV Yield Sp. Atk")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "Sp. Atk"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["Sp. Atk"]
 	} else if(type.includes("EV Yield Sp. Def")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "Sp. Def"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["Sp. Def"]
 	} else if(type.includes("EV Yield Speed")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "Speed"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["Speed"]
 	} else if(type.includes("EV Yield Total")) {
 		arr = finaldata["Pokémon"]["Effort Value Yield"];
-		column = "Total"+"_"+JSONPath_EVYield;
+		column = DATA_Pokémon_EVYield["Total"]
 	}
 
-	for(var i = 0; i < arr.length; i++) {
+	for(let i = 0; i < arr.length; i++) {
 		if(i == int) {
 			if(Array.isArray(column)) {
-				for(var q = 0; q < column.length; q++) {
+				for(let q = 0; q < column.length; q++) {
 					result.push(arr[i][column[q]]);
 				}
 			} else {
@@ -487,7 +464,7 @@ function returnData(int, type, additional) {
 			}
 		}
 	}
-	for(var i = 0; i < result.length; i++) {
+	for(let i = 0; i < result.length; i++) {
 		if(result[i] == undefined) {
 			check = true;
 		} else {
@@ -497,10 +474,10 @@ function returnData(int, type, additional) {
 	}
 	if(check == true) {
 		result = [];
-		for(var i = 0; i < arr.length; i++) {
+		for(let i = 0; i < arr.length; i++) {
 			if(i == int) {
 				if(Array.isArray(column)) {
-					for(var q = 0; q < column.length; q++) {
+					for(let q = 0; q < column.length; q++) {
 						result.push(arr[arr.map(function(e) {
 							return e.ID;
 						}).indexOf(arr[i]["ID"])][column[q]]);
@@ -548,14 +525,14 @@ function returnData(int, type, additional) {
 
 function partyBoxSwitch() {
         
-    var a = this.parentElement.parentElement.querySelector(':scope > section[name="'+this.value+'"]');
-    var b = this.parentElement.parentElement.querySelector(':scope > section:not([name="'+this.value+'"])');
+    let a = this.parentElement.parentElement.querySelector(':scope > section[name="'+this.value+'"]');
+    let b = this.parentElement.parentElement.querySelector(':scope > section:not([name="'+this.value+'"])');
 
-    var z = this.parentElement.querySelectorAll(":scope > input");
-    var x = this.checked.toString();
+    let z = this.parentElement.querySelectorAll(":scope > input");
+    let x = this.checked.toString();
 
 
-    for (var i = 0; i < z.length; i++) {
+    for (let i = 0; i < z.length; i++) {
         z[i].checked = false; 
     }
 
@@ -623,7 +600,7 @@ function partyBoxSwitch() {
 }
 
 function partyBoxOpen(e) {
-    var target = e.target;
+    let target = e.target;
 
     if (target.innerText == "Party") {
         if (document.querySelector('#pokémon aside[name="team"] section[name="party"].open') != undefined) {
@@ -694,12 +671,9 @@ function openSettings() {
 
 function inputMaxValue(base,limit,totallimit) {
 
-    var totallimit;
-    var limit;
-    var combinedValues = 0;
-    var valueVSlimit;
-    var base;
-    var values = [];
+    let combinedValues = 0;
+    let valueVSlimit;
+    let values = [];
 
     for (i = 0; i < base.length; i++) {
         if(base[i].value != "") {
@@ -718,7 +692,7 @@ function inputMaxValue(base,limit,totallimit) {
 
     valueVSlimit = totallimit - combinedValues;
 
-    var tempArr = [];
+    let tempArr = [];
 
     for (i = 0; i < values.length; i++) {
         if ((valueVSlimit+values[i]) >= limit) {
@@ -737,12 +711,12 @@ function inputMaxValue(base,limit,totallimit) {
 
 function evInputMax() {
 
-    var totallimit = 510;
-    var limit = 255;
-    var combinedValues = 0;
-    var valueVSlimit;
-    var base = this.parentElement.querySelectorAll(":scope input");
-    var values = [];
+    let totallimit = 510;
+    let limit = 255;
+    let combinedValues = 0;
+    let valueVSlimit;
+    let base = this.parentElement.querySelectorAll(":scope input");
+    let values = [];
 
     for (i = 0; i < base.length; i++) {
         if(base[i].value != "") {
@@ -761,7 +735,7 @@ function evInputMax() {
 
     valueVSlimit = totallimit - combinedValues;
 
-    var tempArr = [];
+    let tempArr = [];
 
     for (i = 0; i < values.length; i++) {
         if ((valueVSlimit+values[i]) >= limit) {
@@ -781,9 +755,9 @@ function evInputMax() {
 function inputMinMax() {
 
 
-    var val = parseInt(this.value);
-    var min = parseInt(this.min);
-    var max = parseInt(this.max);
+    let val = parseInt(this.value);
+    let min = parseInt(this.min);
+    let max = parseInt(this.max);
 
     if(val <= min) {
         this.value = min;
@@ -802,9 +776,9 @@ function inputMinMax() {
 function iMinMax() {
 
 
-    var val = parseInt(this.value);
-    var min = parseInt(this.min);
-    var max = parseInt(this.max);
+    let val = parseInt(this.value);
+    let min = parseInt(this.min);
+    let max = parseInt(this.max);
 
     if(val <= min) {
         this.value = min;
@@ -817,13 +791,11 @@ function iMinMax() {
 
 
 function onlyOneInput(inputs,input) {
-    var inputs;
-    var input;
 
-    var checks = [];
+    let checks = [];
 
 
-    for (var i = 0; i < inputs.length; i++) {
+    for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].checked) {
             checks.push(inputs[i])
         }
@@ -832,7 +804,7 @@ function onlyOneInput(inputs,input) {
         }
     }
     if (checks.length > 1) {
-        for (var i = 0; i < checks.length; i++) {
+        for (let i = 0; i < checks.length; i++) {
             if (checks[i] != input) {
                 if (checks[i].value != "on") {
                     checks[i].value = "";
@@ -849,21 +821,21 @@ function onlyOneInput(inputs,input) {
 function partyDataSwitchAll() {
 
 
-    var base = document.querySelectorAll('#pokémon aside[name="team"] > section[name="party"] > div');
+    let base = document.querySelectorAll('#pokémon aside[name="team"] > section[name="party"] > div');
 
 
     for (u = 0; u < base.length; u++) {
 
-        var base2 = base[u].querySelectorAll(':scope > aside > span[name]');
-        var base3 = base[u].querySelector(':scope > aside > span:last-child figure');
+        let base2 = base[u].querySelectorAll(':scope > aside > span[name]');
+        let base3 = base[u].querySelector(':scope > aside > span:last-child figure');
 
-        var val = base3.getAttribute("value");
+        let val = base3.getAttribute("value");
 
   
 
-        var tempArr = ["moves","stats","additional",""];
+        let tempArr = ["moves","stats","additional",""];
         for (i = 0; i < tempArr.length; i++) {
-            var base4 = base[u].querySelector(':scope > aside > span[name="'+tempArr[i]+'"]');
+            let base4 = base[u].querySelector(':scope > aside > span[name="'+tempArr[i]+'"]');
   
             if (val == "") {
                 for (q = 0; q < base2.length; q++) {
@@ -912,12 +884,12 @@ function partyDataSwitchAll() {
 
 function partyDataSwitch() {
 
-    var dataAll = this.parentElement.parentElement.querySelectorAll(':scope > span[name]');
+    let dataAll = this.parentElement.parentElement.querySelectorAll(':scope > span[name]');
     for (q = 0; q < dataAll.length; q++) {
         dataAll[q].style.display = "none";
     }
 
-    var data = this.parentElement.parentElement.querySelector(':scope > span[name="'+this.value+'"]');
+    let data = this.parentElement.parentElement.querySelector(':scope > span[name="'+this.value+'"]');
     data.style.display = "flex";
 
     if (this.value = data.nextElementSibling.getAttribute("name") != null) {
@@ -936,10 +908,12 @@ function partyDataSwitch() {
 
 function partyItem() {
 
-    var base = this.parentElement.parentElement.parentElement.parentElement;
-    var item = base.querySelector(':scope span[name="pokémon"] img:first-child');
+    let base = this.parentElement.parentElement.parentElement.parentElement;
+    let item = base.querySelector(':scope span[name="pokémon"] img:first-child');
 
-    item.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+this.name+".png";
+    
+
+    item.src = getMedia([this.name],[PATH_Item_Bag])[0];
     item.title = this.value;
 
 
@@ -953,18 +927,17 @@ function partyItem() {
 
 
 function partyDefault(base) {
-    var base;
 
-    var inputs = base.querySelectorAll(':scope input');
-    for (var i = 0; i < inputs.length; i++) {
+    let inputs = base.querySelectorAll(':scope input');
+    for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = "";
         if (inputs[i].parentElement.getAttribute("name") == "Date") {
             inputs[i].style.color = "transparent";
         }
     }
 
-    var selects = base.querySelectorAll(':scope select');
-    for (var i = 0; i < selects.length; i++) {
+    let selects = base.querySelectorAll(':scope select');
+    for (let i = 0; i < selects.length; i++) {
         if (selects[i].querySelector(":scope > option:first-child") != undefined) {
             selects[i].value = selects[i].querySelector(":scope > option:first-child").value;
         }
@@ -977,48 +950,48 @@ function partyDefault(base) {
             selects[i].setAttribute("name","Primary");
         }
     }
-    var options = base.querySelectorAll(':scope option');
-    for (var i = 0; i < options.length; i++) {
+    let options = base.querySelectorAll(':scope option');
+    for (let i = 0; i < options.length; i++) {
         options[i].removeAttribute("disabled");
     }
 
 
 
     if (HeldItem == true) {
-        var held = base.querySelector(":scope img:not([value])");
+        let held = base.querySelector(":scope img:not([value])");
         held.src = "";
         held.style.display = "none";
 
-        var options = base.querySelectorAll(':scope span[name="item"] select option');
-        for (var i = 0; i < options.length; i++) {
+        let options = base.querySelectorAll(':scope span[name="item"] select option');
+        for (let i = 0; i < options.length; i++) {
             options[i].remove();
         }
     }
 
     if (Gender == true) {
-        var gender = base.querySelector(':scope > aside > span:last-child > select:nth-child(2)')
-        var genders = gender.querySelectorAll(':scope > option');
+        let gender = base.querySelector(':scope > aside > span:last-child > select:nth-child(2)')
+        let genders = gender.querySelectorAll(':scope > option');
 
         gender.removeAttribute("name");
-        for (var u = 0; u < genders.length; u++) {
+        for (let u = 0; u < genders.length; u++) {
             genders[u].remove();
         }
     }
 
 
-    var moves = base.querySelectorAll(':scope > aside span[name="moves"] span:nth-child(2) select')
-    for (var u = 0; u < moves.length; u++) {
+    let moves = base.querySelectorAll(':scope > aside span[name="moves"] span:nth-child(2) select')
+    for (let u = 0; u < moves.length; u++) {
         moves[u].removeAttribute("name");
         moves[u].style.fontStyle = "italic";
-        var movesOptions = moves[u].querySelectorAll(":scope option");
-        for (var q = 0; q < movesOptions.length; q++) {
+        let movesOptions = moves[u].querySelectorAll(":scope option");
+        for (let q = 0; q < movesOptions.length; q++) {
             movesOptions[q].remove();
         }
     }
 
-    var background = base.querySelector(":scope > aside:first-child");
-    var pok = base.querySelector(":scope img[value]");
-    var name = base.querySelector(':scope span[name="name"] input');
+    let background = base.querySelector(":scope > aside:first-child");
+    let pok = base.querySelector(":scope img[value]");
+    let name = base.querySelector(':scope span[name="name"] input');
 
     background.style.background = "";
     pok.src = "";
@@ -1028,15 +1001,15 @@ function partyDefault(base) {
     name.setAttribute("placeholder","");
 
     if (Ability.length > 0) {
-        var ability = base.querySelector(':scope span[name="moves"] > span:last-child select');
-        var abilities = ability.querySelectorAll(':scope option');
-        for (var q = 0; q < abilities.length; q++) {
+        let ability = base.querySelector(':scope span[name="moves"] > span:last-child select');
+        let abilities = ability.querySelectorAll(':scope option');
+        for (let q = 0; q < abilities.length; q++) {
             abilities[q].remove();
         }
     }
 
     if (Natures.length > 0) {
-        var baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
+        let baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
         baseStats.removeAttribute("name");
     }
 
@@ -1051,10 +1024,10 @@ function partyDefault(base) {
 
 
 function dragStart(e) {
-    var base = document.querySelector("#pokémon aside[name='team']")
-    var tar = e.target;
+    let base = document.querySelector("#pokémon aside[name='team']")
+    let tar = e.target;
     savedtar = e.target;
-    for (var q = 0; q < 10; q++) {
+    for (let q = 0; q < 10; q++) {
         if (tar.tagName == "LI") {
             break;
         }
@@ -1062,15 +1035,15 @@ function dragStart(e) {
     }
     drag = getPokémonName(tar.id);
     
-    var blinks = base.querySelectorAll(":scope .indicator");
-    for (var q = 0; q < blinks.length; q++) {
+    let blinks = base.querySelectorAll(":scope .indicator");
+    for (let q = 0; q < blinks.length; q++) {
         blinks[q].classList.add("enabled");
     }
 }
 
 function dragEnter(e) {
     if (e.target.innerText == "Party") {
-        var tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
+        let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
         if (tar.length > 0) {
             e.target.classList.add("hover");
         }
@@ -1097,10 +1070,10 @@ function dragEnd(e) {
 
     drag = undefined;
 
-    var base = document.querySelector("#pokémon aside[name='team']")
+    let base = document.querySelector("#pokémon aside[name='team']")
 
-    var blinks = base.querySelectorAll(":scope .indicator");
-    for (var q = 0; q < blinks.length; q++) {
+    let blinks = base.querySelectorAll(":scope .indicator");
+    for (let q = 0; q < blinks.length; q++) {
         blinks[q].classList.remove("enabled");
     }
 
@@ -1109,17 +1082,17 @@ function dragEnd(e) {
 
 function dragDrop(e) {
 
-    var base = document.querySelector("#pokémon aside[name='team']")
+    let base = document.querySelector("#pokémon aside[name='team']")
 
-    var hov = base.querySelectorAll(':scope .hover');
-    for(var i = 0; i < hov.length; i++) {
+    let hov = base.querySelectorAll(':scope .hover');
+    for(let i = 0; i < hov.length; i++) {
         hov[i].classList.remove("hover");
     }
 
 
     if (drag != undefined) {
         if (e.target.innerText == "Party") {
-            var base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
+            let base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
             if (base.length > 0) {
                 createParty(base[0],"pok:"+drag);
                 partyShow(base[0]);
@@ -1134,7 +1107,7 @@ function dragDrop(e) {
             consoleText("Added "+drag+" to Box.");
         }
         else if (e.target.innerText == "+") {
-            var base = e.target.parentElement.parentElement;
+            let base = e.target.parentElement.parentElement;
             createParty(base,"pok:"+drag);
             partyShow(base);
             consoleText("Added "+drag+" to Party.");
@@ -1144,28 +1117,26 @@ function dragDrop(e) {
 
 function createParty(base,data) {
 
-    var base;
-    var data;
-    var i;
-    var pok;
-    var item;
-    var nick;
-    var level;
-    var gender;
-    var move;
-    var ability;
-    var iv;
-    var ev;
-    var nature;
-    var metlocation;
-    var metlevel;
-    var metdate;
-    var friendship;
+    let i;
+    let pok;
+    let item;
+    let nick;
+    let level;
+    let gender;
+    let move;
+    let ability;
+    let iv;
+    let ev;
+    let nature;
+    let metlocation;
+    let metlevel;
+    let metdate;
+    let friendship;
 
 
     if(data.includes("|")) {
         data = data.split("|")
-        for (var q = 0; q < data.length; q++) {
+        for (let q = 0; q < data.length; q++) {
             if (data[q].split(":")[0] == "pok") {
                 pok = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
@@ -1261,38 +1232,38 @@ function createParty(base,data) {
 
 
 
-    var baseBackground = base.querySelector(":scope > aside:first-child");
-    var basePok = base.querySelector(":scope img[value]");
-    var baseItem = base.querySelector(':scope span[name="item"] select');
-    var baseItemImg = base.querySelector(':scope span[name="pokémon"] img:not([value])');
-    var baseNick = base.querySelector(':scope span[name="name"] input');
-    var baseLevel = base.querySelector(':scope input[placeholder="Lvl."]');
-    var baseGender = base.querySelector(':scope aside > span:last-child > select:nth-child(2)');
-    var baseMove = base.querySelector(':scope span[name="moves"] span:nth-child(2)');
-    var baseMoves = base.querySelectorAll(':scope span[name="moves"] > span:nth-child(2) select');
-    var baseAbility = base.querySelector(':scope span[name="ability"] select');
-    var baseNature = base.querySelectorAll(':scope span[name="nature"] select');
-    var baseIV = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span[name="iv"]');
-    var baseEV = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span[name="ev"]');
-    var baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
-    var baseMetLocation = base.querySelector(':scope span[name="additional"] label[name="location"] select');
-    var baseMetLevel = base.querySelector(':scope span[name="additional"] label[name="level"] input');
-    var baseMetDate = base.querySelector(':scope span[name="additional"] label[name="date"] input');
-    var baseFriendship = base.querySelector(':scope span[name="additional"] label[name="friendship"] input');
-    var baseExport = base.querySelector(":scope aside figure[name='export']");
+    let baseBackground = base.querySelector(":scope > aside:first-child");
+    let basePok = base.querySelector(":scope img[value]");
+    let baseItem = base.querySelector(':scope span[name="item"] select');
+    let baseItemImg = base.querySelector(':scope span[name="pokémon"] img:not([value])');
+    let baseNick = base.querySelector(':scope span[name="name"] input');
+    let baseLevel = base.querySelector(':scope input[placeholder="Lvl."]');
+    let baseGender = base.querySelector(':scope aside > span:last-child > select:nth-child(2)');
+    let baseMove = base.querySelector(':scope span[name="moves"] span:nth-child(2)');
+    let baseMoves = base.querySelectorAll(':scope span[name="moves"] > span:nth-child(2) select');
+    let baseAbility = base.querySelector(':scope span[name="ability"] select');
+    let baseNature = base.querySelectorAll(':scope span[name="nature"] select');
+    let baseIV = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span[name="iv"]');
+    let baseEV = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span[name="ev"]');
+    let baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
+    let baseMetLocation = base.querySelector(':scope span[name="additional"] label[name="location"] select');
+    let baseMetLevel = base.querySelector(':scope span[name="additional"] label[name="level"] input');
+    let baseMetDate = base.querySelector(':scope span[name="additional"] label[name="date"] input');
+    let baseFriendship = base.querySelector(':scope span[name="additional"] label[name="friendship"] input');
+    let baseExport = base.querySelector(":scope aside figure[name='export']");
 
 
-    var imgtype = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"]');
-    var imgtypePath = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"] option[value="'+imgtype.value+'"]').getAttribute("data-path");
-    var imgtypeCategory = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"] option[value="'+imgtype.value+'"]').getAttribute("data-category");
+    let imgtype = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"]');
+    let imgtypePath = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"] option[value="'+imgtype.value+'"]').getAttribute("data-path");
+    let imgtypeCategory = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"] option[value="'+imgtype.value+'"]').getAttribute("data-category");
 
 
-    var imgtypeExtension = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="extension"]').value;
-    var imgtypeType = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="type"]').value;
-    var imgtypeAngle = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="angle"]').value;
+    let imgtypeExtension = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="extension"]').value;
+    let imgtypeType = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="type"]').value;
+    let imgtypeAngle = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="angle"]').value;
 
-    var type1 = returnData(i,"Type","undefined")[0];
-    var type2 = returnData(i,"Type","undefined")[1];
+    let type1 = returnData(i,"Type","undefined")[0];
+    let type2 = returnData(i,"Type","undefined")[1];
 
     if (type2 != undefined) {
         $(baseBackground).css({background: "linear-gradient(to right,var(--type"+type1+"),var(--type"+type2+"))"});
@@ -1303,7 +1274,7 @@ function createParty(base,data) {
         base.querySelector(":scope > aside:first-child").setAttribute("name",type1);
     }
 
-    basePok.src = getPokémonMediaPath([i],["./media/Images/Pokémon/"+imgtypeCategory+"/"+imgtypeExtension+"/"+imgtypeType+"/"+imgtypeAngle+"/"+imgtypePath+"/"]);
+    basePok.src = getPokémonMediaPath([i],[PATH_Pokémon_Battle_Default_Front_PNG]);
    
 
     basePok.setAttribute("value",i);
@@ -1313,31 +1284,31 @@ function createParty(base,data) {
 
     if (HeldItem == true) {
 
-        var items = [];
-        var result = finaldata["Items"]["Reference"].map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
+        let items = [];
+        let result = finaldata["Items"]["Reference"].map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
 
         items = sortObjectArray(result,"Pocket",true);
 
-        var obj = new Object();
+        let obj = new Object();
         obj["Item"] = "Item";
         obj["Game"] = "All";
         items.unshift(obj);
 
 
 
-        if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"] != undefined) {
-            var req = [];
-            if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"].includes(",")) {
-                req = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"].split(",")
+        if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]] != undefined) {
+            let req = [];
+            if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]].includes(",")) {
+                req = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]].split(",")
             }
             else {
-                req[0] = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Required"];
+                req[0] = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Required"]];
             }
-            for (var q = 0; q < items.length; q++) {
+            for (let q = 0; q < items.length; q++) {
                 if (getApplicable(items[q]["Game"])) {
                     if (items[q]["Item"] != undefined) {
                         if (req.includes(items[q]["Item"])) {
-                            var teamItemOption = document.createElement("option");
+                            let teamItemOption = document.createElement("option");
                             teamItemOption.value = items[q]["Item"];
                             teamItemOption.innerText = items[q]["Item"];
                             baseItem.appendChild(teamItemOption);
@@ -1353,21 +1324,21 @@ function createParty(base,data) {
                 }
             }
             baseItemImg.style.display = "unset";
-            baseItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+baseItem.querySelector(":scope option:first-child").value+".png";
+            baseItemImg.src = getMedia([baseItem.querySelector(":scope option:first-child").value],[PATH_Item_Bag])[0]
         }
-        else if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"] != undefined) {
-            var notreq = [];
-            if (finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"].includes(",")) {
-                notreq = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"].split(",")
+        else if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]] != undefined) {
+            let notreq = [];
+            if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]].includes(",")) {
+                notreq = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]].split(",")
             }
             else {
-                notreq[0] = finaldata["Pokémon"]["Form Item"][i][JSONPath_FormItem+"_Not"];
+                notreq[0] = finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]];
             }
-            for (var q = 0; q < items.length; q++) {
+            for (let q = 0; q < items.length; q++) {
                 if (getApplicable(items[q]["Game"])) {
                     if (items[q]["Item"] != undefined) {
                         if (!notreq.includes(items[q]["Item"])) {
-                            var teamItemOption = document.createElement("option");
+                            let teamItemOption = document.createElement("option");
                             teamItemOption.value = items[q]["Item"];
                             teamItemOption.innerText = items[q]["Item"];
                             baseItem.appendChild(teamItemOption);
@@ -1384,10 +1355,10 @@ function createParty(base,data) {
             }
         }
         else {
-            for (var q = 0; q < items.length; q++) {
+            for (let q = 0; q < items.length; q++) {
                 if (getApplicable(items[q]["Game"])) {
                     if (items[q]["Item"] != undefined) {
-                        var teamItemOption = document.createElement("option");
+                        let teamItemOption = document.createElement("option");
                         teamItemOption.value = items[q]["Item"];
                         teamItemOption.innerText = items[q]["Item"];
                         baseItem.appendChild(teamItemOption);
@@ -1405,9 +1376,9 @@ function createParty(base,data) {
     }
 
     if (Gender == true) {
-        var tempgender = returnData(i,"Gender Ratio","undefined");
+        let tempgender = returnData(i,"Gender Ratio","undefined");
 
-        var possibleGender = [];
+        let possibleGender = [];
         if (getPokémonName(i).includes("Male")) {
             possibleGender = ["♂"];
         }
@@ -1439,8 +1410,8 @@ function createParty(base,data) {
             baseGender.style.color = "var(--fontDark)";
         }
 
-        for (var q = 0; q < possibleGender.length; q++) {
-            var option = document.createElement("option");
+        for (let q = 0; q < possibleGender.length; q++) {
+            let option = document.createElement("option");
             option.innerText = possibleGender[q];
             option.value = possibleGender[q];
             option.setAttribute("name",possibleGender[q]);
@@ -1466,12 +1437,12 @@ function createParty(base,data) {
 
 
 
-    var tempmoves = returnMoveSet(i,"onlymoves,noduplicate");
+    let tempmoves = returnMoveSet(i,"onlymoves,noduplicate");
     tempmoves.unshift("Move");
-    for (var u = 0; u < baseMoves.length; u++) {
-        var x = u+1;
-        for (var q = 0; q < tempmoves.length; q++) {
-            var option = document.createElement("option");
+    for (let u = 0; u < baseMoves.length; u++) {
+        let x = u+1;
+        for (let q = 0; q < tempmoves.length; q++) {
+            let option = document.createElement("option");
             if (q == 0) {
                 option.innerText = tempmoves[q]+" #"+x;
                 option.value = tempmoves[q]+" #"+x;
@@ -1482,18 +1453,18 @@ function createParty(base,data) {
                 option.title = formatMoveData(tempmoves[q]);
             }
 
-            option.setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempmoves[q]));
+            option.setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempmoves[q]));
             baseMoves[u].appendChild(option)
         }
     }
 
 
     if (Ability.length > 0) {
-        var abilities = returnData(i,"Ability","");
+        let abilities = returnData(i,"Ability","");
 
-        for (var q = 0; q < abilities.length; q++) {
+        for (let q = 0; q < abilities.length; q++) {
             if (abilities[q] != undefined) {
-                var option = document.createElement("option");
+                let option = document.createElement("option");
                 option.innerText = abilities[q];
                 option.value = abilities[q];
                 if (q == 0) {
@@ -1508,7 +1479,7 @@ function createParty(base,data) {
                 baseAbility.appendChild(option)
             }
         }
-        var desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",baseAbility.value)[0]["Description"];
+        let desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",baseAbility.value)[0]["Description"];
         if (desc != undefined) {
             baseAbility.setAttribute("title",desc);
         }
@@ -1522,10 +1493,10 @@ function createParty(base,data) {
         baseNick.value = nick;
     }
     if (item != undefined && HeldItem == true) {
-        var baseItems = baseItem.querySelectorAll(":scope option");
-        var opt = baseItem.querySelector(':scope option[value="'+item+'"]')
-        var tempArr = [];
-        for (var q = 0; q < baseItems.length; q++) {
+        let baseItems = baseItem.querySelectorAll(":scope option");
+        let opt = baseItem.querySelector(':scope option[value="'+item+'"]')
+        let tempArr = [];
+        for (let q = 0; q < baseItems.length; q++) {
             tempArr.push(baseItems[q].value);
         }
 
@@ -1534,7 +1505,7 @@ function createParty(base,data) {
             baseItem.setAttribute("name",opt.getAttribute("name"));
             baseItem.style.fontStyle = "unset";
             baseItemImg.style.display = "unset";
-            baseItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+opt.getAttribute("name")+".png";
+            baseItemImg.src = getMedia([opt.getAttribute("name")],[PATH_Item_Bag])[0];
             baseItemImg.setAttribute("title",item);
         }
     }
@@ -1554,7 +1525,7 @@ function createParty(base,data) {
         }
     }
     if (ability != undefined && Ability.length > 0) {
-        var abtemp = baseAbility.querySelector(':scope > option[name="'+ability+'"]');
+        let abtemp = baseAbility.querySelector(':scope > option[name="'+ability+'"]');
 
         if (abtemp != undefined) {
             baseAbility.value = abtemp.value;
@@ -1563,7 +1534,7 @@ function createParty(base,data) {
         }
     }
     if (nature != undefined && Natures.length > 0) {
-        for (var q = 0; q < baseNature.length; q++) {
+        for (let q = 0; q < baseNature.length; q++) {
             baseNature[q].value = nature;
         }
 
@@ -1574,19 +1545,19 @@ function createParty(base,data) {
 
 
     if (move != undefined) {
-        var tempmove = [move];
+        let tempmove = [move];
         if (move.includes(",")) {
             tempmove = move.split(",");
         }
-        for (var q = 0; q < tempmove.length; q++) {
-            var y = q+1;
+        for (let q = 0; q < tempmove.length; q++) {
+            let y = q+1;
             if (tempmove[q] != "") {
                 if (tempmoves.includes(tempmove[q])) {
                     baseMove.querySelector(":scope > span:nth-child("+y+") select").value = tempmove[q];
                     if (!tempmove[q].includes("Move")) {
                         baseMove.querySelector(":scope > span:nth-child("+y+") select").title = formatMoveData(tempmove[q]);
                         baseMove.querySelector(":scope > span:nth-child("+y+") select").style.fontStyle = "unset";
-                        baseMove.querySelector(":scope > span:nth-child("+y+") select").setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,tempmove[q]))
+                        baseMove.querySelector(":scope > span:nth-child("+y+") select").setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempmove[q]))
                     }
                 }
             }
@@ -1596,24 +1567,24 @@ function createParty(base,data) {
         }
     }
     if (iv != undefined) {
-        var tempiv = [iv];
+        let tempiv = [iv];
         if (iv.includes(",")) {
             tempiv = iv.split(",");
         }
-        for (var q = 0; q < tempiv.length; q++) {
-            var y = q+1;
+        for (let q = 0; q < tempiv.length; q++) {
+            let y = q+1;
             if (baseIV.querySelector(":scope input:nth-child("+y+")") != undefined) {
                 baseIV.querySelector(":scope input:nth-child("+y+")").value = tempiv[q];
             }
         }
     }
     if (ev != undefined) {
-        var tempev = [ev];
+        let tempev = [ev];
         if (ev.includes(",")) {
             tempev = ev.split(",");
         }
-        for (var q = 0; q < tempev.length; q++) {
-            var y = q+1;
+        for (let q = 0; q < tempev.length; q++) {
+            let y = q+1;
             if (baseEV.querySelector(":scope > input:nth-child("+y+")") != undefined) {
                 baseEV.querySelector(":scope > input:nth-child("+y+")").value = tempev[q];
             }
@@ -1652,14 +1623,14 @@ function createParty(base,data) {
 
 
 function partyNature() {
-    var base = this.parentElement.parentElement.parentElement.parentElement;
+    let base = this.parentElement.parentElement.parentElement.parentElement;
 
-    var select = base.querySelectorAll(':scope span[name="nature"] select');
+    let select = base.querySelectorAll(':scope span[name="nature"] select');
 
-    var coloring = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > *:last-child');
+    let coloring = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > *:last-child');
     coloring.setAttribute("name",this.value);
 
-    for (var q = 0; q < select.length; q++) {
+    for (let q = 0; q < select.length; q++) {
         select[q].value = this.value;
     }
 
@@ -1668,7 +1639,6 @@ function partyNature() {
 
 
 function partyShow(base) {
-    var base;
 
     if (base.getAttribute("name") == "empty") {
         base.removeAttribute("name");
@@ -1676,8 +1646,8 @@ function partyShow(base) {
 
     calcPartyStat(base);
 
-    var sides = base.querySelectorAll(":scope > aside");
-    var side = base.querySelector(":scope > aside:first-child");
+    let sides = base.querySelectorAll(":scope > aside");
+    let side = base.querySelector(":scope > aside:first-child");
 
     for (q = 0; q < sides.length; q++) {
         sides[q].style.display = "none";
@@ -1688,14 +1658,13 @@ function partyShow(base) {
 
 
 function partyHide(base) {
-    var base;
 
     if (base.getAttribute("name") != "empty") {
         base.setAttribute("name","empty");
     }
     
-    var sides = base.querySelectorAll(":scope > aside");
-    var side = base.querySelector(":scope > aside:last-child");
+    let sides = base.querySelectorAll(":scope > aside");
+    let side = base.querySelector(":scope > aside:last-child");
 
     for (q = 0; q < sides.length; q++) {
         sides[q].style.display = "none";
@@ -1713,27 +1682,24 @@ function deleteBox(element) {
 }
 
 function returnMoveSet(int,additional) {
-    var int;
-    var arrE = finaldata["Pokémon Learnset"]["Evolution"];
-    var arrL = finaldata["Pokémon Learnset"]["Level Up"];
-    var arrM = finaldata["Pokémon Learnset"]["Machine"];
-    var arrB = finaldata["Pokémon Learnset"]["Breeding"];
-    var arrT = finaldata["Pokémon Learnset"]["Tutor"];
+    let arrE = finaldata["Pokémon Learnset"]["Evolution"];
+    let arrL = finaldata["Pokémon Learnset"]["Level Up"];
+    let arrM = finaldata["Pokémon Learnset"]["Machine"];
+    let arrB = finaldata["Pokémon Learnset"]["Breeding"];
+    let arrT = finaldata["Pokémon Learnset"]["Tutor"];
 
-    var additional;
+    let name = getPokémonName(int,"Alt");
 
-    var name = getPokémonName(int,"Alt");
-
-    var evores = [];
-    var lvlres = [];
-    var machres = [];
-    var breres = [];
-    var tutres = [];
+    let evores = [];
+    let lvlres = [];
+    let machres = [];
+    let breres = [];
+    let tutres = [];
 
 
-    for(var i = 0; i < arrE.length; i++) {
+    for(let i = 0; i < arrE.length; i++) {
 		if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"])) {
-            var obj = new Object();
+            let obj = new Object();
             obj["Pokémon"] = arrE[i]["Pokémon"];
             obj["Move"] = arrE[i]["Move"];
             obj["Evolution"] = arrE[i]["Evolution"];
@@ -1744,9 +1710,9 @@ function returnMoveSet(int,additional) {
 		}
 	}
 
-    for(var i = 0; i < arrL.length; i++) {
+    for(let i = 0; i < arrL.length; i++) {
 		if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"])) {
-            var obj = new Object();
+            let obj = new Object();
             obj["Pokémon"] = arrL[i]["Pokémon"];
             obj["Factor"] = arrL[i]["Factor"];
             obj["Move"] = arrL[i]["Move"];
@@ -1756,9 +1722,9 @@ function returnMoveSet(int,additional) {
 		}
 	}
 
-    for(var i = 0; i < arrM.length; i++) {
+    for(let i = 0; i < arrM.length; i++) {
 		if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"])) {
-            var obj = new Object();
+            let obj = new Object();
             obj["Pokémon"] = arrM[i]["Pokémon"];
             obj["Machine"] = arrM[i]["Machine"];
             obj["Move"] = arrM[i]["Move"];
@@ -1768,9 +1734,9 @@ function returnMoveSet(int,additional) {
 		}
 	}
 
-    for(var i = 0; i < arrT.length; i++) {
+    for(let i = 0; i < arrT.length; i++) {
 		if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
-            var obj = new Object();
+            let obj = new Object();
             obj["Pokémon"] = arrT[i]["Pokémon"];
             obj["Move"] = arrT[i]["Move"];
             obj["Game"] = arrT[i]["Game"];
@@ -1780,9 +1746,9 @@ function returnMoveSet(int,additional) {
 	}
 
 
-    for(var i = 0; i < arrB.length; i++) {
+    for(let i = 0; i < arrB.length; i++) {
 		if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"])) {
-            var obj = new Object();
+            let obj = new Object();
             obj["Pokémon"] = arrB[i]["Pokémon"];
             obj["Parent"] = arrB[i]["Parent"];
             obj["Item"] = arrB[i]["Item"];
@@ -1794,13 +1760,13 @@ function returnMoveSet(int,additional) {
 		}
 	}
 
-    var name = getPokémonName([finaldata["Pokémon"]["Reference"].map(function(e) {return e.ID;}).indexOf(finaldata["Pokémon"]["Reference"][int]["ID"])],"Alt");
+    name = getPokémonName([finaldata["Pokémon"]["Reference"].map(function(e) {return e.ID;}).indexOf(finaldata["Pokémon"]["Reference"][int]["ID"])],"Alt");
 
 
     if (!evores.length > 0) {
-        for(var i = 0; i < arrE.length; i++) {
+        for(let i = 0; i < arrE.length; i++) {
             if(arrE[i]["Pokémon"] == name && getApplicable(arrE[i]["Game"])) {
-                var obj = new Object();
+                let obj = new Object();
                 obj["Pokémon"] = arrE[i]["Pokémon"];
                 obj["Move"] = arrE[i]["Move"];
                 obj["Evolution"] = arrE[i]["Evolution"];
@@ -1813,9 +1779,9 @@ function returnMoveSet(int,additional) {
     }
     
     if (!lvlres.length > 0) {
-        for(var i = 0; i < arrL.length; i++) {
+        for(let i = 0; i < arrL.length; i++) {
             if(arrL[i]["Pokémon"] == name && getApplicable(arrL[i]["Game"])) {
-                var obj = new Object();
+                let obj = new Object();
                 obj["Pokémon"] = arrL[i]["Pokémon"];
                 obj["Factor"] = arrL[i]["Factor"];
                 obj["Move"] = arrL[i]["Move"];
@@ -1827,9 +1793,9 @@ function returnMoveSet(int,additional) {
     }
 
     if (!machres.length > 0) {
-        for(var i = 0; i < arrM.length; i++) {
+        for(let i = 0; i < arrM.length; i++) {
             if(arrM[i]["Pokémon"] == name && getApplicable(arrM[i]["Game"])) {
-                var obj = new Object();
+                let obj = new Object();
                 obj["Pokémon"] = arrM[i]["Pokémon"];
                 obj["Machine"] = arrM[i]["Machine"];
                 obj["Move"] = arrM[i]["Move"];
@@ -1841,9 +1807,9 @@ function returnMoveSet(int,additional) {
     }
 
     if (!tutres.length > 0) {
-        for(var i = 0; i < arrT.length; i++) {
+        for(let i = 0; i < arrT.length; i++) {
             if(arrT[i]["Pokémon"] == name && getApplicable(arrT[i]["Game"])) {
-                var obj = new Object();
+                let obj = new Object();
                 obj["Pokémon"] = arrT[i]["Pokémon"];
                 obj["Move"] = arrT[i]["Move"];
                 obj["Game"] = arrT[i]["Game"];
@@ -1854,9 +1820,9 @@ function returnMoveSet(int,additional) {
     }
 
     if (!breres.length > 0) {
-        for(var i = 0; i < arrB.length; i++) {
+        for(let i = 0; i < arrB.length; i++) {
             if(arrB[i]["Pokémon"] == name && getApplicable(arrB[i]["Game"])) {
-                var obj = new Object();
+                let obj = new Object();
                 obj["Pokémon"] = arrB[i]["Pokémon"];
                 obj["Parent"] = arrB[i]["Parent"];
                 obj["Item"] = arrB[i]["Item"];
@@ -1869,41 +1835,41 @@ function returnMoveSet(int,additional) {
         }
     }
 
-    var result = [];
+    let result = [];
 
-    for(var q = 0; q < evores.length; q++) {
+    for(let q = 0; q < evores.length; q++) {
         result.push(evores[q]);
     }
-    for(var q = 0; q < lvlres.length; q++) {
+    for(let q = 0; q < lvlres.length; q++) {
         result.push(lvlres[q]);
     }
-    for(var q = 0; q < machres.length; q++) {
+    for(let q = 0; q < machres.length; q++) {
         result.push(machres[q]);
     }
-    for(var q = 0; q < tutres.length; q++) {
+    for(let q = 0; q < tutres.length; q++) {
         result.push(tutres[q]);
     }
-    for(var q = 0; q < breres.length; q++) {
+    for(let q = 0; q < breres.length; q++) {
         result.push(breres[q]);
     }
     if (additional.includes("noduplicate")) {
         result = removeDuplicateObjectFromArray(result,"Move");
     }
     if (additional.includes("onlymoves")) {
-        for(var q = 0; q < result.length; q++) {
+        for(let q = 0; q < result.length; q++) {
             result[q] = result[q]["Move"];
         }
     }
     if (additional.includes("lower")) {
         if (typeof result[0] == "object") {
-            for(var q = 0; q < result.length; q++) {
-                for (var u = 0; u < Object.keys(result[q]).length; u++) {
+            for(let q = 0; q < result.length; q++) {
+                for (let u = 0; u < Object.keys(result[q]).length; u++) {
                     result[q][Object.keys(result[q])[u]] = result[q][Object.keys(result[q])[u]].toLowerCase();
                 }
             }
         }
         else {
-            for(var q = 0; q < result.length; q++) {
+            for(let q = 0; q < result.length; q++) {
                 result[q] = result[q].toLowerCase();
             }
         }
@@ -1915,7 +1881,7 @@ function returnMoveSet(int,additional) {
 
 
 function selectModify(e) {
-    var opt = this.querySelector(':scope > option[value="'+this.value+'"]');
+    let opt = this.querySelector(':scope > option[value="'+this.value+'"]');
 
     if (this.value == "♂") {
         this.style.color = "var(--colorBlue)";
@@ -1954,12 +1920,12 @@ function selectModify(e) {
 
 
     if (this.parentElement.getAttribute("name") == "Nature") {
-        var base = this.parentElement.parentElement.parentElement;
+        let base = this.parentElement.parentElement.parentElement;
         base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child').setAttribute("name",this.value);
     }
 
     if (this.parentElement.getAttribute("name") == "Ability") {
-        var desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",this.value)[0]["Description"];
+        let desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",this.value)[0]["Description"];
         if (desc != undefined) {
             this.setAttribute("title",desc);
         }
@@ -1970,24 +1936,24 @@ function selectModify(e) {
 
 
     if (this.firstElementChild.value.includes("Move")) {
-        var sel = this.parentElement.parentElement.querySelectorAll(':scope select');
-        var opts = this.parentElement.parentElement.querySelectorAll(':scope option');
-        var optz = this.parentElement.parentElement.querySelectorAll(':scope option[value="'+this.value+'"]');
+        let sel = this.parentElement.parentElement.querySelectorAll(':scope select');
+        let opts = this.parentElement.parentElement.querySelectorAll(':scope option');
+        let optz = this.parentElement.parentElement.querySelectorAll(':scope option[value="'+this.value+'"]');
 
-        var selvals = [];
+        let selvals = [];
         
-        for(var i = 0; i < sel.length; i++) {
+        for(let i = 0; i < sel.length; i++) {
             selvals.push(sel[i].value)
         }
 
-        for(var i = 0; i < opts.length; i++) {
+        for(let i = 0; i < opts.length; i++) {
             if (!selvals.includes(opts[i].value)) {
                 opts[i].style.display = "unset";
                 opts[i].removeAttribute("disabled");
             }
         }
      
-        for(var i = 0; i < optz.length; i++) {
+        for(let i = 0; i < optz.length; i++) {
             optz[i].style.display = "none";
             optz[i].setAttribute("disabled","");
         }
@@ -1998,7 +1964,7 @@ function selectModify(e) {
             this.title = "";
         }
 
-        this.setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,this.value));
+        this.setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],this.value));
     }
 
     partyMemory("Save");
@@ -2006,29 +1972,28 @@ function selectModify(e) {
 
 function storeInBox(data) {
 
-    var data;
-    var box = document.querySelector('#pokémon > aside[name="team"] > section[name="box"] ul');
+    let box = document.querySelector('#pokémon > aside[name="team"] > section[name="box"] ul');
     const datastr = data;
 
-    var i;
-    var pok;
-    var item;
-    var nick;
-    var level;
-    var gender;
-    var move;
-    var ability;
-    var iv;
-    var ev;
-    var nature;
-    var metlocation;
-    var metlevel;
-    var metdate;
-    var friendship;
+    let i;
+    let pok;
+    let item;
+    let nick;
+    let level;
+    let gender;
+    let move;
+    let ability;
+    let iv;
+    let ev;
+    let nature;
+    let metlocation;
+    let metlevel;
+    let metdate;
+    let friendship;
 
     if(data.includes("|")) {
         data = data.split("|")
-        for (var q = 0; q < data.length; q++) {
+        for (let q = 0; q < data.length; q++) {
             if (data[q].split(":")[0] == "pok") {
                 pok = data[q].replaceAll(data[q].split(":")[0]+":","")
             }
@@ -2121,10 +2086,10 @@ function storeInBox(data) {
 
     i = getPokémonInt(pok);
 
-    var li = document.createElement("li");
-    var shadow = document.createElement("span");
-    var img = document.createElement("img");
-    img.src = getPokémonMediaPath([i],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+    let li = document.createElement("li");
+    let shadow = document.createElement("span");
+    let img = document.createElement("img");
+    img.src = getPokémonMediaPath([i],[PATH_Pokémon_Box_Default_PNG]);
     img.setAttribute("value",i);
     box.appendChild(li)
     li.appendChild(shadow)
@@ -2181,25 +2146,24 @@ function storeInBox(data) {
 
 
 function getPartyData(base) {
-    var base;
-    var data = [];
+    let data = [];
 
-    var name = base.querySelector(':scope > aside:first-child > span > span[name="name"] input');
-    var level = base.querySelector(':scope > aside:first-child > span:first-child > input[type="number"]');
-    var item = base.querySelector(':scope > aside:first-child > span > span[name="item"] > select');
-    var nick = base.querySelector(':scope > aside:first-child > span > span[name="name"] > input[type="text"]');
-    var gender = base.querySelector(":scope > aside:first-child > span:last-child > select[title='Gender']");
-    var ability = base.querySelector(':scope > aside:first-child > span[name="moves"] > span[name="ability"] > select');
+    let name = base.querySelector(':scope > aside:first-child > span > span[name="name"] input');
+    let level = base.querySelector(':scope > aside:first-child > span:first-child > input[type="number"]');
+    let item = base.querySelector(':scope > aside:first-child > span > span[name="item"] > select');
+    let nick = base.querySelector(':scope > aside:first-child > span > span[name="name"] > input[type="text"]');
+    let gender = base.querySelector(":scope > aside:first-child > span:last-child > select[title='Gender']");
+    let ability = base.querySelector(':scope > aside:first-child > span[name="moves"] > span[name="ability"] > select');
 
-    var nature = base.querySelectorAll(':scope > aside:first-child > span > span[name="nature"] > select');
-    var move = base.querySelectorAll(':scope > aside:first-child > span[name="moves"] > span:nth-child(2) > span select');
-    var iv = base.querySelectorAll(':scope > aside:first-child > span[name="stats"] > span:nth-child(2) > span[name="iv"] > input');
-    var ev = base.querySelectorAll(':scope > aside:first-child > span[name="stats"] > span:nth-child(2) > span[name="ev"] > input');
+    let nature = base.querySelectorAll(':scope > aside:first-child > span > span[name="nature"] > select');
+    let move = base.querySelectorAll(':scope > aside:first-child > span[name="moves"] > span:nth-child(2) > span select');
+    let iv = base.querySelectorAll(':scope > aside:first-child > span[name="stats"] > span:nth-child(2) > span[name="iv"] > input');
+    let ev = base.querySelectorAll(':scope > aside:first-child > span[name="stats"] > span:nth-child(2) > span[name="ev"] > input');
 
-    var metlocation = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="location"] select');
-    var metlvl = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="level"] input');
-    var metdate = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="date"] input');
-    var friendship = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="friendship"] input');
+    let metlocation = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="location"] select');
+    let metlvl = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="level"] input');
+    let metdate = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="date"] input');
+    let friendship = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="friendship"] input');
 
 
 
@@ -2241,9 +2205,9 @@ function getPartyData(base) {
     }
 
     if (move != undefined) {
-        var movearr = [];
-        var movestr;
-        for(var q = 0; q < move.length; q++) {
+        let movearr = [];
+        let movestr;
+        for(let q = 0; q < move.length; q++) {
             if (!move[q].value.includes("Move")) {
                 movearr.push(move[q].value);
             }
@@ -2264,9 +2228,9 @@ function getPartyData(base) {
         }
     }
     if (iv != undefined) {
-        var ivarr = [];
-        var ivstr;
-        for(var q = 0; q < iv.length; q++) {
+        let ivarr = [];
+        let ivstr;
+        for(let q = 0; q < iv.length; q++) {
             ivarr.push(iv[q].value);
         }
         if (ivarr.length > 1) {
@@ -2282,9 +2246,9 @@ function getPartyData(base) {
         }
     }
     if (ev != undefined) {
-        var evarr = [];
-        var evstr;
-        for(var q = 0; q < ev.length; q++) {
+        let evarr = [];
+        let evstr;
+        for(let q = 0; q < ev.length; q++) {
             evarr.push(ev[q].value);
         }
         if (evarr.length > 1) {
@@ -2332,9 +2296,9 @@ function getPartyData(base) {
 }
 
 function getAllBoxData() {
-    var lis = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] > ul li');
-    var data = [];
-    for (var i = 0; i < lis.length; i++) {
+    let lis = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] > ul li');
+    let data = [];
+    for (let i = 0; i < lis.length; i++) {
         data.push(getBoxData(lis[i]))
     }
     if (data.length > 1) {
@@ -2346,8 +2310,7 @@ function getAllBoxData() {
     return data;
 }
 function getBoxData(base) {
-    var base;
-    var data = [];
+    let data = [];
 
     if (base.getAttribute("data-pok") != null) {
         data.push("pok:"+base.getAttribute("data-pok"))
@@ -2404,12 +2367,12 @@ function getBoxData(base) {
 
 
 function partyAdd() {
-    var data = prompt("Enter Pokémon Data String:","");
+    let data = prompt("Enter Pokémon Data String:","");
 
     if (data != null && data != "") {
         if (data.includes("pok:")) {
-            var temparr = [];
-            var tempstr;
+            let temparr = [];
+            let tempstr;
 
             if (data.includes("|")) {
                 temparr = data.split("pok:");
@@ -2423,7 +2386,7 @@ function partyAdd() {
                 tempstr = getPokémonInt(temparr[1]);
             }
             if (tempstr != undefined) {
-                if (finaldata["Pokémon"]["Reference"][parseInt(tempstr)][JSONPath_Reference] == "true") {
+                if (finaldata["Pokémon"]["Reference"][parseInt(tempstr)][DATA_Pokémon_Reference["Reference"]] == "true") {
                     createParty(this.parentElement.parentElement,data)
                     partyShow(this.parentElement.parentElement);
                     consoleText("Added "+getPokémonName(tempstr)+" to Party.")
@@ -2443,11 +2406,10 @@ function partyAdd() {
 }
 
 function reNumberMove(base) {
-    var base;
-    var selects = base.querySelectorAll(":scope select > option:first-child")
+    let selects = base.querySelectorAll(":scope select > option:first-child")
 
-    for (var q = 0; q < selects.length; q++) {
-        var x = q+1;
+    for (let q = 0; q < selects.length; q++) {
+        let x = q+1;
         selects[q].value = "Move #"+x;
         selects[q].innerText = "Move #"+x;
     }
@@ -2456,13 +2418,6 @@ function reNumberMove(base) {
 
 
 function statsCalc(type,level,base,iv,ev,nature,friendship) {
-    var type;
-    var level;
-    var base;
-    var iv;
-    var ev;
-    var nature;
-    var friendship;
 
     if (typeof level == "string") {
         level = parseInt(level);
@@ -2555,7 +2510,7 @@ function natureModifier(type,nature) {
 }
 
 function getNatureTitle(nature) {
-    var result = []
+    let result = []
 
     if (nature == "Lonely" || nature == "Brave" || nature == "Adamant" || nature == "Naughty") {
         result[0] =  "+Attack";
@@ -2603,8 +2558,7 @@ function getNatureTitle(nature) {
 
 function calcPartyStat(divBase) {
 
-    var divBase;
-    var div;
+    let div;
 
     if (divBase.tagName == "DIV") {
         div = divBase;
@@ -2613,27 +2567,27 @@ function calcPartyStat(divBase) {
         div = findUpTag(divBase,"DIV");
     }
 
-    var int = getPokémonInt(div.querySelector(':scope span[name="pokémon"] img[value]').title)
-    var level = div.querySelector(':scope aside > span:first-child input[type="number"]')
-    var ivs = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span[name="iv"] input[type="number"]');
-    var evs = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span[name="ev"] input[type="number"]');
-    var natures = div.querySelectorAll(':scope aside span[name="nature"] select');
-    var friendships = div.querySelector(':scope aside label[name="friendship"] input');
+    let int = getPokémonInt(div.querySelector(':scope span[name="pokémon"] img[value]').title)
+    let level = div.querySelector(':scope aside > span:first-child input[type="number"]')
+    let ivs = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span[name="iv"] input[type="number"]');
+    let evs = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span[name="ev"] input[type="number"]');
+    let natures = div.querySelectorAll(':scope aside span[name="nature"] select');
+    let friendships = div.querySelector(':scope aside label[name="friendship"] input');
  
-    var res = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span:last-child input[type="number"]');
+    let res = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span:last-child input[type="number"]');
 
 
-    for (var i = 0; i < res.length; i++) {
+    for (let i = 0; i < res.length; i++) {
 
-        var stat = Stats[i];
+        let stat = Stats[i];
  
 
-        var lvl = level.value;
-        var base = returnData(int,"Base Stats "+stat,"")[0];
-        var iv = ivs[i].value
-        var ev = evs[i].value
-        var nature;
-        var friendship;
+        let lvl = level.value;
+        let base = returnData(int,"Base Stats "+stat,"")[0];
+        let iv = ivs[i].value
+        let ev = evs[i].value
+        let nature;
+        let friendship;
 
         if (Natures.length > 0) {
             nature = natureModifier(stat,natures[0].value);
@@ -2679,19 +2633,17 @@ function formatMoveData(move,obj) {
     let tempStr;
     let tempArr = [];
 
-    var obj;
-
     if (obj == undefined) {
         obj = {};
     }
 
-    let type = returnArrValue(finaldata["Moves"]["Type"],"Name_"+JSONPath_MoveName,"Type_"+JSONPath_MoveType,move);
-    let cate = returnArrValue(finaldata["Moves"]["Category"],"Name_"+JSONPath_MoveName,"Category_"+JSONPath_MoveCategory,move);
-    let ppmin = returnArrValue(finaldata["Moves"]["PP"],"Name_"+JSONPath_MoveName,"PP Min_"+JSONPath_MovePP,move);
-    let pwr = returnArrValue(finaldata["Moves"]["Power"],"Name_"+JSONPath_MoveName,"Power_"+JSONPath_MovePower,move);
-    let acc = returnArrValue(finaldata["Moves"]["Accuracy"],"Name_"+JSONPath_MoveName,"Accuracy_"+JSONPath_MoveAccuracy,move);
-    let desc = returnArrValue(finaldata["Moves"]["Description"],"Name_"+JSONPath_MoveName,"Description_"+JSONPath_MoveDescription,move);
-    let prio = returnArrValue(finaldata["Moves"]["Priority"],"Name_"+JSONPath_MoveName,"Priority_"+JSONPath_MovePriority,move);
+    let type = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],move);
+    let cate = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],move);
+    let ppmin = returnArrValue(finaldata["Moves"]["PP"],DATA_Move_Reference["Name"],DATA_Move_PP["Min"],move);
+    let pwr = returnArrValue(finaldata["Moves"]["Power"],DATA_Move_Reference["Name"],DATA_Move_Power["Power"],move);
+    let acc = returnArrValue(finaldata["Moves"]["Accuracy"],DATA_Move_Reference["Name"],DATA_Move_Accuracy["Accuracy"],move);
+    let desc = returnArrValue(finaldata["Moves"]["Description"],DATA_Move_Reference["Name"],DATA_Move_Description["Description"],move);
+    let prio = returnArrValue(finaldata["Moves"]["Priority"],DATA_Move_Reference["Name"],DATA_Move_Priority["Priority"],move);
 
     if (obj["Power"] != undefined) {
         pwr = obj["Power"];
@@ -2750,8 +2702,7 @@ function formatMoveData(move,obj) {
 
 
 function dateHideShow(event,status) {
-    var status;
-    var tar = event.target;
+    let tar = event.target;
 
 
     if (tar.value != "" && tar.value != undefined) {
@@ -2779,44 +2730,43 @@ function dateHideShow(event,status) {
 
 function changePartyEvolution(base,i) {
 
-    var base;
-    var evos = getEvolutionFamily(i).map(function(v) {return v["Pokémon"];});
-    var data = getPartyData(base);
+    let evos = getEvolutionFamily(i).map(function(v) {return v["Pokémon"];});
+    let data = getPartyData(base);
 
     evos = evos.filter(function(v) {
         return v != finaldata["Pokémon"]["Reference"][i]["Pokémon"];
     })
     evos = evos.filter(function(v) {
-        return v != finaldata["Pokémon"]["Form"][i]["Form_"+JSONPath_Form];
+        return v != finaldata["Pokémon"]["Form"][i][DATA_Pokémon_Form["Form"]];
     })
 
-    for (var q = 0; q < evos.length; q++) {
-        var x = q+1;
+    for (let q = 0; q < evos.length; q++) {
+        let x = q+1;
         evos[q] = x+". "+evos[q];
     }
 
     evos = evos.join("\n");
 
-    var reply = prompt("Change Evolution\nEnter Number:\n"+evos,"");
-    var num = [];
+    let reply = prompt("Change Evolution\nEnter Number:\n"+evos,"");
+    let num = [];
 
     if (reply != null && reply != "") {
         evos = evos.split("\n");
 
-        for (var q = 0; q < evos.length; q++) {
+        for (let q = 0; q < evos.length; q++) {
             num.push(evos[q].split(". ",2)[0]);
         }
 
-        for (var q = 0; q < evos.length; q++) {
+        for (let q = 0; q < evos.length; q++) {
             evos[q] = evos[q].split(". ",2)[1];
         }
 
-        var result = evos[parseInt(reply)-1]
+        let result = evos[parseInt(reply)-1]
 
         if (data.includes("|")) {
             if (data.includes("pok")) {
                 data = data.split("|");
-                for (var u = 0; u < data.length; u++) {
+                for (let u = 0; u < data.length; u++) {
                     if (data[u].includes("pok:")) {
                         data[u] = data[u].split(":",1)[0]+":"+result;
                         break;
@@ -2851,43 +2801,42 @@ function changePartyEvolution(base,i) {
 
 function changePartyForm(base,i) {
 
-    var base;
-    var forms = getPokémonForm(i);
-    var data = getPartyData(base);
+    let forms = getPokémonForm(i);
+    let data = getPartyData(base);
 
 
     forms = forms.filter(function(v) {
         return v != getPokémonName(i);
     })
 
-    for (var q = 0; q < forms.length; q++) {
-        var x = q+1;
+    for (let q = 0; q < forms.length; q++) {
+        let x = q+1;
         forms[q] = x+". "+forms[q];
     }
 
     forms = forms.join("\n");
 
-    var reply = prompt("Change Form\nEnter Number:\n"+forms,"");
-    var num = [];
+    let reply = prompt("Change Form\nEnter Number:\n"+forms,"");
+    let num = [];
 
     if (reply != null && reply != "") {
 
         forms = forms.split("\n");
 
-        for (var q = 0; q < forms.length; q++) {
+        for (let q = 0; q < forms.length; q++) {
             num.push(forms[q].split(". ",2)[0]);
         }
 
-        for (var q = 0; q < forms.length; q++) {
+        for (let q = 0; q < forms.length; q++) {
             forms[q] = forms[q].split(". ",2)[1];
         }
 
-        var result = forms[parseInt(reply)-1]
+        let result = forms[parseInt(reply)-1]
 
         if (data.includes("|")) {
             if (data.includes("pok")) {
                 data = data.split("|");
-                for (var u = 0; u < data.length; u++) {
+                for (let u = 0; u < data.length; u++) {
                     if (data[u].includes("pok:")) {
                         data[u] = data[u].split(":",1)[0]+":"+result;
                         break;
@@ -2916,15 +2865,14 @@ function changePartyForm(base,i) {
 
 
 function moveLearnsetPartyBox(action) {
-    var action;
-    var base = document.querySelector("#move section[name='sidebar'] ul");
-    var lis = base.querySelectorAll(":scope > li");
-    var boxImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] ul > li img[value]');
-    var partyImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="party"] > div img[value]');
-    var partyArr = [];
-    var boxArr = [];
+    let base = document.querySelector("#move section[name='sidebar'] ul");
+    let lis = base.querySelectorAll(":scope > li");
+    let boxImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] ul > li img[value]');
+    let partyImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="party"] > div img[value]');
+    let partyArr = [];
+    let boxArr = [];
 
-    for (var q = 0; q < boxImg.length; q++) {
+    for (let q = 0; q < boxImg.length; q++) {
         if (boxImg[q].getAttribute("value") != undefined) {
             boxArr.push(boxImg[q].getAttribute("value"));
         }
@@ -2934,7 +2882,7 @@ function moveLearnsetPartyBox(action) {
     }
 
 
-    for (var q = 0; q < partyImg.length; q++) {
+    for (let q = 0; q < partyImg.length; q++) {
         if (partyImg[q].getAttribute("value") != undefined) {
             partyArr.push(partyImg[q].getAttribute("value"));
         }
@@ -2943,18 +2891,18 @@ function moveLearnsetPartyBox(action) {
         }
     }
 
-    for (var i = 0; i < lis.length; i++) {
+    for (let i = 0; i < lis.length; i++) {
         lis[i].style.display = "none";
     }
 
     if (action != undefined) {
-        for (var i = 0; i < lis.length; i++) {
-            var lisImg = lis[i].querySelectorAll(":scope > *[value]");
-            for (var q = 0; q < lisImg.length; q++) {
-                var conditions = [];
-                var tempArr = [];
+        for (let i = 0; i < lis.length; i++) {
+            let lisImg = lis[i].querySelectorAll(":scope > *[value]");
+            for (let q = 0; q < lisImg.length; q++) {
+                let conditions = [];
+                let tempArr = [];
                 if(action.includes(",")) {
-                    for (var u = 0; u < action.split(",").length; u++) {
+                    for (let u = 0; u < action.split(",").length; u++) {
                         tempArr.push(action.split(",")[u]);
                     }
                 }
@@ -2962,7 +2910,7 @@ function moveLearnsetPartyBox(action) {
                     tempArr = [action];
                 }
 
-                for (var u = 0; u < tempArr.length; u++) {
+                for (let u = 0; u < tempArr.length; u++) {
                     if (tempArr[u] == "PARTY") {
                         conditions.push(partyArr.includes(lisImg[q].getAttribute("value")))
                     }
@@ -2977,7 +2925,7 @@ function moveLearnsetPartyBox(action) {
         }
     }
     else {
-        for (var i = 0; i < lis.length; i++) {
+        for (let i = 0; i < lis.length; i++) {
             lis[i].style.removeProperty("display");
         }
     }
@@ -2987,9 +2935,9 @@ function moveLearnsetPartyBox(action) {
 
 }
 
-var moveLearnsetPB = [];
+let moveLearnsetPB = [];
 function movePartyBoxLearnset() {
-    var label = this.parentElement.querySelector(':scope > label[for="'+this.id+'"]').firstElementChild;
+    let label = this.parentElement.querySelector(':scope > label[for="'+this.id+'"]').firstElementChild;
 
     if (this.checked == true) {
         if (!moveLearnsetPB.includes(label.innerText)) {
@@ -3003,7 +2951,7 @@ function movePartyBoxLearnset() {
             })
         }
     }
-    var tempStr;
+    let tempStr;
 
     if (moveLearnsetPB.length > 1) {
         tempStr = moveLearnsetPB.join(",");
@@ -3012,7 +2960,7 @@ function movePartyBoxLearnset() {
         tempStr = moveLearnsetPB[0];
     }
 
-    var navMove = document.querySelector('#navigation input[value="Moves"]');
+    let navMove = document.querySelector('#navigation input[value="Moves"]');
     navMove.addEventListener("change", function() {moveLearnsetPartyBox(tempStr);});
 
     moveLearnsetPartyBox(tempStr);
@@ -3023,16 +2971,15 @@ function movePartyBoxLearnset() {
 
 
 function abilityLearnsetPartyBox(action) {
-    var action;
-    var base = document.querySelector("#ability section[name='sidebar'] ul");
-    var lis = base.querySelectorAll(":scope > li");
-    var boxImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] ul > li img[value]');
-    var partyImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="party"] > div img[value]');
-    var partyArr = [];
-    var boxArr = [];
+    let base = document.querySelector("#ability section[name='sidebar'] ul");
+    let lis = base.querySelectorAll(":scope > li");
+    let boxImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] ul > li img[value]');
+    let partyImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="party"] > div img[value]');
+    let partyArr = [];
+    let boxArr = [];
 
    
-    for (var q = 0; q < boxImg.length; q++) {
+    for (let q = 0; q < boxImg.length; q++) {
         if (boxImg[q].getAttribute("value") != undefined) {
             boxArr.push(boxImg[q].getAttribute("value"));
         }
@@ -3042,7 +2989,7 @@ function abilityLearnsetPartyBox(action) {
     }
 
 
-    for (var q = 0; q < partyImg.length; q++) {
+    for (let q = 0; q < partyImg.length; q++) {
         if (partyImg[q].getAttribute("value") != undefined) {
             partyArr.push(partyImg[q].getAttribute("value"));
         }
@@ -3051,19 +2998,19 @@ function abilityLearnsetPartyBox(action) {
         }
     }
 
-    for (var i = 0; i < lis.length; i++) {
+    for (let i = 0; i < lis.length; i++) {
         lis[i].style.display = "none";
     }
 
     if (action != undefined) {
-        for (var i = 0; i < lis.length; i++) {
-            var lisImg = lis[i].querySelectorAll(":scope > *[value]");
-            for (var q = 0; q < lisImg.length; q++) {
+        for (let i = 0; i < lis.length; i++) {
+            let lisImg = lis[i].querySelectorAll(":scope > *[value]");
+            for (let q = 0; q < lisImg.length; q++) {
                 
-                var conditions = [];
-                var tempArr = [];
+                let conditions = [];
+                let tempArr = [];
                 if(action.includes(",")) {
-                    for (var u = 0; u < action.split(",").length; u++) {
+                    for (let u = 0; u < action.split(",").length; u++) {
                         tempArr.push(action.split(",")[u]);
                     }
                 }
@@ -3071,7 +3018,7 @@ function abilityLearnsetPartyBox(action) {
                     tempArr = [action];
                 }
 
-                for (var u = 0; u < tempArr.length; u++) {
+                for (let u = 0; u < tempArr.length; u++) {
                     if (tempArr[u] == "PARTY") {
                         conditions.push(partyArr.includes(lisImg[q].getAttribute("value")))
                     }
@@ -3086,7 +3033,7 @@ function abilityLearnsetPartyBox(action) {
         }
     }
     else {
-        for (var i = 0; i < lis.length; i++) {
+        for (let i = 0; i < lis.length; i++) {
             lis[i].style.removeProperty("display");
         }
     }
@@ -3095,9 +3042,9 @@ function abilityLearnsetPartyBox(action) {
 
 
 }
-var abilityLearnsetPB = [];
+let abilityLearnsetPB = [];
 function abilityPartyBoxLearnset() {
-    var label = this.parentElement.querySelector(':scope > label[for="'+this.id+'"]').firstElementChild;
+    let label = this.parentElement.querySelector(':scope > label[for="'+this.id+'"]').firstElementChild;
 
     if (this.checked == true) {
         if (!abilityLearnsetPB.includes(label.innerText)) {
@@ -3111,7 +3058,7 @@ function abilityPartyBoxLearnset() {
             })
         }
     }
-    var tempStr;
+    let tempStr;
 
     if (abilityLearnsetPB.length > 1) {
         tempStr = abilityLearnsetPB.join(",");
@@ -3120,7 +3067,7 @@ function abilityPartyBoxLearnset() {
         tempStr = abilityLearnsetPB[0];
     }
 
-    var navAbility = document.querySelector('#navigation input[value="Abilities"]');
+    let navAbility = document.querySelector('#navigation input[value="Abilities"]');
     navAbility.addEventListener("change", function() {abilityLearnsetPartyBox(tempStr);});
 
     abilityLearnsetPartyBox(tempStr);
@@ -3129,37 +3076,37 @@ function abilityPartyBoxLearnset() {
 
 
 function trainerPokExport() {
-    var data = findUpTag(this,"LI").getAttribute("data-string");
+    let data = findUpTag(this,"LI").getAttribute("data-string");
     navigator.clipboard.writeText(data);
     consoleText("Copied Data String!");
 }
 
 
 function trainerPokCycle(event) {
-    var tar = event.target.parentElement;
-    var val = tar.getAttribute("value");
-    var base = tar.parentElement.querySelector(':scope > div[name="data"]');
+    let tar = event.target.parentElement;
+    let val = tar.getAttribute("value");
+    let base = tar.parentElement.querySelector(':scope > div[name="data"]');
 
 
-    var tempArr = [];
-    var divs = base.querySelectorAll(':scope > div[name]');
+    let tempArr = [];
+    let divs = base.querySelectorAll(':scope > div[name]');
 
-    for (var q = 0; q < divs.length; q++) {
+    for (let q = 0; q < divs.length; q++) {
         tempArr.push(divs[q].getAttribute("name"));
     }
 
     if (tempArr.length > 1) {
-        for (var q = 0; q < divs.length; q++) {
+        for (let q = 0; q < divs.length; q++) {
             divs[q].style.display = "none";
         }
 
 
-        var div = base.querySelectorAll(':scope > div[name="'+val+'"]');
-        for (var q = 0; q < div.length; q++) {
+        let div = base.querySelectorAll(':scope > div[name="'+val+'"]');
+        for (let q = 0; q < div.length; q++) {
             div[q].style.display = "unset";
         }
         
-        for (var q = 0; q < tempArr.length; q++) {
+        for (let q = 0; q < tempArr.length; q++) {
             if(tempArr[q] == val) {
                 if (q != (parseInt(tempArr.length)-1)) {
                     tar.setAttribute("value",tempArr[q+1]);
@@ -3174,13 +3121,11 @@ function trainerPokCycle(event) {
 
 
 function overviewMove(dir) {
+    let base = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"]');
+    let left = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"] > div > span:first-child > *')
+    let right = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"] > div > span:last-child > *')
 
-    var dir;
-    var base = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"]');
-    var left = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"] > div > span:first-child > *')
-    var right = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"] > div > span:last-child > *')
-
-    var sel;
+    let sel;
 
     
 
@@ -3192,36 +3137,36 @@ function overviewMove(dir) {
     }
 
 
-    var lis = base.querySelectorAll(':scope ul li');
-    var figs = base.querySelectorAll(":scope figure")
+    let lis = base.querySelectorAll(':scope ul li');
+    let figs = base.querySelectorAll(":scope figure")
 
-    var header = base.querySelector(":scope > span:first-child > *");
+    let header = base.querySelector(":scope > span:first-child > *");
 
-    var ul = base.querySelector(":scope ul")
+    let ul = base.querySelector(":scope ul")
 
-    var val1 = parseInt(sel.getAttribute("value"));
-    var val2 = parseInt(lis.length) - 1;
+    let val1 = parseInt(sel.getAttribute("value"));
+    let val2 = parseInt(lis.length) - 1;
 
 
     if (dir == "left" && val1 > 0) {
 
-        var x = val1 - 1;
+        let x = val1 - 1;
         ul.style.transform = "translate(-"+x+"00%, 0)";
 
        
         header.innerText = base.querySelector(":scope > div ul li[name='"+x+"'] img").getAttribute("title");
-        for (var q = 0; q < figs.length; q++) {
+        for (let q = 0; q < figs.length; q++) {
             figs[q].setAttribute("value",x);
         }
         figs[1].classList.remove("last");
     }
     else if (dir == "right" && val1 < val2) {
 
-        var x = val1 + 1;
+        let x = val1 + 1;
         ul.style.transform = "translate(-"+x+"00%, 0)";
 
         header.innerText = base.querySelector(":scope > div ul li[name='"+x+"'] img").getAttribute("title");
-        for (var q = 0; q < figs.length; q++) {
+        for (let q = 0; q < figs.length; q++) {
             figs[q].setAttribute("value",x);
         }
    
@@ -3240,28 +3185,26 @@ function overviewMove(dir) {
 
 
 function fullscreenIMG(imgs,x) {
-    var imgs;
-    var x;
-    var base = document.querySelector("#fullscreen");
-    var ul = base.querySelector(":scope ul");
-    var lis = base.querySelectorAll(":scope li")
+    let base = document.querySelector("#fullscreen");
+    let ul = base.querySelector(":scope ul");
+    let lis = base.querySelectorAll(":scope li")
 
-    var val1 = parseInt(x);
-    var val2 = parseInt(lis.length);
+    let val1 = parseInt(x);
+    let val2 = parseInt(lis.length);
 
-    var baseBox = base.querySelectorAll(":scope > div ul li");
-    for (var i = 0; i < baseBox.length; i++) {
+    let baseBox = base.querySelectorAll(":scope > div ul li");
+    for (let i = 0; i < baseBox.length; i++) {
         baseBox[i].remove();
     }
 
-    var figs = base.querySelectorAll(":scope figure");
-    for (var i = 0; i < figs.length; i++) {
+    let figs = base.querySelectorAll(":scope figure");
+    for (let i = 0; i < figs.length; i++) {
         figs[i].setAttribute("value",val1);
     }
 
-    for (var i = 0; i < imgs.length; i++) {
-        var imgBox = document.createElement("li");
-        var img = document.createElement("img");
+    for (let i = 0; i < imgs.length; i++) {
+        let imgBox = document.createElement("li");
+        let img = document.createElement("img");
         img.src = imgs[i].src;
         img.title = imgs[i].title;
         imgBox.setAttribute("name",i);
@@ -3299,14 +3242,13 @@ function fullscreenIMG(imgs,x) {
 
 function fullscreenMove(dir) {
 
-    var dir;
-    var sel;
+    let sel;
     
-    var base1 = document.querySelector('#fullscreen');
-    var base2 = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"]');
+    let base1 = document.querySelector('#fullscreen');
+    let base2 = document.querySelector('#contain div#map > section[name="sidebar"] > div > *[name="overview"]');
 
-    var left = base1.querySelector(':scope > figure:first-child');
-    var right = base1.querySelector(':scope > figure:last-child');
+    let left = base1.querySelector(':scope > figure:first-child');
+    let right = base1.querySelector(':scope > figure:last-child');
 
     if (dir == "left") {
         sel = left;
@@ -3315,23 +3257,23 @@ function fullscreenMove(dir) {
         sel = right;
     }
 
-    var header = base2.querySelector(':scope > span:first-child > *')
+    let header = base2.querySelector(':scope > span:first-child > *')
 
-    var figs1 = base1.querySelectorAll(":scope figure");
-    var figs2 = base2.querySelectorAll(":scope figure");
+    let figs1 = base1.querySelectorAll(":scope figure");
+    let figs2 = base2.querySelectorAll(":scope figure");
 
-    var ul1 = base1.querySelector(':scope ul');
-    var ul2 = base2.querySelector(':scope ul');
+    let ul1 = base1.querySelector(':scope ul');
+    let ul2 = base2.querySelector(':scope ul');
 
-    var lis = base1.querySelectorAll(':scope li[name]');
+    let lis = base1.querySelectorAll(':scope li[name]');
 
-    var val1 = parseInt(sel.getAttribute("value"));
-    var val2 = parseInt(lis.length) - 1;
+    let val1 = parseInt(sel.getAttribute("value"));
+    let val2 = parseInt(lis.length) - 1;
 
 
 
     if (dir == "left" && val1 > 0) {
-        var x = val1 - 1;
+        let x = val1 - 1;
 
         ul1.style.transform = "translate(-"+x+"00%, 0)";
         ul2.style.transform = "translate(-"+x+"00%, 0)";
@@ -3340,7 +3282,7 @@ function fullscreenMove(dir) {
         header.innerText = base2.querySelector(":scope img").getAttribute("title");
 
 
-        for (var q = 0; q < figs1.length; q++) {
+        for (let q = 0; q < figs1.length; q++) {
             figs1[q].setAttribute("value",x);
             figs2[q].setAttribute("value",x);
         }
@@ -3350,13 +3292,13 @@ function fullscreenMove(dir) {
     }
     else if (dir == "right" && val1 < val2) {
 
-        var x = val1 + 1;
+        let x = val1 + 1;
         ul1.style.transform = "translate(-"+x+"00%, 0)";
         ul2.style.transform = "translate(-"+x+"00%, 0)";
         header.innerText = base2.querySelector(":scope img").getAttribute("title");
 
 
-        for (var q = 0; q < figs1.length; q++) {
+        for (let q = 0; q < figs1.length; q++) {
             figs1[q].setAttribute("value",x);
             figs2[q].setAttribute("value",x);
         }
@@ -3375,8 +3317,8 @@ function fullscreenMove(dir) {
 }
 
 
-function exitFullscreen(base) {
-    var base = document.querySelector("#fullscreen");
+function exitFullscreen() {
+    let base = document.querySelector("#fullscreen");
     base.classList.remove("open");
 }
 
@@ -3387,12 +3329,12 @@ function calcTypeAdv(types,condition) {
     let used = [];
 
     if (condition == "Defending") {
-        for (var i = 0; i < types.length; i++) {
+        for (let i = 0; i < types.length; i++) {
             let arr = returnTypeAdvantage(types[i],"Defending");
 
-            for (var q = 0; q < arr.length; q++) {
+            for (let q = 0; q < arr.length; q++) {
                 
-                for (var r = 0; r < arr[q].length; r++) {
+                for (let r = 0; r < arr[q].length; r++) {
     
                     if (q == 0) { // Normal
                         if (!used.includes(arr[q][r])) {
@@ -3402,7 +3344,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = adv[t]["Value"]*1;
                                 }
@@ -3418,7 +3360,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = adv[t]["Value"]*0.5;
                                 }
@@ -3434,7 +3376,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = adv[t]["Value"]*2;
                                 }
@@ -3450,7 +3392,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = 0;
                                 }
@@ -3465,12 +3407,12 @@ function calcTypeAdv(types,condition) {
         }
     }
     if (condition == "Attacking") {
-        for (var i = 0; i < types.length; i++) {
+        for (let i = 0; i < types.length; i++) {
             let arr = returnTypeAdvantage(types[i],"Attacking");
 
-            for (var q = 0; q < arr.length; q++) {
+            for (let q = 0; q < arr.length; q++) {
                 
-                for (var r = 0; r < arr[q].length; r++) {
+                for (let r = 0; r < arr[q].length; r++) {
     
                     if (q == 0) { // Normal
                         if (!used.includes(arr[q][r])) {
@@ -3480,7 +3422,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = adv[t]["Value"]*1;
                                 }
@@ -3496,7 +3438,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = adv[t]["Value"]*0.5;
                                 }
@@ -3512,7 +3454,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = adv[t]["Value"]*2;
                                 }
@@ -3528,7 +3470,7 @@ function calcTypeAdv(types,condition) {
                             adv.push(obj);
                         }
                         else {
-                            for (var t = 0; t < adv.length; t++) {
+                            for (let t = 0; t < adv.length; t++) {
                                 if (adv[t]["Type"] == arr[q][r]) {
                                     adv[t]["Value"] = 0;
                                 }
@@ -3545,8 +3487,8 @@ function calcTypeAdv(types,condition) {
 
 
     let result = [];
-    for (var i = 0; i < Types.length; i++) {
-        for (var q = 0; q < adv.length; q++) {
+    for (let i = 0; i < Types.length; i++) {
+        for (let q = 0; q < adv.length; q++) {
             if (adv[q]["Type"] == Types[i].toUpperCase()) {
                 result.push(adv[q]);
             }
@@ -3559,27 +3501,26 @@ function calcTypeAdv(types,condition) {
 
 
 function calculateTypeAdvantage(i) {
-    var i;
-    var primary = returnData(i,"Type","")[0];
-    var secondary = returnData(i,"Type","")[1];
+    let primary = returnData(i,"Type","")[0];
+    let secondary = returnData(i,"Type","")[1];
 
-    var result = [];
+    let result = [];
 
-    var Normal = [];
-    var Weakness2x = [];
-    var Weakness4x = [];
-    var Strength2x = [];
-    var Strength4x = [];
-    var Immunity = [];
+    let Normal = [];
+    let Weakness2x = [];
+    let Weakness4x = [];
+    let Strength2x = [];
+    let Strength4x = [];
+    let Immunity = [];
 
-    var primaryNormal = [];
-    var primary2xWeakness = [];
-    var primary2xStrength = [];
-    var primaryImmunity = [];
-    var secondaryNormal = [];
-    var secondary2xWeakness = [];
-    var secondary2xStrength = [];
-    var secondaryImmunity = [];
+    let primaryNormal = [];
+    let primary2xWeakness = [];
+    let primary2xStrength = [];
+    let primaryImmunity = [];
+    let secondaryNormal = [];
+    let secondary2xWeakness = [];
+    let secondary2xStrength = [];
+    let secondaryImmunity = [];
 
 
     primaryNormal = returnTypeAdvantage(primary,"Defending")[0];
@@ -3595,29 +3536,29 @@ function calculateTypeAdvantage(i) {
     }
 
 
-    for (var q = 0; q < primaryNormal.length; q++) {
+    for (let q = 0; q < primaryNormal.length; q++) {
         if (!Normal.includes(primaryNormal[q])){
             Normal.push(primaryNormal[q]);
         }
     }
-    for (var q = 0; q < secondaryNormal.length; q++) {
+    for (let q = 0; q < secondaryNormal.length; q++) {
         if (!Normal.includes(secondaryNormal[q])){
             Normal.push(secondaryNormal[q]);
         }
     }
 
-    for (var q = 0; q < primaryImmunity.length; q++) {
+    for (let q = 0; q < primaryImmunity.length; q++) {
         if (!Immunity.includes(primaryImmunity[q])){
             Immunity.push(primaryImmunity[q]);
         }
     }
-    for (var q = 0; q < secondaryImmunity.length; q++) {
+    for (let q = 0; q < secondaryImmunity.length; q++) {
         if (!Immunity.includes(secondaryImmunity[q])){
             Immunity.push(secondaryImmunity[q]);
         }
     }
 
-    for (var q = 0; q < primary2xStrength.length; q++) {
+    for (let q = 0; q < primary2xStrength.length; q++) {
         if(secondary2xStrength.includes(primary2xStrength[q])) {
             Strength4x.push(primary2xStrength[q]);
         }
@@ -3625,14 +3566,14 @@ function calculateTypeAdvantage(i) {
             Strength2x.push(primary2xStrength[q]);
         }
     }
-    for (var q = 0; q < secondary2xStrength.length; q++) {
+    for (let q = 0; q < secondary2xStrength.length; q++) {
         if(!Strength2x.includes(secondary2xStrength[q]) && !Strength4x.includes(secondary2xStrength[q])) {
             Strength2x.push(secondary2xStrength[q]);
         }
  
     }
 
-    for (var q = 0; q < primary2xWeakness.length; q++) {
+    for (let q = 0; q < primary2xWeakness.length; q++) {
         if(secondary2xWeakness.includes(primary2xWeakness[q])) {
             Weakness4x.push(primary2xWeakness[q]);
         }
@@ -3640,22 +3581,22 @@ function calculateTypeAdvantage(i) {
             Weakness2x.push(primary2xWeakness[q]);
         }
     }
-    for (var q = 0; q < secondary2xWeakness.length; q++) {
+    for (let q = 0; q < secondary2xWeakness.length; q++) {
         if(!Weakness2x.includes(secondary2xWeakness[q]) && !Weakness4x.includes(secondary2xWeakness[q])) {
             Weakness2x.push(secondary2xWeakness[q]);
         }
     }
 
-    var arrs = [Normal,Weakness2x,Weakness4x,Strength2x,Strength4x,Immunity];
-    var arrsName = ["Normal","Weakness2x","Weakness4x","Strength2x","Strength4x","Immunity"];
+    let arrs = [Normal,Weakness2x,Weakness4x,Strength2x,Strength4x,Immunity];
+    let arrsName = ["Normal","Weakness2x","Weakness4x","Strength2x","Strength4x","Immunity"];
 
-    var tempWeakness = [];
-    var tempStrength = [];
+    let tempWeakness = [];
+    let tempStrength = [];
 
-    for (var q = 0; q < arrs.length; q++) {
-        for (var u = 0; u < arrs[q].length; u++) {
+    for (let q = 0; q < arrs.length; q++) {
+        for (let u = 0; u < arrs[q].length; u++) {
             if (Weakness2x.includes(arrs[q][u]) && arrsName[q] != "Weakness2x" && arrsName[q] != "Immunity") {
-                var obj = new Object;
+                let obj = new Object;
                 obj["Name"] = arrsName[q];
                 obj["Type"] = arrs[q][u];
                 obj["ID"] = q;
@@ -3663,7 +3604,7 @@ function calculateTypeAdvantage(i) {
             }
        
             if (Strength2x.includes(arrs[q][u]) && arrsName[q] != "Strength2x" && arrsName[q] != "Immunity") {
-                var obj = new Object;
+                let obj = new Object;
                 obj["Name"] = arrsName[q];
                 obj["Type"] = arrs[q][u];
                 obj["ID"] = q;
@@ -3673,7 +3614,7 @@ function calculateTypeAdvantage(i) {
         }
     }
 
-    for (var q = 0; q < tempStrength.length; q++) {
+    for (let q = 0; q < tempStrength.length; q++) {
         if (tempStrength[q]["Name"] == "Normal") {
             Normal = Normal.filter(function(val) {return val != tempStrength[q]["Type"]})
         }
@@ -3686,7 +3627,7 @@ function calculateTypeAdvantage(i) {
         }
     }
 
-    for (var q = 0; q < tempWeakness.length; q++) {
+    for (let q = 0; q < tempWeakness.length; q++) {
         if (tempWeakness[q]["Name"] == "Normal") {
             Normal = Normal.filter(function(val) {return val != tempWeakness[q]["Type"]})
         }
@@ -3700,7 +3641,7 @@ function calculateTypeAdvantage(i) {
     }
     
 
-    for (var u = 0; u < Immunity.length; u++) {
+    for (let u = 0; u < Immunity.length; u++) {
         Normal = Normal.filter(function(val) {return val != Immunity[u]})
         Weakness2x = Weakness2x.filter(function(val) {return val != Immunity[u]})
         Weakness4x = Weakness4x.filter(function(val) {return val != Immunity[u]})
@@ -3710,57 +3651,57 @@ function calculateTypeAdvantage(i) {
     
     
 
-    var types = ["NORMAL","FIGHTING","FLYING","POISON","GROUND","ROCK","BUG","GHOST","STEEL","FIRE","WATER","GRASS","ELECTRIC","PSYCHIC","ICE","DRAGON","DARK","FAIRY"];
-    var FinalNormal = [];
-    var FinalWeakness2x = [];
-    var FinalWeakness4x = [];
-    var FinalStrength2x = [];
-    var FinalStrength4x = [];
-    var FinalImmunity = [];
+    let types = ["NORMAL","FIGHTING","FLYING","POISON","GROUND","ROCK","BUG","GHOST","STEEL","FIRE","WATER","GRASS","ELECTRIC","PSYCHIC","ICE","DRAGON","DARK","FAIRY"];
+    let FinalNormal = [];
+    let FinalWeakness2x = [];
+    let FinalWeakness4x = [];
+    let FinalStrength2x = [];
+    let FinalStrength4x = [];
+    let FinalImmunity = [];
     
 
-    for (var q = 0; q < types.length; q++) {
-        for (var u = 0; u < Normal.length; u++) { 
+    for (let q = 0; q < types.length; q++) {
+        for (let u = 0; u < Normal.length; u++) { 
             if (Normal[u] == types[q]) {
                 FinalNormal[q] = Normal[u];
             }
         }
     }
 
-    for (var q = 0; q < types.length; q++) {
-        for (var u = 0; u < Weakness2x.length; u++) { 
+    for (let q = 0; q < types.length; q++) {
+        for (let u = 0; u < Weakness2x.length; u++) { 
             if (Weakness2x[u] == types[q]) {
                 FinalWeakness2x[q] = Weakness2x[u];
             }
         }
     }
 
-    for (var q = 0; q < types.length; q++) {
-        for (var u = 0; u < Weakness4x.length; u++) { 
+    for (let q = 0; q < types.length; q++) {
+        for (let u = 0; u < Weakness4x.length; u++) { 
             if (Weakness4x[u] == types[q]) {
                 FinalWeakness4x[q] = Weakness4x[u];
             }
         }
     }
     
-    for (var q = 0; q < types.length; q++) {
-        for (var u = 0; u < Strength2x.length; u++) { 
+    for (let q = 0; q < types.length; q++) {
+        for (let u = 0; u < Strength2x.length; u++) { 
             if (Strength2x[u] == types[q]) {
                 FinalStrength2x[q] = Strength2x[u];
             }
         }
     }
     
-    for (var q = 0; q < types.length; q++) {
-        for (var u = 0; u < Strength4x.length; u++) { 
+    for (let q = 0; q < types.length; q++) {
+        for (let u = 0; u < Strength4x.length; u++) { 
             if (Strength4x[u] == types[q]) {
                 FinalStrength4x[q] = Strength4x[u];
             }
         }
     }
     
-    for (var q = 0; q < types.length; q++) {
-        for (var u = 0; u < Immunity.length; u++) { 
+    for (let q = 0; q < types.length; q++) {
+        for (let u = 0; u < Immunity.length; u++) { 
             if (Immunity[u] == types[q]) {
                 FinalImmunity[q] = Immunity[u];
             }
@@ -3786,20 +3727,18 @@ function calculateTypeAdvantage(i) {
 }
 
 function formatCalcTypeAdvantage(arr) {
-    
-    var arr;
-    var result;
-    var tempArr = [];
+    let result;
+    let tempArr = [];
 
-    var Normal;
-    var Weakness2x;
-    var Weakness4x;
-    var Strength2x;
-    var Strength4x;
-    var Immunity;
+    let Normal;
+    let Weakness2x;
+    let Weakness4x;
+    let Strength2x;
+    let Strength4x;
+    let Immunity;
 
-    for (var q = 0; q < arr.length; q++) {
-        for (var u = 0; u < arr[q].length; u++) {
+    for (let q = 0; q < arr.length; q++) {
+        for (let u = 0; u < arr[q].length; u++) {
             arr[q][u] = titleCase(arr[q][u]);
         }
     }
@@ -3869,21 +3808,19 @@ function formatCalcTypeAdvantage(arr) {
 
 
 function returnTypeAdvantage(type,condition) {
-    var type;
-    var condition;
-    var arr = finaldata["Game"]["Type Chart_"+JSONPath_Typechart];
-    var keys = [];
-    var result = [];
-    var weakness = [];
-    var strength = [];
-    var immunity = [];
-    var normal = [];
-    var types = [];
+    let arr = finaldata["Game"]["Type Chart_"+JSONPath_Typechart];
+    let keys = [];
+    let result = [];
+    let weakness = [];
+    let strength = [];
+    let immunity = [];
+    let normal = [];
+    let types = [];
 
     type = type.toUpperCase();
 
-    for (var q = 0; q < arr.length; q++) {
-        for (var u = 0; u < Object.keys(arr[q]).length; u++) {
+    for (let q = 0; q < arr.length; q++) {
+        for (let u = 0; u < Object.keys(arr[q]).length; u++) {
             if (!types.includes(Object.keys(arr[q])[u])) {
                 types.push(Object.keys(arr[q])[u]);
             }
@@ -3891,10 +3828,10 @@ function returnTypeAdvantage(type,condition) {
     }
 
     if (condition == "Defending") {
-        for (var q = 0; q < arr.length; q++) {
-            var keys = Object.keys(arr[q])
+        for (let q = 0; q < arr.length; q++) {
+            let keys = Object.keys(arr[q])
 
-            for (var u = 0; u < keys.length; u++) {
+            for (let u = 0; u < keys.length; u++) {
                 if (types[u] == type) {
                     if (arr[q][keys[u]].includes("½")) {
                         weakness.push(types[q])
@@ -3913,11 +3850,11 @@ function returnTypeAdvantage(type,condition) {
         }
     }
     else if (condition == "Attacking") {
-        for (var q = 0; q < arr.length; q++) {
-            var keys = Object.keys(arr[q])
+        for (let q = 0; q < arr.length; q++) {
+            let keys = Object.keys(arr[q])
  
             if (types[q] == type) {
-                for (var u = 0; u < keys.length; u++) {
+                for (let u = 0; u < keys.length; u++) {
                     if (arr[q][keys[u]].includes("½")) {
                         weakness.push(types[u])
                     }
@@ -3935,7 +3872,6 @@ function returnTypeAdvantage(type,condition) {
         }
     }
 
-    var result = [];
     result.push(normal)
     result.push(weakness);
     result.push(strength);
@@ -3947,31 +3883,28 @@ function returnTypeAdvantage(type,condition) {
 
 
 function itemPockets() {
+    let vals = this.parentElement.querySelectorAll(":scope > input:checked");
+    let base = document.querySelector("#item section[name='list'] ol");
+    let nodes = base.querySelectorAll(':scope > label');
 
-
-    var vals = this.parentElement.querySelectorAll(":scope > input:checked");
-    var base = document.querySelector("#item section[name='list'] ol");
-    var nodes = base.querySelectorAll(':scope > label');
-
-    for (var q = 0; q < nodes.length; q++) {
+    for (let q = 0; q < nodes.length; q++) {
         nodes[q].style.display = "none";
     }
 
-    for (var i = 0; i < vals.length; i++) {
-        var val = (vals[i].value).toLowerCase();
-        var node = base.querySelectorAll(':scope > label[data-pocket="'+val+'"]');
-        for (var q = 0; q < node.length; q++) {
+    for (let i = 0; i < vals.length; i++) {
+        let val = (vals[i].value).toLowerCase();
+        let node = base.querySelectorAll(':scope > label[data-pocket="'+val+'"]');
+        for (let q = 0; q < node.length; q++) {
             node[q].style.removeProperty("display");
         }
     }
 
 
 }
-var testImageResult;
+let testImageResult;
 function testImage(url) {
-    var tester=new Image();
-    var testImageResult = undefined;
-    var url;
+    let tester=new Image();
+    let testImageResult = undefined;
     tester.src = url;
     tester.addEventListener("load", function() {
         testImageResult = true;
@@ -3986,19 +3919,17 @@ function testImage(url) {
 
 
 function searchOptionsTitle(base) {
+    let searches = base.querySelectorAll(':scope > *:not(input)');
+    let tempArr = [];
+    let result = "";
+    let exclude = ["name","attack","defense","spatk","spdef","speed","total"];
 
-    var base;
-    var searches = base.querySelectorAll(':scope > *:not(input)');
-    var tempArr = [];
-    var result = "";
-    var exclude = ["name","attack","defense","spatk","spdef","speed","total"];
-
-    for (var i = 0; i < searches.length; i++) {
-        var search = searches[i].getAttributeNames()
-        for (var q = 0; q < search.length; q++) {
+    for (let i = 0; i < searches.length; i++) {
+        let search = searches[i].getAttributeNames()
+        for (let q = 0; q < search.length; q++) {
             if (search[q].includes("data-search-")) {
-                var check;
-                for (var u = 0; u < exclude.length; u++) {
+                let check;
+                for (let u = 0; u < exclude.length; u++) {
                     if (search[q].includes(exclude[u])) {
                         check = false
                         break;
@@ -4050,14 +3981,14 @@ function searchOptionsTitle(base) {
 
 function resizeMap() {
 
-    var options = document.querySelector("#map-options")
-    var checked = options.querySelectorAll(':scope input:checked')
-    var contain = document.querySelector("#map-contain");
-    var mapImg = document.querySelector(".map-inner img[usemap]");
+    let options = document.querySelector("#map-options")
+    let checked = options.querySelectorAll(':scope input:checked')
+    let contain = document.querySelector("#map-contain");
+    let mapImg = document.querySelector(".map-inner img[usemap]");
 
-    var result = [];
-    for (var i = 0; i < checked.length; i++) {
-        var name = checked[i].nextElementSibling.innerText;
+    let result = [];
+    for (let i = 0; i < checked.length; i++) {
+        let name = checked[i].nextElementSibling.innerText;
         result.push(name)
     }
 
@@ -4069,15 +4000,13 @@ function resizeMap() {
 }
 
 function getMapCoords(area) {
-  var area;
+  let result = "";
 
-  var result = "";
-
-  for (var i = 0; i < MapArea.length; i++) {
+  for (let i = 0; i < MapArea.length; i++) {
     if (MapArea[i]["id"].includes("<br>")) {
-      var brk = MapArea[i]["id"].split("<br>");
-      var check = false;
-      for (var q = 0; q < brk.length; q++) {
+      let brk = MapArea[i]["id"].split("<br>");
+      let check = false;
+      for (let q = 0; q < brk.length; q++) {
         if (brk[q] == area) {
           check = true;
         }
@@ -4102,22 +4031,19 @@ function getMapCoords(area) {
 
 
 function getMapPoints(area,base) {
-    var area;
-  
-    var base;
 
-    var areas = base.querySelectorAll(":scope map area");
-    var result = [];
+    let areas = base.querySelectorAll(":scope map area");
+    let result = [];
 
-    for (var i = 0; i < areas.length; i++) {
+    for (let i = 0; i < areas.length; i++) {
         if (areas[i].getAttribute("data-title") == area || areas[i].getAttribute("data-title").split("_")[0] == area) {
             result.push(areas[i].getAttribute("coords"))
         }
     }
     if (result.length == 0) {
-        var area2 = getLocationFromArea(area);
-        for (var q = 0; q < area2.length; q++) {
-            for (var i = 0; i < areas.length; i++) {
+        let area2 = getLocationFromArea(area);
+        for (let q = 0; q < area2.length; q++) {
+            for (let i = 0; i < areas.length; i++) {
                 if (areas[i].getAttribute("data-title") == area2[q] || areas[i].getAttribute("data-title").split("_")[0] == area2[q]) {
                     result.push(areas[i].getAttribute("coords"))
                 }
@@ -4128,14 +4054,11 @@ function getMapPoints(area,base) {
 }
 
 function getMapPointsTest(area,base) {
-    var area;
-  
-    var base;
 
-    var areas = base.querySelectorAll(":scope map area");
-    var result = [];
+    let areas = base.querySelectorAll(":scope map area");
+    let result = [];
 
-    for (var i = 0; i < areas.length; i++) {
+    for (let i = 0; i < areas.length; i++) {
         if (areas[i].getAttribute("data-title") == area || areas[i].getAttribute("data-title").split("_")[0] == area) {
             result.push(areas[i].getAttribute("coords"))
         }
@@ -4146,17 +4069,16 @@ function getMapPointsTest(area,base) {
   
   
 function getLocationFromArea(area) {
-    var arr = finaldata["Locations"]["Connecting"];
-    var area;
+    let arr = finaldata["Locations"]["Connecting"];
 
-    var result = [];
-    for (var i = 0; i < arr.length; i++) {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
         if (getApplicable(arr[i]["Game"])) {
             if (arr[i]["Located"] != undefined) {
                 if (arr[i]["Location"] == area) {
                     if (arr[i]["Located"].includes(",")) {
-                        var arr2 = arr[i]["Located"].split(",");
-                        for (var q = 0; q < arr2.length; q++) {
+                        let arr2 = arr[i]["Located"].split(",");
+                        for (let q = 0; q < arr2.length; q++) {
                             result.push(arr2[q])
                         }
                     }
@@ -4172,17 +4094,16 @@ function getLocationFromArea(area) {
 }
 
 function getAreasFromLocation(location) {
-    var arr = finaldata["Locations"]["Connecting"];
-    var location;
+    let arr = finaldata["Locations"]["Connecting"];
 
-    var result = [];
+    let result = [];
 
-    for (var i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         if (getApplicable(arr[i]["Game"])) {
             if (arr[i]["Located"] != undefined) {
                 if (arr[i]["Located"].includes(",")) {
-                    var arr2 = arr[i]["Located"].split(",");
-                    for (var q = 0; q < arr2.length; q++) {
+                    let arr2 = arr[i]["Located"].split(",");
+                    for (let q = 0; q < arr2.length; q++) {
                         if (arr2[q] == location) {
                             result.push(arr[i]["Location"])
                         }
@@ -4202,11 +4123,10 @@ function getAreasFromLocation(location) {
 
 
 function excludeDuplicateAreas(arr) {
-    var arr;
-    var exclude = [];
-    var broken = [];
+    let exclude = [];
+    let broken = [];
 
-    var arr1 = JSON.parse(JSON.stringify(arr));
+    let arr1 = JSON.parse(JSON.stringify(arr));
 
     if ((GameID >= 7 && GameID <= 8) || GameID == 12) {
         broken = ["Marine Cave","Battle Tent","Terra Cave"];
@@ -4215,21 +4135,21 @@ function excludeDuplicateAreas(arr) {
         broken = ["S.S. Spiral"];
     }
 
-    var list = finaldata["Locations"]["Reference"];
+    let list = finaldata["Locations"]["Reference"];
 
 
 
 
 
-    var del = [];
+    let del = [];
 
-    for (var i = 0; i < arr1.length; i++) {
+    for (let i = 0; i < arr1.length; i++) {
 
-        var listboo = true;
-        for (var q = 0; q < list.length; q++) {
+        let listboo = true;
+        for (let q = 0; q < list.length; q++) {
             if (arr1[i]["id"].includes("<br>")) {
-                var ids = arr1[i]["id"].split("<br>");
-                for (var u = 0; u < ids.length; u++) {
+                let ids = arr1[i]["id"].split("<br>");
+                for (let u = 0; u < ids.length; u++) {
                     if (ids[u] == list[q]["Location"]) {
                         listboo = false;
                         break;
@@ -4246,25 +4166,25 @@ function excludeDuplicateAreas(arr) {
             del.push(i)
         }
        
-        for (var q = 0; q < broken.length; q++) {
+        for (let q = 0; q < broken.length; q++) {
             if (arr1[i]["id"] == broken[q]) {
                 del.push(i);
             }
         }
     }
     
-    var arrResult = [];
-    for (var i = 0; i < arr1.length; i++) {
+    let arrResult = [];
+    for (let i = 0; i < arr1.length; i++) {
         if (!del.includes(i)) {
             arrResult.push(arr1[i]);
         }
     }
 
-    var arr2 = JSON.parse(JSON.stringify(arrResult));
-    var tempArr = [{}]
-    for (var i = 0; i < arr2.length; i++) {
-        var check = false;
-        for (var q = 0; q < tempArr.length; q++) {
+    let arr2 = JSON.parse(JSON.stringify(arrResult));
+    let tempArr = [{}]
+    for (let i = 0; i < arr2.length; i++) {
+        let check = false;
+        for (let q = 0; q < tempArr.length; q++) {
             if (tempArr[q]["coords"] == arr2[i]["coords"] && tempArr[q]["id"] != arr2[i]["id"]) {
                 tempArr[q]["id"] += "<br>"+arr2[i]["id"];
                 check = false;
@@ -4281,7 +4201,7 @@ function excludeDuplicateAreas(arr) {
 
     tempArr.splice(0, 1)
 
-    var result = [];
+    let result = [];
     result = JSON.parse(JSON.stringify(tempArr));
 
     return result;
@@ -4291,11 +4211,9 @@ function excludeDuplicateAreas(arr) {
 
 
 function searchFilter(bar,base,condition) {
-    var bar;
-    var base;
-    var list = base.querySelectorAll(':scope > *:not(input)');
-    var hidden = base.querySelectorAll(':scope > *:not(input).hidden');
-    var filter = base.querySelectorAll(':scope > *:not(input).filtered');
+    let list = base.querySelectorAll(':scope > *:not(input)');
+    let hidden = base.querySelectorAll(':scope > *:not(input).hidden');
+    let filter = base.querySelectorAll(':scope > *:not(input).filtered');
 
 
     if (condition == "Add") {
@@ -4304,7 +4222,7 @@ function searchFilter(bar,base,condition) {
                 if (bar.value != "") {
                     bar.value = "";
                     bar.style.color = "var(--fontDark)";
-                    for (var i = 0; i < hidden.length; i++) {
+                    for (let i = 0; i < hidden.length; i++) {
                         hidden[i].classList.add("filtered");
                     }
                     consoleText("Filter added...");
@@ -4322,7 +4240,7 @@ function searchFilter(bar,base,condition) {
             bar.value = "";
             bar.style.color = "var(--fontDark)";
 
-            for (var i = 0; i < list.length; i++) {
+            for (let i = 0; i < list.length; i++) {
                 list[i].classList.remove("filtered");
                 list[i].classList.remove("hidden");
             }
@@ -4338,16 +4256,14 @@ function searchFilter(bar,base,condition) {
 
 
 function consoleText(txt,time) {
-    var txt;
-    var base = document.querySelector("#console");
-    var time;
+    let base = document.querySelector("#console");
 
     if (time == "" || time == undefined) {
         time = 2000;
     }
 
-    var pdiv = document.querySelector("#contain > div#pokémon");
-    var con = document.querySelector("#console");
+    let pdiv = document.querySelector("#contain > div#pokémon");
+    let con = document.querySelector("#console");
     if (pdiv != undefined) {
         if (pdiv.style.getPropertyValue("display") != "none") {
             con.classList.remove("top");
@@ -4359,7 +4275,7 @@ function consoleText(txt,time) {
         }
     }
 
-    var p = document.createElement("p");
+    let p = document.createElement("p");
     p.innerText = txt;
     base.appendChild(p);
 
@@ -4378,22 +4294,20 @@ function consoleText(txt,time) {
 
 
 function ImageType(action) {
-    var action;
 
-
-    var tar = document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"]');
-    var path = tar.querySelector(":scope select[name='path']");
-    var ext = tar.querySelector(":scope select[name='extension']");
-    var type = tar.querySelector(":scope select[name='type']");
-    var angle = tar.querySelector(":scope select[name='angle']");
+    let tar = document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"]');
+    let path = tar.querySelector(":scope select[name='path']");
+    let ext = tar.querySelector(":scope select[name='extension']");
+    let type = tar.querySelector(":scope select[name='type']");
+    let angle = tar.querySelector(":scope select[name='angle']");
     
 
-    var exts = [];
-    var types = [];
-    var angles = [];
+    let exts = [];
+    let types = [];
+    let angles = [];
 
 
-    for (var q = 0; q < ImageTypes.length; q++) {
+    for (let q = 0; q < ImageTypes.length; q++) {
         if (ImageTypes[q]["name"] == path.value) {
             exts.push(ImageTypes[q]["extension"]);
             types.push(ImageTypes[q]["type"]);
@@ -4428,31 +4342,31 @@ function ImageType(action) {
             angle.removeAttribute("disabled");
         }
 
-        var oldoptions = tar.querySelectorAll(":scope > span:last-child option");
-        for (var q = 0; q < oldoptions.length; q++) {
+        let oldoptions = tar.querySelectorAll(":scope > span:last-child option");
+        for (let q = 0; q < oldoptions.length; q++) {
             oldoptions[q].remove();
         }
 
 
         path.setAttribute("value",path.querySelector(":scope > *:first-child").getAttribute("value"))
 
-        for (var q = 0; q < exts.length; q++) {
-            var option = document.createElement("option");
+        for (let q = 0; q < exts.length; q++) {
+            let option = document.createElement("option");
             option.innerText = exts[q];
             option.setAttribute("value",exts[q]);
             ext.appendChild(option);
         }
 
 
-        for (var q = 0; q < types.length; q++) {
-            var option = document.createElement("option");
+        for (let q = 0; q < types.length; q++) {
+            let option = document.createElement("option");
             option.innerText = types[q];
             option.setAttribute("value",types[q]);
             type.appendChild(option);
         }
 
-        for (var q = 0; q < angles.length; q++) {
-            var option = document.createElement("option");
+        for (let q = 0; q < angles.length; q++) {
+            let option = document.createElement("option");
             option.innerText = angles[q];
             option.setAttribute("value",angles[q]);
             angle.appendChild(option);
@@ -4460,25 +4374,25 @@ function ImageType(action) {
 
     }
     if (action.includes("Execute")) {
-        var conimg = document.querySelectorAll('#pokémon > div ul li label > img');
-        var parimg = document.querySelectorAll('#pokémon > section[name="team"] aside[name="party"] div section img[value]');
+        let conimg = document.querySelectorAll('#pokémon > div ul li label > img');
+        let parimg = document.querySelectorAll('#pokémon > section[name="team"] aside[name="party"] div section img[value]');
 
         if (path.value != "") {
 
-            var dataPath = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-path");
-            var dataCategory = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-category");
-            var dataExtension = ext.value;
-            var dataAngle = angle.value;
-            var dataType = type.value;
+            let dataPath = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-path");
+            let dataCategory = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-category");
+            let dataExtension = ext.value;
+            let dataAngle = angle.value;
+            let dataType = type.value;
             
 
-            for (var q = 0; q < conimg.length; q++) {
+            for (let q = 0; q < conimg.length; q++) {
                 let p = getPokémonMediaPath([getPokémonInt(conimg[q].id)],['./media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath]);
       
                 conimg[q].src = p
                 conimg[q].setAttribute("path",p);
             }
-            for (var q = 0; q < parimg.length; q++) {
+            for (let q = 0; q < parimg.length; q++) {
                 let p = getPokémonMediaPath([parseInt(parimg[q].getAttribute("value"))],['./media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath]);
 
                 parimg[q].src = p
