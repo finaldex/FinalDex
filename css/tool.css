@@ -2777,7 +2777,7 @@ body[Generation="4"] #contain div#tool div#dmg div[name='battle'] span[name*='te
     align-items: flex-end;
 }
 
-body:not([Generation="4"]):not([Generation="2"]):not([Generation="3"]):not([Generation="4"]) #contain div#tool div#dmg div[name='battle'] span[name='user'] > * {
+body:not([Generation="1"]):not([Generation="2"]):not([Generation="3"]):not([Generation="4"]) #contain div#tool div#dmg div[name='battle'] span[name='user'] > * {
 	transform: translate(0px, -30%);
 }
 
