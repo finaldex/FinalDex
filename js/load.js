@@ -66,15 +66,12 @@ function initialize() {
 
 		console.log(finaldata)
 
-		console.log(getPokémonMediaPath([520,252],['./media/Images/Pokémon/Battle/PNG/Default/Front/VI-VII']))
-		
+		config2();
 
-		console.log(getApplicable("All"))
-		console.log(getApplicable("Yellow"))
-		console.log(getApplicable("Crystal-Red"))
-		console.log(getApplicable("Crystal-Emerald"))
-		console.log(getMedia("151","./media/Images/Pokémon/Battle/Default/Front/PNG/"))
-		console.log(getMedia("201-A"))
+
+		console.log(getPokémonMediaPath([12,252],[PATH_Pokémon_Battle_Default_Front_PNG]))
+		console.log(getPokémonMediaPath([12],[PATH_Pokémon_Box_Default_PNG]))
+
 
 		createNav();
 		createPokémon();
