@@ -3,7 +3,7 @@ let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
 let baseextension = "json";
 
 let datas = ["Directory","Game Metadata","Locations Metadata","Pokémon Metadata","Items Metadata"]
-for(var i = 0; i < datas.length; i++) {
+for(let i = 0; i < datas.length; i++) {
     loadData(i)
 }
 
@@ -48,7 +48,7 @@ function setAll() {
     let result = []
 
     if (tar.getAttribute("name") == "pokémon") {
-        for (var i = 0; i < finaldata["Pokémon"]["Path"].length; i++) {
+        for (let i = 0; i < finaldata["Pokémon"]["Path"].length; i++) {
             let vals = []
             if (finaldata["Pokémon"]["Path"][i]["Number"] != undefined) {
                 vals.push(finaldata["Pokémon"]["Path"][i]["Number"])
@@ -60,7 +60,7 @@ function setAll() {
         }
     }
     else if (tar.getAttribute("name") == "items") {
-        for (var i = 0; i < finaldata["Items"]["Reference"].length; i++) {
+        for (let i = 0; i < finaldata["Items"]["Reference"].length; i++) {
             if (getApplicable(finaldata["Items"]["Reference"][i]["Game"])) {
                 if (finaldata["Items"]["Reference"][i]["Use"] == "true") {
                     if (finaldata["Items"]["Reference"][i]["Item"] != undefined) {
@@ -71,7 +71,7 @@ function setAll() {
         }
     }
     else if (tar.getAttribute("name") == "locations") {
-        for (var i = 0; i < finaldata["Locations"]["Reference"].length; i++) {
+        for (let i = 0; i < finaldata["Locations"]["Reference"].length; i++) {
             if (getApplicable(finaldata["Locations"]["Reference"][i]["Game"])) {
                 if (finaldata["Locations"]["Reference"][i]["Location"] != undefined) {
                     result.push(finaldata["Locations"]["Reference"][i]["Location"]);
@@ -98,11 +98,11 @@ function dirGet() {
     }
 
 
-    for (var i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
+    for (let i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
         let path = Object.keys(finaldata["Directory"])[i]
         let source = path.split("/")[path.split("/").length-1]
 
-        for (var q = 0; q < finaldata["Directory"][path].length; q++) {
+        for (let q = 0; q < finaldata["Directory"][path].length; q++) {
             let file = finaldata["Directory"][path][q];
             let fileName = finaldata["Directory"][path][q].split(".")[0]
 
@@ -111,9 +111,9 @@ function dirGet() {
                     let vals1 = splitStr(val1,",");
                     let vals2 = splitStr(val2,",");
 
-                    for(var r = 0; r < vals1.length; r++) {
+                    for(let r = 0; r < vals1.length; r++) {
                         if (path.includes(vals1[r]) || vals1[r] == "") {
-                            for(var t = 0; t < vals2.length; t++) {
+                            for(let t = 0; t < vals2.length; t++) {
                                 let check = false;
                                 if (vals2[t][0] == '"' && vals2[t][vals2[t].length-1] == '"' && fileName.includes(vals2[t].replaceAll('"',''))) {
                                     check = true;
@@ -193,7 +193,7 @@ function setData() {
     
     base.innerHTML = "";
 
-    for (var i = 0; i < res.length; i++) {
+    for (let i = 0; i < res.length; i++) {
         let x = i+1;
         if (x >= sizeMin && x <= sizeMax) {
         
@@ -201,14 +201,14 @@ function setData() {
             let file = res[i]["File"];
             let extension = res[i]["Extension"];
 
-            var li = document.createElement("li");
+            let li = document.createElement("li");
             base.appendChild(li)
 
-            var label = document.createElement("label");
+            let label = document.createElement("label");
             label.setAttribute("for","input-"+path+"/"+file)
             label.setAttribute("name","image");
             li.appendChild(label)
-            var input = document.createElement("input");
+            let input = document.createElement("input");
             input.setAttribute("type","checkbox")
             input.setAttribute("id","input-"+path+"/"+file)
             label.appendChild(input)
@@ -279,13 +279,13 @@ function expandAll() {
     let state = tar.getAttribute("data-state");
     if (inpts.length > 0) {
         if (state == 1) {
-            for (var i = 0; i < inpts.length; i++) {
+            for (let i = 0; i < inpts.length; i++) {
                 inpts[i].checked = true;
             }
             tar.setAttribute("data-state","2")
         }
         else {
-            for (var i = 0; i < inpts.length; i++) {
+            for (let i = 0; i < inpts.length; i++) {
                 inpts[i].checked = false;
             }
             tar.setAttribute("data-state","1")
@@ -305,8 +305,8 @@ function titleCase(str) {
 		return str;
 	}
 	if(isNaN(str)) {
-		var splitStr = str.toLowerCase().split(' ');
-		for(var i = 0; i < splitStr.length; i++) {
+		let splitStr = str.toLowerCase().split(' ');
+		for(let i = 0; i < splitStr.length; i++) {
 			splitStr[i] = splitStr[i].charAt(0).toUpperCase()+splitStr[i].substring(1);
 		}
 		splitStr = splitStr.join(' ');
@@ -353,9 +353,9 @@ function splitStr(str,selector) {
 }
 
 function sortObjectArray(objectsArr,prop,ascending) {
-	var objectsArr;
-	var prop;
-	var ascending;
+	let objectsArr;
+	let prop;
+	let ascending;
 
 	let objectsHaveProp = objectsArr.every(object => object.hasOwnProperty(prop));
 
@@ -430,11 +430,11 @@ function getGameID(name) {
     return games.findIndex(name)+1
 }
 function getApplicable(val) {
-	var val;
+	let val;
     let adds = [];
 
     let labin = document.querySelectorAll("nav label input");
-    for(var i = 0; i < labin.length; i++) {
+    for(let i = 0; i < labin.length; i++) {
         if (labin[i].checked) {
             adds.push(labin[i].previousElementSibling.innerText.toUpperCase())
         }
@@ -453,7 +453,7 @@ function getApplicable(val) {
         if (isNaN(parseInt(valStart)) || isNaN(parseInt(valEnd))) {
             valStart = getGameID(valStart)
             valEnd = getGameID(valEnd)
-            for (var i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+            for (let i = 0; i < finaldata["Game"]["Reference"].length; i++) {
                 if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
                     let x = parseInt(finaldata["Game"]["Reference"][i]["ID"]);
                     if (x >= valStart && x <= valEnd) {
@@ -463,7 +463,7 @@ function getApplicable(val) {
             }
         }
         else {
-            for (var i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+            for (let i = 0; i < finaldata["Game"]["Reference"].length; i++) {
                 if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
                     let x = parseInt(finaldata["Game"]["Reference"][i]["Generation"]);
                     if (x >= valStart && x <= valEnd) {
@@ -475,7 +475,7 @@ function getApplicable(val) {
         
     }
     else if (!isNaN(parseInt(gamePath.value))) {
-        for (var i = 0; i < finaldata["Game"]["Reference"].length; i++) {
+        for (let i = 0; i < finaldata["Game"]["Reference"].length; i++) {
             if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
                 let x = parseInt(finaldata["Game"]["Reference"][i]["Generation"]);
                 if (x == parseInt(gamePath.value)) {
@@ -494,7 +494,7 @@ function getApplicable(val) {
 
     val = val.replaceAll("_",",");
     let vals = splitStr(val,",");
-    for (var i = 0; i < vals.length; i++) {
+    for (let i = 0; i < vals.length; i++) {
         let val = vals[i];
         let additional = []
         if (vals[i].includes(" [")) {
@@ -506,7 +506,7 @@ function getApplicable(val) {
         let check = true;
         if (adds[0] != "All") {
             check = false;
-            for (var q = 0; q < additional.length; q++) {
+            for (let q = 0; q < additional.length; q++) {
                 if (adds.includes(additional[q])) {
                     check = true;
                     break;
@@ -515,7 +515,7 @@ function getApplicable(val) {
         }
        
         if (check) {
-            for (var g = 0; g < games.length; g++) {
+            for (let g = 0; g < games.length; g++) {
                 let game = games[g];
                 let gen = getGeneration(games[g])
         
