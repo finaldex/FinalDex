@@ -1,27 +1,27 @@
-var createPokémon = function() {
-	var contentOuter = document.createElement("div");
+let createPokémon = function() {
+	let contentOuter = document.createElement("div");
 	contentOuter.setAttribute("id","pokémon");
 	contentOuter.setAttribute("value","pokémon");
 	document.querySelector("#contain").appendChild(contentOuter);
-	var navigation = document.createElement("nav");
-	var navigationContent = document.createElement("ul");
-	var navigationDex = document.createElement("li");
-	var navigationDexContent = document.createElement("span");
-	var navigationSearch = document.createElement("li");
-	var navigationSearchContent = document.createElement("span");
-	var navigationSearchInput = document.createElement("input");
-	var navigationSearchExit = document.createElement("span");
-	var navigationCount = document.createElement("li");
-	var navigationCountContent = document.createElement("h1");
-	var navigationCountSpan1 = document.createElement("span");
-	var navigationCountSpan2 = document.createElement("span");
-	var navigationCountSpan3 = document.createElement("span");
-	var navigationGame = document.createElement("li");
-	var navigationGameContent = document.createElement("span");
-	var navigationGameImg = document.createElement("img");
-	var navigationSettings = document.createElement("li");
-	var navigationSettingsIcon = document.createElement("figure");
-    var navigationSettingsIconText = document.createElement("h1");
+	let navigation = document.createElement("nav");
+	let navigationContent = document.createElement("ul");
+	let navigationDex = document.createElement("li");
+	let navigationDexContent = document.createElement("span");
+	let navigationSearch = document.createElement("li");
+	let navigationSearchContent = document.createElement("span");
+	let navigationSearchInput = document.createElement("input");
+	let navigationSearchExit = document.createElement("span");
+	let navigationCount = document.createElement("li");
+	let navigationCountContent = document.createElement("h1");
+	let navigationCountSpan1 = document.createElement("span");
+	let navigationCountSpan2 = document.createElement("span");
+	let navigationCountSpan3 = document.createElement("span");
+	let navigationGame = document.createElement("li");
+	let navigationGameContent = document.createElement("span");
+	let navigationGameImg = document.createElement("img");
+	let navigationSettings = document.createElement("li");
+	let navigationSettingsIcon = document.createElement("figure");
+    let navigationSettingsIconText = document.createElement("h1");
 
 	navigationDex.setAttribute("name","dexswitch");
 	navigationSearch.setAttribute("name","search");
@@ -35,15 +35,16 @@ var createPokémon = function() {
 	navigationCount.setAttribute("name","count");
 	navigationCountSpan2.innerText = "/";
 	navigationGame.setAttribute("name","title");
-	navigationGameImg.src = "./media/Images/Misc/Title/Text/"+GameFullName.replaceAll(",","").replaceAll("!","").replaceAll("'","").replaceAll(":","")+".png";
+    
+	navigationGameImg.src = getMedia([GameFullName.replaceAll(",","").replaceAll("!","").replaceAll("'","").replaceAll(":","")],[PATH_Game_Title])
 	navigationSettings.setAttribute("name","settings");
 	navigationSettingsIconText.innerText = "⚙️";
 
-    var navigationDexOuter = document.createElement("span");
-    var navigationDexInner = document.createElement("span");
-	var navigationDexInput = document.createElement("input");
-	var navigationDexLabel = document.createElement("label");
-    var navigationDexText = document.createElement("h5");
+    let navigationDexOuter = document.createElement("span");
+    let navigationDexInner = document.createElement("span");
+	let navigationDexInput = document.createElement("input");
+	let navigationDexLabel = document.createElement("label");
+    let navigationDexText = document.createElement("h5");
 	navigationDexInput.setAttribute("type","radio");
 	navigationDexInput.setAttribute("value","1");
 	navigationDexInput.setAttribute("name","finaldex-dexswitch-"+GameID);
@@ -60,19 +61,21 @@ var createPokémon = function() {
     navigationDexInput.addEventListener("click", dexMove);
     navigationDexInput.addEventListener("click", dexSwitch);
 
-	for(var i = 0; i < JSONPath_Pokédex.length; i++) {
+    let Pokédex = Object.keys(DATA_Pokémon_PokédexID)
+
+	for(let i = 0; i < Pokédex.length; i++) {
 		let x = i+2;
-		var navigationDexInput = document.createElement("input");
-		var navigationDexLabel = document.createElement("label");
-        var navigationDexText = document.createElement("h5");
+		let navigationDexInput = document.createElement("input");
+		let navigationDexLabel = document.createElement("label");
+        let navigationDexText = document.createElement("h5");
 		navigationDexInput.setAttribute("type","radio");
 		navigationDexInput.setAttribute("value", x);
 		navigationDexInput.setAttribute("name","finaldex-dexswitch-"+GameID);
 		navigationDexInput.setAttribute("id","dexswitch"+x);
 		navigationDexInput.setAttribute("autocomplete","off");
 		navigationDexLabel.setAttribute("for","dexswitch"+x);
-		navigationDexLabel.setAttribute("name", JSONPath_Pokédex[i].split("_")[0]);
-		navigationDexText.innerText = JSONPath_Pokédex[i].split("_")[0];
+		navigationDexLabel.setAttribute("name", Pokédex[i]);
+		navigationDexText.innerText = Pokédex[i];
 		navigationDexInner.appendChild(navigationDexInput);
 		navigationDexInner.appendChild(navigationDexLabel);
         navigationDexLabel.appendChild(navigationDexText);
@@ -103,10 +106,10 @@ var createPokémon = function() {
     navigationSearchExit.addEventListener("click", function() {exitSearch("Pokémon");count();});
 
 
-    var team = document.createElement("aside");
-    var teamNav = document.createElement("section");
-    var teamParty = document.createElement("section");
-    var teamBox = document.createElement("section");
+    let team = document.createElement("aside");
+    let teamNav = document.createElement("section");
+    let teamParty = document.createElement("section");
+    let teamBox = document.createElement("section");
 
     teamParty.setAttribute("name","party");
     teamBox.setAttribute("name","box");
@@ -116,29 +119,29 @@ var createPokémon = function() {
     team.appendChild(teamParty);
     team.appendChild(teamBox);
     team.appendChild(teamNav);
-    var teamPartyBar = document.createElement("span");
+    let teamPartyBar = document.createElement("span");
     teamParty.appendChild(teamPartyBar);
 
 
-    var teamPartyExport = document.createElement("figure");
+    let teamPartyExport = document.createElement("figure");
     teamPartyExport.setAttribute("name","export");
     teamPartyBar.appendChild(teamPartyExport)
     teamPartyExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-    var teamPartyExportText = document.createElement("small");
+    let teamPartyExportText = document.createElement("small");
     teamPartyExportText.innerText = "⮟";
     teamPartyExport.appendChild(teamPartyExportText)
-    var teamPartyExportTop = document.createElement("div");
+    let teamPartyExportTop = document.createElement("div");
     teamPartyExport.appendChild(teamPartyExportTop)
-    var teamPartyExportTopWrap = document.createElement("span");
+    let teamPartyExportTopWrap = document.createElement("span");
     teamPartyExportTop.appendChild(teamPartyExportTopWrap)
-    var teamPartyExportOpts = ["Import Pokémon","Copy Data Strings","Send to Damage Calculator"];
+    let teamPartyExportOpts = ["Import Pokémon","Copy Data Strings","Send to Damage Calculator"];
 
     teamPartyExport.addEventListener("click",dropRelPos);
 
-    for(var e = 0; e < teamPartyExportOpts.length; e++) {
-        var teamPartyExportWrapTop = document.createElement("span");
-        var teamPartyExportWrap = document.createElement("b");
-        var teamPartyExportTxt = document.createElement("small");
+    for(let e = 0; e < teamPartyExportOpts.length; e++) {
+        let teamPartyExportWrapTop = document.createElement("span");
+        let teamPartyExportWrap = document.createElement("b");
+        let teamPartyExportTxt = document.createElement("small");
         teamPartyExportWrapTop.setAttribute("name",teamPartyExportOpts[e]);
         teamPartyExportWrap.setAttribute("type","invert");
         teamPartyExportTxt.innerText = teamPartyExportOpts[e];
@@ -156,8 +159,8 @@ var createPokémon = function() {
             return;
         }
         else {
-            var res = [];
-            for (var i = 0; i < tars.length; i++) {
+            let res = [];
+            for (let i = 0; i < tars.length; i++) {
                 res.push(getPartyData(tars[i]))
             }
         }
@@ -206,10 +209,10 @@ var createPokémon = function() {
 
 
 
-    var teamPartyInput = document.createElement("input");
-    var teamPartyLabel = document.createElement("label");
-    var teamPartyText = document.createElement("p");
-    var teamPartyIndicator = document.createElement("b");
+    let teamPartyInput = document.createElement("input");
+    let teamPartyLabel = document.createElement("label");
+    let teamPartyText = document.createElement("p");
+    let teamPartyIndicator = document.createElement("b");
     teamPartyIndicator.setAttribute("type","invert");
     teamPartyInput.setAttribute("type","checkbox");
     teamPartyInput.setAttribute("name","partybox1");
@@ -225,10 +228,10 @@ var createPokémon = function() {
 
 
 
-    var teamBoxInput = document.createElement("input");
-    var teamBoxLabel = document.createElement("label");
-    var teamBoxText = document.createElement("p");
-    var teamBoxIndicator = document.createElement("b");
+    let teamBoxInput = document.createElement("input");
+    let teamBoxLabel = document.createElement("label");
+    let teamBoxText = document.createElement("p");
+    let teamBoxIndicator = document.createElement("b");
     teamBoxIndicator.setAttribute("type","invert");
     teamBoxInput.setAttribute("type","checkbox");
     teamBoxInput.setAttribute("name","partybox2");
@@ -247,38 +250,38 @@ var createPokémon = function() {
 
 
 
-    navigationSettingsIcon.setAttribute("onclick",`var s = document.querySelector('#pokémon > aside[name="settings"]'); s.classList.toggle('open'); this.classList.toggle('open');`);
+    navigationSettingsIcon.setAttribute("onclick",`let s = document.querySelector('#pokémon > aside[name="settings"]'); s.classList.toggle('open'); this.classList.toggle('open');`);
 
 
 
 
 
-    var natureTemp = [];
+    let natureTemp = [];
 
     if (Natures.length > 0) {
         natureTemp = Natures;
     }
 
-    for (var i = 0; i < 6; i++) {
-        var teamDiv = document.createElement("div");
-        var teamSection1 = document.createElement("aside");
-        var teamSection2 = document.createElement("aside");
-        var teamAdd = document.createElement("b");
+    for (let i = 0; i < 6; i++) {
+        let teamDiv = document.createElement("div");
+        let teamSection1 = document.createElement("aside");
+        let teamSection2 = document.createElement("aside");
+        let teamAdd = document.createElement("b");
         teamAdd.setAttribute("type","invert");
-        var teamLeft = document.createElement("span");
-        var teamGrab = document.createElement("b");
-        var teamPokémon = document.createElement("span");
+        let teamLeft = document.createElement("span");
+        let teamGrab = document.createElement("b");
+        let teamPokémon = document.createElement("span");
 
 
-        var teamImgOuter = document.createElement("span");
-        var teamImg = document.createElement("img");
+        let teamImgOuter = document.createElement("span");
+        let teamImg = document.createElement("img");
 
-        var teamRight = document.createElement("span");
-        var teamStatsButton = document.createElement("figure");
-        var teamExit = document.createElement("figure");
-        var teamLevel = document.createElement("input");
-        var teamNickOuter = document.createElement("span");
-        var teamNick = document.createElement("input");
+        let teamRight = document.createElement("span");
+        let teamStatsButton = document.createElement("figure");
+        let teamExit = document.createElement("figure");
+        let teamLevel = document.createElement("input");
+        let teamNickOuter = document.createElement("span");
+        let teamNick = document.createElement("input");
 
 
         teamDiv.setAttribute("data-string","");
@@ -336,23 +339,18 @@ var createPokémon = function() {
         teamLeft.appendChild(teamGrab);
         teamSection1.appendChild(teamPokémon);
 
+
         if (HeldItem == true) {
-            var teamItemOuter = document.createElement("span");
+            let teamItemOuter = document.createElement("span");
             teamItemOuter.setAttribute("name","item");
             teamPokémon.appendChild(teamItemOuter);
-        }
 
-
-        teamPokémon.appendChild(teamImgOuter);
-
-        if (HeldItem == true) {
-
-            var teamItemSelect = document.createElement("select");
+            let teamItemSelect = document.createElement("select");
             teamItemOuter.appendChild(teamItemSelect);
 
             teamItemSelect.setAttribute("type","icon");
 
-            var teamHeldItemImage = document.createElement("img");
+            let teamHeldItemImage = document.createElement("img");
             teamHeldItemImage.src = "";
             teamHeldItemImage.setAttribute("name","item");
             teamHeldItemImage.setAttribute("title","");
@@ -367,6 +365,7 @@ var createPokémon = function() {
         }
 
 
+        teamPokémon.appendChild(teamImgOuter);
         teamImgOuter.appendChild(teamImg);
         teamPokémon.appendChild(teamNickOuter);
         teamNickOuter.appendChild(teamNick);
@@ -382,22 +381,22 @@ var createPokémon = function() {
         teamExit.addEventListener("click",dropRelPos);
         teamExit.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
 
-        var teamExitTxt = document.createElement("small");
+        let teamExitTxt = document.createElement("small");
         teamExitTxt.innerText = "❌";
         teamExit.appendChild(teamExitTxt)
 
-        var teamExitTop = document.createElement("div");
+        let teamExitTop = document.createElement("div");
         teamExit.appendChild(teamExitTop)
-        var teamExitTopWrap = document.createElement("span");
+        let teamExitTopWrap = document.createElement("span");
         teamExitTop.appendChild(teamExitTopWrap)
 
-        var teamExitOpts = ["Send to Box","Delete"];
+        let teamExitOpts = ["Send to Box","Delete"];
 
 
-        for(var e = 0; e < teamExitOpts.length; e++) {
-            var teamExitWrapTop = document.createElement("span");
-            var teamExitWrap = document.createElement("b");
-            var teamExitText = document.createElement("small");
+        for(let e = 0; e < teamExitOpts.length; e++) {
+            let teamExitWrapTop = document.createElement("span");
+            let teamExitWrap = document.createElement("b");
+            let teamExitText = document.createElement("small");
             teamExitWrapTop.setAttribute("name",teamExitOpts[e]);
             teamExitWrap.setAttribute("type","invert");
             teamExitText.innerText = teamExitOpts[e];
@@ -413,31 +412,31 @@ var createPokémon = function() {
 
 
 
-		var teamExport = document.createElement("figure");
+		let teamExport = document.createElement("figure");
         teamExport.setAttribute("name","export");
         teamLeft.appendChild(teamExport)
 
         teamExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
 
-        var teamExportTxt = document.createElement("small");
+        let teamExportTxt = document.createElement("small");
         teamExportTxt.innerText = "⮟";
         teamExport.appendChild(teamExportTxt)
 
-        var teamExportTop = document.createElement("div");
+        let teamExportTop = document.createElement("div");
         teamExport.appendChild(teamExportTop)
-        var teamExportTopWrap = document.createElement("span");
+        let teamExportTopWrap = document.createElement("span");
         teamExportTop.appendChild(teamExportTopWrap)
 
         teamExport.addEventListener("click",dropRelPos);
        
 
-        var teamExportOpts = ["Copy Data String","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
+        let teamExportOpts = ["Copy Data String","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
 
 
-        for(var e = 0; e < teamExportOpts.length; e++) {
-            var teamExportWrapTop = document.createElement("span");
-            var teamExportWrap = document.createElement("b");
-            var teamExportText = document.createElement("small");
+        for(let e = 0; e < teamExportOpts.length; e++) {
+            let teamExportWrapTop = document.createElement("span");
+            let teamExportWrap = document.createElement("b");
+            let teamExportText = document.createElement("small");
             teamExportWrapTop.setAttribute("name",teamExportOpts[e]);
             teamExportWrap.setAttribute("type","invert");
             teamExportText.innerText = teamExportOpts[e];
@@ -451,8 +450,8 @@ var createPokémon = function() {
 
 
         function teamExportChange() {
-            var tar = findUpAtt(this,"data-string");
-            var base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
+            let tar = findUpAtt(this,"data-string");
+            let base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
        
             let val = this.parentElement.getAttribute("name");
             let dataString = getPartyData(tar);
@@ -499,7 +498,7 @@ var createPokémon = function() {
                 let dmgSlots = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > div > span[name='team 1'] > div[data-string]");
             
                 let check = false;
-                for (var t = 0; t < dmgSlots.length; t++) {
+                for (let t = 0; t < dmgSlots.length; t++) {
                     let ds = dmgSlots[t].getAttribute("data-string");
                     let dsobj = dataStringToObj(ds);
     
@@ -546,7 +545,7 @@ var createPokémon = function() {
         }
 
         function teamExitChange() {
-            var tar = findUpAtt(this,"data-string");
+            let tar = findUpAtt(this,"data-string");
           
             let val = this.parentElement.getAttribute("name");
             let dataString = getPartyData(tar);
@@ -615,18 +614,18 @@ var createPokémon = function() {
         }
         
     
-        var dataOptions = ["Moves","Stats","Additional"];
+        let dataOptions = ["Moves","Stats","Additional"];
 
-        for (var u = 0; u < dataOptions.length; u++) {
-            var teamData = document.createElement("span");
+        for (let u = 0; u < dataOptions.length; u++) {
+            let teamData = document.createElement("span");
      
             teamData.setAttribute("name",dataOptions[u].toLowerCase());
             
             teamData.classList.add("scroll");
             teamSection1.appendChild(teamData);
 
-            for (var y = 0; y < 3; y++) {
-                var teamDataInner = document.createElement("span");
+            for (let y = 0; y < 3; y++) {
+                let teamDataInner = document.createElement("span");
                 teamData.appendChild(teamDataInner);
 
                 if (y == 2 && dataOptions[u] == "Stats" && natureTemp.length > 0) {
@@ -647,7 +646,7 @@ var createPokémon = function() {
 
 
                 if (y == 0) {
-                    var teamDataTitle = document.createElement("small");
+                    let teamDataTitle = document.createElement("small");
                     teamDataTitle.innerText = dataOptions[u];
                     teamDataInner.appendChild(teamDataTitle);
                 }
@@ -656,12 +655,12 @@ var createPokémon = function() {
                     
                     
                
-                    for (var r = 0; r < 4; r++) {
-                        var teamDataStats = document.createElement("span");
+                    for (let r = 0; r < 4; r++) {
+                        let teamDataStats = document.createElement("span");
                         teamDataInner.appendChild(teamDataStats);
-                        for (var q = 0; q < Stats.length; q++) {
+                        for (let q = 0; q < Stats.length; q++) {
                             if (Stats[q] != "Total") {
-                                var teamDataInput = document.createElement("input");
+                                let teamDataInput = document.createElement("input");
                                 teamDataInput.setAttribute("type","number");
 
                                 if (r == 1) {
@@ -723,13 +722,13 @@ var createPokémon = function() {
                 }
 
                 else if (y == 1 && dataOptions[u] == "Additional") {
-                    var teamDataAddOuter = document.createElement("span");
+                    let teamDataAddOuter = document.createElement("span");
                     teamDataInner.appendChild(teamDataAddOuter);
                     
                     if (Friendship == true) {
-                        var teamDataAdd = document.createElement("label");
-                        var teamDataAddText = document.createElement("small");
-                        var teamDataAddInput = document.createElement("input");
+                        let teamDataAdd = document.createElement("label");
+                        let teamDataAddText = document.createElement("small");
+                        let teamDataAddInput = document.createElement("input");
                         teamDataAdd.setAttribute("name","friendship");
                         teamDataAddText.innerText = "Friendship: ";
                         teamDataAddInput.setAttribute("type","number");
@@ -744,30 +743,30 @@ var createPokémon = function() {
                         teamDataAddInput.addEventListener("change",function() {calcPartyStat(this);});
                     }
 
-                    var met = ["Location","Level","Date"];
-                    for(var r = 0; r < met.length; r++) {
-                        var teamDataAdd = document.createElement("label");
-                        var teamDataAddText = document.createElement("small");
+                    let met = ["Location","Level","Date"];
+                    for(let r = 0; r < met.length; r++) {
+                        let teamDataAdd = document.createElement("label");
+                        let teamDataAddText = document.createElement("small");
                         teamDataAdd.setAttribute("name",met[r].toLowerCase());
                         teamDataAddText.innerText = met[r]+" Met: ";
                         teamDataAddOuter.appendChild(teamDataAdd);
                         teamDataAdd.appendChild(teamDataAddText)
                         if (met[r] == "Location") {
-                            var teamDataAddInput = document.createElement("select");
+                            let teamDataAddInput = document.createElement("select");
                             teamDataAddInput.setAttribute("name","small");
                             teamDataAdd.appendChild(teamDataAddInput)
                             teamDataAddInput.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
                             teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
                             teamDataAddInput.addEventListener("change", selectModify);
 
-                            var teamDataAddLabel = document.createElement("option");
+                            let teamDataAddLabel = document.createElement("option");
                             teamDataAddLabel.innerText = "";
                             teamDataAddLabel.value = "";
                             teamDataAddInput.appendChild(teamDataAddLabel)
 
-                            for(var t = 0; t < finaldata["Locations"]["Reference"].length; t++) {
+                            for(let t = 0; t < finaldata["Locations"]["Reference"].length; t++) {
                                 if (finaldata["Locations"]["Reference"][t]["Location"] != undefined) {
-                                    var teamDataAddLabel = document.createElement("option");
+                                    let teamDataAddLabel = document.createElement("option");
                                     teamDataAddLabel.innerText = finaldata["Locations"]["Reference"][t]["Location"];
                                     teamDataAddLabel.value = finaldata["Locations"]["Reference"][t]["Location"];
                                     teamDataAddInput.appendChild(teamDataAddLabel)
@@ -775,7 +774,7 @@ var createPokémon = function() {
                             }
                         }
                         else if (met[r] == "Level") {
-                            var teamDataAddInput = document.createElement("input");
+                            let teamDataAddInput = document.createElement("input");
                             teamDataAddInput.setAttribute("type","number");
                             teamDataAddInput.setAttribute("min","0");
                             teamDataAddInput.setAttribute("max","100");
@@ -785,7 +784,7 @@ var createPokémon = function() {
                             teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
                         }
                         else if (met[r] == "Date") {
-                            var teamDataAddInput = document.createElement("input");
+                            let teamDataAddInput = document.createElement("input");
                             teamDataAddInput.setAttribute("type","date");
                             teamDataAddInput.setAttribute("name","small");
                             teamDataAdd.appendChild(teamDataAddInput)
@@ -797,9 +796,9 @@ var createPokémon = function() {
                 }
 
                 else if (y == 1 && dataOptions[u] == "Moves") {
-                    for (var p = 0; p < 4; p++) {
-                        var teamDataSelectOuter = document.createElement("span");
-                        var teamDataSelect = document.createElement("select");
+                    for (let p = 0; p < 4; p++) {
+                        let teamDataSelectOuter = document.createElement("span");
+                        let teamDataSelect = document.createElement("select");
                         teamDataInner.appendChild(teamDataSelectOuter);
                         teamDataSelectOuter.appendChild(teamDataSelect);
                         teamDataSelect.addEventListener("change",selectModify);
@@ -810,7 +809,7 @@ var createPokémon = function() {
                 }
                 else if (y == 2 && dataOptions[u] == "Moves") {
                     if (Ability.length > 0) {
-                        var teamDataSelect = document.createElement("select");
+                        let teamDataSelect = document.createElement("select");
                         teamDataInner.appendChild(teamDataSelect);
                         teamDataSelect.addEventListener("change",selectModify);
                         teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
@@ -820,15 +819,15 @@ var createPokémon = function() {
 
                 if (y == 2 && u >= 1 && u <= 2) {
                     if (natureTemp.length > 0) {
-                        var teamDataSelect = document.createElement("select");
+                        let teamDataSelect = document.createElement("select");
                         teamDataInner.appendChild(teamDataSelect);
                         teamDataSelect.addEventListener("change",selectModify);
                         teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
                         teamDataSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
                         teamDataSelect.addEventListener("change", partyNature);
                         teamDataSelect.addEventListener("change", function() {calcPartyStat(this);});
-                        for (var q = 0; q < natureTemp.length; q++) {
-                            var teamDataOption = document.createElement("option");
+                        for (let q = 0; q < natureTemp.length; q++) {
+                            let teamDataOption = document.createElement("option");
                             teamDataOption.setAttribute("value",natureTemp[q]);
                             teamDataOption.innerText = natureTemp[q];
                             teamDataSelect.appendChild(teamDataOption);
@@ -844,7 +843,7 @@ var createPokémon = function() {
         teamRight.appendChild(teamStatsButton);
 
         if (Gender == true) {
-            var teamGender = document.createElement("select");
+            let teamGender = document.createElement("select");
             teamRight.appendChild(teamGender);
             teamGender.setAttribute("type","icon");
             teamGender.setAttribute("title","Gender");
@@ -864,13 +863,13 @@ var createPokémon = function() {
 
 
 
-    var boxDiv = document.createElement("ul");
+    let boxDiv = document.createElement("ul");
     teamBox.appendChild(boxDiv);
 
 
 
-    var teamBoxTrash = document.createElement("figure");
-    var teamBoxTrashText = document.createElement("header");
+    let teamBoxTrash = document.createElement("figure");
+    let teamBoxTrashText = document.createElement("header");
     teamBoxTrashText.innerText = "🛇";
     teamBoxTrash.setAttribute("name","trash");
     teamBox.appendChild(teamBoxTrash);
@@ -881,26 +880,26 @@ var createPokémon = function() {
 
 
 
-    var boxExport = document.createElement("figure");
+    let boxExport = document.createElement("figure");
     boxExport.setAttribute("name","export");
     teamBox.appendChild(boxExport)
 
     boxExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-    var boxExportText = document.createElement("header");
+    let boxExportText = document.createElement("header");
     boxExportText.innerText = "🟆";
     boxExport.appendChild(boxExportText)
-    var boxExportTop = document.createElement("div");
+    let boxExportTop = document.createElement("div");
     boxExport.appendChild(boxExportTop)
-    var boxExportTopWrap = document.createElement("span");
+    let boxExportTopWrap = document.createElement("span");
     boxExportTop.appendChild(boxExportTopWrap)
-    var boxExportOpts = ["Copy Data Strings","Send to Damage Calculator"];
+    let boxExportOpts = ["Copy Data Strings","Send to Damage Calculator"];
 
     boxExport.addEventListener("click",dropRelPos);
 
-    for(var e = 0; e < boxExportOpts.length; e++) {
-        var boxExportWrapTop = document.createElement("span");
-        var boxExportWrap = document.createElement("b");
-        var boxExportTxt = document.createElement("small");
+    for(let e = 0; e < boxExportOpts.length; e++) {
+        let boxExportWrapTop = document.createElement("span");
+        let boxExportWrap = document.createElement("b");
+        let boxExportTxt = document.createElement("small");
         boxExportWrapTop.setAttribute("name",boxExportOpts[e]);
         boxExportWrap.setAttribute("type","invert");
         boxExportTxt.innerText = boxExportOpts[e];
@@ -918,8 +917,8 @@ var createPokémon = function() {
             return;
         }
         else {
-            var res = [];
-            for (var i = 0; i < tars.length; i++) {
+            let res = [];
+            for (let i = 0; i < tars.length; i++) {
                 res.push(getBoxData(tars[i]))
             }
         }
@@ -983,9 +982,9 @@ var createPokémon = function() {
 
 
     function BoxDelete() {
-        var lock = confirm("Deleting all the Pokémon in the box.\nDo you want to continue?");
+        let lock = confirm("Deleting all the Pokémon in the box.\nDo you want to continue?");
 
-        var items = document.querySelectorAll("#pokémon aside[name='team'] section[name='box'] > ul li");
+        let items = document.querySelectorAll("#pokémon aside[name='team'] section[name='box'] > ul li");
 
    
             if (lock) {
@@ -993,7 +992,7 @@ var createPokémon = function() {
 
                 if (ask) {
                     if (items.length > 0) {
-                        for (var u = 0; u < items.length; u++) {
+                        for (let u = 0; u < items.length; u++) {
                             items[u].remove("hover");
                         }
                         boxMemory("Save");
@@ -1007,8 +1006,8 @@ var createPokémon = function() {
             }
     }
 
-    var blinktar = document.querySelector('#pokémon > aside section:not([name]) > label[for="partybox1"] *.indicator');
-    var data = [];
+    let blinktar = document.querySelector('#pokémon > aside section:not([name]) > label[for="partybox1"] *.indicator');
+    let data = [];
 
 
 
@@ -1047,7 +1046,7 @@ var createPokémon = function() {
 
         $('#pokémon > aside section:not([name]) > label[for="partybox1"] .indicator').droppable({
             drop: function(e, ui) {
-                var tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
+                let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
                 if (saveddrag != undefined) {
                     if (tar.length > 0) {
                         if (data.length > 1) {
@@ -1129,7 +1128,7 @@ var createPokémon = function() {
 
     $("body").mousemove(function (e) {
         if (boxDrag == true) {
-            var tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
+            let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
             if (tar.length > 0) {
                 if (e.target === blinktar) {
                     blinktar.firstElementChild.classList.add("hover");
@@ -1140,8 +1139,8 @@ var createPokémon = function() {
             }
         }
         else {
-            var hovers = document.getElementsByClassName("hover");
-            for (var u = 0; u < hovers.length; u++) {
+            let hovers = document.getElementsByClassName("hover");
+            for (let u = 0; u < hovers.length; u++) {
                 hovers[u].classList.remove("hover");
             }
         }
@@ -1161,12 +1160,12 @@ var createPokémon = function() {
     });
     
 
-    var PartyPlus = document.querySelectorAll('#pokémon aside[name="team"] section[name="party"] aside > b');
-    var PartyBox = document.querySelectorAll('#pokémon > aside[name="team"] section:not([name]) > label');
+    let PartyPlus = document.querySelectorAll('#pokémon aside[name="team"] section[name="party"] aside > b');
+    let PartyBox = document.querySelectorAll('#pokémon > aside[name="team"] section:not([name]) > label');
 
-    var PPPB = [PartyPlus,PartyBox]
-    for(var u = 0; u < PPPB.length; u++) {
-        for(var q = 0; q < PPPB[u].length; q++) {
+    let PPPB = [PartyPlus,PartyBox]
+    for(let u = 0; u < PPPB.length; u++) {
+        for(let q = 0; q < PPPB[u].length; q++) {
             PPPB[u][q].addEventListener("dragenter",dragEnter);
             PPPB[u][q].addEventListener("dragleave",dragLeave);
             PPPB[u][q].addEventListener("dragover",dragOver);
@@ -1176,43 +1175,43 @@ var createPokémon = function() {
 
 
 
-	var content = document.createElement("div");
-	var contentInner = document.createElement("ul");
+	let content = document.createElement("div");
+	let contentInner = document.createElement("ul");
 	contentOuter.appendChild(content);
 	content.appendChild(contentInner);
 
 
-    var settings = document.createElement("aside");
+    let settings = document.createElement("aside");
     settings.setAttribute("name","settings");
 	contentOuter.appendChild(settings);
 
 
-    var settingsDefaultResizeOuter = document.createElement("span");
-    var settingsDefaultResize = document.createElement("div");
-    var settingsDefaultResizeValue = document.createElement("p");
-    var settingsDefaultResizeInput = document.createElement("input");
+    let settingsDefaultResizeOuter = document.createElement("span");
+    let settingsDefaultResize = document.createElement("div");
+    let settingsDefaultResizeValue = document.createElement("p");
+    let settingsDefaultResizeInput = document.createElement("input");
 
-    var settingsDefaultThemeOuter = document.createElement("span");
-    var settingsDefaultTheme = document.createElement("div");
-    var settingsDefaultThemeInput = document.createElement("input");
-    var settingsDefaultThemeSpan = document.createElement("span");
-
-
-    var settingsDefaultImgtypeOuter = document.createElement("span");
-    var settingsDefaultImgtypeOuterLeft = document.createElement("span");
+    let settingsDefaultThemeOuter = document.createElement("span");
+    let settingsDefaultTheme = document.createElement("div");
+    let settingsDefaultThemeInput = document.createElement("input");
+    let settingsDefaultThemeSpan = document.createElement("span");
 
 
-    var settingsDefaultImgtypePath = document.createElement("select");
-    var settingsDefaultImgtypeOuterRight = document.createElement("span");
-    var settingsDefaultImgtypeExtension = document.createElement("select");
-    var settingsDefaultImgtypeType = document.createElement("select");
-    var settingsDefaultImgtypeAngle = document.createElement("select");
+    let settingsDefaultImgtypeOuter = document.createElement("span");
+    let settingsDefaultImgtypeOuterLeft = document.createElement("span");
 
-    var tempImgTypes = [...ImageTypes];
+
+    let settingsDefaultImgtypePath = document.createElement("select");
+    let settingsDefaultImgtypeOuterRight = document.createElement("span");
+    let settingsDefaultImgtypeExtension = document.createElement("select");
+    let settingsDefaultImgtypeType = document.createElement("select");
+    let settingsDefaultImgtypeAngle = document.createElement("select");
+
+    let tempImgTypes = [...ImageTypes];
     tempImgTypes = removeDuplicateObjectFromArray(tempImgTypes, "name");    
 
-    for (var i = 0; i < tempImgTypes.length; i++) { 
-        var settingsDefaultImgtypeOption = document.createElement("option");
+    for (let i = 0; i < tempImgTypes.length; i++) { 
+        let settingsDefaultImgtypeOption = document.createElement("option");
         settingsDefaultImgtypeOption.setAttribute("data-path",tempImgTypes[i]["path"]);
         settingsDefaultImgtypeOption.setAttribute("data-category",tempImgTypes[i]["category"]);
 
@@ -1276,11 +1275,11 @@ var createPokémon = function() {
 
 
     
-    var settingsCheckbox = document.createElement("span")
-	var settingsCheckboxCheck = document.createElement("button");
-    var settingsCheckboxCheckText = document.createElement("p");
-	var settingsCheckboxUncheck = document.createElement("button");
-    var settingsCheckboxUncheckText = document.createElement("p");
+    let settingsCheckbox = document.createElement("span")
+	let settingsCheckboxCheck = document.createElement("button");
+    let settingsCheckboxCheckText = document.createElement("p");
+	let settingsCheckboxUncheck = document.createElement("button");
+    let settingsCheckboxUncheckText = document.createElement("p");
 
 
     settingsCheckbox.setAttribute("name","checkbox");
@@ -1303,10 +1302,10 @@ var createPokémon = function() {
 	settingsCheckboxUncheck.addEventListener("click", UncheckAll);
 
 
-	var settingsCheckboxExport = document.createElement("button");
-    var settingsCheckboxExportText = document.createElement("p");
-	var settingsCheckboxImport = document.createElement("button");
-    var settingsCheckboxImportText = document.createElement("p");
+	let settingsCheckboxExport = document.createElement("button");
+    let settingsCheckboxExportText = document.createElement("p");
+	let settingsCheckboxImport = document.createElement("button");
+    let settingsCheckboxImportText = document.createElement("p");
 
 	settingsCheckboxExportText.innerText = "Export Data";
     settingsCheckboxExport.setAttribute("type","medium");
@@ -1325,11 +1324,11 @@ var createPokémon = function() {
 
 
 
-    var settingsVariant = document.createElement("span");
-    var settingsVariantTop = document.createElement("span");
-    var settingsVariantBottom = document.createElement("span");
-    var settingsVariantButton = document.createElement("button");
-    var settingsVariantButtonText = document.createElement("p");
+    let settingsVariant = document.createElement("span");
+    let settingsVariantTop = document.createElement("span");
+    let settingsVariantBottom = document.createElement("span");
+    let settingsVariantButton = document.createElement("button");
+    let settingsVariantButtonText = document.createElement("p");
 	settingsVariant.setAttribute("name","variant");
     settingsVariantButtonText.innerText = "Apply";
     settingsVariantButton.setAttribute("type","small");
@@ -1345,24 +1344,25 @@ var createPokémon = function() {
 
 
     
-	var formopts = [];
-	for(var q = 0; q < finaldata["Pokémon"]["Reference"].length; q++) {
-		if(finaldata["Pokémon"]["Reference"][q][JSONPath_Reference] == "true") {
+	let formopts = [];
+	for(let q = 0; q < finaldata["Pokémon"]["Reference"].length; q++) {
+		if(finaldata["Pokémon"]["Reference"][q][DATA_Pokémon_Reference["Reference"]] == "true") {
 			formopts.push(finaldata["Pokémon"]["Reference"][q]["Variant"]);
 		}
 	}
+
 	formopts = formopts.filter((item) => !item.includes("Default ") && !item.includes(" Form") && !item.includes("Gender"));
-	for(var q = 0; q < formopts.length; q++) {
+	for(let q = 0; q < formopts.length; q++) {
 		formopts[q] = formopts[q].replace("Alolan","Regional Form");
 		formopts[q] = formopts[q].replace("Galarian","Regional Form");
 		formopts[q] = formopts[q].replace("Mega","Mega Evolution");
 	}
 	formopts = [...new Set(formopts)];
-	for(var q = 0; q < formopts.length; q++) {
-		var settingsVariantInput = document.createElement("input");
-		var settingsVariantLabel = document.createElement("label");
-        var settingsVariantLabelText = document.createElement("p");
-		var settingsVariantSpan = document.createElement("span");
+	for(let q = 0; q < formopts.length; q++) {
+		let settingsVariantInput = document.createElement("input");
+		let settingsVariantLabel = document.createElement("label");
+        let settingsVariantLabelText = document.createElement("p");
+		let settingsVariantSpan = document.createElement("span");
 		settingsVariantInput.setAttribute("type","checkbox");
 
 		settingsVariantInput.setAttribute("id","settings-form-"+formopts[q]+"-"+q);
@@ -1415,10 +1415,10 @@ function count() {
 function imgTypeDrop() {
 	document.getElementById("imgtype").classList.toggle("imgtype-show");
 	document.querySelector(".imgtype-arrow").style.transform = "scaleY(0.8) rotate(180deg)";
-	var dropdowns = document.getElementsByClassName("imgtype");
-	var i;
+	let dropdowns = document.getElementsByClassName("imgtype");
+	let i;
 	for(i = 0; i < dropdowns.length; i++) {
-		var openDropdown = dropdowns[i];
+		let openDropdown = dropdowns[i];
 		if(openDropdown.classList.contains("imgtype-show")) {} else {
 			document.querySelector(".imgtype-arrow").style.transform = "scaleY(0.8) rotate(0deg)";
 		}
@@ -1426,10 +1426,10 @@ function imgTypeDrop() {
 }
 window.onclick = function(event) {
 	if(!event.target.matches("#imgtype-toggle")) {
-		var dropdowns = document.getElementsByClassName("imgtype");
-		var i;
+		let dropdowns = document.getElementsByClassName("imgtype");
+		let i;
 		for(i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
+			let openDropdown = dropdowns[i];
 			if(openDropdown.classList.contains("imgtype-show")) {
 				openDropdown.classList.remove("imgtype-show");
 				document.querySelector(".imgtype-arrow").style.transform = "scaleY(0.8) rotate(0deg)";
@@ -1439,17 +1439,17 @@ window.onclick = function(event) {
 };
 
 function imgType() {
-	var imgTypeBox = document.getElementById("imgtype-toggle");
-	var imgType = document.querySelectorAll("#imgtype input");
-	var conimg = document.querySelectorAll("#pokémon > div ul li img");
-	for(var i = 0; i < imgType.length; i++) {
+	let imgTypeBox = document.getElementById("imgtype-toggle");
+	let imgType = document.querySelectorAll("#imgtype input");
+	let conimg = document.querySelectorAll("#pokémon > div ul li img");
+	for(let i = 0; i < imgType.length; i++) {
 		if(imgType[i].checked == true) {
-			var dataType = imgType[i].getAttribute("data-type");
-			var dataPath = imgType[i].getAttribute("data-path");
-			var dataExtension = imgType[i].getAttribute("data-extension");
+			let dataType = imgType[i].getAttribute("data-type");
+			let dataPath = imgType[i].getAttribute("data-path");
+			let dataExtension = imgType[i].getAttribute("data-extension");
 			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>'+"<p>"+imgType[i].parentElement.innerText+"</p>"+'<div><img src="./media/Images/Misc/FinalDex/'+dataExtension+'.png" name="'+dataExtension+'" /></div>';
 		
-            for(var q = 0; q < conimg.length; q++) {
+            for(let q = 0; q < conimg.length; q++) {
                 conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
                 conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension);
             }
@@ -1461,19 +1461,19 @@ function imgType() {
 
 
 function resizeDiv() {
-    var sliderDefaultValue = 240;
-    var containIDDefaultDisplay = "flex";
-    var containImgDefaultHeight = "60%";
-    var containImgDefaultMargin = "0 5%";
-    var containNameDefaultDisplay = "flex";
+    let sliderDefaultValue = 240;
+    let containIDDefaultDisplay = "flex";
+    let containImgDefaultHeight = "60%";
+    let containImgDefaultMargin = "0 5%";
+    let containNameDefaultDisplay = "flex";
 
-	var slider = document.querySelector("#pokémon > aside[name='settings'] > span[name='resize'] input");
-	var output = document.querySelector("#pokémon > aside[name='settings'] > span[name='resize'] p");
-	var lis = document.querySelectorAll("#pokémon > div ul li");
-	var id = document.querySelectorAll("#pokémon > div ul li label > div:first-child");
-	var img = document.querySelectorAll("#pokémon > div ul li img");
-	var name = document.querySelectorAll("#pokémon > div ul li label > div:last-child");
-	var sliderSwitch = 180;
+	let slider = document.querySelector("#pokémon > aside[name='settings'] > span[name='resize'] input");
+	let output = document.querySelector("#pokémon > aside[name='settings'] > span[name='resize'] p");
+	let lis = document.querySelectorAll("#pokémon > div ul li");
+	let id = document.querySelectorAll("#pokémon > div ul li label > div:first-child");
+	let img = document.querySelectorAll("#pokémon > div ul li img");
+	let name = document.querySelectorAll("#pokémon > div ul li label > div:last-child");
+	let sliderSwitch = 180;
 
 	for(i = 0; i < lis.length; i++) {
 		lis[i].style.width = slider.value+"px";
@@ -1502,9 +1502,13 @@ function resizeDiv() {
 
 
 function dexMove() {
-	var x = parseInt(this.value);
+	let x = parseInt(this.value);
 
-	if (x > JSONPath_Pokédex.length) {
+
+    let Pokédex = Object.keys(DATA_Pokémon_PokédexID)
+
+
+	if (x > Pokédex.length) {
 		this.parentElement.style.transform = "translate(0%)";
 	}
     else {
@@ -1513,17 +1517,17 @@ function dexMove() {
 
 	dexChecker.fill(x);
 
-    var el1 = event.target.nextElementSibling.nextElementSibling;
-    var el2 = event.target.nextElementSibling;
+    let el1 = event.target.nextElementSibling.nextElementSibling;
+    let el2 = event.target.nextElementSibling;
 
     if (el1 == null) {
-        var val = event.target.parentElement.firstElementChild.nextElementSibling.querySelector(":scope > *").innerText;
+        let val = event.target.parentElement.firstElementChild.nextElementSibling.querySelector(":scope > *").innerText;
         if (val.toLowerCase().includes("national")) {
             document.body.setAttribute("dex","national")
         }
     }
-    else if (el2 != null && JSONPath_Pokédex.length == 0) {
-        var val = el2.querySelector(":scope > *").innerText;
+    else if (el2 != null && Pokédex.length == 0) {
+        let val = el2.querySelector(":scope > *").innerText;
         if (val.toLowerCase().includes("national")) {
             document.body.setAttribute("dex","national")
         }
@@ -1534,15 +1538,17 @@ function dexMove() {
 }
 
 function dexSwitch() {
-	var divList = $("#pokémon > div li");
-	var x = dexChecker[0];
-	if(x == JSONPath_Pokédex.length+1) {
+    let Pokédex = Object.keys(DATA_Pokémon_PokédexID)
+
+	let divList = $("#pokémon > div li");
+	let x = dexChecker[0];
+	if(x == Pokédex.length+1) {
 		divList.sort(function(a, b) {
 			return $(a).data("national") - $(b).data("national");
 		});
 		$("#pokémon > div ul").html(divList);
 	} else {
-		for(q = 0; q < JSONPath_Pokédex.length; q++) {
+		for(q = 0; q < Pokédex.length; q++) {
 			divList.sort(function(a, b) {
 				return $(a).data("regional-"+x) - $(b).data("regional-"+x);
 			});
@@ -1557,8 +1563,8 @@ function dexSwitch() {
 
 function UncheckAll() {
 	count();
-	var uncheck = document.querySelectorAll('#pokémon > div li:not([style*="display: none"]):not(.hidden):not(.filtered) input:checked');
-	for(var i = 0; i < uncheck.length; i++) {
+	let uncheck = document.querySelectorAll('#pokémon > div li:not([style*="display: none"]):not(.hidden):not(.filtered) input:checked');
+	for(let i = 0; i < uncheck.length; i++) {
 		uncheck[i].click();
 	}
     memory("Save","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
@@ -1567,8 +1573,8 @@ function UncheckAll() {
 
 function CheckAll() {
 	count();
-	var check = document.querySelectorAll('#pokémon > div li:not([style*="display: none"]):not(.hidden):not(.filtered) input:not(:checked)');
-	for(var i = 0; i < check.length; i++) {
+	let check = document.querySelectorAll('#pokémon > div li:not([style*="display: none"]):not(.hidden):not(.filtered) input:not(:checked)');
+	for(let i = 0; i < check.length; i++) {
 		check[i].click();
 	}
     memory("Save","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
@@ -1578,15 +1584,12 @@ function CheckAll() {
 
 function createContain(condition) {
 
-    var condition;
+    document.querySelectorAll("#pokémon > div").innerHTML = "";
 
-    var lis = document.querySelectorAll("#pokémon > div li");
-    for (var q = 0; q < lis.length; q++) {
-        lis[q].remove();
-    }
 
-	for(var i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
-        var conditions = [];
+  
+	for(let i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
+        let conditions = [];
         if (condition != undefined) {
             if (condition.includes("Default")) {
                 conditions.push(finaldata["Pokémon"]["Reference"][i]["Variant"].includes("Default"));
@@ -1605,27 +1608,28 @@ function createContain(condition) {
             }
         }
 
-        if(finaldata["Pokémon"]["Reference"][i][JSONPath_Reference] == "true" || finaldata["Pokémon"]["Reference"][i][JSONPath_Reference] == "true") {
-            for (var q = 0; q < conditions.length; q++) {
+        
+        if(finaldata["Pokémon"]["Reference"][i][DATA_Pokémon_Reference["Reference"]] == "true" || finaldata["Pokémon"]["Reference"][i][DATA_Pokémon_Reference["Reference"]] == "true") {
+            for (let q = 0; q < conditions.length; q++) {
                 if (conditions[q] == true) {
-                    var ID = finaldata["Pokémon"]["Reference"][i]["ID"];
-                    var Name = finaldata["Pokémon"]["Form"][i]["Pokémon"];
-                    var formName = finaldata["Pokémon"]["Form"][i]["Form_"+JSONPath_Form];
-                    var variant = finaldata["Pokémon"]["Reference"][i]["Variant"];
-                    var contentDiv = document.createElement("li");
-                    var contentInput = document.createElement("input");
-                    var contentLabel = document.createElement("label");
-                    var contentMainUp = document.createElement("div");
-                    var contentConfirm = document.createElement("figure");
-                    var contentPopup = document.createElement("button");
-                    var contentNationalID = document.createElement("caption");
-                    var contentImg = document.createElement("img");
-                    var contentMainDown = document.createElement("div");
-                    var contentName = document.createElement("p");
+                    let ID = finaldata["Pokémon"]["Reference"][i]["ID"];
+                    let Name = finaldata["Pokémon"]["Form"][i]["Pokémon"];
+                    let formName = finaldata["Pokémon"]["Form"][i][DATA_Pokémon_Form["Form"]];
+                    let variant = finaldata["Pokémon"]["Reference"][i]["Variant"];
+                    let contentDiv = document.createElement("li");
+                    let contentInput = document.createElement("input");
+                    let contentLabel = document.createElement("label");
+                    let contentMainUp = document.createElement("div");
+                    let contentConfirm = document.createElement("figure");
+                    let contentPopup = document.createElement("button");
+                    let contentNationalID = document.createElement("caption");
+                    let contentImg = document.createElement("img");
+                    let contentMainDown = document.createElement("div");
+                    let contentName = document.createElement("p");
                     contentDiv.setAttribute("id",i);
                     contentNationalID.setAttribute("name","national");
 
-                    var evo = getEvolutionFamily(i).map(function(v) {return v["Pokémon"];});
+                    let evo = getEvolutionFamily(i).map(function(v) {return v["Pokémon"];});
                    
                     if (evo.length > 1) {
                         contentDiv.setAttribute("data-search-evolution", evo.join(",").toLowerCase());
@@ -1633,8 +1637,8 @@ function createContain(condition) {
                     else {
                         contentDiv.setAttribute("data-search-evolution", "none");
                     }
-                    var typ = returnData(i, "Type","lower,undefined");
-                    var cr = returnData(i, "Catch Rate","lower,undefined");
+                    let typ = returnData(i, "Type","lower,undefined");
+                    let cr = returnData(i, "Catch Rate","lower,undefined");
 
                     if (typ == "") {
                         typ = "none";
@@ -1646,7 +1650,7 @@ function createContain(condition) {
                     contentDiv.setAttribute("data-search-catchrate", cr);
 
                     if (Ability.length > 0) {
-                        var ab = returnData(i, "Ability","lower,undefined");
+                        let ab = returnData(i, "Ability","lower,undefined");
                         if (ab == "") {
                             ab = "none";
                         }
@@ -1654,7 +1658,7 @@ function createContain(condition) {
                     }
 
                     if (Gender) {
-                        var ratio = returnData(i, "Gender Ratio","lower,undefined");
+                        let ratio = returnData(i, "Gender Ratio","lower,undefined");
                         if(ratio[0] == "1" && ratio[1] == "0") { // Always Male
                             contentDiv.setAttribute("data-search-genderratio", "always male");
                         } else if(ratio[0] == "7" && ratio[1] == "1") { // Very Often Male
@@ -1679,8 +1683,8 @@ function createContain(condition) {
 
 
                     if (Egg) {
-                        var hr = returnData(i, "Hatch Rate","lower,undefined")[0];
-                        var eg = returnData(i, "Egg Group","lower,undefined");
+                        let hr = returnData(i, "Hatch Rate","lower,undefined")[0];
+                        let eg = returnData(i, "Egg Group","lower,undefined");
                         if (hr == "") {
                             hr = "none";
                         }
@@ -1693,7 +1697,7 @@ function createContain(condition) {
                     }
                 
                     if (HeldItem) {
-                        var hld = returnData(i, "Held Item","lower,undefined");
+                        let hld = returnData(i, "Held Item","lower,undefined");
                         if (hld == "") {
                             hld = "none";
                         }
@@ -1713,13 +1717,13 @@ function createContain(condition) {
 
                     //contentDiv.setAttribute("data-search-learnset",returnMoveSet(i,"onlymoves,noduplicate,lower"));
 
-                    var xpyd = returnData(i, "Experience Yield","lower,undefined");
+                    let xpyd = returnData(i, "Experience Yield","lower,undefined");
                     if (xpyd == "") {
                         xpyd = "none";
                     }
                     contentDiv.setAttribute("data-search-expyield", xpyd);
 
-                    var xpydc = returnData(i, "Experience Yield","lower,undefined");
+                    let xpydc = returnData(i, "Experience Yield","lower,undefined");
                     if (xpydc != "") {
                         xpydc = parseInt(xpyd);
                     }
@@ -1741,7 +1745,7 @@ function createContain(condition) {
                         contentDiv.setAttribute("data-search-expyieldcategory",xpydc);
                     }
 
-                    var lvlr = returnData(i, "Leveling Rate","lower,undefined");
+                    let lvlr = returnData(i, "Leveling Rate","lower,undefined");
                     if (lvlr == "") {
                         lvlr = "none";
                     }
@@ -1749,11 +1753,11 @@ function createContain(condition) {
                     contentDiv.setAttribute("data-search-levelrate", lvlr);
                     
 
-                    var statsevL = ["Base Stats","EV Yield"];
-                    var statsevS = ["base","ev"];
-                    for(var q = 0; q < statsevL.length; q++) {
-                        for(var u = 0; u < Stats.length; u++) {
-                            var dat = returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined");
+                    let statsevL = ["Base Stats","EV Yield"];
+                    let statsevS = ["base","ev"];
+                    for(let q = 0; q < statsevL.length; q++) {
+                        for(let u = 0; u < Stats.length; u++) {
+                            let dat = returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined");
                             if (dat == "") {
                                 dat = "none";
                             }
@@ -1802,26 +1806,29 @@ function createContain(condition) {
                     contentImg.addEventListener("dragstart",function(){document.body.classList.add("dragging");})
                     contentImg.addEventListener("dragend",function(){document.body.classList.remove("dragging");})
 
-                    for(q = 0; q < JSONPath_Pokédex.length; q++) {
+                    let Pokédex = Object.keys(DATA_Pokémon_PokédexID)
+
+
+                    for(q = 0; q < Pokédex.length; q++) {
                         let y = q+1;
-                        var contentMainRegionalID = document.createElement("caption");
-                        if(finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]] == undefined) {
+                        let contentMainRegionalID = document.createElement("caption");
+                        if(finaldata["Pokémon"]["Pokédex ID"][i][DATA_Pokémon_PokédexID[Pokédex[q]]] == undefined) {
                             if(finaldata["Pokémon"]["Pokédex ID"][finaldata["Pokémon"]["Pokédex ID"].map(function(e) {
                                     return e.ID;
-                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][JSONPath_Pokédex[q]] != undefined) {
+                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][DATA_Pokémon_PokédexID[Pokédex[q]]] != undefined) {
                                 contentDiv.setAttribute("data-regional-"+y, finaldata["Pokémon"]["Pokédex ID"][finaldata["Pokémon"]["Pokédex ID"].map(function(e) {
                                     return e.ID;
-                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][JSONPath_Pokédex[q]]);
+                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][DATA_Pokémon_PokédexID[Pokédex[q]]]);
                                 contentMainRegionalID.innerText = "#"+finaldata["Pokémon"]["Pokédex ID"][finaldata["Pokémon"]["Pokédex ID"].map(function(e) {
                                     return e.ID;
-                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][JSONPath_Pokédex[q]];
+                                }).indexOf(finaldata["Pokémon"]["Reference"][i]["ID"])][DATA_Pokémon_PokédexID[Pokédex[q]]];
                             } else {
                                 contentDiv.setAttribute("data-regional-"+y, "");
                                 contentMainRegionalID.innerText = "#";
                             }
                         } else {
-                            contentDiv.setAttribute("data-regional-"+y, finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]]);
-                            contentMainRegionalID.innerText = "#"+finaldata["Pokémon"]["Pokédex ID"][i][JSONPath_Pokédex[q]];
+                            contentDiv.setAttribute("data-regional-"+y, finaldata["Pokémon"]["Pokédex ID"][i][DATA_Pokémon_PokédexID[Pokédex[q]]]);
+                            contentMainRegionalID.innerText = "#"+finaldata["Pokémon"]["Pokédex ID"][i][DATA_Pokémon_PokédexID[Pokédex[q]]];
                         }
                         contentMainRegionalID.setAttribute("name","regional"+y)
                         contentMainUp.appendChild(contentMainRegionalID);
@@ -1837,7 +1844,7 @@ function createContain(condition) {
 
     document.querySelector("#pokémon nav li[name='search'] input").title = searchOptionsTitle(document.querySelector("#pokémon > div ul"));
 
-    var searchLis = document.querySelectorAll("#pokémon > div li");
+    let searchLis = document.querySelectorAll("#pokémon > div li");
     searchPokémonAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
         for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -1856,6 +1863,66 @@ function createContain(condition) {
 
     
 }
+
+
+
+let variantIteration = 0;
+
+function variantSelector() {
+
+
+    let inputs = document.querySelectorAll('#pokémon > aside[name="settings"] span[name="variant"] input:checked');
+
+	if(inputs.length > 0) {
+        let tempArr = [];
+        let tempStr;
+        for (let i = 0; i < inputs.length; i++) {
+            tempArr.push(inputs[i].nextElementSibling.innerText)
+        }
+        if (tempArr.length > 1) {
+            tempStr = tempArr.join(",");
+        }
+        else {
+            tempStr = tempArr[0];
+        }
+
+        searchFilter(document.querySelector("#pokémon nav ul li[name='search'] input"),document.querySelector("#pokémon > div ul"),"Remove");
+
+        createContain(tempStr);
+
+        memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
+
+        memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
+
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
+        ImageType("Populate");
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
+        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
+        ImageType("Execute");
+
+        resizeDiv();
+		dexSwitch();
+
+		document.querySelector("#pokémon nav li[name='search'] input").value = "";
+
+
+        if (variantIteration != 0) {
+            consoleText("Variants changed to "+tempStr.replace(/,([^,]*)$/, ' and $1').replaceAll(",",", ")+".");
+        }
+
+        variantIteration = variantIteration + 1;
+	}
+    
+
+}
+
+
+
 
 $("body").click(function(event) {
     document.body.classList.remove("dragging");
