@@ -1,22 +1,22 @@
-var createItem = function() {
-	var itemOuter = document.createElement("div");
-	var itemSectionList = document.createElement("section");
-	var itemSectionListOptionsTitleOuter = document.createElement("div");
-	var itemSectionListOptionsPocketOuter = document.createElement("div");
-	var itemSectionListOptionsSearchOuter = document.createElement("div");
-	var itemSectionListOptionsSearch = document.createElement("input");
-	var itemSectionListOptionsSearchExit = document.createElement("span");
-	var itemSectionListOptionsOuter = document.createElement("div");
-	var itemSectionListOptions = document.createElement("ol");
-	var itemSectionHeader = document.createElement("section");
-	var itemSectionHeaderTitle = document.createElement("span");
-	var itemSectionHeaderTitleID = document.createElement("h4");
-	var itemSectionHeaderTitleName = document.createElement("h3");
-	var itemSectionHeaderDebut = document.createElement("span");
-	var itemSectionHeaderDebutText = document.createElement("h5");
-	var itemSectionContent = document.createElement("section");
-	var itemSectionContentDescription = document.createElement("div");
-	var itemSectionSidebar = document.createElement("section");
+let createItem = function() {
+	let itemOuter = document.createElement("div");
+	let itemSectionList = document.createElement("section");
+	let itemSectionListOptionsTitleOuter = document.createElement("div");
+	let itemSectionListOptionsPocketOuter = document.createElement("div");
+	let itemSectionListOptionsSearchOuter = document.createElement("div");
+	let itemSectionListOptionsSearch = document.createElement("input");
+	let itemSectionListOptionsSearchExit = document.createElement("span");
+	let itemSectionListOptionsOuter = document.createElement("div");
+	let itemSectionListOptions = document.createElement("ol");
+	let itemSectionHeader = document.createElement("section");
+	let itemSectionHeaderTitle = document.createElement("span");
+	let itemSectionHeaderTitleID = document.createElement("h4");
+	let itemSectionHeaderTitleName = document.createElement("h3");
+	let itemSectionHeaderDebut = document.createElement("span");
+	let itemSectionHeaderDebutText = document.createElement("h5");
+	let itemSectionContent = document.createElement("section");
+	let itemSectionContentDescription = document.createElement("div");
+	let itemSectionSidebar = document.createElement("section");
 	itemOuter.setAttribute("id", "item");
 	itemOuter.setAttribute("value","items");
 	itemSectionListOptionsSearch.setAttribute("type", "text");
@@ -55,8 +55,8 @@ var createItem = function() {
 	itemSectionListOptionsSearch.addEventListener("keyup", function() {search("Item");});
 	itemSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Item");});
 
-	var pockets = [];
-	for (var q = 0; q < finaldata["Items"]["Reference"].length; q++) {
+	let pockets = [];
+	for (let q = 0; q < finaldata["Items"]["Reference"].length; q++) {
 		if (getApplicable(finaldata["Items"]["Reference"][q]["Game"])) {
 			if (finaldata["Items"]["Reference"][q]["Use"] == "true") {
 				pockets.push(finaldata["Items"]["Reference"][q]["Pocket"])
@@ -66,18 +66,18 @@ var createItem = function() {
 	pockets = pockets.filter(function(v) {return v !== undefined;});
 	pockets = [...new Set(pockets)];
 	
-	for (var q = 0; q < pockets.length; q++) {
-		var itemSectionListOptionsPocketInput = document.createElement("input");
-		var itemSectionListOptionsPocketLabel = document.createElement("label");
-		var itemSectionListOptionsPocketLabelImage = document.createElement("img");
-		var itemSectionListOptionsPocketLabelText = document.createElement("p");
+	for (let q = 0; q < pockets.length; q++) {
+		let itemSectionListOptionsPocketInput = document.createElement("input");
+		let itemSectionListOptionsPocketLabel = document.createElement("label");
+		let itemSectionListOptionsPocketLabelImage = document.createElement("img");
+		let itemSectionListOptionsPocketLabelText = document.createElement("p");
 		itemSectionListOptionsPocketInput.setAttribute("type","checkbox");
 		itemSectionListOptionsPocketInput.setAttribute("name","item-options-pocket");
 		itemSectionListOptionsPocketInput.setAttribute("id","item-options-pocket-"+q);
 		itemSectionListOptionsPocketInput.setAttribute("alt",pockets[q].toLowerCase());
 		itemSectionListOptionsPocketInput.value = pockets[q];
 		itemSectionListOptionsPocketLabel.setAttribute("for","item-options-pocket-"+q);
-		itemSectionListOptionsPocketLabelImage.src = "./media/Images/Item/Pocket/Icon/"+MEDIAPath_Item_Pocket+"/"+pockets[q]+".png";
+		itemSectionListOptionsPocketLabelImage.src = getMedia([pockets[q]],[PATH_Bag_Pocket])[0];
 		if (pockets[q].includes("Pocket")) {
 			itemSectionListOptionsPocketLabelImage.title = pockets[q];
 		}
@@ -95,33 +95,31 @@ var createItem = function() {
 		itemSectionListOptionsPocketInput.click();
 	}
 
-    var itemSectionHeaderGame = document.createElement("span");
-    var itemSectionHeaderGameImage = document.createElement("img");
-    itemSectionHeaderGameImage.src = "./media/Images/Misc/Title/Text/" + GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "") + ".png";
+    let itemSectionHeaderGame = document.createElement("span");
+    let itemSectionHeaderGameImage = document.createElement("img");
+    itemSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
     itemSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     itemSectionHeader.appendChild(itemSectionHeaderGame);
     itemSectionHeaderGame.appendChild(itemSectionHeaderGameImage);
 
-	var itemSectionSidebarSidebar = document.createElement("div");
-	var itemSectionSidebarSidebarMapOuter = document.createElement("div");
-	var itemSectionSidebarSidebarMapInner = document.createElement("div");
-	var itemSectionSidebarSidebarMapImage = document.createElement("img");
-	var itemSectionSidebarSidebarMap = document.createElement("map");
-	var itemSectionSidebarSidebarMapFullscreen = document.createElement("figure");
-	var itemSectionSidebarSidebarMapFullscreenText = document.createElement("h5");
-	var itemSectionSidebarSidebarMapPause = document.createElement("figure");
-	var itemSectionSidebarSidebarMapPauseText = document.createElement("h3");
-	var itemSectionSidebarSidebarMapZoomIn = document.createElement("figure");
-	var itemSectionSidebarSidebarMapZoomInText = document.createElement("h3");
-	var itemSectionSidebarSidebarMapZoomOut = document.createElement("figure");
-	var itemSectionSidebarSidebarMapZoomOutText = document.createElement("h3");
+	let itemSectionSidebarSidebar = document.createElement("div");
+	let itemSectionSidebarSidebarMapOuter = document.createElement("div");
+	let itemSectionSidebarSidebarMapInner = document.createElement("div");
+	let itemSectionSidebarSidebarMapImage = document.createElement("img");
+	let itemSectionSidebarSidebarMap = document.createElement("map");
+	let itemSectionSidebarSidebarMapFullscreen = document.createElement("figure");
+	let itemSectionSidebarSidebarMapFullscreenText = document.createElement("h5");
+	let itemSectionSidebarSidebarMapPause = document.createElement("figure");
+	let itemSectionSidebarSidebarMapPauseText = document.createElement("h3");
+	let itemSectionSidebarSidebarMapZoomIn = document.createElement("figure");
+	let itemSectionSidebarSidebarMapZoomInText = document.createElement("h3");
+	let itemSectionSidebarSidebarMapZoomOut = document.createElement("figure");
+	let itemSectionSidebarSidebarMapZoomOutText = document.createElement("h3");
 
-	var itemSectionSidebarSidebarUl = document.createElement("ul");
+	let itemSectionSidebarSidebarUl = document.createElement("ul");
 
-	itemSectionSidebarSidebarMapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png"
-
-	itemSectionSidebarSidebarMapImage.src = "./media/Images/Location/Map/"+MEDIAPath_Map+"/Map.png";
-	itemSectionSidebarSidebarMapImage.setAttribute("usemap","#"+MEDIAPath_Map+"-item");
+	itemSectionSidebarSidebarMapImage.src = getMedia(["Map"],[PATH_Region_Map])[0]
+	itemSectionSidebarSidebarMapImage.setAttribute("usemap","#"+Region.join(" & ")+"-item");
 
 	itemSectionSidebarSidebarMapZoomIn.setAttribute("name","zoom");
 	itemSectionSidebarSidebarMapZoomOut.setAttribute("name","reset");
@@ -134,8 +132,8 @@ var createItem = function() {
 	itemSectionSidebarSidebarMapPause.setAttribute("name","pause");
 	itemSectionSidebarSidebarMapPauseText.innerText = "⏸︎";
 
-	itemSectionSidebarSidebarMap.setAttribute("name",MEDIAPath_Map+"-item");
-	itemSectionSidebarSidebarMap.setAttribute("id",MEDIAPath_Map+"-item");
+	itemSectionSidebarSidebarMap.setAttribute("name",Region.join(" & ")+"-item");
+	itemSectionSidebarSidebarMap.setAttribute("id",Region.join(" & ")+"-item");
 
 	itemSectionSidebar.appendChild(itemSectionSidebarSidebar);
 	itemSectionSidebarSidebar.appendChild(itemSectionSidebarSidebarMapOuter);
@@ -160,16 +158,16 @@ var createItem = function() {
 	itemSectionSidebarSidebarMapInner.addEventListener("click", function() {zoom(itemSectionSidebarSidebarMapInner,"pause",undefined)});
 	itemSectionSidebarSidebarMapZoomIn.addEventListener("click",function() {zoom(itemSectionSidebarSidebarMapInner,"in",false)});
 	itemSectionSidebarSidebarMapZoomOut.addEventListener("click",function() {zoom(itemSectionSidebarSidebarMapInner,"out",true)});
-	itemSectionSidebarSidebarMapInner.addEventListener("wheel",function(event){var delta = event.deltaY.toString();if(delta.includes("-")){zoom(itemSectionSidebarSidebarMapInner,"in",false)}else if(!delta.includes("-")){zoom(itemSectionSidebarSidebarMapInner,"out",true)}});
+	itemSectionSidebarSidebarMapInner.addEventListener("wheel",function(event){let delta = event.deltaY.toString();if(delta.includes("-")){zoom(itemSectionSidebarSidebarMapInner,"in",false)}else if(!delta.includes("-")){zoom(itemSectionSidebarSidebarMapInner,"out",true)}});
 	itemSectionSidebarSidebarMapInner.addEventListener("mouseleave", function() {zoom(itemSectionSidebarSidebarMapInner,"out",undefined)});
 	itemSectionSidebarSidebarMapInner.addEventListener("mouseenter", function() {zoom(itemSectionSidebarSidebarMapInner,"in",undefined)});
 	itemSectionSidebarSidebarMapInner.addEventListener("mousemove", function() {zoom(itemSectionSidebarSidebarMapInner,"pan",undefined)});
 
-	for(var q = 0; q < finaldata["Items"]["Reference"].length; q++) {
+	for(let q = 0; q < finaldata["Items"]["Reference"].length; q++) {
 		if (getApplicable(finaldata["Items"]["Reference"][q]["Game"])) {
 			if (finaldata["Items"]["Reference"][q]["Use"] == "true") {
 				//if (returnAppArrData(finaldata["Items"]["Description"],"Item",finaldata["Items"]["Reference"][q]["Item"]).length > 0) {
-					var name = finaldata["Items"]["Reference"][q]["Item"];
+					let name = finaldata["Items"]["Reference"][q]["Item"];
 
 					if (finaldata["Items"]["Reference"][q]["Alias"] != undefined) {
 						name += " ("+finaldata["Items"]["Reference"][q]["Alias"]+")";
@@ -178,9 +176,9 @@ var createItem = function() {
 						name += " ("+getMachineMove(finaldata["Items"]["Reference"][q]["Item"])+")";
 					}
 
-					var itemSectionListOptionsInput = document.createElement("input");
-					var itemSectionListOptionsLabel = document.createElement("label");
-					var itemSectionListOptionsLabelText = document.createElement("p");
+					let itemSectionListOptionsInput = document.createElement("input");
+					let itemSectionListOptionsLabel = document.createElement("label");
+					let itemSectionListOptionsLabelText = document.createElement("p");
 					itemSectionListOptionsInput.setAttribute("type", "radio");
 					itemSectionListOptionsInput.setAttribute("name", "item-options");
 					itemSectionListOptionsInput.setAttribute("id", "item-options-" + q);
@@ -209,9 +207,10 @@ var createItem = function() {
 					}
 					itemSectionListOptionsLabel.setAttribute("type","medium");
 					if (finaldata["Items"]["Reference"][q]["Icon"] != undefined) {
-						var itemSectionListOptionsLabelImageOuter = document.createElement("span");
-						var itemSectionListOptionsLabelImage = document.createElement("img");
-						itemSectionListOptionsLabelImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+finaldata["Items"]["Reference"][q]["Icon"]+".png";
+						let itemSectionListOptionsLabelImageOuter = document.createElement("span");
+						let itemSectionListOptionsLabelImage = document.createElement("img");
+
+						itemSectionListOptionsLabelImage.src = getMedia([finaldata["Items"]["Reference"][q]["Icon"]],[PATH_Item_Bag])[0]
 						itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
 						itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
 						itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
@@ -237,7 +236,7 @@ var createItem = function() {
 
 	itemSectionListOptionsSearch.title = searchOptionsTitle(itemSectionListOptions);
 
-	var searchLis = document.querySelectorAll("#contain > div#item > section[name='list'] ol > label");
+	let searchLis = document.querySelectorAll("#contain > div#item > section[name='list'] ol > label");
     searchItemAttributes = [];
     for(q = 0; q < searchLis.length; q++) {
         for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
@@ -254,11 +253,10 @@ var createItem = function() {
     }
 	
 	function itemOptionsSelector(i) {
-		var i;
 		if (this.value != undefined) {
 			i = this.value;
 		}
-		var item = finaldata["Items"]["Reference"][i]["Item"];
+		let item = finaldata["Items"]["Reference"][i]["Item"];
 
 		itemSectionHeaderTitleName.innerText = finaldata["Items"]["Reference"][i]["Item"];
 
@@ -269,15 +267,15 @@ var createItem = function() {
 		itemSectionHeaderTitleID.innerText = "#"+finaldata["Items"]["Reference"][i]["ID"];
 		itemSectionHeaderTitleID.setAttribute("title",finaldata["Items"]["Reference"][i]["Index"]);
 
-		var priceArr = returnAppArrData(finaldata["Items"]["Price"],"Item",item);
+		let priceArr = returnAppArrData(finaldata["Items"]["Price"],"Item",item);
 	
 		itemSectionHeaderDebutText.innerText = "Cannot be Sold";
 		if (priceArr.length > 0) {
-			var price = priceArr[0]["Sell Amount"];
-			var currency = priceArr[0]["Sell Currency"];	
+			let price = priceArr[0]["Sell Amount"];
+			let currency = priceArr[0]["Sell Currency"];	
 			if (price != undefined) {
 				if (currency == "Pokémon Dollar") {
-					currency = currency.replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />')
+					currency = currency.replaceAll("Pokémon Dollar",'<img src="'+getMedia(["Pokémon Dollar"],[PATH_Currency_Icon])[0]+'" title="Pokémon Dollar" />')
 				}
 				else {
 					currency = currency.replace(/[^A-Z]+/g,"");
@@ -289,28 +287,28 @@ var createItem = function() {
 			}
 		}
 
-		var destexts = itemSectionContentDescription.querySelectorAll(":scope > *");
-		for(var q = 0; q < destexts.length; q++) {
+		let destexts = itemSectionContentDescription.querySelectorAll(":scope > *");
+		for(let q = 0; q < destexts.length; q++) {
 			destexts[q].remove();
 		}
 
 		if (getMachineMove(item) != undefined) {
-			var itemSectionContentDescriptionText = document.createElement("p");
+			let itemSectionContentDescriptionText = document.createElement("p");
 			itemSectionContentDescriptionText.innerHTML = item+" contains the move <b type='invert' name='move'>"+getMachineMove(item)+"</b>.";
 			itemSectionContentDescription.appendChild(itemSectionContentDescriptionText);
 			itemSectionContentDescriptionText.querySelector(":scope b").addEventListener("click",dataRedirect);
 			itemSectionContentDescriptionText.querySelector(":scope b").setAttribute("function","dataRedirect");
 		}
 		else {
-			for(var q = 0; q < finaldata["Items"]["Description"].length; q++) {
+			for(let q = 0; q < finaldata["Items"]["Description"].length; q++) {
 				if (finaldata["Items"]["Description"][q]["Item"] == item) {
 					if (getApplicable(finaldata["Items"]["Description"][q]["Game"])) {
-						var check = true;
+						let check = true;
 						if (finaldata["Items"]["Description"][q]["Index"] != undefined) {
 							check = finaldata["Items"]["Description"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 						}
 						if (check) {
-							var itemSectionContentDescriptionText = document.createElement("p");
+							let itemSectionContentDescriptionText = document.createElement("p");
 							itemSectionContentDescriptionText.innerText = finaldata["Items"]["Description"][q]["Description"];
 							itemSectionContentDescription.appendChild(itemSectionContentDescriptionText);
 							if(finaldata["Items"]["Description"][q]["Version"] != undefined) {
@@ -327,12 +325,12 @@ var createItem = function() {
 
 
 
-		var effect = [];
+		let effect = [];
 
-		for(var q = 0; q < finaldata["Items"]["Effect"].length; q++) {
+		for(let q = 0; q < finaldata["Items"]["Effect"].length; q++) {
 			if(getApplicable(finaldata["Items"]["Effect"][q]["Game"])) {
 				if(finaldata["Items"]["Effect"][q]["Item"] == finaldata["Items"]["Reference"][i]["Item"]) {
-					var check = true;
+					let check = true;
 					if (finaldata["Items"]["Effect"][q]["Index"] != undefined) {
 						check = finaldata["Items"]["Effect"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 					}
@@ -342,12 +340,12 @@ var createItem = function() {
 				}
 			}
 		}
-		var itemSectionContentEffectTitle = document.createElement("h4");
+		let itemSectionContentEffectTitle = document.createElement("h4");
 		itemSectionContentDescription.appendChild(itemSectionContentEffectTitle)
-		var itemSectionContentEffectText = document.createElement("p");
+		let itemSectionContentEffectText = document.createElement("p");
 		itemSectionContentDescription.appendChild(itemSectionContentEffectText)
 
-		for(var q = 0; q < effect.length; q++) {
+		for(let q = 0; q < effect.length; q++) {
 			itemSectionContentEffectText.innerText += effect[q];
 			if (q != effect.length - 1) {
 				itemSectionContentEffectText.innerHTML += "<br>"
@@ -363,32 +361,33 @@ var createItem = function() {
 
 
 
-		var lis = itemSectionSidebarSidebarUl.querySelectorAll(":scope li");
+		let lis = itemSectionSidebarSidebarUl.querySelectorAll(":scope li");
 		
-		for(var q = 0; q < lis.length; q++) {
+		for(let q = 0; q < lis.length; q++) {
 			lis[q].remove();
 		}
 
-		
+		let key1 = Object.keys(DATA_Pokémon_HeldItem);
+		let key2 = DATA_Pokémon_HeldItem;
 
-		for(var q = 0; q < finaldata["Pokémon"]["Held Item"].length; q++) {
-			for(var u = 0; u < JSONPath_HeldItemPercentage.length; u++) {
-				if(finaldata["Pokémon"]["Held Item"][q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem] == item) {
+		for(let q = 0; q < finaldata["Pokémon"]["Held Item"].length; q++) {
+			for(let u = 0; u < key1.length; u++) {
+				if(finaldata["Pokémon"]["Held Item"][q][key1[u]] == item) {
 
-					var itemSectionSidebarSidebarLi = document.createElement("li");
+					let itemSectionSidebarSidebarLi = document.createElement("li");
 					itemSectionSidebarSidebarLi.setAttribute("name","held");
 					itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 
-					var itemSectionSidebarSidebarPokémon = document.createElement("span");
+					let itemSectionSidebarSidebarPokémon = document.createElement("span");
 					itemSectionSidebarSidebarPokémon.setAttribute("name","pokémon");
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarPokémon);
 
-					var itemSectionSidebarSidebarPokémonImg = document.createElement("img");
-					itemSectionSidebarSidebarPokémonImg.src = getPokémonMediaPath([q],["./media/Images/Pokémon/Box/PNG/"+MEDIAPath_Pokémon_Box]);
+					let itemSectionSidebarSidebarPokémonImg = document.createElement("img");
+					itemSectionSidebarSidebarPokémonImg.src = getPokémonMediaPath([q],[PATH_Pokémon_Box_Default_PNG]);
 					itemSectionSidebarSidebarPokémonImg.title = getPokémonName(q);
 					itemSectionSidebarSidebarPokémon.appendChild(itemSectionSidebarSidebarPokémonImg);
 
-					var itemSectionSidebarSidebarPokémonText = document.createElement("small");
+					let itemSectionSidebarSidebarPokémonText = document.createElement("small");
 					itemSectionSidebarSidebarPokémonText.innerText = getPokémonName(q);
 					itemSectionSidebarSidebarPokémon.appendChild(itemSectionSidebarSidebarPokémonText);
 
@@ -398,30 +397,30 @@ var createItem = function() {
 
 
 
-					var itemSectionSidebarSidebarDescription = document.createElement("span");
+					let itemSectionSidebarSidebarDescription = document.createElement("span");
 					itemSectionSidebarSidebarDescription.setAttribute("name","description");
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
 
 			
-					var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+					let itemSectionSidebarSidebarDescriptionText = document.createElement("p");
 					itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 
 					if (HeldItem == false) {
-						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldata["Pokémon"]["Reference"][q]["Pokémon"]+" that was traded to Generation "+(Generation+1)+".";
+						itemSectionSidebarSidebarDescriptionText.innerText = key2[key1]+" chance to be held by a wild "+finaldata["Pokémon"]["Reference"][q]["Pokémon"]+" that was traded to Generation "+(Generation+1)+".";
 					}
 					else {
-						itemSectionSidebarSidebarDescriptionText.innerText = JSONPath_HeldItemPercentage[u]+" chance to be held by a wild "+finaldata["Pokémon"]["Reference"][q]["Pokémon"]+".";
+						itemSectionSidebarSidebarDescriptionText.innerText = key2[key1]+" chance to be held by a wild "+finaldata["Pokémon"]["Reference"][q]["Pokémon"]+".";
 					}
 					
 
-					var itemSectionSidebarSidebarItem = document.createElement("span");
+					let itemSectionSidebarSidebarItem = document.createElement("span");
 					itemSectionSidebarSidebarItem.setAttribute("name","item");
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
-					var itemSectionSidebarSidebarItemImg = document.createElement("img");
-					itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Pokémon"]["Held Item"][q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem])+".png";
+					let itemSectionSidebarSidebarItemImg = document.createElement("img");
+					itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Pokémon"]["Held Item"][q][key1[u]])],[PATH_Item_Bag])[0]
 					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none";')
-					itemSectionSidebarSidebarItemImg.title = finaldata["Pokémon"]["Held Item"][q][JSONPath_HeldItemPercentage[u]+"_"+JSONPath_HeldItem];
+					itemSectionSidebarSidebarItemImg.title = finaldata["Pokémon"]["Held Item"][q][key1[u]];
 					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 		
 				}
@@ -433,15 +432,15 @@ var createItem = function() {
 
 
 
-		for(var q = 0; q < finaldata["Location Items"]["Items"].length; q++) {
+		for(let q = 0; q < finaldata["Location Items"]["Items"].length; q++) {
 			if (getApplicable(finaldata["Location Items"]["Items"][q]["Game"])) {
-				var check = true;
+				let check = true;
 				if (finaldata["Location Items"]["Items"][q]["Index"] != undefined) {
 					check = finaldata["Location Items"]["Items"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 				}
 				if (check) {
 					if(finaldata["Location Items"]["Items"][q]["Item"] == item) {
-						var quantity = finaldata["Location Items"]["Items"][q]["Quantity"];
+						let quantity = finaldata["Location Items"]["Items"][q]["Quantity"];
 						if (quantity == undefined) {
 							quantity = 1;
 						}
@@ -449,11 +448,11 @@ var createItem = function() {
 							quantity = 10;
 						}
 
-						var itemSectionSidebarSidebarLi = document.createElement("li");
+						let itemSectionSidebarSidebarLi = document.createElement("li");
 						itemSectionSidebarSidebarLi.setAttribute("name","location")
 						itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 
-						var itemSectionSidebarSidebarInput = document.createElement("input");
+						let itemSectionSidebarSidebarInput = document.createElement("input");
 						itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
 						itemSectionSidebarSidebarInput.setAttribute("id","location-item");
 						itemSectionSidebarSidebarInput.setAttribute("name","location-item"+q);
@@ -461,9 +460,9 @@ var createItem = function() {
 
 						itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
-						var itemSectionSidebarSidebarLocation = document.createElement("span");
-						var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
-						var itemSectionSidebarSidebarLocationText = document.createElement("h5");
+						let itemSectionSidebarSidebarLocation = document.createElement("span");
+						let itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
+						let itemSectionSidebarSidebarLocationText = document.createElement("h5");
 						itemSectionSidebarSidebarLocation.setAttribute("name","location");
 						itemSectionSidebarSidebarLocationText.innerText = finaldata["Location Items"]["Items"][q]["Location"];
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
@@ -477,7 +476,7 @@ var createItem = function() {
 
 
 						if (finaldata["Location Items"]["Items"][q]["Area"] != undefined && finaldata["Location Items"]["Items"][q]["Area"] != finaldata["Location Items"]["Items"][q]["Location"]) {
-							var itemSectionSidebarSidebarAreaText = document.createElement("small");
+							let itemSectionSidebarSidebarAreaText = document.createElement("small");
 							itemSectionSidebarSidebarAreaText.innerText = finaldata["Location Items"]["Items"][q]["Area"];
 							itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
 						}
@@ -485,29 +484,29 @@ var createItem = function() {
 
 
 						if (finaldata["Location Items"]["Items"][q]["Description"] != undefined) {
-							var itemSectionSidebarSidebarDescription = document.createElement("span");
+							let itemSectionSidebarSidebarDescription = document.createElement("span");
 							itemSectionSidebarSidebarDescription.setAttribute("name","description");
 							itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
-							var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+							let itemSectionSidebarSidebarDescriptionText = document.createElement("p");
 							itemSectionSidebarSidebarDescriptionText.innerText = finaldata["Location Items"]["Items"][q]["Description"];
 							itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 						}
 
-						var itemSectionSidebarSidebarRequirementOuter = document.createElement("span");
+						let itemSectionSidebarSidebarRequirementOuter = document.createElement("span");
 						itemSectionSidebarSidebarRequirementOuter.setAttribute("name","requirement");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarRequirementOuter);
 
 						if (finaldata["Location Items"]["Items"][q]["Field"] != undefined) {
 		
-							var itemSectionSidebarSidebarRequirementTitle = document.createElement("h6");
+							let itemSectionSidebarSidebarRequirementTitle = document.createElement("h6");
 							itemSectionSidebarSidebarRequirementTitle.innerText = "Requires:";
 							itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarRequirementTitle);
 
 
 							if (finaldata["Location Items"]["Items"][q]["Field"].includes("/")) {
-								for(var y = 0; y < finaldata["Location Items"]["Items"][q]["Field"].split("/").length; y++) {
-									var itemIcon;
-									var itm;
+								for(let y = 0; y < finaldata["Location Items"]["Items"][q]["Field"].split("/").length; y++) {
+									let itemIcon;
+									let itm;
 									if (getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]) != undefined) {
 										itemIcon = getItemIcon(getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]));
 										itm = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split("/")[y]);
@@ -517,13 +516,13 @@ var createItem = function() {
 										itm = finaldata["Location Items"]["Items"][q]["Field"].split("/")[y];
 									}
 
-									var itemSectionSidebarSidebarField = document.createElement("b");
-									var itemSectionSidebarSidebarFieldText = document.createElement("small");
+									let itemSectionSidebarSidebarField = document.createElement("b");
+									let itemSectionSidebarSidebarFieldText = document.createElement("small");
 									itemSectionSidebarSidebarFieldText.innerText = finaldata["Location Items"]["Items"][q]["Field"].split("/")[y];
 									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 									if (itemIcon != undefined) {
-										var itemSectionSidebarSidebarFieldImage = document.createElement("img");
-										itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+										let itemSectionSidebarSidebarFieldImage = document.createElement("img");
+										itemSectionSidebarSidebarFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0];
 										itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"].split("/")[y];
 										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
@@ -534,16 +533,16 @@ var createItem = function() {
 									itemSectionSidebarSidebarField.addEventListener("click",dataRedirect);
 									itemSectionSidebarSidebarField.setAttribute("function","dataRedirect");
 									if (y != finaldata["Location Items"]["Items"][q]["Field"].split("/").length - 1) {
-										var itemSectionSidebarSidebarFieldSpace = document.createElement("p");
+										let itemSectionSidebarSidebarFieldSpace = document.createElement("p");
 										itemSectionSidebarSidebarFieldSpace.innerText = " or ";
 										itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarFieldSpace)
 									}
 								}
 							}
 							else if (finaldata["Location Items"]["Items"][q]["Field"].includes(",")) {
-								for(var y = 0; y < finaldata["Location Items"]["Items"][q]["Field"].split(",").length; y++) {
-									var itemIcon;
-									var itm;
+								for(let y = 0; y < finaldata["Location Items"]["Items"][q]["Field"].split(",").length; y++) {
+									let itemIcon;
+									let itm;
 									if (getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]) != undefined) {
 										itemIcon = getItemIcon(getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]));
 										itm = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]);
@@ -553,13 +552,13 @@ var createItem = function() {
 										itm = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 									}
 
-									var itemSectionSidebarSidebarField = document.createElement("b");
-									var itemSectionSidebarSidebarFieldText = document.createElement("small");
+									let itemSectionSidebarSidebarField = document.createElement("b");
+									let itemSectionSidebarSidebarFieldText = document.createElement("small");
 									itemSectionSidebarSidebarFieldText.innerText = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 									if (itemIcon != undefined) {
-										var itemSectionSidebarSidebarFieldImage = document.createElement("img");
-										itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+										let itemSectionSidebarSidebarFieldImage = document.createElement("img");
+										itemSectionSidebarSidebarFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0];
 										itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
@@ -573,8 +572,8 @@ var createItem = function() {
 								}
 							}
 							else {
-								var itemIcon;
-								var itm;
+								let itemIcon;
+								let itm;
 								if (getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"]) != undefined) {
 									itemIcon = getItemIcon(getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"]));
 									itm = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"]);
@@ -584,13 +583,13 @@ var createItem = function() {
 									itm = finaldata["Location Items"]["Items"][q]["Field"];
 								}
 
-								var itemSectionSidebarSidebarField = document.createElement("b");
-								var itemSectionSidebarSidebarFieldText = document.createElement("small");
+								let itemSectionSidebarSidebarField = document.createElement("b");
+								let itemSectionSidebarSidebarFieldText = document.createElement("small");
 								itemSectionSidebarSidebarFieldText.innerText = finaldata["Location Items"]["Items"][q]["Field"];
 								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
-									var itemSectionSidebarSidebarFieldImage = document.createElement("img");
-									itemSectionSidebarSidebarFieldImage.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+itemIcon+".png";
+									let itemSectionSidebarSidebarFieldImage = document.createElement("img");
+									itemSectionSidebarSidebarFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0];
 									itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"];
 									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 									itemSectionSidebarSidebarFieldImage.setAttribute("name","item");
@@ -605,13 +604,13 @@ var createItem = function() {
 							}
 						}
 
-						var itemSectionSidebarSidebarItem = document.createElement("span");
+						let itemSectionSidebarSidebarItem = document.createElement("span");
 						itemSectionSidebarSidebarItem.setAttribute("name","item");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
-						for(var u = 0; u < quantity; u++) {
-							var itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Location Items"]["Items"][q]["Item"])+".png";
+						for(let u = 0; u < quantity; u++) {
+							let itemSectionSidebarSidebarItemImg = document.createElement("img");
+							itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Location Items"]["Items"][q]["Item"])],[PATH_Item_Bag])[0];
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 						}
@@ -626,7 +625,7 @@ var createItem = function() {
 
 
 
-						var itemSectionSidebarSidebarItemText = document.createElement("h6");
+						let itemSectionSidebarSidebarItemText = document.createElement("h6");
 						if (quantity != 1) { 
 							itemSectionSidebarSidebarItemText.innerHTML = finaldata["Location Items"]["Items"][q]["Quantity"]+"x <br>"+finaldata["Location Items"]["Items"][q]["Item"];
 						}
@@ -647,15 +646,15 @@ var createItem = function() {
 			}
 		}
 
-		for(var q = 0; q < finaldata["Location Items"]["Shop"].length; q++) {
+		for(let q = 0; q < finaldata["Location Items"]["Shop"].length; q++) {
 			if (getApplicable(finaldata["Location Items"]["Shop"][q]["Game"])) {
-				var check = true;
+				let check = true;
 				if (finaldata["Location Items"]["Shop"][q]["Index"] != undefined) {
 					check = finaldata["Location Items"]["Shop"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 				}
 				if (check) {
 					if(finaldata["Location Items"]["Shop"][q]["Item"] == item) {
-						var quantity = finaldata["Location Items"]["Shop"][q]["Quantity"];
+						let quantity = finaldata["Location Items"]["Shop"][q]["Quantity"];
 						if (quantity == undefined) {
 							quantity = 1;
 						}
@@ -663,20 +662,20 @@ var createItem = function() {
 							quantity = 10;
 						}
 
-						var itemSectionSidebarSidebarLi = document.createElement("li");
+						let itemSectionSidebarSidebarLi = document.createElement("li");
 						itemSectionSidebarSidebarLi.setAttribute("name","shop")
 						itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 						
-						var itemSectionSidebarSidebarInput = document.createElement("input");
+						let itemSectionSidebarSidebarInput = document.createElement("input");
 						itemSectionSidebarSidebarInput.setAttribute("type","checkbox");
 						itemSectionSidebarSidebarInput.setAttribute("id","location-shop");
 						itemSectionSidebarSidebarInput.setAttribute("name","location-shop"+q);
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarInput);
 						itemSectionSidebarSidebarInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
-						var itemSectionSidebarSidebarLocation = document.createElement("span");
-						var itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
-						var itemSectionSidebarSidebarLocationText = document.createElement("h5");
+						let itemSectionSidebarSidebarLocation = document.createElement("span");
+						let itemSectionSidebarSidebarLocationTrigger = document.createElement("b");
+						let itemSectionSidebarSidebarLocationText = document.createElement("h5");
 						itemSectionSidebarSidebarLocation.setAttribute("name","location")
 						itemSectionSidebarSidebarLocationText.innerText = finaldata["Location Items"]["Shop"][q]["Location"];
 						itemSectionSidebarSidebarLocationTrigger.setAttribute("name","map")
@@ -690,25 +689,25 @@ var createItem = function() {
 
 
 						if (finaldata["Location Items"]["Shop"][q]["Area"] != undefined && finaldata["Location Items"]["Shop"][q]["Area"] != finaldata["Location Items"]["Shop"][q]["Location"]) {
-							var itemSectionSidebarSidebarAreaText = document.createElement("small");
+							let itemSectionSidebarSidebarAreaText = document.createElement("small");
 							itemSectionSidebarSidebarAreaText.innerText = finaldata["Location Items"]["Shop"][q]["Area"];
 							itemSectionSidebarSidebarLocation.appendChild(itemSectionSidebarSidebarAreaText);
 						}
 
 
-						var currency = finaldata["Location Items"]["Shop"][q]["Currency"];
+						let currency = finaldata["Location Items"]["Shop"][q]["Currency"];
 
 						if (currency == "Pokémon Dollar") {
-							currency = '<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />';
+							currency = '<img src="'+getMedia(["Pokémon Dollar"],[PATH_Currency_Icon])[0]+'" title="Pokémon Dollar" />';
 						}
 						else {
 							currency = "<span title='"+currency+"'>"+currency.replace(/[^A-Z]+/g,"")+"</span>";
 						}
 					
-						var itemSectionSidebarSidebarDescription = document.createElement("span");
+						let itemSectionSidebarSidebarDescription = document.createElement("span");
 						itemSectionSidebarSidebarDescription.setAttribute("name","description");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
-						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+						let itemSectionSidebarSidebarDescriptionText = document.createElement("p");
 						if (finaldata["Location Items"]["Shop"][q]["Shop"] != undefined) {
 							itemSectionSidebarSidebarDescriptionText.innerHTML = "Purchased from the "+finaldata["Location Items"]["Shop"][q]["Shop"]+" for "+numFormat(finaldata["Location Items"]["Shop"][q]["Cost"])+currency;
 						}
@@ -724,13 +723,13 @@ var createItem = function() {
 						}
 
 
-						var itemSectionSidebarSidebarItem = document.createElement("span");
+						let itemSectionSidebarSidebarItem = document.createElement("span");
 						itemSectionSidebarSidebarItem.setAttribute("name","item");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
-						for(var u = 0; u < quantity; u++) {
-							var itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Location Items"]["Shop"][q]["Item"])+".png";
+						for(let u = 0; u < quantity; u++) {
+							let itemSectionSidebarSidebarItemImg = document.createElement("img");
+							itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Location Items"]["Shop"][q]["Item"])],[PATH_Item_Bag])[0]
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 						}
@@ -745,7 +744,7 @@ var createItem = function() {
 
 
 
-						var itemSectionSidebarSidebarItemText = document.createElement("h6");
+						let itemSectionSidebarSidebarItemText = document.createElement("h6");
 						if (quantity != 1) { 
 							itemSectionSidebarSidebarItemText.innerHTML = finaldata["Location Items"]["Shop"][q]["Quantity"]+"x <br>"+finaldata["Location Items"]["Shop"][q]["Item"];
 						}
@@ -763,21 +762,21 @@ var createItem = function() {
 		}
 
 
-		for(var q = 0; q < finaldata["Location Items"]["Pickup"].length; q++) {
+		for(let q = 0; q < finaldata["Location Items"]["Pickup"].length; q++) {
 			if (getApplicable(finaldata["Location Items"]["Pickup"][q]["Game"])) {
-				var check = true;
+				let check = true;
 				if (finaldata["Location Items"]["Pickup"][q]["Index"] != undefined) {
 					check = finaldata["Location Items"]["Pickup"][q]["Index"] == finaldata["Items"]["Reference"][i]["Index"];
 				}
 				if (check) {
 					if(finaldata["Location Items"]["Pickup"][q]["Item"] == item) {
-						var itemSectionSidebarSidebarLi = document.createElement("li");
+						let itemSectionSidebarSidebarLi = document.createElement("li");
 						itemSectionSidebarSidebarLi.setAttribute("name","pickup");
 						itemSectionSidebarSidebarUl.appendChild(itemSectionSidebarSidebarLi);
 				
-						var itemSectionSidebarSidebarPickup = document.createElement("span");
-						var itemSectionSidebarSidebarPickupTitle = document.createElement("small");
-						var itemSectionSidebarSidebarPickupText = document.createElement("h5");
+						let itemSectionSidebarSidebarPickup = document.createElement("span");
+						let itemSectionSidebarSidebarPickupTitle = document.createElement("small");
+						let itemSectionSidebarSidebarPickupText = document.createElement("h5");
 						itemSectionSidebarSidebarPickup.setAttribute("name","ability");
 						itemSectionSidebarSidebarPickupTitle.innerText = "Ability";
 						itemSectionSidebarSidebarPickupText.innerText = "Pickup";
@@ -793,18 +792,18 @@ var createItem = function() {
 
 		
 
-						var itemSectionSidebarSidebarDescription = document.createElement("span");
+						let itemSectionSidebarSidebarDescription = document.createElement("span");
 						itemSectionSidebarSidebarDescription.setAttribute("name","description");
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarDescription);
-						var itemSectionSidebarSidebarDescriptionText = document.createElement("p");
+						let itemSectionSidebarSidebarDescriptionText = document.createElement("p");
 						itemSectionSidebarSidebarDescription.appendChild(itemSectionSidebarSidebarDescriptionText);
 
 
-						var PickupText;
-						var PickupLevel = "";
-						var PickupRate = "";
-						var PickupLocation = "";
-						var PickupAdditional = "";
+						let PickupText;
+						let PickupLevel = "";
+						let PickupRate = "";
+						let PickupLocation = "";
+						let PickupAdditional = "";
 
 		
 
@@ -828,18 +827,18 @@ var createItem = function() {
 						itemSectionSidebarSidebarDescriptionText.innerHTML = PickupText+".";
 
 
-						var itemSectionSidebarSidebarItem = document.createElement("span");
+						let itemSectionSidebarSidebarItem = document.createElement("span");
 						itemSectionSidebarSidebarItem.setAttribute("name","item");
 						itemSectionSidebarSidebarItem.title = finaldata["Location Items"]["Pickup"][q]["Item"];
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 				
-						var itemSectionSidebarSidebarItemImg = document.createElement("img");
-						itemSectionSidebarSidebarItemImg.src = "./media/Images/Item/Bag/"+MEDIAPath_Item_Bag+"/"+getItemIcon(finaldata["Location Items"]["Pickup"][q]["Item"])+".png";
+						let itemSectionSidebarSidebarItemImg = document.createElement("img");
+						itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Location Items"]["Pickup"][q]["Item"])],[PATH_Item_Bag])[0]
 						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 
-						var itemSectionSidebarSidebarItemText = document.createElement("p");
+						let itemSectionSidebarSidebarItemText = document.createElement("p");
 						itemSectionSidebarSidebarItemText.innerText = finaldata["Location Items"]["Pickup"][q]["Item"];
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
 						itemSectionSidebarSidebarItemText.style.display = "none";
@@ -852,11 +851,11 @@ var createItem = function() {
 
 
 
-		var itemMapOuter = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div");
-		var itemMap = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div img[usemap]");
-		var locs = document.querySelectorAll("#contain div > section[name='sidebar'] > div > ul li span[name='location'] > * > *");
-		var locations = [];
-		for(var q = 0; q < locs.length; q++) {
+		let itemMapOuter = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div");
+		let itemMap = document.querySelector("#contain div#item > section[name='sidebar'] > * > div:first-child > div img[usemap]");
+		let locs = document.querySelectorAll("#contain div > section[name='sidebar'] > div > ul li span[name='location'] > * > *");
+		let locations = [];
+		for(let q = 0; q < locs.length; q++) {
 			locations.push(locs[q].innerText);
 		}
 		if (itemMap.classList.contains("mapify")) {
