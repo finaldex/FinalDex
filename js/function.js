@@ -226,7 +226,22 @@ function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
 	}
 }
 
-function getMedia(userFile,userPath,set) {
+function msToTime(duration) {
+	var milliseconds = Math.floor((duration % 1000) / 100),
+	  seconds = Math.floor((duration / 1000) % 60),
+	  minutes = Math.floor((duration / (1000 * 60)) % 60),
+	  hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+  
+	hours = (hours < 10) ? "0" + hours : hours;
+	minutes = (minutes < 10) ? "0" + minutes : minutes;
+	seconds = (seconds < 10) ? "0" + seconds : seconds;
+	let result = hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+	result = result.replaceAll("00:","").replaceAll(":00","").replaceAll("00.","0.").replace(/(^0)([0-9])/g,"$2")
+  
+	return result;
+  }
+
+function getMedia(userFile,userPath,games) {
 
 	if (userFile == undefined) {
 		userFile = [];
@@ -235,43 +250,171 @@ function getMedia(userFile,userPath,set) {
 		userPath = [];
 	}
 
-	let result = [];
-	for (let i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
-        let path = Object.keys(finaldata["Directory"])[i]
-        let source = path.split("/")[path.split("/").length-1]
-
-        for (let q = 0; q < finaldata["Directory"][path].length; q++) {
-            let file = finaldata["Directory"][path][q];
-            let fileName = finaldata["Directory"][path][q].split(".")[0]
-
-            if (file.includes(".png") || file.includes(".gif")) {
-                if (getApplicable(source)) {
-                    for(let r = 0; r < userPath.length; r++) {
-                        if (path.includes(userPath[r]) || userPath[r] == "") {
-                            for(let t = 0; t < userFile.length; t++) {
-                                let check = false;
-                                if (set && fileName.includes(userFile[t].replaceAll('"',''))) {
-                                    check = true;
-                                }
-                                if (splitStr(fileName,"_")[0] == userFile[t] || userFile[t] == "") {
-                                    check = true;
-                                }
-                                if (check) {
-                                    result.push(path+"/"+file)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+	if (games == undefined || games.length == 0) {
+        games = [];
     }
+
+	let result = [];
+
+
+	let arr = finaldata["Directory"];
+	let keys = Object.keys(arr);
+
+
+	for(let d = 0; d < keys.length; d++) {
+		let key = keys[d];
+		for(let r = 0; r < userPath.length; r++) {
+			if (key.includes(userPath[r]) || userPath[r] == "") {
+				for (let q = 0; q < arr[key].length; q++) {
+					let file = arr[key][q];
+
+					if (file.includes(".png") || file.includes(".gif")) {
+						for(let t = 0; t < userFile.length; t++) {
+							let fileName = arr[key][q].split(".")[0]
+							fileName = splitStr(fileName,"_")[0]
+
+							if (userFile[t] == fileName) {
+								let source = key.split("/")[key.split("/").length-1]
+								if (getApplicable(source,games)) {
+									result.push(key+"/"+file);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+
 
 	if (result.length == 0) {
 		result.push("");
 	}
 
 	return result;
+}
+
+
+function getPokémonMediaPath(userFile,userPath,gender) {
+
+
+
+	if (gender == undefined || gender.length == 0) {
+		gender = ["Male","Female"]
+	}
+
+	for (g = 0; g < gender.length; g++) {
+		if (gender[g] == "Male" || gender[g] == "M") {
+			gender[g] = '_Male'
+		}
+		else if (gender[g] == "Female" || gender[g] == "F") {
+			gender[g] = '_Female'
+		}
+	}
+	
+	let arr = finaldata["Directory"];
+	let keys = Object.keys(arr);
+
+	for(let d = 0; d < keys.length; d++) {
+		let key = keys[d];
+		for(let r = 0; r < userPath.length; r++) {
+			if (key.includes(userPath[r]) || userPath[r] == "") {
+					for (let q = 0; q < arr[key].length; q++) {
+						let file = arr[key][q];
+
+						if (file.includes(".png") || file.includes(".gif")) {
+							for(let t = 0; t < userFile.length; t++) {
+								let int = parseInt(userFile[t]);
+								if (isNaN(int)) {
+									int = getPokémonInt(userFile[t])
+								}
+							
+								let mediaName = []
+							
+								let val1 = finaldata["Pokémon"]["Path"][int]["Number"];
+								let val2 = finaldata["Pokémon"]["Path"][int]["Text"];
+								
+								if (val1 != undefined) {
+									mediaName.push(val1)
+								}
+								if (val2 != undefined) {
+									mediaName.push(val2)
+								}
+								mediaName = mediaName.join("-")
+
+								for (g = 0; g < gender.length; g++) {
+									let check = false;
+									let fileName = arr[key][q].split(".")[0]
+							
+									if (mediaName+gender[g] == fileName) {
+										check = true;
+									}
+									if (check) {
+										let source = key.split("/")[key.split("/").length-1]
+										if (getApplicable(source)) {
+											return key+"/"+file;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+		}
+	}
+
+
+
+	for(let d = 0; d < keys.length; d++) {
+		let key = keys[d];
+		for(let r = 0; r < userPath.length; r++) {
+			if (key.includes(userPath[r]) || userPath[r] == "") {
+					for (let q = 0; q < arr[key].length; q++) {
+						let file = arr[key][q];
+						if (file.includes(".png") || file.includes(".gif")) {
+							for(let t = 0; t < userFile.length; t++) {
+								let int = parseInt(userFile[t]);
+								if (isNaN(int)) {
+									int = getPokémonInt(userFile[t])
+								}
+							
+								let mediaName = []
+							
+								let val1 = finaldata["Pokémon"]["Path"][int]["Number"];
+								let val2 = finaldata["Pokémon"]["Path"][int]["Text"];
+								
+								if (val1 != undefined) {
+									mediaName.push(val1)
+								}
+								if (val2 != undefined) {
+									mediaName.push(val2)
+								}
+								mediaName = mediaName.join("-")
+
+
+								let check = false;
+								let fileName = arr[key][q].split(".")[0]
+
+								if (mediaName == fileName) {
+									check = true;
+								}
+								if (check) {
+									let source = key.split("/")[key.split("/").length-1]
+									if (getApplicable(source)) {
+										return key+"/"+file;
+									}
+								}
+							}
+						}
+					}
+				}
+		}
+	}
+
+    
+    return ""
+
 }
 
 
@@ -320,7 +463,11 @@ function getGameID(name) {
     let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Legend Arceus","Brilliant Diamond","Shining Pearl","Scarlet","Violet"];
     return games.indexOf(name)+1
 }
-function getApplicable(val) {
+function getApplicable(val,games) {
+
+    if (games == undefined || games.length == 0) {
+        games = [GameName];
+    }
 
     let adds = ["All"];
 
@@ -352,41 +499,45 @@ function getApplicable(val) {
 		*/
        
         if (check) {
-			if (val == "All") {
-				return true;
-			}
-			else if (val == GameName) {
-				return true;
-			}
-			else if (!isNaN(parseInt(val))) {
-				if (parseInt(val) == Generation) {
+			for(var q = 0; q < games.length; q++) {
+				let game = games[q];
+				if (val == "All") {
 					return true;
 				}
-			}
-			else if (val.includes("-")) {
-				let val1 = val.split("-")[0];
-				let val2 = val.split("-")[1];
-				
-				if (!isNaN(parseInt(val1)) || !isNaN(parseInt(val2))) { // Generation
-					let valCurrent = Generation;
-					valStart = Math.min(val1,val2)
-					valEnd = Math.max(val1,val2)
-					if (valCurrent >= valStart && valCurrent <= valEnd) {
-						return true;
-					}
+				else if (val == game) {
+					return true;
 				}
-				else {
-					let valCurrent = getGameID(GameName);
-					val1 = getGameID(val1);
-					val2 = getGameID(val2);
-					valStart = Math.min(val1,val2)
-					valEnd = Math.max(val1,val2)
+				else if (val.includes("-")) {
+					let val1 = val.split("-")[0];
+					let val2 = val.split("-")[1];
+					
+					
+					if (!isNaN(parseInt(val1)) || !isNaN(parseInt(val2))) { // Generation
+						let valCurrent = getGeneration(game);
+						valStart = Math.min(val1,val2)
+						valEnd = Math.max(val1,val2)
+						if (valCurrent >= valStart && valCurrent <= valEnd) {
+							return true;
+						}
+					}
+					else {
+						let valCurrent = getGameID(game);
+						val1 = getGameID(val1);
+						val2 = getGameID(val2);
+						valStart = Math.min(val1,val2)
+						valEnd = Math.max(val1,val2)
 
-					if (valCurrent >= valStart && valCurrent <= valEnd) {
+						if (valCurrent >= valStart && valCurrent <= valEnd) {
+							return true;
+						}
+					}
+					
+				}
+				else if (!isNaN(parseInt(val))) {
+					if (parseInt(val) == getGeneration(game)) {
 						return true;
 					}
 				}
-				
 			}
 			
             
@@ -991,62 +1142,45 @@ function getPokémonForm(i) {
 }
 
 function getPositionAbility(i,column) {
-    let arr = finaldata["Pokémon"]["Ability"];
-    let result;
-	
-    for (let q = 0; q < arr.length; q++) {
-        if (q == i) {
-            if (arr[q][DATA_Pokémon_Ability[column]] != undefined) {
-                result = arr[q][DATA_Pokémon_Ability[column]];
-                break;
-            }
-        }
+
+	let arr = finaldata["Pokémon"]["Ability"];
+	let keys1 = Object.keys(DATA_Pokémon_Ability);
+	let keys2 = DATA_Pokémon_Ability;
+
+    for (let q = 0; q < keys1.length; q++) {
+		if (keys1[q] == column) {
+			return arr[i][keys2[keys1[q]]]
+		}
     }
 
-    if (result == undefined) {
-        for (let q = 0; q < arr.length; q++) {
-            if (q == getDefaultInt(i)) {
-                result = arr[q][DATA_Pokémon_Ability[column]];
-                break;
-            }
-        }
+	for (let q = 0; q < keys1.length; q++) {
+		if (keys1[q] == column) {
+			return arr[getDefaultInt(i)][keys2[keys1[q]]];
+		}
     }
 
-    return result;
+    return;
 }
 
 
 function getAbilityPosition(i,ability) {
     let arr = finaldata["Pokémon"]["Ability"];
-    let result;
+	let keys1 = Object.keys(DATA_Pokémon_Ability);
+	let keys2 = DATA_Pokémon_Ability;
 
-    for (let q = 0; q < arr.length; q++) {
-        if (q == i) {
-			let keys = Object.keys(arr[q]);
-			for (let u = 0; u < keys.length; u++) {
-				if (arr[q][keys[u]] == ability && keys[u].includes(JSONPath_Ability)) {
-					result = keys[u].replaceAll("_"+JSONPath_Ability,"");
-					break;
-				}
-			}
-        }
-    }
-
-    if (result == undefined) {
-        for (let q = 0; q < arr.length; q++) {
-			if (q == getDefaultInt(i)) {
-				let keys = Object.keys(arr[q]);
-				for (let u = 0; u < keys.length; u++) {
-					if (arr[q][keys[u]] == ability && keys[u].includes(JSONPath_Ability)) {
-						result = keys[u].replaceAll("_"+JSONPath_Ability,"");
-						break;
-					}
-				}
-			}
+    for (let q = 0; q < keys1.length; q++) {
+		if (arr[i][keys2[keys1[q]]] == ability) {
+			return keys1[q];
 		}
     }
 
-    return result;
+	for (let q = 0; q < keys1.length; q++) {
+		if (arr[getDefaultInt(i)][keys2[keys1[q]]] == ability) {
+			return keys1[q];
+		}
+    }
+
+    return;
 }
 
 function getDefaultInt(i) {
@@ -1828,6 +1962,8 @@ function search(type) {
     let searchLower = [];
 	let searchlet = [];
 
+	let searchName;
+
     if (searchValue.includes("::") && searchAttributes.includes(searchValue.split("::")[0])) {
         searchPositive = searchValue.split("::");
 		searchlet = searchValue.split("::");
@@ -1845,7 +1981,7 @@ function search(type) {
 		searchlet = searchValue.split(":<");
     }
     else {
-        let searchName = (event.target.value).toLowerCase();
+        searchName = (event.target.value).toLowerCase();
     }
 
 	let tags =  base.querySelectorAll(':scope > '+tag);
@@ -1858,6 +1994,7 @@ function search(type) {
 
 	let check;
 
+	/*
 	if (searchVar.length > 0) {
 		if (tags[0].getAttribute('data-search-'+searchVar[0]).match(/[a-z]/g) ) {
 			check = false;
@@ -1866,6 +2003,7 @@ function search(type) {
 			check = true;
 		}
 	}
+	*/
     if (searchPositive.length > 0 && searchAttributes.includes(searchPositive[0])) {
         if (parseInt(searchPositive[1]) != NaN) {
             let tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'*="'+searchPositive[1]+'"])');
