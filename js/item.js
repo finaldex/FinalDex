@@ -66,6 +66,7 @@ let createItem = function() {
 	pockets = pockets.filter(function(v) {return v !== undefined;});
 	pockets = [...new Set(pockets)];
 	
+
 	for (let q = 0; q < pockets.length; q++) {
 		let itemSectionListOptionsPocketInput = document.createElement("input");
 		let itemSectionListOptionsPocketLabel = document.createElement("label");
@@ -168,12 +169,16 @@ let createItem = function() {
 			if (finaldata["Items"]["Reference"][q]["Use"] == "true") {
 				//if (returnAppArrData(finaldata["Items"]["Description"],"Item",finaldata["Items"]["Reference"][q]["Item"]).length > 0) {
 					let name = finaldata["Items"]["Reference"][q]["Item"];
-
-					if (finaldata["Items"]["Reference"][q]["Alias"] != undefined) {
-						name += " ("+finaldata["Items"]["Reference"][q]["Alias"]+")";
+					let alias = finaldata["Items"]["Reference"][q]["Alias"];
+			
+					if (alias != undefined) {
+						name += " ("+alias+")";
 					}
-					else if (getMachineMove(finaldata["Items"]["Reference"][q]["Item"]) != undefined) {
-						name += " ("+getMachineMove(finaldata["Items"]["Reference"][q]["Item"])+")";
+					else {
+						let machineMove = getMachineMove(finaldata["Items"]["Reference"][q]["Item"]);
+						if (machineMove != undefined) {
+							name += " ("+machineMove+")";
+						}
 					}
 
 					let itemSectionListOptionsInput = document.createElement("input");
@@ -188,10 +193,11 @@ let createItem = function() {
 					itemSectionListOptionsLabel.setAttribute("data-name", name.toLowerCase());
 					itemSectionListOptionsLabel.setAttribute("data-title", finaldata["Items"]["Reference"][q]["Item"].toLowerCase());
 
+					let itemprice = returnAppArrData(finaldata["Items"]["Price"],"Item",finaldata["Items"]["Reference"][q]["Item"]);
 
-					if (returnAppArrData(finaldata["Items"]["Price"],"Item",finaldata["Items"]["Reference"][q]["Item"]).length > 0) {
-						if (returnAppArrData(finaldata["Items"]["Price"],"Item",finaldata["Items"]["Reference"][q]["Item"])[0]["Sell Amount"] != undefined) {
-							itemSectionListOptionsLabel.setAttribute("data-search-price",returnAppArrData(finaldata["Items"]["Price"],"Item",finaldata["Items"]["Reference"][q]["Item"])[0]["Sell Amount"]);
+					if (itemprice.length > 0) {
+						if (itemprice[0]["Sell Amount"] != undefined) {
+							itemSectionListOptionsLabel.setAttribute("data-search-price",itemprice[0]["Sell Amount"]);
 						}
 						else {
 							itemSectionListOptionsLabel.setAttribute("data-search-price",0);
@@ -233,7 +239,6 @@ let createItem = function() {
 
 	}
 
-
 	itemSectionListOptionsSearch.title = searchOptionsTitle(itemSectionListOptions);
 
 	let searchLis = document.querySelectorAll("#contain > div#item > section[name='list'] ol > label");
@@ -251,7 +256,6 @@ let createItem = function() {
     for(q = 0; q < searchItemAttributes.length; q++) {
         searchItemAttributes[q] = searchItemAttributes[q].replaceAll("data-search-","")
     }
-	
 	function itemOptionsSelector(i) {
 		if (this.value != undefined) {
 			i = this.value;
@@ -873,5 +877,4 @@ let createItem = function() {
 		memory("Restore","game",document.querySelectorAll("#contain div#item > section[name='sidebar'] > div > ul li input"))
 
 	}
-
 };
