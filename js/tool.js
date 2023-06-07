@@ -2217,7 +2217,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2239,7 +2239,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2260,7 +2260,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2281,7 +2281,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2302,7 +2302,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2323,7 +2323,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
+			img.src = getMedia([val],[PATH_Type_Icon])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
