@@ -171,12 +171,32 @@
     max-height: 20px;
     margin-left: 20px;
 }
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span img[src=""]::after {
+	content: attr(title);
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span img[src=""] {
+	visibility: hidden;
+}
 
 
 #contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span img {
 	height: 100%;
 	width: 100%;
 	cursor: pointer;
+	position: relative;
 }
 
 
@@ -713,46 +733,35 @@
 	width: 100%;
     height: 100%;
     display: flex;
-	justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-	flex-direction: column;
-	text-align: center;
+    flex-direction: column;
+    text-align: center;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'],
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] {
-	flex-direction: column;
-}
-
-
-
-
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] {
-	justify-content: center;
+#contain div#tool div#dmg div[name='menu'] > div:last-child {
 	width: 50%;
 }
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] li input:not(:checked) ~ label {
+	opacity: 0.5;
+}
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] li input:checked ~ label {
+	text-decoration-line: underline;
+}
 
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] input {
-	display: unset;
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] small::after {
+	content:"?";
 }
 
 
-
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:last-child > * {
-	display: flex;
-    flex-direction: column;
-	padding: 0 10px;
-}
-
-
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child select {
+#contain div#tool div#dmg div[name='menu'] *[name='count'] select {
 	display: none;
     margin: 0px 10px;
     padding: 5px;
     outline: none;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child input {
+#contain div#tool div#dmg div[name='menu'] *[name='count'] input {
 	text-indent: 10%;
 	outline: none;
 	padding: 5px 0;
@@ -761,99 +770,83 @@
 	text-align: center;
 	border: inset 4px #000 !important;
 }
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span:first-child input[disabled] {
+#contain div#tool div#dmg div[name='menu'] *[name='count'] input[disabled] {
 	color: rgba(0,0,0,0.3);
 }
 
 
 
 
-#contain div#tool div#dmg div[name='menu'] > div[name='spec'] > span {
-	display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
-    position: relative;
-	margin: auto 0;
-}
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span {
-	display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
-    position: relative;
-}
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span input {
-	display: unset;
-}
 
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span {
-    width: 75%;
+
+
+#contain div#tool div#dmg div[name='menu'] > div > span {
+	width: 100%;
+    height: fit-content;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: row;
+    padding: 10px 0;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:last-child > * {
-	display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
 
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:last-child > * > * {
-	padding: 5px 10px;
-    cursor: pointer;
-}
 
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] input[type='checkbox'] {
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='critical'] input[type='checkbox'] {
 	display: unset;
+	margin: 0 5px;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span {
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > * {
+	display: flex;
+    flex-direction: column;
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='execute'] button {
+    padding: 5px 10px;
+    background: var(--color12);
+    border-width: 2px;
+    border-style: outset;
+}
+#contain div#tool div#dmg div[name='menu'] *[name='execute'] button:active {
+	border-style: inset;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] input[type='range'] {
 	width: 100%;
-	height: 100%;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div > span > input[type='range'] {
-	width: 100%;
-}
-
-#contain div#tool div#dmg div[name='menu'] > div > span > *[name='min'],
-#contain div#tool div#dmg div[name='menu'] > div > span > *[name='val'],
-#contain div#tool div#dmg div[name='menu'] > div > span > *[name='max'] {
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='min'],
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='val'],
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='max'] {
 	position: absolute;
-    bottom: -15px;
+	bottom: calc(50% - 15px - 5px);
 }
-#contain div#tool div#dmg div[name='menu'] > div > span > *[name='min'] {
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='min'] {
 	left: 5px;
 }
-#contain div#tool div#dmg div[name='menu'] > div > span > *[name='max'] {
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='max'] {
 	right: 5px;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:first-child > *[name='disable'] input {
-	display: unset;
-}
 
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:first-child > *[name='disable'] {
-    position: absolute;
-    top: -20px;
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='critical'] {
+	position: absolute;
+    bottom: calc(50% + 5px + 5px);
+    display: flex;
 }
-
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:first-child > *[name='low'] {
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='low'] {
     position: absolute;
     left: 5px;
-    top: -20px;
+    bottom: calc(50% + 5px + 2px);
 }
-#contain div#tool div#dmg div[name='menu'] > div[name='roll'] > span:first-child > *[name='high'] {
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='high'] {
     position: absolute;
     right: 5px;
-    top: -20px;
+	bottom: calc(50% + 5px + 2px);
 }
 
 
@@ -864,6 +857,16 @@
 #contain div#tool div#dmg div[name='menu'] input[type='range'] {
 	height: 8px;
 }
+
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] {
+	width: 75%;
+	padding: 20px 0;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] {
+	width: 90%;
+}
+
 
 
 #contain div#tool div#dmg input[type='range'] {
@@ -895,21 +898,16 @@
 
 
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:last-child > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:last-child > span > span {
+
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > span > span {
 	padding: 2px 0;
 }
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:last-child > span > span img {
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > span > span img {
 	max-width: 80px;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span select {
+#contain div#tool div#dmg div[name='menu'] *[name='move'] select {
 	width: 80%;
 	height: 100%;
     outline: none;
@@ -925,7 +923,7 @@
 	color: inherit;
 }
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span:first-child::before {
+#contain div#tool div#dmg div[name='menu'] *[name='move']::before {
     content: attr(data-special);
     position: absolute;
     top: 0;
@@ -944,7 +942,7 @@
 }
 
 
-#contain div#tool div#dmg div[name='menu'] > div[name='move'] > span option {
+#contain div#tool div#dmg div[name='menu'] *[name='move'] option {
 	color: var(--fontDark);
     font-size: small;
 }
@@ -2329,16 +2327,16 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
 	pointer-events:none;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Extremely Harsh Sunlight"] figure[name='object'],
-#contain div#tool div#dmg div[name='battle'][data-weather="Harsh Sunlight"] figure[name='object'] {
+#contain div#tool div#dmg div[name='battle'][data-weather='Extremely Harsh Sunlight'] figure[name='object'],
+#contain div#tool div#dmg div[name='battle'][data-weather='Harsh Sunlight'] figure[name='object'] {
 	display: unset;
     position: absolute;
-    content: "";
+    content: '';
     left: 50px;
     top: 15px;
     width: 100px;
     height: 100px;
-    background-image: url("../media/Images/Misc/FinalDex/Light.png");
+    background-image: url('../media/Images/Misc/FinalDex/Light.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-repeat: no-repeat;
@@ -2348,11 +2346,11 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
 	opacity: 0.5;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Harsh Sunlight"] figure[name='object'] {
+#contain div#tool div#dmg div[name='battle'][data-weather='Harsh Sunlight'] figure[name='object'] {
 	animation: sun infinite 60s linear;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Extremely Harsh Sunlight"] figure[name='object'] {
+#contain div#tool div#dmg div[name='battle'][data-weather='Extremely Harsh Sunlight'] figure[name='object'] {
 	animation: sun infinite 30s linear;
 }
 
@@ -2365,7 +2363,7 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
 
 
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Strong Winds"]::before {
+#contain div#tool div#dmg div[name='battle'][data-weather='Strong Winds']::before {
 	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
     background-size: var(--depth) var(--depth);
     background-color: var(--weather);
@@ -2378,7 +2376,7 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
     --w: 49%;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Heavy Rain"]::before {
+#contain div#tool div#dmg div[name='battle'][data-weather='Heavy Rain']::before {
 	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
     background-size: var(--depth) var(--depth);
     background-color: var(--weather);
@@ -2390,7 +2388,7 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
     --w: 48%;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Rain"]::before {
+#contain div#tool div#dmg div[name='battle'][data-weather='Rain']::before {
 	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
 	background-size: var(--depth) var(--depth);
 	background-color: var(--weather);
@@ -2402,7 +2400,7 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
 	--w: 46%;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Snow"]::before {
+#contain div#tool div#dmg div[name='battle'][data-weather='Snow']::before {
 	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
     background-size: var(--depth) var(--depth);
     background-color: var(--weather);
@@ -2414,7 +2412,7 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
     --w: 52%;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Hail"]::before {
+#contain div#tool div#dmg div[name='battle'][data-weather='Hail']::before {
     background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
     background-size: var(--depth) var(--depth);
     background-color: var(--weather);
@@ -2426,7 +2424,7 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
     --w: 53%;
 }
 
-#contain div#tool div#dmg div[name='battle'][data-weather="Sandstorm"]::before {
+#contain div#tool div#dmg div[name='battle'][data-weather='Sandstorm']::before {
 	background: linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
 	background-size: var(--depth) var(--depth);
 	background-color: var(--weather);
@@ -2579,6 +2577,17 @@ body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='te
 	image-rendering: pixelated;
 }
 
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'][src=''] {
+	visibility:hidden;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'][src='']::after {
+	content: '?';
+    visibility: visible;
+    font-size: xxx-large;
+}
+
+
+
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] *[name='pok'] b {
 	width: 100%;
 }
@@ -2690,7 +2699,7 @@ body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='te
 
 
 
-#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='effect'],
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='effect'] *[name='neutral'],
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='name'],
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='health'],
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='percentage'] {
@@ -2770,14 +2779,14 @@ body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='te
 
 
 
-body[Generation="1"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
-body[Generation="2"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
-body[Generation="3"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
-body[Generation="4"] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'] {
+body[Generation='1'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
+body[Generation='2'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
+body[Generation='3'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'],
+body[Generation='4'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'] {
     align-items: flex-end;
 }
 
-body:not([Generation="1"]):not([Generation="2"]):not([Generation="3"]):not([Generation="4"]) #contain div#tool div#dmg div[name='battle'] span[name='user'] > * {
+body:not([Generation='1']):not([Generation='2']):not([Generation='3']):not([Generation='4']) #contain div#tool div#dmg div[name='battle'] span[name='user'] > * {
 	transform: translate(0px, -30%);
 }
 
