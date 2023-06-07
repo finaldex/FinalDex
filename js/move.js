@@ -59,7 +59,7 @@ let createMove = function() {
 
     let moveSectionHeaderGame = document.createElement("span");
     let moveSectionHeaderGameImage = document.createElement("img");
-    moveSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
+    moveSectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
     moveSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     moveSectionHeader.appendChild(moveSectionHeaderGame);
     moveSectionHeaderGame.appendChild(moveSectionHeaderGameImage);
