@@ -296,7 +296,7 @@ function getMedia(userFile,userPath,games) {
 }
 
 
-function getPokémonMediaPath(userFile,userPath,gender) {
+function getPokémonMediaPath(userFile,userPath,gender,games) {
 
 
 
@@ -312,6 +312,11 @@ function getPokémonMediaPath(userFile,userPath,gender) {
 			gender[g] = '_Female'
 		}
 	}
+
+	if (games == undefined || games.length == 0) {
+        games = [];
+    }
+
 	
 	let arr = finaldata["Directory"];
 	let keys = Object.keys(arr);
@@ -352,7 +357,7 @@ function getPokémonMediaPath(userFile,userPath,gender) {
 									}
 									if (check) {
 										let source = key.split("/")[key.split("/").length-1]
-										if (getApplicable(source)) {
+										if (getApplicable(source,games)) {
 											return key+"/"+file;
 										}
 									}
@@ -401,7 +406,7 @@ function getPokémonMediaPath(userFile,userPath,gender) {
 								}
 								if (check) {
 									let source = key.split("/")[key.split("/").length-1]
-									if (getApplicable(source)) {
+									if (getApplicable(source,games)) {
 										return key+"/"+file;
 									}
 								}
