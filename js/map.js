@@ -180,7 +180,7 @@ let createMap = function() {
 
     let mapSectionHeaderGame = document.createElement("span");
     let mapSectionHeaderGameImage = document.createElement("img");
-    mapSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
+    mapSectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
     mapSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     mapSectionHeader.appendChild(mapSectionHeaderGame);
     mapSectionHeaderGame.appendChild(mapSectionHeaderGameImage);
