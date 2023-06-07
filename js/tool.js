@@ -262,7 +262,7 @@ let createTool = function() {
 				let typeSidebarTitleDropOptionImg = document.createElement("img");
 				let typeSidebarTitleDropOptionTxt = document.createElement("p");
 				typeSidebarTitleDropOption.setAttribute("name",Types[q]);
-				typeSidebarTitleDropOptionImg.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
+				typeSidebarTitleDropOptionImg.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
 				typeSidebarTitleDropOptionImg.title = Types[q];
 				typeSidebarTitleDropOptionImg.setAttribute("onerror","this.style.display='none';");
 				typeSidebarTitleDropOptionTxt.innerText = Types[q];
@@ -279,7 +279,7 @@ let createTool = function() {
 
 					let val = el.innerText;
 					let img = document.createElement("img");
-					img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
+					img.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
 					img.setAttribute("name",el.innerText);
 					img.title = el.innerText;
 					img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2102,7 +2102,7 @@ function typeSet() {
 
 	if (check1) {
 		let img = document.createElement("img");
-		img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
+		img.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2111,7 +2111,7 @@ function typeSet() {
 	}
 	else if (check2) {
 		let img = document.createElement("img");
-		img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
+		img.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
