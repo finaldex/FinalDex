@@ -17,6 +17,8 @@ for(let i = 0; i < loads.length; i++) {
 	requestLoad(i,url);
 }
 
+let timeStart = new Date();
+
 function requestLoad(i,url) {
 	let gameRequest = new XMLHttpRequest();
 	gameRequest.open('GET', baseurl+loads[0]+"."+baseextension);
@@ -34,6 +36,7 @@ function requestLoad(i,url) {
 			define();
 			config();
 		}
+
 		
 		if (i != 0) {
 			let request = new XMLHttpRequest();
@@ -43,8 +46,37 @@ function requestLoad(i,url) {
 			request.onload = function() {
 				let Metadata = request.response;
 				let val = loads[i].replace(" Metadata","")
-				finaldata[val] = Metadata;	
+	
+
+				/*
+				if (loads[i] == "Directory") {
+					let arr = Metadata;
+					let origin = Object.keys(arr);
+					let keys = Object.keys(arr).map(function(x){return x.replaceAll(PATH,"").split("/")[0].replace(".","");});
+					keys = [...new Set(keys)]
+					keys = keys.filter(x => x)
+			
+					finaldata[loads[i]] = []
+
+					for (let q = 0; q < keys.length; q++) {
+						for (let r = 0; r < origin.length; r++) {
+							if (origin[r].includes(PATH+keys[q])) {
+								if (finaldata[loads[i]][keys[q]] == undefined) {
+									finaldata[loads[i]][keys[q]] = [];
+								}
+								finaldata[loads[i]][keys[q]][origin[r]] = Metadata[origin[r]]
+							}
+						}
+					}
+				}
+				else {
+					finaldata[val] = Metadata;	
+				}
+				*/
+				finaldata[val] = Metadata;
+					
 				initialize();
+				
 			}
 		}
 	}
@@ -68,11 +100,6 @@ function initialize() {
 
 		config2();
 
-
-		console.log(getPokémonMediaPath([12,252],[PATH_Pokémon_Battle_Default_Front_PNG]))
-		console.log(getPokémonMediaPath([12],[PATH_Pokémon_Box_Default_PNG]))
-
-
 		createNav();
 		createPokémon();
 		createMap();
@@ -91,12 +118,14 @@ function initialize() {
 		memory("Restore","",[document.querySelector('#pokémon > aside[name="settings"] > span[name="theme"] input')]);
 		memory("Restore","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"]'));
 
-		variantSelector();
+		variantSelector(); /* 1min */
 
 		boxMemory("Restore")
 		partyMemory("Restore");
 		memoryDexSwitch();
 
 		load();
+
+		console.log(msToTime(new Date() - timeStart))
 	}
 }
