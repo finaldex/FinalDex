@@ -1547,9 +1547,7 @@ function loadData() {
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("title","Experience gained approximated upon defeating "+getPokémonName(i)+" in battle.");
 
 
-	if (getPokémonMediaPath([i],[PATH_Pokémon_Art_Default_Front_Official]) != undefined) {
-		portrait.querySelector(":scope img").src = getPokémonMediaPath([i],[PATH_Pokémon_Art_Default_Front_Official]);
-	}
+	portrait.querySelector(":scope img").src = getPokémonMediaPath([i],[PATH_Pokémon_Art_Default_Front_Official],[],["HOME"]);
 
 	if (returnData(i,"Catch Rate","") != undefined) {
 		let catchRateFormula;
