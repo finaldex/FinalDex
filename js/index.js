@@ -9,7 +9,9 @@ function build() {
 		if (type == "Core" || type == "Side") {
 			let obj = new Object();
 			obj["Name"] = finaldata["Game"]["Reference"][i]["Name"];
+			obj["Full"] = finaldata["Game"]["Reference"][i]["Full Name"];
 			obj["ID"] = finaldata["Game"]["Reference"][i]["ID"];
+			obj["Region"] = finaldata["Game"]["Reference"][i]["Region"];
 			obj["Generation"] = finaldata["Game"]["Reference"][i]["Generation"];
 			Games.push(obj)
 		}
@@ -17,17 +19,20 @@ function build() {
 
 	let ranobj = new Object();
 	ranobj["Name"] = "Random";
+	ranobj["Full"] = "Random";
 	ranobj["ID"] = 0;
+	ranobj["Region"] = "";
 	ranobj["Generation"] = 0;
 	Games.push(ranobj)
 
 
-	console.log(finaldata)
-	console.log(Games)
+
 	for (let i = 0; i < Games.length; i++) {
 		let generation = Games[i]["Generation"];
 		let id = Games[i]["ID"];
 		let name = Games[i]["Name"];
+		let region = Games[i]["Region"];
+		let full = Games[i]["Full"];
 
 		let appender = document.querySelector("#Games span ul[name='"+generation+"']");
 
@@ -42,24 +47,20 @@ function build() {
 
 
 		let art = document.createElement("img");
-		art.src = getMedia([""],[PATH_Region_Art_Official])[0];
+		art.src = getMedia(splitStr(region,","),[PATH_Region_Art_Official],[name])[0];
 		li.appendChild(art)
 
 
 		let titlewrap = document.createElement("a");
 		let title = document.createElement("img");
-		title.src = getMedia([name],[PATH_Game_Title])[0];
+		title.src = getMedia(["Title"],[PATH_Game_Title],[name])[0];
 		title.title = name;
-		titlewrap.setAttribute("href","./Game.html#"+name);
+		titlewrap.setAttribute("href","./Game.html#"+full);
 		titlewrap.setAttribute("tabindex","-1");
 		li.appendChild(titlewrap)
 		titlewrap.appendChild(title)
 
-		if (id == 0) {
-			let h = document.createElement("h1");
-			h.innerText = name;
-			titlewrap.appendChild(h);
-		}
+
 	}
 
 
