@@ -22,11 +22,11 @@ function build() {
 
 
 			if (GamesArt[i] != "") {
-					let art = document.createElement("img");
-					art.src = "./media/Images/Misc/Region/" + GamesArt[i] + ".png";
-					art.title = GamesArt[i];
-					art.setAttribute("onerror","this.style.display='none'");
-					li.appendChild(art)
+				let art = document.createElement("img");
+				art.src = "./media/Images/Misc/Region/" + GamesArt[i] + ".png";
+				art.title = GamesArt[i];
+				art.setAttribute("onerror","this.style.display='none'");
+				li.appendChild(art)
 			}
 			else {
 					li.classList.add("miss");
