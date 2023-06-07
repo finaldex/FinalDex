@@ -114,7 +114,7 @@ let createAbility = function() {
 
         let abilitySectionHeaderGame = document.createElement("span");
         let abilitySectionHeaderGameImage = document.createElement("img");
-        abilitySectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
+        abilitySectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
         abilitySectionHeaderGameImage.setAttribute("onerror","this.display='none'");
         abilitySectionHeader.appendChild(abilitySectionHeaderGame);
         abilitySectionHeaderGame.appendChild(abilitySectionHeaderGameImage);
