@@ -40,7 +40,7 @@ let createTool = function() {
 
 	let toolSectionHeaderGame = document.createElement("span");
 	let toolSectionHeaderGameImage = document.createElement("img");
-	toolSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
+	toolSectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
 	toolSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
 	toolSectionHeader.appendChild(toolSectionHeaderGame);
 	toolSectionHeaderGame.appendChild(toolSectionHeaderGameImage);
