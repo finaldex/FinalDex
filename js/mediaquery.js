@@ -450,7 +450,7 @@ function getApplicable(val) {
             valStart = getGameID(valStart)
             valEnd = getGameID(valEnd)
             for (let i = 0; i < finaldata["Game"]["Reference"].length; i++) {
-                if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
+                if (finaldata["Game"]["Reference"][i]["Type"] == "Core" || finaldata["Game"]["Reference"][i]["Type"] == "Side") {
                     let x = parseInt(finaldata["Game"]["Reference"][i]["ID"]);
                     if (x >= valStart && x <= valEnd) {
                         games.push(finaldata["Game"]["Reference"][i]["Name"])
@@ -460,7 +460,7 @@ function getApplicable(val) {
         }
         else {
             for (let i = 0; i < finaldata["Game"]["Reference"].length; i++) {
-                if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
+                if (finaldata["Game"]["Reference"][i]["Type"] == "Core" || finaldata["Game"]["Reference"][i]["Type"] == "Side") {
                     let x = parseInt(finaldata["Game"]["Reference"][i]["Generation"]);
                     if (x >= valStart && x <= valEnd) {
                         games.push(finaldata["Game"]["Reference"][i]["Name"])
@@ -472,7 +472,7 @@ function getApplicable(val) {
     }
     else if (!isNaN(parseInt(gamePath.value))) {
         for (let i = 0; i < finaldata["Game"]["Reference"].length; i++) {
-            if (finaldata["Game"]["Reference"][i]["Type"] == "Core Series" || finaldata["Game"]["Reference"][i]["Type"] == "Side Series") {
+            if (finaldata["Game"]["Reference"][i]["Type"] == "Core" || finaldata["Game"]["Reference"][i]["Type"] == "Side") {
                 let x = parseInt(finaldata["Game"]["Reference"][i]["Generation"]);
                 if (x == parseInt(gamePath.value)) {
                     games.push(finaldata["Game"]["Reference"][i]["Name"])
