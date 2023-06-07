@@ -47,7 +47,7 @@ function build() {
 
 
 		let art = document.createElement("img");
-		art.src = getMedia(splitStr(region,","),[PATH_Region_Art_Official],[name])[0];
+		art.src = getMedia([""],[PATH_Region_Art_Official],[name])[0];
 		li.appendChild(art)
 
 
