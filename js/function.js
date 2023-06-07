@@ -244,10 +244,17 @@ function msToTime(duration) {
 function getMedia(userFile,userPath,games) {
 
 	if (userFile == undefined) {
-		userFile = [];
+		userFile = [""];
 	}
+	else if (typeof userFile == "STRING") {
+		userFile = [userFile];
+	}
+
 	if (userPath == undefined) {
-		userPath = [];
+		userPath = [""];
+	}
+	else if (typeof userPath == "STRING") {
+		userPath = [userPath];
 	}
 
 	if (games == undefined || games.length == 0) {
@@ -273,7 +280,7 @@ function getMedia(userFile,userPath,games) {
 							let fileName = arr[key][q].split(".")[0]
 							fileName = splitStr(fileName,"_")[0]
 
-							if (userFile[t] == fileName) {
+							if (userFile[t] == fileName || userFile[t] == "") {
 								let source = key.split("/")[key.split("/").length-1]
 								if (getApplicable(source,games)) {
 									result.push(key+"/"+file);
