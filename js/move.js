@@ -399,21 +399,20 @@ let createMove = function() {
 			moveSectionContentMenuTypeTextText.style.display = "none";
 		}
 		moveSectionContentMenuTypeTextText.innerText = finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]];
-		let cate = moveSectionContentMenuTypeMove.querySelectorAll(":scope > *");
-		for(let u = 0; u < cate.length; u++) {
-			cate[u].remove();
-		}
-		for(let u = 0; u < finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",").length; u++) {
+		moveSectionContentMenuTypeMove.innerHTML = ""
+
+		let categories = splitStr(finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]],",");
+
+		for(let u = 0; u < categories.length; u++) {
 			let moveSectionContentMenuTypeMoveImg = document.createElement("img");
 			moveSectionContentMenuTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-			moveSectionContentMenuTypeMoveImg.src = getMedia([finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",")[u]],[PATH_Move_Category])[0];
-			moveSectionContentMenuTypeMoveImg.setAttribute("title", finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",")[u]);
+			moveSectionContentMenuTypeMoveImg.src = getMedia([categories[u]],[PATH_Move_Category])[0];
+			moveSectionContentMenuTypeMoveImg.setAttribute("title", categories[u]);
 			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveImg);
 			let moveSectionContentMenuTypeMoveText = document.createElement("h6");
-			moveSectionContentMenuTypeMoveText.innerText = finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]].split(",")[u];
+			moveSectionContentMenuTypeMoveText.innerText = categories[u];
 			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveText);
 			moveSectionContentMenuTypeMoveText.style.display = "none";
-
 		}
 		if(finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]] == undefined) {
 			moveSectionContentMenuAttributePowerPointsText.innerHTML = "–";
@@ -463,7 +462,7 @@ let createMove = function() {
 		} else {
 			moveSectionContentMenuContact.setAttribute("name", "positive");
 		}
-		
+
 		moveSectionContentMenuRight.innerHTML = "";
 		
 		let othermove = [];
@@ -580,10 +579,8 @@ let createMove = function() {
 		}
 		
 	
-		let lis = moveSectionSidebarLearnsetUl.querySelectorAll(":scope > li");
-		for(let u = 0; u < lis.length; u++) {
-			lis[u].remove();
-		}
+		moveSectionSidebarLearnsetUl.innerHTML = ""
+	
 		let learnsetlevelarr = [];
 		for(let q = 0; q < finaldata["Pokémon Learnset"]["Level Up"].length; q++) {
 			if(finaldata["Pokémon Learnset"]["Level Up"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Level Up"][q]["Game"]) == true) {
