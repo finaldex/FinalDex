@@ -271,11 +271,15 @@ let createAbility = function() {
 			}
 	
 	
-			let sidebarAbilityListFull = sidebarAbilityList.map((v) => v+"_"+JSONPath_Ability);sidebarAbilityListFull = sidebarAbilityListFull.filter((item) => item !== "Pokémon"+"_"+JSONPath_Ability);
-			for(let q = 0; q < sidebarAbilityListFull.length; q++) {
-				sidebarAbilityListFull[q] = sidebarAbilityListFull[q].replaceAll(" Ability","");
+			let abilityList = []
+			if(Generation <= 4) {
+				abilityList = ["Primary","Secondary"];
 			}
-			let AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"], finaldata["Abilities"]["Reference"][i]["Ability"], sidebarAbilityListFull);
+			if(Generation >= 5) {
+				abilityList = ["Primary","Secondary","Hidden"];
+			}
+	
+			let AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"], finaldata["Abilities"]["Reference"][i]["Ability"], abilityList);
 		
 			for(let q = 0; q < AbilityResults.length; q++) {
 				let abilitySectionSidebarSidebarLi = document.createElement("li");
