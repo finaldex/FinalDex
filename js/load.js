@@ -33,8 +33,13 @@ function requestLoad(i,url) {
 
 			let urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","");
 			GameID = getGameName("",urlid);
+			if (GameID == undefined) {
+				GameID = 1;
+			}
+			console.log(GameID)
 			define();
 			config();
+			location.href = splitStr(location.href,"#")[0]+"#"+GameName;
 		}
 
 		
