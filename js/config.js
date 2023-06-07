@@ -25,9 +25,11 @@ let Natures = [];
 
 let MapArea = [];
 let Allies = false;
-let ImageTypes = [];
 
 // Paths
+let PATH = "./media/Images/";
+let PATH_Pokémon = "./media/Images/Pokémon/";
+let PATH_Pokémon_Battle = "./media/Images/Pokémon/Battle/";
 let PATH_Pokémon_Battle_Default_Front_PNG = "./media/Images/Pokémon/Battle/Default/Front/PNG/";
 let PATH_Pokémon_Battle_Default_Front_GIF = "./media/Images/Pokémon/Battle/Default/Front/GIF/";
 let PATH_Pokémon_Battle_Default_Front = "./media/Images/Pokémon/Battle/Default/Front/";
@@ -212,23 +214,18 @@ function define() {
 	if(GameID == 2) {
 	}
 	if(GameID == 3) {
-		ImageTypes = [{name:"Battle Sprites",path:"Yellow",category:"Battle",angle:"Front",type:"Default",extension:"PNG"}];
 	}
 	if(GameID == 4) {
-		ImageTypes = [{name:"Battle Sprites",path:"Gold",category:"Battle",angle:"Front",type:"Default",extension:"PNG"}];
 	}
 	if(GameID == 5) {
-		ImageTypes = [{name:"Battle Sprites",path:"Silver",category:"Battle",angle:"Front",type:"Default",extension:"PNG"}];
 	}
 	if(GameID == 6) {
-		ImageTypes = [{name:"Battle Sprites",path:"Crystal",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"Crystal",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 	}
 	if(GameID == 7) {
 	}
 	if(GameID == 8) {
 	}
 	if(GameID == 9) {
-		ImageTypes = [{name:"Battle Models",path:"Colosseum",category:"Battle",angle:"Front",type:"Default",extension:"PNG"}];
 		MapArea = Orre1Areas;
 	}
 	if(GameID == 10) {
@@ -236,11 +233,9 @@ function define() {
 	if(GameID == 11) {
 	}
 	if(GameID == 12) {
-		ImageTypes = [{name:"Battle Sprites",path:"Emerald",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"Emerald",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 		MapArea = Hoenn2Areas;
 	}
 	if(GameID == 13) {
-		ImageTypes = [{name:"Battle Models",path:"XD",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Models",path:"XD",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 		MapArea = Orre2Areas;
 	}
 	if(GameID == 14) {
@@ -248,7 +243,6 @@ function define() {
 	if(GameID == 15) {
 	}
 	if(GameID == 16) {
-		ImageTypes = [{name:"Battle Sprites",path:"Platinum",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"Platinum",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 	}
 	if(GameID == 17) {
 	}
@@ -298,7 +292,6 @@ function define() {
 
 
 	if(GameID >= 1 && GameID <= 2) {
-		ImageTypes = [{name:"Battle Sprites",path:"RB",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"RB",category:"Battle",angle:"Front",type:"Recolor",extension:"PNG"}];
 	}
 	if(GameID >= 1 && GameID <= 3) {
 		Generation = 1;
@@ -311,7 +304,6 @@ function define() {
 		MapArea = JohtoKanto1Areas;
 	}
 	if(GameID >= 7 && GameID <= 8) {
-		ImageTypes = [{name:"Battle Sprites",path:"RS",category:"Battle",angle:"Front",type:"Default",extension:"PNG"}];
 		MapArea = Hoenn1Areas;
 	}
 	if(GameID >= 7 && GameID <= 13) {
@@ -328,7 +320,6 @@ function define() {
 	if((GameID >= 9 && GameID <= 11) || (GameID >= 12 && GameID <= 13)) {
 	}
 	if(GameID >= 10 && GameID <= 11) {
-		ImageTypes = [{name:"Battle Sprites",path:"FRLG",category:"Battle",angle:"Front",type:"Default",extension:"PNG"}];
 		MapArea = KantoSeviiAreas;
 	}
 	if(GameID == 9 || GameID == 13) {
@@ -337,7 +328,6 @@ function define() {
 		Generation = 4;
 	}
 	if(GameID >= 14 && GameID <= 15) {
-		ImageTypes = [{name:"Battle Sprites",path:"DP",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"DP",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 	}
 	if(GameID == 14 || GameID == 16) {
 	}
@@ -347,7 +337,6 @@ function define() {
 	if(GameID >= 16 && GameID <= 18) {
 	}
 	if(GameID >= 17 && GameID <= 18) {
-		ImageTypes = [{name:"Battle Sprites",path:"HGSS",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"HGSS",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 		MapArea = JohtoKanto2Areas;
 	}
 	if(GameID >= 19 && GameID <= 22) {
@@ -387,7 +376,6 @@ function define() {
 	}
 	if(GameID >= 33 && GameID <= 34) {
 		Generation = 8;
-		ImageTypes = [{name:"Battle Models",path:"SwSh",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Models",path:"SwSh",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 		MapArea = GalarAreas;
 	}
 	if(Generation >= 1 && Generation <= 2) {
@@ -418,7 +406,6 @@ function define() {
 	if(Generation >= 5 && Generation <= 8) {
 	}
 	if(Generation >= 6 && Generation <= 7) {
-		ImageTypes = [{name:"Battle Models",path:"VI-VII",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Models",path:"VI-VII",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 	}
 	if(Generation >= 6 && Generation <= 8) {
 		JSONPath_Typechart = "6-8";
@@ -486,7 +473,6 @@ function define() {
 		Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark"];
 	}
 	if(Generation == 5) {
-		ImageTypes = [{name:"Battle Sprites",path:"V",category:"Battle",angle:"Front",type:"Default",extension:"PNG"},{name:"Battle Sprites",path:"V",category:"Battle",angle:"Front",type:"Default",extension:"GIF"}];
 		Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Steel","Fire","Water","Grass","Electric","Psychic","Ice","Dragon","Dark"];
 	}
 	if(Generation == 6) {
@@ -502,8 +488,6 @@ function define() {
 
 	let official = {name:"Official Art",path:"Official",category:"Art",angle:"Front",type:"Default",extension:"PNG"};
 	let home = {name:"Home",path:"HOME",category:"Art",angle:"Front",type:"Default",extension:"PNG"};
-	ImageTypes.push(official);
-	ImageTypes.push(home);
 
 
 
