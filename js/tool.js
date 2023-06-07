@@ -46,7 +46,6 @@ let createTool = function() {
 	toolSectionHeaderGame.appendChild(toolSectionHeaderGameImage);
 
 
-	
 	function createTimer() {
 		let stopwatchcountdown = ["stopwatch","countdown"];
 		for(let q = 0; q < stopwatchcountdown.length; q++) {
@@ -258,11 +257,12 @@ let createTool = function() {
 			typeSidebarTitleTrigger.addEventListener("click",function(){let base = this.parentElement.parentElement; if (base.classList.contains("active")) {base.classList.remove("active");} else {base.classList.add("active");}})
 			
 			for(let q = 0; q < Types.length; q++) {
+				let val = Types[q];
 				let typeSidebarTitleDropOption = document.createElement("b");
 				let typeSidebarTitleDropOptionImg = document.createElement("img");
 				let typeSidebarTitleDropOptionTxt = document.createElement("p");
 				typeSidebarTitleDropOption.setAttribute("name",Types[q]);
-				typeSidebarTitleDropOptionImg.src = getMedia([Types[q]],[PATH_Type_Icon])[0]
+				typeSidebarTitleDropOptionImg.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
 				typeSidebarTitleDropOptionImg.title = Types[q];
 				typeSidebarTitleDropOptionImg.setAttribute("onerror","this.style.display='none';");
 				typeSidebarTitleDropOptionTxt.innerText = Types[q];
@@ -277,8 +277,9 @@ let createTool = function() {
 						prev.remove();
 					}
 
+					let val = el.innerText;
 					let img = document.createElement("img");
-					img.src = getMedia([el.innerText],[PATH_Type_Icon])[0]
+					img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
 					img.setAttribute("name",el.innerText);
 					img.title = el.innerText;
 					img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -434,7 +435,7 @@ let createTool = function() {
 						let img = document.createElement("img");
 						wrap.setAttribute("name",val);
 						txt.innerText = val;
-						img.src = getMedia([val],[PATH_Type_Icon])[0]
+						img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
 						img.setAttribute("onload","this.previousElementSibling.style.display = 'none'");
 						img.setAttribute("onerror","this.style.display = 'none'");
 						th.appendChild(wrap);
@@ -519,113 +520,121 @@ let createTool = function() {
 
 		let toolSectionContentDMGMenu = document.createElement("div");
 
-		let toolSectionContentDMGMenuRoll = document.createElement("div");
-		let toolSectionContentDMGMenuMove = document.createElement("div");
-		let toolSectionContentDMGMenuSpecific = document.createElement("div");
+		let toolSectionContentDMGMenuLeft = document.createElement("div");
+		let toolSectionContentDMGMenuCenter = document.createElement("div");
+		let toolSectionContentDMGMenuRight = document.createElement("div");
 
-		let toolSectionContentDMGMenuSpecificTop = document.createElement("span");
-		let toolSectionContentDMGMenuSpecificBottom = document.createElement("span");
+		let toolSectionContentDMGMenuRightTop = document.createElement("span");
+		let toolSectionContentDMGMenuRightBottom = document.createElement("span");
+		let toolSectionContentDMGMenuButton = document.createElement("button");
+		let toolSectionContentDMGMenuButtonText = document.createElement("h6");
 
-		let toolSectionContentDMGMenuMoveTop = document.createElement("span");
-		let toolSectionContentDMGMenuMoveBottom = document.createElement("span");
+		let toolSectionContentDMGMenuCenterTop = document.createElement("span");
+		let toolSectionContentDMGMenuCenterBottom = document.createElement("span");
 
-		let toolSectionContentDMGMenuMoveSelect = document.createElement("select");
-		let toolSectionContentDMGMenuSpecificTopInput = document.createElement("input");
-		let toolSectionContentDMGMenuSpecificTopSelect = document.createElement("select");
+		let toolSectionContentDMGMenuCenterSelect = document.createElement("select");
+		let toolSectionContentDMGMenuRightTopInput = document.createElement("input");
+		let toolSectionContentDMGMenuRightTopSelect = document.createElement("select");
 
-		let toolSectionContentDMGMenuMoveBottomDamage = document.createElement("span");
-		let toolSectionContentDMGMenuMoveBottomDamageTitle = document.createElement("h6");
-		let toolSectionContentDMGMenuMoveBottomDamageText = document.createElement("small");
-		let toolSectionContentDMGMenuMoveBottomAccuracy = document.createElement("span");
-		let toolSectionContentDMGMenuMoveBottomAccuracyTitle = document.createElement("h6");
-		let toolSectionContentDMGMenuMoveBottomAccuracyText = document.createElement("small");
-		let toolSectionContentDMGMenuMoveBottomCritical = document.createElement("span");
-		let toolSectionContentDMGMenuMoveBottomCriticalTitle = document.createElement("h6");
-		let toolSectionContentDMGMenuMoveBottomCriticalText = document.createElement("small");
+		let toolSectionContentDMGMenuCenterBottomDamage = document.createElement("span");
+		let toolSectionContentDMGMenuCenterBottomDamageTitle = document.createElement("h6");
+		let toolSectionContentDMGMenuCenterBottomDamageText = document.createElement("small");
+		let toolSectionContentDMGMenuCenterBottomAccuracy = document.createElement("span");
+		let toolSectionContentDMGMenuCenterBottomAccuracyTitle = document.createElement("h6");
+		let toolSectionContentDMGMenuCenterBottomAccuracyText = document.createElement("small");
+		let toolSectionContentDMGMenuCenterBottomCritical = document.createElement("span");
+		let toolSectionContentDMGMenuCenterBottomCriticalTitle = document.createElement("h6");
+		let toolSectionContentDMGMenuCenterBottomCriticalText = document.createElement("small");
 
-		let toolSectionContentDMGMenuMoveBottomTypeCategory = document.createElement("span");
+		let toolSectionContentDMGMenuCenterBottomTypeCategory = document.createElement("span");
 
-		let toolSectionContentDMGMenuMoveBottomType = document.createElement("span");
-		let toolSectionContentDMGMenuMoveBottomTypeImg = document.createElement("img");
-		let toolSectionContentDMGMenuMoveBottomTypeText = document.createElement("small");
+		let toolSectionContentDMGMenuCenterBottomType = document.createElement("span");
+		let toolSectionContentDMGMenuCenterBottomTypeImg = document.createElement("img");
+		let toolSectionContentDMGMenuCenterBottomTypeText = document.createElement("small");
 
-		let toolSectionContentDMGMenuMoveBottomCategory = document.createElement("span");
-		let toolSectionContentDMGMenuMoveBottomCategoryImg = document.createElement("img");
-		let toolSectionContentDMGMenuMoveBottomCategoryText = document.createElement("small");
+		let toolSectionContentDMGMenuCenterBottomCategory = document.createElement("span");
+		let toolSectionContentDMGMenuCenterBottomCategoryImg = document.createElement("img");
+		let toolSectionContentDMGMenuCenterBottomCategoryText = document.createElement("small");
 
 
-		let toolSectionContentDMGMenuRollTop = document.createElement("span");
-		let toolSectionContentDMGMenuRollRangeTextTopLeft = document.createElement("span");
-		let toolSectionContentDMGMenuRollRangeTextTopRight = document.createElement("span");
-		let toolSectionContentDMGMenuRollRangeTextBottomLeft = document.createElement("small");
-		let toolSectionContentDMGMenuRollRangeTextBottomCenter = document.createElement("small");
-		let toolSectionContentDMGMenuRollRangeTextBottomRight = document.createElement("small");
-		let toolSectionContentDMGMenuRollRange = document.createElement("input");
+		let toolSectionContentDMGMenuLeftTop = document.createElement("span");
+		let toolSectionContentDMGMenuLeftRangeTextTopLeft = document.createElement("span");
+		let toolSectionContentDMGMenuLeftRangeTextTopRight = document.createElement("span");
+		let toolSectionContentDMGMenuLeftRangeTextBottomLeft = document.createElement("small");
+		let toolSectionContentDMGMenuLeftRangeTextBottomCenter = document.createElement("small");
+		let toolSectionContentDMGMenuLeftRangeTextBottomRight = document.createElement("small");
+		let toolSectionContentDMGMenuLeftRange = document.createElement("input");
 		
-		let toolSectionContentDMGMenuRollBottom = document.createElement("span");
-		let toolSectionContentDMGMenuRollCritical = document.createElement("label");
-		let toolSectionContentDMGMenuRollCriticalText = document.createElement("h6");
-		let toolSectionContentDMGMenuRollCriticalInput = document.createElement("input");
+		let toolSectionContentDMGMenuLeftBottom = document.createElement("span");
+
+
+		let toolSectionContentDMGMenuLeftCritical = document.createElement("label");
+		let toolSectionContentDMGMenuLeftCriticalText = document.createElement("h6");
+		let toolSectionContentDMGMenuLeftCriticalInput = document.createElement("input");
 
 
 		toolSectionContentDMGOptionsTop.setAttribute("name","header");
 
-		toolSectionContentDMGMenuSpecificTopInput.setAttribute("type","number");
-		toolSectionContentDMGMenuSpecificTopInput.setAttribute("min","1");
-		toolSectionContentDMGMenuSpecificTopInput.setAttribute("value","1");
-		toolSectionContentDMGMenuSpecificTopInput.setAttribute("max","1");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("type","number");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("min","1");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("value","1");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("max","1");
 
-		toolSectionContentDMGMenuMoveBottomType.setAttribute("name","type");
-		toolSectionContentDMGMenuMoveBottomTypeImg.setAttribute("onload","this.style.removeProperty('display');this.previousElementSibling.style.display='none';");
-		toolSectionContentDMGMenuMoveBottomTypeImg.setAttribute("onerror","this.style.display='none';this.previousElementSibling.style.removeProperty('display');");
+		toolSectionContentDMGMenuCenterBottomType.setAttribute("name","type");
+		toolSectionContentDMGMenuCenterBottomTypeImg.setAttribute("onload","this.style.removeProperty('display');this.previousElementSibling.style.display='none';");
+		toolSectionContentDMGMenuCenterBottomTypeImg.setAttribute("onerror","this.style.display='none';this.previousElementSibling.style.removeProperty('display');");
 
-		toolSectionContentDMGMenuMoveBottomCategory.setAttribute("name","category");
-		toolSectionContentDMGMenuMoveBottomCategoryImg.setAttribute("onload","this.style.removeProperty('display');this.previousElementSibling.style.display='none';");
-		toolSectionContentDMGMenuMoveBottomCategoryImg.setAttribute("onerror","this.style.display='none';this.previousElementSibling.style.removeProperty('display');");
+		toolSectionContentDMGMenuCenterBottomCategory.setAttribute("name","category");
+		toolSectionContentDMGMenuCenterBottomCategoryImg.setAttribute("onload","this.style.removeProperty('display');this.previousElementSibling.style.display='none';");
+		toolSectionContentDMGMenuCenterBottomCategoryImg.setAttribute("onerror","this.style.display='none';this.previousElementSibling.style.removeProperty('display');");
 
 
-		toolSectionContentDMGMenuMoveBottomDamage.setAttribute("name","power");
-		toolSectionContentDMGMenuMoveBottomDamageTitle.innerText = "Power";
-		toolSectionContentDMGMenuMoveBottomDamageText.innerText = "";
+		toolSectionContentDMGMenuCenterBottomDamage.setAttribute("name","power");
+		toolSectionContentDMGMenuCenterBottomDamageTitle.innerText = "Power";
+		toolSectionContentDMGMenuCenterBottomDamageText.innerText = "";
 
-		toolSectionContentDMGMenuMoveBottomAccuracy.setAttribute("name","accuracy");
-		toolSectionContentDMGMenuMoveBottomAccuracyTitle.innerText = "Accuracy";
-		toolSectionContentDMGMenuMoveBottomAccuracyText.innerText = "";
+		toolSectionContentDMGMenuCenterBottomAccuracy.setAttribute("name","accuracy");
+		toolSectionContentDMGMenuCenterBottomAccuracyTitle.innerText = "Accuracy";
+		toolSectionContentDMGMenuCenterBottomAccuracyText.innerText = "";
 
-		toolSectionContentDMGMenuMoveBottomCritical.setAttribute("name","critical");
-		toolSectionContentDMGMenuMoveBottomCriticalTitle.innerText = "Critical";
-		toolSectionContentDMGMenuMoveBottomCriticalText.innerText = ""
+		toolSectionContentDMGMenuCenterBottomCritical.setAttribute("name","critical");
+		toolSectionContentDMGMenuCenterBottomCriticalTitle.innerText = "Critical";
+		toolSectionContentDMGMenuCenterBottomCriticalText.innerText = ""
 		
+		toolSectionContentDMGMenuLeftBottom.setAttribute("name","specific");
+		toolSectionContentDMGMenuLeftTop.setAttribute("name","roll");
 
-		toolSectionContentDMGMenuRoll.setAttribute("name","roll");
+		toolSectionContentDMGMenuLeftCritical.setAttribute("name","critical");
+		toolSectionContentDMGMenuLeftCritical.setAttribute("for","dmg-critical")
+		toolSectionContentDMGMenuLeftCriticalText.innerText = "Critical";
+		toolSectionContentDMGMenuLeftCriticalInput.setAttribute("id","dmg-critical")
+		toolSectionContentDMGMenuLeftCriticalInput.setAttribute("name","dmg-critical")
+		toolSectionContentDMGMenuLeftCriticalInput.setAttribute("type","checkbox");
 
-		toolSectionContentDMGMenuRollCritical.setAttribute("name","critical");
-		toolSectionContentDMGMenuRollCritical.setAttribute("for","dmg-critical")
-		toolSectionContentDMGMenuRollCriticalText.innerText = "Critical";
-		toolSectionContentDMGMenuRollCriticalInput.setAttribute("id","dmg-critical")
-		toolSectionContentDMGMenuRollCriticalInput.setAttribute("name","dmg-critical")
-		toolSectionContentDMGMenuRollCriticalInput.setAttribute("type","checkbox");
+		toolSectionContentDMGMenuCenterTop.setAttribute("name","move");
+		toolSectionContentDMGMenuCenterBottom.setAttribute("name","info");
 
-		toolSectionContentDMGMenuMove.setAttribute("name","move");
-		toolSectionContentDMGMenuSpecific.setAttribute("name","spec");
-
-
-		toolSectionContentDMGMenuRollRangeTextTopLeft.setAttribute("name","low");
-		toolSectionContentDMGMenuRollRangeTextTopLeft.innerHTML = "<h6>Low Roll</h6>";
-		toolSectionContentDMGMenuRollRangeTextTopRight.setAttribute("name","high");
-		toolSectionContentDMGMenuRollRangeTextTopRight.innerHTML = "<h6>High Roll</h6>";
-		toolSectionContentDMGMenuRollRangeTextBottomLeft.setAttribute("name","min");
-		toolSectionContentDMGMenuRollRangeTextBottomCenter.setAttribute("name","val");
-		toolSectionContentDMGMenuRollRangeTextBottomRight.setAttribute("name","max");
+		toolSectionContentDMGMenuRightTop.setAttribute("name","count");
+		toolSectionContentDMGMenuRightBottom.setAttribute("name","execute");
 
 
-		toolSectionContentDMGMenuRollRange.setAttribute("type","range");
-		toolSectionContentDMGMenuRollRange.setAttribute("name","dmg-roll-range")
-		toolSectionContentDMGMenuRollRange.setAttribute("id","dmg-roll-range")
-		toolSectionContentDMGMenuRollRange.min = -1;
-		toolSectionContentDMGMenuRollRange.max = -1;
-		toolSectionContentDMGMenuRollRange.value = -1;
+		toolSectionContentDMGMenuLeftRangeTextTopLeft.setAttribute("name","low");
+		toolSectionContentDMGMenuLeftRangeTextTopLeft.innerHTML = "<h6>Low Roll</h6>";
+		toolSectionContentDMGMenuLeftRangeTextTopRight.setAttribute("name","high");
+		toolSectionContentDMGMenuLeftRangeTextTopRight.innerHTML = "<h6>High Roll</h6>";
+		toolSectionContentDMGMenuLeftRangeTextBottomLeft.setAttribute("name","min");
+		toolSectionContentDMGMenuLeftRangeTextBottomCenter.setAttribute("name","val");
+		toolSectionContentDMGMenuLeftRangeTextBottomRight.setAttribute("name","max");
+
+
+		toolSectionContentDMGMenuLeftRange.setAttribute("type","range");
+		toolSectionContentDMGMenuLeftRange.setAttribute("name","dmg-roll-range")
+		toolSectionContentDMGMenuLeftRange.setAttribute("id","dmg-roll-range")
+		toolSectionContentDMGMenuLeftRange.min = -1;
+		toolSectionContentDMGMenuLeftRange.max = -1;
+		toolSectionContentDMGMenuLeftRange.value = -1;
 	
+		toolSectionContentDMGMenuButtonText.innerText = "Start Calculation";
 
 		toolSectionContentDMGOptionsContentPok.setAttribute("name","pokémon");
 		toolSectionContentDMGOptionsContentTeam.setAttribute("name","team");
@@ -682,59 +691,63 @@ let createTool = function() {
 		
 		
 		
-		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuRoll)
-		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuMove)
+		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuLeft)
+		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuCenter)
 
-		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuSpecific)
-		toolSectionContentDMGMenuSpecific.appendChild(toolSectionContentDMGMenuSpecificTop)
-		toolSectionContentDMGMenuSpecific.appendChild(toolSectionContentDMGMenuSpecificBottom)
+		toolSectionContentDMGMenu.appendChild(toolSectionContentDMGMenuRight)
+		toolSectionContentDMGMenuRight.appendChild(toolSectionContentDMGMenuRightTop)
+		toolSectionContentDMGMenuRight.appendChild(toolSectionContentDMGMenuRightBottom)
+		toolSectionContentDMGMenuRightBottom.appendChild(toolSectionContentDMGMenuButton)
+		toolSectionContentDMGMenuButton.appendChild(toolSectionContentDMGMenuButtonText)
 
-		toolSectionContentDMGMenuSpecificTop.appendChild(toolSectionContentDMGMenuSpecificTopSelect);
-		toolSectionContentDMGMenuSpecificTop.appendChild(toolSectionContentDMGMenuSpecificTopInput);
+		toolSectionContentDMGMenuRightTop.appendChild(toolSectionContentDMGMenuRightTopSelect);
+		toolSectionContentDMGMenuRightTop.appendChild(toolSectionContentDMGMenuRightTopInput);
 
-		toolSectionContentDMGMenuMove.appendChild(toolSectionContentDMGMenuMoveTop);
-		toolSectionContentDMGMenuMove.appendChild(toolSectionContentDMGMenuMoveBottom);
-		toolSectionContentDMGMenuMoveTop.appendChild(toolSectionContentDMGMenuMoveSelect);
+		toolSectionContentDMGMenuCenter.appendChild(toolSectionContentDMGMenuCenterTop);
+		toolSectionContentDMGMenuCenter.appendChild(toolSectionContentDMGMenuCenterBottom);
+		toolSectionContentDMGMenuCenterTop.appendChild(toolSectionContentDMGMenuCenterSelect);
 
 
-		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomDamage);
-		toolSectionContentDMGMenuMoveBottomDamage.appendChild(toolSectionContentDMGMenuMoveBottomDamageTitle);
-		toolSectionContentDMGMenuMoveBottomDamage.appendChild(toolSectionContentDMGMenuMoveBottomDamageText);
-		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomAccuracy);
-		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyTitle);
-		toolSectionContentDMGMenuMoveBottomAccuracy.appendChild(toolSectionContentDMGMenuMoveBottomAccuracyText);
-		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomCritical);
-		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalTitle);
-		toolSectionContentDMGMenuMoveBottomCritical.appendChild(toolSectionContentDMGMenuMoveBottomCriticalText);
+		toolSectionContentDMGMenuCenterBottom.appendChild(toolSectionContentDMGMenuCenterBottomDamage);
+		toolSectionContentDMGMenuCenterBottomDamage.appendChild(toolSectionContentDMGMenuCenterBottomDamageTitle);
+		toolSectionContentDMGMenuCenterBottomDamage.appendChild(toolSectionContentDMGMenuCenterBottomDamageText);
+		toolSectionContentDMGMenuCenterBottom.appendChild(toolSectionContentDMGMenuCenterBottomAccuracy);
+		toolSectionContentDMGMenuCenterBottomAccuracy.appendChild(toolSectionContentDMGMenuCenterBottomAccuracyTitle);
+		toolSectionContentDMGMenuCenterBottomAccuracy.appendChild(toolSectionContentDMGMenuCenterBottomAccuracyText);
+		toolSectionContentDMGMenuCenterBottom.appendChild(toolSectionContentDMGMenuCenterBottomCritical);
+		toolSectionContentDMGMenuCenterBottomCritical.appendChild(toolSectionContentDMGMenuCenterBottomCriticalTitle);
+		toolSectionContentDMGMenuCenterBottomCritical.appendChild(toolSectionContentDMGMenuCenterBottomCriticalText);
 	
 
-		toolSectionContentDMGMenuMoveBottom.appendChild(toolSectionContentDMGMenuMoveBottomTypeCategory);
-		toolSectionContentDMGMenuMoveBottomTypeCategory.appendChild(toolSectionContentDMGMenuMoveBottomType);
-		toolSectionContentDMGMenuMoveBottomType.appendChild(toolSectionContentDMGMenuMoveBottomTypeText);
-		toolSectionContentDMGMenuMoveBottomType.appendChild(toolSectionContentDMGMenuMoveBottomTypeImg);
-		toolSectionContentDMGMenuMoveBottomTypeCategory.appendChild(toolSectionContentDMGMenuMoveBottomCategory);
-		toolSectionContentDMGMenuMoveBottomCategory.appendChild(toolSectionContentDMGMenuMoveBottomCategoryText);
-		toolSectionContentDMGMenuMoveBottomCategory.appendChild(toolSectionContentDMGMenuMoveBottomCategoryImg);
+		toolSectionContentDMGMenuCenterBottom.appendChild(toolSectionContentDMGMenuCenterBottomTypeCategory);
+		toolSectionContentDMGMenuCenterBottomTypeCategory.appendChild(toolSectionContentDMGMenuCenterBottomType);
+		toolSectionContentDMGMenuCenterBottomType.appendChild(toolSectionContentDMGMenuCenterBottomTypeText);
+		toolSectionContentDMGMenuCenterBottomType.appendChild(toolSectionContentDMGMenuCenterBottomTypeImg);
+		toolSectionContentDMGMenuCenterBottomTypeCategory.appendChild(toolSectionContentDMGMenuCenterBottomCategory);
+		toolSectionContentDMGMenuCenterBottomCategory.appendChild(toolSectionContentDMGMenuCenterBottomCategoryText);
+		toolSectionContentDMGMenuCenterBottomCategory.appendChild(toolSectionContentDMGMenuCenterBottomCategoryImg);
 
-		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollTop)
-		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextTopLeft)
-		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextTopRight)
-		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRange)
-		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextBottomLeft)
-		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextBottomCenter)
-		toolSectionContentDMGMenuRollTop.appendChild(toolSectionContentDMGMenuRollRangeTextBottomRight)
-		toolSectionContentDMGMenuRoll.appendChild(toolSectionContentDMGMenuRollBottom)
-		toolSectionContentDMGMenuRollBottom.appendChild(toolSectionContentDMGMenuRollCritical);
-		toolSectionContentDMGMenuRollCritical.appendChild(toolSectionContentDMGMenuRollCriticalText);
-		toolSectionContentDMGMenuRollCritical.appendChild(toolSectionContentDMGMenuRollCriticalInput);
+		toolSectionContentDMGMenuLeft.appendChild(toolSectionContentDMGMenuLeftTop)
+		toolSectionContentDMGMenuLeftTop.appendChild(toolSectionContentDMGMenuLeftCritical);
+		toolSectionContentDMGMenuLeftCritical.appendChild(toolSectionContentDMGMenuLeftCriticalText);
+		toolSectionContentDMGMenuLeftCritical.appendChild(toolSectionContentDMGMenuLeftCriticalInput);
+		toolSectionContentDMGMenuLeftTop.appendChild(toolSectionContentDMGMenuLeftRangeTextTopLeft)
+		toolSectionContentDMGMenuLeftTop.appendChild(toolSectionContentDMGMenuLeftRangeTextTopRight)
+		toolSectionContentDMGMenuLeftTop.appendChild(toolSectionContentDMGMenuLeftRange)
+		toolSectionContentDMGMenuLeftTop.appendChild(toolSectionContentDMGMenuLeftRangeTextBottomLeft)
+		toolSectionContentDMGMenuLeftTop.appendChild(toolSectionContentDMGMenuLeftRangeTextBottomCenter)
+		toolSectionContentDMGMenuLeftTop.appendChild(toolSectionContentDMGMenuLeftRangeTextBottomRight)
+		toolSectionContentDMGMenuLeft.appendChild(toolSectionContentDMGMenuLeftBottom)
 
-		toolSectionContentDMGMenuMoveBottomTypeText.style.display = "none";
-		toolSectionContentDMGMenuMoveBottomCategoryText.style.display = "none";
 
-		toolSectionContentDMGMenuRollRange.addEventListener("input",DMGCalcStart);
-		toolSectionContentDMGMenuRollRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`; let z = this.parentElement.querySelector(":scope *[name='val']"); z.innerText = (this.value-this.min);z.innerText = z.innerText+" ("+parseInt(v)+"%)";})
 
-		toolSectionContentDMGMenuRollCriticalInput.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuCenterBottomTypeText.style.display = "none";
+		toolSectionContentDMGMenuCenterBottomCategoryText.style.display = "none";
+
+		
+		toolSectionContentDMGMenuLeftRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`; let z = this.parentElement.querySelector(":scope *[name='val']"); z.innerText = (this.value-this.min);z.innerText = z.innerText+" ("+parseInt(v)+"%)";})
+		toolSectionContentDMGMenuLeftRange.addEventListener("input",DMGResetCalc)
+		toolSectionContentDMGMenuLeftCriticalInput.addEventListener("input",DMGResetCalc)
 
 		let toolSectionContentDMGImport = document.createElement("figure");
 		let toolSectionContentDMGImportText = document.createElement("h5");
@@ -829,42 +842,47 @@ let createTool = function() {
 			let moveCategory = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],tempMoves[m]);
 			moveCategory = undwsDel(moveCategory,"")
 			if (moveCategory != undefined && moveCategory != "Status") {
-				let toolSectionContentDMGMenuMoveTopOption = document.createElement("option");
-				toolSectionContentDMGMenuMoveTopOption.setAttribute("value",tempMoves[m]);
-				toolSectionContentDMGMenuMoveTopOption.innerText = tempMoves[m];
-				toolSectionContentDMGMenuMoveSelect.appendChild(toolSectionContentDMGMenuMoveTopOption);
+				let toolSectionContentDMGMenuCenterTopOption = document.createElement("option");
+				toolSectionContentDMGMenuCenterTopOption.setAttribute("value",tempMoves[m]);
+				toolSectionContentDMGMenuCenterTopOption.innerText = tempMoves[m];
+				toolSectionContentDMGMenuCenterSelect.appendChild(toolSectionContentDMGMenuCenterTopOption);
 
 				let movd = formatMoveData(tempMoves[m]);
 				movd = undDel(movd,"");
-				toolSectionContentDMGMenuMoveTopOption.title = movd;
+				toolSectionContentDMGMenuCenterTopOption.title = movd;
 
-				toolSectionContentDMGMenuMoveTopOption.style.background = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempMoves[m])+")";
+				toolSectionContentDMGMenuCenterTopOption.style.background = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempMoves[m])+")";
 			}
 		}
 
-		if (toolSectionContentDMGMenuMoveSelect.querySelector(":scope option[value='Pound']") != undefined) {
-			toolSectionContentDMGMenuMoveSelect.value = "Pound";
-			toolSectionContentDMGMenuMoveSelect.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuMoveSelect.value)+")";
-			toolSectionContentDMGMenuMoveBottomTypeImg.src = getMedia([returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuMoveSelect.value)],[PATH_Type_Icon])[0]
-			toolSectionContentDMGMenuMoveBottomTypeText.innerText = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuMoveSelect.value);
-			toolSectionContentDMGMenuMoveBottomCategoryImg.src = getMedia([returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuMoveSelect.value)],[PATH_Type_Icon])[0]
-			toolSectionContentDMGMenuMoveBottomCategoryText.innerText = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuMoveSelect.value);
+		if (toolSectionContentDMGMenuCenterSelect.querySelector(":scope option[value='Pound']") != undefined) {
+			toolSectionContentDMGMenuCenterSelect.value = "Pound";
+			toolSectionContentDMGMenuCenterSelect.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuCenterSelect.value)+")";
+			toolSectionContentDMGMenuCenterBottomTypeImg.src = getMedia([returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuCenterSelect.value)],[PATH_Type_Icon])[0]
+			toolSectionContentDMGMenuCenterBottomTypeText.innerText = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuCenterSelect.value);
+			toolSectionContentDMGMenuCenterBottomCategoryImg.src = getMedia([returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuCenterSelect.value)],[PATH_Type_Icon])[0]
+			toolSectionContentDMGMenuCenterBottomCategoryText.innerText = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuCenterSelect.value);
 		}
 	
-		toolSectionContentDMGMenuSpecificTopInput.addEventListener("change",DMGCalcStart);
-		toolSectionContentDMGMenuSpecificTopSelect.addEventListener("change",DMGCalcStart);
-		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGSetInfo);
-		toolSectionContentDMGMenuMoveSelect.addEventListener("change",function(){
+	
+		toolSectionContentDMGMenuCenterSelect.addEventListener("change",DMGSetInfo);
+		toolSectionContentDMGMenuCenterSelect.addEventListener("change",function(){
 			let movd = formatMoveData(this.value); movd = undDel(movd,"");this.title = movd;this.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],this.value)+")";
 		});
-		toolSectionContentDMGMenuMoveSelect.addEventListener("change",DMGCalcStart);
 
-		let movd = formatMoveData(toolSectionContentDMGMenuMoveSelect.value);
+
+		let movd = formatMoveData(toolSectionContentDMGMenuCenterSelect.value);
 		movd = undDel(movd,"");
-		toolSectionContentDMGMenuMoveSelect.title = movd;
+		toolSectionContentDMGMenuCenterSelect.title = movd;
 	
 
-
+		toolSectionContentDMGMenuButton.addEventListener("click",DMGCalcStart);
+		/*
+		toolSectionContentDMGMenuRightTopInput.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuRightTopSelect.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuCenterSelect.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuLeftCriticalInput.addEventListener("change",DMGCalcStart);
+		toolSectionContentDMGMenuLeftRange.addEventListener("input",DMGCalcStart);*/
 
 
 		for(let q = 0; q < battleVariation.length; q++) {
@@ -904,7 +922,7 @@ let createTool = function() {
 		$(toolSectionContentDMGResultContentTarget).sortable({
 			stop: function(e,ui) {
 				DMGMatchPosition();
-				DMGCalcStart();
+				/*DMGCalcStart();*/
 			},
 			handle:"> span",
 			cursor: "grabbing",
@@ -2084,7 +2102,7 @@ function typeSet() {
 
 	if (check1) {
 		let img = document.createElement("img");
-		img.src = getMedia([val],[PATH_Type_Icon])[0]
+		img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2093,7 +2111,7 @@ function typeSet() {
 	}
 	else if (check2) {
 		let img = document.createElement("img");
-		img.src = getMedia([val],[PATH_Type_Icon])[0]
+		img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2155,7 +2173,7 @@ function typeSwitch() {
 
 
 	if (types.length > 0) {
-		console.log(types)
+
 		
 		let arr = calcTypeAdv(types,condition);
 
@@ -2199,7 +2217,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2221,7 +2239,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2242,7 +2260,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2263,7 +2281,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2284,7 +2302,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2305,7 +2323,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia([val],[PATH_Type_Icon],["Sword"])[0]
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
