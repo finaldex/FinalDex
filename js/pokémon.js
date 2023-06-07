@@ -36,7 +36,7 @@ let createPokémon = function() {
 	navigationCountSpan2.innerText = "/";
 	navigationGame.setAttribute("name","title");
     
-	navigationGameImg.src = getMedia([GameFullName.replaceAll(",","").replaceAll("!","").replaceAll("'","").replaceAll(":","")],[PATH_Game_Title])
+	navigationGameImg.src = getMedia(["Title"],[PATH_Game_Title])
 	navigationSettings.setAttribute("name","settings");
 	navigationSettingsIconText.innerText = "⚙️";
 
