@@ -4263,7 +4263,7 @@ function ImageType(action) {
         let els = imgs1.concat(imgs2)
         let src_path = it1.filter(x => {return x["Style"] == pathEl.value && x["Type"] == typeEl.value && x["Angle"] == angleEl.value && x["Extension"] == extEl.value})
         
-        if (src_path[0]["Path"] != undefined) {
+        if (src_path[0] != undefined) {
             src_path = src_path[0]["Path"];
 
             for (let q = 0; q < els.length; q++) {
