@@ -1207,23 +1207,53 @@ let createPokémon = function() {
     let settingsDefaultImgtypeType = document.createElement("select");
     let settingsDefaultImgtypeAngle = document.createElement("select");
 
-    let tempImgTypes = [...ImageTypes];
-    tempImgTypes = removeDuplicateObjectFromArray(tempImgTypes, "name");    
-
-    for (let i = 0; i < tempImgTypes.length; i++) { 
-        let settingsDefaultImgtypeOption = document.createElement("option");
-        settingsDefaultImgtypeOption.setAttribute("data-path",tempImgTypes[i]["path"]);
-        settingsDefaultImgtypeOption.setAttribute("data-category",tempImgTypes[i]["category"]);
-
-        settingsDefaultImgtypeOption.innerText = tempImgTypes[i]["name"];
-        settingsDefaultImgtypeOption.value = tempImgTypes[i]["name"];
   
+    let ImageTypes = getDirs([PATH_Pokémon_Battle])
+    ImageTypes = ImageTypes.map(function(x){return x.replaceAll(PATH_Pokémon,'').replace("/"+x.split("/")[x.split("/").length-1],"")})
+
+    for (let q = 0; q < ImageTypes.length; q++) {
+        let els = ImageTypes[q].split("/")
+        let obj = new Object();
+        obj["Style"] = els[0];
+        obj["Type"] = els[1];
+        obj["Angle"] = els[2];
+        obj["Extension"] = els[3];
+        ImageTypes[q] = obj;
+    }
+
+
+    let style = [...new Set(ImageTypes.map((item) => item["Style"]))];
+    let type = [...new Set(ImageTypes.map((item) => item["Type"]))];
+    let angle = [...new Set(ImageTypes.map((item) => item["Angle"]))];
+    let ext = [...new Set(ImageTypes.map((item) => item["Extension"]))];
+
+    for (let q = 0; q < style.length; q++) { 
+        let settingsDefaultImgtypeOption = document.createElement("option");
+        settingsDefaultImgtypeOption.innerText = style[q];
+        settingsDefaultImgtypeOption.value = style[q];
         settingsDefaultImgtypePath.appendChild(settingsDefaultImgtypeOption);
+    }
+    for (let q = 0; q < type.length; q++) { 
+        let settingsDefaultImgtypeOption = document.createElement("option");
+        settingsDefaultImgtypeOption.innerText = type[q];
+        settingsDefaultImgtypeOption.value = type[q];
+        settingsDefaultImgtypeType.appendChild(settingsDefaultImgtypeOption);
+    }
+    for (let q = 0; q < angle.length; q++) { 
+        let settingsDefaultImgtypeOption = document.createElement("option");
+        settingsDefaultImgtypeOption.innerText = angle[q];
+        settingsDefaultImgtypeOption.value = angle[q];
+        settingsDefaultImgtypeAngle.appendChild(settingsDefaultImgtypeOption);
+    }
+    for (let q = 0; q < ext.length; q++) { 
+        let settingsDefaultImgtypeOption = document.createElement("option");
+        settingsDefaultImgtypeOption.innerText = ext[q];
+        settingsDefaultImgtypeOption.value = ext[q];
+        settingsDefaultImgtypeExtension.appendChild(settingsDefaultImgtypeOption);
     }
 
     settingsDefaultImgtypePath.setAttribute("name","path");
     settingsDefaultImgtypePath.setAttribute("title","Image Types");
-    settingsDefaultImgtypePath.value = tempImgTypes[0]["name"];
     settingsDefaultImgtypeExtension.setAttribute("name","extension");
     settingsDefaultImgtypeExtension.setAttribute("title","Extension");
     settingsDefaultImgtypeType.setAttribute("name","type");
@@ -1584,7 +1614,7 @@ function CheckAll() {
 
 function createContain(condition) {
 
-    document.querySelectorAll("#pokémon > div").innerHTML = "";
+    document.querySelector("#pokémon > div ul").innerHTML = "";
 
 
   
@@ -1873,51 +1903,50 @@ function variantSelector() {
 
     let inputs = document.querySelectorAll('#pokémon > aside[name="settings"] span[name="variant"] input:checked');
 
-	if(inputs.length > 0) {
-        let tempArr = [];
-        let tempStr;
-        for (let i = 0; i < inputs.length; i++) {
-            tempArr.push(inputs[i].nextElementSibling.innerText)
-        }
-        if (tempArr.length > 1) {
-            tempStr = tempArr.join(",");
-        }
-        else {
-            tempStr = tempArr[0];
-        }
+    let tempArr = [];
+    let tempStr;
+    for (let i = 0; i < inputs.length; i++) {
+        tempArr.push(inputs[i].nextElementSibling.innerText)
+    }
+    if (tempArr.length > 1) {
+        tempStr = tempArr.join(",");
+    }
+    else {
+        tempStr = tempArr[0];
+    }
 
-        searchFilter(document.querySelector("#pokémon nav ul li[name='search'] input"),document.querySelector("#pokémon > div ul"),"Remove");
+    searchFilter(document.querySelector("#pokémon nav ul li[name='search'] input"),document.querySelector("#pokémon > div ul"),"Remove");
 
-        createContain(tempStr);
+    createContain(tempStr);
 
-        memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
+    memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
 
-        memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
+    memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
 
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
-        ImageType("Populate");
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
-        memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
-        ImageType("Execute");
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
+    ImageType("Populate");
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
+    ImageType("Execute");
 
-        resizeDiv();
-		dexSwitch();
+    resizeDiv();
+    dexSwitch();
 
-		document.querySelector("#pokémon nav li[name='search'] input").value = "";
+    document.querySelector("#pokémon nav li[name='search'] input").value = "";
 
 
-        if (variantIteration != 0) {
-            consoleText("Variants changed to "+tempStr.replace(/,([^,]*)$/, ' and $1').replaceAll(",",", ")+".");
-        }
+    if (variantIteration != 0) {
+        consoleText("Variants changed to "+tempStr.replace(/,([^,]*)$/, ' and $1').replaceAll(",",", ")+".");
+    }
 
-        variantIteration = variantIteration + 1;
-	}
-    
+    variantIteration = variantIteration + 1;
+
+
 
 }
 
