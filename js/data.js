@@ -233,6 +233,9 @@ let createData = function(id, i) {
 		dataSectionMainMetadataSidebarAbilityPrimaryContent.appendChild(dataSectionMainMetadataSidebarAbilityPrimary);
 		dataSectionMainMetadataSidebarAbilityPrimary.appendChild(dataSectionMainMetadataSidebarAbilityPrimaryText);
 
+		dataSectionMainMetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp("Ability");});
+		
+
 		let dataSectionMainMetadataSidebarAbilitySecondaryContent = document.createElement("span");
 		let dataSectionMainMetadataSidebarAbilitySecondary = document.createElement("b");
 		dataSectionMainMetadataSidebarAbilitySecondary.setAttribute("type","invert");
@@ -244,6 +247,9 @@ let createData = function(id, i) {
 		dataSectionMainMetadataSidebarAbilitySecondaryContent.appendChild(dataSectionMainMetadataSidebarAbilitySecondary);
 		dataSectionMainMetadataSidebarAbilitySecondary.appendChild(dataSectionMainMetadataSidebarAbilitySecondaryText);
 
+
+		dataSectionMainMetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp("Ability");});
+		
 		if(Ability.length >= 3) {
 			let dataSectionMainMetadataSidebarAbilityHiddenOuter = document.createElement("span");
 			let dataSectionMainMetadataSidebarAbilityHiddenContent = document.createElement("span");
@@ -257,10 +263,14 @@ let createData = function(id, i) {
 			dataSectionMainMetadataSidebarAbilityHiddenOuter.appendChild(dataSectionMainMetadataSidebarAbilityHiddenContent);
 			dataSectionMainMetadataSidebarAbilityHiddenContent.appendChild(dataSectionMainMetadataSidebarAbilityHidden);
 			dataSectionMainMetadataSidebarAbilityHidden.appendChild(dataSectionMainMetadataSidebarAbilityHiddenText);
+			
+			dataSectionMainMetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp("Ability");});
+			
 		}
 	}
 	dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow2);
 	dataSectionMainMetadataSidebarRow2.appendChild(dataSectionMainMetadataSidebarCatchRateOuter);
+
 	let EggCycleStep;
 	if((Generation >= 2 && Generation <= 3) || Generation == 7) {
 		EggCycleStep = "256";
@@ -271,6 +281,7 @@ let createData = function(id, i) {
 	if(Generation >= 5 && Generation <= 6) {
 		EggCycleStep = "257";
 	}
+	
 	if(Egg == true) {
 		let dataSectionMainMetadataSidebarHatchRateOuter = document.createElement("span");
 		let dataSectionMainMetadataSidebarHatchRateToggle = document.createElement("b");
@@ -285,6 +296,7 @@ let createData = function(id, i) {
 		dataSectionMainMetadataSidebarHatchRateOuter.appendChild(dataSectionMainMetadataSidebarHatchRateToggle);
 		dataSectionMainMetadataSidebarHatchRateToggle.appendChild(dataSectionMainMetadataSidebarHatchRateTitle);
 		dataSectionMainMetadataSidebarHatchRateToggle.appendChild(dataSectionMainMetadataSidebarHatchRate);
+		dataSectionMainMetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp("Hatch Rate");});
 	}
 	if(Gender == true) {
 		dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow3);
@@ -311,6 +323,8 @@ let createData = function(id, i) {
 		dataSectionMainMetadataSidebarGenderRatioToggle.appendChild(dataSectionMainMetadataSidebarGenderRatioFemale);
 		dataSectionMainMetadataSidebarGenderRatioToggle.appendChild(dataSectionMainMetadataSidebarGenderRatioGenderless);
 		dataSectionMainMetadataSidebarRow3.appendChild(dataSectionMainMetadataSidebarGenderRatioOuter);
+
+		dataSectionMainMetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp("Gender Ratio");});
 	}
 	if(Egg == true) {
 		let dataSectionMainMetadataSidebarEggGroupOuter = document.createElement("span");
@@ -345,6 +359,9 @@ let createData = function(id, i) {
 		dataSectionMainMetadataSidebarEggGroupPrimarySecondaryOuter.appendChild(dataSectionMainMetadataSidebarEggGroupSecondaryOuter);
 		dataSectionMainMetadataSidebarEggGroupSecondaryOuter.appendChild(dataSectionMainMetadataSidebarEggGroupSecondary);
 		dataSectionMainMetadataSidebarEggGroupSecondary.appendChild(dataSectionMainMetadataSidebarEggGroupSecondaryText);
+		
+		dataSectionMainMetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp("Egg Group");});
+		dataSectionMainMetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp("Egg Group");});
 	}
 	dataSectionMainMetadataSidebar.appendChild(dataSectionMainMetadataSidebarRow4);
 
@@ -621,13 +638,12 @@ let createData = function(id, i) {
 		dataSectionMainMetadataSidebarHeldItemOuter.appendChild(dataSectionMainMetadataSidebarHeldItemTitle);
 		let dataSectionMainMetadataSidebarHeldItem = document.createElement("div");
 		dataSectionMainMetadataSidebarHeldItemOuter.appendChild(dataSectionMainMetadataSidebarHeldItem);
-		let hitms1 = Object.keys(DATA_Pokémon_HeldItem)
-		let hitms2 = DATA_Pokémon_HeldItem
-		for(q = 0; q < hitms1.length; q++) {
+		let hitms = Object.keys(DATA_Pokémon_HeldItem)
+		for(q = 0; q < hitms.length; q++) {
 			let dataSectionMainMetadataSidebarHeldItemIcon = document.createElement("b");
 			let dataSectionMainMetadataSidebarHeldItemImg = document.createElement("img");
 			let dataSectionMainMetadataSidebarHeldItemText = document.createElement("small");
-			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("name", hitms2[hitms1[q]]);
+			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("name", hitms[q]);
 			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("dataname","value");
 			dataSectionMainMetadataSidebarHeldItemImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 			dataSectionMainMetadataSidebarHeldItemIcon.setAttribute("type","invert");
@@ -642,24 +658,11 @@ let createData = function(id, i) {
 
 
 	
-	if(Ability.length >= 1) {
-		dataSectionMainMetadataSidebarAbilityPrimary.addEventListener("click", function() {callPopUp("Ability");});
-		dataSectionMainMetadataSidebarAbilitySecondary.addEventListener("click", function() {callPopUp("Ability");});
-		if(Ability.length >= 3) {
-			dataSectionMainMetadataSidebarAbilityHidden.addEventListener("click", function() {callPopUp("Ability");});
-		}
-	}
-	if(Egg == true) {
-		dataSectionMainMetadataSidebarEggGroupPrimary.addEventListener("click", function() {callPopUp("Egg Group");});
-		dataSectionMainMetadataSidebarEggGroupSecondary.addEventListener("click", function() {callPopUp("Egg Group");});
-	}
+
+
 	dataSectionMainMetadataSidebarCatchRateOuter.addEventListener("click", function() {callPopUp("Catch Rate");});
-	if(Egg == true) {
-		dataSectionMainMetadataSidebarHatchRateOuter.addEventListener("click", function() {callPopUp("Hatch Rate");});
-	}
-    if(Gender == true) {
-        dataSectionMainMetadataSidebarGenderRatioToggle.addEventListener("click", function() {callPopUp("Gender Ratio");});
-    }
+	
+
 	dataSectionMainMetadataSidebarExpYieldOuter.addEventListener("click", function() {callPopUp("Experience Yield");});
 	dataSectionMainMetadataSidebarLevelRateOuter.addEventListener("click", function() {callPopUp("Leveling Rate");});
 
@@ -1567,17 +1570,19 @@ function loadData() {
 		catchrate.querySelector(':scope *[dataname="value"]').innerText = catchRateFormula+"%";
 	}
     if (HeldItem == true) {
-		let percent1 = Object.keys(DATA_Pokémon_HeldItem)
-		let percent2 = DATA_Pokémon_HeldItem
-        for(let q = 0; q < percent1.length; q++) {
+		let percent = Object.keys(DATA_Pokémon_HeldItem)
+        for(let q = 0; q < percent.length; q++) {
+			let pbase = helditem.querySelector(':scope > div b[name="'+percent[q]+'"]');
+			let pimg = helditem.querySelector(':scope > div b[name="'+percent[q]+'"] img');
+			let ptxt = helditem.querySelector(':scope > div b[name="'+percent[q]+'"]  > *:last-child');
             if(returnData(i,"Held Item","")[q] != undefined) {
-                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"]').setAttribute("value", returnData(i,"Held Item","")[q]);
-                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] img').src = getMedia([getItemIcon(returnData(i,"Held Item","")[q])],[PATH_Item_Bag])[0];
-                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"]').setAttribute("title",percent2[percent1[q]]+"\n"+returnData(i,"Held Item","")[q]);
-                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] img').style.display = "unset";
-                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] > *:last-child').innerText = returnData(i,"Held Item","")[q];
+				pbase.setAttribute("value", returnData(i,"Held Item","")[q]);
+                pbase.setAttribute("title",percent[q]+"\n"+returnData(i,"Held Item","")[q]);
+				pimg.src = getMedia([getItemIcon(returnData(i,"Held Item","")[q])],[PATH_Item_Bag])[0];
+				pimg.style.display = "unset";
+                ptxt.innerText = returnData(i,"Held Item","")[q];
             } else {
-                helditem.querySelector(':scope > div b[name="'+percent2[percent1[q]]+'"] img').style.display = "none";
+                pimg.style.display = "none";
             }
         }
         let heldcheck;
