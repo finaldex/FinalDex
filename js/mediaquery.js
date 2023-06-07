@@ -353,9 +353,6 @@ function splitStr(str,selector) {
 }
 
 function sortObjectArray(objectsArr,prop,ascending) {
-	let objectsArr;
-	let prop;
-	let ascending;
 
 	let objectsHaveProp = objectsArr.every(object => object.hasOwnProperty(prop));
 
@@ -430,7 +427,6 @@ function getGameID(name) {
     return games.findIndex(name)+1
 }
 function getApplicable(val) {
-	let val;
     let adds = [];
 
     let labin = document.querySelectorAll("nav label input");
