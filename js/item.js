@@ -98,7 +98,7 @@ let createItem = function() {
 
     let itemSectionHeaderGame = document.createElement("span");
     let itemSectionHeaderGameImage = document.createElement("img");
-    itemSectionHeaderGameImage.src = getMedia([GameFullName.replaceAll(",", "").replaceAll("!", "").replaceAll("'", "").replaceAll(":", "")],[PATH_Game_Title])
+    itemSectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
     itemSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     itemSectionHeader.appendChild(itemSectionHeaderGame);
     itemSectionHeaderGame.appendChild(itemSectionHeaderGameImage);
