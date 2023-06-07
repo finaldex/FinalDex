@@ -236,112 +236,6 @@ function getArrayKey(arr) {
 
 }
 
-function getPokémonMediaPath(names,paths,gender) {
-
-
-    if (gender == undefined || gender.length == 0) {
-        gender = ["Male","Female"]
-    }
-
-    for (g = 0; g < gender.length; g++) {
-        if (gender[g].includes == "Male" || gender[g].includes == "M") {
-            gender[g] = '_M'
-        }
-        else if (gender[g].includes == "Female" || gender[g].includes == "F") {
-            gender[g] = '_F'
-        }
-    }
-
-
-
-    //./media/Images/Pokémon/Battle/PNG/Default/Front/Platinum/201_J.png
-    //./media/Images/Pokémon/Battle/PNG/Default/Front/VI-VII/201_J.png
- 
-    let dirs = Object.keys(finaldata['Directory'])
-
-
-    for (n = 0; n < names.length; n++) {
-        let int = parseInt(names[n]);
-        if (isNaN(int)) {
-            int = getPokémonInt(names[n])
-        }
-    
-        let mediaName = []
-    
-        let val1 = finaldata["Pokémon"]["Path"][int]["Number"];
-        let val2 = finaldata["Pokémon"]["Path"][int]["Text"];
-        
-        if (val1 != undefined) {
-            mediaName.push(val1)
-        }
-        if (val2 != undefined) {
-            mediaName.push(val2)
-        }
-        mediaName = mediaName.join("-")
-
-
-        for (i = 0; i < paths.length; i++) {
-            for (q = 0; q < dirs.length; q++) {
-                if (dirs[q].includes(paths[i])) {
-                    let vals = finaldata['Directory'][dirs[q]]
-                    for (r = 0; r < vals.length; r++) {
-                        let val = dirs[q].split("/")[dirs[q].split("/").length-1];
-                        if (getApplicable(val)) {
-                            let file  = vals[r].split(".")[0]
-                            for (g = 0; g < gender.length; g++) {
-                                if (mediaName+gender[g] == file) {
-                                    return dirs[q]+"/"+vals[r]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-        }
-    }
-
-    for (n = 0; n < names.length; n++) {
-        let int = parseInt(names[n]);
-        if (isNaN(int)) {
-            int = getPokémonInt(names[n])
-        }
-
-        let mediaName = []
-    
-        let val1 = finaldata["Pokémon"]["Path"][int]["Number"];
-        let val2 = finaldata["Pokémon"]["Path"][int]["Text"];
-        
-        if (val1 != undefined) {
-            mediaName.push(val1)
-        }
-        if (val2 != undefined) {
-            mediaName.push(val2)
-        }
-        mediaName = mediaName.join("-")
-        
-        for (i = 0; i < paths.length; i++) {
-            for (q = 0; q < dirs.length; q++) {
-                if (dirs[q].includes(paths[i])) {
-                    let vals = finaldata['Directory'][dirs[q]]
-                    for (r = 0; r < vals.length; r++) {
-                        let val = dirs[q].split("/")[dirs[q].split("/").length-1];
-                        if (getApplicable(val)) {
-                            let file  = vals[r].split(".")[0]
-                            if (mediaName == file) {
-                                return dirs[q]+"/"+vals[r]
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    return ""
-
-}
-
 
 
 function getIntData(int,arr,column) {
@@ -1253,14 +1147,6 @@ function createParty(base,data) {
     let baseExport = base.querySelector(":scope aside figure[name='export']");
 
 
-    let imgtype = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"]');
-    let imgtypePath = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"] option[value="'+imgtype.value+'"]').getAttribute("data-path");
-    let imgtypeCategory = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="path"] option[value="'+imgtype.value+'"]').getAttribute("data-category");
-
-
-    let imgtypeExtension = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="extension"]').value;
-    let imgtypeType = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="type"]').value;
-    let imgtypeAngle = document.querySelector('#pokémon aside[name="settings"] span[name="imagetype"] select[name="angle"]').value;
 
     let type1 = returnData(i,"Type","undefined")[0];
     let type2 = returnData(i,"Type","undefined")[1];
@@ -4291,119 +4177,109 @@ function consoleText(txt,time) {
     console.log(txt);
 }
 
+function getDirs(paths) {
 
+    let arr = finaldata["Directory"]
+    let keys = Object.keys(arr);
+
+    let result = [];
+
+    for (let i = 0; i < keys.length; i++) {
+        for (q = 0; q < paths.length; q++) {
+            if (keys[i].includes(paths[q])) {
+                let val = keys[i].split("/");
+                val = val[val.length-1];
+                if (getApplicable(val)) {
+                    result.push(keys[i])
+                }
+            }
+        }
+    }
+
+    return result;
+}
 
 function ImageType(action) {
 
     let tar = document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"]');
-    let path = tar.querySelector(":scope select[name='path']");
-    let ext = tar.querySelector(":scope select[name='extension']");
-    let type = tar.querySelector(":scope select[name='type']");
-    let angle = tar.querySelector(":scope select[name='angle']");
+    let pathEl = tar.querySelector(":scope select[name='path']");
+    let extEl = tar.querySelector(":scope select[name='extension']");
+    let typeEl = tar.querySelector(":scope select[name='type']");
+    let angleEl = tar.querySelector(":scope select[name='angle']");
     
+    let it = getDirs([PATH_Pokémon_Battle])
 
-    let exts = [];
-    let types = [];
-    let angles = [];
+    let it1 = it.map(function(x){return x.replaceAll(PATH_Pokémon,'').replace("/"+x.split("/")[x.split("/").length-1],"")})
+    let it2 = it1.map(function(x){return PATH_Pokémon+x})
 
-
-    for (let q = 0; q < ImageTypes.length; q++) {
-        if (ImageTypes[q]["name"] == path.value) {
-            exts.push(ImageTypes[q]["extension"]);
-            types.push(ImageTypes[q]["type"]);
-            angles.push(ImageTypes[q]["angle"]);
-        }
+    for (let q = 0; q < it1.length; q++) {
+        let els = it1[q].split("/")
+        let obj = new Object();
+        obj["Style"] = els[0];
+        obj["Type"] = els[1];
+        obj["Angle"] = els[2];
+        obj["Extension"] = els[3];
+        obj["Path"] = it2[q];
+        it1[q] = obj;
     }
-
-    exts = [...new Set(exts)];
-    types = [...new Set(types)];
-    angles = [...new Set(angles)];
-
 
 
     if (action.includes("Populate")) {
 
-        if (exts.length == 1 || exts[0] == undefined) {
-            ext.setAttribute("disabled","");
-        }
-        else {
-            ext.removeAttribute("disabled");
-        }
-        if (types.length == 1 || types[0] == undefined) {
-            type.setAttribute("disabled","");
-        }
-        else {
-            type.removeAttribute("disabled");
-        }
-        if (angles.length == 1 || angles[0] == undefined) {
-            angle.setAttribute("disabled","");
-        }
-        else {
-            angle.removeAttribute("disabled");
-        }
+        let style = [...new Set(it1.map((item) => item["Style"]))];
+        let type = [...new Set(it1.map((item) => item["Type"]))];
+        let angle = [...new Set(it1.map((item) => item["Angle"]))];
+        let ext = [...new Set(it1.map((item) => item["Extension"]))];
 
-        let oldoptions = tar.querySelectorAll(":scope > span:last-child option");
-        for (let q = 0; q < oldoptions.length; q++) {
-            oldoptions[q].remove();
+        pathEl.removeAttribute("disabled");
+        extEl.removeAttribute("disabled");
+        typeEl.removeAttribute("disabled");
+        angleEl.removeAttribute("disabled");
+
+        if (style.length < 2) {
+            pathEl.setAttribute("disabled","");
         }
-
-
-        path.setAttribute("value",path.querySelector(":scope > *:first-child").getAttribute("value"))
-
-        for (let q = 0; q < exts.length; q++) {
-            let option = document.createElement("option");
-            option.innerText = exts[q];
-            option.setAttribute("value",exts[q]);
-            ext.appendChild(option);
+        if (ext.length == 1) {
+            extEl.setAttribute("disabled","");
         }
-
-
-        for (let q = 0; q < types.length; q++) {
-            let option = document.createElement("option");
-            option.innerText = types[q];
-            option.setAttribute("value",types[q]);
-            type.appendChild(option);
+        if (type.length == 1) {
+            typeEl.setAttribute("disabled","");
         }
-
-        for (let q = 0; q < angles.length; q++) {
-            let option = document.createElement("option");
-            option.innerText = angles[q];
-            option.setAttribute("value",angles[q]);
-            angle.appendChild(option);
+        if (angle.length == 1) {
+            angleEl.setAttribute("disabled","");
         }
+        
+
 
     }
     if (action.includes("Execute")) {
-        let conimg = document.querySelectorAll('#pokémon > div ul li label > img');
-        let parimg = document.querySelectorAll('#pokémon > section[name="team"] aside[name="party"] div section img[value]');
 
-        if (path.value != "") {
+        let imgs1 = document.querySelectorAll('#pokémon > div ul li label > img');
+        let imgs2 = document.querySelectorAll('#pokémon > section[name="team"] aside[name="party"] div section img[value]');
 
-            let dataPath = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-path");
-            let dataCategory = path.querySelector(":scope > option[value='"+path.value+"']").getAttribute("data-category");
-            let dataExtension = ext.value;
-            let dataAngle = angle.value;
-            let dataType = type.value;
-            
+        imgs1 = Array.prototype.slice.call(imgs1)
+        imgs2 = Array.prototype.slice.call(imgs2)
 
-            for (let q = 0; q < conimg.length; q++) {
-                let p = getPokémonMediaPath([getPokémonInt(conimg[q].id)],['./media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath]);
-      
-                conimg[q].src = p
-                conimg[q].setAttribute("path",p);
+        let els = imgs1.concat(imgs2)
+        let src_path = it1.filter(x => {return x["Style"] == pathEl.value && x["Type"] == typeEl.value && x["Angle"] == angleEl.value && x["Extension"] == extEl.value})
+        
+        if (src_path[0]["Path"] != undefined) {
+            src_path = src_path[0]["Path"];
+
+            for (let q = 0; q < els.length; q++) {
+                let int = els[q].id;
+                if (isNaN(parseInt(int))) {
+                    int = getPokémonInt(int);
+                }
+
+                els[q].src = getPokémonMediaPath([int],[src_path])
             }
-            for (let q = 0; q < parimg.length; q++) {
-                let p = getPokémonMediaPath([parseInt(parimg[q].getAttribute("value"))],['./media/Images/Pokémon/'+dataCategory+'/'+dataExtension+'/'+dataType+'/'+dataAngle+'/'+dataPath]);
-
-                parimg[q].src = p
-                parimg[q].setAttribute("path",p);
+    
+            let sel = document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="imagetype"] > select');
+            for (var q = 0; q < sel.length; q++) {
+                memory("Save","game",sel[q]);
             }
         }
-
-        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
-        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
-        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
-        memory("Save","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
     }
 
 }
