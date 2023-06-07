@@ -31,15 +31,14 @@ function requestLoad(i,url) {
 			let val = loads[i].replace(" Metadata","")
 			finaldata[val] = Gamedata;
 
-			let urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","");
+			let urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","").replaceAll("_"," ");
 			GameID = getGameName("",urlid);
 			if (GameID == undefined) {
 				GameID = 1;
 			}
-			console.log(GameID)
 			define();
 			config();
-			location.href = splitStr(location.href,"#")[0]+"#"+GameName;
+			location.href = splitStr(location.href,"#")[0]+"#"+GameName.replaceAll(" ","_");
 		}
 
 		
