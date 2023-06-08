@@ -4476,7 +4476,8 @@ function DMGSetChange(base) {
 
 	let pokImgPath = divBase.querySelector(":scope *[name='img']");
 	let pokItemPath = divBase.querySelector(":scope *[name='item']");
-	let pokNamePath = divBase.querySelector(":scope *[name='name'] > *");
+	let pokNamePath = divBase.querySelector(":scope *[name='name'] > *:last-child");
+	let pokLvPath = divBase.querySelector(":scope *[name='name'] > *:first-child");
 	let pokMovesPath = divBase.querySelectorAll(":scope *[name='moves'] > *");
 	
 	let pokPath = pokBase.querySelector(":scope *[name='pokémon'] select");
@@ -4505,6 +4506,7 @@ function DMGSetChange(base) {
 		pokItemPath.removeAttribute("title");
 	}
 	pokNamePath.innerText = "";
+	pokLvPath.innerText = "";
 
 	for(let i = 0; i < pokMovesPath.length; i++) {
 		pokMovesPath[i].firstChild.innerText = "";
@@ -4579,15 +4581,11 @@ function DMGSetChange(base) {
 			}
 
 
-			let titles = [];
-			if (level != undefined) {
-				titles.push("Lv. "+level);
-			}
-			titles.push(getPokémonName(int));
-			
-			
 
-			pokNamePath.innerText = titles.join(" • ");
+			pokNamePath.innerText = pokName;
+			if (level != undefined) {
+				pokLvPath.innerText = "Lv. "+level;
+			}
 			pokPath.value = pokName;
 			
 
@@ -6339,7 +6337,8 @@ function buildDMG(preval) {
 
 
 				let contentName = document.createElement("span");
-				let contentNameText = document.createElement("small");
+				let contentNameText1 = document.createElement("small");
+				let contentNameText2 = document.createElement("small");
 
 				let contentHP = document.createElement("span");
 
@@ -6385,7 +6384,8 @@ function buildDMG(preval) {
 				contentEffectNegative.setAttribute("name","negative");
 
 				contentName.setAttribute("name","name");
-				contentNameText.innerText = ""
+				contentNameText1.innerText = ""
+				contentNameText2.innerText = ""
 
 				contentMoves.setAttribute("name","moves")
 				contentHP.setAttribute("name","hp");
@@ -6428,7 +6428,8 @@ function buildDMG(preval) {
 	
 
 				content.appendChild(contentName);
-				contentName.appendChild(contentNameText);
+				contentName.appendChild(contentNameText1);
+				contentName.appendChild(contentNameText2);
 
 				content.appendChild(contentHP);
 
@@ -6798,6 +6799,7 @@ function buildDMG(preval) {
                     pokSelect.addEventListener("change",DMGSetChange);
                     //pokSelect.addEventListener("change",DMGSetInfo);
                     pokSelect.addEventListener("change",DMGCalcPokStats);
+					pokSelect.addEventListener("change",DMGResetCalc);
 					//pokSelect.addEventListener("change",DMGCalcStart);
 
 
@@ -7385,8 +7387,8 @@ function buildDMG(preval) {
                                 conditionLabelText.innerText = nameTemp.join(" ");
                                 conditionInput.setAttribute("type","checkbox");
                                 conditionInput.setAttribute("name","condition-checkbox");
-                                conditionInput.setAttribute("id",battleCondition[c]["Name"]+"-"+c+"-checkbox");
-                                conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+c+"-checkbox");
+                                conditionInput.setAttribute("id",battleCondition[c]["Name"]+"-"+d+"-"+c+"-pok-checkbox");
+                                conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+d+"-"+c+"-pok-checkbox");
                                 condition.appendChild(conditionInput)
                                 condition.appendChild(conditionLabel)
                                 conditionLabel.appendChild(conditionLabelText)
@@ -7699,8 +7701,8 @@ function buildDMG(preval) {
 							conditionLabelText.innerText = nameTemp.join(" ");
 							conditionInput.setAttribute("type","checkbox");
 							conditionInput.setAttribute("name","condition-checkbox");
-							conditionInput.setAttribute("id",battleCondition[c]["Name"]+"-"+c+"-checkbox");
-							conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+c+"-checkbox");
+							conditionInput.setAttribute("id",battleCondition[c]["Name"]+"-"+d+"-"+c+"-team-checkbox");
+							conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+d+"-"+c+"-team-checkbox");
 							condition.appendChild(conditionInput)
 							condition.appendChild(conditionLabel)
 							conditionLabel.appendChild(conditionLabelText)
@@ -7844,8 +7846,8 @@ function buildDMG(preval) {
 						conditionLabelText.innerText = nameTemp.join(" ");
 						conditionInput.setAttribute("type","checkbox");
 						conditionInput.setAttribute("name","condition-checkbox");
-						conditionInput.setAttribute("id",battleCondition[c]["Name"] +"-"+c+"-checkbox");
-						conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+c+"-checkbox");
+						conditionInput.setAttribute("id",battleCondition[c]["Name"]+"-"+c+"-all-checkbox");
+						conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+c+"-all-checkbox");
 
 
 						appender.appendChild(condition)
@@ -7976,8 +7978,8 @@ function buildDMG(preval) {
 					conditionLabelText.innerText = battleCondition[c]["Name"];
 					conditionInput.setAttribute("type","checkbox");
 					conditionInput.setAttribute("name","condition-checkbox");
-					conditionInput.setAttribute("id",battleCondition[c]["Name"]+"-"+c+"-checkbox");
-					conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+c+"-checkbox");
+					conditionInput.setAttribute("id",battleCondition[c]["Name"]+"-"+c+"-specific-checkbox");
+					conditionLabel.setAttribute("for",battleCondition[c]["Name"]+"-"+c+"-specific-checkbox");
 
 
 					appender.appendChild(condition)
