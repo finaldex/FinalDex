@@ -346,6 +346,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     align-content: center;
+	z-index: 100;
 }
 
 #pokémon > aside section[name='party'] figure[name='exit'] > * *,
@@ -936,7 +937,26 @@
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
     -ms-interpolation-mode: nearest-neighbor;
+	position:relative;
 }
+#pokémon > aside section[name="party"] div span img[value][src=""] {
+	visibility:hidden;
+}
+#pokémon > aside section[name="party"] div span img[value][src=""]::after {
+	content: "?";
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+    justify-content: center;
+    align-items: center;
+	font-size: xxx-large;
+}
+
+
 #pokémon > aside section[name="party"] div span img:not([value]) {
 	position: absolute;
     left: 10%;
@@ -1296,115 +1316,7 @@
 #imgtype * {
 	color: var(--fontDark);
 }
-#imgtype-toggle {
-	font-size: 11px;
-	font-weight: bold;
-	cursor: pointer;
-	width: 100%;
-	height: 40px;
-	text-align: left;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
-}
-#imgtype-toggle span {
-	font-size: 24px;
-	text-align: center;
-	pointer-events: none;
-	transform: rotate(0deg) scaleY(0.8);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 10%;
-}
-#imgtype-toggle p {
-	text-align: center;
-	width: 60%;
-	pointer-events: none;
-}
-#imgtype-toggle div {
-	width: 20%;
-	pointer-events: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-#imgtype-toggle div img {
-	width: 100%;
-	height: 100%;
-	object-fit: scale-down;
-	image-rendering: -moz-crisp-edges;
-    /* Firefox */
-	image-rendering: -o-crisp-edges;
-    /* Opera */
-	image-rendering: -webkit-optimize-contrast;
-    /* Webkit (non-standard naming) */
-	image-rendering: crisp-edges;
-	-ms-interpolation-mode: nearest-neighbor;
-    /* IE (non-standard property) */
-	pointer-events: none;
-}
-.imgtype {
-	display: none;
-	position: absolute;
-	z-index: 100;
-	width: 100%;
-}
-#imgtype label {
-	box-shadow: 0 0 1px var(--border1);
-	display: flex;
-	align-items: center;
-	padding: 0 20%;
-	text-align: left;
-	height: 30px;
-	font-size: 10px;
-	background: var(--color_90);
-	cursor: pointer;
-	position: relative;
-}
-#imgtype input:checked ~ .imgtype-check {
-	background: #2196F3;
-}
-#imgtype label:hover {
-	background: var(--color_80);
-}
-#imgtype label img {
-	height: 50% !important;
-	right: 5%;
-	position: absolute;
-}
-#imgtype-toggle img[name="png"],
-#imgtype label img[name="png"] {
-	filter: invert(22%) sepia(49%) saturate(2508%) hue-rotate(335deg) brightness(96%) contrast(109%);
-}
-#imgtype-toggle img[name="gif"],
-#imgtype label img[name="gif"] {
-	filter: invert(46%) sepia(11%) saturate(2203%) hue-rotate(165deg) brightness(99%) contrast(88%);
-}
-.imgtype-check {
-	position: absolute;
-	height: 12px;
-	width: 12px;
-	background: var(--color_95);
-	border-radius: 50%;
-	left: 10px;
-	margin: 8px 0;
-}
-.imgtype-check:after {
-	content: "";
-	position: absolute;
-	display: block;
-	top: 3px;
-	left: 3px;
-	width: 6px;
-	height: 6px;
-	border-radius: 50%;
-	background: var(--color_95);
-}
-.imgtype-show {
-	display: block;
-}
+
 #pokémon nav li[name='dexswitch'],
 #pokémon nav li[name='search'],
 #pokémon nav li[name='count'],
