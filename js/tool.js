@@ -40,7 +40,7 @@ let createTool = function() {
 
 	let toolSectionHeaderGame = document.createElement("span");
 	let toolSectionHeaderGameImage = document.createElement("img");
-	toolSectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
+	toolSectionHeaderGameImage.src = getMedia(true,["Title"],[PATH_Game_Title])
 	toolSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
 	toolSectionHeader.appendChild(toolSectionHeaderGame);
 	toolSectionHeaderGame.appendChild(toolSectionHeaderGameImage);
@@ -262,7 +262,7 @@ let createTool = function() {
 				let typeSidebarTitleDropOptionImg = document.createElement("img");
 				let typeSidebarTitleDropOptionTxt = document.createElement("p");
 				typeSidebarTitleDropOption.setAttribute("name",Types[q]);
-				typeSidebarTitleDropOptionImg.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
+				typeSidebarTitleDropOptionImg.src = getMedia(true,[val+" Symbol 1"],[PATH_Type_Icon],["Sword"])
 				typeSidebarTitleDropOptionImg.title = Types[q];
 				typeSidebarTitleDropOptionImg.setAttribute("onerror","this.style.display='none';");
 				typeSidebarTitleDropOptionTxt.innerText = Types[q];
@@ -279,7 +279,7 @@ let createTool = function() {
 
 					let val = el.innerText;
 					let img = document.createElement("img");
-					img.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
+					img.src = getMedia(true,[val+" Symbol 1"],[PATH_Type_Icon],["Sword"])
 					img.setAttribute("name",el.innerText);
 					img.title = el.innerText;
 					img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -435,7 +435,7 @@ let createTool = function() {
 						let img = document.createElement("img");
 						wrap.setAttribute("name",val);
 						txt.innerText = val;
-						img.src = getMedia([val+" Symbol 2"],[PATH_Type_Icon],["Sword"])[0]
+						img.src = getMedia(true,[val+" Symbol 2"],[PATH_Type_Icon],["Sword"])
 						img.setAttribute("onload","this.previousElementSibling.style.display = 'none'");
 						img.setAttribute("onerror","this.style.display = 'none'");
 						th.appendChild(wrap);
@@ -858,9 +858,9 @@ let createTool = function() {
 		if (toolSectionContentDMGMenuCenterSelect.querySelector(":scope option[value='Pound']") != undefined) {
 			toolSectionContentDMGMenuCenterSelect.value = "Pound";
 			toolSectionContentDMGMenuCenterSelect.parentElement.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuCenterSelect.value)+")";
-			toolSectionContentDMGMenuCenterBottomTypeImg.src = getMedia([returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuCenterSelect.value)],[PATH_Type_Icon])[0]
+			toolSectionContentDMGMenuCenterBottomTypeImg.src = getMedia(true,[returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuCenterSelect.value)],[PATH_Type_Icon])
 			toolSectionContentDMGMenuCenterBottomTypeText.innerText = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],toolSectionContentDMGMenuCenterSelect.value);
-			toolSectionContentDMGMenuCenterBottomCategoryImg.src = getMedia([returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuCenterSelect.value)],[PATH_Type_Icon])[0]
+			toolSectionContentDMGMenuCenterBottomCategoryImg.src = getMedia(true,[returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuCenterSelect.value)],[PATH_Type_Icon])
 			toolSectionContentDMGMenuCenterBottomCategoryText.innerText = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],toolSectionContentDMGMenuCenterSelect.value);
 		}
 	
@@ -2102,7 +2102,7 @@ function typeSet() {
 
 	if (check1) {
 		let img = document.createElement("img");
-		img.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
+		img.src = getMedia(true,[val+" Symbol 1"],[PATH_Type_Icon],["Sword"])
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2111,7 +2111,7 @@ function typeSet() {
 	}
 	else if (check2) {
 		let img = document.createElement("img");
-		img.src = getMedia([val+" Symbol 1"],[PATH_Type_Icon],["Sword"])[0]
+		img.src = getMedia(true,[val+" Symbol 1"],[PATH_Type_Icon],["Sword"])
 		img.setAttribute("name",val);
 		img.title = val;
 		img.setAttribute("onclick","this.remove();typeSwitch();");
@@ -2217,7 +2217,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia(true,[val],[PATH_Type_Icon])
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2239,7 +2239,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia(true,[val],[PATH_Type_Icon])
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2260,7 +2260,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia(true,[val],[PATH_Type_Icon])
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2281,7 +2281,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia(true,[val],[PATH_Type_Icon])
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2302,7 +2302,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia(true,[val],[PATH_Type_Icon])
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
@@ -2323,7 +2323,7 @@ function typeSwitch() {
 			let img = document.createElement("img");
 			wrap.setAttribute("name",val);
 			txt.innerText = val;
-			img.src = getMedia([val],[PATH_Type_Icon])[0]
+			img.src = getMedia(true,[val],[PATH_Type_Icon])
 			img.title = val;
 			img.setAttribute("onerror","this.style.display = 'none'");
 			img.setAttribute("onload","this.previousElementSibling.style.display ='none'");
