@@ -156,10 +156,51 @@
 	justify-content: center;
 }
 
+#data > div section[name='header'] > div:first-child div > img[src=""]::after {
+	content: "?";
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    opacity: 1;
+    visibility: visible;
+    justify-content: center;
+    align-items: center;
+    font-size: xxx-large;
+}
+
+#data > div section[name='header'] > div:first-child div > img[src=""] {
+	visibility:hidden;
+}
+
+
+#data > div section[name='form'] img[src=""]::after {
+	content: "?";
+    display: flex;
+    /* width: 100%; */
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    opacity: 1;
+    visibility: visible;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+}
+
+
+#data > div section[name='form'] img[src=""] {
+	visibility:hidden;
+}
+
+
+
 #data > div section[name='header'] > div:first-child div > img {
 	height: 90%;
-	max-width: 70%;
+    width: 90%;
 	pointer-events: none;
+	position:relative;
 }
 
 #data > div section[name='header'] > div[name="idname"] {
@@ -1078,6 +1119,7 @@
 	z-index: 100;
 	background: var(--color16);
 	padding: 0 10px;
+	position: relative;
 }
 
 #data > div nav {
@@ -1507,6 +1549,10 @@
 	outline: none;
 	background: none;
 	height: 50%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 
