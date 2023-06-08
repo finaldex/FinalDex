@@ -3331,13 +3331,11 @@ function DMGCalcStart() {
 				}
 			}
 		}
-
-		
 		
 		if ('Extra') {
 			movePath.parentElement.style.color = "var(--type"+moveType+")";
-			moveTypeImgPath.src = getMedia([moveType],[PATH_Type_Icon])[0]
-			moveCategoryImgPath.src = getMedia([moveCategory],[PATH_Move_Category])[0]
+			moveTypeImgPath.src = getMedia(true,[moveType],[PATH_Type_Icon])
+			moveCategoryImgPath.src = getMedia(true,[moveCategory],[PATH_Move_Category])
 			moveTypeTextPath.innerText = moveType;
 			moveCategoryTextPath.innerText = moveCategory;
 		}
@@ -4437,18 +4435,23 @@ function DMGUpdateSRC() {
 				data_dir = [PATH_Pokémon_Battle_Default_Back_GIF,PATH_Pokémon_Battle_Default_Back_PNG,PATH_Pokémon_Battle_Default_Front_GIF,PATH_Pokémon_Battle_Default_Front_PNG]
 			}
 
-			let gen = [];
+			let data_file = ["^"+getPokémonPath(getPokémonInt(pokPath.value))]
+
 			if (genderPath != undefined) {
 				if (genderPath.value == "♂") {
-					gen = ["Male"];
+					data_file.push(data_file[0]+"_Male");
 				}
 				else if (genderPath.value == "♀") {
-					gen = ["Female"];
+					data_file.push(data_file[0]+"_Female");
+				}
+				else {
+					data_file.push(data_file[0]+"_Male");
+					data_file.push(data_file[0]+"_Female");
 				}
 			}
 
 			
-			pokImgPath.src = getPokémonMediaPath([getPokémonInt(pokPath.value)],data_dir,gen);
+			pokImgPath.src = getMedia(true,data_file,data_dir,[],true)
 		}
 	}
 
@@ -4647,7 +4650,7 @@ function DMGSetChange(base) {
 
 
 					if (itemPath.value != undefined && itemPath.value != "") {
-						pokItemPath.src = getMedia([getItemIcon(itemPath.value)],[PATH_Item_Bag])[0]
+						pokItemPath.src = getMedia(true,[getItemIcon(itemPath.value)],[PATH_Item_Bag])
 					}
 				}
 			}
@@ -6109,7 +6112,7 @@ function DMGPartyRow(base) {
 					if (x >= val1 && x <= val2) {
 						li.setAttribute("data-string",dataStrings[r]);
 						li.setAttribute("title",dataStringTitle(dataStrings[r]));
-						img.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
+						img.src = getMedia(true,[getPokémonPath(int)],[PATH_Pokémon_Box_Default_PNG]);
 						used.push(r);
 						break;
 					}
@@ -7873,7 +7876,7 @@ function buildDMG(preval) {
 
 						if (battleCondition[c]["Group"] == "Weather") {
 							let img = document.createElement("img");
-							img.src = getMedia(battleCondition[c]["Name"],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]
+							img.src = getMedia(true,battleCondition[c]["Name"],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])
 							img.title = battleCondition[c]["Name"];
 							img.setAttribute("onload","this.parentElement.parentElement.firstChild.style.display=`none`;");
 							img.setAttribute("onerror","this.parentElement.parentElement.firstChild.style.display=`unset`;this.style.display=`none`");
@@ -7894,7 +7897,7 @@ function buildDMG(preval) {
 								terrtype = "Electric";
 							}
 							let img = document.createElement("img");
-							img.src = getMedia([terrtype],[PATH_Type_Icon],["GO"])
+							img.src = getMedia(true,[terrtype],[PATH_Type_Icon],["GO"])
 							img.title = battleCondition[c]["Name"];
 							img.setAttribute("onload","this.parentElement.firstChild.style.display='none'");
 							img.setAttribute("onerror","this.parentElement.parentElement.firstChild.style.display=`unset`; this.parentElement.firstChild.style.display='unset';this.style.display=`none`");
