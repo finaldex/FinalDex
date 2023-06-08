@@ -4202,85 +4202,62 @@ function getDirs(paths) {
 function ImageType(action) {
 
     let tar = document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"]');
-    let pathEl = tar.querySelector(":scope select[name='path']");
-    let extEl = tar.querySelector(":scope select[name='extension']");
-    let typeEl = tar.querySelector(":scope select[name='type']");
-    let angleEl = tar.querySelector(":scope select[name='angle']");
+    let el = tar.querySelector(":scope select");
+    let img = tar.querySelector(":scope img");
+
+    let val = el.querySelector(":scope option[value='"+el.value+"']")
+
+
+    let imgs1 = document.querySelectorAll('#pokémon > div ul li label > img');
+    let imgs2 = document.querySelectorAll('#pokémon > section[name="team"] aside[name="party"] div section img[value]');
+
+    imgs1 = Array.prototype.slice.call(imgs1)
+    imgs2 = Array.prototype.slice.call(imgs2)
+
+    let els = imgs1.concat(imgs2)
+
+    console.log(val)
+    console.log(el.value)
+
+    if (val != undefined) {
+        val = val.getAttribute("data-path");
+
+        if (action == "Populate") {
+            let randomsrc = "";
     
-    let it = getDirs([PATH_Pokémon_Battle])
-
-    let it1 = it.map(function(x){return x.replaceAll(PATH_Pokémon,'').replace("/"+x.split("/")[x.split("/").length-1],"")})
-    let it2 = it1.map(function(x){return PATH_Pokémon+x})
-
-    for (let q = 0; q < it1.length; q++) {
-        let els = it1[q].split("/")
-        let obj = new Object();
-        obj["Style"] = els[0];
-        obj["Type"] = els[1];
-        obj["Angle"] = els[2];
-        obj["Extension"] = els[3];
-        obj["Path"] = it2[q];
-        it1[q] = obj;
-    }
+            for(var i = 0; i < 5; i++) {
+                let ran = parseInt(getRandomInt(0,els.length-1));
+                let id = els[ran].id;
+                if (id != undefined && id != "") {
+                    let res = getPokémonMediaPath([id],[val])
+                    if (res != "") {
+                        randomsrc = res;
+                    }
+                }
+            }
 
 
-    if (action.includes("Populate")) {
-
-        let style = [...new Set(it1.map((item) => item["Style"]))];
-        let type = [...new Set(it1.map((item) => item["Type"]))];
-        let angle = [...new Set(it1.map((item) => item["Angle"]))];
-        let ext = [...new Set(it1.map((item) => item["Extension"]))];
-
-        pathEl.removeAttribute("disabled");
-        extEl.removeAttribute("disabled");
-        typeEl.removeAttribute("disabled");
-        angleEl.removeAttribute("disabled");
-
-        if (style.length < 2) {
-            pathEl.setAttribute("disabled","");
+            img.src = randomsrc;
         }
-        if (ext.length == 1) {
-            extEl.setAttribute("disabled","");
-        }
-        if (type.length == 1) {
-            typeEl.setAttribute("disabled","");
-        }
-        if (angle.length == 1) {
-            angleEl.setAttribute("disabled","");
-        }
-        
-
-
-    }
-    if (action.includes("Execute")) {
-
-        let imgs1 = document.querySelectorAll('#pokémon > div ul li label > img');
-        let imgs2 = document.querySelectorAll('#pokémon > section[name="team"] aside[name="party"] div section img[value]');
-
-        imgs1 = Array.prototype.slice.call(imgs1)
-        imgs2 = Array.prototype.slice.call(imgs2)
-
-        let els = imgs1.concat(imgs2)
-        let src_path = it1.filter(x => {return x["Style"] == pathEl.value && x["Type"] == typeEl.value && x["Angle"] == angleEl.value && x["Extension"] == extEl.value})
-        
-        if (src_path[0] != undefined) {
-            src_path = src_path[0]["Path"];
-
+        else if (action == "Execute") {
+    
             for (let q = 0; q < els.length; q++) {
                 let int = els[q].id;
                 if (isNaN(parseInt(int))) {
                     int = getPokémonInt(int);
                 }
 
-                els[q].src = getPokémonMediaPath([int],[src_path])
+                els[q].src = getPokémonMediaPath([int],[val])
             }
-    
-            let sel = document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="imagetype"] > select');
-            for (var q = 0; q < sel.length; q++) {
-                memory("Save","game",sel[q]);
-            }
+            
+
+            memory("Save","game",el);
         }
+
     }
+
+    
+
 
 }
 
