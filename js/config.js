@@ -67,6 +67,7 @@ let PATH_Pokémon_Box_Shiny_PNG = "./media/Images/Pokémon/Box/Shiny/PNG/";
 let PATH_Pokémon_Box_Shiny_GIF = "./media/Images/Pokémon/Box/Shiny/GIF/";
 let PATH_Pokémon_Box_Shiny = "./media/Images/Pokémon/Box/Shiny/";
 
+let PATH_Pokémon_Art = "./media/Images/Pokémon/Art/";
 let PATH_Pokémon_Art_Default_Front_Official = "./media/Images/Pokémon/Art/Default/Front/Official/";
 let PATH_Pokémon_Art_Default_Front_Sugimori = "./media/Images/Pokémon/Art/Default/Front/Ken Sugimori/";
 let PATH_Pokémon_Art_Default_Front = "./media/Images/Pokémon/Art/Default/Front/";
