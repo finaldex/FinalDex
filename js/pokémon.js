@@ -1456,7 +1456,7 @@ function imgType() {
 			let dataType = imgType[i].getAttribute("data-type");
 			let dataPath = imgType[i].getAttribute("data-path");
 			let dataExtension = imgType[i].getAttribute("data-extension");
-			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>'+"<p>"+imgType[i].parentElement.innerText+"</p>"+'<div><img src="./media/Images/Misc/FinalDex/'+dataExtension+'.png" name="'+dataExtension+'" /></div>';
+			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>'+"<p>"+imgType[i].parentElement.innerText+"</p>"+'<div><img src="./media/Images/FinalDex/Icon/'+dataExtension+'.png" name="'+dataExtension+'" /></div>';
 		
             for(let q = 0; q < conimg.length; q++) {
                 conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
