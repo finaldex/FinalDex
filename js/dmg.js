@@ -7894,7 +7894,7 @@ function buildDMG(preval) {
 								terrtype = "Electric";
 							}
 							let img = document.createElement("img");
-							img.src = "./media/Images/Misc/Type/Symbol/GO/"+terrtype+".png";
+							img.src = getMedia([terrtype],[PATH_Type_Icon],["GO"])
 							img.title = battleCondition[c]["Name"];
 							img.setAttribute("onload","this.parentElement.firstChild.style.display='none'");
 							img.setAttribute("onerror","this.parentElement.parentElement.firstChild.style.display=`unset`; this.parentElement.firstChild.style.display='unset';this.style.display=`none`");
