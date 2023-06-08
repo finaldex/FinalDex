@@ -78,7 +78,7 @@ let createItem = function() {
 		itemSectionListOptionsPocketInput.setAttribute("alt",pockets[q].toLowerCase());
 		itemSectionListOptionsPocketInput.value = pockets[q];
 		itemSectionListOptionsPocketLabel.setAttribute("for","item-options-pocket-"+q);
-		itemSectionListOptionsPocketLabelImage.src = getMedia([pockets[q]],[PATH_Bag_Pocket])[0];
+		itemSectionListOptionsPocketLabelImage.src = getMedia(true,[pockets[q]],[PATH_Bag_Pocket]);
 		if (pockets[q].includes("Pocket")) {
 			itemSectionListOptionsPocketLabelImage.title = pockets[q];
 		}
@@ -98,7 +98,7 @@ let createItem = function() {
 
     let itemSectionHeaderGame = document.createElement("span");
     let itemSectionHeaderGameImage = document.createElement("img");
-    itemSectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
+    itemSectionHeaderGameImage.src = getMedia(true,["Title"],[PATH_Game_Title])
     itemSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     itemSectionHeader.appendChild(itemSectionHeaderGame);
     itemSectionHeaderGame.appendChild(itemSectionHeaderGameImage);
@@ -119,7 +119,7 @@ let createItem = function() {
 
 	let itemSectionSidebarSidebarUl = document.createElement("ul");
 
-	itemSectionSidebarSidebarMapImage.src = getMedia(["Map"],[PATH_Region_Map])[0]
+	itemSectionSidebarSidebarMapImage.src = getMedia(true,["Map"],[PATH_Region_Map])
 	itemSectionSidebarSidebarMapImage.setAttribute("usemap","#"+Region.join(" & ")+"-item");
 
 	itemSectionSidebarSidebarMapZoomIn.setAttribute("name","zoom");
@@ -216,7 +216,7 @@ let createItem = function() {
 						let itemSectionListOptionsLabelImageOuter = document.createElement("span");
 						let itemSectionListOptionsLabelImage = document.createElement("img");
 
-						itemSectionListOptionsLabelImage.src = getMedia([finaldata["Items"]["Reference"][q]["Icon"]],[PATH_Item_Bag])[0]
+						itemSectionListOptionsLabelImage.src = getMedia(true,[finaldata["Items"]["Reference"][q]["Icon"]],[PATH_Item_Bag])
 						itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
 						itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
 						itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
@@ -279,7 +279,7 @@ let createItem = function() {
 			let currency = priceArr[0]["Sell Currency"];	
 			if (price != undefined) {
 				if (currency == "Pokémon Dollar") {
-					currency = currency.replaceAll("Pokémon Dollar",'<img src="'+getMedia(["Pokémon Dollar"],[PATH_Currency_Icon])[0]+'" title="Pokémon Dollar" />')
+					currency = currency.replaceAll("Pokémon Dollar",'<img src="'+getMedia(true,["Pokémon Dollar"],[PATH_Currency_Icon])+'" title="Pokémon Dollar" />')
 				}
 				else {
 					currency = currency.replace(/[^A-Z]+/g,"");
@@ -387,7 +387,7 @@ let createItem = function() {
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarPokémon);
 
 					let itemSectionSidebarSidebarPokémonImg = document.createElement("img");
-					itemSectionSidebarSidebarPokémonImg.src = getPokémonMediaPath([q],[PATH_Pokémon_Box_Default_PNG]);
+					itemSectionSidebarSidebarPokémonImg.src = getMedia(true,[getPokémonPath(q)],[PATH_Pokémon_Box_Default_PNG]);
 					itemSectionSidebarSidebarPokémonImg.title = getPokémonName(q);
 					itemSectionSidebarSidebarPokémon.appendChild(itemSectionSidebarSidebarPokémonImg);
 
@@ -422,7 +422,7 @@ let createItem = function() {
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 					let itemSectionSidebarSidebarItemImg = document.createElement("img");
-					itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Pokémon"]["Held Item"][q][key1[u]])],[PATH_Item_Bag])[0]
+					itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Pokémon"]["Held Item"][q][key1[u]])],[PATH_Item_Bag])
 					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none";')
 					itemSectionSidebarSidebarItemImg.title = finaldata["Pokémon"]["Held Item"][q][key1[u]];
 					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
@@ -526,7 +526,7 @@ let createItem = function() {
 									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 									if (itemIcon != undefined) {
 										let itemSectionSidebarSidebarFieldImage = document.createElement("img");
-										itemSectionSidebarSidebarFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0];
+										itemSectionSidebarSidebarFieldImage.src = getMedia(true,[itemIcon],[PATH_Item_Bag]);
 										itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"].split("/")[y];
 										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
@@ -562,7 +562,7 @@ let createItem = function() {
 									itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 									if (itemIcon != undefined) {
 										let itemSectionSidebarSidebarFieldImage = document.createElement("img");
-										itemSectionSidebarSidebarFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0];
+										itemSectionSidebarSidebarFieldImage.src = getMedia(true,[itemIcon],[PATH_Item_Bag]);
 										itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 										itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 										itemSectionSidebarSidebarField.appendChild(itemSectionSidebarSidebarFieldImage);
@@ -593,7 +593,7 @@ let createItem = function() {
 								itemSectionSidebarSidebarRequirementOuter.appendChild(itemSectionSidebarSidebarField);
 								if (itemIcon != undefined) {
 									let itemSectionSidebarSidebarFieldImage = document.createElement("img");
-									itemSectionSidebarSidebarFieldImage.src = getMedia([itemIcon],[PATH_Item_Bag])[0];
+									itemSectionSidebarSidebarFieldImage.src = getMedia(true,[itemIcon],[PATH_Item_Bag]);
 									itemSectionSidebarSidebarFieldImage.title = finaldata["Location Items"]["Items"][q]["Field"];
 									itemSectionSidebarSidebarFieldImage.setAttribute("onerror",'this.style.display = "none";')
 									itemSectionSidebarSidebarFieldImage.setAttribute("name","item");
@@ -614,7 +614,7 @@ let createItem = function() {
 
 						for(let u = 0; u < quantity; u++) {
 							let itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Location Items"]["Items"][q]["Item"])],[PATH_Item_Bag])[0];
+							itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Location Items"]["Items"][q]["Item"])],[PATH_Item_Bag]);
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 						}
@@ -702,7 +702,7 @@ let createItem = function() {
 						let currency = finaldata["Location Items"]["Shop"][q]["Currency"];
 
 						if (currency == "Pokémon Dollar") {
-							currency = '<img src="'+getMedia(["Pokémon Dollar"],[PATH_Currency_Icon])[0]+'" title="Pokémon Dollar" />';
+							currency = '<img src="'+getMedia(true,["Pokémon Dollar"],[PATH_Currency_Icon])+'" title="Pokémon Dollar" />';
 						}
 						else {
 							currency = "<span title='"+currency+"'>"+currency.replace(/[^A-Z]+/g,"")+"</span>";
@@ -733,7 +733,7 @@ let createItem = function() {
 
 						for(let u = 0; u < quantity; u++) {
 							let itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Location Items"]["Shop"][q]["Item"])],[PATH_Item_Bag])[0]
+							itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Location Items"]["Shop"][q]["Item"])],[PATH_Item_Bag])
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 						}
@@ -838,7 +838,7 @@ let createItem = function() {
 
 				
 						let itemSectionSidebarSidebarItemImg = document.createElement("img");
-						itemSectionSidebarSidebarItemImg.src = getMedia([getItemIcon(finaldata["Location Items"]["Pickup"][q]["Item"])],[PATH_Item_Bag])[0]
+						itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Location Items"]["Pickup"][q]["Item"])],[PATH_Item_Bag])
 						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 
