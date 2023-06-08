@@ -2343,7 +2343,7 @@ function updateTrainer(trainers,condition) {
 		}
 
 
-		rewardText.innerHTML = rewardText.innerHTML.replaceAll("Pokémon Dollar",'<img src="./media/Images/Misc/Currency/VIII/Pokémon Dollar.png" title="Pokémon Dollar" />');
+		rewardText.innerHTML = rewardText.innerHTML.replaceAll("Pokémon Dollar",'<img src="'+getMedia("Pokémon Dollar",[PATH_Currency_Icon])+'" title="Pokémon Dollar" />');
 		rewardValWrap.appendChild(rewardText);
 		rewardText.style.display = "none";
 
