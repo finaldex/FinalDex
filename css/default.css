@@ -36,7 +36,7 @@ body {
     color: var(--font1);
 }
 ::-webkit-scrollbar {
-    width: 15px;
+    width: 0;
 }
 ::-webkit-scrollbar-thumb {
     background: var(--color_50);
