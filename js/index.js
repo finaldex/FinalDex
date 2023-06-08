@@ -16,7 +16,7 @@ function build() {
 			Games.push(obj)
 		}
 	}
-
+	
 	let ranobj = new Object();
 	ranobj["Name"] = "Random";
 	ranobj["Full"] = "Random";
@@ -47,13 +47,13 @@ function build() {
 
 
 		let art = document.createElement("img");
-		art.src = getMedia([""],[PATH_Region_Art_Official],[name])[0];
+		art.src = getMedia(true,[""],[PATH_Region_Art_Official],[name]);
 		li.appendChild(art)
 
 
 		let titlewrap = document.createElement("a");
 		let title = document.createElement("img");
-		title.src = getMedia(["Title"],[PATH_Game_Title],[name])[0];
+		title.src = getMedia(true,["Title"],[PATH_Game_Title],[name]);
 		title.title = name;
 		titlewrap.setAttribute("href","./Game.html#"+full);
 		titlewrap.setAttribute("tabindex","-1");
