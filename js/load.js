@@ -116,6 +116,7 @@ function initialize() {
 		stopwatch();
 		RNG();
 
+
 		window.addEventListener('resize', resize);
 
 		memory("Restore","",[document.querySelector('#resizer')]);
@@ -130,6 +131,22 @@ function initialize() {
 
 		load();
 
-		console.log(msToTime(new Date() - timeStart))
+		console.log("Time to load: "+msToTime(new Date() - timeStart))
 	}
+}
+
+function getPokémonPath(int) {
+	if (isNaN(parseInt(int))) {
+		int = getPokémonInt(int);
+	}
+	let result = []
+	let num = finaldata["Pokémon"]["Path"][int]["Number"];
+	let txt = finaldata["Pokémon"]["Path"][int]["Text"];
+	if (num != undefined) {
+		result.push(num);
+	}
+	if (txt != undefined) {
+		result.push(txt);
+	}
+	return result.join("-")
 }
