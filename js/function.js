@@ -241,25 +241,26 @@ function msToTime(duration) {
 	return result;
   }
 
-function getMedia(userFile,userPath,games) {
+
+function getMedia(set,userFile,userPath,games) {
 
 	if (userFile == undefined) {
 		userFile = [""];
 	}
-	else if (typeof userFile == "STRING") {
+	else if (typeof userFile == "string") {
 		userFile = [userFile];
 	}
 
 	if (userPath == undefined) {
 		userPath = [""];
 	}
-	else if (typeof userPath == "STRING") {
+	else if (typeof userPath == "string") {
 		userPath = [userPath];
 	}
 
 	if (games == undefined || games.length == 0) {
-        games = [];
-    }
+		games = [GameName];
+	}
 
 	let result = [];
 
@@ -268,22 +269,34 @@ function getMedia(userFile,userPath,games) {
 	let keys = Object.keys(arr);
 
 
-	for(let d = 0; d < keys.length; d++) {
-		let key = keys[d];
-		for(let r = 0; r < userPath.length; r++) {
-			if (key.includes(userPath[r]) || userPath[r] == "") {
-				for (let q = 0; q < arr[key].length; q++) {
-					let file = arr[key][q];
+	for(let g = 0; g < games.length; g++) {
+		for(let d = 0; d < keys.length; d++) {
+			let key = keys[d];
+			for(let r = 0; r < userPath.length; r++) {
+				if (key.includes(userPath[r]) || userPath[r] == "") {
+					let source = key.split("/")[key.split("/").length-1]
+					if (getApplicable(source,games[g])) {
+						for (let q = 0; q < arr[key].length; q++) {
+							let file = arr[key][q];
 
-					if (file.includes(".png") || file.includes(".gif")) {
-						for(let t = 0; t < userFile.length; t++) {
-							let fileName = arr[key][q].split(".")[0]
-							fileName = splitStr(fileName,"_")[0]
+							if (file.includes(".png") || file.includes(".gif")) {
+								for(let t = 0; t < userFile.length; t++) {
+									let fileName = arr[key][q].split(".")[0]
+									let userName = userFile[t];
 
-							if (userFile[t] == fileName || userFile[t] == "") {
-								let source = key.split("/")[key.split("/").length-1]
-								if (getApplicable(source,games)) {
-									result.push(key+"/"+file);
+									if (userName.includes("^")) {
+										userName = userName.replaceAll("^","")
+									}
+									else {
+										fileName = splitStr(fileName,"_")[0]
+									}
+
+									if (userName == fileName || userName == "") {
+										if (set) {
+											return key+"/"+file;
+										}
+										result.push(key+"/"+file);
+									}
 								}
 							}
 						}
@@ -294,15 +307,18 @@ function getMedia(userFile,userPath,games) {
 	}
 
 
+	if (set) {
+		return ""
+	}
 
 	if (result.length == 0) {
 		result.push("");
 	}
-
-	return result;
+	return [...new Set(result)];
 }
 
 
+/*
 function getPokémonMediaPath(userFile,userPath,gender,games) {
 
 
@@ -428,6 +444,7 @@ function getPokémonMediaPath(userFile,userPath,gender,games) {
     return ""
 
 }
+*/
 
 
 function getGeneration(game) {
@@ -475,85 +492,58 @@ function getGameID(name) {
     let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Legend Arceus","Brilliant Diamond","Shining Pearl","Scarlet","Violet"];
     return games.indexOf(name)+1
 }
-function getApplicable(val,games) {
+function getApplicable(val,game) {
 
-    if (games == undefined || games.length == 0) {
-        games = [GameName];
+    if (game == undefined) {
+        game = GameName;
     }
-
-    let adds = ["All"];
 
     val = val.replaceAll("_",",");
     let vals = splitStr(val,",");
     for (let i = 0; i < vals.length; i++) {
         let val = vals[i];
 		
-        let check = true;
-		
-		/*
-        let additional = []
-        if (vals[i].includes(" [")) {
-            additional = splitStr(vals[i].split(" [")[vals[i].split(" [").length-1],"][")
-            additional[additional.length-1] = additional[additional.length-1].replaceAll("]","")
-            val = val.replace(vals[i].split(" [")[vals[i].split(" [").length-1],"").replace(" [","")
-        }
-
-	
-        if (adds[0] != "All") {
-            check = false;
-            for (let q = 0; q < additional.length; q++) {
-                if (adds.includes(additional[q])) {
-                    check = true;
-                    break;
-                }
-            }
-        }
-		*/
-       
-        if (check) {
-			for(var q = 0; q < games.length; q++) {
-				let game = games[q];
-				if (val == "All") {
+		if (val == "All" || game == "All") {
+			return true;
+		}
+		else if (val == game) {
+			return true;
+		}
+		else if (val.includes("-")) {
+			let val1 = val.split("-")[0];
+			let val2 = val.split("-")[1];
+			
+			
+			if (!isNaN(parseInt(val1)) || !isNaN(parseInt(val2))) { // Generation
+				let valCurrent = getGeneration(game);
+				valStart = Math.min(val1,val2)
+				valEnd = Math.max(val1,val2)
+				if (valCurrent >= valStart && valCurrent <= valEnd) {
 					return true;
 				}
-				else if (val == game) {
-					return true;
-				}
-				else if (val.includes("-")) {
-					let val1 = val.split("-")[0];
-					let val2 = val.split("-")[1];
-					
-					
-					if (!isNaN(parseInt(val1)) || !isNaN(parseInt(val2))) { // Generation
-						let valCurrent = getGeneration(game);
-						valStart = Math.min(val1,val2)
-						valEnd = Math.max(val1,val2)
-						if (valCurrent >= valStart && valCurrent <= valEnd) {
-							return true;
-						}
-					}
-					else {
-						let valCurrent = getGameID(game);
-						val1 = getGameID(val1);
-						val2 = getGameID(val2);
-						valStart = Math.min(val1,val2)
-						valEnd = Math.max(val1,val2)
+			}
+			else {
+				let valCurrent = getGameID(game);
+				val1 = getGameID(val1);
+				val2 = getGameID(val2);
+				valStart = Math.min(val1,val2)
+				valEnd = Math.max(val1,val2)
 
-						if (valCurrent >= valStart && valCurrent <= valEnd) {
-							return true;
-						}
-					}
-					
-				}
-				else if (!isNaN(parseInt(val))) {
-					if (parseInt(val) == getGeneration(game)) {
-						return true;
-					}
+				if (valCurrent >= valStart && valCurrent <= valEnd) {
+					return true;
 				}
 			}
 			
+		}
+		else if (!isNaN(parseInt(val))) {
+			if (parseInt(val) == getGeneration(game)) {
+				return true;
+			}
+		}
+		
+			
             
-        }
+        
     }
 	
 	
@@ -1943,7 +1933,7 @@ function getItemIcon(item) {
 			}
 		}
 	}
-    return;
+    return item;
 }
 
 
