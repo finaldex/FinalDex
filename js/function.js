@@ -902,6 +902,27 @@ function getPokémonInt(name) {
 		}
 	}
 }
+
+function sortBy(arr,order) {
+
+	let result = [];
+	let used = []
+	for (let q = 0; q < order.length; q++) {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i] == order[q] || order[q].includes("^") && arr[i].includes(order[q].replace("^",""))) {
+				result.push(arr[i]);
+				used.push(i);
+			}
+		}
+	}
+	for (let i = 0; i < arr.length; i++) {
+		if (!used.includes(i)) {
+			result.push(arr[i]);
+		}
+	}
+
+	return result;
+}
 function returnSortedItemsList(i) {
 
 	let items = finaldata["Items"]["Reference"].map(el => el["Pocket"] == "Berries" ? {...el, ["Pocket"]: "a"} : el).map(el => el["Pocket"] == "Items" || el["Pocket"] == "Other Items"  ? {...el, ["Pocket"]: "b"} : el).map(el => el["Pocket"] != "a" && el["Pocket"] != "b" ? {...el, ["Pocket"]: "c"} : el);
