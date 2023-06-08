@@ -143,6 +143,7 @@ let PATH_Game_Art_HOME = "./media/Images/Game/Art/";
 let PATH_Game_Art_Official = "./media/Images/Game/Art/";
 let PATH_Game_Art_Sugimori = "./media/Images/Game/Art/";
 
+let PATH_FinalDex = "./media/Images/FinalDex/";
 
 
 let DATA_Pokémon_Reference;
