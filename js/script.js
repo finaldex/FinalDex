@@ -807,7 +807,7 @@ function partyItem() {
 
     
 
-    item.src = getMedia([this.name],[PATH_Item_Bag])[0];
+    item.src = getMedia(true,[this.name],[PATH_Item_Bag]);
     item.title = this.value;
 
 
@@ -1160,7 +1160,7 @@ function createParty(base,data) {
         base.querySelector(":scope > aside:first-child").setAttribute("name",type1);
     }
 
-    basePok.src = getPokémonMediaPath([i],[PATH_Pokémon_Battle_Default_Front_PNG]);
+    basePok.src = getMedia(true,[getPokémonPath(i)],[PATH_Pokémon_Battle_Default_Front_PNG],[],true)
    
 
     basePok.setAttribute("value",i);
@@ -1210,7 +1210,7 @@ function createParty(base,data) {
                 }
             }
             baseItemImg.style.display = "unset";
-            baseItemImg.src = getMedia([baseItem.querySelector(":scope option:first-child").value],[PATH_Item_Bag])[0]
+            baseItemImg.src = getMedia(true,[baseItem.querySelector(":scope option:first-child").value],[PATH_Item_Bag])
         }
         else if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]] != undefined) {
             let notreq = [];
@@ -1391,7 +1391,7 @@ function createParty(base,data) {
             baseItem.setAttribute("name",opt.getAttribute("name"));
             baseItem.style.fontStyle = "unset";
             baseItemImg.style.display = "unset";
-            baseItemImg.src = getMedia([opt.getAttribute("name")],[PATH_Item_Bag])[0];
+            baseItemImg.src = getMedia(true,[opt.getAttribute("name")],[PATH_Item_Bag]);
             baseItemImg.setAttribute("title",item);
         }
     }
@@ -1975,7 +1975,7 @@ function storeInBox(data) {
     let li = document.createElement("li");
     let shadow = document.createElement("span");
     let img = document.createElement("img");
-    img.src = getPokémonMediaPath([i],[PATH_Pokémon_Box_Default_PNG]);
+    img.src = getMedia(true,[getPokémonPath(i)],[PATH_Pokémon_Box_Default_PNG]);
     img.setAttribute("value",i);
     box.appendChild(li)
     li.appendChild(shadow)
@@ -4215,26 +4215,26 @@ function ImageType(action) {
     imgs2 = Array.prototype.slice.call(imgs2)
 
     let els = imgs1.concat(imgs2)
+
+
+
+   
 	
     if (val != undefined) {
         val = val.getAttribute("data-path");
+        
+        let games = [GameName]
+        if (val.includes("Sugimori")) {
+            games = [...(AllGames)].reverse().concat("All");
+        }
+        
 
         if (action == "Populate") {
-            let randomsrc = "";
-    
-            for(var i = 0; i < 5; i++) {
-                let ran = parseInt(getRandomInt(0,els.length-1));
-                let id = els[ran].id;
-                if (id != undefined && id != "") {
-                    let res = getPokémonMediaPath([id],[val])
-                    if (res != "") {
-                        randomsrc = res;
-                    }
-                }
-            }
-
-
-            img.src = randomsrc;
+            let ranMed = getMedia(false,[""],[val],games);
+            
+            let ran = parseInt(getRandomInt(0,ranMed.length-1));
+            
+            img.src = ranMed[ran];
         }
         else if (action == "Execute") {
     
@@ -4243,8 +4243,7 @@ function ImageType(action) {
                 if (isNaN(parseInt(int))) {
                     int = getPokémonInt(int);
                 }
-
-                els[q].src = getPokémonMediaPath([int],[val])
+                els[q].src = getMedia(true,["^"+getPokémonPath(int),"^"+getPokémonPath(int)+"_Male","^"+getPokémonPath(int)+"_Female"],[val],games)
             }
             
 
