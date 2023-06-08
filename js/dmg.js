@@ -485,7 +485,7 @@ function DMGCalcStart() {
 										}
 									}
 
-									if (userItemPath.value.includes(" Z") && userItemPath.value.includes(moveType.replace(/.$/, ''))) {
+									if (userItemPath != undefined && userItemPath.value.includes(" Z") && userItemPath.value.includes(moveType.replace(/.$/, ''))) {
 										check3 = true;
 									}
 
@@ -4355,7 +4355,7 @@ function DMGSetInfo() {
 
 
 
-				if (userItemPath.value.includes(" Z") && userItemPath.value.includes(moveType.replace(/.$/, ''))) {
+				if (userItemPath != undefined && userItemPath.value.includes(" Z") && userItemPath.value.includes(moveType.replace(/.$/, ''))) {
 					check3 = true;
 				}
 				
