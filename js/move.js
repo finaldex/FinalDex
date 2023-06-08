@@ -59,7 +59,7 @@ let createMove = function() {
 
     let moveSectionHeaderGame = document.createElement("span");
     let moveSectionHeaderGameImage = document.createElement("img");
-    moveSectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
+    moveSectionHeaderGameImage.src = getMedia(true,["Title"],[PATH_Game_Title])
     moveSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
     moveSectionHeader.appendChild(moveSectionHeaderGame);
     moveSectionHeaderGame.appendChild(moveSectionHeaderGameImage);
@@ -388,7 +388,7 @@ let createMove = function() {
 
 
 		moveSectionContentMenuTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-		moveSectionContentMenuTypeTextImg.src = getMedia([finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]]],[PATH_Type_Icon])[0];
+		moveSectionContentMenuTypeTextImg.src = getMedia(true,[finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]]],[PATH_Type_Icon]);
 		moveSectionContentMenuTypeTextImg.setAttribute("title", finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]]);
 		
 		if(finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]] == undefined) {
@@ -406,7 +406,7 @@ let createMove = function() {
 		for(let u = 0; u < categories.length; u++) {
 			let moveSectionContentMenuTypeMoveImg = document.createElement("img");
 			moveSectionContentMenuTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-			moveSectionContentMenuTypeMoveImg.src = getMedia([categories[u]],[PATH_Move_Category])[0];
+			moveSectionContentMenuTypeMoveImg.src = getMedia(true,[categories[u]],[PATH_Move_Category]);
 			moveSectionContentMenuTypeMoveImg.setAttribute("title", categories[u]);
 			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveImg);
 			let moveSectionContentMenuTypeMoveText = document.createElement("h6");
@@ -607,7 +607,7 @@ let createMove = function() {
 			moveSectionSidebarLearnsetLiSourceOuter.title = "Level Up";
 			moveSectionSidebarLearnsetLiSource.innerHTML = "Level Up: "+learnsetlevelarr[q]["Factor"];
 			moveSectionSidebarLearnsetLiText.innerText = learnsetlevelarr[q]["Pokémon"];
-			moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetlevelarr[q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+			moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(learnsetlevelarr[q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 			moveSectionSidebarLearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
 			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
 			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
@@ -634,7 +634,7 @@ let createMove = function() {
 				if(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].includes(",")) {
 					for(let r = 0; r < finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",").length; r++) {
 						let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r])],[PATH_Pokémon_Box_Default_PNG]);
+						moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r]))],[PATH_Pokémon_Box_Default_PNG]);
 						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r];
 						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
@@ -646,7 +646,7 @@ let createMove = function() {
 					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
 				} else {
 					let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"])],[PATH_Pokémon_Box_Default_PNG]);
+					moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"]))],[PATH_Pokémon_Box_Default_PNG]);
 					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
 					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 
@@ -655,7 +655,7 @@ let createMove = function() {
 					moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
 				}
 		
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];				
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
@@ -701,7 +701,7 @@ let createMove = function() {
 				}
 				
 
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
@@ -726,7 +726,7 @@ let createMove = function() {
 				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
 				let moveSectionSidebarLearnsetLiText = document.createElement("small");
 
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
 				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
@@ -781,7 +781,7 @@ let createMove = function() {
 				if(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].includes(",")) {
 					for(let r = 0; r < finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",").length; r++) {
 						let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r])],[PATH_Pokémon_Box_Default_PNG]);
+						moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r]))],[PATH_Pokémon_Box_Default_PNG]);
 
 						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r];
 						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
@@ -794,12 +794,12 @@ let createMove = function() {
 					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
 				} else {
 					let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"])],[PATH_Pokémon_Box_Default_PNG]);
+					moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"]))],[PATH_Pokémon_Box_Default_PNG]);
 					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
 					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
 				}
 
-				moveSectionSidebarLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 
 
 				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"];
