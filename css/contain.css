@@ -1267,9 +1267,24 @@
     white-space: pre;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small span,
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small img {
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small span[title],
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small img[title] {
 	cursor: help;
+}
+
+
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='Cost'] img {
+	max-height: 15px;
+}
+
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='Cost'] img[src=""] {
+	visibility: hidden;
+    position: relative;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='Cost'] img[src=""]::after {
+	content: attr(data-title);
+    visibility: visible;
+    font-size: 10px;
 }
 
 
@@ -1951,12 +1966,28 @@
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img:not([name='extra']) {
 	height: 100%;
+    width: 100%;
 }
 
 
 
-
-
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img[src=""] {
+	visibility:hidden;
+	position:relative;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img[src=""]::after {
+	content: "?";
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+    justify-content: center;
+    align-items: center;
+	font-size: xxx-large;
+}
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img[name='extra'] {
 	position:absolute;
@@ -2125,13 +2156,6 @@
 
 
 
-
-
-
-img[title='Pokémon Dollar'] {
-	max-width: 10px;
-	filter: invert(1);
-}
 
 #contain div#map > section[name='sidebar'] > * > div:first-child {
 	display: flex;
