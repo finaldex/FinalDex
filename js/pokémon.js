@@ -36,7 +36,7 @@ let createPokémon = function() {
 	navigationCountSpan2.innerText = "/";
 	navigationGame.setAttribute("name","title");
     
-	navigationGameImg.src = getMedia(["Title"],[PATH_Game_Title])
+	navigationGameImg.src = getMedia(true,["Title"],[PATH_Game_Title])
 	navigationSettings.setAttribute("name","settings");
 	navigationSettingsIconText.innerText = "⚙️";
 
@@ -1256,28 +1256,37 @@ let createPokémon = function() {
     itypes = itypes.map(function(x){return x.replaceAll(PATH_Pokémon,'').replace("/"+x.split("/")[x.split("/").length-1],"").replaceAll(PATH_Pokémon,'')})
     itypes = [...new Set(itypes)]
 
-    console.log(itypes)
-
     itypeorder = ["Battle/Default/Front/PNG","Battle/Default/Front/GIF","Battle/Shiny/Front/PNG","Battle/Shiny/Front/GIF","Battle/Default/Back/PNG","Battle/Default/Back/GIF","Battle/Shiny/Back/PNG","Battle/Shiny/Back/GIF","^Art"]
-    //itypeorder = ["Battle/Default/Front/PNG","Battle/Shiny/Front/PNG","Battle/Shiny/Front/GIF","Battle/Default/Back/PNG","Battle/Default/Back/GIF","Battle/Shiny/Back/PNG","Battle/Shiny/Back/GIF","Art/Default/Front/Ken Sugimori"]
     itypes = sortBy(itypes,itypeorder)
-    //itypes.reverse();
+    
 
-    console.log(itypes)
+    let testarr = []
+	for(let q = 0; q < finaldata["Pokémon"]["Reference"].length; q++) {
+		if(finaldata["Pokémon"]["Reference"][q][DATA_Pokémon_Reference["Reference"]] == "true") {
+			testarr.push(finaldata["Pokémon"]["Reference"][q]["Variant"]);
+		}
+	}
 
-    //Art • Front • Default • Ken Sugimori
-    //Ken Sugimori Art • Front • Default
-
-    //Official Art • Front • Default
-    //Official Art • Front • Default
-
+  
+	
     for (let q = 0; q < itypes.length; q++) {
-        let val = itypes[q].replaceAll("/"," • ").replace(/( • [\S\s]*?)( • Front)/g,"$2$1").replace(" • PNG","").replace(" • GIF"," (Animated)").replace("Battle • ","").replace(/(Art[\S\s]*?) • (Official)/g,"$2 $1").replace(/(Art[\S\s]*?) • (Ken Sugimori)/g,"$2 $1").replace("Front • ","");
-        let settingsDefaultImgtypePathOption = document.createElement("option");
-        settingsDefaultImgtypePathOption.value = val;
-        settingsDefaultImgtypePathOption.innerText = val;
-        settingsDefaultImgtypePathOption.setAttribute("data-path",itypes[q])
-        settingsDefaultImgtypePath.appendChild(settingsDefaultImgtypePathOption);
+        let games = [GameName];
+
+        if (itypes[q].includes("Sugimori")) {
+            games = [...(AllGames)].reverse().concat("All");
+        }
+        let getvals = getMedia(false,[""],[itypes[q]],games);
+
+
+            
+        if (getvals.length >= testarr.length) {
+            let val = itypes[q].replaceAll("/"," • ").replace(/( • [\S\s]*?)( • Front)/g,"$2$1").replace(" • PNG","").replace(" • GIF"," (Animated)").replace("Battle • ","").replace(/(Art[\S\s]*?) • (Official)/g,"$2 $1").replace(/(Art[\S\s]*?) • (Ken Sugimori)/g,"$2 $1").replace("Front • ","");
+            let settingsDefaultImgtypePathOption = document.createElement("option");
+            settingsDefaultImgtypePathOption.value = val;
+            settingsDefaultImgtypePathOption.innerText = val;
+            settingsDefaultImgtypePathOption.setAttribute("data-path",itypes[q])
+            settingsDefaultImgtypePath.appendChild(settingsDefaultImgtypePathOption);
+        }
     }
 
 
@@ -1393,8 +1402,9 @@ let createPokémon = function() {
     settingsVariantButton.addEventListener("click", variantSelector);
 
 
-    settingsDefaultImgtypeExecute.addEventListener("click", function() {ImageType("Execute");});
+    settingsDefaultImgtypeExecute.addEventListener("click", function() {ImageType("Execute");ImageType("Populate");});
     settingsDefaultImgtypePath.addEventListener("change", function() {ImageType("Populate");});
+    settingsDefaultImgtypePath.addEventListener("keydown", function() {ImageType("Populate");});
 
     
 
@@ -1447,24 +1457,6 @@ window.onclick = function(event) {
 	}
 };
 
-function imgType() {
-	let imgTypeBox = document.getElementById("imgtype-toggle");
-	let imgType = document.querySelectorAll("#imgtype input");
-	let conimg = document.querySelectorAll("#pokémon > div ul li img");
-	for(let i = 0; i < imgType.length; i++) {
-		if(imgType[i].checked == true) {
-			let dataType = imgType[i].getAttribute("data-type");
-			let dataPath = imgType[i].getAttribute("data-path");
-			let dataExtension = imgType[i].getAttribute("data-extension");
-			imgTypeBox.innerHTML = '<span class="imgtype-arrow">▾</span>'+"<p>"+imgType[i].parentElement.innerText+"</p>"+'<div><img src="./media/Images/FinalDex/Icon/'+dataExtension+'.png" name="'+dataExtension+'" /></div>';
-		
-            for(let q = 0; q < conimg.length; q++) {
-                conimg[q].src = "./media/Images/Pokémon/"+dataType+"/"+dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension;
-                conimg[q].setAttribute("path", dataPath+"/"+getPokémonMediaPath(getPokémonInt(conimg[q].id),dataType)+"."+dataExtension);
-            }
-		}
-	}
-}
 
 
 
