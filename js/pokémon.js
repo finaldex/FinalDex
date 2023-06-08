@@ -1199,67 +1199,20 @@ let createPokémon = function() {
 
     let settingsDefaultImgtypeOuter = document.createElement("span");
     let settingsDefaultImgtypeOuterLeft = document.createElement("span");
-
-
     let settingsDefaultImgtypePath = document.createElement("select");
     let settingsDefaultImgtypeOuterRight = document.createElement("span");
-    let settingsDefaultImgtypeExtension = document.createElement("select");
-    let settingsDefaultImgtypeType = document.createElement("select");
-    let settingsDefaultImgtypeAngle = document.createElement("select");
+    let settingsDefaultImgtypeImage = document.createElement("img");
+    let settingsDefaultImgtypeExecute = document.createElement("button");
+    let settingsDefaultImgtypeExecuteText = document.createElement("p");
+
 
   
-    let ImageTypes = getDirs([PATH_Pokémon_Battle])
-    ImageTypes = ImageTypes.map(function(x){return x.replaceAll(PATH_Pokémon,'').replace("/"+x.split("/")[x.split("/").length-1],"")})
-
-    for (let q = 0; q < ImageTypes.length; q++) {
-        let els = ImageTypes[q].split("/")
-        let obj = new Object();
-        obj["Style"] = els[0];
-        obj["Type"] = els[1];
-        obj["Angle"] = els[2];
-        obj["Extension"] = els[3];
-        ImageTypes[q] = obj;
-    }
 
 
-    let style = [...new Set(ImageTypes.map((item) => item["Style"]))];
-    let type = [...new Set(ImageTypes.map((item) => item["Type"]))];
-    let angle = [...new Set(ImageTypes.map((item) => item["Angle"]))];
-    let ext = [...new Set(ImageTypes.map((item) => item["Extension"]))];
 
-    for (let q = 0; q < style.length; q++) { 
-        let settingsDefaultImgtypeOption = document.createElement("option");
-        settingsDefaultImgtypeOption.innerText = style[q];
-        settingsDefaultImgtypeOption.value = style[q];
-        settingsDefaultImgtypePath.appendChild(settingsDefaultImgtypeOption);
-    }
-    for (let q = 0; q < type.length; q++) { 
-        let settingsDefaultImgtypeOption = document.createElement("option");
-        settingsDefaultImgtypeOption.innerText = type[q];
-        settingsDefaultImgtypeOption.value = type[q];
-        settingsDefaultImgtypeType.appendChild(settingsDefaultImgtypeOption);
-    }
-    for (let q = 0; q < angle.length; q++) { 
-        let settingsDefaultImgtypeOption = document.createElement("option");
-        settingsDefaultImgtypeOption.innerText = angle[q];
-        settingsDefaultImgtypeOption.value = angle[q];
-        settingsDefaultImgtypeAngle.appendChild(settingsDefaultImgtypeOption);
-    }
-    for (let q = 0; q < ext.length; q++) { 
-        let settingsDefaultImgtypeOption = document.createElement("option");
-        settingsDefaultImgtypeOption.innerText = ext[q];
-        settingsDefaultImgtypeOption.value = ext[q];
-        settingsDefaultImgtypeExtension.appendChild(settingsDefaultImgtypeOption);
-    }
+    settingsDefaultImgtypeExecute.setAttribute("type","small")
+    settingsDefaultImgtypeExecuteText.innerText = "Apply";
 
-    settingsDefaultImgtypePath.setAttribute("name","path");
-    settingsDefaultImgtypePath.setAttribute("title","Image Types");
-    settingsDefaultImgtypeExtension.setAttribute("name","extension");
-    settingsDefaultImgtypeExtension.setAttribute("title","Extension");
-    settingsDefaultImgtypeType.setAttribute("name","type");
-    settingsDefaultImgtypeType.setAttribute("title","Type");
-    settingsDefaultImgtypeAngle.setAttribute("name","angle");
-    settingsDefaultImgtypeAngle.setAttribute("title","Angle");
     settingsDefaultImgtypeOuter.setAttribute("name","imagetype");
     settingsDefaultResizeOuter.setAttribute("name","resize");
     settingsDefaultResizeInput.setAttribute("type","range");
@@ -1278,9 +1231,9 @@ let createPokémon = function() {
     settingsDefaultImgtypeOuterLeft.appendChild(settingsDefaultImgtypePath);
 
     settingsDefaultImgtypeOuter.appendChild(settingsDefaultImgtypeOuterRight);
-    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeExtension);
-    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeType);
-    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeAngle);
+    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeImage);
+    settingsDefaultImgtypeOuterRight.appendChild(settingsDefaultImgtypeExecute);
+    settingsDefaultImgtypeExecute.appendChild(settingsDefaultImgtypeExecuteText);
 
 
     settings.appendChild(settingsDefaultResizeOuter);
@@ -1297,9 +1250,35 @@ let createPokémon = function() {
 
     settingsDefaultThemeInput.addEventListener('change', function() {switchTheme(); memory("Save","",settingsDefaultThemeInput)});
 
+   
+    
+    let itypes = getDirs([PATH_Pokémon_Battle_Default_Front,PATH_Pokémon_Battle_Shiny_Front,PATH_Pokémon_Art])
+    itypes = itypes.map(function(x){return x.replaceAll(PATH_Pokémon,'').replace("/"+x.split("/")[x.split("/").length-1],"").replaceAll(PATH_Pokémon,'')})
+    itypes = [...new Set(itypes)]
 
+    console.log(itypes)
 
+    itypeorder = ["Battle/Default/Front/PNG","Battle/Default/Front/GIF","Battle/Shiny/Front/PNG","Battle/Shiny/Front/GIF","Battle/Default/Back/PNG","Battle/Default/Back/GIF","Battle/Shiny/Back/PNG","Battle/Shiny/Back/GIF","^Art"]
+    //itypeorder = ["Battle/Default/Front/PNG","Battle/Shiny/Front/PNG","Battle/Shiny/Front/GIF","Battle/Default/Back/PNG","Battle/Default/Back/GIF","Battle/Shiny/Back/PNG","Battle/Shiny/Back/GIF","Art/Default/Front/Ken Sugimori"]
+    itypes = sortBy(itypes,itypeorder)
+    //itypes.reverse();
 
+    console.log(itypes)
+
+    //Art • Front • Default • Ken Sugimori
+    //Ken Sugimori Art • Front • Default
+
+    //Official Art • Front • Default
+    //Official Art • Front • Default
+
+    for (let q = 0; q < itypes.length; q++) {
+        let val = itypes[q].replaceAll("/"," • ").replace(/( • [\S\s]*?)( • Front)/g,"$2$1").replace(" • PNG","").replace(" • GIF"," (Animated)").replace("Battle • ","").replace(/(Art[\S\s]*?) • (Official)/g,"$2 $1").replace(/(Art[\S\s]*?) • (Ken Sugimori)/g,"$2 $1").replace("Front • ","");
+        let settingsDefaultImgtypePathOption = document.createElement("option");
+        settingsDefaultImgtypePathOption.value = val;
+        settingsDefaultImgtypePathOption.innerText = val;
+        settingsDefaultImgtypePathOption.setAttribute("data-path",itypes[q])
+        settingsDefaultImgtypePath.appendChild(settingsDefaultImgtypePathOption);
+    }
 
 
 
@@ -1413,10 +1392,10 @@ let createPokémon = function() {
 
     settingsVariantButton.addEventListener("click", variantSelector);
 
-    settingsDefaultImgtypePath.addEventListener("change", function() {ImageType("Populate,Execute");});
-    settingsDefaultImgtypeExtension.addEventListener("change", function() {ImageType("Execute");});
-    settingsDefaultImgtypeType.addEventListener("change", function() {ImageType("Execute");});
-    settingsDefaultImgtypeAngle.addEventListener("change", function() {ImageType("Execute");});
+
+    settingsDefaultImgtypeExecute.addEventListener("click", function() {ImageType("Execute");});
+    settingsDefaultImgtypePath.addEventListener("change", function() {ImageType("Populate");});
+
     
 
     $( function() {
@@ -1920,20 +1899,11 @@ function variantSelector() {
     createContain(tempStr);
 
     memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
-
     memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
+    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select')]);
 
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
-    ImageType("Populate");
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="path"]')]);
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="extension"]')]);
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="type"]')]);
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select[name="angle"]')]);
     ImageType("Execute");
-
+    ImageType("Populate");
     resizeDiv();
     dexSwitch();
 
