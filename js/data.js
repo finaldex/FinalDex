@@ -157,24 +157,18 @@ let createData = function(id, i) {
 	let dataSectionHeaderTypePrimary = document.createElement("b");
 	dataSectionHeaderTypePrimary.setAttribute("type","invert");
 	let dataSectionHeaderTypePrimaryImg = document.createElement("img");
-	let dataSectionHeaderTypePrimaryText = document.createElement("h5");
-	dataSectionHeaderTypePrimaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 	dataSectionHeaderTypePrimaryImg.setAttribute("dataname","value");
 	dataSectionHeaderType.appendChild(dataSectionHeaderTypePrimaryOuter);
 	dataSectionHeaderTypePrimaryOuter.appendChild(dataSectionHeaderTypePrimary);
 	dataSectionHeaderTypePrimary.appendChild(dataSectionHeaderTypePrimaryImg);
-	dataSectionHeaderTypePrimary.appendChild(dataSectionHeaderTypePrimaryText);
 	let dataSectionHeaderTypeSecondaryOuter = document.createElement("span");
 	let dataSectionHeaderTypeSecondary = document.createElement("b");
 	dataSectionHeaderTypeSecondary.setAttribute("type","invert");
 	let dataSectionHeaderTypeSecondaryImg = document.createElement("img");
-	let dataSectionHeaderTypeSecondaryText = document.createElement("h5");
-	dataSectionHeaderTypeSecondaryImg.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 	dataSectionHeaderTypeSecondaryImg.setAttribute("dataname","value");
 	dataSectionHeaderType.appendChild(dataSectionHeaderTypeSecondaryOuter);
 	dataSectionHeaderTypeSecondaryOuter.appendChild(dataSectionHeaderTypeSecondary);
 	dataSectionHeaderTypeSecondary.appendChild(dataSectionHeaderTypeSecondaryImg);
-	dataSectionHeaderTypeSecondary.appendChild(dataSectionHeaderTypeSecondaryText);
 
 
 	dataSectionMainMapImage.src = getMedia(true,["Map"],[PATH_Region_Map]);
@@ -1605,29 +1599,33 @@ function loadData() {
     else {
         type.setAttribute("title","");
     }
-	if(returnData(i,"Type","")[0] != undefined) {
+	let data_type = returnData(i,"Type","");
+	let data_type_1 = data_type[0];
+	let data_type_2 = data_type[1];
+
+	if(data_type_1 != undefined) {
 		type.querySelector(":scope > span:first-child > * > *:last-child").style.display = "none";
 		type.querySelector(":scope > span:first-child").classList.add("active");
 		type.querySelector(":scope > span:first-child img").style.display = "inline";
-		type.querySelector(":scope > span:first-child > * > *:last-child").innerText = returnData(i,"Type","")[0];
-		type.querySelector(":scope > span:first-child img").src = getMedia(true,[returnData(i,"Type","")],[PATH_Type_Icon]);
-        type.querySelector(":scope > span:first-child img").setAttribute("value", returnData(i,"Type","")[0]);
+		type.querySelector(":scope > span:first-child > * > *:last-child").innerText = data_type_1;
+		type.querySelector(":scope > span:first-child img").src = getMedia(true,[data_type_1],[PATH_Type_Icon]);
+        type.querySelector(":scope > span:first-child img").setAttribute("value", data_type_1);
 	} else {
 		type.querySelector(":scope > span:first-child").classList.remove("active");
 		type.querySelector(":scope > span:first-child img").style.display = "none";
 	}
-	if(returnData(i,"Type","")[1] != undefined) {
+	if(data_type_2 != undefined) {
 		type.querySelector(":scope > span:last-child > * > *:last-child").style.display = "none";
 		type.querySelector(":scope > span:last-child").classList.add("active");
 		type.querySelector(":scope > span:last-child img").style.display = "inline";
-		type.querySelector(":scope > span:last-child > * > *:last-child").innerText = returnData(i,"Type","")[1];
-		type.querySelector(":scope > span:last-child img").src = getMedia(true,[returnData(i,"Type","")[1]],[PATH_Type_Icon]);
-        type.querySelector(":scope > span:last-child img").setAttribute("value", returnData(i,"Type","")[1]);
+		type.querySelector(":scope > span:last-child > * > *:last-child").innerText = data_type_2;
+		type.querySelector(":scope > span:last-child img").src = getMedia(true,[data_type_2],[PATH_Type_Icon]);
+        type.querySelector(":scope > span:last-child img").setAttribute("value", data_type_2);
 	} else {
 		type.querySelector(":scope > span:last-child").classList.remove("active");
 		type.querySelector(":scope > span:last-child img").style.display = "none";
 	}
-	if(returnData(i,"Type","")[0] != undefined && returnData(i,"Type","")[1] != undefined) {
+	if(data_type_1 != undefined && data_type_2 != undefined) {
 		type.setAttribute("name","2");
 	} else {
 		type.removeAttribute("name");
@@ -1802,7 +1800,7 @@ function loadData() {
                 dataSectionMainLearnsetLiText.title = "Type";
 				dataSectionMainLearnsetLiText.innerText = typ;
                 
-                dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
+                dataSectionMainLearnsetLiTextOuter.style.background = "var(--type"+dataSectionMainLearnsetLiText.innerText+")";
             }
             if(y == 3) {
 				let cate = returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],learnsetArr[u]["Move"])
@@ -1816,7 +1814,8 @@ function loadData() {
                 dataSectionMainLearnsetLiText.title = "Category";
 				dataSectionMainLearnsetLiText.innerText = cate;
                 
-                dataSectionMainLearnsetLiTextOuter.setAttribute("name", dataSectionMainLearnsetLiText.innerText);
+
+				dataSectionMainLearnsetLiTextOuter.style.background = "var(--type"+dataSectionMainLearnsetLiText.innerText+")";
             }
             if(y == 4) {
 				let pwr = returnArrValue(finaldata["Moves"]["Power"],DATA_Move_Reference["Name"],DATA_Move_Power["Power"],learnsetArr[u]["Move"]);
