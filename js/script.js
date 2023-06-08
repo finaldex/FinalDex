@@ -4215,10 +4215,7 @@ function ImageType(action) {
     imgs2 = Array.prototype.slice.call(imgs2)
 
     let els = imgs1.concat(imgs2)
-
-    console.log(val)
-    console.log(el.value)
-
+	
     if (val != undefined) {
         val = val.getAttribute("data-path");
 
