@@ -640,6 +640,7 @@ let createMap = function() {
 				overviewLocation = locationImages[q].split("_")[0];
 				overviewArea = locationImages[q].replaceAll(overviewLocation+"_","")
 				overviewArea = splitStr(overviewArea,"/")[splitStr(overviewArea,"/").length-1];
+				overviewArea = splitStr(overviewArea,".")[0];
 			}
 			else {
 				overviewLocation = locationImages[q];
@@ -877,20 +878,6 @@ let createMap = function() {
 					}
 
 
-					for(let r = 0; r < currency.length; r++) {
-						if (getItemIcon(currency[r]) != undefined) {
-							currency[r] = "<img src='"+getMedia(true,[getItemIcon(currency[r])],[PATH_Item_Bag])+"' onerror='this.style.display=´none´'; onclick='dataRedirect()' name='item' title='"+getItemIcon(currency[r])+"'/>";
-						}
-						else {
-							if (currency[r] == "Pokémon Dollar") {
-								currency[r] = currency[r].replaceAll("Pokémon Dollar",'<img src="'+getMedia(true,["Pokémon Dollar"],[PATH_Currency_Icon])+'" title="Pokémon Dollar" />');
-							}
-							else {
-								currency[r] = "<span title='"+currency[r]+"'>"+currency[r].replace(/[^A-Z]+/g,"")+"</span>";
-							}
-						}
-					}
-				
 					if(cost == "1x") {
 						cost = "";
 					}
@@ -899,17 +886,30 @@ let createMap = function() {
 					}
 
 		
-					mapSectionSidebarCostShopCost.innerHTML = cost+currency.join("");
-					
-
+					mapSectionSidebarCostShopCost.innerHTML = cost+" ";
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCostTitle);
 					mapSectionSidebarCostShopCostOuter.appendChild(mapSectionSidebarCostShopCost);
 
-					let imgs = mapSectionSidebarCostShopCost.querySelectorAll(":scope > img:not([title='Pokémon Dollar'])");
 
-					for (let r = 0; r < imgs.length; r++) {
-						mapSectionSidebarCostShopCostOuter.appendChild(imgs[r])
+					for(let r = 0; r < currency.length; r++) {
+						let icon = getMedia(true,[getItemIcon(currency[r])],[PATH_Currency_Icon]);
+						let abbr = currency[r].replace(/[^A-Z]+/g,"");
+						if (icon != undefined && icon != "") {
+							let img = document.createElement("img");
+							img.src = icon;
+							img.setAttribute("data-title",currency[r])
+							img.setAttribute("title",currency[r])
+							img.setAttribute("onerror","this.removeAttribute('title')")
+							mapSectionSidebarCostShopCost.appendChild(img)
+						}
+						else {
+							let span = document.createElement("span");
+							span.innerText = abbr;
+							span.title = currency[r];
+							mapSectionSidebarCostShopCost.appendChild(span)
+						}
 					}
+
 
 
 
@@ -1660,59 +1660,59 @@ let createMap = function() {
 					if (tutors[u]["Requirement"] != undefined || tutors[u]["Cost"] != undefined || tutors[u]["Rate"] != undefined || tutors[u]["Time"]) {
 						let mapSectionSidebarDescriptionTutorAdditional = document.createElement("span");
 						mapSectionSidebarDescriptionTutorLi.appendChild(mapSectionSidebarDescriptionTutorAdditional);
-					}
+					
 
-					if (tutors[u]["Requirement"] != undefined) {
-						let mapSectionSidebarDescriptionTutorReq = document.createElement("span");
-						let mapSectionSidebarDescriptionTutorReqHeader = document.createElement("h6");
-						let mapSectionSidebarDescriptionTutorReqText = document.createElement("p");
-						mapSectionSidebarDescriptionTutorReqHeader.innerText = "Requires:";
-						mapSectionSidebarDescriptionTutorReqText.innerText = tutors[u]["Requirement"];
-						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorReq);
-						mapSectionSidebarDescriptionTutorReq.appendChild(mapSectionSidebarDescriptionTutorReqHeader);
-						mapSectionSidebarDescriptionTutorReq.appendChild(mapSectionSidebarDescriptionTutorReqText);
-					}
+						if (tutors[u]["Requirement"] != undefined) {
+							let mapSectionSidebarDescriptionTutorReq = document.createElement("span");
+							let mapSectionSidebarDescriptionTutorReqHeader = document.createElement("h6");
+							let mapSectionSidebarDescriptionTutorReqText = document.createElement("p");
+							mapSectionSidebarDescriptionTutorReqHeader.innerText = "Requires:";
+							mapSectionSidebarDescriptionTutorReqText.innerText = tutors[u]["Requirement"];
+							mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorReq);
+							mapSectionSidebarDescriptionTutorReq.appendChild(mapSectionSidebarDescriptionTutorReqHeader);
+							mapSectionSidebarDescriptionTutorReq.appendChild(mapSectionSidebarDescriptionTutorReqText);
+						}
 
-					if (tutors[u]["Time"] != undefined) {
-						let mapSectionSidebarDescriptionTutorTime = document.createElement("span");
-						let mapSectionSidebarDescriptionTutorTimeHeader = document.createElement("h6");
-						let mapSectionSidebarDescriptionTutorTimeText = document.createElement("p");
-						mapSectionSidebarDescriptionTutorTimeHeader.innerText = "Time:"
-						mapSectionSidebarDescriptionTutorTimeText.innerText = tutors[u]["Time"].replaceAll(","," / ");
-						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorTime);
-						mapSectionSidebarDescriptionTutorTime.appendChild(mapSectionSidebarDescriptionTutorTimeHeader);
-						mapSectionSidebarDescriptionTutorTime.appendChild(mapSectionSidebarDescriptionTutorTimeText);
-					}
+						if (tutors[u]["Time"] != undefined) {
+							let mapSectionSidebarDescriptionTutorTime = document.createElement("span");
+							let mapSectionSidebarDescriptionTutorTimeHeader = document.createElement("h6");
+							let mapSectionSidebarDescriptionTutorTimeText = document.createElement("p");
+							mapSectionSidebarDescriptionTutorTimeHeader.innerText = "Time:"
+							mapSectionSidebarDescriptionTutorTimeText.innerText = tutors[u]["Time"].replaceAll(","," / ");
+							mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorTime);
+							mapSectionSidebarDescriptionTutorTime.appendChild(mapSectionSidebarDescriptionTutorTimeHeader);
+							mapSectionSidebarDescriptionTutorTime.appendChild(mapSectionSidebarDescriptionTutorTimeText);
+						}
 
-					if (tutors[u]["Rate"] != undefined) {
-						let mapSectionSidebarDescriptionTutorRate = document.createElement("span");
-						let mapSectionSidebarDescriptionTutorRateHeader = document.createElement("h6");
-						let mapSectionSidebarDescriptionTutorRateText = document.createElement("p");
-						mapSectionSidebarDescriptionTutorRateHeader.innerText = "Available:"
-						mapSectionSidebarDescriptionTutorRateText.innerText = tutors[u]["Rate"];
-						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorRate);
-						mapSectionSidebarDescriptionTutorRate.appendChild(mapSectionSidebarDescriptionTutorRateHeader);
-						mapSectionSidebarDescriptionTutorRate.appendChild(mapSectionSidebarDescriptionTutorRateText);
-					}
+						if (tutors[u]["Rate"] != undefined) {
+							let mapSectionSidebarDescriptionTutorRate = document.createElement("span");
+							let mapSectionSidebarDescriptionTutorRateHeader = document.createElement("h6");
+							let mapSectionSidebarDescriptionTutorRateText = document.createElement("p");
+							mapSectionSidebarDescriptionTutorRateHeader.innerText = "Available:"
+							mapSectionSidebarDescriptionTutorRateText.innerText = tutors[u]["Rate"];
+							mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorRate);
+							mapSectionSidebarDescriptionTutorRate.appendChild(mapSectionSidebarDescriptionTutorRateHeader);
+							mapSectionSidebarDescriptionTutorRate.appendChild(mapSectionSidebarDescriptionTutorRateText);
+						}
 
 
-					if (tutors[u]["Cost"] != undefined) {
-						let mapSectionSidebarDescriptionTutorCost = document.createElement("span");
-						let mapSectionSidebarDescriptionTutorCostHeader = document.createElement("h6");
-						let mapSectionSidebarDescriptionTutorCostText = document.createElement("p");
-						mapSectionSidebarDescriptionTutorCostHeader.innerText = "Cost:";
-						mapSectionSidebarDescriptionTutorCostText.innerHTML = numFormat(tutors[u]["Cost"].replaceAll(",","\n")).replaceAll(" Yellow Shard",'x<img src="'+getMedia(true,[`Yellow Shard`],[PATH_Item_Bag])+'" name="item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="'+getMedia(true,[`Red Shard`],[PATH_Item_Bag])+'" name="item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="'+getMedia(true,[`Blue Shard`],[PATH_Item_Bag])+'" name="item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="'+getMedia(true,[`Green Shard`],[PATH_Item_Bag])+'" name="item" title="Green Shard">');
-						mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorCost);
-						mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostHeader);
-						mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostText);
-						
-						let costImages = mapSectionSidebarDescriptionTutorCost.querySelectorAll(":scope img");
-						for(let y = 0; y < costImages.length; y++) {
-							costImages[y].addEventListener("click",dataRedirect);
-							costImages[y].setAttribute("function","dataRedirect");
+						if (tutors[u]["Cost"] != undefined) {
+							let mapSectionSidebarDescriptionTutorCost = document.createElement("span");
+							let mapSectionSidebarDescriptionTutorCostHeader = document.createElement("h6");
+							let mapSectionSidebarDescriptionTutorCostText = document.createElement("p");
+							mapSectionSidebarDescriptionTutorCostHeader.innerText = "Cost:";
+							mapSectionSidebarDescriptionTutorCostText.innerHTML = numFormat(tutors[u]["Cost"].replaceAll(",","\n")).replaceAll(" Yellow Shard",'x<img src="'+getMedia(true,[`Yellow Shard`],[PATH_Item_Bag])+'" name="item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="'+getMedia(true,[`Red Shard`],[PATH_Item_Bag])+'" name="item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="'+getMedia(true,[`Blue Shard`],[PATH_Item_Bag])+'" name="item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="'+getMedia(true,[`Green Shard`],[PATH_Item_Bag])+'" name="item" title="Green Shard">');
+							mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorCost);
+							mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostHeader);
+							mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostText);
+							
+							let costImages = mapSectionSidebarDescriptionTutorCost.querySelectorAll(":scope img");
+							for(let y = 0; y < costImages.length; y++) {
+								costImages[y].addEventListener("click",dataRedirect);
+								costImages[y].setAttribute("function","dataRedirect");
+							}
 						}
 					}
-
 
 			
 				}
@@ -2202,13 +2202,10 @@ function updateTrainer(trainers,condition) {
 	}
 
 	if (trainerImage == undefined) {
-		trainerImage = trainerClass;
-		if (trainerGender == "Male") {
-			trainerImage +=	"_M";
-		}
-		else if (trainerGender == "Female") {
-			trainerImage +=	"_F";
-		}
+		trainerImage = [trainerClass,trainerClass+" Male",trainerClass+" Female",];
+	}
+	else {
+		trainerImage = [trainerImage]
 	}
 
 
@@ -2217,7 +2214,10 @@ function updateTrainer(trainers,condition) {
 	let currentImg = document.createElement("img");
 	let nextImg = document.createElement("img");
 	let nameText = document.createElement("h6");
-	currentImg.src = getMedia(true,[trainerImage],[PATH_Character_Battle_Front_PNG])
+
+
+
+	currentImg.src = getMedia(true,trainerImage,[PATH_Character_Battle_Front])
 
 
 
@@ -2241,7 +2241,7 @@ function updateTrainer(trainers,condition) {
 				previmg +=	"_F";
 			}
 		}
-		previousImg.src = getMedia(true,[previmg],[PATH_Character_Battle_Front_PNG])
+		previousImg.src = getMedia(true,[previmg],[PATH_Character_Battle_Front])
 		previousPath.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Trainer"];
 	}
 	else {
@@ -2261,7 +2261,7 @@ function updateTrainer(trainers,condition) {
 				nextimg +=	"_F";
 			}
 		}
-		nextImg.src = getMedia(true,[nextimg],[PATH_Character_Battle_Front_PNG])
+		nextImg.src = getMedia(true,[nextimg],[PATH_Character_Battle_Front])
 		nextPath.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Trainer"];
 	}
 	else {
@@ -2856,104 +2856,103 @@ function updateTrainer(trainers,condition) {
 			let pokRight = document.createElement("div");
 			pokRight.setAttribute("name","moves");
 			liMain.appendChild(pokRight);
-		}
 
-		if (move != undefined) {
-			let moves = undefined;
+			if (move != undefined) {
+				let moves = undefined;
 
 
-			if (move.includes(",")) {
-				moves = move.split(",");
-			}
-			else {
-				moves = move;
-			}
-			for(let y = 0; y < moves.length; y++) {
-				let pokRightMovesWrap = document.createElement("b");
-				let pokRightMovesText = document.createElement("p");
-				pokRightMovesText.innerText = moves[y];
-				pokRightMovesWrap.title = formatMoveData(moves[y]);
-				pokRightMovesWrap.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moves[y])+")";
-				pokRightMovesWrap.setAttribute("name","move");
-				pokRight.appendChild(pokRightMovesWrap);
-				pokRightMovesWrap.appendChild(pokRightMovesText);
-				pokRightMovesWrap.addEventListener("click", dataRedirect);
-				pokRightMovesWrap.setAttribute("function","dataRedirect");
-				if (moves[y] != "") {
-					if(returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moves[y]) == undefined) {
-						console.log("#DEBUG# "+moves[y]+" needs formatting?");
+				if (move.includes(",")) {
+					moves = move.split(",");
+				}
+				else {
+					moves = move;
+				}
+				for(let y = 0; y < moves.length; y++) {
+					let pokRightMovesWrap = document.createElement("b");
+					let pokRightMovesText = document.createElement("p");
+					pokRightMovesText.innerText = moves[y];
+					pokRightMovesWrap.title = formatMoveData(moves[y]);
+					pokRightMovesWrap.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moves[y])+")";
+					pokRightMovesWrap.setAttribute("name","move");
+					pokRight.appendChild(pokRightMovesWrap);
+					pokRightMovesWrap.appendChild(pokRightMovesText);
+					pokRightMovesWrap.addEventListener("click", dataRedirect);
+					pokRightMovesWrap.setAttribute("function","dataRedirect");
+					if (moves[y] != "") {
+						if(returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moves[y]) == undefined) {
+							console.log("#DEBUG# "+moves[y]+" needs formatting?");
+						}
+						
+						let moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
+						if (!moveset.includes(moves[y])) {
+							console.log("#DEBUG# "+pok+" cannot learn "+moves[y]+"?");
+						}
+
 					}
-					
-					let moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
-					if (!moveset.includes(moves[y])) {
-						console.log("#DEBUG# "+pok+" cannot learn "+moves[y]+"?");
+				}
+			}
+
+			if (iv != undefined) {
+				let ivs = undefined;
+				let pokRightIV = document.createElement("div");
+				pokRightIV.setAttribute("name", "ivs");
+				liAdditional.appendChild(pokRightIV);
+				let pokRightIVTitle = document.createElement("span");
+				let pokRightIVTitleText = document.createElement("small");
+				pokRightIVTitleText.innerText = "Individual Values:";
+				pokRightIV.appendChild(pokRightIVTitle);
+				pokRightIVTitle.appendChild(pokRightIVTitleText);
+
+
+				let pokRightIVMain = document.createElement("span");
+				pokRightIV.appendChild(pokRightIVMain);
+				if (iv.includes(",")) {
+					ivs = iv.split(",");
+				}
+				else {
+					ivs = iv;
+				}
+				for(let y = 0; y < ivs.length; y++) {
+					if (ivs[y] != "") {
+						let pokRightIVText = document.createElement("small");
+						pokRightIVText.setAttribute("name","iv");
+						pokRightIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+ivs[y];
+						pokRightIVMain.appendChild(pokRightIVText);
 					}
-
 				}
 			}
-		}
 
-		if (iv != undefined) {
-			let ivs = undefined;
-			let pokRightIV = document.createElement("div");
-			pokRightIV.setAttribute("name", "ivs");
-			liAdditional.appendChild(pokRightIV);
-			let pokRightIVTitle = document.createElement("span");
-			let pokRightIVTitleText = document.createElement("small");
-			pokRightIVTitleText.innerText = "Individual Values:";
-			pokRightIV.appendChild(pokRightIVTitle);
-			pokRightIVTitle.appendChild(pokRightIVTitleText);
+			if (ev != undefined) {
+				let evs = undefined;
+				let pokRightEV = document.createElement("div");
+				pokRightEV.setAttribute("name", "evs");
+				liAdditional.appendChild(pokRightEV);
+				let pokRightEVTitle = document.createElement("span");
+				let pokRightEVTitleText = document.createElement("small");
+				pokRightEVTitleText.innerText = "Effort Values:";
+				pokRightEV.appendChild(pokRightEVTitle);
+				pokRightEVTitle.appendChild(pokRightEVTitleText);
 
 
-			let pokRightIVMain = document.createElement("span");
-			pokRightIV.appendChild(pokRightIVMain);
-			if (iv.includes(",")) {
-				ivs = iv.split(",");
-			}
-			else {
-				ivs = iv;
-			}
-			for(let y = 0; y < ivs.length; y++) {
-				if (ivs[y] != "") {
-					let pokRightIVText = document.createElement("small");
-					pokRightIVText.setAttribute("name","iv");
-					pokRightIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+ivs[y];
-					pokRightIVMain.appendChild(pokRightIVText);
+				let pokRightEVMain = document.createElement("span");
+				pokRightEV.appendChild(pokRightEVMain);
+				if (ev.includes(",")) {
+					evs = ev.split(",");
+				}
+				else {
+					evs = ev;
+				}
+				for(let y = 0; y < evs.length; y++) {
+					if (evs[y] != "") {
+						let pokRightEVText = document.createElement("small");
+						pokRightEVText.setAttribute("name","ev");
+						pokRightEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+evs[y];
+						pokRightEVMain.appendChild(pokRightEVText);
+					}
 				}
 			}
+
 		}
-
-		if (ev != undefined) {
-			let evs = undefined;
-			let pokRightEV = document.createElement("div");
-			pokRightEV.setAttribute("name", "evs");
-			liAdditional.appendChild(pokRightEV);
-			let pokRightEVTitle = document.createElement("span");
-			let pokRightEVTitleText = document.createElement("small");
-			pokRightEVTitleText.innerText = "Effort Values:";
-			pokRightEV.appendChild(pokRightEVTitle);
-			pokRightEVTitle.appendChild(pokRightEVTitleText);
-
-
-			let pokRightEVMain = document.createElement("span");
-			pokRightEV.appendChild(pokRightEVMain);
-			if (ev.includes(",")) {
-				evs = ev.split(",");
-			}
-			else {
-				evs = ev;
-			}
-			for(let y = 0; y < evs.length; y++) {
-				if (evs[y] != "") {
-					let pokRightEVText = document.createElement("small");
-					pokRightEVText.setAttribute("name","ev");
-					pokRightEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+evs[y];
-					pokRightEVMain.appendChild(pokRightEVText);
-				}
-			}
-		}
-
-
 
 		li.setAttribute("data-string",datas[u]);
 
