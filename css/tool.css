@@ -2518,6 +2518,18 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
     flex-direction: column;
 }
 
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name="name"] {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: .2s ease opacity;
+    width: 20%;
+    margin: 2px auto !important;
+    flex-direction: column;
+	text-align: center;
+}
+
 
 
 #contain div#tool div#dmg > div:not([data-battle='Single Battle']) div[name='result'] *[name='imgs']:active > img[name='img'] {
