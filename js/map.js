@@ -2201,12 +2201,17 @@ function updateTrainer(trainers,condition) {
 		trainerNext = trainers[q+1];
 	}
 
-	if (trainerImage == undefined) {
-		trainerImage = [trainerClass,trainerClass+" Male",trainerClass+" Female",];
+	trainerImage = [trainerImage];
+	if (trainerImage[0] == undefined) {
+		trainerImage = ["^"+trainerClass]
+		if (trainerGender == "Male") {
+			trainerImage.unshift(trainerImage[0]+"_Male")
+		}
+		else if (trainerGender == "Female") {
+			trainerImage.unshift(trainerImage[0]+"_Female")
+		}
 	}
-	else {
-		trainerImage = [trainerImage]
-	}
+
 
 
 
@@ -2230,18 +2235,20 @@ function updateTrainer(trainers,condition) {
 	}
 
 	if(trainerPrevious != undefined) {
-		let previmg = trainerPrevious["Image"];
-		if (previmg == undefined) {
-			previmg = trainerPrevious["Class"];
-
+		let previmg = [trainerPrevious["Image"]];
+		if (previmg[0] == undefined) {
+			previmg = ["^"+trainerPrevious["Class"]]
 			if (trainerPrevious["Gender"] == "Male") {
-				previmg +=	"_M";
+				previmg.unshift(previmg[0]+"_Male")
 			}
 			else if (trainerPrevious["Gender"] == "Female") {
-				previmg +=	"_F";
+				previmg.unshift(previmg[0]+"_Female")
 			}
 		}
-		previousImg.src = getMedia(true,[previmg],[PATH_Character_Battle_Front])
+
+	
+
+		previousImg.src = getMedia(true,previmg,[PATH_Character_Battle_Front])
 		previousPath.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Trainer"];
 	}
 	else {
@@ -2250,18 +2257,18 @@ function updateTrainer(trainers,condition) {
 		previousPath.removeAttribute("title");
 	}
 	if(trainerNext != undefined) {
-		let nextimg = trainerNext["Image"];
-		if (nextimg == undefined) {
-			nextimg = trainerNext["Class"];
-
+		let nextimg = [trainerNext["Image"]];
+		if (nextimg[0] == undefined) {
+			nextimg = ["^"+trainerNext["Class"]]
 			if (trainerNext["Gender"] == "Male") {
-				nextimg +=	"_M";
+				nextimg.unshift(nextimg[0]+"_Male")
 			}
 			else if (trainerNext["Gender"] == "Female") {
-				nextimg +=	"_F";
+				nextimg.unshift(nextimg[0]+"_Female")
 			}
 		}
-		nextImg.src = getMedia(true,[nextimg],[PATH_Character_Battle_Front])
+
+		nextImg.src = getMedia(true,nextimg,[PATH_Character_Battle_Front])
 		nextPath.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Trainer"];
 	}
 	else {
