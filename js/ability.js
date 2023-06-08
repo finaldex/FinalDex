@@ -114,7 +114,7 @@ let createAbility = function() {
 
         let abilitySectionHeaderGame = document.createElement("span");
         let abilitySectionHeaderGameImage = document.createElement("img");
-        abilitySectionHeaderGameImage.src = getMedia(["Title"],[PATH_Game_Title])
+        abilitySectionHeaderGameImage.src = getMedia(true,["Title"],[PATH_Game_Title])
         abilitySectionHeaderGameImage.setAttribute("onerror","this.display='none'");
         abilitySectionHeader.appendChild(abilitySectionHeaderGame);
         abilitySectionHeaderGame.appendChild(abilitySectionHeaderGameImage);
@@ -291,7 +291,7 @@ let createAbility = function() {
 						let abilitySectionSidebarSidebarLiImgOuter = document.createElement("div");
 						let abilitySectionSidebarSidebarLiImg = document.createElement("img");
 						let abilitySectionSidebarSidebarLiText = document.createElement("small");
-						abilitySectionSidebarSidebarLiImg.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
+						abilitySectionSidebarSidebarLiImg.src = getMedia(true,[getPokémonPath(int)],[PATH_Pokémon_Box_Default_PNG]);
 						abilitySectionSidebarSidebarLiImg.setAttribute("title", name);
 						abilitySectionSidebarSidebarLiText.innerText = name;
 						abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiImgOuter);
