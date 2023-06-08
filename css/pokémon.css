@@ -624,6 +624,7 @@
     height: 100%;
 	width: 50%;
     flex-direction: column;
+	position:relative;
 }
 #pokémon > aside[name='settings'] > span[name="imagetype"] > span:first-child {
 	width: 60%;
@@ -631,6 +632,29 @@
 #pokémon > aside[name='settings'] > span[name="imagetype"] > span:last-child {
 	width: 40%;
 }
+#pokémon > aside[name='settings'] > span[name="imagetype"] img {
+	width: 100%;
+    height: 60%;
+	position:relative;
+}
+#pokémon > aside[name='settings'] > span[name="imagetype"] img[src=""] {
+	visibility:hidden;
+}
+#pokémon > aside[name='settings'] > span[name="imagetype"] img[src=""]::after {
+	content: "?";
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+    justify-content: center;
+    align-items: center;
+	font-size: xxx-large;
+}
+
+
 #pokémon > aside[name='settings'] > span[name="imagetype"] > span:last-child select {
 	padding: 5px;
 	margin: 2px 0;
