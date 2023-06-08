@@ -6,7 +6,6 @@ function theme() {
 }
 
 function switchTheme() {
-	console.log(event.target)
 	if(event.target.checked) {
 		document.documentElement.setAttribute("data-theme", "dark");
 		localStorage.setItem("finaldex-theme", "dark");
