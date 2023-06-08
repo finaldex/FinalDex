@@ -97,6 +97,9 @@ function dirGet() {
         imgd.setAttribute("data-state","1");
     }
 
+    val1 = val1.replaceAll("\\","/");
+    val2 = val2.replaceAll("\\","/");
+
 
     for (let i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
         let path = Object.keys(finaldata["Directory"])[i]
