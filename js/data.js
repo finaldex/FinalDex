@@ -41,7 +41,7 @@ let createData = function(id, i) {
 			}
 			dataFormInput.value = u;
 			dataFormLabel.setAttribute("for","data-form-selector-"+u);
-			dataFormImg.src = getPokémonMediaPath([u],[PATH_Pokémon_Box_Default_PNG]);
+			dataFormImg.src = getMedia(true,[getPokémonPath(u)],[PATH_Pokémon_Box_Default_PNG]);
 			dataForm.appendChild(dataFormInput);
 			dataForm.appendChild(dataFormLabel);
 			dataFormLabel.appendChild(dataFormImg);
@@ -177,7 +177,7 @@ let createData = function(id, i) {
 	dataSectionHeaderTypeSecondary.appendChild(dataSectionHeaderTypeSecondaryText);
 
 
-	dataSectionMainMapImage.src = getMedia(["Map"],[PATH_Region_Map])[0];
+	dataSectionMainMapImage.src = getMedia(true,["Map"],[PATH_Region_Map]);
 	dataSectionMainMapImage.setAttribute("usemap", "#"+Region.join(' & ')+"-"+id);
 	
 	dataSectionMainMap.setAttribute("name", Region.join(' & ')+"-"+id);
@@ -382,7 +382,7 @@ let createData = function(id, i) {
         dataPreviousNational.setAttribute("name","national");
         dataPreviousNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,"")) - 1)));
         dataPreviousNational.title = "#"+(parseInt(getIntID(d,"")) - 1)+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,"")) - 1))]["Pokémon"];
-        dataPreviousNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))-1))],[PATH_Pokémon_Box_Default_PNG]);
+        dataPreviousNationalImg.src = getMedia(true,[getPokémonPath(getIntID("",(parseInt(getIntID(d,""))-1)))],[PATH_Pokémon_Box_Default_PNG]);
         
         dataPrevious.appendChild(dataPreviousNational);
         dataPreviousNational.appendChild(dataPreviousNationalImg);
@@ -399,7 +399,7 @@ let createData = function(id, i) {
         dataNextNational.setAttribute("name","national");
         dataNextNational.setAttribute("value",getIntID("",(parseInt(getIntID(d,""))+1)));
         dataNextNational.title = "#"+(parseInt(getIntID(d,""))+1)+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",(parseInt(getIntID(d,""))+1))]["Pokémon"];
-        dataNextNationalImg.src = getPokémonMediaPath([getIntID("",(parseInt(getIntID(d,""))+1))],[PATH_Pokémon_Box_Default_PNG]);
+        dataNextNationalImg.src = getMedia(true,[getPokémonPath(getIntID("",(parseInt(getIntID(d,""))+1)))],[PATH_Pokémon_Box_Default_PNG]);
         
         dataNext.appendChild(dataNextNational);
         dataNextNational.appendChild(dataNextNationalImg);
@@ -423,7 +423,7 @@ let createData = function(id, i) {
 			dataPreviousRegional.setAttribute("name","regional"+y);
 			dataPreviousRegional.setAttribute("value",getIntID("",previousID));
 			dataPreviousRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",previousID)][DATA_Pokémon_PokédexID[Pokédex[q]]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",previousID)]["Pokémon"];
-			dataPreviousRegionalImg.src = getPokémonMediaPath([getIntID("",previousID)],[PATH_Pokémon_Box_Default_PNG]);
+			dataPreviousRegionalImg.src = getMedia(true,[getPokémonPath(getIntID("",previousID))],[PATH_Pokémon_Box_Default_PNG]);
 			
 			dataPrevious.appendChild(dataPreviousRegional);
 			dataPreviousRegional.appendChild(dataPreviousRegionalImg);
@@ -439,7 +439,7 @@ let createData = function(id, i) {
 			dataNextRegional.setAttribute("name","regional"+y);
 			dataNextRegional.setAttribute("value",getIntID("",nextID));
 			dataNextRegional.title = "#"+finaldata["Pokémon"]["Pokédex ID"][getIntID("",nextID)][DATA_Pokémon_PokédexID[Pokédex[q]]]+"\n"+finaldata["Pokémon"]["Reference"][getIntID("",nextID)]["Pokémon"];
-			dataNextRegionalImg.src = getPokémonMediaPath([getIntID("",nextID)],[PATH_Pokémon_Box_Default_PNG]); 
+			dataNextRegionalImg.src = getMedia(true,[getPokémonPath(getIntID("",nextID))],[PATH_Pokémon_Box_Default_PNG]); 
 			
 			dataNext.appendChild(dataNextRegional);
 			dataNextRegional.appendChild(dataNextRegionalImg);
@@ -753,7 +753,7 @@ function loadData() {
 				evo.setAttribute("name","evolution");
          
                 evoButton.setAttribute("value",getPokémonInt(evoArr[q][u]["Pokémon"]));
-				evoImg.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
+				evoImg.src = getMedia(true,[getPokémonPath(int)],[PATH_Pokémon_Box_Default_PNG]);
                 evoImg.title = evoArr[q][u]["Pokémon"];
 
                 if (getPokémonID(evoArr[q][u]["Pokémon"]) == undefined) {
@@ -1013,7 +1013,7 @@ function loadData() {
             
                         pokPok.setAttribute("name","pokémon");
                         pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Pokémon"][q]["Level"];
-						pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+						pokPokImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 				
 						pokPokImg.setAttribute("title",finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]);
                 
@@ -1097,7 +1097,7 @@ function loadData() {
 
                                 if (finaldata["Location Pokémon"]["Pokémon"][q]["Rate"] != undefined) {
                                     let pokRateText = document.createElement("h6");
-                                    pokRateText.innerHTML = finaldata["Location Pokémon"]["Pokémon"][q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="'+getMedia([`Morning`],[`./media/Images/FinalDex/`])[0]+'" title="Morning">').replaceAll("da:",'<img src="'+getMedia([`Day`],[`./media/Images/FinalDex/`])[0]+'" title="Day">').replaceAll("ni:",'<img src="'+getMedia([`Night`],[`./media/Images/FinalDex/`])[0]+'" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("mon:",'<pre name="monday">Monday</pre>').replaceAll("tue:",'<pre name="tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="thursday">Thursday</pre>').replaceAll("fri:",'<pre name="friday">Friday</pre>').replaceAll("sat:",'<pre name="saturday">Saturday</pre>').replaceAll("sun:",'<pre name="sunday">Sunday</pre>').replaceAll("extremelyharshsunlight:",'<img src="'+getMedia([`Extremely Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="'+getMedia([`Hail`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Hail">').replaceAll("harshsunlight:",'<img src="'+getMedia([`Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="'+getMedia([`Heavy Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Heavy Rain">').replaceAll("rain:",'<img src="'+getMedia([`Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Rain">').replaceAll("sandstorm:",'<img src="'+getMedia([`Sandstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Sandstorm">').replaceAll("strongwinds:",'<img src="'+getMedia([`Strong Winds`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Strong Winds">').replaceAll("fog:",'<img src="'+getMedia([`Fog`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Fog">').replaceAll("cloudy:",'<img src="'+getMedia([`Cloudy`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Cloudy">').replaceAll("clear:",'<img src="'+getMedia([`Clear`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Clear">').replaceAll("blizzard:",'<img src="'+getMedia([`Blizzard`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Blizzard">').replaceAll("snow:",'<img src="'+getMedia([`Snow`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Snow">').replaceAll("thunderstorm:",'<img src="'+getMedia([`Thunderstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])[0]+'" title="Thunderstorm">').replaceAll("%,","%");
+                                    pokRateText.innerHTML = finaldata["Location Pokémon"]["Pokémon"][q]["Rate"].replaceAll(",","\n").replaceAll("mo:0%,","").replaceAll("mo:0%","").replaceAll("da:0%,","").replaceAll("da:0%","").replaceAll("ni:0%,","").replaceAll("ni:0%","").replaceAll("mo:",'<img src="'+getMedia(true,[`Morning`],[`./media/Images/FinalDex/`])+'" title="Morning">').replaceAll("da:",'<img src="'+getMedia(true,[`Day`],[`./media/Images/FinalDex/`])+'" title="Day">').replaceAll("ni:",'<img src="'+getMedia(true,[`Night`],[`./media/Images/FinalDex/`])+'" title="Night">').replaceAll("sp:0%,",'').replaceAll("sp:0%",'').replaceAll("su:0%,",'').replaceAll("su:0%",'').replaceAll("au:0%,",'').replaceAll("au:0%",'').replaceAll("wi:0%,",'').replaceAll("wi:0%",'').replaceAll("sp:",'<pre name="spring">Spring</pre>').replaceAll("au:",'<pre name="autumn">Autumn</pre>').replaceAll("su:",'<pre name="summer">Summer</pre>').replaceAll("wi:",'<pre name="winter">Winter</pre>').replaceAll("mon:",'<pre name="monday">Monday</pre>').replaceAll("tue:",'<pre name="tuesday">Tuesday</pre>').replaceAll("wed:",'<pre name="wednesday">Wednesday</pre>').replaceAll("thu:",'<pre name="thursday">Thursday</pre>').replaceAll("fri:",'<pre name="friday">Friday</pre>').replaceAll("sat:",'<pre name="saturday">Saturday</pre>').replaceAll("sun:",'<pre name="sunday">Sunday</pre>').replaceAll("extremelyharshsunlight:",'<img src="'+getMedia(true,[`Extremely Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Extremely Harsh Sunlight">').replaceAll("hail:",'<img src="'+getMedia(true,[`Hail`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Hail">').replaceAll("harshsunlight:",'<img src="'+getMedia(true,[`Harsh Sunlight`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Harsh Sunlight">').replaceAll("heavyrain:",'<img src="'+getMedia(true,[`Heavy Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Heavy Rain">').replaceAll("rain:",'<img src="'+getMedia(true,[`Rain`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Rain">').replaceAll("sandstorm:",'<img src="'+getMedia(true,[`Sandstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Sandstorm">').replaceAll("strongwinds:",'<img src="'+getMedia(true,[`Strong Winds`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Strong Winds">').replaceAll("fog:",'<img src="'+getMedia(true,[`Fog`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Fog">').replaceAll("cloudy:",'<img src="'+getMedia(true,[`Cloudy`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Cloudy">').replaceAll("clear:",'<img src="'+getMedia(true,[`Clear`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Clear">').replaceAll("blizzard:",'<img src="'+getMedia(true,[`Blizzard`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Blizzard">').replaceAll("snow:",'<img src="'+getMedia(true,[`Snow`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Snow">').replaceAll("thunderstorm:",'<img src="'+getMedia(true,[`Thunderstorm`],[PATH_Weather_Icon_PNG,PATH_Weather_Icon_GIF])+'" title="Thunderstorm">').replaceAll("%,","%");
                                     pokRate.appendChild(pokRateText);
                                 }
 
@@ -1201,7 +1201,7 @@ function loadData() {
 
 									for(let r = 0; r < allies.length; r++) {
 										let allyIMG = document.createElement("img");
-										allyIMG.src = getPokémonMediaPath([getPokémonInt(allies[r])],[PATH_Pokémon_Box_Default_PNG]);
+										allyIMG.src = getMedia(true,[getPokémonPath(getPokémonInt(allies[r]))],[PATH_Pokémon_Box_Default_PNG]);
 										allyIMG.title = allies[r];
 										pokAllies.appendChild(allyIMG);
 									}
@@ -1218,7 +1218,7 @@ function loadData() {
 								pokPok.setAttribute("name","pokémon");
 								pokPokIsAlly.innerText = "Ally to "+finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"];
 								pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Pokémon"][q]["Level"];
-								pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+								pokPokImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 								pokPokImg.setAttribute("value",getPokémonInt(finaldata["Location Pokémon"]["Pokémon"][q]["Pokémon"]));
 			
 
@@ -1314,11 +1314,11 @@ function loadData() {
 
 					for(let r = 0; r < currency.length; r++) {
 						if (getItemIcon(currency[r]) != undefined) {
-							currency[r] = '<img src="'+getMedia([getItemIcon(currency[r])],[PATH_Item_Bag])[0]+'" onerror="this.style.display=´none´"; onclick="dataRedirect()" name="item" title="'+getItemIcon(currency[r])+'"/>';
+							currency[r] = '<img src="'+getMedia(true,[getItemIcon(currency[r])],[PATH_Item_Bag])+'" onerror="this.style.display=´none´"; onclick="dataRedirect()" name="item" title="'+getItemIcon(currency[r])+'"/>';
 						}
 						else {
 							if (currency[r] == "Pokémon Dollar") {
-								currency[r] = "<span title='"+currency[r]+"'>"+currency[r].replaceAll("Pokémon Dollar",'<img src="'+getMedia(["Pokémon Dollar"],[PATH_Currency_Icon])+'" title="Pokémon Dollar" />')+"</span>";
+								currency[r] = "<span title='"+currency[r]+"'>"+currency[r].replaceAll("Pokémon Dollar",'<img src="'+getMedia(true,["Pokémon Dollar"],[PATH_Currency_Icon])+'" title="Pokémon Dollar" />')+"</span>";
 							}
 							else {
 								currency[r] = "<span title='"+currency[r]+"'>"+currency[r].replace(/[^A-Z]+/g,"")+"</span>";
@@ -1345,7 +1345,7 @@ function loadData() {
 		
 					pokPok.setAttribute("name","pokémon");
 					pokPokLvl.innerText = "Lv. "+finaldata["Location Pokémon"]["Shop"][q]["Level"];
-					pokPokImg.src = getPokémonMediaPath([getPokémonInt(finaldata["Location Pokémon"]["Shop"][q]["Pokémon"])],[PATH_Pokémon_Box_Default_PNG]);
+					pokPokImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Location Pokémon"]["Shop"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
 			
 					pokPokImg.setAttribute("title",finaldata["Location Pokémon"]["Shop"][q]["Pokémon"]);
 			
@@ -1547,7 +1547,8 @@ function loadData() {
 	expyield.querySelector(':scope *[dataname="value"]').setAttribute("title","Experience gained approximated upon defeating "+getPokémonName(i)+" in battle.");
 
 
-	portrait.querySelector(":scope img").src = getPokémonMediaPath([i],[PATH_Pokémon_Art_Default_Front_Official],[],["HOME"]);
+	portrait.querySelector(":scope img").src = getMedia(true,[getPokémonPath(i)],[PATH_Pokémon_Art_Default_Front_Official],["HOME"]);
+
 
 	if (returnData(i,"Catch Rate","") != undefined) {
 		let catchRateFormula;
@@ -1576,7 +1577,7 @@ function loadData() {
             if(returnData(i,"Held Item","")[q] != undefined) {
 				pbase.setAttribute("value", returnData(i,"Held Item","")[q]);
                 pbase.setAttribute("title",percent[q]+"\n"+returnData(i,"Held Item","")[q]);
-				pimg.src = getMedia([getItemIcon(returnData(i,"Held Item","")[q])],[PATH_Item_Bag])[0];
+				pimg.src = getMedia(true,[getItemIcon(returnData(i,"Held Item","")[q])],[PATH_Item_Bag]);
 				pimg.style.display = "unset";
                 ptxt.innerText = returnData(i,"Held Item","")[q];
             } else {
@@ -1609,7 +1610,7 @@ function loadData() {
 		type.querySelector(":scope > span:first-child").classList.add("active");
 		type.querySelector(":scope > span:first-child img").style.display = "inline";
 		type.querySelector(":scope > span:first-child > * > *:last-child").innerText = returnData(i,"Type","")[0];
-		type.querySelector(":scope > span:first-child img").src = getMedia([returnData(i,"Type","")[0]],[PATH_Type_Icon])[0];
+		type.querySelector(":scope > span:first-child img").src = getMedia(true,[returnData(i,"Type","")],[PATH_Type_Icon]);
         type.querySelector(":scope > span:first-child img").setAttribute("value", returnData(i,"Type","")[0]);
 	} else {
 		type.querySelector(":scope > span:first-child").classList.remove("active");
@@ -1620,7 +1621,7 @@ function loadData() {
 		type.querySelector(":scope > span:last-child").classList.add("active");
 		type.querySelector(":scope > span:last-child img").style.display = "inline";
 		type.querySelector(":scope > span:last-child > * > *:last-child").innerText = returnData(i,"Type","")[1];
-		type.querySelector(":scope > span:last-child img").src = getMedia([returnData(i,"Type","")[1]],[PATH_Type_Icon])[0];
+		type.querySelector(":scope > span:last-child img").src = getMedia(true,[returnData(i,"Type","")[1]],[PATH_Type_Icon]);
         type.querySelector(":scope > span:last-child img").setAttribute("value", returnData(i,"Type","")[1]);
 	} else {
 		type.querySelector(":scope > span:last-child").classList.remove("active");
@@ -1666,7 +1667,7 @@ function loadData() {
                     if(learnsetArr[u]["Evolution"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Evolution"].split(",").length; p++) {
                             let dataSectionMainLearnsetLiImg = document.createElement("img");
-							dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p])],[PATH_Pokémon_Box_Default_PNG]);
+							dataSectionMainLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]))],[PATH_Pokémon_Box_Default_PNG]);
                             dataSectionMainLearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"].split(",")[p]);
                             dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"].split(",")[p]));
                             dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -1675,7 +1676,7 @@ function loadData() {
                         }
                     } else {
                         let dataSectionMainLearnsetLiImg = document.createElement("img");
-						dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Evolution"])],[PATH_Pokémon_Box_Default_PNG]);
+						dataSectionMainLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(learnsetArr[u]["Evolution"]))],[PATH_Pokémon_Box_Default_PNG]);
                         dataSectionMainLearnsetLiImg.setAttribute("title", learnsetArr[u]["Evolution"]);
                         dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Evolution"]));
                         dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -1718,7 +1719,7 @@ function loadData() {
                     if(learnsetArr[u]["Parent"].includes(",")) {
                         for (p = 0; p < learnsetArr[u]["Parent"].split(",").length; p++) {
                             let dataSectionMainLearnsetLiImg = document.createElement("img");
-							dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Parent"].split(",")[p])],[PATH_Pokémon_Box_Default_PNG]);
+							dataSectionMainLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]))],[PATH_Pokémon_Box_Default_PNG]);
                             dataSectionMainLearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"].split(",")[p]);
                             dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"].split(",")[p]));
                             dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -1727,7 +1728,7 @@ function loadData() {
                         }
                     } else {
                         let dataSectionMainLearnsetLiImg = document.createElement("img");
-						dataSectionMainLearnsetLiImg.src = getPokémonMediaPath([getPokémonInt(learnsetArr[u]["Parent"])],[PATH_Pokémon_Box_Default_PNG]);
+						dataSectionMainLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(learnsetArr[u]["Parent"]))],[PATH_Pokémon_Box_Default_PNG]);
                         dataSectionMainLearnsetLiImg.setAttribute("title", "with "+learnsetArr[u]["Parent"]);
                         dataSectionMainLearnsetLiImg.setAttribute("value",getPokémonInt(learnsetArr[u]["Parent"]));
                         dataSectionMainLearnsetLiTextOuter.appendChild(dataSectionMainLearnsetLiImg);
@@ -2192,7 +2193,7 @@ function callPopUp(type) {
 		}
 	}
 	if(type == "Held Item") {
-		icon = getMedia([getItemIcon(target.getAttribute("value"))],[PATH_Item_Bag])[0];
+		icon = getMedia(true,[getItemIcon(target.getAttribute("value"))],[PATH_Item_Bag]);
 		iconpath.setAttribute("name","item");
 		iconpath.addEventListener("click", dataRedirect);
         iconpath.setAttribute("function","dataRedirect");
@@ -2480,7 +2481,7 @@ function callPopUp(type) {
 				}
 			}
 			let img = document.createElement("img");
-            img.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
+            img.src = getMedia(true,[getPokémonPath(int)],[PATH_Pokémon_Box_Default_PNG]);
             img.title = name;
             img.setAttribute("value",int);
 
@@ -2574,7 +2575,7 @@ function callPopUp(type) {
 						let img2 = document.createElement("img");
 						let text = document.createElement("p");
 						if(result[u][json[q]] != undefined) {
-							img2.src = getMedia([result[u][json[q]]],[PATH_Type_Icon])[0];
+							img2.src = getMedia(true,[result[u][json[q]]],[PATH_Type_Icon]);
 							img2.setAttribute("onerror","this.style.display='none';this.nextElementSibling.style.display='block';");
 							text.innerText = result[u][json[q]];
 						}
@@ -2595,7 +2596,7 @@ function callPopUp(type) {
 			let span = document.createElement("span");
 			let img = document.createElement("img");
 	
-            img.src = getPokémonMediaPath([int],[PATH_Pokémon_Box_Default_PNG]);
+            img.src = getMedia(true,[getPokémonPath(int)],[PATH_Pokémon_Box_Default_PNG]);
             img.title = name;
             img.setAttribute("value",int);
 			
@@ -2615,7 +2616,7 @@ function callPopUp(type) {
 				let span2 = document.createElement("span");
 				let pimg = document.createElement("img");
 				if(result[u][json[q]] != undefined) {
-					pimg.src = getMedia([getItemIcon(result[u][json[q]])],[PATH_Item_Bag])[0];
+					pimg.src = getMedia(true,[getItemIcon(result[u][json[q]])],[PATH_Item_Bag]);
 					pimg.title = result[u][json[q]];
 					if(json[q].includes("_")) {
 						span2.innerText = json[q].split("_")[0];
