@@ -4,7 +4,6 @@ let createMove = function() {
 	let moveSectionListOptionsTitleOuter = document.createElement("div");
 	let moveSectionListOptionsSearchOuter = document.createElement("div");
 	let moveSectionListOptionsSearch = document.createElement("input");
-	let moveSectionListOptionsSearchExit = document.createElement("span");
 	let moveSectionListOptionsOuter = document.createElement("div");
 	let moveSectionListOptions = document.createElement("ol");
 	let moveSectionHeader = document.createElement("section");
@@ -21,13 +20,12 @@ let createMove = function() {
 	moveSectionContentDescription.setAttribute("name","description");
 
 
-	moveSectionListOptionsSearch.setAttribute("type", "text");
+	moveSectionListOptionsSearch.setAttribute("type","search");
 
 	moveSectionListOptionsSearch.setAttribute("placeholder", "Search Moves...");
 	moveSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
 	moveSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Moves...'");
 	moveSectionListOptionsSearch.setAttribute("autocomplete", "off");
-	moveSectionListOptionsSearchExit.setAttribute("name","exit");
 	moveSectionHeaderTitleID.innerText = "#";
 	moveSectionHeaderTitleName.innerText = "-";
 	moveSectionHeaderDebutText.innerText = "-";
@@ -35,7 +33,6 @@ let createMove = function() {
 	moveOuter.appendChild(moveSectionList);
 	moveSectionList.appendChild(moveSectionListOptionsTitleOuter);
 	moveSectionListOptionsTitleOuter.appendChild(moveSectionListOptionsSearchOuter);
-	moveSectionListOptionsSearchOuter.appendChild(moveSectionListOptionsSearchExit);
 	moveSectionListOptionsSearchOuter.appendChild(moveSectionListOptionsSearch);
 	moveSectionList.appendChild(moveSectionListOptionsOuter);
 	moveSectionListOptionsOuter.appendChild(moveSectionListOptions);
@@ -54,8 +51,7 @@ let createMove = function() {
 	moveSectionContent.setAttribute("name","content");
 	moveSectionSidebar.setAttribute("name","sidebar");
 
-	moveSectionListOptionsSearch.addEventListener("keyup", function() {search("Move");});
-	moveSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Move");});
+	moveSectionListOptionsSearch.addEventListener("input", function() {search("Move");});
 
     let moveSectionHeaderGame = document.createElement("span");
     let moveSectionHeaderGameImage = document.createElement("img");
