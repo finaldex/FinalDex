@@ -1,5 +1,8 @@
 let wsrc = ["Home","Games","FAQ","Bug","Metadata","Sources","Changelog"]
 
+
+
+
 function build() {
 
 	let Games = []
@@ -62,16 +65,62 @@ function build() {
 
 
 	}
-
-	// Videos
-
-	let vids = getMedia(false,[""],["Videos"])
-	console.log(vids)
-
-
-
-
+	
 	/*
+	// Videos
+	let first_vid = document.querySelector("video")
+	first_vid.addEventListener("play",function(){this.style.removeProperty("display")});
+	first_vid.addEventListener("ended",function(){this.style.display = "none";});
+	first_vid.addEventListener("ended",function(){
+		try {
+			this.nextElementSibling.play();
+		}
+		catch {
+			console.log("nope")
+		}
+		
+	});
+	first_vid.addEventListener("unhandledrejection",function(){console.log("ok let's do this")});
+
+
+
+	let first_src = first_vid.querySelector(":scope source")
+
+	let vids = [...(finaldata["Directory"]["./media/Videos"])].sort((a, b) => 0.5 - Math.random());
+
+	for (let q = 0; q < vids.length; q++) {
+		let path = "./media/Videos/"+vids[q];
+		if (vids[q].includes(".mp4") && vids[q] != "Sample_0.mp4" && !first_src.src.includes(vids[q]))	 {
+			let vid = document.createElement("video");
+			let src = document.createElement("source");
+			vid.setAttribute("autoplay","true");
+			vid.setAttribute("muted","true");
+			src.setAttribute("type","video/mp4");
+			src.src = path;
+			document.querySelector("#Home > span:first-child").appendChild(vid)
+			vid.appendChild(src)
+			vid.addEventListener("play",function(){this.style.removeProperty("display")});
+			vid.addEventListener("ended",function(){this.style.display = "none";});
+			vid.addEventListener("ended",function(){try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();} });
+			vid.style.display = "none";
+		}
+	}
+
+
+
+	//document.body.addEventListener("keydown",playvid);
+	//document.body.addEventListener("mousedown",playvid);
+	//document.body.addEventListener("wheel",playvid);
+
+	function playvid() {
+		document.body.removeEventListener("mousedown",playvid);
+		document.querySelector("#Home > span:first-child").setAttribute("state","play");
+		document.querySelector("#Home video").play();
+	}
+
+
+
+
 	let arr1 = [];
   	let arr2 = [];
 
@@ -142,7 +191,12 @@ function build() {
 
 }
 
-
+function shuffleArr(array){
+    for (var i = array.length - 1; i > 0; i--) {
+        var rand = Math.floor(Math.random() * (i + 1));
+        [array[i], array[rand]] = [array[rand], array[i]]
+    }
+}
 
 let finaldata = [];
 let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
@@ -172,15 +226,7 @@ function loadData(i) {
 
 
 
-let vids = document.querySelectorAll("video");
 
-for(let q = 0; q < vids.length; q++) {
-	vids[q].style.display = "none";
-	vids[q].addEventListener("play",function(){this.style.removeProperty("display")});
-	vids[q].addEventListener("ended",function(){this.style.display = "none";});
-	vids[q].addEventListener("ended",function(){try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();} })
-}
-vids[0].play();
 
 $(window).on('beforeunload', function() {
 	$(window).scrollTop(0);
