@@ -162,7 +162,7 @@ nav > div > div.active {
     border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-#Games ul li:hover,
+#Games ul li:active,
 #Games ul li:focus {
     box-shadow: -1px 1px rgb(0 0 0 / 50%);
     transform: scale(0.98);
