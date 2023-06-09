@@ -34,14 +34,6 @@ document.querySelector("nav span[name='set'] button[name='locations']").addEvent
 
 
 
-document.querySelector("nav input#search-path + span").addEventListener("click",clearSearch);
-document.querySelector("nav input#search-file + span").addEventListener("click",clearSearch);
-
-function clearSearch() {
-    let tar = this;
-
-    tar.previousElementSibling.value = "";
-}
 
 function setAll() {
     let tar = this;
