@@ -5,7 +5,6 @@ let createItem = function() {
 	let itemSectionListOptionsPocketOuter = document.createElement("div");
 	let itemSectionListOptionsSearchOuter = document.createElement("div");
 	let itemSectionListOptionsSearch = document.createElement("input");
-	let itemSectionListOptionsSearchExit = document.createElement("span");
 	let itemSectionListOptionsOuter = document.createElement("div");
 	let itemSectionListOptions = document.createElement("ol");
 	let itemSectionHeader = document.createElement("section");
@@ -19,19 +18,18 @@ let createItem = function() {
 	let itemSectionSidebar = document.createElement("section");
 	itemOuter.setAttribute("id", "item");
 	itemOuter.setAttribute("value","items");
-	itemSectionListOptionsSearch.setAttribute("type", "text");
+	itemSectionListOptionsSearch.setAttribute("type","search");
 	itemSectionListOptionsSearch.setAttribute("placeholder", "Search Items...");
 	itemSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
 	itemSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Items...'");
 	itemSectionListOptionsSearch.setAttribute("autocomplete", "off");
-	itemSectionListOptionsSearchExit.setAttribute("name","exit");
+
 	itemSectionHeaderTitleID.innerText = "#";
 	itemSectionHeaderTitleName.innerText = "Items";
 	document.querySelector("#contain").appendChild(itemOuter);
 	itemOuter.appendChild(itemSectionList);
 	itemSectionList.appendChild(itemSectionListOptionsTitleOuter);
 	itemSectionListOptionsTitleOuter.appendChild(itemSectionListOptionsSearchOuter);
-	itemSectionListOptionsSearchOuter.appendChild(itemSectionListOptionsSearchExit);
 	itemSectionListOptionsSearchOuter.appendChild(itemSectionListOptionsSearch);
 	itemSectionListOptionsTitleOuter.appendChild(itemSectionListOptionsPocketOuter);
 	itemSectionList.appendChild(itemSectionListOptionsOuter);
@@ -52,8 +50,7 @@ let createItem = function() {
 	itemSectionContent.setAttribute("name","content");
 	itemSectionSidebar.setAttribute("name","sidebar");
 
-	itemSectionListOptionsSearch.addEventListener("keyup", function() {search("Item");});
-	itemSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Item");});
+	itemSectionListOptionsSearch.addEventListener("input", function() {search("Item");});
 
 	let pockets = [];
 	for (let q = 0; q < finaldata["Items"]["Reference"].length; q++) {
