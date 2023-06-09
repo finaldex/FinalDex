@@ -1,3 +1,36 @@
+
+
+let finaldata = [];
+let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
+let baseextension = "json";
+let ite = 0;
+let datas = ["Directory","Game Metadata"]
+for(let i = 0; i < datas.length; i++) {
+    loadData(i)
+}
+
+
+function loadData(i) {
+    let val = datas[i].replace(" Metadata","")
+    let gameRequest = new XMLHttpRequest();
+    gameRequest.open('GET', baseurl+datas[i]+"."+baseextension);
+    gameRequest.responseType = 'json';
+    gameRequest.send();
+    gameRequest.onload = function() {
+        finaldata[val] = gameRequest.response;
+		ite += 1;
+		if (ite == datas.length) {
+			console.log(finaldata)
+			build();
+		}
+    }
+}
+
+
+
+
+
+
 let wsrc = ["Home","Games","FAQ","Bug","Metadata","Sources","Changelog"]
 
 
@@ -37,7 +70,7 @@ function build() {
 		let region = Games[i]["Region"];
 		let full = Games[i]["Full"];
 
-		let appender = document.querySelector("#Games span ul[name='"+generation+"']");
+		let appender = document.querySelector("#Games ul[name='"+generation+"'] > span");
 
 
 		let games = [name];
@@ -88,33 +121,6 @@ function build() {
 }
 
 
-
-
-let finaldata = [];
-let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
-let baseextension = "json";
-let ite = 0;
-let datas = ["Directory","Game Metadata"]
-for(let i = 0; i < datas.length; i++) {
-    loadData(i)
-}
-
-
-function loadData(i) {
-    let val = datas[i].replace(" Metadata","")
-    let gameRequest = new XMLHttpRequest();
-    gameRequest.open('GET', baseurl+datas[i]+"."+baseextension);
-    gameRequest.responseType = 'json';
-    gameRequest.send();
-    gameRequest.onload = function() {
-        finaldata[val] = gameRequest.response;
-		ite += 1;
-		if (ite == datas.length) {
-			console.log(finaldata)
-			build();
-		}
-    }
-}
 
 
 
@@ -227,6 +233,7 @@ $(window).on('beforeunload', function() {
 })();
 
 function buttonAction(form,action) {
+	form.parentElement.setAttribute("data-state",action);
 	let buttons = form.querySelectorAll(":scope div:first-child button");
 	for (let i = 0; i < buttons.length; i++) {
 		buttons[i].disabled = action;
