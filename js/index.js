@@ -63,6 +63,13 @@ function build() {
 
 	}
 
+	// Videos
+
+	let vids = getMedia(false,[""],["Videos"])
+	console.log(vids)
+
+
+
 
 	/*
 	let arr1 = [];
@@ -136,10 +143,11 @@ function build() {
 }
 
 
+
 let finaldata = [];
 let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
 let baseextension = "json";
-
+let ite = 0;
 let datas = ["Directory","Game Metadata"]
 for(let i = 0; i < datas.length; i++) {
     loadData(i)
@@ -154,14 +162,25 @@ function loadData(i) {
     gameRequest.send();
     gameRequest.onload = function() {
         finaldata[val] = gameRequest.response;
-		if (i == datas.length-1) {
+		ite += 1;
+		if (ite == datas.length) {
 			build();
+			console.log(finaldata)
 		}
     }
 }
 
 
 
+let vids = document.querySelectorAll("video");
+
+for(let q = 0; q < vids.length; q++) {
+	vids[q].style.display = "none";
+	vids[q].addEventListener("play",function(){this.style.removeProperty("display")});
+	vids[q].addEventListener("ended",function(){this.style.display = "none";});
+	vids[q].addEventListener("ended",function(){try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();} })
+}
+vids[0].play();
 
 $(window).on('beforeunload', function() {
 	$(window).scrollTop(0);
