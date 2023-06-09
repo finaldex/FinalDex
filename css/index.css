@@ -3,7 +3,7 @@ body {
 }
 nav {
     width: 100%;
-    height: 5vh;
+    height: 7.5vh;
     position: unset;
     display: flex;
     align-items: center;
@@ -12,17 +12,25 @@ nav {
     box-shadow: 0px 2px 1px #000;
     z-index: 100;
     position: relative;
+    min-height: 40px;
+    user-select: none;
 }
 li {
     list-style: unset;
 }
 #content {
-    height: 95vh;
+    height: 92.5vh;
     position: relative;
     display: block;
     overflow: auto;
 }
 
+nav > div:first-child:active > span > *:last-child,
+nav b:hover,
+nav b:active {
+    text-decoration: underline;
+    text-underline-position: under;
+}
 
 nav b:active {
     transform:scale(0.95);
@@ -40,6 +48,7 @@ nav > div:first-child {
 }
 nav > div:first-child > img {
     height:100%;
+    filter: drop-shadow(0 1px 1px black);
 }
 nav > div:first-child > * > * {
     text-align: center;
@@ -241,7 +250,7 @@ nav > div > div.active {
     font-size: 20px;
     position: relative;
     height: unset;
-    height: calc(95vh - calc(5vw / 4));
+    height: calc(92.5vh - calc(5vw / 4));
     background: var(--color_30);
     overflow: hidden;
     display: flex;
@@ -376,7 +385,7 @@ nav > div > div.active {
 
 
 #Home > span strong,
-nav > div:first-child > span > *:last-child {
+nav > div:first-child > span > span:last-child > *{
     background: -webkit-linear-gradient(left, #3F3F3F, #7F7F7F);
     background: -moz-linear-gradient(left, #3F3F3F, #7F7F7F);
     background: -ms-linear-gradient(left, #3F3F3F, #7F7F7F);
@@ -443,6 +452,7 @@ nav > div:first-child > span > *:last-child {
 
 #content > span:not([name="0"]) > * {
     padding:10vh 0;
+    max-width: 80vw;
 }
 
 #content > span {
@@ -512,6 +522,9 @@ ol {
 #Changelog ul {
     list-style:square;
 }
+#Changelog ul {
+    padding: 5px 0 10px;
+}
 
 #Agenda ul li ~ li {
     list-style:disc;
@@ -546,7 +559,7 @@ ol {
 } 
 #Bug select,
 #Bug textarea {
-    padding: 5px;
+    padding: 5px 10px;
 }
 
 code {
