@@ -549,13 +549,12 @@ ol {
 }
 
 
-#Agenda ul li > *::after {
-    content:".";
-}
 
 #Bug form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -569,7 +568,20 @@ ol {
 #Bug {
     min-width: 400px;
     text-align:center;
-} 
+    width: min-content;
+}
+#Bug ol {
+    background: ghostwhite;
+    border: 1px solid;
+    padding: 10px 40px;
+    border-radius: 6px;
+}
+#Bug ol > span {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
 #Bug select,
 #Bug textarea {
     padding: 5px 10px;
@@ -583,7 +595,11 @@ code {
     min-height: 100px;
     min-width: 100%;
 }
-
+select,
+textarea,
+input {
+    outline: none;
+}
 
 #Bug > ol > * {
     transition: 1s ease 0s opacity, 0s linear 0s height;
@@ -595,13 +611,28 @@ code {
     opacity:0;
     height:0;
     transition: none;
+    display:block;
 }
 
-#Agenda ul:has(li > * > s) {
+#Bug figure {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Agenda li:has(s) {
     display: none;
 }
-
+#Agenda ul li {
+    padding: 0 0 5px;
+}
 
 #Agenda {
     text-transform:capitalize;
+}
+#FAQ ul li:not(:first-child) > *::after,
+#Changelog ul li:not(:first-child) > *::after,
+#Agenda ul li > *::after {
+    content:".";
 }
