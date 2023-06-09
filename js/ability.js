@@ -5,7 +5,6 @@ let createAbility = function() {
 		let abilitySectionListOptionsTitleOuter = document.createElement("div");
 		let abilitySectionListOptionsSearchOuter = document.createElement("div");
 		let abilitySectionListOptionsSearch = document.createElement("input");
-		let abilitySectionListOptionsSearchExit = document.createElement("span");
 		let abilitySectionListOptionsOuter = document.createElement("div");
 		let abilitySectionListOptions = document.createElement("ol");
 		let abilitySectionHeader = document.createElement("section");
@@ -73,7 +72,7 @@ let createAbility = function() {
 		abilityOuter.setAttribute("value","abilities");
 
 
-		abilitySectionListOptionsSearch.setAttribute("type","text");
+		abilitySectionListOptionsSearch.setAttribute("type","search");
 
 		abilitySectionListOptionsSearch.setAttribute("placeholder","Search Abilities...");
 		abilitySectionListOptionsSearch.setAttribute("onfocus","this.placeholder=''");
@@ -82,13 +81,11 @@ let createAbility = function() {
 
 		abilitySectionHeaderTitleName.innerText = "Abilities";
 
-		abilitySectionListOptionsSearchExit.setAttribute("name","exit");
 
 		document.querySelector("#contain").appendChild(abilityOuter);
 		abilityOuter.appendChild(abilitySectionList);
 		abilitySectionList.appendChild(abilitySectionListOptionsTitleOuter);
 		abilitySectionListOptionsTitleOuter.appendChild(abilitySectionListOptionsSearchOuter);
-		abilitySectionListOptionsSearchOuter.appendChild(abilitySectionListOptionsSearchExit);
 		abilitySectionListOptionsSearchOuter.appendChild(abilitySectionListOptionsSearch);
 		abilitySectionList.appendChild(abilitySectionListOptionsOuter);
 		abilitySectionListOptionsOuter.appendChild(abilitySectionListOptions);
@@ -108,8 +105,7 @@ let createAbility = function() {
 		abilitySectionContentDescription.appendChild(abilitySectionContentAffectText);
 		abilityOuter.appendChild(abilitySectionSidebar);
 
-		abilitySectionListOptionsSearch.addEventListener("keyup", function() {search("Ability");});
-		abilitySectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Ability");});
+		abilitySectionListOptionsSearch.addEventListener("input", function() {search("Ability");});
 
 
         let abilitySectionHeaderGame = document.createElement("span");
