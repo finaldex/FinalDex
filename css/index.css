@@ -291,10 +291,15 @@ nav > div > div.active {
 
 
 
+
 #Home {
     flex-direction: column;
     font-size: 20px;
     position: relative;
+    height: unset;
+    height: 90vh;
+    background: var(--color_30);
+    overflow: hidden;
 }
 /*
 #Home > span {
@@ -308,23 +313,39 @@ nav > div > div.active {
 
 
 #Home > span:first-child {
-    position: absolute;
-    top: 0%;
     width: 100%;
-    height: calc(100% + 100px);
-    background: var(--color_30);
-    
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
 }
 
 
 #Home > span video {
     position: relative;
-    opacity: 0.25;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: top;
+    max-width: 1920px;
+    opacity: 0.25;
+    transition: 1s ease 0s opacity, 0s ease 1s width;
 }
+
+#Home > span video.active {
+    transition: 1s ease 1s opacity, 0s ease 1s width;
+}
+#Home > span video.inactive {
+    opacity: 0;
+    width: 0;
+}
+
+
+
+#Home > span:has(video.active ~ video.active) > *.active:first-child,
+#Home > span:has(video.active ~ video.active) > *:first-child:not(.active) + *.active {
+    display:none;
+}
+ 
 
 #Home > span:first-child::after {
     content: "";
@@ -340,7 +361,14 @@ nav > div > div.active {
 }
 
 #Home > span:last-child {
-    filter: drop-shadow(2px 4px 6px black);
+    filter: drop-shadow(0px 2px 4px black);
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #Home > span h5 {
@@ -555,9 +583,7 @@ nav > div:first-child > span > h2 {
     list-style-type: none;
     margin-left: 20px;
 }
-#Changelog li:not(:first-child) > * {
-    font-size: 90%;
-}
+
 
 #Changelog ol ul {
     padding-bottom: 10px;
@@ -672,11 +698,9 @@ body > span[name="num"] {
     position:relative;
 }
 
-#Games {
-    margin-top: 100px;
-}
 
-#below::before,
+
+#Home::after,
 #below {
     background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%);
     background-size: 1em 1em;
@@ -684,14 +708,16 @@ body > span[name="num"] {
 
 }
 
-#below::before {
+#Home::after {
     content: "";
     display: block;
     width: 100%;
     clip-path: polygon(50% 0, 100% 100%, 0% 100%, 0 100%);
-    height: 100px;
+    height: 5vw;
+    max-height: 100px;
     position: absolute;
-    top: -99px;
+    bottom: -1px;
+    z-index: 100;
 }
 .gform select {
     padding: 10px 30px;
