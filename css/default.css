@@ -77,6 +77,7 @@ h5 {
 h6 {
     font-size: min(max(0.7em, 0.75vw), 0.83em);
 }
+input[type="search"],
 input[type="text"],
 input[type="number"] {
     font-size:var(--sizeFontS)
@@ -246,7 +247,7 @@ select:not([disabled]) {
 select option[disabled] {
     display:none;
 }
-select[type='icon'] {
+select[type="icon"] {
     background: none;
     border:none;
 }
@@ -1166,9 +1167,10 @@ sup[name="time"] {
 
 
 
-input[type=text] {
+input[type="search"] {
 	border-radius: 5px;
 	border-color: var(--border2) !important;
+	outline: none;
 }
 
 
