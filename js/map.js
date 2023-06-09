@@ -4,7 +4,6 @@ let createMap = function() {
 	let mapSectionListOptionsTitleOuter = document.createElement("div");
 	let mapSectionListOptionsSearchOuter = document.createElement("div");
 	let mapSectionListOptionsSearch = document.createElement("input");
-	let mapSectionListOptionsSearchExit = document.createElement("span");
 	let mapSectionHeader = document.createElement("section");
 	let mapSectionHeaderTitle = document.createElement("span");
 	let mapSectionHeaderTitleText = document.createElement("h3");
@@ -16,20 +15,18 @@ let createMap = function() {
 	mapOuter.setAttribute("value","map");
 
 
-	mapSectionListOptionsSearch.setAttribute("type", "text");
+	mapSectionListOptionsSearch.setAttribute("type", "search");
 
 	mapSectionListOptionsSearch.setAttribute("placeholder", "Search Locations...");
 	mapSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
 	mapSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Locations...'");
 	mapSectionListOptionsSearch.setAttribute("autocomplete", "off");
-	mapSectionListOptionsSearchExit.setAttribute("name","exit");
 	/*mapSectionHeaderTitleText.innerText = "Map of "+Region.replaceAll(","," & ");*/
 	mapSectionHeaderFlavor.setAttribute("title", "Slogan")
 	document.querySelector("#contain").appendChild(mapOuter);
 	mapOuter.appendChild(mapSectionList);
 	mapSectionList.appendChild(mapSectionListOptionsTitleOuter);
 	mapSectionListOptionsTitleOuter.appendChild(mapSectionListOptionsSearchOuter);
-	mapSectionListOptionsSearchOuter.appendChild(mapSectionListOptionsSearchExit);
 	mapSectionListOptionsSearchOuter.appendChild(mapSectionListOptionsSearch);
 	mapOuter.appendChild(mapSectionHeader);
 	mapSectionHeader.appendChild(mapSectionHeaderTitle);
@@ -127,8 +124,7 @@ let createMap = function() {
 
 
 
-	mapSectionListOptionsSearch.addEventListener("keyup", function() {search("Map");});
-	mapSectionListOptionsSearchExit.addEventListener("click", function() {exitSearch("Map");});
+	mapSectionListOptionsSearch.addEventListener("input", function() {search("Map");});
 	mapSectionContentMapInner2.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([mapSectionContentMapImg],0)}});
 
 	mapSectionContentMapFullscreen.addEventListener("click", function(){fullscreenIMG([mapSectionContentMapImg],0)})
@@ -1912,7 +1908,7 @@ let createMap = function() {
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("disabled","");
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("onclick","this.select()");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearch.setAttribute("name","search");
-	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("type","text");
+	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("type","search");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("placeholder", "Search Trainer...");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("onfocus", "this.placeholder=''");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("onblur", "this.placeholder='Search Trainer...'");
@@ -1942,7 +1938,7 @@ let createMap = function() {
 	mapSectionSidebarDescriptionTrainerDataBottom.appendChild(mapSectionSidebarDescriptionTrainerDataBottomRight);
 	mapSectionSidebarDescriptionTrainerWrap.appendChild(mapSectionSidebarDescriptionTrainerUl);
 
-	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.addEventListener("keyup",trainerSearch)
+	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.addEventListener("input",trainerSearch)
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.addEventListener("focus",trainerSearch);
 
 
@@ -2598,7 +2594,7 @@ function updateTrainer(trainers,condition) {
 				let battleType = document.querySelector("#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div").getAttribute("data-type");
 				battleType = undDel(battleType,"");
 	
-				let sel = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='options'] > div:first-child > span:first-child > select");
+				let sel = document.querySelector("#contain div#tool div#dmg *[name='header'] > *:first-child select");
 				let els = sel.querySelectorAll(":scope option")
 				let el = sel.querySelector(":scope option[value='"+sel.getAttribute("value")+"']")
 
