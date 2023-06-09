@@ -40,6 +40,19 @@ function build() {
 		let appender = document.querySelector("#Games span ul[name='"+generation+"']");
 
 
+		let games = [name];
+		let paths = [PATH_Region,PATH_Game_Art];
+
+		if (name == "Random") {
+			games = AllGames;
+			paths = [PATH_Game_Art];
+		}
+
+		let med = getMedia(false,[""],paths,games)
+		let ran = parseInt(getRandomInt(0,med.length))
+		med = med[ran];
+	
+
 		let li = document.createElement("li");
 		li.setAttribute("name",id);
 		li.addEventListener("keyup",function(event){if(event.which === 13){event.target.querySelector(":scope a").click();}});
@@ -50,7 +63,7 @@ function build() {
 
 
 		let art = document.createElement("img");
-		art.src = getMedia(true,[""],[PATH_Region_Art_Official],[name]);
+		art.src = med;
 		li.appendChild(art)
 
 
