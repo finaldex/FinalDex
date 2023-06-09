@@ -1719,7 +1719,9 @@
 
 
 
-
+body:has(* #pokémon > div li img:active) {
+	cursor:grabbing !important;
+}
 
 
 
