@@ -38,7 +38,9 @@ function requestLoad(i,url) {
 			}
 			define();
 			config();
-			location.href = splitStr(location.href,"#")[0]+"#"+GameName.replaceAll(" ","_");
+			if (!(location.href).toLowerCase().includes("random")) {
+				location.href = splitStr(location.href,"#")[0]+"#"+GameName.replaceAll(" ","_");
+			}
 		}
 
 		
