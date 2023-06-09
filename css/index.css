@@ -313,7 +313,9 @@ nav > div > div.active {
     width: 100%;
     height: calc(100% + 100px);
     background: var(--color_30);
+    
 }
+
 
 #Home > span video {
     position: relative;
@@ -324,7 +326,18 @@ nav > div > div.active {
     object-position: top;
 }
 
-
+#Home > span:first-child::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0.2;
+    background-size: 16px 16px;
+    background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 1.6px, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 50%);
+}
 
 #Home > span:last-child {
     filter: drop-shadow(2px 4px 6px black);
