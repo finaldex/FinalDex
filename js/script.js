@@ -173,10 +173,8 @@ function dataRedirect() {
         let z = what.toLowerCase();
         let modalOpen = document.querySelector("#data > div.open");
         let navInput = document.querySelector("#navigation > input[value='"+typevariant+"']");
-        let searchExit = document.querySelector('#contain > div#'+where+' section[name="list"] span[name="exit"]');
         let tar = document.querySelector('#contain > div#'+where+' ol label[data-title="'+z+'"]');
 
-        searchExit.click();
 
         if (tar != null) {
             if (where == "item") {
