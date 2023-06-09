@@ -5402,7 +5402,8 @@ function DMGClearData(base) {
     let naturePath = pokBase.querySelector(":scope *[name='nature'] select");
     let movesPath = pokBase.querySelectorAll(":scope *[name='moves'] select");
 
-	let namePath = divBase.querySelector(":scope *[name='name'] > *");
+	let idPath = divBase.querySelector(":scope *[name='name'] > *:first-child");
+	let namePath = divBase.querySelector(":scope *[name='name'] > *:last-child");
 	let pokImgPath = divBase.querySelector(":scope img[name='img']");
 	let itemImgPath = divBase.querySelector(":scope img[name='item']");
     
@@ -5457,6 +5458,7 @@ function DMGClearData(base) {
         totalPath[e].value = 0;
     }
 	namePath.innerText = "";
+	idPath.innerText = "";
 	pokImgPath.removeAttribute("src");
 	itemImgPath.removeAttribute("src");
 
