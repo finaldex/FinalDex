@@ -13,7 +13,9 @@ nav {
     z-index: 100;
     position: relative;
 }
-
+li {
+    list-style: unset;
+}
 #content {
     height: 95vh;
     position: relative;
@@ -118,24 +120,7 @@ nav > div > div {
 nav > div > div.active {
     display: flex;
 }
-#Games > * > *,
-#FAQ > * > *,
-#Bug,
-#Metadata > * > *,
-#Sources > * > *,
-#Changelog > * > *,
-#Agenda > * > * {
-    transform: scaleX(-1);
-}
-#Games > * > * > *,
-#FAQ > * > * > *,
-#Bug > *,
-#Metadata > * > * > *,
-#Sources > * > * > *,
-#Changelog > * > * > *,
-#Agenda > * > * > * {
-    transform: scaleX(-1);
-}
+
 #Games > span header {
     display: block;
     transform: none;
@@ -146,42 +131,6 @@ nav > div > div.active {
     flex-direction: column;
 }
 
-#Metadata,
-#FAQ,
-#Bug,
-#Changelog,
-#Agenda,
-#Sources {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#Games,
-#Metadata,
-#FAQ,
-#Bug,
-#Changelog,
-#Agenda,
-#Sources {
-    width:100%;
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    align-content: center;
-    padding: 10vh 0;
-}
-#Games {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row-reverse;
-    justify-content: center;
-    height:unset;
-    
-}
 
 #Games ul li {
     display: flex;
@@ -206,7 +155,7 @@ nav > div > div.active {
 #Games ul li:hover,
 #Games ul li:focus {
     box-shadow: -1px 1px rgb(0 0 0 / 50%);
-    transform: scaleX(-1) scale(0.98);
+    transform: scale(0.98);
 }  
 
 
@@ -427,197 +376,16 @@ nav > div > div.active {
 
 
 #Home > span strong,
-nav > div:first-child > span > h2 {
+nav > div:first-child > span > *:last-child {
     background: -webkit-linear-gradient(left, #3F3F3F, #7F7F7F);
     background: -moz-linear-gradient(left, #3F3F3F, #7F7F7F);
     background: -ms-linear-gradient(left, #3F3F3F, #7F7F7F);
     background: -o-linear-gradient(left, #3F3F3F, #7F7F7F);
-    background: linear-gradient(to right, #3F3F3F, #7F7F7F);
+    background: linear-gradient(to right, mediumseagreen, darkcyan);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-}
-
-
-
-#Games > span,
-#FAQ > span,
-#Bug > span,
-#Metadata > span,
-#Sources > span,
-#Changelog > span,
-#Agenda > span {
-    width:100%;
-    height:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-#Games > span > ul,
-#FAQ > span > ul,
-#Bug > span > ul,
-#Metadata > span > ul,
-#Sources > span > ul,
-#Changelog > span > ul,
-#Agenda > span > ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 90%;
-    width: min(max(100px, 90vw), 750px);
-}
-
-#Games > span > ul {
-    width: 80%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
-    padding: 20px 0;
-}
-
-#Games > span > ul > h4:first-child {
-    position: absolute;
-    top: 0;
-}
-#Bug form {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: space-around;
-}
-#Bug form span {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    max-height: 90%;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-#Metadata > span > ul ul,
-#Sources > span > ul ul {
-    padding: 5px 0;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-}
-#FAQ > span > ul ul {
-    padding: 10px 0;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-}
-#Metadata h3,
-#Sources h3,
-#FAQ h3 {
-    width: 95%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-
-#Agenda h3 {
-    padding: 10px 0;
-    width: 95%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#Agenda ul pre {
-    padding: 5px 0; 
-}
-#Agenda ul > ol {
-    width: 95%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-content: center;
-}
-#Agenda li {
-    padding: 2px 0;
-    font-size: 0.8em;
-}
-#Agenda li:not(:first-child) {
-    list-style-type: none;
-    margin-left: 20px;
-}
-#Agenda li:not(:first-child) > * {
-    font-size: 90%;
-}
-
-#Agenda ol ul {
-    padding-bottom: 10px;
-    text-transform: capitalize;
-}
-#Agenda li p::after {
-    content:".";
-}
-
-
-#Changelog h3 {
-    padding: 10px 0;
-    width: 95%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#Changelog ul pre {
-    padding: 5px 0; 
-}
-#Changelog ul > ol {
-    width: 95%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-content: center;
-}
-#Changelog li {
-    padding: 2px 0;
-    font-size: 0.8em;
-}
-#Changelog li:not(:first-child) {
-    list-style-type: none;
-    margin-left: 20px;
-}
-
-
-#Changelog ol ul {
-    padding-bottom: 10px;
-}
-
-#Bug select {
-    padding: 10px 30px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 2px;
-    cursor: pointer;
-    display: block;
-    margin: 10px 30%;
-    width: 40%;
-    text-align: left;
-}
-#Bug textarea {
-    width: 80%;
-    padding: 10px 20px;
-    display: block;
-    min-height: 100px;
-    min-width: 100px;
-    max-width: 90%;
-    max-height: 50vh;
-    margin-bottom: 10px;
+    filter: drop-shadow(1px 1px 0px black);
 }
 
 
@@ -625,98 +393,10 @@ nav > div:first-child > span > h2 {
 
 
 
-#Bug select option[disabled] {
-    display: none;
-}
-#Bug select {
-    font-weight: normal;
-}
-#Bug option {
-    font-weight: bold;
-    font-size: 1em;
-}
-#Bug div {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-}
-#Bug div:nth-child(2) {
-    opacity:0;
-    height: 0;
-    width: 0;
-}
-
-#Bug form span > div {
-    transition: 0.5s ease opacity 0s, 2s ease height 0.5s;
-}
-
-#Bug form span.hide > div:nth-child(1),
-#Bug form span.show > div:nth-child(2) {
-    opacity:0;
-    height: 0;
-    width: 0;
-}
-#Bug form span.hide > div:nth-child(2),
-#Bug form span.show > div:nth-child(1) {
-    opacity:1;
-    height: unset;
-    width: 100%;
-}
-#Bug form span.hide > div:last-child {
-    overflow:hidden;
-}
-
-#FAQ ul ul > li:first-child {
-    list-style-type: disc;
-}
-#FAQ ul ul > li:last-child {
-    list-style-type: circle;
-}
-#FAQ ul ul > li:last-child > * {
-    font-weight:normal;
-}
-#Metadata ul ul ul > li {
-    list-style-type: none;
-}
-#Sources ul ul ul > li {
-    list-style-type: none;
-}
-#Agenda li {
-    list-style-type: circle;
-}
-#Changelog li,
-#Metadata ul ul > li,
-#Sources ul ul > li {
-    list-style-type: square;
-}
-
-
-body > span.hide {
-    opacity: 0;
-    pointer-events: none;
-}
-body > span[name="num"] {
-    top: 50vh;
-    font-size: 1.5em;
-    right: 1vw;
-}
-#below {
-    position:relative;
-}
 
 
 
-#Home::after,
-#below {
-    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%);
-    background-size: 1em 1em;
-    background-color: var(--color19);
 
-}
 
 #Home::after {
     content: "";
@@ -729,10 +409,9 @@ body > span[name="num"] {
     bottom: -1px;
     z-index: 100;
 }
-.gform select {
-    padding: 10px 30px;
-    margin: 10px;
-}
+
+
+
 #Games ul li > a:hover {
     text-decoration: none;
 }
@@ -751,4 +430,152 @@ body > span[name="num"] {
     text-shadow: -1px 1px 1px #fff;
     text-decoration-color: #000 !important;
 
+}
+
+
+
+#Home::after,
+#content > span:not([name="0"]) {
+    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.01) 0, rgba(0, 0, 0, 0.01) 5%, transparent 0, transparent 50%);
+    background-size: 1em 1em;
+    background-color: var(--color19);
+}
+
+#content > span:not([name="0"]) > * {
+    padding:10vh 0;
+}
+
+#content > span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#Games {
+    text-align:center;
+}
+
+#Games ul {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    flex-direction: column;
+}
+
+#Games ul > span {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+ul ul li {
+
+    list-style: disc;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+ul ul {
+    padding: 2px 0 5px;
+}
+
+ol > ul {
+    padding: 0 0 5px;
+}
+ol {
+    padding: 10px 0;
+}
+
+#Sources ul,
+#Metadata ul {
+    list-style:disc;
+}
+
+#FAQ ul {
+    list-style: square;
+    padding: 10px 0;
+}
+
+#FAQ ol ul li ~ li {
+    list-style: circle;
+}
+#FAQ ol ul li ~ li > * {
+    font-weight:normal;
+}
+
+#Agenda ul,
+#Changelog ul {
+    list-style:square;
+}
+
+#Agenda ul li ~ li {
+    list-style:disc;
+}
+
+
+#Changelog ul li ~ li {
+    list-style:none;
+}
+
+
+#Agenda ul li > *::after {
+    content:".";
+}
+
+#Bug form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#Bug form > * {
+    margin: 5px 0;
+}
+#Bug select,
+#Bug button {
+    margin: 10px auto 5px;
+}
+#Bug {
+    min-width: 400px;
+    text-align:center;
+} 
+#Bug select,
+#Bug textarea {
+    padding: 5px;
+}
+
+code {
+    font-size:smaller;
+}
+
+#Bug textarea {
+    min-height: 100px;
+    min-width: 100%;
+}
+
+
+#Bug > ol > * {
+    transition: 1s ease 0s opacity, 0s linear 0s height;
+}
+
+#Bug > ol:not([data-state="true"]) > span,
+#Bug > ol:not([data-state="false"]) > form {
+    pointer-events: none;
+    opacity:0;
+    height:0;
+    transition: none;
+}
+
+#Agenda ul:has(li > * > s) {
+    display: none;
+}
+
+
+#Agenda {
+    text-transform:capitalize;
 }
