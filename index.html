@@ -30,17 +30,16 @@
     </nav>
     <div id="content">
         <div id="Home">
-            <span>
-                <video preload muted>
-                    <source src="./media/Videos/Sample_Party_Drag.mp4" type="video/mp4">
-                </video>
-                <video preload muted>
-                    <source src="./media/Videos/Sample_Party.mp4" type="video/mp4">
-                </video>
-                <video preload muted>
-                    <source src="./media/Videos/Sample_Settings_Images.mp4" type="video/mp4">
-                </video>
+            <span name="video">
+                <video autoplay="true" muted="true" style="display: 'none'" onplay="this.style.removeProperty('display')" onended="this.style.display = 'none'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}"><source type="video/mp4" src="./media/Videos/Sample_Abilities.mp4"></video>
+                <video autoplay="true" muted="true" style="display: 'none'" onplay="this.style.removeProperty('display')" onended="this.style.display = 'none'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}"><source type="video/mp4" src="./media/Videos/Sample_Party_Drag.mp4"></video>
+                <video autoplay="true" muted="true" style="display: 'none'" onplay="this.style.removeProperty('display')" onended="this.style.display = 'none'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}"><source type="video/mp4" src="./media/Videos/Sample_Map_Trainers.mp4"></video>
+                <video autoplay="true" muted="true" style="display: 'none'" onplay="this.style.removeProperty('display')" onended="this.style.display = 'none'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}"><source type="video/mp4" src="./media/Videos/Sample_Pokédex.mp4"></video>
+                <video autoplay="true" muted="true" style="display: 'none'" onplay="this.style.removeProperty('display')" onended="this.style.display = 'none'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}"><source type="video/mp4" src="./media/Videos/Sample_Map_Shop.mp4"></video>
+                <video autoplay="true" muted="true" style="display: 'none'" onplay="this.style.removeProperty('display')" onended="this.style.display = 'none'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}"><source type="video/mp4" src="./media/Videos/Sample_Map_Pokémon.mp4"></video>
+                <video autoplay="true" muted="true" style="display: 'none'" onplay="this.style.removeProperty('display')" onended="this.style.display = 'none'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}"><source type="video/mp4" src="./media/Videos/Sample_Box_Drag.mp4"></video>
             </span>
+
             <span>
                 <strong onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });">FinalDex</strong>
                 <h5>A complete online Pokédex with rich detailed data for all the mainline Pokémon Games</h5>
