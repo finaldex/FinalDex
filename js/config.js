@@ -127,6 +127,7 @@ let PATH_Character_YComm = "./media/Images/Character/Y-Comm/";
 
 let PATH_Bag_Pocket = "./media/Images/Bag/Pocket/";
 
+let PATH_Region = "./media/Images/Region/";
 let PATH_Region_Art_Official = "./media/Images/Region/Art/Official/";
 let PATH_Region_Map = "./media/Images/Region/Map/";
 
@@ -139,9 +140,10 @@ let PATH_Move_Icon = "./media/Images/Move/Icon/";
 
 let PATH_Game_Title = "./media/Images/Game/Title/";
 let PATH_Game_Menu = "./media/Images/Game/Menu/";
-let PATH_Game_Art_HOME = "./media/Images/Game/Art/";
-let PATH_Game_Art_Official = "./media/Images/Game/Art/";
-let PATH_Game_Art_Sugimori = "./media/Images/Game/Art/";
+let PATH_Game_Art_HOME = "./media/Images/Game/Art/HOME";
+let PATH_Game_Art_Official = "./media/Images/Game/Official/";
+let PATH_Game_Art_Sugimori = "./media/Images/Game/Ken Sugimori/";
+let PATH_Game_Art = "./media/Images/Game/Art/";
 
 let PATH_FinalDex = "./media/Images/FinalDex/";
 
