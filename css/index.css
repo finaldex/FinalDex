@@ -257,10 +257,10 @@ nav > div > div.active {
     align-items: center;
     justify-content: center;
     visibility: visible;
-    font-size: x-large;
+    font-size: xx-large;
     font-weight: bold;
     text-align: center;
-    text-shadow: 0 0 1px #fff;
+    text-shadow: 1px 1px 2px #fff;
 
 }
 
@@ -292,7 +292,7 @@ nav > div > div.active {
     font-size: 20px;
     position: relative;
     height: unset;
-    height: 90vh;
+    height: calc(95vh - calc(5vw / 4));
     background: var(--color_30);
     overflow: hidden;
     display: flex;
@@ -366,7 +366,7 @@ nav > div > div.active {
 }
 
 #Home > span:last-child {
-    filter: drop-shadow(0px 2px 4px black);
+    filter: drop-shadow(2px 2px 1px black);
     position:absolute;
     width: 100%;
     height: 100%;
@@ -374,6 +374,9 @@ nav > div > div.active {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    -webkit-text-stroke: var(--color_20);
+    -webkit-text-stroke-width: thin;
 }
 
 #Home > span h5 {
@@ -382,6 +385,7 @@ nav > div > div.active {
     text-shadow: -1px 1px 0px black;
     color: var(--color18);
     text-align:center;
+    -webkit-text-stroke: 0;
 }
 
 #Home > span strong {
@@ -391,7 +395,7 @@ nav > div > div.active {
     text-transform: uppercase;
 }
 
-#Home > span strong:hover {
+#Home > span strong:active {
     opacity: 0.8;
 }
 
@@ -717,7 +721,7 @@ body > span[name="num"] {
 #Home::after {
     content: "";
     display: block;
-    width: 100%;
+    width: calc(100% + 50px);
     clip-path: polygon(50% 0, 100% 100%, 0% 100%, 0 100%);
     height: 5vw;
     max-height: 100px;
