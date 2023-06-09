@@ -112,6 +112,7 @@ nav > div > b {
     display:flex;
     align-items:center;
     justify-content: center;
+    padding: 0 2px;
 }
 #hp {
     display:none !important;
@@ -167,6 +168,13 @@ nav > div > div.active {
     transform: scale(0.98);
 }  
 
+
+@media (max-width:800px) {
+    #Games ul li {
+        width: 150px;
+        height: 75px;
+    }
+}
 
 #Games ul li > a {
     z-index: 1;
@@ -250,7 +258,7 @@ nav > div > div.active {
     font-size: 20px;
     position: relative;
     height: unset;
-    height: calc(92.5vh - calc(5vw / 4));
+    max-height: 90vh;
     background: var(--color_30);
     overflow: hidden;
     display: flex;
@@ -451,11 +459,16 @@ nav > div:first-child > span > span:last-child > *{
 }
 
 #content > span:not([name="0"]) > * {
-    padding:10vh 0;
+    padding: 10vh 0 20vh;
     max-width: 80vw;
+    height: fit-content;
 }
 
-#content > span {
+#content > span:not([name="0"]):last-child > * {
+    padding: 10vh 0;
+}
+
+#content > span:not([name="0"]) {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
