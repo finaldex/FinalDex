@@ -10,7 +10,6 @@ let createPokémon = function() {
 	let navigationSearch = document.createElement("li");
 	let navigationSearchContent = document.createElement("span");
 	let navigationSearchInput = document.createElement("input");
-	let navigationSearchExit = document.createElement("span");
 	let navigationCount = document.createElement("li");
 	let navigationCountContent = document.createElement("h1");
 	let navigationCountSpan1 = document.createElement("span");
@@ -25,13 +24,12 @@ let createPokémon = function() {
 
 	navigationDex.setAttribute("name","dexswitch");
 	navigationSearch.setAttribute("name","search");
-	navigationSearchInput.setAttribute("type","text");
+	navigationSearchInput.setAttribute("type","search");
 	navigationSearchInput.setAttribute("placeholder","Search...");
 	navigationSearchInput.setAttribute("onfocus","this.placeholder = ''");
 	navigationSearchInput.setAttribute("onblur","this.placeholder = 'Search...'");
 	navigationSearchInput.setAttribute("autocomplete","off");
 	navigationSearchInput.setAttribute("tabindex","0");
-	navigationSearchExit.setAttribute("name","exit");
 	navigationCount.setAttribute("name","count");
 	navigationCountSpan2.innerText = "/";
 	navigationGame.setAttribute("name","title");
@@ -93,7 +91,6 @@ let createPokémon = function() {
 	navigationCountContent.appendChild(navigationCountSpan3);
 	navigationContent.appendChild(navigationSearch);
 	navigationSearch.appendChild(navigationSearchContent);
-	navigationSearchContent.appendChild(navigationSearchExit);
 	navigationSearchContent.appendChild(navigationSearchInput);
 	navigationContent.appendChild(navigationGame);
 	navigationGame.appendChild(navigationGameContent);
@@ -102,8 +99,7 @@ let createPokémon = function() {
 	navigationSettings.appendChild(navigationSettingsIcon);
     navigationSettingsIcon.appendChild(navigationSettingsIconText);
 
-    navigationSearch.addEventListener("keyup", function() {search("Pokémon");});
-    navigationSearchExit.addEventListener("click", function() {exitSearch("Pokémon");count();});
+    navigationSearchInput.addEventListener("input", function() {search("Pokémon");});
 
 
     let team = document.createElement("aside");
