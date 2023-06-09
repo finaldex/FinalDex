@@ -52,16 +52,11 @@ function build() {
 			Games.push(obj)
 		}
 	}
-	
-	let ranobj = new Object();
-	ranobj["Name"] = "Random";
-	ranobj["Full"] = "Random";
-	ranobj["ID"] = 0;
-	ranobj["Region"] = "";
-	ranobj["Generation"] = 0;
-	Games.push(ranobj)
+
+	let objs = [{Name: "Random",Full:"Random",ID:0,Region:"",Generation:0},{Name: "Mediaquery",Full:"Mediaquery",ID:0,Region:"",Generation:0}]
 
 
+	Games = Games.concat(objs)
 
 	for (let i = 0; i < Games.length; i++) {
 		let generation = Games[i]["Generation"];
@@ -72,13 +67,22 @@ function build() {
 
 		let appender = document.querySelector("#Games ul[name='"+generation+"'] > span");
 
+		let data_href = "./Game.html#"+full
+
 
 		let games = [name];
 		let paths = [PATH_Region,PATH_Game_Art];
 
-		if (name == "Random") {
+		if (id == 0 && generation == 0) {
+			data_href = "./"+name+".html";
 			games = AllGames;
 			paths = [PATH_Game_Art];
+		}
+
+
+
+		if (name == "Random") {
+			data_href = "./Game.html#"+name;
 		}
 
 		let med = getMedia(false,[""],paths,games)
@@ -104,7 +108,7 @@ function build() {
 		let title = document.createElement("img");
 		title.src = getMedia(true,["Title"],[PATH_Game_Title],[name]);
 		title.title = name;
-		titlewrap.setAttribute("href","./Game.html#"+full);
+		titlewrap.setAttribute("href",data_href);
 		titlewrap.setAttribute("tabindex","-1");
 		li.appendChild(titlewrap)
 		titlewrap.appendChild(title)
