@@ -121,7 +121,7 @@ let createAbility = function() {
 			if(getApplicable(finaldata["Abilities"]["Reference"][q]["Game"])) {
 				let abilitySectionListOptionsInput = document.createElement("input");
 				let abilitySectionListOptionsLabel = document.createElement("label");
-				let abilitySectionListOptionsText = document.createElement("p");
+				let abilitySectionListOptionsText = document.createElement("h5");
 				abilitySectionListOptionsInput.setAttribute("type","radio");
 				abilitySectionListOptionsInput.setAttribute("name","ability-options");
 				abilitySectionListOptionsInput.setAttribute("id","ability-options-"+q);
