@@ -120,32 +120,38 @@ let createPokémon = function() {
 
 
     let teamPartyExport = document.createElement("figure");
+    let teamPartyExportTxt = document.createElement("small");
+    let teamPartyExportLabel = document.createElement("label");
+    let teamPartyExportInput = document.createElement("input");
+    let teamPartyExportOl = document.createElement("ol");
     teamPartyExport.setAttribute("name","export");
+    teamPartyExport.setAttribute("type","rotate-left");
+    teamPartyExport.classList.add("drop");
+    teamPartyExportTxt.innerText = "⮞";
+    teamPartyExportInput.setAttribute("type","checkbox");
+    teamPartyExportInput.setAttribute("name","team-party-export-input");
+    teamPartyExportInput.setAttribute("id","team-party-export-input");
+    teamPartyExportLabel.setAttribute("for","team-party-export-input");
     teamPartyBar.appendChild(teamPartyExport)
-    teamPartyExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-    let teamPartyExportText = document.createElement("small");
-    teamPartyExportText.innerText = "⮟";
-    teamPartyExport.appendChild(teamPartyExportText)
-    let teamPartyExportTop = document.createElement("div");
-    teamPartyExport.appendChild(teamPartyExportTop)
-    let teamPartyExportTopWrap = document.createElement("span");
-    teamPartyExportTop.appendChild(teamPartyExportTopWrap)
-    let teamPartyExportOpts = ["Import Pokémon","Copy Data Strings","Send to Damage Calculator"];
-
+    teamPartyExport.appendChild(teamPartyExportLabel)
+    teamPartyExportLabel.appendChild(teamPartyExportTxt)
+    teamPartyExportLabel.appendChild(teamPartyExportInput)
+    teamPartyExportLabel.appendChild(teamPartyExportOl)
     teamPartyExport.addEventListener("click",dropRelPos);
-
+    teamPartyExport.click();
+    let teamPartyExportOpts = ["Import Pokémon","Copy Data Strings","Send to Damage Calculator"];
     for(let e = 0; e < teamPartyExportOpts.length; e++) {
-        let teamPartyExportWrapTop = document.createElement("span");
-        let teamPartyExportWrap = document.createElement("b");
-        let teamPartyExportTxt = document.createElement("small");
-        teamPartyExportWrapTop.setAttribute("name",teamPartyExportOpts[e]);
-        teamPartyExportWrap.setAttribute("type","invert");
-        teamPartyExportTxt.innerText = teamPartyExportOpts[e];
-        teamPartyExportTopWrap.appendChild(teamPartyExportWrapTop);
-        teamPartyExportWrapTop.appendChild(teamPartyExportWrap);
-        teamPartyExportWrap.appendChild(teamPartyExportTxt);
-        teamPartyExportWrap.addEventListener("click",teamPartyExportFunction);
+        let teamPartyExportLi = document.createElement("li");
+        let teamPartyExportText = document.createElement("small");
+        teamPartyExportLi.setAttribute("name",teamPartyExportOpts[e]);
+        teamPartyExportText.innerText = teamPartyExportOpts[e];
+        teamPartyExportOl.appendChild(teamPartyExportLi);
+        teamPartyExportLi.appendChild(teamPartyExportText);
+        teamPartyExportLi.addEventListener("click",teamPartyExportFunction);
     }
+
+
+
     function teamPartyExportFunction() {
         let base = findUpTag(this,"SECTION");
         let tars = base.querySelectorAll(":scope > div:not([name='empty'])");
@@ -289,7 +295,6 @@ let createPokémon = function() {
 
         let teamRight = document.createElement("span");
         let teamStatsButton = document.createElement("figure");
-        let teamExit = document.createElement("figure");
         let teamLevel = document.createElement("input");
         let teamNickOuter = document.createElement("span");
         let teamNick = document.createElement("input");
@@ -314,7 +319,6 @@ let createPokémon = function() {
         teamImgOuter.setAttribute("name","pokémon");
 
     
-        teamExit.setAttribute("name","exit");
         teamLevel.setAttribute("type","number");
         teamLevel.setAttribute("min","0");
         teamLevel.setAttribute("max","100");
@@ -328,6 +332,39 @@ let createPokémon = function() {
             teamNick.setAttribute("maxlength","12");
         }
    
+
+
+        let teamExit = document.createElement("figure");
+        let teamExitTxt = document.createElement("small");
+        let teamExitLabel = document.createElement("label");
+        let teamExitInput = document.createElement("input");
+        let teamExitOl = document.createElement("ol");
+        teamExit.setAttribute("name","exit");
+        teamExit.classList.add("drop");
+        teamExit.setAttribute("type","scale");
+        teamExitTxt.innerText = "❌";
+        teamExitInput.setAttribute("type","checkbox");
+        teamExitInput.setAttribute("name","team-exit-input");
+        teamExitInput.setAttribute("id","team-exit-input");
+        teamExitLabel.setAttribute("for","team-exit-input");
+        teamLeft.appendChild(teamExit)
+        teamExit.appendChild(teamExitLabel)
+        teamExitLabel.appendChild(teamExitTxt)
+        teamExitLabel.appendChild(teamExitInput)
+        teamExitLabel.appendChild(teamExitOl)
+        teamExit.addEventListener("click",dropRelPos);
+        teamExit.click();
+        let teamExitOpts = ["Send to Box","Delete"];
+        for(let e = 0; e < teamExitOpts.length; e++) {
+            let teamExitLi = document.createElement("li");
+            let teamExitText = document.createElement("small");
+            teamExitLi.setAttribute("name",teamExitOpts[e]);
+            teamExitText.innerText = teamExitOpts[e];
+            teamExitOl.appendChild(teamExitLi);
+            teamExitLi.appendChild(teamExitText);
+            teamExitLi.addEventListener("click",teamExitChange);
+        }
+
 
         teamAdd.addEventListener("click", partyAdd)
 
@@ -345,7 +382,6 @@ let createPokémon = function() {
         teamSection2.appendChild(teamAdd);
 
         teamSection1.appendChild(teamLeft);
-        teamLeft.appendChild(teamExit);
         teamLeft.appendChild(teamLevel);
         teamLeft.appendChild(teamGrab);
         teamSection1.appendChild(teamPokémon);
@@ -389,33 +425,7 @@ let createPokémon = function() {
 
 
 
-        teamExit.addEventListener("click",dropRelPos);
-        teamExit.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
 
-        let teamExitTxt = document.createElement("small");
-        teamExitTxt.innerText = "❌";
-        teamExit.appendChild(teamExitTxt)
-
-        let teamExitTop = document.createElement("div");
-        teamExit.appendChild(teamExitTop)
-        let teamExitTopWrap = document.createElement("span");
-        teamExitTop.appendChild(teamExitTopWrap)
-
-        let teamExitOpts = ["Send to Box","Delete"];
-
-
-        for(let e = 0; e < teamExitOpts.length; e++) {
-            let teamExitWrapTop = document.createElement("span");
-            let teamExitWrap = document.createElement("b");
-            let teamExitText = document.createElement("small");
-            teamExitWrapTop.setAttribute("name",teamExitOpts[e]);
-            teamExitWrap.setAttribute("type","invert");
-            teamExitText.innerText = teamExitOpts[e];
-            teamExitTopWrap.appendChild(teamExitWrapTop);
-            teamExitWrapTop.appendChild(teamExitWrap);
-            teamExitWrap.appendChild(teamExitText);
-            teamExitWrap.addEventListener("click",teamExitChange);
-        }
 
 
 
@@ -424,37 +434,34 @@ let createPokémon = function() {
 
 
 		let teamExport = document.createElement("figure");
-        teamExport.setAttribute("name","export");
-        teamLeft.appendChild(teamExport)
-
-        teamExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-
         let teamExportTxt = document.createElement("small");
-        teamExportTxt.innerText = "⮟";
-        teamExport.appendChild(teamExportTxt)
-
-        let teamExportTop = document.createElement("div");
-        teamExport.appendChild(teamExportTop)
-        let teamExportTopWrap = document.createElement("span");
-        teamExportTop.appendChild(teamExportTopWrap)
-
+        let teamExportLabel = document.createElement("label");
+        let teamExportInput = document.createElement("input");
+        let teamExportOl = document.createElement("ol");
+        teamExport.setAttribute("name","export");
+        teamExport.classList.add("drop");
+        teamExport.setAttribute("type","rotate-right");
+        teamExportTxt.innerText = "⮜";
+        teamExportInput.setAttribute("type","checkbox");
+        teamExportInput.setAttribute("name","team-export-input");
+        teamExportInput.setAttribute("id","team-export-input");
+        teamExportLabel.setAttribute("for","team-export-input");
+        teamLeft.appendChild(teamExport)
+        teamExport.appendChild(teamExportLabel)
+        teamExportLabel.appendChild(teamExportTxt)
+        teamExportLabel.appendChild(teamExportInput)
+        teamExportLabel.appendChild(teamExportOl)
         teamExport.addEventListener("click",dropRelPos);
-       
-
+        teamExport.click();
         let teamExportOpts = ["Copy Data String","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
-
-
         for(let e = 0; e < teamExportOpts.length; e++) {
-            let teamExportWrapTop = document.createElement("span");
-            let teamExportWrap = document.createElement("b");
+            let teamExportLi = document.createElement("li");
             let teamExportText = document.createElement("small");
-            teamExportWrapTop.setAttribute("name",teamExportOpts[e]);
-            teamExportWrap.setAttribute("type","invert");
+            teamExportLi.setAttribute("name",teamExportOpts[e]);
             teamExportText.innerText = teamExportOpts[e];
-            teamExportTopWrap.appendChild(teamExportWrapTop);
-            teamExportWrapTop.appendChild(teamExportWrap);
-            teamExportWrap.appendChild(teamExportText);
-            teamExportWrap.addEventListener("click",teamExportChange);
+            teamExportOl.appendChild(teamExportLi);
+            teamExportLi.appendChild(teamExportText);
+            teamExportLi.addEventListener("click",teamExportChange);
         }
 
         
@@ -585,45 +592,6 @@ let createPokémon = function() {
                 partyDefault(tar);
             }
         }
-        function dropRelPos() {
-
-            let box = this.getBoundingClientRect();
-            let body = document.body;
-            let docEl = document.documentElement;
-        
-            let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-            let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-        
-            let clientTop = docEl.clientTop || body.clientTop || 0;
-            let clientLeft = docEl.clientLeft || body.clientLeft || 0;
-        
-            let top  = box.top + scrollTop - clientTop;
-            let left = box.left + scrollLeft - clientLeft;
-
-            let bodyY = body.getBoundingClientRect().bottom;
-            let bodyX = body.getBoundingClientRect().right;
-
-     
-            let y = top/bodyY;
-            let x = left/bodyX;
-
-            this.lastChild.className = "";
-
-            if (x > 0.5) {
-                this.lastChild.classList.add("right");
-            }
-            else {
-                this.lastChild.classList.add("left");
-            }
-
-            if (y < 0.5) {
-                this.lastChild.classList.add("top");
-            }
-            else {
-                this.lastChild.classList.add("bottom");
-            }
-        }
-        
     
         let dataOptions = ["Moves","Stats","Additional"];
 
@@ -885,40 +853,44 @@ let createPokémon = function() {
     teamBoxTrash.setAttribute("name","trash");
     teamBox.appendChild(teamBoxTrash);
     teamBoxTrash.appendChild(teamBoxTrashText);
-
     teamBoxTrash.addEventListener("click", BoxDelete);
 
 
 
 
     let boxExport = document.createElement("figure");
+    let boxExportTxt = document.createElement("header");
+    let boxExportLabel = document.createElement("label");
+    let boxExportInput = document.createElement("input");
+    let boxExportOl = document.createElement("ol");
     boxExport.setAttribute("name","export");
+    boxExport.setAttribute("type","rotate-left");
+    boxExport.classList.add("drop");
+    boxExportTxt.innerText = "🟆";
+    boxExportInput.setAttribute("type","checkbox");
+    boxExportInput.setAttribute("name","box-export-input");
+    boxExportInput.setAttribute("id","box-export-input");
+    boxExportLabel.setAttribute("for","box-export-input");
     teamBox.appendChild(boxExport)
-
-    boxExport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-    let boxExportText = document.createElement("header");
-    boxExportText.innerText = "🟆";
-    boxExport.appendChild(boxExportText)
-    let boxExportTop = document.createElement("div");
-    boxExport.appendChild(boxExportTop)
-    let boxExportTopWrap = document.createElement("span");
-    boxExportTop.appendChild(boxExportTopWrap)
-    let boxExportOpts = ["Copy Data Strings","Send to Damage Calculator"];
-
+    boxExport.appendChild(boxExportLabel)
+    boxExportLabel.appendChild(boxExportTxt)
+    boxExportLabel.appendChild(boxExportInput)
+    boxExportLabel.appendChild(boxExportOl)
     boxExport.addEventListener("click",dropRelPos);
-
+    boxExport.click();
+    let boxExportOpts = ["Copy Data Strings","Send to Damage Calculator"];
     for(let e = 0; e < boxExportOpts.length; e++) {
-        let boxExportWrapTop = document.createElement("span");
-        let boxExportWrap = document.createElement("b");
-        let boxExportTxt = document.createElement("small");
-        boxExportWrapTop.setAttribute("name",boxExportOpts[e]);
-        boxExportWrap.setAttribute("type","invert");
-        boxExportTxt.innerText = boxExportOpts[e];
-        boxExportTopWrap.appendChild(boxExportWrapTop);
-        boxExportWrapTop.appendChild(boxExportWrap);
-        boxExportWrap.appendChild(boxExportTxt);
-        boxExportWrap.addEventListener("click",boxExportFunction);
+        let boxExportLi = document.createElement("li");
+        let boxExportText = document.createElement("small");
+        boxExportLi.setAttribute("name",boxExportOpts[e]);
+        boxExportText.innerText = boxExportOpts[e];
+        boxExportOl.appendChild(boxExportLi);
+        boxExportLi.appendChild(boxExportText);
+        boxExportLi.addEventListener("click",boxExportFunction);
+        
     }
+
+
     function boxExportFunction() {
         let base = findUpTag(this,"SECTION");
         let tars = base.querySelectorAll(":scope ul li");
@@ -1202,10 +1174,6 @@ let createPokémon = function() {
     let settingsDefaultResizeValue = document.createElement("p");
     let settingsDefaultResizeInput = document.createElement("input");
 
-    let settingsDefaultThemeOuter = document.createElement("span");
-    let settingsDefaultTheme = document.createElement("div");
-    let settingsDefaultThemeInput = document.createElement("input");
-    let settingsDefaultThemeSpan = document.createElement("span");
 
 
     let settingsDefaultImgtypeOuter = document.createElement("span");
@@ -1233,8 +1201,6 @@ let createPokémon = function() {
     settingsDefaultResizeInput.setAttribute("value","240");
     settingsDefaultResizeInput.setAttribute("step","60");
     settingsDefaultResizeInput.setAttribute("autocomplete","off");
-    settingsDefaultThemeOuter.setAttribute("name","theme");
-    settingsDefaultThemeInput.setAttribute("type","checkbox");
  
 
     settings.appendChild(settingsDefaultImgtypeOuter);
@@ -1254,12 +1220,7 @@ let createPokémon = function() {
 
     settingsDefaultResizeInput.addEventListener("change",resizeDiv);
 
-    settings.appendChild(settingsDefaultThemeOuter);
-    settingsDefaultThemeOuter.appendChild(settingsDefaultTheme);
-    settingsDefaultTheme.appendChild(settingsDefaultThemeInput);
-    settingsDefaultTheme.appendChild(settingsDefaultThemeSpan);
 
-    settingsDefaultThemeInput.addEventListener('change', function() {switchTheme(); memory("Save","",settingsDefaultThemeInput)});
 
    
     
@@ -2784,13 +2745,13 @@ function createParty(base,data) {
         }
 
         if (possibleGender[0] == "♂") {
-            baseGender.style.color = "var(--colorBlue)";
+            baseGender.style.color = "Blue";
         }
         if (possibleGender[0] == "♀") {
-            baseGender.style.color = "var(--colorRed)";
+            baseGender.style.color = "Red";
         }
         if (possibleGender[0] == "☿") {
-            baseGender.style.color = "var(--fontDark)";
+            baseGender.style.color = "Black";
         }
 
         for (let q = 0; q < possibleGender.length; q++) {
@@ -2898,13 +2859,13 @@ function createParty(base,data) {
     if (gender != undefined && Gender == true) {
         baseGender.value = gender;
         if (gender == "♂") {
-            baseGender.style.color = "var(--colorBlue)";
+            baseGender.style.color = "Blue";
         }
         if (gender == "♀") {
-            baseGender.style.color = "var(--colorRed)";
+            baseGender.style.color = "Red";
         }
         if (gender == "☿") {
-            baseGender.style.color = "var(--fontDark)";
+            baseGender.style.color = "Black";
         }
     }
     if (ability != undefined && Ability.length > 0) {
@@ -3267,13 +3228,13 @@ function selectModify(e) {
     let opt = this.querySelector(':scope > option[value="'+this.value+'"]');
 
     if (this.value == "♂") {
-        this.style.color = "var(--colorBlue)";
+        this.style.color = "Blue";
     }
     if (this.value == "♀") {
-        this.style.color = "var(--colorRed)";
+        this.style.color = "Red";
     }
     if (this.value == "☿") {
-        this.style.color = "var(--fontDark)";
+        this.style.color = "Black";
     }
 
     if (this.firstElementChild.value.includes("Move")) {
@@ -4090,7 +4051,7 @@ function dateHideShow(event,status) {
 
     if (tar.value != "" && tar.value != undefined) {
         if (status == "open") {
-            tar.style.color = "var(--fontDark)";
+            tar.style.color = "black";
         }
         else if (status == "close"){
             tar.style.color = "inherit";
@@ -4098,7 +4059,7 @@ function dateHideShow(event,status) {
     }
     else {
         if (status == "open"){
-            tar.style.color = "var(--fontDark)";
+            tar.style.color = "black";
         }
         else if (status == "close"){
             tar.style.color = null;
