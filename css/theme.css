@@ -1,0 +1,357 @@
+
+
+:root {
+
+    /* Regex
+	(--Background[\S\s]*?Search:)initial
+	$1HERE
+	--([\S\s]*?)_([\S\s]*?):
+	--$2_$1:
+	
+	*/
+
+    /* Load */
+    --Background_Load:repeating-linear-gradient(0deg, hsl(0,0%,50%) 0px, hsl(0,0%,50%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,50%);
+    --Background_Load_Item:hsl(0,0%,30%);
+    --Color_Load:hsl(0,0%,90%);
+    --Color_Load_Title:linear-gradient(to right, hsl(175,10%,30%), hsl(0,0%,50%));
+
+    /* Body */
+    --Background_Body:var(--Background_Load);
+    --Color_Body:hsl(0,0%,90%);
+
+    /* Scroll */
+    --Background_Scroll:hsl(0,0%,90%);
+    --Background_Scroll_Bar:hsl(0,0%,60%);
+
+    /* Console */
+    --Background_Console:initial;
+    --Color_Console:initial;
+    --Border_Console:initial;
+    --Background_Dex_Content:repeating-linear-gradient(0deg, hsl(0,0%,45%) 0px, hsl(0,0%,45%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,45%);
+	--Color_Dex_Content:initial;
+	--Background_Dex_Content_Item:hsl(0,0%,35%);
+    --Border_Dex_Content_Item:10px double hsl(0,0%,45%);
+	--Color_Dex_Content_Item:initial;
+	--Background_Dex_Navigation:hsl(0,0%,35%);
+    --Border_Dex_Navigation:1px Solid hsl(0,0%,10%);
+    --Border_Dex_Navigation_Button:initial;
+	--Color_Dex_Navigation:initial;
+	--Background_Dex_Navigation_Search:White;
+    --Border_Dex_Navigation_Search:1px Solid Black;
+	--Color_Dex_Navigation_Search:hsl(0,0%,10%);
+	--Background_Dex_PartyBox_Content:repeating-linear-gradient( 45deg, hsl(0,0%,35%), hsl(0,0%,35%) 2px, hsl(0,0%,40%) 2px, hsl(0,0%,40%) 10px);
+	--Color_Dex_PartyBox_Content:initial;
+    --Background_Dex_PartyBox_Content_Export:initial;
+    --Border_Dex_PartyBox_Content_Export:initial;
+    --Color_Dex_PartyBox_Content_Export:White;
+    --Background_Dex_PartyBox_Content_Item:linear-gradient(to right, Skyblue, hsl(0,0%,60%));
+    --Border_Dex_PartyBox_Content_Item:initial;
+    --Color_Dex_PartyBox_Content_Item:initial;
+    --Background_Dex_PartyBox_Content_Trash:initial;
+    --Border_Dex_PartyBox_Content_Trash:initial;
+    --Color_Dex_PartyBox_Content_Trash:Red;
+	--Background_Dex_PartyBox_Item:hsl(0,0%,25%);
+	--Color_Dex_PartyBox_Item:White;
+	--Border_Dex_PartyBox_Item:1px Solid Black;
+	--Border_Dex_PartyBox_Redirect:2px Solid Black;
+	--Background_Dex_PartyBox_Redirect_Label:hsl(0,0%,30%);
+    --Border_Dex_PartyBox_Redirect_Label:1px Solid Black;
+	--Color_Dex_PartyBox_Redirect_Label:initial;
+	--Background_Dex_PartyBox_Redirect_Label_Selected:hsl(0,0%,50%);
+	--Color_Dex_PartyBox_Redirect_Label_Selected:Black;
+	--Background_Dex_Settings:hsl(0,0%,40%);
+	--Color_Dex_Settings:initial;
+	--Border_Dex_Settings:2px Solid Black;
+	--Background_Dex_Settings_Button:hsl(0,0%,30%);
+    --Border_Dex_Settings_Button:1px Solid hsl(0,0%,20%);
+	--Color_Dex_Settings_Button:initial;
+    --Background_Dex_Settings_Item:initial;
+	--Border_Dex_Settings_Item:1px Solid hsl(0,0%,10%);
+    --Color_Dex_Settings_Item:initial;
+	--Background_Dex_Settings_Label:hsl(0,0%,50%);
+    --Border_Dex_Settings_Label:1px solid hsl(0,0%,10%);
+	--Color_Dex_Settings_Label:initial;
+	--Background_Dex_Settings_Label_Selected:hsl(0,0%,30%);
+	--Color_Dex_Settings_Label_Selected:initial;
+    --Background_Dex_Settings_Select:White;
+    --Border_Dex_Settings_Select:1px Solid Black;
+    --Color_Dex_Settings_Select:Black;
+
+
+    /* Main */
+	--Border_Main_Content:initial;
+	--Background_Main_Description_Content:hsl(0,0%,35%);
+    --Border_Main_Description_Content:1px Solid Black;
+	--Color_Main_Description_Content:initial;
+	--Border_Main_Header:initial;
+	--Background_Main_Header_Content:repeating-linear-gradient(0deg, hsl(0,0%,45%) 0px, hsl(0,0%,45%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,45%);
+	--Color_Main_Header_Content:initial;
+	--Border_Main_Header_Content:1px Solid Black;
+	--Background_Main_List_Content:hsl(0,0%,40%);
+    --Border_Main_List_Content:1px Solid Black;
+	--Color_Main_List_Content:initial;
+	--Background_Main_List_Content_Label:hsl(0,0%,35%);
+	--Border_Main_List_Content_Label:1px Solid Black;
+	--Color_Main_List_Content_Label:initial;
+	--Background_Main_List_Content_Label_Selected:hsl(0,0%,60%);
+	--Color_Main_List_Content_Label_Selected:Black;
+	--Background_Main_List_Header:hsl(0,0%,35%);
+    --Border_Main_List_Header:1px Solid Black;
+	--Color_Main_List_Header:initial;
+	--Background_Main_List_Header_Search:White;
+    --Border_Main_List_Header_Search:1px Solid Black;
+	--Color_Main_List_Header_Search:hsl(0,0%,10%);
+	--Background_Main_Menu:hsl(0,0%,25%);
+    --Border_Main_Menu:1px Solid Black;
+	--Color_Main_Menu:initial;
+	--Background_Main_Menu_List:initial;
+    --Border_Main_Menu_List:1px Solid Black;
+    --Color_Main_Menu_List:initial;
+    --Background_Main_Menu_List_Item:initial;
+    --Border_Main_Menu_List_Item:1px dashed hsl(0,0%,20%);
+    --Color_Main_Menu_List_Item:initial;
+    --Background_Main_Navigation_Label:hsl(0,0%,25%);
+    --Border_Main_Navigation_Label:1px solid black;
+    --Color_Main_Navigation_Label:initial;
+    --Background_Main_Navigation_Label_Selected:hsl(0,0%,50%);
+    --Color_Main_Navigation_Label_Selected:Black;
+	--Background_Main_Sidebar_Content:hsl(0,0%,40%);
+    --Border_Main_Sidebar_Content:initial;
+	--Color_Main_Sidebar_Content:initial;
+    --Border_Main_Sidebar_Content_Item:1px Dashed hsl(0,0%,30%);
+    --Border_Main_Sidebar_Footer:initial;
+	--Background_Main_Sidebar_Footer_Label:hsl(0,0%,30%);
+    --Border_Main_Sidebar_Footer_Label:initial;
+	--Color_Main_Sidebar_Footer_Label:initial;
+	--Background_Main_Sidebar_Footer_Label_Selected:hsl(0,0%,50%);
+	--Color_Main_Sidebar_Footer_Label_Selected:Black;
+	--Background_Main_Sidebar_Header:hsl(0,0%,25%);
+    --Border_Main_Sidebar_Header:1px Solid Black;
+	--Color_Main_Sidebar_Header:initial;
+    --Background_Main_Sidebar_Header_Label:initial;
+    --Border_Main_Sidebar_Header_Label:initial;
+    --Color_Main_Sidebar_Header_Label:initial;
+	--Background_Main_Sidebar_Header_Label_Selected:initial;
+	--Color_Main_Sidebar_Header_Label_Selected:initial;
+
+
+    /* Data */
+	--Background_Data_Content:hsl(0,0%,35%);
+    --Border_Data_Content:initial;
+	--Color_Data_Content:initial;
+    --Background_Data_Content_Header:hsl(0,0%,50%);
+    --Border_Data_Content_Header:initial;
+    --Color_Data_Content_Header:initial;
+	--Background_Data_Content_Item:hsl(0,0%,30%);
+    --Border_Data_Content_Item:1px Dashed black;
+	--Color_Data_Content_Item:initial;
+    --Background_Data_Footer_Content:hsl(0,0%,30%);
+    --Border_Data_Footer_Content:initial;
+    --Color_Data_Footer_Content:initial;
+    --Background_Data_Footer_Content_Item:initial;
+    --Border_Data_Footer_Content_Item:initial;
+    --Color_Data_Footer_Content_Item:initial;
+	--Background_Data_Footer_Title:hsl(0,0%,25%);
+    --Border_Data_Footer_Title:initial;
+	--Color_Data_Footer_Title:initial;
+	--Background_Data_Foreground:hsl(0,0%,40%);
+    --Border_Data_Foreground:initial;
+	--Color_Data_Foreground:initial;
+	--Background_Data_Header:initial;
+	--Color_Data_Header:initial;
+	--Border_Data_Header:1px solid black;
+	--Background_Data_Header_Label:hsl(0,0%,50%);
+    --Border_Data_Header_Label:1px dashed hsl(0,0%,20%);
+	--Color_Data_Header_Label:initial;
+	--Background_Data_Header_Label_Selected:hsl(0,0%,70%);
+	--Color_Data_Header_Label_Selected:black;
+	--Background_Data_Label:hsl(0,0%,30%);
+	--Color_Data_Label:initial;
+	--Border_Data_Label:1px solid black;
+    --Background_Data_Label_Selected:hsl(0,0%,60%);
+    --Color_Data_Label_Selected:black;
+	--Background_Data_Redirect:hsl(0,0%,70%);
+    --Border_Data_Redirect:1px solid hsl(0,0%,20%);
+	--Color_Data_Redirect:initial;
+	--Background_Data_Sidebar:initial;
+    --Border_Data_Sidebar:1px Solid black;
+	--Color_Data_Sidebar:initial;
+    --Background_Data_Sidebar_Item:hsl(0,0%,30%);
+	--Color_Data_Sidebar_Item:initial;
+	--Border_Data_Sidebar_Item:1px Dashed Black;
+	--Background_Data_Sidebar_Label:hsl(0,0%,40%);
+    --Border_Data_Sidebar_Label:initial;
+	--Color_Data_Sidebar_Label:initial;
+	--Background_Data_Sidebar_Label_Selected:hsl(0,0%,60%);
+	--Color_Data_Sidebar_Label_Selected:Black;
+
+
+    /* Map */
+	--Background_Map_Content_Footer:hsl(0,0%,55%);
+    --Border_Map_Content_Footer:initial;
+	--Color_Map_Content_Footer:initial;
+    --Background_Map_Content_Footer_Item:initial;
+	--Border_Map_Content_Footer_Item:initial;
+	--Background_Map_Content_Redirect:hsl(0,0%,25%);
+	--Border_Map_Content_Redirect:initial;
+	--Color_Map_Content_Redirect:initial;
+	--Background_Map_Sidebar_Annotation:hsl(0,0%,70%);
+	--Border_Map_Sidebar_Annotation:1px solid black;
+	--Color_Map_Sidebar_Annotation:black;
+    --Background_Map_Sidebar_Content:hsl(0,0%,40%);
+	--Border_Map_Sidebar_Content:initial;
+	--Color_Map_Sidebar_Content:initial;
+    --Background_Map_Sidebar_Content_Item:initial;
+	--Border_Map_Sidebar_Content_Item:1px Dashed hsl(0,0%,25%);
+	--Color_Map_Sidebar_Content_Item:initial;
+	--Background_Map_Sidebar_Content_Item_Title:hsl(0,0%,20%);
+	--Border_Map_Sidebar_Content_Item_Title:initial;
+	--Color_Map_Sidebar_Content_Item_Title:initial;
+    --Background_Map_Sidebar_Content_Search:White;
+	--Border_Map_Sidebar_Content_Search:1px Solid Black;
+    --Color_Map_Sidebar_Content_Search:hsl(0,0%,10%);
+  
+	--Background_Map_Sidebar_Content_Title:hsl(0,0%,50%);
+	--Border_Map_Sidebar_Content_Title:initial;
+	--Color_Map_Sidebar_Content_Title:initial;
+	--Background_Map_Sidebar_Header_Label:hsl(0,0%,30%);
+	--Border_Map_Sidebar_Header_Label:1px Solid Black;
+	--Color_Map_Sidebar_Header_Label:initial;
+	--Background_Map_Sidebar_Header_Label_Selected:hsl(0,0%,50%);
+	--Color_Map_Sidebar_Header_Label_Selected:Black;
+
+
+	/* Damage Calculator */
+	--Background_Calculator_Content_Footer:hsl(0,0%,30%);
+    --Border_Calculator_Content_Footer:1px Solid Black;
+    --Color_Calculator_Content_Footer:initial;
+    --Background_Calculator_Content_Footer_Item_Active:hsl(0,0%,70%);
+    --Border_Calculator_Content_Footer_Item_Active:2px Solid hsl(0,0%,55%);
+    --Color_Calculator_Content_Footer_Item_Active:initial;
+    --Background_Calculator_Content_Footer_Item:linear-gradient(to bottom, Skyblue, hsl(0,0%,60%));
+    --Border_Calculator_Content_Footer_Item:1px Solid hsl(0,0%,10%);
+    --Color_Calculator_Content_Footer_Item:White;
+    --Background_Calculator_Footer:hsl(0,0%,45%);
+    --Border_Calculator_Footer:1px Solid black;
+    --Background_Calculator_Footer_Button:hsl(0,0%,35%);
+    --Border_Calculator_Footer_Button:2px outset hsl(0,0%,50%);
+    --Color_Calculator_Footer_Button:initial;
+    --Color_Calculator_Footer:initial;
+    --Background_Calculator_Footer_Input:hsl(0,0%,100%);
+    --Border_Calculator_Footer_Input:4px Ridge hsl(0,0%,55%);
+    --Color_Calculator_Footer_Input:black;
+    --Background_Calculator_Header:hsl(0,0%,35%);
+    --Border_Calculator_Header:1px Solid Black;
+    --Color_Calculator_Header:initial;
+    --Background_Calculator_Sidebar_Content:hsl(0,0%,40%);
+    --Border_Calculator_Sidebar_Content:1px Dashed hsl(0,0%,30%);
+    --Color_Calculator_Sidebar_Content:White;
+    --Background_Calculator_Sidebar_Content_Footer:hsl(0,0%,45%);
+    --Border_Calculator_Sidebar_Content_Footer:1px Solid hsl(0,0%,20%);
+    --Color_Calculator_Sidebar_Content_Footer:initial;
+    --Background_Calculator_Sidebar_Content_Input:White;
+    --Border_Calculator_Sidebar_Content_Input:1px Solid Black;
+    --Color_Calculator_Sidebar_Content_Input:Black;
+    --Background_Calculator_Sidebar_Content_Select:White;
+    --Border_Calculator_Sidebar_Content_Select:1px Solid Black;
+    --Color_Calculator_Sidebar_Content_Select:Black;
+    --Background_Calculator_Sidebar_Content_Select_Special:White;
+    --Border_Calculator_Sidebar_Content_Select_Special:1px Solid Black;
+    --Color_Calculator_Sidebar_Content_Select_Special:Black;
+    --Background_Calculator_Sidebar_Footer:hsl(0,0%,25%);
+    --Border_Calculator_Sidebar_Footer:1px Solid Black;
+    --Color_Calculator_Sidebar_Footer:initial;
+    --Border_Calculator_Sidebar_Footer_Item:initial;
+    --Background_Calculator_Sidebar_Header:hsl(0,0%,30%);
+    --Border_Calculator_Sidebar_Header:1px Solid Black;
+    --Color_Calculator_Sidebar_Header:initial;
+    --Background_Calculator_Sidebar_Header_Select:initial;
+    --Border_Calculator_Sidebar_Header_Select:initial;
+    --Color_Calculator_Sidebar_Header_Select:initial;
+
+	/* Type Advantage */
+	--Background_Type_Content: hsl(0,0%,50%);
+    --Border_Type_Content: 1px solid black;
+    --Color_Type_Content: initial;
+    --Background_Type_Content_Effective: hsl(0,0%,100%);
+    --Border_Type_Content_Effective: 1px solid black;
+    --Color_Type_Content_Effective: black;
+    --Background_Type_Content_Immune: hsl(0,0%,20%);
+    --Border_Type_Content_Immune: 1px solid black;
+    --Color_Type_Content_Immune: initial;
+    --Background_Type_Content_Ineffective: indianred;
+    --Border_Type_Content_Ineffective: 1px solid black;
+    --Color_Type_Content_Ineffective: initial;
+    --Background_Type_Content_SuperEffective: mediumseagreen;
+    --Border_Type_Content_SuperEffective: 1px solid black;
+    --Color_Type_Content_SuperEffective: initial;
+    --Background_Type_Sidebar_Content: hsl(0,0%,55%);
+    --Border_Type_Sidebar_Content: 1px solid black;
+    --Color_Type_Sidebar_Content: initial;
+    --Background_Type_Sidebar_Content_Label: hsl(0,0%,50%);
+    --Border_Type_Sidebar_Content_Label: 1px solid black;
+    --Color_Type_Sidebar_Content_Label: initial;
+    --Background_Type_Sidebar_Content_Label_Selected: hsl(0,0%,70%);
+    --Color_Type_Sidebar_Content_Label_Selected: black;
+    --Background_Type_Sidebar_Header_Add: hsl(0,0%,55%);
+    --Border_Type_Sidebar_Header_Add: 4px Inset hsl(0,0%,60%);
+    --Color_Type_Sidebar_Header_Add: White;
+    --Background_Type_Sidebar_Header: hsl(0,0%,45%);
+    --Border_Type_Sidebar_Header: 1px solid black;
+    --Color_Type_Sidebar_Header: initial;
+
+
+    /* Random */
+	--Background_Random_Content: hsl(0,0%,60%);
+    --Border_Random_Content: initial;
+    --Color_Random_Content: initial;
+    --Background_Random_Content_Item: hsl(0,0%,50%);
+    --Border_Random_Content_Item: 4px outset hsl(0,0%,70%);
+    --Color_Random_Content_Item: initial;
+    --Background_Random_Sidebar_Content: hsl(0,0%,45%);
+    --Border_Random_Sidebar_Content: initial;
+    --Color_Random_Sidebar_Content: initial;
+	--Background_Random_Sidebar_Content_Item:initial;
+	--Color_Random_Sidebar_Content_Item:initial;
+	--Border_Random_Sidebar_Content_Item:1px dashed hsl(0,0%,30%);
+    --Background_Random_Sidebar_Content_Input: hsl(0,0%,100%);
+    --Border_Random_Sidebar_Content_Input: initial;
+    --Color_Random_Sidebar_Content_Input: black;
+    --Background_Random_Sidebar_Header: hsl(0,0%,40%);
+    --Border_Random_Sidebar_Header: initial;
+    --Background_Random_Sidebar_Header_Button: hsl(0,0%,60%);
+    --Border_Random_Sidebar_Header_Button: 2px Solid hsl(0,0%,30%);
+    --Color_Random_Sidebar_Header_Button: initial;
+    --Color_Random_Sidebar_Header: initial;
+    --Background_Random_Sidebar_Header_Input: hsl(0,0%,100%);
+    --Border_Random_Sidebar_Header_Input: initial;
+    --Color_Random_Sidebar_Header_Input: black;
+
+
+    /* Timer */
+	--Background_Timer_Content: hsl(0,0%,50%);
+    --Border_Timer_Content: initial;
+    --Color_Timer_Content: initial;
+    --Background_Timer_Content_Item: hsl(0,0%,45%);
+    --Border_Timer_Content_Item: 1px dashed hsl(0,0%,20%);
+    --Color_Timer_Content_Item: initial;
+    --Border_Timer_Header: initial;
+    --Background_Timer_Header_Label: hsl(0,0%,35%);
+    --Border_Timer_Header_Label: initial;
+    --Color_Timer_Header_Label: initial;
+    --Background_Timer_Header_Label_Selected: hsl(0,0%,50%);
+    --Color_Timer_Header_Label_Selected: black;
+    --Background_Timer_Title: hsl(0,0%,25%);
+    --Border_Timer_Title: initial;
+    --Color_Timer_Title: initial;
+    --Background_Timer_Title_Input: hsl(0,0%,100%);
+    --Border_Timer_Title_Input: 4px inset hsl(0,0%,40%);
+    --Color_Timer_Title_Input: black;
+    --Background_Timer_Title_Pause: salmon;
+    --Border_Timer_Title_Pause: initial;
+    --Color_Timer_Title_Pause: initial;
+    --Background_Timer_Title_Play: seagreen;
+    --Border_Timer_Title_Play: initial;
+    --Color_Timer_Title_Play: initial;
+}
