@@ -122,7 +122,6 @@ function initialize() {
 		window.addEventListener('resize', resize);
 
 		memory("Restore","",[document.querySelector('#resizer')]);
-		memory("Restore","",[document.querySelector('#pokémon > aside[name="settings"] > span[name="theme"] input')]);
 		memory("Restore","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"]'));
 
 		variantSelector(); /* 1min */
