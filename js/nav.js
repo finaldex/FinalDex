@@ -118,5 +118,7 @@ function navSelector() {
 			document.querySelector("#contain > div#item ol input:first-child").click();
 		}
 	}
+
+
 }
 
