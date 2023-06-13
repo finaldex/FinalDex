@@ -67,12 +67,12 @@ let createMap = function() {
 
 	mapSectionContentMapImg.src = getMedia(true,["Map"],[PATH_Region_Map])
 
-	mapSectionContentMapImg.setAttribute("usemap","#"+Region.join(" & ")+"-map");
+	mapSectionContentMapImg.setAttribute("usemap","#"+Region.join("_")+"-map");
 	mapOuter.appendChild(mapSectionContent);
 	mapSectionContent.appendChild(mapSectionContentMapOuter);
 
-	mapSectionContentMap.setAttribute("name",Region.join(" & ")+"-map");
-	mapSectionContentMap.setAttribute("id",Region.join(" & ")+"-map");
+	mapSectionContentMap.setAttribute("name",Region.join("_")+"-map");
+	mapSectionContentMap.setAttribute("id",Region.join("_")+"-map");
 
 	mapSectionContentMapOuter.setAttribute("name","map");
 
@@ -307,7 +307,7 @@ let createMap = function() {
 		if (getApplicable(finaldata["Locations"]["Reference"][q]["Game"])) {
 			let mapSectionListOptionsInput = document.createElement("input");
 			let mapSectionListOptionsLabel = document.createElement("label");
-			let mapSectionListOptionsText = document.createElement("p");
+			let mapSectionListOptionsText = document.createElement("h5");
 			mapSectionListOptionsInput.setAttribute("type", "radio");
 			mapSectionListOptionsInput.setAttribute("name", "map-options");
 			mapSectionListOptionsInput.setAttribute("id", "map-options-"+q);
@@ -503,26 +503,27 @@ let createMap = function() {
 			}
 		}
 		else {
-		
-			let DescriptionSelectorInput = document.createElement("input");
-			let DescriptionSelectorLabel = document.createElement("label");
+			for(let q = 0; q < mapDescriptionTitles.length; q++) {
+				let DescriptionSelectorInput = document.createElement("input");
+				let DescriptionSelectorLabel = document.createElement("label");
 
-			DescriptionSelectorInput.setAttribute("type", "radio");
-			DescriptionSelectorInput.setAttribute("name", "map-description-selector");
-			DescriptionSelectorInput.setAttribute("id", "map-description-selector-"+q);
-			DescriptionSelectorInput.setAttribute("autocomplete", "off");
-			DescriptionSelectorInput.setAttribute("value", mapDescriptionTitles[q].replaceAll(" ","").toLowerCase());
-			DescriptionSelectorLabel.setAttribute("for", "map-description-selector-"+q);
-	
-			let DescriptionSelectorLabelText = document.createElement("h6");
-			DescriptionSelectorLabelText.innerText = mapDescriptionTitles[q];
-			DescriptionSelectorUp.appendChild(DescriptionSelectorInput);
-			DescriptionSelectorUp.appendChild(DescriptionSelectorLabel);
-			DescriptionSelectorLabelText.innerText = location;
-			DescriptionSelectorInput.setAttribute("checked","")
-			DescriptionSelectorLabel.appendChild(DescriptionSelectorLabelText);
+				DescriptionSelectorInput.setAttribute("type", "radio");
+				DescriptionSelectorInput.setAttribute("name", "map-description-selector");
+				DescriptionSelectorInput.setAttribute("id", "map-description-selector-"+q);
+				DescriptionSelectorInput.setAttribute("autocomplete", "off");
+				DescriptionSelectorInput.setAttribute("value", mapDescriptionTitles[q].replaceAll(" ","").toLowerCase());
+				DescriptionSelectorLabel.setAttribute("for", "map-description-selector-"+q);
 		
-			DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);	  
+				let DescriptionSelectorLabelText = document.createElement("h6");
+				DescriptionSelectorLabelText.innerText = mapDescriptionTitles[q];
+				DescriptionSelectorUp.appendChild(DescriptionSelectorInput);
+				DescriptionSelectorUp.appendChild(DescriptionSelectorLabel);
+				DescriptionSelectorLabelText.innerText = location;
+				DescriptionSelectorInput.setAttribute("checked","")
+				DescriptionSelectorLabel.appendChild(DescriptionSelectorLabelText);
+			
+				DescriptionSelectorInput.addEventListener("click", mapDescriptionSelector);
+			}
 			
 		}
 
@@ -812,7 +813,10 @@ let createMap = function() {
 					for(let y = 0; y < quantity; y++) {
 						let mapSectionSidebarDescriptionShopIcon = document.createElement("img");
 						if (type == "item") {
-							mapSectionSidebarDescriptionShopIcon.src = getMedia(true,[getItemIcon(shops[u]["Item"])],[PATH_Item_Bag]);
+							let itoc = getItemIcon(shops[u]["Item"]);
+							if (itoc != undefined) {
+								mapSectionSidebarDescriptionShopIcon.src = getMedia(true,[itoc],[PATH_Item_Bag]);
+							}
 							mapSectionSidebarDescriptionShopIcon.setAttribute("onerror", "this.style.display='none';");
 						}
 						else if (type == "pokémon") {
@@ -888,7 +892,11 @@ let createMap = function() {
 
 
 					for(let r = 0; r < currency.length; r++) {
-						let icon = getMedia(true,[getItemIcon(currency[r])],[PATH_Currency_Icon]);
+						let ic = getItemIcon(currency[r]);
+						let icon;
+						if (ic != undefined) {
+							icon = getMedia(true,[ic],[PATH_Currency_Icon]);
+						}
 						let abbr = currency[r].replace(/[^A-Z]+/g,"");
 						if (icon != undefined && icon != "") {
 							let img = document.createElement("img");
@@ -1018,8 +1026,12 @@ let createMap = function() {
 
 					for(let y = 0; y < quantity; y++) {
 	
+						let itoc = getItemIcon(items[u]["Item"]);
+
 						let mapSectionSidebarDescriptionItemIcon = document.createElement("img");
-						mapSectionSidebarDescriptionItemIcon.src = getMedia(true,[getItemIcon(items[u]["Item"])],[PATH_Item_Bag])
+						if (itoc != undefined) {
+							mapSectionSidebarDescriptionItemIcon.src = getMedia(true,[itoc],[PATH_Item_Bag])
+						}
 
 						mapSectionSidebarDescriptionItemIcon.setAttribute("onerror", "this.style.display='none';");
 						mapSectionSidebarDescriptionItemIconInner.appendChild(mapSectionSidebarDescriptionItemIcon);
@@ -1898,7 +1910,7 @@ let createMap = function() {
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("type","number");
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("min",1);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("max",trainers.length);
-	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("value",1);
+	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.value = 1;
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountMiddle.innerText = "/";
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("placeholder",1);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("type","number");
@@ -1945,8 +1957,11 @@ let createMap = function() {
 
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.addEventListener("change",iMinMax);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.addEventListener("change",function(){updateTrainer(trainers,undefined)});
-	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("onwheel","");
+	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("onwheel",function(){updateTrainer(trainers,undefined)});
 
+
+
+	
 
 	mapSectionListOptionsSearch.title = searchOptionsTitle(mapSectionListOptions);
 
@@ -2518,29 +2533,34 @@ function updateTrainer(trainers,condition) {
 					
 
 					let grpFig = document.createElement("figure");
+					let grpFigTxt = document.createElement("small");
+					let grpFigLabel = document.createElement("label");
+					let grpFigInput = document.createElement("input");
+					let grpFigOl = document.createElement("ol");
 					grpFig.setAttribute("name","export");
+					grpFig.classList.add("drop");
+					grpFig.setAttribute("type","rotate-right");
+					grpFigTxt.innerText = "⮟";
+					grpFigInput.setAttribute("type","checkbox");
+					grpFigInput.setAttribute("name","trainer-specific-export-input-"+data);
+					grpFigInput.setAttribute("id","trainer-specific-export-input-"+data);
+					grpFigLabel.setAttribute("for","trainer-specific-export-input-"+data);
 					grpWrap.appendChild(grpFig)
-					grpFig.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-					let grpFigText = document.createElement("small");
-					grpFigText.innerText = "⮟";
-					grpFig.appendChild(grpFigText)
-					let grpFigTop = document.createElement("div");
-					grpFig.appendChild(grpFigTop)
-					let grpFigTopWrap = document.createElement("span");
-					grpFigTop.appendChild(grpFigTopWrap)
+					grpFig.appendChild(grpFigLabel)
+					grpFigLabel.appendChild(grpFigTxt)
+					grpFigLabel.appendChild(grpFigInput)
+					grpFigLabel.appendChild(grpFigOl)
+					grpFig.addEventListener("click",dropRelPos);
+					grpFig.click();
 					let grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
-	
 					for(let e = 0; e < grpFigOpts.length; e++) {
-						let grpFigWrapTop = document.createElement("span");
-						let grpFigWrap = document.createElement("b");
-						let grpFigTxt = document.createElement("small");
-						grpFigWrapTop.setAttribute("name",grpFigOpts[e]);
-						grpFigWrap.setAttribute("type","invert");
-						grpFigTxt.innerText = grpFigOpts[e];
-						grpFigTopWrap.appendChild(grpFigWrapTop);
-						grpFigWrapTop.appendChild(grpFigWrap);
-						grpFigWrap.appendChild(grpFigTxt);
-						grpFigWrap.addEventListener("click",grpFigFunction);
+						let grpFigLi = document.createElement("li");
+						let grpFigText = document.createElement("small");
+						grpFigLi.setAttribute("name",grpFigOpts[e]);
+						grpFigText.innerText = grpFigOpts[e];
+						grpFigOl.appendChild(grpFigLi);
+						grpFigLi.appendChild(grpFigText);
+						grpFigLi.addEventListener("click",grpFigFunction);
 					}
 				}
 		
@@ -2556,29 +2576,34 @@ function updateTrainer(trainers,condition) {
 
 
 					let grpFig = document.createElement("figure");
+					let grpFigTxt = document.createElement("small");
+					let grpFigLabel = document.createElement("label");
+					let grpFigInput = document.createElement("input");
+					let grpFigOl = document.createElement("ol");
 					grpFig.setAttribute("name","export");
+					grpFig.classList.add("drop");
+					grpFig.setAttribute("type","rotate-right");
+					grpFigTxt.innerText = "⮟";
+					grpFigInput.setAttribute("type","checkbox");
+					grpFigInput.setAttribute("name","trainer-specific-export-input");
+					grpFigInput.setAttribute("id","trainer-specific-export-input");
+					grpFigLabel.setAttribute("for","trainer-specific-export-input");
 					grpWrap.appendChild(grpFig)
-					grpFig.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-					let grpFigText = document.createElement("small");
-					grpFigText.innerText = "⮟";
-					grpFig.appendChild(grpFigText)
-					let grpFigTop = document.createElement("div");
-					grpFig.appendChild(grpFigTop)
-					let grpFigTopWrap = document.createElement("span");
-					grpFigTop.appendChild(grpFigTopWrap)
+					grpFig.appendChild(grpFigLabel)
+					grpFigLabel.appendChild(grpFigTxt)
+					grpFigLabel.appendChild(grpFigInput)
+					grpFigLabel.appendChild(grpFigOl)
+					grpFig.addEventListener("click",dropRelPos);
+					grpFig.click();
 					let grpFigOpts = ["Copy Data Strings","Send to Damage Calculator"];
-	
 					for(let e = 0; e < grpFigOpts.length; e++) {
-						let grpFigWrapTop = document.createElement("span");
-						let grpFigWrap = document.createElement("b");
-						let grpFigTxt = document.createElement("small");
-						grpFigWrapTop.setAttribute("name",grpFigOpts[e]);
-						grpFigWrap.setAttribute("type","invert");
-						grpFigTxt.innerText = grpFigOpts[e];
-						grpFigTopWrap.appendChild(grpFigWrapTop);
-						grpFigWrapTop.appendChild(grpFigWrap);
-						grpFigWrap.appendChild(grpFigTxt);
-						grpFigWrap.addEventListener("click",grpFigFunction);
+						let grpFigLi = document.createElement("li");
+						let grpFigText = document.createElement("small");
+						grpFigLi.setAttribute("name",grpFigOpts[e]);
+						grpFigText.innerText = grpFigOpts[e];
+						grpFigOl.appendChild(grpFigLi);
+						grpFigLi.appendChild(grpFigText);
+						grpFigLi.addEventListener("click",grpFigFunction);
 					}
 				}
 		
@@ -2962,30 +2987,35 @@ function updateTrainer(trainers,condition) {
 
 
 		let exportButton = document.createElement("figure");
-		exportButton.setAttribute("name","export");
-		liMain.appendChild(exportButton)
-		exportButton.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-		let exportButtonText = document.createElement("small");
-		exportButtonText.innerText = "⮟";
-		exportButton.appendChild(exportButtonText)
-		let exportButtonTop = document.createElement("div");
-		exportButton.appendChild(exportButtonTop)
-		let exportButtonTopWrap = document.createElement("span");
-		exportButtonTop.appendChild(exportButtonTopWrap)
-		let exportButtonOpts = ["Copy Data String","Send to Damage Calculator"];
-
-		for(let e = 0; e < exportButtonOpts.length; e++) {
-			let exportButtonWrapTop = document.createElement("span");
-			let exportButtonWrap = document.createElement("b");
-			let exportButtonTxt = document.createElement("small");
-			exportButtonWrapTop.setAttribute("name",exportButtonOpts[e]);
-			exportButtonWrap.setAttribute("type","invert");
-			exportButtonTxt.innerText = exportButtonOpts[e];
-			exportButtonTopWrap.appendChild(exportButtonWrapTop);
-			exportButtonWrapTop.appendChild(exportButtonWrap);
-			exportButtonWrap.appendChild(exportButtonTxt);
-			exportButtonWrap.addEventListener("click",exportButtonFunction);
-		}
+        let exportButtonTxt = document.createElement("small");
+        let exportButtonLabel = document.createElement("label");
+        let exportButtonInput = document.createElement("input");
+        let exportButtonOl = document.createElement("ol");
+        exportButton.setAttribute("name","export");
+        exportButton.classList.add("drop");
+        exportButton.setAttribute("type","rotate-right");
+        exportButtonTxt.innerText = "⮟";
+        exportButtonInput.setAttribute("type","checkbox");
+        exportButtonInput.setAttribute("name","trainer-export-input-"+datas[u]);
+        exportButtonInput.setAttribute("id","trainer-export-input-"+datas[u]);
+        exportButtonLabel.setAttribute("for","trainer-export-input-"+datas[u]);
+        liMain.appendChild(exportButton)
+        exportButton.appendChild(exportButtonLabel)
+        exportButtonLabel.appendChild(exportButtonTxt)
+        exportButtonLabel.appendChild(exportButtonInput)
+        exportButtonLabel.appendChild(exportButtonOl)
+        exportButton.addEventListener("click",dropRelPos);
+        exportButton.click();
+        let exportButtonOpts = ["Copy Data String","Send to Damage Calculator"];
+        for(let e = 0; e < exportButtonOpts.length; e++) {
+            let exportButtonLi = document.createElement("li");
+            let exportButtonText = document.createElement("small");
+            exportButtonLi.setAttribute("name",exportButtonOpts[e]);
+            exportButtonText.innerText = exportButtonOpts[e];
+            exportButtonOl.appendChild(exportButtonLi);
+            exportButtonLi.appendChild(exportButtonText);
+            exportButtonLi.addEventListener("click",exportButtonFunction);
+        }
 
 		function exportButtonFunction() {
 			let val = this.parentElement.getAttribute("name");
