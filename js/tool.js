@@ -745,38 +745,45 @@ let createTool = function() {
 		toolSectionContentDMGMenuCenterBottomCategoryText.style.display = "none";
 
 		
-		toolSectionContentDMGMenuLeftRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`; let z = this.parentElement.querySelector(":scope *[name='val']"); z.innerText = (this.value-this.min);z.innerText = z.innerText+" ("+parseInt(v)+"%)";})
+		toolSectionContentDMGMenuLeftRange.addEventListener("input",function(){let v = ((this.value-this.min)/(this.max-this.min))*100;let c = "Blue";let b = "hsl(0,0%,90%)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`; let z = this.parentElement.querySelector(":scope *[name='val']"); z.innerText = (this.value-this.min);z.innerText = z.innerText+" ("+parseInt(v)+"%)";})
 		toolSectionContentDMGMenuLeftRange.addEventListener("input",DMGResetCalc)
 		toolSectionContentDMGMenuLeftCriticalInput.addEventListener("input",DMGResetCalc)
 
+
+
 		let toolSectionContentDMGImport = document.createElement("figure");
-		let toolSectionContentDMGImportText = document.createElement("h5");
-		toolSectionContentDMGImport.setAttribute("name","import");
-		toolSectionContentDMGImportText.innerText = "⮟";
-		toolSectionContentDMGResult.appendChild(toolSectionContentDMGImport);
-		toolSectionContentDMGImport.appendChild(toolSectionContentDMGImportText);
-		let toolSectionContentDMGImportWrapTop = document.createElement("div");
-		let toolSectionContentDMGImportWrap = document.createElement("span");
-		toolSectionContentDMGImport.appendChild(toolSectionContentDMGImportWrapTop);
-		toolSectionContentDMGImportWrapTop.appendChild(toolSectionContentDMGImportWrap);
+        let toolSectionContentDMGImportTxt = document.createElement("h4");
+        let toolSectionContentDMGImportLabel = document.createElement("label");
+        let toolSectionContentDMGImportInput = document.createElement("input");
+        let toolSectionContentDMGImportOl = document.createElement("ol");
+        toolSectionContentDMGImport.setAttribute("name","import");
+        toolSectionContentDMGImport.classList.add("drop");
+		toolSectionContentDMGImportOl.classList.add("bottom");
+		toolSectionContentDMGImportOl.classList.add("right");
+        toolSectionContentDMGImport.setAttribute("type","rotate-right");
+        toolSectionContentDMGImportTxt.innerText = "⮟";
+        toolSectionContentDMGImportInput.setAttribute("type","checkbox");
+        toolSectionContentDMGImportInput.setAttribute("name","dmg-import-input");
+        toolSectionContentDMGImportInput.setAttribute("id","dmg-import-input");
+        toolSectionContentDMGImportLabel.setAttribute("for","dmg-import-input");
+        toolSectionContentDMGResult.appendChild(toolSectionContentDMGImport)
+        toolSectionContentDMGImport.appendChild(toolSectionContentDMGImportLabel)
+        toolSectionContentDMGImportLabel.appendChild(toolSectionContentDMGImportTxt)
+        toolSectionContentDMGImportLabel.appendChild(toolSectionContentDMGImportInput)
+        toolSectionContentDMGImportLabel.appendChild(toolSectionContentDMGImportOl)
+;
+        toolSectionContentDMGImport.click();
+        let toolSectionContentDMGImportOpts = ["Import Pokémon","Copy Data Strings"];
+        for(let e = 0; e < toolSectionContentDMGImportOpts.length; e++) {
+            let toolSectionContentDMGImportLi = document.createElement("li");
+            let toolSectionContentDMGImportText = document.createElement("small");
+            toolSectionContentDMGImportLi.setAttribute("name",toolSectionContentDMGImportOpts[e]);
+            toolSectionContentDMGImportText.innerText = toolSectionContentDMGImportOpts[e];
+            toolSectionContentDMGImportOl.appendChild(toolSectionContentDMGImportLi);
+            toolSectionContentDMGImportLi.appendChild(toolSectionContentDMGImportText);
+            toolSectionContentDMGImportLi.addEventListener("click",DMGFieldExport);
+        }
 
-		toolSectionContentDMGImport.addEventListener("click",function(){if (this.classList.contains("active")) {this.classList.remove("active");} else {this.classList.add("active");}})
-
-		let impopts = ["Import Pokémon","Copy Data Strings"];
-		for (let r = 0; r < impopts.length; r++) {
-			let toolSectionContentDMGImportWrapSpan = document.createElement("span");
-			let toolSectionContentDMGImportWrapTrigger = document.createElement("b");
-			let toolSectionContentDMGImportWrapText = document.createElement("small");
-			toolSectionContentDMGImportWrapText.innerText = impopts[r];
-			toolSectionContentDMGImportWrapTrigger.setAttribute("type","invert");
-			toolSectionContentDMGImportWrapSpan.setAttribute("name",impopts[r])
-			toolSectionContentDMGImportWrap.appendChild(toolSectionContentDMGImportWrapSpan);
-			toolSectionContentDMGImportWrapSpan.appendChild(toolSectionContentDMGImportWrapTrigger);
-			toolSectionContentDMGImportWrapTrigger.appendChild(toolSectionContentDMGImportWrapText);
-
-			toolSectionContentDMGImportWrapTrigger.addEventListener("click",DMGFieldExport);
-
-		}
 
 		function DMGFieldExport() {
 			let val = findUpTag(this,"SPAN").querySelector(":scope small").innerText;
@@ -948,6 +955,7 @@ let createTool = function() {
 	for(let q = 0; q < toolOptionsTitle.length; q++) {
 		let toolSectionListOptionsInput = document.createElement("input");
 		let toolSectionListOptionsLabel = document.createElement("label");
+		let toolSectionListOptionsLabelText = document.createElement("h5");
 		toolSectionListOptionsInput.setAttribute("type","radio");
 		toolSectionListOptionsInput.setAttribute("name","tool-options");
 		toolSectionListOptionsInput.setAttribute("id","tool-options-" + q);
@@ -955,9 +963,10 @@ let createTool = function() {
 		toolSectionListOptionsInput.value = toolOptionsTitle[q];
 		toolSectionListOptionsLabel.setAttribute("for","tool-options-" + q);
 		toolSectionListOptionsLabel.setAttribute("type","medium");
-		toolSectionListOptionsLabel.innerHTML = toolOptionsTitle[q];
+		toolSectionListOptionsLabelText.innerText = toolOptionsTitle[q];
 		toolSectionListOptions.appendChild(toolSectionListOptionsInput);
 		toolSectionListOptions.appendChild(toolSectionListOptionsLabel);
+		toolSectionListOptionsLabel.appendChild(toolSectionListOptionsLabelText);
 		toolSectionListOptionsInput.addEventListener("click", toolOptionsSelector);
 
 		function toolOptionsSelector() {
