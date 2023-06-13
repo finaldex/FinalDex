@@ -120,12 +120,33 @@ function build() {
 	let vids = document.querySelectorAll("video");
 	for(let i = 0; i < vids.length; i++) {
 		vids[i].playbackRate = 2;
+		vids[i].addEventListener("play",vidStart)
+		vids[i].addEventListener("ended",vidEnd)
 	}
+
 
 }
 
+function vidEnd() {
+	event.target.className = "inactive";
+	try {
+		this.nextElementSibling.play();
+	} catch {
+		this.parentElement.firstElementChild.play();
+	}
+}
 
+function vidStart() {
+	event.target.className = "active";
+	let els = this.parentElement.querySelectorAll(":scope > *");
+	let id = 0; for(let i = 0; i < els.length; i++) {
+		if (els[i] == this) {
+			id = i;break;
+		}
+	}
 
+	this.parentElement.style.setProperty("--state","-"+id+"00%")
+}
 
 
 
