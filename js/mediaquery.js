@@ -162,17 +162,11 @@ function setData() {
 
     pagePath.max = Math.ceil(res.length/parseInt(sizePath.value));
 
-    if (pagePath.value > pagePath.max) {
-        pagePath.value = pagePath.max;
-    }
-    if (pagePath.value < pagePath.min) {
-        pagePath.value = pagePath.min;
-    }
-
-
+    inpMM(pagePath)
 
     let size = parseInt(sizePath.value);
     let page = parseInt(pagePath.value);
+
 
     let sizeMin = (size*page)-size;
     let sizeMax = (size*page);
@@ -242,11 +236,10 @@ function setData() {
 }
 
 
-document.querySelector("span[name='size'] input").addEventListener("input",inpMM)
-document.querySelector("span[name='page'] input").addEventListener("input",inpMM)
+document.querySelector("span[name='size'] input").addEventListener("input",function(){inpMM(this)})
+document.querySelector("span[name='page'] input").addEventListener("input",function(){inpMM(this)})
 
-function inpMM() {
-    let tar = this;
+function inpMM(tar) {
     let val = parseInt(tar.value);
     let valmin = parseInt(tar.min);
     let valmax = parseInt(tar.max);
