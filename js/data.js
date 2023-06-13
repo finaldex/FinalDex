@@ -172,10 +172,10 @@ let createData = function(id, i) {
 
 
 	dataSectionMainMapImage.src = getMedia(true,["Map"],[PATH_Region_Map]);
-	dataSectionMainMapImage.setAttribute("usemap", "#"+Region.join(' & ')+"-"+id);
+	dataSectionMainMapImage.setAttribute("usemap", "#"+Region.join('_')+"-"+id);
 	
-	dataSectionMainMap.setAttribute("name", Region.join(' & ')+"-"+id);
-	dataSectionMainMap.setAttribute("id", Region.join(' & ')+"-"+id);
+	dataSectionMainMap.setAttribute("name", Region.join('_')+"-"+id);
+	dataSectionMainMap.setAttribute("id", Region.join('_')+"-"+id);
 	dataSectionMainDescriptionOuter.classList.add("scroll");
 	dataSectionMainDescriptionOuter.setAttribute("name","description");
 
@@ -1307,8 +1307,9 @@ function loadData() {
 					}
 
 					for(let r = 0; r < currency.length; r++) {
-						if (getItemIcon(currency[r]) != undefined) {
-							currency[r] = '<img src="'+getMedia(true,[getItemIcon(currency[r])],[PATH_Item_Bag])+'" onerror="this.style.display=´none´"; onclick="dataRedirect()" name="item" title="'+getItemIcon(currency[r])+'"/>';
+						let itoc = getItemIcon(currency[r]);
+						if (itoc != undefined) {
+							currency[r] = `<img src="`+getMedia(true,[itoc],[PATH_Item_Bag])+`" onerror="this.style.display='none'"; onclick="dataRedirect()" name="item" title="`+itoc+`"/>`;
 						}
 						else {
 							if (currency[r] == "Pokémon Dollar") {
