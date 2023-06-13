@@ -1,67 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
-@import url("https://fonts.googleapis.com/css?family=Bebas+Neue");
-
 :root {
-	--color_97: #F7F7F7;
-	--color_95: #F2F2F2;
-	--color_90: #E5E5E5;
-	--color_85: #D8D8D8;
-	--color_80: #CCCCCC;
-	--color_75: #C0C0C0;
-	--color_70: #B2B2B2;
-	--color_65: #A5A5A5;
-	--color_60: #999999;
-	--color_55: #8C8C8C;
-	--color_50: #7F7F7F;
-	--color_45: #727272;
-	--color_40: #666666;
-	--color_35: #595959;
-	--color_30: #4C4C4C;
-	--color_25: #414141;
-	--color_20: #333333;
-	--color_15: #262626;
-	--color_10: #1A1A1A;
-	--color_5: #0C0C0C;
-
-	--fontDark:#0D0D0D;
-	--fontLight:#F2F2F2;
-
-	--color20: #F7F7F7;
-	--color19: #F2F2F2;
-	--color18: #E5E5E5;
-	--color17: #D8D8D8;
-	--color16: #CCCCCC;
-	--color15: #C0C0C0;
-	--color14: #B2B2B2;
-	--color13: #A5A5A5;
-	--color12: #999999;
-	--color11: #8C8C8C;
-	--color10: #7F7F7F;
-	--color9: #727272;
-	--color8: #666666;
-	--color7: #595959;
-	--color6: #4C4C4C;
-	--color5: #414141;
-	--color4: #333333;
-	--color3: #262626;
-	--color2: #1A1A1A;
-	--color1: #0C0C0C;
-
-	--colorRed:#E60000;
-	--colorBlue:#7373E6;
-	--colorGreen:#13BF13;
-
-	--border1:#262626;
-	--border2:#D8D8D8;
-
-	--descending1: #999999;
-
-	--font1:#1A1A1A;
-	--font2:#E5E5E5;
-
-	--background:#C0C0C0;
-	--contain: #CCCCCC;
-
 	--typeNormal:#9099A1;
 	--typeFighting:#CE4069;
 	--typeFlying:#8FA8DD;
@@ -113,21 +50,21 @@
 	--statSpeed:#FA92B2;
 	--statSpe:#FA92B2;
 
-    --sizeFontTitle: min(max(1.5em, 15vw), 6em);
-    --sizeFontHeader: min(max(1em, 8vw), 4em);
-    --sizeFontXL: min(max(1em, 2vw), 1.75em);
-    --sizeFontL: min(max(0.8em, 1.5vw), 1.17em);
-    --sizeFontM: min(max(0.75em, 1.25vw), 1em);
-    --sizeFontS: min(max(0.6em, 0.75vw), 0.67em);
+    --sizeFontTitle:min(max(1.5em, 15vw), 6em);
+    --sizeFontHeader:min(max(1em, 8vw), 4em);
+    --sizeFontXL:min(max(1em, 2vw), 1.75em);
+    --sizeFontL:min(max(0.8em, 1.5vw), 1.17em);
+    --sizeFontM:min(max(0.75em, 1.25vw), 1em);
+    --sizeFontS:min(max(0.6em, 0.75vw), 0.67em);
 
-    --sizeWidthL: min(max(200px, 20vw), 500px);
-    --sizeWidthM: min(max(150px, 10vw), 250px);
-    --sizeWidthS: min(max(100px, 8vw), 200px);
-	--sizeWidthXS: min(max(50px, 4vw), 100px);
+    --sizeWidthL:min(max(200px, 20vw), 500px);
+    --sizeWidthM:min(max(150px, 10vw), 250px);
+    --sizeWidthS:min(max(100px, 8vw), 200px);
+	--sizeWidthXS:min(max(50px, 4vw), 100px);
 
-	--sizeHeightXL: min(max(150px, 35vh), 500px);
-    --sizeHeightL: min(max(150px, 25vh), 400px);
-    --sizeHeightM: min(max(100px, 17vh), 250px);
-    --sizeHeightS: min(max(50px, 12vh), 200px);
-	--sizeHeightXS: min(max(50px, 7vh), 100px);
+	--sizeHeightXL:min(max(150px, 35vh), 500px);
+    --sizeHeightL:min(max(150px, 25vh), 400px);
+    --sizeHeightM:min(max(100px, 17vh), 250px);
+    --sizeHeightS:min(max(50px, 12vh), 200px);
+	--sizeHeightXS:min(max(50px, 7vh), 100px);
 }
