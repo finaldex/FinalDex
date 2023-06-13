@@ -3797,7 +3797,7 @@ function DMGCalcPokStats(base) {
 					}
 					
 					let per = (pokHPPath.value/val)*100;
-					pokHPPath.style.background = "linear-gradient(to right, var(--colorBlue) 0%, var(--colorBlue) "+per+"%, var(--color_90) "+per+"%, var(--color_90) 100%)"
+					pokHPPath.style.background = "linear-gradient(to right, Blue 0%, Blue "+per+"%, hsl(0,0%,90%) "+per+"%, hsl(0,0%,90%) 100%)"
 				
 				}
 
@@ -4219,7 +4219,7 @@ function DMGSetInfo() {
 	let pcent = ((rollRandomPath.value-parseFloat(rollRandomPath.min))/(parseFloat(rollRandomPath.max)-parseFloat(rollRandomPath.min)))*100;
 	rollValTextPath.innerText = rollRandomPath.value-parseFloat(rollRandomPath.min);
 	rollValTextPath.innerText = rollValTextPath.innerText+" ("+parseInt(pcent)+"%)";
-	rollRandomPath.style.background = "linear-gradient(to right, var(--colorBlue) 0%, var(--colorBlue) "+pcent+"%, var(--color_90) "+pcent+"%, var(--color_90) 100%)"
+	rollRandomPath.style.background = "linear-gradient(to right, Blue 0%, Blue "+pcent+"%, hsl(0,0%,90%) "+pcent+"%, hsl(0,0%,90%) 100%)"
 	rollMinTextPath.innerText = parseFloat(rollRandomPath.min)-parseFloat(rollRandomPath.min);
 	rollMaxTextPath.innerText = parseFloat(rollRandomPath.max)-parseFloat(rollRandomPath.min);
 
@@ -4650,7 +4650,9 @@ function DMGSetChange(base) {
 
 
 					if (itemPath.value != undefined && itemPath.value != "") {
-						pokItemPath.src = getMedia(true,[getItemIcon(itemPath.value)],[PATH_Item_Bag])
+						let itoc = getItemIcon(itemPath.value);
+						itoc = undDel(itoc,itemPath.value);
+						pokItemPath.src = getMedia(true,[itoc],[PATH_Item_Bag])
 					}
 				}
 			}
@@ -6424,9 +6426,9 @@ function buildDMG(preval) {
 				contentUser.setAttribute("type","invert");
 				contentTarget.setAttribute("type","invert");
 
-				contentItem.setAttribute("onerror","this.style.display = 'none';");
-				contentItem.setAttribute("onload","this.style.removeProperty('display');");
-		
+				contentImg.src = "";
+				contentItem.src = "";
+
 				contentUserText.innerText = "⚝";
 				contentTargetText.innerText = "⚀";
 
@@ -6488,6 +6490,7 @@ function buildDMG(preval) {
 				let contentActiveExportText = document.createElement("small");
 				contentActiveClose.setAttribute("name","close");
 				contentActiveExport.setAttribute("name","export");
+				contentActiveExport.classList.add("drop");
 				contentActiveCloseText.innerText = "❌";
 				contentActiveExportText.innerText = "⮟";
 				contentActiveTop.appendChild(contentActiveClose);
@@ -6620,6 +6623,7 @@ function buildDMG(preval) {
 			let partyTeamExport = document.createElement("figure");
 			let partyTeamExportText = document.createElement("h6");
 			partyTeamExport.setAttribute("name","export");
+			partyTeamExport.classList.add("drop");
 			partyTeamExport.setAttribute("type","invert");
 			partyTeamExportText.innerText = "⮟";
 			partyTeamFigureWrap.appendChild(partyTeamExport);
@@ -6798,7 +6802,7 @@ function buildDMG(preval) {
                     pok.appendChild(pokSelect);
                     
                     //pokSelect.addEventListener("change",function(){if(this.value == ""){DMGRemoveDataString(findUpTag(this,"UL"))}});
-                    pokSelect.addEventListener("change",function(){let ulbase = findUpTag(this,"UL");let team = ulbase.parentElement.getAttribute("name");let id = ulbase.getAttribute("name"); let tar = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+team+"'] > div[data-string][name='"+id+"']"); let dstring = tar.getAttribute("data-string"); if (dstring != "") {let ds = tar.getAttribute("data-string").replaceAll("pok:"+dataStringToObj(tar.getAttribute("data-string"))["pok"],"pok:"+this.value); tar.setAttribute("data-string",ds);} else {tar.setAttribute("data-string","pok:"+this.value)}let el1 = ulbase.querySelector(":scope *[name='hp'] > input");let el2 = ulbase.querySelector(":scope *[name='hp'] input[name='current']");el1.value = el1.max; el2.value = el1.max;el1.style.background = "var(--colorBlue)";});
+                    pokSelect.addEventListener("change",function(){let ulbase = findUpTag(this,"UL");let team = ulbase.parentElement.getAttribute("name");let id = ulbase.getAttribute("name"); let tar = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+team+"'] > div[data-string][name='"+id+"']"); let dstring = tar.getAttribute("data-string"); if (dstring != "") {let ds = tar.getAttribute("data-string").replaceAll("pok:"+dataStringToObj(tar.getAttribute("data-string"))["pok"],"pok:"+this.value); tar.setAttribute("data-string",ds);} else {tar.setAttribute("data-string","pok:"+this.value)}let el1 = ulbase.querySelector(":scope *[name='hp'] > input");let el2 = ulbase.querySelector(":scope *[name='hp'] input[name='current']");el1.value = el1.max; el2.value = el1.max;el1.style.background = "Dodgerblue";});
                     pokSelect.addEventListener("change",DMGPokSpecific);
                     pokSelect.addEventListener("change",DMGSaveData);
                     pokSelect.addEventListener("change",DMGSetChange);
@@ -6870,7 +6874,7 @@ function buildDMG(preval) {
                     optionsPok.appendChild(maxHP);
                     maxHP.appendChild(maxHPRange);
 
-                    maxHPRange.addEventListener("input",function(){let v = (((this.value-this.min)/(this.max-this.min))*100);let c = "var(--colorBlue)";let b = "var(--color_90)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`})
+                    maxHPRange.addEventListener("input",function(){let v = (((this.value-this.min)/(this.max-this.min))*100);let c = "Dodgerblue";let b = "hsl(0,0%,90%)";this.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`})
 
 
                     let maxHPWrap = document.createElement("span");
@@ -6897,7 +6901,7 @@ function buildDMG(preval) {
                     maxHPWrapCurrent.addEventListener("change",iMinMax);
 					maxHPWrapCurrent.addEventListener("click",function(){this.select();});
                     maxHPWrapCurrent.addEventListener("change",function(){this.parentElement.parentElement.querySelector(":scope input[type='range']").value = this.value;});
-                    maxHPWrapCurrent.addEventListener("change",function(){let tar = this.parentElement.parentElement.querySelector(":scope input[type='range']");let v = ((tar.value-tar.min)/(tar.max-tar.min))*100;let c = "var(--colorBlue)";let b = "var(--color_90)";tar.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`})
+                    maxHPWrapCurrent.addEventListener("change",function(){let tar = this.parentElement.parentElement.querySelector(":scope input[type='range']");let v = ((tar.value-tar.min)/(tar.max-tar.min))*100;let c = "Dodgerblue";let b = "hsl(0,0%,90%)";tar.style.background = `linear-gradient(to right, ${c} 0%, ${c} ${v}%, ${b} ${v}%, ${b} 100%)`})
 
 					//maxHPWrapCurrent.addEventListener("change",DMGCalcStart);
 
@@ -6943,9 +6947,6 @@ function buildDMG(preval) {
                             typeSelect.appendChild(typeOption)
                             if (n != 0) {
                                 typeOption.style.background = "var(--type"+typesTemp[n]+")";
-                            }
-                            else {
-                                typeOption.style.background = "gray";
                             }
                         }
                         if (m == 2) {
@@ -7300,6 +7301,7 @@ function buildDMG(preval) {
                     let exportTeamTop = document.createElement("div");
                     let exportTeamWrap = document.createElement("span");
                     exportTeam.setAttribute("name","export");
+					exportTeam.classList.add("drop");
                     exportTeamText.innerText = "⮟";
                     optionsPok.appendChild(exportTeam)
                     exportTeam.appendChild(exportTeamText)
