@@ -282,7 +282,7 @@ function getMedia(set,userFile,userPath,games) {
 							if (file.includes(".png") || file.includes(".gif")) {
 								for(let t = 0; t < userFile.length; t++) {
 									let fileName = arr[key][q].split(".")[0]
-									let userName = userFile[t];
+									let userName = userFile[t].toString();
 
 									if (userName.includes("^")) {
 										userName = userName.replaceAll("^","")
@@ -1929,7 +1929,9 @@ function getItemIcon(item) {
 	for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"])) {
 			if (arr[q]["Item"] == item) {
-				return arr[q]["Icon"]
+				if (arr[q]["Icon"] != undefined && arr[q]["Icon"] != "") {
+					return arr[q]["Icon"]
+				}
 			}
 		}
 	}
@@ -2040,7 +2042,7 @@ function search(type) {
 				tags[i].classList.add("hidden");
 			}
         }
-        tar.style.color = "var(--colorRed)";
+        tar.style.color = "Red";
     }
     else if (searchNegative.length > 0 && searchAttributes.includes(searchNegative[0])) {
         if (parseInt(searchNegative[1]) != NaN) {
@@ -2055,7 +2057,7 @@ function search(type) {
 				tags[i].classList.add("hidden");
 			}
         }
-        tar.style.color = "var(--colorRed)";
+        tar.style.color = "Red";
     }
 	else if (searchLower.length > 0 && searchAttributes.includes(searchLower[0]) && check) {
         let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchLower[0]+']');
@@ -2069,7 +2071,7 @@ function search(type) {
 				}
 			}
         }
-        tar.style.color = "var(--colorRed)";
+        tar.style.color = "Red";
     }
     else if (searchGreater.length > 0 && searchAttributes.includes(searchGreater[0]) && check) {
         let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchGreater[0]+']');
@@ -2083,7 +2085,7 @@ function search(type) {
 				}
 			}
         }
-        tar.style.color = "var(--colorRed)";
+        tar.style.color = "Red";
     }
     else if (event.target.value.length > 0) {
         let tags = base.querySelectorAll(':scope > '+tag+':not([data-name*="'+searchName+'"])');
