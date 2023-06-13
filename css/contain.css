@@ -1,55 +1,61 @@
 
 #contain {
-	height: 96vh;
+	height:96vh;
 }
 
 
 #contain > div {
-	width: 100%;
-	height: 100%;
-	position: relative;
-	display: block;
+	width:100%;
+	height:100%;
+	position:relative;
+	display:block;
 }
 #contain > div:not(#pokémon) {
-	display: none;
+	display:none;
 }
 
 
 
-#contain > div > section[name='list'] div:last-child {
-	height: 90%;
-	width: 100%;
-	display: block;
-	z-index: 10;
-	overflow: auto;
-	box-shadow: 0 1px 0 var(--border1);
+#contain > div > section[name='list'] > div:last-child {
+	height:90%;
+	width:100%;
+	display:block;
+	z-index:10;
+	overflow:auto;
+
+	background:var(--Background_Main_List_Content);
+	color:var(--Color_Main_List_Content);
+	border:var(--Border_Main_List_Content);
+	border-bottom: none;
+    border-left: none;
+    border-top: none;
 }
-#contain > div#item > section[name='list'] div:last-child {
-	height: 85%;
+#contain > div#item > section[name='list'] > div:last-child {
+	height:85%;
 }
 
 #contain > div > section[name='list'] ol {
-	width: 100%;
-	display: inline-block;
-	margin: 5px 0 10px 0;
+	width:100%;
+	display:inline-block;
+	margin:5px 0 10px 0;
 }
 
 #contain > div > section[name='list'] ol label {
-	background: var(--color14);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 5px auto;
-	text-align:center
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin:5px auto;
+	text-align:center;
+
+	background:var(--Background_Main_List_Content_Label);
+	color:var(--Color_Main_List_Content_Label);
+	border:var(--Border_Main_List_Content_Label);
 }
 
-#contain > div > section[name='list'] ol label:active {
-	background: var(--color10);
-	color: var(--font2);
-}
+#contain > div > section[name='list'] ol label:active,
 #contain > div > section[name='list'] ol input:checked + label {
-	background: var(--color10);
-	color: var(--font2);
+	background:var(--Background_Main_List_Content_Label_Selected);
+	color:var(--Color_Main_List_Content_Label_Selected);
 }
 
 
@@ -59,160 +65,151 @@
 
 
 #contain span[name='exit'] {
-	position: absolute;
-    width: 60%;
-    height: 50%;
-    padding: 0 2vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    font-size: var(--sizeFontXL);
+	position:absolute;
+    width:60%;
+    height:50%;
+    padding:0 2vw;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    pointer-events:none;
+    font-size:var(--sizeFontXL);
 }
 #contain span[name='exit']::after {
-	position: absolute;
-    right: 0;
-    content: '⨯';
-    cursor: pointer;
-    pointer-events: auto;
-    width: 2vw;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position:absolute;
+    right:0;
+    content:'⨯';
+    cursor:pointer;
+    pointer-events:auto;
+    width:2vw;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 
 #contain div#pokémon span[name='exit'] {
-	width: 90%;
-	height: 40%;
+	width:90%;
+	height:40%;
 }
 
 
 
-#contain span[name='exit']:active::after {
-	color: var(--colorRed);
-}
 
 
-
-#contain > div > section[name='list'] > div:first-child > div *,
-#contain > div#pokémon nav ul li[name='search'] * {
-	color: var(--fontDark);
-}
 
 #contain span[name='exit']:active ~ input::placeholder {
-	opacity: 0;
+	opacity:0;
 }
-#search input[type='search']::placeholder,
-#contain > div > section[name='list'] input[type='search']::placeholder {
-	opacity: 0.5;
+#search input[type='search']::placeholder, #contain > div > section[name='list'] input[type='search']::placeholder {
+	opacity:0.5;
 }
 
 
 
 
 #contain > div > section[name='list'] div:first-child {
-	display: block;
-	width: 100%;
-	height: 10%;
-	z-index: 100;
-    
-    position: relative;
+	display:block;
+	width:100%;
+	height:10%;
+	z-index:100;
+    position:relative;
+}
+#contain > div > section[name='list'] > div:first-child {
+	background:var(--Background_Main_List_Header);
+	color:var(--Color_Main_List_Header);
+	border:var(--Border_Main_List_Header);
+	border-top:none;
+	border-left:none;
 }
 
 
 
 #contain > div#item > section[name='list'] div:first-child {
-	height: 15%;
-	display: flex;
-    flex-direction: column;
+	height:15%;
+	display:flex;
+    flex-direction:column;
 }
 #contain > div#item > section[name='list'] ol label p {
-	width: 100%;
+	width:100%;
 }
 #contain > div#item > section[name='list'] ol label span {
-	width: 30%;
+	width:30%;
 	position:relative;
 }
 #contain > div#item > section[name='list'] ol label img {
-	max-height: 100%;
+	max-height:100%;
 	max-width:100%;
 }
 
 #contain > div > section[name='list'] div:first-child h2 {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width:100%;
+	height:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 
 #contain > div > section[name='list'] > div:first-child > *:first-child {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	position: relative;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	height:100%;
+	position:relative;
 }
 #contain > div#item > section[name='list'] > div:first-child > *:first-child {
-	height: 300%;
+	height:200%;
 }
 
 #contain > div > section[name='list'] div:first-child input[type='search'] {
-	width: 60%;
-	height: 50%;
-	padding: 0 10px;
-	display: block;
-	text-align: center;
+	width:60%;
+	height:50%;
+	padding:0 10px;
+	display:block;
+	text-align:center;
+
+	background:var(--Background_Main_List_Header_Search);
+	color:var(--Color_Main_List_Header_Search);
+	border:var(--Border_Main_List_Header_Search);
 }
 
 
 
 
 #contain > div#item > section[name='list'] > div:first-child > *:last-child {
-	display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 150%;
+	display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:150%;
 }
 #contain > div#item > section[name='list'] > div:first-child > *:last-child label {
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+	display:flex;
+    align-items:center;
+	justify-content:flex-start;
+    width:100%;
+    height:100%;
 	text-align:center;
+	flex-direction:column;
 }
 
 
-#contain > div#item > section[name='list'] > div:first-child > *:last-child label p {
-	display: none;
-}
 #contain > div#item > section[name='list'] > div:first-child > *:last-child label img {
-	max-height: 80%;
-    max-width: 80%;
+	max-height:30px;
+    max-width:80%;
 }
 
-
-#contain > div#item > section[name='list'] > div:first-child > *:last-child input:checked + label p {
-	color: var(--colorGreen);
-	text-shadow: 1px 1px 2px var(--border1)
-}
-
-#contain > div#item > section[name='list'] > div:first-child > *:last-child input:not(:checked) + label p {
-	color: var(--color_50);
-    transform: scale(0.8);
-	text-shadow: 1px 1px 2px var(--border1)
-}
 
 #contain > div#item > section[name='list'] > div:first-child > *:last-child input:not(:checked) + label img {
-	filter: brightness(0.9) grayscale(1);
-	transform: scale(0.8);
+	transform:scale(0.9);
+	filter:grayscale(1);
 }
 
+#contain > div#item > section[name='list'] > div:first-child > *:last-child input:not(:checked) + label *:not(img) {
+	opacity:0.25;
+} 
 
 
 
@@ -224,43 +221,48 @@
 
 
 #contain div > section[name='list']  {
-	width: 20%;
-	height: 100%;
-	float: left;
-	z-index: 4;
+	width:20%;
+	height:100%;
+	float:left;
+	z-index:4;
 	position:relative;
-	background: var(--color15);
-	box-shadow: 1px 0 1px var(--border1);
 }
 
 #contain div > section[name='header']  {
-	width: 80%;
-	height: 20%;
-	z-index: 3;
-	box-shadow: 0 1px 1px var(--border1);
-	position: relative;
+	width:80%;
+	height:20%;
+	z-index:3;
+	position:relative;
     float:right;
+	background:var(--Background_Main_Header_Content);
+	color:var(--Color_Main_Header_Content);
+	border:var(--Border_Main_Header_Content);
+	border-top: none;
+	border-left: none;
+	border-right: none;
 }
 
 
 
 
 #contain div > section[name='content']  {
-	width: 50%;
-	height: 80%;
-	float: left;
+	width:50%;
+	height:80%;
+	float:left;
 	position:relative;
-	z-index: 2;
+	z-index:2;
+
+	border:var(--Border_Main_Content);
 }
 
 
 
 #contain div > section[name='sidebar'] {
-	width: 30%;
-	height: 80%;
-	float: right;
+	width:30%;
+	height:80%;
+	float:right;
 	position:relative;
-	z-index: 1;
+	z-index:1;
 }
 
 
@@ -269,161 +271,190 @@
 
 
 #contain div > section[name='header'] > span:first-child {
-	position: absolute;
-	bottom: 5px;
-	left: 15px;
-	text-align: left;
+	position:absolute;
+	bottom:5px;
+	left:15px;
+	text-align:left;
 }
 
 #contain div > section[name='header'] > span:nth-child(2):not(:last-child) {
-	position: absolute;
-	bottom: 5px;
-	right: 38%;
-	text-align: right;
+	position:absolute;
+	bottom:5px;
+	right:38%;
+	text-align:right;
 }
 #contain div#map > section[name='header'] > span:nth-child(2) {
-	right: 32%;
+	right:32%;
 }
 
-#contain div > section[name='content'] > * {
-	text-align: left;
-	height: 100%;
-	width: 100%;
-	background: var(--color16);
-	overflow: auto;
+#contain div > section[name='content'] > *:first-child {
+	text-align:left;
+	height:100%;
+	width:100%;
+	overflow:auto;
 }
 #contain div#move > section[name='content'] > *:first-child {
 	height:70%;
 }
+
+#contain div > section[name='content'] > *:first-child {
+	background:var(--Background_Main_Description_Content);
+	color:var(--Color_Main_Description_Content);
+	border:var(--Border_Main_Description_Content);
+	border-top: none;
+    border-left: none;
+    border-bottom: none;
+}
 #contain div#move > section[name='content'] > *:nth-child(2) {
 	height:30%;
-	display: flex;
-    text-align: center;
-    background: var(--color17);
+	display:flex;
+    text-align:center;
+
+	background:var(--Background_Main_Menu);
+	color:var(--Color_Main_Menu);
+	border:var(--Border_Main_Menu);
+	border-bottom: none;
+    border-left: none;
 }
 
 
 #contain div#move > section[name='content'] > *:nth-child(2) > div:last-child > div {
-	padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	padding:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#contain div#move > section[name='content'] > *:nth-child(2) > div:last-child {
+	background:var(--Background_Main_Menu_List);
+	color:var(--Color_Main_Menu_List);
+	border:var(--Border_Main_Menu_List);
+	border-top:none;
+	border-right:none;
+	border-bottom:none;
 }
 
 
 #contain div > section[name='content'] > h3 {
-	padding: 2px 10px;
+	padding:2px 10px;
 }
 
 #contain div > section[name='content'] > h3 + p {
-	padding: 0 10px 10px 10px;
+	padding:0 10px 10px 10px;
 }
 
 
 #contain div > section[name='content'] >  p li {
-	list-style: disc;
-	padding: 0 10px;
+	list-style:disc;
+	padding:0 10px;
 }
 
 #contain div > section[name='content'] > p li:first-child {
-	padding: 10px 10px 0 10px;
+	padding:10px 10px 0 10px;
 }
 
 
 
 #contain div > section[name='sidebar'] > * {
-	height: 100%;
-	width: 100%;
-	position: relative;
-	display: flex;
-    flex-direction: column;
+	height:100%;
+	width:100%;
+	position:relative;
+	display:flex;
+    flex-direction:column;
 }
 
 #contain div > section[name='sidebar'] > * > div:first-child {
-	width: 100%;
-	height: 15%;
-	border-bottom: 1px solid;
-	background: var(--color13);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	position: relative;
+	width:100%;
+	height:15%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	overflow:hidden;
+	position:relative;
+
+	background:var(--Background_Main_Sidebar_Header);
+	color:var(--Color_Main_Sidebar_Header);
+	border:var(--Border_Main_Sidebar_Header);
+	border-left: none;
+	border-right: none;
+	border-top:none;
 }
 #contain div > section[name='sidebar'] > * > div:nth-child(2) {
-	height: 75%;
-    width: 100%;
-    position: relative;
+	height:75%;
+    width:100%;
+    position:relative;
 }
 
 #contain div > section[name='sidebar'] > * > div:nth-child(3) {
-	height: 10%;
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
+	height:10%;
+    width:100%;
+    position:relative;
+    display:flex;
+    align-items:center;
+	border:var(--Border_Main_Sidebar_Footer);
+	border-left: none;
+    border-right: none;
+    border-bottom: none;
 }
-#contain div#item > section[name='sidebar'] > * > div:first-child > div:not([name='pause']),
-#contain > div#map > section[name='content'] > *[name='map'] > div > div > div:not([name='pause']) {
-	cursor: crosshair;
+#contain div#item > section[name='sidebar'] > * > div:first-child > div:not([name='pause']), #contain > div#map > section[name='content'] > *[name='map'] > div > div > div:not([name='pause']) {
+	cursor:crosshair;
 }
 
 #contain div#item > section[name='sidebar'] > * > div:nth-child(3) {
-	height: 20%;
-	background: var(--color14);
+	height:20%;
 }
 
 
 
 #contain div#item > section[name='sidebar'] > * > * {
-	height: 50%;
+	height:50%;
 }
 
 
 #contain div#item > section[name='sidebar'] > * > div:first-child > div {
-	position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    transition-property: transform;
-    transition-duration: 0.25s;
-    transition-timing-function: ease;
-    justify-content: center;
-    align-items: center;
-	background: var(--color_5);
+	position:relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    text-align:center;
+    transition-property:transform;
+    transition-duration:0.25s;
+    transition-timing-function:ease;
+    justify-content:center;
+    align-items:center;
+	background:black;
 }
 
 #contain div#item > section[name='sidebar'] > * > div:first-child > div:not([name='pause']) ~ figure[name='pause'] {
-	display: none;
+	display:none;
 }
 
 #contain div#item > section[name='sidebar'] > * > div:first-child figure > * {
-	text-shadow: 1px 1px 0px var(--border1);
+	text-shadow:1px 1px 0px var(--border1);
 }
 
 #contain div#item > section[name='sidebar'] > * > div:first-child figure {
-	position: absolute;
+	position:absolute;
 }
 #contain div#item > section[name='sidebar'] > * > div:first-child figure[name='fullscreen'] {
-	bottom: 5px;
-	right: 5px;
+	bottom:5px;
+	right:5px;
 }
 #contain div#item > section[name='sidebar'] > * > div:first-child figure[name='pause'] {
-	left: 5px;
-	bottom: 5px;
-	cursor: default;
+	left:5px;
+	bottom:5px;
+	cursor:default;
 }
 
 
 #contain div#item > section[name='sidebar'] > * > div:first-child figure[name='zoom'] {
-	top: 5px;
-	right: 15px;
+	top:5px;
+	right:15px;
 }
 
 #contain div#item > section[name='sidebar'] > * > div:first-child figure[name='reset'] {
-	top: 5px;
-	left: 15px;
+	top:5px;
+	left:15px;
 }
 #contain div#item > section[name='sidebar'] > * > div:first-child figure[name='fullscreen']:active {
 	transform:scale(1.2);
@@ -432,106 +463,106 @@
 
 
 #contain div > section[name='sidebar'] > div > ul {
-	display: block;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background: var(--color17);
+	display:block;
+	width:100%;
+	height:100%;
+	overflow:auto;
+	background:var(--Background_Main_Sidebar_Content);
+	color:var(--Color_Main_Sidebar_Content);
+	border:var(--Border_Main_Sidebar_Content);
 }
 
 #contain div > section[name='sidebar'] > div > ul li {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	padding: 10px 0;
-	border-bottom: 1px dotted;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	padding:10px 0;
+}
+
+#contain div > section[name='sidebar'] > div > ul li {
+	border:var(--Border_Main_Sidebar_Content_Item);
+	border-top: none;
+	border-left: none;
+	border-right: none;
 }
 
 
 
-#contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='description'],
-#contain div > section[name='sidebar'] > div > ul li[name='pickup'] span[name='description'] {
-	width: 250%;
+
+#contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='description'], #contain div > section[name='sidebar'] > div > ul li[name='pickup'] span[name='description'] {
+	width:250%;
 }
-#contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='pokémon'],
-#contain div > section[name='sidebar'] > div > ul li[name='pickup'] span[name='ability'] {
-	width: 100%;
+#contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='pokémon'], #contain div > section[name='sidebar'] > div > ul li[name='pickup'] span[name='ability'] {
+	width:100%;
 }
 
 #contain div > section[name='sidebar'] > div > ul li[name='held'] span[name='description'] {
-	align-items: flex-start;
-    text-align: left;
+	align-items:flex-start;
+    text-align:left;
 }
 #contain div > section[name='sidebar'] > div > ul li span[name='description'] {
-	width: 200%;
-	align-items: flex-start;
-	justify-content: flex-start;
+	width:200%;
+	align-items:flex-start;
+	justify-content:flex-start;
 	text-align:left;
 }
 #contain div > section[name='sidebar'] > div > ul li span[name='description'] > *[title] {
-	cursor: help;
-	text-decoration: underline;
+	cursor:help;
+	text-decoration:underline;
 }
 #contain div > section[name='sidebar'] > div > ul li span[name='description'] > *[title]:hover {
-	text-decoration-style: dashed;
+	text-decoration-style:dashed;
 }
 
 #contain div > section[name='sidebar'] > div > ul li span[name='description'] > * > span[title] {
-	cursor: help;
+	cursor:help;
 }
-#contain div > section[name='sidebar'] > div > ul li[name='shop'] span[name='location'],
-#contain div > section[name='sidebar'] > div > ul li[name='location'] span[name='location'] {
-	width: 100%;
+#contain div > section[name='sidebar'] > div > ul li[name='shop'] span[name='location'], #contain div > section[name='sidebar'] > div > ul li[name='location'] span[name='location'] {
+	width:100%;
 }
 
 #contain div > section[name='sidebar'] > div > ul li[name='shop'] span[name='description'] {
-	width: 250%;
+	width:250%;
 }
 
-#contain div > section[name='sidebar'] > div > ul li span[name='pokémon'],
-#contain div > section[name='sidebar'] > div > ul li span[name='ability'],
-#contain div > section[name='sidebar'] > div > ul li span[name='location'],
-#contain div > section[name='sidebar'] > div > ul li span[name='requirement'] {
-	flex-direction: column;
+#contain div > section[name='sidebar'] > div > ul li span[name='pokémon'], #contain div > section[name='sidebar'] > div > ul li span[name='ability'], #contain div > section[name='sidebar'] > div > ul li span[name='location'], #contain div > section[name='sidebar'] > div > ul li span[name='requirement'] {
+	flex-direction:column;
 }
 
 
 #contain div > section[name='sidebar'] > div > ul li div {
-	width: 20%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	text-align: center;
+	width:20%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:column;
+	text-align:center;
 }
 
 
-#contain div > section[name='sidebar'] > div > ul li > span,
-#contain div > section[name='sidebar'] > div > ul li > b {
-	width: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
+#contain div > section[name='sidebar'] > div > ul li > span, #contain div > section[name='sidebar'] > div > ul li > b {
+	width:50%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	text-align:center;
 }
 
-#contain div > section[name='sidebar'] > div > ul li div,
-#contain div > section[name='sidebar'] > div > ul li > span,
-#contain div > section[name='sidebar'] > div > ul li > b {
-	padding: 0 10px;
+#contain div > section[name='sidebar'] > div > ul li div, #contain div > section[name='sidebar'] > div > ul li > span, #contain div > section[name='sidebar'] > div > ul li > b {
+	padding:0 10px;
 }
 #contain div > section[name='sidebar'] > div > ul li > b {
-	font-weight: normal;
+	font-weight:normal;
 }
 
 
 
 
 #contain div#move > section[name='content'] > *:nth-child(2) > div {
-	width: 50%;
-    height: 100%;
-    display: inline-block;
+	width:50%;
+    height:100%;
+    display:inline-block;
 }
 
 #contain div#move > section[name='content'] > *:nth-child(2) > div:last-child {
@@ -539,123 +570,144 @@
 }
 
 #contain div#move > section[name='content'] > *:nth-child(2) > div:first-child > div {
-	width: 100%;
-    height: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    align-content: center;
+	width:100%;
+    height:50%;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    align-content:center;
 }
 
 #contain div#move > section[name='content'] > *:nth-child(2) > div:first-child > div > span {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    box-shadow: 0.5px 0.5px 0.5px var(--border1);
+	width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
 }
 
 
 
 #contain div > section[name='sidebar'] > * > div:nth-child(3) label {
-	display: flex;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    box-shadow: 0 0 0 1px var(--border1);
-    z-index: inherit;
-    background: var(--color14);
-	position: relative;
+	display:flex;
+    height:100%;
+    width:100%;
+    align-items:center;
+    justify-content:center;
+    text-transform:uppercase;
+    z-index:inherit;
+	position:relative;
+
+	background:var(--Background_Main_Sidebar_Footer_Label);
+	color:var(--Color_Main_Sidebar_Footer_Label);
+	border:var(--Border_Main_Sidebar_Footer_Label);
+
 }
 
 #contain div > section[name='sidebar'] > * > div:nth-child(3) input:checked + label {
-	background: var(--color10);
-    color: var(--font2);
+	background:var(--Background_Main_Sidebar_Footer_Label_Selected);
+	color:var(--Color_Main_Sidebar_Footer_Label_Selected);
 }
 
-
+#contain div#move > section[name='content'] > *:nth-child(2) > div:last-child span[name] {
+	text-shadow:0 0 1px BLACK;
+}
 #contain div#move > section[name='content'] > *:nth-child(2) > div:last-child span[name='positive'] * {
-	color: var(--colorGreen);
+	color:Green;
 }
 
 #contain div#move > section[name='content'] > *:nth-child(2) > div:last-child span[name='negative'] * {
-	color: var(--colorRed);
+	color:Red;
 }
 
 #contain div#move > section[name='sidebar'] ul li > span[title='Parent'] > p {
-	padding-top: 2px;
+	padding-top:2px;
 }
 
 
 
 
 
+#contain div#move > section[name='content'] > div[name='menu'] > div:last-child > div {
+	background:var(--Background_Main_Menu_List_Item);
+	color:var(--Color_Main_Menu_List_Item);
+	border:var(--Border_Main_Menu_List_Item);
+}
+#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div:first-child > span {
+	border-left:none;
+	border-bottom:none;
+	border-top:none;
+}
 
 
+#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div:last-child > span {
+	border-left:none;
+	border-bottom:none;
+}
+
+#contain div#move > section[name='content'] > div[name='menu'] > div:last-child > div {
+	border-left: none;
+	border-right: none;
+	border-top:none;
+}
 
 
 
 #contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div > span {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	box-shadow: 0.5px 0.5px 0.5px var(--border1);
+	width:100%;
+	height:100%;
+	display:flex;
+	align-items:center;
+	justify-content:space-evenly;
+	box-sizing: content-box;
 }
 
-#contain div#move > section[name='content'] > div[name='menu'] > div:nth-child(2) > div {
-	box-shadow: 0.5px 0.5px 0.5px var(--border1);
-}
+
 
 #contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div span img {
-	max-width: 50%;
+	max-width:50%;
 }
 
 
 
 #contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div {
-	width: 100%;
-	height: 50%;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	align-content: center;
+	width:100%;
+	height:50%;
+	display:flex;
+	justify-content:space-around;
+	align-items:center;
+	align-content:center;
 }
 
-#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div:last-child span span *:last-child,
-#contain div#move > section[name='content'] > div[name='menu'] > div:last-child > div[name='movetutor'] span span *:last-child {
-	padding: 5px 0;
+#contain div#move > section[name='content'] > div[name='menu'] > div:first-child > div:last-child span span *:last-child, #contain div#move > section[name='content'] > div[name='menu'] > div:last-child > div[name='movetutor'] span span *:last-child {
+	padding:5px 0;
 }
 
 
 #contain div#move > section[name='sidebar'] ul li span {
-	width: 100%;
+	width:100%;
 }
 #contain div#move > section[name='sidebar'] ul li > span {
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: column;
+	display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    flex-direction:column;
 }
 
 #contain div > section[name='content'] > div[name='description'] > * {
-	padding: 2px 10px;
+	padding:2px 10px;
 }
 #contain div > section[name='content'] > div[name='description'] > *:first-child {
-	padding: 10px 10px 5px;
+	padding:10px 10px 5px;
 }
 
 
 
 #contain div > section[name='content'] > div[name='description'] p br {
-	display: block;
-	content: '';
-	padding: 5px;
+	display:block;
+	content:'';
+	padding:5px;
 }
 
 
@@ -664,7 +716,7 @@
 
 
 #contain div > section[name='sidebar'] > div > ul li > span[name='item'] img {
-	margin: -2px -8px;
+	margin:-2px -8px;
 }
 
 
@@ -672,17 +724,17 @@
 
 
 #contain div#item > section[name='sidebar'] ul li > span[name='item'] {
-	width: 30%;
-	flex-wrap: wrap;
+	width:30%;
+	flex-wrap:wrap;
 }
 
 #contain div#item > section[name='sidebar'] ul li.hide > span[name='item'] {
-	filter: brightness(0.4) contrast(0.6);
+	filter:brightness(0.4) contrast(0.6);
 }
 
 
 #contain div#item > section[name='sidebar'] ul li.hide > span[name='item']:hover {
-	filter: unset;
+	filter:unset;
 }
 
 
@@ -696,45 +748,43 @@
 
 
 #contain div#item > section[name='sidebar'] > * > div:nth-child(3) {
-	display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 15%;
-    position: relative;
-    background: var(--color15);
-    box-shadow: 0 -1px 1px var(--border1);
+	display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    width:100%;
+    height:15%;
+    position:relative;
 }
 
 
 #contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-	text-align: center;
+	width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+	text-align:center;
 }
 #contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span > span {
-	display: flex;
-    justify-content: center;
-    align-items: center;
+	display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 #contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span p {
-	display: inline;
+	display:inline;
 }
 #contain div#item > section[name='sidebar'] > * > div:nth-child(3) > span img {
-	padding: 0 2px;
-	max-width: 12px;
+	padding:0 2px;
+	max-width:12px;
 
 }
 
 
 
 #contain div#item > section[name='sidebar'] > * > div:nth-child(3) p img {
-	max-width: 10px;
+	max-width:10px;
 }
 
 
@@ -750,76 +800,74 @@
 
 
 #contain > div > section[name='header'] span:last-child {
-	position: absolute;
-    right: 0;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	position:absolute;
+    right:0;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 
 
 #contain > div > section[name='header'] span:last-child {
-	width: 25%;
+	width:25%;
 }
 
 
 #contain > div > section[name='header'] span:last-child img   {
-	max-width: 90%;
-    max-height: 70%;
+	max-width:90%;
+    max-height:70%;
 }
 
 
 #contain > div#map > section[name='content'] > *[name='map'] {
-	width: 100%;
-    height: 80%;
-    position: relative;
-    margin: 0 auto;
-    display: flex;
-    background: var(--color_5);
-    flex-wrap: wrap;
+	width:100%;
+    height:80%;
+    position:relative;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
 }
-#contain > div#map > section[name='content'] > *[name='map'] > span,
-#contain > div#map > section[name='content'] > *[name='map'] > div > span {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+#contain > div#map > section[name='content'] > *[name='map'] > span, #contain > div#map > section[name='content'] > *[name='map'] > div > span {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+	user-select:none;
+
+	background:var(--Background_Map_Content_Redirect);
+	color:var(--Color_Map_Content_Redirect);
+	border:var(--Border_Map_Content_Redirect);
 }
 #contain > div#map > section[name='content'] > *[name='map'] > span {
-	height: 100%;
-	width: 5%;
+	height:100%;
+	width:5%;
 }
 #contain > div#map > section[name='content'] > *[name='map'] > div > span {
-	height: 5%;
-	width: 100%;
+	height:5%;
+	width:100%;
 }
 
 
 
-#contain > div#map > section[name='content'] > *[name='map'] > span,
-#contain > div#map > section[name='content'] > *[name='map'] > div > span {
-	background: var(--color_10);
-	user-select:none;
-}
 
 #contain > div#map > section[name='content'] > *[name='map'] span figure {
 	height:100%;
 	width:100%;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-	transition: .5s ease opacity;
-	color: var(--fontLight);
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	transition:.5s ease opacity;
+	color:White;
 }
 #contain > div#map > section[name='content'] > *[name='map'] span[title=''] figure {
-	opacity: 0;
-	pointer-events: none;
+	opacity:0;
+	pointer-events:none;
 }
 
 #contain > div#map > section[name='content'] > *[name='map'] span figure:active {
-	font-weight: normal;
+	font-weight:normal;
 }
 
 
@@ -828,71 +876,71 @@
 
 
 #contain > div#map > section[name='content'] > *[name='map'] > div {
-	width: 90%;
-    height: 100%;
-    display: inline-block;
+	width:90%;
+    height:100%;
+    display:inline-block;
 }
 
 #contain > div#map > section[name='content'] > *[name='map'] > div > div  {
-	width: 100%;
-    height: 90%;
-    background: #000;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	width:100%;
+    height:90%;
+    background:#000;
+    overflow:hidden;
+    text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 	position:relative;
 }
 
 #contain > div#map > section[name='content'] > *[name='map'] > div > div > div {
-	position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    transition-property: transform;
-    transition-duration: 0.25s;
-    transition-timing-function: ease;
-    justify-content: center;
-    align-items: center;
+	position:relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    text-align:center;
+    transition-property:transform;
+    transition-duration:0.25s;
+    transition-timing-function:ease;
+    justify-content:center;
+    align-items:center;
 }
 
 #contain > div#map > section[name='content'] > *[name='map'] > div > div > figure > * {
-	text-shadow: 1px 1px 0px var(--border1);
+	text-shadow:1px 1px 0px var(--border1);
 }
 #contain > div#map > section[name='content'] > *[name='map'] > div > div > figure {
-	width: 25px;
-    height: 25px;
-	display: flex;
-    justify-content: center;
-    align-items: center;
+	width:25px;
+    height:25px;
+	display:flex;
+    justify-content:center;
+    align-items:center;
 	position:absolute;
-	z-index: 10;
-	color:var(--fontLight);
+	z-index:10;
+	color:White;
 }
 
 #contain > div#map > section[name='content'] > *[name='map'] > div > div > div:not([name='pause']) ~ figure[name='pause'] {
-	display: none;
+	display:none;
 }
 
 #contain > div#map > section[name='content'] > *[name='map'] > div figure[name='pause'] {
-	bottom: 15px;
-	left: 10px;
-	cursor: default;
+	bottom:15px;
+	left:10px;
+	cursor:default;
 }
 
 #contain > div#map > section[name='content'] > *[name='map'] > div figure[name='reset'] {
-	top: 10px;
-	left: 10px;
+	top:10px;
+	left:10px;
 }
 #contain > div#map > section[name='content'] > *[name='map'] > div figure[name='zoom'] {
-	top: 10px;
-	right: 10px;
+	top:10px;
+	right:10px;
 }
 #contain > div#map > section[name='content'] > *[name='map'] > div figure[name='fullscreen'] {
-	bottom: 10px;
-	right: 10px;
+	bottom:10px;
+	right:10px;
 }
 #contain > div#map > section[name='content'] > *[name='map'] > div figure[name='fullscreen']:active {
 	transform:scale(1.2);
@@ -903,101 +951,108 @@
 
 
 #contain > div#map > section[name='content'] > *[name='navigation'] {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	height: 20%;
-	width: 100%;
-	position: relative;
-	background: var(--color12);
+	display:inline-flex;
+	justify-content:center;
+	align-items:center;
+	height:20%;
+	width:100%;
+	position:relative;
+
+	background:var(--Background_Map_Content_Footer);
+	color:var(--Color_Map_Content_Footer);
+	border:var(--Border_Map_Content_Footer);
 }
 
 #contain > div#map > section[name='content'] > *[name='navigation'] > div {
-	width: 50%;
-	height: 100%;
-	text-align: center;
-	display: inline-block;
-	box-shadow: 1px 0 1px var(--border1);
+	width:50%;
+	height:100%;
+	text-align:center;
+	display:inline-block;
+
+	background:var(--Background_Map_Content_Footer_Item);
+	color:var(--Color_Map_Content_Footer_Item);
+	border:var(--Border_Map_Content_Footer_Item);
 }
 
 #contain > div#map > section[name='content'] > *[name='navigation'] div > span {
-	display: flex;
-	align-items: center;
-	justify-content: space-around;
-	width: 100%;
-	height: 100%;
-	flex-wrap: wrap;
-	overflow: auto;
+	display:flex;
+	align-items:center;
+	justify-content:space-around;
+	width:100%;
+	height:100%;
+	flex-wrap:wrap;
+	overflow:auto;
 }
 
 #contain > div#map > section[name='content'] > *[name='navigation'] div > span > span {
-	padding: 10px;
+	padding:10px;
 }
 
 #contain > div#map > section[name='content'] > *[name='navigation'] div > span > span > span {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 
 
 #contain > div#map > section[name='content'] > *[name='navigation'] div > span > span > span > img {
-	padding: 0 5px;
+	padding:0 5px;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name] {
-	height: 85%;
-	background: var(--color14);
-	display: flex;
-    flex-direction: column;
-	align-items: flex-start;
+	height:85%;
+	display:flex;
+    flex-direction:column;
+	align-items:flex-start;
 	position:relative;
+
+}
+#contain div#map > section[name='sidebar'] > div > *[name] {
+	background:var(--Background_Map_Sidebar_Content);
+	color:var(--Color_Map_Sidebar_Content);
+	border:var(--Border_Map_Sidebar_Content);
 }
 
 
 
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'],
-#contain div#map > section[name='sidebar'] > div > *[name='shop'],
-#contain div#map > section[name='sidebar'] > div > *[name='items'],
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] {
-	overflow: auto;
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'], #contain div#map > section[name='sidebar'] > div > *[name='shop'], #contain div#map > section[name='sidebar'] > div > *[name='items'], #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] {
+	overflow:auto;
 }
 
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] *[name='gender'] {
-	text-shadow: 1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px var(--border1);
 } 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div {
-	display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
+	display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    width:100%;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child {
-    padding: 10px 0;
+    padding:10px 0;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child {
-	border-bottom: 1px solid;
-	flex-direction: column;
+	flex-direction:column;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child > div {
-	width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 5px 0;
+	width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    align-items:center;
+    padding:5px 0;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child > figure {
-	padding: 0 10px;
+	padding:0 10px;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child > div > span small span {
@@ -1008,48 +1063,48 @@
 	width:50%;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:last-child > div > span {
-	width: 100%;
-	display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
+	width:100%;
+	display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    text-align:center;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child > div > span {
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+	display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='data'] > span > * {
-	padding: 1px 0;
+	padding:1px 0;
 }
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li > div:first-child > div {
-	width: 100%;
-	display: inline-flex;
-    justify-content: center;
-    align-items: center;
-	flex-direction: column;
+	width:100%;
+	display:inline-flex;
+    justify-content:center;
+    align-items:center;
+	flex-direction:column;
 	position:relative;
 	text-align:center;
-	margin: 0 2px;
+	margin:0 2px;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='pokémon'] > span {
 	position:relative;
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='moves'] > * {
-	text-align: center;
-	display: block;
+	text-align:center;
+	display:block;
 }
 
 
@@ -1083,133 +1138,138 @@
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] {
-    background: var(--color14);
-	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
+	display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:nowrap;
 }
 #contain div#map > section[name='sidebar'] > div > *:not([name='overview']) {
-	display: none;
+	display:none;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div {
-	width: 100%;
-    height: 50%;
-    position: relative;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-	background: #000;
-	z-index: 2;
-	border-top: 1px solid;
-	border-bottom: 1px solid;
+	width:100%;
+    height:50%;
+    position:relative;
+    display:flex;
+    flex-wrap:nowrap;
+    flex-direction:row;
+	background:#000;
+	z-index:2;
 	overflow:hidden;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > span:first-child {
-	width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: var(--color16);
-    border-bottom: 1px solid;
-	z-index: 1;
+	width:100%;
+    height:10%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+	z-index:1;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > h4, #contain div#map > section[name='sidebar'] > div > *[name='items'] ul > h4, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > h4, #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul > h4,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span,
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > span:first-child,
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span {
+	background:var(--Background_Map_Sidebar_Content_Item_Title);
+	color:var(--Color_Map_Sidebar_Content_Item_Title);
+	border:var(--Border_Map_Sidebar_Content_Item_Title);
+	border-top:none;
+	border-left:none;
+	border-right:none;
+
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > span:last-child {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    z-index: 3;
-    flex-direction: column;
-    overflow: auto;
+	width:100%;
+    height:100%;
+    display:flex;
+    z-index:3;
+    flex-direction:column;
+    overflow:auto;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > p {
-	padding: 10px 15px;
-	font-variant: all-small-caps;
+	padding:10px 15px;
+	font-variant:all-small-caps;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > span {
-	padding: 10px 15px;
-    line-height: 110%;
+	padding:10px 15px;
+    line-height:110%;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > span > *:first-child {
-	line-height: 160%;
+	line-height:160%;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > span br {
-	content: '';
-    display: block;
-    padding-bottom: 5px;
+	content:'';
+    display:block;
+    padding-bottom:5px;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > span > p br {
-	content: '';
-    display: block;
-    padding: 3px 0;
+	content:'';
+    display:block;
+    padding:3px 0;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > ul {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    position: relative;
-    transition: .25s ease;
+	width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    flex-wrap:wrap;
+    position:relative;
+    transition:.25s ease;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span {
-	width: 10%;
-	background: var(--color_15);
-	display: flex;
-    align-items: center;
-    justify-content: center;
-	z-index: 10;
-	color:var(--fontLight);
+	width:10%;
+	display:flex;
+    align-items:center;
+    justify-content:center;
+	z-index:10;
+	color:White;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span:first-child > figure[value='0'],
-#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span:last-child > figure.last {
-	display: none;
+#contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span:first-child > figure[value='0'], #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span:last-child > figure.last {
+	display:none;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > span figure {
-	width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > ul li {
-	width: 100%;
-    height: 100%;
+	width:100%;
+    height:100%;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div > ul img {
-	width: 100%;
-    height: 100%;
-    user-select: none;
-	cursor: zoom-in;
+	width:100%;
+    height:100%;
+    user-select:none;
+	cursor:zoom-in;
 }
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='overview'] > div button:active {
-	font-weight: bold;
+	font-weight:bold;
 }
 
 
@@ -1224,88 +1284,87 @@
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li span[name='rate'] img {
-    max-width: 30px;
+    max-width:30px;
 }
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li img[title='Morning'] {
-	filter: brightness(0) saturate(100%) invert(87%) sepia(49%) saturate(212%) hue-rotate(357deg) brightness(109%) contrast(101%) drop-shadow(1px 1px 0px var(--border1));
+	filter:brightness(0) saturate(100%) invert(87%) sepia(49%) saturate(212%) hue-rotate(357deg) brightness(109%) contrast(101%) drop-shadow(1px 1px 0px var(--border1));
 }
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li img[title='Day'] {
-	filter: brightness(0) saturate(100%) invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%) drop-shadow(1px 1px 0px var(--border1));
+	filter:brightness(0) saturate(100%) invert(82%) sepia(14%) saturate(1390%) hue-rotate(168deg) brightness(99%) contrast(103%) drop-shadow(1px 1px 0px var(--border1));
 }
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li img[title='Night'] {
-	filter: brightness(0) saturate(100%) invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%) drop-shadow(1px 1px 0px var(--border1));
+	filter:brightness(0) saturate(100%) invert(45%) sepia(22%) saturate(683%) hue-rotate(169deg) brightness(97%) contrast(91%) drop-shadow(1px 1px 0px var(--border1));
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * {
-	width: 20%;
-	display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-	overflow: auto;
+	width:20%;
+	display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:nowrap;
+    justify-content:space-evenly;
+	overflow:auto;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span {
-	width: 40%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-	padding: 0 10px;
+	width:40%;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    align-content:center;
+    flex-wrap:wrap;
+    flex-direction:column;
+	padding:0 10px;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: pre;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    white-space:pre;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small span[title],
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small img[title] {
-	cursor: help;
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small span[title], #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span small img[title] {
+	cursor:help;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='Cost'] img {
-	max-height: 15px;
+	max-height:15px;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='Cost'] img[src=""] {
-	visibility: hidden;
-    position: relative;
+	visibility:hidden;
+    position:relative;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='Cost'] img[src=""]::after {
-	content: attr(data-title);
-    visibility: visible;
-    font-size: 10px;
+	content:attr(data-title);
+    visibility:visible;
+    font-size:10px;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='item'] span {
-	width: 100%;
-	overflow: auto;
-	display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
+	width:100%;
+	overflow:auto;
+	display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:nowrap;
+    justify-content:space-evenly;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span.hide {
-	filter: brightness(0.4) contrast(0.6);
+	filter:brightness(0.4) contrast(0.6);
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='requirement'] span > *:last-child {
 	display:block;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='description'] {
-	align-content: flex-start;
+	align-content:flex-start;
 	text-align:left;
 }
 
@@ -1313,52 +1372,51 @@
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * {
-	width: 20%;
-	display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
-	overflow: auto;
+	width:20%;
+	display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:nowrap;
+    justify-content:space-evenly;
+	overflow:auto;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span {
-	width: 40%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-	padding: 0 10px;
+	width:40%;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    align-content:center;
+    flex-wrap:wrap;
+    flex-direction:column;
+	padding:0 10px;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='item'] span {
-	width: 100%;
-	overflow: auto;
-	display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
+	width:100%;
+	overflow:auto;
+	display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:nowrap;
+    justify-content:space-evenly;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span.hide {
-	filter: brightness(0.4) contrast(0.6);
+	filter:brightness(0.4) contrast(0.6);
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='requirement'] span > *:last-child {
 	display:block;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='description'] {
-	align-content: flex-start;
+	align-content:flex-start;
 	text-align:left;
 }
 
 
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='item'] img,
-#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='item'] img {
-	margin: 0 -80%;
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='item'] img, #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='item'] img {
+	margin:0 -80%;
 }
 
 
@@ -1367,69 +1425,72 @@
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > span {
 	text-align:center;
 }
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > span,
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > b > span {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > span, #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > b > span {
 	display:block
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span:first-child {
-	position: relative;
-    display: inline;
+	position:relative;
+    display:inline;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span:last-child {
-	position: relative;
-    display: flex;
-    padding: 5px 0;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-    white-space: pre;
+	position:relative;
+    display:flex;
+    padding:5px 0;
+    align-items:center;
+    flex-direction:row;
+    justify-content:center;
+    white-space:pre;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span[name='multi'] img:first-child {
-	position: absolute;
-    bottom: 30%;
-    left: 30%;
+	position:absolute;
+    bottom:30%;
+    left:30%;
 }
 
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span > * {
-    padding: 2px 0;
+    padding:2px 0;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] > span,
-#contain div#map > section[name='sidebar'] > div > *[name='items'] > span,
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] > span {
-	position: fixed;
-    z-index: 100;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--color19);
-    border-bottom-right-radius: 10px;
-	display: none;
-	opacity: 0.8;
-    pointer-events: none;
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] > span, #contain div#map > section[name='sidebar'] > div > *[name='items'] > span, #contain div#map > section[name='sidebar'] > div > *[name='shop'] > span {
+	position:fixed;
+    z-index:100;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-bottom-right-radius:10px;
+	display:none;
+	opacity:0.8;
+    pointer-events:none;
+
+	background:var(--Background_Map_Sidebar_Annotation);
+	color:var(--Color_Map_Sidebar_Annotation);
+	border:var(--Border_Map_Sidebar_Annotation);
+	border-left: none;
+	border-top: none;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span > img {
-	max-width: 50px;
+	max-width:50px;
 } 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span > img[title='Gift'] {
-	max-width: 10px;
+	max-width:10px;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] > span[name='multi'] > img[src]:not([name='tile']) {
-	margin-left: 10px;
-    margin-bottom: -10px;
-    z-index: 10;
+	margin-left:10px;
+    margin-bottom:-10px;
+    z-index:10;
 }
 
 
@@ -1438,47 +1499,45 @@
 
 
 
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title] span h6,
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title] p {
-	text-decoration: underline;
-    text-decoration-style: solid;
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title] span h6, #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title] p {
+	text-decoration:underline;
+    text-decoration-style:solid;
 }
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title]:hover span h6,
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title]:hover p {
-	text-decoration-style: dashed;
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title]:hover span h6, #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > li[title]:hover p {
+	text-decoration-style:dashed;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li span[name='pok'] > *:nth-child(1) {
-	padding: 0;
+	padding:0;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li span[name='pok'] > * {
-	padding: 2px 0;
+	padding:2px 0;
 }
 #contain div#map > section[name='sidebar'] > div > *[name] small {
 	display:block;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='description'] {
-	width: 100%;
+	width:100%;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='description'] p {
-	padding: 0 10px;
+	padding:0 10px;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='description']:last-child {
-	width: 140%;
-	padding: 0 5px;
+	width:140%;
+	padding:0 5px;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='requirement'] {
-	width: 40%;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    text-align: center;
+	width:40%;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    flex-direction:column;
+    text-align:center;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li span[name='requirement'] > * {
-	padding: 2px 0;
+	padding:2px 0;
 }
 
 
@@ -1493,38 +1552,37 @@
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > b {
-	text-shadow: 1px 1px 1px var(--fontDark);
+	text-shadow:1px 1px 1px Black;
 }
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * > span {
-	padding: 3px 0;
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	padding:3px 0;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * > span img {
-	max-width: 30px;
-	max-height: 30px;
+	max-width:30px;
+	max-height:30px;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li > * {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-	width: 100%;
-	flex-direction: column;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	width:100%;
+	flex-direction:column;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li p,
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li h4 {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-	width: fit-content;
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li p, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li h4 {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	width:fit-content;
 }
 
 
@@ -1532,30 +1590,32 @@
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul {
-	width: 100%;
-	height: 70%;
-	overflow: auto;
-	background: var(--color15);
+	width:100%;
+	height:70%;
+	overflow:auto;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li {
-	position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+	position:relative;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    box-shadow: 0px 0.25px 0px #000;
-    background: var(--color16);
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:10px 0;
 	position:relative;
 }
+
+
+
+
+
 
 
 
@@ -1565,249 +1625,98 @@
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] {
-	position:absolute;
-	left: 5px;
+	position: absolute;
+    left: 5px;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div {
-	position:relative;
-	z-index: 100;
-	text-align: center;
-}
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 500px;
-    min-width: 100px;
-    background: #fff;
-    width: 100%;
-    color: var(--fontDark);
+	right:unset;
+	left:0;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > small {
-	width:100%;
-	height:100%;
-	display:block;
-	transition: .2s ease;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']:not(.active) > small {
-	transform: rotate(-90deg);
-}
-
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']:active > small,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'].active > small {
-	filter:invert(0.3);
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export']:not(.active) > div > span {
-	display: none;
-}
-
-
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span > span {
-	display: block;
-    border: 1px solid;
-    width: 100%;
-    border-bottom: 0;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span > span:last-child {
-    border-bottom: 1px solid;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span > span:hover,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span > span:active {
-	background: var(--color_50);
-    color: var(--fontLight);
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span > span > b {
-    padding: 2px 0;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span > span > b,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure[name='export'] > div > span > span > b > small {
-	font-weight: normal;
-	width:100%;
-	height:100%;
-	display: block;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div {
-	position:relative;
-	z-index: 100;
-	text-align: center;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    max-width: 500px;
-    min-width: 100px;
-    background: #fff;
-    width: 100%;
-    color: var(--fontDark);
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > small {
-	width:100%;
-	height:100%;
-	display:block;
-	transition: .2s ease;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export']:not(.active) > small {
-	transform: rotate(90deg);
-}
-
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export']:active > small,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'].active > small {
-	filter:invert(0.3);
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export']:not(.active) > div > span {
-	display: none;
-}
-
-
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span > span {
-	display: block;
-    border: 1px solid;
-    width: 100%;
-    border-bottom: 0;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span > span:last-child {
-    border-bottom: 1px solid;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span > span:hover,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span > span:active {
-	background: var(--color_50);
-    color: var(--fontLight);
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span > span > b {
-    padding: 2px 0;
-}
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span > span > b,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li figure[name='export'] > div > span > span > b > small {
-	font-weight: normal;
-	width:100%;
-	height:100%;
-	display: block;
-}
 
 
 
 
 body:has(* #pokémon > div li img:active) {
-	cursor:grabbing !important;
+	cursor:grabbing;
 }
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='moves'] p {
-	text-shadow: 1px 1px 1px var(--fontDark);
+	text-shadow:1px 1px 1px Black;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div img {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	max-width: 100%;
-	user-select: none;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	max-width:100%;
+	user-select:none;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div img[name='item'] {
-	position: absolute;
-    top: 0;
-    margin-right: 50%;
+	position:absolute;
+    top:0;
+    margin-right:50%;
 }
 
 
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul,
-#contain div#map > section[name='sidebar'] > div > *[name='items'] ul,
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul,
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul {
-	width: 100%;
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul, #contain div#map > section[name='sidebar'] > div > *[name='items'] ul, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul, #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul {
+	width:100%;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > h4,
-#contain div#map > section[name='sidebar'] > div > *[name='items'] ul > h4,
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > h4,
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul > h4  {
-	padding: 20px 0;
-	text-align: center;
-	background: var(--color17);
-	border-top: 1px solid;
-    border-bottom: 1px solid;
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > h4, #contain div#map > section[name='sidebar'] > div > *[name='items'] ul > h4, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > h4, #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul > h4  {
+	padding:20px 0;
+	text-align:center;
+
 }
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul:first-child > h4,
-#contain div#map > section[name='sidebar'] > div > *[name='items'] ul:first-child > h4,
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul:first-child > h4,
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul:first-child > h4 {
+
+
+
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li, #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li {
+	width:100%;
+	position:relative;
+    flex-direction:row;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    align-content:center;
+	padding:10px 0;
+
+} 
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li, #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li {
+	background:var(--Background_Map_Sidebar_Content_Item);
+	color:var(--Color_Map_Sidebar_Content_Item);
+	border:var(--Border_Map_Sidebar_Content_Item);
 	border-top: none;
+	border-left: none;
+	border-right: none;
 }
 
-
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li,
-#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li,
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li,
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li {
-	width: 100%;
-	position: relative;
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-	padding: 10px 0;
-	border-bottom: 1px dotted;
-	background: var(--color16);
-}
-
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li,
-#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > li {
-	justify-content: space-around;
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > li {
+	justify-content:space-around;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='rate'] > * {
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span {
-	width: 33%;
-	text-align: center;
+	width:33%;
+	text-align:center;
 	display:table-cell;
-	vertical-align: middle;
+	vertical-align:middle;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span > small {
-	display: inline;
+	display:inline;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[title] {
-    text-decoration: underline;
+    text-decoration:underline;
 	cursor:help;
 }
 
@@ -1816,31 +1725,28 @@ body:has(* #pokémon > div li img:active) {
     text-decoration-style:dashed;
 }
 
-[game='Sun'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span,
-[game='Moon'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span,
-[game='Ultra Sun'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span,
-[game='Ultra Moon'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span {
-	width: 25%;
+[game='Sun'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span, [game='Moon'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span, [game='Ultra Sun'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span, [game='Ultra Moon'] #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span {
+	width:25%;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div {
-	display: flex;
-    flex-direction: column;
-    height: 100%;
-	width: 100%;
+	display:flex;
+    flex-direction:column;
+    height:100%;
+	width:100%;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span {
-	width: 40%;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
+	width:40%;
+    display:flex;
+    position:relative;
+    justify-content:center;
+    align-items:center;
 	text-align:center;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:first-child {
-	flex-direction: column;
+	flex-direction:column;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:first-child p {
@@ -1848,127 +1754,130 @@ body:has(* #pokémon > div li img:active) {
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) img {
-	margin: 0 -18px;
+	margin:0 -18px;
 }
 
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child {
-	width: 100%;
-	height: 30%;
-	position: relative;
-	background: var(--color14);
-	flex-wrap: wrap;
-	box-shadow: 0px 0.5px 0 #000;
+	width:100%;
+	height:30%;
+	position:relative;
+	flex-wrap:wrap;
+
+	
+	background:var(--Background_Map_Sidebar_Content_Title);
+	color:var(--Color_Map_Sidebar_Content_Title);
+	border:var(--Border_Map_Sidebar_Content_Title);
+	border-left:none;
+	border-top:none;
+	border-right:none;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:first-child {
-	height: 25%;
-	justify-content: space-between;
+	height:25%;
+	justify-content:space-between;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
-	height: 50%;
+	height:50%;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child {
-	height: 25%;
+	height:25%;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span {
-	height: 100%;
-	display: flex;
-	align-items: center;
-	overflow: auto;
+	height:100%;
+	display:flex;
+	align-items:center;
+	overflow:auto;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child {
-	width: 25%;
+	width:25%;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:nth-child(2) {
-	width: 50%;
-	justify-content: center;
+	width:50%;
+	justify-content:center;
 	text-align:center;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child {
-	width: 25%;
-	justify-content: center;
-	flex-direction: column;
+	width:25%;
+	justify-content:center;
+	flex-direction:column;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child > span:first-child {
-	padding-left: 5px;
+	padding-left:5px;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:first-child > span {
-	padding: 0 1px;
+	padding:0 1px;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span[title] {
-	text-decoration: underline;
-	cursor: help;
+	text-decoration:underline;
+	cursor:help;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span[title]:hover {
-	text-decoration-style: dashed;
+	text-decoration-style:dashed;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:last-child > span img,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child img {
-	margin: 0 -75%;
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:last-child > span img, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child img {
+	margin:0 -75%;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:last-child > span,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child > span {
-	width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span:last-child > span, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child > span {
+	width:100%;
+    display:flex;
+    flex-direction:row-reverse;
+    flex-wrap:nowrap;
+    justify-content:space-evenly;
 }
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span b,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child b {
-	width: 100%;
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span b, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child b {
+	width:100%;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > * {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:100%;
+	width:100%;
 	position:relative;
-	cursor: default;
+	cursor:default;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span {
-	width: 200%;
+	width:200%;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='current'][title] {
-	cursor: help;
-	border-bottom: 1px solid var(--font1) !important;
+	cursor:help;
+	border-bottom:1px solid inherit;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='current'][title]:hover {
-	border-bottom: 1px dashed var(--font1) !important;
+	border-bottom:1px dashed inherit;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span img[title]:not([name='extra']) {
-	cursor: help;
-	border-bottom: 1px solid var(--font1) !important;
+	cursor:help;
+	border-bottom:1px solid inherit;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > span img[title]:not([name='extra']):hover {
-	border-bottom: 1px dashed var(--font1) !important;
+	border-bottom:1px dashed inherit;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img:not([name='extra']) {
-	height: 100%;
-    width: 100%;
+	height:100%;
+    width:100%;
 }
 
 
@@ -1978,31 +1887,31 @@ body:has(* #pokémon > div li img:active) {
 	position:relative;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img[src=""]::after {
-	content: "?";
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    opacity: 1;
-    visibility: visible;
-    justify-content: center;
-    align-items: center;
-	font-size: xxx-large;
+	content:"?";
+    display:flex;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    opacity:1;
+    visibility:visible;
+    justify-content:center;
+    align-items:center;
+	font-size:xxx-large;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img[name='extra'] {
 	position:absolute;
-	top: 5px;
-	left: 5px;
+	top:5px;
+	left:5px;
 }
 
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b img {
-	filter: brightness(0.4);
-    transform: scale(0.8);
-	cursor: pointer;
+	filter:brightness(0.4);
+    transform:scale(0.8);
+	cursor:pointer;
 }
 
 
@@ -2012,31 +1921,27 @@ body:has(* #pokémon > div li img:active) {
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span[name='navigation'] {
-	flex-direction: column;
+	flex-direction:column;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] {
-	flex-direction: row;
-    justify-content: center;
+	flex-direction:row;
+    justify-content:center;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] > * {
-	display: unset;
+	display:unset;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'],
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::placeholder {
-	background: none;
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'], #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::placeholder {
+	background:none;
 	color:var(--font1);
 	outline:none;
-	border: none;
+	border:none;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::-webkit-outer-spin-button,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-   -moz-appearance: textfield;
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::-webkit-outer-spin-button, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input::-webkit-inner-spin-button {
+  -webkit-appearance:none;
+  margin:0;
+   -moz-appearance:textfield;
    appearance:none;
 }
 
@@ -2044,66 +1949,67 @@ body:has(* #pokémon > div li img:active) {
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='count'] input:first-child {
 	text-align:right;
-	cursor: pointer;
+	cursor:pointer;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] {
-	width: 100%;
+	width:100%;
 	position:relative;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] input {
-	padding: 2px 0;
-    text-indent: 5px;
-    width: 100%;
+	padding:2px 0;
+    text-indent:5px;
+    width:100%;
+
+	background:var(--Background_Map_Sidebar_Content_Search);
+	color:var(--Color_Map_Sidebar_Content_Search);
+	border:var(--Border_Map_Sidebar_Content_Search);
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] input  {
-	border-radius: 0;
-	outline: none;
+	border-radius:0;
+	outline:none;
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol {
-	position: absolute;
-    background: var(--color16);
-    z-index: 100;
-    width: 100%;
-    max-height: 200px;
-    overflow: auto;
-    box-shadow: 0px 0px 2px #000;
+	position:absolute;
+
+    z-index:100;
+    width:100%;
+    max-height:200px;
+    overflow:auto;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol:not(.active) {
-	display: none;
+	display:none;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li {
-	border-bottom: 1px solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background: var(--color16);
-	padding: 2px 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+	padding:2px 0;
 }
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li:last-child {
 	border-bottom: none;
 }
+
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li b {
-	padding: 2px 5px;
+	padding:2px 5px;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover,
-#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover * {
-	filter: none;
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover * {
+	filter:none;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > b:hover > img.error {
-	filter: brightness(0) contrast(1);
+	filter:brightness(0) contrast(1);
 }
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) img.error {
-	filter: brightness(0) contrast(0.7);
+	filter:brightness(0) contrast(0.7);
 }
 
 
@@ -2111,86 +2017,62 @@ body:has(* #pokémon > div li img:active) {
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 30%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	height:30%;
 }
 
 
 
-
-
-
-.pokéball {
-	box-sizing: border-box;
-    border: 2px solid #262122;
-    width: 16px;
-    height: 16px;
-    border-radius: 100%;
-    margin: 0 auto;
-    background: linear-gradient( 180deg, #BA0C2F 0%, #BA0C2F 46%, #262122 27%, #262122 55%, #FFF 53%, #FFF 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.pokéball:after {
-	content: ' ';
-    border-radius: 100%;
-    display: block;
-	margin-top: 1px;
-    width: 4px;
-    height: 4px;
-    background: #fff;
-    border: double 1px #262122;
-}
-
-.empty {
-	box-sizing: border-box;
-    border: 1px solid white !important;
-    width: 5px;
-    height: 5px;
-    margin: 5.5px;
-    border-radius: 100%;
-    background: black;
-}
 
 
 
 
 #contain div#map > section[name='sidebar'] > * > div:first-child {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	width: 100%;
-	height: 15%;
-	/*border-bottom: 1px solid;*/
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+	width:100%;
+	height:15%;
 }
 
 #contain div#map > section[name='sidebar'] > * > div:first-child > span {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
+	display:inline-flex;
+	justify-content:center;
+	align-items:center;
+	width:100%;
+	height:100%;
 }
 
 #contain div#map > section[name='sidebar'] > * > div:first-child label {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: 100%;
-	box-shadow: 0 0 1px var(--border1);
-	background: var(--color13);
-	color: var(--font1);
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	height:100%;
+
+	background:var(--Background_Map_Sidebar_Header_Label);
+	color:var(--Color_Map_Sidebar_Header_Label);
+	border:var(--Border_Map_Sidebar_Header_Label);
+	border-bottom: none;
+    border-left: none;
 }
 
+#contain div#map > section[name='sidebar'] > * > div:first-child label:last-child {
+	border-right: none;
+}
+
+#contain div#map > section[name='sidebar'] > * > div:first-child span:first-child label {
+	border: none;
+}
+
+
 #contain div#map > section[name='sidebar'] > * > div:first-child input:checked + label {
-	background: var(--color11);
-	color: var(--font2);
+	background:var(--Background_Map_Sidebar_Header_Label_Selected);
+	color:var(--Color_Map_Sidebar_Header_Label_Selected);
 }
 
 
@@ -2198,39 +2080,36 @@ body:has(* #pokémon > div li img:active) {
 
 
 #contain > div#map > section[name='list'] {
-	height: 100%;
-	width: 20%;
-	float: left;
-	position: inherit;
-	background: var(--color15);
-	box-shadow: 1px 0 1px var(--border1);
-	z-index: 4;
+	height:100%;
+	width:20%;
+	float:left;
+	position:inherit;
+	z-index:4;
 }
 
 #contain > div#map > section[name='header'] {
-	height: 20%;
-	width: 80%;
-	float: right;
-	position: relative;
-	box-shadow: 0 1px 1px var(--border1);
-	z-index: 3;
+	height:20%;
+	width:80%;
+	float:right;
+	position:relative;
+	z-index:3;
 }
 
 
 #contain > div#map > section[name='content'] {
-	width: 55%;
-	height: 80%;
-	float: left;
-	position: inherit;
-	z-index: 2;
+	width:55%;
+	height:80%;
+	float:left;
+	position:inherit;
+	z-index:2;
 }
 
 #contain > div#map > section[name='sidebar'] {
-	width: 25%;
-	height: 80%;
-	float: right;
-	position: inherit;
-	z-index: 1;
+	width:25%;
+	height:80%;
+	float:right;
+	position:inherit;
+	z-index:1;
 }
 
 
@@ -2238,25 +2117,21 @@ body:has(* #pokémon > div li img:active) {
 
 
 
-#data > div section[name='main'] > div[name='area'] ul li input,
-#contain div#item > section[name='sidebar'] > div > ul li input,
-#contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox'] {
-	display: unset;
-	margin: 10px;
+#data > div section[name='main'] > div[name='area'] ul li input, #contain div#item > section[name='sidebar'] > div > ul li input, #contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox'] {
+	display:unset;
+	margin:10px;
 }
 
-#data > div section[name='main'] > div[name='area'] ul li input:checked ~ *,
-#contain div#item > section[name='sidebar'] > div > ul li input:checked ~ *,
-#contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox']:checked ~ * {
-	opacity: 0.5 !important;
-	text-decoration:line-through !important;
+#data > div section[name='main'] > div[name='area'] ul li input:checked ~ *, #contain div#item > section[name='sidebar'] > div > ul li input:checked ~ *, #contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox']:checked ~ * {
+	opacity:0.5;
+	text-decoration:line-through;
 }
 
 #contain div > section[name='sidebar'] > div > ul li span[name='requirement'] small {
-	display: block;
+	display:block;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
-	user-select: none;
+	user-select:none;
 }
 
