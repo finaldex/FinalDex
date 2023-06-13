@@ -1408,6 +1408,10 @@ function getMapPoints(area,base) {
     let areas = base.querySelectorAll(":scope map area");
     let result = [];
 
+    areas = [...(Array.prototype.slice.call(areas))]
+
+
+
     for (let i = 0; i < areas.length; i++) {
         if (areas[i].getAttribute("data-title") == area || areas[i].getAttribute("data-title").split("_")[0] == area) {
             result.push(areas[i].getAttribute("coords"))
@@ -1430,6 +1434,8 @@ function getMapPointsTest(area,base) {
 
     let areas = base.querySelectorAll(":scope map area");
     let result = [];
+
+    areas = [...(Array.prototype.slice.call(areas))]
 
     for (let i = 0; i < areas.length; i++) {
         if (areas[i].getAttribute("data-title") == area || areas[i].getAttribute("data-title").split("_")[0] == area) {
@@ -1600,8 +1606,8 @@ function searchFilter(bar,base,condition) {
                     }
                     consoleText("Filter added...");
 
-                    bar.style.setProperty("outline-color","var(--colorRed)","important");
-                    bar.style.setProperty("border-color","var(--colorRed)","important");
+                    bar.style.setProperty("outline-color","Red","important");
+                    bar.style.setProperty("border-color","Red","important");
                     bar.style.setProperty("border-style","solid");
                 }
             }
@@ -1717,13 +1723,26 @@ function ImageType(action) {
         
 
         if (action == "Populate") {
-            let ranMed = getMedia(false,[""],[val],games);
-            
-            let ran = parseInt(getRandomInt(0,ranMed.length-1));
-            
-            img.src = ranMed[ran];
+            for (let q = 0; q < 10; q++) {
+                let ran1 = parseInt(getRandomInt(0,els.length-1));
+                let id = els[ran1].id;
+                if (isNaN(parseInt(id))) {
+                    id = getPokémonInt(id);
+                }
+                let ranMed = getMedia(false,[id],[val],games);
+                let ran2 = parseInt(getRandomInt(0,ranMed.length-1));
+                ranMed = ranMed[ran2];
+
+                if (ranMed != "") {
+                    img.src = ranMed;
+                    break;
+                }
+            }
         }
         else if (action == "Execute") {
+            for (let q = 0; q < els.length; q++) {
+                els[q].src = ""
+            }
     
             for (let q = 0; q < els.length; q++) {
                 let int = els[q].id;
@@ -1781,6 +1800,8 @@ function mapifyMap(base) {
 
 		let relative = (originalSize[0]+originalSize[1]) / (newwidth+newheight);
 
+
+
 		if (relative > 1) {
 			img.setAttribute("width",newwidth+"px");
 			img.setAttribute("height",newheight+"px");	
@@ -1831,6 +1852,7 @@ function mapifyMap(base) {
 			margin: "15px"
         }
         });
+
 
 
 
@@ -2210,4 +2232,47 @@ function getGameName(id,name) {
 
 
 	return undefined;
+}
+
+
+function dropRelPos() {
+    let tar = this.querySelector(":scope ol");
+    let obj = this.querySelector(":scope label");
+
+    let box = tar.getBoundingClientRect();
+    let body = document.body;
+    let docEl = document.documentElement;
+
+    let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+    let clientTop = docEl.clientTop || body.clientTop || 0;
+    let clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+    let top  = box.top + scrollTop - clientTop;
+    let left = box.left + scrollLeft - clientLeft;
+
+    let bodyY = body.getBoundingClientRect().bottom;
+    let bodyX = body.getBoundingClientRect().right;
+
+
+    let y = top/bodyY;
+    let x = tar.offsetWidth - left;
+
+
+    tar.className = "";
+
+    if (x > 0) {
+        tar.style.left = obj.offsetWidth-obj.offsetWidth+"px";
+    }
+    else {
+        tar.style.right = obj.offsetWidth-obj.offsetWidth+"px";
+    }
+
+    if (y < 0.5) {
+        tar.style.top = obj.offsetHeight+"px";
+    }
+    else {
+        tar.style.bottom = obj.offsetHeight+"px";
+    }
 }
