@@ -17,10 +17,10 @@ firstIteration = True
 for f in onlyfiles:
     it = str(dir.replace(root,"."))+"\\"+f
     if firstIteration:
-        item = "<video autoplay=\"true\" muted=\"true\" class=\"active\" onplay=\"this.className = 'active';\" onended=\"this.className = 'inactive'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}\"><source type=\"video/mp4\" src=\""+str(it)+"\"></video>"
+        item = "<video autoplay=\"true\" muted=\"true\"><source type=\"video/mp4\" src=\""+str(it)+"\"></video>"
         firstIteration = False
     else:
-        item = "<video muted=\"true\" class=\"inactive\" onplay=\"this.className = 'active';\" onended=\"this.className = 'inactive'; try {this.nextElementSibling.play();} catch {this.parentElement.firstElementChild.play();}\"><source type=\"video/mp4\" src=\""+str(it)+"\"></video>"
+        item = "<video muted=\"true\"><source type=\"video/mp4\" src=\""+str(it)+"\"></video>"
 
     result.append(item)
 
