@@ -68,7 +68,7 @@ let createItem = function() {
 		let itemSectionListOptionsPocketInput = document.createElement("input");
 		let itemSectionListOptionsPocketLabel = document.createElement("label");
 		let itemSectionListOptionsPocketLabelImage = document.createElement("img");
-		let itemSectionListOptionsPocketLabelText = document.createElement("p");
+		let itemSectionListOptionsPocketLabelText = document.createElement("small");
 		itemSectionListOptionsPocketInput.setAttribute("type","checkbox");
 		itemSectionListOptionsPocketInput.setAttribute("name","item-options-pocket");
 		itemSectionListOptionsPocketInput.setAttribute("id","item-options-pocket-"+q);
@@ -82,7 +82,6 @@ let createItem = function() {
 		else {
 			itemSectionListOptionsPocketLabelImage.title = pockets[q]+" Pocket";
 		}
-		itemSectionListOptionsPocketLabelImage.setAttribute("onerror",'this.style.display = "none";this.nextElementSibling.style.display = "unset";')
 		itemSectionListOptionsPocketLabelText.innerText = pockets[q];
 		itemSectionListOptionsPocketOuter.appendChild(itemSectionListOptionsPocketInput)
 		itemSectionListOptionsPocketOuter.appendChild(itemSectionListOptionsPocketLabel)
@@ -180,7 +179,7 @@ let createItem = function() {
 
 					let itemSectionListOptionsInput = document.createElement("input");
 					let itemSectionListOptionsLabel = document.createElement("label");
-					let itemSectionListOptionsLabelText = document.createElement("p");
+					let itemSectionListOptionsLabelText = document.createElement("h5");
 					itemSectionListOptionsInput.setAttribute("type", "radio");
 					itemSectionListOptionsInput.setAttribute("name", "item-options");
 					itemSectionListOptionsInput.setAttribute("id", "item-options-" + q);
@@ -419,10 +418,14 @@ let createItem = function() {
 					itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 					let itemSectionSidebarSidebarItemImg = document.createElement("img");
-					itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Pokémon"]["Held Item"][q][key1[u]])],[PATH_Item_Bag])
 					itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none";')
 					itemSectionSidebarSidebarItemImg.title = finaldata["Pokémon"]["Held Item"][q][key1[u]];
 					itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
+
+					let itoc = getItemIcon(finaldata["Pokémon"]["Held Item"][q][key1[u]]);
+					if (itoc != undefined) {
+						itemSectionSidebarSidebarItemImg.src = getMedia(true,[itoc],[PATH_Item_Bag]);
+					}
 		
 				}
 			}
@@ -544,12 +547,15 @@ let createItem = function() {
 								for(let y = 0; y < finaldata["Location Items"]["Items"][q]["Field"].split(",").length; y++) {
 									let itemIcon;
 									let itm;
-									if (getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]) != undefined) {
-										itemIcon = getItemIcon(getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]));
+									let itMach = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]);
+									let itIco = getItemIcon(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]);
+									
+									if (itMach != undefined) {
+										itemIcon = itMach;
 										itm = getMoveMachine(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]);
 									}
-									else if (getItemIcon(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]) != undefined) {
-										itemIcon = getItemIcon(finaldata["Location Items"]["Items"][q]["Field"].split(",")[y]);
+									else if (itIco != undefined) {
+										itemIcon = itIco;
 										itm = finaldata["Location Items"]["Items"][q]["Field"].split(",")[y];
 									}
 
@@ -610,10 +616,15 @@ let createItem = function() {
 						itemSectionSidebarSidebarLi.appendChild(itemSectionSidebarSidebarItem);
 
 						for(let u = 0; u < quantity; u++) {
+							
 							let itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Location Items"]["Items"][q]["Item"])],[PATH_Item_Bag]);
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
+
+							let itoc = getItemIcon(finaldata["Location Items"]["Items"][q]["Item"]);
+							if (itoc != undefined) {
+								itemSectionSidebarSidebarItemImg.src = getMedia(true,[itoc],[PATH_Item_Bag]);
+							}
 						}
 
 						if (quantity != 1) { 
@@ -730,9 +741,13 @@ let createItem = function() {
 
 						for(let u = 0; u < quantity; u++) {
 							let itemSectionSidebarSidebarItemImg = document.createElement("img");
-							itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Location Items"]["Shop"][q]["Item"])],[PATH_Item_Bag])
 							itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 							itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
+
+							let itoc = getItemIcon(finaldata["Location Items"]["Shop"][q]["Item"]);
+							if (itoc != undefined) {
+								itemSectionSidebarSidebarItemImg.src = getMedia(true,[itoc],[PATH_Item_Bag]);
+							}
 						}
 
 						if (quantity != 1) { 
@@ -835,7 +850,6 @@ let createItem = function() {
 
 				
 						let itemSectionSidebarSidebarItemImg = document.createElement("img");
-						itemSectionSidebarSidebarItemImg.src = getMedia(true,[getItemIcon(finaldata["Location Items"]["Pickup"][q]["Item"])],[PATH_Item_Bag])
 						itemSectionSidebarSidebarItemImg.setAttribute("onerror",'this.style.display = "none"; this.parentElement.lastChild.style.display = "unset";');
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemImg);
 
@@ -843,6 +857,11 @@ let createItem = function() {
 						itemSectionSidebarSidebarItemText.innerText = finaldata["Location Items"]["Pickup"][q]["Item"];
 						itemSectionSidebarSidebarItem.appendChild(itemSectionSidebarSidebarItemText);
 						itemSectionSidebarSidebarItemText.style.display = "none";
+
+						let itoc = getItemIcon(finaldata["Location Items"]["Pickup"][q]["Item"]);
+						if (itoc != undefined) {
+							itemSectionSidebarSidebarItemImg.src = getMedia(true,[itoc],[PATH_Item_Bag]);
+						}
 
 						
 					}
