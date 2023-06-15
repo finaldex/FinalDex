@@ -2014,7 +2014,7 @@ function search(type) {
 		tags[i].classList.remove("hidden");
 	}
 
-    tar.style.color = "var(--fontDark)";
+    tar.style.removeProperty("color");
 
 
 	let check;
@@ -2092,13 +2092,11 @@ function search(type) {
 		for(i = 0; i < tags.length; i++) {
 			tags[i].classList.add("hidden");
 		}
-        tar.style.color = "var(--fontDark)";
     }
 	else {
 		for(i = 0; i < tags.length; i++) {
 			tags[i].classList.remove("hidden");
 		}
-		tar.style.color = "var(--fontDark)";
 	}
 
 
@@ -2123,33 +2121,6 @@ function search(type) {
 
 
     count();
-}
-function exitSearch(base) {
-
-	let tar = event.target;
-
-    if (base == "Pokémon") {
-		base = document.querySelector("#contain > div#"+base.toLowerCase()+" > div ul");
-    }
-	else {
-		base = document.querySelector("#contain > div#"+base.toLowerCase()+" section[name='list'] ol");
-	}
-    
-    let items = base.querySelectorAll(":scope > *:not(input)");
-    for (i = 0; i < items.length; i++) {
-        items[i].classList.remove("hidden");
-    }
-
-    let search = tar.parentElement.querySelector(':scope > input[type="text"]');
-
-	search.style.color = "var(--fontDark)";
-	search.style.removeProperty("outline-color");
-	search.style.removeProperty("border-color");
-	search.style.removeProperty("border-style");
-    search.value = "";
-    search.focus();
-
-	searchFilter(event.target,base,"Remove");
 }
 
 function joinObj(arr, attr,type){
