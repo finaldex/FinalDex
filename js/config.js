@@ -461,11 +461,9 @@ function define() {
 		Natures = ["Hardy","Lonely","Brave","Adamant","Naughty","Bold","Docile","Relaxed","Impish","Lax","Timid","Hasty","Serious","Jolly","Naive","Modest","Mild","Quiet","Bashful","Rash","Calm","Gentle","Sassy","Careful","Quirky"];
 	}
 	if(Generation <= 1) {
-		Stats = ["HP","Attack","Defense","Special","Speed","Total"];
-		StatsAbbr = ["HP","Atk","Def","Spc","Spe","Total"];
+		Stats = [{Name:"HP",Full:"HP",Abbreviation:"HP"},{Name:"Attack",Full:"Attack",Abbreviation:"Atk"},{Name:"Defense",Full:"Defense",Abbreviation:"Def"},{Name:"Special",Full:"Special",Abbreviation:"Sp"},{Name:"Speed",Full:"Speed",Abbreviation:"Spe"}];
 	} else {
-		Stats = ["HP","Attack","Defense","Sp. Atk","Sp. Def","Speed","Total"];
-		StatsAbbr = ["HP","Atk","Def","SpAtk","SpDef","Spe","Total"];
+		Stats = [{Name:"HP",Full:"HP",Abbreviation:"HP"},{Name:"Attack",Full:"Attack",Abbreviation:"Atk"},{Name:"Defense",Full:"Defense",Abbreviation:"Def"},{Name:"Sp. Atk",Full:"Special Attack",Abbreviation:"SpAtk"},{Name:"Sp. Def",Full:"Special Defense",Abbreviation:"SpDef"},{Name:"Speed",Full:"Speed",Abbreviation:"Spe"}]
 	}
 	if(Generation == 1) {
 		Types = ["Normal","Fighting","Flying","Poison","Ground","Rock","Bug","Ghost","Fire","Water","Grass","Electric","Psychic","Ice","Dragon"];
