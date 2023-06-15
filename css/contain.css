@@ -51,6 +51,10 @@
 	color:var(--Color_Main_List_Content_Label);
 	border:var(--Border_Main_List_Content_Label);
 }
+#contain > div > section[name='list'] ol label.hidden,
+#contain > div > section[name='list'] ol label.filtered {
+	display: none;
+}
 
 #contain > div > section[name='list'] ol label:active,
 #contain > div > section[name='list'] ol input:checked + label {
@@ -729,7 +733,7 @@
 }
 
 #contain div#item > section[name='sidebar'] ul li.hide > span[name='item'] {
-	filter:brightness(0.4) contrast(0.6);
+	opacity:0.4;
 }
 
 
@@ -1356,9 +1360,6 @@
     justify-content:space-evenly;
 }
 
-#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span.hide {
-	filter:brightness(0.4) contrast(0.6);
-}
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span[name='requirement'] span > *:last-child {
 	display:block;
@@ -1403,7 +1404,7 @@
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span.hide {
-	filter:brightness(0.4) contrast(0.6);
+	opacity:0.4;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li > span[name='requirement'] span > *:last-child {
@@ -1495,7 +1496,12 @@
 
 
 
-
+#contain div#map > section[name='sidebar'] > div > *[name] ul li > span[function='dataRedirect'] {
+	cursor:pointer;
+}
+#contain div#map > section[name='sidebar'] > div > *[name] ul li > span[function='dataRedirect']:active {
+	filter:invert(0.3);
+}
 
 
 
@@ -1636,12 +1642,9 @@
 
 
 
-
-
-body:has(* #pokémon > div li img:active) {
-	cursor:grabbing;
+#contain > div#item > section[name='list'] > div:first-child > *:last-child label > * {
+	padding: 2px 0;
 }
-
 
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li div[name='moves'] p {
@@ -2123,7 +2126,7 @@ body:has(* #pokémon > div li img:active) {
 }
 
 #data > div section[name='main'] > div[name='area'] ul li input:checked ~ *, #contain div#item > section[name='sidebar'] > div > ul li input:checked ~ *, #contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox']:checked ~ * {
-	opacity:0.5;
+	opacity:0.4;
 	text-decoration:line-through;
 }
 
