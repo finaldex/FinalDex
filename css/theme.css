@@ -11,10 +11,10 @@
 	*/
 
     /* Load */
-    --Background_Load:repeating-linear-gradient(0deg, hsl(0,0%,50%) 0px, hsl(0,0%,50%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,50%);
-    --Background_Load_Item:hsl(0,0%,30%);
-    --Color_Load:hsl(0,0%,90%);
-    --Color_Load_Title:linear-gradient(to right, hsl(175,10%,30%), hsl(0,0%,50%));
+    --Background_Load:repeating-linear-gradient(0deg, hsl(0,0%,40%) 0px, hsl(0,0%,40%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,40%);
+    --Background_Load_Item:hsl(0,0%,90%);
+    --Color_Load:hsl(0,0%,100%);
+    --Color_Load_Title:linear-gradient(to right, hsl(150,0%,60%), hsl(150,0%,70%));
 
     /* Body */
     --Background_Body:var(--Background_Load);
@@ -25,11 +25,13 @@
     --Background_Scroll_Bar:hsl(0,0%,60%);
 
     /* Console */
-    --Background_Console:initial;
+    --Background_Console:rgba(5,5,5,0.5);
     --Color_Console:initial;
-    --Border_Console:initial;
+    --Border_Console:1px solid hsl(0,0%,10%);
+    	
+    /* Dex */
     --Background_Dex_Content:repeating-linear-gradient(0deg, hsl(0,0%,45%) 0px, hsl(0,0%,45%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,45%);
-	--Color_Dex_Content:initial;
+    --Color_Dex_Content:initial;
 	--Background_Dex_Content_Item:hsl(0,0%,35%);
     --Border_Dex_Content_Item:10px double hsl(0,0%,45%);
 	--Color_Dex_Content_Item:initial;
@@ -53,7 +55,7 @@
     --Color_Dex_PartyBox_Content_Trash:Red;
 	--Background_Dex_PartyBox_Item:hsl(0,0%,25%);
 	--Color_Dex_PartyBox_Item:White;
-	--Border_Dex_PartyBox_Item:1px Solid Black;
+	--Border_Dex_PartyBox_Item:1px Solid hsl(0,0%,40%);
 	--Border_Dex_PartyBox_Redirect:2px Solid Black;
 	--Background_Dex_PartyBox_Redirect_Label:hsl(0,0%,30%);
     --Border_Dex_PartyBox_Redirect_Label:1px Solid Black;
@@ -206,7 +208,7 @@
 	--Border_Map_Sidebar_Content_Item:1px Dashed hsl(0,0%,25%);
 	--Color_Map_Sidebar_Content_Item:initial;
 	--Background_Map_Sidebar_Content_Item_Title:hsl(0,0%,20%);
-	--Border_Map_Sidebar_Content_Item_Title:initial;
+	--Border_Map_Sidebar_Content_Item_Title:1px Solid Black;
 	--Color_Map_Sidebar_Content_Item_Title:initial;
     --Background_Map_Sidebar_Content_Search:White;
 	--Border_Map_Sidebar_Content_Search:1px Solid Black;
