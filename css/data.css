@@ -1206,8 +1206,8 @@
 	text-decoration:underline;
 	text-decoration-style:solid;
 }
-#data > div section[name='main'] > div[name='area'] ul li > span > * > small {
-	display:block;
+#data > div section[name='main'] > div[name='area'] ul li *[function='dataRedirect']:active {
+	filter:invert(0.3);
 }
 #data > div section[name='main'] > div[name='area'] ul li > *[title]:hover > * {
 	text-decoration-style:dashed;
