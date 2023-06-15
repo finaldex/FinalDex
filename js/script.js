@@ -345,6 +345,7 @@ function returnData(int, type, additional) {
 		column = DATA_Pokémon_EVYield["Total"]
 	}
 
+
 	for(let i = 0; i < arr.length; i++) {
 		if(i == int) {
 			if(Array.isArray(column)) {
@@ -1600,7 +1601,7 @@ function searchFilter(bar,base,condition) {
             if (hidden.length != list.length) {
                 if (bar.value != "") {
                     bar.value = "";
-                    bar.style.color = "var(--fontDark)";
+                    bar.style.removeProperty("color");
                     for (let i = 0; i < hidden.length; i++) {
                         hidden[i].classList.add("filtered");
                     }
@@ -1617,7 +1618,7 @@ function searchFilter(bar,base,condition) {
 
         if (filter.length > 0) {
             bar.value = "";
-            bar.style.color = "var(--fontDark)";
+            bar.style.removeProperty("color");
 
             for (let i = 0; i < list.length; i++) {
                 list[i].classList.remove("filtered");
@@ -2259,8 +2260,10 @@ function dropRelPos() {
     let y = top/bodyY;
     let x = tar.offsetWidth - left;
 
-
-    tar.className = "";
+    tar.style.removeProperty("left");
+    tar.style.removeProperty("right");
+    tar.style.removeProperty("top");
+    tar.style.removeProperty("bottom");
 
     if (x > 0) {
         tar.style.left = obj.offsetWidth-obj.offsetWidth+"px";
