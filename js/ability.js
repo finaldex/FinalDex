@@ -104,9 +104,11 @@ let createAbility = function() {
 		abilitySectionContentDescription.appendChild(abilitySectionContentAffectTitle);
 		abilitySectionContentDescription.appendChild(abilitySectionContentAffectText);
 		abilityOuter.appendChild(abilitySectionSidebar);
-
+		
 		abilitySectionListOptionsSearch.addEventListener("input", function() {search("Ability");});
-
+		abilitySectionListOptionsSearch.addEventListener("keyup", function() {search("Ability");});
+	
+	
 
         let abilitySectionHeaderGame = document.createElement("span");
         let abilitySectionHeaderGameImage = document.createElement("img");
