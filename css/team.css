@@ -1,0 +1,734 @@
+
+body.dragging #pokémon > aside[name='team'] .indicator.enabled,
+body.dragging #pokémon > aside[name='team'] .indicator.ui-droppable-active {
+    background:linear-gradient(90deg, Black 50%, transparent 50%), 
+                linear-gradient(90deg, Black 50%, transparent 50%), 
+                linear-gradient(0deg, Black 50%, transparent 50%), 
+                linear-gradient(0deg, Black 50%, transparent 50%);
+    background-repeat:repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size:16px 3px, 16px 3px, 3px 16px, 3px 16px;
+    background-position:0% 0%, 100% 100%, 0% 100%, 100% 0px;
+    animation:dash 10s linear infinite;
+}
+
+body.dragging #pokémon > aside[name='team'] .indicator.ui-droppable-active.ui-droppable-hover,
+body.dragging #pokémon > aside[name='team'] .hover > .indicator.enabled,
+body.dragging #pokémon > aside[name='team'] .indicator.enabled.hover {
+	background:linear-gradient(90deg, Green 50%, transparent 50%), 
+                linear-gradient(90deg, Green 50%, transparent 50%), 
+                linear-gradient(0deg, Green 50%, transparent 50%), 
+                linear-gradient(0deg, Green 50%, transparent 50%);
+    background-repeat:repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size:16px 3px, 16px 3px, 3px 16px, 3px 16px;
+    background-position:0% 0%, 100% 100%, 0% 100%, 100% 0px;
+    animation:dash 10s linear infinite;
+}
+
+
+
+#pokémon > aside section[name='party'] > span {
+	height:5%;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    flex-wrap:wrap;
+    flex-direction:row;
+    align-content:center;
+	z-index:100;
+}
+
+#pokémon > aside section[name='box'] {
+	overflow:unset;
+}
+
+
+
+
+#pokémon > aside[name="team"] section[name]:not(.open):not(.switch) figure[name="export"], #pokémon > aside section[name="box"] figure[name="trash"] {
+	max-width:100%;
+	overflow:hidden;
+}
+#pokémon > aside section[name="box"] figure[name="export"] {
+	position:absolute;
+	bottom:10px;
+	right:10px;
+	font-size:120%;
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+
+
+#pokémon > aside[name="team"] section[name] {
+    width:0vw;
+}
+
+#pokémon > aside[name="team"] section[name="party"] {
+	background:var(--Background_Dex_PartyBox_Item);
+}
+
+#pokémon > aside[name="team"] section[name].open, #pokémon > aside[name="team"] section[name].switch {
+    width:min(max(300px, 20vw), 500px);
+}
+/*
+#pokémon > aside[name="team"] section[name] > * {
+    opacity:0;
+    transition:.2s ease opacity .5s;
+}
+#pokémon > aside[name="team"] section[name].close > * {
+    opacity:0;
+    transition:.2s ease opacity .5s;
+}
+#pokémon > aside[name="team"] section[name].switch > * {
+    opacity:1;
+    transition:none;
+}
+#pokémon > aside[name="team"] section[name].open > * {
+    opacity:1;
+    transition:.2s ease opacity .5s;
+}
+*/
+#pokémon > aside[name="team"] section.open {
+    transition:.5s ease width;
+}
+#pokémon > aside[name="team"] section.close {
+    transition:none;
+}
+#pokémon > aside[name="team"] section.switch {
+    transition:none;
+}
+
+
+
+#pokémon > aside section[name='box'] > figure[name='trash'] {
+    position:absolute;
+    bottom:10px;
+    left:10px;
+    overflow:hidden;
+}
+#pokémon > aside section[name='box'] > figure[name='trash'] {
+	background:var(--Background_Dex_PartyBox_Content_Trash);
+	color:var(--Color_Dex_PartyBox_Content_Trash);
+	border:var(--Border_Dex_PartyBox_Content_Trash);
+}
+#pokémon > aside section[name='box'] > figure[name='export'] {
+	background:var(--Background_Dex_PartyBox_Content_Export);
+	color:var(--Color_Dex_PartyBox_Content_Export);
+	border:var(--Border_Dex_PartyBox_Content_Export);
+}
+
+
+#pokémon > aside section[name='box'] ul {
+	display:flex;
+    flex-direction:row;
+    overflow:auto;
+    flex-wrap:wrap;
+    align-content:flex-start;
+	overflow:auto;
+	background:var(--Background_Dex_PartyBox_Content);
+	color:var(--Color_Dex_PartyBox_Content);
+}
+#pokémon > aside section[name='box'] > figure[name='trash'] {
+	position:absolute;
+	left:10px;
+	bottom:10px;
+	object-fit:scale-down;
+    transition:.2s ease filter;
+}
+
+#pokémon > aside section[name='box'] > figure[name='trash']:hover, #pokémon > aside section[name='box'] > figure[name='trash'].ui-droppable-active {
+	animation:scale80 infinite 2s linear;
+}
+#pokémon > aside section[name='box'] > figure[name='trash']:active, #pokémon > aside section[name='box'] > figure[name='trash'].ui-droppable-hover.ui-droppable-active.ui-droppable {
+	filter:grayscale(0.8);
+    animation-play-state:paused;
+}
+#pokémon > aside section[name='box'] ul li {
+	position:relative;
+	padding:5px;
+}
+#pokémon > aside section[name='box'] ul li span {
+	position:absolute;
+    background:#000;
+    width:100%;
+    height:100%;
+    bottom:-10px;
+    border-radius:100%;
+    transform:rotate3d(20, 0, 0, 300deg) scale(0.7);
+    opacity:0.4;
+}
+#pokémon > aside section[name='box'] ul li img {
+	position:inherit;
+}
+#pokémon > aside section[name='box'] ul li:active img {
+	pointer-events:none;
+}
+
+
+
+
+
+
+
+
+#pokémon > aside section[name='party'] > div[data-string] {
+	display: flex;
+	flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+	background:var(--Background_Dex_PartyBox_Item);
+	color:var(--Color_Dex_PartyBox_Item);
+	border:var(--Border_Dex_PartyBox_Item);
+	border-top: none;
+	border-left:none;
+	border-right: none;
+}
+
+
+#pokémon > aside section[name='party'] div[data-string] > span:first-child > b:last-child:active {
+    cursor:grabbing;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > span:first-child > b:last-child {
+    font-weight:normal;
+    font-size:unset;
+	cursor:grab;
+}
+#pokémon > aside section[name='party'] div[data-string] > span {
+    height: 100%;
+    padding: 2px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+#pokémon > aside section[name='party'] div[data-string] > span:last-child,
+#pokémon > aside section[name='party'] div[data-string] > span:first-child {
+    padding: 10px;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > span:first-child,
+#pokémon > aside section[name='party'] div[data-string] > span:first-child >    * {
+    align-items:flex-start;
+    text-align:left;
+}
+#pokémon > aside section[name='party'] div[data-string] > span:last-child,
+#pokémon > aside section[name='party'] div[data-string] > span:last-child > * {
+    align-items:flex-end;
+    text-align:right;
+}
+
+
+#pokémon > aside section[name='party'] div[data-string] input {
+	appearance: none;
+    width: min-content;
+}
+#pokémon > aside section[name='party'] div[data-string] input[type=number]::-webkit-outer-spin-button,
+#pokémon > aside section[name='party'] div[data-string] input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+#pokémon > aside section[name='party'] div[data-string] input[type=number] {
+	appearance: auto;
+	-moz-appearance: textfield;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > button {
+	width:100%;
+    height:100%;
+    padding:0;
+    font-family:fantasy;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+	cursor:pointer;
+	position: absolute;
+	background:var(--Background_Dex_PartyBox_Content_Item);
+	color:var(--Color_Dex_PartyBox_Content_Item);
+    z-index: 10;
+}
+#pokémon > aside section[name='party'] div[data-string] > button:hover > * {
+	filter:brightness(0.8);
+}
+#pokémon > aside section[name='party'] div[data-string] > button:active > * {
+	transform:scale(0.9);
+}
+
+#pokémon > aside section[name='party'] div:not([data-string=""]) > button {
+    display: none;
+}
+
+#pokémon > aside section[name='party'] div[data-string] img {
+    position:relative;
+    cursor: pointer;
+}
+#pokémon > aside section[name='party'] div[data-string] img:active {
+    transform:scale(0.75);
+}
+
+#pokémon > aside section[name='party'] div[data-string] span img[src=''] {
+	visibility:hidden;
+}
+#pokémon > aside section[name='party'] div[data-string] span img[src='']::after {
+	content:'?';
+    display:flex;
+    visibility:visible;
+    justify-content:center;
+    align-items:center;
+}
+#pokémon > aside section[name='party'] div[data-string] span[name='pokémon'] {
+    height: 100%;
+    width: 100%;
+    position:relative;
+}
+
+#pokémon > aside section[name='party'] div[data-string] span img[name='item'] {
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+#pokémon > aside section[name='party'] div[data-string] span img[name='item'][src='']::after {
+    font-size:x-large;
+}
+#pokémon > aside section[name='party'] div[data-string] span img[name='img'][src='']::after {
+    font-size:xxx-large;
+}
+
+
+#pokémon > aside section[name='party'] div[data-string] select,
+#pokémon > aside section[name='party'] div[data-string] input {
+    text-align: center;
+    padding: 2px;
+    appearance: none;
+    background: none;
+    border: none;
+}
+
+#pokémon > aside section[name='party'] div[data-string],
+#pokémon > aside section[name='party'] div[data-string] select,
+#pokémon > aside section[name='party'] div[data-string] input,
+#pokémon > aside section[name='party'] div[data-string] input::placeholder {
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+#pokémon > aside section[name='party'] div[data-string][type*='Electric'],
+#pokémon > aside section[name='party'] div[data-string][type*='Electric'] select,
+#pokémon > aside section[name='party'] div[data-string][type*='Electric'] input,
+#pokémon > aside section[name='party'] div[data-string][type*='Electric'] input::placeholder {
+    color: black;
+    text-shadow: none;
+}
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string] option {
+    color:black;
+}
+
+
+#pokémon > aside section[name='party'] div[data-string] > span > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='data'] > span > span:first-child {
+    height: 20%;
+}
+
+
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string] span[name='moves'] select {
+    margin: 2px;
+    padding: 0 10px;
+}
+
+#pokémon > aside section[name='party'] div[data-string] span[name='moves'] option {
+    color:black;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='data'] *[name='nums'] {
+    display:flex;
+    flex-direction:row;
+}
+
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='data'] *[name='nums'] > *:first-child * {
+    text-align:right;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='data'] *[name='nums'] > span {
+    display: flex;
+    flex-direction: column;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='data'] *[name='nums'] input {
+    padding: 0;
+    margin: 0;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='data'] > span {
+    height: 100%;
+    width:100%;
+    transition: 0.25s ease opacity 0s, 0s ease height 0s, 0s ease width 0s;
+}
+#pokémon > aside section[name='party'][data-state=''] div[data-string] > span[name='data'] > span {
+    transition: none;
+}
+
+#pokémon > aside section[name='party']:not([data-state='moves']) div[data-string] > span[name='data'] > span[name='moves'],
+#pokémon > aside section[name='party']:not([data-state='stats']) div[data-string] > span[name='data'] > span[name='stats'] {
+    width:0px;
+    height:0px;
+    opacity:0;
+    padding: 0;
+}
+
+#pokémon > aside section[name='party'] div[data-string] span[name='moves'] > span {
+    display:flex;
+    flex-direction:column;
+}
+
+
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string] select[title='Gender'][name='♂'] {
+    color:blue;
+}
+
+#pokémon > aside section[name='party'] div[data-string] select[title='Gender'][name='♀'] {
+    color:red;
+}
+#pokémon > aside section[name='party'] div[data-string] select[title='Gender'][name='☿'] {
+    color:black;
+}
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='data'] > span[name='moves'] {
+    padding: 10px 0;
+    justify-content: space-between;
+}
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string*='na:Lonely'] span[name='total'] > input:nth-child(2), #pokémon > aside section[name='party'] div[data-string*='na:Brave'] span[name='total'] > input:nth-child(2), #pokémon > aside section[name='party'] div[data-string*='na:Adamant'] span[name='total'] > input:nth-child(2), #pokémon > aside section[name='party'] div[data-string*='na:Naughty'] span[name='total'] > input:nth-child(2),
+#pokémon > aside section[name='party'] div[data-string*='na:Bold'] span[name='total'] > input:nth-child(3), #pokémon > aside section[name='party'] div[data-string*='na:Relaxed'] span[name='total'] > input:nth-child(3), #pokémon > aside section[name='party'] div[data-string*='na:Impish'] span[name='total'] > input:nth-child(3), #pokémon > aside section[name='party'] div[data-string*='na:Lax'] span[name='total'] > input:nth-child(3),
+#pokémon > aside section[name='party'] div[data-string*='na:Modest'] span[name='total'] > input:nth-child(4), #pokémon > aside section[name='party'] div[data-string*='na:Mild'] span[name='total'] > input:nth-child(4), #pokémon > aside section[name='party'] div[data-string*='na:Quiet'] span[name='total'] > input:nth-child(4), #pokémon > aside section[name='party'] div[data-string*='na:Rash'] span[name='total'] > input:nth-child(4),
+#pokémon > aside section[name='party'] div[data-string*='na:Calm'] span[name='total'] > input:nth-child(5), #pokémon > aside section[name='party'] div[data-string*='na:Gentle'] span[name='total'] > input:nth-child(5), #pokémon > aside section[name='party'] div[data-string*='na:Sassy'] span[name='total'] > input:nth-child(5), #pokémon > aside section[name='party'] div[data-string*='na:Careful'] span[name='total'] > input:nth-child(5),
+#pokémon > aside section[name='party'] div[data-string*='na:Timid'] span[name='total'] > input:nth-child(6), #pokémon > aside section[name='party'] div[data-string*='na:Hasty'] span[name='total'] > input:nth-child(6), #pokémon > aside section[name='party'] div[data-string*='na:Jolly'] span[name='total'] > input:nth-child(6), #pokémon > aside section[name='party'] div[data-string*='na:Naive'] span[name='total'] > input:nth-child(6) {
+	color:Green;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#pokémon > aside section[name='party'] div[data-string*='na:Bold'] span[name='total'] > input:nth-child(2), #pokémon > aside section[name='party'] div[data-string*='na:Timid'] span[name='total'] > input:nth-child(2), #pokémon > aside section[name='party'] div[data-string*='na:Modest'] span[name='total'] > input:nth-child(2), #pokémon > aside section[name='party'] div[data-string*='na:Calm'] span[name='total'] > input:nth-child(2),
+#pokémon > aside section[name='party'] div[data-string*='na:Lonely'] span[name='total'] > input:nth-child(3), #pokémon > aside section[name='party'] div[data-string*='na:Hasty'] span[name='total'] > input:nth-child(3), #pokémon > aside section[name='party'] div[data-string*='na:Mild'] span[name='total'] > input:nth-child(3), #pokémon > aside section[name='party'] div[data-string*='na:Gentle'] span[name='total'] > input:nth-child(3),
+#pokémon > aside section[name='party'] div[data-string*='na:Adamant'] span[name='total'] > input:nth-child(4), #pokémon > aside section[name='party'] div[data-string*='na:Impish'] span[name='total'] > input:nth-child(4), #pokémon > aside section[name='party'] div[data-string*='na:Jolly'] span[name='total'] > input:nth-child(4), #pokémon > aside section[name='party'] div[data-string*='na:Careful'] span[name='total'] > input:nth-child(4),
+#pokémon > aside section[name='party'] div[data-string*='na:Naughty'] span[name='total'] > input:nth-child(5), #pokémon > aside section[name='party'] div[data-string*='na:Lax'] span[name='total'] > input:nth-child(5), #pokémon > aside section[name='party'] div[data-string*='na:Naive'] span[name='total'] > input:nth-child(5), #pokémon > aside section[name='party'] div[data-string*='na:Rash'] span[name='total'] > input:nth-child(5),
+#pokémon > aside section[name='party'] div[data-string*='na:Brave'] span[name='total'] > input:nth-child(6), #pokémon > aside section[name='party'] div[data-string*='na:Relaxed'] span[name='total'] > input:nth-child(6), #pokémon > aside section[name='party'] div[data-string*='na:Quiet'] span[name='total'] > input:nth-child(6), #pokémon > aside section[name='party'] div[data-string*='na:Sassy'] span[name='total'] > input:nth-child(6) {
+	color:Red;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string] select,
+#pokémon > aside section[name='party'] div[data-string] input {
+    font-size:x-small;
+}
+
+
+
+
+/*
+
+
+#pokémon > aside[name='team'] section > div button {
+    cursor:pointer;
+	transition:.25s ease opacity .25s, .1s linear;
+}
+#pokémon > aside[name='team'] section > div aside > span:first-child select, #pokémon > aside[name='team'] section > div aside > span:last-child select:last-child {
+	font-style:normal;
+}
+#pokémon > aside[name='team'] section > div aside > span:first-child select:focus, #pokémon > aside[name='team'] section > div aside > span:last-child select:last-child:focus {
+	background:none;
+    border:none;
+	color:White;
+	cursor:pointer;
+	font-style:normal;
+	outline:none;
+}
+#pokémon > aside[name='team'] section > div aside > span:first-child select > option:first-child, #pokémon > aside[name='team'] section > div aside > span:last-child select:last-child > option:first-child {
+	display:none;
+}
+#pokémon > aside[name='team'] section > div span b:first-child:active {
+	filter:unset;
+}
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string][name*='Electric,'] > span:first-child *, #pokémon > aside section[name='party'] div[data-string][name*='Electric,'] > span:first-child *::placeholder, #pokémon > aside section[name='party'] div[data-string][name*='Electric,'] > span:nth-child(2) *, #pokémon > aside section[name='party'] div[data-string][name*='Electric,'] > span:nth-child(2) *::placeholder, #pokémon > aside section[name='party'] div[data-string][name*='Ice,'] > span:first-child *, #pokémon > aside section[name='party'] div[data-string][name*='Ice,'] > span:first-child *::placeholder, #pokémon > aside section[name='party'] div[data-string][name*='Ice,'] > span:nth-child(2) *, #pokémon > aside section[name='party'] div[data-string][name*='Ice,'] > span:nth-child(2) *::placeholder  {
+	color:Black;
+}
+#pokémon > aside section[name='party'] div[data-string][name='electric'] *, #pokémon > aside section[name='party'] div[data-string][name='electric'] *::placeholder, #pokémon > aside section[name='party'] div[data-string][name='ice'] *, #pokémon > aside section[name='party'] div[data-string][name='ice'] *::placeholder  {
+	color:Black;
+}
+#pokémon > aside section[name='party'] div[data-string][name*=',Electric'] > span[name] *, #pokémon > aside section[name='party'] div[data-string][name*=',Electric'] > span[name] *::placeholder, #pokémon > aside section[name='party'] div[data-string][name*=',Electric'] > span:last-child *, #pokémon > aside section[name='party'] div[data-string][name*=',Electric'] > span:last-child *::placeholder, #pokémon > aside section[name='party'] div[data-string][name*=',Ice'] > span[name] *, #pokémon > aside section[name='party'] div[data-string][name*=',Ice'] > span[name] *::placeholder, #pokémon > aside section[name='party'] div[data-string][name*=',Ice'] > span:last-child *, #pokémon > aside section[name='party'] div[data-string][name*=',Ice'] > span:last-child *::placeholder   {
+	color:Black;
+}
+
+
+
+
+
+
+#pokémon > aside section[name='party'] div[data-string] > span.scroll > span {
+	padding:2px 0;
+}
+
+
+#pokémon > aside div aside > span:first-child select:first-child {
+	filter:none;
+}
+#pokémon > aside div aside > span:first-child select:first-child:active {
+	filter:grayscale(1) brightness(2.5) invert(1);
+}
+
+
+
+#pokémon > aside section[name='party'] div[data-string] span img:not([value]) {
+	position:absolute;
+    left:10%;
+    top:5%;
+	z-index:10;
+}
+#pokémon > aside section[name='party'] div[data-string] > span > span {
+	position:relative;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+	flex-direction:column;
+}
+#pokémon > aside section[name='party'] div[data-string] > span:nth-child(2) span:first-child[name='pokémon'] {
+	height:85%;
+}
+#pokémon > aside section[name='party'] div[data-string] > span:nth-child(2) span:nth-child(2)[name='pokémon'] {
+	height:70%;
+}
+#pokémon > aside section[name='party'] div[data-string] span[name='item'], #pokémon > aside section[name='party'] div[data-string] span[name='name'] {
+	height:15%;
+}
+#pokémon > aside section[name='party'] div[data-string] [name='moves'] > span:nth-child(2) > span {
+	width:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	cursor:grab;
+}
+#pokémon > aside section[name='party'] div[data-string] [name='moves'] > span:nth-child(2) > span:active {
+	cursor:grabbing;
+}
+#pokémon > aside section[name='party'] div[data-string] span select {
+	width:90%;
+    font-size:var(--sizeFontS)
+}
+#pokémon > aside section[name='party'] div[data-string] span select[value='Held Item'], #pokémon > aside section[name='party'] div[data-string] span select[value='Nature'] {
+	font-style:italic;
+}
+#pokémon > aside section[name='party'] div[data-string] span select, #pokémon > aside section[name='party'] div[data-string] span option {
+	text-align:center;
+	outline:none;
+}
+
+#pokémon > aside[name='team'] select {
+	font-style:italic;
+}
+#pokémon > aside[name='team'] span[name='nature'] select, #pokémon > aside[name='team'] span[name='ability'] select, #pokémon > aside section[name='party'] div[data-string] > span:last-child select:nth-child(2) {
+	font-style:unset;
+}
+#pokémon > aside[name='team'] select option:checked {
+	font-weight:bold;
+}
+#pokémon > aside div aside > span input[type='number']:not(:focus) {
+	-moz-appearance:textfield;
+}
+#pokémon > aside div aside > span select, #pokémon > aside div aside > span input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance:none;
+	-moz-appearance:none;
+}
+#pokémon > aside div aside > span input:focus::-webkit-inner-spin-button {
+    -webkit-appearance:auto;
+	-moz-appearance:auto;
+}
+#pokémon > aside div aside > span input[type=number]::placeholder {
+	font-size:90%;
+}
+#pokémon > aside div aside > span input::placeholder {
+    opacity:1;
+    color:White;
+    font-style:italic;
+}
+#pokémon > aside div aside > span input:focus::placeholder {
+    opacity:0;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2){
+	flex-direction:row;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child > input[value*='HP'], #pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child > input[value*='Attack'], #pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child > input[value*='Defense'], #pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child > input[value*='Special'], #pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child > input[value*='Sp. Atk'], #pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child > input[value*='Sp. Def'], #pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child > input[value*='Speed'] {
+    display:none;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span {
+	display:flex;
+    flex-direction:column;
+    align-content:center;
+    justify-content:center;
+    align-items:center;
+}
+#pokémon > aside div aside > span input[type='date'] {
+	color:transparent;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span {
+	width:20%;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span[name='iv'], #pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span[name='ev'] {
+	width:25%;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child input {
+	cursor:help;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:first-child {
+	width:30%;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:first-child input {
+	text-align:right;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:first-child input::placeholder {
+	font-style:normal;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span input[disabled] {
+	cursor:default;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='stats'] > span:nth-child(2) > span:last-child input {
+	font-weight:bold;
+    text-shadow:1px 1px 1px Black;
+}
+#pokémon > aside section[name='party'] div[data-string][name='ice'] > span[name='stats'] > span:nth-child(2) > span:last-child input, #pokémon > aside section[name='party'] div[data-string][name='electric'] > span[name='stats'] > span:nth-child(2) > span:last-child input, #pokémon > aside section[name='party'] div[data-string][name*=',Electric'] > span[name='stats'] > span:nth-child(2) > span:last-child input, #pokémon > aside section[name='party'] div[data-string][name*=',Ice'] > span[name='stats'] > span:nth-child(2) > span:last-child input  {
+	text-shadow:1px 1px 1px Gray;
+}
+#pokémon > aside section[name='party'] div[data-string] > span:last-child > button {
+	transition:.25s ease;
+}
+#pokémon > aside section[name='party'] div[data-string] > span:last-child > button:active {
+	transform:rotate(-90deg);
+}
+#pokémon > aside section[name='party'] div[data-string] > span:last-child > select:last-child {
+	transition:.25s ease;
+}
+#pokémon > aside section[name='party'] div[data-string] > span:last-child > select:active, #pokémon > aside section[name='party'] div[data-string] > span:last-child > select:active * {
+	color:black;
+}
+#pokémon > aside section[name='party'] span[name='Lonely'] input:nth-child(2), #pokémon > aside section[name='party'] span[name='Brave'] input:nth-child(2), #pokémon > aside section[name='party'] span[name='Adamant'] input:nth-child(2), #pokémon > aside section[name='party'] span[name='Naughty'] input:nth-child(2),
+#pokémon > aside section[name='party'] span[name='Bold'] input:nth-child(3), #pokémon > aside section[name='party'] span[name='Relaxed'] input:nth-child(3), #pokémon > aside section[name='party'] span[name='Impish'] input:nth-child(3), #pokémon > aside section[name='party'] span[name='Lax'] input:nth-child(3),
+#pokémon > aside section[name='party'] span[name='Modest'] input:nth-child(4), #pokémon > aside section[name='party'] span[name='Mild'] input:nth-child(4), #pokémon > aside section[name='party'] span[name='Quiet'] input:nth-child(4), #pokémon > aside section[name='party'] span[name='Rash'] input:nth-child(4),
+#pokémon > aside section[name='party'] span[name='Calm'] input:nth-child(5), #pokémon > aside section[name='party'] span[name='Gentle'] input:nth-child(5), #pokémon > aside section[name='party'] span[name='Sassy'] input:nth-child(5), #pokémon > aside section[name='party'] span[name='Careful'] input:nth-child(5),
+#pokémon > aside section[name='party'] span[name='Timid'] input:nth-child(6), #pokémon > aside section[name='party'] span[name='Hasty'] input:nth-child(6), #pokémon > aside section[name='party'] span[name='Jolly'] input:nth-child(6), #pokémon > aside section[name='party'] span[name='Naive'] input:nth-child(6) {
+	color:Green;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#pokémon > aside section[name='party'] span[name='Bold'] input:nth-child(2), #pokémon > aside section[name='party'] span[name='Timid'] input:nth-child(2), #pokémon > aside section[name='party'] span[name='Modest'] input:nth-child(2), #pokémon > aside section[name='party'] span[name='Calm'] input:nth-child(2),
+#pokémon > aside section[name='party'] span[name='Lonely'] input:nth-child(3), #pokémon > aside section[name='party'] span[name='Hasty'] input:nth-child(3), #pokémon > aside section[name='party'] span[name='Mild'] input:nth-child(3), #pokémon > aside section[name='party'] span[name='Gentle'] input:nth-child(3),
+#pokémon > aside section[name='party'] span[name='Adamant'] input:nth-child(4), #pokémon > aside section[name='party'] span[name='Impish'] input:nth-child(4), #pokémon > aside section[name='party'] span[name='Jolly'] input:nth-child(4), #pokémon > aside section[name='party'] span[name='Careful'] input:nth-child(4),
+#pokémon > aside section[name='party'] span[name='Naughty'] input:nth-child(5), #pokémon > aside section[name='party'] span[name='Lax'] input:nth-child(5), #pokémon > aside section[name='party'] span[name='Naive'] input:nth-child(5), #pokémon > aside section[name='party'] span[name='Rash'] input:nth-child(5),
+#pokémon > aside section[name='party'] span[name='Brave'] input:nth-child(6), #pokémon > aside section[name='party'] span[name='Relaxed'] input:nth-child(6), #pokémon > aside section[name='party'] span[name='Quiet'] input:nth-child(6), #pokémon > aside section[name='party'] span[name='Sassy'] input:nth-child(6) {
+	color:Red;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span:last-child {
+	width:100%;
+    align-items:center;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-content:center;
+    flex-wrap:wrap;
+    justify-content:space-around;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span > span {
+	height:100%;
+	width:100%;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label {
+	width:100%;
+    display:flex;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label[name*='Met'] > span {
+    min-width:30%;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label > span {
+	font-size:80%;
+}
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label input::-webkit-calendar-picker-indicator {
+	opacity:0;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label input:focus::-webkit-calendar-picker-indicator {
+	opacity:1;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label[name] select, #pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label[name] input {
+	margin:2px;
+}
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] > span label[name] {
+	cursor:pointer;
+	margin:5px 0;
+}
+#pokémon > aside section[name='party'] div[data-string][name='ice'] > span[name='additional'] > span label[name='date'] input, #pokémon > aside section[name='party'] div[data-string][name='electric'] > span[name='additional'] > span label[name='date'] input, #pokémon > aside section[name='party'] div[data-string][name*=',Electric'] > span[name='additional'] > span label[name='date'] input, #pokémon > aside section[name='party'] div[data-string][name*=',Ice'] > span[name='additional'] > span label[name='date'] input  {
+	color:Black;
+}
+
+
+#pokémon > aside section[name='party'] div[data-string] > span[name='additional'] select {
+	font-style:normal;
+}
+#pokémon > aside section[name='party'] div[data-string] h5 {
+	cursor:default;
+}
+#pokémon > aside section[name='party'] select option[disabled] {
+	display:none;
+}
+*/
+
+#pokémon > aside[name='team'] figure div.top > * {
+	top: 0;
+}
+#pokémon > aside[name='team'] figure div.bottom > * {
+	bottom: 0;
+}
+#pokémon > aside[name='team'] figure div.left > * {
+	left: 0;
+}
+#pokémon > aside[name='team'] figure div.right > * {
+	right: 0;
+}
