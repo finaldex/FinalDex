@@ -3,24 +3,19 @@ function partyMemory(action) {
     if (action == "Save") {
         let partyMemory = [];
         for(let i = 0; i < partySlots.length; i++) {
-            if (partySlots[i].getAttribute("name") != "empty") {
-                partyMemory.push(getPartyData(partySlots[i]))
-            }
-            else {
-                partyMemory.push("")
-            }
+            partyMemory.push(partySlots[i].getAttribute("data-string"))
         }
         localStorage.setItem("finaldex-party-"+GameID, partyMemory.join("/"));
     }
     else if (action == "Restore") {
-        let tempArr = localStorage.getItem("finaldex-party-"+GameID);
-        if (tempArr != undefined) {
-            tempArr = localStorage.getItem("finaldex-party-"+GameID).split("/");
+        let tempData = localStorage.getItem("finaldex-party-"+GameID);
+        if (tempData != undefined) {
+            let tempArr = localStorage.getItem("finaldex-party-"+GameID).split("/");
             if (tempArr.length == partySlots.length) {
                 for(let i = 0; i < tempArr.length; i++) {
                     if (tempArr[i] != "") {
-                        createParty(partySlots[i],tempArr[i]);
-                        partyShow(partySlots[i]);
+                        partySlots[i].setAttribute("data-string",tempArr[i])
+                        partyApply(partySlots[i]);
                     }
                 }
             }
