@@ -125,6 +125,8 @@ let createMap = function() {
 
 
 	mapSectionListOptionsSearch.addEventListener("input", function() {search("Map");});
+	mapSectionListOptionsSearch.addEventListener("keyup", function() {search("Map");});
+
 	mapSectionContentMapInner2.addEventListener("mousedown",function(event){if(event.button === 1){fullscreenIMG([mapSectionContentMapImg],0)}});
 
 	mapSectionContentMapFullscreen.addEventListener("click", function(){fullscreenIMG([mapSectionContentMapImg],0)})
@@ -2612,7 +2614,7 @@ function updateTrainer(trainers,condition) {
 			function grpFigFunction() {
 
 			
-				const val = this.parentElement.getAttribute("name");
+				const val = this.getAttribute("name");
 				const dataStrings = findUpAtt(this,"data-string").getAttribute("data-string");
 				const base = findUpAtt(this,"data-string");
 
@@ -3018,7 +3020,7 @@ function updateTrainer(trainers,condition) {
         }
 
 		function exportButtonFunction() {
-			let val = this.parentElement.getAttribute("name");
+			let val = this.getAttribute("name");
 			let base = findUpTagAtt(this,"LI","data-string");
 			let dataString = base.getAttribute("data-string");
 
