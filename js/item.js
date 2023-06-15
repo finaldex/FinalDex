@@ -51,6 +51,7 @@ let createItem = function() {
 	itemSectionSidebar.setAttribute("name","sidebar");
 
 	itemSectionListOptionsSearch.addEventListener("input", function() {search("Item");});
+	itemSectionListOptionsSearch.addEventListener("keyup", function() {search("Item");});
 
 	let pockets = [];
 	for (let q = 0; q < finaldata["Items"]["Reference"].length; q++) {
@@ -116,7 +117,7 @@ let createItem = function() {
 	let itemSectionSidebarSidebarUl = document.createElement("ul");
 
 	itemSectionSidebarSidebarMapImage.src = getMedia(true,["Map"],[PATH_Region_Map])
-	itemSectionSidebarSidebarMapImage.setAttribute("usemap","#"+Region.join(" & ")+"-item");
+	itemSectionSidebarSidebarMapImage.setAttribute("usemap","#"+Region.join("_")+"-item");
 
 	itemSectionSidebarSidebarMapZoomIn.setAttribute("name","zoom");
 	itemSectionSidebarSidebarMapZoomOut.setAttribute("name","reset");
@@ -129,8 +130,8 @@ let createItem = function() {
 	itemSectionSidebarSidebarMapPause.setAttribute("name","pause");
 	itemSectionSidebarSidebarMapPauseText.innerText = "⏸︎";
 
-	itemSectionSidebarSidebarMap.setAttribute("name",Region.join(" & ")+"-item");
-	itemSectionSidebarSidebarMap.setAttribute("id",Region.join(" & ")+"-item");
+	itemSectionSidebarSidebarMap.setAttribute("name",Region.join("_")+"-item");
+	itemSectionSidebarSidebarMap.setAttribute("id",Region.join("_")+"-item");
 
 	itemSectionSidebar.appendChild(itemSectionSidebarSidebar);
 	itemSectionSidebarSidebar.appendChild(itemSectionSidebarSidebarMapOuter);
