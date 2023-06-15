@@ -3743,7 +3743,7 @@ function DMGCalcPokStats(base) {
 		}
 
 		for (let i = 0; i < totalPath.length; i++) {
-			let stat = Stats[i];
+			let stat = Stats[i]["Name"];
 			let base = returnData(int,"Base Stats "+stat,"")[0];
 
 			let lvl = levelPath.value;
@@ -4643,11 +4643,12 @@ function DMGSetChange(base) {
 				if (item != undefined) {
 					itemPath.value = item;
 
+				
 					let itd = returnAppArrData(finaldata["Items"]["Description"],"Item",itemPath.value)[0];
 					itd = undDel(itd,{Description:""});
 					itd = itd["Description"];
 					pokItemPath.title = itd;
-
+				
 
 					if (itemPath.value != undefined && itemPath.value != "") {
 						let itoc = getItemIcon(itemPath.value);
@@ -7525,6 +7526,8 @@ function buildDMG(preval) {
                     
                     let statsTemp = [...Stats];
     
+					statsTemp = statsTemp.map(function(item) {return item['Name'];});
+
                     statsTemp.push("Evasion");
                     statsTemp.push("Accuracy");
                     statsTemp.push("Critical");
