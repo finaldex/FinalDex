@@ -208,7 +208,7 @@ body {
     line-height:20vw;
     width:100%;
     background-image:var(--Color_Load_Title);
-	filter:drop-shadow(2px 4px 1px black);
+	
 }
 
 #load h1:first-child {
@@ -242,9 +242,10 @@ body {
 	width:15px;
 	display:inline-block;
 	animation:sk-stretchdelay 1.2s infinite ease;
+	border-radius: 2px;
 }
 #load.hide .load-bar > div {
-	animation:none;
+	animation-iteration-count:1;
 }
 
 
@@ -295,4 +296,6 @@ body {
 .load-bar .load-rect5 {
 	animation-delay:-0.8s;
 }
+
+
 
