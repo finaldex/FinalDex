@@ -132,7 +132,7 @@ function initialize() {
 
 		load();
 
-		console.log("Time to load: "+msToTime(new Date() - timeStart))
+		console.log("Time to load: "+msToTime(new Date() - timeStart))	
 	}
 }
 
