@@ -52,6 +52,7 @@ let createMove = function() {
 	moveSectionSidebar.setAttribute("name","sidebar");
 
 	moveSectionListOptionsSearch.addEventListener("input", function() {search("Move");});
+	moveSectionListOptionsSearch.addEventListener("keyup", function() {search("Move");});
 
     let moveSectionHeaderGame = document.createElement("span");
     let moveSectionHeaderGameImage = document.createElement("img");
