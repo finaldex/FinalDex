@@ -576,10 +576,10 @@ let createData = function(id, i) {
 			let dataSectionHeaderStatsEVSpan = document.createElement("b");
 			dataSectionHeaderStatsEVSpan.setAttribute("type","invert");
 			let dataSectionHeaderStatsEVSpanText = document.createElement("p");
-			dataSectionHeaderStatEV.setAttribute("name", Stats[u].toLowerCase().replace(" ","").replace(".",""));
-			dataSectionHeaderStatEVText.innerText = Stats[u];
+			dataSectionHeaderStatEV.setAttribute("name", Stats[u]["Name"].toLowerCase().replace(" ","").replace(".",""));
+			dataSectionHeaderStatEVText.innerText = Stats[u]["Name"];
 			dataSectionHeaderStatEVText.setAttribute("dataname","value");
-			dataSectionHeaderStatEVValue.setAttribute("name",Stats[u].toLowerCase().replaceAll(".","").replaceAll(" ",""));
+			dataSectionHeaderStatEVValue.setAttribute("name",Stats[u]["Name"].toLowerCase().replaceAll(".","").replaceAll(" ",""));
 			dataSectionHeaderStatsEVSpanText.setAttribute("dataname","value");
 			dataSectionHeaderStatsEVSpan.setAttribute("value","");
 			dataSectionHeaderStatsEVUl.appendChild(dataSectionHeaderStatEV);
@@ -1499,15 +1499,15 @@ function loadData() {
 			let taq;
 			if(y == 0) {
 				arr = finaldata["Pokémon"]["Base Stats"];
-				json = DATA_Pokémon_BaseStats[Stats[q]];
+				json = DATA_Pokémon_BaseStats[Stats[q]["Name"]];
 				taq = basestats;
 			} else if(y == 1) {
 				arr = finaldata["Pokémon"]["Effort Value Yield"];
-				json = DATA_Pokémon_EVYield[Stats[q]];
+				json = DATA_Pokémon_EVYield[Stats[q]["Name"]];
 				taq = evyield;
 			}
 
-			let temp = Stats[q].toLowerCase().replace(" ","").replace(".","");
+			let temp = Stats[q]["Name"].toLowerCase().replace(" ","").replace(".","");
 			for(let u = 0; u < finaldata["Pokémon"]["Reference"].length; u++) {
 				if(finaldata["Pokémon"]["Reference"][u][DATA_Pokémon_Reference["Reference"]] == "true") {
 					if(arr[u][json] != undefined && arr[u][json] != "") {
@@ -1516,9 +1516,9 @@ function loadData() {
 				}
 			}
 			let target = taq.querySelector(':scope li[name='+temp+']').querySelector(':scope *[dataname="value"]');
-			target.innerHTML = returnData(i, baseev[y]+" "+Stats[q],"")[0]+"&nbsp;&nbsp;";
-			target.setAttribute("value", returnData(i, baseev[y]+" "+Stats[q],"")[0]);
-			target.parentElement.style.width = returnData(i, baseev[y]+" "+Stats[q],"")[0] / Math.max.apply(Math, sts) * 100+"%";
+			target.innerHTML = returnData(i, baseev[y]+" "+Stats[q]["Name"],"")[0]+"&nbsp;&nbsp;";
+			target.setAttribute("value", returnData(i, baseev[y]+" "+Stats[q]["Name"],"")[0]);
+			target.parentElement.style.width = returnData(i, baseev[y]+" "+Stats[q]["Name"],"")[0] / Math.max.apply(Math, sts) * 100+"%";
 
 			sts = [];
 		}
@@ -1960,51 +1960,58 @@ function modalData() {
 			}
 		}
 	}
+
+	
+
 	let activeWindow = document.querySelector("#data > div.open");
 	if(activeWindow != null) {
 		activeWindow.classList.remove("open");
 	}
-	if(id != undefined) {
-		let windowCount;
-		let maxWindowCount;
-		let currentWindow;
-		let formSpec;
-		let formFirst;
-		maxWindowCount = 10;
-		windowCount = document.querySelectorAll("#data > div");
-		currentWindow = document.querySelector("#data"+id);
-		if (windowCount.length >= maxWindowCount) {
-			for (let u = 0; u < windowCount.length; u++) {
-				if (windowCount[u].getAttribute("value") != id) {
-					windowCount[u].remove();
-				}
-			}
-			console.log("Cleared some space")
-		}
-		if(currentWindow == null) {
-			createData(id, int);
-		}
 
-        if(int != undefined) {
-            formSpec = document.querySelector("#data > div[value='"+id+"'] section[name='form'] > input[value='"+int+"'");
-            formFirst = document.querySelector("#data > div[value='"+id+"'] section[name='form'] > input:first-child");
-            if(def == false) {
-                if(formSpec != null) {
-                    formSpec.click();
-                }
-            } else if(def == true) {
-                if(formFirst != null) {
-                    formFirst.click();
-                }
-            }
-        }
-
-		currentWindow = document.querySelector("#data > div[value='"+id+"']");
-		if(currentWindow != null) {
-			currentWindow.classList.add("open");
-		}
-		navKeeper(id);
+	if (int == "" || int == undefined || int == null || id == "" || id == undefined || id == null) {
+		return;
 	}
+
+	let windowCount;
+	let maxWindowCount;
+	let currentWindow;
+	let formSpec;
+	let formFirst;
+	maxWindowCount = 10;
+	windowCount = document.querySelectorAll("#data > div");
+	currentWindow = document.querySelector("#data"+id);
+	if (windowCount.length >= maxWindowCount) {
+		for (let u = 0; u < windowCount.length; u++) {
+			if (windowCount[u].getAttribute("value") != id) {
+				windowCount[u].remove();
+			}
+		}
+		console.log("Cleared some space")
+	}
+	if(currentWindow == null) {
+		createData(id, int);
+	}
+
+	if(int != undefined) {
+		formSpec = document.querySelector("#data > div[value='"+id+"'] section[name='form'] > input[value='"+int+"'");
+		formFirst = document.querySelector("#data > div[value='"+id+"'] section[name='form'] > input:first-child");
+		if(def == false) {
+			if(formSpec != null) {
+				formSpec.click();
+			}
+		} else if(def == true) {
+			if(formFirst != null) {
+				formFirst.click();
+			}
+		}
+	}
+
+	currentWindow = document.querySelector("#data > div[value='"+id+"']");
+	if(currentWindow != null) {
+		currentWindow.classList.add("open");
+	}
+	navKeeper(id);
+	
 
 }
 
