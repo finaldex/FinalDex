@@ -100,6 +100,7 @@ let createPokémon = function() {
     navigationSettingsIcon.appendChild(navigationSettingsIconText);
 
     navigationSearchInput.addEventListener("input", function() {search("Pokémon");});
+    navigationSearchInput.addEventListener("keyup", function() {search("Pokémon");});
 
 
     let team = document.createElement("aside");
@@ -139,7 +140,7 @@ let createPokémon = function() {
     teamPartyExportLabel.appendChild(teamPartyExportOl)
     teamPartyExport.addEventListener("click",dropRelPos);
     teamPartyExport.click();
-    let teamPartyExportOpts = ["Import Pokémon","Copy Data Strings","Send to Damage Calculator"];
+    let teamPartyExportOpts = ["Import Pokémon","Open Data Editor","Copy Data Strings","Send to Damage Calculator"];
     for(let e = 0; e < teamPartyExportOpts.length; e++) {
         let teamPartyExportLi = document.createElement("li");
         let teamPartyExportText = document.createElement("small");
@@ -154,12 +155,12 @@ let createPokémon = function() {
 
     function teamPartyExportFunction() {
         let base = findUpTag(this,"SECTION");
-        let tars = base.querySelectorAll(":scope > div:not([name='empty'])");
+        let tars = base.querySelectorAll(":scope > div:not([data-string=''])");
 
         let res = [];
 
         for (let i = 0; i < tars.length; i++) {
-            res.push(getPartyData(tars[i]))
+            res.push(tars[i].getAttribute("data-string"))
         }
 
         
@@ -167,7 +168,7 @@ let createPokémon = function() {
 
         let dataStrings = res.join("\n");
 
-        let val = this.parentElement.getAttribute("name");
+        let val = this.getAttribute("name");
 
         if (val == "Copy Data Strings") {
             if (tars.length == 0) {
@@ -185,7 +186,7 @@ let createPokémon = function() {
                 return;
             }
 
-            let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+            let dmgBox = document.querySelector("#contain div#tool div#dmg *[name='party'] > span[name='team 1']");
 			
 
             if (dmgBox.getAttribute("data-string") == "") {
@@ -215,7 +216,7 @@ let createPokémon = function() {
             }
         }
         else if (val == "Import Pokémon") {
-            let tars = base.querySelectorAll(":scope > div[name='empty']");
+            let tars = base.querySelectorAll(":scope > div[data-string='']");
             if (tars.length == 0) {
                 consoleText("Party is full!");
                 return;
@@ -270,21 +271,17 @@ let createPokémon = function() {
     navigationSettingsIcon.setAttribute("onclick",`let s = document.querySelector('#pokémon > aside[name="settings"]'); s.classList.toggle('open'); this.classList.toggle('open');`);
 
 
+    teamParty.setAttribute("data-state","");
 
 
-
-    let natureTemp = [];
-
-    if (Natures.length > 0) {
-        natureTemp = Natures;
-    }
+   
 
     for (let i = 0; i < 6; i++) {
         let teamDiv = document.createElement("div");
-        let teamSection1 = document.createElement("aside");
-        let teamSection2 = document.createElement("aside");
-        let teamAdd = document.createElement("b");
-        teamAdd.setAttribute("type","invert");
+        
+        let teamAdd = document.createElement("button");
+        let teamAddText = document.createElement("strong");
+        teamAdd.setAttribute("type","scale");
         let teamLeft = document.createElement("span");
         let teamGrab = document.createElement("b");
         let teamPokémon = document.createElement("span");
@@ -301,20 +298,19 @@ let createPokémon = function() {
 
 
         teamDiv.setAttribute("data-string","");
-        teamDiv.setAttribute("name","empty")
-        teamImg.setAttribute("value","");
-        teamImg.setAttribute("title","");
+        teamImg.src = "";
+        teamImg.setAttribute("name","img")
         teamImg.addEventListener("click", modalData);
         teamImg.setAttribute("function","modalData");
 
         teamGrab.innerText = "⋮⋮⋮";
+        teamGrab.setAttribute("name","grab");
         teamStatsButton.setAttribute("type","rotate");
         teamStatsButton.innerText = "⟲";
 
-        teamAdd.innerText = "+";
         teamAdd.classList.add("indicator");
+        teamAddText.innerText = "+";
 
-        teamStatsButton.setAttribute("value","moves");
         teamNickOuter.setAttribute("name","name");
         teamImgOuter.setAttribute("name","pokémon");
 
@@ -322,6 +318,7 @@ let createPokémon = function() {
         teamLevel.setAttribute("type","number");
         teamLevel.setAttribute("min","0");
         teamLevel.setAttribute("max","100");
+        teamLevel.title = "Level";
         teamLevel.setAttribute("placeholder","Lvl.");
         teamNick.setAttribute("type","text");
         teamNick.setAttribute("placeholder","Pokémon");
@@ -344,9 +341,9 @@ let createPokémon = function() {
         teamExit.setAttribute("type","scale");
         teamExitTxt.innerText = "❌";
         teamExitInput.setAttribute("type","checkbox");
-        teamExitInput.setAttribute("name","team-exit-input");
-        teamExitInput.setAttribute("id","team-exit-input");
-        teamExitLabel.setAttribute("for","team-exit-input");
+        teamExitInput.setAttribute("name","team-exit-input-"+i);
+        teamExitInput.setAttribute("id","team-exit-input-"+i);
+        teamExitLabel.setAttribute("for","team-exit-input-"+i);
         teamLeft.appendChild(teamExit)
         teamExit.appendChild(teamExitLabel)
         teamExitLabel.appendChild(teamExitTxt)
@@ -370,21 +367,22 @@ let createPokémon = function() {
 
         teamLevel.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
         teamLevel.addEventListener("change", inputMinMax);
+        teamLevel.addEventListener("change", partySave);
         teamLevel.addEventListener("change", function() {calcPartyStat(this);});
 
         teamNick.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
         teamNick.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
 
+        teamNick.addEventListener("change",partySave);
+
 
         teamParty.appendChild(teamDiv);
-        teamDiv.appendChild(teamSection1);
-        teamDiv.appendChild(teamSection2);
-        teamSection2.appendChild(teamAdd);
-
-        teamSection1.appendChild(teamLeft);
+        teamDiv.appendChild(teamLeft);
         teamLeft.appendChild(teamLevel);
         teamLeft.appendChild(teamGrab);
-        teamSection1.appendChild(teamPokémon);
+        teamDiv.appendChild(teamAdd);
+        teamAdd.appendChild(teamAddText);
+        teamDiv.appendChild(teamPokémon);
 
 
         if (HeldItem == true) {
@@ -395,15 +393,14 @@ let createPokémon = function() {
             let teamItemSelect = document.createElement("select");
             teamItemOuter.appendChild(teamItemSelect);
 
-            teamItemSelect.setAttribute("type","icon");
-
             let teamHeldItemImage = document.createElement("img");
             teamHeldItemImage.src = "";
+            teamHeldItemImage.style.display = "none";
             teamHeldItemImage.setAttribute("name","item");
-            teamHeldItemImage.setAttribute("title","");
             teamImgOuter.appendChild(teamHeldItemImage);
 
-            teamItemSelect.addEventListener("change",selectModify);
+            teamItemSelect.addEventListener("change",function(){let el = this.parentElement.parentElement.querySelector(":scope img[name='item']"); if (this.value != "") {el.style.removeProperty("display")} else {el.style.display='none';}})
+            teamItemSelect.addEventListener("change",partySave);
             teamItemSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
             teamItemSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
             teamItemSelect.addEventListener("change", partyItem);
@@ -443,9 +440,9 @@ let createPokémon = function() {
         teamExport.setAttribute("type","rotate-right");
         teamExportTxt.innerText = "⮜";
         teamExportInput.setAttribute("type","checkbox");
-        teamExportInput.setAttribute("name","team-export-input");
-        teamExportInput.setAttribute("id","team-export-input");
-        teamExportLabel.setAttribute("for","team-export-input");
+        teamExportInput.setAttribute("name","team-export-input-"+i);
+        teamExportInput.setAttribute("id","team-export-input-"+i);
+        teamExportLabel.setAttribute("for","team-export-input-"+i);
         teamLeft.appendChild(teamExport)
         teamExport.appendChild(teamExportLabel)
         teamExportLabel.appendChild(teamExportTxt)
@@ -453,7 +450,7 @@ let createPokémon = function() {
         teamExportLabel.appendChild(teamExportOl)
         teamExport.addEventListener("click",dropRelPos);
         teamExport.click();
-        let teamExportOpts = ["Copy Data String","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
+        let teamExportOpts = ["Copy Data String","Open Data Editor","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
         for(let e = 0; e < teamExportOpts.length; e++) {
             let teamExportLi = document.createElement("li");
             let teamExportText = document.createElement("small");
@@ -469,10 +466,8 @@ let createPokémon = function() {
 
         function teamExportChange() {
             let tar = findUpAtt(this,"data-string");
-            let base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
-       
-            let val = this.parentElement.getAttribute("name");
-            let dataString = getPartyData(tar);
+            let val = this.getAttribute("name");
+            let dataString = tar.getAttribute("data-string");
             let dataStringObj = dataStringToObj(dataString);
 
 
@@ -483,8 +478,13 @@ let createPokémon = function() {
 
             if (int == undefined) {
                 consoleText("An error occured.")
+                console.log("yep")
                 return;
             }
+
+
+            let els = document.querySelectorAll('#pokémon > aside[name="team"] section div[data-string=""]');
+       
 
    
             if (val == "Add Copy to Box") {
@@ -492,9 +492,9 @@ let createPokémon = function() {
                 consoleText("Copy added to Box.");
             }
             else if (val == "Add Copy to Party") {
-                if (base.length > 0) {
-                    createParty(base[0],dataString);
-                    partyShow(base[0]);
+                if (els.length > 0) {
+                    els[0].setAttribute("data-string",dataStringObj);
+                    partyApply(els[0]);
                     consoleText("Copy added to Party.");
                 }
                 else {
@@ -513,8 +513,8 @@ let createPokémon = function() {
                 changePartyForm(tar,tar.querySelector(":scope img[value]").getAttribute("value"));
             }
             else if (val == "Add to Damage Calculator") {
-                let dmgSlots = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > div > span[name='team 1'] > div[data-string]");
-            
+                let dmgSlots = document.querySelectorAll("#contain div#tool div#dmg *[name='battle'] span[name='team 1'] > div[data-string]");
+
                 let check = false;
                 for (let t = 0; t < dmgSlots.length; t++) {
                     let ds = dmgSlots[t].getAttribute("data-string");
@@ -541,7 +541,7 @@ let createPokémon = function() {
                 else {
                     let ask2 = confirm("Do you instead want to add it to the Party?");
                     if (ask2) {
-                        let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+                        let dmgBox = document.querySelector("#contain div#tool div#dmg *[name='party'] > span[name='team 1']");
                         DMGPartyCreate(dmgBox,dataString);
                         SwitchTab("Tools","Damage Calculator");
                     }
@@ -565,8 +565,8 @@ let createPokémon = function() {
         function teamExitChange() {
             let tar = findUpAtt(this,"data-string");
           
-            let val = this.parentElement.getAttribute("name");
-            let dataString = getPartyData(tar);
+            let val = this.getAttribute("name");
+            let dataString = tar.getAttribute("data-string");
             let dataStringObj = dataStringToObj(dataString);
 
             let pok = dataStringObj["pok"];
@@ -580,245 +580,221 @@ let createPokémon = function() {
             if (val == "Delete") {
                 let ask = confirm("The Pokémon's data will not be saved.\nDo you want to continue?");
                 if (ask) {
-                    partyHide(tar);
-                    partyDefault(tar);
+                    clearParty(tar);
                     consoleText("Pokémon deleted.");
                 }
             }
             else if (val == "Send to Box") {
                 consoleText("Sent "+pok+" to Box.");
                 storeInBox(dataString);
-                partyHide(tar);
-                partyDefault(tar);
+                clearParty(tar);
             }
         }
     
-        let dataOptions = ["Moves","Stats","Additional"];
-
-        for (let u = 0; u < dataOptions.length; u++) {
-            let teamData = document.createElement("span");
+  
+        let partyPokData = document.createElement("span");
+        partyPokData.setAttribute("name","data");
+        teamDiv.appendChild(partyPokData)
      
-            teamData.setAttribute("name",dataOptions[u].toLowerCase());
-            
-            teamData.classList.add("scroll");
-            teamSection1.appendChild(teamData);
-
-            for (let y = 0; y < 3; y++) {
-                let teamDataInner = document.createElement("span");
-                teamData.appendChild(teamDataInner);
-
-                if (y == 2 && dataOptions[u] == "Stats" && natureTemp.length > 0) {
-                    teamDataInner.setAttribute("name","nature");
-                }
-                if (y == 2 && dataOptions[u] == "Moves" && Ability.length > 0) {
-                    teamDataInner.setAttribute("name","ability");
-                }
-                if (y == 2 && dataOptions[u] == "Stats" && natureTemp.length < 1) {
-                    teamDataInner.remove();
-                }
-                if (y == 2 && dataOptions[u] == "Moves" && Ability.length < 1) {
-                    teamDataInner.remove();
-                }
-                if (y == 2 && dataOptions[u] == "Additional") {
-                    teamDataInner.remove();
-                }
+        let partyPokMoves = document.createElement("span");
+        let partyPokMovesTitle = document.createElement("span");
+        let partyPokMovesTitleText = document.createElement("small");
+        partyPokMovesTitleText.innerText = "Moves";
+        partyPokMoves.setAttribute("name","moves");
+        partyPokMoves.classList.add("scroll");
+        partyPokData.appendChild(partyPokMoves);
+        partyPokMoves.appendChild(partyPokMovesTitle);
+        partyPokMovesTitle.appendChild(partyPokMovesTitleText);
 
 
-                if (y == 0) {
-                    let teamDataTitle = document.createElement("small");
-                    teamDataTitle.innerText = dataOptions[u];
-                    teamDataInner.appendChild(teamDataTitle);
-                }
+        let partyPokMovesMove = document.createElement("span");
+        partyPokMoves.appendChild(partyPokMovesMove);
 
-                else if (y == 1 && dataOptions[u] == "Stats") {
-                    
-                    
-               
-                    for (let r = 0; r < 4; r++) {
-                        let teamDataStats = document.createElement("span");
-                        teamDataInner.appendChild(teamDataStats);
-                        for (let q = 0; q < Stats.length; q++) {
-                            if (Stats[q] != "Total") {
-                                let teamDataInput = document.createElement("input");
-                                teamDataInput.setAttribute("type","number");
+        for (let p = 0; p < 4; p++) {
+            let partyPokMovesMoveSelect = document.createElement("select");
+            partyPokMovesMove.appendChild(partyPokMovesMoveSelect);
+            partyPokMovesMoveSelect.addEventListener("change",partySave);
+            partyPokMovesMoveSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+            partyPokMovesMoveSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+        }
 
-                                if (r == 1) {
-                                    teamDataStats.setAttribute("name","iv");
-
-                                    teamDataInput.setAttribute("placeholder","IV");
-                                    teamDataInput.setAttribute("title","Individual Value"+"\n"+Stats[q]);
-                                    if (Generation >= 1 && Generation <= 2) {
-                                        teamDataInput.setAttribute("min","0");
-                                        teamDataInput.setAttribute("max","15");
-                                    }
-                                    else if (Generation >= 3) {
-                                        teamDataInput.setAttribute("min","0");
-                                        teamDataInput.setAttribute("max","31");
-                                    }
-                                    teamDataInput.addEventListener("change", inputMinMax);
-                                }
-                                else if (r == 2) {
-                                    teamDataStats.setAttribute("name","ev");
-
-                                    if (Generation >= 1 && Generation <= 2) {
-                                        teamDataInput.setAttribute("min","0");
-                                        teamDataInput.setAttribute("max","255");
-                                        teamDataInput.setAttribute("placeholder","EV");
-                                        teamDataInput.setAttribute("title","Effort Value"+"\n"+Stats[q]);
-                                    }
-                                    else if (GameID >= 31 && GameID <= 32) {
-                                        teamDataInput.setAttribute("min","0");
-                                        teamDataInput.setAttribute("max","200");
-                                        teamDataInput.setAttribute("placeholder","AV");
-                                        teamDataInput.setAttribute("title","Awakening Value"+"\n"+Stats[q]);
-                                    }
-                                    else if (Generation >= 3) {
-                                        teamDataInput.setAttribute("min","0");
-                                        teamDataInput.setAttribute("max","255");
-                                        teamDataInput.setAttribute("placeholder","EV");
-                                        teamDataInput.setAttribute("title","Effort Value"+"\n"+Stats[q]);
-                                        teamDataInput.addEventListener("blur", evInputMax);
-                                        teamDataInput.addEventListener("focus", evInputMax);
-                                        teamDataInput.addEventListener("change", evInputMax);
-                                    }
-                                    teamDataInput.addEventListener("change", inputMinMax);
-                                }
-                                else {
-                                    teamDataInput.setAttribute("min","0");
-                                    teamDataInput.setAttribute("max","0");
-                                    teamDataInput.setAttribute("placeholder",Stats[q]+":")
-                                    teamDataInput.addEventListener("change", inputMinMax);
-                                    teamDataInput.setAttribute("title",Stats[q]);
-                                    teamDataInput.setAttribute("disabled","");
-                                }
-                              
-                                teamDataInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                                teamDataInput.addEventListener("change", function() {calcPartyStat(this);});
-                                teamDataStats.appendChild(teamDataInput);
-                            }
-                        }
-                    }
-                }
-
-                else if (y == 1 && dataOptions[u] == "Additional") {
-                    let teamDataAddOuter = document.createElement("span");
-                    teamDataInner.appendChild(teamDataAddOuter);
-                    
-                    if (Friendship == true) {
-                        let teamDataAdd = document.createElement("label");
-                        let teamDataAddText = document.createElement("small");
-                        let teamDataAddInput = document.createElement("input");
-                        teamDataAdd.setAttribute("name","friendship");
-                        teamDataAddText.innerText = "Friendship: ";
-                        teamDataAddInput.setAttribute("type","number");
-                        teamDataAddInput.setAttribute("min","0");
-                        teamDataAddInput.setAttribute("max","255");
-                        teamDataAddInput.setAttribute("name","small");
-                        teamDataAddOuter.appendChild(teamDataAdd);
-                        teamDataAdd.appendChild(teamDataAddText);
-                        teamDataAdd.appendChild(teamDataAddInput);
-                        teamDataAddInput.addEventListener("change", inputMinMax);
-                        teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                        teamDataAddInput.addEventListener("change",function() {calcPartyStat(this);});
-                    }
-
-                    let met = ["Location","Level","Date"];
-                    for(let r = 0; r < met.length; r++) {
-                        let teamDataAdd = document.createElement("label");
-                        let teamDataAddText = document.createElement("small");
-                        teamDataAdd.setAttribute("name",met[r].toLowerCase());
-                        teamDataAddText.innerText = met[r]+" Met: ";
-                        teamDataAddOuter.appendChild(teamDataAdd);
-                        teamDataAdd.appendChild(teamDataAddText)
-                        if (met[r] == "Location") {
-                            let teamDataAddInput = document.createElement("select");
-                            teamDataAddInput.setAttribute("name","small");
-                            teamDataAdd.appendChild(teamDataAddInput)
-                            teamDataAddInput.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
-                            teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                            teamDataAddInput.addEventListener("change", selectModify);
-
-                            let teamDataAddLabel = document.createElement("option");
-                            teamDataAddLabel.innerText = "";
-                            teamDataAddLabel.value = "";
-                            teamDataAddInput.appendChild(teamDataAddLabel)
-
-                            for(let t = 0; t < finaldata["Locations"]["Reference"].length; t++) {
-                                if (finaldata["Locations"]["Reference"][t]["Location"] != undefined) {
-                                    let teamDataAddLabel = document.createElement("option");
-                                    teamDataAddLabel.innerText = finaldata["Locations"]["Reference"][t]["Location"];
-                                    teamDataAddLabel.value = finaldata["Locations"]["Reference"][t]["Location"];
-                                    teamDataAddInput.appendChild(teamDataAddLabel)
-                                }
-                            }
-                        }
-                        else if (met[r] == "Level") {
-                            let teamDataAddInput = document.createElement("input");
-                            teamDataAddInput.setAttribute("type","number");
-                            teamDataAddInput.setAttribute("min","0");
-                            teamDataAddInput.setAttribute("max","100");
-                            teamDataAddInput.setAttribute("name","small");
-                            teamDataAdd.appendChild(teamDataAddInput)
-                            teamDataAddInput.addEventListener("change", inputMinMax);
-                            teamDataAddInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                        }
-                        else if (met[r] == "Date") {
-                            let teamDataAddInput = document.createElement("input");
-                            teamDataAddInput.setAttribute("type","date");
-                            teamDataAddInput.setAttribute("name","small");
-                            teamDataAdd.appendChild(teamDataAddInput)
-                            //teamDataAddInput.addEventListener("change", function() {consoleText("now1");this.blur();});   
-                        }
-                    }
-
- 
-                }
-
-                else if (y == 1 && dataOptions[u] == "Moves") {
-                    for (let p = 0; p < 4; p++) {
-                        let teamDataSelectOuter = document.createElement("span");
-                        let teamDataSelect = document.createElement("select");
-                        teamDataInner.appendChild(teamDataSelectOuter);
-                        teamDataSelectOuter.appendChild(teamDataSelect);
-                        teamDataSelect.addEventListener("change",selectModify);
-                        teamDataSelect.addEventListener("focus",selectModify);
-                        teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
-                        teamDataSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                    }
-                }
-                else if (y == 2 && dataOptions[u] == "Moves") {
-                    if (Ability.length > 0) {
-                        let teamDataSelect = document.createElement("select");
-                        teamDataInner.appendChild(teamDataSelect);
-                        teamDataSelect.addEventListener("change",selectModify);
-                        teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
-                        teamDataSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                    }
-                }
-
-                if (y == 2 && u >= 1 && u <= 2) {
-                    if (natureTemp.length > 0) {
-                        let teamDataSelect = document.createElement("select");
-                        teamDataInner.appendChild(teamDataSelect);
-                        teamDataSelect.addEventListener("change",selectModify);
-                        teamDataSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
-                        teamDataSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
-                        teamDataSelect.addEventListener("change", partyNature);
-                        teamDataSelect.addEventListener("change", function() {calcPartyStat(this);});
-                        for (let q = 0; q < natureTemp.length; q++) {
-                            let teamDataOption = document.createElement("option");
-                            teamDataOption.setAttribute("value",natureTemp[q]);
-                            teamDataOption.innerText = natureTemp[q];
-                            teamDataSelect.appendChild(teamDataOption);
-                        }
-                    }
-                }
-            }
+        if (Ability.length > 0) {
+            let partyPokMovesAbility = document.createElement("span");
+            let partyPokMovesAbilitySelect = document.createElement("select");
+            partyPokMovesAbility.setAttribute("name","ability");
+            partyPokMoves.appendChild(partyPokMovesAbility);
+            partyPokMovesAbility.appendChild(partyPokMovesAbilitySelect);
+            partyPokMovesAbilitySelect.addEventListener("change",partySave);
+            partyPokMovesAbilitySelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+            partyPokMovesAbilitySelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
         }
 
 
+        let partyPokStats = document.createElement("span");
+        let partyPokStatsTitle = document.createElement("span");
+        let partyPokStatsTitleText = document.createElement("small");
+        partyPokStatsTitleText.innerText = "Stats";
+        partyPokStats.setAttribute("name","stats");
+        partyPokStats.classList.add("scroll");
+        partyPokData.appendChild(partyPokStats);
+        partyPokStats.appendChild(partyPokStatsTitle);
+        partyPokStatsTitle.appendChild(partyPokStatsTitleText);
+
+
+        let partyPokStatsWrap = document.createElement("span");
+        partyPokStatsWrap.setAttribute("name","nums")
+        partyPokStats.appendChild(partyPokStatsWrap)
+
+
         
-        teamSection1.appendChild(teamRight);
+   
+  
+
+        let headerStats = [...(Stats)]
+
+        let partyPokStatsHeaderInner = document.createElement("span");
+        partyPokStatsWrap.appendChild(partyPokStatsHeaderInner);
+        for (let q = 0; q < headerStats.length; q++) {
+            let partyPokStatsHeaderText = document.createElement("small");
+            partyPokStatsHeaderText.innerText = headerStats[q]["Name"];
+            partyPokStatsHeaderInner.appendChild(partyPokStatsHeaderText)
+        }
+
+        let ivStats = [...(Stats)]
+
+        let partyPokStatsIVInner = document.createElement("span");
+        partyPokStatsIVInner.setAttribute("name","iv");
+        partyPokStatsWrap.appendChild(partyPokStatsIVInner);
+        for (let q = 0; q < ivStats.length; q++) {
+            let partyPokStatsIVInput = document.createElement("input");
+            partyPokStatsIVInput.setAttribute("type","number");
+            partyPokStatsIVInput.setAttribute("name","iv");
+
+            partyPokStatsIVInput.setAttribute("title","Individual Value"+"\n"+ivStats[q]["Name"]);
+            if (Generation >= 1 && Generation <= 2) {
+                partyPokStatsIVInput.setAttribute("min","0");
+                partyPokStatsIVInput.setAttribute("max","15");
+            }
+            else if (Generation >= 3) {
+                partyPokStatsIVInput.setAttribute("min","0");
+                partyPokStatsIVInput.setAttribute("max","31");
+            }
+            partyPokStatsIVInput.addEventListener("change", inputMinMax);
+
+            
+            partyPokStatsIVInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+            partyPokStatsIVInput.addEventListener("change", function() {calcPartyStat(this);});
+            partyPokStatsIVInput.addEventListener("change",partySave);
+            partyPokStatsIVInner.appendChild(partyPokStatsIVInput);
+
+            partyPokStatsIVInput.setAttribute("placeholder","IV")
+            partyPokStatsIVInput.setAttribute("onblur","this.placeholder = 'IV'");
+            partyPokStatsIVInput.setAttribute("onfocus","this.placeholder = ''");
+        }
+
+
+
+
+
+        let evStats = [...(Stats)]
+   
+        let partyPokStatsEVInner = document.createElement("span");
+        partyPokStatsEVInner.setAttribute("name","ev");
+        partyPokStatsWrap.appendChild(partyPokStatsEVInner);
+        for (let q = 0; q < evStats.length; q++) {
+            let partyPokStatsEVInput = document.createElement("input");
+            partyPokStatsEVInput.setAttribute("type","number");
+
+            if (Generation >= 1 && Generation <= 2) {
+                partyPokStatsEVInput.setAttribute("min","0");
+                partyPokStatsEVInput.setAttribute("max","255");
+                partyPokStatsEVInput.setAttribute("title","Effort Value"+"\n"+evStats[q]["Name"]);
+
+                partyPokStatsEVInput.setAttribute("placeholder","EV")
+                partyPokStatsEVInput.setAttribute("onblur","this.placeholder = 'EV'");
+                partyPokStatsEVInput.setAttribute("onfocus","this.placeholder = ''");
+            }
+            else if (GameID >= 31 && GameID <= 32) {
+                partyPokStatsEVInput.setAttribute("min","0");
+                partyPokStatsEVInput.setAttribute("max","200");
+                partyPokStatsEVInput.setAttribute("title","Awakening Value"+"\n"+evStats[q]["Name"]);
+
+                partyPokStatsEVInput.setAttribute("placeholder","AV")
+                partyPokStatsEVInput.setAttribute("onblur","this.placeholder = 'AV'");
+                partyPokStatsEVInput.setAttribute("onfocus","this.placeholder = ''");
+            }
+            else if (Generation >= 3) {
+                partyPokStatsEVInput.setAttribute("min","0");
+                partyPokStatsEVInput.setAttribute("max","255");
+                partyPokStatsEVInput.setAttribute("title","Effort Value"+"\n"+evStats[q]["Name"]);
+                partyPokStatsEVInput.addEventListener("blur", evInputMax);
+                partyPokStatsEVInput.addEventListener("focus", evInputMax);
+                partyPokStatsEVInput.addEventListener("change", evInputMax);
+
+                partyPokStatsEVInput.setAttribute("placeholder","EV")
+                partyPokStatsEVInput.setAttribute("onblur","this.placeholder = 'EV'");
+                partyPokStatsEVInput.setAttribute("onfocus","this.placeholder = ''");
+            }
+            partyPokStatsEVInput.addEventListener("change", inputMinMax);
+        
+            partyPokStatsEVInput.addEventListener("change",partySave);
+            partyPokStatsEVInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+            partyPokStatsEVInput.addEventListener("change", function() {calcPartyStat(this);});
+            partyPokStatsEVInner.appendChild(partyPokStatsEVInput);
+
+        
+        }
+
+
+
+        let totalStats = [...(Stats)]
+
+        let partyPokStatsTotalInner = document.createElement("span");
+        partyPokStatsTotalInner.setAttribute("name","total");
+        partyPokStatsWrap.appendChild(partyPokStatsTotalInner);
+        for (let q = 0; q < totalStats.length; q++) {
+            let partyPokStatsTotalInput = document.createElement("input");
+            partyPokStatsTotalInput.setAttribute("type","number");
+            partyPokStatsTotalInput.setAttribute("min","0");
+            partyPokStatsTotalInput.setAttribute("max","0");
+            partyPokStatsTotalInput.setAttribute("placeholder","0")
+            partyPokStatsTotalInput.addEventListener("change", inputMinMax);
+            partyPokStatsTotalInput.setAttribute("title",totalStats[q]["Name"]);
+            partyPokStatsTotalInput.setAttribute("disabled","");
+            
+            partyPokStatsTotalInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+            partyPokStatsTotalInput.addEventListener("change", function() {calcPartyStat(this);});
+            partyPokStatsTotalInner.appendChild(partyPokStatsTotalInput);
+        }
+        
+
+
+        if (Natures.length > 0) {
+            let partyPokStatsNatures = document.createElement("span");
+            let partyPokStatsNaturesSelect = document.createElement("select");
+            partyPokStatsNatures.setAttribute("name","nature");
+            partyPokStats.appendChild(partyPokStatsNatures);
+            partyPokStatsNatures.appendChild(partyPokStatsNaturesSelect);
+            partyPokStatsNaturesSelect.addEventListener("change",partySave);
+            partyPokStatsNaturesSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
+            partyPokStatsNaturesSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+            partyPokStatsNaturesSelect.addEventListener("change", function() {calcPartyStat(this);});
+            for (let q = 0; q < Natures.length; q++) {
+                let partyPokStatsNature = document.createElement("option");
+                partyPokStatsNature.innerText = Natures[q];
+                partyPokStatsNaturesSelect.appendChild(partyPokStatsNature);
+            }
+        }
+   
+
+
+
+
+
+
+
+        
+        teamDiv.appendChild(teamRight);
         teamRight.appendChild(teamStatsButton);
 
         if (Gender == true) {
@@ -828,12 +804,14 @@ let createPokémon = function() {
             teamGender.setAttribute("title","Gender");
             teamGender.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
             teamGender.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
-            teamGender.addEventListener("change",selectModify);
+            teamGender.addEventListener("change",partySave);
+            teamGender.addEventListener("input",function(){this.name = this.value;})
+            
         }
 
         teamRight.appendChild(teamExport);
 
-        teamStatsButton.addEventListener("click", partyDataSwitchAll);
+        teamStatsButton.addEventListener("click", partyDataSwitch);
 
 
 
@@ -895,12 +873,13 @@ let createPokémon = function() {
         let base = findUpTag(this,"SECTION");
         let tars = base.querySelectorAll(":scope ul li");
 
+        let res = [];
+
         if (tars.length == 0) {
             consoleText("No Pokémon in Box!");
             return;
         }
         else {
-            let res = [];
             for (let i = 0; i < tars.length; i++) {
                 res.push(getBoxData(tars[i]))
             }
@@ -909,7 +888,7 @@ let createPokémon = function() {
 
         let dataStrings = res.join("\n");
 
-        let val = this.parentElement.getAttribute("name");
+        let val = this.getAttribute("name");
 
         if (val == "Copy Data Strings") {
             navigator.clipboard.writeText(dataStrings);
@@ -917,7 +896,8 @@ let createPokémon = function() {
             consoleText("Copied!");
         }
         else if (val == "Send to Damage Calculator") {
-            let dmgBox = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+            let dmgBox = document.querySelector("#contain div#tool div#dmg *[name='party'] > span[name='team 1']");
+
 				
             if (dmgBox.getAttribute("data-string") == "") {
                 dmgBox.setAttribute("data-row","1");
@@ -1027,26 +1007,40 @@ let createPokémon = function() {
             }
         });
 
-        $('#pokémon > aside section:not([name]) > label[for="partybox1"] .indicator').droppable({
+        $('#pokémon > aside section:not([name]) > label .indicator').droppable({
             drop: function(e, ui) {
-                let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
-                if (saveddrag != undefined) {
-                    if (tar.length > 0) {
-                        if (data.length > 1) {
-                            data = data.join("|")
-                        }
-                        else {
-                            data = data[0];
-                        }
-                        deleteBox(saveddrag);
-                        createParty(tar[0],data);
-                        partyShow(tar[0]);
-                        consoleText("Sent "+saveddrag.getAttribute("data-pok")+" to Party.")
+
+                let helper = ui.helper["context"];
+                let data = helper.getAttribute("data-string");
+                data = undDel(data,"pok:"+getPokémonName(helper.id))
+
+
+
+                let tar = e.target.firstChild.innerText;
+
+                if (tar == "Party") {
+                    let partys = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[data-string=""]');
+                    if (partys.length > 0) {
+    
+                        //deleteBox(saveddrag);
+
+                        partys[0].setAttribute("data-string",data);
+
+                        partyApply(partys[0]);
+  
+                        consoleText("Sent "+dataStringToObj(data)["pok"]+" to Party.")
                     }
                     else {
                         consoleText("Party is full!");
                     }
                 }
+                else if (tar == "Box") {
+                    storeInBox(data);
+                    consoleText("Added "+dataStringToObj(data)["pok"]+" to the Box.")
+                }
+            
+
+            
             }
         });
 
@@ -1111,7 +1105,7 @@ let createPokémon = function() {
 
     $("body").mousemove(function (e) {
         if (boxDrag == true) {
-            let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
+            let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[data-string=""]');
             if (tar.length > 0) {
                 if (e.target === blinktar) {
                     blinktar.firstElementChild.classList.add("hover");
@@ -1134,7 +1128,7 @@ let createPokémon = function() {
         $('#pokémon > aside section[name="party"]').sortable({
             stop: function(e,ui) {
             },
-            handle:"aside > span:first-child > b:last-child",
+            handle:"*[name='grab']",
             cursor:"grabbing",
             axis: "y",
             scroll: false,
@@ -1142,7 +1136,7 @@ let createPokémon = function() {
         });
     });
     
-
+/*
     let PartyPlus = document.querySelectorAll('#pokémon aside[name="team"] section[name="party"] aside > b');
     let PartyBox = document.querySelectorAll('#pokémon > aside[name="team"] section:not([name]) > label');
 
@@ -1155,7 +1149,7 @@ let createPokémon = function() {
             PPPB[u][q].addEventListener("drop",dragDrop);
         }
     }
-
+*/
 
 
 	let content = document.createElement("div");
@@ -1531,6 +1525,21 @@ function dexSwitch() {
 
     searchFilter(document.querySelector("#pokémon nav ul li[name='search'] input"),document.querySelector("#pokémon > div ul"),"Remove");
 	count();
+
+    $(document.querySelectorAll("#pokémon > div > ul > li")).draggable({
+        start:function(e,ui){
+            document.body.classList.add("dragging");
+        },
+        stop:function(e,ui){
+            document.body.classList.remove("dragging");
+        },
+        cursor:"grabbing",
+        revert:true,
+        helper:"clone",
+        appendTo:"body",
+        cursor:"grabbing",
+        scroll: false,
+    });
 }
 
 
@@ -1561,6 +1570,8 @@ function createContain(condition) {
 
 
   
+
+
 	for(let i = 0; i < finaldata["Pokémon"]["Reference"].length; i++) {
         let conditions = [];
         if (condition != undefined) {
@@ -1600,6 +1611,7 @@ function createContain(condition) {
                     let contentMainDown = document.createElement("div");
                     let contentName = document.createElement("p");
                     contentDiv.setAttribute("id",i);
+                    contentDiv.classList.add("dex-item")
                     contentNationalID.setAttribute("name","national");
 
                     let evo = getEvolutionFamily(i).map(function(v) {return v["Pokémon"];});
@@ -1730,11 +1742,11 @@ function createContain(condition) {
                     let statsevS = ["base","ev"];
                     for(let q = 0; q < statsevL.length; q++) {
                         for(let u = 0; u < Stats.length; u++) {
-                            let dat = returnData(i, statsevL[q]+" "+Stats[u], "lower,undefined");
+                            let dat = returnData(i, statsevL[q]+" "+Stats[u]["Name"], "lower,undefined");
                             if (dat == "") {
                                 dat = "none";
                             }
-                            contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u].replaceAll(".","").replaceAll(" ","").toLowerCase(), dat);
+                            contentDiv.setAttribute("data-search-"+statsevS[q]+Stats[u]["Name"].replaceAll(".","").replaceAll(" ","").toLowerCase(), dat);
                         }
                     }
 
@@ -1776,8 +1788,7 @@ function createContain(condition) {
                     contentInput.addEventListener("change",function() {memory("Save","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));});
                     contentInput.addEventListener("change", count);
 
-                    contentImg.addEventListener("dragstart",function(){document.body.classList.add("dragging");})
-                    contentImg.addEventListener("dragend",function(){document.body.classList.remove("dragging");})
+      
 
                     let Pokédex = Object.keys(DATA_Pokémon_PokédexID)
 
@@ -1812,8 +1823,10 @@ function createContain(condition) {
                 }
             }
         }
+    
         conditions = [];
 	}
+
 
     document.querySelector("#pokémon nav li[name='search'] input").title = searchOptionsTitle(document.querySelector("#pokémon > div ul"));
 
@@ -1862,6 +1875,8 @@ function variantSelector() {
 
     createContain(tempStr);
 
+
+
     memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
     memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
     memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select')]);
@@ -1871,6 +1886,10 @@ function variantSelector() {
     resizeDiv();
     dexSwitch();
 
+
+
+
+
     document.querySelector("#pokémon nav li[name='search'] input").value = "";
 
 
@@ -1879,6 +1898,8 @@ function variantSelector() {
     }
 
     variantIteration = variantIteration + 1;
+
+
 
 
 
@@ -2156,87 +2177,34 @@ function onlyOneInput(inputs,input) {
 }
 
 
-function partyDataSwitchAll() {
-
-
-    let base = document.querySelectorAll('#pokémon aside[name="team"] > section[name="party"] > div');
-
-
-    for (u = 0; u < base.length; u++) {
-
-        let base2 = base[u].querySelectorAll(':scope > aside > span[name]');
-        let base3 = base[u].querySelector(':scope > aside > span:last-child figure');
-
-        let val = base3.getAttribute("value");
-
-  
-
-        let tempArr = ["moves","stats","additional",""];
-        for (i = 0; i < tempArr.length; i++) {
-            let base4 = base[u].querySelector(':scope > aside > span[name="'+tempArr[i]+'"]');
-  
-            if (val == "") {
-                for (q = 0; q < base2.length; q++) {
-                    base2[q].classList.remove("show");
-                    base2[q].classList.remove("showstart");
-                    base2[q].classList.remove("showmiddle");
-                    base2[q].classList.remove("showend");
-                }
-
-                base[u].querySelector(':scope > aside > span[name="'+tempArr[tempArr.length - 2]+'"]').classList.add("showend");
-    
-                base3.setAttribute("value",base2[0].getAttribute("name"));
-                break;
-            }
-            if (val == tempArr[i]) {
-                for (q = 0; q < base2.length; q++) {
-                    base2[q].classList.remove("show");
-                    base2[q].classList.remove("showstart");
-                    base2[q].classList.remove("showmiddle");
-                    base2[q].classList.remove("showend");
-                }
-          
-                base4.classList.add("show");
-
-                if (tempArr[i] == tempArr[0]) {
-                    base4.classList.add("showstart");
-                }
-                if (tempArr[i] != tempArr[0]) {
-                    base4.classList.add("showmiddle");
-                }
-  
-                
-                if (val = base4.nextElementSibling.getAttribute("name") != null) {
-                    base3.setAttribute("value",base4.nextElementSibling.getAttribute("name"));
-                }
-                else {
-                    base3.setAttribute("value","");
-                }
-                break;
-            }
-        }
-       
-    }
-}
-
-
 function partyDataSwitch() {
 
-    let dataAll = this.parentElement.parentElement.querySelectorAll(':scope > span[name]');
-    for (q = 0; q < dataAll.length; q++) {
-        dataAll[q].style.display = "none";
+    let tar = findUpAtt(this,"data-string");
+    let els = tar.querySelectorAll(":scope > *[name='data'] > *[name]")
+    let check = false;
+
+    tar = tar.parentElement;
+
+    els = Array.prototype.slice.call(els)
+    for (let i = 0; i < els.length; i++) {
+        els[i] = els[i].getAttribute("name");
+    }
+    els.push("");
+    els = els.concat(els)
+
+    for (let i = 0; i < els.length; i++) {
+        let state = els[i];
+
+        if (check) {
+            tar.setAttribute("data-state",state);
+            break;
+        }
+
+        if (state == tar.getAttribute("data-state")) {
+            check = true;
+        }
     }
 
-    let data = this.parentElement.parentElement.querySelector(':scope > span[name="'+this.value+'"]');
-    data.style.display = "flex";
-
-    if (this.value = data.nextElementSibling.getAttribute("name") != null) {
-        this.value = data.nextElementSibling.getAttribute("name");
-
-    }
-    else {
-        this.value = data.parentElement.querySelectorAll(":scope > span[name]")[0].getAttribute("name");
-    }
 }
 
 
@@ -2244,112 +2212,53 @@ function partyDataSwitch() {
 
 
 
-function partyItem() {
 
-    let base = this.parentElement.parentElement.parentElement.parentElement;
-    let item = base.querySelector(':scope span[name="pokémon"] img:first-child');
+
+function partyItem(base) {
+
+    if (base.tagName == undefined) {
+        base = findUpAtt(this,"data-string")
+    }
+    let item = base.querySelector(':scope img[name="item"]');
+    let sel = base.querySelector(':scope *[name="item"] select');
 
     
 
-    item.src = getMedia(true,[this.name],[PATH_Item_Bag]);
-    item.title = this.value;
+    item.src = getMedia(true,[sel.value],[PATH_Item_Bag]);
+    item.title = sel.value;
 
 
-    if (this.value == "Item") {
+    if (sel.value == "Item") {
         item.style.display = "none";
     }
     else {
-        item.style.display = "unset";
+        item.style.removeProperty("display");
     }
 }
 
 
-function partyDefault(base) {
+function clearParty(base) {
+
 
     let inputs = base.querySelectorAll(':scope input');
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = "";
-        if (inputs[i].parentElement.getAttribute("name") == "Date") {
-            inputs[i].style.color = "transparent";
-        }
     }
 
     let selects = base.querySelectorAll(':scope select');
     for (let i = 0; i < selects.length; i++) {
-        if (selects[i].querySelector(":scope > option:first-child") != undefined) {
-            selects[i].value = selects[i].querySelector(":scope > option:first-child").value;
+        if (selects[i].firstChild != undefined) {
+            selects[i].value = selects[i].firstChild.innerText;
         }
         else {
             selects[i].value = "";
         }
-
-        if (selects[i].parentElement.getAttribute("name") == "Ability") {
-            selects[i].title = "";
-            selects[i].setAttribute("name","Primary");
-        }
     }
-    let options = base.querySelectorAll(':scope option');
-    for (let i = 0; i < options.length; i++) {
-        options[i].removeAttribute("disabled");
+    let imgs = base.querySelectorAll(':scope img');
+    for (let i = 0; i < imgs.length; i++) {
+        imgs[i].src = "";
     }
-
-
-
-    if (HeldItem == true) {
-        let held = base.querySelector(":scope img:not([value])");
-        held.src = "";
-        held.style.display = "none";
-
-        let options = base.querySelectorAll(':scope span[name="item"] select option');
-        for (let i = 0; i < options.length; i++) {
-            options[i].remove();
-        }
-    }
-
-    if (Gender == true) {
-        let gender = base.querySelector(':scope > aside > span:last-child > select:nth-child(2)')
-        let genders = gender.querySelectorAll(':scope > option');
-
-        gender.removeAttribute("name");
-        for (let u = 0; u < genders.length; u++) {
-            genders[u].remove();
-        }
-    }
-
-
-    let moves = base.querySelectorAll(':scope > aside span[name="moves"] span:nth-child(2) select')
-    for (let u = 0; u < moves.length; u++) {
-        moves[u].removeAttribute("name");
-        moves[u].style.fontStyle = "italic";
-        let movesOptions = moves[u].querySelectorAll(":scope option");
-        for (let q = 0; q < movesOptions.length; q++) {
-            movesOptions[q].remove();
-        }
-    }
-
-    let background = base.querySelector(":scope > aside:first-child");
-    let pok = base.querySelector(":scope img[value]");
-    let name = base.querySelector(':scope span[name="name"] input');
-
-    background.style.background = "";
-    pok.src = "";
-    pok.title = "";
-    pok.setAttribute("value","");
-
-    name.setAttribute("placeholder","");
-
-    if (Ability.length > 0) {
-        let ability = base.querySelector(':scope span[name="moves"] > span:last-child select');
-        let abilities = ability.querySelectorAll(':scope option');
-        for (let q = 0; q < abilities.length; q++) {
-            abilities[q].remove();
-        }
-    }
-
-    if (Natures.length > 0) {
-        let baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
-        baseStats.removeAttribute("name");
-    }
+    base.setAttribute("data-string","");
 
 }
 
@@ -2381,7 +2290,7 @@ function dragStart(e) {
 
 function dragEnter(e) {
     if (e.target.innerText == "Party") {
-        let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[name="empty"]');
+        let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[data-string=""]');
         if (tar.length > 0) {
             e.target.classList.add("hover");
         }
@@ -2417,7 +2326,7 @@ function dragEnd(e) {
 
     
 }
-
+/*
 function dragDrop(e) {
 
     let base = document.querySelector("#pokémon aside[name='team']")
@@ -2427,13 +2336,12 @@ function dragDrop(e) {
         hov[i].classList.remove("hover");
     }
 
-
     if (drag != undefined) {
         if (e.target.innerText == "Party") {
-            let base = document.querySelectorAll('#pokémon > aside[name="team"] section div[name="empty"]');
+            let base = document.querySelectorAll('#pokémon > aside[name="team"] section div[data-string=""]');
             if (base.length > 0) {
-                createParty(base[0],"pok:"+drag);
-                partyShow(base[0]);
+                partyApply(base[0],"pok:"+drag);
+  
                 consoleText("Added "+drag+" to Party.");
             }
             else {
@@ -2446,149 +2354,57 @@ function dragDrop(e) {
         }
         else if (e.target.innerText == "+") {
             let base = e.target.parentElement.parentElement;
-            createParty(base,"pok:"+drag);
-            partyShow(base);
+            partyApply(base,"pok:"+drag);
+
             consoleText("Added "+drag+" to Party.");
         }
     }
 }
+*/
 
-function createParty(base,data) {
+function partyApply(base) {
+
+    data = base.getAttribute("data-string")
+    data = dataStringToObj(data)
 
     let i;
-    let pok;
-    let item;
-    let nick;
-    let level;
-    let gender;
-    let move;
-    let ability;
-    let iv;
-    let ev;
-    let nature;
-    let metlocation;
-    let metlevel;
-    let metdate;
-    let friendship;
+    let pok = data["pok"];
+    let item = data["it"];
+    let nick = data["ni"];
+    let level = data["le"];
+    let gender = data["ge"];
+    let move = data["mo"];
+    let ability = data["ab"];
+    let iv = data["iv"];
+    let ev = data["ev"];
+    let nature = data["na"];
+    let friendship = data["fr"];
 
-
-    if(data.includes("|")) {
-        data = data.split("|")
-        for (let q = 0; q < data.length; q++) {
-            if (data[q].split(":")[0] == "pok") {
-                pok = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "it") {
-                item = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ni") {
-                nick = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "lv") {
-                level = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ge") {
-                gender = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "mo") {
-                move = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ab") {
-                ability = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "iv") {
-                iv = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ev") {
-                ev = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "na") {
-                nature = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "metlo") {
-                metlocation = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "metlv") {
-                metlevel = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "metda") {
-                metdate = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "fr") {
-                friendship = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-        }
-    }
-    else {
-        if (data.split(":")[0] == "pok") {
-            pok = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "it") {
-            item = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ni") {
-            nick = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "lv") {
-            level = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ge") {
-            gender = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "mo") {
-            move = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ab") {
-            ability = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "iv") {
-            iv = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ev") {
-            ev = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "na") {
-            nature = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "metlo") {
-            metlocation = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "metlv") {
-            metlevel = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "metda") {
-            metdate = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "fr") {
-            friendship = data.replaceAll(data.split(":")[0]+":","")
-        }
+    if (pok == undefined) {
+        return;
     }
 
     i = getPokémonInt(pok);
 
-    partyDefault(base);
+    clearParty(base);
 
 
 
-    let baseBackground = base.querySelector(":scope > aside:first-child");
-    let basePok = base.querySelector(":scope img[value]");
+    let basePok = base.querySelector(':scope img[name="img"]');
     let baseItem = base.querySelector(':scope span[name="item"] select');
-    let baseItemImg = base.querySelector(':scope span[name="pokémon"] img:not([value])');
+    let baseItemImg = base.querySelector(':scope img[name="item"]');
     let baseNick = base.querySelector(':scope span[name="name"] input');
-    let baseLevel = base.querySelector(':scope input[placeholder="Lvl."]');
-    let baseGender = base.querySelector(':scope aside > span:last-child > select:nth-child(2)');
+    let baseLevel = base.querySelector(':scope input[title="Level"]');
+    let baseGender = base.querySelector(':scope select[title="Gender"]');
     let baseMove = base.querySelector(':scope span[name="moves"] span:nth-child(2)');
     let baseMoves = base.querySelectorAll(':scope span[name="moves"] > span:nth-child(2) select');
     let baseAbility = base.querySelector(':scope span[name="ability"] select');
-    let baseNature = base.querySelectorAll(':scope span[name="nature"] select');
-    let baseIV = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span[name="iv"]');
-    let baseEV = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span[name="ev"]');
+    let baseNature = base.querySelector(':scope span[name="nature"] select');
+    let baseIV = base.querySelectorAll(':scope span[name="iv"] input');
+    let baseEV = base.querySelectorAll(':scope span[name="ev"] input');
     let baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
-    let baseMetLocation = base.querySelector(':scope span[name="additional"] label[name="location"] select');
-    let baseMetLevel = base.querySelector(':scope span[name="additional"] label[name="level"] input');
-    let baseMetDate = base.querySelector(':scope span[name="additional"] label[name="date"] input');
-    let baseFriendship = base.querySelector(':scope span[name="additional"] label[name="friendship"] input');
-    let baseExport = base.querySelector(":scope aside figure[name='export']");
+
+    let baseExport = base.querySelector(":scope figure[name='export']");
 
 
 
@@ -2596,12 +2412,12 @@ function createParty(base,data) {
     let type2 = returnData(i,"Type","undefined")[1];
 
     if (type2 != undefined) {
-        $(baseBackground).css({background: "linear-gradient(to right,var(--type"+type1+"),var(--type"+type2+"))"});
-        base.querySelector(":scope > aside:first-child").setAttribute("name",type1+","+type2);
+        $(base).css({background: "linear-gradient(to right,var(--type"+type1+"),var(--type"+type2+"))"});
+        base.setAttribute("type",type1+"-"+type2);
     }
     else {
-        $(baseBackground).css({background: "linear-gradient(to right,var(--type"+type1+"),var(--type"+type1+"))"});
-        base.querySelector(":scope > aside:first-child").setAttribute("name",type1);
+        $(base).css({background: "linear-gradient(to right,var(--type"+type1+"),var(--type"+type1+"))"});
+        base.setAttribute("type",type1);
     }
 
     let fileNames = ["^"+getPokémonPath(i)]
@@ -2667,7 +2483,7 @@ function createParty(base,data) {
                     }
                 }
             }
-            baseItemImg.style.display = "unset";
+            baseItemImg.style.removeProperty("display");
             baseItemImg.src = getMedia(true,[baseItem.querySelector(":scope option:first-child").value],[PATH_Item_Bag])
         }
         else if (finaldata["Pokémon"]["Form Item"][i][DATA_Pokémon_FormItem["Non Required"]] != undefined) {
@@ -2744,15 +2560,9 @@ function createParty(base,data) {
             }
         }
 
-        if (possibleGender[0] == "♂") {
-            baseGender.style.color = "Blue";
-        }
-        if (possibleGender[0] == "♀") {
-            baseGender.style.color = "Red";
-        }
-        if (possibleGender[0] == "☿") {
-            baseGender.style.color = "Black";
-        }
+    
+        baseGender.setAttribute("name",possibleGender[0]);
+
 
         for (let q = 0; q < possibleGender.length; q++) {
             let option = document.createElement("option");
@@ -2805,6 +2615,7 @@ function createParty(base,data) {
 
     if (Ability.length > 0) {
         let abilities = returnData(i,"Ability","");
+        baseAbility.innerHTML = "";
 
         for (let q = 0; q < abilities.length; q++) {
             if (abilities[q] != undefined) {
@@ -2837,20 +2648,10 @@ function createParty(base,data) {
         baseNick.value = nick;
     }
     if (item != undefined && HeldItem == true) {
-        let baseItems = baseItem.querySelectorAll(":scope option");
-        let opt = baseItem.querySelector(':scope option[value="'+item+'"]')
-        let tempArr = [];
-        for (let q = 0; q < baseItems.length; q++) {
-            tempArr.push(baseItems[q].value);
-        }
-
-        if (tempArr.includes(item)) {
+        let optItem = baseItem.querySelector(':scope option[value="'+item+'"]');
+   
+        if (optItem != undefined) {
             baseItem.value = item;
-            baseItem.setAttribute("name",opt.getAttribute("name"));
-            baseItem.style.fontStyle = "unset";
-            baseItemImg.style.display = "unset";
-            baseItemImg.src = getMedia(true,[opt.getAttribute("name")],[PATH_Item_Bag]);
-            baseItemImg.setAttribute("title",item);
         }
     }
     if (level != undefined) {
@@ -2858,17 +2659,17 @@ function createParty(base,data) {
     }
     if (gender != undefined && Gender == true) {
         baseGender.value = gender;
-        if (gender == "♂") {
-            baseGender.style.color = "Blue";
-        }
-        if (gender == "♀") {
-            baseGender.style.color = "Red";
-        }
-        if (gender == "☿") {
-            baseGender.style.color = "Black";
-        }
+
+        baseGender.setAttribute("name",baseGender.value);
     }
     if (ability != undefined && Ability.length > 0) {
+
+        if (!ability.toLowerCase().includes("primary") && !ability.toLowerCase().includes("secondary") && !ability.toLowerCase().includes("hidden")) {
+            ability = getAbilityPosition(i,ability);
+        }
+
+        console.log(ability);
+
         let abtemp = baseAbility.querySelector(':scope > option[name="'+ability+'"]');
 
         if (abtemp != undefined) {
@@ -2878,73 +2679,50 @@ function createParty(base,data) {
         }
     }
     if (nature != undefined && Natures.length > 0) {
-        for (let q = 0; q < baseNature.length; q++) {
-            baseNature[q].value = nature;
-        }
-
-        baseStats.setAttribute("name",nature);
+        baseNature.value = nature;
     }
 
 
 
 
     if (move != undefined) {
-        let tempmove = [move];
-        if (move.includes(",")) {
-            tempmove = move.split(",");
-        }
-        for (let q = 0; q < tempmove.length; q++) {
-            let y = q+1;
-            if (tempmove[q] != "") {
-                if (tempmoves.includes(tempmove[q])) {
-                    baseMove.querySelector(":scope > span:nth-child("+y+") select").value = tempmove[q];
-                    if (!tempmove[q].includes("Move")) {
-                        baseMove.querySelector(":scope > span:nth-child("+y+") select").title = formatMoveData(tempmove[q]);
-                        baseMove.querySelector(":scope > span:nth-child("+y+") select").style.fontStyle = "unset";
-                        baseMove.querySelector(":scope > span:nth-child("+y+") select").setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempmove[q]))
+        let tempmove = splitStr(move,",");
+        if (tempmove.length == baseMoves.length) {
+            for (let q = 0; q < tempmove.length; q++) {
+                if (tempmove[q] != "") {
+                    if (tempmoves.includes(tempmove[q])) {
+                        baseMoves[q].value = tempmove[q];
+                        baseMoves[q].title = formatMoveData(tempmove[q]);
+                        baseMoves[q].setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempmove[q]))
                     }
                 }
-            }
-            else {
-                baseMove.querySelector(":scope > span:nth-child("+y+") select").value = baseMove.querySelector(":scope > span:nth-child("+y+") select").firstElementChild.value;
+                else {
+                    baseMoves[q].value = baseMoves[q].firstElementChild.value;
+                }
             }
         }
     }
     if (iv != undefined) {
-        let tempiv = [iv];
-        if (iv.includes(",")) {
-            tempiv = iv.split(",");
-        }
-        for (let q = 0; q < tempiv.length; q++) {
-            let y = q+1;
-            if (baseIV.querySelector(":scope input:nth-child("+y+")") != undefined) {
-                baseIV.querySelector(":scope input:nth-child("+y+")").value = tempiv[q];
+        let vals = splitStr(iv,",");
+
+        if (baseIV.length == vals.length) {
+            for (let q = 0; q < baseIV.length; q++) {
+                baseIV[q].value = vals[q];
             }
         }
     }
     if (ev != undefined) {
-        let tempev = [ev];
-        if (ev.includes(",")) {
-            tempev = ev.split(",");
-        }
-        for (let q = 0; q < tempev.length; q++) {
-            let y = q+1;
-            if (baseEV.querySelector(":scope > input:nth-child("+y+")") != undefined) {
-                baseEV.querySelector(":scope > input:nth-child("+y+")").value = tempev[q];
+        let vals = splitStr(ev,",");
+
+        if (baseEV.length == vals.length) {
+            for (let q = 0; q < baseEV.length; q++) {
+                baseEV[q].value = vals[q];
             }
         }
     }
 
-    if (metlocation != undefined) {
-        baseMetLocation.value = metlocation;
-    }
-    if (metlevel != undefined) {
-        baseMetLevel.value = metlevel;
-    }
-    if (metdate != undefined) {
-        baseMetDate.value = metdate;
-        baseMetDate.style.color = "inherit";
-    }
+
+    /*
     if (Friendship == true) {
         if (baseFriendship != null) {
             if (friendship != undefined) {
@@ -2955,15 +2733,163 @@ function createParty(base,data) {
             }
         }
     }
+*/
 
 
-
+    partySave(base);
     boxMemory("Save");
     partyMemory("Save");
 }
 
 
+function partySave(base) {
 
+
+    if (base.tagName == undefined) {
+        base = findUpAtt(this,"data-string");
+    }
+
+
+    let basePok = base.querySelector(':scope img[name="img"]');
+    let baseItem = base.querySelector(':scope span[name="item"] select');
+    let baseItemImg = base.querySelector(':scope img[name="item"]');
+    let baseNick = base.querySelector(':scope span[name="name"] input');
+    let baseLevel = base.querySelector(':scope input[title="Level"]');
+    let baseGender = base.querySelector(':scope select[title="Gender"]');
+    let baseMove = base.querySelector(':scope span[name="moves"] span:nth-child(2)');
+    let baseMoves = base.querySelectorAll(':scope span[name="moves"] > span:nth-child(2) select');
+    let baseAbility = base.querySelector(':scope span[name="ability"] select');
+    let baseNature = base.querySelector(':scope span[name="nature"] select');
+    let baseIV = base.querySelectorAll(':scope span[name="iv"] input');
+    let baseEV = base.querySelectorAll(':scope span[name="ev"] input');
+    let baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
+
+
+    let pok;
+    let item;
+    let nick;
+    let level;
+    let gender;
+    let move;
+    let ability;
+    let iv;
+    let ev;
+    let nature;
+
+
+    if (basePok.title != undefined) {
+        pok = basePok.title;
+    }
+    if (baseItem.value != "") {
+        if (baseItem.value == "Item") {
+            item = "";
+        }
+        else {
+            item = baseItem.value;
+        }
+    }
+    if (baseNick.value != "") {
+        nick = baseNick.value;
+    }
+    if (baseLevel.value != "") {
+        level = baseLevel.value;
+    }
+    if (baseGender != undefined && baseGender.value != "") {
+        gender = baseGender.value;
+    }
+    if (baseAbility != undefined && baseAbility.value != "") {
+        ability = baseAbility.value;
+    }
+    if (baseNature != undefined && baseNature.value != "") {
+        nature = baseNature.value;
+    }
+
+    let moves = [];
+    for (let q = 0; q < baseMoves.length; q++) {
+        let val = baseMoves[q].value;
+        if (baseMoves[q].value.includes("Move #")) {
+            val = "";
+        }
+        moves.push(val);
+    }
+    if (moves.length > 0) {
+        move = moves.join(",");
+    }
+
+
+    let ivs = [];
+    for (let q = 0; q < baseIV.length; q++) {
+        ivs.push(baseIV[q].value);
+    }
+    if (ivs.length > 0) {
+        iv = ivs.join(",");
+    }
+
+
+    let evs = [];
+    for (let q = 0; q < baseEV.length; q++) {
+        evs.push(baseEV[q].value);
+    }
+    if (evs.length > 0) {
+        ev = evs.join(",");
+    }
+
+
+    let data = {};
+    
+    try {
+        data = JSON.parse(base.getAttribute("data-string"));
+    }
+    catch {
+        data = dataStringToObj(base.getAttribute("data-string"));
+    }
+
+    if (pok != undefined) {
+        data["pok"] = pok;
+    }
+    if (item != undefined) {
+        data["it"] = item;
+    }
+    if (nick != undefined) {
+        data["ni"] = nick;
+    }
+    if (level != undefined) {
+        data["lv"] = level;
+    }
+    if (gender != undefined) {
+        data["ge"] = gender;
+    }
+    if (move != undefined) {
+        data["mo"] = move;
+    }
+    if (ability != undefined) {
+        data["ab"] = ability;
+    }
+    if (iv != undefined) {
+        data["iv"] = iv;
+    }
+    if (ev != undefined) {
+        data["ev"] = ev;
+    }
+    if (nature != undefined) {
+        data["na"] = nature;
+    }
+
+    base.setAttribute("data-string",dataObjToString(data));
+
+
+    partyItem(base)
+}
+
+
+function dataObjToString(data) {
+    data = JSON.stringify(data);
+    data = data.replaceAll('","','"|"')
+    data = data.replaceAll('"','')
+    data = data.replaceAll('{','')
+    data = data.replaceAll('}','');
+    return data;
+}
 
 
 function partyNature() {
@@ -2982,41 +2908,6 @@ function partyNature() {
 
 
 
-function partyShow(base) {
-
-    if (base.getAttribute("name") == "empty") {
-        base.removeAttribute("name");
-    }
-
-    calcPartyStat(base);
-
-    let sides = base.querySelectorAll(":scope > aside");
-    let side = base.querySelector(":scope > aside:first-child");
-
-    for (q = 0; q < sides.length; q++) {
-        sides[q].style.display = "none";
-    }
-    side.style.display = "flex";
-    partyMemory("Save");
-}
-
-
-function partyHide(base) {
-
-    if (base.getAttribute("name") != "empty") {
-        base.setAttribute("name","empty");
-    }
-    
-    let sides = base.querySelectorAll(":scope > aside");
-    let side = base.querySelector(":scope > aside:last-child");
-
-    for (q = 0; q < sides.length; q++) {
-        sides[q].style.display = "none";
-    }
-    side.style.display = "flex";
-
-    partyMemory("Save");
-}
 
 
 
@@ -3224,95 +3115,7 @@ function returnMoveSet(int,additional) {
 
 
 
-function selectModify(e) {
-    let opt = this.querySelector(':scope > option[value="'+this.value+'"]');
 
-    if (this.value == "♂") {
-        this.style.color = "Blue";
-    }
-    if (this.value == "♀") {
-        this.style.color = "Red";
-    }
-    if (this.value == "☿") {
-        this.style.color = "Black";
-    }
-
-    if (this.firstElementChild.value.includes("Move")) {
-        if (this.value == this.firstElementChild.value) {
-            this.style.fontStyle = "italic";
-        }
-        else {
-            this.style.fontStyle = "unset";
-        }
-    }
-    
-    if (this.firstElementChild.value.includes("Item")) {
-        if (this.value == "Item") {
-            this.style.fontStyle = "italic";
-        }
-        else {
-            this.style.fontStyle = "unset";
-        }
-    }
-
-
-
-    if (this.firstElementChild.value == "Item") {
-        this.setAttribute("name",opt.getAttribute("name"));
-    }
-
-
-
-    if (this.parentElement.getAttribute("name") == "Nature") {
-        let base = this.parentElement.parentElement.parentElement;
-        base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child').setAttribute("name",this.value);
-    }
-
-    if (this.parentElement.getAttribute("name") == "Ability") {
-        let desc = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",this.value)[0]["Description"];
-        if (desc != undefined) {
-            this.setAttribute("title",desc);
-        }
-        this.setAttribute("name",this.querySelector(':scope > option[value="'+this.value+'"]').getAttribute("name"));
-    }
-
-
-
-
-    if (this.firstElementChild.value.includes("Move")) {
-        let sel = this.parentElement.parentElement.querySelectorAll(':scope select');
-        let opts = this.parentElement.parentElement.querySelectorAll(':scope option');
-        let optz = this.parentElement.parentElement.querySelectorAll(':scope option[value="'+this.value+'"]');
-
-        let selvals = [];
-        
-        for(let i = 0; i < sel.length; i++) {
-            selvals.push(sel[i].value)
-        }
-
-        for(let i = 0; i < opts.length; i++) {
-            if (!selvals.includes(opts[i].value)) {
-                opts[i].style.display = "unset";
-                opts[i].removeAttribute("disabled");
-            }
-        }
-     
-        for(let i = 0; i < optz.length; i++) {
-            optz[i].style.display = "none";
-            optz[i].setAttribute("disabled","");
-        }
-        if (!this.value.includes("Move #")) {
-            this.title = formatMoveData(this.value);
-        }
-        else {
-            this.title = "";
-        }
-
-        this.setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],this.value));
-    }
-
-    partyMemory("Save");
-}
 
 function storeInBox(data) {
 
@@ -3489,155 +3292,7 @@ function storeInBox(data) {
 }
 
 
-function getPartyData(base) {
-    let data = [];
 
-    let name = base.querySelector(':scope > aside:first-child > span > span[name="name"] input');
-    let level = base.querySelector(':scope > aside:first-child > span:first-child > input[type="number"]');
-    let item = base.querySelector(':scope > aside:first-child > span > span[name="item"] > select');
-    let nick = base.querySelector(':scope > aside:first-child > span > span[name="name"] > input[type="text"]');
-    let gender = base.querySelector(":scope > aside:first-child > span:last-child > select[title='Gender']");
-    let ability = base.querySelector(':scope > aside:first-child > span[name="moves"] > span[name="ability"] > select');
-
-    let nature = base.querySelectorAll(':scope > aside:first-child > span > span[name="nature"] > select');
-    let move = base.querySelectorAll(':scope > aside:first-child > span[name="moves"] > span:nth-child(2) > span select');
-    let iv = base.querySelectorAll(':scope > aside:first-child > span[name="stats"] > span:nth-child(2) > span[name="iv"] > input');
-    let ev = base.querySelectorAll(':scope > aside:first-child > span[name="stats"] > span:nth-child(2) > span[name="ev"] > input');
-
-    let metlocation = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="location"] select');
-    let metlvl = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="level"] input');
-    let metdate = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="date"] input');
-    let friendship = base.querySelector(':scope > aside:first-child > span[name="additional"] label[name="friendship"] input');
-
-
-
-    if (name != undefined) {
-        if (name.placeholder != undefined) {
-            data.push("pok:"+name.placeholder);
-        }
-    }
-    if (level != undefined) {
-        if (level.value != undefined && level.value != "") {
-            data.push("lv:"+level.value);
-        }
-    }
-    if (item != undefined) {
-        if (item.value != undefined && item.value != "Item") {
-            data.push("it:"+item.value);
-        }
-    }
-    if (nick != undefined) {
-        if (nick.value != undefined && nick.value != "") {
-            data.push("ni:"+nick.value);
-        }
-    }
-    if (gender != undefined) {
-        if (gender.value != undefined) {
-            data.push("ge:"+gender.value);
-        }
-    }
-    if (ability != undefined) {
-        if (ability.value != undefined) {
-
-            data.push("ab:"+ability.querySelector(":scope option[value='"+ability.value+"']").getAttribute("name"));
-        }
-    }
-    if (nature[0] != undefined) {
-        if (nature[0].value != undefined && nature[0].value != "Nature") {
-            data.push("na:"+nature[0].value);
-        }
-    }
-
-    if (move != undefined) {
-        let movearr = [];
-        let movestr;
-        for(let q = 0; q < move.length; q++) {
-            if (!move[q].value.includes("Move")) {
-                movearr.push(move[q].value);
-            }
-            else {
-                movearr.push("");
-            }
-        }
-        if (movearr.length > 1) {
-            movestr = movearr.join(",");
-        }
-        else {
-            movestr = movearr[0];
-        }
-        if (movestr != undefined) {
-            if (movestr.replaceAll(",","").length > 0) {
-                data.push("mo:"+movestr);
-            }
-        }
-    }
-    if (iv != undefined) {
-        let ivarr = [];
-        let ivstr;
-        for(let q = 0; q < iv.length; q++) {
-            ivarr.push(iv[q].value);
-        }
-        if (ivarr.length > 1) {
-            ivstr = ivarr.join(",");
-        }
-        else {
-            ivstr = ivarr[0];
-        }
-        if (ivstr != undefined) {
-            if (ivstr.replaceAll(",","").length > 0) {
-                data.push("iv:"+ivstr);
-            }
-        }
-    }
-    if (ev != undefined) {
-        let evarr = [];
-        let evstr;
-        for(let q = 0; q < ev.length; q++) {
-            evarr.push(ev[q].value);
-        }
-        if (evarr.length > 1) {
-            evstr = evarr.join(",");
-        }
-        else {
-            evstr = evarr[0];
-        }
-        if (evstr != undefined) {
-            if (evstr.replaceAll(",","").length > 0) {
-                data.push("ev:"+evstr);
-            }
-        }
-    }
-    if (metlocation != undefined) {
-        if (metlocation.value != undefined && metlocation.value != "") {
-            data.push("metlo:"+metlocation.value);
-        }
-    }
-    if (metlvl != undefined) {
-        if (metlvl.value != undefined && metlvl.value != "") {
-            data.push("metlv:"+metlvl.value);
-        }
-    }
-    if (metdate != undefined) {
-        if (metdate.value != undefined && metdate.value != "") {
-            data.push("metda:"+metdate.value);
-        }
-    }
-    if (friendship != undefined) {
-        if (friendship.value != undefined && friendship.value != "") {
-            data.push("fr:"+friendship.value);
-        }
-    }
-
-
-    if (data.length > 1) {
-        data = data.join("|");
-    }
-    else {
-        data = data[0];
-    }
-
-    return data;
-}
 
 function getAllBoxData() {
     let lis = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] > ul li');
@@ -3714,38 +3369,30 @@ function partyAdd() {
     let data = prompt("Enter Pokémon Data String:","");
 
     if (data != null && data != "") {
-        if (data.includes("pok:")) {
-            let temparr = [];
-            let tempstr;
+        let base = this.parentElement;
+        data = dataStringToObj(data);
 
-            if (data.includes("|")) {
-                temparr = data.split("pok:");
-                if (temparr.length > 1) {
-                    temparr = temparr[1].split("|");
-                    tempstr = getPokémonInt(temparr[0]);
-                }
-            }
-            else {
-                temparr = data.split("pok:");
-                tempstr = getPokémonInt(temparr[1]);
-            }
-            if (tempstr != undefined) {
-                if (finaldata["Pokémon"]["Reference"][parseInt(tempstr)][DATA_Pokémon_Reference["Reference"]] == "true") {
-                    createParty(this.parentElement.parentElement,data)
-                    partyShow(this.parentElement.parentElement);
-                    consoleText("Added "+getPokémonName(tempstr)+" to Party.")
-                }
-                else {
-                    consoleText("Pokémon Unavailable.")
-                }
-            }
-            else {
-                consoleText("Data returned an error.")
-            }
+        if (data["pok"] == undefined && getPokémonInt(data["pok"]) != undefined) {
+            consoleText("Data returned an error.")
+            return;
+        }
+
+        let int = getPokémonInt(data["pok"]);
+
+        console.log(int)
+
+
+        if (finaldata["Pokémon"]["Reference"][int][DATA_Pokémon_Reference["Reference"]] == "true") {
+            base.setAttribute("data-string",dataObjToString(data))
+
+
+            partyApply(this.parentElement)
+            consoleText("Added "+getPokémonName(int)+" to Party.")
         }
         else {
-            consoleText("Data returned an error.")
+            consoleText("Pokémon Unavailable.")
         }
+     
     }
 }
 
@@ -3900,73 +3547,77 @@ function getNatureTitle(nature) {
 
 
 
-function calcPartyStat(divBase) {
+function calcPartyStat(base) {
 
-    let div;
 
-    if (divBase.tagName == "DIV") {
-        div = divBase;
+
+    if (base.tagName == "DIV") {
+        base = base;
     }
     else {
-        div = findUpTag(divBase,"DIV");
+        base = findUpAtt(base,"data-string");
     }
 
-    let int = getPokémonInt(div.querySelector(':scope span[name="pokémon"] img[value]').title)
-    let level = div.querySelector(':scope aside > span:first-child input[type="number"]')
-    let ivs = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span[name="iv"] input[type="number"]');
-    let evs = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span[name="ev"] input[type="number"]');
-    let natures = div.querySelectorAll(':scope aside span[name="nature"] select');
-    let friendships = div.querySelector(':scope aside label[name="friendship"] input');
- 
-    let res = div.querySelectorAll(':scope aside > span[name="stats"] > span:nth-child(2) > span:last-child input[type="number"]');
+    let pok = base.querySelector(':scope span[name="pokémon"] img[name="img"]').title;
+    if (pok == undefined || pok == "") {
+        return;
+    }
+
+    let int = getPokémonInt(pok)
 
 
-    for (let i = 0; i < res.length; i++) {
+    let levelPath = base.querySelector(':scope input[title="Level"]')
+    let ivsPath = base.querySelectorAll(':scope span[name="stats"] span[name="iv"] input[type="number"]');
+    let evsPath = base.querySelectorAll(':scope span[name="stats"] span[name="ev"] input[type="number"]');
+    let naturePath = base.querySelector(':scope span[name="nature"] select');
+    let friendshipPath = base.querySelector(':scope span[name="friendship"] input');
+    let totalPath = base.querySelectorAll(':scope span[name="stats"] span[name="total"] input[type="number"]');
 
-        let stat = Stats[i];
- 
+    
+    if ([totalPath.length,Stats.length,ivsPath.length,evsPath.length].every((val, x, arr) => val === arr[0])) {
+        for (let i = 0; i < totalPath.length; i++) {
 
-        let lvl = level.value;
-        let base = returnData(int,"Base Stats "+stat,"")[0];
-        let iv = ivs[i].value
-        let ev = evs[i].value
-        let nature;
-        let friendship;
+            let stats = Stats[i]["Name"];
+    
+            let lvl = levelPath.value;
+            let base = returnData(int,"Base Stats "+stats,"")[0];
+            let iv = ivsPath[i].value
+            let ev = evsPath[i].value
+            let nature = naturePath.value;
+            let friendship = 0;
 
-        if (Natures.length > 0) {
-            nature = natureModifier(stat,natures[0].value);
-        }
-        else {
-            nature = 1;
-        }
-
-        if (Friendship == true) {
-            if (friendships.value != undefined && friendships.value != "") {
-                friendship = friendshipModifer(friendships.value);
+            if (Natures.length > 0) {
+                nature = natureModifier(stats,);
             }
             else {
-                friendship = 1;
+                nature = 1;
             }
-        }
 
-        if (lvl != "") {
+            if (Friendship && false) {
+                if (friendshipPath.value != undefined && friendshipPath.value != "") {
+                    friendship = friendshipModifer(friendshipPath.value);
+                }
+                else {
+                    friendship = 1;
+                }
+            }
+
+            if (lvl == "") {
+                lvl = 0;
+            }
             if (iv == "") {
                 iv = 0;
             }
             if (ev == "") {
                 ev = 0;
             }
-            res[i].setAttribute("min",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
-            res[i].setAttribute("max",statsCalc(stat,lvl,base,iv,ev,nature,friendship));
-            res[i].value = statsCalc(stat,lvl,base,iv,ev,nature,friendship);
-        }
-        else {
-            res[i].setAttribute("min","0");
-            res[i].setAttribute("max","0");
-            res[i].value = 0;
+
+            totalPath[i].setAttribute("min",statsCalc(stats,lvl,base,iv,ev,nature,friendship));
+            totalPath[i].setAttribute("max",statsCalc(stats,lvl,base,iv,ev,nature,friendship));
+            totalPath[i].value = statsCalc(stats,lvl,base,iv,ev,nature,friendship);
+         
         }
     }
-    
 
 
 
@@ -4075,7 +3726,9 @@ function dateHideShow(event,status) {
 function changePartyEvolution(base,i) {
 
     let evos = getEvolutionFamily(i).map(function(v) {return v["Pokémon"];});
-    let data = getPartyData(base);
+    let data = dataStringToObj(base.getAttribute("data-string"))
+
+
 
     evos = evos.filter(function(v) {
         return v != finaldata["Pokémon"]["Reference"][i]["Pokémon"];
@@ -4107,28 +3760,14 @@ function changePartyEvolution(base,i) {
 
         let result = evos[parseInt(reply)-1]
 
-        if (data.includes("|")) {
-            if (data.includes("pok")) {
-                data = data.split("|");
-                for (let u = 0; u < data.length; u++) {
-                    if (data[u].includes("pok:")) {
-                        data[u] = data[u].split(":",1)[0]+":"+result;
-                        break;
-                    }
-                }
-                data = data.join("|");
-            }
-        }
-        else {
-            if (data.includes("pok")) {
-                data = data.split(":",1)[0]+":"+result;
-            }
-        }
+      
 
 
         if (num.includes(reply)) {
-            createParty(base,data)
-            partyShow(base);
+            data["pok"] = result;
+            base.setAttribute("data-string",dataObjToString(data));
+
+            partyApply(base)
             consoleText("Evolution updated.");
         }
         else {
@@ -4146,7 +3785,7 @@ function changePartyEvolution(base,i) {
 function changePartyForm(base,i) {
 
     let forms = getPokémonForm(i);
-    let data = getPartyData(base);
+    let data = dataStringToObj(base.getAttribute("data-string"))
 
 
     forms = forms.filter(function(v) {
@@ -4177,27 +3816,12 @@ function changePartyForm(base,i) {
 
         let result = forms[parseInt(reply)-1]
 
-        if (data.includes("|")) {
-            if (data.includes("pok")) {
-                data = data.split("|");
-                for (let u = 0; u < data.length; u++) {
-                    if (data[u].includes("pok:")) {
-                        data[u] = data[u].split(":",1)[0]+":"+result;
-                        break;
-                    }
-                }
-                data = data.join("|");
-            }
-        }
-        else {
-            if (data.includes("pok")) {
-                data = data.split(":",1)[0]+":"+result;
-            }
-        }
 
+ 
         if (num.includes(reply)) {
-            createParty(base,data)
-            partyShow(base);
+            data["pok"] = result;
+            base.setAttribute("data-string",dataObjToString(data));
+            partyApply(base)
             consoleText("Form updated.");
         }
         else {
