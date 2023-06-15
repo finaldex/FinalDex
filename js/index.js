@@ -149,11 +149,11 @@ function vidStart() {
 }
 
 
-
-
+/*
 $(window).on('beforeunload', function() {
 	$(window).scrollTop(0);
 });
+*/
 
 (function() {
 	// get all data in form and return object
