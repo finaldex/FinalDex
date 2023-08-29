@@ -645,7 +645,9 @@
 	left:20px;
 }
 
-
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] h4 {
+	text-shadow: 0px 0px 2px black;
+}
 
 
 
@@ -870,6 +872,12 @@
 }
 
 
+#contain div#tool div#dmg div[name='menu'] *[name='execute'] button.change {
+	background:var(--Background_Calculator_Footer_Button_Active);
+	color:var(--Color_Calculator_Footer_Button_Active);
+}
+
+
 #contain div#tool div#dmg div[name='menu'] *[name='roll'] input[type='range'] {
 	width:100%;
 }
@@ -955,7 +963,8 @@
 	padding:2px 0;
 }
 #contain div#tool div#dmg div[name='menu'] *[name='info'] > span > span img {
-	max-width:80px;
+	max-width: 80px;
+    max-height: 20px;
 }
 
 #contain div#tool div#dmg div[name='menu'] *[name='move'] select {
@@ -1718,6 +1727,11 @@ body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] 
 #contain div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name] > ul[name] > figure[name='export'] > div > span > span {
 	display:block;
     width:100%;
+	border: 1px solid black;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name] > ul[name] > figure[name='export'] > div > span > span:not(:last-child) {
+	border-bottom: none;
 }
 
 #contain div#tool div#dmg div[name='options'] ol[name='pokémon'] > span[name] > ul[name] > figure[name='export'] > div > span > span > b {
@@ -2615,6 +2629,7 @@ body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > 
 }
 #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img {
 	position: relative;
+	max-height: 200px;
 }
 #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='item'] {
 	position:absolute;
@@ -2767,8 +2782,8 @@ body[Generation='1'] #contain div#tool div#dmg div[name='battle'] span[name*='te
 }
 
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='result'] {
-	right:5px;
-    left:unset;
+	right:5px !important;
+    left:unset !important;
 }
 
 
@@ -2840,7 +2855,7 @@ body[Generation='1'] #contain div#tool div#dmg div[name='battle'] span[name*='te
 }
 
 body:not([Generation='1']):not([Generation='2']):not([Generation='3']):not([Generation='4']) #contain div#tool div#dmg div[name='battle'] span[name='user'] > * {
-	transform:translate(0px, -30%);
+	/*transform:translate(0px, -30%);*/
 }
 
 #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] {
