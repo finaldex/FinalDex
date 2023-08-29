@@ -94,6 +94,7 @@ figure.drop label ol {
     position: absolute;
     width:max-content;
     z-index: 100;
+    text-shadow: initial;
 }
 
 
@@ -146,8 +147,8 @@ figure[type="rotate-left"].drop label:has(input:checked) > *:not(input):not(ol) 
     transform:rotate(90deg);
     display:block;
 }
-figure[type="rotate-right"].drop label:active > strong:not(input):not(ol),
-figure[type="rotate-right"].drop label:has(input:checked) > small:not(input):not(ol) {
+figure[type="rotate-right"].drop label:active > *:not(input):not(ol),
+figure[type="rotate-right"].drop label:has(input:checked) > *:not(input):not(ol) {
     transform:rotate(-90deg);
 }
 figure[type="scale"].drop label:active > *:not(input):not(ol),
