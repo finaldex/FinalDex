@@ -306,6 +306,18 @@ nav > div > div.active {
 #Home > span video:first-child.active {
     transition:none;
 }
+#Home > button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: xx-large;
+    text-shadow: 1px 3px hsl(0,0%,8%);
+    color: hsl(0,0%,90%);
+    z-index: 100;
+}
+#Home > button:active {
+    transform:scale(0.9);
+}
 
 
 
@@ -545,7 +557,10 @@ ol {
     padding:10px 0;
 }
 
-#FAQ ol ul li ~ li {
+#FAQ ol ul li:first-child {
+    list-style:disc;
+}
+#FAQ ol ul li:last-child {
     list-style:circle;
 }
 #FAQ ol ul li ~ li > * {
