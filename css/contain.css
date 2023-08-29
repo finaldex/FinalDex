@@ -43,13 +43,20 @@
 #contain > div > section[name='list'] ol label {
 	display:flex;
 	align-items:center;
-	justify-content:center;
+	justify-content: center;
 	margin:5px auto;
 	text-align:center;
 
 	background:var(--Background_Main_List_Content_Label);
 	color:var(--Color_Main_List_Content_Label);
 	border:var(--Border_Main_List_Content_Label);
+}
+#contain > div#item > section[name='list'] ol label:has(img) {
+	justify-content: space-between;
+}
+
+#contain > div > section[name='list'] ol label > * {
+	padding: 0 20px;
 }
 #contain > div > section[name='list'] ol label.hidden,
 #contain > div > section[name='list'] ol label.filtered {
@@ -139,7 +146,6 @@
 	width:100%;
 }
 #contain > div#item > section[name='list'] ol label span {
-	width:30%;
 	position:relative;
 }
 #contain > div#item > section[name='list'] ol label img {
@@ -205,12 +211,32 @@
     max-width:80%;
 }
 
+#contain > div#item > section[name='list'] > div:first-child > *:last-child label img[src=""] {
+	visibility:hidden;
+	position:relative;
+}
+#contain > div#item > section[name='list'] > div:first-child > *:last-child label img[src=""]::after {
+	content:"?";
+    display:flex;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    opacity:1;
+    visibility:visible;
+    justify-content:center;
+    align-items:center;
+	font-size:x-large;
+}
+
+
+
 
 #contain > div#item > section[name='list'] > div:first-child > *:last-child input:not(:checked) + label img {
 	transform:scale(0.9);
 	filter:grayscale(1);
 }
-
+#contain > div#item > section[name='list'] > div:first-child > *:last-child input:not(:checked) + label img::after,
 #contain > div#item > section[name='list'] > div:first-child > *:last-child input:not(:checked) + label *:not(img) {
 	opacity:0.25;
 } 
@@ -992,6 +1018,15 @@
 	padding:10px;
 }
 
+#contain > div#map > section[name='content'] > *[name='navigation'] *[function="dataRedirect"] {
+	cursor: pointer;
+	user-select:none;
+}
+#contain > div#map > section[name='content'] > *[name='navigation'] *[function="dataRedirect"]:active {
+	font-weight: bold;
+}
+
+
 #contain > div#map > section[name='content'] > *[name='navigation'] div > span > span > span {
 	display:flex;
 	align-items:center;
@@ -1310,6 +1345,7 @@
     flex-wrap:nowrap;
     justify-content:space-evenly;
 	overflow:auto;
+	text-shadow: 1px 1px black;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li > span {
@@ -1688,7 +1724,11 @@
 	padding:10px 0;
 
 } 
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li, #contain div#map > section[name='sidebar'] > div > *[name='items'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul li {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li,
+#contain div#map > section[name='sidebar'] > div > *[name='items'] ul li,
+#contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul li,
+#contain div#map > section[name='sidebar'] > div > *[name='shop'] ul li,
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > ul > li {
 	background:var(--Background_Map_Sidebar_Content_Item);
 	color:var(--Color_Map_Sidebar_Content_Item);
 	border:var(--Border_Map_Sidebar_Content_Item);
@@ -1847,6 +1887,10 @@
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(1) > span b, #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:last-child > span:last-child b {
 	width:100%;
 }
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li small {
+	font-weight:normal;
+}
+
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) > * {
 	display:flex;
@@ -1977,11 +2021,24 @@
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol {
 	position:absolute;
-
     z-index:100;
     width:100%;
     max-height:200px;
     overflow:auto;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol li {
+	background:var(--Background_Map_Sidebar_Content_Search_Item);
+	color:var(--Color_Map_Sidebar_Content_Search_Item);
+	border:var(--Border_Map_Sidebar_Content_Search_Item);
+	border-top: none;
+    border-left: none;
+    border-right: none;
+}
+#contain div#map > section[name='sidebar'] > div > *[name='trainers'] ul > span > figure.drop label ol {
+	right: unset !important;
+	bottom: unset !important;
+	left: 0px !important;
+	top: 15px !important;
 }
 
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] span[name='search'] ol:not(.active) {
@@ -2120,12 +2177,12 @@
 
 
 
-#data > div section[name='main'] > div[name='area'] ul li input, #contain div#item > section[name='sidebar'] > div > ul li input, #contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox'] {
+#data > div section[name='main'] > div[name='area'] ul li input, #contain div#item > section[name='sidebar'] > div > ul li input, #contain div#map > section[name='sidebar'] > div > *[name]:not([name='trainers']) ul > li input[type='checkbox'] {
 	display:unset;
 	margin:10px;
 }
 
-#data > div section[name='main'] > div[name='area'] ul li input:checked ~ *, #contain div#item > section[name='sidebar'] > div > ul li input:checked ~ *, #contain div#map > section[name='sidebar'] > div > *[name] ul > li input[type='checkbox']:checked ~ * {
+#data > div section[name='main'] > div[name='area'] ul li input:checked ~ *, #contain div#item > section[name='sidebar'] > div > ul li input:checked ~ *, #contain div#map > section[name='sidebar'] > div > *[name]:not([name='trainers']) ul > li input[type='checkbox']:checked ~ * {
 	opacity:0.4;
 	text-decoration:line-through;
 }
@@ -2137,4 +2194,3 @@
 #contain div#map > section[name='sidebar'] > div > *[name='trainers'] > div > div:first-child > span:nth-child(2) {
 	user-select:none;
 }
-
