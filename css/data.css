@@ -198,6 +198,30 @@
 #data > div section[name='form'] img[src=""] {
 	visibility:hidden;
 }
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li img {
+	cursor: pointer;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li img:hover {
+	filter:brightness(1.2);
+}
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li img[src=""] {
+	visibility:hidden;
+	position: relative;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li img[src=""]::after {
+	content:"?";
+    display:flex;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0px;
+    opacity:1;
+    visibility:visible;
+    justify-content:center;
+    align-items:center;
+    font-size:x-large;
+}
 
 
 
@@ -684,13 +708,12 @@
 
 
 
-#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li {
-}
 
 #data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > span {
 	display:table-cell;
-	width:10%;
+	/*width:20%;*/
 	vertical-align:middle;
+	padding: 0 10px;
 }
 
 #data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li span p {
@@ -709,6 +732,10 @@
 	display:table-cell;
 	vertical-align:middle;
 	width:10%;
+}
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name*='Base Stats'] li > p,
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name*='EV Yield'] li > p {
+	color: hsl(0,0%,0%);
 }
 
 #data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul[name="Held Item"] li[name="4"] > p {
@@ -1758,34 +1785,37 @@
 	filter:brightness(0.9) saturate(1.5);
 }
 
+
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='HP'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="hp"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="hp"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="hp"] > * {
 	background:var(--statHP);
 }
-
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='Attack'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="attack"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="attack"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="attack"] > * {
 	background:var(--statAtk);
 }
 
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='Defense'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="defense"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="defense"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="defense"] > * {
 	background:var(--statDef);
 }
-
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='Special'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="special"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="special"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="special"] > * {
 	background:var(--statSpecial);
 }
-
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='Sp. Atk'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="spatk"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spatk"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spatk"] > * {
 	background:var(--statSpAtk);
 }
-
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='Sp. Def'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="spdef"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spdef"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="spdef"] > * {
 	background:var(--statSpDef);
 }
-
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='Speed'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="speed"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="speed"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="speed"] > * {
 	background:var(--statSpeed);
 }
-
+#data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > p[title*='Total'],
 #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child ul > b[name="total"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="total"], #data > div section[name='main'] > div[name='metadata'] > div[name='sidebar'] > div:first-child li[name="total"] > * {
 	color:White;
 	background:slategray;
