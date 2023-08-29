@@ -14,7 +14,8 @@
     --Background_Load:repeating-linear-gradient(0deg, hsl(0,0%,40%) 0px, hsl(0,0%,40%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,40%);
     --Background_Load_Item:hsl(0,0%,90%);
     --Color_Load:hsl(0,0%,100%);
-    --Color_Load_Title:linear-gradient(to right, hsl(150,0%,60%), hsl(150,0%,70%));
+    --Color_Load_Title:hsl(0,0%,50%);
+    --Color_Load_Title_Selected:LightSlateGray;
 
     /* Body */
     --Background_Body:var(--Background_Load);
@@ -213,7 +214,9 @@
     --Background_Map_Sidebar_Content_Search:White;
 	--Border_Map_Sidebar_Content_Search:1px Solid Black;
     --Color_Map_Sidebar_Content_Search:hsl(0,0%,10%);
-  
+    --Background_Map_Sidebar_Content_Search_Item:hsl(0,0%,100%);
+	--Border_Map_Sidebar_Content_Search_Item:1px dashed hsl(0,0%,25%);
+    --Color_Map_Sidebar_Content_Search_Item:hsl(0,0%,10%);
 	--Background_Map_Sidebar_Content_Title:hsl(0,0%,50%);
 	--Border_Map_Sidebar_Content_Title:initial;
 	--Color_Map_Sidebar_Content_Title:initial;
@@ -239,6 +242,8 @@
     --Background_Calculator_Footer_Button:hsl(0,0%,35%);
     --Border_Calculator_Footer_Button:2px outset hsl(0,0%,50%);
     --Color_Calculator_Footer_Button:initial;
+    --Background_Calculator_Footer_Button_Active:Springgreen;
+    --Color_Calculator_Footer_Button_Active:hsl(0,0%,0%);
     --Color_Calculator_Footer:initial;
     --Background_Calculator_Footer_Input:hsl(0,0%,100%);
     --Border_Calculator_Footer_Input:4px Ridge hsl(0,0%,55%);
@@ -258,7 +263,7 @@
     --Background_Calculator_Sidebar_Content_Select:White;
     --Border_Calculator_Sidebar_Content_Select:1px Solid Black;
     --Color_Calculator_Sidebar_Content_Select:Black;
-    --Background_Calculator_Sidebar_Content_Select_Special:White;
+    --Background_Calculator_Sidebar_Content_Select_Special:hsl(0,0%,55%);
     --Border_Calculator_Sidebar_Content_Select_Special:1px Solid Black;
     --Color_Calculator_Sidebar_Content_Select_Special:Black;
     --Background_Calculator_Sidebar_Footer:hsl(0,0%,25%);
