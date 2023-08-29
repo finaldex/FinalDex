@@ -20,7 +20,7 @@
 
 <body>
     <nav id="navigation">
-        <div onauxclick="if(event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><img src="./media/Images/FinalDex/Icon/FinalDex.png" /><span><span><h6>Version 1.0.2</h6></span><span><h3>FINALDEX</h3></span></span></div>
+        <div onauxclick="if(event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><img src="./media/Images/FinalDex/Icon/FinalDex.png" /><span><span><h6>Version 1.0.3</h6></span><span><h3>FINALDEX</h3></span></span></div>
         <div><b onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Games</h6></b></div>
         <div><b onclick="document.getElementById('FAQ').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>FAQ</h6></b></div>
         <div><b onclick="document.getElementById('Bug').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Submit a Bug</h6></b></div>
@@ -44,8 +44,9 @@
     <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Items_Pockets.mp4"></video>
     <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Map.mp4"></video>
     <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Items.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Abilities.mp4"></video></span>
-
+    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Abilities.mp4"></video>
+    </span>
+                <button onclick="videoFunc()"></button>
                 <span>
                     <strong onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });">FinalDex</strong>
                     <h5>A complete online Pokédex with rich detailed data for all the mainline Pokémon Games</h5>
@@ -272,7 +273,7 @@
               
                         <li><small><s>Change search inputs to type='search'</s></small></li>
         
-                        <li><small>Give inputs name &/ ids</small></li>
+                        <li><small>Give inputs unique name &/ ids</small></li>
 
                         <li><small><s>Add mediaquery link to site</s></small></li>
                   
@@ -298,8 +299,19 @@
                         <li><small>Rewrite/Merge party/dmgcalc functions</small></li>
                   
                         <li><small><s>merge rows => 2 from index</s></small></li>
-                 
+
                         <li><small>be able to drag image from dmg calc field to party plus to create new or over existing to replace</small></li>
+                        <li><small>Fix main page video sizing 1920+ width screens issue</small></li>
+                        <li><s><small>Add open editor button and delete all button (party)</small></s></li>
+                        <li><small>update info for main move function for damage calculator</small></li>
+                        <li><small>fix button change class to properly update on data change</small></li>
+                        <li><small>fix ability datastring from primary to value and check for issues</small></li>
+
+                        <li><small>add class to apply buttons when option has changed to visualize a change</small></li>
+                        <li><small>add power/accuracy/crit/type/etc change to damage calculator move change</small></li>
+                        <li><small>fix terrain/weather/other changes does not signal change from "start calculation"</small></li>
+                        <li><small>add memory to damage calculation party</small></li>
+                        <li><small>add open data option for pokémon in damage calculator</small></li>
                     </ul>
                 </ol>
             </div>
@@ -320,6 +332,11 @@
                         <li><code>Damage Calculator</code></li>
                         <li><code>Revamp of Directory System</code></li>
                         <li><code>Additional Media Types</code></li>
+                        <li><code>Party Editor</code></li>
+                    </ul>
+                    <ul>
+                        <li><h6>Version 1.0.3 // 06-07-2023</h6></li>
+                        <li><code>Color Theme Support</code></li>
                     </ul>
                 </ol>
             </div>
