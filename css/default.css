@@ -195,7 +195,7 @@ figure[type="rotate"] {
     transform-origin:center;
 }
 figure[type="rotate"]:active {
-    transform:rotate(-180deg) scale(0.8);
+    transform:rotate(-180deg);
 }
 figure[type="scale"]:active {
 	transform:scale(0.8);
