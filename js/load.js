@@ -32,10 +32,7 @@ function requestLoad(i,url) {
 			finaldata[val] = Gamedata;
 
 			let urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","").replaceAll("_"," ");
-			GameID = getGameName("",urlid);
-			if (GameID == undefined) {
-				GameID = 1;
-			}
+			GameID = getGameID(urlid);
 			define();
 			config();
 			if (!(location.href).toLowerCase().includes("random")) {
@@ -95,6 +92,9 @@ function initialize() {
 		initTimeStart = new Date();
 	}
 
+	let val = initEnd/(initLength-1)*100;
+	document.querySelector("#load").style.setProperty("--progress",val+"%");
+
 	loaddescription.innerHTML = "Building Databases<span>.</span><span>.</span><span>.</span>";
 	if(new Date() - initTimeStart >= 5000) {
 		loaddescription.innerHTML = "Load taking longer than expected<span>.</span><span>.</span><span>.</span>";
@@ -132,7 +132,7 @@ function initialize() {
 
 		load();
 
-		console.log("Time to load: "+msToTime(new Date() - timeStart))	
+		console.log("Time to load: "+msToTime(new Date() - timeStart))
 	}
 }
 
