@@ -120,15 +120,72 @@ let createPokémon = function() {
     teamParty.appendChild(teamPartyBar);
 
 
+
+    let teamPartyDelete = document.createElement("figure");
+    let teamPartyDeleteText = document.createElement("small");
+    teamPartyDelete.setAttribute("name","delete");
+    teamPartyDelete.setAttribute("type","scale");
+    teamPartyDeleteText.innerText = "❌"
+    teamPartyBar.appendChild(teamPartyDelete);
+    teamPartyDelete.appendChild(teamPartyDeleteText);
+ 
+    teamPartyDelete.addEventListener("click",function(){let els = document.querySelectorAll("#pokémon > aside section[name='party'] > div[data-string]"); let ask = confirm("This cannot be reverted.\nDo you want to continue?"); if (ask) { for(let i = 0; i < els.length; i++) {els[i].setAttribute("data-string","");clearParty(els[i]);}consoleText("Pokémon deleted.");}})
+
+    
+
+
+
+
+    function getDataStrings(els) {
+        let res = [];
+
+        for (let i = 0; i < els.length; i++) {
+            let ds = els[i].getAttribute("data-string");
+            if (ds != undefined) {
+                res.push(ds)
+            }
+        }
+        return res;
+    }
+
+
+    let teamPartyEditor = document.createElement("figure");
+    let teamPartyEditorText = document.createElement("small");
+    teamPartyEditor.setAttribute("name","editor");
+    teamPartyEditor.setAttribute("type","invert");
+    teamPartyEditorText.innerText = "☰"
+    teamPartyBar.appendChild(teamPartyEditor);
+    teamPartyEditor.appendChild(teamPartyEditorText);
+
+    teamPartyEditor.addEventListener("click",function(){let dataStrings = getDataStrings(document.querySelectorAll("#pokémon > aside section[name='party'] > div:not([data-string=''])"));createEditor(dataStrings);})
+
+    let teamPartyInput = document.createElement("input");
+    let teamPartyLabel = document.createElement("label");
+    let teamPartyText = document.createElement("p");
+    let teamPartyIndicator = document.createElement("b");
+    teamPartyIndicator.setAttribute("type","invert");
+    teamPartyInput.setAttribute("type","checkbox");
+    teamPartyInput.setAttribute("name","partybox1");
+    teamPartyInput.setAttribute("id","partybox1");
+    teamPartyInput.setAttribute("value","party");
+    teamPartyLabel.setAttribute("for","partybox1");
+    teamPartyIndicator.setAttribute("class","indicator");
+    teamPartyText.innerText = "Party";
+    teamNav.appendChild(teamPartyInput);
+    teamNav.appendChild(teamPartyLabel);
+    teamPartyLabel.appendChild(teamPartyIndicator);
+    teamPartyIndicator.appendChild(teamPartyText);
+
+
     let teamPartyExport = document.createElement("figure");
     let teamPartyExportTxt = document.createElement("small");
     let teamPartyExportLabel = document.createElement("label");
     let teamPartyExportInput = document.createElement("input");
     let teamPartyExportOl = document.createElement("ol");
     teamPartyExport.setAttribute("name","export");
-    teamPartyExport.setAttribute("type","rotate-left");
+    teamPartyExport.setAttribute("type","rotate-right");
     teamPartyExport.classList.add("drop");
-    teamPartyExportTxt.innerText = "⮞";
+    teamPartyExportTxt.innerText = "⮜";
     teamPartyExportInput.setAttribute("type","checkbox");
     teamPartyExportInput.setAttribute("name","team-party-export-input");
     teamPartyExportInput.setAttribute("id","team-party-export-input");
@@ -140,7 +197,7 @@ let createPokémon = function() {
     teamPartyExportLabel.appendChild(teamPartyExportOl)
     teamPartyExport.addEventListener("click",dropRelPos);
     teamPartyExport.click();
-    let teamPartyExportOpts = ["Import Pokémon","Open Data Editor","Copy Data Strings","Send to Damage Calculator"];
+    let teamPartyExportOpts = ["Import Pokémon","Copy Data Strings","Send to Damage Calculator"];
     for(let e = 0; e < teamPartyExportOpts.length; e++) {
         let teamPartyExportLi = document.createElement("li");
         let teamPartyExportText = document.createElement("small");
@@ -221,29 +278,27 @@ let createPokémon = function() {
                 consoleText("Party is full!");
                 return;
             }
+            else {
+                let ask = prompt("Enter Pokémon Data Strings:","");
+
+                if (ask != null && ask != "") {
+                    ask = ask.replaceAll("\r","");
+                    ask = ask.replaceAll("\n","_");
+                    let data = splitStr(ask,"_");
+                    for (let i = 0; i < tars.length; i++) {
+                        if (data[i] != undefined && data[i] != "") {
+                            tars[i].setAttribute("data-string",data[i])
+                            partyApply(tars[i]);
+                        }
+                    }
+                    if (data.length > tars.length) {
+                        consoleText("Could not fit all Pokémon into Party.")
+                    }
+                }
+            }
         }
-    
+
     }
-
-
-
-    let teamPartyInput = document.createElement("input");
-    let teamPartyLabel = document.createElement("label");
-    let teamPartyText = document.createElement("p");
-    let teamPartyIndicator = document.createElement("b");
-    teamPartyIndicator.setAttribute("type","invert");
-    teamPartyInput.setAttribute("type","checkbox");
-    teamPartyInput.setAttribute("name","partybox1");
-    teamPartyInput.setAttribute("id","partybox1");
-    teamPartyInput.setAttribute("value","party");
-    teamPartyLabel.setAttribute("for","partybox1");
-    teamPartyIndicator.setAttribute("class","indicator");
-    teamPartyText.innerText = "Party";
-    teamNav.appendChild(teamPartyInput);
-    teamNav.appendChild(teamPartyLabel);
-    teamPartyLabel.appendChild(teamPartyIndicator);
-    teamPartyIndicator.appendChild(teamPartyText);
-
 
 
     let teamBoxInput = document.createElement("input");
@@ -280,8 +335,8 @@ let createPokémon = function() {
         let teamDiv = document.createElement("div");
         
         let teamAdd = document.createElement("button");
+        let teamAddWrap = document.createElement("span");
         let teamAddText = document.createElement("strong");
-        teamAdd.setAttribute("type","scale");
         let teamLeft = document.createElement("span");
         let teamGrab = document.createElement("b");
         let teamPokémon = document.createElement("span");
@@ -306,9 +361,10 @@ let createPokémon = function() {
         teamGrab.innerText = "⋮⋮⋮";
         teamGrab.setAttribute("name","grab");
         teamStatsButton.setAttribute("type","rotate");
-        teamStatsButton.innerText = "⟲";
+        teamStatsButton.innerText = "↺";
 
-        teamAdd.classList.add("indicator");
+        teamAdd.setAttribute("type","scale");
+        teamAddWrap.classList.add("indicator");
         teamAddText.innerText = "+";
 
         teamNickOuter.setAttribute("name","name");
@@ -322,6 +378,10 @@ let createPokémon = function() {
         teamLevel.setAttribute("placeholder","Lvl.");
         teamNick.setAttribute("type","text");
         teamNick.setAttribute("placeholder","Pokémon");
+        teamNick.setAttribute("data_placeholder","Pokémon");
+        teamNick.setAttribute("onfocus","this.placeholder='';")
+        teamNick.setAttribute("onblur","this.placeholder=this.getAttribute('data_placeholder');");
+
         if (Generation >= 1 && Generation <= 5) {
             teamNick.setAttribute("maxlength","10");
         }
@@ -381,7 +441,8 @@ let createPokémon = function() {
         teamLeft.appendChild(teamLevel);
         teamLeft.appendChild(teamGrab);
         teamDiv.appendChild(teamAdd);
-        teamAdd.appendChild(teamAddText);
+        teamAdd.appendChild(teamAddWrap);
+        teamAddWrap.appendChild(teamAddText);
         teamDiv.appendChild(teamPokémon);
 
 
@@ -450,7 +511,7 @@ let createPokémon = function() {
         teamExportLabel.appendChild(teamExportOl)
         teamExport.addEventListener("click",dropRelPos);
         teamExport.click();
-        let teamExportOpts = ["Copy Data String","Open Data Editor","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
+        let teamExportOpts = ["Copy Data String","Add to Damage Calculator","Add Copy to Party","Add Copy to Box","Change Evolution","Change Form"];
         for(let e = 0; e < teamExportOpts.length; e++) {
             let teamExportLi = document.createElement("li");
             let teamExportText = document.createElement("small");
@@ -478,7 +539,6 @@ let createPokémon = function() {
 
             if (int == undefined) {
                 consoleText("An error occured.")
-                console.log("yep")
                 return;
             }
 
@@ -486,9 +546,8 @@ let createPokémon = function() {
             let els = document.querySelectorAll('#pokémon > aside[name="team"] section div[data-string=""]');
        
 
-   
             if (val == "Add Copy to Box") {
-                storeInBox(dataString);
+                createBox(dataString);
                 consoleText("Copy added to Box.");
             }
             else if (val == "Add Copy to Party") {
@@ -580,13 +639,15 @@ let createPokémon = function() {
             if (val == "Delete") {
                 let ask = confirm("The Pokémon's data will not be saved.\nDo you want to continue?");
                 if (ask) {
+                    tar.setAttribute("data-string","");
                     clearParty(tar);
                     consoleText("Pokémon deleted.");
                 }
             }
             else if (val == "Send to Box") {
                 consoleText("Sent "+pok+" to Box.");
-                storeInBox(dataString);
+                createBox(dataString);
+                tar.setAttribute("data-string","");
                 clearParty(tar);
             }
         }
@@ -616,6 +677,7 @@ let createPokémon = function() {
             partyPokMovesMoveSelect.addEventListener("change",partySave);
             partyPokMovesMoveSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
             partyPokMovesMoveSelect.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
+            partyPokMovesMoveSelect.addEventListener("change",function(){let tar = event.target; if (!tar.value.includes("Move #")) {tar.title = formatMoveData(tar.value);} else {tar.removeAttribute("title");}})
         }
 
         if (Ability.length > 0) {
@@ -690,6 +752,7 @@ let createPokémon = function() {
             partyPokStatsIVInput.setAttribute("placeholder","IV")
             partyPokStatsIVInput.setAttribute("onblur","this.placeholder = 'IV'");
             partyPokStatsIVInput.setAttribute("onfocus","this.placeholder = ''");
+            partyPokStatsIVInput.addEventListener("change", function() {let tar = event.target; let max = tar.max; let p = (tar.value/max)*100; tar.style.color = "hwb("+p+" 0% 0% / 1)";});
         }
 
 
@@ -708,8 +771,8 @@ let createPokémon = function() {
             if (Generation >= 1 && Generation <= 2) {
                 partyPokStatsEVInput.setAttribute("min","0");
                 partyPokStatsEVInput.setAttribute("max","255");
+                partyPokStatsEVInput.setAttribute("data-max","255");
                 partyPokStatsEVInput.setAttribute("title","Effort Value"+"\n"+evStats[q]["Name"]);
-
                 partyPokStatsEVInput.setAttribute("placeholder","EV")
                 partyPokStatsEVInput.setAttribute("onblur","this.placeholder = 'EV'");
                 partyPokStatsEVInput.setAttribute("onfocus","this.placeholder = ''");
@@ -718,7 +781,7 @@ let createPokémon = function() {
                 partyPokStatsEVInput.setAttribute("min","0");
                 partyPokStatsEVInput.setAttribute("max","200");
                 partyPokStatsEVInput.setAttribute("title","Awakening Value"+"\n"+evStats[q]["Name"]);
-
+                partyPokStatsEVInput.setAttribute("data-max","200");
                 partyPokStatsEVInput.setAttribute("placeholder","AV")
                 partyPokStatsEVInput.setAttribute("onblur","this.placeholder = 'AV'");
                 partyPokStatsEVInput.setAttribute("onfocus","this.placeholder = ''");
@@ -726,11 +789,11 @@ let createPokémon = function() {
             else if (Generation >= 3) {
                 partyPokStatsEVInput.setAttribute("min","0");
                 partyPokStatsEVInput.setAttribute("max","255");
+                partyPokStatsEVInput.setAttribute("data-max","255");
                 partyPokStatsEVInput.setAttribute("title","Effort Value"+"\n"+evStats[q]["Name"]);
                 partyPokStatsEVInput.addEventListener("blur", evInputMax);
                 partyPokStatsEVInput.addEventListener("focus", evInputMax);
                 partyPokStatsEVInput.addEventListener("change", evInputMax);
-
                 partyPokStatsEVInput.setAttribute("placeholder","EV")
                 partyPokStatsEVInput.setAttribute("onblur","this.placeholder = 'EV'");
                 partyPokStatsEVInput.setAttribute("onfocus","this.placeholder = ''");
@@ -741,8 +804,8 @@ let createPokémon = function() {
             partyPokStatsEVInput.addEventListener("keyup",function(event){if(event.which === 13 || event.which === 27){this.blur()}});
             partyPokStatsEVInput.addEventListener("change", function() {calcPartyStat(this);});
             partyPokStatsEVInner.appendChild(partyPokStatsEVInput);
+            partyPokStatsEVInput.addEventListener("change", function() {let tar = event.target; let max = parseInt(tar.getAttribute("data-max")); let p = (tar.value/max)*100; tar.style.color = "hwb("+p+" 0% 0% / 1)";});
 
-        
         }
 
 
@@ -806,7 +869,6 @@ let createPokémon = function() {
             teamGender.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
             teamGender.addEventListener("change",partySave);
             teamGender.addEventListener("input",function(){this.name = this.value;})
-            
         }
 
         teamRight.appendChild(teamExport);
@@ -842,7 +904,7 @@ let createPokémon = function() {
     let boxExportInput = document.createElement("input");
     let boxExportOl = document.createElement("ol");
     boxExport.setAttribute("name","export");
-    boxExport.setAttribute("type","rotate-left");
+    boxExport.setAttribute("type","scale");
     boxExport.classList.add("drop");
     boxExportTxt.innerText = "🟆";
     boxExportInput.setAttribute("type","checkbox");
@@ -945,46 +1007,37 @@ let createPokémon = function() {
 
 
     function BoxDelete() {
-        let lock = confirm("Deleting all the Pokémon in the box.\nDo you want to continue?");
-
         let items = document.querySelectorAll("#pokémon aside[name='team'] section[name='box'] > ul li");
 
-   
-            if (lock) {
-                let ask = confirm("This cannot be reverted.\nDo you want to continue?");
+        if (items.length <= 0) {
+            consoleText ("No Pokémon found in Box.")
+            return;
+        }
 
-                if (ask) {
-                    if (items.length > 0) {
-                        for (let u = 0; u < items.length; u++) {
-                            items[u].remove("hover");
-                        }
-                        boxMemory("Save");
+        let lock = confirm("Deleting all the Pokémon in the box.\nDo you want to continue?");
 
-                        consoleText("Box successfully cleared.");
-                    }
-                    else {
-                        consoleText ("No Pokémon found in Box.")
-                    }
+        if (lock) {
+            let ask = confirm("This cannot be reverted.\nDo you want to continue?");
+
+            if (ask) {
+                for (let u = 0; u < items.length; u++) {
+                    items[u].remove("hover");
                 }
+                boxMemory("Save");
+                consoleText("Box successfully cleared.");
             }
+        }
     }
-
-    let blinktar = document.querySelector('#pokémon > aside section:not([name]) > label[for="partybox1"] *.indicator');
-    let data = [];
-
 
 
 
     $(function() {
         $('#pokémon > aside section[name="box"] > ul').sortable({
             start: function(e, ui) {
-                saveddrag = ui.item.context;
-                startDrag();
                 boxMemory("Save");
                 document.body.classList.add("dragging");
             },
             stop: function(e, ui) {
-                stopDrag();
                 boxMemory("Save");
                 document.body.classList.remove("dragging");
             },
@@ -1007,121 +1060,47 @@ let createPokémon = function() {
             }
         });
 
-        $('#pokémon > aside section:not([name]) > label .indicator').droppable({
+        $('#pokémon > aside[name="team"] *.indicator').droppable({
             drop: function(e, ui) {
-
                 let helper = ui.helper["context"];
                 let data = helper.getAttribute("data-string");
                 data = undDel(data,"pok:"+getPokémonName(helper.id))
+                data_obj = dataStringToObj(data);
 
 
+                let dir = e.target.firstChild.innerText;
 
-                let tar = e.target.firstChild.innerText;
 
-                if (tar == "Party") {
-                    let partys = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[data-string=""]');
-                    if (partys.length > 0) {
-    
-                        //deleteBox(saveddrag);
-
-                        partys[0].setAttribute("data-string",data);
-
-                        partyApply(partys[0]);
-  
-                        consoleText("Sent "+dataStringToObj(data)["pok"]+" to Party.")
+                if (dir == "+") {
+                    let tar = findUpTag(e.target,"DIV");
+                    if (tar != undefined && helper.tagName != "DIV") {
+                        tar.setAttribute("data-string",data);
+                        partyApply(tar);
+                        consoleText("Sent "+data_obj["pok"]+" to Party.")
+                    }
+                }
+                else if (dir == "Party") {
+                    let tars = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[data-string=""]');
+                    if (tars.length > 0) {
+                        tars[0].setAttribute("data-string",data);
+                        partyApply(tars[0]);
+                        consoleText("Sent "+data_obj["pok"]+" to Party.")
                     }
                     else {
                         consoleText("Party is full!");
                     }
                 }
-                else if (tar == "Box") {
-                    storeInBox(data);
-                    consoleText("Added "+dataStringToObj(data)["pok"]+" to the Box.")
+                else if (dir == "Box") {
+                    createBox(data);
+                    consoleText("Added "+data_obj["pok"]+" to the Box.")
                 }
-            
-
-            
             }
         });
 
 
-        function startDrag() {
-            saveddrag.style.pointerEvents = "none";
 
-            if (saveddrag.getAttribute("data-pok") != undefined) {
-                data.push("pok:"+saveddrag.getAttribute("data-pok"));
-            }
-            if (saveddrag.getAttribute("data-item") != undefined) {
-                data.push("it:"+saveddrag.getAttribute("data-item"));
-            }
-            if (saveddrag.getAttribute("data-nick") != undefined) {
-                data.push("ni:"+saveddrag.getAttribute("data-nick"));
-            }
-            if (saveddrag.getAttribute("data-level") != undefined) {
-                data.push("lv:"+saveddrag.getAttribute("data-level"));
-            }
-            if (saveddrag.getAttribute("data-gender") != undefined) {
-                data.push("ge:"+saveddrag.getAttribute("data-gender"));
-            }
-            if (saveddrag.getAttribute("data-move") != undefined) {
-                data.push("mo:"+saveddrag.getAttribute("data-move"));
-            }
-            if (saveddrag.getAttribute("data-ability") != undefined) {
-                data.push("ab:"+saveddrag.getAttribute("data-ability"));
-            }
-            if (saveddrag.getAttribute("data-iv") != undefined) {
-                data.push("iv:"+saveddrag.getAttribute("data-iv"));
-            }
-            if (saveddrag.getAttribute("data-ev") != undefined) {
-                data.push("ev:"+saveddrag.getAttribute("data-ev"));
-            }
-            if (saveddrag.getAttribute("data-nature") != undefined) {
-                data.push("na:"+saveddrag.getAttribute("data-nature"));
-            }
-            if (saveddrag.getAttribute("data-metlocation") != undefined) {
-                data.push("metlo:"+saveddrag.getAttribute("data-metlocation"));
-            }
-            if (saveddrag.getAttribute("data-metlevel") != undefined) {
-                data.push("metlv:"+saveddrag.getAttribute("data-metlevel"));
-            }
-            if (saveddrag.getAttribute("data-metdate") != undefined) {
-                data.push("metda:"+saveddrag.getAttribute("data-metdate"));
-            }
-            if (saveddrag.getAttribute("data-friendship") != undefined) {
-                data.push("fr:"+saveddrag.getAttribute("data-friendship"));
-            }
-
-            boxDrag = true;
-            blinktar.firstElementChild.classList.add("enabled");
-        }
-        function stopDrag() {
-            saveddrag.style.pointerEvents = "unset";
-            saveddrag = "";
-            boxDrag = false;
-            blinktar.firstElementChild.classList.remove("enabled");
-            data = [];
-        }
     });
 
-    $("body").mousemove(function (e) {
-        if (boxDrag == true) {
-            let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[data-string=""]');
-            if (tar.length > 0) {
-                if (e.target === blinktar) {
-                    blinktar.firstElementChild.classList.add("hover");
-                }
-                else {
-                    blinktar.firstElementChild.classList.remove("hover");
-                }
-            }
-        }
-        else {
-            let hovers = document.getElementsByClassName("hover");
-            for (let u = 0; u < hovers.length; u++) {
-                hovers[u].classList.remove("hover");
-            }
-        }
-    });
 
     
     $(function() {
@@ -1182,7 +1161,7 @@ let createPokémon = function() {
   
 
 
-
+    settingsDefaultImgtypePath.setAttribute("name","itype")
     settingsDefaultImgtypeExecute.setAttribute("type","small")
     settingsDefaultImgtypeExecuteText.innerText = "Apply";
 
@@ -1537,7 +1516,6 @@ function dexSwitch() {
         revert:true,
         helper:"clone",
         appendTo:"body",
-        cursor:"grabbing",
         scroll: false,
     });
 }
@@ -1817,9 +1795,7 @@ function createContain(condition) {
                         contentMainRegionalID.setAttribute("name","regional"+y)
                         contentMainUp.appendChild(contentMainRegionalID);
                     }
-                    contentDiv.addEventListener("dragstart", dragStart);
-                    contentDiv.addEventListener("dragend", dragEnd);
-                    contentDiv.addEventListener("drag", dragMove);
+      
                 }
             }
         }
@@ -1879,7 +1855,7 @@ function variantSelector() {
 
     memory("Save","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input'));
     memory("Restore","game",document.querySelectorAll('#pokémon > div > ul input[type="checkbox"]'));
-    memory("Restore","game",[document.querySelector('#pokémon > aside[name="settings"] > span[name="imagetype"] select')]);
+    memory("Restore","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="imagetype"] select'));
 
     ImageType("Execute");
     ImageType("Populate");
@@ -2223,16 +2199,18 @@ function partyItem(base) {
     let sel = base.querySelector(':scope *[name="item"] select');
 
     
+    if (sel != undefined) {
 
-    item.src = getMedia(true,[sel.value],[PATH_Item_Bag]);
-    item.title = sel.value;
+        item.src = getMedia(true,[sel.value],[PATH_Item_Bag]);
+        item.title = sel.value;
 
 
-    if (sel.value == "Item") {
-        item.style.display = "none";
-    }
-    else {
-        item.style.removeProperty("display");
+        if (sel.value == "Item") {
+            item.style.display = "none";
+        }
+        else {
+            item.style.removeProperty("display");
+        }
     }
 }
 
@@ -2258,8 +2236,7 @@ function clearParty(base) {
     for (let i = 0; i < imgs.length; i++) {
         imgs[i].src = "";
     }
-    base.setAttribute("data-string","");
-
+    partyMemory("Save");
 }
 
 
@@ -2270,108 +2247,18 @@ function clearParty(base) {
 
 
 
-function dragStart(e) {
-    let base = document.querySelector("#pokémon aside[name='team']")
-    let tar = e.target;
-    savedtar = e.target;
-    for (let q = 0; q < 10; q++) {
-        if (tar.tagName == "LI") {
-            break;
-        }
-        tar = tar.parentElement;
-    }
-    drag = getPokémonName(tar.id);
-    
-    let blinks = base.querySelectorAll(":scope .indicator");
-    for (let q = 0; q < blinks.length; q++) {
-        blinks[q].classList.add("enabled");
-    }
-}
 
-function dragEnter(e) {
-    if (e.target.innerText == "Party") {
-        let tar = document.querySelectorAll('#pokémon > aside[name="team"] section[name="party"] > div[data-string=""]');
-        if (tar.length > 0) {
-            e.target.classList.add("hover");
-        }
-    }
-    else {
-        e.target.classList.add("hover");
-    }
-}
-
-function dragLeave(e) {
-    e.target.classList.remove("hover");
-}
-
-
-function dragMove(e) {
-    e.preventDefault();
-}
-
-function dragOver(e) {
-    e.preventDefault();
-}
-
-function dragEnd(e) {
-
-    drag = undefined;
-
-    let base = document.querySelector("#pokémon aside[name='team']")
-
-    let blinks = base.querySelectorAll(":scope .indicator");
-    for (let q = 0; q < blinks.length; q++) {
-        blinks[q].classList.remove("enabled");
-    }
-
-    
-}
-/*
-function dragDrop(e) {
-
-    let base = document.querySelector("#pokémon aside[name='team']")
-
-    let hov = base.querySelectorAll(':scope .hover');
-    for(let i = 0; i < hov.length; i++) {
-        hov[i].classList.remove("hover");
-    }
-
-    if (drag != undefined) {
-        if (e.target.innerText == "Party") {
-            let base = document.querySelectorAll('#pokémon > aside[name="team"] section div[data-string=""]');
-            if (base.length > 0) {
-                partyApply(base[0],"pok:"+drag);
-  
-                consoleText("Added "+drag+" to Party.");
-            }
-            else {
-                consoleText("Party is full!")
-            }
-        }
-        else if (e.target.innerText == "Box") {
-            storeInBox("pok:"+drag);
-            consoleText("Added "+drag+" to Box.");
-        }
-        else if (e.target.innerText == "+") {
-            let base = e.target.parentElement.parentElement;
-            partyApply(base,"pok:"+drag);
-
-            consoleText("Added "+drag+" to Party.");
-        }
-    }
-}
-*/
 
 function partyApply(base) {
 
-    data = base.getAttribute("data-string")
+    let data = base.getAttribute("data-string")
     data = dataStringToObj(data)
 
     let i;
     let pok = data["pok"];
     let item = data["it"];
     let nick = data["ni"];
-    let level = data["le"];
+    let level = data["lv"];
     let gender = data["ge"];
     let move = data["mo"];
     let ability = data["ab"];
@@ -2379,6 +2266,7 @@ function partyApply(base) {
     let ev = data["ev"];
     let nature = data["na"];
     let friendship = data["fr"];
+    let shiny = data["shiny"];
 
     if (pok == undefined) {
         return;
@@ -2387,6 +2275,7 @@ function partyApply(base) {
     i = getPokémonInt(pok);
 
     clearParty(base);
+
 
 
 
@@ -2400,9 +2289,11 @@ function partyApply(base) {
     let baseMoves = base.querySelectorAll(':scope span[name="moves"] > span:nth-child(2) select');
     let baseAbility = base.querySelector(':scope span[name="ability"] select');
     let baseNature = base.querySelector(':scope span[name="nature"] select');
+    let baseFriendship = base.querySelector(':scope span[name="friendship"] input');
     let baseIV = base.querySelectorAll(':scope span[name="iv"] input');
     let baseEV = base.querySelectorAll(':scope span[name="ev"] input');
     let baseStats = base.querySelector(':scope span[name="stats"] > span:nth-child(2) > span:last-child');
+
 
     let baseExport = base.querySelector(":scope figure[name='export']");
 
@@ -2434,12 +2325,19 @@ function partyApply(base) {
     }
     
 
-    basePok.src = getMedia(true,fileNames,[PATH_Pokémon_Battle_Default_Front])
+
+    if (shiny != undefined && shiny == "true") {
+        basePok.src = getMedia(true,fileNames,[PATH_Pokémon_Battle_Shiny_Front])
+    }
+    else {
+        basePok.src = getMedia(true,fileNames,[PATH_Pokémon_Battle_Default_Front])
+    }
    
 
     basePok.setAttribute("value",i);
     basePok.title = getPokémonName(i);
     baseNick.setAttribute("placeholder",getPokémonName(i));
+    baseNick.setAttribute("data_placeholder",getPokémonName(i));
 
 
     if (HeldItem == true) {
@@ -2540,29 +2438,31 @@ function partyApply(base) {
 
         let possibleGender = [];
         if (getPokémonName(i).includes("Male")) {
-            possibleGender = ["♂"];
+            possibleGender = [...(["♂"])];
         }
         else if (getPokémonName(i).includes("Female")) {
-            possibleGender = ["♀"];
+            possibleGender = [...(["♀"])];
         }
         else {
             if (tempgender[0] == "0" && tempgender[1] == "0") {
-                possibleGender = ["☿"];
+                possibleGender = [...(["☿"])];
             }
             else if (tempgender[0] == "0") {
-                possibleGender = ["♀"];
+                possibleGender = [...(["♀"])];
             }
             else if (tempgender[1] == "0") {
-                possibleGender = ["♂"];
+                possibleGender = [...(["♂"])];
             }
             else {
-                possibleGender = ["♂","♀"];
+                possibleGender = [...(["♂","♀"])];
             }
         }
+        //possibleGender.unshift("")
+
 
     
         baseGender.setAttribute("name",possibleGender[0]);
-
+        baseGender.innerHTML = "";
 
         for (let q = 0; q < possibleGender.length; q++) {
             let option = document.createElement("option");
@@ -2614,14 +2514,14 @@ function partyApply(base) {
 
 
     if (Ability.length > 0) {
-        let abilities = returnData(i,"Ability","");
+        let abs = returnData(i,"Ability","");
         baseAbility.innerHTML = "";
 
-        for (let q = 0; q < abilities.length; q++) {
-            if (abilities[q] != undefined) {
+        for (let q = 0; q < abs.length; q++) {
+            if (abs[q] != undefined) {
                 let option = document.createElement("option");
-                option.innerText = abilities[q];
-                option.value = abilities[q];
+                option.innerText = abs[q];
+                option.value = abs[q];
                 if (q == 0) {
                     option.setAttribute("name","Primary")
                 }
@@ -2668,8 +2568,6 @@ function partyApply(base) {
             ability = getAbilityPosition(i,ability);
         }
 
-        console.log(ability);
-
         let abtemp = baseAbility.querySelector(':scope > option[name="'+ability+'"]');
 
         if (abtemp != undefined) {
@@ -2693,7 +2591,6 @@ function partyApply(base) {
                     if (tempmoves.includes(tempmove[q])) {
                         baseMoves[q].value = tempmove[q];
                         baseMoves[q].title = formatMoveData(tempmove[q]);
-                        baseMoves[q].setAttribute("name","styleBackgroundType"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempmove[q]))
                     }
                 }
                 else {
@@ -2722,25 +2619,43 @@ function partyApply(base) {
     }
 
 
-    /*
-    if (Friendship == true) {
-        if (baseFriendship != null) {
-            if (friendship != undefined) {
-                baseFriendship.value = friendship;
-            }
-            else if (returnData(i,"Base Friendship","")[0] != undefined){
-                baseFriendship.value = returnData(i,"Base Friendship","")[0];
-            }
+
+    if (baseFriendship != undefined) {
+        let frdata = returnData(i,"Base Friendship","");
+        if (friendship != undefined) {
+            baseFriendship.value = friendship;
+        }
+        else if (frdata[0] != undefined){
+            baseFriendship.value = frdata[0];
         }
     }
-*/
-
-
+    
+    calcPartyStat(base);
     partySave(base);
+    partyStyle(base);
     boxMemory("Save");
     partyMemory("Save");
 }
+function partyStyle(base) {
+    let baseMoves = base.querySelectorAll(':scope span[name="moves"] > span:nth-child(2) select');
+    let baseNumbers = base.querySelectorAll(":scope *[name='stats'] input[type='number']");
 
+    
+    for (let i = 0; i < baseNumbers.length; i++) {
+        if (baseNumbers[i].min != baseNumbers[i].max) {
+            let p = ((baseNumbers[i].value / baseNumbers[i].max)*100);
+            baseNumbers[i].style.color = "hwb("+p+" 0% 0% / 1)";
+        }
+    }
+    for (let i = 0; i < baseMoves.length; i++) {
+        if (baseMoves[i].value != "" && !baseMoves[i].value.includes("Move #")) {
+            baseMoves[i].title = formatMoveData(baseMoves[i].value)
+        }
+        else {
+            baseMoves[i].removeAttribute("title");
+        }
+    }
+}
 
 function partySave(base) {
 
@@ -2780,7 +2695,7 @@ function partySave(base) {
     if (basePok.title != undefined) {
         pok = basePok.title;
     }
-    if (baseItem.value != "") {
+    if (baseItem != undefined && baseItem.value != "") {
         if (baseItem.value == "Item") {
             item = "";
         }
@@ -2788,19 +2703,18 @@ function partySave(base) {
             item = baseItem.value;
         }
     }
-    if (baseNick.value != "") {
-        nick = baseNick.value;
-    }
-    if (baseLevel.value != "") {
-        level = baseLevel.value;
-    }
-    if (baseGender != undefined && baseGender.value != "") {
+
+    nick = baseNick.value;
+
+    level = baseLevel.value;
+    
+    if (baseGender != undefined) {
         gender = baseGender.value;
     }
-    if (baseAbility != undefined && baseAbility.value != "") {
+    if (baseAbility != undefined) {
         ability = baseAbility.value;
     }
-    if (baseNature != undefined && baseNature.value != "") {
+    if (baseNature != undefined) {
         nature = baseNature.value;
     }
 
@@ -2833,6 +2747,7 @@ function partySave(base) {
     if (evs.length > 0) {
         ev = evs.join(",");
     }
+
 
 
     let data = {};
@@ -2874,6 +2789,9 @@ function partySave(base) {
     if (nature != undefined) {
         data["na"] = nature;
     }
+
+
+	data = Object.entries(data).reduce((a,[k,v]) => (v.replaceAll(',','') == "" ? a : (a[k]=v, a)), {})
 
     base.setAttribute("data-string",dataObjToString(data));
 
@@ -3117,177 +3035,35 @@ function returnMoveSet(int,additional) {
 
 
 
-function storeInBox(data) {
+function createBox(data) {
 
     let box = document.querySelector('#pokémon > aside[name="team"] > section[name="box"] ul');
-    const datastr = data;
+    let data_obj = dataStringToObj(data);
 
-    let i;
-    let pok;
-    let item;
-    let nick;
-    let level;
-    let gender;
-    let move;
-    let ability;
-    let iv;
-    let ev;
-    let nature;
-    let metlocation;
-    let metlevel;
-    let metdate;
-    let friendship;
+    int = getPokémonInt(data_obj["pok"]);
 
-    if(data.includes("|")) {
-        data = data.split("|")
-        for (let q = 0; q < data.length; q++) {
-            if (data[q].split(":")[0] == "pok") {
-                pok = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "it") {
-                item = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ni") {
-                nick = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "lv") {
-                level = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ge") {
-                gender = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "mo") {
-                move = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ab") {
-                ability = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "iv") {
-                iv = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "ev") {
-                ev = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "na") {
-                nature = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "metlo") {
-                metlocation = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "metlv") {
-                metlevel = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "metda") {
-                metdate = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-            if (data[q].split(":")[0] == "fr") {
-                friendship = data[q].replaceAll(data[q].split(":")[0]+":","")
-            }
-        }
+    let path = [];
 
+    if (data_obj["shiny"] != undefined && data_obj["shiny"] == "true") {
+        path = [PATH_Pokémon_Box_Shiny_PNG,PATH_Pokémon_Box_Default_PNG]
     }
     else {
-        if (data.split(":")[0] == "pok") {
-            pok = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "it") {
-            item = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ni") {
-            nick = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "lv") {
-            level = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ge") {
-            gender = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "mo") {
-            move = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ab") {
-            ability = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "iv") {
-            iv = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "ev") {
-            ev = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "na") {
-            nature = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "metlo") {
-            metlocation = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "metlv") {
-            metlevel = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "metda") {
-            metdate = data.replaceAll(data.split(":")[0]+":","")
-        }
-        if (data.split(":")[0] == "fr") {
-            friendship = data.replaceAll(data.split(":")[0]+":","")
-        }
+        path = [PATH_Pokémon_Box_Default_PNG]
     }
-
-    i = getPokémonInt(pok);
 
     let li = document.createElement("li");
     let shadow = document.createElement("span");
     let img = document.createElement("img");
-    img.src = getMedia(true,[getPokémonPath(i)],[PATH_Pokémon_Box_Default_PNG]);
-    img.setAttribute("value",i);
+    img.src = getMedia(true,[getPokémonPath(int)],path);
     box.appendChild(li)
     li.appendChild(shadow)
     li.appendChild(img)
 
-    if (i != undefined) {
-        li.setAttribute("data-pok",pok);
-    }
-    if (item != undefined) {
-        li.setAttribute("data-item",item);
-    }
-    if (nick != undefined) {
-        li.setAttribute("data-nick",nick);
-    }
-    if (level != undefined) {
-        li.setAttribute("data-level",level);
-    }
-    if (gender != undefined) {
-        li.setAttribute("data-gender",gender);
-    }
-    if (move != undefined) {
-        li.setAttribute("data-move",move);
-    }
-    if (ability != undefined) {
-        li.setAttribute("data-ability",ability);
-    }
-    if (iv != undefined) {
-        li.setAttribute("data-iv",iv);
-    }
-    if (ev != undefined) {
-        li.setAttribute("data-ev",ev);
-    }
-    if (nature != undefined) {
-        li.setAttribute("data-nature",nature);
-    }
-    if (metlocation != undefined) {
-        li.setAttribute("data-metlocation",metlocation);
-    }
-    if (metlevel != undefined) {
-        li.setAttribute("data-metlevel",metlevel);
-    }
-    if (metdate != undefined) {
-        li.setAttribute("data-metdate",metdate);
-    }
-    if (friendship != undefined) {
-        li.setAttribute("data-friendship",friendship);
-    }
+    li.setAttribute("data-string",data)
    
 
    
-    img.setAttribute("title",dataStringTitle(datastr));
+    img.setAttribute("title",dataStringTitle(data));
     boxMemory("Save");
 }
 
@@ -3366,6 +3142,7 @@ function getBoxData(base) {
 
 
 function partyAdd() {
+
     let data = prompt("Enter Pokémon Data String:","");
 
     if (data != null && data != "") {
@@ -3379,12 +3156,9 @@ function partyAdd() {
 
         let int = getPokémonInt(data["pok"]);
 
-        console.log(int)
-
-
+   
         if (finaldata["Pokémon"]["Reference"][int][DATA_Pokémon_Reference["Reference"]] == "true") {
             base.setAttribute("data-string",dataObjToString(data))
-
 
             partyApply(this.parentElement)
             consoleText("Added "+getPokémonName(int)+" to Party.")
@@ -3583,15 +3357,13 @@ function calcPartyStat(base) {
             let base = returnData(int,"Base Stats "+stats,"")[0];
             let iv = ivsPath[i].value
             let ev = evsPath[i].value
-            let nature = naturePath.value;
+            let nature = 1;
             let friendship = 0;
 
             if (Natures.length > 0) {
-                nature = natureModifier(stats,);
+                nature = natureModifier(stats,naturePath.value);
             }
-            else {
-                nature = 1;
-            }
+
 
             if (Friendship && false) {
                 if (friendshipPath.value != undefined && friendshipPath.value != "") {
@@ -3764,7 +3536,18 @@ function changePartyEvolution(base,i) {
 
 
         if (num.includes(reply)) {
+            let pos;
+            if (data["ab"] != undefined) {
+                if (!data["ab"].toLowerCase().includes("primary") && !data["ab"].toLowerCase().includes("secondary") && !data["ab"].toLowerCase().includes("hidden")) {
+                    pos = getAbilityPosition(getPokémonInt(data["pok"]),data["ab"])
+                }
+            }
+
             data["pok"] = result;
+
+            if (pos != undefined) {
+                data["ab"] = getPositionAbility(getPokémonInt(data["pok"]),pos);
+            }
             base.setAttribute("data-string",dataObjToString(data));
 
             partyApply(base)
@@ -4043,6 +3826,18 @@ function abilityPartyBoxLearnset() {
 }
 
 
+$("body").click(function(event) {
+    let els = document.getElementsByClassName("drop")
+    for (let i = 0; i < els.length; i++) {
+        if(!$(event.target).closest(els[i]).length && !$(event.target).is(els[i])) {
+            let el = els[i].querySelector(":scope input[type='checkbox']");
+            if (el != null) {
+                el.checked = false;
+            }
+        }
+    }
+    
+});
 
 
 
