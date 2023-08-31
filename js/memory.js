@@ -29,24 +29,27 @@ function partyMemory(action) {
 function boxMemory(action) {
 
     if (action == "Save") {
-        localStorage.setItem("finaldex-box-"+GameID, getAllBoxData());
+        let els = document.querySelectorAll("#pokémon > aside section[name='box'] ul > li");
+        let data = [];
+        for (let i = 0; i < els.length; i++) {
+            let data_str = els[i].getAttribute("data-string")
+            if (data_str != undefined && data_str != "") {
+                data.push(data_str);
+            }
+        }
+        localStorage.setItem("finaldex-box-"+GameID, JSON.stringify(data));
     }
     else if (action == "Restore") {
-        let tempArr = [];
-        let tempStr = localStorage.getItem("finaldex-box-"+GameID);
-
-        if (tempStr != "undefined" && tempStr != undefined) {
-            if (tempStr.includes("/")) {
-                tempArr = tempStr.split("/");
-                for(let i = 0; i < tempArr.length; i++) {
-                    storeInBox(tempArr[i]);
+        let data = localStorage.getItem("finaldex-box-"+GameID);
+        if (data != undefined && data != "") {
+            try {
+                data = JSON.parse(data)
+                for (let i = 0; i < data.length; i++) {
+                    createBox(data[i]);
                 }
             }
-            else {
-                tempArr[0] = tempStr;
-                for(let i = 0; i < tempArr.length; i++) {
-                    storeInBox(tempArr[i]);
-                }
+            catch {
+                console.log(data)
             }
         }
     }
@@ -62,11 +65,17 @@ function memory(action,suffix,elements) {
     if (suffix.includes("game")) {
         tempArr.push(GameID);
     }
-	
+
+  
 
 	for(let i = 0; i < elements.length; i++) {
 		let setName = tempArr.join("-")+"-"+elements[i].getAttribute("name");
 		let setValue;
+
+        if (setName.includes("null")) {
+            console.warn("Element is missing unique name for memory.")
+            return;
+        }
 
 		if (elements[i].tagName == "INPUT" && elements[i].getAttribute("type") == "checkbox") {
 			setValue = elements[i].checked;
