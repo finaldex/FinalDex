@@ -1753,8 +1753,7 @@ function ImageType(action) {
                 els[q].src = getMedia(true,["^"+getPokémonPath(int),"^"+getPokémonPath(int)+"_Male","^"+getPokémonPath(int)+"_Female"],[val],games)
             }
             
-
-            memory("Save","game",el);
+            memory("Save","game",[el]);
         }
 
     }
@@ -1862,7 +1861,7 @@ function mapifyMap(base) {
 			if (getApplicable(finaldata["Locations"]["Reference"][i]["Game"])) {
 				let points = getMapPoints(finaldata["Locations"]["Reference"][i]["Location"],base);
 				if (points.length == 0) {
-					console.log("#DEBUG# "+finaldata["Locations"]["Reference"][i]["Location"]+" returned an error.");
+					console.warn(finaldata["Locations"]["Reference"][i]["Location"]+" returned an error.");
 				}
 			}
 		}
@@ -2202,37 +2201,29 @@ function load() {
 	document.documentElement.scrollTop = 0;
 	load.className += "hide";
 }
-function getGameName(id,name) {
+function getGameID(name) {
+
 	let arr = finaldata["Game"]["Reference"];
-	let ran;
-
-	if (name != undefined && name != "" && name.toLowerCase() == "random") {
-		ran = Math.floor(Math.random() * arr.length-2) + 1;
-		return ran;
-	}
 	
-	if (id != "") {
-		for(let q = 0; q < arr.length; q++) {
-			let x = q + 1;
-			if(x == id) {
-				return arr[q]["Full Name"];
-			}
-		}
+    if (!isNaN(parseInt(name))) {
+        name = parseInt(name);
+        if (name >= 0 && name <= AllGames.length) {
+            return name;
+        }
+    }
+	else if (name.toLowerCase() == "random") {
+		return Math.floor(Math.random() * AllGames.length) + 1;
 	}
-	else if (name != "") {
+	else {
 		for(let q = 0; q < arr.length; q++) {
-			let x = q + 1;
-			if(arr[q]["Full Name"] == name) {
-				return x;
-			}
-			else if(arr[q]["Name"] == name) {
-				return x;
+			if(arr[q]["Full Name"] == name || arr[q]["Name"] == name) {
+				return parseInt(arr[q]["ID"]);
 			}
 		}
 	}
 
 
-	return undefined;
+	return 1;
 }
 
 
