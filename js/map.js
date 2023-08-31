@@ -63,16 +63,16 @@ let createMap = function() {
 	mapSectionContentMapFullscreen.setAttribute("name","fullscreen");
 	mapSectionContentMapFullscreenText.innerText = "⛶";
 	mapSectionContentMapPause.setAttribute("name","pause");
-	mapSectionContentMapPauseText.innerText = "⏸︎";
+	mapSectionContentMapPauseText.innerText = "❙❙";
 
 	mapSectionContentMapImg.src = getMedia(true,["Map"],[PATH_Region_Map])
 
-	mapSectionContentMapImg.setAttribute("usemap","#"+Region.join("_")+"-map");
+	mapSectionContentMapImg.setAttribute("usemap","#"+Region.join("_").replaceAll(" ","")+"-map");
 	mapOuter.appendChild(mapSectionContent);
 	mapSectionContent.appendChild(mapSectionContentMapOuter);
 
-	mapSectionContentMap.setAttribute("name",Region.join("_")+"-map");
-	mapSectionContentMap.setAttribute("id",Region.join("_")+"-map");
+	mapSectionContentMap.setAttribute("name",Region.join("_").replaceAll(" ","")+"-map");
+	mapSectionContentMap.setAttribute("id",Region.join("_").replaceAll(" ","")+"-map");
 
 	mapSectionContentMapOuter.setAttribute("name","map");
 
@@ -988,8 +988,8 @@ let createMap = function() {
 					let locint = getItemLocationInt(items[u]["Item"],items[u]["Description"],location);
 					if (locint == undefined) {
 						for(let r = 0; r < 10; r++) {
-							let ran = getRandomInt(50000,51000);
-							if (localStorage.getItem("location-item"+ran) == undefined) {
+							let ran = parseInt(getRandomInt(50000,51000));
+							if (localStorage.getItem("location-item-"+ran) == undefined) {
 								locint = ran;
 								break;
 							}
@@ -1001,8 +1001,8 @@ let createMap = function() {
 
 					let mapSectionSidebarDescriptionItemLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionItemLiInput.setAttribute("type","checkbox");
-					mapSectionSidebarDescriptionItemLiInput.setAttribute("id","location-item");
-					mapSectionSidebarDescriptionItemLiInput.setAttribute("name","location-item"+locint);
+					mapSectionSidebarDescriptionItemLiInput.setAttribute("id","location-item-"+locint);
+					mapSectionSidebarDescriptionItemLiInput.setAttribute("name","location-item-"+locint);
 					mapSectionSidebarDescriptionItemLi.appendChild(mapSectionSidebarDescriptionItemLiInput);
 					mapSectionSidebarDescriptionItemLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
@@ -1316,8 +1316,8 @@ let createMap = function() {
 					let locint = getPokémonLocationInt(poks[u]["Pokémon"],poks[u]["Level"],poks[u]["Rate"],poks[u]["Tile"],poks[u]["Encounter"],poks[u]["Mechanic"],location);
 					if (locint == undefined) {
 						for(let r = 0; r < 10; r++) {
-							let ran = getRandomInt(50000,51000);
-							if (localStorage.getItem("location-pokémon"+ran) == undefined) {
+							let ran = parseInt(getRandomInt(50000,51000));
+							if (localStorage.getItem("location-pokémon-"+ran) == undefined) {
 								locint = ran;
 								break;
 							}
@@ -1326,8 +1326,8 @@ let createMap = function() {
 
 					let mapSectionSidebarDescriptionPokLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionPokLiInput.setAttribute("type","checkbox");
-					mapSectionSidebarDescriptionPokLiInput.setAttribute("id","location-pokémon");
-					mapSectionSidebarDescriptionPokLiInput.setAttribute("name","location-pokémon"+locint);
+					mapSectionSidebarDescriptionPokLiInput.setAttribute("id","location-pokémon-"+locint);
+					mapSectionSidebarDescriptionPokLiInput.setAttribute("name","location-pokémon-"+locint);
 					mapSectionSidebarDescriptionPokLi.appendChild(mapSectionSidebarDescriptionPokLiInput);
 					mapSectionSidebarDescriptionPokLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
 
@@ -2042,11 +2042,11 @@ let createMap = function() {
 									if (finaldata["Locations"]["Connecting"][r]["Location"] == val[u]) {
 										if (finaldata["Locations"]["Connecting"][r][origin2[q]] != undefined) {
 											if (!finaldata["Locations"]["Connecting"][r][origin2[q]].includes(finaldata["Locations"]["Connecting"][i]["Location"])) {
-												console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
+												console.warn(finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 											}
 										}
 										else {
-											console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
+											console.warn(finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 										}
 									}
 								}
@@ -2059,11 +2059,11 @@ let createMap = function() {
 								if (finaldata["Locations"]["Connecting"][r]["Location"] == val) {
 									if (finaldata["Locations"]["Connecting"][r][origin2[q]] != undefined) {
 										if (!finaldata["Locations"]["Connecting"][r][origin2[q]].includes(finaldata["Locations"]["Connecting"][i]["Location"])) {
-											console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
+											console.warn(finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 										}
 									}
 									else {
-										console.log("#DEBUG# "+finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
+										console.warn(finaldata["Locations"]["Connecting"][i]["Location"]+" is not "+origin2[q]+" of "+finaldata["Locations"]["Connecting"][r]["Location"]+".")
 									}
 								}
 							}
@@ -2122,7 +2122,7 @@ function trainerSearch() {
 
 			let li = document.createElement("li");
 			let b = document.createElement("b");
-			let txt = document.createElement("h6");
+			let txt = document.createElement("small");
 			li.setAttribute("name",found[i]["Name"]);
 			txt.innerText = found[i]["Name"];
 			b.setAttribute("type","invert");
@@ -2442,79 +2442,18 @@ function updateTrainer(trainers,condition) {
 
 	for(let u = 0; u < datas.length; u++) {
 	
-		let data = datas[u];
-		let pok = undefined;
-		let item = undefined;
-		let level = undefined;
-		let gender = undefined;
-		let move = undefined;
-		let ability = undefined;
-		let iv = undefined;
-		let ev = undefined;
-		let nature = undefined;
+		let data = dataStringToObj(datas[u]);
+		let pok = data["pok"];
+		let item = data["it"];
+		let level = data["lv"];
+		let gender = data["ge"];
+		let move = data["mo"];
+		let ability = data["ab"];
+		let iv = data["iv"];
+		let ev = data["ev"];
+		let nature = data["na"];
 
-		if(data.includes("|")) {
-			data = data.split("|")
-			for (let r = 0; r < data.length; r++) {
-				if (data[r].split(":")[0] == "pok") {
-					pok = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "it") {
-					item = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "lv") {
-					level = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "ge") {
-					gender = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "mo") {
-					move = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "ab") {
-					ability = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "iv") {
-					iv = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "ev") {
-					ev = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-				if (data[r].split(":")[0] == "na") {
-					nature = data[r].replaceAll(data[r].split(":")[0]+":","")
-				}
-			}
-		}
-		else {
-			if (data.split(":")[0] == "pok") {
-				pok = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "it") {
-				item = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "lv") {
-				level = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "ge") {
-				gender = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "mo") {
-				move = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "ab") {
-				ability = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "iv") {
-				iv = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "ev") {
-				ev = data.replaceAll(data.split(":")[0]+":","")
-			}
-			if (data.split(":")[0] == "na") {
-				nature = data.replaceAll(data.split(":")[0]+":","")
-			}
-		}
-
+	
 
 
 
@@ -2650,11 +2589,11 @@ function updateTrainer(trainers,condition) {
 					consoleText("Copied Data String!")
 				}
 				else if (val == "Send to Damage Calculator") {
-					let dmgBoxes = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name]:not([name='team 1'])");
+					let dmgBoxes = document.querySelectorAll("#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name]:not([name='team 1'])");
 
 					if (base.firstChild.innerText != undefined) {
 						if (base.firstChild.innerText.toLowerCase().includes("player")) {
-							dmgBoxes = document.querySelectorAll("#contain div#tool > section[name='content'] > div[name='dmg'] div[name='result'] > span > span[name='team 1']");
+							dmgBoxes = document.querySelectorAll("#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name='team 1']");
 						}
 					}
 				
@@ -2817,7 +2756,7 @@ function updateTrainer(trainers,condition) {
 					abilityWrap.title += "\n"+desc[0]["Description"];
 				}
 				else {
-					console.log("#DEBUG# "+ability+" is missing description?");
+					console.warn(ability+" is missing description?");
 				}
 				abilityWrap.setAttribute("name","ability");
 				pokLeftWrap.appendChild(abilityWrap);
@@ -2910,12 +2849,12 @@ function updateTrainer(trainers,condition) {
 					pokRightMovesWrap.setAttribute("function","dataRedirect");
 					if (moves[y] != "") {
 						if(returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moves[y]) == undefined) {
-							console.log("#DEBUG# "+moves[y]+" needs formatting?");
+							console.warn(moves[y]+" needs formatting?");
 						}
 						
 						let moveset = returnMoveSet(getPokémonInt(pok),"onlymoves,noduplicate");
 						if (!moveset.includes(moves[y])) {
-							console.log("#DEBUG# "+pok+" cannot learn "+moves[y]+"?");
+							console.warn(pok+" cannot learn "+moves[y]+"?");
 						}
 
 					}
@@ -2946,7 +2885,7 @@ function updateTrainer(trainers,condition) {
 					if (ivs[y] != "") {
 						let pokRightIVText = document.createElement("small");
 						pokRightIVText.setAttribute("name","iv");
-						pokRightIVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+ivs[y];
+						pokRightIVText.innerHTML = "<span name='"+Stats[y]["Name"]+"'>"+Stats[y]["Name"]+"</span>"+ivs[y];
 						pokRightIVMain.appendChild(pokRightIVText);
 					}
 				}
@@ -2976,7 +2915,7 @@ function updateTrainer(trainers,condition) {
 					if (evs[y] != "") {
 						let pokRightEVText = document.createElement("small");
 						pokRightEVText.setAttribute("name","ev");
-						pokRightEVText.innerHTML = "<span name='"+Stats[y]+"'>"+Stats[y]+"</span>"+evs[y];
+						pokRightEVText.innerHTML = "<span name='"+Stats[y]["Name"]+"'>"+Stats[y]["Name"]+"</span>"+evs[y];
 						pokRightEVMain.appendChild(pokRightEVText);
 					}
 				}
@@ -2995,7 +2934,7 @@ function updateTrainer(trainers,condition) {
         let exportButtonOl = document.createElement("ol");
         exportButton.setAttribute("name","export");
         exportButton.classList.add("drop");
-        exportButton.setAttribute("type","rotate-right");
+        exportButton.setAttribute("type","rotate-left");
         exportButtonTxt.innerText = "⮟";
         exportButtonInput.setAttribute("type","checkbox");
         exportButtonInput.setAttribute("name","trainer-export-input-"+datas[u]);
