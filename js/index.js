@@ -125,6 +125,7 @@ function build() {
 	}
 
 
+	videoFunc();
 }
 
 function vidEnd() {
@@ -148,6 +149,40 @@ function vidStart() {
 	this.parentElement.style.setProperty("--state","-"+id+"00%")
 }
 
+
+function videoFunc() {
+	let trigger = document.querySelector("#Home button");
+	let vids = document.querySelectorAll("#Home video");
+
+	let playing;
+
+	for (let i = 0; i < vids.length; i++) {
+		if (vids[i].playing || vids[i].classList.contains("active")) {
+			playing = vids[i];
+			break;
+		}
+	}
+	if (playing == undefined) {
+		playing = vids[0];
+		trigger.innerText = "▶";
+	}
+	else if (trigger.innerText == "") {
+		trigger.innerText = "❙❙";
+	}
+
+
+	if (trigger.innerText == "▶")  { // play
+		playing.play();
+		trigger.innerText = "❙❙";
+	}
+	else if (trigger.innerText == "❙❙") {
+		playing.pause();
+		trigger.innerText = "▶";
+	}
+
+	
+
+}
 
 /*
 $(window).on('beforeunload', function() {
