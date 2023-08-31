@@ -509,6 +509,20 @@ function getApplicable(val,game) {
 		else if (val == game) {
 			return true;
 		}
+		else if (val[val.length-1] == "-") {
+			let valCurrent = getGeneration(game);
+			let val1 = parseInt(val.replaceAll("+",""));
+			if (valCurrent <= val1) {
+				return true;
+			}
+		}
+		else if (val[val.length-1] == "+") {
+			let valCurrent = getGeneration(game);
+			let val1 = parseInt(val.replaceAll("+",""));
+			if (valCurrent >= val1) {
+				return true;
+			}
+		}
 		else if (val.includes("-")) {
 			let val1 = val.split("-")[0];
 			let val2 = val.split("-")[1];
@@ -1083,13 +1097,20 @@ function dataStringToObj(data) {
 	else {
 		tempArr = [];
 	}
+
 	let obj = new Object();
+	
 	for (let i = 0; i < tempArr.length; i++) {
 		let val1 = tempArr[i].split(":")[0];
 		let val2 = tempArr[i].split(":")[1];
-		
-		obj[val1] = val2;
+		let val = val2.replaceAll(",","").replaceAll(" ","").replaceAll("\r","")
+
+		if (val != "") {
+			obj[val1] = val2;
+		}
 	}
+
+	obj = Object.entries(obj).reduce((a,[k,v]) => (v.replaceAll(',','') == "" ? a : (a[k]=v, a)), {})
 
 	return obj;
 }
@@ -1801,7 +1822,7 @@ function SwitchTab(tab,sub) {
 			let inputs = tar.querySelectorAll(":scope section[name='list'] ol input");
 			let contents = tar.querySelectorAll(":scope section[name='content'] > div[name]")
 			if (sub == "Damage Calculator") {
-				let input = tar.querySelector(":scope section[name='list'] ol input[value='0']");
+				let input = tar.querySelector(":scope #tool-options-0");
 				for (let q = 0; q < inputs.length; q++) {
 					inputs[q].checked = false;
 				}
