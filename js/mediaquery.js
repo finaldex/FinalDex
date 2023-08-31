@@ -32,6 +32,70 @@ document.querySelector("nav span[name='set'] button[name='items']").addEventList
 document.querySelector("nav span[name='set'] button[name='locations']").addEventListener("click",setAll);
 
 
+function getGame(string) {
+    let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Brilliant Diamond","Shining Pearl","Legend Arceus","Scarlet","Violet","1","2","3","4","5","6","7","8","9","GO","Masters EX","Masters","Camp","HOME","Smile","TCG","TCG 2","PokéPark","PokéPark 2","Mezastar","Pokkén","Pokkén DX","Tretta","Battrio","Tretta Lab","Ga-Olé","Channel","Hey You Pikachu","Picross","Shuffle","Trozei","Battle Trozei","Snap","New Snap","Rumble Rush","Rumble World","Rumble U","Rumble","Rumble Blast","Ranger","Ranger Guardian Signs", "Ranger Shadows of Almia","Mystery Dungeon RTDX","Mystery Dungeon","Mystery Dungeon TDS","Mystery Dungeon V","Mystery Dungeon Gates to Infinity","Super Mystery Dungeon","Mystery Dungeon RTRB","Mystery Dungeon Rescue Team DX","Mystery Dungeon VI","Stadium","Stadium 2","UNITE","Rush","Battle Revolution","Kids Winter Fest","All"];
+    let result = [];
+
+    if (games.includes(string)) {
+        result.push(string);
+    }
+    else {
+        let str1 = splitStr(string,"/");
+        
+        for (let i = 0; i < games.length; i++) {
+            for (let q = 0; q < str1.length; q++) {
+                if (str1[q] == games[i]) {
+                    result.push(games[i]);
+                    break;
+                }
+             
+
+
+
+                let arr1 = splitStr(str1[q],"_");
+   
+    
+
+                for (let r = 0; r < arr1.length; r++) {
+                    if (arr1[r] == games[i]) {
+                        result.push(games[i]);
+                        break;
+                    }
+
+                    let arr1_alt = splitStr(arr1[r]," [")[0];
+
+                    if (arr1_alt == games[i]) {
+                        result.push(games[i])
+                        break;
+                    }
+                }
+
+                 
+                let arr2 = splitStr(str1[q],"-");
+
+                if (str1[q].includes("-")) {
+                    result.push(arr2.join(" to "))
+                    break;
+                }
+               
+            }
+          
+        }
+        
+    }
+
+    for (let i = 0; i < result.length; i++) {
+        if (!isNaN(parseInt(result[i]))) {
+            result[i] = "Generation "+result[i];
+        }
+        else if (result[i] == "All") {
+            result[i] = result[i]+" Games";
+        }
+    }
+    result = [...new Set(result)];
+    return result;
+}
+
 
 
 
@@ -120,7 +184,8 @@ function dirGet() {
                                     let obj = new Object();
                                     obj["Path"] = path
                                     obj["File"] = file.replace("."+file.split(".")[file.split(".").length-1],"")
-                                    obj["Extension"] = file.split(".")[file.split(".").length-1]
+                                    obj["Extension"] = file.split(".")[file.split(".").length-1];
+                                    obj["Source"] = getGame(path).join("\n");
                                     result.push(obj)
                                 }
                             }
@@ -139,6 +204,7 @@ function dirGet() {
         document.querySelector("ul#roof span[name='image']").setAttribute("data-state","1");
         document.querySelector("ul#roof span[name='file']").setAttribute("data-state","1");
         document.querySelector("ul#roof span[name='path']").setAttribute("data-state","1");
+        document.querySelector("ul#roof span[name='source']").setAttribute("data-state","1");
         document.querySelector("ul#roof span[name='extension']").setAttribute("data-state","1");
     }
     else {
@@ -146,6 +212,7 @@ function dirGet() {
         document.querySelector("ul#roof span[name='image']").removeAttribute("data-state");
         document.querySelector("ul#roof span[name='file']").removeAttribute("data-state");
         document.querySelector("ul#roof span[name='path']").removeAttribute("data-state");
+        document.querySelector("ul#roof span[name='source']").removeAttribute("data-state");
         document.querySelector("ul#roof span[name='extension']").removeAttribute("data-state");
     }
 
@@ -189,6 +256,8 @@ function setData() {
             let path = res[i]["Path"];
             let file = res[i]["File"];
             let extension = res[i]["Extension"];
+            let source = res[i]["Source"];
+     
 
             let li = document.createElement("li");
             base.appendChild(li)
@@ -220,6 +289,13 @@ function setData() {
             pathwrap.setAttribute("name","path");
             li.appendChild(pathwrap);
             pathwrap.appendChild(pathtxt);
+
+            let srcwrap = document.createElement("span");
+            let src = document.createElement("small");
+            src.innerText = source;
+            srcwrap.setAttribute("name","source");
+            li.appendChild(srcwrap);
+            srcwrap.appendChild(src);
 
 
             let extwrap = document.createElement("span");
@@ -287,6 +363,7 @@ function expandAll() {
 document.querySelector("ol ul#roof li > *:nth-child(2)").addEventListener("click",sortBy)
 document.querySelector("ol ul#roof li > *:nth-child(3)").addEventListener("click",sortBy)
 document.querySelector("ol ul#roof li > *:nth-child(4)").addEventListener("click",sortBy)
+document.querySelector("ol ul#roof li > *:nth-child(5)").addEventListener("click",sortBy)
 
 function titleCase(str) {
 	if (str == undefined) {
@@ -310,6 +387,12 @@ function sortBy() {
 
     let base = document.querySelector("ul#result");
     let list = JSON.parse(base.parentElement.getAttribute("data"))
+
+    console.log(list)
+    console.log(base)
+    console.log(state)
+    console.log(type)
+    console.log(tar)
 
     list.sort(function(a, b) {return a[titleCase(type)].localeCompare(b[titleCase(type)], undefined, {numeric: true,sensitivity: 'base'});})
 
@@ -411,7 +494,7 @@ function getGeneration(game) {
 }
 
 function getGameID(name) {
-    let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Legend Arceus","Brilliant Diamond","Shining Pearl","Scarlet","Violet"];
+    let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Legend Arceus","Brilliant Diamond","Shining Pearl","Scarlet","Violet","Dream World","Studio Red","Studio Blue","Box Ruby & Sapphire","Conquest"];
     return games.findIndex(name)+1
 }
 function getApplicable(val) {
