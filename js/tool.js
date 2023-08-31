@@ -786,7 +786,7 @@ let createTool = function() {
 
 
 		function DMGFieldExport() {
-			let val = findUpTag(this,"SPAN").querySelector(":scope small").innerText;
+			let val = this.querySelector(":scope small").innerText;
 
 			let divBases = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name] > div[data-string]");
 			let pokBases = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name] > ul[name]");
@@ -798,7 +798,7 @@ let createTool = function() {
 			if (val == "Import Pokémon") {
 				DMGSetDataString(divBases);
 			}
-			if (val == "Copy Data Strings") {
+			else if (val == "Copy Data Strings") {
 				let res = [];
 				for(let t = 0; t < divBases.length; t++) {
 					let ds = divBases[t].getAttribute("data-string"); 
@@ -823,7 +823,19 @@ let createTool = function() {
 		toolSectionContentDMGResetText.innerText = "❌";
 		toolSectionContentDMGResult.appendChild(toolSectionContentDMGReset);
 		toolSectionContentDMGReset.appendChild(toolSectionContentDMGResetText);
-		toolSectionContentDMGReset.addEventListener("click",function(){let x = findUpTag(this,"DIV"); let z = x.querySelectorAll(":scope div[data-string]"); let lock = confirm("The Pokémon's data will not be saved.\nDo you want to continue?"); if (lock) {for(let p = 0; p < z.length; p++) {z[p].setAttribute("data-string","");let tar = document.querySelector("#contain div#tool > section[name='content'] > div[name='dmg'] > div span[name='"+z[p].parentElement.getAttribute("name")+"'] ul[name='"+z[p].getAttribute("name")+"']");DMGClearData(tar);}}})
+		toolSectionContentDMGReset.addEventListener("click",function(){
+
+			let lock = confirm("The Pokémon's data will not be saved.\nDo you want to continue?");
+			if (lock) {
+				let divBase = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name] > div[name]");
+				let pokBase = document.querySelectorAll("#contain > div#tool div#dmg ol[name='pokémon'] span[name] > ul[name]");			
+
+				for(let p = 0; p < divBase.length; p++) {
+					divBase[p].setAttribute("data-string","");
+					DMGClearData(pokBase[p]);
+				}
+			}
+		})
 
 
 
