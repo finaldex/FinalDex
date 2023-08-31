@@ -3575,6 +3575,8 @@ function DMGCalcStart() {
 		moveCriticalTextPath.innerText = critResult;
 	}
 
+	let button = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='execute'] button");
+	button.classList.remove("change");
 
 }
 let DMGCalculation = [];
@@ -4428,12 +4430,28 @@ function DMGUpdateSRC() {
 		let genderPath = pokBase.querySelector(":scope *[name='gender'] select");
 		let pokPath = pokBase.querySelector(":scope *[name='pokémon'] select");
 
-		if (pokPath.value != "") {
-			let data_dir = [PATH_Pokémon_Battle_Default_Front_GIF,PATH_Pokémon_Battle_Default_Front_PNG]
+		let dataString = dataStringToObj(divBase.getAttribute("data-string"))
 
-			if (bases[i].parentElement.parentElement.getAttribute("name") == "user") {
-				data_dir = [PATH_Pokémon_Battle_Default_Back_GIF,PATH_Pokémon_Battle_Default_Back_PNG,PATH_Pokémon_Battle_Default_Front_GIF,PATH_Pokémon_Battle_Default_Front_PNG]
+		if (pokPath.value != "") {
+			let data_dir = []
+
+			if (dataString["shiny"] != undefined && dataString["shiny"] == "true") {
+				if (bases[i].parentElement.parentElement.getAttribute("name") == "user") {
+					data_dir = [PATH_Pokémon_Battle_Shiny_Back_GIF,PATH_Pokémon_Battle_Shiny_Back_PNG,PATH_Pokémon_Battle_Shiny_Front_GIF,PATH_Pokémon_Battle_Shiny_Front_PNG]
+				}
+				else {
+					data_dir = [PATH_Pokémon_Battle_Shiny_Front_GIF,PATH_Pokémon_Battle_Shiny_Front_PNG]
+				}
 			}
+			else {
+				if (bases[i].parentElement.parentElement.getAttribute("name") == "user") {
+					data_dir = [PATH_Pokémon_Battle_Default_Back_GIF,PATH_Pokémon_Battle_Default_Back_PNG,PATH_Pokémon_Battle_Default_Front_GIF,PATH_Pokémon_Battle_Default_Front_PNG]
+				}
+				else {
+					data_dir = [PATH_Pokémon_Battle_Default_Front_GIF,PATH_Pokémon_Battle_Default_Front_PNG]
+				}
+			}
+			
 
 			let data_file = ["^"+getPokémonPath(getPokémonInt(pokPath.value))]
 
@@ -4449,7 +4467,6 @@ function DMGUpdateSRC() {
 					data_file.push(data_file[0]+"_Female");
 				}
 			}
-
 			
 			pokImgPath.src = getMedia(true,data_file,data_dir,[],true)
 		}
@@ -4647,6 +4664,7 @@ function DMGSetChange(base) {
 					let itd = returnAppArrData(finaldata["Items"]["Description"],"Item",itemPath.value)[0];
 					itd = undDel(itd,{Description:""});
 					itd = itd["Description"];
+					itd = itemPath.value+"\n"+itd;
 					pokItemPath.title = itd;
 				
 
@@ -5308,11 +5326,11 @@ function DMGPokSpecific(base) {
 			}
 		}
 
-		if (genders[0] != "") {
-			if (genders.length > 1) {
-				genders.unshift("");
-			}
+
+		if (genders.length > 1) {
+			genders.unshift("");
 		}
+	
 
 		let storeGenderVal = genderPath.value.toString();
 
@@ -5657,6 +5675,9 @@ function DMGResetCalc() {
 		EffectPositivePath.innerHTML = "";
 		EffectNegativePath.innerHTML = "";
 	}
+
+	let button = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='execute'] button")
+	button.classList.add("change");
 }
 function DMGMatchPosition() {
 	let teams = document.querySelectorAll("#contain > div#tool div#dmg div[name='battle'] span[name*='team']");
@@ -5949,42 +5970,45 @@ function DMGSetDataString(base,str) {
 
         data = splitStr(data,"_");
 
-        if (divBases.length >= data.length) {
-            for (let d = 0; d < data.length; d++) {
-				let baseteam = base[d].parentElement.getAttribute("name");
-				let baseid = base[d].getAttribute("name");
 
-				let divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+baseteam+"'] > div[name='"+baseid+"']");
-				let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+baseteam+"'] > ul[name='"+baseid+"']");
+		for (let d = 0; d < data.length; d++) {
+			if (base[d] == undefined) {
+				consoleText("Could not fit all Pokémon on the Field.");
+				break;
+			}
 
-                let dataObj = dataStringToObj(data[d]);
-                let dataPok = dataObj["pok"]
-				let dataInt = getPokémonInt(dataPok);
+			let baseteam = base[d].parentElement.getAttribute("name");
+			let baseid = base[d].getAttribute("name");
 
-                if (dataPok != undefined && dataInt != undefined) {
-                    if (finaldata["Pokémon"]["Reference"][parseInt(dataInt)][DATA_Pokémon_Reference["Reference"]] == "true") {
-                        divBase.setAttribute("data-string",data[d]);
+			let divBase = document.querySelector("#contain > div#tool div#dmg div[name='battle'] span[name='"+baseteam+"'] > div[name='"+baseid+"']");
+			let pokBase = document.querySelector("#contain > div#tool div#dmg ol[name='pokémon'] span[name='"+baseteam+"'] > ul[name='"+baseid+"']");
 
-						DMGSetChange(pokBase);
-						DMGPokSpecific(pokBase);
-                        DMGSetChange(pokBase);
-						DMGSaveData(pokBase);
-						DMGSetPossible();
-                        DMGCalcPokStats(pokBase);
-                        DMGCalcStart(pokBase);
-                    }
-                    else {
-                        consoleText("Pokémon Unavailable.");
-                    }
-                }
-                else {
-                    consoleText("Data returned an error.")
-                }
-            }
-        }
-        else {
-            consoleText("Too many Pokémon for the battle.");
-        }
+			let dataObj = dataStringToObj(data[d]);
+			let dataPok = dataObj["pok"]
+			let dataInt = getPokémonInt(dataPok);
+
+			if (dataPok != undefined && dataInt != undefined) {
+				if (finaldata["Pokémon"]["Reference"][parseInt(dataInt)][DATA_Pokémon_Reference["Reference"]] == "true") {
+					divBase.setAttribute("data-string",data[d]);
+
+					DMGSetChange(pokBase);
+					DMGPokSpecific(pokBase);
+					DMGSetChange(pokBase);
+					DMGSaveData(pokBase);
+					DMGSetPossible();
+					DMGCalcPokStats(pokBase);
+					DMGCalcStart(pokBase);
+				}
+				else {
+					consoleText("Pokémon Unavailable.");
+				}
+			}
+			else {
+				consoleText("Data returned an error.")
+			}
+		}
+
+   
 
 	
 	}
@@ -6624,7 +6648,6 @@ function buildDMG(preval) {
 			let partyTeamExport = document.createElement("figure");
 			let partyTeamExportText = document.createElement("h6");
 			partyTeamExport.setAttribute("name","export");
-			partyTeamExport.classList.add("drop");
 			partyTeamExport.setAttribute("type","invert");
 			partyTeamExportText.innerText = "⮟";
 			partyTeamFigureWrap.appendChild(partyTeamExport);
@@ -6814,9 +6837,8 @@ function buildDMG(preval) {
 
 
                     let poks = [];
-                    if (poks[0] != "") {
-                        poks.unshift("");
-                    }
+					poks.unshift("");
+
                     for(let e = 0; e < finaldata["Pokémon"]["Reference"].length; e++) {
                         if (finaldata["Pokémon"]["Reference"][e][DATA_Pokémon_Reference["Reference"]] == "true") {
                             poks.push(getPokémonName(e))
@@ -6935,11 +6957,9 @@ function buildDMG(preval) {
                         //typeSelect.addEventListener("change",DMGCalcStart);
 
 
-                        let typesTemp = [...Types];
-
-                        if (typesTemp[0] != "") {
-                            typesTemp.unshift("");
-                        }
+                        let typesTemp = [...(Types)];
+						typesTemp.unshift("");
+                        
 
                         for(let n = 0; n < typesTemp.length; n++) {
                             let typeOption = document.createElement("option");
@@ -7000,10 +7020,10 @@ function buildDMG(preval) {
                         natureSelect.addEventListener("change",DMGCalcPokStats);
                         //natureSelect.addEventListener("change",DMGCalcStart);
                         
-                        let naturesTemp = Natures;
-                        if (naturesTemp[0] != "") {
-                            naturesTemp.unshift("");
-                        }
+                        let naturesTemp = [...(Natures)];
+            
+						naturesTemp.unshift("");
+                        
                         for(let n = 0; n < naturesTemp.length; n++) {
                             let natureOption = document.createElement("option");
                             natureOption.value = naturesTemp[n];
@@ -7167,9 +7187,8 @@ function buildDMG(preval) {
 
 
                         let items = []
-                        if (items[0] != "") {
-                            items.unshift("");
-                        }
+						items.unshift("");
+                        
 
                         for (let r = 0; r < items.length; r++) {
                             let option = document.createElement("option");
