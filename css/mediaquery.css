@@ -167,7 +167,7 @@ ul#roof li {
     align-items:center;
 }
 ul#roof li > * {
-    width:25%;
+    width:30%;
     text-align:left;
     height:100%;
     display:flex;
@@ -182,6 +182,8 @@ ul#roof li > *:first-child {
 ul#roof li span[name='extension'] {
     width:12.5%;
 }
+
+
 ul#result li span > *,
 ul#roof li > *:not(:first-child) {
     padding:0 10px;
@@ -195,7 +197,7 @@ ul#result li > * {
     position:relative;
     display:table-cell;
     vertical-align:middle;
-    width:25%;
+    width:20%;
     padding:5px;
 }
 ul#result li label:has(input:checked) img {
