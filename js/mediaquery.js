@@ -33,7 +33,7 @@ document.querySelector("nav span[name='set'] button[name='locations']").addEvent
 
 
 function getGame(string) {
-    let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Brilliant Diamond","Shining Pearl","Legend Arceus","Scarlet","Violet","1","2","3","4","5","6","7","8","9","GO","Masters EX","Masters","Camp","HOME","Smile","TCG","TCG 2","PokéPark","PokéPark 2","Mezastar","Pokkén","Pokkén DX","Tretta","Battrio","Tretta Lab","Ga-Olé","Channel","Hey You Pikachu","Picross","Picross GBC","Picross 3DS","Shuffle","Trozei","Battle Trozei","Snap","New Snap","Rumble Rush","Rumble World","Rumble U","Rumble","Rumble Blast","Ranger","Ranger Guardian Signs", "Ranger Shadows of Almia","Mystery Dungeon RTDX","Mystery Dungeon","Mystery Dungeon TDS","Mystery Dungeon V","Mystery Dungeon Gates to Infinity","Super Mystery Dungeon","Mystery Dungeon RTRB","Mystery Dungeon Rescue Team DX","Mystery Dungeon VI","Stadium","Stadium 2","UNITE","Rush","Battle Revolution","Kids Winter Fest","Dream World","Studio Red","Studio Blue","Box Ruby & Sapphire","Pinball Ruby & Sapphire","Conquest","Place","Magikarp Jump","Detective Pikachu","All"];
+    let games = ["Red","Blue","Yellow","Gold","Silver","Crystal","Ruby","Sapphire","Colosseum","FireRed","LeafGreen","Emerald","XD","Diamond","Pearl","Platinum","HeartGold","SoulSilver","Black","White","Black 2","White 2","X","Y","Omega Ruby","Alpha Sapphire","Sun","Moon","Ultra Sun","Ultra Moon","Lets Go Pikachu","Lets Go Eevee","Sword","Shield","Brilliant Diamond","Shining Pearl","Legend Arceus","Scarlet","Violet","1","2","3","4","5","6","7","8","9","GO","Masters EX","Masters","Camp","HOME","Smile","TCG","TCG 2","PokéPark","PokéPark 2","Mezastar","Pokkén","Pokkén DX","Tretta","Battrio","Tretta Lab","Ga-Olé","Channel","Hey You Pikachu","Picross","Picross GBC","Picross 3DS","Shuffle","Trozei","Battle Trozei","Snap","New Snap","Rumble Rush","Rumble World","Rumble U","Rumble","Rumble Blast","Ranger","Ranger Guardian Signs", "Ranger Shadows of Almia","Mystery Dungeon RTDX","Mystery Dungeon","Mystery Dungeon TDS","Mystery Dungeon V","Mystery Dungeon Gates to Infinity","Super Mystery Dungeon","Mystery Dungeon RTRB","Mystery Dungeon Rescue Team DX","Mystery Dungeon VI","Stadium","Stadium 2","UNITE","Rush","Battle Revolution","Kids Winter Fest","Dream World","Studio Red","Studio Blue","Box Ruby & Sapphire","Pinball","Pinball Ruby & Sapphire","Conquest","Place","Magikarp Jump","Detective Pikachu","All"];
     let result = [];
 
     if (games.includes(string)) {
@@ -170,7 +170,7 @@ function dirGet() {
                     let vals1 = splitStr(val1,",");
                     let vals2 = splitStr(val2,",");
 
-                    for(let r = 0; r < vals1.length; r++) {
+                    for (let r = 0; r < vals1.length; r++) {
                         if (path.includes(vals1[r]) || vals1[r] == "") {
                             for(let t = 0; t < vals2.length; t++) {
                                 let check = false;
