@@ -864,37 +864,53 @@ function abbreviateStats(stats) {
 
 
 function findUpEl(base,att,val) {
+     let el = null;
 	while (base.parentNode) {
 		base = base.parentNode;
-		if (base.getAttribute(att) === val)
-			return base;
+		if (base.getAttribute(att) == val) {
+			el = base;
+               break;
+          }
 	}
+     return el;
 }
 
 function findUpAtt(base,att) {
+     let el = null;
 	while (base.parentNode) {
 		base = base.parentNode;
-		if (base.getAttribute(att) != undefined)
-			return base;
+		if (base.getAttribute(att) != undefined) {
+               el = base;
+               break;
+          }
 	}
+     return el;
 }
 function findUpTagAtt(base,tag,att) {
+     let el = null;
 	while (base.parentNode) {
 		base = base.parentNode;
-		if (base.tagName == tag)
-			if (base.getAttribute(att) != undefined)
-				return base;
+		if (base.tagName == tag) {
+			if (base.getAttribute(att) != undefined) {
+				el = base;
+                    break;
+               }
+          }
 	}
+     return el;
 }
 
 
-function findUpTag(el, tag) {
-    while (el.parentNode) {
-        el = el.parentNode;
-        if (el.tagName === tag)
-            return el;
+function findUpTag(base, tag) {
+     let el = null;
+    while (base.parentNode) {
+          base = base.parentNode;
+          if (base.tagName == tag) {
+               el = base;
+               break;
+          }
     }
-    return null;
+    return el;
 }
 
 function getPokémonInt(name) {
@@ -1961,188 +1977,6 @@ function getItemIcon(item) {
 
 
 
-let searchPokémonAttributes = [];
-let searchMoveAttributes = [];
-let searchAbilityAttributes = [];
-let searchItemAttributes = [];
-let searchMapAttributes = [];
-let searchNotFirst = false;
-
-function search(type) {
-
-	let tag;
-	let searchAttributes;
-
-    if (type == "Pokémon") {
-        base = document.querySelector("#contain > div#"+type.toLowerCase()+" > div ul");
-		tag = "li";
-    }
-	else {
-		base = document.querySelector("#contain > div#"+type.toLowerCase()+" section[name='list'] ol");
-		tag = "label";
-	}
-
-
-	if (type == "Pokémon") {
-        searchAttributes = searchPokémonAttributes;
-    }
-    else if (type == "Move") {
-        searchAttributes = searchMoveAttributes;
-    }
-    else if (type == "Ability") {
-        searchAttributes = searchAbilityAttributes;
-    }
-    else if (type == "Item") {
-        searchAttributes = searchItemAttributes;
-    }
-    else if (type == "Map") {
-        searchAttributes = searchMapAttributes;
-    }
-
-
-	let tar = event.target;
-    let searchValue = (tar.value).toLowerCase();
-    let searchPositive = [];
-    let searchNegative = [];
-    let searchGreater = [];
-    let searchLower = [];
-	let searchlet = [];
-
-	let searchName;
-
-    if (searchValue.includes("::") && searchAttributes.includes(searchValue.split("::")[0])) {
-        searchPositive = searchValue.split("::");
-		searchlet = searchValue.split("::");
-    }
-    else if (searchValue.includes(":!") && searchAttributes.includes(searchValue.split(":!")[0])) {
-        searchNegative = searchValue.split(":!");
-		searchlet = searchValue.split(":!");
-    }
-    else if (searchValue.includes(":>") && searchAttributes.includes(searchValue.split(":>")[0])) {
-        searchGreater = searchValue.split(":>");
-		searchlet = searchValue.split(":>");
-    }
-    else if (searchValue.includes(":<") && searchAttributes.includes(searchValue.split(":<")[0])) {
-        searchLower = searchValue.split(":<");
-		searchlet = searchValue.split(":<");
-    }
-    else {
-        searchName = (event.target.value).toLowerCase();
-    }
-
-	let tags =  base.querySelectorAll(':scope > '+tag);
-	for(i = 0; i < tags.length; i++) {
-		tags[i].classList.remove("hidden");
-	}
-
-    tar.style.removeProperty("color");
-
-
-	let check;
-
-	/*
-	if (searchVar.length > 0) {
-		if (tags[0].getAttribute('data-search-'+searchVar[0]).match(/[a-z]/g) ) {
-			check = false;
-		}
-		else {
-			check = true;
-		}
-	}
-	*/
-    if (searchPositive.length > 0 && searchAttributes.includes(searchPositive[0])) {
-        if (parseInt(searchPositive[1]) != NaN) {
-            let tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'*="'+searchPositive[1]+'"])');
-			for(i = 0; i < tags.length; i++) {
-				tags[i].classList.add("hidden");
-			}
-        }
-        else {
-            let tags = base.querySelectorAll(':scope > '+tag+':not([data-search-'+searchPositive[0]+'="'+searchPositive[1]+'"])');
-			for(i = 0; i < tags.length; i++) {
-				tags[i].classList.add("hidden");
-			}
-        }
-        tar.style.color = "Red";
-    }
-    else if (searchNegative.length > 0 && searchAttributes.includes(searchNegative[0])) {
-        if (parseInt(searchNegative[1]) != NaN) {
-            let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'*="'+searchNegative[1]+'"]');
-			for(i = 0; i < tags.length; i++) {
-				tags[i].classList.add("hidden");
-			}
-        }
-        else {
-            let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchNegative[0]+'="'+searchNegative[1]+'"]');
-			for(i = 0; i < tags.length; i++) {
-				tags[i].classList.add("hidden");
-			}
-        }
-        tar.style.color = "Red";
-    }
-	else if (searchLower.length > 0 && searchAttributes.includes(searchLower[0]) && check) {
-        let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchLower[0]+']');
-		for(i = 0; i < tags.length; i++) {
-			tags[i].classList.add("hidden");
-		}
-        for(i = 0; i < tags.length; i++) {
-			if (tags[i].getAttribute("data-search-"+searchLower[0]) != "") {
-				if (parseInt(tags[i].getAttribute("data-search-"+searchLower[0])) <= parseInt(searchLower[1])) {
-					tags[i].classList.remove("hidden");
-				}
-			}
-        }
-        tar.style.color = "Red";
-    }
-    else if (searchGreater.length > 0 && searchAttributes.includes(searchGreater[0]) && check) {
-        let tags = base.querySelectorAll(':scope > '+tag+'[data-search-'+searchGreater[0]+']');
-		for(i = 0; i < tags.length; i++) {
-			tags[i].classList.add("hidden");
-		}
-        for(i = 0; i < tags.length; i++) {
-			if (tags[i].getAttribute("data-search-"+searchGreater[0]) != "") {
-				if (parseInt(tags[i].getAttribute("data-search-"+searchGreater[0])) >= parseInt(searchGreater[1])) {
-					tags[i].classList.remove("hidden");
-				}
-			}
-        }
-        tar.style.color = "Red";
-    }
-    else if (event.target.value.length > 0) {
-        let tags = base.querySelectorAll(':scope > '+tag+':not([data-name*="'+searchName+'"])');
-		for(i = 0; i < tags.length; i++) {
-			tags[i].classList.add("hidden");
-		}
-    }
-	else {
-		for(i = 0; i < tags.length; i++) {
-			tags[i].classList.remove("hidden");
-		}
-	}
-
-
-	if (event.target.title != "") {
-		if (event.code == "Enter") {
-			searchFilter(event.target,base,"Add");
-			count();
-		}
-		
-		if (event.code == "Escape") {
-			searchFilter(event.target,base,"Remove");
-			exitSearch(type);
-			count();
-		}
-	}
-	else {
-		if (event.code == "Escape") {
-			exitSearch(type);
-		}
-	}
-
-
-
-    count();
-}
 
 function joinObj(arr, attr,type){
 
@@ -3103,58 +2937,6 @@ function doubleClicker(handler) {
 	};
 }
 
-function importData() {
-
-	let lock = prompt("Enter Import String:");
-
-	if (lock != undefined && lock != "") {
-		if (lock.charAt(0) == "[" && lock.includes("]") && lock.includes(":")) {
-			let conf = confirm("It's not recommended to transfer data cross-games.\nThis action cannot be reversed.\nDo you want to continue?")
-			if (conf) {
-				let tempArr = lock.replaceAll("{","").replaceAll("}","").replaceAll("[","").replaceAll("]","").replaceAll('"','').split(",")
-
-				for (let i = 0; i < tempArr.length; i++) {
-					if (tempArr[i].includes("finaldex")) {
-						let name = tempArr[i].split(":")[0];
-						let val = tempArr[i].split(":")[1];
-						localStorage.setItem(name,val);
-					}
-				}
-				consoleText("Successfully Exported!")
-				consoleText("Reload page for full effect.")
-			}
-		}
-		else {
-			consoleText("Returned Invalid String.")
-		}
-	}
-	else if (lock == null) {
-		return;
-	}
-	else {
-		consoleText("Returned Invalid String.")
-	}
-}
-function exportData() {
-	let res = [];
-	let tempArr = JSON.stringify(localStorage).replaceAll("{","").replaceAll("}","").replaceAll('"','').split(",");
-
-	for (let i = 0; i < tempArr.length; i++) {
-		if (tempArr[i].includes("finaldex-")) {
-			let name = tempArr[i].split(":")[0];
-			let val = tempArr[i].split(":")[1];
-			let obj = new Object();
-			obj[name] = val;
-			res.push(obj);
-		}
-	}
-
-	let resStr = JSON.stringify(res);
-
-	navigator.clipboard.writeText(resStr);
-	console.log(resStr)
-	consoleText("Copied Data String!")
-}
 
 
 
