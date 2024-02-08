@@ -711,7 +711,7 @@
 
 #data > div section[name='main'] > div[name='metadata'] > div[name='popup'] div[name="list"] ul li > span {
 	display:table-cell;
-	/*width:20%;*/
+	width:20%;
 	vertical-align:middle;
 	padding: 0 10px;
 }
@@ -1534,7 +1534,7 @@
 #data aside[name="evolution"] {
 	position:absolute;
 	height:10%;
-	z-index:10;
+	z-index:100;
 }
 
 #data aside[name="evolution"] br {
