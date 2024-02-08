@@ -2351,6 +2351,8 @@ function DMGCalcStart() {
 							let Gravity = 1;
 							let Affection = 0;
 
+							console.log(moveAccuracy)
+
 							let acc = moveAccuracy;
 							acc = acc.replaceAll("%","").replaceAll("~","");
 							let evasionMod = tarModEvasionPath.value;
