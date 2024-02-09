@@ -1099,7 +1099,6 @@ function dataStringTitle(data) {
 }
 
 function dataStringToObj(data) {
-
 	let tempArr;
 
 	if (data != "") {
@@ -1115,10 +1114,14 @@ function dataStringToObj(data) {
 	}
 
 	let obj = new Object();
+
 	
 	for (let i = 0; i < tempArr.length; i++) {
 		let val1 = tempArr[i].split(":")[0];
 		let val2 = tempArr[i].split(":")[1];
+		val1 = undDel(val1,"");
+		val2 = undDel(val2,"");
+
 		let val = val2.replaceAll(",","").replaceAll(" ","").replaceAll("\r","")
 
 		if (val != "") {
