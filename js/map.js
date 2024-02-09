@@ -1707,20 +1707,44 @@ let createMap = function() {
 
 
 						if (tutors[u]["Cost"] != undefined) {
+
+							let tutor_cost = splitStr(tutors[u]["Cost"],",");
+							let tutor_currency = splitStr(tutors[u]["Currency"],",");
+
 							let mapSectionSidebarDescriptionTutorCost = document.createElement("span");
 							let mapSectionSidebarDescriptionTutorCostHeader = document.createElement("h6");
-							let mapSectionSidebarDescriptionTutorCostText = document.createElement("p");
 							mapSectionSidebarDescriptionTutorCostHeader.innerText = "Cost:";
-							mapSectionSidebarDescriptionTutorCostText.innerHTML = numFormat(tutors[u]["Cost"].replaceAll(",","\n")).replaceAll(" Yellow Shard",'x<img src="'+getMedia(true,[`Yellow Shard`],[PATH_Item_Bag])+'" name="item" title="Yellow Shard">').replaceAll(" Red Shard",'x<img src="'+getMedia(true,[`Red Shard`],[PATH_Item_Bag])+'" name="item" title="Red Shard">').replaceAll(" Blue Shard",'x<img src="'+getMedia(true,[`Blue Shard`],[PATH_Item_Bag])+'" name="item" title="Blue Shard">').replaceAll(" Green Shard",'x<img src="'+getMedia(true,[`Green Shard`],[PATH_Item_Bag])+'" name="item" title="Green Shard">');
 							mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorCost);
 							mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostHeader);
-							mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostText);
+
+							console.log(tutor_cost)
+							console.log(tutor_currency)
+							if (tutor_cost.length == tutor_currency.length) {
+								for (let c = 0; c < tutor_cost.length; c++) {
+								
+									let mapSectionSidebarDescriptionTutorCostText = document.createElement("p");
+									mapSectionSidebarDescriptionTutorCostText.innerText = numFormat(tutor_cost[c]);
+									mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostText);
+
+									
 							
-							let costImages = mapSectionSidebarDescriptionTutorCost.querySelectorAll(":scope img");
-							for(let y = 0; y < costImages.length; y++) {
-								costImages[y].addEventListener("click",dataRedirect);
-								costImages[y].setAttribute("function","dataRedirect");
+									let currency_icon = getMedia(true,[tutor_currency[c]],[PATH_Item_Bag]);
+									if (currency_icon.length > 0) {
+										mapSectionSidebarDescriptionTutorCostText.innerHTML += +'x<img src="'+currency_icon+'" name="item" title="'+tutor_currency[c]+'">'
+									}
+									else {
+										mapSectionSidebarDescriptionTutorCostText.innerText += " "+tutor_currency[c];
+									}
+									
+									let costImages = mapSectionSidebarDescriptionTutorCost.querySelectorAll(":scope img");
+									for(let y = 0; y < costImages.length; y++) {
+										costImages[y].addEventListener("click",dataRedirect);
+										costImages[y].setAttribute("function","dataRedirect");
+									}
+								}
 							}
+						
+							
 						}
 					}
 
@@ -2015,8 +2039,7 @@ let createMap = function() {
 	}
 
 
-
-	memory("Restore","game",document.querySelectorAll("#contain div#map > section[name='sidebar'] > div > *[name] input"))
+	memory("Restore","game",document.querySelectorAll("#contain div#map > section[name='sidebar'] > div > *[name] input[id][name]"))
 
 	}
 
@@ -2435,13 +2458,14 @@ function updateTrainer(trainers,condition) {
 		datas = trainers[q]["Pokémon"].split("\n");
 	}
 	else {
-		datas = [datas]
+		datas = [trainers[q]["Pokémon"]]
 	}
 
 
 
+
 	for(let u = 0; u < datas.length; u++) {
-	
+
 		let data = dataStringToObj(datas[u]);
 		let pok = data["pok"];
 		let item = data["it"];
@@ -2453,11 +2477,7 @@ function updateTrainer(trainers,condition) {
 		let ev = data["ev"];
 		let nature = data["na"];
 
-	
 
-
-
-		
 		let grp = trainers[q]["Grouping"];
 		if (u == 0) {
 			grp = undDel(grp,"Pokémon");
@@ -2483,9 +2503,9 @@ function updateTrainer(trainers,condition) {
 					grpFig.setAttribute("type","rotate-right");
 					grpFigTxt.innerText = "⮟";
 					grpFigInput.setAttribute("type","checkbox");
-					grpFigInput.setAttribute("name","trainer-specific-export-input-"+data);
-					grpFigInput.setAttribute("id","trainer-specific-export-input-"+data);
-					grpFigLabel.setAttribute("for","trainer-specific-export-input-"+data);
+					grpFigInput.setAttribute("name","trainer-specific-export-input-"+datas[u]);
+					grpFigInput.setAttribute("id","trainer-specific-export-input-"+datas[u]);
+					grpFigLabel.setAttribute("for","trainer-specific-export-input-"+datas[u]);
 					grpWrap.appendChild(grpFig)
 					grpFig.appendChild(grpFigLabel)
 					grpFigLabel.appendChild(grpFigTxt)
