@@ -1169,6 +1169,7 @@ let createPokémon = function() {
     settingsDefaultResizeOuter.setAttribute("name","resize");
     settingsDefaultResizeInput.setAttribute("type","range");
     settingsDefaultResizeInput.setAttribute("id","resizer");
+    settingsDefaultResizeInput.setAttribute("name","resizer");
     settingsDefaultResizeInput.setAttribute("min","60");
     settingsDefaultResizeInput.setAttribute("max","420");
     settingsDefaultResizeInput.setAttribute("value","240");
