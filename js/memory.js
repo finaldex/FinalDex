@@ -73,7 +73,7 @@ function memory(action,suffix,elements) {
 		let setValue;
 
         if (setName.includes("null")) {
-            console.warn("Element is missing unique name for memory.")
+            console.warn("Element '"+setName+"' is missing unique name for memory.")
             return;
         }
 
