@@ -326,17 +326,26 @@ let createMove = function() {
 			moveSectionContentDescription.innerHTML += "<br>"
 		}
 
-
+		let tutor_data = getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move");
 		if(getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move").length > 0) {
 			let text = document.createElement("p");
 			moveSectionContentDescription.appendChild(text)
 
-			if (getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"].includes("Route")) {
-				text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" can be taught by a Move Tutor on <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"</b>."
+			text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"</b>."	
+
+			if (tutor_data[0]["Location"].includes("Route")) {
+				text.innerHTML = text.innerHTML.replaceAll("Move Tutor in ", "Move Tutor on ");
 			}
-			else {
-				text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"</b>."	
+
+			if (tutor_data[0]["Pokémon"] != undefined) {
+				let poks = splitStr(tutor_data[0]["Pokémon"],",");
+				let poks_list = [];
+				for (let p = 0; p < poks.length; p++) {
+					poks_list.push("<b type='invert' onclick='modalData()' function='modalData' value='"+getPokémonInt(poks[p])+"'>"+poks[p]+"</b>")
+				}
+				text.innerHTML = text.innerHTML.replaceAll(" can be taught by "," can be taught to "+poks_list.join(",").replace(/,([^,]*)$/, ', and $1').replaceAll(",",", ").replaceAll("  "," ")+" by ")
 			}
+			
 
 			moveSectionContentDescription.innerHTML += "<br>"
 		}
