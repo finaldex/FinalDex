@@ -1667,10 +1667,23 @@ let createMap = function() {
 					mapSectionSidebarDescriptionTutorMoveTrigger.addEventListener("click",dataRedirect);
 					mapSectionSidebarDescriptionTutorMoveTrigger.setAttribute("function","dataRedirect");
 
-					if (tutors[u]["Requirement"] != undefined || tutors[u]["Cost"] != undefined || tutors[u]["Rate"] != undefined || tutors[u]["Time"]) {
+					if (tutors[u]["Pokémon"] != undefined || tutors[u]["Requirement"] != undefined || tutors[u]["Cost"] != undefined || tutors[u]["Rate"] != undefined || tutors[u]["Time"]) {
 						let mapSectionSidebarDescriptionTutorAdditional = document.createElement("span");
 						mapSectionSidebarDescriptionTutorLi.appendChild(mapSectionSidebarDescriptionTutorAdditional);
 					
+
+
+						if (tutors[u]["Pokémon"] != undefined) {
+							let mapSectionSidebarDescriptionTutorPok = document.createElement("span");
+							let mapSectionSidebarDescriptionTutorPokHeader = document.createElement("h6");
+							let mapSectionSidebarDescriptionTutorPokText = document.createElement("p");
+							mapSectionSidebarDescriptionTutorPokHeader.innerText = "Pokémon:"
+							mapSectionSidebarDescriptionTutorPokText.innerHTML = "<b type='invert' onclick='modalData()' function='modalData' value='"+getPokémonInt(tutors[u]["Pokémon"])+"'>"+tutors[u]["Pokémon"]+"</b>";
+							mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorPok);
+							mapSectionSidebarDescriptionTutorPok.appendChild(mapSectionSidebarDescriptionTutorPokHeader);
+							mapSectionSidebarDescriptionTutorPok.appendChild(mapSectionSidebarDescriptionTutorPokText);
+							
+						}
 
 						if (tutors[u]["Requirement"] != undefined) {
 							let mapSectionSidebarDescriptionTutorReq = document.createElement("span");
@@ -1704,7 +1717,8 @@ let createMap = function() {
 							mapSectionSidebarDescriptionTutorRate.appendChild(mapSectionSidebarDescriptionTutorRateHeader);
 							mapSectionSidebarDescriptionTutorRate.appendChild(mapSectionSidebarDescriptionTutorRateText);
 						}
-
+						
+					
 
 						if (tutors[u]["Cost"] != undefined) {
 
@@ -1717,8 +1731,6 @@ let createMap = function() {
 							mapSectionSidebarDescriptionTutorAdditional.appendChild(mapSectionSidebarDescriptionTutorCost);
 							mapSectionSidebarDescriptionTutorCost.appendChild(mapSectionSidebarDescriptionTutorCostHeader);
 
-							console.log(tutor_cost)
-							console.log(tutor_currency)
 							if (tutor_cost.length == tutor_currency.length) {
 								for (let c = 0; c < tutor_cost.length; c++) {
 								
@@ -1730,7 +1742,7 @@ let createMap = function() {
 							
 									let currency_icon = getMedia(true,[tutor_currency[c]],[PATH_Item_Bag]);
 									if (currency_icon.length > 0) {
-										mapSectionSidebarDescriptionTutorCostText.innerHTML += +'x<img src="'+currency_icon+'" name="item" title="'+tutor_currency[c]+'">'
+										mapSectionSidebarDescriptionTutorCostText.innerHTML += 'x<img src="'+currency_icon+'" name="item" title="'+tutor_currency[c]+'">'
 									}
 									else {
 										mapSectionSidebarDescriptionTutorCostText.innerText += " "+tutor_currency[c];
