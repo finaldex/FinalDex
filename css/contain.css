@@ -1740,6 +1740,11 @@
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li, #contain div#map > section[name='sidebar'] > div > *[name='movetutor'] ul > li {
 	justify-content:space-around;
 }
+
+
+
+
+
 #contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='rate'] > * {
 	display:flex;
     justify-content:center;
