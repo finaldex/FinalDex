@@ -21,7 +21,7 @@ let createMove = function() {
 
 
 	moveSectionListOptionsSearch.setAttribute("type","search");
-
+	moveSectionListOptionsSearch.setAttribute("name","move_search");
 	moveSectionListOptionsSearch.setAttribute("placeholder", "Search Moves...");
 	moveSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
 	moveSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Moves...'");
