@@ -73,7 +73,7 @@ let createAbility = function() {
 
 
 		abilitySectionListOptionsSearch.setAttribute("type","search");
-
+		abilitySectionListOptionsSearch.setAttribute("name","ability_search");
 		abilitySectionListOptionsSearch.setAttribute("placeholder","Search Abilities...");
 		abilitySectionListOptionsSearch.setAttribute("onfocus","this.placeholder=''");
 		abilitySectionListOptionsSearch.setAttribute("onblur","this.placeholder='Search Abilities...'");
