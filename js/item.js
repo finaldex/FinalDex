@@ -19,6 +19,7 @@ let createItem = function() {
 	itemOuter.setAttribute("id", "item");
 	itemOuter.setAttribute("value","items");
 	itemSectionListOptionsSearch.setAttribute("type","search");
+	itemSectionListOptionsSearch.setAttribute("name","item_search");
 	itemSectionListOptionsSearch.setAttribute("placeholder", "Search Items...");
 	itemSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
 	itemSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Items...'");
