@@ -553,6 +553,8 @@ function overviewMove(dir) {
     }
 
 
+
+
 }
 
 
@@ -653,7 +655,7 @@ function fullscreenMove(dir) {
         ul2.style.transform = "translate(-"+x+"00%, 0)";
 
 
-        header.innerText = base2.querySelector(":scope img").getAttribute("title");
+        header.innerText = base2.querySelector(":scope > div ul li[name='"+x+"'] img").getAttribute("title");
 
 
         for (let q = 0; q < figs1.length; q++) {
@@ -669,7 +671,7 @@ function fullscreenMove(dir) {
         let x = val1 + 1;
         ul1.style.transform = "translate(-"+x+"00%, 0)";
         ul2.style.transform = "translate(-"+x+"00%, 0)";
-        header.innerText = base2.querySelector(":scope img").getAttribute("title");
+        header.innerText = base2.querySelector(":scope > div ul li[name='"+x+"'] img").getAttribute("title");
 
 
         for (let q = 0; q < figs1.length; q++) {
