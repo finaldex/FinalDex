@@ -93,12 +93,12 @@ def gsheet(id,name):
         for sheet in sheets:
             sheetid = sheet['properties']['title']
             if not '//' in sheetid and not 'sheet' in sheetid and not 'Sheet' in sheetid:
-                print(sheetid)
                 data = spreadsheet.values().get(spreadsheetId=id,range=sheetid).execute()
                 table = tableToArr(data)
             
                 if len(table) > 0:
                     obj[sheetid] = table
+                    print(sheetid+" ✓")
 
         json_object = json.dumps(obj,separators=(',', ':'))
 
