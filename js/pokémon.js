@@ -25,6 +25,7 @@ let createPokémon = function() {
 	navigationDex.setAttribute("name","dexswitch");
 	navigationSearch.setAttribute("name","search");
 	navigationSearchInput.setAttribute("type","search");
+    navigationSearchInput.setAttribute("name","search");
 	navigationSearchInput.setAttribute("placeholder","Search...");
 	navigationSearchInput.setAttribute("onfocus","this.placeholder = ''");
 	navigationSearchInput.setAttribute("onblur","this.placeholder = 'Search...'");
@@ -376,7 +377,9 @@ let createPokémon = function() {
         teamLevel.setAttribute("max","100");
         teamLevel.title = "Level";
         teamLevel.setAttribute("placeholder","Lvl.");
+        teamLevel.setAttribute("name","level");
         teamNick.setAttribute("type","text");
+        teamNick.setAttribute("name","nick");
         teamNick.setAttribute("placeholder","Pokémon");
         teamNick.setAttribute("data_placeholder","Pokémon");
         teamNick.setAttribute("onfocus","this.placeholder='';")
@@ -452,6 +455,7 @@ let createPokémon = function() {
             teamPokémon.appendChild(teamItemOuter);
 
             let teamItemSelect = document.createElement("select");
+            teamItemSelect.setAttribute("name","item");
             teamItemOuter.appendChild(teamItemSelect);
 
             let teamHeldItemImage = document.createElement("img");
@@ -673,6 +677,7 @@ let createPokémon = function() {
 
         for (let p = 0; p < 4; p++) {
             let partyPokMovesMoveSelect = document.createElement("select");
+            partyPokMovesMoveSelect.setAttribute("name","move"+p);
             partyPokMovesMove.appendChild(partyPokMovesMoveSelect);
             partyPokMovesMoveSelect.addEventListener("change",partySave);
             partyPokMovesMoveSelect.addEventListener("click",function(event){if(event.which === 0){this.blur()}});
@@ -684,6 +689,7 @@ let createPokémon = function() {
             let partyPokMovesAbility = document.createElement("span");
             let partyPokMovesAbilitySelect = document.createElement("select");
             partyPokMovesAbility.setAttribute("name","ability");
+            partyPokMovesAbilitySelect.setAttribute("name","ability");
             partyPokMoves.appendChild(partyPokMovesAbility);
             partyPokMovesAbility.appendChild(partyPokMovesAbilitySelect);
             partyPokMovesAbilitySelect.addEventListener("change",partySave);
@@ -727,6 +733,7 @@ let createPokémon = function() {
         let partyPokStatsIVInner = document.createElement("span");
         partyPokStatsIVInner.setAttribute("name","iv");
         partyPokStatsWrap.appendChild(partyPokStatsIVInner);
+        
         for (let q = 0; q < ivStats.length; q++) {
             let partyPokStatsIVInput = document.createElement("input");
             partyPokStatsIVInput.setAttribute("type","number");
@@ -767,6 +774,7 @@ let createPokémon = function() {
         for (let q = 0; q < evStats.length; q++) {
             let partyPokStatsEVInput = document.createElement("input");
             partyPokStatsEVInput.setAttribute("type","number");
+            partyPokStatsEVInput.setAttribute("name","ev");
 
             if (Generation >= 1 && Generation <= 2) {
                 partyPokStatsEVInput.setAttribute("min","0");
@@ -818,6 +826,7 @@ let createPokémon = function() {
         for (let q = 0; q < totalStats.length; q++) {
             let partyPokStatsTotalInput = document.createElement("input");
             partyPokStatsTotalInput.setAttribute("type","number");
+            partyPokStatsTotalInput.setAttribute("name","total");
             partyPokStatsTotalInput.setAttribute("min","0");
             partyPokStatsTotalInput.setAttribute("max","0");
             partyPokStatsTotalInput.setAttribute("placeholder","0")
@@ -836,6 +845,7 @@ let createPokémon = function() {
             let partyPokStatsNatures = document.createElement("span");
             let partyPokStatsNaturesSelect = document.createElement("select");
             partyPokStatsNatures.setAttribute("name","nature");
+            partyPokStatsNaturesSelect.setAttribute("name","nature");
             partyPokStats.appendChild(partyPokStatsNatures);
             partyPokStatsNatures.appendChild(partyPokStatsNaturesSelect);
             partyPokStatsNaturesSelect.addEventListener("change",partySave);
@@ -862,6 +872,7 @@ let createPokémon = function() {
 
         if (Gender == true) {
             let teamGender = document.createElement("select");
+            teamGender.setAttribute("name","gender");
             teamRight.appendChild(teamGender);
             teamGender.setAttribute("type","icon");
             teamGender.setAttribute("title","Gender");
