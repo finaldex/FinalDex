@@ -16,6 +16,7 @@ let createMap = function() {
 
 
 	mapSectionListOptionsSearch.setAttribute("type", "search");
+	mapSectionListOptionsSearch.setAttribute("name", "location_search");
 
 	mapSectionListOptionsSearch.setAttribute("placeholder", "Search Locations...");
 	mapSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
@@ -768,8 +769,8 @@ let createMap = function() {
 
 					let mapSectionSidebarDescriptionShopLiInput = document.createElement("input");
 					mapSectionSidebarDescriptionShopLiInput.setAttribute("type","checkbox");
-					mapSectionSidebarDescriptionShopLiInput.setAttribute("id","location-"+type+"-shop"+type);
-					mapSectionSidebarDescriptionShopLiInput.setAttribute("name","location-"+type+"-shop"+getShopLocationInt(main,type,shops[u]["Cost"],location));
+					mapSectionSidebarDescriptionShopLiInput.setAttribute("id","location-"+type+"-shop"+"-"+getShopLocationInt(main,type,shops[u]["Cost"],location));
+					mapSectionSidebarDescriptionShopLiInput.setAttribute("name","location-"+type+"-shop"+"-"+getShopLocationInt(main,type,shops[u]["Cost"],location));
 				
 					mapSectionSidebarDescriptionShopLi.appendChild(mapSectionSidebarDescriptionShopLiInput);
 					mapSectionSidebarDescriptionShopLiInput.addEventListener("change", function() {memory("Save","game",[event.target])})
@@ -1946,12 +1947,14 @@ let createMap = function() {
 	mapSectionSidebarDescriptionTrainerDataTopCenter.setAttribute("name","navigation");
 	mapSectionSidebarDescriptionTrainerDataTopCenterCount.setAttribute("name","count");
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("type","number");
+	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("name","trainer_value");
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("min",1);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("max",trainers.length);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.value = 1;
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountMiddle.innerText = "/";
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("placeholder",1);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("type","number");
+	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("name","trainer_max");
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("min",trainers.length);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("max",trainers.length);
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountRight.setAttribute("placeholder",trainers.length);
@@ -1959,6 +1962,7 @@ let createMap = function() {
 	mapSectionSidebarDescriptionTrainerDataTopCenterCountLeft.setAttribute("onclick","this.select()");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearch.setAttribute("name","search");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("type","search");
+	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("name","trainer_search");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("placeholder", "Search Trainer...");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("onfocus", "this.placeholder=''");
 	mapSectionSidebarDescriptionTrainerDataTopCenterSearchInput.setAttribute("onblur", "this.placeholder='Search Trainer...'");
