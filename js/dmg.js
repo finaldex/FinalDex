@@ -6820,6 +6820,7 @@ function buildDMG(preval) {
 					let pokTitle = document.createElement("span");
                     let pokTitleText = document.createElement("h6");
                     let pokSelect = document.createElement("select");
+					pokSelect.setAttribute("name","pokémon");
                     pokTitleText.innerText = "Pokémon #"+y;
                     pok.setAttribute("name","pokémon");
                     optionsPok.appendChild(pok);
@@ -6951,6 +6952,7 @@ function buildDMG(preval) {
                     }
                     for (let m = 0; m < count; m++) {
                         let typeSelect = document.createElement("select");
+						typeSelect.setAttribute("name","type");
                         typeWrap.appendChild(typeSelect)
                         typeSelect.setAttribute("name",m)
                         typeSelect.addEventListener("change",function(){if (this.value != "" && this.value != undefined) {this.style.background = "var(--type"+this.value+")"} else {this.style.removeProperty("background")}})
@@ -6987,7 +6989,8 @@ function buildDMG(preval) {
                     let levelInput = document.createElement("input");
 
                     levelTitle.innerText = "Level";
-                    levelInput.setAttribute("type","number");
+					levelInput.setAttribute("type","number");
+                    levelInput.setAttribute("name","level");
                     levelInput.setAttribute("min","1");
                     levelInput.setAttribute("max","100");
                     levelInput.setAttribute("placeholder","1");
@@ -7010,7 +7013,7 @@ function buildDMG(preval) {
                         let nature = document.createElement("li");
                         let natureTitle = document.createElement("h6");
                         let natureSelect = document.createElement("select");
-
+						natureSelect.setAttribute("name","nature");
                         nature.setAttribute("name","nature");
                         natureTitle.innerText = "Nature"
 
@@ -7039,7 +7042,7 @@ function buildDMG(preval) {
                         let ability = document.createElement("li");
                         let abilityTitle = document.createElement("h6");
                         let abilitySelect = document.createElement("select");
-
+						abilitySelect.setAttribute("name","ability");
                         ability.setAttribute("name","ability");
                         abilityTitle.innerText = "Ability"
 
@@ -7064,7 +7067,7 @@ function buildDMG(preval) {
                         let gender = document.createElement("li");
                         let genderTitle = document.createElement("h6");
                         let genderSelect = document.createElement("select");
-                        
+                        genderSelect.setAttribute("name","gender");
                         gender.setAttribute("name","gender");
                         genderTitle.innerText = "Gender"
 
@@ -7102,6 +7105,7 @@ function buildDMG(preval) {
                         friendshipTitle.innerText = "Friendship";
 
                         friendshipInput.setAttribute("type","number");
+						friendshipInput.setAttribute("name","friendship");
                         friendshipInput.setAttribute("min","0");
                         friendshipInput.setAttribute("max","255");
                         friendshipInput.setAttribute("placeholder","0");
@@ -7133,6 +7137,7 @@ function buildDMG(preval) {
                         affectionTitle.innerText = "Affection";
 
                         affectionInput.setAttribute("type","number");
+						affectionInput.setAttribute("name","affection");
                         affectionInput.setAttribute("min","0");
                         affectionInput.setAttribute("max","255");
                         affectionInput.setAttribute("placeholder","0");
@@ -7163,7 +7168,9 @@ function buildDMG(preval) {
                         let itemImg = document.createElement("img");
                         itemTitle.innerText = "Item";
 
+						itemSelect.setAttribute("name","item");
                         itemImg.setAttribute("type","number");
+						itemImg.setAttribute("name","item");
                         itemImg.setAttribute("min","0");
                         itemImg.setAttribute("max","100");
                         itemImg.setAttribute("placeholder","0");
@@ -7234,6 +7241,7 @@ function buildDMG(preval) {
                     for (let m = 0; m < 4; m++) {
                         let moveSelectTopWrap = document.createElement("span");
                         let moveSelect = document.createElement("select");
+						moveSelect.setAttribute("name","move-"+(m+1))
                         moveWrap.appendChild(moveSelectTopWrap);
                         moveSelectTopWrap.appendChild(moveSelect);
                         moveSelect.setAttribute("name",m)
@@ -7535,6 +7543,7 @@ function buildDMG(preval) {
     
                     let statsWrapTempInput = document.createElement("input");
                     statsWrapTempInput.setAttribute("type","number");
+					statsWrapTempInput.setAttribute("name","temp_input");
                     statsWrapTempInput.setAttribute("disabled","");
                     statsWrapTempInput.setAttribute("min",0);
                     statsWrapTempInput.setAttribute("max",0);
