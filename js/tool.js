@@ -79,24 +79,28 @@ let createTool = function() {
 			toolSectionContentTimerTime.setAttribute("name","time");
 
 			toolSectionContentTimerSetInputHours.setAttribute("type","number");
+			toolSectionContentTimerSetInputHours.setAttribute("name",stopwatchcountdown[q]+"_hour");
 			toolSectionContentTimerSetInputHours.setAttribute("min","0");
 			toolSectionContentTimerSetInputHours.setAttribute("max","9999");
 			toolSectionContentTimerSetInputHours.setAttribute("autocomplete","off");
 			toolSectionContentTimerSetInputHours.setAttribute("placeholder","00");
 			toolSectionContentTimerSetInputHours.setAttribute("title","Hours");
 			toolSectionContentTimerSetInputMinutes.setAttribute("type","number");
+			toolSectionContentTimerSetInputMinutes.setAttribute("name",stopwatchcountdown[q]+"_minute");
 			toolSectionContentTimerSetInputMinutes.setAttribute("min","0");
 			toolSectionContentTimerSetInputMinutes.setAttribute("max","59");
 			toolSectionContentTimerSetInputMinutes.setAttribute("autocomplete","off");
 			toolSectionContentTimerSetInputMinutes.setAttribute("placeholder","00");
 			toolSectionContentTimerSetInputMinutes.setAttribute("title","Minutes");
 			toolSectionContentTimerSetInputSeconds.setAttribute("type","number");
+			toolSectionContentTimerSetInputSeconds.setAttribute("name",stopwatchcountdown[q]+"_second");
 			toolSectionContentTimerSetInputSeconds.setAttribute("min","0");
 			toolSectionContentTimerSetInputSeconds.setAttribute("max","59");
 			toolSectionContentTimerSetInputSeconds.setAttribute("autocomplete","off");
 			toolSectionContentTimerSetInputSeconds.setAttribute("placeholder","00");
 			toolSectionContentTimerSetInputSeconds.setAttribute("title","Seconds");
 			toolSectionContentTimerSetInputMilliseconds.setAttribute("type","number");
+			toolSectionContentTimerSetInputMilliseconds.setAttribute("name",stopwatchcountdown[q]+"_millisecond");
 			toolSectionContentTimerSetInputMilliseconds.setAttribute("min","0");
 			toolSectionContentTimerSetInputMilliseconds.setAttribute("max","99");
 			toolSectionContentTimerSetInputMilliseconds.setAttribute("autocomplete","off");
@@ -179,6 +183,7 @@ let createTool = function() {
 		toolSectionContentRNGOptionsIterations.setAttribute("name","iterations");
 		toolSectionContentRNGOptionsIterationsText.innerText = "Iterations";
 		toolSectionContentRNGOptionsIterationsInput.setAttribute("type","number");
+		toolSectionContentRNGOptionsIterationsInput.setAttribute("name","iteration");
 		toolSectionContentRNGOptionsIterationsInput.setAttribute("min","1");
 		toolSectionContentRNGOptionsIterationsInput.setAttribute("max","1000");
 		toolSectionContentRNGOptionsIterationsInput.setAttribute("value","1");
@@ -576,6 +581,7 @@ let createTool = function() {
 		toolSectionContentDMGOptionsTop.setAttribute("name","header");
 
 		toolSectionContentDMGMenuRightTopInput.setAttribute("type","number");
+		toolSectionContentDMGMenuRightTopInput.setAttribute("name","values");
 		toolSectionContentDMGMenuRightTopInput.setAttribute("min","1");
 		toolSectionContentDMGMenuRightTopInput.setAttribute("value","1");
 		toolSectionContentDMGMenuRightTopInput.setAttribute("max","1");
@@ -873,6 +879,9 @@ let createTool = function() {
 				toolSectionContentDMGMenuCenterTopOption.style.background = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],tempMoves[m])+")";
 			}
 		}
+
+		toolSectionContentDMGMenuCenterSelect.setAttribute("name","move");
+		toolSectionContentDMGMenuRightTopSelect.setAttribute("name","option");
 
 		if (toolSectionContentDMGMenuCenterSelect.querySelector(":scope option[value='Pound']") != undefined) {
 			toolSectionContentDMGMenuCenterSelect.value = "Pound";
@@ -1993,6 +2002,7 @@ function RNG() {
 			itText.setAttribute("title","Iteration");
 			min.setAttribute("name","min");
 			minInput.setAttribute("type","number");
+			minInput.setAttribute("name","minimum");
 			minInput.setAttribute("title","Min");
 			minInput.setAttribute("autocomplete","off");
 			if(themin[i] != undefined) {
@@ -2004,6 +2014,7 @@ function RNG() {
 			}
 			max.setAttribute("name","max");
 			maxInput.setAttribute("type","number");
+			maxInput.setAttribute("name","maximum");
 			maxInput.setAttribute("title","Max");
 			maxInput.setAttribute("autocomplete","off");
 			if(themax[i] != undefined) {
