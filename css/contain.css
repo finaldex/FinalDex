@@ -52,12 +52,10 @@
 	border:var(--Border_Main_List_Content_Label);
 }
 #contain > div#item > section[name='list'] ol label:has(img) {
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 
-#contain > div > section[name='list'] ol label > * {
-	padding: 0 20px;
-}
+
 #contain > div > section[name='list'] ol label.hidden,
 #contain > div > section[name='list'] ol label.filtered {
 	display: none;
@@ -147,10 +145,7 @@
 }
 #contain > div#item > section[name='list'] ol label span {
 	position:relative;
-}
-#contain > div#item > section[name='list'] ol label img {
-	max-height:100%;
-	max-width:100%;
+	width: 40%;
 }
 
 #contain > div > section[name='list'] div:first-child h2 {
