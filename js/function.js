@@ -32,46 +32,9 @@ function numFormat(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function getShopLocationInt(obj,type,cost,location) {
-	let arr;
-
-	if (type == "pokémon") {
-		arr = finaldata["Location Pokémon"]["Shop"];
-	}
-	else if (type == "item") {
-		arr = finaldata["Location Items"]["Shop"];
-	}
-
-	for(let i = 0; i < arr.length; i++) {
-		if (getApplicable(arr[i]["Game"])) {
-			if (arr[i]["Location"] == location) {
-				if (arr[i][titleCase(type)] == obj) {
-					if (arr[i]["Cost"] == cost) {
-						return i;
-					}
-				}
-			}
-		}
-	}
-}
 
 
-function getItemLocationInt(obj,description,location) {
 
-	let arr = finaldata["Location Items"]["Items"];
-
-	for(let i = 0; i < arr.length; i++) {
-		if (getApplicable(arr[i]["Game"])) {
-			if (arr[i]["Location"] == location) {
-				if (arr[i]["Item"] == obj) {
-					if (arr[i]["Description"] == description) {
-						return i;
-					}
-				}
-			}
-		}
-	}
-}
 
 function splitStr(str,selector) {
 	if (typeof str != "string") {
@@ -202,29 +165,7 @@ function linGradCalc() {
 }
 
 
-function getPokémonLocationInt(obj,lvl,rate,tile,encounter,mechanic,location) {
-	let arr = finaldata["Location Pokémon"]["Pokémon"]
 
-	for(let i = 0; i < arr.length; i++) {
-		if (getApplicable(arr[i]["Game"])) {
-			if (arr[i]["Location"] == location) {
-				if (arr[i]["Pokémon"] == obj) {
-					if (arr[i]["Level"] == lvl) {
-						if (arr[i]["Rate"] == rate) {
-							if (arr[i]["Tile"] == tile) {
-								if (arr[i]["Encounter"] == encounter) {
-									if (arr[i]["Mechanic"] == mechanic) {
-										return i;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-}
 
 function msToTime(duration) {
 	var milliseconds = Math.floor((duration % 1000) / 100),
@@ -1265,33 +1206,19 @@ function getDefaultInt(i) {
 }
 
 
-function getLocationTrainers(location) {
 
-	let arr = finaldata["Location Trainers"]["Trainers"];
+
+
+
+function getArrDataIndexed(arr,column,value) {
 	let result = [];
 
-    for (let q = 0; q < arr.length; q++) {
+	for (let q = 0; q < arr.length; q++) {
 		if (getApplicable(arr[q]["Game"]) == true) {
-			if(arr[q]["Location"] == location) {
-				result.push(arr[q]);
-			}
-		}
-	}
-
-	return result;
-
-}
-
-
-function getLocationItems(location) {
-
-	let arr = finaldata["Location Items"]["Items"];
-	let result = [];
-
-    for (let q = 0; q < arr.length; q++) {
-		if (getApplicable(arr[q]["Game"]) == true) {
-			if(arr[q]["Location"] == location) {
-				result.push(arr[q]);
+			if(arr[q][column] == value) {
+				let obj = arr[q];
+				obj["Index"] = q;
+				result.push(obj);
 			}
 		}
 	}
@@ -1299,22 +1226,6 @@ function getLocationItems(location) {
 	return result;
 }
 
-function getLocationPokémon(location) {
-
-	let arr = finaldata["Location Pokémon"]["Pokémon"];
-	let result = [];
-
-    for (let q = 0; q < arr.length; q++) {
-		if (getApplicable(arr[q]["Game"]) == true) {
-			if(arr[q]["Location"] == location) {
-				result.push(arr[q]);
-			}
-		}
-	}
-
-	return result;
-
-}
 
 
 
@@ -2996,5 +2907,47 @@ function flingPowerCalc(item) {
 
 	return 0;
 	
+
+}
+
+
+function getGames(option) {
+	let ref = finaldata["Game"]["Reference"];
+	let result = [];
+
+	let g = ref[GameID-1];
+
+	if (option.toLowerCase() == "generation") {
+		for (let i = 0; i < ref.length; i++) {
+			if (parseInt(ref[i]["Generation"]) == parseInt(g["Generation"])) {
+				result.push(ref[i]["Name"]);
+			}
+		}
+	}
+	else if (option.toLowerCase().includes("generation")) {
+		let operator = option.toLowerCase().replaceAll("generation","");
+		for (let i = 0; i < ref.length; i++) {
+			if (parseInt(ref[i]["Generation"]) == parseInt(g["Generation"])) {
+				result.push(ref[i]["Name"]);
+			}
+		}
+	}
+	else if (option.toLowerCase() == "all") {
+		for (let i = 0; i < ref.length; i++) {
+			result.push(ref[i]["Name"]);
+		}
+	}
+	else if (option.toLowerCase() == "sibling") {
+
+		result.push(g["Name"])
+
+		let sib = splitStr(g["Sibling"],",");
+
+		for (let i = 0; i < sib.length; i++) {
+			result.push(ref[parseInt(sib[i])-1]["Name"]);
+		}
+	}
+
+	return result;
 
 }
