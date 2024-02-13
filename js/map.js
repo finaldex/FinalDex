@@ -1390,20 +1390,19 @@ let createMap = function() {
 
 
 					let mapSectionSidebarDescriptionPokTypeTxtWrap = document.createElement("span");
-
 					let mapSectionSidebarDescriptionPokTypeEncounterImg = document.createElement("img");
 					let mapSectionSidebarDescriptionPokTypeTileText = document.createElement("small");
 	
 					let val1 = poks[u]["Tile"];
 					let val2 = [PATH_Object_Overworld_Tile];
-					let val3 = getGames("Generation");
+					let val3 = [GameName].concat(getGames("All"));
 					let val4 = poks[u]["Tile"];
 
 					if (poks[u]["Encounter"] == "Static") {
 						pok_int = getPokémonInt(poks[u]["Pokémon"]);
 						val1 = ["^"+getPokémonPath(pok_int),"^"+getPokémonPath(pok_int)+"_Male","^"+getPokémonPath(pok_int)+"_Female"]
 						val2 = [PATH_Pokémon_Overworld_Default,PATH_Pokémon_Overworld_Shiny]
-						val3 = [GameName].concat(getGames("all"));
+						val3 = [GameName].concat(getGames("All"));
 						val4 = poks[u]["Pokémon"];
 					}
 
@@ -1417,97 +1416,29 @@ let createMap = function() {
 					encounter_text = undDel(encounter_text,"");
 
 					if (encounter_text == "Static") {
-						encounter_text = poks[u]["Pokémon"];
+						encounter_text = poks[u]["Pokémon"]+" (Static Encounter)";
 					}
-					else if (encounter_text.includes("Rod")) {
-						encounter_text = poks[u]["Encounter"]+" in "+poks[u]["Tile"];
-					}
-					else if (encounter_text == "Surfing") {
+					else if (encounter_text == "Surfing" || encounter_text.includes("Rod")) {
 						encounter_text = poks[u]["Encounter"]+" on "+poks[u]["Tile"];
 					}
 					else if (poks[u]["Encounter"] == undefined) {
 						encounter_text = poks[u]["Tile"];
 					}
-
-					mapSectionSidebarDescriptionPokTypeTileText.innerText = encounter_text;
-
-
-					let rgs;
-
-					if (Region.includes(",")) {
-						rgs = Region.split(",")
+					if (poks[u]["Mechanic"] != undefined) {
+						encounter_text += " ("+poks[u]["Mechanic"]+")";
 					}
-					else {
-						rgs = [Region];
-					}
-					for(let r = 0; r < rgs.length; r++) {
-						mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" "+rgs[r],"").replaceAll(rgs[r]+" ","");
-					}
-					mapSectionSidebarDescriptionPokTypeTileText.innerText = mapSectionSidebarDescriptionPokTypeTileText.innerText.replaceAll(" Spring","").replaceAll(" Summer","").replaceAll(" Winter","").replaceAll(" Autumn","");				
+
+					mapSectionSidebarDescriptionPokTypeTileText.innerHTML = encounter_text;
 
 					mapSectionSidebarDescriptionPokType.appendChild(mapSectionSidebarDescriptionPokTypeEncounterImg);
 					mapSectionSidebarDescriptionPokType.appendChild(mapSectionSidebarDescriptionPokTypeTxtWrap);
 					mapSectionSidebarDescriptionPokTypeTxtWrap.appendChild(mapSectionSidebarDescriptionPokTypeTileText);
-						
-
-
-						
-					for(let r = 0; r < encounters.length; r++) {
-						let mapSectionSidebarDescriptionPokTypeEncounterText = document.createElement("small");
-
-						let encounter = encounters[r];
-
-						if (encounter.includes("Surfing")) {
-							encounter = encounter+"_M"
-						}
-						else {
-							encounter = encounter;
-						}
-
-						if (encounter != undefined) {
-	
-							
-							if (encounter == "Static") {
-								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = poks[u]["Pokémon"];
-							}
-							else {
-								mapSectionSidebarDescriptionPokTypeEncounterText.innerText = encounters[r];
-							}
-							if (poks[u]["Item"] != undefined) {
-								if (poks[u]["Item"] == poks[u]["Encounter"]) {
-									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","item");
-									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value",poks[u]["Item"]);
-									mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
-									mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
-								}
-							}
-							
-							if (encounters[r] == "Surfing") {
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","move");
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value","Surf");
-								mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
-							}
-					
-							if (returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],encounters[r]) != undefined) {
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("name","move");
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("value",encounters[r]);
-								mapSectionSidebarDescriptionPokTypeEncounterText.addEventListener("click",dataRedirect);
-								mapSectionSidebarDescriptionPokTypeEncounterText.setAttribute("function","dataRedirect");
-							}
-						}
-						mapSectionSidebarDescriptionPokTypeTxtWrap.appendChild(mapSectionSidebarDescriptionPokTypeEncounterText);
-					}
-
-
-
 
 					if (poks[u]["Mechanic"] != undefined) {
 						let mapSectionSidebarDescriptionPokTypeMechanicText = document.createElement("small");
 						mapSectionSidebarDescriptionPokTypeMechanicText.innerText = poks[u]["Mechanic"];
 						mapSectionSidebarDescriptionPokTypeTxtWrap.appendChild(mapSectionSidebarDescriptionPokTypeMechanicText);
 					}
-
 
 
 					if (poks[u]["Criteria"] != undefined) {
