@@ -281,7 +281,7 @@ function getMedia(set,userFile,userPath,games) {
 
 							if (file.includes(".png") || file.includes(".gif")) {
 								for(let t = 0; t < userFile.length; t++) {
-									let fileName = arr[key][q].split(".")[0]
+									let fileName = arr[key][q].replace("."+arr[key][q].split(".")[arr[key][q].split(".").length-1],"")
 									let userName = userFile[t].toString();
 
 									if (userName.includes("^")) {
