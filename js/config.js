@@ -43,12 +43,12 @@ let PATH_Pokémon_Battle_Shiny_Back = "./media/Images/Pokémon/Battle/Shiny/Back
 let PATH_Pokémon_Battle_Shiny_Back_PNG = "./media/Images/Pokémon/Battle/Shiny/Back/PNG/";
 let PATH_Pokémon_Battle_Shiny_Back_GIF = "./media/Images/Pokémon/Battle/Shiny/Back/GIF/";
 
-let PATH_Pokémon_Overworld_Default_PNG = "./media/Images/Pokémon/Overworld/Default/Front/PNG/";
-let PATH_Pokémon_Overworld_Default_GIF = "./media/Images/Pokémon/Overworld/Default/Front/GIF/";
-let PATH_Pokémon_Overworld_Default = "./media/Images/Pokémon/Overworld/Default/Front/";
-let PATH_Pokémon_Overworld_Shiny_PNG = "./media/Images/Pokémon/Overworld/Shiny/Front/PNG/";
-let PATH_Pokémon_Overworld_Shiny_GIF = "./media/Images/Pokémon/Overworld/Shiny/Front/GIF/";
-let PATH_Pokémon_Overworld_Shiny = "./media/Images/Pokémon/Overworld/Shiny/Front/";
+let PATH_Pokémon_Overworld_Default_Front_PNG = "./media/Images/Pokémon/Overworld/Default/Front/PNG/";
+let PATH_Pokémon_Overworld_Default_Front_GIF = "./media/Images/Pokémon/Overworld/Default/Front/GIF/";
+let PATH_Pokémon_Overworld_Default_Front = "./media/Images/Pokémon/Overworld/Default/Front/";
+let PATH_Pokémon_Overworld_Shiny_Front_PNG = "./media/Images/Pokémon/Overworld/Shiny/Front/PNG/";
+let PATH_Pokémon_Overworld_Shiny_Front_GIF = "./media/Images/Pokémon/Overworld/Shiny/Front/GIF/";
+let PATH_Pokémon_Overworld_Shiny_Front = "./media/Images/Pokémon/Overworld/Shiny/Front/";
 
 let PATH_Pokémon_Menu_Default = "./media/Images/Pokémon/Menu/Default/Front/";
 let PATH_Pokémon_Menu_Shiny = "./media/Images/Pokémon/Menu/Shiny/Front/";
