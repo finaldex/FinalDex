@@ -281,8 +281,11 @@ function getMedia(set,userFile,userPath,games) {
 
 							if (file.includes(".png") || file.includes(".gif")) {
 								for(let t = 0; t < userFile.length; t++) {
-									let fileName = arr[key][q].replace("."+arr[key][q].split(".")[arr[key][q].split(".").length-1],"")
+									let fileName = arr[key][q].toString();
 									let userName = userFile[t].toString();
+
+									// remove extension from name
+									fileName = fileName.replace("."+arr[key][q].split(".")[arr[key][q].split(".").length-1],"");
 
 									if (userName.includes("^")) {
 										userName = userName.replaceAll("^","")
@@ -290,7 +293,7 @@ function getMedia(set,userFile,userPath,games) {
 									else {
 										fileName = splitStr(fileName,"_")[0]
 									}
-
+									
 									if (userName == fileName || userName == "") {
 										if (set) {
 											return key+"/"+file;
