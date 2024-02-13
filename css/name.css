@@ -760,3 +760,6 @@
 	text-shadow:1px 1px 1px Black;
 }
 
+[function='dataRedirect'] {
+	cursor:pointer;
+}
