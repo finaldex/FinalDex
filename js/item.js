@@ -211,13 +211,19 @@ let createItem = function() {
 					}
 					itemSectionListOptionsLabel.setAttribute("type","medium");
 					if (finaldata["Items"]["Reference"][q]["Icon"] != undefined) {
+						let item_icon = getMedia(true,[finaldata["Items"]["Reference"][q]["Icon"]],[PATH_Item_Bag]);
+
 						let itemSectionListOptionsLabelImageOuter = document.createElement("span");
 						let itemSectionListOptionsLabelImage = document.createElement("img");
 
-						itemSectionListOptionsLabelImage.src = getMedia(true,[finaldata["Items"]["Reference"][q]["Icon"]],[PATH_Item_Bag])
+						itemSectionListOptionsLabelImage.src = item_icon;
 						itemSectionListOptionsLabelImage.setAttribute("onerror","this.style.display='none';");
 						itemSectionListOptionsLabel.appendChild(itemSectionListOptionsLabelImageOuter);
 						itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
+
+						if (item_icon == "") {
+							console.warn('"'+finaldata["Items"]["Reference"][q]["Item"]+'" has wrong Image Icon.')
+						}
 					}
 				
 					itemSectionListOptionsLabelText.innerText = name;
