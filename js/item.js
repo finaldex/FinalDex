@@ -222,7 +222,7 @@ let createItem = function() {
 						itemSectionListOptionsLabelImageOuter.appendChild(itemSectionListOptionsLabelImage);
 
 						if (item_icon == "") {
-							console.warn('"'+finaldata["Items"]["Reference"][q]["Item"]+'" has wrong Image Icon.')
+							console.warn('"'+finaldata["Items"]["Reference"][q]["Item"]+'" has wrong Image Icon. ('+finaldata["Items"]["Reference"][q]["Icon"]+')')
 						}
 					}
 				
