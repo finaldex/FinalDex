@@ -633,21 +633,25 @@ let createMap = function() {
 
 
 		for (let q = 0; q < locationImages.length; q++) {
-			let overviewLocation;
-			let overviewArea;
-			if (locationImages[q].includes("_")) {
-				overviewLocation = locationImages[q].split("_")[0];
-				overviewArea = locationImages[q].replaceAll(overviewLocation+"_","")
-				overviewArea = splitStr(overviewArea,"/")[splitStr(overviewArea,"/").length-1];
+			let overviewLocation = splitStr(locationImages[q],"/");
+			overviewLocation = overviewLocation[overviewLocation.length-1];
+			overviewLocation = splitStr(overviewLocation,"_");
+			overviewLocation = overviewLocation[0];
+			overviewLocation = splitStr(overviewLocation,".")[0];
+
+
+			let overviewArea = splitStr(locationImages[q],"/");
+			overviewArea = overviewArea[overviewArea.length-1];
+
+			if (overviewArea.includes("_")) {
+				overviewArea = splitStr(overviewArea,"_")
+				overviewArea = overviewArea[overviewArea.length-1];
 				overviewArea = splitStr(overviewArea,".")[0];
 			}
 			else {
-				overviewLocation = locationImages[q];
 				overviewArea = undefined;
 			}
 
-			overviewLocation = splitStr(overviewLocation,"/")[splitStr(overviewLocation,"/").length-1];
-			
 
 			let mapSectionSidebarDescriptionOviewImageInner = document.createElement("li");
 			let mapSectionSidebarDescriptionOviewImage = document.createElement("img");
