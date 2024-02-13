@@ -2058,32 +2058,34 @@ function mapifyMap(base) {
         $(img).mapify({
             popOver: {
             content: function(zone){ 
-                let zones = [];
-                if (zone.attr("data-title").includes("<br>")) {
-                	zones = zone.attr("data-title").split("<br>");
-                }
-                else {
-                	zones = [zone.attr("data-title")];
-                }
-				let z2 = [];
-				for (let i = 0; i < zones.length; i++) {
-					let arr2 = getAreasFromLocation(zones[i]);
-					for (let q = 0; q < arr2.length; q++) {
-						z2.push(arr2[q]);
-					}
-				}
+              
+			
 
-				for (let i = 0; i < z2.length; i++) {
-					if (getMapPointsTest(z2[i],base).length == 0) {
-						zones.push(z2[i]);
-					}
-				}
+
+                let zone_coords_default = zone[0].getAttribute('data-coords-default');
+                let z1 = base.querySelectorAll(":scope map area[data-coords-default='"+zone_coords_default+"']");
+                
+                let zones = [];
+
+                for (let i = 0; i < z1.length; i++) {
+                    let zone_title = z1[i].getAttribute("data-title");
+                    zones.push(zone_title);
+
+                    let a1 = getAreasFromLocation(zone_title);
+                    for (let q = 0; q < a1.length; q++) {
+                        let a2 = base.querySelectorAll(":scope map area[data-title='"+a1[q]+"']")
+                        if (a2.length == 0) {
+                            zones.push(a1[q]);
+                        }
+                    }
+                }
+                zones = [...new Set(zones)];
+
+				
                 for (let i = 0; i < zones.length; i++) {
-					let z = zones[i];
-					if (z.includes("_")) {
-						z = z.split("_")[0];
-					}
-                	zones[i] = `<b name="map" onclick="dataRedirect()"><p style="pointer-events:none">`+z+`</p></b>`;
+					let zone = splitStr(zones[i],"_")[0];
+
+                	zones[i] = `<b name="map" onclick="dataRedirect()"><p style="pointer-events:none">`+zone+`</p></b>`;
                 }
                 return zones.join("<br>");
             },
