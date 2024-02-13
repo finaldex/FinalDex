@@ -147,6 +147,8 @@ let PATH_Game_Art = "./media/Images/Game/Art/";
 
 let PATH_FinalDex = "./media/Images/FinalDex/";
 
+let PATH_Object_Overworld_Tile = "./media/Images/Object/Overworld/Tile/";
+
 
 let DATA_Pokémon_Reference;
 let DATA_Pokémon_BaseStats;
