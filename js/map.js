@@ -14,7 +14,6 @@ let createMap = function() {
 	mapOuter.setAttribute("id","map");
 	mapOuter.setAttribute("value","map");
 
-
 	mapSectionListOptionsSearch.setAttribute("type", "search");
 	mapSectionListOptionsSearch.setAttribute("name", "location_search");
 
@@ -2228,11 +2227,6 @@ function updateTrainer(trainers,condition) {
 	let trainerTitle = trainers[q]["Title"];
 	let trainerType = trainers[q]["Type"];
 
-
-
-
-
-
 	let trainerInfo = [];
 
 	if (trainerTitle != undefined) {
@@ -2263,6 +2257,9 @@ function updateTrainer(trainers,condition) {
 			trainerImage.unshift(trainerImage[0]+"_Female")
 		}
 	}
+	else {
+		trainerImage[0] = "^"+trainerImage;
+	}
 
 
 
@@ -2274,8 +2271,7 @@ function updateTrainer(trainers,condition) {
 
 
 
-	currentImg.src = getMedia(true,trainerImage,[PATH_Character_Battle_Front])
-
+	currentImg.src = getMedia(true,trainerImage,[PATH_Character_Battle_Front,PATH_Character_VS])
 
 
 
@@ -2297,10 +2293,13 @@ function updateTrainer(trainers,condition) {
 				previmg.unshift(previmg[0]+"_Female")
 			}
 		}
+		else {
+			previmg[0] = "^"+previmg;
+		}
 
 	
 
-		previousImg.src = getMedia(true,previmg,[PATH_Character_Battle_Front])
+		previousImg.src = getMedia(true,previmg,[PATH_Character_Battle_Front,PATH_Character_VS])
 		previousPath.title = trainers[q-1]["Class"]+"\n"+trainers[q-1]["Trainer"];
 	}
 	else {
@@ -2308,6 +2307,7 @@ function updateTrainer(trainers,condition) {
 		previousImg.style.pointerEvents = "none";
 		previousPath.removeAttribute("title");
 	}
+
 	if(trainerNext != undefined) {
 		let nextimg = [trainerNext["Image"]];
 		if (nextimg[0] == undefined) {
@@ -2319,8 +2319,11 @@ function updateTrainer(trainers,condition) {
 				nextimg.unshift(nextimg[0]+"_Female")
 			}
 		}
+		else {
+			nextimg[0] = "^"+nextimg;
+		}
 
-		nextImg.src = getMedia(true,nextimg,[PATH_Character_Battle_Front])
+		nextImg.src = getMedia(true,nextimg,[PATH_Character_Battle_Front,PATH_Character_VS])
 		nextPath.title = trainers[q+1]["Class"]+"\n"+trainers[q+1]["Trainer"];
 	}
 	else {
@@ -2374,45 +2377,49 @@ function updateTrainer(trainers,condition) {
 		rewardTitleText.innerText = "Reward:"
 		rewardPath.appendChild(rewardTitleText);
 
-		let rewardWrap = document.createElement("b");
+
+		let rewardWrap = document.createElement("span");
 		rewardPath.appendChild(rewardWrap);
-
-
-		let rewardValWrap = document.createElement("span");
-		rewardWrap.appendChild(rewardValWrap);
 		
 
-		for(let u = 0; u < rwcount; u++) {
-			let rewardImg = document.createElement("img");
-			rewardImg.src = getMedia(true,[getItemIcon(trainerReward)],[PATH_Item_Bag]);
-			if (rwcount != 1) {
-				rewardImg.title = trainerRewardCount+"x "+trainerReward;
-			}
-			else {
-				rewardImg.title = trainerReward;
-			}
-			rewardImg.setAttribute("onerror","this.style.display='none';this.parentElement.parentElement.lastChild.style.display='unset';")
-			rewardValWrap.appendChild(rewardImg)
-		}
 
-		let rewardText = document.createElement("h6");
-		if (rwcount != 1) {
-			rewardText.innerText = trainerRewardCount+"x "+trainerReward;
+		let reward_img = getMedia(true,[getItemIcon(trainerReward)],[PATH_Item_Bag,PATH_Currency_Icon]);
+
+		if (reward_img != "") {
+			for(let u = 0; u < rwcount; u++) {
+				let rewardImg = document.createElement("img");
+				rewardImg.src = reward_img;
+				if (rwcount != 1) {
+					rewardImg.title = trainerRewardCount+"x "+trainerReward;
+				}
+				else {
+					rewardImg.title = trainerReward;
+				}
+				rewardWrap.appendChild(rewardImg)
+				
+				rewardImg.addEventListener("click",dataRedirect)
+				rewardImg.setAttribute("function","dataRedirect")
+				rewardImg.setAttribute("name","item");
+				rewardImg.setAttribute("value",trainerReward);
+			}
 		}
 		else {
-			rewardText.innerText = trainerReward;
+			let rewardText = document.createElement("h6");
+			if (rwcount != 1) {
+				rewardText.innerText = trainerRewardCount+" "+trainerReward;
+			}
+			else {
+				rewardText.innerText = trainerReward;
+			}
+			rewardWrap.appendChild(rewardText);
 		}
 
+		
 
-		rewardText.innerHTML = rewardText.innerHTML.replaceAll("Pokémon Dollar",'<img src="'+getMedia(true,"Pokémon Dollar",[PATH_Currency_Icon])+'" title="Pokémon Dollar" />');
-		rewardValWrap.appendChild(rewardText);
-		rewardText.style.display = "none";
+		
 
 
-		rewardWrap.addEventListener("click",dataRedirect)
-		rewardWrap.setAttribute("function","dataRedirect")
-		rewardWrap.setAttribute("name","item");
-		rewardWrap.setAttribute("value",trainerReward);
+
 	}
 
 	if (trainerInfo.length > 0) {
