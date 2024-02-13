@@ -145,4 +145,4 @@ if __name__ == '__main__':
 
         time.sleep(10) # To not exceed api quota
     print("Time Elapsed: "+str(datetime.timedelta(seconds=(round(time.time() - timeStart,0)))))
-    input('Complete!')
+    os.system("pause")
