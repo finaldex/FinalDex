@@ -2101,7 +2101,7 @@ function mapifyMap(base) {
 			if (getApplicable(finaldata["Locations"]["Reference"][i]["Game"])) {
 				let points = getMapPoints(finaldata["Locations"]["Reference"][i]["Location"],base);
 				if (points.length == 0) {
-					console.warn(finaldata["Locations"]["Reference"][i]["Location"]+" returned an error.");
+					console.warn(finaldata["Locations"]["Reference"][i]["Location"]+" is missing a map point.");
 				}
 			}
 		}
