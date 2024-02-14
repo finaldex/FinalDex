@@ -2926,6 +2926,7 @@ function getGames(option) {
 	}
 	else if (option.toLowerCase().includes("generation")) {
 		let operator = option.toLowerCase().replaceAll("generation","");
+		
 		for (let i = 0; i < ref.length; i++) {
 			if (parseInt(ref[i]["Generation"]) == parseInt(g["Generation"])) {
 				result.push(ref[i]["Name"]);
