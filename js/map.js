@@ -1395,14 +1395,14 @@ let createMap = function() {
 	
 					let val1 = poks[u]["Tile"];
 					let val2 = [PATH_Object_Overworld_Tile];
-					let val3 = [GameName].concat(getGames("All"));
+					let val3 = getGames("Generation");
 					let val4 = poks[u]["Tile"];
 
 					if (poks[u]["Encounter"] == "Static") {
 						pok_int = getPokémonInt(poks[u]["Pokémon"]);
 						val1 = ["^"+getPokémonPath(pok_int),"^"+getPokémonPath(pok_int)+"_Male","^"+getPokémonPath(pok_int)+"_Female"]
-						val2 = [PATH_Pokémon_Overworld_Default,PATH_Pokémon_Overworld_Shiny]
-						val3 = [GameName].concat(getGames("All"));
+						val2 = [PATH_Pokémon_Overworld_Default_Front,PATH_Pokémon_Overworld_Shiny_Front]
+						val3 = [GameName];
 						val4 = poks[u]["Pokémon"];
 					}
 
@@ -1415,10 +1415,7 @@ let createMap = function() {
 					let encounter_text = poks[u]["Encounter"];
 					encounter_text = undDel(encounter_text,"");
 
-					if (encounter_text == "Static") {
-						encounter_text = poks[u]["Pokémon"]+" (Static Encounter)";
-					}
-					else if (encounter_text == "Surfing" || encounter_text.includes("Rod")) {
+					if (encounter_text == "Surfing" || encounter_text.includes("Rod")) {
 						encounter_text = poks[u]["Encounter"]+" on "+poks[u]["Tile"];
 					}
 					else if (poks[u]["Encounter"] == undefined) {
