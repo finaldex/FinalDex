@@ -58,49 +58,49 @@
 
 [name="spring"] {
 	color:#B0F858;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="summer"] {
 	color:#FFFA73;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="autumn"] {
 	color:#F89058;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="winter"] {
 	color:#78D0F8;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 
 
 [name="monday"] {
 	color:#FFE66D;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="tuesday"] {
 	color:#F87575;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="wednesday"] {
 	color:#357266;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="thursday"] {
 	color:#B8B08D;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="friday"] {
 	color:#576CA8;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="saturday"] {
 	color:#F0D3F7;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 [name="sunday"] {
 	color:#9D5C63;
-	text-shadow:1px 1px 1px var(--border1);
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
 }
 
 
