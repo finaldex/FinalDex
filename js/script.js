@@ -2073,7 +2073,7 @@ function mapifyMap(base) {
 
                     let a1 = getAreasFromLocation(zone_title);
                     for (let q = 0; q < a1.length; q++) {
-                        let a2 = base.querySelectorAll(":scope map area[data-title='"+a1[q]+"']")
+                        let a2 = base.querySelectorAll(`:scope map area[data-title="`+a1[q]+`"]`)
                         if (a2.length == 0) {
                             zones.push(a1[q]);
                         }
