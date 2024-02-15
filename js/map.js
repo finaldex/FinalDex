@@ -183,24 +183,34 @@ let createMap = function() {
     mapSectionHeader.appendChild(mapSectionHeaderGame);
     mapSectionHeaderGame.appendChild(mapSectionHeaderGameImage);
 
-	let mapSectionContentAreaNavigation = document.createElement("div");
-	mapSectionContentAreaNavigation.setAttribute("name","navigation");
-	mapSectionContent.appendChild(mapSectionContentAreaNavigation);
-	let mapSectionContentAreaOuter = document.createElement("div");
-	let mapSectionContentArea = document.createElement("span");
-	mapSectionContentAreaNavigation.appendChild(mapSectionContentAreaOuter);
-	mapSectionContentAreaOuter.appendChild(mapSectionContentArea);
+	let mapSectionContentLocationAreaNavigation = document.createElement("div");
+	mapSectionContentLocationAreaNavigation.setAttribute("name","navigation");
+	mapSectionContent.appendChild(mapSectionContentLocationAreaNavigation);
+	let mapSectionContentLocationAreaOuter = document.createElement("div");
+	let mapSectionContentLocationArea = document.createElement("span");
+	mapSectionContentLocationAreaNavigation.appendChild(mapSectionContentLocationAreaOuter);
+	mapSectionContentLocationAreaOuter.appendChild(mapSectionContentLocationArea);
+
 	let mapSectionContentAreaContent = document.createElement("span");
 	let mapSectionContentAreaTitle = document.createElement("h5");
-	mapSectionContentAreaTitle.innerText = "Sub Area/Location";
-	mapSectionContentArea.appendChild(mapSectionContentAreaContent);
+	mapSectionContentAreaTitle.innerText = "Sub Areas";
+	mapSectionContentAreaContent.setAttribute("name","areas");
+	mapSectionContentLocationArea.appendChild(mapSectionContentAreaContent);
 	mapSectionContentAreaContent.appendChild(mapSectionContentAreaTitle);
+
+	let mapSectionContentLocationContent = document.createElement("span");
+	let mapSectionContentLocationTitle = document.createElement("h5");
+	mapSectionContentLocationTitle.innerText = "Location";
+	mapSectionContentLocationContent.setAttribute("name","location");
+	mapSectionContentLocationArea.appendChild(mapSectionContentLocationContent);
+	mapSectionContentLocationContent.appendChild(mapSectionContentLocationTitle);
+
 	let mapSectionContentNavigationOuter = document.createElement("div");
 	let mapSectionContentNavigation = document.createElement("span");
 	let mapSectionContentNavigationContent = document.createElement("span");
 	let mapSectionContentNavigationTitle = document.createElement("h5");
 	mapSectionContentNavigationTitle.innerText = "Required for Navigation";
-	mapSectionContentAreaNavigation.appendChild(mapSectionContentNavigationOuter);
+	mapSectionContentLocationAreaNavigation.appendChild(mapSectionContentNavigationOuter);
 	mapSectionContentNavigationOuter.appendChild(mapSectionContentNavigation);
 	mapSectionContentNavigation.appendChild(mapSectionContentNavigationContent);
 	mapSectionContentNavigationContent.appendChild(mapSectionContentNavigationTitle);
@@ -1634,33 +1644,31 @@ let createMap = function() {
 
 
 
-		let subs = mapSectionContentAreaContent.querySelectorAll(":scope > p");
+		let subs = mapSectionContentLocationArea.querySelectorAll(":scope p");
 		for(let q = 0; q < subs.length; q++) {
 			subs[q].remove();
 		}
-		mapSectionContentAreaTitle.innerText = "Sub Area/Location";
+	
 
 		let areas = getAreasFromLocation(location);
 		let locations = getLocationFromArea(location);
 
 		for(let q = 0; q < locations.length; q++) {
-			let mapSectionContentAreaText = document.createElement("p");
-			mapSectionContentAreaTitle.innerText = "Location";
-			mapSectionContentAreaText.innerText = locations[q];
-			mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
-			mapSectionContentAreaText.setAttribute("name", "map");
-			mapSectionContentAreaText.addEventListener("click", dataRedirect);
-			mapSectionContentAreaText.setAttribute("function","dataRedirect");
+			let location_text = document.createElement("p");
+			location_text.innerText = locations[q];
+			mapSectionContentLocationContent.appendChild(location_text);
+			location_text.setAttribute("name", "map");
+			location_text.addEventListener("click", dataRedirect);
+			location_text.setAttribute("function","dataRedirect");
 		}
 
 		for(let q = 0; q < areas.length; q++) {
-			let mapSectionContentAreaText = document.createElement("p");
-			mapSectionContentAreaTitle.innerText = "Sub Areas";
-			mapSectionContentAreaText.innerText = areas[q];
-			mapSectionContentAreaContent.appendChild(mapSectionContentAreaText);
-			mapSectionContentAreaText.setAttribute("name", "map");
-			mapSectionContentAreaText.addEventListener("click", dataRedirect);
-			mapSectionContentAreaText.setAttribute("function","dataRedirect");
+			let area_text = document.createElement("p");
+			area_text.innerText = areas[q];
+			mapSectionContentAreaContent.appendChild(area_text);
+			area_text.setAttribute("name", "map");
+			area_text.addEventListener("click", dataRedirect);
+			area_text.setAttribute("function","dataRedirect");
 		}
 
 
