@@ -1514,8 +1514,8 @@
 	max-width:50px;
 } 
 
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] img:not([src]),
-#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name='encounter'] img[src=''] {
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name] img:not([src]),
+#contain div#map > section[name='sidebar'] > div > *[name='pokémon'] ul > li > span[name] img[src=''] {
 	display:none;
 }
 
