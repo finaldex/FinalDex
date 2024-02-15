@@ -1662,25 +1662,33 @@ function getAreasFromLocation(location) {
 
     let result = [];
 
+    let depth = 5;
+
     for (let i = 0; i < arr.length; i++) {
         if (getApplicable(arr[i]["Game"])) {
             if (arr[i]["Located"] != undefined) {
-                if (arr[i]["Located"].includes(",")) {
-                    let arr2 = arr[i]["Located"].split(",");
-                    for (let q = 0; q < arr2.length; q++) {
-                        if (arr2[q] == location) {
-                            result.push(arr[i]["Location"])
-                        }
-                    }
-                }
-                else {
-                    if (arr[i]["Located"] == location) {
+                let arr2 = splitStr(arr[i]["Located"],",");
+
+                for (let q = 0; q < arr2.length; q++) {
+                    if (arr2[q] == location) {
                         result.push(arr[i]["Location"])
                     }
                 }
             }
         }
     }
+
+    for (let i = 0; i < result.length; i++) {
+        for (let d = 0; d < depth; d++) {
+            let a1 = getAreasFromLocation(result[i]);
+            for (let a = 0; a < a1.length; a++) {
+                result.push(a1[a]);
+            }
+        }
+    }
+    
+    result = [...new Set(result)];
+
     return result;
 }
 
