@@ -1013,6 +1013,12 @@
 	padding:10px;
 }
 
+#contain > div#map > section[name='content'] > *[name='navigation'] div > span > span[name='areas']:not(:has(p)),
+#contain > div#map > section[name='content'] > *[name='navigation'] div > span > span[name='location']:not(:has(p)) {
+	opacity:0.25;
+	user-select: none;
+}
+
 #contain > div#map > section[name='content'] > *[name='navigation'] *[function="dataRedirect"] {
 	cursor: pointer;
 	user-select:none;
