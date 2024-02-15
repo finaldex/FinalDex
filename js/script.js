@@ -1657,7 +1657,7 @@ function getLocationFromArea(area) {
 
 }
 
-function getAreasFromLocation(location) {
+function getAreasFromLocation(location,check) {
     let arr = finaldata["Locations"]["Connecting"];
 
     let result = [];
@@ -1678,15 +1678,19 @@ function getAreasFromLocation(location) {
         }
     }
 
-    for (let i = 0; i < result.length; i++) {
-        for (let d = 0; d < depth; d++) {
-            let a1 = getAreasFromLocation(result[i]);
-            for (let a = 0; a < a1.length; a++) {
-                result.push(a1[a]);
+    // Areas from Areas
+
+    if (check) {
+        for (let i = 0; i < result.length; i++) {
+            for (let d = 0; d < depth; d++) {
+                let a1 = getAreasFromLocation(result[i]);
+                for (let a = 0; a < a1.length; a++) {
+                    result.push(a1[a]);
+                }
             }
         }
     }
-    
+
     result = [...new Set(result)];
 
     return result;
@@ -2079,7 +2083,7 @@ function mapifyMap(base) {
                     let zone_title = z1[i].getAttribute("data-title");
                     zones.push(zone_title);
 
-                    let a1 = getAreasFromLocation(zone_title);
+                    let a1 = getAreasFromLocation(zone_title,true);
                     for (let q = 0; q < a1.length; q++) {
                         let a2 = base.querySelectorAll(`:scope map area[data-title="`+a1[q]+`"]`)
                         if (a2.length == 0) {
@@ -2107,10 +2111,23 @@ function mapifyMap(base) {
 		
 		for (let i = 0; i < finaldata["Locations"]["Reference"].length; i++) {
 			if (getApplicable(finaldata["Locations"]["Reference"][i]["Game"])) {
-				let points = getMapPoints(finaldata["Locations"]["Reference"][i]["Location"],base);
-				if (points.length == 0) {
-					console.warn(finaldata["Locations"]["Reference"][i]["Location"]+" is missing a map point.");
-				}
+                let val1 = finaldata["Locations"]["Reference"][i]["Location"];
+                let arr1 = getAreasFromLocation(val1,true).concat([finaldata["Locations"]["Reference"][i]["Location"]]);
+
+                let check = true;
+                for (let q = 0; q < arr1.length; q++) {
+                    let location_area = getLocationFromArea(arr1[q]);
+
+                    let p1 = getMapPoints(arr1[q],base);
+                    let p2 = getMapPoints(location_area,base);
+
+                    if (p1.length > 0 || p2.length > 0) {
+                        check = false;
+                    }
+                }
+                if (check) {
+                    console.warn(val1+" is missing a map point.");
+                }
 			}
 		}
     }
