@@ -1650,7 +1650,7 @@ let createMap = function() {
 		}
 	
 
-		let areas = getAreasFromLocation(location);
+		let areas = getAreasFromLocation(location,false);
 		let locations = getLocationFromArea(location);
 
 		for(let q = 0; q < locations.length; q++) {
