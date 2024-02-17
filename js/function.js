@@ -867,60 +867,52 @@ function getPokémonInt(name) {
 	}
 }
 
-function sortBy_v2(arr,order,depend) {
+function sortBy_v2(arr,order) {
 	let result = [];
-	let num = [];
+	
+	for (let i = 0; i < 2; i++) {
+		for (let o = 0; o < order.length; o++) {
+			for (let a = 0; a < arr.length; a++) {
 
+				let a1 = arr[a].toString();
+				let o1 = order[o].toString().replace("^","");
 
-	for (let o = 0; o < order.length; o++) {
-		for (let i = 0; i < arr.length; i++) {
+				if (!result.includes(a)) {
+					let check = false;
 
-			let a1 = arr[i].toString();
-			let o1 = order[o].toString().replace("^","");
-
-			if (!result.includes(i)) {
-				let check = false;
-
-				if (a1 == o1) {
-					check = true;
-					//console.log("0")
-				}
-
-				if (order[o].match(RegExp("^\^"))) {
-					if (a1.includes(" "+o1)) {
+					if (a1 == o1) {
 						check = true;
-						//console.log("1")
 					}
-					if (a1.includes(o1+" ")) {
+					if (a1.match(RegExp("_"+o1+"$"))) {
 						check = true;
-						//console.log("2")
 					}
-					if (a1.match(RegExp("\\"+o1+"$"))) {
-						check = true;
-						//console.log("3")
+					
+					
+					if (i == 1) {
+						if (a1.includes("_"+o1+" ")) {
+							check = true;
+						}
+						if (a1.match(RegExp("\\"+o1+"$"))) {
+							check = true;
+						}
+						if (a1.includes(" "+o1+" ")) {
+							check = true;
+						}
 					}
-				}
 
-				if (check) {
-					//console.log(a1)
-					num.push(o);
-					result.push(i);
+					if (check) {
+						result.push(a);
+					}
 				}
 			}
 		}
 	}
 
-	for (let i = 0; i < arr.length; i++) {
-		if (!result.includes(i)) {
-			result.push(i);
-			num.push(Math.max(...num)+1);
+	for (let a = 0; a < arr.length; a++) {
+		if (!result.includes(a)) {
+			result.push(a);
 		}
 	}
-	
-	console.log(result);
-	result = sortByNumArr(num,result)
-	console.log(result);
-
 
 	return result;
 }
