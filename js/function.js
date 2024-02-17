@@ -867,10 +867,69 @@ function getPokémonInt(name) {
 	}
 }
 
+function sortBy_v2(arr,order,depend) {
+	let result = [];
+	let num = [];
+
+
+	for (let o = 0; o < order.length; o++) {
+		for (let i = 0; i < arr.length; i++) {
+
+			let a1 = arr[i].toString();
+			let o1 = order[o].toString().replace("^","");
+
+			if (!result.includes(i)) {
+				let check = false;
+
+				if (a1 == o1) {
+					check = true;
+					//console.log("0")
+				}
+
+				if (order[o].match(RegExp("^\^"))) {
+					if (a1.includes(" "+o1)) {
+						check = true;
+						//console.log("1")
+					}
+					if (a1.includes(o1+" ")) {
+						check = true;
+						//console.log("2")
+					}
+					if (a1.match(RegExp("\\"+o1+"$"))) {
+						check = true;
+						//console.log("3")
+					}
+				}
+
+				if (check) {
+					//console.log(a1)
+					num.push(o);
+					result.push(i);
+				}
+			}
+		}
+	}
+
+	for (let i = 0; i < arr.length; i++) {
+		if (!result.includes(i)) {
+			result.push(i);
+			num.push(Math.max(...num)+1);
+		}
+	}
+	
+	console.log(result);
+	result = sortByNumArr(num,result)
+	console.log(result);
+
+
+	return result;
+}
+
 function sortBy(arr,order) {
 
 	let result = [];
-	let used = []
+	let used = [];
+
 	for (let q = 0; q < order.length; q++) {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i] == order[q] || order[q].includes("^") && arr[i].includes(order[q].replace("^",""))) {
@@ -879,6 +938,7 @@ function sortBy(arr,order) {
 			}
 		}
 	}
+
 	for (let i = 0; i < arr.length; i++) {
 		if (!used.includes(i)) {
 			result.push(arr[i]);
@@ -1772,8 +1832,21 @@ function SwitchTab(tab,sub) {
 	}
 }
 
+function sortByNumArr(arr, order) {
 
+	const arrSorted = Array.from(arr).sort((a,b)=>a-b);
+	const orderSorted = Array.from(order).sort((a,b)=>a-b);
+	const result = [];
+  
 
+	for(let u of order){
+	  const pos = orderSorted.indexOf(u); 
+
+	  orderSorted[pos] = undefined
+	  result.push(arrSorted[pos]);
+	}
+	return result;
+}
 
 
 function sortObjectArray(objectsArr,prop,ascending) {
