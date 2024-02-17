@@ -315,57 +315,66 @@ let createMap = function() {
 	mapSectionListOptionsOuter.setAttribute("name", "0");
 	mapSectionList.appendChild(mapSectionListOptionsOuter);
 	mapSectionListOptionsOuter.appendChild(mapSectionListOptions);
+
+	
+	let locations = []
 	for(let q = 0; q < finaldata["Locations"]["Reference"].length; q++) {
 		if (getApplicable(finaldata["Locations"]["Reference"][q]["Game"])) {
-			let mapSectionListOptionsInput = document.createElement("input");
-			let mapSectionListOptionsLabel = document.createElement("label");
-			let mapSectionListOptionsText = document.createElement("h5");
-			mapSectionListOptionsInput.setAttribute("type", "radio");
-			mapSectionListOptionsInput.setAttribute("name", "map-options");
-			mapSectionListOptionsInput.setAttribute("id", "map-options-"+q);
-			mapSectionListOptionsInput.setAttribute("autocomplete", "off");
-			mapSectionListOptionsInput.value = q;
-			mapSectionListOptionsLabel.setAttribute("for", "map-options-"+q);
-			mapSectionListOptionsLabel.setAttribute("type","medium");
-			mapSectionListOptionsLabel.setAttribute("data-name", finaldata["Locations"]["Reference"][q]["Location"].toLowerCase());
-			mapSectionListOptionsLabel.setAttribute("data-title", finaldata["Locations"]["Reference"][q]["Location"].toLowerCase());
-			let poi = [];
-			for(let u = 0; u < finaldata["Locations"]["Point of Interest"].length; u++) {
-				if (getApplicable(finaldata["Locations"]["Point of Interest"][u]["Game"])) {
-					if (finaldata["Locations"]["Point of Interest"][u]["Location"] == finaldata["Locations"]["Reference"][q]["Location"]) {
-						poi.push(finaldata["Locations"]["Point of Interest"][u]["Point of Interest"]);
-					}
-				}
-			}
-			if (poi.length > 0) {
-				mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest",poi.join(",").toLowerCase());
-			}
-			else {
-				mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest","none");
-			}
-
-
-			let nav = [];
-			for(let u = 0; u < finaldata["Locations"]["Navigation"].length; u++) {
-				if (finaldata["Locations"]["Navigation"][u]["Location"] == finaldata["Locations"]["Reference"][q]["Location"]) {
-					nav.push(finaldata["Locations"]["Navigation"][u]["Location"]);
-				}
-			}
-			if (nav.length > 0) {
-				mapSectionListOptionsLabel.setAttribute("data-search-navigation",nav.join(",").toLowerCase());
-			}
-			else {
-				mapSectionListOptionsLabel.setAttribute("data-search-navigation","none");
-			}
-
-			mapSectionListOptionsText.innerText = finaldata["Locations"]["Reference"][q]["Location"];
-			mapSectionListOptions.appendChild(mapSectionListOptionsInput);
-			mapSectionListOptions.appendChild(mapSectionListOptionsLabel);
-			mapSectionListOptionsLabel.appendChild(mapSectionListOptionsText);
-			mapSectionListOptionsInput.addEventListener("click", mapOptionsSelector);
-			mapSectionListOptionsLabel.setAttribute("tabindex",q+10);
-			mapSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;mapOptionsSelector(event.target.previousElementSibling.value);}}});
+			locations.push(finaldata["Locations"]["Reference"][q])
 		}
+	}
+	locations = locations.sort((a, b) => new Intl.Collator([], {numeric: true}).compare(a["Location"], b["Location"]));
+
+
+	for (let q = 0; q < locations.length; q++) {
+		let mapSectionListOptionsInput = document.createElement("input");
+		let mapSectionListOptionsLabel = document.createElement("label");
+		let mapSectionListOptionsText = document.createElement("h5");
+		mapSectionListOptionsInput.setAttribute("type", "radio");
+		mapSectionListOptionsInput.setAttribute("name", "map-options");
+		mapSectionListOptionsInput.setAttribute("id", "map-options-"+q);
+		mapSectionListOptionsInput.setAttribute("autocomplete", "off");
+		mapSectionListOptionsInput.value = q;
+		mapSectionListOptionsLabel.setAttribute("for", "map-options-"+q);
+		mapSectionListOptionsLabel.setAttribute("type","medium");
+		mapSectionListOptionsLabel.setAttribute("data-name", locations[q]["Location"].toLowerCase());
+		mapSectionListOptionsLabel.setAttribute("data-title", locations[q]["Location"].toLowerCase());
+		let poi = [];
+		for(let u = 0; u < finaldata["Locations"]["Point of Interest"].length; u++) {
+			if (getApplicable(finaldata["Locations"]["Point of Interest"][u]["Game"])) {
+				if (finaldata["Locations"]["Point of Interest"][u]["Location"] == locations[q]["Location"]) {
+					poi.push(finaldata["Locations"]["Point of Interest"][u]["Point of Interest"]);
+				}
+			}
+		}
+		if (poi.length > 0) {
+			mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest",poi.join(",").toLowerCase());
+		}
+		else {
+			mapSectionListOptionsLabel.setAttribute("data-search-pointofinterest","none");
+		}
+
+
+		let nav = [];
+		for(let u = 0; u < finaldata["Locations"]["Navigation"].length; u++) {
+			if (finaldata["Locations"]["Navigation"][u]["Location"] == locations[q]["Location"]) {
+				nav.push(finaldata["Locations"]["Navigation"][u]["Location"]);
+			}
+		}
+		if (nav.length > 0) {
+			mapSectionListOptionsLabel.setAttribute("data-search-navigation",nav.join(",").toLowerCase());
+		}
+		else {
+			mapSectionListOptionsLabel.setAttribute("data-search-navigation","none");
+		}
+
+		mapSectionListOptionsText.innerText = locations[q]["Location"];
+		mapSectionListOptions.appendChild(mapSectionListOptionsInput);
+		mapSectionListOptions.appendChild(mapSectionListOptionsLabel);
+		mapSectionListOptionsLabel.appendChild(mapSectionListOptionsText);
+		mapSectionListOptionsInput.addEventListener("click", mapOptionsSelector);
+		mapSectionListOptionsLabel.setAttribute("tabindex",q+10);
+		mapSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;mapOptionsSelector(event.target.previousElementSibling.value);}}});
 	}
 
 	let searchLis = document.querySelectorAll("#contain > div#map > section[name='list'] ol > label");
@@ -616,8 +625,7 @@ let createMap = function() {
 		overviewImages = overviewImages.filter(x => x != null && x != undefined && x != '')
 
 		let locationImages = loadImages.concat(overviewImages)
-
-		console.log(locationImages)
+		locationImages = locationImages.sort((a, b) => new Intl.Collator([], {numeric: true}).compare(a, b));
 
 		let sort_order = ["Entrance","Exterior","Interior","Lobby","Spring","Summer","Autumn","Winter","Center","North","West","East","South","1F","2F","3F","4F","5F","6F","7F","8F","9F","10F","11F","12F","13F","14F","15F","B1F","B2F","B3F","B4F","B5F","B6F","B7F","B8F","B9F","B10F","B11F","B12F","B13F","B14F","B15F","Room 1","Room 2","Room 3","Room 4","Room 5","Room 6","Room 7","Room 8","Room 9","Room 10","Room 11","Room 12","Room 13","Room 14","Room 15","Bottom","Top"]
 		let sort_arr = locationImages;
@@ -627,14 +635,8 @@ let createMap = function() {
 	
 		sort_arr = sortBy_v2(sort_arr,sort_order);
 		
-		//locationImages = locationImages.sort(function(a, b){ return sort_arr.indexOf(a) - sort_arr.indexOf(b);});
-		//locationImages = locationImages.sort((a, b) => sort_arr - sort_arr);
-		
+	
 		locationImages = sortByNumArr(locationImages,sort_arr)
-		//locationImages = sort_arr;
-	
-		console.log(locationImages)
-	
 
 		if (locationImages.length <= 1) {
 			mapSectionSidebarDescriptionOviewButtonRightButton.classList.add("last");
@@ -643,6 +645,9 @@ let createMap = function() {
 			mapSectionSidebarDescriptionOviewButtonRightButton.classList.remove("last");
 		}
 
+
+	
+		
 
 
 		for (let q = 0; q < locationImages.length; q++) {
