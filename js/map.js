@@ -615,10 +615,26 @@ let createMap = function() {
 		let overviewImages = getMedia(false,[location],[PATH_Location_Overview]);
 		overviewImages = overviewImages.filter(x => x != null && x != undefined && x != '')
 
-
-
 		let locationImages = loadImages.concat(overviewImages)
 
+		console.log(locationImages)
+
+		let sort_order = ["Entrance","Exterior","Interior","Lobby","Spring","Summer","Autumn","Winter","Center","North","West","East","South","1F","2F","3F","4F","5F","6F","7F","8F","9F","10F","11F","12F","13F","14F","15F","B1F","B2F","B3F","B4F","B5F","B6F","B7F","B8F","B9F","B10F","B11F","B12F","B13F","B14F","B15F","Room 1","Room 2","Room 3","Room 4","Room 5","Room 6","Room 7","Room 8","Room 9","Room 10","Room 11","Room 12","Room 13","Room 14","Room 15","Bottom","Top"]
+		let sort_arr = locationImages;
+		sort_order = sort_order.map(v => '^'+v);
+		sort_arr = sort_arr.map(function(x){ return x.replace(/.*\//g,"").replace(/\..*$/g,"") });
+		sort_order = [location].concat(sort_order)
+	
+		sort_arr = sortBy_v2(sort_arr,sort_order);
+		
+		//locationImages = locationImages.sort(function(a, b){ return sort_arr.indexOf(a) - sort_arr.indexOf(b);});
+		//locationImages = locationImages.sort((a, b) => sort_arr - sort_arr);
+		
+		locationImages = sortByNumArr(locationImages,sort_arr)
+		//locationImages = sort_arr;
+	
+		console.log(locationImages)
+	
 
 		if (locationImages.length <= 1) {
 			mapSectionSidebarDescriptionOviewButtonRightButton.classList.add("last");
