@@ -399,6 +399,7 @@
 	justify-self:center;
 	padding:10px 20px;
 	cursor:pointer;
+	max-width: 80%;
 }
 
 #contain div#tool div#rng div[name='result'] div {
