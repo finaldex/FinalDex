@@ -22,59 +22,59 @@
     <nav>
         <span>
             <span>
-            <h4>Game</h4>
-            <select>
-                <option>All</option>
-                <option>1</option>
-                <option>Red</option>
-                <option>Blue</option>
-                <option>Yellow</option>
-                <option>Green</option>
-                <option>2</option>
-                <option>Gold</option>
-                <option>Silver</option>
-                <option>Crystal</option>
-                <option>3</option>
-                <option>Ruby</option>
-                <option>Sapphire</option>
-                <option>Colosseum</option>
-                <option>FireRed</option>
-                <option>LeafGreen</option>
-                <option>Emerald</option>
-                <option>XD</option>
-                <option>4</option>
-                <option>Diamond</option>
-                <option>Pearl</option>
-                <option>Platinum</option>
-                <option>HeartGold</option>
-                <option>SoulSilver</option>
-                <option>5</option>
-                <option>Black</option>
-                <option>White</option>
-                <option>Black 2</option>
-                <option>White 2</option>
-                <option>6</option>
-                <option>X</option>
-                <option>Y</option>
-                <option>Omega Ruby</option>
-                <option>Alpha Sapphire</option>
-                <option>7</option>
-                <option>Sun</option>
-                <option>Moon</option>
-                <option>Ultra Sun</option>
-                <option>Ultra Moon</option>
-                <option>Lets Go Pikachu</option>
-                <option>Lets Go Eevee</option>
-                <option>8</option>
-                <option>Sword</option>
-                <option>Shield</option>
-                <option>Legend Arceus</option>
-                <option>Brilliant Diamond</option>
-                <option>Shining Pearl</option>
-                <option>9</option>
-                <option>Scarlet</option>
-                <option>Violet</option>
-            </select>
+            <label for="game_select1"><input type="checkbox" name="game_select" id="game_select1" value="Game"><h4>Game</h4></label>
+            <span name="game_select">
+                <button onclick='let z = this.parentElement.querySelectorAll(":scope input"); if(this.innerText == "All"){for(let i = 0; i < z.length; i++) {z[i].checked = true;};this.innerText = "None"} else {for(let i = 0; i < z.length; i++) {z[i].checked = false;};this.innerText = "All"}'>None</button>
+                <label for="game_select2"><input type="checkbox" name="game_select" id="game_select2" value="Generation 1" checked>Generation 1</label>
+                <label for="game_select3"><input type="checkbox" name="game_select" id="game_select3" value="Red" checked>Red</label>
+                <label for="game_select4"><input type="checkbox" name="game_select" id="game_select4" value="Blue" checked>Blue</label>
+                <label for="game_select5"><input type="checkbox" name="game_select" id="game_select5" value="Yellow" checked>Yellow</label>
+                <label for="game_select6"><input type="checkbox" name="game_select" id="game_select6" value="Green" checked>Green</label>
+                <label for="game_select7"><input type="checkbox" name="game_select" id="game_select7" value="Generation 2" checked>Generation 2</label>
+                <label for="game_select8"><input type="checkbox" name="game_select" id="game_select8" value="Gold" checked>Gold</label>
+                <label for="game_select9"><input type="checkbox" name="game_select" id="game_select9" value="Silver" checked>Silver</label>
+                <label for="game_select10"><input type="checkbox" name="game_select" id="game_select10" value="Crystal" checked>Crystal</label>
+                <label for="game_select11"><input type="checkbox" name="game_select" id="game_select11" value="Generation 3" checked>Generation 3</label>
+                <label for="game_select12"><input type="checkbox" name="game_select" id="game_select12" value="Ruby" checked>Ruby</label>
+                <label for="game_select13"><input type="checkbox" name="game_select" id="game_select13" value="Sapphire" checked>Sapphire</label>
+                <label for="game_select14"><input type="checkbox" name="game_select" id="game_select14" value="Colosseum" checked>Colosseum</label>
+                <label for="game_select15"><input type="checkbox" name="game_select" id="game_select15" value="FireRed" checked>FireRed</label>
+                <label for="game_select16"><input type="checkbox" name="game_select" id="game_select16" value="LeafGreen" checked>LeafGreen</label>
+                <label for="game_select17"><input type="checkbox" name="game_select" id="game_select17" value="Emerald" checked>Emerald</label>
+                <label for="game_select18"><input type="checkbox" name="game_select" id="game_select18" value="XD" checked>XD</label>
+                <label for="game_select19"><input type="checkbox" name="game_select" id="game_select19" value="Generation 4" checked>Generation 4</label>
+                <label for="game_select20"><input type="checkbox" name="game_select" id="game_select20" value="Diamond" checked>Diamond</label>
+                <label for="game_select21"><input type="checkbox" name="game_select" id="game_select21" value="Pearl" checked>Pearl</label>
+                <label for="game_select22"><input type="checkbox" name="game_select" id="game_select22" value="Platinum" checked>Platinum</label>
+                <label for="game_select23"><input type="checkbox" name="game_select" id="game_select23" value="HeartGold" checked>HeartGold</label>
+                <label for="game_select24"><input type="checkbox" name="game_select" id="game_select24" value="SoulSilver" checked>SoulSilver</label>
+                <label for="game_select25"><input type="checkbox" name="game_select" id="game_select25" value="Generation 5" checked>Generation 5</label>
+                <label for="game_select26"><input type="checkbox" name="game_select" id="game_select26" value="Black" checked>Black</label>
+                <label for="game_select27"><input type="checkbox" name="game_select" id="game_select27" value="White" checked>White</label>
+                <label for="game_select28"><input type="checkbox" name="game_select" id="game_select28" value="Black 2" checked>Black 2</label>
+                <label for="game_select29"><input type="checkbox" name="game_select" id="game_select29" value="White 2" checked>White 2</label>
+                <label for="game_select30"><input type="checkbox" name="game_select" id="game_select30" value="Generation 6" checked>Generation 6</label>
+                <label for="game_select31"><input type="checkbox" name="game_select" id="game_select31" value="X" checked>X</label>
+                <label for="game_select32"><input type="checkbox" name="game_select" id="game_select32" value="Y" checked>Y</label>
+                <label for="game_select33"><input type="checkbox" name="game_select" id="game_select33" value="Omega Ruby" checked>Omega Ruby</label>
+                <label for="game_select34"><input type="checkbox" name="game_select" id="game_select34" value="Alpha Sapphire" checked>Alpha Sapphire</label>
+                <label for="game_select35"><input type="checkbox" name="game_select" id="game_select35" value="Generation 7" checked>Generation 7</label>
+                <label for="game_select36"><input type="checkbox" name="game_select" id="game_select36" value="Sun" checked>Sun</label>
+                <label for="game_select37"><input type="checkbox" name="game_select" id="game_select37" value="Moon" checked>Moon</label>
+                <label for="game_select38"><input type="checkbox" name="game_select" id="game_select38" value="Ultra Sun" checked>Ultra Sun</label>
+                <label for="game_select39"><input type="checkbox" name="game_select" id="game_select39" value="Ultra Moon" checked>Ultra Moon</label>
+                <label for="game_select40"><input type="checkbox" name="game_select" id="game_select40" value="Lets Go Pikachu" checked>Lets Go Pikachu</label>
+                <label for="game_select41"><input type="checkbox" name="game_select" id="game_select41" value="Lets Go Eevee" checked>Lets Go Eevee</label>
+                <label for="game_select42"><input type="checkbox" name="game_select" id="game_select42" value="Generation 8" checked>Generation 8</label>
+                <label for="game_select43"><input type="checkbox" name="game_select" id="game_select43" value="Sword" checked>Sword</label>
+                <label for="game_select44"><input type="checkbox" name="game_select" id="game_select44" value="Shield" checked>Shield</label>
+                <label for="game_select45"><input type="checkbox" name="game_select" id="game_select45" value="Legend Arceus" checked>Legend Arceus</label>
+                <label for="game_select46"><input type="checkbox" name="game_select" id="game_select46" value="Brilliant Diamond" checked>Brilliant Diamond</label>
+                <label for="game_select47"><input type="checkbox" name="game_select" id="game_select47" value="Shining Pearl" checked>Shining Pearl</label>
+                <label for="game_select48"><input type="checkbox" name="game_select" id="game_select48" value="Generation 9" checked>Generation 9</label>
+                <label for="game_select49"><input type="checkbox" name="game_select" id="game_select49" value="Scarlet" checked>Scarlet</label>
+                <label for="game_select50"><input type="checkbox" name="game_select" id="game_select50" value="Violet" checked>Violet</label>
+            </span>
             </span>
             <span name="set">
                 <button name="pokémon"><small>Pokémon</small></button>
@@ -87,7 +87,7 @@
             <input type="search" id="search-path" title="Use ',' to divide values." placeholder="Specific Path" onblur="this.placeholder='Specific Path'" onfocus="this.placeholder=''">
             <input type="search" id="search-file" title="Use ',' to divide values.
 Use quotation mark to return inclusive values." placeholder="File Name" onblur="this.placeholder='File Name'" onfocus="this.placeholder=''">
-            <button><small>GO</small></button>
+            <button id="execute"><small>GO</small></button>
         </span>
 
 
@@ -122,6 +122,11 @@ Use quotation mark to return inclusive values." placeholder="File Name" onblur="
         </ul>
         <ul id="result">
         </ul>
+        <span id="loader">
+            <div class="loadingIndicator">
+                <div class="loadingSpinner"></div> <br /> Loading...
+            </div>
+        </span>
     </ol>
 
 
