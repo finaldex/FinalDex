@@ -228,20 +228,50 @@ input[type="search"] {
     outline:none;
     text-align:center;
     display:inline-block;
-    margin:0 5px;
     padding:0 10px;
     border: 1px solid hsl(0,0%,80%);
 }
 
+input[type="search"]:first-child {
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+ 
+}
+input[type="search"]:not(:first-child) {
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    border-left:none;
+}
 
-
-nav span[name='search'] button {
-    border-radius:10px;
+input[type="search"] + button {
     height:40%;
     display:flex;
     justify-content:center;
     align-items:center;
+    padding:10px 20px;
+    border-radius:10%;
+    background: coral;
+    font-size: x-large;
+    font-family: system-ui;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-left:none;
+    border-radius:10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    font-weight:normal;
 }
+input[type="search"] + button > * {
+    font-weight:bold;
+}
+input[type="search"] + button:active > * {
+    font-weight:normal;
+}
+
+
+
+
 
 input[type="search"] + span:active {
 	filter:invert(0.3);
@@ -310,18 +340,7 @@ body.load ol::after {
 	}
 }
 
-input[type="search"] + button {
-    padding:2px 0;
-    padding:10px 20px;
-    border-radius:10%;
-    margin:0 10px;
-}
-input[type="search"] + button:active {
-    transform:none;
-}
-input[type="search"] + button:active > * {
-    font-size:xx-small
-}
+
 
 nav button,
 nav label {
@@ -329,12 +348,202 @@ nav label {
 }
 nav label:has(input:checked) {
     font-weight:bold;
+    text-decoration:underline;
 }
 p {
     display:inline;
 }
 
 
+nav > span:not(:nth-child(2)) > *:first-child {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
 nav > span:not(:nth-child(2)) > * {
     margin:5px 0;
 }
+
+*:has(> input#game_select1):hover,
+*:has(> input#game_select1):hover * {
+    color:hsl(0,0%,50%);
+    font-weight:normal;
+}
+
+*:has(> span[name="game_select"]) {
+    user-select:none;
+}
+
+
+*:has(> input#game_select1:not(:checked)) ~ span[name="game_select"] {
+    display:none;
+}
+
+span[name="game_select"] {
+    position: absolute;
+    max-height: 40vh;
+    background: gainsboro;
+    z-index: 100;
+    overflow: auto;
+    border: 1px solid hsl(0, 0%, 60%);
+    box-sizing: border-box;
+    text-align: left;
+    width: max-content;
+    top: calc(100% + 5px);
+}
+span[name="game_select"] > * {
+   display:flex;
+   padding: 2px 5px;
+   border-bottom: 1px solid hsl(0, 0%, 70%);
+   box-sizing: border-box;
+   text-align: left;
+}
+span[name="game_select"] > button {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: hsl(0, 0%, 75%);
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+span[name="game_select"] > button:active {
+    background: hsl(0, 0%, 70%);
+}
+
+span[name="game_select"] > *:last-child {
+    border-bottom:none;
+}
+span[name="game_select"] input[type="checkbox"] {
+    display:block;
+    margin: 0 10px;
+}
+
+
+span[name="game_select"] *:has(> input[type="checkbox"]:checked) {
+
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+#loader {
+    width: 100%;
+    height: 95%;
+    position: absolute;
+    top: 5%;
+    overflow: auto;
+}
+#loader:not(.active) {
+    display:none;
+}
+
+body:has(#loader.active) {
+    cursor:wait;
+}
+
+
+
+.loadingIndicator {
+    background: #ffffff;
+    color: #666666;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .loadingSpinner {
+    color: black;
+      font-size: 22px;
+      text-indent: -9999em;
+      overflow: hidden;
+      width: 1.00em;
+      height: 1.00em;
+      border-radius: 100%;
+        margin: 0 auto;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+    animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  }
+  
+  @-webkit-keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+  }
+  
+  @keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+  }
+  
+  @-webkit-keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
