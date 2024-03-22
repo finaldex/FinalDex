@@ -18,9 +18,11 @@ function loadData(i) {
         finaldata[val] = gameRequest.response;
     }
 }
-document.querySelector("nav span[name='search'] button").addEventListener("click",dirGet);
-document.querySelector("input#search-path").addEventListener("keydown",function(event) { if (event.keyCode == 13) {dirGet()} });
-document.querySelector("input#search-file").addEventListener("keydown",function(event) { if (event.keyCode == 13) {dirGet()} });
+
+
+document.querySelector("button#execute").addEventListener("click",execute);
+document.querySelector("input#search-path").addEventListener("keydown",function(event) { if (event.keyCode == 13) {execute()} });
+document.querySelector("input#search-file").addEventListener("keydown",function(event) { if (event.keyCode == 13) {execute()} });
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -157,6 +159,7 @@ function dirGet() {
     val2 = val2.replaceAll("\\","/");
 
 
+    
     for (let i = 0; i < Object.keys(finaldata["Directory"]).length; i++) {
         let path = Object.keys(finaldata["Directory"])[i]
         let source = path.split("/")[path.split("/").length-1]
@@ -195,12 +198,13 @@ function dirGet() {
             }
         }
     }
+    
     base.parentElement.setAttribute("data",JSON.stringify(result))
 
     setData();
 
     if (result.length > 0) {
-        document.querySelector("ul#roof span[name='execute']").addEventListener("click",setData)
+        document.querySelector("ul#roof span[name='execute']").addEventListener("click",execute)
         document.querySelector("ul#roof span[name='image']").setAttribute("data-state","1");
         document.querySelector("ul#roof span[name='file']").setAttribute("data-state","1");
         document.querySelector("ul#roof span[name='path']").setAttribute("data-state","1");
@@ -208,7 +212,7 @@ function dirGet() {
         document.querySelector("ul#roof span[name='extension']").setAttribute("data-state","1");
     }
     else {
-        document.querySelector("ul#roof span[name='execute']").removeEventListener("change",setData)
+        document.querySelector("ul#roof span[name='execute']").removeEventListener("change",execute)
         document.querySelector("ul#roof span[name='image']").removeAttribute("data-state");
         document.querySelector("ul#roof span[name='file']").removeAttribute("data-state");
         document.querySelector("ul#roof span[name='path']").removeAttribute("data-state");
@@ -220,13 +224,29 @@ function dirGet() {
 
 
 
+function loader_operator(opt) {
+    let loader = document.querySelector("#loader");
+    if (opt == true) {
+        loader.classList.add("active");
+    }
+    else {
+        loader.classList.remove("active");
+    }
+}
+async function execute() {
+    loader_operator(true);
+    setTimeout(function(){dirGet();loader_operator(false);}, 500);
+}
+
+
+
+
 function setData() {
     let base = document.querySelector("ul#result");
     let res = JSON.parse(base.parentElement.getAttribute("data"));
     let pagePath = document.querySelector("span[name='page'] input");
     let sizePath = document.querySelector("span[name='size'] input");
     
-
     pagePath.max = Math.ceil(res.length/parseInt(sizePath.value));
 
     inpMM(pagePath)
@@ -245,13 +265,11 @@ function setData() {
     document.querySelector("span[name='count'] > *:first-child").innerText = val1+" – "+val2;
     document.querySelector("span[name='count'] > *:last-child").innerText = " /"+val3;
 
-  
-    
     base.innerHTML = "";
 
     for (let i = 0; i < res.length; i++) {
         let x = i+1;
-        if (x >= sizeMin && x <= sizeMax) {
+        if (x >= sizeMin+1 && x <= sizeMax) {
         
             let path = res[i]["Path"];
             let file = res[i]["File"];
@@ -306,9 +324,6 @@ function setData() {
             extwrap.appendChild(ext);
         }
     }
-
-
- 
 }
 
 
@@ -335,7 +350,8 @@ function inpMM(tar) {
 }
 
 
-document.querySelector("ol ul#roof li > *:first-child").addEventListener("click",expandAll)
+document.querySelector("ol ul#roof li > *:first-child").addEventListener("click",expandAll);
+
 function expandAll() {
     let tar = this;
     let inpts = document.querySelectorAll("ol ul#result input")
@@ -388,12 +404,6 @@ function sortBy() {
     let base = document.querySelector("ul#result");
     let list = JSON.parse(base.parentElement.getAttribute("data"))
 
-    console.log(list)
-    console.log(base)
-    console.log(state)
-    console.log(type)
-    console.log(tar)
-
     list.sort(function(a, b) {return a[titleCase(type)].localeCompare(b[titleCase(type)], undefined, {numeric: true,sensitivity: 'base'});})
 
     if (state == 1) {
@@ -406,7 +416,7 @@ function sortBy() {
 
 
     base.parentElement.setAttribute("data",JSON.stringify(list))
-    setData()
+    execute()
 
 }
 
@@ -500,7 +510,7 @@ function getGameID(name) {
 function getApplicable(val) {
     let adds = [];
 
-    let labin = document.querySelectorAll("nav label input");
+    let labin = document.querySelectorAll("nav > span:last-child label input");
     for(let i = 0; i < labin.length; i++) {
         if (labin[i].checked) {
             adds.push(labin[i].previousElementSibling.innerText.toUpperCase())
@@ -510,11 +520,12 @@ function getApplicable(val) {
         adds.push("All")
     }
 
-    let gamePath = document.querySelector("select");
 
-    let games = [];
 
-    if (gamePath.value.includes("-")) {
+    let games = $("span[name='game_select'] input:checked").get().map(function(el) { return el.value.replaceAll("Generation ","") });
+
+    /*
+    if (gameVal.includes("-")) {
         let valStart = val.split("-")[0];
         let valEnd = val.split("-")[1];
         if (isNaN(parseInt(valStart)) || isNaN(parseInt(valEnd))) {
@@ -541,19 +552,20 @@ function getApplicable(val) {
         }
         
     }
-    else if (!isNaN(parseInt(gamePath.value))) {
+    else if (!isNaN(parseInt(gameVal))) {
         for (let i = 0; i < finaldata["Game"]["Reference"].length; i++) {
             if (finaldata["Game"]["Reference"][i]["Type"] == "Core" || finaldata["Game"]["Reference"][i]["Type"] == "Side") {
                 let x = parseInt(finaldata["Game"]["Reference"][i]["Generation"]);
-                if (x == parseInt(gamePath.value)) {
+                if (x == parseInt(gameVal)) {
                     games.push(finaldata["Game"]["Reference"][i]["Name"])
                 }
             }
         }
     }
     else {
-        games.push(gamePath.value);
+        games.push(gameVal);
     }
+    */
 
    
 
@@ -613,3 +625,11 @@ function getApplicable(val) {
 	return false;
 }
 
+
+
+$("body").click(function(event) {
+	if(!$(event.target).closest("*:has( > span[name='game_select'])").length && !$(event.target).is("*:has( > span[name='game_select'])")) {
+		$("input#game_select1").prop('checked', false);
+	}
+
+});
