@@ -321,6 +321,7 @@ let createMap = function() {
 	for(let q = 0; q < finaldata["Locations"]["Reference"].length; q++) {
 		if (getApplicable(finaldata["Locations"]["Reference"][q]["Game"])) {
 			locations.push(finaldata["Locations"]["Reference"][q])
+			locations[locations.length-1]["Index"] = q;
 		}
 	}
 	locations = locations.sort((a, b) => new Intl.Collator([], {numeric: true}).compare(a["Location"], b["Location"]));
@@ -334,7 +335,7 @@ let createMap = function() {
 		mapSectionListOptionsInput.setAttribute("name", "map-options");
 		mapSectionListOptionsInput.setAttribute("id", "map-options-"+q);
 		mapSectionListOptionsInput.setAttribute("autocomplete", "off");
-		mapSectionListOptionsInput.value = q;
+		mapSectionListOptionsInput.value = locations[q]["Index"];
 		mapSectionListOptionsLabel.setAttribute("for", "map-options-"+q);
 		mapSectionListOptionsLabel.setAttribute("type","medium");
 		mapSectionListOptionsLabel.setAttribute("data-name", locations[q]["Location"].toLowerCase());
@@ -419,6 +420,8 @@ let createMap = function() {
 		if (this.value != undefined) {
 			i = this.value;
 		}
+
+		
 		let location = finaldata["Locations"]["Reference"][i]["Location"];
 		let trainers = getArrDataIndexed(finaldata["Location Trainers"]["Trainers"],"Location",location);
 		let shops = getArrDataIndexed(finaldata["Location Pokémon"]["Shop"],"Location",location).concat(getArrDataIndexed(finaldata["Location Items"]["Shop"],"Location",location));
@@ -2731,8 +2734,9 @@ function updateTrainer(trainers,condition) {
 			heldImg.setAttribute("function","dataRedirect");
 		}
 
+
 		let pokImg = document.createElement("img");
-		pokImg.src = getMedia(true,[getPokémonPath(getPokémonInt(pok))],[PATH_Pokémon_Battle_Default_Front_PNG]);
+		pokImg.src = getMedia(true,["^"+getPokémonPath(getPokémonInt(pok)),"^"+getPokémonPath(getPokémonInt(pok))+"_Male","^"+getPokémonPath(getPokémonInt(pok))+"_Female"],[PATH_Pokémon_Battle_Default_Front_PNG,PATH_Pokémon_Battle_Default_Front_GIF]);
 		pokImg.setAttribute("title", pok);
 		pokCenterWrap.setAttribute("value",getPokémonInt(pok));
 		pokCenterWrap.appendChild(pokImg);
