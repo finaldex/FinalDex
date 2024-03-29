@@ -71,6 +71,30 @@ ul#result li:has(label input:checked) img {
 }
 
 
+body ol[data=""] ul#result::after,
+body ol[data="[]"] ul#result::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: whitesmoke;
+    content: "NO DATA FOUND";
+    font-family: "Roboto";
+    font-size: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    color: hsl(0, 0%, 25%);
+    text-shadow: 3px 3px hsl(0,0%,80%);
+}
+
+body ol[data=""] ul#result::after {
+    content: "WAITING FOR INPUT";
+}
+
+
 
 
 ul#roof span[data-state] > *::after {
@@ -86,10 +110,28 @@ ul#roof span[data-state="2"] > *::after {
     content:"⮟"
 }
 
+
+
+ul#roof span[data-state=""] > *::after,
+ul#roof span[data-state="0"] > *::after {
+    content:"⮟";
+    opacity: 0.25;
+}
+
+
 ul#roof li span[data-state] {
     cursor:pointer;
     user-select:none;
 }
+
+ol[data=''] ul#roof span[data-state=""],
+ol[data=''] ul#roof span[data-state="0"],
+ol[data='[]'] ul#roof span[data-state=""],
+ol[data='[]'] ul#roof span[data-state="0"] {
+    pointer-events:none;
+    cursor:default;
+}
+
 
 ul#roof li span[name="size"],
 ul#roof li span[name="page"] {
@@ -165,9 +207,10 @@ ul#roof li {
     display:flex;
     justify-content:space-around;
     align-items:center;
+    width: calc(100% - 15px);
 }
 ul#roof li > * {
-    width:30%;
+    width:20%;
     text-align:left;
     height:100%;
     display:flex;
@@ -180,7 +223,7 @@ ul#roof li > *:first-child {
     justify-content:center;
 }
 ul#roof li span[name='extension'] {
-    width:12.5%;
+    width:7.5%;
 }
 
 
@@ -359,10 +402,17 @@ nav > span:not(:nth-child(2)) > *:first-child {
     display: flex;
     justify-content: center;
     position: relative;
-    line-height: 100%;
+    line-height: 110%;
+}
+
+nav span[name='set'] button:hover > * {
+    filter:invert(0.4);
 }
 
 
+nav span[name='set'] button:active > * {
+    text-decoration:underline;
+}
 
 
 
@@ -440,6 +490,7 @@ span[name="game_select"] *:has(> input[type="checkbox"]:checked) {
     position: absolute;
     top: 5%;
     overflow: auto;
+    background:whitesmoke;
 }
 #loader:not(.active) {
     display:none;
@@ -452,7 +503,6 @@ body:has(#loader.active) {
 
 
 .loadingIndicator {
-    background: #ffffff;
     color: #666666;
     position: absolute;
     height: 100%;
