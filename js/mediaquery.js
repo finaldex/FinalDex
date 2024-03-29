@@ -20,9 +20,10 @@ function loadData(i) {
 }
 
 
-document.querySelector("button#execute").addEventListener("click",execute);
-document.querySelector("input#search-path").addEventListener("keydown",function(event) { if (event.keyCode == 13) {execute()} });
-document.querySelector("input#search-file").addEventListener("keydown",function(event) { if (event.keyCode == 13) {execute()} });
+document.querySelector("button#execute").addEventListener("click",dir_init);
+document.querySelector("ul#roof span[name='execute']").addEventListener("click",dir_init)
+document.querySelector("input#search-path").addEventListener("keydown",function(event) { if (event.keyCode == 13) {dir_init()} });
+document.querySelector("input#search-file").addEventListener("keydown",function(event) { if (event.keyCode == 13) {dir_init()} });
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -76,7 +77,7 @@ function getGame(string) {
                 let arr2 = splitStr(str1[q],"-");
 
                 if (str1[q].includes("-")) {
-                    result.push(arr2.join(" to "))
+                    result.push(arr2.join("-"))
                     break;
                 }
                
@@ -144,13 +145,14 @@ function setAll() {
     document.querySelector("nav input#search-file").value = result.join(",");
 }
 
-function dirGet() {
+function dir_exec() {
     let base = document.querySelector("ul#result");
     let val1 = document.querySelector("input#search-path").value;
     let val2 = document.querySelector("input#search-file").value;
     let result = [];
 
     let imgd = document.querySelector("nav span[name='image'][data-state]");
+
     if (imgd != undefined) {
         imgd.setAttribute("data-state","1");
     }
@@ -201,24 +203,14 @@ function dirGet() {
     
     base.parentElement.setAttribute("data",JSON.stringify(result))
 
-    setData();
+    data_exec();
 
-    if (result.length > 0) {
-        document.querySelector("ul#roof span[name='execute']").addEventListener("click",execute)
-        document.querySelector("ul#roof span[name='image']").setAttribute("data-state","1");
-        document.querySelector("ul#roof span[name='file']").setAttribute("data-state","1");
-        document.querySelector("ul#roof span[name='path']").setAttribute("data-state","1");
-        document.querySelector("ul#roof span[name='source']").setAttribute("data-state","1");
-        document.querySelector("ul#roof span[name='extension']").setAttribute("data-state","1");
-    }
-    else {
-        document.querySelector("ul#roof span[name='execute']").removeEventListener("change",execute)
-        document.querySelector("ul#roof span[name='image']").removeAttribute("data-state");
-        document.querySelector("ul#roof span[name='file']").removeAttribute("data-state");
-        document.querySelector("ul#roof span[name='path']").removeAttribute("data-state");
-        document.querySelector("ul#roof span[name='source']").removeAttribute("data-state");
-        document.querySelector("ul#roof span[name='extension']").removeAttribute("data-state");
-    }
+    
+    document.querySelector("ul#roof span[name='image']").setAttribute("data-state","0");
+    document.querySelector("ul#roof span[name='file']").setAttribute("data-state","0");
+    document.querySelector("ul#roof span[name='path']").setAttribute("data-state","0");
+    document.querySelector("ul#roof span[name='source']").setAttribute("data-state","0");
+    document.querySelector("ul#roof span[name='extension']").setAttribute("data-state","0");
 
 }
 
@@ -233,15 +225,15 @@ function loader_operator(opt) {
         loader.classList.remove("active");
     }
 }
-async function execute() {
+async function dir_init() {
     loader_operator(true);
-    setTimeout(function(){dirGet();loader_operator(false);}, 500);
+    setTimeout(function(){dir_exec();loader_operator(false);}, 500);
 }
 
 
 
 
-function setData() {
+function data_exec() {
     let base = document.querySelector("ul#result");
     let res = JSON.parse(base.parentElement.getAttribute("data"));
     let pagePath = document.querySelector("span[name='page'] input");
@@ -398,15 +390,20 @@ function titleCase(str) {
 
 function sortBy() {
     let tar = this;
+    let tars = tar.parentElement.querySelectorAll(":scope > *[data-state]");
     let type = tar.getAttribute("name");
     let state = tar.getAttribute("data-state");
 
     let base = document.querySelector("ul#result");
-    let list = JSON.parse(base.parentElement.getAttribute("data"))
+    let list = JSON.parse(base.parentElement.getAttribute("data"));
 
     list.sort(function(a, b) {return a[titleCase(type)].localeCompare(b[titleCase(type)], undefined, {numeric: true,sensitivity: 'base'});})
+    
+    for (let i = 0; i < tars.length; i++) {
+        tars[i].setAttribute("data-state",0);
+    }
 
-    if (state == 1) {
+    if (state == 0 || state == 1) {
         tar.setAttribute("data-state","2")
     }
     else if (state == 2) {
@@ -416,8 +413,13 @@ function sortBy() {
 
 
     base.parentElement.setAttribute("data",JSON.stringify(list))
-    execute()
+    data_exec();
 
+}
+
+async function data_init() {
+    loader_operator(true);
+    setTimeout(function(){data_exec();loader_operator(false);}, 500);
 }
 
 
@@ -524,6 +526,8 @@ function getApplicable(val) {
 
     let games = $("span[name='game_select'] input:checked").get().map(function(el) { return el.value.replaceAll("Generation ","") });
 
+    console.log(games)
+
     /*
     if (gameVal.includes("-")) {
         let valStart = val.split("-")[0];
@@ -573,6 +577,8 @@ function getApplicable(val) {
 
     val = val.replaceAll("_",",");
     let vals = splitStr(val,",");
+
+
     for (let i = 0; i < vals.length; i++) {
         let val = vals[i];
         let additional = []
@@ -598,7 +604,7 @@ function getApplicable(val) {
                 let game = games[g];
                 let gen = getGeneration(games[g])
         
-                if (val == "All" || games[g] == "All") {
+                if (val == "All" || game == "All") {
                     return true;
                 }
                 else if (val.includes("-")) {
@@ -610,7 +616,7 @@ function getApplicable(val) {
                     }
                 }
                 else if (!isNaN(parseInt(val))) {
-                    if (parseInt(val) == gen) {
+                    if (parseInt(val) == gen || parseInt(val) == game) {
                         return true;
                     }
                 }
