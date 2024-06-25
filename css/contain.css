@@ -2205,6 +2205,8 @@
 #data > div section[name='main'] > div[name='area'] ul li input:checked ~ *, #contain div#item > section[name='sidebar'] > div > ul li input:checked ~ *, #contain div#map > section[name='sidebar'] > div > *[name]:not([name='trainers']) ul > li input[type='checkbox']:checked ~ * {
 	opacity:0.4;
 	text-decoration:line-through;
+	pointer-events: none;
+	user-select: none;
 }
 
 #contain div > section[name='sidebar'] > div > ul li span[name='requirement'] small {
