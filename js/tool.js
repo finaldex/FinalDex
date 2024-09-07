@@ -11,6 +11,7 @@ let createTool = function() {
 	let toolSectionContent = document.createElement("section");
 	let toolSectionContentTimersOuter = document.createElement("div");
 	let toolSectionContentTimerSelectorOuter = document.createElement("div");
+
 	toolOuter.setAttribute("id","tool")
 	toolOuter.setAttribute("value","tools");
 	toolSectionListOptionsTitle.innerText = "Tools";
@@ -153,6 +154,63 @@ let createTool = function() {
 			toolSectionContentTimerSelectorInput.addEventListener("click", timerSelector);
 		}
 	}
+	
+	function createCounter() {
+		let toolSectionContentCounterOuter = document.createElement("div");
+		let toolSectionContentCounter = document.createElement("div");
+		let toolSectionContentCounterOptions = document.createElement("div");
+		let toolSectionContentCounterOptionsTop = document.createElement("div");
+		let toolSectionContentCounterOptionsIterations = document.createElement("span");
+		let toolSectionContentCounterOptionsIterationsText = document.createElement("p");
+		let toolSectionContentCounterOptionsIterationsInput = document.createElement("input");
+		let toolSectionContentCounterOptionsTitle = document.createElement("span");
+		let toolSectionContentCounterOptionsTitleIterations = document.createElement("span");
+		let toolSectionContentCounterOptionsTitleIterationsText = document.createElement("p");
+		let toolSectionContentCounterOptionsTitleMin = document.createElement("span");
+		let toolSectionContentCounterOptionsTitleMinText = document.createElement("p");
+		let toolSectionContentCounterOptionsTitleMax = document.createElement("span");
+		let toolSectionContentCounterOptionsTitleMaxText = document.createElement("p");
+		let toolSectionContentCounterOptionsUl = document.createElement("ul");
+		let toolSectionContentCounterResult = document.createElement("div");
+
+		toolSectionContentCounterOuter.setAttribute("id","counter");
+		toolSectionContentCounterOuter.setAttribute("name","Counter");
+
+		toolSectionContentCounterResult.setAttribute("name","result");
+		toolSectionContentCounterResult.classList.add("scroll");
+		toolSectionContentCounterOptions.setAttribute("name","options");
+		toolSectionContentCounterOptionsIterations.setAttribute("name","iterations");
+		toolSectionContentCounterOptionsIterationsText.innerText = "Iterations";
+		toolSectionContentCounterOptionsIterationsInput.setAttribute("type","number");
+		toolSectionContentCounterOptionsIterationsInput.setAttribute("name","iteration");
+		toolSectionContentCounterOptionsIterationsInput.setAttribute("min","1");
+		toolSectionContentCounterOptionsIterationsInput.setAttribute("max","1000");
+		toolSectionContentCounterOptionsIterationsInput.setAttribute("value","1");
+		toolSectionContentCounterOptionsIterationsInput.setAttribute("autocomplete","off");
+		toolSectionContentCounterOptionsTitle.setAttribute("name","title");
+		toolSectionContentCounterOptionsTitleIterationsText.innerText = "#";
+		toolSectionContentCounterOptionsTitleMinText.innerText = "Min";
+		toolSectionContentCounterOptionsTitleMaxText.innerText = "Max";
+		toolSectionContentCounterOptionsUl.classList.add("scroll");
+		toolSectionContent.appendChild(toolSectionContentCounterOuter);
+		toolSectionContentCounterOuter.appendChild(toolSectionContentCounter);
+		toolSectionContentCounter.appendChild(toolSectionContentCounterResult);
+		toolSectionContentCounter.appendChild(toolSectionContentCounterOptions);
+		toolSectionContentCounterOptions.appendChild(toolSectionContentCounterOptionsTop);
+		toolSectionContentCounterOptionsTop.appendChild(toolSectionContentCounterOptionsIterations);
+		toolSectionContentCounterOptionsIterations.appendChild(toolSectionContentCounterOptionsIterationsText);
+		toolSectionContentCounterOptionsIterations.appendChild(toolSectionContentCounterOptionsIterationsInput);
+		toolSectionContentCounterOptionsTop.appendChild(toolSectionContentCounterOptionsTitle);
+		toolSectionContentCounterOptionsTitle.appendChild(toolSectionContentCounterOptionsTitleIterations);
+		toolSectionContentCounterOptionsTitleIterations.appendChild(toolSectionContentCounterOptionsTitleIterationsText);
+		toolSectionContentCounterOptionsTitle.appendChild(toolSectionContentCounterOptionsTitleMin);
+		toolSectionContentCounterOptionsTitleMin.appendChild(toolSectionContentCounterOptionsTitleMinText);
+		toolSectionContentCounterOptionsTitle.appendChild(toolSectionContentCounterOptionsTitleMax);
+		toolSectionContentCounterOptionsTitleMax.appendChild(toolSectionContentCounterOptionsTitleMaxText);
+		toolSectionContentCounterOptions.appendChild(toolSectionContentCounterOptionsUl);
+
+	
+	}
 
 	function createRNG() {
 		let toolSectionContentRNGOuter = document.createElement("div");
@@ -214,6 +272,7 @@ let createTool = function() {
 		toolSectionContentRNGOptionsTitleMax.appendChild(toolSectionContentRNGOptionsTitleMaxText);
 		toolSectionContentRNGOptions.appendChild(toolSectionContentRNGOptionsUl);
 	}
+
 	function createType() {
 
 
@@ -963,15 +1022,21 @@ let createTool = function() {
 
 
 	}
+
 	createTimer();
+	createCounter();
 	createRNG();
 	createType();
 	createDamageCalc();
 
 
-	let toolOptionsTitle = ["Damage Calculator (Development)","Type Advantage","Timers","Random Number Generator"];
+	let toolOptionsTitle = ["Damage Calculator (Development)","Type Advantage","Catch Rate Calculator","Timers","Counter","Random Number Generator"];
 
 	// Counter, Damage Calculator, Catch Rate Calculator, Shiny Odds Calculator, Item/Move/Type/Ability/Location Checklist
+
+	if (Generation > 1) {
+		toolOptionsTitle.splice(3, 0, "Shiny Odds Calculator");
+	}
 
 	for(let q = 0; q < toolOptionsTitle.length; q++) {
 		let toolSectionListOptionsInput = document.createElement("input");
@@ -1887,6 +1952,174 @@ function stopwatch() {
 	stopwatchResetButton.addEventListener("click", stopwatchResetButtonEvent);
 	stopwatchLapsButton.addEventListener("click", stopwatchLapsButtonEvent);
 	stopwatchLapsButton.addEventListener("click", stopwatchLapsScroll);
+}
+
+function Counter() {
+	let lastMin = 1;
+	let lastMax = 100;
+
+	let base = document.querySelector("#contain > div#tool section[name='content'] *#counter");
+
+	function rollNumber() {
+
+		let it = 0;
+
+		addIteration();
+		let iteration = base.querySelector(":scope span[name='iterations'] input").value;
+		for(let i = 0; i < iteration; i++) {
+			let x = i + 1;
+
+			function generateNumber(x) {
+				let min = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(2) input").value);
+				let max = parseInt(base.querySelector(":scope ul li[name='" + x + "'] div:nth-child(3) input").value) + 1;
+				let random1 = Math.floor(Math.random() * (max - min)) + min;
+				let output = base.querySelector(":scope *[name='result'] div[name='" + x + "'] > *");
+				let intervalRandom = setInterval(genRandom, 100);
+				let startDate = new Date();
+				let durationMin = 1000;
+				let durationMax = 3000;
+
+				function genRandom() {
+					let random2 = Math.floor(Math.random() * (max - min)) + min;
+					let currentDate = new Date();
+					output.innerText = random2;
+					if(currentDate - startDate > durationMax) {
+						stopcount();
+					} else if(random1 == random2 && currentDate - startDate > durationMin) {
+						stopcount();
+					}
+		
+					function stopcount() {
+						output.innerText = random1;
+						clearInterval(intervalRandom);
+						output.style.color = "gold";
+						output.innerText = numFormat(output.innerText);
+						highestLowest();
+					}
+				}
+			}
+			generateNumber(x);
+
+		}
+
+		function highestLowest() {
+
+	
+
+			it = it+1;
+			if (it == iteration) {
+				let nums = [];
+				let num = base.querySelectorAll(":scope div[name='result'] > *")
+				for(let r = 0; r < num.length; r++) {
+					nums.push(num[r].firstElementChild.innerText);
+				}
+			
+				let max = Math.max(...nums);
+				let min = Math.min(...nums);
+
+
+				for(let r = 0; r < num.length; r++) {
+					if (parseInt(num[r].firstElementChild.innerText) == max) {
+						num[r].classList.add("max");
+					}
+					if (parseInt(num[r].firstElementChild.innerText) == min) {
+						num[r].classList.add("min");
+					}
+				}
+			
+			}
+			
+		}
+	
+	}
+	base.querySelector(":scope button").addEventListener("click", rollNumber);
+	base.querySelector(":scope span[name='iterations'] input").addEventListener("change", addIteration);
+	addIteration();
+
+	function addIteration() {
+		let iteration = base.querySelector(":scope span[name='iterations'] input").value;
+		let themin = [];
+		let themax = [];
+		let lis = base.querySelectorAll(":scope ul li");
+		for(let q = 0; q < lis.length; q++) {
+			themin.push(lis[q].lastElementChild.previousElementSibling.firstChild.value);
+			themax.push(lis[q].lastElementChild.firstChild.value);
+			lis[q].remove();
+		}
+
+		let outs = base.querySelectorAll(":scope div[name='result'] > div");
+		for(let q = 0; q < outs.length; q++) {
+			outs[q].remove();
+		}
+		
+		for(let i = 0; i < iteration; i++) {
+			let x = i + 1;
+			let li = document.createElement("li");
+			let it = document.createElement("div");
+			let itText = document.createElement("p");
+			let min = document.createElement("div");
+			let minInput = document.createElement("input");
+			let max = document.createElement("div");
+			let maxInput = document.createElement("input");
+			li.setAttribute("name", x);
+			it.setAttribute("name","it");
+			itText.innerText = "#" + x;
+			itText.setAttribute("title","Iteration");
+			min.setAttribute("name","min");
+			minInput.setAttribute("type","number");
+			minInput.setAttribute("name","minimum");
+			minInput.setAttribute("title","Min");
+			minInput.setAttribute("autocomplete","off");
+			if(themin[i] != undefined) {
+				minInput.setAttribute("value", themin[i]);
+			} else if(lastMin != undefined) {
+				minInput.setAttribute("value", lastMin);
+			} else {
+				minInput.setAttribute("value","1");
+			}
+			max.setAttribute("name","max");
+			maxInput.setAttribute("type","number");
+			maxInput.setAttribute("name","maximum");
+			maxInput.setAttribute("title","Max");
+			maxInput.setAttribute("autocomplete","off");
+			if(themax[i] != undefined) {
+				maxInput.setAttribute("value", themax[i]);
+			} else if(lastMax != undefined) {
+				maxInput.setAttribute("value", lastMax);
+			} else {
+				maxInput.setAttribute("value","100");
+			}
+			minInput.setAttribute("min","1");
+			minInput.setAttribute("max", parseInt(maxInput.value) - 1);
+			maxInput.setAttribute("min", parseInt(minInput.value) + 1);
+			maxInput.setAttribute("max","1000");
+		
+			base.querySelector(":scope ul").appendChild(li);
+			li.appendChild(it);
+			it.appendChild(itText);
+			li.appendChild(min);
+			min.appendChild(minInput);
+			li.appendChild(max);
+			max.appendChild(maxInput);
+			let out = document.createElement("div");
+			out.setAttribute("name", x);
+			out.title = "#" + x + "\n" + "Number between " + minInput.value + "-" + maxInput.value;
+			out.innerHTML = "<header>-</header>";
+			base.querySelector(":scope div[name='result']").appendChild(out);
+			minInput.addEventListener("change", minmaxChange);
+			maxInput.addEventListener("change", minmaxChange);
+		}
+		base.querySelector(":scope ul").scrollTo(0, base.querySelector(":scope ul").scrollHeight);
+	}
+
+	function minmaxChange() {
+		let Min = this.parentElement.parentElement.querySelector(':scope > div[name="min"] > input');
+		let Max = this.parentElement.parentElement.querySelector(':scope > div[name="max"] > input');
+		Min.max = parseInt(Max.value) - 1;
+		Max.min = parseInt(Min.value) + 1;
+		lastMin = Min.value;
+		lastMax = Max.value;
+	}
 }
 
 function RNG() {
