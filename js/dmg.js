@@ -2333,416 +2333,11 @@ function DMGCalcStart() {
 						}
 
 						if ("Accuracy") {
-							let accCalc = 0;
-
-							// Defaults
-							let CompoundEyes = 1;
-							let SandVeil = 1;
-							let SnowCloak = 1;
-							let VictoryStar = 1;
-							let Fog = 1;
-							let Hustle = 1;
-							let TangledFeet = 1;
-							let BrightPowder = 1;
-							let LaxIncense = 1;
-							let WideLens = 1;
-							let ZoomLens = 1;
-							let MicleBerry = 1;
-							let Gravity = 1;
-							let Affection = 0;
-
-							console.log(moveAccuracy)
-
-							let acc = moveAccuracy;
-							acc = acc.replaceAll("%","").replaceAll("~","");
-							let evasionMod = tarModEvasionPath.value;
-							let accuracyMod = userModAccuracyPath.value;
-
-							
-							accuracyMod = undwsDel(accuracyMod,0);
-							accuracyMod = parseInt(accuracyMod);
-							evasionMod = undwsDel(evasionMod,0)
-							evasionMod = parseInt(evasionMod);
-
-							accuracyMod = modStageCalc("Accuracy",accuracyMod);
-							evasionMod = modStageCalc("Evasion",evasionMod);
-
-
-							if (movePath.value == "Fissure" || movePath.value == "Guillotine" || movePath.value == "Horn Drill" || movePath.value == "Sheer Cold") {
-								if (Generation == 2) {
-									acc = (((parseInt(userLevelPath.value)-parseInt(tarLevelPath.value))*2+76)/256)*100;
-								}
-								if (Generation >= 3) {
-									acc = parseInt(userLevelPath.value)-parseInt(tarLevelPath.value)+30;
-								}
-							}
-
-							if (Generation == 1 || Generation == 2) {
-								BrightPowder = 0;
-
-								if (tarItemPath != undefined && tarItemPath.value == "BrightPowder") {
-									BrightPowder = 20;
-								}
-					
-								acc = 255*(acc/100);
-								accCalc = acc*accuracyMod*evasionMod-BrightPowder;
-								if (accCalc < 1) {
-									accCalc = 1;
-								}
-								if (accCalc > 255) {
-									accCalc = 255;
-								}
-								accCalc = (accCalc/255)*100;
-							}
-							if (Generation == 3) {
-								if (userAbilityPath.value == "CompoundEyes") {
-									CompoundEyes = 1.3;
-								}
-								if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
-									if (tarAbilityPath.value == "Sand Veil") {
-										if (weatherSandstormPath.checked) {
-											SandVeil = 0.8;
-										}
-									}
-								}
-								if (userAbilityPath.value == "Hustle") {
-									if (moveCategory == "Physical") {
-										Hustle = 0.8;
-									}
-								}
-								if (tarItemPath.value == "BrightPowder") {
-									BrightPowder = 0.9;
-								}
-								if (tarItemPath.value == "Lax Incense") {
-									LaxIncense = 0.95;
-								}
-
-								accCalc = acc*(accuracyMod*evasionMod)*CompoundEyes*SandVeil*Hustle*BrightPowder*LaxIncense;
-							}
-							if (Generation == 4) {
-								if (userAbilityPath.value == "CompoundEyes") {
-									CompoundEyes = 1.3;
-								}
-								if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
-									if (tarAbilityPath.value == "Sand Veil") {
-										if (weatherSandstormPath.checked) {
-											if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
-												SandVeil = 0.8;
-											}
-										}
-									}
-									if (tarAbilityPath.value == "Snow CLoak") {
-										if (weatherHailPath.checked) {
-											if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
-												SnowCloak = 0.8;
-											}
-										}
-									}
-									if (weatherFogPath != undefined && weatherFogPath.checked) {
-										Fog = 0.6;
-									}
-								}
-								if (userAbilityPath.value == "Hustle") {
-									if (moveCategory == "Physical") {
-										Hustle = 0.8;
-									}
-								}
-								if (tarAbilityPath.value == "Tangled Feet") {
-									if (ConfusionPath.checked) {
-										if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
-											TangledFeet = 0.5;
-										}
-									}
-								}
-
-								if (tarItemPath.value == "BrightPowder") {
-									BrightPowder = 0.9;
-								}
-								if (tarItemPath.value == "Lax Incense") {
-									LaxIncense = 0.9;
-								}
-								if (userItemPath.value == "Wide Lens") {
-									WideLens = 1.1;
-								}
-								if (userItemPath.value == "Zoom Lens") {
-									ZoomLens = 1.2;
-								}
-								if (userItemPath.value == "Micle Berry") {
-									MicleBerry = 1.2;
-								}
-								if (gravityPath.checked) {
-									Gravity = 5/3;
-								}
-								accCalc = acc*(accuracyMod*evasionMod)*CompoundEyes*SandVeil*SnowCloak*Fog*Hustle*TangledFeet*BrightPowder*LaxIncense*WideLens*ZoomLens*MicleBerry*Gravity;
-							}
-							if (Generation >= 5) {
-								if (gravityPath.checked) {
-									Gravity = 6840/4096;
-								}
-								if (tarAbilityPath.value == "Tangled Feet") {
-									if (ConfusionPath.checked) {
-										if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
-											TangledFeet = 0.5;
-										}
-									}
-								}
-								if (userAbilityPath.value == "Hustle") {
-									if (moveCategory == "Physical") {
-										Hustle = 3277/4096;
-									}
-								}
-								if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
-									if (tarAbilityPath.value == "Sand Veil") {
-										if (weatherSandstormPath.checked) {
-											if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
-												SandVeil = 0.8;
-											}
-										}
-									}
-									if (tarAbilityPath.value == "Snow Cloak") {
-										if (weatherHailPath.checked) {
-											if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
-												SnowCloak = 0.8;
-											}
-										}
-									}
-								}
-
-								if (DMGFindScenario(tar,"Victory Star","Ability","Ally","") > 0) {
-									VictoryStar = (4506/4096)*DMGFindScenario(tar,"Victory Star","Ability","Ally","");
-								}
-								if (tarItemPath.value == "Lax Incense") {
-									LaxIncense = 3686/4096;
-								}
-								if (userItemPath.value == "Wide Lens") {
-									WideLens = 4505/4096;
-								}
-								if (userItemPath.value == "Zoom Lens") {
-									ZoomLens = 4915/4096;
-								}
-								if (userItemPath.value == "Micle Berry") {
-									MicleBerry = 4915/4096;
-								}
-							}
-							if (Generation == 5) {
-								if (tarItemPath.value == "BrightPowder") {
-									BrightPowder = 3686/4096;
-								}
-								if (userAbilityPath.value == "CompoundEyes") {
-									CompoundEyes = 5325/4096;
-								}
-				
-								accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod*evasionMod)*MicleBerry;
-							}
-							if (Generation >= 6) {
-								if (tarItemPath.value == "Bright Powder") {
-									BrightPowder = 3686/4096;
-								}
-								if (userAbilityPath.value == "Compound Eyes") {
-									CompoundEyes = 5325/4096;
-								}
-
-								let fr = undDel(userFriendshipPath.value,0);
-
-								if (getApplicable("X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon")) {
-									let af = undDel(userAffectionPath.value,0);
-									if (af >= 150) {
-										Affection = 10;
-									}
-								}
-								else if (getApplicable("Lets Go Pikachu,Lets Go Eevee")) {
-									if (fr >= 200) {
-										Affection = 10;
-									}
-								}
-								else if (Generation >= 8) {
-									if (fr == 255) {
-										Affection = 10;
-									}
-								}
-
-								accCalc = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod*evasionMod)*MicleBerry-Affection;
-							}
-							
-							moveAccuracy = Math.min(Math.max(accCalc,0),100);
-
-							if (returnArrValue(finaldata["Moves"]["Accuracy"],DATA_Move_Reference["Name"],DATA_Move_Accuracy["Accuracy"],movePath.value) == undefined) {
-								moveAccuracy = 100;
-							}
-
-
-
-
-							if (movePath.value == "Fissure" || movePath.value == "Guillotine" || movePath.value == "Horn Drill" || movePath.value == "Sheer Cold") {
-								if (Generation == 1) {
-									let val1 = userSpeedStatPath.value;
-									let val2 = tarSpeedStatPath.value
-									val1 = undDel(val1,0);
-									val2 = undDel(val2,0);
-									val1 = parseInt(val1);
-									val2 = parseInt(val2);
-
-									if (val2 > val1) {
-										moveAccuracy = 0;
-									}
-								}
-								else {
-									let val1 = userLevelPath.value;
-									let val2 = tarLevelPath.value
-									val1 = undDel(val1,0);
-									val2 = undDel(val2,0);
-									val1 = parseInt(val1);
-									val2 = parseInt(val2);
-
-									if (val2 > val1) {
-										moveAccuracy = 0;
-									}
-								}
-								Type1 = 1;
-								Type2 = 1;
-								Type = 1;
-							}
-
-							accRes.push(Math.ceil(moveAccuracy)+"%");
+							accRes.push(DMGCalc_Accuracy())
 						}
 
 						if ("Critical") {
-							let critCalc = 0;
-
-							let critHigh = false;
-							for (let a = 0; a < finaldata["Moves"]["Additional"].length; a++) {
-								if (finaldata["Moves"]["Additional"][a]["Additional"] == "High Critical-hit Ratio") {
-									if (getApplicable(finaldata["Moves"]["Additional"][a]["Game"])) {
-										if (finaldata["Moves"]["Additional"][a]["Move"] == movePath.value) {
-											critHigh = true;
-											break;
-										}		
-									}
-								}
-							}
-
-							let critMod = userModCriticalPath.value;
-							critMod = undwsnullnanDel(critMod,0);
-
-							if (critHigh) {
-								critMod = parseInt(critMod)+1;
-							}
-
-
-							if (Generation == 1) {
-								let tarspeed = parseInt(returnData(getPokémonInt(userPokémonPath.value),"Base Stats Speed","")[0]);
-
-								if (movePath.value == "Crabhammer" || movePath.value == "Karate Chop" || movePath.value == "Razor Leaf" || movePath.value == "Slash") {
-									if (critMod == 1) {
-										critCalc = 4*Math.floor(tarspeed/4);
-									}
-									else {
-										critCalc = Math.min(8*Math.floor(tarspeed/2),255);
-									}
-								}
-								else {
-									if (critMod == 1) {
-										critCalc = Math.floor(tarspeed/8);
-									}
-									else {
-										critCalc = Math.floor(tarspeed/2);
-									}
-								}
-
-								critCalc = (critCalc/256)*100;
-							}
-							else if (Generation == 2) {
-								if (critMod == 0 || critMod == undefined || critMod == "") {
-									critCalc = 17/256;
-								}
-								else if (critMod == 1) {
-									critCalc = 1/8;
-								}
-								else if (critMod == 2) {
-									critCalc = 1/4;
-								}
-								else if (critMod == 3) {
-									critCalc = 85/256;
-								}
-								else if (critMod >= 4) {
-									critCalc = 1/2;
-								}
-								critCalc = critCalc*100;
-							}
-							else if (Generation >= 3 && Generation <= 5) {
-								if (critMod == 0 || critMod == undefined || critMod == "") {
-									critCalc = 1/16;
-								}
-								else if (critMod == 1) {
-									critCalc = 1/8;
-								}
-								else if (critMod == 2) {
-									critCalc = 1/4;
-								}
-								else if (critMod == 3) {
-									critCalc = 1/3;
-								}
-								else if (critMod >= 4) {
-									critCalc = 1/2;
-								}
-								critCalc = critCalc*100;
-							}
-							else if (Generation == 6) {
-								if (critMod == 0 || critMod == undefined || critMod == "") {
-									critCalc = 1/16;
-								}
-								else if (critMod == 1) {
-									critCalc = 1/8;
-								}
-								else if (critMod == 2) {
-									critCalc = 1/2;
-								}
-								else if (critMod == 3) {
-									critCalc = 1;
-								}
-								else if (critMod >= 4) {
-									critCalc = 1;
-								}
-								critCalc = critCalc*100;
-							}
-							else if (Generation >= 7) {
-								if (critMod == 0 || critMod == undefined || critMod == "") {
-									critCalc = 1/24;
-								}
-								else if (critMod == 1) {
-									critCalc = 1/8;
-								}
-								else if (critMod == 2) {
-									critCalc = 1/2;
-								}
-								else if (critMod == 3) {
-									critCalc = 1;
-								}
-								else if (critMod >= 4) {
-									critCalc = 1;
-								}
-								critCalc = critCalc*100;
-							}
-							if (tarAbilityPath != undefined) {
-								if (tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
-									critCalc = 0;
-								}
-							}
-							for (let a = 0; a < finaldata["Moves"]["Additional"].length; a++) {
-								if (finaldata["Moves"]["Additional"][a]["Additional"] == "Set Damage" || finaldata["Moves"]["Additional"][a]["Additional"] == "One-hit Knockout") {
-									if (getApplicable(finaldata["Moves"]["Additional"][a]["Game"])) {
-										if (finaldata["Moves"]["Additional"][a]["Move"] == movePath.value) {
-											critCalc = 0;
-											break;
-										}		
-									}
-								}
-							}
-			
-
-							critCalc = Math.round(critCalc);
-							critCalc = undwsnullnanDel(critCalc,0);
-							critRes.push(critCalc+"%")
+							critRes.push(DMGCalc_Critical())	
 						}
 
 						if ("Calculation") {
@@ -3331,6 +2926,423 @@ function DMGCalcStart() {
 						}
 					}
 				}
+
+
+
+
+
+				// Calcs
+
+				function DMGCalc_Accuracy() {
+	
+					let accuracy = 0;
+				
+					// Defaults
+					let CompoundEyes = 1;
+					let SandVeil = 1;
+					let SnowCloak = 1;
+					let VictoryStar = 1;
+					let Fog = 1;
+					let Hustle = 1;
+					let TangledFeet = 1;
+					let BrightPowder = 1;
+					let LaxIncense = 1;
+					let WideLens = 1;
+					let ZoomLens = 1;
+					let MicleBerry = 1;
+					let Gravity = 1;
+					let Affection = 0;
+				
+					let acc = moveAccuracy;
+					acc = parseInt(acc.toString().replaceAll("%","").replaceAll("~",""));
+					let evasionMod = tarModEvasionPath.value;
+					let accuracyMod = userModAccuracyPath.value;
+				
+					
+					accuracyMod = undwsDel(accuracyMod,0);
+					accuracyMod = parseInt(accuracyMod);
+					evasionMod = undwsDel(evasionMod,0)
+					evasionMod = parseInt(evasionMod);
+				
+					accuracyMod = modStageCalc("Accuracy",accuracyMod);
+					evasionMod = modStageCalc("Evasion",evasionMod);
+				
+				
+					if (movePath.value == "Fissure" || movePath.value == "Guillotine" || movePath.value == "Horn Drill" || movePath.value == "Sheer Cold") {
+						if (Generation == 2) {
+							acc = (((parseInt(userLevelPath.value)-parseInt(tarLevelPath.value))*2+76)/256)*100;
+						}
+						if (Generation >= 3) {
+							acc = parseInt(userLevelPath.value)-parseInt(tarLevelPath.value)+30;
+						}
+					}
+				
+					if (Generation == 1 || Generation == 2) {
+						BrightPowder = 0;
+				
+						if (tarItemPath != undefined && tarItemPath.value == "BrightPowder") {
+							BrightPowder = 20;
+						}
+				
+						acc = 255*(acc/100);
+						accuracy = acc*accuracyMod*evasionMod-BrightPowder;
+						if (accuracy < 1) {
+							accuracy = 1;
+						}
+						if (accuracy > 255) {
+							accuracy = 255;
+						}
+						accuracy = (accuracy/255)*100;
+					}
+					if (Generation == 3) {
+						if (userAbilityPath.value == "CompoundEyes") {
+							CompoundEyes = 1.3;
+						}
+						if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
+							if (tarAbilityPath.value == "Sand Veil") {
+								if (weatherSandstormPath.checked) {
+									SandVeil = 0.8;
+								}
+							}
+						}
+						if (userAbilityPath.value == "Hustle") {
+							if (moveCategory == "Physical") {
+								Hustle = 0.8;
+							}
+						}
+						if (tarItemPath.value == "BrightPowder") {
+							BrightPowder = 0.9;
+						}
+						if (tarItemPath.value == "Lax Incense") {
+							LaxIncense = 0.95;
+						}
+				
+						accuracy = acc*(accuracyMod*evasionMod)*CompoundEyes*SandVeil*Hustle*BrightPowder*LaxIncense;
+					}
+					if (Generation == 4) {
+						if (userAbilityPath.value == "CompoundEyes") {
+							CompoundEyes = 1.3;
+						}
+						if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
+							if (tarAbilityPath.value == "Sand Veil") {
+								if (weatherSandstormPath.checked) {
+									if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
+										SandVeil = 0.8;
+									}
+								}
+							}
+							if (tarAbilityPath.value == "Snow CLoak") {
+								if (weatherHailPath.checked) {
+									if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
+										SnowCloak = 0.8;
+									}
+								}
+							}
+							if (weatherFogPath != undefined && weatherFogPath.checked) {
+								Fog = 0.6;
+							}
+						}
+						if (userAbilityPath.value == "Hustle") {
+							if (moveCategory == "Physical") {
+								Hustle = 0.8;
+							}
+						}
+						if (tarAbilityPath.value == "Tangled Feet") {
+							if (ConfusionPath.checked) {
+								if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
+									TangledFeet = 0.5;
+								}
+							}
+						}
+				
+						if (tarItemPath.value == "BrightPowder") {
+							BrightPowder = 0.9;
+						}
+						if (tarItemPath.value == "Lax Incense") {
+							LaxIncense = 0.9;
+						}
+						if (userItemPath.value == "Wide Lens") {
+							WideLens = 1.1;
+						}
+						if (userItemPath.value == "Zoom Lens") {
+							ZoomLens = 1.2;
+						}
+						if (userItemPath.value == "Micle Berry") {
+							MicleBerry = 1.2;
+						}
+						if (gravityPath.checked) {
+							Gravity = 5/3;
+						}
+						accuracy = acc*(accuracyMod*evasionMod)*CompoundEyes*SandVeil*SnowCloak*Fog*Hustle*TangledFeet*BrightPowder*LaxIncense*WideLens*ZoomLens*MicleBerry*Gravity;
+					}
+					if (Generation >= 5) {
+						if (gravityPath.checked) {
+							Gravity = 6840/4096;
+						}
+						if (tarAbilityPath.value == "Tangled Feet") {
+							if (ConfusionPath.checked) {
+								if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
+									TangledFeet = 0.5;
+								}
+							}
+						}
+						if (userAbilityPath.value == "Hustle") {
+							if (moveCategory == "Physical") {
+								Hustle = 3277/4096;
+							}
+						}
+						if (DMGFindScenario(tar,"Cloud Nine","Ability","All","") == 0 && DMGFindScenario(tar,"Air Lock","Ability","All","") == 0) {
+							if (tarAbilityPath.value == "Sand Veil") {
+								if (weatherSandstormPath.checked) {
+									if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
+										SandVeil = 0.8;
+									}
+								}
+							}
+							if (tarAbilityPath.value == "Snow Cloak") {
+								if (weatherHailPath.checked) {
+									if (DMGFindScenario(tar,"Mold Breaker","Ability","Enemy","") == 0) {
+										SnowCloak = 0.8;
+									}
+								}
+							}
+						}
+				
+						if (DMGFindScenario(tar,"Victory Star","Ability","Ally","") > 0) {
+							VictoryStar = (4506/4096)*DMGFindScenario(tar,"Victory Star","Ability","Ally","");
+						}
+						if (tarItemPath.value == "Lax Incense") {
+							LaxIncense = 3686/4096;
+						}
+						if (userItemPath.value == "Wide Lens") {
+							WideLens = 4505/4096;
+						}
+						if (userItemPath.value == "Zoom Lens") {
+							ZoomLens = 4915/4096;
+						}
+						if (userItemPath.value == "Micle Berry") {
+							MicleBerry = 4915/4096;
+						}
+					}
+					if (Generation == 5) {
+						if (tarItemPath.value == "BrightPowder") {
+							BrightPowder = 3686/4096;
+						}
+						if (userAbilityPath.value == "CompoundEyes") {
+							CompoundEyes = 5325/4096;
+						}
+				
+						accuracy = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod*evasionMod)*MicleBerry;
+					}
+					if (Generation >= 6) {
+						if (tarItemPath.value == "Bright Powder") {
+							BrightPowder = 3686/4096;
+						}
+						if (userAbilityPath.value == "Compound Eyes") {
+							CompoundEyes = 5325/4096;
+						}
+				
+						let fr = undDel(userFriendshipPath.value,0);
+				
+						if (getApplicable("X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon")) {
+							let af = undDel(userAffectionPath.value,0);
+							if (af >= 150) {
+								Affection = 10;
+							}
+						}
+						else if (getApplicable("Lets Go Pikachu,Lets Go Eevee")) {
+							if (fr >= 200) {
+								Affection = 10;
+							}
+						}
+						else if (Generation >= 8) {
+							if (fr == 255) {
+								Affection = 10;
+							}
+						}
+				
+						accuracy = acc*Gravity*TangledFeet*Hustle*SandVeil*SnowCloak*VictoryStar*CompoundEyes*BrightPowder*LaxIncense*WideLens*ZoomLens*(accuracyMod*evasionMod)*MicleBerry-Affection;
+					}
+					
+					moveAccuracy = Math.min(Math.max(accuracy,0),100);
+				
+					if (returnArrValue(finaldata["Moves"]["Accuracy"],DATA_Move_Reference["Name"],DATA_Move_Accuracy["Accuracy"],movePath.value) == undefined) {
+						moveAccuracy = 100;
+					}
+				
+					if (movePath.value == "Fissure" || movePath.value == "Guillotine" || movePath.value == "Horn Drill" || movePath.value == "Sheer Cold") {
+						if (Generation == 1) {
+							let val1 = userSpeedStatPath.value;
+							let val2 = tarSpeedStatPath.value
+							val1 = undDel(val1,0);
+							val2 = undDel(val2,0);
+							val1 = parseInt(val1);
+							val2 = parseInt(val2);
+				
+							if (val2 > val1) {
+								moveAccuracy = 0;
+							}
+						}
+						else {
+							let val1 = userLevelPath.value;
+							let val2 = tarLevelPath.value
+							val1 = undDel(val1,0);
+							val2 = undDel(val2,0);
+							val1 = parseInt(val1);
+							val2 = parseInt(val2);
+				
+							if (val2 > val1) {
+								moveAccuracy = 0;
+							}
+						}
+						Type1 = 1;
+						Type2 = 1;
+						Type = 1;
+					}
+				
+					return Math.ceil(moveAccuracy)+"%"
+				
+				}
+
+				function DMGCalc_Critical() {
+					let critical = 0;
+
+					let critHigh = false;
+					for (let a = 0; a < finaldata["Moves"]["Additional"].length; a++) {
+						if (finaldata["Moves"]["Additional"][a]["Additional"] == "High Critical-hit Ratio") {
+							if (getApplicable(finaldata["Moves"]["Additional"][a]["Game"])) {
+								if (finaldata["Moves"]["Additional"][a]["Move"] == movePath.value) {
+									critHigh = true;
+									break;
+								}		
+							}
+						}
+					}
+
+					let critMod = userModCriticalPath.value;
+					critMod = undwsnullnanDel(critMod,0);
+
+					if (critHigh) {
+						critMod = parseInt(critMod)+1;
+					}
+
+
+					if (Generation == 1) {
+						let tarspeed = parseInt(returnData(getPokémonInt(userPokémonPath.value),"Base Stats Speed","")[0]);
+
+						if (movePath.value == "Crabhammer" || movePath.value == "Karate Chop" || movePath.value == "Razor Leaf" || movePath.value == "Slash") {
+							if (critMod == 1) {
+								critical = 4*Math.floor(tarspeed/4);
+							}
+							else {
+								critical = Math.min(8*Math.floor(tarspeed/2),255);
+							}
+						}
+						else {
+							if (critMod == 1) {
+								critical = Math.floor(tarspeed/8);
+							}
+							else {
+								critical = Math.floor(tarspeed/2);
+							}
+						}
+
+						critical = (critical/256)*100;
+					}
+					else if (Generation == 2) {
+						if (critMod == 0 || critMod == undefined || critMod == "") {
+							critical = 17/256;
+						}
+						else if (critMod == 1) {
+							critical = 1/8;
+						}
+						else if (critMod == 2) {
+							critical = 1/4;
+						}
+						else if (critMod == 3) {
+							critical = 85/256;
+						}
+						else if (critMod >= 4) {
+							critical = 1/2;
+						}
+						critical = critical*100;
+					}
+					else if (Generation >= 3 && Generation <= 5) {
+						if (critMod == 0 || critMod == undefined || critMod == "") {
+							critical = 1/16;
+						}
+						else if (critMod == 1) {
+							critical = 1/8;
+						}
+						else if (critMod == 2) {
+							critical = 1/4;
+						}
+						else if (critMod == 3) {
+							critical = 1/3;
+						}
+						else if (critMod >= 4) {
+							critical = 1/2;
+						}
+						critical = critical*100;
+					}
+					else if (Generation == 6) {
+						if (critMod == 0 || critMod == undefined || critMod == "") {
+							critical = 1/16;
+						}
+						else if (critMod == 1) {
+							critical = 1/8;
+						}
+						else if (critMod == 2) {
+							critical = 1/2;
+						}
+						else if (critMod == 3) {
+							critical = 1;
+						}
+						else if (critMod >= 4) {
+							critical = 1;
+						}
+						critical = critical*100;
+					}
+					else if (Generation >= 7) {
+						if (critMod == 0 || critMod == undefined || critMod == "") {
+							critical = 1/24;
+						}
+						else if (critMod == 1) {
+							critical = 1/8;
+						}
+						else if (critMod == 2) {
+							critical = 1/2;
+						}
+						else if (critMod == 3) {
+							critical = 1;
+						}
+						else if (critMod >= 4) {
+							critical = 1;
+						}
+						critical = critical*100;
+					}
+					if (tarAbilityPath != undefined) {
+						if (tarAbilityPath.value == "Battle Armor" || tarAbilityPath.value == "Shell Armor") {
+							critical = 0;
+						}
+					}
+					for (let a = 0; a < finaldata["Moves"]["Additional"].length; a++) {
+						if (finaldata["Moves"]["Additional"][a]["Additional"] == "Set Damage" || finaldata["Moves"]["Additional"][a]["Additional"] == "One-hit Knockout") {
+							if (getApplicable(finaldata["Moves"]["Additional"][a]["Game"])) {
+								if (finaldata["Moves"]["Additional"][a]["Move"] == movePath.value) {
+									critical = 0;
+									break;
+								}		
+							}
+						}
+					}
+	
+
+					critical = Math.round(critical);
+					critical = undwsnullnanDel(critical,0);
+					
+					return critical+"%"
+				}
 			}
 		}
 		
@@ -3575,6 +3587,9 @@ function DMGCalcStart() {
 		movePowerTextPath.innerText = pwrResult;
 		moveAccuracyTextPath.innerText = accResult;
 		moveCriticalTextPath.innerText = critResult;
+
+		moveTypeTextPath.style.color = "var(--type"+moveType+")";
+		moveCategoryTextPath.style.color = "var(--type"+moveCategory+")";
 	}
 
 	let button = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='execute'] button");
@@ -4097,6 +4112,11 @@ function DMGSetInfo() {
 
 	let baseDiv = document.querySelector("#contain > div#tool div#dmg > div");
 	let moveSelect = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='move'] select");
+	let moveTypeText = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='type'] > *:first-child");
+	let moveCategoryText = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='category'] > *:first-child");
+	let movePowerText = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='power'] > *:last-child");
+	let moveAccuracyText = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='accuracy'] > *:last-child");
+	let moveCriticalText = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='critical'] > *:last-child");
 
 	let specInput = document.querySelector("#contain > div#tool div#dmg div[name='menu'] *[name='count'] input");
 	let specSelect = document.querySelector("#contain > div#tool div#dmg div[name='menu'] *[name='count'] select");
@@ -4105,10 +4125,15 @@ function DMGSetInfo() {
     let battleSelect = document.querySelector("#contain > div#tool div#dmg div[name='options'] > div:first-child > span:first-child > select")
 
 
-	let movePower = returnArrValue(finaldata["Moves"]["Power"],DATA_Move_Reference["Name"],DATA_Move_Power["Power"],moveSelect.value);
-	let moveType = returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moveSelect.value);
-	let moveGroup = returnArrValue(finaldata["Moves"]["Group"],DATA_Move_Reference["Name"],"Group",moveSelect.value)
-	let moveRange = returnArrValue(finaldata["Moves"]["Range"],DATA_Move_Reference["Name"],"Range",moveSelect.value);
+	
+	let moveType = undDel(returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],moveSelect.value),"None");
+	let moveCategory = undDel(returnArrValue(finaldata["Moves"]["Category"],DATA_Move_Reference["Name"],DATA_Move_Category["Category"],moveSelect.value),"None");
+	let movePower = undDel(returnArrValue(finaldata["Moves"]["Power"],DATA_Move_Reference["Name"],DATA_Move_Power["Power"],moveSelect.value),0);
+	let moveAccuracy = undDel(returnArrValue(finaldata["Moves"]["Accuracy"],DATA_Move_Reference["Name"],DATA_Move_Accuracy["Accuracy"],moveSelect.value),"0%");
+	let moveCritical = "0%";
+	let moveGroup = undDel(returnArrValue(finaldata["Moves"]["Group"],DATA_Move_Reference["Name"],"Group",moveSelect.value),"None");
+	let moveRange = undDel(returnArrValue(finaldata["Moves"]["Range"],DATA_Move_Reference["Name"],"Range",moveSelect.value),"None");
+
 
 
 	let rollPath = document.querySelector("#contain div#tool div#dmg div[name='menu'] *[name='roll']")
@@ -4140,6 +4165,14 @@ function DMGSetInfo() {
 	specSelect.style.display = "none";
 
 
+	moveTypeText.innerText = moveType;
+	moveCategoryText.innerText = moveCategory;
+	movePowerText.innerText = movePower;
+	moveAccuracyText.innerText = moveAccuracy;
+	moveCriticalText.innerText = moveCritical;
+
+	moveTypeText.style.color =  "var(--type"+moveType+")";
+	moveCategoryText.style.color =  "var(--type"+moveCategory+")";
 	
 	for (let a = 0; a < finaldata["Moves"]["Additional"].length; a++) {
 		if (finaldata["Moves"]["Additional"][a]["Move"] == moveSelect.value) {
@@ -8521,3 +8554,6 @@ function DMGSetWeatherTerrain(){
 		el1.setAttribute("data-terrain","");
 	}
 };
+
+
+
