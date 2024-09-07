@@ -335,6 +335,32 @@
     --Border_Random_Sidebar_Header_Input: initial;
     --Color_Random_Sidebar_Header_Input: black;
 
+    /* Counter */
+	--Background_Counter_Content: hsl(0,0%,60%);
+    --Border_Counter_Content: initial;
+    --Color_Counter_Content: initial;
+    --Background_Counter_Content_Item: hsl(0,0%,50%);
+    --Border_Counter_Content_Item: 4px outset hsl(0,0%,70%);
+    --Color_Counter_Content_Item: initial;
+    --Background_Counter_Sidebar_Content: hsl(0,0%,45%);
+    --Border_Counter_Sidebar_Content: initial;
+    --Color_Counter_Sidebar_Content: initial;
+	--Background_Counter_Sidebar_Content_Item:initial;
+	--Color_Counter_Sidebar_Content_Item:initial;
+	--Border_Counter_Sidebar_Content_Item:1px dashed hsl(0,0%,30%);
+    --Background_Counter_Sidebar_Content_Input: hsl(0,0%,100%);
+    --Border_Counter_Sidebar_Content_Input: initial;
+    --Color_Counter_Sidebar_Content_Input: black;
+    --Background_Counter_Sidebar_Header: hsl(0,0%,40%);
+    --Border_Counter_Sidebar_Header: initial;
+    --Background_Counter_Sidebar_Header_Button: hsl(0,0%,60%);
+    --Border_Counter_Sidebar_Header_Button: 2px Solid hsl(0,0%,30%);
+    --Color_Counter_Sidebar_Header_Button: initial;
+    --Color_Counter_Sidebar_Header: initial;
+    --Background_Counter_Sidebar_Header_Input: hsl(0,0%,100%);
+    --Border_Counter_Sidebar_Header_Input: initial;
+    --Color_Counter_Sidebar_Header_Input: black;
+
 
     /* Timer */
 	--Background_Timer_Content: hsl(0,0%,50%);
