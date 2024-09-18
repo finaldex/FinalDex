@@ -2050,8 +2050,6 @@ function mapifyMap(base) {
 
 		let relative = (originalSize[0]+originalSize[1]) / (newwidth+newheight);
 
-
-
 		if (relative > 1) {
 			img.setAttribute("width",newwidth+"px");
 			img.setAttribute("height",newheight+"px");	
@@ -2105,10 +2103,9 @@ function mapifyMap(base) {
         }
         });
 
-
-
-
-		
+        
+		// Crashes some game pages
+        /*
 		for (let i = 0; i < finaldata["Locations"]["Reference"].length; i++) {
 			if (getApplicable(finaldata["Locations"]["Reference"][i]["Game"])) {
                 let val1 = finaldata["Locations"]["Reference"][i]["Location"];
@@ -2130,9 +2127,8 @@ function mapifyMap(base) {
                 }
 			}
 		}
+        */
     }
-    
-
 
 }
 function mapBlink(base,area) {
