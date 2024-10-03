@@ -2009,6 +2009,19 @@ function mapDescriptionSelector() {
 	}
 	mapSelectorVal.fill(i)
 }
+
+function getLocationTrainers(l) {
+	let res = []
+
+	for (let i = 0; i < finaldata["Location Trainers"]["Trainers"].length; i++) {
+		if (finaldata["Location Trainers"]["Trainers"][i]["Location"] == l && getApplicable(finaldata["Location Trainers"]["Trainers"][i]["Game"])) {
+			res.push(finaldata["Location Trainers"]["Trainers"][i])
+		}
+	}
+
+	return res
+}
+
 function trainerSearch() {
 	let tar = event.target;
 	let val = tar.value;
