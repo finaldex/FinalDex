@@ -3630,24 +3630,27 @@ function changePartyForm(base,i) {
 function moveLearnsetPartyBox(action) {
     let base = document.querySelector("#move section[name='sidebar'] ul");
     let lis = base.querySelectorAll(":scope > li");
-    let boxImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] ul > li img[value]');
-    let partyImg = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="party"] > div img[value]');
+    let boxPok = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="box"] ul > li[data-string]');
+    let partyPok = document.querySelectorAll('#pokémon > aside[name="team"] > section[name="party"] > div[data-string]');
     let partyArr = [];
     let boxArr = [];
 
-    for (let q = 0; q < boxImg.length; q++) {
-        if (boxImg[q].getAttribute("value") != undefined) {
-            boxArr.push(boxImg[q].getAttribute("value"));
+    for (let q = 0; q < boxPok.length; q++) {
+        if (boxPok[q].getAttribute("data-string") != undefined) {
+            let pid = getPokémonInt(dataStringToObj(boxPok[q].getAttribute("data-string"))["pok"]);
+            pid = pid.toString()
+            boxArr.push(pid);
         }
         else {
             boxArr.push("");
         }
     }
 
-
-    for (let q = 0; q < partyImg.length; q++) {
-        if (partyImg[q].getAttribute("value") != undefined) {
-            partyArr.push(partyImg[q].getAttribute("value"));
+    for (let q = 0; q < partyPok.length; q++) {
+        if (partyPok[q].getAttribute("data-string") != undefined) {
+            let pid = getPokémonInt(dataStringToObj(partyPok[q].getAttribute("data-string"))["pok"]);
+            pid = pid.toString()
+            partyArr.push(pid);
         }
         else {
             partyArr.push("");
@@ -3658,33 +3661,18 @@ function moveLearnsetPartyBox(action) {
         lis[i].style.display = "none";
     }
 
+    
     if (action != undefined) {
-        for (let i = 0; i < lis.length; i++) {
-            let lisImg = lis[i].querySelectorAll(":scope > *[value]");
-            for (let q = 0; q < lisImg.length; q++) {
-                let conditions = [];
-                let tempArr = [];
-                if(action.includes(",")) {
-                    for (let u = 0; u < action.split(",").length; u++) {
-                        tempArr.push(action.split(",")[u]);
-                    }
-                }
-                else {
-                    tempArr = [action];
-                }
 
-                for (let u = 0; u < tempArr.length; u++) {
-                    if (tempArr[u] == "PARTY") {
-                        conditions.push(partyArr.includes(lisImg[q].getAttribute("value")))
-                    }
-                    if (tempArr[u] == "BOX") {
-                        conditions.push(boxArr.includes(lisImg[q].getAttribute("value")))
-                    }
-                }
-                if (conditions[0] == true || conditions[1] == true) {
-                    lis[i].style.removeProperty("display");
-                }
+        let actions = splitStr(action,",");
+
+        for (let i = 0; i < lis.length; i++) {
+            let item = lis[i].querySelector(":scope div[value]");
+
+            if (actions.includes("PARTY") && partyArr.includes(item.getAttribute("value")) || actions.includes("BOX") && boxArr.includes(item.getAttribute("value")) || actions.includes("!PARTY") && !partyArr.includes(item.getAttribute("value")) || actions.includes("!BOX") && !boxArr.includes(item.getAttribute("value"))) {
+                lis[i].style.removeProperty("display");
             }
+     
         }
     }
     else {
