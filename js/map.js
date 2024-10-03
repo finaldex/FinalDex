@@ -2131,7 +2131,7 @@ function updateTrainer(trainers,condition) {
 
 	trainerImage = [trainerImage];
 	if (trainerImage[0] == undefined) {
-		trainerImage = ["^"+trainerClass]
+		trainerImage = ["^"+trainerClass,"^"+trainerName]
 		if (trainerGender == "Male") {
 			trainerImage.unshift(trainerImage[0]+"_Male")
 		}
@@ -2167,7 +2167,7 @@ function updateTrainer(trainers,condition) {
 	if(trainerPrevious != undefined) {
 		let previmg = [trainerPrevious["Image"]];
 		if (previmg[0] == undefined) {
-			previmg = ["^"+trainerPrevious["Class"]]
+			previmg = ["^"+trainerPrevious["Class"],"^"+trainerPrevious["Trainer"]]
 			if (trainerPrevious["Gender"] == "Male") {
 				previmg.unshift(previmg[0]+"_Male")
 			}
@@ -2193,7 +2193,7 @@ function updateTrainer(trainers,condition) {
 	if(trainerNext != undefined) {
 		let nextimg = [trainerNext["Image"]];
 		if (nextimg[0] == undefined) {
-			nextimg = ["^"+trainerNext["Class"]]
+			nextimg = ["^"+trainerNext["Class"],"^"+trainerNext["Trainer"]]
 			if (trainerNext["Gender"] == "Male") {
 				nextimg.unshift(nextimg[0]+"_Male")
 			}
