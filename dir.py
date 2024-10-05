@@ -23,7 +23,7 @@ for path, subdirs, files in os.walk(root):
                 dir[path] = [name]
 
 
-#print(dir['./media/Images/Pokémon/Overworld/Front/Shiny/PNG/HGSS'])
+#print(dir['./media/Images/Pokemon/Overworld/Front/Shiny/PNG/HGSS'])
 
 os.chdir(os.getcwd()+'\\'+'data')
 json_object = json.dumps(dir,separators=(',', ':'))
