@@ -122,28 +122,22 @@ def convert_value(value):
 
 def tableToArr(data):
     arr = []
-    try:
-        values = data['values']
-        title = values[0]
+    values = data.get('values', [])
+    title = values[0] if values else []
 
-        for i in range(0,len(values)): #Row
-            obj = {}
+    for row in values[1:]:  # Skip the title row
+        if len(row) > len(title):
+            return []
+
+        obj = {
+            title[i]: convert_value(cell) 
+            for i, cell in enumerate(row) 
+            if cell and i < len(title) and title[i]
+        }
         
-            if len(values[i]) > len(title):
-                return []
+        arr.append(obj)
 
-            for q in range(0,len(title)): # Column
-                try:
-                    if values[i][q] != '' and title[q] != '':
-                        obj[title[q]] = convert_value(values[i][q])
-                except:
-                    break
-            if i != 0:
-                arr.append(obj)
-
-        return arr
-    except:
-        return arr
+    return arr
 
 
 if __name__ == '__main__':
