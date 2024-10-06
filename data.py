@@ -98,7 +98,7 @@ def gsheet(id,name):
             
                 if len(table) > 0:
                     obj[sheetid] = table
-                    print(sheetid+" ✓")
+                    print("Completed: "sheetid)
 
         json_object = json.dumps(obj,separators=(',', ':'))
 
