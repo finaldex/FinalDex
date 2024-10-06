@@ -108,6 +108,18 @@ def gsheet(id,name):
     except HttpError as err:
         print(err)
 
+def convert_value(value):
+    if value is None:
+        return value
+    if isinstance(value, str):
+        if value.lower() in ['true', 'false']:
+            return value.lower() == 'true'
+        try:
+            return int(value)
+        except ValueError:
+            return value
+    return value
+
 def tableToArr(data):
     arr = []
     try:
@@ -123,7 +135,7 @@ def tableToArr(data):
             for q in range(0,len(title)): # Column
                 try:
                     if values[i][q] != '' and title[q] != '':
-                        obj[title[q]] = values[i][q]
+                        obj[title[q]] = convert_value(values[i][q])
                 except:
                     break
             if i != 0:
