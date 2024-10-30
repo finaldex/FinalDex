@@ -1,0 +1,114 @@
+#fullscreen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+}
+#fullscreen:not(.active) {
+	display: none;
+}
+#fullscreen > span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.7);
+	z-index: -1;
+}
+#fullscreen > div {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	pointer-events: none;
+}
+#fullscreen > div ul {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	flex-wrap: wrap;
+	transform: translate(var(--translate-value), 0%);
+	transition: .25s ease;
+}
+#fullscreen > div ul li {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#fullscreen li > img {
+	max-width: 100%;
+	max-height: 100%;
+	background: #000;
+	object-fit: scale-down;
+	user-select: none;
+}
+#fullscreen li div {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 80vw;
+	max-height: 80vh;
+	outline: 8px groove hsl(0, 0%, 70%);
+}
+#fullscreen li div > * {
+	pointer-events: all;
+}
+#fullscreen li .magnify {
+	position: absolute;
+	left: calc(var(--x) * 1px);
+	top: calc(var(--y) * 1px);
+	min-width: 100px;
+	min-height: 60px;
+	max-width: 80%;
+	max-height: 80%;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+	visibility: visible;
+	outline: 4px solid hsl(0, 0%, 20%);
+}
+#fullscreen:has(.magnify) li:active {
+	cursor: crosshair;
+}
+#fullscreen li .magnify img {
+	transform: scale(2);
+	transform-origin: top left;
+}
+#fullscreen li:not(:has(:active)) .magnify {
+	visibility: hidden;
+}
+#fullscreen button {
+	position: absolute;
+	color: white;
+	font-size: 8rem;
+	height: fit-content;
+}
+#fullscreen button:first-child {
+	left: 1vw;
+}
+#fullscreen button:last-child {
+	right: 1vw;
+}
+#fullscreen button:active {
+	font-weight: bold;
+}
+#fullscreen li div > img {
+	max-width: 80vw;
+	max-height: 80vh;
+	object-fit: scale-down;
+}
