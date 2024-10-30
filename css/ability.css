@@ -1,0 +1,14 @@
+#ability > main li::marker {
+    color: var(--Color_Body);
+}
+
+#ability > main ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#ability .sidebar > header > *:first-child {
+    font-size: 1.1rem;
+    padding: 10px 0;
+}
