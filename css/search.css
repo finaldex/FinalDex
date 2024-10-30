@@ -1,0 +1,13 @@
+.search input::placeholder {
+    opacity: 0.5;
+}
+
+.search input.deep,
+.search input.deep::placeholder {
+    color: Red;
+}
+
+.search input.filter,
+.search input.filter {
+    border-color: Red;
+}
