@@ -1,0 +1,457 @@
+#dex ol {
+    height: 85%;
+    overflow: auto;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.dex_list li {
+    background: var(--Background_Dex_Content_Item);
+    border-radius: 10px;
+    color: var(--Color_Dex_Content_Item);
+    display: inline-block;
+    height: 250px;
+    margin: 8px;
+    outline: var(--Outline_Dex_Content_Item);
+    text-shadow: var(--Shadow_Dex_Content_Item);
+    transition: none;
+    width: 250px;
+}
+
+.dex_list li:hover,
+.dex_list li:active {
+    filter: brightness(1.025);
+}
+
+.dex_list label {
+    cursor: auto;
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: bold;
+    height: 100%;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.dex_list li.hidden_dex,
+.dex_list li.hidden_filter,
+.dex_list li.hidden_search {
+    display: none;
+}
+
+.dex_list li:not(:has(input:checked)) .confirm span::after {
+    opacity: 0;
+}
+
+.dex_list li:not(:has(input:checked)) .image {
+    filter: brightness(0%) opacity(10%);
+}
+
+.dex_list li:not(:has(input:checked)) .id {
+    opacity: 0.5;
+    transition: none;
+}
+
+.dex_list li:not(:has(input:checked)) .name {
+    opacity: 0;
+    transition: none;
+}
+
+.dex_list li:not(:has(input:checked)) .data {
+    display: none;
+}
+
+.dex_list .confirm span::after {
+    transition: .5s ease;
+}
+
+.dex_list .confirm {
+    height: 20%;
+    padding: 10px 0 0 10px;
+    width: 20%;
+}
+
+.dex_list .id {
+    height: 20%;
+    opacity: 1;
+    padding: 10px 0 0 0;
+    transition: 1s ease opacity;
+    width: 60%;
+}
+
+.dex_list .data {
+    color: hsl(0, 0%, 15%);
+    height: 20%;
+    opacity: 0.4;
+    padding: 10px 10px 0 0;
+    transition: .5s ease opacity;
+    width: 20%;
+}
+
+.dex_list .image {
+    filter: brightness(100%) opacity(100%);
+    font-size: 75px;
+    height: 65%;
+    padding: 10px;
+    transition: .5s ease filter;
+    width: 100%;
+}
+
+.dex_list .image img {
+    height: 100%;
+    object-fit: scale-down;
+    position: relative;
+    width: 100%;
+}
+
+.dex_list .image img[src=""],
+.dex_list .image img:not([src]) {
+    visibility: hidden;
+}
+
+.dex_list .name {
+    height: 15%;
+    opacity: 1;
+    padding: 0 10px 10px 10px;
+    transition: 1s ease opacity;
+    width: 100%;
+}
+
+.dex_list label > *[class] {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dex_list .data > * {
+    font-size: 1.8rem;
+}
+
+.dex_list img:not([src])::after,
+.dex_list img[src='']::after {
+    align-items: center;
+    content: '?';
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    visibility: visible;
+    width: 100%;
+}
+
+.dex_list .confirm span {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 100%;
+    height: 45%;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 12px;
+    min-width: 12px;
+    position: relative;
+    width: 45%;
+}
+
+.dex_list li .confirm span::after {
+    background: linear-gradient(337deg, rgba(0, 255, 162, 1) 0%, rgba(27, 255, 172, 1) 16%, rgba(57, 255, 184, 1) 21%, rgba(27, 255, 172, 1) 26%, rgba(0, 204, 130, 1) 56%, rgba(0, 255, 162, 1) 100%);
+    border-radius: 100%;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+/* Dex Header */
+#dex header {
+    background: var(--Background_Dex_Navigation);
+    border: var(--Border_Dex_Navigation);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    color: var(--Color_Dex_Navigation);
+    height: 15%;
+    overflow: hidden;
+    position: relative;
+    text-shadow: var(--Shadow_Dex_Navigation);
+    width: 100%;
+}
+
+#dex header ul {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+#dex header ul li {
+    align-items: center;
+    display: flex;
+    float: left;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+}
+
+#dex header .dexswitch {
+    width: 20%;
+}
+
+#dex header .search {
+    width: 40%;
+}
+
+#dex header .game {
+    width: 30%;
+}
+
+#dex header .count {
+    width: 10%;
+}
+
+#dex header .search input {
+    background: var(--Background_Dex_Navigation_Search);
+    border: var(--Border_Dex_Navigation_Search);
+    border-radius: 3px;
+    color: var(--Color_Dex_Navigation_Search);
+    height: 40%;
+    padding: 0 20px;
+    text-indent: 15px;
+    width: 90%;
+}
+
+#dex header .search input::placeholder {
+    color: var(--Color_Dex_Navigation_Search);
+}
+
+#dex header .game img {
+    height: 100%;
+    max-height: 70%;
+    max-width: 90%;
+    object-fit: scale-down;
+    width: 90%;
+}
+
+#dex header .count div {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Bebas Neue';
+    font-size: clamp(1.5rem, 1vw + 1.5rem, 3rem);
+    justify-content: center;
+    text-align: center;
+}
+
+#dex header .count div > * {
+    padding: 0 1px;
+}
+
+#dex header .dexswitch div {
+    border: var(--Border_Dex_Navigation_Button);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 70%;
+    max-width: calc(9.5vh * 3);
+    overflow: hidden;
+    width: 80%;
+}
+
+#dex header .dexswitch span {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+    transition: .25s ease;
+    transform: translate(var(--translate-value), 0%);
+}
+
+#dex header .dexswitch label {
+    align-items: center;
+    border: var(--Border_Dex_Navigation_Button);
+    color: White;
+    display: flex;
+    font-weight: bold;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+#dex header .dexswitch label[name='National Pokédex'] {
+    background: Red;
+}
+
+#dex header .dexswitch label[name='National Pokédex']:active {
+    background: #D90000;
+}
+
+#dex header .dexswitch label[name='Kanto Pokédex'] {
+    background: Tomato;
+}
+
+#dex header .dexswitch label[name='Kanto Pokédex']:active {
+    background: #ff5233;
+}
+
+#dex header .dexswitch label[name='New Pokédex'] {
+    background: SlateGray;
+}
+
+#dex header .dexswitch label[name='New Pokédex']:active {
+    background: #647382;
+}
+
+#dex header .dexswitch label[name='Hoenn Pokédex'] {
+    background: RoyalBlue;
+}
+
+#dex header .dexswitch label[name='Hoenn Pokédex']:active {
+    background: #3862e0;
+}
+
+#dex header .dexswitch label[name='Sinnoh Pokédex'] {
+    background: MediumPurple;
+}
+
+#dex header .dexswitch label[name='Sinnoh Pokédex']:active {
+    background: #855cd6;
+}
+
+#dex header .dexswitch label[name='Enhanced Sinnoh Pokédex'] {
+    background: RebeccaPurple;
+    line-height: 20px;
+}
+
+#dex header .dexswitch label[name='Enhanced Sinnoh Pokédex']:active {
+    background: #592d86;
+}
+
+#dex header .dexswitch label[name='Johto Pokédex'] {
+    background: LightSlateGray;
+}
+
+#dex header .dexswitch label[name='Johto Pokédex']:active {
+    background: #6e8091;
+}
+
+#dex header .dexswitch label[name='Unova Pokédex'] {
+    background: Gray;
+}
+
+#dex header .dexswitch label[name='Unova Pokédex']:active {
+    background: #737373;
+}
+
+#dex header .dexswitch label[name='New Unova Pokédex'] {
+    background: DimGray;
+}
+
+#dex header .dexswitch label[name='New Unova Pokédex']:active {
+    background: #595959;
+}
+
+#dex header .dexswitch label[name='Central Kalos Pokédex'] {
+    background: BurlyWood;
+    line-height: 20px;
+}
+
+#dex header .dexswitch label[name='Central Kalos Pokédex']:active {
+    background: #d9ad73;
+}
+
+#dex header .dexswitch label[name='Coastal Kalos Pokédex'] {
+    background: CadetBlue;
+    line-height: 20px;
+}
+
+#dex header .dexswitch label[name='Coastal Kalos Pokédex']:active {
+    background: #568e8f;
+}
+
+#dex header .dexswitch label[name='Mountain Kalos Pokédex'] {
+    background: Chocolate;
+    line-height: 20px;
+}
+
+#dex header .dexswitch label[name='Mountain Kalos Pokédex']:active {
+    background: #c9641d;
+}
+
+#dex header .dexswitch label[name='Alola Pokédex'] {
+    background: MediumSeaGreen;
+}
+
+#dex header .dexswitch label[name='Alola Pokédex']:active {
+    background: #39ac6d;
+}
+
+#dex header .dexswitch label[name='Melemele Pokédex'] {
+    background: Sandybrown;
+}
+
+#dex header .dexswitch label[name='Melemele Pokédex']:active {
+    background: #f3a158;
+}
+
+#dex header .dexswitch label[name='Akala Pokédex'] {
+    background: LimeGreen;
+}
+
+#dex header .dexswitch label[name='Akala Pokédex']:active {
+    background: #2db92d;
+}
+
+#dex header .dexswitch label[name="Ula'ula Pokédex"] {
+    background: SkyBlue;
+}
+
+#dex header .dexswitch label[name="Ula'ula Pokédex"]:active {
+    background: #7ccae9;
+}
+
+#dex header .dexswitch label[name='Poni Pokédex'] {
+    background: LightCoral;
+}
+
+#dex header .dexswitch label[name='Poni Pokédex']:active {
+    background: #ef7676;
+}
+
+#dex header .dexswitch label[name='Galar Pokédex'] {
+    background: LightSkyBlue;
+}
+
+#dex header .dexswitch label[name='Galar Pokédex']:active {
+    background: #6cc3f9;
+}
+
+#dex header .dexswitch label[name='Isle of Armor Pokédex'] {
+    background: IndianRed;
+}
+
+#dex header .dexswitch label[name='Isle of Armor Pokédex']:active {
+    background: #c94f4f;
+}
+
+#dex header .dexswitch label[name='Crown Tundra Pokédex'] {
+    background: LightSteelBlue;
+}
+
+#dex header .dexswitch label[name='Crown Tundra Pokédex']:active {
+    background: #a5bcd9;
+}
+
+#dex header .dexswitch label[name*='Strategy Memo'] {
+    background: DarkSeaGreen;
+    line-height: 20px;
+}
+
+#dex header .dexswitch label[name*='Strategy-Memo']:active {
+    background: #80b380;
+}
+
