@@ -8,64 +8,66 @@
 	<script src="./js/lib/jquery-1.10.2.js"></script>
 	<script src="./js/lib/mousewheel-3.1.13.js"></script>
 	<script src="./js/lib/mapify-1.0.0.js"></script>
-    <script src="./js/lib/jquery-ui-1.13.1.js"></script>
+    <script src="./js/lib/jquery-ui-1.13.3.js"></script>
 
 	<link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Bebas+Neue" rel="stylesheet" type="text/css">
 
-	<link rel="stylesheet" type="text/css" href="./css/default.css">
-	<link rel="stylesheet" type="text/css" href="./css/contain.css">
-	<link rel="stylesheet" type="text/css" href="./css/tool.css">
-	<link rel="stylesheet" type="text/css" href="./css/data.css">
-    <link rel="stylesheet" type="text/css" href="./css/keyframe.css">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-	<link rel="stylesheet" type="text/css" href="./css/team.css">
-	<link rel="stylesheet" type="text/css" href="./css/pokémon.css">
-	<link rel="stylesheet" type="text/css" href="./css/mapify.css">
-	<link rel="stylesheet" type="text/css" href="./css/class.css">
-	<link rel="stylesheet" type="text/css" href="./css/name.css">
 	<link rel="stylesheet" type="text/css" href="./css/theme.css">
-	<link rel="stylesheet" type="text/css" href="./css/root.css">
-	<link rel="stylesheet" type="text/css" href="./css/@media.css">
+	<link rel="stylesheet" type="text/css" href="./css/default.css">
+	<link rel="stylesheet" type="text/css" href="./css/keyframe.css">
 
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/load.css">
+	<link rel="stylesheet" type="text/css" href="./css/nav.css">
+	<link rel="stylesheet" type="text/css" href="./css/dex.css">
+	<link rel="stylesheet" type="text/css" href="./css/layout1.css">
+	<link rel="stylesheet" type="text/css" href="./css/move.css">
+	<link rel="stylesheet" type="text/css" href="./css/ability.css">
+	<link rel="stylesheet" type="text/css" href="./css/item.css">
+	<link rel="stylesheet" type="text/css" href="./css/location.css">
+
+	<link rel="stylesheet" type="text/css" href="./css/generated.css">
+
+	<link rel="stylesheet" type="text/css" href="./css/card.css">
+	<link rel="stylesheet" type="text/css" href="./css/console.css">
+	<link rel="stylesheet" type="text/css" href="./css/fullscreen.css">
+	<link rel="stylesheet" type="text/css" href="./css/search.css">
+	
 </head>
 
 <body>
-	<div id="load">
-		<h1 class="load-title">Final</h1>
-		<div class="load-bar-outer">
-			<div class="load-bar">
-				<div class="load-rect1"></div>
-				<div class="load-rect2"></div>
-				<div class="load-rect3"></div>
-				<div class="load-rect4"></div>
-				<div class="load-rect5"></div>
-			</div>
+	<div id="load" class="active">
+		<div class="title"><h1>Final</h1></div>
+		<div>
+			<div class="rect"></div>
+			<div class="rect"></div>
+			<div class="rect"></div>
+			<div class="rect"></div>
+			<div class="rect"></div>
 		</div>
-		<p id="load-description">Loading data<span>.</span><span>.</span><span>.</span></p>
-		<h1 class="load-title">Dex</h1>
+		<div class="description"><p>Loading data<span>.</span><span>.</span><span>.</span></p></div>
+		<div class="title"><h1>Dex</h1></div>
     </div>
-	<nav id="navigation"></nav>
-	<div id="settings"></div>
-	<div id="contain"></div>
-	<div id="data"></div>
-	<div id="fullscreen"></div>
-	<div id="editor"></div>
-	<div id="console"></div>
 	<script src="./js/config.js"></script>
 	<script src="./js/memory.js"></script>
 	<script src="./js/nav.js"></script>
-	<script src="./js/pokémon.js"></script>
+	<script src="./js/dex.js"></script>
 	<script src="./js/move.js"></script>
 	<script src="./js/ability.js"></script>
 	<script src="./js/item.js"></script>
-	<script src="./js/map.js"></script>
-	<script src="./js/tool.js"></script>
-	<script src="./js/dmg.js"></script>
-	<script src="./js/data.js"></script>
+	<script src="./js/location.js"></script>
+	<script src="./js/card.js"></script>
+	<script src="./js/console.js"></script>
+	<script src="./js/fullscreen.js"></script>
+	<script src="./js/generate.js"></script>
+	<script src="./js/redirect.js"></script>
+	<script src="./js/search.js"></script>
+	<script src="./js/zoom.js"></script>
+	<script src="./js/query.js"></script>
 	<script src="./js/function.js"></script>
-	<script src="./js/script.js"></script>
 	<script src="./js/load.js"></script>
+	<script>load_start();</script>
 </body>
 
 </html>
