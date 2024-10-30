@@ -1,549 +1,125 @@
 body {
-    background:var(--Background_Body);
-    color:var(--Color_Body);
-}
-
-#console {
-	position:fixed;
-    z-index:1000;
-	cursor:default;
-	display:flex;
-    flex-direction:column;
-	pointer-events:none;
-	max-width:50vw;
-    max-height:95vh;
-}
-#console p {
-	padding:5px 20px;
-	transition:1s ease opacity 0.5s;
-	opacity:0;
-
-	background:var(--Background_Console);
-	color:var(--Color_Console);
-	border:var(--Border_Console);
-}
-#console.top {
-	top:50px;
-    right:25px;
-}
-#console.bottom {
-	bottom:25px;
-    right:50px;
-}
-
-
-#fullscreen {
-	position:fixed;
-    width:100%;
-    height:100%;
-    left:0;
-    top:0;
-    display:flex;
-    z-index:100000;
-    justify-content:center;
-    align-items:center;
-}
-#fullscreen:not(.open) {
-	display:none;
-}
-#fullscreen > span {
-	width:100%;
-    height:100%;
-	background:rgba(0,0,0,0.7);
-	position:absolute;
-	left:0;
-	top:0;
-	z-index:-1;
-}
-#fullscreen img {
-	max-height:90%;
-    max-width:90%;
-	border:5px ridge;
-    user-select:none;
-	pointer-events:all;
-	background:#000;
-	cursor:zoom-in;
-}
-#fullscreen img.zoom {
-	height:95%;
-    object-fit:contain;
-    cursor:zoom-out;
-    max-height:95%;
-	max-width:90%;
-}
-#fullscreen > div {
-	width:100%;
-    height:100%;
-    position:relative;
-    display:flex;
-    flex-wrap:nowrap;
-    flex-direction:row;
-    pointer-events:none;
-}
-
-#fullscreen > div ul {
-	width:100%;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    flex-wrap:wrap;
-    position:relative;
-    transition:.25s ease;
-}
-#fullscreen > div ul li {
-	width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-
-#fullscreen figure {
-	position:absolute;
-    color:White;
-    height:fit-content;
-    object-fit:scale-down;
-}
-
-#fullscreen figure:last-child {
-    right:1vw;
-}
-#fullscreen figure:first-child {
-    left:1vw;
-}
-
-
-#fullscreen figure,
-#fullscreen figure * {
-	font-weight:normal;
-}
-
-#fullscreen figure:active,
-#fullscreen figure:active * {
-	font-weight:bold;
-}
-#fullscreen figure:first-child[value="0"],
-#fullscreen figure:last-child.last {
-	display:none;
-}
-
-
-
-
-#navigation {
-	height:4vh;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	z-index:5;
-}
-
-#navigation label {
-	display:flex;
-	height:100%;
-	width:100%;
-	align-items:center;
-	justify-content:center;
-	text-transform:uppercase;
-	z-index:inherit;
-
-	background:var(--Background_Main_Navigation_Label);
-	color:var(--Color_Main_Navigation_Label);
-	border:var(--Border_Main_Navigation_Label);
-
-	border-left: none;
-	border-top:none;
-}
-#navigation label:last-child {
-	border-right: none;
-}
-
-#navigation input:checked + label,
-#navigation label:active {
-	background:var(--Background_Main_Navigation_Label_Selected);
-	color:var(--Color_Main_Navigation_Label_Selected);
-}
-
-
-
-
-
-
-
-#load {
-	position: fixed;
-    z-index: 101;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: 1s ease;
-    transition-delay: 1s;
-    visibility: visible;
-    opacity: 1;
+    background: var(--Background_Body);
+    color: var(--Color_Body);
     display: flex;
-    cursor: default;
-    background: var(--Background_Load);
-    color: var(--Color_Load);
     flex-direction: column;
     justify-content: center;
-    text-align: center;
     align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
 }
-
-#load.hide {
-	visibility:hidden;
-	opacity:0;
-}
-
-.load-title {
-    display: flex;
-    justify-content: center;
-    font-size: 20vw;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    text-transform: uppercase;
-    line-height: 20vw;
-    width: fit-content;
-	transition: 1s linear --progress;
-}
-
-.load-title:first-child {
-	--p: calc(var(--progress) * 2);
-	background-image: linear-gradient(to right, var(--Color_Load_Title_Selected) 0%, var(--Color_Load_Title_Selected) var(--p), var(--Color_Load_Title) var(--p), var(--Color_Load_Title) 100%);
-}
-.load-title:last-child {
-	--p: calc((var(--progress) - 50%) * 2);
-	background-image: linear-gradient(to right, var(--Color_Load_Title_Selected) 0%, var(--Color_Load_Title_Selected) var(--p), var(--Color_Load_Title) var(--p), var(--Color_Load_Title) 100%);
-}
-
-
-@property --progress {
-	syntax: '<percentage>';
-	initial-value: 0%;
-	inherits: true;
-}
-  
-
-
-#load h1:first-child {
-	align-items:flex-end;
-}
-
-#load h1:last-child {
-	align-items:flex-start;
-}
-
-.load-bar-outer {
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	width:100%;
-	height:60px;
-	background:inherit;
-}
-
-.load-bar {
-	height:100%;
-	width:100%;
-	display:block;
-	text-align:center;
-	font-size:20px;
-}
-
-.load-bar > div {
-	background:var(--Background_Load_Item);
-	height:100%;
-	width:15px;
-	display:inline-block;
-	animation:sk-stretchdelay 1.2s infinite ease;
-	border-radius: 2px;
-}
-#load.hide .load-bar > div {
-	animation-iteration-count:1;
-}
-
-
-#load-description {
-    margin-top:15px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:100%;
-    text-align:center;
-    background:inherit;
-}
-
-#load-description > span {
-	opacity:0;
-	-webkit-animation:dot 1.3s infinite;
-	animation:dot 1.3s infinite;
-}
-
-#load-description > span:nth-of-type(1) {
-	-webkit-animation-delay:0.0s;
-	animation-delay:0.0s;
-}
-
-#load-description > span:nth-of-type(2) {
-	-webkit-animation-delay:0.2s;
-	animation-delay:0.2s;
-}
-
-#load-description > span:nth-of-type(3) {
-	-webkit-animation-delay:0.3s;
-	animation-delay:0.3s;
-}
-
-
-.load-bar .load-rect2 {
-	animation-delay:-1.1s;
-}
-
-.load-bar .load-rect3 {
-	animation-delay:-1.0s;
-}
-
-.load-bar .load-rect4 {
-	animation-delay:-0.9s;
-}
-
-.load-bar .load-rect5 {
-	animation-delay:-0.8s;
-}
-
-#editor {
-	display: flex;
-	align-items:center;
-	justify-content: center;
-	flex-direction: column;
-    width: 95vw;
-    height: 90vh;
-    position: fixed;
-	z-index: 100;
-	top: 5%;
-    left: 2.5%;
-}
-#editor > span {
-	content:"";
-	position:fixed;
-	width:100vw;
-	height:100vh;
-	top: 0;
-    left: 0;
-	background: rgba(0,0,0,0.7);
-	z-index: -1;
-}
-#editor input::-webkit-outer-spin-button,
-#editor input::-webkit-inner-spin-button {
-	opacity: 1;
-}
-#editor > div {
-    width:100%;
-    height:100%;
-    background: hsl(0,0%,50%);
-    border: 1px solid black;
-	overflow: auto;
-}
-
-#editor button {
+#dex,
+#move,
+#location,
+#item,
+#ability,
+#tool {
     width: 100%;
-    padding: 20px;
-	background: hsl(0,0%,50%);
-    border: 1px solid black;
-	font-weight:bold;
-	cursor: default;
-	outline:none;
-}
-#editor.change button:active > * {
-	transform:scale(0.8);
-}
-#editor.change button {
-	cursor: pointer;
-	background: mediumseagreen;
+    height: 95vh;
 }
 
-
-#editor:not(.active) {
-	display:none;
-}
-#editor thead td {
-	position: sticky;
-	top: 0;
-	z-index: 1;
-	padding: 10px 0;
-	background:white;
+#dex:not(.active),
+#move:not(.active),
+#location:not(.active),
+#item:not(.active),
+#ability:not(.active),
+#tool:not(.active) {
+    display: none;
 }
 
-
-#editor table  {
-	border-collapse: collapse;
-	width: 100%;
+.dex_list li[data-color='Green']:has(input:checked),
+#card[data-color='Green'] {
+    background: linear-gradient(90deg, mediumseagreen, seagreen);
+    color: white;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
 }
-#editor th,
-#editor td {
-	position: relative;
-	text-align: center;
-	min-width: 150px;
+.dex_list li[data-color='Red']:has(input:checked),
+#card[data-color='Red'] {
+    background: linear-gradient(90deg, tomato, indianred);
+    color: white;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
 }
-
-#editor table td img {
-	max-height: 100%;
-	pointer-events:none;
+.dex_list li[data-color='Blue']:has(input:checked),
+#card[data-color='Blue'] {
+    background: linear-gradient(90deg, steelblue, royalblue);
+    color: white;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
 }
-
-#editor tbody td img {
-    position: relative;
-    top: 25px;
+.dex_list li[data-color='Yellow']:has(input:checked),
+#card[data-color='Yellow'] {
+    background: linear-gradient(90deg, khaki, gold);
+    color: black;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 80%);
 }
-
-#editor table td input,
-#editor table td select {
-	width: 100%;
-    height: 100%;
-	background: none;
-    border: none;
-	text-align: center;
-	padding: 5px 10px;
-	appearance: none;
-	cursor: default;
-	display:block;
+.dex_list li[data-color='Brown']:has(input:checked),
+#card[data-color='Brown'] {
+    background: linear-gradient(90deg, sienna, saddlebrown);
+    color: white;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
 }
-#editor table td img[src=""]::after {
-	content: "?";
-    visibility: visible;
-    font-size: xx-large;
+.dex_list li[data-color='Purple']:has(input:checked),
+#card[data-color='Purple'] {
+    background: linear-gradient(90deg, darkviolet, rebeccapurple);
+    color: white;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
 }
-#editor table td img[src=""] {
-	visibility: hidden;
-    position: relative;
+.dex_list li[data-color='Pink']:has(input:checked),
+#card[data-color='Pink'] {
+    background: linear-gradient(90deg, lightpink, palevioletred);
+    color: black;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 80%);
 }
-
-#editor p {
-	z-index: 1;
-    position: relative;
-	pointer-events: none;
+.dex_list li[data-color='Gray']:has(input:checked),
+#card[data-color='Gray'] {
+    background: linear-gradient(90deg, lightslategray, slategray);
+    color: white;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
 }
-#editor tbody td[name='Move'] select {
-	text-shadow: 1px 1px black;
+.dex_list li[data-color='White']:has(input:checked),
+#card[data-color='White'] {
+    background: linear-gradient(90deg, aliceblue, ghostwhite);
+    color: black;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 80%);
 }
-
-#editor table tbody td input[type=checkbox] {
-    border: 2px inset hsl(0,0%,27%);
-    background: dimgray;
-}
-#editor table td input[type=checkbox]:checked {
-	background: chartreuse;
-}
-#editor tbody td input,
-#editor tbody td select,
-#editor tbody td input,
-#editor tbody td input::placeholder {
-	color:white;
-}
-#editor table td input::placeholder {
-	opacity: 0.5;
+.dex_list li[data-color='Black']:has(input:checked),
+#card[data-color='Black'] {
+    background: linear-gradient(90deg, hsl(0,0%,20%), hsl(0,0%,20%));
+    color: white;
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
 }
 
-#editor table td:not(:has(input ~ input)) > input,
-#editor table td:not(:has(select ~ select)) > select {
-    position: absolute;
-    top: 0;
-    left: 0;
+#card .data .effortvalueyield .hp > *:first-child,
+#location .sidebar > main > .trainer ul ol > li header *[data-stat='HP'] > *:first-child {
+    color: var(--Stats_HP);
+    text-shadow: 1px 1px black;
 }
-
-
-#editor table thead input,
-#editor table thead select {
-	color:transparent;
+#card .data .effortvalueyield .attack > *:first-child,
+#location .sidebar > main > .trainer ul ol > li header *[data-stat='Attack'] > *:first-child {
+    color: var(--Stats_Attack);
+    text-shadow: 1px 1px black;
 }
-
-#editor table thead td[name='Move'] > span {
-	position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#card .data .effortvalueyield .defense > *:first-child,
+#location .sidebar > main > .trainer ul ol > li header *[data-stat='Defense'] > *:first-child {
+    color: var(--Stats_Defense);
+    text-shadow: 1px 1px black;
 }
-
-#editor table thead td[name='Move'] > span::after {
-    font-size: small;
-    position: absolute;
-    top: 0;
-    padding: 5px 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
+#card .data .effortvalueyield .special > *:first-child,
+#location .sidebar > main > .trainer ul ol > li header *[data-stat='Special'] > *:first-child {
+    color: var(--Stats_Special);
+    text-shadow: 1px 1px black;
 }
-#editor table thead td[name='Move'] > span:nth-child(2)::after {
-	content: "Move #1";
+#card .data .effortvalueyield .spatk > *:first-child,
+#location .sidebar > main > .trainer ul ol > li header *[data-stat='SpAtk'] > *:first-child {
+    color: var(--Stats_SpAtk);
+    text-shadow: 1px 1px black;
 }
-#editor table thead td[name='Move'] > span:nth-child(3)::after {
-	content: "Move #2";
+#card .data .effortvalueyield .spdef > *:first-child,
+#location .sidebar > main > .trainer ul ol > li header *[data-stat='SpDef'] > *:first-child {
+    color: var(--Stats_SpDef);
+    text-shadow: 1px 1px black;
 }
-#editor table thead td[name='Move'] > span:nth-child(4)::after {
-	content: "Move #3";
-}
-#editor table thead td[name='Move'] > span:nth-child(5)::after {
-	content: "Move #4";
-}
-
-
-
-#editor thead input:focus {
-	color:black;
-}
-
-#editor table thead td:not(:has(input ~ input)):has(input:not([type=checkbox])) p {
-	position: relative;
-    top: -20px;
-}
-
-#editor *[data_style='♂'],
-#editor *[name='♂'] {
-	color:Blue;
-	font-family:fantasy;
-	text-shadow: 1px 1px black;
-}
-#editor *[data_style='♀'],
-#editor *[name='♀'] {
-	color:Red;
-	font-family:fantasy;
-	text-shadow: 1px 1px black;
-}
-#editor *[data_style='☿'],
-#editor *[name='☿'] {
-	color:Black;
-	font-family:fantasy;
-}
-
-
-#editor table td select option {
-	color:black;
-}
-
-#editor td {
-	border: 1px dashed hsl(0,0%,65%);
-    background: hsl(0,0%,45%);
-}
-
-
-#editor .dummy {
-	width: 50px;
-	height: 50px;
-	display:block;
-}
-
-img[title='Pokémon Dollar'] {
-	max-height:12px;
-}
-
-#editor thead td,
-#editor thead td * {
-	color:black;
+#card .data .effortvalueyield .speed > *:first-child,
+#location .sidebar > main > .trainer ul ol > li header *[data-stat='Speed'] > *:first-child {
+    color: var(--Stats_Speed);
+    text-shadow: 1px 1px black;
 }
