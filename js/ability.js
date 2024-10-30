@@ -1,343 +1,128 @@
-let createAbility = function() {
-	if(Ability.length >= 1) {
-		let abilityOuter = document.createElement("div");
-		let abilitySectionList = document.createElement("section");
-		let abilitySectionListOptionsTitleOuter = document.createElement("div");
-		let abilitySectionListOptionsSearchOuter = document.createElement("div");
-		let abilitySectionListOptionsSearch = document.createElement("input");
-		let abilitySectionListOptionsOuter = document.createElement("div");
-		let abilitySectionListOptions = document.createElement("ol");
-		let abilitySectionHeader = document.createElement("section");
-		let abilitySectionHeaderTitle = document.createElement("span");
-		let abilitySectionHeaderTitleID = document.createElement("h4");
-		let abilitySectionHeaderTitleName = document.createElement("h3");
-		let abilitySectionHeaderDebut = document.createElement("span");
-		let abilitySectionHeaderDebutText = document.createElement("h5");
-		let abilitySectionContent = document.createElement("section");
-		let abilitySectionContentDescription = document.createElement("div");
-		let abilitySectionContentDescriptionText = document.createElement("p");
-		let abilitySectionContentEffectTitle = document.createElement("h4");
-		let abilitySectionContentEffectText = document.createElement("p");
-		let abilitySectionContentBreak = document.createElement("br");
-		let abilitySectionContentAffectTitle = document.createElement("h4");
-		let abilitySectionContentAffectText = document.createElement("p");
-		let abilitySectionSidebar = document.createElement("section");
-		let abilitySectionSidebarSidebar = document.createElement("div");
-		let abilitySectionSidebarSidebarTitle = document.createElement("div");
+const create_ability = function() {
+    
+    if (!config.Ability) { return }
 
-		let abilitySectionSidebarSidebarUl = document.createElement("ul");
-		abilitySectionSidebar.appendChild(abilitySectionSidebarSidebar);
-		abilitySectionSidebarSidebar.appendChild(abilitySectionSidebarSidebarTitle);
-		abilitySectionSidebarSidebar.appendChild(abilitySectionSidebarSidebarUl);
+    const ability = create_element({ Tag: "div", Attribute: { id: "ability" }, Class: ["layout1"], Parent: document.body, });
 
-		let abilitySectionSidebarLearnsetPartyBox = document.createElement("div");
-		abilitySectionSidebarSidebar.appendChild(abilitySectionSidebarLearnsetPartyBox);
-	
-		abilitySectionContentDescription.setAttribute("name","description");
+    // Catalog
+    const ability_catalog = create_element({ Tag: "aside", Class: ["catalog"],  Parent: ability });
+    const ability_catalogHeader = create_element({ Tag: "header", Parent: ability_catalog });
 
-		let parbo = ["Party","Box"];
-		for(let q = 0; q < parbo.length; q++) {
-			let abilitySectionSidebarLearnsetInput = document.createElement("input");
-			let abilitySectionSidebarLearnsetLabel = document.createElement("label");
-			let abilitySectionSidebarLearnsetText = document.createElement("h6");
-			abilitySectionSidebarLearnsetInput.setAttribute("type","checkbox");
-			abilitySectionSidebarLearnsetInput.setAttribute("id","ability-learnset-partybox-"+q);
-			abilitySectionSidebarLearnsetInput.setAttribute("name","ability-learnset-partybox");
-			abilitySectionSidebarLearnsetInput.value = "Abilities";
-			abilitySectionSidebarLearnsetLabel.setAttribute("for","ability-learnset-partybox-"+q);
-			abilitySectionSidebarLearnsetText.innerText = parbo[q];
-			abilitySectionSidebarLearnsetLabel.title = "Show results from "+parbo[q];
-			abilitySectionSidebarLearnsetPartyBox.appendChild(abilitySectionSidebarLearnsetInput);
-			abilitySectionSidebarLearnsetPartyBox.appendChild(abilitySectionSidebarLearnsetLabel);
-			abilitySectionSidebarLearnsetLabel.appendChild(abilitySectionSidebarLearnsetText);
-			abilitySectionSidebarLearnsetInput.addEventListener("change", abilityPartyBoxLearnset);
-		}
-		abilitySectionList.setAttribute("name","list");
-		abilitySectionHeader.setAttribute("name","header");
-		abilitySectionContent.setAttribute("name","content");
-		abilitySectionSidebar.setAttribute("name","sidebar");
+    // Search
+    const ability_searchWrap = create_element({ Tag: "div", Class: ["search"], Parent: ability_catalogHeader });
+    const ability_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "ability_search", autocomplete: "off", placeholder: "Search Abilities...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Abilities...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#ability .catalog ol li'), Data: data.Abilities, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#ability .catalog ol li') }, event), }, Parent: ability_searchWrap });
 
-		let abilitySectionSidebarSidebarTitleLiTopText = document.createElement("h4");
-		abilitySectionSidebarSidebarTitle.appendChild(abilitySectionSidebarSidebarTitleLiTopText);
+    // List
+    const ability_catalogList = create_element({ Tag: "ol",  Parent: ability_catalog });
 
-		let sidebarAbilityList = [];
-		if(Generation <= 4) {
-			sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability"];
-		}
-		if(Generation >= 5) {
-			sidebarAbilityList = ["Pokémon","Primary Ability","Secondary Ability","Hidden Ability"];
-		}
+    // Entry
+    const abilities = Object.keys(data.Abilities);
+    abilities.forEach((a, i) => {
+        const ability_catalogEntry = create_element({ Tag: "li", Data: { index: a, search: data.Abilities[a].Ability.join(",") },  Parent: ability_catalogList });
+        const ability_catalogEntryLabel = create_element({ Tag: "label", Attribute: { for: `ability_entry-${a}`, }, Parent: ability_catalogEntry });
+        const ability_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "ability_entry", id: `ability_entry-${a}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => ability_data()}, Parent: ability_catalogEntryLabel });
+        const ability_catalogEntryText = create_element({ Tag: "strong", Text: a, Parent: ability_catalogEntryLabel });
+    });
 
-		abilityOuter.setAttribute("id","ability");
-		abilityOuter.setAttribute("value","abilities");
+    // Header
+    const ability_header = create_element({ Tag: "header", Class: ["header"],  Parent: ability });
+    const ability_titleWrap = create_element({ Tag: "div", Class: ["title"], Parent: ability_header });
+    const ability_id = create_element({ Tag: "h3", Class: ["id_text"], Parent: ability_titleWrap });
+    const ability_title = create_element({ Tag: "h2", Class: ["title_text"], Parent: ability_titleWrap });
+    const ability_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: ability_header });
+    const ability_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [path.Game.Title]}) }, Parent: ability_gameWrap });
 
 
-		abilitySectionListOptionsSearch.setAttribute("type","search");
-		abilitySectionListOptionsSearch.setAttribute("name","ability_search");
-		abilitySectionListOptionsSearch.setAttribute("placeholder","Search Abilities...");
-		abilitySectionListOptionsSearch.setAttribute("onfocus","this.placeholder=''");
-		abilitySectionListOptionsSearch.setAttribute("onblur","this.placeholder='Search Abilities...'");
-		abilitySectionListOptionsSearch.setAttribute("autocomplete","off");
+    // Sidebar
+    const ability_sidebar = create_element({ Tag: "aside",Class: ["sidebar"],  Parent: ability });
+    const ability_sidebarHeader = create_element({ Tag: "header", Parent: ability_sidebar });
+    const ability_sidebarHeaderText1 = create_element({ Tag: "h4", Text: "Pokémon with the Ability:", Parent: ability_sidebarHeader });
+    const ability_sidebarHeaderText2 = create_element({ Tag: "h3", Parent: ability_sidebarHeader });
 
-		abilitySectionHeaderTitleName.innerText = "Abilities";
+    // Content
+    const ability_sidebarContent = create_element({ Tag: "main", Parent: ability_sidebar });
+    const ability_sidebarList = create_element({ Tag: "ul", Parent: ability_sidebarContent });
 
+    // Description
+    const ability_description = create_element({ Tag: "main", Class: ["description"],  Parent: ability });
 
-		document.querySelector("#contain").appendChild(abilityOuter);
-		abilityOuter.appendChild(abilitySectionList);
-		abilitySectionList.appendChild(abilitySectionListOptionsTitleOuter);
-		abilitySectionListOptionsTitleOuter.appendChild(abilitySectionListOptionsSearchOuter);
-		abilitySectionListOptionsSearchOuter.appendChild(abilitySectionListOptionsSearch);
-		abilitySectionList.appendChild(abilitySectionListOptionsOuter);
-		abilitySectionListOptionsOuter.appendChild(abilitySectionListOptions);
-		abilityOuter.appendChild(abilitySectionHeader);
-		abilitySectionHeader.appendChild(abilitySectionHeaderTitle);
-		abilitySectionHeaderTitle.appendChild(abilitySectionHeaderTitleID);
-		abilitySectionHeaderTitle.appendChild(abilitySectionHeaderTitleName);
-		abilitySectionHeader.appendChild(abilitySectionHeaderDebut);
-		abilitySectionHeaderDebut.appendChild(abilitySectionHeaderDebutText);
-		abilityOuter.appendChild(abilitySectionContent);
-		abilitySectionContent.appendChild(abilitySectionContentDescription);
-		abilitySectionContentDescription.appendChild(abilitySectionContentDescriptionText);
-		abilitySectionContentDescription.appendChild(abilitySectionContentEffectTitle);
-		abilitySectionContentDescription.appendChild(abilitySectionContentEffectText);
-		abilitySectionContentDescription.appendChild(abilitySectionContentBreak);
-		abilitySectionContentDescription.appendChild(abilitySectionContentAffectTitle);
-		abilitySectionContentDescription.appendChild(abilitySectionContentAffectText);
-		abilityOuter.appendChild(abilitySectionSidebar);
-		
-		abilitySectionListOptionsSearch.addEventListener("input", function() {search("Ability");});
-		abilitySectionListOptionsSearch.addEventListener("keyup", function() {search("Ability");});
-	
-	
-
-        let abilitySectionHeaderGame = document.createElement("span");
-        let abilitySectionHeaderGameImage = document.createElement("img");
-        abilitySectionHeaderGameImage.src = getMedia(true,["Title"],[PATH_Game_Title])
-        abilitySectionHeaderGameImage.setAttribute("onerror","this.display='none'");
-        abilitySectionHeader.appendChild(abilitySectionHeaderGame);
-        abilitySectionHeaderGame.appendChild(abilitySectionHeaderGameImage);
+    ability_data();
+}
 
 
-		let firstabilityiteration;
-		for(let q = 0; q < finaldata["Abilities"]["Reference"].length; q++) {
-			if(getApplicable(finaldata["Abilities"]["Reference"][q]["Game"])) {
-				let abilitySectionListOptionsInput = document.createElement("input");
-				let abilitySectionListOptionsLabel = document.createElement("label");
-				let abilitySectionListOptionsText = document.createElement("h5");
-				abilitySectionListOptionsInput.setAttribute("type","radio");
-				abilitySectionListOptionsInput.setAttribute("name","ability-options");
-				abilitySectionListOptionsInput.setAttribute("id","ability-options-"+q);
-				abilitySectionListOptionsInput.setAttribute("autocomplete","off");
-				abilitySectionListOptionsInput.value = q;
-				abilitySectionListOptionsLabel.setAttribute("for","ability-options-"+q);
-				abilitySectionListOptionsLabel.setAttribute("type","medium");
-				abilitySectionListOptionsLabel.setAttribute("data-name", finaldata["Abilities"]["Reference"][q]["Ability"].toLowerCase());
-				abilitySectionListOptionsLabel.setAttribute("data-title", finaldata["Abilities"]["Reference"][q]["Ability"].toLowerCase());
-				abilitySectionListOptionsText.innerText = finaldata["Abilities"]["Reference"][q]["Ability"];
-				abilitySectionListOptions.appendChild(abilitySectionListOptionsInput);
-				abilitySectionListOptions.appendChild(abilitySectionListOptionsLabel);
-				abilitySectionListOptionsLabel.appendChild(abilitySectionListOptionsText);
-				abilitySectionListOptionsInput.addEventListener("click", abilityOptionsSelector);
-				abilitySectionListOptionsLabel.setAttribute("tabindex",q+10);
-				abilitySectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;abilityOptionsSelector(event.target.previousElementSibling.value);}}});
+function ability_data() {
+    const active_entry = document.querySelector("#ability .catalog ol li:has(input:checked)")
+    
+    if (!active_entry || !active_entry.dataset.index) { return }
 
-				if(firstabilityiteration != true) {
-					firstabilityiteration = true;
-					abilitySectionListOptionsLabel.click();
-				}
-			}
-		}
-	
+    const index = active_entry.dataset.index;
+    const ability = data.Abilities[index].Ability;
 
-		abilitySectionListOptionsSearch.title = searchOptionsTitle(abilitySectionListOptions);
-		
-		let searchLis = document.querySelectorAll("#contain > div#ability > section[name='list'] ol > label");
-		searchAbilityAttributes = [];
-		for(q = 0; q < searchLis.length; q++) {
-			for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
-				if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
-					if (!searchAbilityAttributes.includes(searchLis[q].getAttributeNames()[u])) {
-						searchAbilityAttributes.push(searchLis[q].getAttributeNames()[u]);
-					}
-				}
-			}
-		}
+    const titleText = document.querySelector("#ability > header .title_text")
+    titleText.innerText = ability[0];
 
-		for(q = 0; q < searchAbilityAttributes.length; q++) {
-			searchAbilityAttributes[q] = searchAbilityAttributes[q].replaceAll("data-search-","");
-		}
+    const sidebarHeaderText = document.querySelector("#ability .sidebar > header > *:last-child")
+    sidebarHeaderText.innerText = ability[0];
 
-		function abilityOptionsSelector(i) {
-			if (this.value != undefined) {
-				i = this.value;
-			}
-			let data_ability = finaldata["Abilities"]["Reference"][i]["Ability"];
+    const idText = document.querySelector("#ability > header .id_text")
+    idText.innerText = data.Abilities[index].ID ? `#${data.Abilities[index].ID}` : "";
 
-			abilitySectionSidebarSidebarTitleLiTopText.innerHTML = "Pokémon with&nbsp;"+"<u>"+data_ability+"</u>";
-			abilitySectionHeaderTitleID.innerText = "#"+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",data_ability)[0]["ID"];
-	
-			abilitySectionHeaderDebutText.innerText = "Introduced in "+returnAppArrData(finaldata["Abilities"]["Reference"],"Ability",data_ability)[0]["Debut"];
-			abilitySectionHeaderTitleName.innerText = data_ability;
-			abilitySectionContentDescriptionText.innerText = returnAppArrData(finaldata["Abilities"]["Description"],"Ability",data_ability)[0]["Description"];
-	
-			let effect = [];
-	
-			for(let q = 0; q < finaldata["Abilities"]["Effect"].length; q++) {
-				if(getApplicable(finaldata["Abilities"]["Effect"][q]["Game"])) {
-					if(finaldata["Abilities"]["Effect"][q]["Ability"] == data_ability) {
-						effect.push(finaldata["Abilities"]["Effect"][q]["Effect"])
-					}
-				}
-			}
-	
-			abilitySectionContentEffectText.innerText = "";
-	
-			for(let q = 0; q < effect.length; q++) {
-				abilitySectionContentEffectText.innerText += effect[q];
-				if (q != effect.length - 1) {
-					abilitySectionContentEffectText.innerHTML += "<br>"
-				}
-			}
-			
-			if (effect.length > 0) {
-				abilitySectionContentEffectTitle.innerText = "Effect";
-			}
-			else {
-				abilitySectionContentEffectTitle.innerText = "";
-			}
-	
-			//abilitySectionContentEffectText.innerHTML = referenceLink(abilitySectionContentEffectText.innerHTML);
-	
-			let affect = [];
-	
-			for(let q = 0; q < finaldata["Abilities"]["Affect"].length; q++) {
-				if(getApplicable(finaldata["Abilities"]["Affect"][q]["Game"])) {
-					if(finaldata["Abilities"]["Affect"][q]["Ability"] == data_ability) {
-						if (finaldata["Abilities"]["Affect"][q]["Type"] == "Move") {
-							let move = returnArrValue(finaldata["Moves"]["Description"],DATA_Move_Reference["Name"],DATA_Move_Description["Description"],finaldata["Abilities"]["Affect"][q]["Name"]);
-							if (move != undefined) {
-								affect.push(finaldata["Abilities"]["Affect"][q]);
-							}
-						}
-						else if (finaldata["Abilities"]["Affect"][q]["Type"] == "Item") {
-							let item = getItemIcon(finaldata["Abilities"]["Affect"][q]["Name"]);
-							if (item != undefined) {
-								affect.push(finaldata["Abilities"]["Affect"][q]);
-							}
-						}
-					}
-				}
-			}
-	
-			abilitySectionContentAffectText.innerText = "";
-			for(let q = 0; q < affect.length; q++) {
-				let b = document.createElement("b");
-				b.innerText = affect[q]["Name"];
-				abilitySectionContentAffectText.appendChild(b)
-				
-				b.setAttribute("name",affect[q]["Type"].toLowerCase());
-				b.setAttribute("type", "invert");
-				b.setAttribute("onclick", "dataRedirect()");
-				b.setAttribute("function","dataRedirect");
-				b.style.color = "var(--type"+returnArrValue(finaldata["Moves"]["Type"],DATA_Move_Reference["Name"],DATA_Move_Type["Type"],affect[q]["Name"])+")";
-				b.style.textShadow  = "1px 1px #000";
-				
-				if (q == affect.length - 2) {
-					abilitySectionContentAffectText.innerHTML += " and ";
-				}
-				else if (q == affect.length - 1) {
-					abilitySectionContentAffectText.innerHTML += ".";
-				}
-				else {
-					abilitySectionContentAffectText.innerHTML += ", ";
-				}
-			}
-	
-			
-			if (affect.length > 0) {
-				abilitySectionContentAffectTitle.innerText = "Affected "+affect[0]["Type"]+"s";
-			}
-			else {
-				abilitySectionContentAffectTitle.innerText = "";
-			}
-			
-	
-	
-	
-			document.querySelector("#contain div#ability > section[name='sidebar'] ul").innerHTML = "";
-	
-	
-			let vals = Object.values(DATA_Pokémon_Ability);
-			let AbilityResults = getPokémonData(finaldata["Pokémon"]["Ability"],data_ability,vals);
-		
-			for(let q = 0; q < AbilityResults.length; q++) {
-				let abilitySectionSidebarSidebarLi = document.createElement("li");
-				abilitySectionSidebarSidebarUl.appendChild(abilitySectionSidebarSidebarLi);
-				for(let u = 0; u < sidebarAbilityList.length; u++) {
-					let int = AbilityResults[q]["Integer"];
-					let name = getPokémonName(int);
-					if(u == 0) {
-						let abilitySectionSidebarSidebarLiImgOuter = document.createElement("div");
-						let abilitySectionSidebarSidebarLiImg = document.createElement("img");
-						let abilitySectionSidebarSidebarLiText = document.createElement("small");
-						abilitySectionSidebarSidebarLiImg.src = getMedia(true,[getPokémonPath(int)],[PATH_Pokémon_Box_Default_PNG]);
-						abilitySectionSidebarSidebarLiImg.setAttribute("title", name);
-						abilitySectionSidebarSidebarLiText.innerText = name;
-						abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiImgOuter);
-						abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiImg);
-						abilitySectionSidebarSidebarLiImgOuter.appendChild(abilitySectionSidebarSidebarLiText);
-	
-						abilitySectionSidebarSidebarLiImgOuter.setAttribute("value",int);
-						abilitySectionSidebarSidebarLiImgOuter.addEventListener("click", modalData);
-						abilitySectionSidebarSidebarLiImgOuter.setAttribute("function","modalData");
-	
-					} else if(u != 0) {
-					
-	
-						if(AbilityResults[q][vals[u - 1]] == data_ability) {
-							let abilitySectionSidebarSidebarLiTextOuter = document.createElement("span");
-							let abilitySectionSidebarSidebarLiText = document.createElement("h6");
-							if(AbilityResults[q][vals[u - 1]] != undefined) {
-								abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][vals[u - 1]];
-							}
-							abilitySectionSidebarSidebarLiTextOuter.setAttribute("name","ability");
-							abilitySectionSidebarSidebarLiTextOuter.setAttribute("title", sidebarAbilityList[u]);
-							abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiTextOuter);
-							abilitySectionSidebarSidebarLiTextOuter.appendChild(abilitySectionSidebarSidebarLiText);
-	
-							abilitySectionSidebarSidebarLiTextOuter.classList.add("active");
-						} else {
-							let abilitySectionSidebarSidebarLiTextOuter = document.createElement("b");
-							abilitySectionSidebarSidebarLiTextOuter.setAttribute("type","invert");
-							let abilitySectionSidebarSidebarLiText = document.createElement("p");
-							if(AbilityResults[q][vals[u - 1]] != undefined) {
-								abilitySectionSidebarSidebarLiText.innerText = AbilityResults[q][vals[u - 1]];
-							}
-							abilitySectionSidebarSidebarLiTextOuter.setAttribute("name","ability");
-							abilitySectionSidebarSidebarLiTextOuter.setAttribute("title", sidebarAbilityList[u]);
-							abilitySectionSidebarSidebarLi.appendChild(abilitySectionSidebarSidebarLiTextOuter);
-							abilitySectionSidebarSidebarLiTextOuter.appendChild(abilitySectionSidebarSidebarLiText);
-							abilitySectionSidebarSidebarLiTextOuter.addEventListener("click", dataRedirect);
-							abilitySectionSidebarSidebarLiTextOuter.setAttribute("function","dataRedirect");
-						}
-					}
-				}
-			}
-		
-			let tempStr;
-			if (abilityLearnsetPB.length > 1) {
-				tempStr = abilityLearnsetPB.join(",");
-			}
-			else {
-				tempStr = abilityLearnsetPB[0];
-			}
-			abilityLearnsetPartyBox(tempStr);
-		}
-	}
+    const description = document.querySelector("#ability > main");
+    description.innerHTML = "";
+   
+    const list = document.querySelector("#ability .sidebar > main ul");
+    list.innerHTML = ""; // Clear previous data
+
+    const ability_pokemon = Object.keys(data.Pokemon).reduce((acc, key) => { const abilities = data.Pokemon[key].Ability; if (abilities) { if (ability.includes(abilities.Primary)) { acc[key] = { Ability: { Primary: abilities.Primary } }; } else if (ability.includes(abilities.Secondary)) { acc[key] = { Ability: { Secondary: abilities.Secondary } }; } else if (ability.includes(abilities.Hidden)) { acc[key] = { Ability: { Hidden: abilities.Hidden } }; } } return acc; }, {});
+    generate_ability({Catalog: "Ability", Entry: ability, Data: ability_pokemon, Parent: list});
+ 
+    const descriptionText = data.Abilities[index].Description ? create_element({ Tag: "p", Text: data.Abilities[index].Description, Class: ["description_text"], Parent: description }) : null;
+
+    const ability_effect = data.Abilities[index].Effect ? data.Abilities[index].Effect : [];
+    const effectTitle = ability_effect.length > 0 ? create_element({ Tag: "h3", Text:"Effect", Class: ["effect_header"], Parent: description }) : null;
+    ability_effect.forEach(data => {
+        const effectText = create_element({ Tag: "p", Text: data.Effect, Class: ["effect_text"], Parent: description });
+    });
+
+    const affectedMoves_true = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Move" && a.Boolean === true && data.Moves[get_moveIndex(a.Name)]) : []) : [];
+    const affectedMoves_false = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Move" && a.Boolean === false && data.Moves[get_moveIndex(a.Name)]) : []) : [];
+    const affectedItems_true = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Item" && a.Boolean === true && data.Items[get_itemIndex(a.Name)]) : []) : [];
+    const affectedItems_false = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Item" && a.Boolean === false && data.Items[get_itemIndex(a.Name)]) : []) : [];
 
 
+    const affectMoveTitle_true = affectedMoves_true.length > 0 ? create_element({ Tag: "h3", Text:"Affected Moves", Class: ["affect_move_header"], Parent: description }) : null;
+    const affectMoveList_true = affectedMoves_true.length > 0 ? create_element({ Tag: "ul", Parent: description }) : null;
+    affectedMoves_true.forEach(d => {
+        const index = get_moveIndex(d.Name);
+        const move_type = data.Moves[index].Type;
+        const affect = create_element({ Tag: "li", Text: d.Name, Class: ["affect_move_text"], Data: { ...(move_type && {type: move_type} ) }, Parent: affectMoveList_true });
+        add_redirect(affect,{catalog:"move",entry:d.Name,style:"color"});
+    });
 
-	
-};
+    const affectMoveTitle_false = affectedMoves_false.length > 0 ? create_element({ Tag: "h3", Text:"Not Affected Moves", Class: ["unaffect_move_header"], Parent: description }) : null;
+    const affectMoveList_false = affectedMoves_false.length > 0 ? create_element({ Tag: "ul", Parent: description }) : null;
+    affectedMoves_false.forEach(d => {
+        const index = get_moveIndex(d.Name);
+        const move_type = data.Moves[index].Type;
+        const affect = create_element({ Tag: "li", Text: d.Name, Class: ["unaffect_move_text"], Data: { ...(move_type && {type: move_type} ) }, Parent: affectMoveList_false });
+        add_redirect(affect,{catalog:"move",entry:d.Name,style:"color"});
+    });
 
+    const affectItemTitle_true = affectedItems_true.length > 0 ? create_element({ Tag: "h3", Text:"Affected Items", Class: ["affect_item_header"], Parent: description }) : null;
+    const affectItemList_true = affectedItems_true.length > 0 ? create_element({ Tag: "ul", Parent: description }) : null;
+    affectedItems_true.forEach(d => {
+        const index = get_itemIndex(d.Name);
+        const affect = create_element({ Tag: "li", Text: d.Name, Class: ["affect_item_text"], Parent: affectItemList_true });
+        add_redirect(affect,{catalog:"item",entry:d.Name,style:"color"});
+    });
 
+    const affectItemTitle_false = affectedItems_false.length > 0 ? create_element({ Tag: "h3", Text:"Not Affected Items", Class: ["unaffect_item_header"], Parent: description }) : null;
+    const affectItemList_false = affectedItems_false.length > 0 ? create_element({ Tag: "ul", Parent: description }) : null;
+    affectedItems_false.forEach(d => {
+        const index = get_itemIndex(d.Name);
+        const affect = create_element({ Tag: "li", Text: d.Name, Class: ["unaffect_move_text"], Parent: affectItemList_false });
+        add_redirect(affect,{catalog:"item",entry:d.Name,style:"color"});
+    });
+
+  
+}
