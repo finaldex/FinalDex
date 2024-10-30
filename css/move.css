@@ -1,0 +1,260 @@
+#move > main {
+    height: 60%;
+}
+
+#move .panel {
+    height: 25%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#move .panel > * {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#move .panel > div {
+    height: 50%;
+}
+
+#move .panel .range {
+    width: 20%;
+    height: 100%;
+}
+
+#move .panel .category > *:first-child {
+    display: none;
+}
+
+#move .panel .type:not(:has(img[src=''])):has(img[src]) > *:first-child {
+    display: none;
+}
+
+#move .panel > .category[data-category] > *:last-child {
+    padding: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-shadow: 1px 1px black;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#move .panel > .category[data-category='Physical'] > *:last-child {
+    background: var(--Category_Physical);
+}
+
+#move .panel > .category[data-category='Special'] > *:last-child {
+    background: var(--Category_Special);
+}
+
+#move .panel > .category[data-category='Status'] > *:last-child {
+    background: var(--Category_Status);
+}
+
+#move .panel .type:has(img[src]):not(:has(img[src=''])) > *:last-child {
+    display: none;
+}
+
+#move .panel .type img {
+    max-width: 80px;
+    max-height: 50px;
+    object-fit: scale-down;
+}
+
+#move .panel .affect {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    overflow: auto;
+    flex-wrap: nowrap;
+    padding: 10px 0;
+    position: relative;
+    background: var(--Background_Layout1_Footer_List);
+    color: var(--Color_Layout1_Footer_List);
+    border-left: var(--Border_Layout1_Footer_List);
+}
+
+#move .panel .affect li {
+    width: 80%;
+    padding: 10px 0;
+    line-break: anywhere;
+}
+
+#move .panel .affect li[data-boolean='true'] {
+    color: Green;
+}
+
+#move .panel .affect li[data-boolean='false'] {
+    color: Red;
+}
+
+#move .panel .affect li[data-boolean] b {
+    text-decoration: underline;
+}
+
+#move .panel .range span[class] {
+    display: flex;
+    text-align: center;
+    cursor: default;
+}
+
+#move .panel .range span[class] > span {
+    width: 50px;
+    height: 20px;
+    display: block;
+    margin: 2px;
+    border-radius: 5px;
+    background: var(--Background_Layout1_Footer_Range);
+    color: var(--Color_Layout1_Footer_Range);
+    border: var(--Border_Layout1_Footer_Range);
+}
+
+#move .panel > div > *:first-child {
+    padding: 5px 5px;
+}
+
+#move .panel .range span.friendly > span:hover {
+    border-color: hsl(130, 70%, 50%);
+}
+
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .friendly > *:nth-of-type(2),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *,
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(1),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(3),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(3),
+#move .panel .range[title="May affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .friendly > *:nth-of-type(2) {
+    animation: rangeAnimation1 2s infinite;
+}
+
+#move .panel .range[title="Affects all adjacent foes, but not allies"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="Affects all adjacent foes, but not allies"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="Affects all adjacent foes, but not allies"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *,
+#move .panel .range[title="Affects all adjacent foes, but not allies"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="Affects all adjacent foes, but not allies"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="Affects all adjacent foes, but not allies"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(3) {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range[title="Affects the user"] .friendly > span:hover {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range[title="May affect anyone but the user"]:has(.friendly > *:hover) > span[class] > *:not(:hover) {
+    animation: rangeAnimation1 2s infinite;
+}
+
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .friendly > *:nth-of-type(2),
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *,
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(3),
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(3),
+#move .panel .range[title="May randomly affect anyone adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .friendly > *:nth-of-type(2) {
+    animation: rangeAnimation1 2s infinite;
+}
+
+#move .panel .range[title="Affects the user and all allies"]:has(.friendly > *:hover) .friendly > * {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(1):hover) .friendly > *:nth-of-type(2),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *,
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(1),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(3),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(3),
+#move .panel .range[title="Affects all Pokémon adjacent to the user"]:has(.friendly > *:nth-of-type(3):hover) .friendly > *:nth-of-type(2) {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range[title="Affects all Pokémon on the field"]:has(span[class] > span:hover) span[class] > span {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range[title="Affects all foes"]:has(.friendly > span:hover) span.enemy > span {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range[title="Affects an adjacent ally"]:has(.friendly > *:nth-of-type(1):hover) .friendly > *:nth-of-type(2),
+#move .panel .range[title="Affects an adjacent ally"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(1),
+#move .panel .range[title="Affects an adjacent ally"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(3),
+#move .panel .range[title="Affects an adjacent ally"]:has(.friendly > *:nth-of-type(3):hover) .friendly > *:nth-of-type(2) {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range[title="May affect the user or an adjacent ally"] .friendly > *:hover,
+#move .panel .range[title="May affect the user or an adjacent ally"]:has(.friendly > *:nth-of-type(1):hover) .friendly > *:nth-of-type(2),
+#move .panel .range[title="May affect the user or an adjacent ally"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(1),
+#move .panel .range[title="May affect the user or an adjacent ally"]:has(.friendly > *:nth-of-type(2):hover) .friendly > *:nth-of-type(3),
+#move .panel .range[title="May affect the user or an adjacent ally"]:has(.friendly > *:nth-of-type(3):hover) .friendly > *:nth-of-type(2) {
+    animation: rangeAnimation1 2s infinite;
+}
+
+#move .panel .range[title="May affect any adjacent foe, but not allies"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="May affect any adjacent foe, but not allies"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="May affect any adjacent foe, but not allies"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *,
+#move .panel .range[title="May affect any adjacent foe, but not allies"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="May affect any adjacent foe, but not allies"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="May affect any adjacent foe, but not allies"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(3) {
+    animation: rangeAnimation1 2s infinite;
+}
+
+#move .panel .range[title="Affects all allies"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(2),
+#move .panel .range[title="Affects all allies"]:has(.friendly > *:nth-of-type(1):hover) .enemy > *:nth-of-type(3),
+#move .panel .range[title="Affects all allies"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="Affects all allies"]:has(.friendly > *:nth-of-type(2):hover) .enemy > *:nth-of-type(3),
+#move .panel .range[title="Affects all allies"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(1),
+#move .panel .range[title="Affects all allies"]:has(.friendly > *:nth-of-type(3):hover) .enemy > *:nth-of-type(2) {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range:not(:has(:hover)) .rangeAnimation1 {
+    animation: rangeAnimation1 2s infinite;
+}
+
+#move .panel .range:not(:has(:hover)) .rangeAnimation2 {
+    animation: rangeAnimation2 2s infinite;
+}
+
+#move .panel .range:not(:has(:hover)) .rangeAnimation3 {
+    animation: rangeAnimation3 2s infinite;
+}
+
+#move .panel .range:not(:has(:hover)) .rangeAnimation1.rangeAnimation2 {
+    animation: rangeAnimation1 2s infinite, rangeAnimation2 2s infinite;
+}
+
+#move .panel .range:not(:has(:hover)) .rangeAnimation1.rangeAnimation3 {
+    animation: rangeAnimation1 2s infinite, rangeAnimation3 2s infinite;
+}
+
+#move .panel .range:not(:has(:hover)) .rangeAnimation2.rangeAnimation3 {
+    animation: rangeAnimation2 2s infinite, rangeAnimation3 2s infinite;
+}
+
+#move .panel .range:not(:has(:hover)) .rangeAnimation1.rangeAnimation2.rangeAnimation3 {
+    animation: rangeAnimation3 2s infinite, rangeAnimation2 2s infinite, rangeAnimation3 2s infinite;
+}
+
+#move .sidebar > header > *:first-child {
+    padding: 10px 0;
+    font-size: 1.1rem;
+}
