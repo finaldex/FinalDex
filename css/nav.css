@@ -1,0 +1,59 @@
+#nav {
+    height: 5vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav label,
+#nav button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    border-left: none;
+    border-top: none;
+    overflow: hidden;
+}
+
+#nav button svg {
+    height: 60%;
+    width: 60%;
+    stroke: black;
+    stroke-width: 6px;
+    fill: hsl(0, 0%, 60%);
+    transform: rotate(0deg) scale(1);
+    transition: 0.2s ease transform;
+}
+
+#nav button:active svg {
+    transform: rotate(-45deg) scale(0.8);
+}
+
+#nav label {
+    background: var(--Background_Layout1_Navigation_Label);
+    color: var(--Color_Layout1_Navigation_Label);
+    border: var(--Border_Layout1_Navigation_Label);
+    border-top: none;
+    font-size: 0.8rem;
+}
+
+#nav label:not(:nth-last-of-type(1)) {
+    border-right: none;
+}
+
+#nav button {
+    background: var(--Background_Layout1_Navigation_Button);
+    color: var(--Color_Layout1_Navigation_Button);
+    max-width: 50px;
+    font-size: 1.5rem;
+}
+
+#nav label:has(> input:checked),
+#nav label:active {
+    background: var(--Background_Layout1_Navigation_Label_Selected);
+    color: var(--Color_Layout1_Navigation_Label_Selected);
+}
