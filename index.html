@@ -23,11 +23,11 @@
 
 <body>
     <nav id="navigation">
-        <div onauxclick="if(event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><img src="./media/Images/FinalDex/Icon/FinalDex.png" /><span><span><h6>Version 1.0.3</h6></span><span><h3>FINALDEX</h3></span></span></div>
+        <div onauxclick="if (event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><img src="./media/Images/FinalDex/Icon/FinalDex.png" /><span><span><h6>Version 1.0.3</h6></span><span><h3>FINALDEX</h3></span></span></div>
         <div><b onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Games</h6></b></div>
         <div><b onclick="document.getElementById('FAQ').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>FAQ</h6></b></div>
         <div><b onclick="document.getElementById('Bug').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Submit a Bug</h6></b></div>
-        <div><b onclick="document.getElementById('Metadata').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Metadata</h6></b></div>
+        <div><b onclick="document.getElementById('Dataset').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Dataset</h6></b></div>
         <div><b onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Sources</h6></b></div>
         <div><b onclick="document.getElementById('Agenda').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Agenda</h6></b></div>
         <div><b onclick="document.getElementById('Changelog').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Changelog</h6></b></div>
@@ -52,7 +52,7 @@
                 <button onclick="videoFunc()"></button>
                 <span>
                     <strong onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });">FinalDex</strong>
-                    <h5>A complete online Pokédex with rich detailed data for all the mainline Pokémon Games</h5>
+                    <h5>A complete online Pokedex with rich detailed data for all the mainline Pokemon Games</h5>
                 </span>
             </div>
         </span>
@@ -78,23 +78,23 @@
                 <ol>
                     <h3>Frequently Asked Questions</h3>
                     <ul>
-                        <li><h6>How does the metadata work for different versions of the Games?</h6></li>
-                        <li><h6>All Metadata corresponds to the lastest versions of the games (including DLC)</h6></li>
+                        <li><h6>How does the dataset work for different versions of the Games?</h6></li>
+                        <li><h6>All Dataset corresponds to the lastest versions of the games (including DLC)</h6></li>
                     </ul>
                     <ul>
                         <li><h6>How about different language versions of the games, like the Japanese Red/Green?</h6></li>
-                        <li><h6>All Metadata only corresponds to the English releases of the games</h6></li>
+                        <li><h6>All Dataset only corresponds to the English releases of the games</h6></li>
                     </ul>
                     <ul>
-                        <li><h6>How does the metadata work for Pokémon Forms?</h6></li>
-                        <li><h6>All of the data listed in the Pokémon Form is applied only to that specific Form, any missing Fields equals to the default Forms value</h6></li>
+                        <li><h6>How does the dataset work for Pokemon Forms?</h6></li>
+                        <li><h6>All of the data listed in the Pokemon Form is applied only to that specific Form, any missing Fields equals to the default Forms value</h6></li>
                     </ul>
                     <ul>
-                        <li><h6>How was all of the metadata imported?</h6></li>
+                        <li><h6>How was all of the dataset imported?</h6></li>
                         <li><h6>Data from various <a tabindex="-1" onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });">sources</a> was exported in to Google Sheets through scripts</h6></li>
                     </ul>
                     <ul>
-                        <li><h6>Can i use this metadata for a project of mine?</h6></li>
+                        <li><h6>Can i use this dataset for a project of mine?</h6></li>
                         <li><h6>Sure, feel free to use it however you like</h6></li>
                     </ul>
                     <ul>
@@ -109,7 +109,7 @@
                         <h3>Submit A Bug</h3>
                         <select id="Bug Type" name="Bug Type" onchange="this.style.fontWeight = 'bold';">
                             <option value="" disabled="" selected="">Select an option</option>
-                            <option value="Metadata">Invalid Metadata</option>
+                            <option value="Dataset">Invalid Dataset</option>
                             <option value="Image">Image Error</option>
                             <option value="Compatibility">Compatibility Issue</option>
                             <option value="Other">Other</option>
@@ -126,59 +126,59 @@
             </div>
         </span>
         <span name="3">
-            <div id="Metadata">
-                <h3>Metadata</h3>
+            <div id="Dataset">
+                <h3>Dataset</h3>
                 <ol>
                     <ul>
-                        <li><h6>Pokémon</h6></li>
+                        <li><h6>Pokemon</h6></li>
                         <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/17LnZd-Sm0Oc8Np2bIxnQYc_gkCMLLWwfkA8I6XojHvQ">Pokémon Metadata</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PcOs40UPqvoWuCr0pkjb2nx1NhRgyaF82bDwtFJhqk4">Pokémon Learnset Metadata</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/17LnZd-Sm0Oc8Np2bIxnQYc_gkCMLLWwfkA8I6XojHvQ">Pokemon Dataset</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PcOs40UPqvoWuCr0pkjb2nx1NhRgyaF82bDwtFJhqk4">Pokemon Learnset Dataset</a></small></li>
                         </ul>
                     </ul>
                 
                     <ul>   
                         <li><h6>Locations</h6></li>
                         <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PuIneyaNi8nYxxpGxFnUYToUTSYHZyUW2BDcDz94vys">Locations Metadata</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/15lMtz5WMlJ2NF1V41wIYRDXVYIbNIdIzjiXq80zK83w">Location Pokémon Metadata</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5H4">Location Items Metadata</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1lsPn9sXfHlxWhrMOnZb0shPAZAzEl3Kl2KMDOOMTR8M">Location Trainers Metadata</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PuIneyaNi8nYxxpGxFnUYToUTSYHZyUW2BDcDz94vys">Locations Dataset</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/15lMtz5WMlJ2NF1V41wIYRDXVYIbNIdIzjiXq80zK83w">Location Pokemon Dataset</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5H4">Location Items Dataset</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1lsPn9sXfHlxWhrMOnZb0shPAZAzEl3Kl2KMDOOMTR8M">Location Trainers Dataset</a></small></li>
                         </ul>
                     </ul>
                 
                     <ul>   
                         <li><h6>Moves</h6></li>
                         <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1vmvr-1CKuT3EySejHUQvgjiZqpQ27nRXplWeOMbQ9C0">Moves Metadata</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1vmvr-1CKuT3EySejHUQvgjiZqpQ27nRXplWeOMbQ9C0">Moves Dataset</a></small></li>
                         </ul>
                     </ul>
                 
                     <ul>   
                         <li><h6>Abilities</h6></li>
                         <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1i6PJyMg_DRDPIQ7ahhWYHXClgnJjfWZOjBuZ1smddOc">Abilities Metadata</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1i6PJyMg_DRDPIQ7ahhWYHXClgnJjfWZOjBuZ1smddOc">Abilities Dataset</a></small></li>
                         </ul>
                     </ul>
                 
                     <ul>   
                         <li><h6>Items</h6></li>
                         <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/18yqu7HN2YIFAU--cvsJ0y8rZNL3hyv9TJW4cI4TUGAg">Items Metadata</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/18yqu7HN2YIFAU--cvsJ0y8rZNL3hyv9TJW4cI4TUGAg">Items Dataset</a></small></li>
                         </ul>
                     </ul>
                 
                     <ul>   
                         <li><h6>Trainers</h6></li>
                         <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PvbwQOKAL-_1re7xNxwQ_1HTHrTsU153N_7R2T1rrWc">Trainers Metadata</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PvbwQOKAL-_1re7xNxwQ_1HTHrTsU153N_7R2T1rrWc">Trainers Dataset</a></small></li>
                         </ul>
                     </ul>
                 
                     <ul>   
                         <li><h6>Games</h6></li>
                         <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1UxHecxZc_g6RyLWF7KfzjJzJLRvvRgfYO1FqCv4lIsI">Games Metadata</a></small></li>
+                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1UxHecxZc_g6RyLWF7KfzjJzJLRvvRgfYO1FqCv4lIsI">Games Dataset</a></small></li>
                         </ul>
                     </ul>
                 </ol>
@@ -189,16 +189,16 @@
                     <ul>
                         <li><h6><a tabindex="-1" target="_blank" href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></h6></li>
                         <ul>
-                            <li><small>Pokémon Metadata</small></li>
-                            <li><small>Location Metadata</small></li>
-                            <li><small>Move Metadata</small></li>
-                            <li><small>Item Metadata</small></li>
+                            <li><small>Pokemon Dataset</small></li>
+                            <li><small>Location Dataset</small></li>
+                            <li><small>Move Dataset</small></li>
+                            <li><small>Item Dataset</small></li>
                             <li><small>Sprites/Images</small></li>
                         </ul>
                     </ul>
 
                     <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="https://projectpokemon.org/">Project Pokémon</a></h6></li>
+                        <li><h6><a tabindex="-1" target="_blank" href="https://projectpokemon.org/">Project Pokemon</a></h6></li>
                         <ul>
                             <li><small>Animated 3DS Sprites</small></li>
                         </ul>
@@ -246,13 +246,13 @@
                 <h3>Agenda</h3>
                 <ol>
                     <ul>
-                        <li><small>Complete Pokédex Learnset Data</small></li>
+                        <li><small>Complete Pokedex Learnset Data</small></li>
                    
                         <li><small><s>Implement Damage Calculator</s></small></li>
                    
                         <li><small>Party/Box Removes Additional Datastring Values Fix</small></li>
                     
-                        <li><small>Add "Copy Datastring" to Contentdiv (Pokédex)</small></li>
+                        <li><small>Add "Copy Datastring" to Contentdiv (Pokedex)</small></li>
                    
                         <li><small>Refine/Debug Damage Calculator</small></li>
                  
@@ -262,7 +262,7 @@
                     
                         <li><small>Add Location Trainers Data</small></li>
                    
-                        <li><small>Shiny Option for Party/Box Pokémon</small></li>
+                        <li><small>Shiny Option for Party/Box Pokemon</small></li>
                  
                         <li><small><s>Add More Media Types/Angles/Extensions</s></small></li>
                  
@@ -288,7 +288,7 @@
                  
                         <li><small>Change "generation numbers" in the game select in mediaquery to "Generation x" and give the select an input that updates on change</small></li>
                   
-                        <li><small><s>fix getapplicable/getmedia/pokmedia giving wrong order paths because of games array loops (remove pokmedia function)</s></small></li>
+                        <li><small><s>fix get_applicable/getmedia/pokmedia giving wrong order paths because of games array loops (remove pokmedia function)</s></small></li>
                  
                         <li><small>consider adding pages to dex page to reduce load time</small></li>
                        
@@ -314,10 +314,10 @@
                         <li><small>add power/accuracy/crit/type/etc change to damage calculator move change</small></li>
                         <li><small>fix terrain/weather/other changes does not signal change from "start calculation"</small></li>
                         <li><small>add memory to damage calculation party</small></li>
-                        <li><small>add open data option for pokémon in damage calculator</small></li>
+                        <li><small>add open data option for pokemon in damage calculator</small></li>
                         <li><small>checkbox to make calculation on any change in damage calculator</small></li>
                         <li><small>fix multiattack moves giving accuracy error in damage calculator</small></li>
-                        <li><small>add cipher lab data from pokémon XD</small></li>
+                        <li><small>add cipher lab data from pokemon XD</small></li>
                     </ul>
                 </ol>
             </div>
