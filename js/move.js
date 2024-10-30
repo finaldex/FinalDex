@@ -1,838 +1,320 @@
-let createMove = function() {
-	let moveOuter = document.createElement("div");
-	let moveSectionList = document.createElement("section");
-	let moveSectionListOptionsTitleOuter = document.createElement("div");
-	let moveSectionListOptionsSearchOuter = document.createElement("div");
-	let moveSectionListOptionsSearch = document.createElement("input");
-	let moveSectionListOptionsOuter = document.createElement("div");
-	let moveSectionListOptions = document.createElement("ol");
-	let moveSectionHeader = document.createElement("section");
-	let moveSectionHeaderTitle = document.createElement("span");
-	let moveSectionHeaderTitleID = document.createElement("h4");
-	let moveSectionHeaderTitleName = document.createElement("h3");
-	let moveSectionHeaderDebut = document.createElement("span");
-	let moveSectionHeaderDebutText = document.createElement("h5");
-	let moveSectionContent = document.createElement("section");
-	let moveSectionContentDescription = document.createElement("div");
-	let moveSectionSidebar = document.createElement("section");
-	moveOuter.setAttribute("id", "move");
-	moveOuter.setAttribute("value","moves");
-	moveSectionContentDescription.setAttribute("name","description");
+const create_move = function() {
+    
+    const move = create_element({ Tag: "div", Attribute: { id: "move" }, Class: ["layout1"], Parent: document.body, });
+
+    // Catalog
+    const move_catalog = create_element({ Tag: "aside", Class: ["catalog"],  Parent: move });
+    const move_catalogHeader = create_element({ Tag: "header", Parent: move_catalog });
+
+    // Search
+    const move_searchWrap = create_element({ Tag: "div", Class: ["search"], Parent: move_catalogHeader });
+    const move_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "move_search", autocomplete: "off", placeholder: "Search Moves...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Moves...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#move .catalog ol li'), Data: data.Moves, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#move .catalog ol li') }, event), }, Parent: move_searchWrap });
+
+    // List
+    const move_catalogList = create_element({ Tag: "ol",  Parent: move_catalog });
+
+    // Move
+    const moves = Object.keys(data.Moves);
+    moves.forEach((m, i) => {
+        const move_type = data.Moves[m].Type ? data.Moves[m].Type : "";
+        const move_catalogMove = create_element({ Tag: "li", Data: {index: m, search: data.Moves[m].Move.join(","), type: move_type}, Parent: move_catalogList });
+        const move_catalogMoveLabel = create_element({ Tag: "label", Attribute: { for: `move_entry-${m}`, }, Parent: move_catalogMove });
+        const move_catalogMoveInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "move_entry", id: `move_entry-${m}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => move_data(), }, Parent: move_catalogMoveLabel });
+        const move_catalogMoveText = create_element({ Tag: "strong", Text: m, Parent: move_catalogMoveLabel });
+    });
+
+    // Header
+    const move_header = create_element({ Tag: "header", Class: ["header"],  Parent: move });
+    const move_titleWrap = create_element({ Tag: "div", Class: ["title"], Parent: move_header });
+    const move_id = create_element({ Tag: "h3", Class: ["id_text"], Parent: move_titleWrap });
+    const move_title = create_element({ Tag: "h2", Class: ["title_text"], Parent: move_titleWrap });
+    const move_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: move_header });
+    const move_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [path.Game.Title]}) }, Parent: move_gameWrap });
+
+    // Sidebar
+    const move_sidebar = create_element({ Tag: "aside",Class: ["sidebar"],  Parent: move });
+    const move_sidebarHeader = create_element({ Tag: "header", Parent: move_sidebar });
+    const move_sidebarHeaderText1 = create_element({ Tag: "h4", Text: "Pokémon Learnset:", Parent: move_sidebarHeader });
+    const move_sidebarHeaderText2 = create_element({ Tag: "h3", Text: "Learnset", Parent: move_sidebarHeader });
+
+    // Content
+    const move_sidebarContent = create_element({ Tag: "main", Parent: move_sidebar });
+    const move_sidebarList = create_element({ Tag: "ul", Parent: move_sidebarContent });
+
+    // Description
+    const move_description = create_element({ Tag: "main", Class: ["description"],  Parent: move });
+
+    // Panel
+    const move_panel = create_element({ Tag: "footer", Class: ["panel"],  Parent: move });
+
+    const move_ppWrap = create_element({ Tag: "div", Class: ["pp"], Parent: move_panel });
+    const move_ppHeader = create_element({ Tag: "h4", Text: "PP", Parent: move_ppWrap });
+    const move_ppText = create_element({ Tag: "span",  Parent: move_ppWrap });
+    
+    const move_priorityWrap = create_element({ Tag: "div", Class: ["priority"], Parent: move_panel });
+    const move_priorityHeader = create_element({ Tag: "h4", Text: "Priority", Parent: move_priorityWrap });
+    const move_priorityText = create_element({ Tag: "span",  Parent: move_priorityWrap });
+
+    const move_powerWrap = create_element({ Tag: "div", Class: ["power"], Parent: move_panel });
+    const move_powerHeader = create_element({ Tag: "h4", Text: "Power", Parent: move_powerWrap });
+    const move_powerText = create_element({ Tag: "span",  Parent: move_powerWrap });
+
+    const move_typeWrap = create_element({ Tag: "div", Class: ["type"], Parent: move_panel });
+    const move_typeHeader = create_element({ Tag: "h4", Text: "Type", Parent: move_typeWrap });
+    const move_typeImage = create_element({ Tag: "img",  Parent: move_typeWrap });
+    const move_typeText = create_element({ Tag: "span",  Parent: move_typeWrap });
+
+    const move_accuracyWrap = create_element({ Tag: "div", Class: ["accuracy"], Parent: move_panel });
+    const move_accuracyHeader = create_element({ Tag: "h4", Text: "Accuracy", Parent: move_accuracyWrap });
+    const move_accuracyText = create_element({ Tag: "span",  Parent: move_accuracyWrap });
+
+    const move_categoryWrap = create_element({ Tag: "div", Class: ["category"],  Parent: move_panel });
+    const move_categoryHeader = create_element({ Tag: "h4", Text: "Category", Parent: move_categoryWrap });
+    const move_categoryText = create_element({ Tag: "span",  Parent: move_categoryWrap });
 
 
-	moveSectionListOptionsSearch.setAttribute("type","search");
-	moveSectionListOptionsSearch.setAttribute("name","move_search");
-	moveSectionListOptionsSearch.setAttribute("placeholder", "Search Moves...");
-	moveSectionListOptionsSearch.setAttribute("onfocus", "this.placeholder=''");
-	moveSectionListOptionsSearch.setAttribute("onblur", "this.placeholder='Search Moves...'");
-	moveSectionListOptionsSearch.setAttribute("autocomplete", "off");
-	moveSectionHeaderTitleID.innerText = "#";
-	moveSectionHeaderTitleName.innerText = "-";
-	moveSectionHeaderDebutText.innerText = "-";
-	document.querySelector("#contain").appendChild(moveOuter);
-	moveOuter.appendChild(moveSectionList);
-	moveSectionList.appendChild(moveSectionListOptionsTitleOuter);
-	moveSectionListOptionsTitleOuter.appendChild(moveSectionListOptionsSearchOuter);
-	moveSectionListOptionsSearchOuter.appendChild(moveSectionListOptionsSearch);
-	moveSectionList.appendChild(moveSectionListOptionsOuter);
-	moveSectionListOptionsOuter.appendChild(moveSectionListOptions);
-	moveOuter.appendChild(moveSectionHeader);
-	moveSectionHeader.appendChild(moveSectionHeaderTitle);
-	moveSectionHeaderTitle.appendChild(moveSectionHeaderTitleID);
-	moveSectionHeaderTitle.appendChild(moveSectionHeaderTitleName);
-	moveSectionHeader.appendChild(moveSectionHeaderDebut);
-	moveSectionHeaderDebut.appendChild(moveSectionHeaderDebutText);
-	moveOuter.appendChild(moveSectionContent);
-	moveSectionContent.appendChild(moveSectionContentDescription);
-	moveOuter.appendChild(moveSectionSidebar);
+    const move_rangeWrap = create_element({ Tag: "div", Class: ["range"], Parent: move_panel });
+    const move_rangeHeader = create_element({ Tag: "h4", Text: "Range", Parent: move_rangeWrap });
+    const move_rangeEnemy = create_element({ Tag: "span", Class: ["enemy"], Parent: move_rangeWrap });
+    const move_rangeFriendly = create_element({ Tag: "span", Class: ["friendly"], Parent: move_rangeWrap });
 
-	moveSectionList.setAttribute("name","list");
-	moveSectionHeader.setAttribute("name","header");
-	moveSectionContent.setAttribute("name","content");
-	moveSectionSidebar.setAttribute("name","sidebar");
+    Array.from({length: 3}).forEach(() => {
+        const move_rangeElement = create_element({ Tag: "span", Text:" ", Parent: move_rangeEnemy });
+    });
+    Array.from({length: 3}).forEach(() => {
+        const move_rangeElement = create_element({ Tag: "span", Text:" ", Parent: move_rangeFriendly });
+    });
+    
 
-	moveSectionListOptionsSearch.addEventListener("input", function() {search("Move");});
-	moveSectionListOptionsSearch.addEventListener("keyup", function() {search("Move");});
-
-    let moveSectionHeaderGame = document.createElement("span");
-    let moveSectionHeaderGameImage = document.createElement("img");
-    moveSectionHeaderGameImage.src = getMedia(true,["Title"],[PATH_Game_Title])
-    moveSectionHeaderGameImage.setAttribute("onerror","this.display='none'");
-    moveSectionHeader.appendChild(moveSectionHeaderGame);
-    moveSectionHeaderGame.appendChild(moveSectionHeaderGameImage);
-
-	let moveSectionContentMenu = document.createElement("div");
-	let moveSectionContentMenuLeft = document.createElement("div");
-	let moveSectionContentMenuType = document.createElement("div");
-	let moveSectionContentMenuTypeText = document.createElement("span");
-	let moveSectionContentMenuTypeTextImg = document.createElement("img");
-	let moveSectionContentMenuTypeTextText = document.createElement("h6");
-	let moveSectionContentMenuTypeMove = document.createElement("span");
-	let moveSectionContentMenuAttribute = document.createElement("div");
-	let moveSectionContentMenuAttributePowerPoints = document.createElement("span");
-	let moveSectionContentMenuAttributePowerPointsContent = document.createElement("span");
-	let moveSectionContentMenuAttributePowerPointsTitle = document.createElement("h4");
-	let moveSectionContentMenuAttributePowerPointsText = document.createElement("p");
-	let moveSectionContentMenuAttributePower = document.createElement("span");
-	let moveSectionContentMenuAttributePowerContent = document.createElement("span");
-	let moveSectionContentMenuAttributePowerTitle = document.createElement("h4");
-	let moveSectionContentMenuAttributePowerText = document.createElement("p");
-	let moveSectionContentMenuAttributeAccuracy = document.createElement("span");
-	let moveSectionContentMenuAttributeAccuracyContent = document.createElement("span");
-	let moveSectionContentMenuAttributeAccuracyTitle = document.createElement("h4");
-	let moveSectionContentMenuAttributeAccuracyText = document.createElement("p");
-	let moveSectionContentMenuAttributePriority = document.createElement("span");
-	let moveSectionContentMenuAttributePriorityContent = document.createElement("span");
-	let moveSectionContentMenuAttributePriorityTitle = document.createElement("h4");
-	let moveSectionContentMenuAttributePriorityText = document.createElement("p");
-	let moveSectionContentMenuRight = document.createElement("div");
-	let moveSectionContentMenuContact = document.createElement("div");
-	let moveSectionContentMenuContactContent = document.createElement("span");
-	let moveSectionContentMenuContactText = document.createElement("h5");
-	moveSectionContentMenuAttributePowerPointsTitle.innerText = "PP";
-	moveSectionContentMenuAttributePowerTitle.innerText = "Power";
-	moveSectionContentMenuAttributeAccuracyTitle.innerText = "Accuracy";
-	moveSectionContentMenuAttributePriorityTitle.innerText = "Priority";
-	moveSectionContentMenu.setAttribute("name","menu");
-	moveSectionContentMenuTypeText.setAttribute("name","type");
-	moveSectionContentMenuTypeMove.setAttribute("name","category");
-	moveSectionContentMenuAttributePowerPoints.setAttribute("name","pp");
-	moveSectionContentMenuAttributePower.setAttribute("name","power");
-	moveSectionContentMenuAttributeAccuracy.setAttribute("name","accuracy");
-	moveSectionContentMenuAttributePriority.setAttribute("name","priority");
-
-	moveSectionContent.appendChild(moveSectionContentMenu);
-	moveSectionContentMenu.appendChild(moveSectionContentMenuLeft);
-	moveSectionContentMenu.appendChild(moveSectionContentMenuRight);
-	moveSectionContentMenuLeft.appendChild(moveSectionContentMenuType);
-	moveSectionContentMenuType.appendChild(moveSectionContentMenuTypeText);
-	moveSectionContentMenuTypeText.appendChild(moveSectionContentMenuTypeTextImg);
-	moveSectionContentMenuTypeText.appendChild(moveSectionContentMenuTypeTextText);
-	moveSectionContentMenuType.appendChild(moveSectionContentMenuTypeMove);
-	moveSectionContentMenuLeft.appendChild(moveSectionContentMenuAttribute);
-
-	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributePowerPoints);
-	moveSectionContentMenuAttributePowerPoints.appendChild(moveSectionContentMenuAttributePowerPointsContent);
-	moveSectionContentMenuAttributePowerPointsContent.appendChild(moveSectionContentMenuAttributePowerPointsTitle);
-	moveSectionContentMenuAttributePowerPointsContent.appendChild(moveSectionContentMenuAttributePowerPointsText);
-
-	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributePower);
-	moveSectionContentMenuAttributePower.appendChild(moveSectionContentMenuAttributePowerContent);
-	moveSectionContentMenuAttributePowerContent.appendChild(moveSectionContentMenuAttributePowerTitle);
-	moveSectionContentMenuAttributePowerContent.appendChild(moveSectionContentMenuAttributePowerText);
-
-	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributeAccuracy);
-	moveSectionContentMenuAttributeAccuracy.appendChild(moveSectionContentMenuAttributeAccuracyContent);
-	moveSectionContentMenuAttributeAccuracyContent.appendChild(moveSectionContentMenuAttributeAccuracyTitle);
-	moveSectionContentMenuAttributeAccuracyContent.appendChild(moveSectionContentMenuAttributeAccuracyText);
-
-	moveSectionContentMenuAttribute.appendChild(moveSectionContentMenuAttributePriority);
-	moveSectionContentMenuAttributePriority.appendChild(moveSectionContentMenuAttributePriorityContent);
-	moveSectionContentMenuAttributePriorityContent.appendChild(moveSectionContentMenuAttributePriorityTitle);
-	moveSectionContentMenuAttributePriorityContent.appendChild(moveSectionContentMenuAttributePriorityText);
-
-	moveSectionContentMenuRight.appendChild(moveSectionContentMenuContact);
-	moveSectionContentMenuContact.appendChild(moveSectionContentMenuContactContent);
-	moveSectionContentMenuContactContent.appendChild(moveSectionContentMenuContactText);
-	let moveSectionSidebarLearnset = document.createElement("div");
-	moveSectionSidebar.appendChild(moveSectionSidebarLearnset);
-	let moveSectionSidebarLearnsetTitle = document.createElement("div");
-	let moveSectionSidebarLearnsetTitleText = document.createElement("h4");
-	moveSectionSidebarLearnsetTitleText.innerHTML = "Learnset";
-	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetTitle);
-	moveSectionSidebarLearnsetTitle.appendChild(moveSectionSidebarLearnsetTitleText);
-	
-	
-	let moveSectionSidebarLearnsetUl = document.createElement("ul");
-	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetUl);
-	let moveSectionSidebarLearnsetPartyBox = document.createElement("div");
-	moveSectionSidebarLearnset.appendChild(moveSectionSidebarLearnsetPartyBox);
+    const move_affectWrap = create_element({ Tag: "ul", Class: ["affect"], Parent: move_panel });
+    //const move_affect = create_element({ Tag: "li", Text: "Affected by Protect", Parent: move_affectWrap });
 
 
-	let parbo = ["Party","Box"];
-	for(let q = 0; q < parbo.length; q++) {
-		let moveSectionSidebarLearnsetInput = document.createElement("input");
-		let moveSectionSidebarLearnsetLabel = document.createElement("label");
-		let moveSectionSidebarLearnsetText = document.createElement("h6");
-		moveSectionSidebarLearnsetInput.setAttribute("type","checkbox");
-		moveSectionSidebarLearnsetInput.setAttribute("id","move-learnset-partybox-"+q);
-		moveSectionSidebarLearnsetInput.setAttribute("name","move-learnset-partybox");
-		moveSectionSidebarLearnsetLabel.setAttribute("for","move-learnset-partybox-"+q);
-		moveSectionSidebarLearnsetText.innerText = parbo[q];
-		moveSectionSidebarLearnsetLabel.title = "Show results from "+parbo[q];
-		moveSectionSidebarLearnsetPartyBox.appendChild(moveSectionSidebarLearnsetInput);
-		moveSectionSidebarLearnsetPartyBox.appendChild(moveSectionSidebarLearnsetLabel);
-		moveSectionSidebarLearnsetLabel.appendChild(moveSectionSidebarLearnsetText);
-		moveSectionSidebarLearnsetInput.addEventListener("change",movePartyBoxLearnset);
-	}
+    move_data();
+}
 
 
-	let firstmoveiteration;
-	for(let q = 0; q < finaldata["Moves"]["Reference"].length; q++) {
-		if(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Reference"]] == "true") {
-			let moveSectionListOptionsInput = document.createElement("input");
-			let moveSectionListOptionsLabel = document.createElement("label");
-			let moveSectionListOptionsText = document.createElement("h5");
-			moveSectionListOptionsInput.setAttribute("type", "radio");
-			moveSectionListOptionsInput.setAttribute("name", "move-options");
-			moveSectionListOptionsInput.setAttribute("id", "move-options-"+q);
-			moveSectionListOptionsInput.setAttribute("autocomplete", "off");
-			moveSectionListOptionsInput.value = q;
-			moveSectionListOptionsLabel.setAttribute("for", "move-options-"+q);
-			moveSectionListOptionsLabel.setAttribute("type","medium");
-			if(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-name", finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]].toLowerCase());
-				moveSectionListOptionsLabel.setAttribute("data-title", finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]].toLowerCase());
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-name", "none");
-				moveSectionListOptionsLabel.setAttribute("data-title", "none");
-			}
-			/*
-			let moveset = returnMoveLearnset(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]],"");
-			if (moveset.length > 0) {
-				moveSectionListOptionsLabel.setAttribute("data-search-learnset", moveset.join(",").toLowerCase());
-			}
-			else {
-				moveSectionListOptionsLabel.setAttribute("data-search-learnset", "none");
-			}
-			*/
 
-			if(finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]] != undefined) {
-				
-				if (finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].includes("-")) {
-					moveSectionListOptionsLabel.setAttribute("data-search-priority", "-"+finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].replaceAll("-",""));
-				}
-				else if (finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].includes("+")) {
-					moveSectionListOptionsLabel.setAttribute("data-search-priority", "+"+finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]].replaceAll("+",""));
-				}
-				else {
-					moveSectionListOptionsLabel.setAttribute("data-search-priority", finaldata["Moves"]["Priority"][q][DATA_Move_Priority["Priority"]]);
-				}
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-priority", "none");
-			}
 
-			if(finaldata["Moves"]["Type"][q][DATA_Move_Type["Type"]] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-type", finaldata["Moves"]["Type"][q][DATA_Move_Type["Type"]].toLowerCase());
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-type", "none");
-			}
-			if(finaldata["Moves"]["Category"][q][DATA_Move_Category["Category"]] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-category", finaldata["Moves"]["Category"][q][DATA_Move_Category["Category"]].toLowerCase());
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-category", "none");
-			}
-			if(finaldata["Moves"]["PP"][q][DATA_Move_PP["Min"]] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-pp", finaldata["Moves"]["PP"][q][DATA_Move_PP["Min"]].toLowerCase());
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-pp", "none");
-			}
-			if(finaldata["Moves"]["Power"][q][DATA_Move_Power["Power"]] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-power", finaldata["Moves"]["Power"][q][DATA_Move_Power["Power"]].toLowerCase());
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-power", "none");
-			}
-			if(finaldata["Moves"]["Accuracy"][q][DATA_Move_Accuracy["Accuracy"]] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-accuracy", finaldata["Moves"]["Accuracy"][q][DATA_Move_Accuracy["Accuracy"]].toLowerCase());
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-accuracy", "none");
-			}
-	
+function move_data() {
+    const active_entry = document.querySelector("#move .catalog ol li:has(input:checked)")
+    
+    if (!active_entry || !active_entry.dataset.index) { return }
 
-			if(finaldata["Moves"]["Other Moves"][q]["Contact"] == "Makes contact") {
-				moveSectionListOptionsLabel.setAttribute("data-search-contact", "y");
-			} else if(finaldata["Moves"]["Other Moves"][q]["Contact"] == "Does not make contact") {
-				moveSectionListOptionsLabel.setAttribute("data-search-contact", "n");
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-contact", "none");
-			}
+    const index = active_entry.dataset.index;
+    const move = data.Moves[index].Move;
 
-			if(getTutorData(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]],"Move").length > 0) {
-				let tutors = getTutorData(finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]],"Move");
-				let res = [];
-				for(y = 0; y < tutors.length; y++) {
-					res.push(tutors[y]["Location"].toLowerCase())
-				}
-				moveSectionListOptionsLabel.setAttribute("data-search-tutor", res.join(","));
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-tutor", "none");
-			}
-			if(finaldata["Moves"]["Machine"][q][DATA_Move_Machine["Machine"]] != undefined) {
-				moveSectionListOptionsLabel.setAttribute("data-search-machine", finaldata["Moves"]["Machine"][q][DATA_Move_Machine["Machine"]].toLowerCase());
-			} else {
-				moveSectionListOptionsLabel.setAttribute("data-search-machine", "none");
-			}
-			moveSectionListOptionsText.innerText = finaldata["Moves"]["Reference"][q][DATA_Move_Reference["Name"]];
-			moveSectionListOptions.appendChild(moveSectionListOptionsInput);
-			moveSectionListOptions.appendChild(moveSectionListOptionsLabel);
-			moveSectionListOptionsLabel.appendChild(moveSectionListOptionsText);
-			moveSectionListOptionsLabel.setAttribute("tabindex","1");
-			moveSectionListOptionsLabel.addEventListener("keyup",function(event){if(event.which === 13){if(event.target.previousElementSibling.checked == false) {event.target.previousElementSibling.checked = true;moveOptionsSelector(event.target.previousElementSibling.value);}}});
-			moveSectionListOptionsInput.addEventListener("change", moveOptionsSelector);
+    const titleText = document.querySelector("#move > header .title_text")
+    titleText.innerText = move[0];
 
-			if(firstmoveiteration != true) {
-				firstmoveiteration = true;
-				moveSectionListOptionsLabel.click();
-			}
-		}
-	}
+    const headerText = document.querySelector("#move .sidebar > header > *:last-child")
+    headerText.innerText = move[0];
 
-	moveSectionListOptionsSearch.title = searchOptionsTitle(moveSectionListOptions);
+    const idText = document.querySelector("#move > header .id_text")
+    idText.innerText = data.Moves[index].ID ? `#${data.Moves[index].ID}` : "";
 
-	let searchLis = document.querySelectorAll("#contain > div#move > section[name='list'] ol > label");
-    searchMoveAttributes = [];
-    for(q = 0; q < searchLis.length; q++) {
-        for(u = 0; u < searchLis[q].getAttributeNames().length; u++) {
-            if (searchLis[q].getAttributeNames()[u].includes("data-search")) {
-                if (!searchMoveAttributes.includes(searchLis[q].getAttributeNames()[u])) {
-                    searchMoveAttributes.push(searchLis[q].getAttributeNames()[u]);
-                }
-            }
-        }
+    const description = document.querySelector("#move > main");
+    description.innerHTML = "";
+   
+    const list = document.querySelector("#move .sidebar > main ul");
+    list.innerHTML = ""; // Clear previous data
+
+    const pokemon_learnset = Object.keys(data.Pokemon).reduce((found, pokemonName) => { const learnset = data.Pokemon[pokemonName].Learnset; const hasMove = learnset && learnset.some(learnsetItem => learnsetItem.Move.includes(move)); if (hasMove) { found[pokemonName] = data.Pokemon[pokemonName]; } return found; }, {})
+    generate_learnset({Catalog: "Move", Entry: move, Data: pokemon_learnset, Parent: list})
+   
+    const rangeText = document.querySelector("#move .panel .range");
+    rangeText.setAttribute("title", data.Moves[index].Range ? data.Moves[index].Range : "");
+
+    applyRangeAnimation();
+
+    const powerText = document.querySelector("#move .panel .power > *:last-child")
+    powerText.innerText = data.Moves[index].Power ? data.Moves[index].Power : `N/A`;
+
+    const ppText = document.querySelector("#move .panel .pp > *:last-child")
+    ppText.innerText = data.Moves[index].PP ? `${data.Moves[index].PP.Min}` : "N/A";
+
+    const accuracyText = document.querySelector("#move .panel .accuracy > *:last-child")
+    accuracyText.innerText = data.Moves[index].Accuracy ? data.Moves[index].Accuracy : `N/A`;
+
+    const categoryText = document.querySelector("#move .panel .category > *:last-child")
+    categoryText.innerText = data.Moves[index].Category ? data.Moves[index].Category : "N/A";
+
+    const categoryElement = document.querySelector("#move .panel .category")
+    categoryElement.dataset.category = data.Moves[index].Category ? data.Moves[index].Category : "";
+    
+
+    const priorityText = document.querySelector("#move .panel .priority > *:last-child")
+    priorityText.innerText = data.Moves[index].Priority ? data.Moves[index].Priority : 0;
+    
+    const typeText = document.querySelector("#move .panel .type > *:last-child")
+    typeText.innerText = data.Moves[index].Type ? data.Moves[index].Type : "N/A";
+
+    const typeImage = document.querySelector("#move .panel .type > img");
+    const typeSrc = data.Moves[index].Type ? get_directory({FirstMatch: true, Exact: true, File: [data.Moves[index].Type], Path: [path.Type.Icon]}) : "";
+    typeImage.src = typeSrc;
+
+    const affectList = document.querySelector("#move .panel .affect");
+    affectList.innerHTML = "";
+
+    const affectField = data.Moves[index].Field ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Field}, HTML: `Is a <b>Field</b> move.`, Parent: affectList }) : null;
+    const affectSoundBased = data.Moves[index].Sound ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Sound"]}, HTML: `Is a <b>Sound-based</b> move.`, Parent: affectList }) : null;
+    const affectContact = data.Moves[index].Contact !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Contact}, HTML: data.Moves[index].Contact ? `Makes <b>Contact</b>.` : `Does not make <b>Contact</b>.`, Parent: affectList }) : null;
+    const affectProtect = data.Moves[get_moveIndex("Protect")] && data.Moves[index].Protect !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Protect}, HTML: data.Moves[index].Protect ? `Affected by <b>Protect</b>.` : `Not affected by <b>Protect</b>.`, Parent: affectList }) : null;
+    const affectKingsRock = data.Items[get_itemIndex("King's Rock")] && data.Moves[index]["King's Rock"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["King's Rock"]}, HTML: data.Moves[index]["King's Rock"] ? `Affected by <b>King's Rock</b>.` : `Not affected by <b>King's Rock</b>.`, Parent: affectList }) : null;
+    const affectMagicCoat = data.Moves[get_moveIndex("Magic Coat")] && data.Moves[index]["Magic Coat"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Magic Coat"]}, HTML: data.Moves[index]["Magic Coat"] ? `Affected by <b>Magic Coat</b>` : `Not affected by <b>Magic Coat</b>.`, Parent: affectList }) : null;
+    const affectMagicBounce = data.Abilities && data.Abilities[get_abilityIndex("Magic Bounce")] && data.Moves[index]["Magic Bounce"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Magic Bounce"]}, HTML: data.Moves[index]["Magic Bounce"] ? `Affected by <b>Magic Bounce</b>.` : `Not affected by <b>Magic Bounce</b>.`, Parent: affectList }) : null;
+    const affectSnatch = data.Moves[get_moveIndex("Snatch")] && data.Moves[index].Snatch !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Snatch}, HTML: data.Moves[index].Snatch ? `Affected by <b>Snatch</b>.` : `Not affected by <b>Snatch</b>.`, Parent: affectList }) : null;
+    const affectMirrorMove = data.Moves[get_moveIndex("Mirror Move")] && data.Moves[index]["Mirror Move"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Mirror Move"]}, HTML: data.Moves[index]["Mirror Move"] ? `Affected by <b>Mirror Move</b>.` : `Not affected by <b>Mirror Move</b>.`, Parent: affectList }) : null;
+
+    affectProtect && (add_redirect(affectProtect.querySelector(":scope b"),{catalog:"move",entry:"Protect",style:"brightness"}));
+    affectKingsRock && (add_redirect(affectKingsRock.querySelector(":scope b"),{catalog:"item",entry:"King's Rock",style:"brightness"}));
+    affectMagicCoat && (add_redirect(affectMagicCoat.querySelector(":scope b"),{catalog:"move",entry:"Magic Coat",style:"brightness"}));
+    affectMagicBounce && (add_redirect(affectMagicBounce.querySelector(":scope b"),{catalog:"ability",entry:"Magic Bounce",style:"brightness"}));
+    affectSnatch && (add_redirect(affectSnatch.querySelector(":scope b"),{catalog:"move",entry:"Snatch",style:"brightness"}));
+    affectMirrorMove && (add_redirect(affectMirrorMove.querySelector(":scope b"),{catalog:"move",entry:"Mirror Move",style:"brightness"}));
+
+    const descriptionText = data.Moves[index].Description ? create_element({ Tag: "p", Text: data.Moves[index].Description, Class: ["description_text"], Parent: description }) : null;
+
+
+    const matchedTutors = Object.keys(data.Locations).flatMap(key => { const tutor = data.Locations[key]["Move Tutor"]; return tutor && tutor.filter(t => t && move.includes(t.Move)).map(t => ({ ...t, Location: key, })) || []; });
+    const tutorTitle = matchedTutors.length > 0 ? create_element({ Tag: "h3", Text: "Move Tutor", Class: ["tutor_header"], Parent: description }) : null;
+
+    matchedTutors.forEach(d => {
+        let cost_text = d.Cost ? d.Cost.map(({ Cost, Currency }) => {
+            const dir = get_directory({ FirstMatch: true, Exact: true, File: [Currency], Path: [path.Item.Bag, path.Currency.Icon] });
+            return dir !== "" ? `${Cost} <img src='${dir}' title='${Currency}' />` : Currency.length > 5 ? `${Cost} <span title='${Currency}'>${Currency.match(/[A-Z]/g).join('')}</span>` : `${Cost} ${Currency}`;
+        }).join(', ') : null;
+        let text = `${move[0]} can be taught at <b>${d.Location}</b> ${d.Area ? `(${d.Area})` : ''}${d.Pokemon ? ` to ${d.Pokemon}` : ''}${d.Rate ? ` ${d.Rate}` : ''}${d.Character ? ` by ${d.Character}` : ''}${cost_text ? ` for ${cost_text}` : ''}`.replaceAll("  ", " ").trim() + '.';
+        text = text === "Taught." ? null : text;
+        const tutorText = create_element({ Tag: "p", HTML: text, Class: ["tutor_text"], Parent: description });
+
+        const tutorLocation = tutorText.querySelector(":scope b");
+        tutorLocation && (add_redirect(tutorLocation,{catalog:"location",entry:d.Location,style:"invert"}));
+
+        const tutorItems = tutorText.querySelectorAll(":scope img");
+        tutorItems.forEach(i => {
+            add_redirect(i,{catalog:"item",entry:i.title,style:"brightness"});
+        });
+      
+        
+    });
+
+
+    const move_effect = data.Moves[index].Effect ? data.Moves[index].Effect : [];
+    const effectTitle = move_effect.length > 0 ? create_element({ Tag: "h3", Text:"Effect", Class: ["effect_header"], Parent: description }) : null;
+    move_effect.forEach(d => {
+        const effectText = create_element({ Tag: "p", Text: d.Effect, Class: ["effect_text"], Parent: description });
+    });
+
+
+    
+ 
+    
+    
+}
+
+
+
+
+function applyRangeAnimation() {
+    const rangeElement = document.querySelector("#move .panel .range")
+
+    if (!rangeElement) { return; }
+    
+    const range = rangeElement.getAttribute("title");
+    const enemyElements = rangeElement.querySelectorAll(':scope .enemy > span');
+    const friendlyElements = rangeElement.querySelectorAll(':scope .friendly > span');
+    const userElement = friendlyElements[0]; // bottom-left
+
+    // Clear previous animations
+    enemyElements.forEach(el => el.classList.remove('rangeAnimation1', 'rangeAnimation2', 'rangeAnimation3'));
+    friendlyElements.forEach(el => el.classList.remove('rangeAnimation1', 'rangeAnimation2', 'rangeAnimation3'));
+
+    let targetElements = [];
+
+    if (range === 'May affect anyone adjacent to the user') {
+        targetElements = [
+            enemyElements[0], // top-left
+            enemyElements[1], // top-middle
+            friendlyElements[1] // bottom-middle
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation1'));
+    } else if (range === 'Affects an adjacent ally') {
+        targetElements = [
+            friendlyElements[1] // bottom-middle
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation2'));
+    } else if (range === 'Affects all adjacent foes, but not allies') {
+        targetElements = [
+            enemyElements[0], // top-left
+            enemyElements[1], // top-middle
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation1'));
+    } else if (range === 'Affects the user') {
+        targetElements = [
+            friendlyElements[0] // bottom-left
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation2'));
+    } else if (range === 'May affect anyone but the user') {
+        targetElements = [
+            enemyElements[0], // top-left
+            enemyElements[1], // top-middle
+            enemyElements[2], // top-right
+            friendlyElements[1], // bottom-middle
+            friendlyElements[2]  // bottom-right
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation1'));
+    } else if (range === 'May randomly affect anyone adjacent to the user') {
+        targetElements = [
+            enemyElements[0], // top-left
+            enemyElements[1], // top-middle
+            friendlyElements[1] // bottom-middle
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation1'));
+    } else if (range === 'Affects the user and all allies') {
+        targetElements = [
+            friendlyElements[0], // bottom-left
+            friendlyElements[1], // bottom-middle
+            friendlyElements[2]  // bottom-right
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation2'));
+    } else if (range === 'Affects all Pokémon adjacent to the user') {
+        targetElements = [
+            enemyElements[0], // top-left
+            enemyElements[1], // top-middle
+            friendlyElements[1] // bottom-middle
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation1'));
+    } else if (range === 'Affects all Pokémon on the field') {
+        targetElements = [
+            enemyElements[0], // top-left
+            enemyElements[1], // top-middle
+            enemyElements[2], // top-right
+            friendlyElements[0], // bottom-left
+            friendlyElements[1], // bottom-middle
+            friendlyElements[2]  // bottom-right
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation1'));
+    } else if (range === 'Affects all foes') {
+        targetElements = [
+            enemyElements[0], // top-left
+            enemyElements[1], // top-middle
+            enemyElements[2]  // top-right
+        ];
+        targetElements.forEach(el => el.classList.add('rangeAnimation1'));
     }
 
-    for(q = 0; q < searchMoveAttributes.length; q++) {
-        searchMoveAttributes[q] = searchMoveAttributes[q].replaceAll("data-search-","")
-    }
-
-	function moveOptionsSelector(i) {
-		if (this.value != undefined) {
-			i = this.value;
-		}
-		
-		moveSectionHeaderTitleName.innerText = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]];
-		moveSectionHeaderTitleID.innerText = "#"+finaldata["Moves"]["ID"][i][DATA_Move_ID["ID"]];
-		if(finaldata["Moves"]["ID"][i]["ID Type"] != undefined) {
-			moveSectionHeaderTitleID.title = finaldata["Moves"]["ID"][i]["ID Type"]+" Index number";
-		} else {
-			moveSectionHeaderTitleID.title = "Index number";
-		}
-		moveSectionHeaderDebutText.innerText = "Introduced in "+finaldata["Moves"]["Reference"][i]["Debut"].split("-")[0];
-
-		moveSectionContentDescription.innerHTML = "";
-
-		if (finaldata["Moves"]["Description"][i][DATA_Move_Description["Description"]] != undefined) {
-			let text = document.createElement("p");
-			text.innerText = finaldata["Moves"]["Description"][i][DATA_Move_Description["Description"]];
-			moveSectionContentDescription.appendChild(text)
-			moveSectionContentDescription.innerHTML += "<br>"
-		}
-
-
-		if (finaldata["Moves"]["Machine"][i][DATA_Move_Machine["Machine"]] != undefined) {
-			let text = document.createElement("p");
-			text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" is <b type='invert' name='item' value='"+finaldata["Moves"]["Machine"][i][DATA_Move_Machine["Machine"]]+"' onclick='dataRedirect()' function='dataRedirect'>"+finaldata["Moves"]["Machine"][i][DATA_Move_Machine["Machine"]]+"</b>."
-			moveSectionContentDescription.appendChild(text)
-			moveSectionContentDescription.innerHTML += "<br>"
-		}
-
-		let tutor_data = getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move");
-		if(getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move").length > 0) {
-			let text = document.createElement("p");
-			moveSectionContentDescription.appendChild(text)
-
-			text.innerHTML = finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]+" can be taught by a Move Tutor in <b type='invert' name='map' value='"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"' onclick='dataRedirect()' function='dataRedirect'>"+getTutorData(finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]],"Move")[0]["Location"]+"</b>."	
-
-			if (tutor_data[0]["Location"].includes("Route")) {
-				text.innerHTML = text.innerHTML.replaceAll("Move Tutor in ", "Move Tutor on ");
-			}
-
-			if (tutor_data[0]["Pokémon"] != undefined) {
-				let poks = splitStr(tutor_data[0]["Pokémon"],",");
-				let poks_list = [];
-				for (let p = 0; p < poks.length; p++) {
-					poks_list.push("<b type='invert' onclick='modalData()' function='modalData' value='"+getPokémonInt(poks[p])+"'>"+poks[p]+"</b>")
-				}
-				text.innerHTML = text.innerHTML.replaceAll(" can be taught by "," can be taught to "+poks_list.join(",").replace(/,([^,]*)$/, ', and $1').replaceAll(",",", ").replaceAll("  "," ")+" by ")
-			}
-			
-
-			moveSectionContentDescription.innerHTML += "<br>"
-		}
-
-
-
-
-		let effect = [];
-
-		for(let q = 0; q < finaldata["Moves"]["Effect"].length; q++) {
-			if(getApplicable(finaldata["Moves"]["Effect"][q]["Game"])) {
-				if(finaldata["Moves"]["Effect"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]]) {
-					effect.push(finaldata["Moves"]["Effect"][q]["Effect"])
-				}
-			}
-		}
-
-
-		if (effect.length > 0) {
-			let text = document.createElement("h4");
-			text.innerText = "Effect";
-			moveSectionContentDescription.appendChild(text)
-		}
-
-
-		for(let q = 0; q < effect.length; q++) {
-			let text = document.createElement("p");
-			text.innerText = effect[q];
-			moveSectionContentDescription.appendChild(text)
-			if (q == effect.length - 1) {
-				moveSectionContentDescription.innerHTML += "<br>"
-			}
-		}
-		
-	
-
-
-
-
-		
-	
-
-
-
-
-
-
-		moveSectionContentMenuTypeTextImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-		moveSectionContentMenuTypeTextImg.src = getMedia(true,[finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]]],[PATH_Type_Icon]);
-		moveSectionContentMenuTypeTextImg.setAttribute("title", finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]]);
-		
-		if(finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]] == undefined) {
-			moveSectionContentMenuTypeTextImg.style.display = "none";
-			moveSectionContentMenuTypeTextText.style.display = "block";
-		} else {
-			moveSectionContentMenuTypeTextImg.style.display = "block";
-			moveSectionContentMenuTypeTextText.style.display = "none";
-		}
-		moveSectionContentMenuTypeTextText.innerText = finaldata["Moves"]["Type"][i][DATA_Move_Type["Type"]];
-		moveSectionContentMenuTypeMove.innerHTML = ""
-
-		let categories = splitStr(finaldata["Moves"]["Category"][i][DATA_Move_Category["Category"]],",");
-
-		for(let u = 0; u < categories.length; u++) {
-			let moveSectionContentMenuTypeMoveImg = document.createElement("img");
-			moveSectionContentMenuTypeMoveImg.setAttribute("onerror", "this.style.display='none';this.nextElementSibling.style.display='block'");
-			moveSectionContentMenuTypeMoveImg.src = getMedia(true,[categories[u]],[PATH_Move_Category]);
-			moveSectionContentMenuTypeMoveImg.setAttribute("title", categories[u]);
-			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveImg);
-			let moveSectionContentMenuTypeMoveText = document.createElement("h6");
-			moveSectionContentMenuTypeMoveText.innerText = categories[u];
-			moveSectionContentMenuTypeMove.appendChild(moveSectionContentMenuTypeMoveText);
-			moveSectionContentMenuTypeMoveText.style.display = "none";
-		}
-		if(finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]] == undefined) {
-			moveSectionContentMenuAttributePowerPointsText.innerHTML = "–";
-		} else if(finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]] != undefined && finaldata["Moves"]["PP"][i][DATA_Move_PP["Max"]] == undefined) {
-			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]];
-		} else {
-			moveSectionContentMenuAttributePowerPointsText.innerHTML = finaldata["Moves"]["PP"][i][DATA_Move_PP["Min"]]+" <span>(max. "+finaldata["Moves"]["PP"][i][DATA_Move_PP["Max"]]+")</span>";
-		}
-		if(finaldata["Moves"]["Power"][i][DATA_Move_Power["Power"]] == undefined) {
-			moveSectionContentMenuAttributePowerText.innerText = "–";
-		} else {
-			moveSectionContentMenuAttributePowerText.innerText = finaldata["Moves"]["Power"][i][DATA_Move_Power["Power"]];
-		}
-		if(finaldata["Moves"]["Accuracy"][i][DATA_Move_Accuracy["Accuracy"]] == undefined) {
-			moveSectionContentMenuAttributeAccuracyText.innerText = "–";
-		} else {
-			moveSectionContentMenuAttributeAccuracyText.innerText = finaldata["Moves"]["Accuracy"][i][DATA_Move_Accuracy["Accuracy"]];
-		}
-		if(finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]] == undefined) {
-			moveSectionContentMenuAttributePriorityText.innerText = "–";
-		} else {
-			if (finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]] == "0" || finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]] == undefined) {
-				moveSectionContentMenuAttributePriority.style.display = "none";
-			}
-			else {
-				moveSectionContentMenuAttributePriority.style.removeProperty("display");
-			}
-
-
-			if (finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].includes("-")) {
-				moveSectionContentMenuAttributePriorityText.innerText = "-"+finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].replaceAll("-","");
-			}
-			else if (finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].includes("+")) {
-				moveSectionContentMenuAttributePriorityText.innerText = "+"+finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]].replaceAll("+","");
-			}
-			else {
-				moveSectionContentMenuAttributePriorityText.innerText = finaldata["Moves"]["Priority"][i][DATA_Move_Priority["Priority"]];
-			}
-		}
-		if(finaldata["Moves"]["Other Moves"][i]["Contact"] == "Makes contact") {
-			moveSectionContentMenuContactText.innerHTML = "Makes contact";
-		} else if(finaldata["Moves"]["Other Moves"][i]["Contact"] == "Does not make contact") {
-			moveSectionContentMenuContactText.innerHTML = "Does not make contact";
-		}
-		if(finaldata["Moves"]["Other Moves"][i]["Contact"].includes("not") || finaldata["Moves"]["Other Moves"][i]["Contact"].includes("Not")) {
-			moveSectionContentMenuContact.setAttribute("name", "negative");
-		} else {
-			moveSectionContentMenuContact.setAttribute("name", "positive");
-		}
-
-		moveSectionContentMenuRight.innerHTML = "";
-		
-		let othermove = [];
-
-		if(Generation == 1) {
-			othermove = ["Mirror Move", "Sound-Based", "Outside Battle"];
-		}
-		if(Generation == 2) {
-			othermove = ["Protect", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
-		}
-		if(Generation >= 3 && Generation <= 4) {
-			othermove = ["Protect", "Magic Coat", "Snatch", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
-		}
-		if(Generation >= 5 && Generation <= 8) {
-			othermove = ["Protect", "Magic Coat/Magic Bounce", "Snatch", "Mirror Move", "King's Rock", "Sound-Based", "Outside Battle", ];
-		}
-		for(let u = 0; u < othermove.length; u++) {
-			if(finaldata["Moves"]["Other Moves"][i][othermove[u]] != undefined) {
-				let moveSectionContentMenuOther = document.createElement("div");
-				let moveSectionContentMenuOtherContent = document.createElement("span");
-				let moveSectionContentMenuOtherText = document.createElement("h5");
-
-				moveSectionContentMenuOther.setAttribute("name",othermove[u].toLowerCase());
-				for(let q = 0; q < othermove.length; q++) {
-			
-					if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Affected by "+othermove[q]) {
-
-				
-						moveSectionContentMenuOtherText.innerHTML = "Affected by ";
-
-				
-						moveSectionContentMenuOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
-
-						if (othermove[q] != "Outside Battle" && othermove[q] != "Sound-Based") {
-							if (othermove[q] != "King's Rock") {
-								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","move");
-							}
-							else {
-								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","item");
-							}
-							moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
-							moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
-							moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("type","invert");
-						}
-						
-					} else if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Not affected by "+othermove[q]) {
-			
-						moveSectionContentMenuOtherText.innerHTML = "Not affected by";
-						
-					
-							moveSectionContentMenuOtherText.innerHTML += " <b>"+othermove[q]+"</b>";
-
-							if (othermove[q] != "Outside Battle" && othermove[q] != "Sound-Based") {
-								if (othermove[q] != "King's Rock") {
-									moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","move");
-								}
-								else {
-									moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","item");
-								}
-								moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
-								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
-								moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("type","invert");
-							}
-						
-					}
-				}
-				if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Usable outside of battle") {
-					moveSectionContentMenuOtherText.innerHTML = "Usable outside of battle";
-				} else if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Is a sound-based move") {
-					moveSectionContentMenuOtherText.innerHTML = "Is a sound-based move";
-				} else if (finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Affected by Magic Coat") {
-					moveSectionContentMenuOtherText.innerHTML = "Affected by <b>Magic Coat</b>";
-				} else if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Affected by Magic Coat and Magic Bounce") {
-					moveSectionContentMenuOtherText.innerHTML = "Affected by <b>Magic Coat</b> and <b>Magic Bounce</b>";
-
-					let applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
-					for(let r = 0; r < applicables.length; r++) {
-						applicables[r].setAttribute("name","move");
-						applicables[r].addEventListener("click",dataRedirect);
-						applicables[r].setAttribute("function","dataRedirect");
-					}
-				} else if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Not affected by Magic Coat") {
-					moveSectionContentMenuOtherText.innerHTML = "Not affected by <b>Magic Coat</b>";
-					moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("name","move");
-					moveSectionContentMenuOtherText.querySelector(":scope > b").addEventListener("click",dataRedirect);
-					moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("function","dataRedirect");
-					moveSectionContentMenuOtherText.querySelector(":scope > b").setAttribute("type","invert");
-				}
-				else if(finaldata["Moves"]["Other Moves"][i][othermove[u]] == "Not affected by Magic Coat or Magic Bounce") { 
-					moveSectionContentMenuOtherText.innerHTML = "Not affected by <b>Magic Coat</b> or <b>Magic Bounce</b>";
-
-					let applicables = moveSectionContentMenuOtherText.querySelectorAll(":scope > b")
-					for(let r = 0; r < applicables.length; r++) {
-						if (r == 0) {
-							applicables[r].setAttribute("name","move");
-						}
-						else {
-							applicables[r].setAttribute("name","ability");
-						}
-						applicables[r].addEventListener("click",dataRedirect);
-						applicables[r].setAttribute("function","dataRedirect");
-						applicables[r].setAttribute("type","invert");
-					}
-				}
-				moveSectionContentMenuRight.appendChild(moveSectionContentMenuOther);
-				moveSectionContentMenuOther.appendChild(moveSectionContentMenuOtherContent);
-				moveSectionContentMenuOtherContent.appendChild(moveSectionContentMenuOtherText);
-				if(finaldata["Moves"]["Other Moves"][i][othermove[u]].includes("not") || finaldata["Moves"]["Other Moves"][i][othermove[u]].includes("Not")) {
-					moveSectionContentMenuOtherContent.setAttribute("name", "negative");
-				} else {
-					moveSectionContentMenuOtherContent.setAttribute("name", "positive");
-				}
-			}
-		}
-		
-	
-		moveSectionSidebarLearnsetUl.innerHTML = ""
-	
-		let learnsetlevelarr = [];
-		for(let q = 0; q < finaldata["Pokémon Learnset"]["Level Up"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Level Up"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Level Up"][q]["Game"]) == true) {
-				let obj = new Object();
-				obj["Pokémon"] = finaldata["Pokémon Learnset"]["Level Up"][q]["Pokémon"];
-				obj["Factor"] = finaldata["Pokémon Learnset"]["Level Up"][q]["Factor"];
-				learnsetlevelarr.push(obj);
-			}
-		}
-		learnsetlevelarr = learnsetlevelarr.filter(
-			(value) => Object.keys(value).length !== 0);
-		learnsetlevelarr.sort(function(a, b) {
-			return parseInt(a["Factor"]) - parseInt(b["Factor"]);
-		});
-
-		for(let q = 0; q < learnsetlevelarr.length; q++) {
-			let moveSectionSidebarLearnsetLi = document.createElement("li");
-			moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-			let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-			let moveSectionSidebarLearnsetLiImg = document.createElement("img");
-			let moveSectionSidebarLearnsetLiText = document.createElement("small");
-			let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-			let moveSectionSidebarLearnsetLiSource = document.createElement("h5");
-			moveSectionSidebarLearnsetLiSourceOuter.title = "Level Up";
-			moveSectionSidebarLearnsetLiSource.innerHTML = "Level Up: "+learnsetlevelarr[q]["Factor"];
-			moveSectionSidebarLearnsetLiText.innerText = learnsetlevelarr[q]["Pokémon"];
-			moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(learnsetlevelarr[q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
-			moveSectionSidebarLearnsetLiImg.title = learnsetlevelarr[q]["Pokémon"];
-			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
-			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
-			moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
-			moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
-			moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSource);
-
-			moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(learnsetlevelarr[q]["Pokémon"]));
-			moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
-			moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
-		}
-		for(let q = 0; q < finaldata["Pokémon Learnset"]["Evolution"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Evolution"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Evolution"][q]["Game"]) == true) {
-				let moveSectionSidebarLearnsetLi = document.createElement("li");
-				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				let moveSectionSidebarLearnsetLiText = document.createElement("small");
-				let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-				let moveSectionSidebarLearnsetLiSourceText = document.createElement("h6");
-				let moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
-				moveSectionSidebarLearnsetLiSourceOuter.title = "Prior Evolution";
-				moveSectionSidebarLearnsetLiSourceText.innerText = "Prior Evolution:";
-				if(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].includes(",")) {
-					for(let r = 0; r < finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",").length; r++) {
-						let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r]))],[PATH_Pokémon_Box_Default_PNG]);
-						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r];
-						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
-
-						moveSectionSidebarLearnsetLiSource.setAttribute("value",getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"].split(",")[r]));
-						moveSectionSidebarLearnsetLiSource.addEventListener("click", modalData);
-						moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
-					}
-				} else if(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"] == "None") {
-					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
-				} else {
-					let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"]))],[PATH_Pokémon_Box_Default_PNG]);
-					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"];
-					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
-
-					moveSectionSidebarLearnsetLiSource.setAttribute("value",getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Evolution"]));
-					moveSectionSidebarLearnsetLiSource.addEventListener("click", modalData);
-					moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
-				}
-		
-				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
-				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];
-				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"];				
-				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
-				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
-				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceText);
-				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceImgOuter);
-
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldata["Pokémon Learnset"]["Evolution"][q]["Pokémon"]));
-				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
-
-			}
-		}
-		for(let q = 0; q < finaldata["Pokémon Learnset"]["Machine"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Machine"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Machine"][q]["Game"]) == true) {
-				let moveSectionSidebarLearnsetLi = document.createElement("li");
-				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				let moveSectionSidebarLearnsetLiText = document.createElement("small");
-				let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-				let moveSectionSidebarLearnsetLiSource = document.createElement("h5");
-				if(finaldata["Pokémon Learnset"]["Machine"][q]["Machine"].includes("HM")) {
-					moveSectionSidebarLearnsetLiSource.innerHTML = "<b>"+finaldata["Pokémon Learnset"]["Machine"][q]["Machine"]+"</b>";
-					moveSectionSidebarLearnsetLiSource.setAttribute("name","hm");
-					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").setAttribute("name","item");
-					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
-					moveSectionSidebarLearnsetLiSource.setAttribute("function","dataRedirect");
-				} else if(finaldata["Pokémon Learnset"]["Machine"][q]["Machine"].includes("TM")) {
-					moveSectionSidebarLearnsetLiSource.innerHTML = "<b>"+finaldata["Pokémon Learnset"]["Machine"][q]["Machine"]+"</b>";
-					moveSectionSidebarLearnsetLiSource.setAttribute("name","tm");
-					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").setAttribute("name","item");
-					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
-					moveSectionSidebarLearnsetLiSource.setAttribute("function","dataRedirect");
-				} else if(finaldata["Pokémon Learnset"]["Machine"][q]["Machine"].includes("TR")) {
-					moveSectionSidebarLearnsetLiSource.innerHTML = "<b>"+finaldata["Pokémon Learnset"]["Machine"][q]["Machine"]+"</b>";
-					moveSectionSidebarLearnsetLiSource.setAttribute("name","tr");
-					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").setAttribute("name","item");
-					moveSectionSidebarLearnsetLiSource.querySelector(":scope > b").addEventListener("click",dataRedirect);
-					moveSectionSidebarLearnsetLiSource.setAttribute("function","dataRedirect");
-				}
-				
-
-				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
-				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
-				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"];
-				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
-				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
-				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSource);
-
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldata["Pokémon Learnset"]["Machine"][q]["Pokémon"]));
-				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
-
-			}
-		}
-		for(let q = 0; q < finaldata["Pokémon Learnset"]["Tutor"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Tutor"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Tutor"][q]["Game"]) == true) {
-				let tutorData = getTutorData(finaldata["Pokémon Learnset"]["Tutor"][q]["Move"],"Move");
-				
-				let moveSectionSidebarLearnsetLi = document.createElement("li");
-				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				let moveSectionSidebarLearnsetLiText = document.createElement("small");
-
-				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
-				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
-				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"];
-				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
-
-				if (tutorData.length > 0) {
-
-					let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-					let moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
-					let moveSectionSidebarLearnsetLiSourceWrap = document.createElement("b");
-					let moveSectionSidebarLearnsetLiSourceText = document.createElement("small");
-
-					moveSectionSidebarLearnsetLiSourceTitle.innerText = "Move Tutor";
-					moveSectionSidebarLearnsetLiSourceText.innerText = tutorData[0]["Location"];
-					moveSectionSidebarLearnsetLiSourceWrap.setAttribute("name","map");
-					moveSectionSidebarLearnsetLiSourceWrap.setAttribute("value",tutorData[0]["Location"])
-					moveSectionSidebarLearnsetLiSourceWrap.addEventListener("click",dataRedirect);
-					moveSectionSidebarLearnsetLiSourceWrap.setAttribute("function","dataRedirect");
-
-					moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
-					moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceTitle);
-					moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceWrap);
-					moveSectionSidebarLearnsetLiSourceWrap.appendChild(moveSectionSidebarLearnsetLiSourceText);
-				}
-				else {
-					let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-					let moveSectionSidebarLearnsetLiSourceTitle = document.createElement("h5");
-					moveSectionSidebarLearnsetLiSourceTitle.innerText = "Move Tutor";
-					moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
-					moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceTitle);
-				}
-
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldata["Pokémon Learnset"]["Tutor"][q]["Pokémon"]));
-				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
-
-			}
-		}
-		for(let q = 0; q < finaldata["Pokémon Learnset"]["Breeding"].length; q++) {
-			if(finaldata["Pokémon Learnset"]["Breeding"][q]["Move"] == finaldata["Moves"]["Reference"][i][DATA_Move_Reference["Name"]] && getApplicable(finaldata["Pokémon Learnset"]["Breeding"][q]["Game"]) == true) {
-				let moveSectionSidebarLearnsetLi = document.createElement("li");
-				moveSectionSidebarLearnsetUl.appendChild(moveSectionSidebarLearnsetLi);
-				let moveSectionSidebarLearnsetLiImgOuter = document.createElement("div");
-				let moveSectionSidebarLearnsetLiImg = document.createElement("img");
-				let moveSectionSidebarLearnsetLiText = document.createElement("small");
-				let moveSectionSidebarLearnsetLiSourceOuter = document.createElement("span");
-				let moveSectionSidebarLearnsetLiSourceText = document.createElement("h5");
-				let moveSectionSidebarLearnsetLiSourceImgOuter = document.createElement("span");
-				moveSectionSidebarLearnsetLiSourceOuter.title = "Parent";
-				moveSectionSidebarLearnsetLiSourceText.innerText = "Parent:";
-				if(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].includes(",")) {
-					for(let r = 0; r < finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",").length; r++) {
-						let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-						moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r]))],[PATH_Pokémon_Box_Default_PNG]);
-
-						moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r];
-						moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
-
-						moveSectionSidebarLearnsetLiSource.setAttribute("value",getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"].split(",")[r]));
-						moveSectionSidebarLearnsetLiSource.addEventListener("click", modalData);
-						moveSectionSidebarLearnsetLiSource.setAttribute("function","modalData");
-					}
-				} else if(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"] == "None") {
-					moveSectionSidebarLearnsetLiSourceImgOuter.innerText = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
-				} else {
-					let moveSectionSidebarLearnsetLiSource = document.createElement("img");
-					moveSectionSidebarLearnsetLiSource.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"]))],[PATH_Pokémon_Box_Default_PNG]);
-					moveSectionSidebarLearnsetLiSource.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Parent"];
-					moveSectionSidebarLearnsetLiSourceImgOuter.appendChild(moveSectionSidebarLearnsetLiSource);
-				}
-
-				moveSectionSidebarLearnsetLiImg.src = getMedia(true,[getPokémonPath(getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"]))],[PATH_Pokémon_Box_Default_PNG]);
-
-
-				moveSectionSidebarLearnsetLiImg.title = finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"];
-				moveSectionSidebarLearnsetLiText.innerText = finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"];
-
-				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiImgOuter);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiImg);
-				moveSectionSidebarLearnsetLiImgOuter.appendChild(moveSectionSidebarLearnsetLiText);
-				moveSectionSidebarLearnsetLi.appendChild(moveSectionSidebarLearnsetLiSourceOuter);
-				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceText);
-				moveSectionSidebarLearnsetLiSourceOuter.appendChild(moveSectionSidebarLearnsetLiSourceImgOuter);
-
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("value",getPokémonInt(finaldata["Pokémon Learnset"]["Breeding"][q]["Pokémon"]));
-				moveSectionSidebarLearnsetLiImgOuter.addEventListener("click", modalData);
-				moveSectionSidebarLearnsetLiImgOuter.setAttribute("function","modalData");
-			}
-		}
-
-		let tempStr;
-		if (moveLearnsetPB.length > 1) {
-			tempStr = moveLearnsetPB.join(",");
-		}
-		else {
-			tempStr = moveLearnsetPB[0];
-		}
-		moveLearnsetPartyBox(tempStr);
-	}
-};
+    // Force reflow to restart animation
+    targetElements.forEach(el => {
+        el.classList.remove('rangeAnimation1', 'rangeAnimation2');
+        void el.offsetWidth; // Trigger reflow
+        el.classList.add(range.includes('May') ? 'rangeAnimation1' : 'rangeAnimation2');
+    });
+
+    // Always apply rangeAnimation3 to userElement
+    userElement.classList.remove('rangeAnimation3');
+    void userElement.offsetWidth; // Trigger reflow
+    userElement.classList.add('rangeAnimation3');
+}
 
 
