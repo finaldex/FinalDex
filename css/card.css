@@ -1,0 +1,545 @@
+#card {
+    position: fixed;
+    width: 700px;
+    height: 350px;
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 100;
+    background: hsl(0, 0%, 20%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border: 2px solid hsl(0, 0%, 0%);
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: 1s ease opacity 0s, 1s ease width 0s, 1s ease height 0s;
+}
+
+#card.full {
+    width: 1050px;
+    height: 700px;
+    max-width: 90%;
+    max-height: 90%;
+    aspect-ratio: 3 / 2;
+    inset: unset !important;
+    top: unset !important;
+    left: unset !important;
+    right: unset !important;
+    bottom: unset !important;
+}
+
+#card.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#card[data-color='Green'] select,
+#card[data-color='Red'] select,
+#card[data-color='Blue'] select,
+#card[data-color='Brown'] select,
+#card[data-color='Purple'] select,
+#card[data-color='Gray'] select,
+#card[data-color='Black'] select {
+    text-shadow: 1px 1px 0 hsl(0, 0%, 20%);
+}
+
+#card[data-color='Yellow'] select,
+#card[data-color='Pink'] select,
+#card[data-color='White'] select {
+    text-shadow: 1px 1px 0 hsl(0, 0%, 80%);
+}
+
+#card[data-color='Green'] ul:not(.stats) {
+    background-color: mediumspringgreen;
+    color: black;
+}
+
+#card[data-color='Red'] ul:not(.stats) {
+    background: indianred;
+    color: white;
+}
+
+#card[data-color='Blue'] ul:not(.stats) {
+    background: cornflowerblue;
+    color: white;
+}
+
+#card[data-color='Yellow'] ul:not(.stats) {
+    background: palegoldenrod;
+    color: black;
+}
+
+#card[data-color='Brown'] ul:not(.stats) {
+    background: peru;
+    color: white;
+}
+
+#card[data-color='Purple'] ul:not(.stats) {
+    background: mediumpurple;
+    color: white;
+}
+
+#card[data-color='Pink'] ul:not(.stats) {
+    background: pink;
+    color: black;
+}
+
+#card[data-color='Gray'] ul:not(.stats) {
+    background: silver;
+    color: black;
+}
+
+#card[data-color='White'] ul:not(.stats) {
+    background: whitesmoke;
+    color: black;
+}
+
+#card[data-color='Black'] ul:not(.stats) {
+    background: hsl(0, 0%, 30%);
+    color: white;
+}
+
+#card > aside:first-child {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+#card > aside:nth-of-type(2) {
+    width: 250%;
+    height: 100%;
+}
+
+#card > aside:first-child > header {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    align-content: center;
+}
+
+#card > aside:first-child > section:nth-of-type(1) {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#card > aside:first-child > section:nth-of-type(2) {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#card > aside:first-child > *:empty {
+    display: none;
+}
+
+#card > aside:nth-of-type(2) > header {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#card > aside:nth-of-type(2) > section {
+    width: 100%;
+    height: 80%;
+}
+
+#card > aside:nth-of-type(2) select {
+    width: 70%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: unset;
+    text-indent: 15px;
+    text-align: left;
+}
+
+#card > aside:nth-of-type(2) select:hover {
+    filter: brightness(0.7);
+}
+
+#card > aside:nth-of-type(2) select option {
+    padding: 10px;
+    font-size: 1rem;
+    color: initial;
+    text-indent: 34px;
+}
+
+#card ul {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    font-size: 0.8rem;
+}
+
+#card .type {
+    width: 20%;
+    height: 20%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    text-align: right;
+    padding: 10px;
+    font-size: 0.7rem;
+}
+
+#card > aside:first-child > header .name {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+#card > aside:first-child > header .id {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#card > aside:first-child > header > * {
+    padding: 2px 0;
+}
+
+#card > aside:first-child .ability > * {
+    padding: 5px 0;
+}
+
+#card *[title] {
+    cursor: help;
+}
+
+#card ul.data li {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 0;
+}
+
+#card ul.data li:not(:last-child) {
+    border-bottom: 1px dashed hsl(0, 0%, 0%);
+}
+
+#card ul.data li > section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 10px;
+}
+
+#card ul.data li > section:first-child {
+    width: 100%;
+}
+
+#card ul.data li > section:last-child {
+    width: 250%;
+}
+
+#card ul li > section > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#card ul.stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#card ul.stats li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px 5px;
+}
+
+#card ul.stats li > *:first-child {
+    width: 20%;
+    text-align: right;
+    padding: 0 5px;
+}
+
+#card ul.stats li > div {
+    width: 80%;
+    position: relative;
+    color: white;
+}
+
+#card ul.stats li > div > * {
+    width: var(--Width);
+    background: var(--Background);
+    padding: 5px 10px;
+    border: 2px solid hsl(0, 0%, 15%);
+    display: block;
+    border-radius: 4px;
+    text-shadow: 1px 1px black;
+    text-align: right;
+    min-width: fit-content;
+}
+
+#card ul.stats li.HP > div > * {
+    background: var(--Stats_HP);
+}
+
+#card ul.stats li.Attack > div > * {
+    background: var(--Stats_Attack);
+}
+
+#card ul.stats li.Defense > div > * {
+    background: var(--Stats_Defense);
+}
+
+#card ul.stats li.Special > div > * {
+    background: var(--Stats_Special);
+}
+
+#card ul.stats li.SpAtk > div > * {
+    background: var(--Stats_SpAtk);
+}
+
+#card ul.stats li.SpDef > div > * {
+    background: var(--Stats_SpDef);
+}
+
+#card ul.stats li.Speed > div > * {
+    background: var(--Stats_Speed);
+}
+
+#card ul.stats li.Total > div > * {
+    background: hsl(0, 0%, 35%);
+}
+
+#card ul.data,
+#card ul.evolution,
+#card ul.form,
+#card ul.learnset,
+#card ul.area {
+    background: hsl(0, 0%, 30%);
+    border: 2px solid hsl(0, 0%, 10%);
+    border-right: none;
+    border-bottom: none;
+    text-shadow: none;
+}
+
+#card ul:not(.active) {
+    display: none;
+}
+
+#card ul li > section > div.bar {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#card ul li > section > div.bar > span:first-child {
+    text-align: left;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-right-width: 1px;
+}
+
+#card ul li > section > div.bar > span:last-child {
+    text-align: right;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-left-width: 1px;
+}
+
+#card ul li > section > div.bar *.male {
+    background: deepskyblue;
+    color: white;
+}
+
+#card ul li > section > div.bar *.female {
+    background: hotpink;
+    color: white;
+}
+
+#card ul li > section > div.bar > span {
+    width: calc(var(--Width, 50%) * 1);
+    padding: 5px 5px;
+    min-width: fit-content;
+    text-shadow: 1px 1px black;
+    border: 2px solid hsl(0, 0%, 10%);
+}
+
+#card .type img[src=''],
+#card .type > div:not(:has(img[src=''])) > *:last-child {
+    display: none;
+}
+
+#card ul li > section > div.bar:not(:has([data-value='0'] ~ [data-value='0'])) [data-value='0'] {
+    display: none;
+}
+
+#card ul li > section > div.bar:has( > *[data-value='0'] ~ *[data-value]:not([data-value='0'])) *[data-value]:not([data-value='0']):last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+#card ul li > section > div.bar:has( > *[data-value]:not([data-value='0']) ~ [data-value='0']) *[data-value]:not([data-value='0']):first-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#card ul li > section > div.bar:has([data-value='0'] ~ [data-value='0']) [data-value='0'] > * {
+    visibility: hidden;
+}
+
+#card ul li > section > div.bar:has([data-value='0'] ~ [data-value='0']) [data-value='0']:first-child {
+    border-right: none;
+}
+
+#card ul li > section > div.bar:has([data-value='0'] ~ [data-value='0']) [data-value='0']:last-child {
+    border-left: none;
+}
+
+#card ul li > section > div.bar:has([data-value='0'] ~ [data-value='0']) [data-value='0'] {
+    background: hsl(0, 0%, 20%);
+    width: 50%;
+}
+
+#card ul li.genderratio > section > div.bar:has([data-value='0'] ~ [data-value='0'])::after {
+    position: absolute;
+    content: "Genderless";
+    font-weight: bold;
+    color: white;
+}
+
+#card > aside:nth-of-type(2) select option[disabled] {
+    display: none;
+}
+
+#card > aside:nth-of-type(2) select:not(:has(option:not([disabled]))) {
+    visibility: hidden;
+}
+
+#card > aside:nth-of-type(2):not(:has(section > *:not(:empty))) {
+    display: none;
+}
+
+#card .fullscreen {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#card .pokemon {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#card .pokemon img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#card .type img {
+    max-width: 100%;
+    max-height: 24px;
+}
+
+#card .form,
+#card .evolution {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#card .form li {
+    max-width: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+}
+
+#card .evolution li {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    padding: 10px 20px;
+    flex-wrap: nowrap;
+}
+
+#card .evolution div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    padding: 0 10px;
+    flex-wrap: wrap;
+}
+
+#card .evolution li > span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#card .evolution div::before {
+    content: "→";
+    position: absolute;
+    left: 5px;
+}
+
+#card .evolution img,
+#card .form img {
+    max-width: 100%;
+    max-height: 100%;
+}
