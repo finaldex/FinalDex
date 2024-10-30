@@ -1,154 +1,120 @@
-let finaldata = [];
-let dexChecker = [1];
-let drag;
-let savedtar;
-let saveddrag;
-let boxDrag;
-let loads = ["Game Metadata","Pokémon Metadata","Pokémon Learnset Metadata","Locations Metadata","Location Pokémon Metadata","Location Items Metadata","Location Trainers Metadata","Moves Metadata","Abilities Metadata","Items Metadata","Trainers Metadata","Directory"];
-let baseurl = "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/";
-let baseextension = "json";
+const finaldata = {};
 
-let initStart = 1;
-let initLength = loads.length;
-let initTimeStart;
+let json_urls = [
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Game Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Learnset Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Locations Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Pokemon Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Items Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Trainers Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Moves Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Abilities Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Items Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Trainers Dataset.json",
+    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Directory.json"
+];
 
-for(let i = 0; i < loads.length; i++) {
-	let url = baseurl+loads[i]+"."+baseextension;
-	requestLoad(i,url);
+let InitialTime = 0;
+let LoadProgress = 0;
+
+function load_start() {
+	const href_match = location.href.match(/#(.*)/) ? location.href.match(/#(.*)/)[1].replace("%20"," ").replace("_"," ") : "Red";
+    const ID = get_gameid(href_match) || 1;
+    const Game = get_game(ID) || "N/A";
+    document.title = `${Game}`
+    load_game(ID);
 }
 
-let timeStart = new Date();
 
-function requestLoad(i,url) {
-	let gameRequest = new XMLHttpRequest();
-	gameRequest.open('GET', baseurl+loads[0]+"."+baseextension);
-	gameRequest.responseType = 'json';
-	gameRequest.send();
-	gameRequest.onload = function() {
-		let Gamedata = gameRequest.response;
+async function load_game(ID) {
 
-		if (loads[i] == "Game Metadata") {
-			let val = loads[i].replace(" Metadata","")
-			finaldata[val] = Gamedata;
+	load_clear();
 
-			let urlid = location.href.replaceAll("%20"," ").replaceAll(/(?<=^)(.*)(?=Game.html)/g,"").replaceAll("Game.html","").replaceAll("#","").replaceAll("_"," ");
-			GameID = getGameID(urlid);
-			define();
-			config();
-			if (!(location.href).toLowerCase().includes("random")) {
-				location.href = splitStr(location.href,"#")[0]+"#"+GameName.replaceAll(" ","_");
-			}
-		}
+    ID = typeof(ID) === "string" ? (get_gameid(ID) !== null ? get_gameid(ID) : 1) : ID;
 
-		
-		if (i != 0) {
-			let request = new XMLHttpRequest();
-			request.open('GET', url);
-			request.responseType = 'json';
-			request.send();
-			request.onload = function() {
-				let Metadata = request.response;
-				let val = loads[i].replace(" Metadata","")
-	
+    const totalDatasets = json_urls.length; // Total number of datasets
+    let datasetsLoaded = 0; // Track how many datasets have been loaded
+	InitialTime = new Date();
 
-				/*
-				if (loads[i] == "Directory") {
-					let arr = Metadata;
-					let origin = Object.keys(arr);
-					let keys = Object.keys(arr).map(function(x){return x.replaceAll(PATH,"").split("/")[0].replace(".","");});
-					keys = [...new Set(keys)]
-					keys = keys.filter(x => x)
-			
-					finaldata[loads[i]] = []
+	document.querySelector("#load").className = "active";
+    document.querySelector("#load .description > *").innerHTML = "Building Databases<span>.</span><span>.</span><span>.</span>";
 
-					for (let q = 0; q < keys.length; q++) {
-						for (let r = 0; r < origin.length; r++) {
-							if (origin[r].includes(PATH+keys[q])) {
-								if (finaldata[loads[i]][keys[q]] == undefined) {
-									finaldata[loads[i]][keys[q]] = [];
-								}
-								finaldata[loads[i]][keys[q]][origin[r]] = Metadata[origin[r]]
-							}
-						}
-					}
-				}
-				else {
-					finaldata[val] = Metadata;	
-				}
-				*/
-				finaldata[val] = Metadata;
-					
-				initialize();
-				
-			}
-		}
-	}
+    for (const url of json_urls) {
+        datasetsLoaded++;
+        LoadProgress = Math.min(100, (datasetsLoaded / totalDatasets) * 100); // Calculate progress
+        document.querySelector("#load").style.setProperty("--progress", LoadProgress + "%");
+
+		await load_dataset(url); // Load the dataset
+		//await new Promise(resolve => setTimeout(resolve, 400)); // Makes start animation smoother but increases load time by ~5 seconds
+    }
+
+	configure_game(ID);
 }
 
-function initialize() {
-	let initEnd = initStart++;
-	let loaddescription = document.getElementById("load-description");
-	if(initEnd == 1) {
-		initTimeStart = new Date();
-	}
+async function load_dataset(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Network response was not ok');
 
-	let val = initEnd/(initLength-1)*100;
-	document.querySelector("#load").style.setProperty("--progress",val+"%");
+        const data = await response.json();
+        const json = url.match(/([^\/]+)\.json$/)[1].replace(" Dataset", "");
 
-	loaddescription.innerHTML = "Building Databases<span>.</span><span>.</span><span>.</span>";
-	if(new Date() - initTimeStart >= 5000) {
-		loaddescription.innerHTML = "Load taking longer than expected<span>.</span><span>.</span><span>.</span>";
-	}
-	if(initEnd >= initLength - 1) {
-		loaddescription.innerHTML = "Complete!";
+		finaldata[json] = data;
+        
 
-		console.log(finaldata)
-
-		config2();
-
-		createNav();
-		createPokémon();
-		createMap();
-		createAbility();
-		createItem();
-		createMove();
-		createTool();
-
-		countdown();
-		stopwatch();
-		RNG();
-
-
-		window.addEventListener('resize', resize);
-
-		memory("Restore","",document.querySelectorAll('#resizer[id][name]'));
-		memory("Restore","game",document.querySelectorAll('#pokémon > aside[name="settings"] > span[name="variant"] input[type="checkbox"][id][name]'));
-
-		variantSelector(); /* 1min */
-
-		boxMemory("Restore")
-		partyMemory("Restore");
-		memoryDexSwitch();
-
-		load();
-
-		console.log("Time to load: "+msToTime(new Date() - timeStart))
-
-	}
+    } catch (error) {
+        console.error('Error loading dataset:', error);
+    }
 }
 
-function getPokémonPath(int) {
-	if (isNaN(parseInt(int))) {
-		int = getPokémonInt(int);
-	}
-	let result = []
-	let num = finaldata["Pokémon"]["Path"][int]["Number"];
-	let txt = finaldata["Pokémon"]["Path"][int]["Text"];
-	if (num != undefined) {
-		result.push(num);
-	}
-	if (txt != undefined) {
-		result.push(txt);
-	}
-	return result.join("-")
+function load_initialize() {
+
+    document.querySelector("#load").style.setProperty("--progress", "100%");
+    document.querySelector("#load .description > *").innerHTML = "Complete!";
+
+    create_card();
+    create_console();
+    create_fullscreen();
+	create_dex();
+    create_nav();
+	create_location();
+    create_item();
+	create_ability();
+	create_move();
+    create_memory();
+
+	//create_tool();
+
+    document.querySelector("#load").classList.remove("active");
+
+    const LoadTime = format_time(new Date() - InitialTime);
+	console.log("Load Time: " + LoadTime);
+
+	//console.group("finaldata");
+	//console.log(finaldata);
+    //console.groupEnd();
+
+    console.group("data");
+    console.log(data);
+    console.groupEnd();
+
+    console.group("config");
+	console.log(config);
+    console.groupEnd();
+
+    console.group("memory");
+    console.log(memory);
+	console.groupEnd();
+
+
 }
+
+
+function load_clear() {
+    //console.clear();
+    const elements = document.querySelectorAll(["#nav", "#setting", "#dex", "#fullscreen", "#location","#ability","#move","#item","#tool", "#editor", "#console"].join(', '));
+	elements.forEach(el => { el.remove(); });
+}
+
+
