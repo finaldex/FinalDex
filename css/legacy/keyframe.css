@@ -1,0 +1,196 @@
+@keyframes shake {
+	0% {
+		transform:'translateX(0%)';
+	}
+
+	25% {
+		transform:'translateX(1%)';
+	}
+
+	50% {
+		transform:'translateX(0%)';
+	}
+
+	75% {
+		transform:'translateX(-1%)';
+	}
+
+	100% {
+		transform:'translateX(0%)';
+	}
+}
+
+@-webkit-keyframes dot {
+	0% {
+		opacity:1;
+	}
+
+	100% {
+		opacity:0;
+	}
+}
+
+
+
+
+
+@keyframes dash {
+    to {
+        background-position:100% 0%, 0% 100%, 0% 0%, 100% 100%;
+    }
+}
+
+@keyframes rotate {
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes scale95 {
+    0% {
+        transform:scale(100%);
+    }
+    50% {
+        transform:scale(95%);
+    }
+    100% {
+        transform:scale(100%);
+    }
+}
+
+@keyframes scale90 {
+    0% {
+        transform:scale(100%);
+    }
+    50% {
+        transform:scale(90%);
+    }
+    100% {
+        transform:scale(100%);
+    }
+}
+
+@keyframes scale80 {
+    0% {
+        transform:scale(100%);
+    }
+    50% {
+        transform:scale(80%);
+    }
+    100% {
+        transform:scale(100%);
+    }
+}
+
+@keyframes scale70 {
+    0% {
+        transform:scale(100%);
+    }
+    50% {
+        transform:scale(70%);
+    }
+    100% {
+        transform:scale(100%);
+    }
+}
+
+@keyframes scale60 {
+    0% {
+        transform:scale(100%);
+    }
+    50% {
+        transform:scale(60%);
+    }
+    100% {
+        transform:scale(100%);
+    }
+}
+
+
+@keyframes scale50 {
+    0% {
+        transform:scale(100%);
+    }
+    50% {
+        transform:scale(50%);
+    }
+    100% {
+        transform:scale(100%);
+    }
+}
+
+
+@keyframes rotateInverse {
+    to {
+        transform:rotate(-360deg);
+    }
+}
+
+
+@keyframes blinkOpacity0 {
+	0% {
+		opacity:1;
+	}
+
+	50% {
+		opacity:0;
+	}
+
+	100% {
+		opacity:1;
+	}
+}
+
+@keyframes fadeOpacity {
+	0% {
+		opacity:1;
+	}
+
+	100% {
+		opacity:0;
+	}
+}
+
+
+@-webkit-keyframes blinkOpacity0 {
+	0% {
+		opacity:1;
+	}
+
+	50% {
+		opacity:0;
+	}
+
+	100% {
+		opacity:1;
+	}
+}
+
+
+@keyframes blinkOpacity05 {
+	0% {
+		opacity:1;
+	}
+
+	50% {
+		opacity:0.5;
+	}
+
+	100% {
+		opacity:1;
+	}
+}
+
+@-webkit-keyframes blinkOpacity05 {
+	0% {
+		opacity:1;
+	}
+
+	50% {
+		opacity:0.5;
+	}
+
+	100% {
+		opacity:1;
+	}
+}
