@@ -1,0 +1,814 @@
+#location > main {
+    height: 70%;
+}
+
+#location .panel {
+    display: flex;
+    height: 15%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#location .panel > div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#location .panel > div > div {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+#location .panel > div:not(:has(> div > *)) {
+    display: none;
+}
+
+#location .panel .navigation {
+    width: 200%;
+}
+
+#location > main.map {
+    padding: 0;
+}
+
+#location .map > .west {
+    float: left;
+    width: 5%;
+    height: 100%;
+}
+
+#location .map > .north {
+    float: left;
+    width: 90%;
+    height: 5%;
+}
+
+#location .map > div {
+    float: left;
+    width: 90%;
+    height: 90%;
+    position: relative;
+    text-align: center;
+    background: black;
+    padding: 0;
+    overflow: hidden;
+}
+
+#location .map > div > div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: .25s ease transform;
+}
+
+#location .map > div:not(:hover) > div:not([data-suspend='true']) {
+    transform: none !important;
+}
+
+#location .map > .south {
+    float: left;
+    width: 90%;
+    height: 5%;
+}
+
+#location .map > .east {
+    clear: right;
+    width: 5%;
+    height: 100%;
+}
+
+#location .map > button {
+    transition: .5s ease color;
+}
+
+#location .map > button:active {
+    font-size: 0.5rem;
+}
+
+#location .map > button[title=''] {
+    color: transparent;
+    pointer-events: none;
+}
+
+#location .map > .west,
+#location .map > .north,
+#location .map > .east,
+#location .map > .south {
+    background: var(--Background_Location_Content_Redirect);
+    color: var(--Color_Location_Content_Redirect);
+    border: var(--Border_Location_Content_Redirect);
+}
+
+#location .sidebar > header label {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    color: var(--Color_Location_Sidebar_Header_Label);
+    border: var(--Border_Location_Sidebar_Header_Label);
+}
+
+#location .sidebar > header label:has(input:checked) {
+    background: var(--Background_Location_Sidebar_Header_Label_Selected);
+    color: var(--Color_Location_Sidebar_Header_Label_Selected);
+}
+
+#location .sidebar > header > label {
+    border: none;
+}
+
+#location .sidebar > header > div > label {
+    border-bottom: none;
+    border-left: none;
+}
+
+#location .sidebar > header > div > label:last-child {
+    border-right: none;
+}
+
+#location .sidebar:not(:has(.pokemon > ul > *)):not(:has(.item > ul > *)):not(:has(.shop > ul > *)):not(:has(.trainer > ul > *)):not(:has(.tutor > ul > *)) > header > div,
+#location .sidebar:not(:has(.pokemon > ul > *)) > header label:has(input[value='pokemon']),
+#location .sidebar:not(:has(.item > ul > *)) > header label:has(input[value='item']),
+#location .sidebar:not(:has(.shop > ul > *)) > header label:has(input[value='shop']),
+#location .sidebar:not(:has(.trainer > ul > *)) > header label:has(input[value='trainer']),
+#location .sidebar:not(:has(.tutor > ul > *)) > header label:has(input[value='tutor']) {
+    display: none;
+}
+
+#location .sidebar > header > div {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#location .sidebar > header > div:not(:has( > *)) {
+    display: none;
+}
+
+#location > header > .slogan {
+    font-family: monospace;
+}
+
+#location .sidebar > main > div[class]:not(.active) {
+    display: none;
+}
+
+#location .sidebar > main > div[class] {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#location .sidebar > main > .overview > header {
+    width: 100%;
+    height: 40%;
+}
+
+#location .sidebar > main > .overview > main {
+    width: 100%;
+    height: 60%;
+    padding: 10px;
+    font-size: 0.9rem;
+    overflow: auto;
+}
+
+#location .sidebar > main > .overview > header > *:first-child {
+    width: 100%;
+    height: 15%;
+}
+
+#location .sidebar > main > .overview > header > *:last-child {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#location .sidebar > main > .overview > header > *:last-child button {
+    width: 10%;
+    height: 100%;
+    font-size: 2rem;
+}
+
+#location .sidebar > main > .overview > header > *:last-child button:active {
+    font-weight: bold;
+}
+
+#location .sidebar > main > .overview > header > *:first-child,
+#location .sidebar > main > .overview > header > *:last-child button {
+    background: var(--Background_Location_Sidebar_Content_Item_Title);
+    color: var(--Color_Location_Sidebar_Content_Item_Title);
+}
+
+#location .sidebar > main > .overview > header > *:first-child,
+#location .sidebar > main > .overview > header > *:last-child ol,
+#location .sidebar > main > .overview > header > *:last-child button {
+    border: var(--Border_Location_Sidebar_Content_Item_Title);
+}
+
+#location .sidebar > main > .overview > header > *:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+#location .sidebar > main > .overview > header > *:last-child ol {
+    border-top: none;
+}
+
+#location .sidebar > main > .overview > header > *:last-child button {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+}
+
+#location .sidebar .overview > main .description_text {
+    font-family: monospace;
+}
+
+#location .sidebar .overview > main > * {
+    padding: 5px 0 0 0;
+}
+
+#location .sidebar .overview > main > *:has(+ [class*='_header']) {
+    padding: 10px 0 15px 0;
+}
+
+#location .sidebar > main > div[class] > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 50%;
+    max-height: 20%;
+    padding: 10px 5px;
+    border-bottom-right-radius: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid hsl(0, 0%, 20%);
+    border-left: none;
+    border-top: none;
+    text-shadow: 2px 2px black;
+}
+
+#location .sidebar > main > div[class] > div:has( > *:empty) {
+    display: none;
+}
+
+#location .sidebar > main > .tutor aside:first-child {
+    width: 200%;
+}
+
+#location .sidebar > main > .tutor aside .move {
+    display: flex;
+    font-size: 0.9em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+}
+
+#location .sidebar > main > .tutor aside:last-child:has(> header:empty):has(> main:empty) {
+    display: none;
+}
+
+#location .sidebar > main > .trainer ul ol > li .held_image[src=''] {
+    width: 32px;
+    height: 32px;
+    visibility: hidden;
+}
+
+#location .sidebar > main > div[class] > ul {
+    display: flex;
+    height: 100%;
+    overflow: auto;
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#location .sidebar > main > .tutor ol > li aside:last-child > *:empty {
+    display: none;
+}
+
+#location .sidebar > main > .trainer ul ol > li main {
+    font-size: 0.7rem;
+}
+
+#location .sidebar > main > .trainer ul ol > li main > * > * {
+    padding: 5px 10px;
+}
+
+#location .sidebar > main > .trainer ul ol > li main > *:first-child {
+    display: flex;
+    width: 200%;
+    padding: 5px;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > * {
+    width: 50%;
+}
+
+#location .sidebar > main > .trainer ul ol > li main > *:last-child {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#location .sidebar > main > .trainer ul ol > li header > * {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+    font-size: 0.8rem;
+    padding: 2px 5px;
+}
+
+#location .sidebar > main > .trainer ul ol > li header > * > div {
+    width: 100%;
+}
+
+#location .sidebar > main > .trainer > header {
+    display: flex;
+    width: 100%;
+    height: 35%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background: hsl(0, 0%, 30%);
+    border-bottom: 1px solid black;
+    color: unset;
+}
+
+#location .sidebar > main > div[class].trainer > ul {
+    height: 65%;
+}
+
+#location .sidebar > main > .trainer header > section > div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+#location .sidebar > main > .trainer .search {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-align: center;
+}
+
+#location .sidebar > main > .trainer header > section:nth-of-type(1) {
+    width: 100%;
+    height: 25%;
+    font-size: 0.8rem;
+}
+
+#location .sidebar > main > .trainer header > section:nth-of-type(2) {
+    width: 100%;
+    height: 35%;
+}
+
+#location .sidebar > main > .trainer header > section:nth-of-type(3) {
+    width: 100%;
+    height: 25%;
+}
+
+#location .sidebar > main > .trainer header > section > div {
+    width: 100%;
+    height: 100%;
+}
+
+#location .sidebar > main > .trainer header > section > div:not(.name) {
+    font-size: 0.8rem;
+}
+
+#location .sidebar > main > .trainer header > section:not(:nth-of-type(2)) > div:nth-of-type(2) {
+    width: 150%;
+}
+
+#location .sidebar > main > .trainer header > section:nth-of-type(2) > div:nth-of-type(2) {
+    width: 200%;
+}
+
+#location .sidebar > main > .trainer header > section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#location .sidebar > main > .trainer header .item:has(img ~ img) img,
+#location .sidebar > main > .trainer header .reward:has(img ~ img) img {
+    margin: 0 -5px;
+}
+
+#location .sidebar > main > .trainer header .item:has(div img[src='']) > div,
+#location .sidebar > main > .trainer header .item:has(div img[src]:not([src=''])) > *:last-child,
+#location .sidebar > main > .trainer header .reward:has(div img[src='']) > div,
+#location .sidebar > main > .trainer header .reward:has(div img[src]:not([src=''])) > *:last-child {
+    display: none;
+}
+
+#location .sidebar > main > .trainer header .item *[title]:not(img),
+#location .sidebar > main > .trainer header .reward *[title]:not(img) {
+    cursor: help;
+}
+
+#location .sidebar > main > .trainer header .item > *[title]:not(img):hover,
+#location .sidebar > main > .trainer header .reward > *[title]:not(img):hover {
+    filter: invert(1);
+}
+
+#location .sidebar > main > .trainer header .note {
+    font-size: 0.7rem;
+}
+
+#location .sidebar > main > .trainer header .name[title]:not([title='']) {
+    cursor: help;
+    text-decoration: underline;
+}
+
+#location .sidebar > main > .trainer header .name[title]:not([title='']):hover {
+    text-decoration-style: dotted;
+}
+
+#location .sidebar > main > .trainer header > section:nth-of-type(2) img[src='']:not([title='']) {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+}
+
+#location .sidebar > main > .trainer header > section:nth-of-type(2) img[src='']:not([title=''])::after {
+    content: '?';
+    display: flex;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    font-size: 2rem;
+}
+
+#location .sidebar > main > .trainer .reward:has( > *:last-child:empty) > *:first-child,
+#location .sidebar > main > .trainer .item:has( > *:last-child:empty) > *:first-child {
+    display: none;
+}
+
+#location .sidebar > main > .trainer .previous img,
+#location .sidebar > main > .trainer .next img {
+    transform: scale(0.75);
+    filter: brightness(0.5);
+    cursor: pointer;
+}
+
+#location .sidebar > main > .trainer .previous img:hover,
+#location .sidebar > main > .trainer .next img:hover {
+    filter: brightness(1);
+}
+
+#location .sidebar > main > .trainer ul ol > li main,
+#location .sidebar > main > .trainer ul ol > li header {
+    padding: 10px;
+}
+
+#location .sidebar > main > .trainer ul ol > li {
+    display: flex;
+    position: relative;
+    background: linear-gradient(90deg, var(--Type1) 30%, var(--Type2) 70%);
+    text-shadow: 1px 1px 1px black;
+}
+
+#location .sidebar > main > .trainer ul ol > li .held_image {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+#location .sidebar > main > .trainer ul ol > li .gender {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 0.8rem;
+}
+
+#location .sidebar > main > .trainer ul ol > li aside:last-child:has(main > *:first-child:empty):has(main > *:last-child:empty):has(header:empty),
+#location .sidebar > main > .trainer ul ol > li header:empty,
+#location .sidebar > main > .trainer ul ol > li main:has(> *:first-child:empty):has(> *:last-child:empty) {
+    display: none;
+}
+
+#location .sidebar > main > .trainer img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#location .sidebar > main > .trainer ul ol .gender[title]:not([title='']) {
+    cursor: help;
+}
+
+#location .sidebar > main > .trainer .search ol > *:hover,
+#location .sidebar > main > .trainer .search ol > *:active {
+    font-weight: bold;
+}
+
+#location .sidebar > main > .trainer .search ol > *:not(.hidden):has(~ *:not(.hidden)) {
+    border-bottom: 1px dashed hsl(0, 0%, 40%);
+}
+
+#location .sidebar > main > .trainer .search ol > * {
+    display: flex;
+    width: 100%;
+    padding: 5px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+#location .sidebar > main > .trainer .search ol {
+    display: flex;
+    width: 90%;
+    max-height: 30vh;
+    overflow: auto;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    position: absolute;
+    background: hsl(0, 0%, 20%);
+    top: calc(100% - 2px);
+    border: 2px solid hsl(0, 0%, 0%);
+    z-index: 100;
+}
+
+#location .sidebar > main > .trainer .search input {
+    width: 90%;
+    height: 80%;
+    text-align: center;
+    padding: 0 5%;
+    border: 2px inset hsl(0, 0%, 10%);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+#location .sidebar > main > .trainer .search ol {
+    display: none;
+}
+
+#location .sidebar > main > .trainer .search:focus-within ol,
+#location .sidebar > main > .trainer .search ol:focus-within {
+    display: flex;
+}
+
+#location .sidebar > main > .trainer .search ol > *.hidden {
+    display: none;
+}
+
+#location .sidebar > main > .trainer .search ol:not(:has(*:not(.hidden))) {
+    padding: 15px 0;
+}
+
+#location .sidebar > main > .overview > header > *:last-child > div {
+    overflow: hidden;
+    width: 80%;
+    height: 100%;
+    background: black;
+    position: relative;
+}
+
+#location .sidebar > main > .overview > header > *:last-child ol {
+    display: flex;
+    width: calc(100% + 2px);
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    transition: .25s ease;
+    transform: translate(var(--translate-value), 0%);
+}
+
+#location .sidebar > main > .overview > header > *:last-child ol li {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#location .sidebar > main > .overview > header > *:last-child ol li img {
+    width: 100%;
+    height: 100%;
+    object-fit: scale-down;
+}
+
+#location .sidebar > main > .overview > header > *:last-child ol:empty::after {
+    content: "?";
+    display: flex;
+    width: 100%;
+    height: 100%;
+    font-size: 5rem;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+}
+
+#location .sidebar > main > .overview > header > *:last-child ol:not(:empty) {
+    cursor: pointer;
+}
+
+#location .sidebar > main > .trainer ul li .ability span {
+    display: block;
+}
+
+#location .sidebar > main > .trainer ul ol > li {
+    display: flex;
+    position: relative;
+    background: initial;
+    color: unset;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px dashed hsl(0, 0%, 0%);
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    font-size: 0.9rem;
+}
+
+#location .sidebar > main > .trainer ul img[title] {
+    cursor: help;
+}
+
+#location .sidebar > main > .trainer ul ol > li main > * span {
+    font-size: 0.75rem;
+}
+
+#location .sidebar > main > .trainer ul ol > li .held_image[src=''] {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    visibility: hidden;
+}
+
+#location .sidebar > main > .trainer ul ol > li .held_image[src='']::after {
+    content: '?';
+    display: flex;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    font-size: 1rem;
+}
+
+#location .sidebar > main > .trainer ul ol > li:first-child:not(:has(> aside)) {
+    display: flex;
+    background: hsl(0, 0%, 25%);
+    color: unset;
+    border: 1px solid hsl(0, 0%, 0%);
+    border-right: none;
+    border-left: none;
+    padding: 10px;
+}
+
+#location .sidebar > main > .trainer aside .pokemon {
+    display: flex;
+    font-size: 0.7em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+}
+
+#location .sidebar > main > .trainer ul ol:first-child > li:first-child {
+    border-top: none;
+}
+
+#location .sidebar > main > .trainer aside:first-child {
+    width: 100%;
+}
+
+#location .sidebar > main > .trainer aside:last-child {
+    width: 200%;
+}
+
+#location .sidebar > main > .trainer ul ol > li main {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 5px;
+}
+
+#location .sidebar > main > .trainer ul ol > li header {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5px;
+    align-content: flex-start;
+    text-align: left;
+    flex-wrap: wrap;
+}
+
+#location .sidebar > main > .trainer ul ol > li header > * > div {
+    list-style: circle;
+    list-style-position: inside;
+    font-size: 0.8rem;
+}
+
+#location .sidebar > main > .trainer ul ol > li header:empty {
+    display: none;
+}
+
+#location .map:not(:has([data-suspend='true'])) > div:not(:has(:hover)) > button {
+    opacity: 0;
+}
+
+#location .map > div > button {
+    z-index: 10;
+    position: absolute;
+    text-shadow: 2px 2px black;
+    font-size: 2rem;
+    transition: .5s ease opacity;
+}
+
+#location .map > div > button:active {
+    transform: scale(0.8);
+}
+
+#location .map .zoom {
+    top: 15px;
+    right: 15px;
+}
+
+#location .map .reset {
+    top: 15px;
+    left: 15px;
+}
+
+#location .map .fullscreen {
+    bottom: 15px;
+    right: 15px;
+}
+
+#location .map .suspend {
+    bottom: 15px;
+    left: 15px;
+}
+
+#location .map img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: scale-down;
+}
+
+#location .map:has([data-suspend='true']) > div > button:not(.suspend) {
+    display: none;
+}
+
+#location .map .suspend > *:first-child,
+#location .map:not(:has([data-suspend='true'])) .suspend > *:last-child {
+    display: none;
+}
