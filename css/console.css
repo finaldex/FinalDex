@@ -1,0 +1,36 @@
+#console {
+	position: fixed;
+	z-index: 1000;
+	cursor: default;
+	display: flex;
+	flex-direction: column;
+	pointer-events: none;
+	max-width: 50vw;
+	max-height: 95vh;
+}
+
+#console span {
+	padding: 5px 20px;
+	opacity: 0;
+	transition: 1s ease opacity 0.5s;
+	background: var(--Background_Console);
+	color: var(--Color_Console);
+	border: var(--Border_Console);
+}
+
+#console.Top {
+	top: calc(5vh + 5px);
+}
+
+#console.Bottom {
+	bottom: 25px;
+}
+
+#console.Right {
+	right: 25px;
+}
+
+#console.Left {
+	left: 25px;
+}
+
