@@ -274,7 +274,7 @@ ol.generated_location_pokemon:first-child > li:first-child {
 }
 
 .generated_location_pokemon .tile > div,
-.generated_location_pokemon .item > div {
+.generated_location_pokemon .required > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
