@@ -7,16 +7,16 @@ const create_location = function() {
 
     // Search
     const location_searchWrap = create_element({ Tag: "div", Class: ["search"], Parent: location_catalogHeader });
-    const location_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "location_search", autocomplete: "off", placeholder: "Search Locations...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Locations...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#location .catalog ol li'), Data: data.Locations, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#location .catalog ol li') }, event), }, Parent: location_searchWrap });
+    const location_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "location_search", autocomplete: "off", placeholder: "Search Locations...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Locations...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#location .catalog ol li'), Data: Data.Locations, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#location .catalog ol li') }, event), }, Parent: location_searchWrap });
 
     // List
     const location_catalogList = create_element({ Tag: "ol",  Parent: location_catalog });
 
     // Entry
-    const locations = Object.keys(data.Locations).sort((a, b) => (nA = a.match(/\d+/), nB = b.match(/\d+/), c = a.replace(/\d+/, '').trim().localeCompare(b.replace(/\d+/, '').trim()), c !== 0 ? c : (nA ? (nB ? parseInt(nA[0]) - parseInt(nB[0]) : 1) : -1)));
+    const locations = Object.keys(Data.Locations).sort((a, b) => (nA = a.match(/\d+/), nB = b.match(/\d+/), c = a.replace(/\d+/, '').trim().localeCompare(b.replace(/\d+/, '').trim()), c !== 0 ? c : (nA ? (nB ? parseInt(nA[0]) - parseInt(nB[0]) : 1) : -1)));
 
     locations.forEach((l, i) => {
-        const location_catalogEntry = create_element({ Tag: "li", Event: {click: location_data }, Data: {index: l, search: data.Locations[l].Location.join(",") }, Parent: location_catalogList });
+        const location_catalogEntry = create_element({ Tag: "li", Event: {click: location_data }, Data: {index: l, search: Data.Locations[l].Location.join(",") }, Parent: location_catalogList });
         const location_catalogEntryLabel = create_element({ Tag: "label", Attribute: { for: `location_entry-${l}`, }, Parent: location_catalogEntry });
         const location_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "location_entry", id: `location_entry-${l}`, ...(i === 0 && {checked: ""}) }, Parent: location_catalogEntryLabel });
         const location_catalogEntryText = create_element({ Tag: "strong", Text: l, Parent: location_catalogEntryLabel });
@@ -282,16 +282,16 @@ function location_data() {
     const location_index = active_entry.dataset.index;
 
     const titleText = document.querySelector("#location > header .title > *")
-    titleText.innerText = data.Locations[location_index].Location[0];
+    titleText.innerText = Data.Locations[location_index].Location[0];
 
     const sloganText = document.querySelector("#location > header .slogan > *")
-    sloganText.innerText = data.Locations[location_index].Slogan ? data.Locations[location_index].Slogan : "";
+    sloganText.innerText = Data.Locations[location_index].Slogan ? Data.Locations[location_index].Slogan : "";
 
     const overviewList = document.querySelector("#location .sidebar > main > .overview > header > *:last-child ol");
     overviewList.innerHTML = "";
     overviewList.dataset.index = 1;
 
-    const overviewImages = get_directory({Exact: true, File: [...data.Locations[location_index].Location], Path: [path.Location.Load,path.Location.Overview]})
+    const overviewImages = get_directory({Exact: true, File: [...Data.Locations[location_index].Location], Path: [path.Location.Load,path.Location.Overview]})
     overviewImages.forEach(i => {
         const overviewWrap = create_element({ Tag: "li", Parent: overviewList });
         const overviewImage = create_element({ Tag: "img", Attribute: {src: i, title: i.split('/').pop().replace(/\.[^.]+$/, '').replace(/.*_/, '')}, Parent: overviewWrap });
@@ -300,15 +300,15 @@ function location_data() {
     overview_update();
 
     const overviewText = document.querySelector("#location .sidebar > header label:has(input[value='overview']) > *:last-child")
-    overviewText.innerText = data.Locations[location_index].Location[0];
+    overviewText.innerText = Data.Locations[location_index].Location[0];
 
     const overview_content = document.querySelector("#location .sidebar .overview > main");
     overview_content.innerHTML = "";
 
-    const descriptionArea = data.Locations[location_index].Description ? (data.Locations[location_index].Description.Area ? create_element({ Tag: "h3", Text: data.Locations[location_index].Description.Area, Class: ["description_header"], Parent: overview_content }) : null) : null;
-    const descriptionText = data.Locations[location_index].Description ? (data.Locations[location_index].Description.Text ? create_element({ Tag: "p", Text: data.Locations[location_index].Description.Text, Class: ["description_text"], Parent: overview_content }) : null) : null;
+    const descriptionArea = Data.Locations[location_index].Description ? (Data.Locations[location_index].Description.Area ? create_element({ Tag: "h3", Text: Data.Locations[location_index].Description.Area, Class: ["description_header"], Parent: overview_content }) : null) : null;
+    const descriptionText = Data.Locations[location_index].Description ? (Data.Locations[location_index].Description.Text ? create_element({ Tag: "p", Text: Data.Locations[location_index].Description.Text, Class: ["description_text"], Parent: overview_content }) : null) : null;
 
-    const location_points = data.Locations[location_index]["Point of Interest"] ? data.Locations[location_index]["Point of Interest"] : [];
+    const location_points = Data.Locations[location_index]["Point of Interest"] ? Data.Locations[location_index]["Point of Interest"] : [];
     location_points.forEach(d => {
         const point_header = (d.Description || d.Located) ? create_element({ Tag: "h4", Text: d.Point, Class: ["point_header"], Parent: overview_content }) : null;
         const point_description = d.Description ? create_element({ Tag: "p", Text: d.Description, Class: ["point_text"], Parent: overview_content }) : null;
@@ -316,8 +316,8 @@ function location_data() {
     });
 
     const directions = ['west', 'north', 'east', 'south'];
-    data.Locations[location_index].Connection && (directions.forEach(dir => {
-        const connection = data.Locations[location_index].Connection[dir.charAt(0).toUpperCase()+dir.slice(1)];
+    Data.Locations[location_index].Connection && (directions.forEach(dir => {
+        const connection = Data.Locations[location_index].Connection[dir.charAt(0).toUpperCase()+dir.slice(1)];
         const element = document.querySelector(`#location .map > .${dir}`);
         const value = connection ? connection.join("\n") : "";
         element.title = value;
@@ -327,7 +327,7 @@ function location_data() {
     const locatedElement = document.querySelector("#location .panel .located > div");
     locatedElement.innerHTML = "";
 
-    const location_located = data.Locations[location_index].Connection && data.Locations[location_index].Connection.Located ? data.Locations[location_index].Connection.Located : [];
+    const location_located = Data.Locations[location_index].Connection && Data.Locations[location_index].Connection.Located ? Data.Locations[location_index].Connection.Located : [];
     location_located.forEach(d => {
         const locatedText = create_element({ Tag: "span", Text: d, Parent: locatedElement });
         add_redirect(locatedText,{catalog:"location",entry:d,style:"invert"});
@@ -336,7 +336,7 @@ function location_data() {
     const areaElement = document.querySelector("#location .panel .area > div");
     areaElement.innerHTML = "";
 
-    const location_area = Object.keys(data.Locations).filter(key => { const area = data.Locations[key].Connection; return key && (area && area.Located && area.Located.includes(location)); });
+    const location_area = Object.keys(Data.Locations).filter(key => { const area = Data.Locations[key].Connection; return key && (area && area.Located && area.Located.includes(location)); });
     location_area.forEach(d => {
         const areaText = create_element({ Tag: "span", Text: d, Parent: areaElement });
         add_redirect(areaText,{catalog:"location",entry:d,style:"invert"});
@@ -348,8 +348,8 @@ function location_data() {
     const pokemonList = document.querySelector("#location .sidebar > main > div.pokemon > ul");
     pokemonNavText.innerHTML = "";
     pokemonList.innerHTML = "";
-    generate_locationPokemon({Catalog:"Location", Entry: data.Locations[location_index].Location, Data: {[location_index]: data.Locations[location_index]}, Parent:pokemonList, });
-    generate_locationShopPokemon({Catalog:"Location", Entry: data.Locations[location_index].Location, Data: {[location_index]: data.Locations[location_index]}, Parent:pokemonList, });
+    generate_locationPokemon({Catalog:"Location", Entry: Data.Locations[location_index].Location, Data: {[location_index]: Data.Locations[location_index]}, Parent:pokemonList, });
+    generate_locationShopPokemon({Catalog:"Location", Entry: Data.Locations[location_index].Location, Data: {[location_index]: Data.Locations[location_index]}, Parent:pokemonList, });
 
     const itemElement = document.querySelector("#location .sidebar > main > div.item");
     const itemNavText = document.querySelector("#location .sidebar > main > div.item > div > *");
@@ -357,8 +357,8 @@ function location_data() {
     itemNavText.innerHTML = "";
     itemList.innerHTML = "";
 
-    generate_locationItem({Catalog:"Location", Entry: data.Locations[location_index].Location, Data: {[location_index]: data.Locations[location_index]}, Parent:itemList, });
-    generate_locationShopItem({Catalog:"Location", Entry: data.Locations[location_index].Location, Data: {[location_index]: data.Locations[location_index]}, Parent:itemList, });
+    generate_locationItem({Catalog:"Location", Entry: Data.Locations[location_index].Location, Data: {[location_index]: Data.Locations[location_index]}, Parent:itemList, });
+    generate_locationShopItem({Catalog:"Location", Entry: Data.Locations[location_index].Location, Data: {[location_index]: Data.Locations[location_index]}, Parent:itemList, });
 
     
     
@@ -366,7 +366,7 @@ function location_data() {
     const trainerHeader = document.querySelector("#location .sidebar > main > div.trainer > header");
     const trainerList = document.querySelector("#location .sidebar > main > div.trainer .search ol");
     const trainerPokemon = document.querySelector("#location .sidebar > main > .trainer ul");
-    const location_trainer = data.Locations[location_index]["Trainer"] ? data.Locations[location_index]["Trainer"] : [];
+    const location_trainer = Data.Locations[location_index]["Trainer"] ? Data.Locations[location_index]["Trainer"] : [];
     trainerPokemon.innerHTML = "";
     trainerList.innerHTML = "";
     trainerHeader.dataset.index = 0;
@@ -387,7 +387,7 @@ function location_data() {
     const tutorList = document.querySelector("#location .sidebar > main > div.tutor > ul");
     tutorNavText.innerHTML = "";
     tutorList.innerHTML = "";
-    generate_tutor({Catalog:"Location", Entry: data.Locations[location_index].Location, Data: {[location_index]: data.Locations[location_index]}, Parent:tutorList, });
+    generate_tutor({Catalog:"Location", Entry: Data.Locations[location_index].Location, Data: {[location_index]: Data.Locations[location_index]}, Parent:tutorList, });
 
     
 
@@ -405,7 +405,7 @@ function location_data() {
 
 function trainer_populate(location_index) {
 
-    const trainer_data = data.Locations[location_index].Trainer ? data.Locations[location_index].Trainer : [];
+    const trainer_data = Data.Locations[location_index].Trainer ? Data.Locations[location_index].Trainer : [];
 
     if (!trainer_data.length > 0) { return; }
  
@@ -454,7 +454,7 @@ function trainer_populate(location_index) {
 
     trainer_data[index].Reward && (trainer_data[index].Reward.Quantity = trainer_data[index].Reward.Quantity ? trainer_data[index].Reward.Quantity : 1 );  
     const reward_index = trainer_data[index].Reward ? get_itemIndex(trainer_data[index].Reward.Reward) : null;
-    const reward_src = reward_index ? get_directory({FirstMatch: true, Exact: true, File: [data.Items[reward_index].Image,...(data.Items[reward_index].Item)], Path: [path.Item.Bag]}) : trainer_data[index].Reward ? get_directory({FirstMatch: true, Exact: true, File: [trainer_data[index].Reward.Reward], Path: [path.Currency.Icon]}) : "";
+    const reward_src = reward_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[reward_index].Image,...(Data.Items[reward_index].Item)], Path: [path.Item.Bag]}) : trainer_data[index].Reward ? get_directory({FirstMatch: true, Exact: true, File: [trainer_data[index].Reward.Reward], Path: [path.Currency.Icon]}) : "";
     
     const reward_text = trainer_data[index].Reward ? (reward_index ? `${trainer_data[index].Reward.Quantity}x<br>${trainer_data[index].Reward.Reward}` : reward_src !== "" ? `${trainer_data[index].Reward.Quantity}<img src='${reward_src}' title='${trainer_data[index].Reward.Reward}' />` : trainer_data[index].Reward.Reward.length > 5 ? `${trainer_data[index].Reward.Quantity} <span title='${trainer_data[index].Reward.Reward}'>${trainer_data[index].Reward.Reward.match(/[A-Z]/g).join('')}</span>` : `${trainer_data[index].Reward.Quantity} <span title='${trainer_data[index].Reward.Reward}'>${trainer_data[index].Reward.Reward.match(/[A-Z]/g).join('')}</span>`) : "";
     rewardText.innerHTML = reward_text;
@@ -483,7 +483,7 @@ function trainer_populate(location_index) {
 
     trainer_data[index].Item && (trainer_data[index].Item.Quantity = trainer_data[index].Item.Quantity ? trainer_data[index].Item.Quantity : 1 );  
     const item_index = trainer_data[index].Item ? get_itemIndex(trainer_data[index].Item.Item) : null;
-    const item_src = item_index ? get_directory({FirstMatch: true, Exact: true, File: [data.Items[item_index].Image,...(data.Items[item_index].Item)], Path: [path.Item.Bag]}) : "";
+    const item_src = item_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[item_index].Image,...(Data.Items[item_index].Item)], Path: [path.Item.Bag]}) : "";
     itemText.innerHTML = trainer_data[index].Item ? (item_index ? `${trainer_data[index].Item.Quantity}x<br>${trainer_data[index].Item.Item}` : "") : "";
 
     item_index && item_src !== "" && (Array(Math.min(trainer_data[index].Item.Quantity, 5)).fill().forEach(i => {
@@ -506,12 +506,12 @@ function trainer_populate(location_index) {
     trainer_data[index].Pokemon && trainer_data[index].Pokemon.forEach(p => {
         const pokemon_index = get_pokemonIndex(p.Pokemon);
 
-        if (data.Pokemon[pokemon_index]) {
+        if (Data.Pokemon[pokemon_index]) {
             const default_index = get_defaultPokemon(pokemon_index);
             const held_index = p.Item ? get_itemIndex(p.Item) : null;
 
-            const pokemon_file = [data.Pokemon[pokemon_index].File,data.Pokemon[default_index].File].filter(v => v !== undefined && v !== null);
-            const held_file = [p.Item, ...(held_index ? [data.Items[held_index].Image, ...data.Items[held_index].Item] : [])].filter(v => v !== undefined && v !== null);
+            const pokemon_file = [Data.Pokemon[pokemon_index].File,Data.Pokemon[default_index].File].filter(v => v !== undefined && v !== null);
+            const held_file = [p.Item, ...(held_index ? [Data.Items[held_index].Image, ...Data.Items[held_index].Item] : [])].filter(v => v !== undefined && v !== null);
 
             const header = p.Header ? p.Header : "";
             const headerElement = pokemonList.querySelector(`:scope ol[data-index="${header}"]`)
@@ -523,9 +523,9 @@ function trainer_populate(location_index) {
             const entry = create_element({ Tag: "li", Parent: ol ? ol : headerElement });
 
 
-            if (data.Pokemon[pokemon_index].Type) {
-                const type1 = data.Pokemon[pokemon_index].Type.Primary ? data.Pokemon[pokemon_index].Type.Primary : "";
-                const type2 = data.Pokemon[pokemon_index].Type.Secondary ? data.Pokemon[pokemon_index].Type.Secondary : type1;
+            if (Data.Pokemon[pokemon_index].Type) {
+                const type1 = Data.Pokemon[pokemon_index].Type.Primary ? Data.Pokemon[pokemon_index].Type.Primary : "";
+                const type2 = Data.Pokemon[pokemon_index].Type.Secondary ? Data.Pokemon[pokemon_index].Type.Secondary : type1;
                 
                 entry.style.setProperty('--Type2', `var(--Type_${type1})`);
                 entry.style.setProperty('--Type1', `var(--Type_${type2})`);
@@ -566,8 +566,8 @@ function trainer_populate(location_index) {
             
             p.Move && (p.Move.forEach(m => {
                 const move_index = get_moveIndex(m);
-                if (data.Moves[move_index]) {
-                    const moveText = create_element({ Tag: "strong", Data: {type: data.Moves[move_index].Type}, Text: m, Parent: lowerLeftWrap });
+                if (Data.Moves[move_index]) {
+                    const moveText = create_element({ Tag: "strong", Data: {type: Data.Moves[move_index].Type}, Text: m, Parent: lowerLeftWrap });
                     add_redirect(moveText,{catalog:"move",entry:m,style:"brightness"});
                 }
                 else {
