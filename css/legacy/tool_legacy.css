@@ -1,0 +1,2988 @@
+#contain > div#tool > section[name='list'] div:first-child {
+}
+
+#contain div#tool > section[name='content']  {
+	width:80%;
+	display:flex;
+}
+
+
+#contain div#tool > section[name='content'] > div {
+	width:100%;
+}
+
+#contain div#tool > section[name='sidebar'] {
+	width:80%;
+	height:50%;
+}
+
+
+
+#contain > div#tool div#type > div[name='content'] {
+	width:75%;
+	height:100%;
+	float:left;
+}
+
+#contain > div#tool div#type > div[name='sidebar'] {
+	width:25%;
+	height:100%;
+	float:right;
+	position:inherit;
+}
+
+#contain > div#tool div#type > div[name='header'] label {
+	width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+#contain > div#tool div#type > div[name='header'] input:checked + label {
+    color:Black;
+}
+
+
+
+
+#contain > div#tool div#type table {
+	width:100%;
+	height:100%;
+	position:relative;
+	text-align:center;
+	text-transform:uppercase;
+	border-collapse:collapse;
+}
+
+
+
+
+
+
+#contain > div#tool div#type table img {
+	max-width:20px;
+	max-height:20px;
+	vertical-align:middle;
+}
+
+
+#contain > div#tool div#type table th {
+	user-select:none;
+}
+#contain > div#tool div#type table tr th span {
+	width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+	cursor:pointer;
+}
+#contain > div#tool div#type table tr th span:active {
+	transform:scale(0.8);
+}
+
+
+
+
+#contain > div#tool div#type table tr:not(:first-child) th:not(:first-child):hover, #contain > div#tool div#type table tr:not(:first-child) th:not(:first-child):active {
+	filter:brightness(0.7);
+}
+
+#contain > div#tool div#type table[name='matrix'] tr:first-child th, #contain > div#tool div#type table[name='matrix'] tr th:first-child {
+	background:var(--Background_Type_Content);
+	color:var(--Color_Type_Content);
+	border:var(--Border_Type_Content);
+}
+#contain > div#tool div#type table th[title='Normal Effectiveness'] {
+	background:var(--Background_Type_Content_Effective);
+	color:var(--Color_Type_Content_Effective);
+	border:var(--Border_Type_Content_Effective);
+}
+#contain > div#tool div#type table th[title='Super Effective'] {
+	background:var(--Background_Type_Content_SuperEffective);
+	color:var(--Color_Type_Content_SuperEffective);
+	border:var(--Border_Type_Content_SuperEffective);
+}
+#contain > div#tool div#type table th[title='Not Very Effective'] {
+	background:var(--Background_Type_Content_Ineffective);
+	color:var(--Color_Type_Content_Ineffective);
+	border:var(--Border_Type_Content_Ineffective);
+}
+#contain > div#tool div#type table th[title='Immune'] {
+	background:var(--Background_Type_Content_Immune);
+	color:var(--Color_Type_Content_Immune);
+	border:var(--Border_Type_Content_Immune);
+}
+#contain > div#tool div#type table[name='matrix'] tr:first-child th {
+	border-top: none;
+}
+#contain > div#tool div#type table[name='matrix'] tr th:first-child {
+	border-left: none;
+}
+#contain > div#tool div#type table[name='matrix'] tr th:last-child {
+	border-right: none;
+}
+#contain > div#tool div#type table[name='matrix'] tr:last-child th {
+	border-bottom: none;
+}
+
+
+
+
+
+#contain > div#tool div#type *[name='sidebar'] > div {
+	height:100%;
+	width:100%;
+	position:inherit;
+}
+
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div {
+	position:absolute;
+    top:100%;
+    left:0;
+    max-width:500px;
+    min-width:100px;
+    max-height:40dvh;
+    width:100%;
+    color:Black;
+	overflow:auto;
+	background:white;
+	border: 1px solid black;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b {
+	display:flex;
+    width:100%;
+    flex-direction:row;
+    cursor:pointer;
+    justify-content:center;
+    align-items:center;
+	border-bottom: 1px dashed hsl(0,0%,80%);
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b:last-child {
+	border-bottom: none;
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] img {
+	max-width:80px;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b:active > * {
+	transform:scale(0.9);
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b * {
+	font-weight:normal;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+	padding:5px 0;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b:hover, #contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b:active {
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > div > b img {
+	max-width:30px;
+    max-height:30px;
+    margin-left:20px;
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span img[src=""]::after {
+	content:attr(title);
+    visibility:visible;
+    position:absolute;
+    top:0;
+    z-index:100;
+    left:0;
+    width:100%;
+    height:100%;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span img[src=""] {
+	visibility:hidden;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span img {
+	height:100%;
+	width:100%;
+	cursor:pointer;
+	position:relative;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] {
+	height:80%;
+	width:100%;
+	z-index:4;
+
+	background:var(--Background_Type_Sidebar_Content);
+	color:var(--Color_Type_Sidebar_Content);
+	border:var(--Border_Type_Sidebar_Content);
+	border-right:none;
+	border-bottom:none;
+	border-top: none;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] > *:first-child {
+	width:100%;
+    height:10%;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] > *:last-child {
+	width:100%;
+	height:90%;
+	overflow:auto;
+}
+#contain > div#tool div#type *[name='sidebar'][data-type] *[name='description'] ul[name='Attacking'], #contain > div#tool div#type *[name='sidebar'][data-type] *[name='description'] ul[name='Defending'] {
+	display:none;
+}
+
+#contain > div#tool div#type *[name='sidebar'][data-type='Attacking'] *[name='description'] ul[name='Attacking'], #contain > div#tool div#type *[name='sidebar'][data-type='Defending'] *[name='description'] ul[name='Defending']  {
+	display:block;
+	padding:10px;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li {
+	display:none;
+	padding:5px 0;
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li > span > span {
+	display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    padding:2px 0px;
+	cursor:pointer;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li > span > span:active {
+	transform:scale(0.9);
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li *:first-child {
+	padding:2px 0;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] ul[name] > li > span > span:not(:first-child) {
+	padding:2px 2px;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'][data-type='Attacking'] *[name='title'] > span:last-child {
+	width:0;
+	transform:rotateY(90deg);
+	opacity:0;
+}
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span {
+	transition:.5s ease;
+	transition-property:transform, width;
+	transform:rotateY(0deg);
+}
+
+
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] label {
+    height:100%;
+    width:50%;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    color:Black;
+
+	background:var(--Background_Type_Sidebar_Content_Label);
+	color:var(--Color_Type_Sidebar_Content_Label);
+	border:var(--Border_Type_Sidebar_Content_Label);
+	border-top:none;
+	border-left:none;
+
+} 
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] label:last-child {
+	border-right: none;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='description'] input:checked + label {
+	background:var(--Background_Type_Sidebar_Content_Label_Selected);
+	color:var(--Color_Type_Sidebar_Content_Label_Selected);
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] {
+	width:100%;
+	height:20%;
+	position:relative;
+	display:flex;
+	justify-content:center;
+    align-items:center;
+	z-index:5;
+
+	background:var(--Background_Type_Sidebar_Header);
+	color:var(--Color_Type_Sidebar_Header);
+	border:var(--Border_Type_Sidebar_Header);
+	border-top:none;
+	border-right:none;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span {
+	height:100%;
+	width:50%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+}
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span > img + b {
+	display:none;
+}
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span > span {
+    width:100px;
+    height:100px;
+    border-radius:50%;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	z-index:100;
+
+	background:var(--Background_Type_Sidebar_Header_Add);
+	color:var(--Color_Type_Sidebar_Header_Add);
+	border:var(--Border_Type_Sidebar_Header_Add);
+}
+
+
+#contain > div#tool div#type *[name='sidebar'] *[name='title'] > span:not(.active) > div {
+	display:none;
+}
+
+
+
+
+
+#contain div#tool div#rng,
+#contain div#tool div#counter {
+	width:100%;
+	height:100%;
+}
+
+#contain div#tool div#rng > div,
+#contain div#tool div#counter > div {
+	width:100%;
+	height:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:row;
+}
+
+#contain div#tool div#rng div[name='result'],
+#contain div#tool div#counter div[name='result'] {
+	width:100%;
+	height:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-wrap:wrap;
+}
+#contain div#tool div#rng div[name='result'] {
+	background:var(--Background_Random_Content);
+	color:var(--Color_Random_Content);
+	border:var(--Border_Random_Content);
+}
+#contain div#tool div#counter div[name='result'] {
+	background:var(--Background_Counter_Content);
+	color:var(--Color_Counter_Content);
+	border:var(--Border_Counter_Content);
+}
+
+#contain div#tool div#rng > div button,
+#contain div#tool div#counter > div button {
+	align-self:center;
+	font-weight:bold;
+	justify-self:center;
+	padding:10px 20px;
+	cursor:pointer;
+	max-width: 80%;
+}
+
+#contain div#tool div#rng div[name='result'] div,
+#contain div#tool div#counter div[name='result'] div {
+	margin:10px;
+    padding:5px;
+    border-radius:10px;
+    width:var(--sizeWidthS);
+    height:var(--sizeWidthS);
+    color:White;
+    display:flex;
+    align-items:center;
+    overflow:auto;
+    flex-wrap:wrap;
+    flex-direction:column;
+    justify-content:center;
+}
+
+#contain div#tool div#rng div[name='result'] div {
+	background:var(--Background_Random_Content_Item);
+	color:var(--Color_Random_Content_Item);
+	border:var(--Border_Random_Content_Item);
+}
+#contain div#tool div#counter div[name='result'] div {
+	background:var(--Background_Counter_Content_Item);
+	color:var(--Color_Counter_Content_Item);
+	border:var(--Border_Counter_Content_Item);
+}
+
+#contain div#tool div#rng div[name='result'] div.min, #contain div#tool div#rng div[name='result'] div.max  {
+	text-decoration-line:underline;
+}
+#contain div#tool div#rng div[name='result'] div.min {
+	text-decoration-color:Green;
+}
+#contain div#tool div#rng div[name='result'] div.max  {
+	text-decoration-color:Red;
+}
+
+
+
+#contain div#tool div#rng span[name='iterations'],
+#contain div#tool div#counter span[name='iterations'] {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:column;
+	text-align:center;
+	width:100%;
+	padding:10px 0;
+}
+
+#contain div#tool div#rng span[name='iterations'] p, #contain div#tool div#rng span[name='iterations'] input,
+#contain div#tool div#counter span[name='iterations'] p, #contain div#tool div#counter span[name='iterations'] input {
+	text-align:center;
+	width:80%;
+}
+
+#contain div#tool div#rng span[name='title'],
+#contain div#tool div#counter span[name='title'] {
+	display:flex;
+	flex-direction:row;
+	width:100%;
+}
+
+#contain div#tool div#rng span[name='title'] > span,
+#contain div#tool div#counter span[name='title'] > span {
+	text-align:center;
+	width:100%;
+}
+
+#contain div#tool div#rng span[name='title'] > span:first-child,
+#contain div#tool div#counter span[name='title'] > span:first-child {
+	width:30%;
+}
+
+#contain div#tool div#rng div[name='options'],
+#contain div#tool div#counter div[name='options'] {
+	width:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:column;
+	width:40%;
+	height:100%;
+}
+
+
+
+#contain div#tool div#rng > div ul,
+#contain div#tool div#counter > div ul {
+	overflow:auto;
+	height:100%;
+	width:100%;
+}
+#contain div#tool div#rng > div ul {
+	background:var(--Background_Random_Sidebar_Content);
+	color:var(--Color_Random_Sidebar_Content);
+	border:var(--Border_Random_Sidebar_Content);
+}
+#contain div#tool div#counter > div ul {
+	background:var(--Background_Counter_Sidebar_Content);
+	color:var(--Color_Counter_Sidebar_Content);
+	border:var(--Border_Counter_Sidebar_Content);
+}
+
+#contain div#tool div#rng > div ul input {
+	background:var(--Background_Random_Sidebar_Content_Input);
+	color:var(--Color_Random_Sidebar_Content_Input);
+	border:var(--Border_Random_Sidebar_Content_Input);
+}
+#contain div#tool div#counter > div ul input {
+	background:var(--Background_Counter_Sidebar_Content_Input);
+	color:var(--Color_Counter_Sidebar_Content_Input);
+	border:var(--Border_Counter_Sidebar_Content_Input);
+}
+
+#contain div#tool div#rng > div li div,
+#contain div#tool div#counter > div li div {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+}
+
+#contain div#tool div#rng > div li div[name='it'],
+#contain div#tool div#counter > div li div[name='it'] {
+	width:30%;
+}
+
+#contain div#tool div#rng > div li p:nth-child(1),
+#contain div#tool div#counter > div li p:nth-child(1) {
+	text-align:center;
+}
+
+
+#contain div#tool div#rng > div li p, #contain div#tool div#rng > div li input,
+#contain div#tool div#counter > div li p, #contain div#tool div#counter > div li input {
+	width:100%;
+	text-align:center;
+	margin:0 5px;
+}
+
+#contain div#tool div#rng > div input,
+#contain div#tool div#counter > div input {
+	color:Black;
+}
+
+#contain div#tool div#rng div[name='options'],
+#contain div#tool div#counter div[name='options'] {
+	flex-direction:column;
+}
+
+
+#contain div#tool div#rng > div li {
+	background: var(--Background_Random_Sidebar_Content_Item);
+	color: var(--Color_Random_Sidebar_Content_Item);
+	border: var(--Border_Random_Sidebar_Content_Item);
+}
+#contain div#tool div#counter > div li {
+	background: var(--Background_Counter_Sidebar_Content_Item);
+	color: var(--Color_Counter_Sidebar_Content_Item);
+	border: var(--Border_Counter_Sidebar_Content_Item);
+}
+
+#contain div#tool div#rng > div li,
+#contain div#tool div#counter > div li {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:row;
+	width:100%;
+	padding:5px 0;
+	border-left:none;
+	border-right:none;
+	border-top:none;
+}
+
+
+
+#contain div#tool div#rng > div li > div p,
+#contain div#tool div#counter > div li > div p {
+	width:100%;
+}
+
+#contain div#tool div#rng span[name='execute'] > button:active {
+	transform:scale(0.95);
+}
+
+#contain div#tool div#rng span[name='execute'] {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	padding:20px 0;
+	width:100%;
+}
+
+#contain div#tool div#rng div[name='options'] > div,
+#contain div#tool div#counter div[name='options'] > div {
+	width:100%;
+}
+
+#contain div#tool div#rng div[name='options'] > div {
+	background:var(--Background_Random_Sidebar_Header);
+	color:var(--Color_Random_Sidebar_Header);
+	border:var(--Border_Random_Sidebar_Header);
+}
+#contain div#tool div#counter div[name='options'] > div {
+	background:var(--Background_Counter_Sidebar_Header);
+	color:var(--Color_Counter_Sidebar_Header);
+	border:var(--Border_Counter_Sidebar_Header);
+}
+
+
+#contain div#tool div#rng div[name='options'] > div button {
+	background:var(--Background_Random_Sidebar_Header_Button);
+	color:var(--Color_Random_Sidebar_Header_Button);
+	border:var(--Border_Random_Sidebar_Header_Button);
+}
+
+#contain div#tool div#counter div[name='options'] > div button {
+	background:var(--Background_Counter_Sidebar_Header_Button);
+	color:var(--Color_Counter_Sidebar_Header_Button);
+	border:var(--Border_Counter_Sidebar_Header_Button);
+}
+
+#contain div#tool div#rng div[name='options'] > div input {
+	background:var(--Background_Random_Sidebar_Header_Input);
+	color:var(--Color_Random_Sidebar_Header_Input);
+	border:var(--Border_Random_Sidebar_Header_Input);
+}
+
+#contain div#tool div#counter div[name='options'] > div input {
+	background:var(--Background_Counter_Sidebar_Header_Input);
+	color:var(--Color_Counter_Sidebar_Header_Input);
+	border:var(--Border_Counter_Sidebar_Header_Input);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#contain div#tool div#dmg {
+	width:100%;
+	height:100%;
+}
+
+#contain div#tool div#dmg > div {
+	width:100%;
+	height:100%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:row;
+	-webkit-user-drag:none;
+}
+
+#contain div#tool div#dmg div[name='content'] {
+	width:100%;
+    height:100%;
+	position:relative;
+}
+#contain div#tool div#dmg div[name='result'] {
+	width:100%;
+    height:65%;
+    display:flex;
+    flex-wrap:nowrap;
+    position:relative;
+    flex-direction:column;
+    text-align:center;
+    align-items:center;
+    justify-content:space-between;
+}
+#contain div#tool div#dmg div[name='battle'] {
+	width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    position:relative;
+	color:white;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure > *:first-child {
+	text-shadow:0px 0px 1px #000;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure {
+	position:absolute;
+	top:15px;
+	z-index:100;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='reset'] {
+	right:20px;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] {
+	left:20px;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] h4 {
+	text-shadow: 0px 0px 2px black;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > div {
+	position:relative;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > div > span {
+    position:absolute;
+    top:0;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    max-width:500px;
+    min-width:100px;
+    background:#fff;
+    width:100%;
+    color:Black;
+	text-align:center;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > small {
+	width:100%;
+	height:100%;
+	display:block;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > h5 {
+	transform:rotate(-90deg);
+    transition:.2s ease;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'].active > h5 {
+	transform:none;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import']:active > h5, #contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'].active > h5 {
+	filter:invert(0.3);
+}
+
+#contain div#tool div#dmg > div[data-count='0'] div[name='content'] > figure[name='import'] > div > span > span[name='Copy Data Strings'], #contain div#tool div#dmg > div:not([data-count]) div[name='content'] > figure[name='import'] > div > span > span[name='Copy Data Strings'] {
+	display:none;
+}
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import']:not(.active) > div > span {
+	display:none;
+}
+
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > div > span > span {
+	display:block;
+    width:100%;
+}
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > div > span > span > b {
+    padding:4px 0;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > div > span > span > b, #contain div#tool div#dmg div[name='content'] > div[name='result'] > figure[name='import'] > div > span > span > b > small {
+	font-weight:normal;
+	width:100%;
+	height:100%;
+	display:block;
+}
+
+
+
+
+
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='battle'] > span > span > div {
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    justify-content:center;
+	flex-wrap:nowrap;
+	text-shadow:-1px 1px #000;
+	margin:10px;
+    position:relative;
+    left:unset;
+    right:unset;
+    z-index:10;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#contain div#tool > section[name='content'] {
+	z-index:unset;
+}
+#contain div#tool > section[name='content'] > * {
+	overflow:unset;
+}
+
+#contain div#tool div#dmg div[name='menu'] {
+	width:100%;
+	height:20%;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+    position:inherit;
+
+	background:var(--Background_Calculator_Footer);
+	color:var(--Color_Calculator_Footer);
+	border:var(--Border_Calculator_Footer);
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+}
+
+
+#contain div#tool div#dmg div[name='menu'] > div {
+	width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+#contain div#tool div#dmg div[name='menu'] > div:last-child {
+	width:50%;
+}
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] li input:not(:checked) ~ label {
+	opacity:0.5;
+}
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] li input:checked ~ label {
+	text-decoration-line:underline;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] small::after {
+	content:"?";
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='count'] select {
+	display:none;
+    margin:0px 10px;
+    padding:5px;
+    outline:none;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='count'] input {
+	text-indent:20%;
+	outline:none;
+	padding:5px 0;
+	font-size:var(--sizeFontL);
+	text-align:center;
+	font-weight: bold;
+
+	background:var(--Background_Calculator_Footer_Input);
+	color:var(--Color_Calculator_Footer_Input);
+	border:var(--Border_Calculator_Footer_Input);
+}
+#contain div#tool div#dmg div[name='menu'] *[name='count'] input[disabled] {
+	user-select: none;
+    background: hsl(0,0%,70%);
+	color:hsl(0,0%,60%);
+}
+
+
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='menu'] > div > span {
+	width:100%;
+    height:fit-content;
+    position:relative;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-direction:row;
+    padding:10px 0;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='critical'] input[type='checkbox'] {
+	display:unset;
+	margin:0 5px;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > * {
+	display:flex;
+    flex-direction:column;
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='execute'] button {
+    padding:5px 10px;
+
+	background:var(--Background_Calculator_Footer_Button);
+	color:var(--Color_Calculator_Footer_Button);
+	border:var(--Border_Calculator_Footer_Button);
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='execute'] button:active {
+	transform:scale(0.97);
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='execute'] button.change {
+	background:var(--Background_Calculator_Footer_Button_Active);
+	color:var(--Color_Calculator_Footer_Button_Active);
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] input[type='range'] {
+	width:100%;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='min'], #contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='val'], #contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='max'] {
+	position:absolute;
+	bottom:calc(50% - 15px - 5px);
+}
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='min'] {
+	left:5px;
+}
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='max'] {
+	right:5px;
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='critical'] {
+	position:absolute;
+    bottom:calc(50% + 5px + 5px);
+    display:flex;
+}
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='low'] {
+    position:absolute;
+    left:5px;
+    bottom:calc(50% + 5px + 2px);
+}
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] *[name='high'] {
+    position:absolute;
+    right:5px;
+	bottom:calc(50% + 5px + 2px);
+}
+
+
+#contain div#tool div#dmg div[name='options'] input[type='range'] {
+	height:4px;
+}
+
+#contain div#tool div#dmg div[name='menu'] input[type='range'] {
+	height:8px;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='roll'] {
+	width:75%;
+	padding:20px 0;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='specific'] {
+	width:90%;
+}
+
+
+
+#contain div#tool div#dmg input[type='range'] {
+	border:solid 1px hsl(0,0%,25%);
+	border-radius:4px;
+	-webkit-appearance:none;
+	outline:none;
+}
+#contain div#tool div#dmg div[name='menu'] input[type='range'] {
+}
+
+#contain div#tool div#dmg div[name='options'] input[type='range'] {
+}
+
+
+#contain div#tool div#dmg input[type='range']::-webkit-slider-thumb {
+	width:0;
+	height:0;
+	-webkit-appearance:none;
+	pointer-events:none;
+}
+
+#contain div#tool div#dmg input[type='range'][disabled] {
+	filter:grayscale(1) contrast(0.5);
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > span > span[name] {
+	color: hsl(0, 0%, 80%);
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > span > span[name] > *:first-child {
+	background: hsl(0, 0%, 35%);
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid hsl(0,0%,0%);
+	text-shadow: -1px 1px hsl(0, 0%, 0%);
+}
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > span > span {
+	padding:2px 0;
+}
+#contain div#tool div#dmg div[name='menu'] *[name='info'] > span > span img {
+	max-width: 80px;
+    max-height: 20px;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='move'] select {
+	width:80%;
+	height:100%;
+    outline:none;
+    text-align:center;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background:none;
+    color:White;
+    font-size:var(--sizeFontXL);
+    font-weight:bold;
+	border:none;
+	text-shadow:2px 2px 0px #000;
+	color:inherit;
+}
+
+#contain div#tool div#dmg div[name='menu'] *[name='move']::before {
+    content:attr(data-special);
+    position:absolute;
+    top:0;
+    width:fit-content;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    text-shadow:2px 2px 0px #000;
+    font-size:var(--sizeFontXL);
+	color:inherit;
+	user-select:none;
+	pointer-events:none;
+}
+
+
+#contain div#tool div#dmg div[name='menu'] *[name='move'] option {
+	color:black;
+    font-size:small;
+}
+
+
+#contain div#tool div#dmg div[name='options'] {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:column;
+	width:40%;
+	height:100%;
+}
+
+
+#contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='options'] {
+	width:90%;
+}
+
+
+
+#contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='battle'] span[name*='team'] > div[data-string] span[name='inactive'], #contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='battle'] span[name*='team'] > div[data-string] span[name='active'] > span:first-child {
+	width:250px;
+}
+
+
+
+
+#contain div#tool div#dmg span[name='title'] {
+	display:flex;
+	flex-direction:row;
+	width:100%;
+}
+
+#contain div#tool div#dmg span[name='title'] > span {
+	text-align:center;
+	width:100%;
+}
+
+#contain div#tool div#dmg span[name='title'] > span:first-child {
+	width:30%;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='options'] div > ol {
+    width:100%;
+    display:flex;
+    flex-direction:row;
+}
+
+
+#contain div#tool div#dmg > div ol[name='team'] {
+	display:flex;
+    width:100%;
+    padding:10px 0;
+    flex-direction:row;
+    position:relative;
+
+	background:var(--Background_Calculator_Sidebar_Content_Footer);
+	color:var(--Color_Calculator_Sidebar_Content_Footer);
+	border:var(--Border_Calculator_Sidebar_Content_Footer);
+	border-left:none;
+	border-right:none;
+	border-bottom:none;
+}
+
+
+
+
+#contain div#tool div#dmg > div li > span {
+	display:flex;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    flex-direction:column;
+    margin-bottom:5px;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span input {
+	text-align:center;
+	outline:none;
+	caret-color:White;
+	width:100%;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span input:first-child {
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span {
+	display:flex;
+    flex-direction:column;
+    width:100%;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:first-child {
+	width:200%;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul input {
+	background:none;
+	cursor:default;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span[name] input {
+	cursor:unset;
+}
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) li:not([name='pokemon']) select, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) li:not([name='hp']) input, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) li[name='hp'] > input  {
+	background:rgba(239, 239, 239, 0.3);
+	color:rgba(0, 0, 0, 0.3);
+	text-shadow:unset;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) > figure {
+	display:none;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) li[name='hp'] > span {
+	opacity:0;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul[name]:not(.active) *::placeholder,
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul[name]:not(.active) * {
+	color:White;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ul[name]:not(.active) > *:not([name='pokemon']):not([name='header']) {
+	opacity:0.25;
+	pointer-events: none;
+	filter:blur(0.5px);
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) > li:not([name='pokemon']) input,
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) > li:not([name='pokemon']) input::placeholder,
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name]:not(.active) > li:not([name='pokemon']) select {
+	color:transparent;
+	background:White !important;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li *[disabled] ~ label, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li *[disabled] ~ small {
+	opacity:0.5;
+	cursor:default;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] input::placeholder, #contain div#tool div#dmg div[name='options'] ol[name='stats'] input {
+	color:White;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] input::-webkit-outer-spin-button, #contain div#tool div#dmg div[name='options'] ol[name='stats'] input::-webkit-inner-spin-button {
+	appearance:none;
+	-webkit-appearance:none;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Lonely'] input:nth-child(3), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Brave'] input:nth-child(3), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Adamant'] input:nth-child(3), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Naughty'] input:nth-child(3) {
+	color:Green;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Bold'] input:nth-child(4), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Relaxed'] input:nth-child(4), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Impish'] input:nth-child(4), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Lax'] input:nth-child(4) {
+	color:Green;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Modest'] input:nth-child(5), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Mild'] input:nth-child(5), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Quiet'] input:nth-child(5), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Rash'] input:nth-child(5) {
+	color:Green;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Calm'] input:nth-child(6), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Gentle'] input:nth-child(6), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Sassy'] input:nth-child(6), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Careful'] input:nth-child(6) {
+	color:Green;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Timid'] input:nth-child(7), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Hasty'] input:nth-child(7), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Jolly'] input:nth-child(7), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Naive'] input:nth-child(7) {
+	color:Green;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Bold'] input:nth-child(3), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Timid'] input:nth-child(3), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Modest'] input:nth-child(3), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Calm'] input:nth-child(3) {
+	color:Red;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Lonely'] input:nth-child(4), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Hasty'] input:nth-child(4), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Mild'] input:nth-child(4), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Gentle'] input:nth-child(4) {
+	color:Red;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Adamant'] input:nth-child(5), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Impish'] input:nth-child(5), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Jolly'] input:nth-child(5), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Careful'] input:nth-child(5) {
+	color:Red;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Naughty'] input:nth-child(6), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Lax'] input:nth-child(6), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Naive'] input:nth-child(6), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Rash'] input:nth-child(6) {
+	color:Red;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Brave'] input:nth-child(7), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Relaxed'] input:nth-child(7), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Quiet'] input:nth-child(7), #contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child[name='Sassy'] input:nth-child(7) {
+	color:Red;
+	text-shadow:1px 1px 1px var(--border1);
+	font-weight:bold;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child input {
+	font-weight:bold;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:first-child input {
+	text-align:right;
+	font-weight:bold;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:first-child input::placeholder {
+	color:inherit;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul > span:last-child {
+	font-weight:bold;
+	text-shadow:1px 1px 1px Black;
+}
+
+
+
+
+#contain div#tool div#dmg > div ol[name='pokemon'] > span {
+    width:100%;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] {
+	display:flex;
+    flex-direction:column;
+    flex-wrap:nowrap;
+    align-items:center;
+	position:relative;
+	padding:10px 0;
+
+	background:var(--Background_Calculator_Sidebar_Content);
+	color:var(--Color_Calculator_Sidebar_Content);
+	border:var(--Border_Calculator_Sidebar_Content);
+	border-bottom:none;
+	border-top:none;
+	border-left:none;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name]:last-child > ul[name] {
+	border-right: none;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] {
+	display:none;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol:not([name='stats']) > span[name] > ul[name] input[type="number"] {
+	
+	background:var(--Background_Calculator_Sidebar_Content_Input);
+	color:var(--Color_Calculator_Sidebar_Content_Input);
+	border:var(--Border_Calculator_Sidebar_Content_Input);
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol:not([name='stats']) > span[name] > ul[name] select {
+	
+	background:var(--Background_Calculator_Sidebar_Content_Select);
+	color:var(--Color_Calculator_Sidebar_Content_Select);
+	border:var(--Border_Calculator_Sidebar_Content_Select);
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol:not([name='stats']) > span[name] > ul[name] *[name='moves'] select, #contain div#tool div#dmg div[name='options'] ol:not([name='stats']) > span[name] > ul[name] *[name='type'] select {
+	background:var(--Background_Calculator_Sidebar_Content_Select_Special);
+	color:var(--Color_Calculator_Sidebar_Content_Select_Special);
+	border:var(--Border_Calculator_Sidebar_Content_Select_Special);
+}
+
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > * > span:last-child > * {
+	padding:5px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    width:30%;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name*='Group'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='pokemon'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='moves'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='type'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='level'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='nature'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='friendship'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='affection'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='ability'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='item'], #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='gender'] {
+	flex-direction:column;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='level'] input, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='friendship'] input, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='affection'] input {
+	margin:0;
+	padding:5px;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] input[type='range'] {
+	width:100%;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] span > input {
+    background:none;
+    color:White;
+    outline:none;
+    margin:0;
+    padding:0;
+    width:100%;
+	font-weight:bold;
+	border: none;
+}
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] span > input, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] span > input::-webkit-outer-spin-button, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] span > input::-webkit-inner-spin-button {
+	-webkit-appearance:none;
+	margin:0;
+	-moz-appearance:textfield;
+	appearance:none;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] span > input:first-child {
+	text-align:right;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] span > input:last-child {
+	text-align:left;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='type'] > span {
+    flex-direction:row;
+	justify-content:center;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='type'] > span > select:nth-child(3) {
+	width:100%;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='type'] > span > select.disable {
+	user-select:none;
+	pointer-events:none;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='type'] select {
+	font-size:var(--sizeFontS);
+	text-align:center;
+	text-shadow:-1px 0px 0px rgba(0,0,0,0.25);
+	width:50%;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	padding:2px 0px;
+	font-weight:bold;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='type'] select:first-child:not(:last-child) {
+	border-right:none;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='moves'] > span {
+    flex-direction:row;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='moves'] > span > span {
+	width:45%;
+    padding:2px 4px 0 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+	cursor:grab;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='moves'] > span > span:active {
+	cursor:grabbing;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='moves'] select {
+	width:100%;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    padding:2px 0px;
+    font-size:var(--sizeFontS);
+    text-align:center;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='moves'] select[style]:not([style='']) {
+	text-shadow:1px 1px 0px rgba(0,0,0,0.5);
+	font-weight:bold;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='options'] input {
+	width:min-content;
+}
+#contain div#tool div#dmg div[name='options'] li > select, #contain div#tool div#dmg div[name='options'] li > input {
+    padding:3px 0px;
+    text-indent:10%;
+}
+#contain div#tool div#dmg div[name='options'] li[name='pokemon'] > select {
+	width:100%;
+}
+
+#contain div#tool div#dmg div[name='options'] input, #contain div#tool div#dmg div[name='options'] select {
+	outline:none;
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='gender'] select {
+	font-family:fantasy;
+    font-weight:bold;
+    text-shadow:0px 0px 1px #000;
+    caret-color:#000;
+    appearance:none;
+    width:fit-content;
+    padding:3px 20px;
+    text-align:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-indent:0;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='gender'] select option {
+	text-align:left;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li {
+	padding:2px 0;
+    width:100%;
+    display:flex;
+    justify-content:flex-start;
+    text-align:left;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] span {
+	display:flex;
+    flex-direction:row;
+    padding:0;
+    margin:0;
+    flex-wrap:nowrap;
+    width:100%;
+    text-align:center;
+    justify-content:center;
+    align-items:center;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li[name='hp'] input[disabled] ~ span {
+	display:none;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > span[name='header'] {
+	position:absolute;
+    top:4px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > li[name='pokemon'] > span {
+    position:relative;
+    padding:10px 0 0;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > li[name='pokemon'] > span > *:first-child {
+    text-indent:5%;
+    width:-webkit-fill-available;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > li[name='pokemon'] > span input {
+	display:none;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > li[name='pokemon'] > span label {
+	position:absolute;
+    right:5px;
+    cursor:pointer;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > li[name='pokemon'] > span input:not(:checked) ~ label {
+	opacity:0.5;
+}
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] {
+	width:100%;
+    z-index:10;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:nowrap;
+    flex-direction:row;
+
+	background:var(--Background_Calculator_Content_Footer);
+	color:var(--Color_Calculator_Content_Footer);
+	border:var(--Border_Calculator_Content_Footer);
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name] {
+	display:flex;
+    width:100%;
+    position:relative;
+    padding:10px;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name] > span[name='wrap'] {
+	width:90%;
+	display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] > span[name] > span[name='row'] {
+	display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+	user-select:none;
+}
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] b {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] b:not(.active) {
+	pointer-events:none;
+	opacity:0.2;
+}
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add:not(.active), #contain div#tool div#dmg div[name='result'] > span[name='party'] li[data-string=''] {
+	display:none;
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    user-select:none;
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li img {
+    -webkit-user-drag:unset;
+    -khtml-user-drag:unset;
+    -moz-user-drag:unset;
+    -o-user-drag:unset;
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add, #contain div#tool div#dmg div[name='result'] > span[name='party'] li[name] {
+    width:40px;
+    height:40px;
+    padding:10px;
+    border-radius:4px;
+    margin:0 10px;
+    box-sizing:border-box;
+	border-style:outset;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name] > * {
+    pointer-events:none;
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add {
+    cursor:pointer;
+
+	background:var(--Background_Calculator_Content_Footer_Item);
+	color:var(--Color_Calculator_Content_Footer_Item);
+	border:var(--Border_Calculator_Content_Footer_Item);
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name] {
+    cursor:grab;
+    
+	background:var(--Background_Calculator_Content_Footer_Item_Active);
+	color:var(--Color_Calculator_Content_Footer_Item_Active);
+	border:var(--Border_Calculator_Content_Footer_Item_Active);
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name]:active {
+    cursor:grabbing;
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] figure[name='exit'] {
+    cursor:pointer;
+}
+
+
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] span li[data-string].delete {
+	background:red;
+}
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] span li[data-string].copy {
+	background:cornflowerblue;
+}
+body.dragging #contain div#tool div#dmg div[name='result'] > span[name='party'] span li[data-string].plus {
+	background:lightgreen;
+}
+
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add > * {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add:hover > * {
+	opacity:0.5;
+}
+
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li.add:active > * {
+    transform:scale(0.8);
+}
+#contain div#tool div#dmg div[name='result'] > span[name='party'] li[name].select {
+	border-style:dashed;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure {
+	position:absolute;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='reset'] {
+	right:2px;
+	top:2px;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] {
+	left:7px;
+	top:2px;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > div {
+	position:relative;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > div > span {
+    position:absolute;
+    top:0;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    max-width:500px;
+    min-width:100px;
+    background:#fff;
+    width:100%;
+    color:Black;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > small {
+	width:100%;
+	height:100%;
+	display:block;
+	transition:.2s ease;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export']:not(.active) > small {
+	transform:rotate(-90deg);
+}
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export']:active > small, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'].active > small {
+	filter:invert(0.3);
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export']:not(.active) > div > span {
+	display:none;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > div > span > span {
+	display:block;
+    width:100%;
+	border: 1px solid black;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > div > span > span:not(:last-child) {
+	border-bottom: none;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > div > span > span > b {
+    padding:2px 0;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > div > span > span > b, #contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > figure[name='export'] > div > span > span > b > small {
+	font-weight:normal;
+	width:100%;
+	height:100%;
+	display:block;
+}
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > li {
+	width:90%;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > li:first-child {
+	margin-top:10px;
+}
+
+#contain div#tool div#dmg > div ol[name='team'] > span {
+	width:100%;
+	display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+	
+#contain div#tool div#dmg > div ol[name='team'] > span > li {
+    width:90%;
+    padding:5px 0;
+    display:flex;
+    justify-content:flex-start;
+    text-align:left;
+}
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] li > *:not(span):not(input):first-child, #contain div#tool div#dmg > div ol[name='team'] > span > li[name*='-Group'] > *:not(span):first-child {
+    padding:5px 0 5px;
+	text-indent:5%;
+}
+
+#contain div#tool div#dmg > div ol[name='team'] > span > li[name] > span > li {
+	display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    width:100%;
+    flex-direction:row;
+}
+#contain div#tool div#dmg > div ol[name='team'] > span > li span li {
+	padding:3px 0;
+}
+#contain div#tool div#dmg > div ol[name='team'] > span > li[name*='-Group'] {
+	flex-direction:column;
+}
+#contain div#tool div#dmg > div ol[name='team'] > span > li > span { 
+	display:flex;
+    flex-direction:row;
+    justify-content:center;
+}
+
+#contain div#tool div#dmg > div ol[name='team'] > span > li small {
+	display:block;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] span > li {
+	padding:1px 0;	
+}
+
+
+#contain div#tool div#dmg > div input {
+	color:Black;
+}
+
+#contain div#tool div#dmg div[name='options'] {
+	flex-direction:column;
+}
+
+
+#contain div#tool div#dmg div[name='options'] > div {
+	width:100%;
+}
+
+
+#contain div#tool div#dmg div[name='options'] > div:first-child {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	height:15%;
+	flex-direction:column;
+	z-index:3;
+
+	background:var(--Background_Calculator_Sidebar_Header);
+	color:var(--Color_Calculator_Sidebar_Header);
+	border:var(--Border_Calculator_Sidebar_Header);
+}
+#contain div#tool div#dmg div[name='options'] > div:nth-child(2) {
+	display:flex;
+    height:65%;
+    text-align:center;
+    flex-wrap:nowrap;
+    flex-direction:column;
+	z-index:1;
+}
+#contain div#tool div#dmg div[name='options'] > div:last-child {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    height:20%;
+    flex-direction:row;
+    z-index:2;
+	
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:left;
+    width:100%;
+    height:100%;
+    flex-direction:row;
+
+	background:var(--Background_Calculator_Sidebar_Footer);
+	color:var(--Color_Calculator_Sidebar_Footer);
+	border:var(--Border_Calculator_Sidebar_Footer);
+	border-bottom:none;
+	border-right:none;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] ul {
+    display:none;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    align-items:stretch;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='stats'] > * {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+
+	border:var(--Border_Calculator_Sidebar_Footer_Item);
+}
+
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] {
+	height:15%;
+    width:100%;
+	position:relative;
+	display:flex;
+
+	background:var(--Background_Calculator_Header);
+	color:var(--Color_Calculator_Header);
+	border:var(--Border_Calculator_Header);
+	border-left: none;
+	border-right: none;
+	border-top: none;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > * {
+	display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    width:100%;
+    padding:0 5px;
+    flex-direction:column;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name*='wrap'] {
+    height:100%;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] {
+	float:left;
+    width:400%;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap2'] {
+	float:right;
+    width:100%;
+    overflow:auto;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    align-items:center;
+}
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap2'] > * {
+	display:inline-block;
+    padding:5px 0 0;
+    min-width:50%;
+    width:fit-content;
+    height:fit-content;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name*='-Group'] > *:first-child {
+	padding:10px 0 5px;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > * > span {
+	display:flex;
+    flex-direction:row;
+    width:100%;
+    align-items:center;
+    justify-content:space-evenly;
+    margin-bottom:10px;
+    flex-wrap:nowrap;
+}
+
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > * > span > li label{
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	padding:2px 0px;
+    flex-direction:column-reverse;
+}
+
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] input[type='checkbox'] {
+	display:unset;
+	margin:0 10px;
+}
+
+
+#contain div#tool div#dmg div[name='options'] > div:first-child > span {
+	display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    width:100%;
+    height:100%;
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child > span > * {
+	width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child > span > select {
+	outline:none;
+    text-align:center;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background:none;
+    font-weight:bold;
+	border:none;
+
+	background:var(--Background_Calculator_Sidebar_Header_Select);
+	color:var(--Color_Calculator_Sidebar_Header_Select);
+	border:var(--Border_Calculator_Sidebar_Header_Select);
+	border-top: none;
+	border-right: none;
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child select {
+	border:none;
+	outline:none;
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child > span:first-child > select {
+	padding:20px 10px;
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child > span:last-child > select {
+	padding:10px 0px;
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child > span:last-child > select:last-child {
+	padding:10px 0px;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='options'] > div:first-child > span:first-child > select {
+	font-size:var(--sizeFontM);
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child > span:last-child > select {
+	font-size:var(--sizeFontS);
+}
+#contain div#tool div#dmg div[name='options'] > div:first-child > span:last-child > select option {
+	font-size:var(--sizeFontL);
+}
+
+#contain div#tool div#dmg option {
+	padding:5px 10px;
+	color:Black;
+}
+
+
+
+#contain div#tool div#dmg > div ol:not([name='stats']) input[type='checkbox'], #contain div#tool div#dmg > div ol:not([name='stats']) input[type='number'] {
+	display:unset;
+    margin:0 10px;
+}
+
+
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > div[name] {
+	width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > div[name] > span {
+	display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    flex-direction:row;
+    padding:10px 0;
+    width:75%;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > div[name] > span[name] {
+	flex-direction:column;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > div[name] > span[name] > span {
+	display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    flex-direction:column;
+    text-align:center;
+
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > div[name] > span[name] > span > span {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:5px 0;
+}
+
+#contain div#tool div#dmg div[name='options'] ol[name='pokemon'] > span[name] > ul[name] > div:not([name*='1']) {
+	display:none;
+}
+
+
+
+
+
+#contain div#tool div#timer {
+	width:100%;
+	height:100%;
+}
+
+#contain div#tool div#timer > *:first-child {
+	width:100%;
+	height:10%;
+	display:flex;
+    flex-direction:row;
+
+	border:var(--Border_Timer_Header);
+}
+
+
+
+#contain div#tool div#timer > *:first-child label {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	height:100%;
+	color:Black;
+
+	background:var(--Background_Timer_Header_Label);
+	color:var(--Color_Timer_Header_Label);
+	border:var(--Border_Timer_Header_Label);
+}
+
+#contain div#tool div#timer > *:first-child label:active,
+#contain div#tool div#timer > *:first-child input:checked + label {
+	background:var(--Background_Timer_Header_Label_Selected);
+	color:var(--Color_Timer_Header_Label_Selected);
+	text-decoration: underline;
+}
+
+
+
+#contain div#tool div#timer > *[name] {
+	/*display:inline-block;*/
+	margin:auto;
+	width:100%;
+	height:90%;
+	position:relative;
+	overflow:hidden;
+}
+#contain div#tool div#timer > *[name='countdown'] {
+	display:none;
+}
+#contain div#tool div#timer > *[name] b {
+	display:flex;
+    align-items:center;
+    justify-content:center;
+    color:Black;
+}
+
+#contain div#tool div#timer > *[name] input {
+    font-size:var(--sizeFontXL);
+	padding:5px 10px;
+
+	background:var(--Background_Timer_Title_Input);
+	color:var(--Color_Timer_Title_Input);
+	border:var(--Border_Timer_Title_Input);
+}
+
+#contain div#tool div#timer > *[name] input::placeholder {
+	color:Black;
+}
+#contain div#tool div#timer > *[name] > div > div > span > p {
+	padding:0 5px;
+}
+
+
+#contain div#tool div#timer > *[name] b {
+	height:40%;
+	width:100%;
+	color:Black;
+}
+
+#contain div#tool div#timer > *[name] b:active {
+	color:White;
+}
+
+
+
+#contain div#tool div#timer > *[name] figure {
+	height:100%;
+	width:10%;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+#contain div#tool div#timer > *[name] b[title='Play'] {
+	background:var(--Background_Timer_Title_Play);
+	color:var(--Color_Timer_Title_Play);
+	border:var(--Border_Timer_Title_Play);
+}
+
+#contain div#tool div#timer > *[name] b[title='Pause'] {
+	background:var(--Background_Timer_Title_Pause);
+	color:var(--Color_Timer_Title_Pause);
+	border:var(--Border_Timer_Title_Pause);
+}
+
+#contain div#tool div#timer > *[name] b:active {
+	color:Black;
+}
+
+
+#contain div#tool div#timer > *[name] > div > div[name='set'], #contain div#tool div#timer > *[name] > div > div > data {
+    text-align:center;
+    width:100%;
+    height:60%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:row;
+}
+
+
+
+#contain div#tool div#timer > *[name] > div > div[name='set'] {
+	background:var(--Background_Timer_Title);
+	color:var(--Color_Timer_Title);
+	border:var(--Border_Timer_Title);
+}
+
+#contain div#tool div#timer > *[name] > div > div > span {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	width:80%;
+}	
+
+
+
+#contain div#tool div#timer > *[name] > div > div > data {
+	width:80%;
+}
+
+#contain div#tool div#timer > *[name] > div {
+	width:100%;
+	height:30%;
+}
+
+#contain div#tool div#timer > *[name] ul {
+	width:100%;
+	height:70%;
+	overflow-y:auto;
+
+	background:var(--Background_Timer_Content);
+	color:var(--Color_Timer_Content);
+	border:var(--Border_Timer_Content);
+}
+
+#contain div#tool div#timer > *[name] ul > li {
+	width:100%;
+    display:inline-block;
+    text-align:center;
+    padding:10px 0;
+    position:relative;
+
+	background:var(--Background_Timer_Content_Item);
+	color:var(--Color_Timer_Content_Item);
+	border:var(--Border_Timer_Content_Item);
+	border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+
+
+
+#contain div#tool div#timer > *[name] ul > li span {
+	position:absolute;
+	left:10px;
+}
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Terrain-Group'] input, #contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] input {
+	display:none;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Terrain-Group'] li, #contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] li {
+    justify-content:center;
+    width:unset;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] li {
+	height:100%;
+}
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] li label {
+	justify-content:space-between;
+	height:100%;
+}
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name] img {
+	max-height:40px;
+    max-width:70px;
+}
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > * img[name='SwSh'] {
+	filter:invert(100%) sepia(0%) saturate(7500%) hue-rotate(77deg) brightness(112%) contrast(107%);
+}
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > * input:checked ~ label img {
+    transform:scale(0.9);
+    image-rendering:pixelated;
+}
+
+
+#contain div#tool div#dmg div[name='content'] > div[name='field'] > *[name='wrap1'] > *[name='Weather-Group'] {
+	width:200%;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] {
+    display:flex;
+    flex-direction:row;
+    position:relative;
+    margin:0 auto;
+    align-items:center;
+    justify-content:center;
+}
+
+
+
+#contain div#tool div#dmg div[name='battle'] {
+	--weather:Lightskyblue;
+	--terrain:Silver;
+}
+
+
+#contain div#tool div#dmg div[name='battle']::before, #contain div#tool div#dmg div[name='battle']::after {
+	content:'';
+	width:100%;
+	position:absolute;
+	-webkit-mask:var(--mask);
+	mask:var(--mask);
+}
+
+#contain div#tool div#dmg div[name='battle']::before {
+	top:0;
+    height:60%;
+    --mask:linear-gradient(to bottom, rgba(0,0,0, 1) 0, rgba(0,0,0, 1) 90%, rgba(0,0,0, 0) 100%, rgba(0,0,0, 0) 0 ) 100% 50% / 100% 100% repeat-x;
+    background-color:var(--weather);
+    background-position-y:0%;
+    background-position-x:0%;
+	z-index:2;
+}
+
+
+body.dragging #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'] {
+	animation:dropshadow infinite 1.5s linear;
+	animation-delay:1s;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].ui-droppable-hover span[name='pok'] b, #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].ui-droppable-hover span[name='pok'] img[name='img'] {
+	animation:none;
+	filter:brightness(0);
+}
+
+@keyframes dropshadow {
+    0% {
+        filter:drop-shadow(0px 1px 0px #000);
+    }
+	50% {
+        filter:drop-shadow(4px 1px 0px #000);
+    }
+	100% {
+        filter:drop-shadow(0px 1px 0px #000);
+    }
+}
+
+#contain div#tool div#dmg div[name='battle'] figure[name='object'] {
+	user-select:none;
+	pointer-events:none;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Extremely Harsh Sunlight'] figure[name='object'], #contain div#tool div#dmg div[name='battle'][data-weather='Harsh Sunlight'] figure[name='object'] {
+	display:unset;
+    position:absolute;
+    content:'';
+    left:50px;
+    top:15px;
+    width:100px;
+    height:100px;
+    background-image:url('../media/Images/Misc/FinalDex/Light.png');
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-repeat:no-repeat;
+    transform-origin:center;
+    z-index:100;
+	filter:brightness(1.2);
+	opacity:0.5;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Harsh Sunlight'] figure[name='object'] {
+	animation:sun infinite 60s linear;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Extremely Harsh Sunlight'] figure[name='object'] {
+	animation:sun infinite 30s linear;
+}
+
+@keyframes sun {
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+
+
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Strong Winds']::before {
+	background:linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size:var(--depth) var(--depth);
+    background-color:var(--weather);
+    background-position-y:0%;
+    animation:weather2 infinite 1s linear;
+    --c1:rgba(255, 255, 255, .015);
+    --angle:0deg;
+    --depth:92px;
+    --h:15%;
+    --w:49%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Heavy Rain']::before {
+	background:linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size:var(--depth) var(--depth);
+    background-color:var(--weather);
+    animation:weather1 infinite .8s linear;
+    --c1:rgba(255, 255, 255, .09);
+    --angle:0deg;
+    --depth:34px;
+    --h:61%;
+    --w:48%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Rain']::before {
+	background:linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+	background-size:var(--depth) var(--depth);
+	background-color:var(--weather);
+	animation:weather1 infinite 1s linear;
+	--c1:rgba(255, 255, 255, .09);
+	--angle:0deg;
+	--depth:34px;
+	--h:72%;
+	--w:46%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Snow']::before {
+	background:linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size:var(--depth) var(--depth);
+    background-color:var(--weather);
+    animation:weather1 infinite 3s linear;
+    --c1:rgba(255, 255, 255, .05);
+    --angle:0deg;
+    --depth:34px;
+    --h:92%;
+    --w:52%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Hail']::before {
+    background:linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+    background-size:var(--depth) var(--depth);
+    background-color:var(--weather);
+    animation:weather1 infinite 1.2s linear;
+    --c1:rgba(255, 255, 255, .3);
+    --angle:0deg;
+    --depth:55px;
+    --h:89%;
+    --w:53%;
+}
+
+#contain div#tool div#dmg div[name='battle'][data-weather='Sandstorm']::before {
+	background:linear-gradient(var(--angle), var(--weather) var(--h), transparent 21%),linear-gradient(90deg, transparent 45%, var(--c1) 45%, var(--c1) var(--w), transparent var(--w), transparent 20%, var(--c1) 20%, var(--c1) 30%,transparent 30%);
+	background-size:var(--depth) var(--depth);
+	background-color:var(--weather);
+	animation:weather3 infinite 25s linear;
+	--c1:rgba(0, 0, 0, .075);
+	--angle:0deg;
+	--depth:9px;
+	--h:88%;
+	--w:65%;
+}
+
+
+@keyframes weather1 {
+    to {
+        background-position-y:100%;
+    }
+}
+
+
+@keyframes weather2 {
+    to {
+        background-position-y:-100%;
+    }
+}
+
+@keyframes weather3 {
+    to {
+        background-position-y:200%;
+		background-position-x:100%;
+    }
+}
+
+
+
+
+#contain div#tool div#dmg div[name='battle']::after {
+	bottom:0;
+	height:65%;
+	--mask:linear-gradient(to top, rgba(0,0,0, 1) 0, rgba(0,0,0, 1) 75%, rgba(0,0,0, 0) 100%, rgba(0,0,0, 0) 0 ) 100% 50% / 100% 100% repeat-x;
+	background-color:var(--terrain);
+	z-index:1;
+}
+#contain div#tool div#dmg div[name='battle'] > span > span[name] {
+	display:flex;
+    flex-direction:row;
+    width:50%;
+    position:relative;
+    height:100%;
+}
+
+#contain div#tool div#dmg div[name='battle'] > span {
+	width:100%;
+    display:flex;
+    flex-direction:row;
+    height:100%;
+    flex-wrap:wrap;
+    z-index:10;
+}
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] {
+	display:flex;
+    flex-direction:column;
+    position:relative;
+    text-shadow:1px 1px 1px #000;
+	min-width:200px;
+	margin:0 10px;
+}
+#contain div#tool div#dmg > div[data-battle='Battle Royal'] div[name='battle'] span[name*='team'] div[data-string], #contain div#tool div#dmg > div[data-battle='Triple Battle'] div[name='battle'] span[name*='team'] div[data-string] {
+	min-width:150px;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span {
+	position:relative;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name] {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+	transition:.2s ease opacity;
+	margin:2px 0;
+}
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='wrap'] {
+    flex-direction:column;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name="name"] {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    transition:.2s ease opacity;
+    width:20%;
+    margin:2px auto;
+    flex-direction:column;
+	text-align:center;
+}
+
+
+
+#contain div#tool div#dmg > div:not([data-battle='Single Battle']) div[name='result'] *[name='imgs']:active > img[name='img'] {
+	transform:scale(0.9);
+}
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure {
+	position:absolute;
+    cursor:pointer;
+    bottom:0;
+    padding:5px;
+    z-index:10;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure > * {
+	width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure[name='user'] {
+	left:0px;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure[name='target'] {
+	right:0px;
+}
+
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] figure:active > * {
+	transform:scale(0.8)
+}
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] span[name='hp'][title]:not([title='']), #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='item'][title]:not([title='']) {
+	cursor:help;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img {
+	position: relative;
+	max-height: 200px;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='item'] {
+	position:absolute;
+	left:20px;
+	top:20px;
+}
+
+
+
+
+body[Generation='1'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'], body[Generation='2'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'], body[Generation='3'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'], body[Generation='4'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'], body[Generation='5'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'] {
+	image-rendering:pixelated;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[src=''] {
+	visibility: hidden;
+    font-size: 0;
+	margin:auto;
+	overflow:visible;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[src='']::after {
+	content: '?';
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='img'][src='']::after {
+    font-size:xxx-large;
+}
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string] img[name='item'][src='']::after {
+    font-size:x-large;
+}
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] *[name='pok'] b {
+	width:100%;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] *[name='pok'] b:active {
+	transform:scale(0.9)
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:not(.active) span[name='hp'], #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]:not(.active) figure, #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string]:not(.active) *[name='pok'] img, #contain div#tool div#dmg div[name='battle'] span[name*='team'] > div[data-string].active *[name='pok'] b {
+	display:none;
+}
+
+#contain div#tool div#dmg > div:not([data-count='0']):not([data-count='1']):not([data-count='2']) div[name='battle'] span[name*='team'] > div[data-string] *[name='pok'] img[name='img'] {
+	cursor:pointer;
+}
+
+#contain div#tool div#dmg > div:not([data-count='0']):not([data-count='1']):not([data-count='2']) div[name='battle'] span[name*='team'] > div[data-string] *[name='pok'] img[name='img']:active {
+	transform:scale(0.95);
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='info'] {
+	position:absolute;
+	top:0;
+	width:100%;
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp']:hover ~ span > span[name='moves'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves']:hover {
+	display:flex;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] {
+	display:none;
+    flex-wrap:wrap;
+    position:absolute;
+    top:calc(100% + -2px);
+    width:100%;
+    z-index:10;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b {
+	width:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+	cursor:default;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category] {
+	cursor:pointer;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='moves'] b[data-category]{
+	padding:5px 0;
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] b[data-category='Status'] {
+    pointer-events:none;
+    opacity:0.5;
+	color:unset;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] {
+	--dmg: 100%;
+    --heal: 100%;
+    --hp: 100%;
+    background: linear-gradient(to right, limegreen 0%, limegreen var(--dmg), greenyellow var(--dmg), greenyellow var(--heal), orangered var(--heal), orangered var(--hp), darkred var(--hp), darkred 100%);
+    position: relative;
+    transition: 2s ease opacity;
+    padding: 2px 0;
+    justify-content: space-between;
+    border-radius: 3px;
+    height: 15px;
+    width: 100%;
+    border: 1px solid hsl(0,0%,40%);
+    box-sizing: content-box;
+}
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='effect'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='health'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='percentage'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='result'] {
+	pointer-events:none;
+	cursor:default;
+	position:absolute;
+	user-select:none;
+}
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='health'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='percentage'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] span[name='result'] {
+	display:flex;
+	justify-content:center;
+    align-items:center;
+}
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='effect'] *[name='neutral'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='name'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='health'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='percentage'] {
+	opacity:0;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='name'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='health'], #contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='percentage'] {
+	opacity:1;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:hover span[name='result'] {
+	right:5px !important;
+    left:unset !important;
+}
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] > span[name='health'] {
+	left:5px;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] > span[name='percentage'] {
+    right:50%;
+    left:50%;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='hp'] > span[name='result'] {
+	left:100%;
+	margin-left:-20px;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user figure[name='target'] {
+	display:none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user figure[name='user'] {
+	display:none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].target figure[name='target'] {
+	display:none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string]:not(.viable) figure[name='target'] {
+	display:none;
+}
+
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] span[name*='team'] > div[data-string].viable figure[name='target'] {
+	display:none;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user span[name='hp'] {
+	outline:2px solid Blue;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].target span[name='hp'] {
+	outline:2px solid Red;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string].user.target span[name='hp'] {
+	border:2px solid Blue;
+    outline:2px solid Red;
+}
+
+#contain div#tool div#dmg > div[data-range*='Affects'] div[name='result'] span[name*='team'] > div[data-string].viable span[name='hp'] {
+	outline:2px solid Red;
+}
+
+
+
+
+
+#contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'] {
+	min-height:100px;
+	margin: 0;
+}
+
+
+
+body[Generation='1'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'], body[Generation='2'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'], body[Generation='3'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'], body[Generation='4'] #contain div#tool div#dmg div[name='battle'] span[name*='team'] div[data-string] > span[name='pok'] {
+    align-items:flex-end;
+}
+
+body:not([Generation='1']):not([Generation='2']):not([Generation='3']):not([Generation='4']) #contain div#tool div#dmg div[name='battle'] span[name='user'] > * {
+	/*transform:translate(0px, -30%);*/
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] {
+	display:flex;
+    justify-content:center;
+    position:absolute;
+    bottom:calc(100% + 5px);
+    width:100%;
+    align-items:flex-end;
+    font-size:100%;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] > span:not([name]) {
+	display:flex;
+    justify-content:space-between;
+	width:100%;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] span[name] {
+    display:flex;
+    flex-direction:column-reverse;
+	max-width:40%;
+}
+
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] *[name='positive'] {
+    align-items:flex-start;
+	text-align:left;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] *[name='negative'] {
+    align-items:flex-end;
+	text-align:right;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] *[name='neutral'] {
+	position:absolute;
+}
+#contain div#tool div#dmg div[name='result'] span[name*='team'] > div[data-string] span[name='effect'] span[name] > * {
+	padding:1px 0;
+}
+
+#contain div#tool div#dmg div[name='battle'] span[name='user'] {
+	align-items:flex-end;
+}
+
+#contain div#tool div#timer > *[state='play'] b[title='Play'],
+#contain div#tool div#timer > *[state='stop'] b[title='Pause'],
+#contain div#tool div#timer > *[state='stop'] > div > div > data,
+#contain div#tool div#timer > *[state='play'] > div > div > span {
+	display:none;
+}
