@@ -19,6 +19,21 @@
     }
 }
 
+@keyframes transformScale1 {
+    0% {
+        transform: scale(1);
+    }
+    48% {
+        transform: scale(0.9);
+    }
+    52% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 @keyframes rangeAnimation1 {
     0% {
         background-color: hsl(0, 0%, 40%);
