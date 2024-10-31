@@ -5,12 +5,10 @@ nav {
     top: 0;
     background: hsl(0, 0%, 90%);
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: nowrap;
     color: black;
-    text-align:center;
+    text-align: center;
     z-index: 100;
     border-bottom: 2px outset hsl(0, 0%, 0%);
 }
@@ -18,18 +16,21 @@ nav {
 nav > * {
     width: 100%;
 }
-nav button {
 
+nav button {
     font-size: 0.8rem;
     font-weight: bold;
 }
+
 nav button:hover,
 nav button:active {
     text-decoration: underline;
 }
+
 nav button:active {
-    font-size:0.75rem;
+    font-size: 0.75rem;
 }
+
 nav div {
     height: 100%;
     display: flex;
@@ -38,24 +39,29 @@ nav div {
     align-items: center;
     cursor: pointer;
 }
+
 nav div > img {
     height: 100%;
     transition: 0.2s ease;
 }
+
 nav div span {
-    height: 0%;
+    height: 0;
     overflow: hidden;
     transition: 0.2s ease;
     user-select: none;
 }
+
 nav div.active > img,
 nav div:hover > img {
     height: 50%;
 }
+
 nav div.active > span,
-nav div:hover > span  {
+nav div:hover > span {
     height: 50%;
 }
+
 main {
     height: calc(100vh - 75px);
     width: 100%;
@@ -68,13 +74,14 @@ section {
     min-height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
+
 section:not(:first-child):not(:nth-child(2)) {
     padding: 0 30px;
 }
+
 section:has(#Home) {
     min-height: unset;
     height: calc(100% - 20px);
@@ -83,23 +90,26 @@ section:has(#Home) {
 #Games {
     margin-top: 100px;
 }
+
 section > div {
-    position:relative;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
+
 section > div:not(#Home):not(#Games) {
     padding: 20px 10px;
 }
 
 #Home {
     height: 100%;
-    width:100%;
-    background:hsl(0,0%,35%);
+    width: 100%;
+    background: hsl(0, 0%, 0%);
 }
-#Home::before {
+
+#Home::after {
     content: "";
     width: 100%;
     height: 100%;
@@ -110,14 +120,17 @@ section > div:not(#Home):not(#Games) {
     opacity: 0.2;
     background-size: 16px 16px;
     background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 1.6px, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 50%);
+    z-index: 10;
 }
+
 #Home .text {
-    position:absolute;
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     -webkit-text-stroke: rgba(0, 0, 0, 0.9) thin;
+    z-index: 100;
 }
 
 nav div span > *:last-child,
@@ -125,41 +138,50 @@ nav div span > *:last-child,
     background: linear-gradient(to right, mediumseagreen, darkcyan);
     color: transparent;
     background-clip: text;
-    text-transform:uppercase;
+    text-transform: uppercase;
     filter: drop-shadow(1px 1px 0px black);
 }
 
 #Home .text > *:first-child {
     font-size: 7.5rem;
-    cursor:pointer;
-    user-select:none;
+    cursor: pointer;
+    user-select: none;
 }
+
 #Home .text > *:first-child:active {
-    filter:drop-shadow(1px 1px 0px black) brightness(0.8);
+    filter: drop-shadow(1px 1px 0px black) brightness(0.8);
 }
+
 #Home .text > *:last-child {
-    color:white;
+    color: white;
     text-shadow: -1px 1px 0px black;
     filter: drop-shadow(2px 2px 1px black);
     -webkit-text-stroke: 0;
 }
+
 #Home .video {
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    filter: brightness(0.5) opacity(0.5);
-    position: relative; /* Ensure the container is positioned relative */
+    filter: brightness(1) opacity(0.5) contrast(0.2);
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background: hsl(0, 0%, 40%);
+    overflow: hidden;
 }
 
 #Home .video video {
     transition: opacity 1s ease, visibility 0s 1.5s ease;
     visibility: hidden;
     opacity: 0;
-    max-width:100%;
+    max-height: 150%;
+    object-fit: scale-down;
 }
+
 #Home .video video:not(.active) {
-    position:absolute;
+    position: absolute;
 }
 
 #Home .video video.active {
@@ -170,18 +192,21 @@ nav div span > *:last-child,
 
 #Home .play,
 #Home .pause {
-    position:absolute;
-    left:10px;
-    bottom:10px;
-    font-size:3rem;
-    color:white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 3rem;
+    color: white;
     text-shadow: 1px 1px 0px black;
+    z-index: 100;
+    padding: 10px;
 }
 
 #Home .play:not(.active),
 #Home .pause:not(.active) {
     display: none;
 }
+
 section:has(#Games)::before {
     content: "";
     display: block;
@@ -205,15 +230,14 @@ section:not(:has(#Home)) {
 
 #Games > header {
     font-size: 3rem;
-    text-transform:uppercase;
-    font-weight:bold;
+    text-transform: uppercase;
+    font-weight: bold;
     margin: 20px 0;
 }
 
 #Games > div {
     text-align: center;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -234,9 +258,11 @@ section:not(:has(#Home)) {
     cursor: pointer;
     user-select: none;
 }
+
 #Games li:has(img[src]:not([src=''])) {
     background: hsl(0, 0%, 0%);
 }
+
 #Games li img {
     height: 100%;
     width: 100%;
@@ -244,9 +270,11 @@ section:not(:has(#Home)) {
     object-fit: cover;
     filter: blur(1px) brightness(0.5);
 }
+
 #Games li img[src=''] {
-    visibility:hidden;
+    visibility: hidden;
 }
+
 #Games li a {
     z-index: 100;
     font-size: 2.5rem;
@@ -262,121 +290,157 @@ section:not(:has(#Home)) {
     user-drag: none;
 }
 
-#Games li a:active {
+#Games li a:hover > *,
+#Games li a:active > * {
+    animation: transformScale1 2.5s infinite ease;
+}
+
+#Games li a > *:active {
     font-size: 2.3rem;
 }
 
-#Games li[data-game] a {
-    filter: drop-shadow(2px 2px 1px hsl(0,0%,0%));
-    background: linear-gradient(to right, hsl(0,0%,80%), hsl(0,0%,50%));
+#Games li[data-game] a > * {
+    filter: drop-shadow(2px 2px 1px hsl(0, 0%, 0%));
+    background: linear-gradient(to right, hsl(0, 0%, 80%), hsl(0, 0%, 50%));
 }
 
-
-#Games li[data-game='Red'] a {
+#Games li[data-game='Red'] a > * {
     background: linear-gradient(to right, Red, palevioletred);
 }
-#Games li[data-game='Blue'] a {
+
+#Games li[data-game='Blue'] a > * {
     background: linear-gradient(to right, blue, steelblue);
 }
-#Games li[data-game='Yellow'] a {
+
+#Games li[data-game='Yellow'] a > * {
     background: linear-gradient(to right, Yellow, khaki);
 }
-#Games li[data-game='Gold'] a {
+
+#Games li[data-game='Gold'] a > * {
     background: linear-gradient(to right, Gold, palegoldenrod);
 }
-#Games li[data-game='Silver'] a {
+
+#Games li[data-game='Silver'] a > * {
     background: linear-gradient(to right, Silver, slategray);
 }
-#Games li[data-game='Crystal'] a {
+
+#Games li[data-game='Crystal'] a > * {
     background: linear-gradient(to right, steelblue, deepskyblue);
 }
-#Games li[data-game='Ruby'] a {
+
+#Games li[data-game='Ruby'] a > * {
     background: linear-gradient(to right, darkred, indianred);
 }
-#Games li[data-game='Sapphire'] a {
+
+#Games li[data-game='Sapphire'] a > * {
     background: linear-gradient(to right, darkblue, dodgerblue);
 }
-#Games li[data-game='Emerald'] a {
+
+#Games li[data-game='Emerald'] a > * {
     background: linear-gradient(to right, darkgreen, green);
 }
-#Games li[data-game='FireRed'] a {
+
+#Games li[data-game='FireRed'] a > * {
     background: linear-gradient(to right, orange, orangered);
 }
-#Games li[data-game='LeafGreen'] a {
+
+#Games li[data-game='LeafGreen'] a > * {
     background: linear-gradient(to right, forestgreen, lawngreen);
 }
-#Games li[data-game='Colosseum'] a {
+
+#Games li[data-game='Colosseum'] a > * {
     background: linear-gradient(to right, tan, wheat);
 }
-#Games li[data-game='XD'] a {
+
+#Games li[data-game='XD'] a > * {
     background: linear-gradient(to right, darkslategray, slategray);
 }
-#Games li[data-game='Diamond'] a {
+
+#Games li[data-game='Diamond'] a > * {
     background: linear-gradient(to right, steelblue, midnightblue);
 }
-#Games li[data-game='Pearl'] a {
+
+#Games li[data-game='Pearl'] a > * {
     background: linear-gradient(to right, thistle, plum);
 }
-#Games li[data-game='Platinum'] a {
+
+#Games li[data-game='Platinum'] a > * {
     background: linear-gradient(to right, steelblue, lightslategray);
 }
-#Games li[data-game='HeartGold'] a {
+
+#Games li[data-game='HeartGold'] a > * {
     background: linear-gradient(to right, gold, orange);
 }
-#Games li[data-game='SoulSilver'] a {
+
+#Games li[data-game='SoulSilver'] a > * {
     background: linear-gradient(to right, ghostwhite, powderblue);
 }
-#Games li[data-game='Black'] a {
-    background: linear-gradient(to right, lightslategrey, hsl(0,0%,20%));
+
+#Games li[data-game='Black'] a > * {
+    background: linear-gradient(to right, lightslategrey, hsl(0, 0%, 20%));
 }
-#Games li[data-game='White'] a {
+
+#Games li[data-game='White'] a > * {
     background: linear-gradient(to right, whitesmoke, lightcyan);
 }
-#Games li[data-game='Black 2'] a {
+
+#Games li[data-game='Black 2'] a > * {
     background: linear-gradient(to right, darkslategrey, steelblue);
 }
-#Games li[data-game='White 2'] a {
+
+#Games li[data-game='White 2'] a > * {
     background: linear-gradient(to right, floralwhite, thistle);
 }
-#Games li[data-game='X'] a {
+
+#Games li[data-game='X'] a > * {
     background: linear-gradient(to right, royalblue, darkblue);
 }
-#Games li[data-game='Y'] a {
+
+#Games li[data-game='Y'] a > * {
     background: linear-gradient(to right, palevioletred, darkred);
 }
-#Games li[data-game='Omega Ruby'] a {
+
+#Games li[data-game='Omega Ruby'] a > * {
     background: linear-gradient(to right, darkred, tomato);
 }
-#Games li[data-game='Alpha Sapphire'] a {
+
+#Games li[data-game='Alpha Sapphire'] a > * {
     background: linear-gradient(to right, darkblue, skyblue);
 }
-#Games li[data-game='Sun'] a {
+
+#Games li[data-game='Sun'] a > * {
     background: linear-gradient(to right, darkorange, antiquewhite);
 }
-#Games li[data-game='Moon'] a {
+
+#Games li[data-game='Moon'] a > * {
     background: linear-gradient(to right, skyblue, dodgerblue);
 }
-#Games li[data-game='Ultra Sun'] a {
+
+#Games li[data-game='Ultra Sun'] a > * {
     background: linear-gradient(to right, darkorange, darkred);
 }
-#Games li[data-game='Ultra Moon'] a {
+
+#Games li[data-game='Ultra Moon'] a > * {
     background: linear-gradient(to right, skyblue, mediumslateblue);
 }
-#Games li[data-game='Lets Go Pikachu'] a {
+
+#Games li[data-game='Lets Go Pikachu'] a > * {
     background: linear-gradient(to right, goldenrod, darkgoldenrod);
 }
-#Games li[data-game='Lets Go Eevee'] a {
+
+#Games li[data-game='Lets Go Eevee'] a > * {
     background: linear-gradient(to right, saddlebrown, rosybrown);
 }
-#Games li[data-game='Sword'] a {
+
+#Games li[data-game='Sword'] a > * {
     background: linear-gradient(to right, lightskyblue, turquoise);
 }
-#Games li[data-game='Shield'] a {
+
+#Games li[data-game='Shield'] a > * {
     background: linear-gradient(to right, red, hotpink);
 }
 
-
-#Games li[data-game] a {
+#Games li[data-game] a > * {
     background-clip: text;
     color: transparent;
 }
@@ -389,7 +453,9 @@ section:not(:has(#Home)) {
     flex-wrap: wrap;
     align-items: flex-start;
 }
-#Agenda li:has(s) {
+
+#Agenda li:has(s),
+#Agenda li:has(del) {
     display: none;
 }
 
@@ -402,7 +468,6 @@ section:not(:has(#Home)) {
 #Changelog h6 span {
     display: none;
 }
-
 
 #FAQ li,
 #Dataset li,
@@ -418,7 +483,9 @@ section:not(:has(#Home)) {
     text-transform: capitalize;
 }
 
-
+#Changelog li {
+    list-style: square;
+}
 
 #FAQ li,
 #Dataset li,
@@ -429,21 +496,21 @@ section:not(:has(#Home)) {
 
 #FAQ li:nth-child(odd) {
     list-style: square;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 #FAQ li:nth-child(even) {
     list-style: circle;
     padding: 2px 0 10px 0;
 }
+
 #Sources li {
     list-style: circle;
     list-style-position: inside;
 }
 
-
 #Agenda li::after {
-    content:".";
+    content: ".";
 }
 
 #FAQ > *:first-child,
@@ -454,8 +521,6 @@ section:not(:has(#Home)) {
     margin-bottom: 10px;
 }
 
-
-
 #Bug form {
     display: flex;
     flex-direction: column;
@@ -464,16 +529,18 @@ section:not(:has(#Home)) {
     flex-wrap: wrap;
     transition: .5s ease opacity 0s, 0s ease visibility 1s;
     opacity: 1;
-    visibility:visible;
+    visibility: visible;
 }
-#Bug > div.complete > form {
-    visibility:hidden;
-    opacity:0;
-}
-#Bug form > *:first-child,
-#Bug form > *:last-child {
+
+#Bug form > *:first-child {
     margin: 5px;
 }
+
+#Bug > div.complete > form {
+    visibility: hidden;
+    opacity: 0;
+}
+
 #Bug form select {
     padding: 10px 0;
     text-align: center;
@@ -488,26 +555,27 @@ section:not(:has(#Home)) {
     border-bottom-left-radius: 0;
     background: hsl(0, 0%, 80%);
 }
+
 #Bug form select option[disabled] {
     display: none;
 }
+
 #Bug select {
-    color: rgba(0,0,0,0.3);
-}
-#Bug select option {
-    color:black;   
+    color: rgba(0, 0, 0, 0.3);
 }
 
+#Bug select option {
+    color: black;
+}
 
 #Bug textarea {
     resize: none;
     height: 200px;
     aspect-ratio: 2 / 1;
-    border-radius: 5px;
     padding: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    outline: none;
 }
+
 #Bug form button {
     padding: 5px 10px;
     border-radius: 5px;
@@ -515,11 +583,19 @@ section:not(:has(#Home)) {
     text-transform: uppercase;
     font-size: 0.9rem;
     border: 2px solid hsl(0, 0%, 60%);
+    width: 100%;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
+
 #Bug form button:active {
     font-weight: bold;
 }
 
+#Bug form button span {
+    display: block;
+}
 
 #Bug > div {
     position: relative;
@@ -528,6 +604,7 @@ section:not(:has(#Home)) {
     justify-content: center;
     align-items: center;
 }
+
 #Bug > div > div {
     position: absolute;
     width: 100%;
@@ -539,23 +616,25 @@ section:not(:has(#Home)) {
     transition: .5s ease opacity 0.75s, 0s ease visibility 0.75s;
     visibility: visible;
     opacity: 1;
+    background: ghostwhite;
+    border-radius: 20px;
+    border: 4px solid hsl(0, 0%, 80%);
 }
 
 #Bug > div:not(.complete) > div {
     visibility: hidden;
     opacity: 0;
 }
+
 #Bug > div > div button {
     transition: .25s ease;
 }
+
 #Bug > div > div > * {
-    margin:5px;
+    margin: 5px;
 }
 
 #Bug > div:not(.complete) > div button,
 #Bug > div > div button:active {
-    transform:rotate(180deg);
+    transform: rotate(180deg);
 }
-
-
-
