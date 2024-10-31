@@ -1,7 +1,7 @@
 function get_applicable(value, game) {
 
     const values = Array.isArray(value) ? value : String(value).split(/[,_]/);
-    const games = game !== undefined ? (Array.isArray(game) ? game : String(game).split(/[,_]/)) : [config.Game];
+    const games = game !== undefined ? (Array.isArray(game) ? game : String(game).split(/[,_]/)) : [Config.Game];
 
     for (const g of games) {
         const game_generation = get_generation(g);
@@ -55,7 +55,7 @@ function get_directory(parameters = {}) {
         Case: false,
         Exact: false,
         FirstMatch: false,
-        Game: [config.Game],
+        Game: [Config.Game],
         ...parameters // Spread operator to merge
     };
 
@@ -64,8 +64,8 @@ function get_directory(parameters = {}) {
     const removeExtension = (v) => v.replace(/\.[^.]+$/, ""); // Remove the last extension from the file name
     const removeExtra = (v) => v.replace(/_[^_]+$/, ""); // Remove everything after "_" from the file name
     
-    const filteredFiles = options.File.filter(v => v !== "" && v !== undefined && v !== null).map(v => String(v));
-    const filteredPaths = options.Path.filter(v => v !== "" && v !== undefined && v !== null).map(v => String(v));
+    const filteredFiles = options.File.filter(v => v !== undefined && v !== null).map(v => String(v));
+    const filteredPaths = options.Path.filter(v => v !== undefined && v !== null).map(v => String(v));
 
     // Iterate through each file in the order specified
     for (const file of filteredFiles) {
@@ -141,10 +141,10 @@ function get_arraykey(arr) {
 function get_gameid(name) {
 
     if (name.toLowerCase() === "random") {
-        return Math.floor(Math.random() * games.length) + 1;
+        return Math.floor(Math.random() * Data.Games.length) + 1;
     }
 
-    const index = games.map(game => game.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')).indexOf(name.toLowerCase().replace(/[^a-zA-Z0-9]/g, ''));
+    const index = Data.Games.map(game => game.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')).indexOf(name.toLowerCase().replace(/[^a-zA-Z0-9]/g, ''));
     if (index !== 0) {
         return index+1;
     }
@@ -153,7 +153,7 @@ function get_gameid(name) {
 }
 
 function get_game(id) {
-    return games[id - 1] != undefined ? games[id - 1] : null;
+    return Data.Games[id - 1] != undefined ? Data.Games[id - 1] : null;
 }
 function get_generation(game) {
     
@@ -172,60 +172,60 @@ function get_generation(game) {
 
 
 function get_pokemonIndex(pokemon) {
-    if (data.Pokemon[pokemon]) { return pokemon; }
+    if (Data.Pokemon[pokemon]) { return pokemon; }
 
-    const search1 = Object.keys(data.Pokemon).find(key => data.Pokemon[key].Pokemon && data.Pokemon[key].Pokemon === pokemon);
+    const search1 = Object.keys(Data.Pokemon).find(key => Data.Pokemon[key].Pokemon && Data.Pokemon[key].Pokemon === pokemon);
     if (search1) { return get_defaultPokemon(search1); }
 
-    const search2 = Object.keys(data.Pokemon).find(key => data.Pokemon[key].Pokemon && data.Pokemon[key].Pokemon.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === pokemon.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, ""));
+    const search2 = Object.keys(Data.Pokemon).find(key => Data.Pokemon[key].Pokemon && Data.Pokemon[key].Pokemon.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === pokemon.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, ""));
     if (search2) { return get_defaultPokemon(search2); }
 
     return null;
 }
 
 function get_itemIndex(item) {
-    if (data.Items[item]) { return item; }
+    if (Data.Items[item]) { return item; }
 
-    const search1 = Object.keys(data.Items).find(key => data.Items[key].Item && data.Items[key].Item.includes(item));
+    const search1 = Object.keys(Data.Items).find(key => Data.Items[key].Item && Data.Items[key].Item.includes(item));
     if (search1) { return search1; }
 
-    const search2 = Object.keys(data.Items).find(key => data.Items[key].Item && data.Items[key].Item.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === item.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "")));
+    const search2 = Object.keys(Data.Items).find(key => Data.Items[key].Item && Data.Items[key].Item.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === item.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "")));
     if (search2) { return search2; }
 
     return null;
 }
 
 function get_abilityIndex(ability) {
-    if (data.Abilities[ability]) { return ability; }
+    if (Data.Abilities[ability]) { return ability; }
 
-    const search1 = Object.keys(data.Abilities).find(key => data.Abilities[key].Ability && data.Abilities[key].Ability.includes(ability));
+    const search1 = Object.keys(Data.Abilities).find(key => Data.Abilities[key].Ability && Data.Abilities[key].Ability.includes(ability));
     if (search1) { return search1; }
 
-    const search2 = Object.keys(data.Abilities).find(key => data.Abilities[key].Ability && data.Abilities[key].Ability.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === ability.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "")));
+    const search2 = Object.keys(Data.Abilities).find(key => Data.Abilities[key].Ability && Data.Abilities[key].Ability.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === ability.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "")));
     if (search2) { return search2; }
 
     return null;
 }
 
 function get_locationIndex(location) {
-    if (data.Locations[location]) { return location; }
+    if (Data.Locations[location]) { return location; }
 
-    const search1 = Object.keys(data.Locations).find(key => data.Locations[key].Location && data.Locations[key].Location.includes(location));
+    const search1 = Object.keys(Data.Locations).find(key => Data.Locations[key].Location && Data.Locations[key].Location.includes(location));
     if (search1) { return search1; }
 
-    const search2 = Object.keys(data.Locations).find(key => data.Locations[key].Location && data.Locations[key].Location.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === location.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "")));
+    const search2 = Object.keys(Data.Locations).find(key => Data.Locations[key].Location && Data.Locations[key].Location.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === location.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "")));
     if (search2) { return search2; }
 
     return null;
 }
 
 function get_moveIndex(move) {
-    if (data.Moves[move]) { return move; }
+    if (Data.Moves[move]) { return move; }
 
-    const search1 = Object.keys(data.Moves).find(key => data.Moves[key].Move && data.Moves[key].Move.includes(move) )
+    const search1 = Object.keys(Data.Moves).find(key => Data.Moves[key].Move && Data.Moves[key].Move.includes(move) )
     if (search1) { return search1; }
 
-    const search2 = Object.keys(data.Moves).find(key => data.Moves[key].Move && data.Moves[key].Move.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === move.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") ));
+    const search2 = Object.keys(Data.Moves).find(key => Data.Moves[key].Move && Data.Moves[key].Move.some(i => i.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") === move.normalize("NFD").toLowerCase().replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "") ));
     if (search2) { return search2; }
 
     return null;
@@ -238,10 +238,10 @@ function get_defaultPokemon(targetPokemon) {
 
     let defaultPokemon = null;
     let maxKeys = 0;
-    let targetSpecie = data.Pokemon[targetPokemon] ? data.Pokemon[targetPokemon].Pokemon : targetPokemon;
+    let targetSpecie = Data.Pokemon[targetPokemon] ? Data.Pokemon[targetPokemon].Pokemon : targetPokemon;
 
-    for (const key in data.Pokemon) {
-        const pokemonEntry = data.Pokemon[key];
+    for (const key in Data.Pokemon) {
+        const pokemonEntry = Data.Pokemon[key];
 
         // Check if the Pokemon matches the target
         if (pokemonEntry.Pokemon === targetSpecie) {
