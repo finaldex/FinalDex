@@ -33,7 +33,7 @@ const create_dex = function() {
     const header_SearchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "search", autocomplete: "off", placeholder: "Search...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search...'" }, Event: {input: event => {search({ Entries: document.querySelectorAll('.dex_list li'), Data: Data.Pokemon, }, event); dex_count()}, keydown: event => search_filter({ Entries: document.querySelectorAll('.dex_list li') }, event), }, Parent: header_Search });
 
     const header_Game = create_element({ Tag: "li", Class: ["game"], Parent: header_List });
-    const header_GameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [path.Game.Title]}) }, Parent: header_Game });
+    const header_GameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: header_Game });
 
     const dex_List = create_element({ Tag: "ol", Class: ["dex_list"], Parent: dex});
     const Pokemon = Array.from(new Set(Object.values(Data.Pokemon).map(p => p.Pokemon)));
@@ -205,7 +205,7 @@ function image_update() {
 
     // Temporary
     Config.Image = { Pokemon: [], Icon: [], };
-    Config.Image.Pokemon = [path.Pokemon.Battle.Default.Front.GIF, path.Pokemon.Battle.Default.Front.PNG];
+    Config.Image.Pokemon = [Path.Pokemon.Battle.Default.Front.GIF, Path.Pokemon.Battle.Default.Front.PNG];
     Config.Image.Icon = [];
 
     const dex_entries = document.querySelectorAll(".dex_list li");
