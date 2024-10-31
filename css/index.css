@@ -64,15 +64,25 @@ main {
 }
 
 section {
-    position:relative;
-    min-height:100%;
-    width:100%;
+    position: relative;
+    min-height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: space-around;
 }
+section:not(:first-child):not(:nth-child(2)) {
+    padding: 0 30px;
+}
+section:has(#Home) {
+    min-height: unset;
+    height: calc(100% - 20px);
+}
 
+#Games {
+    margin-top: 100px;
+}
 section > div {
     position:relative;
     display: flex;
@@ -80,8 +90,12 @@ section > div {
     align-items: center;
     flex-direction: column;
 }
+section > div:not(#Home):not(#Games) {
+    padding: 20px 10px;
+}
 
 #Home {
+    height: 100%;
     width:100%;
     background:hsl(0,0%,35%);
 }
@@ -129,15 +143,39 @@ nav div span > *:last-child,
     filter: drop-shadow(2px 2px 1px black);
     -webkit-text-stroke: 0;
 }
-#Home .video video:not(.active) {
-    display:none;
+#Home .video {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    filter: brightness(0.5) opacity(0.5);
+    position: relative; /* Ensure the container is positioned relative */
 }
+
+#Home .video video {
+    transition: opacity 1s ease, visibility 0s 1.5s ease;
+    visibility: hidden;
+    opacity: 0;
+    max-width:100%;
+}
+#Home .video video:not(.active) {
+    position:absolute;
+}
+
+#Home .video video.active {
+    transition: opacity 1s ease, visibility 0s ease;
+    visibility: visible;
+    opacity: 1;
+}
+
 #Home .play,
 #Home .pause {
     position:absolute;
     left:10px;
     bottom:10px;
-    font-size:2rem;
+    font-size:3rem;
+    color:white;
+    text-shadow: 1px 1px 0px black;
 }
 
 #Home .play:not(.active),
@@ -152,7 +190,7 @@ section:has(#Games)::before {
     height: 100px;
     max-height: 100px;
     position: absolute;
-    top: -99px;
+    top: -100px;
     z-index: 100;
     background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.02) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.02) 5%, transparent 0, transparent 50%);
     background-size: 1em 1em;
@@ -169,7 +207,7 @@ section:not(:has(#Home)) {
     font-size: 3rem;
     text-transform:uppercase;
     font-weight:bold;
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 #Games > div {
@@ -225,7 +263,7 @@ section:not(:has(#Home)) {
 }
 
 #Games li a:active {
-    font-size: 2rem;
+    font-size: 2.3rem;
 }
 
 #Games li[data-game] a {
@@ -391,6 +429,7 @@ section:not(:has(#Home)) {
 
 #FAQ li:nth-child(odd) {
     list-style: square;
+    font-weight:bold;
 }
 
 #FAQ li:nth-child(even) {
@@ -444,6 +483,10 @@ section:not(:has(#Home)) {
     align-items: center;
     width: 100%;
     border-bottom: none;
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background: hsl(0, 0%, 80%);
 }
 #Bug form select option[disabled] {
     display: none;
@@ -504,6 +547,9 @@ section:not(:has(#Home)) {
 }
 #Bug > div > div button {
     transition: .25s ease;
+}
+#Bug > div > div > * {
+    margin:5px;
 }
 
 #Bug > div:not(.complete) > div button,
