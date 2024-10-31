@@ -8,16 +8,16 @@ const create_move = function() {
 
     // Search
     const move_searchWrap = create_element({ Tag: "div", Class: ["search"], Parent: move_catalogHeader });
-    const move_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "move_search", autocomplete: "off", placeholder: "Search Moves...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Moves...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#move .catalog ol li'), Data: data.Moves, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#move .catalog ol li') }, event), }, Parent: move_searchWrap });
+    const move_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "move_search", autocomplete: "off", placeholder: "Search Moves...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Moves...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#move .catalog ol li'), Data: Data.Moves, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#move .catalog ol li') }, event), }, Parent: move_searchWrap });
 
     // List
     const move_catalogList = create_element({ Tag: "ol",  Parent: move_catalog });
 
     // Move
-    const moves = Object.keys(data.Moves);
+    const moves = Object.keys(Data.Moves);
     moves.forEach((m, i) => {
-        const move_type = data.Moves[m].Type ? data.Moves[m].Type : "";
-        const move_catalogMove = create_element({ Tag: "li", Data: {index: m, search: data.Moves[m].Move.join(","), type: move_type}, Parent: move_catalogList });
+        const move_type = Data.Moves[m].Type ? Data.Moves[m].Type : "";
+        const move_catalogMove = create_element({ Tag: "li", Data: {index: m, search: Data.Moves[m].Move.join(","), type: move_type}, Parent: move_catalogList });
         const move_catalogMoveLabel = create_element({ Tag: "label", Attribute: { for: `move_entry-${m}`, }, Parent: move_catalogMove });
         const move_catalogMoveInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "move_entry", id: `move_entry-${m}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => move_data(), }, Parent: move_catalogMoveLabel });
         const move_catalogMoveText = create_element({ Tag: "strong", Text: m, Parent: move_catalogMoveLabel });
@@ -102,7 +102,7 @@ function move_data() {
     if (!active_entry || !active_entry.dataset.index) { return }
 
     const index = active_entry.dataset.index;
-    const move = data.Moves[index].Move;
+    const move = Data.Moves[index].Move;
 
     const titleText = document.querySelector("#move > header .title_text")
     titleText.innerText = move[0];
@@ -111,7 +111,7 @@ function move_data() {
     headerText.innerText = move[0];
 
     const idText = document.querySelector("#move > header .id_text")
-    idText.innerText = data.Moves[index].ID ? `#${data.Moves[index].ID}` : "";
+    idText.innerText = Data.Moves[index].ID ? `#${Data.Moves[index].ID}` : "";
 
     const description = document.querySelector("#move > main");
     description.innerHTML = "";
@@ -119,52 +119,52 @@ function move_data() {
     const list = document.querySelector("#move .sidebar > main ul");
     list.innerHTML = ""; // Clear previous data
 
-    const pokemon_learnset = Object.keys(data.Pokemon).reduce((found, pokemonName) => { const learnset = data.Pokemon[pokemonName].Learnset; const hasMove = learnset && learnset.some(learnsetItem => learnsetItem.Move.includes(move)); if (hasMove) { found[pokemonName] = data.Pokemon[pokemonName]; } return found; }, {})
+    const pokemon_learnset = Object.keys(Data.Pokemon).reduce((found, pokemonName) => { const learnset = Data.Pokemon[pokemonName].Learnset; const hasMove = learnset && learnset.some(learnsetItem => learnsetItem.Move.includes(move)); if (hasMove) { found[pokemonName] = Data.Pokemon[pokemonName]; } return found; }, {})
     generate_learnset({Catalog: "Move", Entry: move, Data: pokemon_learnset, Parent: list})
    
     const rangeText = document.querySelector("#move .panel .range");
-    rangeText.setAttribute("title", data.Moves[index].Range ? data.Moves[index].Range : "");
+    rangeText.setAttribute("title", Data.Moves[index].Range ? Data.Moves[index].Range : "");
 
     applyRangeAnimation();
 
     const powerText = document.querySelector("#move .panel .power > *:last-child")
-    powerText.innerText = data.Moves[index].Power ? data.Moves[index].Power : `N/A`;
+    powerText.innerText = Data.Moves[index].Power ? Data.Moves[index].Power : `N/A`;
 
     const ppText = document.querySelector("#move .panel .pp > *:last-child")
-    ppText.innerText = data.Moves[index].PP ? `${data.Moves[index].PP.Min}` : "N/A";
+    ppText.innerText = Data.Moves[index].PP ? `${Data.Moves[index].PP.Min}` : "N/A";
 
     const accuracyText = document.querySelector("#move .panel .accuracy > *:last-child")
-    accuracyText.innerText = data.Moves[index].Accuracy ? data.Moves[index].Accuracy : `N/A`;
+    accuracyText.innerText = Data.Moves[index].Accuracy ? Data.Moves[index].Accuracy : `N/A`;
 
     const categoryText = document.querySelector("#move .panel .category > *:last-child")
-    categoryText.innerText = data.Moves[index].Category ? data.Moves[index].Category : "N/A";
+    categoryText.innerText = Data.Moves[index].Category ? Data.Moves[index].Category : "N/A";
 
     const categoryElement = document.querySelector("#move .panel .category")
-    categoryElement.dataset.category = data.Moves[index].Category ? data.Moves[index].Category : "";
+    categoryElement.dataset.category = Data.Moves[index].Category ? Data.Moves[index].Category : "";
     
 
     const priorityText = document.querySelector("#move .panel .priority > *:last-child")
-    priorityText.innerText = data.Moves[index].Priority ? data.Moves[index].Priority : 0;
+    priorityText.innerText = Data.Moves[index].Priority ? Data.Moves[index].Priority : 0;
     
     const typeText = document.querySelector("#move .panel .type > *:last-child")
-    typeText.innerText = data.Moves[index].Type ? data.Moves[index].Type : "N/A";
+    typeText.innerText = Data.Moves[index].Type ? Data.Moves[index].Type : "N/A";
 
     const typeImage = document.querySelector("#move .panel .type > img");
-    const typeSrc = data.Moves[index].Type ? get_directory({FirstMatch: true, Exact: true, File: [data.Moves[index].Type], Path: [path.Type.Icon]}) : "";
+    const typeSrc = Data.Moves[index].Type ? get_directory({FirstMatch: true, Exact: true, File: [Data.Moves[index].Type], Path: [path.Type.Icon]}) : "";
     typeImage.src = typeSrc;
 
     const affectList = document.querySelector("#move .panel .affect");
     affectList.innerHTML = "";
 
-    const affectField = data.Moves[index].Field ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Field}, HTML: `Is a <b>Field</b> move.`, Parent: affectList }) : null;
-    const affectSoundBased = data.Moves[index].Sound ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Sound"]}, HTML: `Is a <b>Sound-based</b> move.`, Parent: affectList }) : null;
-    const affectContact = data.Moves[index].Contact !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Contact}, HTML: data.Moves[index].Contact ? `Makes <b>Contact</b>.` : `Does not make <b>Contact</b>.`, Parent: affectList }) : null;
-    const affectProtect = data.Moves[get_moveIndex("Protect")] && data.Moves[index].Protect !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Protect}, HTML: data.Moves[index].Protect ? `Affected by <b>Protect</b>.` : `Not affected by <b>Protect</b>.`, Parent: affectList }) : null;
-    const affectKingsRock = data.Items[get_itemIndex("King's Rock")] && data.Moves[index]["King's Rock"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["King's Rock"]}, HTML: data.Moves[index]["King's Rock"] ? `Affected by <b>King's Rock</b>.` : `Not affected by <b>King's Rock</b>.`, Parent: affectList }) : null;
-    const affectMagicCoat = data.Moves[get_moveIndex("Magic Coat")] && data.Moves[index]["Magic Coat"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Magic Coat"]}, HTML: data.Moves[index]["Magic Coat"] ? `Affected by <b>Magic Coat</b>` : `Not affected by <b>Magic Coat</b>.`, Parent: affectList }) : null;
-    const affectMagicBounce = data.Abilities && data.Abilities[get_abilityIndex("Magic Bounce")] && data.Moves[index]["Magic Bounce"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Magic Bounce"]}, HTML: data.Moves[index]["Magic Bounce"] ? `Affected by <b>Magic Bounce</b>.` : `Not affected by <b>Magic Bounce</b>.`, Parent: affectList }) : null;
-    const affectSnatch = data.Moves[get_moveIndex("Snatch")] && data.Moves[index].Snatch !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index].Snatch}, HTML: data.Moves[index].Snatch ? `Affected by <b>Snatch</b>.` : `Not affected by <b>Snatch</b>.`, Parent: affectList }) : null;
-    const affectMirrorMove = data.Moves[get_moveIndex("Mirror Move")] && data.Moves[index]["Mirror Move"] !== undefined ? create_element({ Tag: "li", Data: {boolean: data.Moves[index]["Mirror Move"]}, HTML: data.Moves[index]["Mirror Move"] ? `Affected by <b>Mirror Move</b>.` : `Not affected by <b>Mirror Move</b>.`, Parent: affectList }) : null;
+    const affectField = Data.Moves[index].Field ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index].Field}, HTML: `Is a <b>Field</b> move.`, Parent: affectList }) : null;
+    const affectSoundBased = Data.Moves[index].Sound ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index]["Sound"]}, HTML: `Is a <b>Sound-based</b> move.`, Parent: affectList }) : null;
+    const affectContact = Data.Moves[index].Contact !== undefined ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index].Contact}, HTML: Data.Moves[index].Contact ? `Makes <b>Contact</b>.` : `Does not make <b>Contact</b>.`, Parent: affectList }) : null;
+    const affectProtect = Data.Moves[get_moveIndex("Protect")] && Data.Moves[index].Protect !== undefined ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index].Protect}, HTML: Data.Moves[index].Protect ? `Affected by <b>Protect</b>.` : `Not affected by <b>Protect</b>.`, Parent: affectList }) : null;
+    const affectKingsRock = Data.Items[get_itemIndex("King's Rock")] && Data.Moves[index]["King's Rock"] !== undefined ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index]["King's Rock"]}, HTML: Data.Moves[index]["King's Rock"] ? `Affected by <b>King's Rock</b>.` : `Not affected by <b>King's Rock</b>.`, Parent: affectList }) : null;
+    const affectMagicCoat = Data.Moves[get_moveIndex("Magic Coat")] && Data.Moves[index]["Magic Coat"] !== undefined ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index]["Magic Coat"]}, HTML: Data.Moves[index]["Magic Coat"] ? `Affected by <b>Magic Coat</b>` : `Not affected by <b>Magic Coat</b>.`, Parent: affectList }) : null;
+    const affectMagicBounce = Data.Abilities && Data.Abilities[get_abilityIndex("Magic Bounce")] && Data.Moves[index]["Magic Bounce"] !== undefined ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index]["Magic Bounce"]}, HTML: Data.Moves[index]["Magic Bounce"] ? `Affected by <b>Magic Bounce</b>.` : `Not affected by <b>Magic Bounce</b>.`, Parent: affectList }) : null;
+    const affectSnatch = Data.Moves[get_moveIndex("Snatch")] && Data.Moves[index].Snatch !== undefined ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index].Snatch}, HTML: Data.Moves[index].Snatch ? `Affected by <b>Snatch</b>.` : `Not affected by <b>Snatch</b>.`, Parent: affectList }) : null;
+    const affectMirrorMove = Data.Moves[get_moveIndex("Mirror Move")] && Data.Moves[index]["Mirror Move"] !== undefined ? create_element({ Tag: "li", Data: {boolean: Data.Moves[index]["Mirror Move"]}, HTML: Data.Moves[index]["Mirror Move"] ? `Affected by <b>Mirror Move</b>.` : `Not affected by <b>Mirror Move</b>.`, Parent: affectList }) : null;
 
     affectProtect && (add_redirect(affectProtect.querySelector(":scope b"),{catalog:"move",entry:"Protect",style:"brightness"}));
     affectKingsRock && (add_redirect(affectKingsRock.querySelector(":scope b"),{catalog:"item",entry:"King's Rock",style:"brightness"}));
@@ -173,10 +173,10 @@ function move_data() {
     affectSnatch && (add_redirect(affectSnatch.querySelector(":scope b"),{catalog:"move",entry:"Snatch",style:"brightness"}));
     affectMirrorMove && (add_redirect(affectMirrorMove.querySelector(":scope b"),{catalog:"move",entry:"Mirror Move",style:"brightness"}));
 
-    const descriptionText = data.Moves[index].Description ? create_element({ Tag: "p", Text: data.Moves[index].Description, Class: ["description_text"], Parent: description }) : null;
+    const descriptionText = Data.Moves[index].Description ? create_element({ Tag: "p", Text: Data.Moves[index].Description, Class: ["description_text"], Parent: description }) : null;
 
 
-    const matchedTutors = Object.keys(data.Locations).flatMap(key => { const tutor = data.Locations[key]["Move Tutor"]; return tutor && tutor.filter(t => t && move.includes(t.Move)).map(t => ({ ...t, Location: key, })) || []; });
+    const matchedTutors = Object.keys(Data.Locations).flatMap(key => { const tutor = Data.Locations[key]["Move Tutor"]; return tutor && tutor.filter(t => t && move.includes(t.Move)).map(t => ({ ...t, Location: key, })) || []; });
     const tutorTitle = matchedTutors.length > 0 ? create_element({ Tag: "h3", Text: "Move Tutor", Class: ["tutor_header"], Parent: description }) : null;
 
     matchedTutors.forEach(d => {
@@ -200,7 +200,7 @@ function move_data() {
     });
 
 
-    const move_effect = data.Moves[index].Effect ? data.Moves[index].Effect : [];
+    const move_effect = Data.Moves[index].Effect ? Data.Moves[index].Effect : [];
     const effectTitle = move_effect.length > 0 ? create_element({ Tag: "h3", Text:"Effect", Class: ["effect_header"], Parent: description }) : null;
     move_effect.forEach(d => {
         const effectText = create_element({ Tag: "p", Text: d.Effect, Class: ["effect_text"], Parent: description });
