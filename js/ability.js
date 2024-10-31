@@ -30,7 +30,7 @@ const create_ability = function() {
     const ability_id = create_element({ Tag: "h3", Class: ["id_text"], Parent: ability_titleWrap });
     const ability_title = create_element({ Tag: "h2", Class: ["title_text"], Parent: ability_titleWrap });
     const ability_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: ability_header });
-    const ability_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [path.Game.Title]}) }, Parent: ability_gameWrap });
+    const ability_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: ability_gameWrap });
 
 
     // Sidebar
@@ -80,8 +80,8 @@ function ability_data() {
 
     const ability_effect = Data.Abilities[index].Effect ? Data.Abilities[index].Effect : [];
     const effectTitle = ability_effect.length > 0 ? create_element({ Tag: "h3", Text:"Effect", Class: ["effect_header"], Parent: description }) : null;
-    ability_effect.forEach(data => {
-        const effectText = create_element({ Tag: "p", Text: Data.Effect, Class: ["effect_text"], Parent: description });
+    ability_effect.forEach(d => {
+        const effectText = create_element({ Tag: "p", Text: d.Effect, Class: ["effect_text"], Parent: description });
     });
 
     const affectedMoves_true = Data.Abilities[index].Affect ? (Data.Abilities[index].Affect.length > 0 ? Data.Abilities[index].Affect.filter(a => a.Type === "Move" && a.Boolean === true && Data.Moves[get_moveIndex(a.Name)]) : []) : [];
