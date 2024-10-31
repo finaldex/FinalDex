@@ -1,19 +1,19 @@
 const finaldata = {};
 
-let json_urls = [
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Game Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Learnset Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Locations Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Pokemon Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Items Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Trainers Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Moves Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Abilities Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Items Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Trainers Dataset.json",
-    "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Directory.json"
-];
+const json_url = {
+    ["Game"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Game Dataset.json",
+    ["Pokemon"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Dataset.json",
+    ["Pokemon Learnset"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Learnset Dataset.json",
+    ["Locations"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Locations Dataset.json",
+    ["Location Pokemon"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Pokemon Dataset.json",
+    ["Location Item"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Items Dataset.json",
+    ["Location Trainers"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Trainers Dataset.json",
+    ["Moves"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Moves Dataset.json",
+    ["Abilities"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Abilities Dataset.json",
+    ["Items"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Items Dataset.json",
+    ["Trainers"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Trainers Dataset.json",
+    ["Directory"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Directory.json"
+};
 
 let InitialTime = 0;
 let LoadProgress = 0;
@@ -28,28 +28,27 @@ function load_start() {
 
 
 async function load_game(ID) {
-
-	load_clear();
+    load_clear();
 
     ID = typeof(ID) === "string" ? (get_gameid(ID) !== null ? get_gameid(ID) : 1) : ID;
 
-    const totalDatasets = json_urls.length; // Total number of datasets
+    const totalDatasets = Object.keys(json_url).length; // Total number of datasets
     let datasetsLoaded = 0; // Track how many datasets have been loaded
-	InitialTime = new Date();
+    InitialTime = new Date();
 
-	document.querySelector("#load").className = "active";
+    document.querySelector("#load").className = "active";
     document.querySelector("#load .description > *").innerHTML = "Building Databases<span>.</span><span>.</span><span>.</span>";
 
-    for (const url of json_urls) {
+    for (const json of Object.keys(json_url)) {
         datasetsLoaded++;
         LoadProgress = Math.min(100, (datasetsLoaded / totalDatasets) * 100); // Calculate progress
         document.querySelector("#load").style.setProperty("--progress", LoadProgress + "%");
 
-		await load_dataset(url); // Load the dataset
-		//await new Promise(resolve => setTimeout(resolve, 400)); // Makes start animation smoother but increases load time by ~5 seconds
+        await load_dataset(json_url[json]); // Load the dataset
+        //await new Promise(resolve => setTimeout(resolve, 400)); // Makes start animation smoother but increases load time by ~5 seconds
     }
 
-	configure_game(ID);
+    configure_game(ID);
 }
 
 async function load_dataset(url) {
