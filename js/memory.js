@@ -58,14 +58,14 @@ const create_memory = function() {
     // Initialize memory from localStorage or set default
     memory = JSON.parse(localStorage.getItem('finaldex-memory')) || {};
 
-    if (!memory[config.Game]) memory[config.Game] = {};
-    if (!memory[config.Game].Dex) memory[config.Game].Dex = {};
+    if (!Memory[Config.Game]) Memory[Config.Game] = {};
+    if (!Memory[Config.Game].Dex) Memory[Config.Game].Dex = {};
 
     const pokemon = document.querySelectorAll('#dex .dex_list li input'); // Select all relevant inputs
 
     pokemon.forEach(input => {
-        input.addEventListener('change', () => memory_save({ Elements: pokemon, Group: [config.Game, 'Dex'] })); // Save status on change
+        input.addEventListener('change', () => memory_save({ Elements: pokemon, Group: [Config.Game, 'Dex'] })); // Save status on change
     });
 
-    memory_restore({ Elements: pokemon, Group: [config.Game, 'Dex'] }); // Restore state
+    memory_restore({ Elements: pokemon, Group: [Config.Game, 'Dex'] }); // Restore state
 }
