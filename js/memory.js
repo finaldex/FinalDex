@@ -1,7 +1,7 @@
 // Function to save input status to memory and localStorage
 function memory_save({ Elements, Group }) {
     // Navigate to the correct nested memory object
-    let target = memory;
+    let target = Memory;
     Group.forEach(g => {
         if (!target[g]) {
             target[g] = {};
@@ -24,13 +24,13 @@ function memory_save({ Elements, Group }) {
     });
 
     // Update localStorage
-    localStorage.setItem('finaldex-memory', JSON.stringify(memory));
+    localStorage.setItem('finaldex-memory', JSON.stringify(Memory));
 }
 
 // Function to restore input states from memory
 function memory_restore({ Elements, Group }) {
     // Navigate to the correct nested memory object
-    let target = memory;
+    let target = Memory;
     Group.forEach(g => {
         if (!target[g]) {
             target[g] = {};
@@ -56,7 +56,7 @@ function memory_restore({ Elements, Group }) {
 
 const create_memory = function() {
     // Initialize memory from localStorage or set default
-    memory = JSON.parse(localStorage.getItem('finaldex-memory')) || {};
+    Memory = JSON.parse(localStorage.getItem('finaldex-memory')) || {};
 
     if (!Memory[Config.Game]) Memory[Config.Game] = {};
     if (!Memory[Config.Game].Dex) Memory[Config.Game].Dex = {};
