@@ -94,16 +94,16 @@ function load_initialize() {
 	//console.log(finaldata);
     //console.groupEnd();
 
-    console.group("data");
-    console.log(data);
+    console.group("Data");
+    console.log(Data);
     console.groupEnd();
 
-    console.group("config");
-	console.log(config);
+    console.group("Config");
+	console.log(Config);
     console.groupEnd();
 
-    console.group("memory");
-    console.log(memory);
+    console.group("Memory");
+    console.log(Memory);
 	console.groupEnd();
 
 
