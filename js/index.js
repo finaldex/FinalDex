@@ -5,6 +5,16 @@ async function load_index() {
     game_image()
 
 	document.querySelector("form").addEventListener("submit", form_submit, false);
+    
+    // Add event listeners to all video elements
+    const videos = document.querySelectorAll("video");
+    videos.forEach(video => {
+        video.addEventListener("ended", video_autoplay);
+        video.playbackRate = 2;
+    });
+
+    document.querySelector(".pause").classList.add("active");
+    video_play(videos[0])
 }
 
 function game_image() {
@@ -42,16 +52,59 @@ function game_image() {
              
     })
 
+   
 
 }
 
+
+function video_play(video) {
+    video.play()
+    video.classList.add("active");
+}
+function video_pause(boolean) {
+
+    if (boolean) {
+        event.target.classList.remove("active");
+        event.target.previousElementSibling.classList.add("active");
+        document.querySelector("video.active").pause();
+    }
+    else {
+        event.target.classList.remove("active");
+        event.target.nextElementSibling.classList.add("active");
+        document.querySelector("video.active").play();
+    }
+
+    
+}
+function video_autoplay(event) {
+    const currentVideo = event.target;
+    const parent = currentVideo.parentElement;
+    const nextVideo = currentVideo.nextElementSibling;
+
+    // Remove 'active' class from all videos and add 'inactive' class
+    const allVideos = parent.querySelectorAll('video');
+    allVideos.forEach(video => {
+        video.classList.remove('active');
+    });
+
+    if (nextVideo && nextVideo.tagName === 'VIDEO') {
+        nextVideo.classList.add("active");
+        nextVideo.play();
+    } else {
+        // If there is no next sibling or the next sibling is not a video, play the first video in the parent
+        const firstVideo = parent.querySelector('video');
+        if (firstVideo) {
+            firstVideo.classList.add("active");
+            firstVideo.play();
+        }
+    }
+}
 
 
 document.querySelector("main").addEventListener('scroll', function() {
     const scrollPosition = document.querySelector("main").scrollTop;
     const targetElement = document.querySelector('nav div');
-
-    console.log(scrollPosition);
+    
     if (scrollPosition > 0) {
         targetElement.classList.add('active');
     } else {
