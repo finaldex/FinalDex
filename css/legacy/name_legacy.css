@@ -1,0 +1,765 @@
+[name="winter"] {
+	color:var(--font2);
+}
+
+[name="summer"] {
+	color:var(--font2);
+}
+
+[name="spring"] {
+	color:var(--font2);
+}
+
+[name="autumn"] {
+	color:var(--font2);
+}
+
+[name="morning"] {
+	color:var(--font2);
+}
+
+[name="day"] {
+	color:var(--font2);
+}
+
+[name="night"] {
+	color:var(--font2);
+}
+
+[title="Monday"] {
+	color:var(--font2);
+}
+
+[title="Tuesday"] {
+	color:var(--font2);
+}
+
+[title="Wednesday"] {
+	color:var(--font2);
+}
+
+[title="Thursday"] {
+	color:var(--font2);
+}
+
+[title="Friday"] {
+	color:var(--font2);
+}
+
+[title="Saturday"] {
+	color:var(--font2);
+}
+
+[title="Sunday"] {
+	color:var(--font2);
+}
+
+
+
+[name="spring"] {
+	color:#B0F858;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="summer"] {
+	color:#FFFA73;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="autumn"] {
+	color:#F89058;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="winter"] {
+	color:#78D0F8;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+
+
+[name="monday"] {
+	color:#FFE66D;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="tuesday"] {
+	color:#F87575;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="wednesday"] {
+	color:#357266;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="thursday"] {
+	color:#B8B08D;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="friday"] {
+	color:#576CA8;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="saturday"] {
+	color:#F0D3F7;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+[name="sunday"] {
+	color:#9D5C63;
+	text-shadow:1px 1px 1px hsl(0,0%,5%);
+}
+
+
+
+[name="styleBackgroundTypeNormal"] {
+	background:var(--typeNormal);
+}
+
+[name="styleBackgroundTypeFighting"] {
+	background:var(--typeFighting);
+}
+
+[name="styleBackgroundTypeFlying"] {
+	background:var(--typeFlying);
+}
+
+[name="styleBackgroundTypePoison"] {
+	background:var(--typePoison);
+}
+
+[name="styleBackgroundTypeGround"] {
+	background:var(--typeGround);
+}
+
+[name="styleBackgroundTypeRock"] {
+	background:var(--typeRock);
+}
+
+[name="styleBackgroundTypeBug"] {
+	background:var(--typeBug);
+}
+
+[name="styleBackgroundTypeGhost"] {
+	background:var(--typeGhost);
+	color:White;
+}
+
+[name="styleBackgroundTypeSteel"] {
+	background:var(--typeSteel);
+}
+
+[name="styleBackgroundTypeFire"] {
+	background:var(--typeFire);
+}
+
+[name="styleBackgroundTypeWater"] {
+	background:var(--typeWater);
+}
+
+[name="styleBackgroundTypeGrass"] {
+	background:var(--typeGrass);
+}
+
+[name="styleBackgroundTypeElectric"] {
+	background:var(--typeElectric);
+}
+
+[name="styleBackgroundTypePsychic"] {
+	background:var(--typePsychic);
+}
+
+[name="styleBackgroundTypeIce"] {
+	background:var(--typeIce);
+}
+
+[name="styleBackgroundTypeDragon"] {
+	background:var(--typeDragon);
+	color:White;
+}
+
+[name="styleBackgroundTypeDark"] {
+	background:var(--typeDark);
+	color:White;
+}
+
+[name="styleBackgroundTypeFairy"] {
+	background:var(--typeFairy);
+}
+
+[name="styleBackgroundType???"] {
+	background:var(--typeUnknown);
+}
+
+
+[name="♂"] {
+	color:Blue;
+}
+[name="♀"] {
+	color:Red;
+}
+
+[name="☿"] {
+	color:black;
+}
+
+
+
+
+
+[name="typeNormal"] * {
+	background:var(--typeNormal);
+	color:White;
+}
+
+[name="typeFighting"] * {
+	background:var(--typeFighting);
+	color:White;
+}
+
+[name="typeFlying"] * {
+	background:var(--typeFlying);
+	color:White;
+}
+
+[name="typePoison"] * {
+	background:var(--typePoison);
+	color:White;
+}
+
+[name="typeGround"] * {
+	background:var(--typeGround);
+	color:White;
+}
+
+[name="typeRock"] * {
+	background:var(--typeRock);
+	color:White;
+}
+
+[name="typeBug"] * {
+	background:var(--typeBug);
+	color:White;
+}
+
+[name="typeGhost"] * {
+	background:var(--typeGhost);
+	color:White;
+}
+
+[name="typeSteel"] * {
+	background:var(--typeSteel);
+	color:White;
+}
+
+[name="typeFire"] * {
+	background:var(--typeFire);
+	color:Black;
+}
+
+[name="typeWater"] * {
+	background:var(--typeWater);
+	color:White;
+}
+
+[name="typeGrass"] * {
+	background:var(--typeGrass);
+	color:White;
+}
+
+[name="typeElectric"] * {
+	background:var(--typeElectric);
+	color:Black;
+}
+
+[name="typePsychic"] * {
+	background:var(--typePsychic);
+	color:Black;
+}
+
+[name="typeIce"] * {
+	background:var(--typeIce);
+	color:Black;
+}
+
+[name="typeDragon"] * {
+	background:var(--typeDragon);
+	color:White;
+}
+
+[name="typeDark"] * {
+	background:var(--typeDark);
+	color:White;
+}
+
+[name="typeFairy"] * {
+	background:var(--typeFairy);
+	color:Black;
+}
+
+[name="styleColorTypeNormal"] {
+	color:var(--typeNormal);
+}
+
+[name="styleColorTypeFighting"] {
+	color:var(--typeFighting);
+}
+
+[name="styleColorTypeFlying"] {
+	color:var(--typeFlying);
+}
+
+[name="styleColorTypePoison"] {
+	color:var(--typePoison);
+}
+
+[name="styleColorTypeGround"] {
+	color:var(--typeGround);
+}
+
+[name="styleColorTypeRock"] {
+	color:var(--typeRock);
+}
+
+[name="styleColorTypeBug"] {
+	color:var(--typeBug);
+}
+
+[name="styleColorTypeGhost"] {
+	color:var(--typeGhost);
+}
+
+[name="styleColorTypeSteel"] {
+	color:var(--typeSteel);
+}
+
+[name="styleColorTypeFire"] {
+	color:var(--typeFire);
+}
+
+[name="styleColorTypeWater"] {
+	color:var(--typeWater);
+}
+
+[name="styleColorTypeGrass"] {
+	color:var(--typeGrass);
+}
+
+[name="styleColorTypeElectric"] {
+	color:var(--typeElectric);
+}
+
+[name="styleColorTypePsychic"] {
+	color:var(--typePsychic);
+}
+
+[name="styleColorTypeIce"] {
+	color:var(--typeIce);
+}
+
+[name="styleColorTypeDragon"] {
+	color:var(--typeDragon);
+}
+
+[name="styleColorTypeDark"] {
+	color:var(--typeDark);
+}
+
+[name="styleColorTypeFairy"] {
+	color:var(--typeFairy);
+}
+
+[name="styleColorType???"] {
+	color:var(--typeUnknown);
+}
+
+
+
+
+
+
+
+[name="styleBackgroundTypeNormal"] {
+	background:var(--typeNormal);
+}
+
+[name="styleBackgroundTypeFighting"] {
+	background:var(--typeFighting);
+}
+
+[name="styleBackgroundTypeFlying"] {
+	background:var(--typeFlying);
+}
+
+[name="styleBackgroundTypePoison"] {
+	background:var(--typePoison);
+}
+
+[name="styleBackgroundTypeGround"] {
+	background:var(--typeGround);
+}
+
+[name="styleBackgroundTypeRock"] {
+	background:var(--typeRock);
+}
+
+[name="styleBackgroundTypeBug"] {
+	background:var(--typeBug);
+}
+
+[name="styleBackgroundTypeGhost"] {
+	background:var(--typeGhost);
+	color:White;
+}
+
+[name="styleBackgroundTypeSteel"] {
+	background:var(--typeSteel);
+}
+
+[name="styleBackgroundTypeFire"] {
+	background:var(--typeFire);
+}
+
+[name="styleBackgroundTypeWater"] {
+	background:var(--typeWater);
+}
+
+[name="styleBackgroundTypeGrass"] {
+	background:var(--typeGrass);
+}
+
+[name="styleBackgroundTypeElectric"] {
+	background:var(--typeElectric);
+}
+
+[name="styleBackgroundTypePsychic"] {
+	background:var(--typePsychic);
+}
+
+[name="styleBackgroundTypeIce"] {
+	background:var(--typeIce);
+}
+
+[name="styleBackgroundTypeDragon"] {
+	background:var(--typeDragon);
+	color:White;
+}
+
+[name="styleBackgroundTypeDark"] {
+	background:var(--typeDark);
+	color:White;
+}
+
+[name="styleBackgroundTypeFairy"] {
+	background:var(--typeFairy);
+}
+
+[name="styleBackgroundType???"] {
+	background:var(--typeUnknown);
+}
+
+
+[name="eggMonster"],
+[name="eggMonster"] * {
+	background:#D25064;
+	color:White;
+}
+
+[name="eggWater 1"],
+[name="eggWater 1"] * {
+	background:#97B5FD;
+	color:Black;
+}
+
+[name="eggBug"],
+[name="eggBug"] * {
+	background:#AAC22A;
+	color:Black;
+}
+
+[name="eggFlying"],
+[name="eggFlying"] * {
+	background:#B29AFA;
+	color:Black;
+}
+
+[name="eggField"],
+[name="eggField"] * {
+	background:#E0C068;
+	color:Black;
+}
+
+[name="eggFairy"],
+[name="eggFairy"] * {
+	background:#FFC8F0;
+	color:Black;
+}
+
+[name="eggGrass"],
+[name="eggGrass"] * {
+	background:#82D25A;
+	color:Black;
+}
+
+[name="eggHuman-Like"],
+[name="eggHuman-Like"] * {
+	background:#D29682;
+	color:Black;
+}
+
+[name="eggWater 3"],
+[name="eggWater 3"] * {
+	background:#5876BE;
+	color:White;
+}
+
+[name="eggMineral"],
+[name="eggMineral"] * {
+	background:#7A6252;
+	color:White;
+}
+
+[name="eggAmorphous"],
+[name="eggAmorphous"] * {
+	background:#8A8A8A;
+	color:White;
+}
+
+[name="eggWater 2"],
+[name="eggWater 2"] * {
+	background:#729AFA;
+	color:White;
+}
+
+[name="eggDitto"],
+[name="eggDitto"] * {
+	background:#A664BF;
+	color:White;
+}
+
+[name="eggDragon"],
+[name="eggDragon"] * {
+	background:#7A42FF;
+	color:White;
+}
+
+[name="eggUndiscovered"],
+[name="eggUndiscovered"] * {
+	color:White;
+}
+
+
+
+
+
+
+
+[name="eggTextMonster"],
+[name="eggTextMonster"] * {
+	color:#D25064;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextWater 1"],
+[name="eggTextWater 1"] * {
+	color:#97B5FD;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextBug"],
+[name="eggTextBug"] * {
+	color:#AAC22A;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextFlying"],
+[name="eggTextFlying"] * {
+	color:#B29AFA;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextField"],
+[name="eggTextField"] * {
+	color:#E0C068;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextFairy"],
+[name="eggTextFairy"] * {
+	color:#FFC8F0;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextGrass"],
+[name="eggTextGrass"] * {
+	color:#82D25A;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextHuman-Like"],
+[name="eggTextHuman-Like"] * {
+	color:#D29682;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextWater 3"],
+[name="eggTextWater 3"] * {
+	color:#5876BE;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextMineral"],
+[name="eggTextMineral"] * {
+	color:#7A6252;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextAmorphous"],
+[name="eggTextAmorphous"] * {
+	color:#8A8A8A;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextWater 2"],
+[name="eggTextWater 2"] * {
+	color:#729AFA;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextDitto"],
+[name="eggTextDitto"] * {
+	color:#A664BF;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextDragon"],
+[name="eggTextDragon"] * {
+	color:#7A42FF;
+	text-shadow:1px 0px 1px Black;
+}
+
+[name="eggTextUndiscovered"],
+[name="eggTextUndiscovered"] * {
+	color:Silver;
+	text-shadow:1px 0px 1px Black;
+}
+
+
+[title="Male"],
+[name="Male"],
+[name="male"] {
+	color:Blue;
+	font-family:fantasy;
+	font-weight:bold;
+}
+
+[title="Female"],
+[name="Female"],
+[name="female"] {
+	color:Red;
+	font-family:fantasy;
+	font-weight:bold;
+}
+
+[title="Genderless"],
+[name="Genderless"] {
+	font-weight:bold;
+}
+
+
+
+
+[name="statHP"] *,
+[name="statHP"] {
+	background:var(--statHP);
+	color:Black;
+}
+
+[name="statAttack"] *,
+[name="statAttack"] {
+	background:var(--statAtk);
+	color:Black;
+}
+
+[name="statDefense"] *,
+[name="statDefense"] {
+	background:var(--statDef);
+	color:Black;
+}
+
+[name="statSpecial"] *,
+[name="statSpecial"] {
+	background:var(--statSpecial);
+	color:Black;
+}
+
+[name="statSp. Atk"] *,
+[name="statSp. Atk"] {
+	background:var(--statSpAtk);
+	color:Black;
+}
+
+[name="statSp. Def"] *,
+[name="statSp. Def"] {
+	background:var(--statSpDef);
+	color:Black;
+}
+
+[name="statSpeed"] *,
+[name="statSpeed"] {
+	background:var(--statSpeed);
+	color:Black;
+}
+
+[name="statTotal"] *,
+[name="statTotal"] {
+	color:Black;
+}
+
+
+
+[name="statTextHP"] *,
+[name="statTextHP"] {
+	color:var(--statHP);
+	text-shadow:1px 1px 1px Black;
+}
+
+[name="statTextAttack"] *,
+[name="statTextAttack"] {
+	color:var(--statAtk);
+	text-shadow:1px 1px 1px Black;
+}
+
+[name="statTextDefense"] *,
+[name="statTextDefense"] {
+	color:var(--statDef);
+	text-shadow:1px 1px 1px Black;
+}
+
+[name="statTextSpecial"] *,
+[name="statTextSpecial"] {
+	color:var(--statSpecial);
+	text-shadow:1px 1px 1px Black;
+}
+
+[name="statTextSp. Atk"] *,
+[name="statTextSp. Atk"] {
+	color:var(--statSpAtk);
+	text-shadow:1px 1px 1px Black;
+}
+
+[name="statTextSp. Def"] *,
+[name="statTextSp. Def"] {
+	color:var(--statSpDef);
+	text-shadow:1px 1px 1px Black;
+
+}
+
+[name="statTextSpeed"] *,
+[name="statTextSpeed"] {
+	color:var(--statSpeed);
+	text-shadow:1px 1px 1px Black;
+}
+
+[name="statTextTotal"] *,
+[name="statTextTotal"] {
+	color:darkgray;
+	text-shadow:1px 1px 1px Black;
+}
+
+[function='dataRedirect'] {
+	cursor:pointer;
+}
