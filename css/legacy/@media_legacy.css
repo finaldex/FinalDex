@@ -1,0 +1,22 @@
+@media (hover: none) {
+	[title]:not([title=""]) {
+		position: relative !important;
+		overflow: unset !important;
+	}
+	[title]:not([title=""]):focus::after {
+		content: attr(title);
+		position:absolute;
+		top: 50%;
+		color: #000;
+		background: #fff;
+		border: 1px solid;
+		width:fit-content;
+		padding: 2px;
+		z-index: 100000;
+		font-weight:normal;
+		cursor:default;
+	}
+}
+
+
+
