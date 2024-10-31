@@ -17,7 +17,7 @@ const create_item = function() {
     pockets.forEach(pocket => {
         const item_pocketLabel = create_element({ Tag: "label", Attribute: { for: `item_pocket-${pocket}`, }, Parent: item_pocketWrap });
         const item_pocketInput = create_element({ Tag: "input", Attribute: { type: "checkbox", name: "item_pocket", id: `item_pocket-${pocket}`, value: pocket, checked: "" }, Event: {change: () => pocket_filter() }, Parent: item_pocketLabel });
-        const item_pocketImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [pocket], Path: [path.Bag.Pocket]}) }, Parent: item_pocketLabel });
+        const item_pocketImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [pocket], Path: [Path.Bag.Pocket]}) }, Parent: item_pocketLabel });
         const item_pocketText = create_element({ Tag: "strong", Text: pocket, Parent: item_pocketLabel });
     });
 
@@ -29,7 +29,7 @@ const create_item = function() {
     entries.forEach((idx, i) => {
         if (Data.Items[idx] && Data.Items[idx].Item) { 
             const machineMove = Object.keys(Data.Moves).find(key => Data.Items[idx].Item.includes(Data.Moves[key].Machine));
-            const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].Image,...Data.Items[idx].Item], Path: [path.Item.Bag]});
+            const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].Image,...Data.Items[idx].Item], Path: [Path.Item.Bag]});
             const machineType = machineMove ? Data.Moves[get_moveIndex(machineMove)].Type : null;
 
             const item_catalogEntry = create_element({ Tag: "li",  Data: {index: idx, search: [...Data.Items[idx].Item,...(machineMove != null ? [machineMove] : [])].join(",") }, Parent: item_catalogList });
@@ -46,7 +46,7 @@ const create_item = function() {
     const item_id = create_element({ Tag: "h3", Class: ["id_text"], Parent: item_titleWrap });
     const item_title = create_element({ Tag: "h2", Class: ["title_text"], Parent: item_titleWrap });
     const item_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: item_header });
-    const item_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [path.Game.Title]}) }, Parent: item_gameWrap });
+    const item_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: item_gameWrap });
     const item_priceWrap = create_element({ Tag: "div", Class: ["price"], Parent: item_header });
 
     // Sidebar
@@ -86,7 +86,7 @@ function item_data() {
 
     const item_price = Data.Items[index].Sell ? Data.Items[index].Sell : [];
     item_price.forEach(d => {
-        const currency_source = get_directory({FirstMatch: true, File: [d.Currency], Path: [path.Currency.Icon]});
+        const currency_source = get_directory({FirstMatch: true, File: [d.Currency], Path: [Path.Currency.Icon]});
         const currency = d.Currency == "N/A" ? "" : currency_source !== "" ? ` <img src='${currency_source}' title='${d.Currency}' />` : ` ${d.Currency}`;
         const priceText = create_element({ Tag: "strong", HTML: `Sell Price: ${d.Price}${currency}`, Attribute: {title:`Sold for ${d.Price}${d.Currency !== "N/A" ? ` ${d.Currency}` : ''}${d.Shop ? ` (${d.Shop})` : ''}`}, Parent: priceElement });
     });
@@ -118,8 +118,8 @@ function item_data() {
 
     const item_effect = Data.Items[index].Effect ? Data.Items[index].Effect : [];
     const effectTitle = item_effect.length > 0 ? create_element({ Tag: "h3", Text:"Effect", Class: ["effect_header"], Parent: description }) : null;
-    item_effect.forEach(data => {
-        const effectText = create_element({ Tag: "p", Text: Data.Effect, Class: ["effect_text"], Parent: description });
+    item_effect.forEach(d => {
+        const effectText = create_element({ Tag: "p", Text: d.Effect, Class: ["effect_text"], Parent: description });
     });
 
 
