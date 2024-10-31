@@ -2,6 +2,8 @@
 function add_redirect(element, options) {
     element.addEventListener("click", redirect)
 
+    element.classList.add("redirect_event");
+
     options.catalog && (element.dataset.catalog = options.catalog);
     options.entry && (element.dataset.entry = options.entry);
     options.style && (element.classList.add(`redirect_${options.style}`));
