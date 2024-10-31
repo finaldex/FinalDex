@@ -11,347 +11,447 @@
     <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Bebas+Neue" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" type="text/css" href="./css/index.css">
-    <link rel="stylesheet" type="text/css" href="./css/keyframe.css">
-    <link rel="stylesheet" type="text/css" href="./css/default.css">
     <link rel="stylesheet" type="text/css" href="./css/theme.css">
-    <link rel="stylesheet" type="text/css" href="./css/root.css">
-    <link rel="stylesheet" type="text/css" href="./css/@media.css">
+    <link rel="stylesheet" type="text/css" href="./css/default.css">
+    <link rel="stylesheet" type="text/css" href="./css/keyframe.css">
 
-
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
 </head>
 
 <body>
     <nav id="navigation">
-        <div onauxclick="if (event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><img src="./media/Images/FinalDex/Icon/FinalDex.png" /><span><span><h6>Version 1.0.3</h6></span><span><h3>FINALDEX</h3></span></span></div>
-        <div><b onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Games</h6></b></div>
-        <div><b onclick="document.getElementById('FAQ').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>FAQ</h6></b></div>
-        <div><b onclick="document.getElementById('Bug').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Submit a Bug</h6></b></div>
-        <div><b onclick="document.getElementById('Dataset').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Dataset</h6></b></div>
-        <div><b onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Sources</h6></b></div>
-        <div><b onclick="document.getElementById('Agenda').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Agenda</h6></b></div>
-        <div><b onclick="document.getElementById('Changelog').scrollIntoView({ block: 'start',  behavior: 'smooth' });"><h6>Changelog</h6></b></div>
+        <div onauxclick="if (event.button == 1) {window.open(location.href,'_blank')}" onclick="document.getElementById('Home').scrollIntoView({ block: 'start',  behavior: 'smooth' });">
+            <img src="./media/Images/FinalDex/Icon/FinalDex.png" />
+            <span>
+                <h6>Version 1.1.0</h6>
+                <h3>FinalDex</h3>
+            </span>
+        </div>
+        <button onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });">Games</button>
+        <button onclick="document.getElementById('FAQ').scrollIntoView({ block: 'start',  behavior: 'smooth' });">FAQ</button>
+        <button onclick="document.getElementById('Bug').scrollIntoView({ block: 'start',  behavior: 'smooth' });">Submit a Bug</button>
+        <button onclick="document.getElementById('Dataset').scrollIntoView({ block: 'start',  behavior: 'smooth' });">Dataset</button>
+        <button onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });">Sources</button>
+        <button onclick="document.getElementById('Agenda').scrollIntoView({ block: 'start',  behavior: 'smooth' });">Agenda</button>
+        <button onclick="document.getElementById('Changelog').scrollIntoView({ block: 'start',  behavior: 'smooth' });">Changelog</button>
     </nav>
-    <div id="content">
-        <span name="0">
+
+    <main>
+        <section>
             <div id="Home">
-                <span name="video"><video autoplay="true" muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Party.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Map_Trainers.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Map_Shop.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Moves.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Box_Drag.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Settings_Images.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Map_Pok.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Party_Drag.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Dex.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Items_Pockets.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Map.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Items.mp4"></video>
-    <video muted="true"><source type="video/mp4" src=".\media\Videos\Sample\Abilities.mp4"></video>
-    </span>
-                <button onclick="videoFunc()"></button>
-                <span>
+                <div class="video">
+                    <video autoplay="true" muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Party.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Map_Trainers.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Map_Shop.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Moves.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Box_Drag.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Settings_Images.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Map_Pok.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Party_Drag.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Dex.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Items_Pockets.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Map.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Items.mp4">
+                    </video>
+                    <video muted="true">
+                        <source type="video/mp4" src=".\media\Videos\Sample\Abilities.mp4">
+                    </video>
+                </div>
+
+                <button class='play'>▶</button>
+                <button class='pause'>❙❙</button>
+                <span class='text'>
                     <strong onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });">FinalDex</strong>
-                    <h5>A complete online Pokedex with rich detailed data for all the mainline Pokemon Games</h5>
+                    <strong>A complete online Pokedex with rich detailed data for all the mainline Pokemon Games</strong>
                 </span>
             </div>
-        </span>
-        <span name="1">
+        </section>
+
+        <section>
             <div id="Games">
-                <header>SELECT GAME</header>
-                <ol>
-                    <ul name="1"><h4>Generation 1</h4><span></span></ul>
-                    <ul name="2"><h4>Generation 2</h4><span></span></ul>
-                    <ul name="3"><h4>Generation 3</h4><span></span></ul>
-                    <ul name="4"><h4>Generation 4</h4><span></span></ul>
-                    <ul name="5"><h4>Generation 5</h4><span></span></ul>
-                    <ul name="6"><h4>Generation 6</h4><span></span></ul>
-                    <ul name="7"><h4>Generation 7</h4><span></span></ul>
-                    <ul name="8"><h4>Generation 8</h4><span></span></ul>
-                    <br>
-                    <ul name="0"><span></span></ul>
-                </ol>
+                <header>Select Game</header>
+                <div>
+                    <ol>
+                        <h3>Generation 1</h3>
+                        <li data-game="Red">
+                            <img>
+                            <a href='Game.html#Red' target="_blank">Red</a>
+                        </li>
+                        <li data-game="Blue">
+                            <img>
+                            <a href='Game.html#Blue' target="_blank">Blue</a>
+                        </li>
+                        <li data-game="Yellow">
+                            <img>
+                            <a href='Game.html#Yellow' target="_blank">Yellow</a>
+                        </li>
+                    </ol>
+                    <ol>
+                        <h3>Generation 2</h3>
+                        <li data-game="Gold">
+                            <img>
+                            <a href='Game.html#Gold' target="_blank">Gold</a>
+                        </li>
+                        <li data-game="Silver">
+                            <img>
+                            <a href='Game.html#Silver' target="_blank">Silver</a>
+                        </li>
+                        <li data-game="Crystal">
+                            <img>
+                            <a href='Game.html#Crystal' target="_blank">Crystal</a>
+                        </li>
+                    </ol>
+                    <ol>
+                        <h3>Generation 3</h3>
+                        <li data-game="Ruby">
+                            <img>
+                            <a href='Game.html#Ruby' target="_blank">Ruby</a>
+                        </li>
+                        <li data-game="Sapphire">
+                            <img>
+                            <a href='Game.html#Sapphire' target="_blank">Sapphire</a>
+                        </li>
+                        <li data-game="Emerald">
+                            <img>
+                            <a href='Game.html#Emerald' target="_blank">Emerald</a>
+                        </li>
+                        <li data-game="FireRed">
+                            <img>
+                            <a href='Game.html#FireRed' target="_blank">FireRed</a>
+                        </li>
+                        <li data-game="LeafGreen">
+                            <img>
+                            <a href='Game.html#LeafGreen' target="_blank">LeafGreen</a>
+                        </li>
+                        <li data-game="Colosseum">
+                            <img>
+                            <a href='Game.html#Colosseum' target="_blank">Colosseum</a>
+                        </li>
+                        <li data-game="XD">
+                            <img>
+                            <a href='Game.html#XD' target="_blank">XD: Gale of Darkness</a>
+                        </li>
+                    </ol>
+                    <ol>
+                        <h3>Generation 4</h3>
+                        <li data-game="Diamond">
+                            <img>
+                            <a href='Game.html#Diamond' target="_blank">Diamond</a>
+                        </li>
+                        <li data-game="Pearl">
+                            <img>
+                            <a href='Game.html#Pearl' target="_blank">Pearl</a>
+                        </li>
+                        <li data-game="Platinum">
+                            <img>
+                            <a href='Game.html#Platinum' target="_blank">Platinum</a>
+                        </li>
+                        <li data-game="HeartGold">
+                            <img>
+                            <a href='Game.html#HeartGold' target="_blank">HeartGold</a>
+                        </li>
+                        <li data-game="SoulSilver">
+                            <img>
+                            <a href='Game.html#SoulSilver' target="_blank">SoulSilver</a>
+                        </li>
+                    </ol>
+                    <ol>
+                        <h3>Generation 5</h3>
+                        <li data-game="Black">
+                            <img>
+                            <a href='Game.html#Black' target="_blank">Black</a>
+                        </li>
+                        <li data-game="White">
+                            <img>
+                            <a href='Game.html#White' target="_blank">White</a>
+                        </li>
+                        <li data-game="Black 2">
+                            <img>
+                            <a href='Game.html#Black2' target="_blank">Black 2</a>
+                        </li>
+                        <li data-game="White 2">
+                            <img>
+                            <a href='Game.html#White2' target="_blank">White 2</a>
+                        </li>
+                    </ol>
+                    <ol>
+                        <h3>Generation 6</h3>
+                        <li data-game="X">
+                            <img>
+                            <a href='Game.html#X' target="_blank">X</a>
+                        </li>
+                        <li data-game="Y">
+                            <img>
+                            <a href='Game.html#Y' target="_blank">Y</a>
+                        </li>
+                        <li data-game="Omega Ruby">
+                            <img>
+                            <a href='Game.html#OmegaRuby' target="_blank">Omega Ruby</a>
+                        </li>
+                        <li data-game="Alpha Sapphire">
+                            <img>
+                            <a href='Game.html#AlphaSapphire' target="_blank">Alpha Sapphire</a>
+                        </li>
+                    </ol>
+                    <ol>
+                        <h3>Generation 7</h3>
+                        <li data-game="Sun">
+                            <img>
+                            <a href='Game.html#Sun' target="_blank">Sun</a>
+                        </li>
+                        <li data-game="Moon">
+                            <img>
+                            <a href='Game.html#Moon' target="_blank">Moon</a>
+                        </li>
+                        <li data-game="Ultra Sun">
+                            <img>
+                            <a href='Game.html#UltraSun' target="_blank">Ultra Sun</a>
+                        </li>
+                        <li data-game="Ultra Moon">
+                            <img>
+                            <a href='Game.html#UltraMoon' target="_blank">Ultra Moon</a>
+                        </li>
+                        <li data-game="Lets Go Pikachu">
+                            <img>
+                            <a href='Game.html#LetsGoPikachu' target="_blank">Let's Go Pikachu</a>
+                        </li>
+                        <li data-game="Lets Go Eevee">
+                            <img>
+                            <a href='Game.html#LetsGoEevee' target="_blank">Let's Go Eevee</a>
+                        </li>
+                    </ol>
+                    <ol>
+                        <h3>Generation 8</h3>
+                        <li data-game="Sword">
+                            <img>
+                            <a href='Game.html#Sword' target="_blank">Sword</a>
+                        </li>
+                        <li data-game="Shield">
+                            <img>
+                            <a href='Game.html#Shield' target="_blank">Shield</a>
+                        </li>
+                    </ol>
+                </div>
+
+                <div>
+                    <li data-game="Red,Blue,Yellow,Gold,Silver,Crystal,Ruby,Sapphire,Emerald,FireRed,LeafGreen,Colosseum,XD,Diamond,Pearl,Platinum,HeartGold,SoulSilver,Black,White,Black 2,White 2,X,Y,Omega Ruby,Alpha Sapphire,Sun,Moon,Ultra Sun,Ultra Moon,Lets Go Pikachu,Lets Go Eevee,Sword,Shield">
+                        <img>
+                        <a href='Game.html#Random' target="_blank">Random</a>
+                    </li>
+                    <li data-game="All">
+                        <img>
+                        <a href='Mediaquery.html' target="_blank">Mediaquery</a>
+                    </li>
+                </div>                
             </div>
-        </span>
-        <span name="2">
+        </section>
+
+        <section>
             <div id="FAQ">
-                <ol>
-                    <h3>Frequently Asked Questions</h3>
-                    <ul>
-                        <li><h6>How does the dataset work for different versions of the Games?</h6></li>
-                        <li><h6>All Dataset corresponds to the lastest versions of the games (including DLC)</h6></li>
-                    </ul>
-                    <ul>
-                        <li><h6>How about different language versions of the games, like the Japanese Red/Green?</h6></li>
-                        <li><h6>All Dataset only corresponds to the English releases of the games</h6></li>
-                    </ul>
-                    <ul>
-                        <li><h6>How does the dataset work for Pokemon Forms?</h6></li>
-                        <li><h6>All of the data listed in the Pokemon Form is applied only to that specific Form, any missing Fields equals to the default Forms value</h6></li>
-                    </ul>
-                    <ul>
-                        <li><h6>How was all of the dataset imported?</h6></li>
-                        <li><h6>Data from various <a tabindex="-1" onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });">sources</a> was exported in to Google Sheets through scripts</h6></li>
-                    </ul>
-                    <ul>
-                        <li><h6>Can i use this dataset for a project of mine?</h6></li>
-                        <li><h6>Sure, feel free to use it however you like</h6></li>
-                    </ul>
-                    <ul>
-                        <li><h6>I have suggestions/questions/would like to express my opinions, where do i contact you?</h6></li>
-                        <li><h6>You can contact me directly <a tabindex="-1" href="mailto:xedlanif@gmail.com">here</a></h6></li>
-                    </ul>
-                </ol>
+                <h4>Frequently Asked Questions</h3>
+                <ul>
+                    <li>How does the dataset work for different versions of the Games?</li>
+                    <li>All Dataset corresponds to the lastest versions of the games (including DLC).</li>
+
+                    <li>How about different language versions of the games, like the Japanese Red/Green?</li>
+                    <li>All Dataset only corresponds to the English releases of the games.</li>
+                
+                    <li>How does the dataset work for Pokemon Forms?</li>
+                    <li>All of the data listed in the Pokemon Form is applied only to that specific Form, any missing Fields equals to the default Forms value.</li>
+                
+                    <li>How was all of the dataset imported?</li>
+                    <li>Data from various <span onclick="document.getElementById('Sources').scrollIntoView({ block: 'start',  behavior: 'smooth' });">sources</span> was exported in to Google Sheets through scripts.</li>
+            
+                    <li>Can i use this dataset for a project of mine?</li>
+                    <li>Sure, feel free to use it however you like.</li>
+
+                    <li>I have suggestions/questions/would like to express my opinions, where do i contact you?</li>
+                    <li>You can contact me directly <a href="mailto:xedlanif@gmail.com">here</a>.</li>
+                </ul>
             </div>
             <div id="Bug">
-                <ol data-state="false">
-                    <form class="gform" method="POST" data-email="xedlanif@gmail.com" action="https://script.google.com/macros/s/AKfycbyub2AtKx9vn-bF7hBdb7KCnjfr1ZilNTE3vnnYaSYVh_4AM2VULcV1YGjcG55Dk2yt/exec">
+
+                <div>
+                    <form method="POST" data-email="xedlanif@gmail.com" action="https://script.google.com/macros/s/AKfycbxK3fyvFX8rd0UwKfcweh0NyQ6WM2ajbZYZcSXMhussvbh9s28FZph2sLIdQ80jHoN4/exec">
                         <h3>Submit A Bug</h3>
-                        <select id="Bug Type" name="Bug Type" onchange="this.style.fontWeight = 'bold';">
-                            <option value="" disabled="" selected="">Select an option</option>
+                        <select id="bug_select" name="bug_select" onchange="this.style.color='black'">
+                            <option value="" disabled selected>Select an option</option>
                             <option value="Dataset">Invalid Dataset</option>
                             <option value="Image">Image Error</option>
                             <option value="Compatibility">Compatibility Issue</option>
                             <option value="Other">Other</option>
                         </select>
-                        <textarea id="Message" name="Message" placeholder="Describe the issue" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Describe the issue'" autocomplete="off"></textarea>
-                        <input id="hp" type="text" name="hp" value="">
-                        <button type="small" class="button-success">Send</button>
+                        <textarea id="bug_message" name="bug_message" placeholder="Describe the issue" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Describe the issue'" autocomplete="off"></textarea>
+                        <button>Send</button>
                     </form>
-                    <span>
+
+                    <div>
                         <h3>Thank You</h3>
-                        <figure type="rotate" onclick="buttonAction(document.querySelector('#Bug form'),false)"><h2>↺</h2></figure>
-                    </span>
-                </ol>
+                        <button onclick="this.parentElement.parentElement.classList.remove('complete')">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2V6C7.58 6 4 9.58 4 14C4 18.42 7.58 22 12 22C16.42 22 20 18.42 20 14H18C18 17.31 15.31 20 12 20C8.69 20 6 17.31 6 14C6 10.69 8.69 8 12 8V12L17 7L12 2Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+              
             </div>
-        </span>
-        <span name="3">
+        </section>
+
+        <section>
             <div id="Dataset">
                 <h3>Dataset</h3>
-                <ol>
-                    <ul>
-                        <li><h6>Pokemon</h6></li>
-                        <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/17LnZd-Sm0Oc8Np2bIxnQYc_gkCMLLWwfkA8I6XojHvQ">Pokemon Dataset</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PcOs40UPqvoWuCr0pkjb2nx1NhRgyaF82bDwtFJhqk4">Pokemon Learnset Dataset</a></small></li>
-                        </ul>
-                    </ul>
-                
-                    <ul>   
-                        <li><h6>Locations</h6></li>
-                        <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PuIneyaNi8nYxxpGxFnUYToUTSYHZyUW2BDcDz94vys">Locations Dataset</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/15lMtz5WMlJ2NF1V41wIYRDXVYIbNIdIzjiXq80zK83w">Location Pokemon Dataset</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5H4">Location Items Dataset</a></small></li>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1lsPn9sXfHlxWhrMOnZb0shPAZAzEl3Kl2KMDOOMTR8M">Location Trainers Dataset</a></small></li>
-                        </ul>
-                    </ul>
-                
-                    <ul>   
-                        <li><h6>Moves</h6></li>
-                        <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1vmvr-1CKuT3EySejHUQvgjiZqpQ27nRXplWeOMbQ9C0">Moves Dataset</a></small></li>
-                        </ul>
-                    </ul>
-                
-                    <ul>   
-                        <li><h6>Abilities</h6></li>
-                        <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1i6PJyMg_DRDPIQ7ahhWYHXClgnJjfWZOjBuZ1smddOc">Abilities Dataset</a></small></li>
-                        </ul>
-                    </ul>
-                
-                    <ul>   
-                        <li><h6>Items</h6></li>
-                        <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/18yqu7HN2YIFAU--cvsJ0y8rZNL3hyv9TJW4cI4TUGAg">Items Dataset</a></small></li>
-                        </ul>
-                    </ul>
-                
-                    <ul>   
-                        <li><h6>Trainers</h6></li>
-                        <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1PvbwQOKAL-_1re7xNxwQ_1HTHrTsU153N_7R2T1rrWc">Trainers Dataset</a></small></li>
-                        </ul>
-                    </ul>
-                
-                    <ul>   
-                        <li><h6>Games</h6></li>
-                        <ul>
-                            <li><small><a tabindex="-1" target="_blank" href="https://docs.google.com/spreadsheets/d/1UxHecxZc_g6RyLWF7KfzjJzJLRvvRgfYO1FqCv4lIsI">Games Dataset</a></small></li>
-                        </ul>
-                    </ul>
-                </ol>
+                <ul>
+                    <h5>Pokemon</h5>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/17LnZd-Sm0Oc8Np2bIxnQYc_gkCMLLWwfkA8I6XojHvQ">Pokemon Dataset</a></li>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1PcOs40UPqvoWuCr0pkjb2nx1NhRgyaF82bDwtFJhqk4">Pokemon Learnset Dataset</a></li>
+                    <h5>Locations</h5>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1PuIneyaNi8nYxxpGxFnUYToUTSYHZyUW2BDcDz94vys">Locations Dataset</a></li>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/15lMtz5WMlJ2NF1V41wIYRDXVYIbNIdIzjiXq80zK83w">Location Pokemon Dataset</a></li>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5h5">Location Items Dataset</a></li>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1lsPn9sXfHlxWhrMOnZb0shPAZAzEl3Kl2KMDOOMTR8M">Location Trainers Dataset</a></li>
+                    <h5>Moves</h5>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1vmvr-1CKuT3EySejHUQvgjiZqpQ27nRXplWeOMbQ9C0">Moves Dataset</a></li>
+                    <h5>Abilities</h5>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1i6PJyMg_DRDPIQ7ahhWYHXClgnJjfWZOjBuZ1smddOc">Abilities Dataset</a></li>
+                    <h5>Items</h5>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/18yqu7HN2YIFAU--cvsJ0y8rZNL3hyv9TJW4cI4TUGAg">Items Dataset</a></li>
+                    <h5>Trainers</h5>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1PvbwQOKAL-_1re7xNxwQ_1HTHrTsU153N_7R2T1rrWc">Trainers Dataset</a></li>
+                    <h5>Games</h5>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1UxHecxZc_g6RyLWF7KfzjJzJLRvvRgfYO1FqCv4lIsI">Games Dataset</a></li>
+                </ul>
             </div>
             <div id="Sources">
                 <h3>Sources</h3>
-                <ol>
-                    <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></h6></li>
-                        <ul>
-                            <li><small>Pokemon Dataset</small></li>
-                            <li><small>Location Dataset</small></li>
-                            <li><small>Move Dataset</small></li>
-                            <li><small>Item Dataset</small></li>
-                            <li><small>Sprites/Images</small></li>
-                        </ul>
-                    </ul>
-
-                    <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="https://projectpokemon.org/">Project Pokemon</a></h6></li>
-                        <ul>
-                            <li><small>Animated 3DS Sprites</small></li>
-                        </ul>
-                    </ul>
-
-                    <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="https://www.pkparaiso.com/">PKParaiso</a></h6></li>
-                        <ul>
-                            <li><small>Animated Switch Sprites</small></li>
-                        </ul>
-                    </ul>
-
-                    <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="https://www.serebii.net/">Serebii</a></h6></li>
-                        <ul>
-                            <li><small>Mechanic Research</small></li>
-                        </ul>
-                    </ul>
-
-                    <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="https://github.com/etienne-martin/Mapify">Mapify by Etienne Martin</a></h6></li>
-                        <ul>
-                            <li><small>Mapify jquery</small></li>
-                        </ul>
-                    </ul>
-
-                    <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="https://www.reddit.com/r/pokemon/comments/k08x5m/after_two_months_of_nonstop_work_i_recreated_all/">/u/Red_O_Zone</a></h6></li>
-                        <ul>
-                            <li><small>Red/Blue Sprites Recolor</small></li>
-                        </ul>
-                    </ul>
-
-                    <ul>
-                        <li><h6><a tabindex="-1" target="_blank" href="http://www.psypokes.com/">Psypoke</a></h6></li>
-                        <ul>
-                            <li><small>Moves Research</small></li>
-                        </ul>
-                    </ul>
-                </ol>
+                <ul>
+                    <h5><a target="_blank" href="https://bulbapedia.bulbagarden.net/">Bulbapedia</a></h5>
+                    <li>Pokemon Dataset</li>
+                    <li>Location Dataset</li>
+                    <li>Move Dataset</li>
+                    <li>Item Dataset</li>
+                    <li>Sprites/Images</li>
+                    <h5><a target="_blank" href="https://projectpokemon.org/">Project Pokemon</a></h5>
+                    <li>Animated 3DS Sprites</li>
+                    <h5><a target="_blank" href="https://www.pkparaiso.com/">PKParaiso</a></h5>
+                    <li>Animated Switch Sprites</li>
+                    <h5><a target="_blank" href="https://www.serebii.net/">Serebii</a></h5>
+                    <li>Mechanic Research</li>
+                    <h5><a target="_blank" href="https://github.com/etienne-martin/Mapify">Mapify by Etienne Martin</a></h5>
+                    <li>Mapify jquery</li>
+                    <h5><a target="_blank" href="https://www.reddit.com/r/pokemon/comments/k08x5m/after_two_months_of_nonstop_work_i_recreated_all/">/u/Red_O_Zone</a></h5>
+                    <li>Red/Blue Sprites Recolor</li>
+                    <h5><a target="_blank" href="http://www.psypokes.com/">Psypoke</a></h5>
+                    <li>Moves Research</li>
+                </ul>
             </div>
-        </span>
-        <span name="4">
+        </section>
+
+        <section>
             <div id="Agenda">
                 <h3>Agenda</h3>
-                <ol>
-                    <ul>
-                        <li><small>Complete Pokedex Learnset Data</small></li>
-                   
-                        <li><small><s>Implement Damage Calculator</s></small></li>
-                   
-                        <li><small>Party/Box Removes Additional Datastring Values Fix</small></li>
-                    
-                        <li><small>Add "Copy Datastring" to Contentdiv (Pokedex)</small></li>
-                   
-                        <li><small>Refine/Debug Damage Calculator</small></li>
-                 
-                        <li><small><s>Add Item Effects Data</s></small></li>
-                   
-                        <li><small><s>Fix and format Ability/Move/Item Effects Data</s></small></li>
-                    
-                        <li><small>Add Location Trainers Data</small></li>
-                   
-                        <li><small>Shiny Option for Party/Box Pokemon</small></li>
-                 
-                        <li><small><s>Add More Media Types/Angles/Extensions</s></small></li>
-                 
-                        <li><small>Implement Counter</small></li>
-                 
-                        <li><small>Implement Catch Rate Calculator</small></li>
-                 
-                        <li><small>Implement Shiny Odds Calculator</small></li>
-          
-                        <li><small>Implement Item/Move/Type/Ability/Location Checklist</small></li>
-              
-                        <li><small><s>Change search inputs to type='search'</s></small></li>
-        
-                        <li><small><s>Give inputs unique name &/ ids</s></small></li>
+                <ul>
+                    <li>Complete Pokedex Learnset Data</li>
+                    <li><s>Implement Damage Calculator</s></li>
+                    <li>Party/Box Removes Additional Datastring Values Fix</li>
+                    <li>Add "Copy Datastring" to Contentdiv (Pokedex)</li>
+                    <li>Refine/Debug Damage Calculator</li>
+                    <li><s>Add Item Effects Data</s></li>
+                    <li><s>Fix and format Ability/Move/Item Effects Data</s></li>
+                    <li>Add Location Trainers Data</li>
+                    <li>Shiny Option for Party/Box Pokemon</li>
+                    <li><s>Add More Media Types/Angles/Extensions</s></li>
+                    <li>Implement Counter</li>
+                    <li>Implement Catch Rate Calculator</li>
+                    <li>Implement Shiny Odds Calculator</li>
+                    <li>Implement Item/Move/Type/Ability/Location Checklist</li>
+                    <li><s>Change search inputs to type='search'</s></li>
+                    <li><s>Give inputs unique name &/ ids</s></li>
+                    <li><s>Add mediaquery link to site</s></li>
+                    <li>Add download options to mediaquery</li>
+                    <li>Add game column to Mediaquery</li>
+                    <li>Add 'copy url' to mediaquery rows</li>
+                    <li><s>Add viewer friendly introduction images of site</s></li>
+                    <li>Change "generation numbers" in the game select in mediaquery to "Generation x" and give the select an input that updates on change</li>
+                    <li><s>fix get_applicable/getmedia/pokmedia giving wrong order paths because of games array loops (remove pokmedia function)</s></li>
+                    <li>consider adding pages to dex page to reduce load time</li>
+                    <li>set variable with strong/normal/weak depending on page load time</li>
+                    <li>Set page size to match variable above</li>
+                    <li><s>Fix data flickering main page</s></li>
+                    <li><s>Fix random scroll index page (videos transition)</s></li>
+                    <li>Rewrite/Merge party/dmgcalc functions</li>
+                    <li><s>merge rows => 2 from index</s></li>
+                    <li>be able to drag image from dmg calc field to party plus to create new or over existing to replace</li>
+                    <li>Fix main page video sizing 1920+ width screens issue</li>
+                    <li><s>Add open editor button and delete all button (party)</s></li>
+                    <li>update info for main move function for damage calculator</li>
+                    <li>fix button change class to properly update on data change</li>
+                    <li>fix ability datastring from primary to value and check for issues</li>
+                    <li>add class to apply buttons when option has changed to visualize a change</li>
+                    <li>add power/accuracy/crit/type/etc change to damage calculator move change</li>
+                    <li>fix terrain/weather/other changes does not signal change from "start calculation"</li>
+                    <li>add memory to damage calculation party</li>
+                    <li>add open data option for pokemon in damage calculator</li>
+                    <li>checkbox to make calculation on any change in damage calculator</li>
+                    <li>fix multiattack moves giving accuracy error in damage calculator</li>
+                    <li>add cipher lab data from pokemon XD</li>
+                </ul>
 
-                        <li><small><s>Add mediaquery link to site</s></small></li>
-                  
-                        <li><small>Add download options to mediaquery</small></li>
-                        <li><small>Add game column to Mediaquery</small></li>
-                        <li><small>Add 'copy url' to mediaquery rows</small></li>
-                 
-                        <li><small><s>Add viewer friendly introduction images of site</s></small></li>
-                 
-                        <li><small>Change "generation numbers" in the game select in mediaquery to "Generation x" and give the select an input that updates on change</small></li>
-                  
-                        <li><small><s>fix get_applicable/getmedia/pokmedia giving wrong order paths because of games array loops (remove pokmedia function)</s></small></li>
-                 
-                        <li><small>consider adding pages to dex page to reduce load time</small></li>
-                       
-                        <li><small>set variable with strong/normal/weak depending on page load time</small></li>
-                        <li><small>Set page size to match variable above</small></li>
-                    
-                  
-                        <li><small><s>Fix data flickering main page</s></small></li>
-                        <li><small><s>Fix random scroll index page (videos transition)</s></small></li>
-                 
-                        <li><small>Rewrite/Merge party/dmgcalc functions</small></li>
-                  
-                        <li><small><s>merge rows => 2 from index</s></small></li>
-
-                        <li><small>be able to drag image from dmg calc field to party plus to create new or over existing to replace</small></li>
-                        <li><small>Fix main page video sizing 1920+ width screens issue</small></li>
-                        <li><s><small>Add open editor button and delete all button (party)</small></s></li>
-                        <li><small>update info for main move function for damage calculator</small></li>
-                        <li><small>fix button change class to properly update on data change</small></li>
-                        <li><small>fix ability datastring from primary to value and check for issues</small></li>
-
-                        <li><small>add class to apply buttons when option has changed to visualize a change</small></li>
-                        <li><small>add power/accuracy/crit/type/etc change to damage calculator move change</small></li>
-                        <li><small>fix terrain/weather/other changes does not signal change from "start calculation"</small></li>
-                        <li><small>add memory to damage calculation party</small></li>
-                        <li><small>add open data option for pokemon in damage calculator</small></li>
-                        <li><small>checkbox to make calculation on any change in damage calculator</small></li>
-                        <li><small>fix multiattack moves giving accuracy error in damage calculator</small></li>
-                        <li><small>add cipher lab data from pokemon XD</small></li>
-                    </ul>
-                </ol>
             </div>
             <div id="Changelog">
                 <h3>Changelog</h3>
-                <ol>
-                    <ul>
-                        <li><h6>Version 1.0.0 // 29-01-2023</h6></li>
-                        <li><code>Initial Release</code></li>
-                    </ul>
-                    <ul>
-                        <li><h6>Version 1.0.1 // 10-03-2023</h6></li>
-                        <li><code>Location Shops</code></li>
-                        <li><code>Ability Effect Text</code></li>
-                    </ul>
-                    <ul>
-                        <li><h6>Version 1.0.2 // 07-06-2023</h6></li>
-                        <li><code>Damage Calculator</code></li>
-                        <li><code>Revamp of Directory System</code></li>
-                        <li><code>Additional Media Types</code></li>
-                        <li><code>Party Editor</code></li>
-                    </ul>
-                    <ul>
-                        <li><h6>Version 1.0.3 // 06-07-2023</h6></li>
-                        <li><code>Color Theme Support</code></li>
-                    </ul>
-                </ol>
+                <ul>
+                    <h6>Version 1.0.0 <span>// 29-01-2023</span></h6>
+                    <li>Initial Release</li>
+                    <h6>Version 1.0.1 <span>// 10-03-2023</span></h6>
+                    <li>Location Shops</li>
+                    <li>Ability Effect Text</li>
+                    <h6>Version 1.0.2 <span>// 07-06-2023</span></h6>
+                    <li>Damage Calculator</li>
+                    <li>Revamp of Directory System</li>
+                    <li>Additional Media Types</li>
+                    <li>Party Editor</li>
+                    <h6>Version 1.0.3 <span>// 06-07-2023</span></h6>
+                    <li>Color Theme Support</li>
+                    <h6>Version 1.1.0 <span>// 30-10-2024</span></h6>
+                    <li>Design overhaul</li>
+                    <li>Major code rework</li>
+                </ul>
             </div>
-        </span>
+        </section>
+    </main>
 
-    </div>
+    <script src="./js/function.js"></script>
+    <script src="./js/load.js"></script>
+    <script src="./js/query.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/index.js"></script>
-    <script src="./js/function.js"></script>
+    <script>load_index();</script>
+    
 </body>
 
 </html>
