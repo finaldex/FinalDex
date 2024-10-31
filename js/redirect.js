@@ -28,10 +28,10 @@ function redirect(event) {
     let catalog = target.dataset.catalog;
     let entry = target.dataset.entry.split(/[,]/);
 
-    // Convert hexadecimal entries to data.Item[entry].Item[0] if applicable
+    // Convert hexadecimal entries to Data.Item[entry].Item[0] if applicable
     let displayEntries = entry.map(e => {
-        if (/^(0x)?[0-9A-Fa-f]+$/.test(e) && catalog === "item" && data.Items[e] !== undefined) {
-            return data.Items[e].Item[0];
+        if (/^(0x)?[0-9A-Fa-f]+$/.test(e) && catalog === "item" && Data.Items[e] !== undefined) {
+            return Data.Items[e].Item[0];
         }
         return e;
     });
