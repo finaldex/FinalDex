@@ -1,7 +1,7 @@
 const create_nav = function() {
     const nav_options = [{text: "Dex", id: "dex"}, {text: "Moves", id: "move"}, {text: "Items", id: "item"}, {text: "Locations", id: "location"}, /*{text: "Tools", id: "tool"}*/];
 
-    if (config.Ability) { nav_options.splice(2, 0, {text: "Ability", id: "ability"}); }
+    if (Config.Ability) { nav_options.splice(2, 0, {text: "Ability", id: "ability"}); }
 
     const nav = create_element({Tag: "nav", Attribute: { id: "nav", }, Position: "Top", Parent: document.body, });
 
