@@ -14,11 +14,13 @@ async function load_index() {
     });
 
     document.querySelector(".pause").classList.add("active");
-    video_play(videos[0])
+    //video_play(videos[0])
 }
 
 function game_image() {
     const games = document.querySelectorAll("#Games li[data-game]:has(img)");
+
+    const used_src = [];
 
     games.forEach(g => {
         const game = g.dataset.game.split(/[,]/);
@@ -28,16 +30,20 @@ function game_image() {
         const location_overview = get_directory({ Path: [Path.Location.Overview], Game: game});
         const pokemon_art = get_directory({ Path: [Path.Pokemon.Art.Default.Front.Official], Game: game});
 
-        let art = [];
+        let source = [];
 
-        art = adjustArrayLength(art, location_art, 12);    
-        art = adjustArrayLength(art, location_load, 8);
-        art = adjustArrayLength(art, game_art, 4);
-        art = adjustArrayLength(art, location_overview, 1);
-        art = adjustArrayLength(art, pokemon_art, 1);
-        
+        source = adjustArrayLength(source, location_art, 12);    
+        source = adjustArrayLength(source, location_load, 8);
+        source = adjustArrayLength(source, game_art, 4);
+        source = adjustArrayLength(source, location_overview, 1);
+        source = adjustArrayLength(source, pokemon_art, 1);
+ 
+        source = source.filter(v => !used_src.includes(v));
+        const random_src = source.length > 0 ? source[Math.floor(Math.random() * source.length)] : ""
+        random_src !== "" && (used_src.push(random_src))
+
         const img = g.querySelector(":scope img");
-        img.src = art.length > 0 ? art[Math.floor(Math.random() * art.length)] : "";
+        img.src = random_src;
 
         function adjustArrayLength(array, selection, multiplier) {
             const selectionLength = selection.length > 0 ? selection.length : 1;
@@ -102,10 +108,12 @@ function video_autoplay(event) {
 
 
 document.querySelector("main").addEventListener('scroll', function() {
-    const scrollPosition = document.querySelector("main").scrollTop;
+    const mainElement = document.querySelector("main");
     const targetElement = document.querySelector('nav div');
+    const scrollPosition = mainElement.scrollTop;
+    const windowHeight = window.innerHeight;
     
-    if (scrollPosition > 0) {
+    if (scrollPosition > windowHeight) {
         targetElement.classList.add('active');
     } else {
         targetElement.classList.remove('active');
@@ -163,7 +171,8 @@ function form_submit(event) {
     const textarea = form.querySelector(":scope textarea");
 
     if (textarea.value == "" || textarea.value == undefined ) {
-        form.querySelector(":scope button").animate([{transform: "translateX(0px)"}, {transform: "translateX(2px)"}, {transform: "translateX(0px)"}, {transform: "translateX(-2px)"}, {transform: "translateX(0px)"}, ], {duration: 200,easing: "linear",iterations: 1,});
+        console.log(form.querySelector(":scope button > *"))
+        form.querySelector(":scope button > *").animate([{transform: "translateX(0px)"}, {transform: "translateX(2px)"}, {transform: "translateX(0px)"}, {transform: "translateX(-2px)"}, {transform: "translateX(0px)"}, ], {duration: 200,easing: "linear",iterations: 1,});
         return false;
     }
     else {
