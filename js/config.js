@@ -30,7 +30,7 @@ const Data = {
 }
 
 // Memory
-const Memory = {};
+let Memory = {};
 
 // Paths
 const Path = {
@@ -247,7 +247,7 @@ const Path = {
 function configure_game(id) {
 
 	// Reset config
-	Object.keys(config).forEach(key => config[key] = undefined);
+	Object.keys(Config).forEach(key => Config[key] = undefined);
 
     Config.ID = id || 1;
     Config.Game = get_game(Config.ID)
