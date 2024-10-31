@@ -95,22 +95,22 @@ function card_display() {
         const pokemon_index = get_pokemonIndex(options.Entry)
         const default_index = get_defaultPokemon(pokemon_index)
 
-        if (data.Pokemon[pokemon_index]) {
+        if (Data.Pokemon[pokemon_index]) {
             card.innerHTML = "";
             card.classList.add("active");
 
             card.dataset.entry = pokemon_index;
             card.dataset.catalog = options.Catalog;
 
-            const pokemon_type = data.Pokemon[pokemon_index].Type ? data.Pokemon[pokemon_index].Type : data.Pokemon[default_index].Type ? data.Pokemon[default_index].Type : {};
-            const pokemon_dex = data.Pokemon[pokemon_index].Pokedex ? data.Pokemon[pokemon_index].Pokedex : data.Pokemon[default_index].Pokedex ? data.Pokemon[default_index].Pokedex : {};
-            const pokemon_dexColor = data.Pokemon[pokemon_index]["Pokedex Color"] ? data.Pokemon[pokemon_index]["Pokedex Color"] : data.Pokemon[default_index]["Pokedex Color"] ? data.Pokemon[default_index]["Pokedex Color"] : "";
+            const pokemon_type = Data.Pokemon[pokemon_index].Type ? Data.Pokemon[pokemon_index].Type : Data.Pokemon[default_index].Type ? Data.Pokemon[default_index].Type : {};
+            const pokemon_dex = Data.Pokemon[pokemon_index].Pokedex ? Data.Pokemon[pokemon_index].Pokedex : Data.Pokemon[default_index].Pokedex ? Data.Pokemon[default_index].Pokedex : {};
+            const pokemon_dexColor = Data.Pokemon[pokemon_index]["Pokedex Color"] ? Data.Pokemon[pokemon_index]["Pokedex Color"] : Data.Pokemon[default_index]["Pokedex Color"] ? Data.Pokemon[default_index]["Pokedex Color"] : "";
 
-            const pokemon_abilityPrimary = data.Pokemon[pokemon_index].Ability && data.Pokemon[pokemon_index].Ability.Primary ? data.Pokemon[pokemon_index].Ability.Primary : data.Pokemon[default_index].Ability && data.Pokemon[default_index].Ability.Primary ? data.Pokemon[default_index].Ability.Primary : null
-            const pokemon_abilitySecondary = data.Pokemon[pokemon_index].Ability && data.Pokemon[pokemon_index].Ability.Secondary ? data.Pokemon[pokemon_index].Ability.Secondary : data.Pokemon[default_index].Ability && data.Pokemon[default_index].Ability.Secondary ? data.Pokemon[default_index].Ability.Secondary : null
-            const pokemon_abilityHidden = data.Pokemon[pokemon_index].Ability && data.Pokemon[pokemon_index].Ability.Hidden ? data.Pokemon[pokemon_index].Ability.Hidden : data.Pokemon[default_index].Ability && data.Pokemon[default_index].Ability.Hidden ? data.Pokemon[default_index].Ability.Hidden : null
+            const pokemon_abilityPrimary = Data.Pokemon[pokemon_index].Ability && Data.Pokemon[pokemon_index].Ability.Primary ? Data.Pokemon[pokemon_index].Ability.Primary : Data.Pokemon[default_index].Ability && Data.Pokemon[default_index].Ability.Primary ? Data.Pokemon[default_index].Ability.Primary : null
+            const pokemon_abilitySecondary = Data.Pokemon[pokemon_index].Ability && Data.Pokemon[pokemon_index].Ability.Secondary ? Data.Pokemon[pokemon_index].Ability.Secondary : Data.Pokemon[default_index].Ability && Data.Pokemon[default_index].Ability.Secondary ? Data.Pokemon[default_index].Ability.Secondary : null
+            const pokemon_abilityHidden = Data.Pokemon[pokemon_index].Ability && Data.Pokemon[pokemon_index].Ability.Hidden ? Data.Pokemon[pokemon_index].Ability.Hidden : Data.Pokemon[default_index].Ability && Data.Pokemon[default_index].Ability.Hidden ? Data.Pokemon[default_index].Ability.Hidden : null
 
-            const pokemon_stats = data.Pokemon[pokemon_index]["Base Stats"] ? data.Pokemon[pokemon_index]["Base Stats"] : data.Pokemon[default_index]["Base Stats"] ? data.Pokemon[default_index]["Base Stats"] : {};
+            const pokemon_stats = Data.Pokemon[pokemon_index]["Base Stats"] ? Data.Pokemon[pokemon_index]["Base Stats"] : Data.Pokemon[default_index]["Base Stats"] ? Data.Pokemon[default_index]["Base Stats"] : {};
 
             const leftWrap = create_element({Tag: "aside", Parent: card });
             const rightWrap = create_element({Tag: "aside", Parent: card });
@@ -141,7 +141,7 @@ function card_display() {
             const nameWrap = create_element({Tag: "div", Class:["name"], Parent: leftTopWrap });
             const name = create_element({Tag: "strong", Text: pokemon_index, Parent: nameWrap });
 
-            const pokemon_src = get_directory({FirstMatch: true, Exact: true, File: [data.Pokemon[pokemon_index].File], Path: [path.Pokemon.Battle.Default.Front.GIF,path.Pokemon.Battle.Default.Front.PNG,path.Pokemon.Menu.Default] });
+            const pokemon_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Pokemon[pokemon_index].File], Path: [path.Pokemon.Battle.Default.Front.GIF,path.Pokemon.Battle.Default.Front.PNG,path.Pokemon.Menu.Default] });
             const pokemonWrap = create_element({Tag: "div", Class:["pokemon"], Parent: leftCenterWrap });
             const pokemonImage = create_element({Tag: "img", Attribute: {src: pokemon_src},  Parent: pokemonWrap });
 
@@ -168,7 +168,7 @@ function card_display() {
             const stats_wrap = create_element({Tag: "ul", Class: ["stats"], Parent: groupWrap });
 
             stats_keys.forEach(k => {
-                const stats_percentage = (pokemon_stats[k] / Math.max(...Object.values(data.Pokemon).map(p => p["Base Stats"] && p["Base Stats"][k] !== undefined ? p["Base Stats"][k] : 0))) * 100;
+                const stats_percentage = (pokemon_stats[k] / Math.max(...Object.values(Data.Pokemon).map(p => p["Base Stats"] && p["Base Stats"][k] !== undefined ? p["Base Stats"][k] : 0))) * 100;
 
                 const stats_entry = create_element({Tag: "li", Class:[k], Parent: stats_wrap });
                 const stats_header = create_element({Tag: "strong", Text: k, Parent: stats_entry });
@@ -183,7 +183,7 @@ function card_display() {
             const data_wrap = create_element({Tag: "ul", Class:["data"], Parent: groupWrap });
 
             data_keys.forEach(d => {
-                const index = data.Pokemon[pokemon_index][d] ? pokemon_index : data.Pokemon[default_index][d] ? default_index : null;
+                const index = Data.Pokemon[pokemon_index][d] ? pokemon_index : Data.Pokemon[default_index][d] ? default_index : null;
 
                 if (index) {
         
@@ -193,12 +193,12 @@ function card_display() {
 
                     const data_value = create_element({Tag: "section", Parent: data_entry });
 
-                    const key = Array.isArray(data.Pokemon[index][d])
-                    ? data.Pokemon[index][d].map(item => ({ Value: item }))
-                    : typeof data.Pokemon[index][d] === "object"
-                    ? Object.keys(data.Pokemon[index][d]).filter(key => !(typeof data.Pokemon[index][d][key] === "number" && data.Pokemon[index][d][key] === 0)).map(key => ({ Header: key, Value: data.Pokemon[index][d][key] }))
-                    : ["string", "number"].includes(typeof data.Pokemon[index][d])
-                    ? [{ Value: data.Pokemon[index][d] }]
+                    const key = Array.isArray(Data.Pokemon[index][d])
+                    ? Data.Pokemon[index][d].map(item => ({ Value: item }))
+                    : typeof Data.Pokemon[index][d] === "object"
+                    ? Object.keys(Data.Pokemon[index][d]).filter(key => !(typeof Data.Pokemon[index][d][key] === "number" && Data.Pokemon[index][d][key] === 0)).map(key => ({ Header: key, Value: Data.Pokemon[index][d][key] }))
+                    : ["string", "number"].includes(typeof Data.Pokemon[index][d])
+                    ? [{ Value: Data.Pokemon[index][d] }]
                     : [];
 
                     key.forEach(k => {
@@ -212,7 +212,7 @@ function card_display() {
             const data_ratio = ["Gender Ratio"];
             // Ratio
             data_ratio.forEach(d => {
-                const index = data.Pokemon[pokemon_index][d] ? pokemon_index : data.Pokemon[default_index][d] ? default_index : null;
+                const index = Data.Pokemon[pokemon_index][d] ? pokemon_index : Data.Pokemon[default_index][d] ? default_index : null;
 
                 if (index) {
                     const data_entry = create_element({Tag: "li", Class: [d.replaceAll(" ","").toLowerCase()], Parent: data_wrap });
@@ -223,7 +223,7 @@ function card_display() {
 
                     const data_valueBarWrap = create_element({Tag: "div", Class: ["bar"], Parent: data_value });
 
-                    const ratio = data.Pokemon[index][d];
+                    const ratio = Data.Pokemon[index][d];
                     const ratio_total = Object.values(ratio).reduce((sum, value) => sum + value, 0);
 
                     Object.keys(ratio).forEach(r => {
@@ -244,21 +244,21 @@ function card_display() {
             const evolution_wrap = create_element({ Tag: "ul", Class: ["evolution"], Parent: groupWrap });
 
     
-            if (data.Pokemon[pokemon_index].Evolution) {
+            if (Data.Pokemon[pokemon_index].Evolution) {
 
-                const first_evolution = (function findFirst(pokemon) { return data.Pokemon[pokemon].Evolution ? (data.Pokemon[pokemon].Evolution.Previous ? findFirst(data.Pokemon[pokemon].Evolution.Previous[0]) : pokemon) : null;})(pokemon_index);
+                const first_evolution = (function findFirst(pokemon) { return Data.Pokemon[pokemon].Evolution ? (Data.Pokemon[pokemon].Evolution.Previous ? findFirst(Data.Pokemon[pokemon].Evolution.Previous[0]) : pokemon) : null;})(pokemon_index);
 
                 create_evolution(first_evolution);
 
                 function create_evolution(pokemon, evolution_parent = evolution_wrap) {
-                    const evolution_text = data.Pokemon[pokemon].Evolution.Type ? `Evolve ${data.Pokemon[pokemon].Evolution.Type !== "Item" ? `by ${data.Pokemon[pokemon].Evolution.Type}` : ``} ${data.Pokemon[pokemon].Evolution.Level ? `(${data.Pokemon[pokemon].Evolution.Level})` : ''} ${data.Pokemon[pokemon].Evolution.Item ? `with <span data-item='${data.Pokemon[pokemon].Evolution.Item}'>${data.Pokemon[pokemon].Evolution.Item}</span>` : ''} ${data.Pokemon[pokemon].Evolution.Extra ? data.Pokemon[pokemon].Evolution.Extra : ''}  ${data.Pokemon[pokemon].Evolution.Gender ? `(<span data-gender='${data.Pokemon[pokemon].Evolution.Gender}'>${data.Pokemon[pokemon].Evolution.Gender}</span>)` : ''}`.replace(/\s+/g, ' ').trim() : null;
+                    const evolution_text = Data.Pokemon[pokemon].Evolution.Type ? `Evolve ${Data.Pokemon[pokemon].Evolution.Type !== "Item" ? `by ${Data.Pokemon[pokemon].Evolution.Type}` : ``} ${Data.Pokemon[pokemon].Evolution.Level ? `(${Data.Pokemon[pokemon].Evolution.Level})` : ''} ${Data.Pokemon[pokemon].Evolution.Item ? `with <span data-item='${Data.Pokemon[pokemon].Evolution.Item}'>${Data.Pokemon[pokemon].Evolution.Item}</span>` : ''} ${Data.Pokemon[pokemon].Evolution.Extra ? Data.Pokemon[pokemon].Evolution.Extra : ''}  ${Data.Pokemon[pokemon].Evolution.Gender ? `(<span data-gender='${Data.Pokemon[pokemon].Evolution.Gender}'>${Data.Pokemon[pokemon].Evolution.Gender}</span>)` : ''}`.replace(/\s+/g, ' ').trim() : null;
 
                     const evolution = create_element({ Tag: "li", Parent: evolution_parent });
                     const wrap = create_element({ Tag: "span", Parent: evolution });
-                    const image = create_element({ Tag: "img", Attribute:{src: get_directory({FirstMatch: true, Exact: true, File: [data.Pokemon[pokemon].File], Path: [path.Pokemon.Battle.Default.Front.GIF,path.Pokemon.Battle.Default.Front.PNG,path.Pokemon.Menu.Default] })}, Parent: wrap });
+                    const image = create_element({ Tag: "img", Attribute:{src: get_directory({FirstMatch: true, Exact: true, File: [Data.Pokemon[pokemon].File], Path: [path.Pokemon.Battle.Default.Front.GIF,path.Pokemon.Battle.Default.Front.PNG,path.Pokemon.Menu.Default] })}, Parent: wrap });
                     const name = create_element({ Tag: "strong", Text: pokemon, Parent: wrap });
                     const description = evolution_text ? create_element({ Tag: "p", HTML: evolution_text, Parent: wrap }) : null;
-                    const evolutionData = data.Pokemon[pokemon].Evolution;
+                    const evolutionData = Data.Pokemon[pokemon].Evolution;
 
                     if (pokemon !== pokemon_index) {
                         add_card(image, {catalog: "Pokemon", entry: pokemon, select: "evolution", style: "brightness"});
@@ -283,17 +283,17 @@ function card_display() {
             // Form
             const form_wrap = create_element({Tag: "ul", Class:["form"], Parent: groupWrap });
 
-            const forms = Object.fromEntries(Object.entries(data.Pokemon).filter(([key, value]) => value.Pokemon === data.Pokemon[pokemon_index].Pokemon));
+            const forms = Object.fromEntries(Object.entries(Data.Pokemon).filter(([key, value]) => value.Pokemon === Data.Pokemon[pokemon_index].Pokemon));
 
      
             Object.keys(forms).length > 1 && (Object.keys(forms).forEach(idx => {
                 const form = create_element({Tag: "li", Parent: form_wrap });
                 
                 /*
-                const form_conflictHeader = data.Pokemon[idx].Form && data.Pokemon[idx].Form["Conflicting Item"] ? create_element({Tag: "h5", Text: "Conflicting Item", Parent: form }) : null;
-                const form_conflictText = data.Pokemon[idx].Form && data.Pokemon[idx].Form["Conflicting Item"] ? create_element({Tag: "p", HTML: format_conjunctionSplit(data.Pokemon[idx].Form["Conflicting Item"]).replace(/(\d{2}:\d{2}-\d{2}:\d{2})|(\w+(?: \w+)?)|([^,\s/]+)/g, "<span data-text='$&'>$&</span>"), Parent: form }) : null;
-                const form_requiredHeader = data.Pokemon[idx].Form && data.Pokemon[idx].Form["Required Item"] ? create_element({Tag: "h5", Text: "Required Item", Parent: form }) : null;
-                const form_requiredText = data.Pokemon[idx].Form && data.Pokemon[idx].Form["Required Item"] ? create_element({Tag: "p", HTML: format_conjunctionSplit(data.Pokemon[idx].Form["Required Item"]).replace(/(\d{2}:\d{2}-\d{2}:\d{2})|(\w+(?: \w+)?)|([^,\s/]+)/g, "<span data-text='$&'>$&</span>"), Parent: form }) : null;
+                const form_conflictHeader = Data.Pokemon[idx].Form && Data.Pokemon[idx].Form["Conflicting Item"] ? create_element({Tag: "h5", Text: "Conflicting Item", Parent: form }) : null;
+                const form_conflictText = Data.Pokemon[idx].Form && Data.Pokemon[idx].Form["Conflicting Item"] ? create_element({Tag: "p", HTML: format_conjunctionSplit(Data.Pokemon[idx].Form["Conflicting Item"]).replace(/(\d{2}:\d{2}-\d{2}:\d{2})|(\w+(?: \w+)?)|([^,\s/]+)/g, "<span data-text='$&'>$&</span>"), Parent: form }) : null;
+                const form_requiredHeader = Data.Pokemon[idx].Form && Data.Pokemon[idx].Form["Required Item"] ? create_element({Tag: "h5", Text: "Required Item", Parent: form }) : null;
+                const form_requiredText = Data.Pokemon[idx].Form && Data.Pokemon[idx].Form["Required Item"] ? create_element({Tag: "p", HTML: format_conjunctionSplit(Data.Pokemon[idx].Form["Required Item"]).replace(/(\d{2}:\d{2}-\d{2}:\d{2})|(\w+(?: \w+)?)|([^,\s/]+)/g, "<span data-text='$&'>$&</span>"), Parent: form }) : null;
                 
                 const form_items = [...(form_conflictText ? form_conflictText.querySelectorAll(":scope span") : []), ...(form_requiredText ? form_requiredText.querySelectorAll(":scope span") : [])];
                 form_items.forEach(f => {
@@ -302,9 +302,9 @@ function card_display() {
                 });
                 */
 
-                const form_image = create_element({Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: [data.Pokemon[idx].File], Path: [path.Pokemon.Battle.Default.Front.GIF,path.Pokemon.Battle.Default.Front.PNG,path.Pokemon.Menu.Default] })}, Parent: form });
+                const form_image = create_element({Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: [Data.Pokemon[idx].File], Path: [path.Pokemon.Battle.Default.Front.GIF,path.Pokemon.Battle.Default.Front.PNG,path.Pokemon.Menu.Default] })}, Parent: form });
                 const form_name = create_element({Tag: "strong", Text: idx, Parent: form });
-                const form_change = data.Pokemon[idx].Form && data.Pokemon[idx].Form.Change ? create_element({Tag: "p", Text: data.Pokemon[idx].Form.Change, Parent: form }) : null;
+                const form_change = Data.Pokemon[idx].Form && Data.Pokemon[idx].Form.Change ? create_element({Tag: "p", Text: Data.Pokemon[idx].Form.Change, Parent: form }) : null;
                 
 
                 if (idx !== pokemon_index) {
@@ -316,14 +316,14 @@ function card_display() {
 
             // Learnset
             const learnset_wrap = create_element({Tag: "ul", Class:["learnset"], Parent: groupWrap });
-            generate_learnset({Catalog: "Pokemon", Entry: [pokemon_index,default_index], Data: {[default_index]: data.Pokemon[pokemon_index],[pokemon_index]: data.Pokemon[pokemon_index]}, Parent: learnset_wrap});
+            generate_learnset({Catalog: "Pokemon", Entry: [pokemon_index,default_index], Data: {[default_index]: Data.Pokemon[pokemon_index],[pokemon_index]: Data.Pokemon[pokemon_index]}, Parent: learnset_wrap});
                 
             // Area
             const area_wrap = create_element({Tag: "ul", Class:["area"], Parent: groupWrap });
 
-            const location_pokemon = Object.keys(data.Locations).reduce((found, index) => (data.Locations[index].Pokemon && data.Locations[index].Pokemon.some(i => [pokemon_index,default_index].some(it => i.Pokemon && i.Pokemon.includes(it))) ? (found[index] = data.Locations[index], found) : found), {});
+            const location_pokemon = Object.keys(Data.Locations).reduce((found, index) => (Data.Locations[index].Pokemon && Data.Locations[index].Pokemon.some(i => [pokemon_index,default_index].some(it => i.Pokemon && i.Pokemon.includes(it))) ? (found[index] = Data.Locations[index], found) : found), {});
             generate_locationPokemon({Catalog: "Pokemon", Entry: [pokemon_index,default_index], Data: location_pokemon, Parent: area_wrap});
-            const shop_pokemon = Object.keys(data.Locations).reduce((found, index) => (data.Locations[index].Shop && data.Locations[index].Shop.some(i => [pokemon_index,default_index].some(it => i.Pokemon && i.Pokemon.includes(it))) ? (found[index] = data.Locations[index], found) : found), {});
+            const shop_pokemon = Object.keys(Data.Locations).reduce((found, index) => (Data.Locations[index].Shop && Data.Locations[index].Shop.some(i => [pokemon_index,default_index].some(it => i.Pokemon && i.Pokemon.includes(it))) ? (found[index] = Data.Locations[index], found) : found), {});
             generate_locationShopPokemon({Catalog: "Pokemon", Entry: [pokemon_index,default_index], Data: shop_pokemon, Parent:area_wrap, });
 
             const group = ["Base Stats","Evolution","Form","Data","Learnset","Area"];
