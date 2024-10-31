@@ -14,7 +14,7 @@ function generate_locationShopItem(parameters = {}) {
 
     Object.keys(options.Data).forEach(index => {
         
-        const l = data.Locations[index];
+        const l = Data.Locations[index];
         const location_index = index;
 
         l.Shop && l.Shop.forEach(d => {
@@ -55,7 +55,7 @@ function generate_locationShopItem(parameters = {}) {
                         const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
                 
                         Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                            const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,data.Items[item_index].Image,...data.Items[item_index].Item], Path: [path.Item.Bag]}) }, Parent: itemImageWrap });
+                            const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].Image,...Data.Items[item_index].Item], Path: [path.Item.Bag]}) }, Parent: itemImageWrap });
                             options.Catalog !== "Item" && (add_redirect(itemImage,{catalog:"item", entry:item_index, style:"brightness"}));
                         });
                         const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
@@ -119,7 +119,7 @@ function generate_locationShopPokemon(parameters = {}) {
 
     Object.keys(options.Data).forEach(index => {
         
-        const l = data.Locations[index];
+        const l = Data.Locations[index];
         const location_index = index;
 
         l.Shop && l.Shop.forEach(d => {
@@ -133,10 +133,10 @@ function generate_locationShopPokemon(parameters = {}) {
                         let currency_text = format_conjunctionSplit(d.Currency);
                         let currency_source = get_directory({FirstMatch: true, File: [currency_text], Path: [path.Currency.Icon]});
                         let currency = currency_source !== "" ? `<img src='${currency_source}' title='${currency_text}' />` : currency_text.length > 5 ? `<span title='${currency_text}'>${currency_text.match(/[A-Z]/g).join('')}</span>` : ` ${currency_text}`;
-                        let text = data.Pokemon[pokemon_index].Group === "Fossil" ? `Revived with ${d.Cost} ${currency_text}` : `Bought for ${d.Cost} ${currency}`;
+                        let text = Data.Pokemon[pokemon_index].Group === "Fossil" ? `Revived with ${d.Cost} ${currency_text}` : `Bought for ${d.Cost} ${currency}`;
                         text = text !== "" ? text.replaceAll("  "," ").trim()+`.` : "";
             
-                        const pokemon_file = [data.Pokemon[pokemon_index].File,data.Pokemon[default_index].File];
+                        const pokemon_file = [Data.Pokemon[pokemon_index].File,Data.Pokemon[default_index].File];
             
                         const header = [d.Shop,d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                         let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
@@ -212,7 +212,7 @@ function generate_locationItem(parameters = {}) {
 
     Object.keys(options.Data).forEach(index => {
         
-        const l = data.Locations[index];
+        const l = Data.Locations[index];
         const location_index = index;
 
         l.Item && l.Item.forEach(d => {
@@ -222,7 +222,7 @@ function generate_locationItem(parameters = {}) {
 
                 const item_index = d.Index ? d.Index : get_itemIndex(d.Item);
 
-                const item_file = item_index && data.Items[item_index] ? [d.Image, data.Items[item_index]?.Image, ...(data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
+                const item_file = item_index && Data.Items[item_index] ? [d.Image, Data.Items[item_index]?.Image, ...(Data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
 
                 const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                 let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
@@ -249,7 +249,7 @@ function generate_locationItem(parameters = {}) {
                     const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
             
                     Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                        const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,data.Items[item_index].Image,...data.Items[item_index].Item].filter(value => value !== undefined), Path: [path.Item.Bag]}) }, Parent: itemImageWrap });
+                        const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].Image,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [path.Item.Bag]}) }, Parent: itemImageWrap });
                         options.Catalog !== "Item" && (add_redirect(itemImage,{catalog:"item", entry:item_index, style:"brightness"}));
                     });
                     const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
@@ -316,7 +316,7 @@ function generate_locationPokemon(parameters = {}) {
 
     Object.keys(options.Data).forEach(index => {
         
-        const l = data.Locations[index];
+        const l = Data.Locations[index];
         const location_index = index;
         
         l.Pokemon && l.Pokemon.forEach(d => {
@@ -329,8 +329,8 @@ function generate_locationPokemon(parameters = {}) {
                     const defaultPokemon = get_defaultPokemon(pokemon_index);
                     const held_index = d.Held ? get_itemIndex(d.Held) : null;
 
-                    const pokemon_file = [data.Pokemon[pokemon_index].File,data.Pokemon[default_index].File];
-                    const held_file = [d.Held, ...(held_index ? [data.Items[held_index].Image, ...data.Items[held_index].Item] : [])];
+                    const pokemon_file = [Data.Pokemon[pokemon_index].File,Data.Pokemon[default_index].File];
+                    const held_file = [d.Held, ...(held_index ? [Data.Items[held_index].Image, ...Data.Items[held_index].Item] : [])];
                     
                     const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                     let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
@@ -421,7 +421,7 @@ function generate_locationPokemon(parameters = {}) {
                     d.Item && d.Item.forEach(it => {
                         it.forEach(i => {
                             const item_index = i ? get_itemIndex(i) : null;
-                            const item_file = [i, ...(item_index && data.Items[item_index] ? [data.Items[item_index].Image, ...data.Items[item_index].Item] : [])];
+                            const item_file = [i, ...(item_index && Data.Items[item_index] ? [Data.Items[item_index].Image, ...Data.Items[item_index].Item] : [])];
 
                             const itemContent = create_element({ Tag: "div", Parent: itemWrap });
                             const itemImage = create_element({ Tag: "img", Attribute: { title: `Required Item\n${i}`, src: get_directory({FirstMatch: true, Exact: true, File: item_file, Path: [path.Item.Bag]}), }, Parent: itemContent });
@@ -434,8 +434,8 @@ function generate_locationPokemon(parameters = {}) {
                 
                     if (options.Catalog !== "Pokemon") {
                         entry.dataset.spoiler = !!(d.Encounter === "Static" && (
-                            (data.Pokemon[pokemon_index] && data.Pokemon[pokemon_index].Group && (data.Pokemon[pokemon_index].Group === "Legendary" || data.Pokemon[pokemon_index].Group === "Mythical")) ||
-                            (data.Pokemon[defaultPokemon] && data.Pokemon[defaultPokemon].Group && (data.Pokemon[defaultPokemon].Group === "Legendary" || data.Pokemon[defaultPokemon].Group === "Mythical"))
+                            (Data.Pokemon[pokemon_index] && Data.Pokemon[pokemon_index].Group && (Data.Pokemon[pokemon_index].Group === "Legendary" || Data.Pokemon[pokemon_index].Group === "Mythical")) ||
+                            (Data.Pokemon[defaultPokemon] && Data.Pokemon[defaultPokemon].Group && (Data.Pokemon[defaultPokemon].Group === "Legendary" || Data.Pokemon[defaultPokemon].Group === "Mythical"))
                         ));
                         entry.dataset.spoiler && entry.dataset.spoiler === "true" && (entry.addEventListener("click", function(event) { event.currentTarget.classList.add("active"); }))
                     }
@@ -471,18 +471,18 @@ function generate_learnset(parameters = {}) {
     const invalid = [];
 
     Object.keys(options.Data).forEach(index => {
-        const d = data.Pokemon[index];
+        const d = Data.Pokemon[index];
 
         const pokemon_index = index;
         const default_index = get_defaultPokemon(pokemon_index);
-        const pokemon_file = [data.Pokemon[pokemon_index].File,data.Pokemon[default_index].File];
+        const pokemon_file = [Data.Pokemon[pokemon_index].File,Data.Pokemon[default_index].File];
 
         d.Learnset && d.Learnset.forEach(l => {
             if (options.Catalog !== "Move" || options.Entry.includes(l.Move)) {
                 const move_index = get_moveIndex(l.Move);
 
                 if (move_index) {
-                    const move_type = data.Moves[move_index].Type;
+                    const move_type = Data.Moves[move_index].Type;
                     
                     const header = l.Type === "Level Up" ? `Level Up` : l.Type === "Machine" ? `` : l.Type === "Breeding" ? `Parent` : l.Type === "Evolution" ? `Previous Evolution` : l.Type === "Tutor" ? `Move Tutor` : "";
                     const text = l.Type === "Level Up" ? `${l.Factor}` : l.Type === "Machine" ? `${l.Machine}` : l.Type === "Breeding" ? `` : l.Type === "Tutor" ? `${l.Location}` : "";
@@ -517,7 +517,7 @@ function generate_learnset(parameters = {}) {
                     pokes.forEach(p => {
                         const poke_index = get_pokemonIndex(p);
                         const def_index = get_defaultPokemon(poke_index);
-                        const pok_file = [data.Pokemon[poke_index].File,data.Pokemon[def_index].File];
+                        const pok_file = [Data.Pokemon[poke_index].File,Data.Pokemon[def_index].File];
                 
                         const summaryImage = create_element({ Tag: "img", Attribute: { title: p, src: get_directory({FirstMatch: true, Exact: true, File: pok_file, Path: [path.Pokemon.Box.Default.PNG,path.Pokemon.Box.Default.GIF,path.Pokemon.Menu.Default] }), }, Parent: summaryImageWrap });
                         add_card(summaryImage, {catalog: "Pokemon", entry: p, ...(options.Catalog === "Pokemon" && {select: "area"}), style: "brightness"});
@@ -557,7 +557,7 @@ function generate_pickup(parameters = {}) {
     const invalid = [];
 
     Object.keys(options.Data).forEach(index => {
-        const l = data.Abilities[index];
+        const l = Data.Abilities[index];
         const ability_index = index;
 
         l.Item && l.Item.forEach(d => {
@@ -565,7 +565,7 @@ function generate_pickup(parameters = {}) {
                 d.Quantity = d.Quantity === undefined ? 1 : d.Quantity;
                 const item_index = d.Index ? d.Index : get_itemIndex(d.Item);
             
-                const item_file = item_index && data.Items[item_index] ? [d.Image, data.Items[item_index]?.Image, ...(data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
+                const item_file = item_index && Data.Items[item_index] ? [d.Image, Data.Items[item_index]?.Image, ...(Data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
 
                 const text = `${d.Rate} chance to be held by a${d.Level ? ` Level ${unparse_levels(d.Level)} ` : ''} Pokemon with the ability Pickup after a battle${d.Location ? ` while in the location ${d.Location}` : ''}${d.Area ? ` (${d.Area})` : ''}.`;
 
@@ -593,7 +593,7 @@ function generate_pickup(parameters = {}) {
                 const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
 
                 Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                    const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,data.Items[item_index].Image,...data.Items[item_index].Item].filter(value => value !== undefined), Path: [path.Item.Bag]}) }, Parent: itemImageWrap });
+                    const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].Image,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [path.Item.Bag]}) }, Parent: itemImageWrap });
                 });
                 const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
 
@@ -652,11 +652,11 @@ function generate_ability(parameters = {}) {
 
         if (pokemon_index) {
             const defaultPokemon = get_defaultPokemon(pokemon_index);
-            const file = data.Pokemon[p] ? (data.Pokemon[p].File ? String(data.Pokemon[p].File) : ( data.Pokemon[defaultPokemon] ? (data.Pokemon[defaultPokemon].File ? String(data.Pokemon[defaultPokemon].File) : null) : null ) ) : null;
+            const file = Data.Pokemon[p] ? (Data.Pokemon[p].File ? String(Data.Pokemon[p].File) : ( Data.Pokemon[defaultPokemon] ? (Data.Pokemon[defaultPokemon].File ? String(Data.Pokemon[defaultPokemon].File) : null) : null ) ) : null;
 
-            const pokemon_primary = data.Pokemon[p].Ability.Primary;
-            const pokemon_secondary = data.Pokemon[p].Ability.Secondary;
-            const pokemon_hidden = data.Pokemon[p].Ability.Hidden;
+            const pokemon_primary = Data.Pokemon[p].Ability.Primary;
+            const pokemon_secondary = Data.Pokemon[p].Ability.Secondary;
+            const pokemon_hidden = Data.Pokemon[p].Ability.Hidden;
 
             const data_entry = create_element({ Tag: "li", Class:["generated_ability"], Parent: options.Parent });
                 
@@ -668,9 +668,9 @@ function generate_ability(parameters = {}) {
             add_card(pokemonText, {catalog: "Pokemon", entry: p, style: "invert"});
 
 
-            const headers = config.Ability;
+            const headers = Config.Ability;
             for (const key of headers) {
-                const a = data.Pokemon[pokemon_index].Ability[key] ? data.Pokemon[pokemon_index].Ability[key] : null
+                const a = Data.Pokemon[pokemon_index].Ability[key] ? Data.Pokemon[pokemon_index].Ability[key] : null
                 const isAbility = a ? options.Entry.includes(a) : false;
                 const abilityWrap = create_element({ Tag: "div", Class: [key], Attribute: { title: `${key} Ability`, }, Parent: data_entry });
                 const abilityText = create_element({ Tag: isAbility ? "strong" : "span", Text: a ? a : "None", ...(!a && { Class: ["none"] }), Parent: abilityWrap });
@@ -709,7 +709,7 @@ function generate_tutor(parameters = {}) {
     Object.keys(options.Data).forEach(index => {
 
         const location_index = index;
-        const l = data.Locations[location_index];
+        const l = Data.Locations[location_index];
         
 
         l["Move Tutor"] && l["Move Tutor"].forEach(d => {
@@ -744,7 +744,7 @@ function generate_tutor(parameters = {}) {
                     const upperWrap = create_element({ Tag: "header", Parent: rightWrap });
                     const lowerWrap = create_element({ Tag: "main", Parent: rightWrap });
             
-                    const moveWrap = create_element({ Tag: "div", Class: ["move"], Data: {type: data.Moves[move_index].Type}, Parent: leftWrap });
+                    const moveWrap = create_element({ Tag: "div", Class: ["move"], Data: {type: Data.Moves[move_index].Type}, Parent: leftWrap });
                     const moveText = create_element({ Tag: "strong", Text: d.Move, Parent: moveWrap });
 
                     add_redirect(moveWrap,{catalog:"move",entry:move_index,style:"brightness"});
