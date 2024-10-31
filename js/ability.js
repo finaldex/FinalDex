@@ -1,6 +1,6 @@
 const create_ability = function() {
     
-    if (!config.Ability) { return }
+    if (!Config.Ability) { return }
 
     const ability = create_element({ Tag: "div", Attribute: { id: "ability" }, Class: ["layout1"], Parent: document.body, });
 
@@ -10,15 +10,15 @@ const create_ability = function() {
 
     // Search
     const ability_searchWrap = create_element({ Tag: "div", Class: ["search"], Parent: ability_catalogHeader });
-    const ability_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "ability_search", autocomplete: "off", placeholder: "Search Abilities...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Abilities...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#ability .catalog ol li'), Data: data.Abilities, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#ability .catalog ol li') }, event), }, Parent: ability_searchWrap });
+    const ability_searchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "ability_search", autocomplete: "off", placeholder: "Search Abilities...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search Abilities...'" }, Event: {input: event => search({ Entries: document.querySelectorAll('#ability .catalog ol li'), Data: Data.Abilities, }, event), keydown: event => search_filter({ Entries: document.querySelectorAll('#ability .catalog ol li') }, event), }, Parent: ability_searchWrap });
 
     // List
     const ability_catalogList = create_element({ Tag: "ol",  Parent: ability_catalog });
 
     // Entry
-    const abilities = Object.keys(data.Abilities);
+    const abilities = Object.keys(Data.Abilities);
     abilities.forEach((a, i) => {
-        const ability_catalogEntry = create_element({ Tag: "li", Data: { index: a, search: data.Abilities[a].Ability.join(",") },  Parent: ability_catalogList });
+        const ability_catalogEntry = create_element({ Tag: "li", Data: { index: a, search: Data.Abilities[a].Ability.join(",") },  Parent: ability_catalogList });
         const ability_catalogEntryLabel = create_element({ Tag: "label", Attribute: { for: `ability_entry-${a}`, }, Parent: ability_catalogEntry });
         const ability_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "ability_entry", id: `ability_entry-${a}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => ability_data()}, Parent: ability_catalogEntryLabel });
         const ability_catalogEntryText = create_element({ Tag: "strong", Text: a, Parent: ability_catalogEntryLabel });
@@ -56,7 +56,7 @@ function ability_data() {
     if (!active_entry || !active_entry.dataset.index) { return }
 
     const index = active_entry.dataset.index;
-    const ability = data.Abilities[index].Ability;
+    const ability = Data.Abilities[index].Ability;
 
     const titleText = document.querySelector("#ability > header .title_text")
     titleText.innerText = ability[0];
@@ -65,7 +65,7 @@ function ability_data() {
     sidebarHeaderText.innerText = ability[0];
 
     const idText = document.querySelector("#ability > header .id_text")
-    idText.innerText = data.Abilities[index].ID ? `#${data.Abilities[index].ID}` : "";
+    idText.innerText = Data.Abilities[index].ID ? `#${Data.Abilities[index].ID}` : "";
 
     const description = document.querySelector("#ability > main");
     description.innerHTML = "";
@@ -73,28 +73,28 @@ function ability_data() {
     const list = document.querySelector("#ability .sidebar > main ul");
     list.innerHTML = ""; // Clear previous data
 
-    const ability_pokemon = Object.keys(data.Pokemon).reduce((acc, key) => { const abilities = data.Pokemon[key].Ability; if (abilities) { if (ability.includes(abilities.Primary)) { acc[key] = { Ability: { Primary: abilities.Primary } }; } else if (ability.includes(abilities.Secondary)) { acc[key] = { Ability: { Secondary: abilities.Secondary } }; } else if (ability.includes(abilities.Hidden)) { acc[key] = { Ability: { Hidden: abilities.Hidden } }; } } return acc; }, {});
+    const ability_pokemon = Object.keys(Data.Pokemon).reduce((acc, key) => { const abilities = Data.Pokemon[key].Ability; if (abilities) { if (ability.includes(abilities.Primary)) { acc[key] = { Ability: { Primary: abilities.Primary } }; } else if (ability.includes(abilities.Secondary)) { acc[key] = { Ability: { Secondary: abilities.Secondary } }; } else if (ability.includes(abilities.Hidden)) { acc[key] = { Ability: { Hidden: abilities.Hidden } }; } } return acc; }, {});
     generate_ability({Catalog: "Ability", Entry: ability, Data: ability_pokemon, Parent: list});
  
-    const descriptionText = data.Abilities[index].Description ? create_element({ Tag: "p", Text: data.Abilities[index].Description, Class: ["description_text"], Parent: description }) : null;
+    const descriptionText = Data.Abilities[index].Description ? create_element({ Tag: "p", Text: Data.Abilities[index].Description, Class: ["description_text"], Parent: description }) : null;
 
-    const ability_effect = data.Abilities[index].Effect ? data.Abilities[index].Effect : [];
+    const ability_effect = Data.Abilities[index].Effect ? Data.Abilities[index].Effect : [];
     const effectTitle = ability_effect.length > 0 ? create_element({ Tag: "h3", Text:"Effect", Class: ["effect_header"], Parent: description }) : null;
     ability_effect.forEach(data => {
-        const effectText = create_element({ Tag: "p", Text: data.Effect, Class: ["effect_text"], Parent: description });
+        const effectText = create_element({ Tag: "p", Text: Data.Effect, Class: ["effect_text"], Parent: description });
     });
 
-    const affectedMoves_true = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Move" && a.Boolean === true && data.Moves[get_moveIndex(a.Name)]) : []) : [];
-    const affectedMoves_false = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Move" && a.Boolean === false && data.Moves[get_moveIndex(a.Name)]) : []) : [];
-    const affectedItems_true = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Item" && a.Boolean === true && data.Items[get_itemIndex(a.Name)]) : []) : [];
-    const affectedItems_false = data.Abilities[index].Affect ? (data.Abilities[index].Affect.length > 0 ? data.Abilities[index].Affect.filter(a => a.Type === "Item" && a.Boolean === false && data.Items[get_itemIndex(a.Name)]) : []) : [];
+    const affectedMoves_true = Data.Abilities[index].Affect ? (Data.Abilities[index].Affect.length > 0 ? Data.Abilities[index].Affect.filter(a => a.Type === "Move" && a.Boolean === true && Data.Moves[get_moveIndex(a.Name)]) : []) : [];
+    const affectedMoves_false = Data.Abilities[index].Affect ? (Data.Abilities[index].Affect.length > 0 ? Data.Abilities[index].Affect.filter(a => a.Type === "Move" && a.Boolean === false && Data.Moves[get_moveIndex(a.Name)]) : []) : [];
+    const affectedItems_true = Data.Abilities[index].Affect ? (Data.Abilities[index].Affect.length > 0 ? Data.Abilities[index].Affect.filter(a => a.Type === "Item" && a.Boolean === true && Data.Items[get_itemIndex(a.Name)]) : []) : [];
+    const affectedItems_false = Data.Abilities[index].Affect ? (Data.Abilities[index].Affect.length > 0 ? Data.Abilities[index].Affect.filter(a => a.Type === "Item" && a.Boolean === false && Data.Items[get_itemIndex(a.Name)]) : []) : [];
 
 
     const affectMoveTitle_true = affectedMoves_true.length > 0 ? create_element({ Tag: "h3", Text:"Affected Moves", Class: ["affect_move_header"], Parent: description }) : null;
     const affectMoveList_true = affectedMoves_true.length > 0 ? create_element({ Tag: "ul", Parent: description }) : null;
     affectedMoves_true.forEach(d => {
         const index = get_moveIndex(d.Name);
-        const move_type = data.Moves[index].Type;
+        const move_type = Data.Moves[index].Type;
         const affect = create_element({ Tag: "li", Text: d.Name, Class: ["affect_move_text"], Data: { ...(move_type && {type: move_type} ) }, Parent: affectMoveList_true });
         add_redirect(affect,{catalog:"move",entry:d.Name,style:"color"});
     });
@@ -103,7 +103,7 @@ function ability_data() {
     const affectMoveList_false = affectedMoves_false.length > 0 ? create_element({ Tag: "ul", Parent: description }) : null;
     affectedMoves_false.forEach(d => {
         const index = get_moveIndex(d.Name);
-        const move_type = data.Moves[index].Type;
+        const move_type = Data.Moves[index].Type;
         const affect = create_element({ Tag: "li", Text: d.Name, Class: ["unaffect_move_text"], Data: { ...(move_type && {type: move_type} ) }, Parent: affectMoveList_false });
         add_redirect(affect,{catalog:"move",entry:d.Name,style:"color"});
     });
