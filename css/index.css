@@ -1,0 +1,515 @@
+nav {
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background: hsl(0, 0%, 90%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    color: black;
+    text-align:center;
+    z-index: 100;
+    border-bottom: 2px outset hsl(0, 0%, 0%);
+}
+
+nav > * {
+    width: 100%;
+}
+nav button {
+
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+nav button:hover,
+nav button:active {
+    text-decoration: underline;
+}
+nav button:active {
+    font-size:0.75rem;
+}
+nav div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+nav div > img {
+    height: 100%;
+    transition: 0.2s ease;
+}
+nav div span {
+    height: 0%;
+    overflow: hidden;
+    transition: 0.2s ease;
+    user-select: none;
+}
+nav div.active > img,
+nav div:hover > img {
+    height: 50%;
+}
+nav div.active > span,
+nav div:hover > span  {
+    height: 50%;
+}
+main {
+    height: calc(100vh - 75px);
+    width: 100%;
+    overflow: auto;
+    margin-top: 75px;
+}
+
+section {
+    position:relative;
+    min-height:100%;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+section > div {
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#Home {
+    width:100%;
+    background:hsl(0,0%,35%);
+}
+#Home::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0.2;
+    background-size: 16px 16px;
+    background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 1.6px, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 50%);
+}
+#Home .text {
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-text-stroke: rgba(0, 0, 0, 0.9) thin;
+}
+
+nav div span > *:last-child,
+#Home .text > *:first-child {
+    background: linear-gradient(to right, mediumseagreen, darkcyan);
+    color: transparent;
+    background-clip: text;
+    text-transform:uppercase;
+    filter: drop-shadow(1px 1px 0px black);
+}
+
+#Home .text > *:first-child {
+    font-size: 7.5rem;
+    cursor:pointer;
+    user-select:none;
+}
+#Home .text > *:first-child:active {
+    filter:drop-shadow(1px 1px 0px black) brightness(0.8);
+}
+#Home .text > *:last-child {
+    color:white;
+    text-shadow: -1px 1px 0px black;
+    filter: drop-shadow(2px 2px 1px black);
+    -webkit-text-stroke: 0;
+}
+#Home .video video:not(.active) {
+    display:none;
+}
+#Home .play,
+#Home .pause {
+    position:absolute;
+    left:10px;
+    bottom:10px;
+    font-size:2rem;
+}
+
+#Home .play:not(.active),
+#Home .pause:not(.active) {
+    display: none;
+}
+section:has(#Games)::before {
+    content: "";
+    display: block;
+    width: 100%;
+    clip-path: polygon(50% 0, 100% 100%, 0% 100%, 0 100%);
+    height: 100px;
+    max-height: 100px;
+    position: absolute;
+    top: -99px;
+    z-index: 100;
+    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.02) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.02) 5%, transparent 0, transparent 50%);
+    background-size: 1em 1em;
+    background-color: hsl(0, 0%, 97%);
+}
+
+section:not(:has(#Home)) {
+    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.02) 5%, transparent 0, transparent 50%), repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0, rgba(0, 0, 0, 0.02) 5%, transparent 0, transparent 50%);
+    background-size: 1em 1em;
+    background-color: hsl(0, 0%, 97%);
+}
+
+#Games > header {
+    font-size: 3rem;
+    text-transform:uppercase;
+    font-weight:bold;
+    margin: 10px 0;
+}
+
+#Games > div {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#Games li {
+    font-family: 'Bebas Neue';
+    width: 250px;
+    aspect-ratio: 3 / 2;
+    background: hsl(0, 0%, 70%);
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid hsl(0, 0%, 50%);
+    cursor: pointer;
+    user-select: none;
+}
+#Games li:has(img[src]:not([src=''])) {
+    background: hsl(0, 0%, 0%);
+}
+#Games li img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+    filter: blur(1px) brightness(0.5);
+}
+#Games li img[src=''] {
+    visibility:hidden;
+}
+#Games li a {
+    z-index: 100;
+    font-size: 2.5rem;
+    color: white;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+#Games li a:active {
+    font-size: 2rem;
+}
+
+#Games li[data-game] a {
+    filter: drop-shadow(2px 2px 1px hsl(0,0%,0%));
+    background: linear-gradient(to right, hsl(0,0%,80%), hsl(0,0%,50%));
+}
+
+
+#Games li[data-game='Red'] a {
+    background: linear-gradient(to right, Red, palevioletred);
+}
+#Games li[data-game='Blue'] a {
+    background: linear-gradient(to right, blue, steelblue);
+}
+#Games li[data-game='Yellow'] a {
+    background: linear-gradient(to right, Yellow, khaki);
+}
+#Games li[data-game='Gold'] a {
+    background: linear-gradient(to right, Gold, palegoldenrod);
+}
+#Games li[data-game='Silver'] a {
+    background: linear-gradient(to right, Silver, slategray);
+}
+#Games li[data-game='Crystal'] a {
+    background: linear-gradient(to right, steelblue, deepskyblue);
+}
+#Games li[data-game='Ruby'] a {
+    background: linear-gradient(to right, darkred, indianred);
+}
+#Games li[data-game='Sapphire'] a {
+    background: linear-gradient(to right, darkblue, dodgerblue);
+}
+#Games li[data-game='Emerald'] a {
+    background: linear-gradient(to right, darkgreen, green);
+}
+#Games li[data-game='FireRed'] a {
+    background: linear-gradient(to right, orange, orangered);
+}
+#Games li[data-game='LeafGreen'] a {
+    background: linear-gradient(to right, forestgreen, lawngreen);
+}
+#Games li[data-game='Colosseum'] a {
+    background: linear-gradient(to right, tan, wheat);
+}
+#Games li[data-game='XD'] a {
+    background: linear-gradient(to right, darkslategray, slategray);
+}
+#Games li[data-game='Diamond'] a {
+    background: linear-gradient(to right, steelblue, midnightblue);
+}
+#Games li[data-game='Pearl'] a {
+    background: linear-gradient(to right, thistle, plum);
+}
+#Games li[data-game='Platinum'] a {
+    background: linear-gradient(to right, steelblue, lightslategray);
+}
+#Games li[data-game='HeartGold'] a {
+    background: linear-gradient(to right, gold, orange);
+}
+#Games li[data-game='SoulSilver'] a {
+    background: linear-gradient(to right, ghostwhite, powderblue);
+}
+#Games li[data-game='Black'] a {
+    background: linear-gradient(to right, lightslategrey, hsl(0,0%,20%));
+}
+#Games li[data-game='White'] a {
+    background: linear-gradient(to right, whitesmoke, lightcyan);
+}
+#Games li[data-game='Black 2'] a {
+    background: linear-gradient(to right, darkslategrey, steelblue);
+}
+#Games li[data-game='White 2'] a {
+    background: linear-gradient(to right, floralwhite, thistle);
+}
+#Games li[data-game='X'] a {
+    background: linear-gradient(to right, royalblue, darkblue);
+}
+#Games li[data-game='Y'] a {
+    background: linear-gradient(to right, palevioletred, darkred);
+}
+#Games li[data-game='Omega Ruby'] a {
+    background: linear-gradient(to right, darkred, tomato);
+}
+#Games li[data-game='Alpha Sapphire'] a {
+    background: linear-gradient(to right, darkblue, skyblue);
+}
+#Games li[data-game='Sun'] a {
+    background: linear-gradient(to right, darkorange, antiquewhite);
+}
+#Games li[data-game='Moon'] a {
+    background: linear-gradient(to right, skyblue, dodgerblue);
+}
+#Games li[data-game='Ultra Sun'] a {
+    background: linear-gradient(to right, darkorange, darkred);
+}
+#Games li[data-game='Ultra Moon'] a {
+    background: linear-gradient(to right, skyblue, mediumslateblue);
+}
+#Games li[data-game='Lets Go Pikachu'] a {
+    background: linear-gradient(to right, goldenrod, darkgoldenrod);
+}
+#Games li[data-game='Lets Go Eevee'] a {
+    background: linear-gradient(to right, saddlebrown, rosybrown);
+}
+#Games li[data-game='Sword'] a {
+    background: linear-gradient(to right, lightskyblue, turquoise);
+}
+#Games li[data-game='Shield'] a {
+    background: linear-gradient(to right, red, hotpink);
+}
+
+
+#Games li[data-game] a {
+    background-clip: text;
+    color: transparent;
+}
+
+#FAQ,
+#Dataset,
+#Sources,
+#Changelog,
+#Agenda {
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+#Agenda li:has(s) {
+    display: none;
+}
+
+#Changelog ul > h6,
+#Sources ul > h5,
+#Dataset ul > h5 {
+    padding: 10px 0 2px 0;
+}
+
+#Changelog h6 span {
+    display: none;
+}
+
+
+#FAQ li,
+#Dataset li,
+#Sources li,
+#Changelog li,
+#Agenda li {
+    list-style: circle;
+    font-size: 0.8rem;
+    padding: 2px 0;
+}
+
+#Agenda li {
+    text-transform: capitalize;
+}
+
+
+
+#FAQ li,
+#Dataset li,
+#Sources li,
+#Changelog li {
+    list-style-position: inside;
+}
+
+#FAQ li:nth-child(odd) {
+    list-style: square;
+}
+
+#FAQ li:nth-child(even) {
+    list-style: circle;
+    padding: 2px 0 10px 0;
+}
+#Sources li {
+    list-style: circle;
+    list-style-position: inside;
+}
+
+
+#Agenda li::after {
+    content:".";
+}
+
+#FAQ > *:first-child,
+#Dataset > *:first-child,
+#Sources > *:first-child,
+#Changelog > *:first-child,
+#Agenda > *:first-child {
+    margin-bottom: 10px;
+}
+
+
+
+#Bug form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: .5s ease opacity 0s, 0s ease visibility 1s;
+    opacity: 1;
+    visibility:visible;
+}
+#Bug > div.complete > form {
+    visibility:hidden;
+    opacity:0;
+}
+#Bug form > *:first-child,
+#Bug form > *:last-child {
+    margin: 5px;
+}
+#Bug form select {
+    padding: 10px 0;
+    text-align: center;
+    appearance: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-bottom: none;
+}
+#Bug form select option[disabled] {
+    display: none;
+}
+#Bug select {
+    color: rgba(0,0,0,0.3);
+}
+#Bug select option {
+    color:black;   
+}
+
+
+#Bug textarea {
+    resize: none;
+    height: 200px;
+    aspect-ratio: 2 / 1;
+    border-radius: 5px;
+    padding: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+#Bug form button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: hsl(0, 0%, 80%);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: 2px solid hsl(0, 0%, 60%);
+}
+#Bug form button:active {
+    font-weight: bold;
+}
+
+
+#Bug > div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#Bug > div > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: .5s ease opacity 0.75s, 0s ease visibility 0.75s;
+    visibility: visible;
+    opacity: 1;
+}
+
+#Bug > div:not(.complete) > div {
+    visibility: hidden;
+    opacity: 0;
+}
+#Bug > div > div button {
+    transition: .25s ease;
+}
+
+#Bug > div:not(.complete) > div button,
+#Bug > div > div button:active {
+    transform:rotate(180deg);
+}
+
+
+
