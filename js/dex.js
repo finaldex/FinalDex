@@ -12,14 +12,14 @@ const create_dex = function() {
     const translateValue = -100 * (header_SwitchContent.dataset.index - 1);
     header_SwitchWrap.style.setProperty('--translate-value', `${translateValue}%`);
 
-    const Pokedex = Array.from(new Set(Object.keys(data.Pokemon).flatMap(p => data.Pokemon[p].Pokedex ? Object.keys(data.Pokemon[p].Pokedex) : [])));
+    const Pokedex = Array.from(new Set(Object.keys(Data.Pokemon).flatMap(p => Data.Pokemon[p].Pokedex ? Object.keys(Data.Pokemon[p].Pokedex) : [])));
     if (Pokedex.includes("National Pokédex")) { Pokedex.unshift(Pokedex.splice(Pokedex.indexOf("National Pokédex"), 1)[0]); }
 
     header_SwitchContent.dataset.index = Pokedex.length > 1 ? 2 : 1;
 
     Pokedex.forEach((dex, i) => {
         const header_SwitchLabel = create_element({ Tag: "label", Attribute: { for: "dexswitch-"+dex, name: dex }, Event: {click: event => dex_switch(event)}, Parent: header_SwitchWrap });
-        const header_SwitchInput = create_element({ Tag: "input", Attribute: { type: "radio", value: i, name: "finaldex-dexswitch-"+config.ID, id: "dexswitch-"+dex }, Parent: header_SwitchLabel });
+        const header_SwitchInput = create_element({ Tag: "input", Attribute: { type: "radio", value: i, name: "finaldex-dexswitch-"+Config.ID, id: "dexswitch-"+dex }, Parent: header_SwitchLabel });
         const header_SwitchText = create_element({ Tag: "strong", Text: dex, Parent: header_SwitchLabel });
     });
 
@@ -30,18 +30,18 @@ const create_dex = function() {
     const header_CountPost = create_element({ Tag: "span", Text: "0", Parent: header_CountWrap });
 
     const header_Search = create_element({ Tag: "li", Class: ["search"], Parent: header_List });
-    const header_SearchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "search", autocomplete: "off", placeholder: "Search...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search...'" }, Event: {input: event => {search({ Entries: document.querySelectorAll('.dex_list li'), Data: data.Pokemon, }, event); dex_count()}, keydown: event => search_filter({ Entries: document.querySelectorAll('.dex_list li') }, event), }, Parent: header_Search });
+    const header_SearchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "search", autocomplete: "off", placeholder: "Search...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search...'" }, Event: {input: event => {search({ Entries: document.querySelectorAll('.dex_list li'), Data: Data.Pokemon, }, event); dex_count()}, keydown: event => search_filter({ Entries: document.querySelectorAll('.dex_list li') }, event), }, Parent: header_Search });
 
     const header_Game = create_element({ Tag: "li", Class: ["game"], Parent: header_List });
     const header_GameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [path.Game.Title]}) }, Parent: header_Game });
 
     const dex_List = create_element({ Tag: "ol", Class: ["dex_list"], Parent: dex});
-    const Pokemon = Array.from(new Set(Object.values(data.Pokemon).map(p => p.Pokemon)));
+    const Pokemon = Array.from(new Set(Object.values(Data.Pokemon).map(p => p.Pokemon)));
 
     Pokemon.forEach((poke, i) => {
         const index = get_pokemonIndex(poke);
 
-        const dex_entry = create_element({ Tag: "li", Data: { index: index, search: [index,data.Pokemon[index].Pokemon].join(","), ...(data.Pokemon[index]["Pokedex Color"] && { color: data.Pokemon[index]["Pokedex Color"] }), }, Parent: dex_List });
+        const dex_entry = create_element({ Tag: "li", Data: { index: index, search: [index,Data.Pokemon[index].Pokemon].join(","), ...(Data.Pokemon[index]["Pokedex Color"] && { color: Data.Pokemon[index]["Pokedex Color"] }), }, Parent: dex_List });
         const dex_label = create_element({ Tag: "label", Attribute: { for: `${index}` }, Parent: dex_entry });
         const dex_input = create_element({ Tag: "input", Attribute: { type: "checkbox", id: `${index}`, value: index, name: i }, Event: { change: () => dex_count() }, Parent: dex_label });
 
@@ -57,14 +57,14 @@ const create_dex = function() {
         const dex_img = create_element({ Tag: "img", Parent: dex_imgWrap });
 
         const dex_nameWrap = create_element({ Tag: "div", Class: ["name"], Parent: dex_label });
-        const dex_name = create_element({ Tag: "span", Text: data.Pokemon[index].Pokemon, Parent: dex_nameWrap });
+        const dex_name = create_element({ Tag: "span", Text: Data.Pokemon[index].Pokemon, Parent: dex_nameWrap });
 
 
         add_card(dex_dataWrap, {catalog:"Pokemon",entry: index,style:"brightness"});
 
-        if (data.Pokemon[index] && data.Pokemon[index].Pokedex) {
-            Object.keys(data.Pokemon[index].Pokedex).forEach((dex) => {
-                const dex_id = create_element({ Tag: "span", Data: { dex: dex }, Text: `#${data.Pokemon[index].Pokedex[dex]}`, Parent: dex_idWrap });
+        if (Data.Pokemon[index] && Data.Pokemon[index].Pokedex) {
+            Object.keys(Data.Pokemon[index].Pokedex).forEach((dex) => {
+                const dex_id = create_element({ Tag: "span", Data: { dex: dex }, Text: `#${Data.Pokemon[index].Pokedex[dex]}`, Parent: dex_idWrap });
             });
         }
     });
@@ -106,7 +106,7 @@ function dex_update() {
     const elements = dexSwitch.querySelectorAll(":scope label");
     const index = dexSwitch.dataset.index ? dexSwitch.dataset.index : 1;
 
-    config.Pokedex = elements[index - 1].getAttribute("name");
+    Config.Pokedex = elements[index - 1].getAttribute("name");
 
     const translateValue = -100 * (index - 1);
     dexSwitch.querySelector(":scope span").style.setProperty('--translate-value', `${translateValue}%`);
@@ -130,15 +130,15 @@ function dex_sort() {
     const dex_lbl = document.querySelectorAll("#dex .dexswitch label");
     const index = dexswitch.dataset.index;
 
-    const dex = config.Pokedex;
+    const dex = Config.Pokedex;
 
     const listEntries = Array.from(document.querySelectorAll(".dex_list li"));
   
     // Create an array of entries with their IDs
     const sortedEntries = listEntries.map(entry => {
         const default_pokemon = get_defaultPokemon(entry.dataset.index);
-        const pokemon = data.Pokemon[entry.dataset.index] ? entry.dataset.index : data.Pokemon[default_pokemon] ? default_pokemon : entry.dataset.index;
-        const id = data.Pokemon[pokemon].Pokedex ? (data.Pokemon[pokemon].Pokedex[dex] ? data.Pokemon[pokemon].Pokedex[dex] : null) : null;
+        const pokemon = Data.Pokemon[entry.dataset.index] ? entry.dataset.index : Data.Pokemon[default_pokemon] ? default_pokemon : entry.dataset.index;
+        const id = Data.Pokemon[pokemon].Pokedex ? (Data.Pokemon[pokemon].Pokedex[dex] ? Data.Pokemon[pokemon].Pokedex[dex] : null) : null;
         return { entry, id };
     });
 
@@ -177,7 +177,7 @@ function dex_sort() {
 }
 
 function dex_ids() {
-    const dex = config.Pokedex;
+    const dex = Config.Pokedex;
     const base = document.querySelectorAll(`.dex_list .id, #card > aside:first-child > header .id`);
 
     base.forEach(b => {
@@ -204,9 +204,9 @@ function image_types() {
 function image_update() {
 
     // Temporary
-    config.Image = { Pokemon: [], Icon: [], };
-    config.Image.Pokemon = [path.Pokemon.Battle.Default.Front.GIF, path.Pokemon.Battle.Default.Front.PNG];
-    config.Image.Icon = [];
+    Config.Image = { Pokemon: [], Icon: [], };
+    Config.Image.Pokemon = [path.Pokemon.Battle.Default.Front.GIF, path.Pokemon.Battle.Default.Front.PNG];
+    Config.Image.Icon = [];
 
     const dex_entries = document.querySelectorAll(".dex_list li");
     
@@ -214,9 +214,9 @@ function image_update() {
 
     dex_entries.forEach((entry) => {
         const img = entry.querySelector(":scope img");
-        const path = config.Image.Pokemon;
+        const path = Config.Image.Pokemon;
         const index = get_pokemonIndex(entry.dataset.index);
-        const file = data.Pokemon[index] ? (data.Pokemon[index].File ? String(data.Pokemon[index].File) : null) : null;
+        const file = Data.Pokemon[index] ? (Data.Pokemon[index].File ? String(Data.Pokemon[index].File) : null) : null;
         
         const source = get_directory({FirstMatch: true, Exact: true, File:[file], Path: path });
 
