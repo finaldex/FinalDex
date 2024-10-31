@@ -40,7 +40,7 @@
         <section>
             <div id="Home">
                 <div class="video">
-                    <video autoplay="true" muted="true">
+                    <video muted="true">
                         <source type="video/mp4" src=".\media\Videos\Sample\Party.mp4">
                     </video>
                     <video muted="true">
@@ -81,8 +81,8 @@
                     </video>
                 </div>
 
-                <button class='play'>▶</button>
-                <button class='pause'>❙❙</button>
+                <button class='play' onclick='video_pause(false)'>▶</button>
+                <button class='pause' onclick='video_pause(true)'>❙❙</button>
                 <span class='text'>
                     <strong onclick="document.getElementById('Games').scrollIntoView({ block: 'start',  behavior: 'smooth' });">FinalDex</strong>
                     <strong>A complete online Pokedex with rich detailed data for all the mainline Pokemon Games</strong>
@@ -309,7 +309,7 @@
                     </form>
 
                     <div>
-                        <h3>Thank You</h3>
+                        <h3>Bug Report Submitted.</h3>
                         <button onclick="this.parentElement.parentElement.classList.remove('complete')">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 2V6C7.58 6 4 9.58 4 14C4 18.42 7.58 22 12 22C16.42 22 20 18.42 20 14H18C18 17.31 15.31 20 12 20C8.69 20 6 17.31 6 14C6 10.69 8.69 8 12 8V12L17 7L12 2Z" fill="currentColor"/>
@@ -332,7 +332,7 @@
                     <h5>Locations</h5>
                     <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1PuIneyaNi8nYxxpGxFnUYToUTSYHZyUW2BDcDz94vys">Locations Dataset</a></li>
                     <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/15lMtz5WMlJ2NF1V41wIYRDXVYIbNIdIzjiXq80zK83w">Location Pokemon Dataset</a></li>
-                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5h5">Location Items Dataset</a></li>
+                    <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1FlWzdfzpQGLJpcZcn5rZMyTwl3_1_mxuH8ozKVOW5H4">Location Items Dataset</a></li>
                     <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1lsPn9sXfHlxWhrMOnZb0shPAZAzEl3Kl2KMDOOMTR8M">Location Trainers Dataset</a></li>
                     <h5>Moves</h5>
                     <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1vmvr-1CKuT3EySejHUQvgjiZqpQ27nRXplWeOMbQ9C0">Moves Dataset</a></li>
@@ -432,7 +432,7 @@
                     <li>Ability Effect Text</li>
                     <h6>Version 1.0.2 <span>// 07-06-2023</span></h6>
                     <li>Damage Calculator</li>
-                    <li>Revamp of Directory System</li>
+                    <li>Directory System Revamp</li>
                     <li>Additional Media Types</li>
                     <li>Party Editor</li>
                     <h6>Version 1.0.3 <span>// 06-07-2023</span></h6>
