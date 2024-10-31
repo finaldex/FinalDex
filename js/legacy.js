@@ -1,6 +1,6 @@
 function parsePokemonData(data) {
     // Split the input data by brackets to separate groups
-    const groups = data.split(/\s*\[\s*/).filter(Boolean).map(group => group.replace(/\]/g, '').trim());
+    const groups = Data.split(/\s*\[\s*/).filter(Boolean).map(group => group.replace(/\]/g, '').trim());
     
     const result = groups.map(group => {
         // Split each group into individual Pokémon entries
@@ -179,7 +179,7 @@ function convertPokemonData(jsonString, index) {
         }
     };
 
-    const result = data.map(pokemon => {
+    const result = Data.map(pokemon => {
         // Check for unexpected fields
         Object.keys(pokemon).forEach(key => {
             if (!fields.includes(key)) {
@@ -202,7 +202,7 @@ function convertMultiplePokemonData(jsonStrings) {
 
 function formatPokemonData(data) {
     // Clean up the input data by removing unnecessary line breaks
-    const cleanedData = data.trim().replace(/\n\s*\n/g, '\n');
+    const cleanedData = Data.trim().replace(/\n\s*\n/g, '\n');
 
     // Split the cleaned data into individual Pokémon entries
     const entries = cleanedData.split(/\n(?=Spr)/);
