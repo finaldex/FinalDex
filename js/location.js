@@ -17,7 +17,7 @@ const create_location = function() {
 
     locations.forEach((l, i) => {
         const location_catalogEntry = create_element({ Tag: "li", Event: {click: location_data }, Data: {index: l, search: Data.Locations[l].Location.join(",") }, Parent: location_catalogList });
-        const location_catalogEntryLabel = create_element({ Tag: "label", Attribute: { for: `location_entry-${l}`, }, Parent: location_catalogEntry });
+        const location_catalogEntryLabel = create_element({ Tag: "label", Parent: location_catalogEntry });
         const location_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "location_entry", id: `location_entry-${l}`, ...(i === 0 && {checked: ""}) }, Parent: location_catalogEntryLabel });
         const location_catalogEntryText = create_element({ Tag: "strong", Text: l, Parent: location_catalogEntryLabel });
     });
@@ -40,7 +40,7 @@ const create_location = function() {
     sidebar_options.forEach((opt, i) => {
         const format_name = (opt.lastIndexOf(" ") !== -1 ? opt.substring(opt.lastIndexOf(" ") + 1).toLowerCase() : opt.toLowerCase()).replace("é","e");
         
-        const location_sidebarHeaderLabel = create_element({ Tag: "label", Attribute: { for: `location_sidebar_option${i}`}, Parent: opt === "Overview" ? location_sidebarHeader : location_sidebarHeaderWrap,Position: opt === "Overview" ? "Top" : undefined, });
+        const location_sidebarHeaderLabel = create_element({ Tag: "label", Parent: opt === "Overview" ? location_sidebarHeader : location_sidebarHeaderWrap,Position: opt === "Overview" ? "Top" : undefined, });
         const location_sidebarHeaderInput = create_element({ Tag: "input", Attribute: {type: "radio", name: "location_sidebar_options", id: `location_sidebar_option${i}`, value: format_name, ...(opt === "Overview" && {checked: ""}), }, Event: { change: () => { location_sidebarHeader.dataset.input = format_name; const show = document.querySelectorAll(`#location .sidebar > main > div.${format_name}`); const hide = document.querySelectorAll(`#location .sidebar > main > div:not(.${format_name})`); toggleVisibility(show, hide) } }, Parent: location_sidebarHeaderLabel });
         const location_sidebarHeaderText = create_element({ Tag: "span", Text: opt, Parent: location_sidebarHeaderLabel });    
     });
