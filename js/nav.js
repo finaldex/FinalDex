@@ -10,7 +10,7 @@ const create_nav = function() {
     
 
     nav_options.forEach((opt, index) => {
-        const nav_lbl = create_element({ Tag: "label", Attribute: { for: `nav-${index + 1}` }, Parent: nav });
+        const nav_lbl = create_element({ Tag: "label", Parent: nav });
         const nav_input = create_element({ Tag: "input", Attribute: { type: "radio", name: "navigation", id: `nav-${index + 1}`, value: opt.id, ...(opt.id === "dex" && { checked: true }), }, Event: { change: () => { const show = document.querySelectorAll(`#${opt.id}`); const hide = document.querySelectorAll(nav_options.filter(option => option.id !== opt.id).map(option => `#${option.id}`).join(', ')); toggleVisibility(show, hide) } }, Parent: nav_lbl });
         const nav_text = create_element({ Tag: "strong", Text: opt.text, Parent: nav_lbl });
     });
