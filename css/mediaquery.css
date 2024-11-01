@@ -209,7 +209,7 @@ main header > div[data-state] > *::after {
     transform:rotate(0deg);
     transition: 0.2s ease transform;
     margin: 0 5px;
-    font-size: 0.5rem;
+    font-size: 0.6rem;
 }
 
 main header > div[data-state].image > *::after {
@@ -226,7 +226,7 @@ main header > div[data-state="true"] > *::after {
 
 
 main header > div[data-state="false"]:not(.image) > *::after {
-    color:orangered;
+    color:red;
 }
 main header > div[data-state="true"]:not(.image) > *::after {
     color:mediumseagreen;
