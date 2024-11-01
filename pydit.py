@@ -27,7 +27,7 @@ def rename_files(directory_path, location_array):
                 old_file_path = os.path.join(root, file)
                 new_file_path = os.path.join(root, new_name)
                 print(f'Rename:\n{old_file_path}\n{new_file_path}')
-                os.rename(old_file_path, new_file_path)
+                #os.rename(old_file_path, new_file_path)
 
 # Directory to rename files in
 directory_path = './media/Images/Location/Overview/'
