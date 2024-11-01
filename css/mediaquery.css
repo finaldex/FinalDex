@@ -1,0 +1,361 @@
+nav {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    background: ghostwhite;
+    position: relative;
+}
+
+
+nav > * {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+nav > .search {
+    width: 200%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+nav .search input {
+    width: 80%;
+    padding: 5px 10px;
+    border: 2px solid hsl(0, 0%, 85%);
+    text-align:center;
+}
+nav .search input:first-child {
+    border-bottom:none;
+}
+nav .search button {
+    width: 80%;
+    padding: 10px 5px;
+    background:hsl(0,0%,85%);
+    border: 2px solid hsl(0, 0%, 85%);
+    border-top:none;
+    border-radius: 10px;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    font-weight: bold;
+    text-transform:uppercase;
+    font-size:0.65rem;
+    color: hsl(0,0%,30%)
+}
+nav .search button:active {
+    background:hsl(0,0%,80%)
+}
+
+nav .search input::placeholder {
+    color:rgba(0,0,0,0.2);
+}
+nav .page > * {
+    margin: 3px 0;
+    max-width: 80%;
+}
+nav .page input {
+    border: 1px solid hsl(0, 0%, 50%);
+    width: inherit;
+    min-width: 50px;
+    text-align: center;
+}
+
+nav .page button {
+    border: 1px solid hsl(0, 0%, 50%);
+    background: hsl(0, 0%, 80%);
+    color: black;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+nav .dropdown {
+    height: 100%;
+}
+
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.dropdown * {
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.dropdown textarea {
+    font-weight:bold;
+    color: black;
+    cursor: pointer;
+    background: unset;
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: none;
+    align-content: center;
+    height: 100%;
+    padding: 10px;
+}
+
+
+.dropdown textarea::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight:normal;
+    font-size: 1rem;
+}
+
+
+.dropdown > div {
+    position: absolute;
+    background-color: #f9f9f9;
+    display: flex;
+    max-height: 40vh;
+    flex-direction: column;
+    top: 100%;
+    width: 100%;
+    border: 1px solid black;
+    overflow: auto;
+    flex-wrap: nowrap;
+    border-top: none;
+    margin-top: 51px;
+    z-index: 100;
+}
+.dropdown > div > * {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.dropdown > div > * > * {
+    padding: 10px 5px;
+}
+.dropdown > div > * > button {
+    width:100%;
+    height:100%;
+}
+.dropdown > div > * > button:active {
+    font-weight:bold;
+}
+.dropdown > div > * > button:last-child {
+    border-left: 1px solid black;
+}
+.dropdown > div > * > button:last-child {
+    border-left: 1px solid black;
+}
+
+.dropdown > div > *:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+.dropdown > div > *:has(input:checked) {
+    background:hsl(0,0%,40%);
+    color:white;
+}
+
+.dropdown:not(.active) > div {
+    display: none;
+}
+
+main {
+    position: relative;
+    width:100%;
+    height:calc(100vh - 150px);
+}
+
+main > * {
+    width:100%;
+}
+
+main header {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    background: ghostwhite;
+    font-size: 0.8rem;
+    text-align: center;
+}
+main header > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+    user-select:none;
+}
+
+
+main header > div[data-state] > *::after {
+    content:"⮞";
+    display:inline-block;
+    transform:rotate(0deg);
+    transition: 0.2s ease transform;
+    margin: 0 5px;
+    font-size: 0.5rem;
+}
+
+main header > div[data-state].image > *::after {
+    display:block;
+}
+
+main header > div[data-state="false"] > *::after {
+    transform:rotate(-90deg);
+}
+
+main header > div[data-state="true"] > *::after {
+    transform:rotate(90deg);
+}
+
+
+main header > div[data-state="false"]:not(.image) > *::after {
+    color:orangered;
+}
+main header > div[data-state="true"]:not(.image) > *::after {
+    color:mediumseagreen;
+}
+
+main ol {
+    height: calc(100% - 50px);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid hsl(0, 0%, 10%);
+    background: hsl(0, 0%, 90%);
+    position:relative;
+    align-items: center;
+}
+main ol::after {
+    position:absolute;
+    font-size:8rem;
+    font-family:'Bebas Neue';
+    text-transform:uppercase;
+    color: hsl(0,0%,70%);
+    text-shadow: 5px 5px 0 hsl(0,0%,30%);
+    padding: 20px;
+    margin-top: 50px;
+}
+
+main ol:empty::after {
+    content:"No Match Found";
+}
+main ol:has(> span)::after {
+    content:"Waiting For Input...";
+}
+main ol li {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    text-align: center;
+    border: 1px dashed black;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background: whitesmoke;
+    font-size: 0.8rem;
+    font-weight:bold;
+    color: hsl(0, 0%, 10%);
+}
+
+
+
+main ol li img {
+    max-width: 90%;: 
+}
+
+main ol li div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+main ol li div:not(.image) > * {
+    margin: 5px;
+}
+main ol li div:has(* ~ *) > * {
+    margin: 5px 0;
+}
+
+header div.image,
+main ol li div.image {
+    width: 200%;
+}
+header div.path,
+main ol li div.path {
+    width: 150%;
+}
+header div.extension,
+main ol li div.extension {
+    width: 50%;
+}
+
+main ol li div.image {
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+main ol li div.image img {
+    transition: 1s ease;
+    max-width: 100%;
+    padding: 0 20px;
+}
+
+main:has(header div.image[data-state=true]) li div.image img {
+    max-height: 300px;
+}
+
+main:has(header div.image[data-state=false]) li div.image img {
+    max-height: 100px;
+}
+
+main ol li div.extension {
+    text-transform:uppercase;
+}
+header div.image > * {
+    padding: 0 5%;
+}
+header div.image {
+    display: flex;
+    justify-content: flex-start;
+}
+
+nav .count {
+    font-size: 2rem;
+}
+
+nav .count span {
+    font-size: 1rem;
+}
+
+
+
+nav .page[data-size="0"] {
+    opacity:0.5;
+    pointer-events:none;
+    color:rgba(0,0,0,0.5);
+    visibility:hidden;
+}
