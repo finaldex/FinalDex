@@ -1,6 +1,7 @@
 async function load_mediaquery() {
     
     await load_dataset(json_url["Directory"]);
+    await load_dataset(json_url["Locations"]);
 
     const dropdowns = document.querySelectorAll('.dropdown');
 
