@@ -18,7 +18,7 @@ const create_dex = function() {
     header_SwitchContent.dataset.index = Pokedex.length > 1 ? 2 : 1;
 
     Pokedex.forEach((dex, i) => {
-        const header_SwitchLabel = create_element({ Tag: "label", Attribute: { for: "dexswitch-"+dex, name: dex }, Event: {click: event => dex_switch(event)}, Parent: header_SwitchWrap });
+        const header_SwitchLabel = create_element({ Tag: "label", Attribute: { name: dex }, Event: {click: event => dex_switch(event)}, Parent: header_SwitchWrap });
         const header_SwitchInput = create_element({ Tag: "input", Attribute: { type: "radio", value: i, name: "finaldex-dexswitch-"+Config.ID, id: "dexswitch-"+dex }, Parent: header_SwitchLabel });
         const header_SwitchText = create_element({ Tag: "strong", Text: dex, Parent: header_SwitchLabel });
     });
@@ -42,7 +42,7 @@ const create_dex = function() {
         const index = get_pokemonIndex(poke);
 
         const dex_entry = create_element({ Tag: "li", Data: { index: index, search: [index,Data.Pokemon[index].Pokemon].join(","), ...(Data.Pokemon[index]["Pokedex Color"] && { color: Data.Pokemon[index]["Pokedex Color"] }), }, Parent: dex_List });
-        const dex_label = create_element({ Tag: "label", Attribute: { for: `${index}` }, Parent: dex_entry });
+        const dex_label = create_element({ Tag: "label", Parent: dex_entry });
         const dex_input = create_element({ Tag: "input", Attribute: { type: "checkbox", id: `${index}`, value: index, name: i }, Event: { change: () => dex_count() }, Parent: dex_label });
 
         const dex_confirmWrap = create_element({ Tag: "div", Class: ["confirm"], Parent: dex_label });
