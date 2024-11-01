@@ -19,7 +19,7 @@ const create_ability = function() {
     const abilities = Object.keys(Data.Abilities);
     abilities.forEach((a, i) => {
         const ability_catalogEntry = create_element({ Tag: "li", Data: { index: a, search: Data.Abilities[a].Ability.join(",") },  Parent: ability_catalogList });
-        const ability_catalogEntryLabel = create_element({ Tag: "label", Attribute: { for: `ability_entry-${a}`, }, Parent: ability_catalogEntry });
+        const ability_catalogEntryLabel = create_element({ Tag: "label", Parent: ability_catalogEntry });
         const ability_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "ability_entry", id: `ability_entry-${a}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => ability_data()}, Parent: ability_catalogEntryLabel });
         const ability_catalogEntryText = create_element({ Tag: "strong", Text: a, Parent: ability_catalogEntryLabel });
     });
