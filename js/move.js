@@ -18,7 +18,7 @@ const create_move = function() {
     moves.forEach((m, i) => {
         const move_type = Data.Moves[m].Type ? Data.Moves[m].Type : "";
         const move_catalogMove = create_element({ Tag: "li", Data: {index: m, search: Data.Moves[m].Move.join(","), type: move_type}, Parent: move_catalogList });
-        const move_catalogMoveLabel = create_element({ Tag: "label", Attribute: { for: `move_entry-${m}`, }, Parent: move_catalogMove });
+        const move_catalogMoveLabel = create_element({ Tag: "label", Parent: move_catalogMove });
         const move_catalogMoveInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "move_entry", id: `move_entry-${m}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => move_data(), }, Parent: move_catalogMoveLabel });
         const move_catalogMoveText = create_element({ Tag: "strong", Text: m, Parent: move_catalogMoveLabel });
     });
