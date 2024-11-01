@@ -4,13 +4,11 @@ function get_applicable(value, game) {
     const games = game !== undefined ? (Array.isArray(game) ? game : String(game).split(/[,_]/)) : [Config.Game];
 
     for (const g of games) {
-        const game_generation = get_generation(g);
-        const game_id = get_gameid(g);
-
-        
+        const game_generation = !parseInt(g) ? get_generation(g) : g;
+        const game_id = !parseInt(g) ? get_gameid(g) : null;
 
         for (const v of values) {
-            if (v === "All" || g === "All" || String(v) === String(g) || String(v) == game_generation) {
+            if (v === "All" || g === "All" || String(v) === String(g) || String(v) == game_generation || (parseInt(g) && String(v) == g) || (parseInt(g) && get_generation(v) == g)) {
                 return true;
             }
 
