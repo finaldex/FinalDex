@@ -261,4 +261,18 @@ Object.fromEntries(
         ])
         .filter(([key, values]) => values.length > 0)
 );
+
+Object.fromEntries(
+    Object.entries(finaldata.Directory)
+        .filter(([key]) => key.includes("/Location/"))
+        .map(([key, values]) => [
+            key,
+            values.filter(value => {
+                const match = value.match(/^(.*?)(?:_|(?=\.[^.]*$))/);
+                const baseValue = match ? match[1] : value;
+                return ![...new Set(finaldata.Locations.Overview.map(item => item.Location))].includes(baseValue);
+            })
+        ])
+        .filter(([key, values]) => values.length > 0)
+);
 */
