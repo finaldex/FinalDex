@@ -1,142 +1,117 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>FinalDex – Mediaquery</title>
     <link rel="icon" href="./media/Images/FinalDex/Icon/FinalDex.png" type="image/gif" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
-
     <script src="./js/lib/jquery-1.10.2.js"></script>
-
     <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-	<link href="http://fonts.googleapis.com/css?family=Bebas+Neue" rel="stylesheet" type="text/css">
-
+    <link href="http://fonts.googleapis.com/css?family=Bebas+Neue" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="./css/theme.css">
     <link rel="stylesheet" type="text/css" href="./css/default.css">
     <link rel="stylesheet" type="text/css" href="./css/keyframe.css">
-
     <link rel="stylesheet" type="text/css" href="./css/mediaquery.css">
 </head>
-
 <body>
     <nav>
-        <span>
-            <span>
-            <label for="game_select1"><input type="checkbox" name="game_select" id="game_select1" value="Game"><h4>Game</h4></label>
-            <span name="game_select">
-                <button onclick='let z = this.parentElement.querySelectorAll(":scope input"); if (this.innerText == "All") {for (let i = 0; i < z.length; i++) {z[i].checked = true;};this.innerText = "None"} else {for (let i = 0; i < z.length; i++) {z[i].checked = false;};this.innerText = "All"}'>None</button>
-                <label for="game_select2"><input type="checkbox" name="game_select" id="game_select2" value="Generation 1" checked>Generation 1</label>
-                <label for="game_select3"><input type="checkbox" name="game_select" id="game_select3" value="Red" checked>Red</label>
-                <label for="game_select4"><input type="checkbox" name="game_select" id="game_select4" value="Blue" checked>Blue</label>
-                <label for="game_select5"><input type="checkbox" name="game_select" id="game_select5" value="Yellow" checked>Yellow</label>
-                <label for="game_select6"><input type="checkbox" name="game_select" id="game_select6" value="Green" checked>Green</label>
-                <label for="game_select7"><input type="checkbox" name="game_select" id="game_select7" value="Generation 2" checked>Generation 2</label>
-                <label for="game_select8"><input type="checkbox" name="game_select" id="game_select8" value="Gold" checked>Gold</label>
-                <label for="game_select9"><input type="checkbox" name="game_select" id="game_select9" value="Silver" checked>Silver</label>
-                <label for="game_select10"><input type="checkbox" name="game_select" id="game_select10" value="Crystal" checked>Crystal</label>
-                <label for="game_select11"><input type="checkbox" name="game_select" id="game_select11" value="Generation 3" checked>Generation 3</label>
-                <label for="game_select12"><input type="checkbox" name="game_select" id="game_select12" value="Ruby" checked>Ruby</label>
-                <label for="game_select13"><input type="checkbox" name="game_select" id="game_select13" value="Sapphire" checked>Sapphire</label>
-                <label for="game_select14"><input type="checkbox" name="game_select" id="game_select14" value="Colosseum" checked>Colosseum</label>
-                <label for="game_select15"><input type="checkbox" name="game_select" id="game_select15" value="FireRed" checked>FireRed</label>
-                <label for="game_select16"><input type="checkbox" name="game_select" id="game_select16" value="LeafGreen" checked>LeafGreen</label>
-                <label for="game_select17"><input type="checkbox" name="game_select" id="game_select17" value="Emerald" checked>Emerald</label>
-                <label for="game_select18"><input type="checkbox" name="game_select" id="game_select18" value="XD" checked>XD</label>
-                <label for="game_select19"><input type="checkbox" name="game_select" id="game_select19" value="Generation 4" checked>Generation 4</label>
-                <label for="game_select20"><input type="checkbox" name="game_select" id="game_select20" value="Diamond" checked>Diamond</label>
-                <label for="game_select21"><input type="checkbox" name="game_select" id="game_select21" value="Pearl" checked>Pearl</label>
-                <label for="game_select22"><input type="checkbox" name="game_select" id="game_select22" value="Platinum" checked>Platinum</label>
-                <label for="game_select23"><input type="checkbox" name="game_select" id="game_select23" value="HeartGold" checked>HeartGold</label>
-                <label for="game_select24"><input type="checkbox" name="game_select" id="game_select24" value="SoulSilver" checked>SoulSilver</label>
-                <label for="game_select25"><input type="checkbox" name="game_select" id="game_select25" value="Generation 5" checked>Generation 5</label>
-                <label for="game_select26"><input type="checkbox" name="game_select" id="game_select26" value="Black" checked>Black</label>
-                <label for="game_select27"><input type="checkbox" name="game_select" id="game_select27" value="White" checked>White</label>
-                <label for="game_select28"><input type="checkbox" name="game_select" id="game_select28" value="Black 2" checked>Black 2</label>
-                <label for="game_select29"><input type="checkbox" name="game_select" id="game_select29" value="White 2" checked>White 2</label>
-                <label for="game_select30"><input type="checkbox" name="game_select" id="game_select30" value="Generation 6" checked>Generation 6</label>
-                <label for="game_select31"><input type="checkbox" name="game_select" id="game_select31" value="X" checked>X</label>
-                <label for="game_select32"><input type="checkbox" name="game_select" id="game_select32" value="Y" checked>Y</label>
-                <label for="game_select33"><input type="checkbox" name="game_select" id="game_select33" value="Omega Ruby" checked>Omega Ruby</label>
-                <label for="game_select34"><input type="checkbox" name="game_select" id="game_select34" value="Alpha Sapphire" checked>Alpha Sapphire</label>
-                <label for="game_select35"><input type="checkbox" name="game_select" id="game_select35" value="Generation 7" checked>Generation 7</label>
-                <label for="game_select36"><input type="checkbox" name="game_select" id="game_select36" value="Sun" checked>Sun</label>
-                <label for="game_select37"><input type="checkbox" name="game_select" id="game_select37" value="Moon" checked>Moon</label>
-                <label for="game_select38"><input type="checkbox" name="game_select" id="game_select38" value="Ultra Sun" checked>Ultra Sun</label>
-                <label for="game_select39"><input type="checkbox" name="game_select" id="game_select39" value="Ultra Moon" checked>Ultra Moon</label>
-                <label for="game_select40"><input type="checkbox" name="game_select" id="game_select40" value="Lets Go Pikachu" checked>Lets Go Pikachu</label>
-                <label for="game_select41"><input type="checkbox" name="game_select" id="game_select41" value="Lets Go Eevee" checked>Lets Go Eevee</label>
-                <label for="game_select42"><input type="checkbox" name="game_select" id="game_select42" value="Generation 8" checked>Generation 8</label>
-                <label for="game_select43"><input type="checkbox" name="game_select" id="game_select43" value="Sword" checked>Sword</label>
-                <label for="game_select44"><input type="checkbox" name="game_select" id="game_select44" value="Shield" checked>Shield</label>
-                <label for="game_select45"><input type="checkbox" name="game_select" id="game_select45" value="Legend Arceus" checked>Legend Arceus</label>
-                <label for="game_select46"><input type="checkbox" name="game_select" id="game_select46" value="Brilliant Diamond" checked>Brilliant Diamond</label>
-                <label for="game_select47"><input type="checkbox" name="game_select" id="game_select47" value="Shining Pearl" checked>Shining Pearl</label>
-                <label for="game_select48"><input type="checkbox" name="game_select" id="game_select48" value="Generation 9" checked>Generation 9</label>
-                <label for="game_select49"><input type="checkbox" name="game_select" id="game_select49" value="Scarlet" checked>Scarlet</label>
-                <label for="game_select50"><input type="checkbox" name="game_select" id="game_select50" value="Violet" checked>Violet</label>
-            </span>
-            </span>
-            <span name="set">
-                <button name="pokemon"><small>Pokemon</small></button>
-                <button name="items"><small>Items</small></button>
-                <button name="locations"><small>Locations</small></button>
-            </span>
-        </span>
-
-        <span name="search">
-            <input type="search" id="search-path" title="Use , to divide values." placeholder="Specific Path" onblur="this.placeholder='Specific Path'" onfocus="this.placeholder=''">
-            <input type="search" id="search-file" title='Use , to divide values.
-Use " to return inclusive values.' placeholder="File Name" onblur="this.placeholder='File Name'" onfocus="this.placeholder=''">
-            <button id="execute"><small>GO</small></button>
-        </span>
-
-
-        <span>
-            <span name="count">
-                <h3>0 – 0</h2>
-                <small> / 0</small>
-            </span>
-            <span>
-                <h4>Additional</h4>
-                <span>
-                    <label for="additional-1-checkbox"><p>JP</p><input type="checkbox" id="additional-1-checkbox"></label>
-                    <label for="additional-2-checkbox"><p>BETA</p><input type="checkbox" id="additional-2-checkbox"></label>
-                    <label for="additional-3-checkbox"><p>DEMO</p><input type="checkbox" id="additional-3-checkbox"></label>
-                </span>
-            </span>
-        </span>
-    </nav>
-    
-    <ol data>
-        <ul id="roof">
-            <li>
-                <span name="image" data-state><small>Image</small></span>
-                <span name="file" data-state><small>File</small></span>
-                <span name="path" data-state><small>Path</small></span>
-                <span name="source" data-state><small>Source</small></span>
-                <span name="extension" data-state><small>Extension</small></span>
-                <span name="size"><small>Size:</small><input type="number" min="0" step="10" value="50" oninput="if (this.value == 0) {this.value = 1}"></span>
-                <span name="page"><small>Page:</small><input type="number" min="1" max="1" value="1"></span>
-                <span name="execute"><button><small>Go</small></button></span>
-            </li>
-        </ul>
-        <ul id="result">
-        </ul>
-        <span id="loader">
-            <div class="loadingIndicator">
-                <div class="loadingSpinner"></div> <br /> Loading...
+        <div class="dropdown source">
+            <textarea placeholder='Source' readonly></textarea>
+            <div>
+                <div><button onclick='Array.from(this.parentElement.parentElement.children).forEach(e => {const el = e.querySelector(":scope input"); if (el) el.checked = true;})'>Check All</button><button onclick='Array.from(this.parentElement.parentElement.children).forEach(e => {const el = e.querySelector(":scope input"); if (el) el.checked = false;})'>Uncheck All</button></div>
+                <label><input type="checkbox" value="1"><span>Generation 1</span></label>
+                <label><input type="checkbox" value="Red"><span>Red</span></label>
+                <label><input type="checkbox" value="Blue"><span>Blue</span></label>
+                <label><input type="checkbox" value="Yellow"><span>Yellow</span></label>
+                <label><input type="checkbox" value="2"><span>Generation 2</span></label>
+                <label><input type="checkbox" value="Gold"><span>Gold</span></label>
+                <label><input type="checkbox" value="Silver"><span>Silver</span></label>
+                <label><input type="checkbox" value="Crystal"><span>Crystal</span></label>
+                <label><input type="checkbox" value="3"><span>Generation 3</span></label>
+                <label><input type="checkbox" value="Ruby"><span>Ruby</span></label>
+                <label><input type="checkbox" value="Sapphire"><span>Sapphire</span></label>
+                <label><input type="checkbox" value="Colosseum"><span>Colosseum</span></label>
+                <label><input type="checkbox" value="FireRed"><span>FireRed</span></label>
+                <label><input type="checkbox" value="LeafGreen"><span>LeafGreen</span></label>
+                <label><input type="checkbox" value="Emerald"><span>Emerald</span></label>
+                <label><input type="checkbox" value="XD"><span>XD: Gale of Darkness</span></label>
+                <label><input type="checkbox" value="4"><span>Generation 4</span></label>
+                <label><input type="checkbox" value="Diamond"><span>Diamond</span></label>
+                <label><input type="checkbox" value="Pearl"><span>Pearl</span></label>
+                <label><input type="checkbox" value="Platinum"><span>Platinum</span></label>
+                <label><input type="checkbox" value="HeartGold"><span>HeartGold</span></label>
+                <label><input type="checkbox" value="SoulSilver"><span>SoulSilver</span></label>
+                <label><input type="checkbox" value="5"><span>Generation 5</span></label>
+                <label><input type="checkbox" value="Black"><span>Black</span></label>
+                <label><input type="checkbox" value="White"><span>White</span></label>
+                <label><input type="checkbox" value="Black 2"><span>Black 2</span></label>
+                <label><input type="checkbox" value="White 2"><span>White 2</span></label>
+                <label><input type="checkbox" value="6"><span>Generation 6</span></label>
+                <label><input type="checkbox" value="X"><span>X</span></label>
+                <label><input type="checkbox" value="Y"><span>Y</span></label>
+                <label><input type="checkbox" value="Omega Ruby"><span>Omega Ruby</span></label>
+                <label><input type="checkbox" value="Alpha Sapphire"><span>Alpha Sapphire</span></label>
+                <label><input type="checkbox" value="7"><span>Generation 7</span></label>
+                <label><input type="checkbox" value="Sun"><span>Sun</span></label>
+                <label><input type="checkbox" value="Moon"><span>Moon</span></label>
+                <label><input type="checkbox" value="Ultra Sun"><span>Ultra Sun</span></label>
+                <label><input type="checkbox" value="Ultra Moon"><span>Ultra Moon</span></label>
+                <label><input type="checkbox" value="Lets Go Pikachu"><span>Let's Go Pikachu</span></label>
+                <label><input type="checkbox" value="Lets Go Eevee"><span>Let's Go Eevee</span></label>
+                <label><input type="checkbox" value="8"><span>Generation 8</span></label>
+                <label><input type="checkbox" value="Sword"><span>Sword</span></label>
+                <label><input type="checkbox" value="Shield"><span>Shield</span></label>
+                <label><input type="checkbox" value="Brilliant Diamond"><span>Brilliant Diamond</span></label>
+                <label><input type="checkbox" value="Shining Pearl"><span>Shining Pearl</span></label>
+                <label><input type="checkbox" value="Legend Arceus"><span>Legend Arceus</span></label>
+                <label><input type="checkbox" value="9"><span>Generation 9</span></label>
+                <label><input type="checkbox" value="Scarlet"><span>Scarlet</span></label>
+                <label><input type="checkbox" value="Violet"><span>Violet</span></label>
             </div>
-        </span>
-    </ol>
-
-
+        </div>
+        <div class="dropdown version">
+            <textarea placeholder='Version' readonly></textarea>
+            <div>
+                <div><button onclick='Array.from(this.parentElement.parentElement.children).forEach(e => {const el = e.querySelector(":scope input"); if (el) el.checked = true;})'>Check All</button><button onclick='Array.from(this.parentElement.parentElement.children).forEach(e => {const el = e.querySelector(":scope input"); if (el) el.checked = false;})'>Uncheck All</button></div>
+                <label><input type="checkbox" value="Japan"><span>Japan</span></label>
+                <label><input type="checkbox" value="Korea"><span>Korea</span></label>
+                <label><input type="checkbox" value="Europe"><span>Europe</span></label>
+                <label><input type="checkbox" value="America"><span>America</span></label>
+                <label><input type="checkbox" value="Oceania"><span>Oceania</span></label>
+                <label><input type="checkbox" value="Asia"><span>Asia</span></label>
+                <label><input type="checkbox" value="Beta"><span>Beta</span></label>
+                <label><input type="checkbox" value="DLC"><span>DLC</span></label>
+            </div>
+        </div>
+        <div class="search">
+            <input type="search" id="search-path" placeholder="Path" onblur="this.placeholder='Path'" onfocus="this.placeholder=''">
+            <input type="search" id="search-file" placeholder="File Name" onblur="this.placeholder='File Name'" onfocus="this.placeholder=''">
+            <button onclick='mediaquery()'>Search</button>
+        </div>
+        <div class="count">
+            <strong>0 – 0 <span>/ 0</span></strong>
+        </div>
+        <div class='page' data-size="0">
+            <h5>Size</h5>
+            <input type="number" id='size_value' min="1" max="1000" step="1" value="50" autocomplete='off' onchange='page_update()'>
+            <h5>Page</h5>
+            <input type="number" id='page_value' min="1" max="1000" step="1" value="1" autocomplete='off' onchange='page_update()'>
+        </div>
+    </nav>
+    <main>
+        <header>
+            <div class="image" data-state="false" onclick='this.dataset.state = this.dataset.state === "true" ? "false" : "true";'><strong>Image</strong></div>
+            <div class="file" data-state onclick='this.dataset.state = this.dataset.state === "true" ? "false" : this.dataset.state === "false" ? "" : "true";'><strong>File</strong></div>
+            <div class="path" data-state onclick='this.dataset.state = this.dataset.state === "true" ? "false" : this.dataset.state === "false" ? "" : "true";'><strong>Path</strong></div>
+            <div class="source" data-state onclick='this.dataset.state = this.dataset.state === "true" ? "false" : this.dataset.state === "false" ? "" : "true";'><strong>Source</strong></div>
+            <div class="extension" data-state onclick='this.dataset.state = this.dataset.state === "true" ? "false" : this.dataset.state === "false" ? "" : "true";'><strong>Extension</strong></div>
+        </header>
+        <ol><span></span></ol>
+    </main>
     <script src="./js/function.js"></script>
     <script src="./js/load.js"></script>
     <script src="./js/query.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/mediaquery.js"></script>
     <script>load_mediaquery();</script>
-
 </body>
-
 </html>
