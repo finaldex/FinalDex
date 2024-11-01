@@ -15,7 +15,7 @@ const create_item = function() {
 
     const pockets = [...new Set(Object.values(Data.Items).map(item => item.Pocket).filter(Boolean))];
     pockets.forEach(pocket => {
-        const item_pocketLabel = create_element({ Tag: "label", Attribute: { for: `item_pocket-${pocket}`, }, Parent: item_pocketWrap });
+        const item_pocketLabel = create_element({ Tag: "label", Parent: item_pocketWrap });
         const item_pocketInput = create_element({ Tag: "input", Attribute: { type: "checkbox", name: "item_pocket", id: `item_pocket-${pocket}`, value: pocket, checked: "" }, Event: {change: () => pocket_filter() }, Parent: item_pocketLabel });
         const item_pocketImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [pocket], Path: [Path.Bag.Pocket]}) }, Parent: item_pocketLabel });
         const item_pocketText = create_element({ Tag: "strong", Text: pocket, Parent: item_pocketLabel });
@@ -33,7 +33,7 @@ const create_item = function() {
             const machineType = machineMove ? Data.Moves[get_moveIndex(machineMove)].Type : null;
 
             const item_catalogEntry = create_element({ Tag: "li",  Data: {index: idx, search: [...Data.Items[idx].Item,...(machineMove != null ? [machineMove] : [])].join(",") }, Parent: item_catalogList });
-            const item_catalogEntryLabel = create_element({ Tag: "label", Attribute: { for: `item_entry-${idx}`, }, Parent: item_catalogEntry });
+            const item_catalogEntryLabel = create_element({ Tag: "label", Parent: item_catalogEntry });
             const item_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "item_entry", id: `item_entry-${idx}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => item_data() }, Parent: item_catalogEntryLabel });
             const item_catalogEntryImage = create_element({ Tag: "img", Attribute: { src: item_src }, Parent: item_catalogEntryLabel });
             const item_catalogEntryText = create_element({ Tag: "strong", HTML: machineMove ? `${Data.Items[idx].Item}<span data-type='${machineType}'>${machineMove}</span>` : Data.Items[idx].Item, Parent: item_catalogEntryLabel });
