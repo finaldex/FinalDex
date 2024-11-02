@@ -16,9 +16,9 @@ const create_location = function() {
     const locations = Object.keys(Data.Locations).sort((a, b) => (nA = a.match(/\d+/), nB = b.match(/\d+/), c = a.replace(/\d+/, '').trim().localeCompare(b.replace(/\d+/, '').trim()), c !== 0 ? c : (nA ? (nB ? parseInt(nA[0]) - parseInt(nB[0]) : 1) : -1)));
 
     locations.forEach((l, i) => {
-        const location_catalogEntry = create_element({ Tag: "li", Event: {click: location_data }, Data: {index: l, search: Data.Locations[l].Location.join(",") }, Parent: location_catalogList });
+        const location_catalogEntry = create_element({ Tag: "li", Data: {index: l, search: Data.Locations[l].Location.join(",") }, Parent: location_catalogList });
         const location_catalogEntryLabel = create_element({ Tag: "label", Parent: location_catalogEntry });
-        const location_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "location_entry", id: `location_entry-${l}`, ...(i === 0 && {checked: ""}) }, Parent: location_catalogEntryLabel });
+        const location_catalogEntryInput = create_element({ Tag: "input", Event: {change: location_data }, Attribute: { type: "radio", name: "location_entry", id: `location_entry-${l}`, ...(i === 0 && {checked: ""}) }, Parent: location_catalogEntryLabel });
         const location_catalogEntryText = create_element({ Tag: "strong", Text: l, Parent: location_catalogEntryLabel });
     });
 
@@ -163,8 +163,9 @@ const create_location = function() {
 
     let directions = {West: "⮜", North: "⮝", East: "⮞", South: "⮟"};
     Object.keys(directions).forEach(direction => {
-        const location_directionButton = create_element({ Tag: "button", Text: directions[direction], Class: [direction.toLowerCase()], Parent: location_map, ...((direction === "North" || direction === "South") && { Sibling: location_mapWrap }), Position: (direction === "West" || direction === "North") ? "Top" : "Bottom" });
-        add_redirect(location_directionButton,{catalog:"location",style:"color"});
+        const location_directionButton = create_element({ Tag: "button", Class: [direction.toLowerCase()], Parent: location_map, ...((direction === "North" || direction === "South") && { Sibling: location_mapWrap }), Position: (direction === "West" || direction === "North") ? "Top" : "Bottom" });
+        const location_directionText = create_element({ Tag: "span", Text: directions[direction], Parent: location_directionButton,  });
+        add_redirect(location_directionButton,{catalog:"location"});
     });
 
     // Panel
@@ -292,6 +293,7 @@ function location_data() {
     overviewList.dataset.index = 1;
 
     const overviewImages = get_directory({Exact: true, File: [...Data.Locations[location_index].Location], Path: [Path.Location.Load,Path.Location.Overview]})
+    overviewImages.sort((a, b) => Data.Locations[location_index].Location.some(v => a.split('/').pop().startsWith(v) && !a.split('/').pop().includes('_')) && !Data.Locations[location_index].Location.some(v => b.split('/').pop().startsWith(v) && !b.split('/').pop().includes('_')) ? -1 : !Data.Locations[location_index].Location.some(v => a.split('/').pop().startsWith(v) && !a.split('/').pop().includes('_')) && Data.Locations[location_index].Location.some(v => b.split('/').pop().startsWith(v) && !b.split('/').pop().includes('_')) ? 1 : a.localeCompare(b));
     overviewImages.forEach(i => {
         const overviewWrap = create_element({ Tag: "li", Parent: overviewList });
         const overviewImage = create_element({ Tag: "img", Attribute: {src: i, title: i.split('/').pop().replace(/\.[^.]+$/, '').replace(/.*_/, '')}, Parent: overviewWrap });
@@ -336,7 +338,7 @@ function location_data() {
     const areaElement = document.querySelector("#location .panel .area > div");
     areaElement.innerHTML = "";
 
-    const location_area = Object.keys(Data.Locations).filter(key => { const area = Data.Locations[key].Connection; return key && (area && area.Located && area.Located.includes(location)); });
+    const location_area = Object.keys(Data.Locations).filter(key => { const area = Data.Locations[key].Connection; return key && area && area.Located && Data.Locations[location_index].Location.some(l => area.Located.includes(l)); });
     location_area.forEach(d => {
         const areaText = create_element({ Tag: "span", Text: d, Parent: areaElement });
         add_redirect(areaText,{catalog:"location",entry:d,style:"invert"});
@@ -578,7 +580,7 @@ function trainer_populate(location_index) {
             const ivWrap = p.IV ? create_element({ Tag: "div", Class: ["iv"], Parent: upperWrap }) : null;
             const ivHeader = p.IV ? create_element({ Tag: "h5", Text: "IVs:", Parent: ivWrap }) : null;
             p.IV && (Object.keys(p.IV).forEach(i => {
-                const iv = p.IV[i] !== 0 ? create_element({ Tag: "div", Data: {stat:i}, Parent: ivWrap }) : null;
+                const iv = create_element({ Tag: "div", Data: {stat:i}, Parent: ivWrap });
                 const ivStat = p.IV[i] !== 0 ? create_element({ Tag: "h5", Text: i, Parent: iv }) : null;
                 const ivText = p.IV[i] !== 0 ? create_element({ Tag: "span", Text: p.IV[i], Parent: iv }) : null;
             }));
@@ -586,7 +588,7 @@ function trainer_populate(location_index) {
             const evWrap = p.EV ? create_element({ Tag: "div", Class: ["ev"], Parent: upperWrap }) : null;
             const evHeader = p.EV ? create_element({ Tag: "h5", Text: "EVs:", Parent: evWrap }) : null;
             p.EV && (Object.keys(p.EV).forEach(i => {
-                const ev = p.EV[i] !== 0 ? create_element({ Tag: "div", Data: {stat:i}, Parent: evWrap }) : null;
+                const ev = create_element({ Tag: "div", Data: {stat:i}, Parent: evWrap });
                 const evStat = p.EV[i] !== 0 ? create_element({ Tag: "h5", Text: i, Parent: ev }) : null;
                 const evText = p.EV[i] !== 0 ? create_element({ Tag: "span", Text: p.EV[i], Parent: ev }) : null;
             }));
