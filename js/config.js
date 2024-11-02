@@ -80,8 +80,8 @@ const Path = {
             }
         },
         Menu: {
-            Default: "./media/Images/Pokemon/Menu/Default/Front/",
-            Shiny: "./media/Images/Pokemon/Menu/Shiny/Front/"
+            Default: "./media/Images/Pokemon/Menu/Default/",
+            Shiny: "./media/Images/Pokemon/Menu/Shiny/"
         },
         Pokedex: {
             Default: {
