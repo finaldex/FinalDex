@@ -2,14 +2,21 @@ async function load_debug() {
     for (const json of Object.keys(json_url)) {
         await load_dataset(json_url[json]);
     }
+    document.querySelector("button").style.removeProperty("display");
 }
 async function start_debug(event) {
-    await (async (event) => { event.target.innerText = "Debugging"; })(event);
+    event.target.innerText = "Debugging";
+    document.body.style.cursor = "wait";
+    document.body.style.width = "100vw";
+    document.body.style.height = "100vh";
+    await new Promise(resolve => setTimeout(resolve, 1000));
     //await debug_locationDirection()
     await debug_pokemonImagesBattle();
+    document.body.style.style.removeProperty("cursor");
 }
 
 function debug_pokemonImagesBattle() {
+    const InitialTime = new Date();
 
     console.group("Missing Pokémon Images");
     Data.Games.forEach(g => {
@@ -29,11 +36,15 @@ function debug_pokemonImagesBattle() {
             console.log(invalid)
         }
     });
+
+    const LoadTime = format_time(new Date() - InitialTime);
+	console.log("Elapsed Time: " + LoadTime);
     console.groupEnd();
 
 }
 
 function debug_locationDirection() {
+    const InitialTime = new Date();
 
     const directions = ["North", "South", "East", "West"];
     const oppositeDirections = {
@@ -43,6 +54,7 @@ function debug_locationDirection() {
         "West": "East",
     };
 
+    console.group("Location Directions");
     const locations = finaldata.Locations.Connection;
     locations.forEach(location => {
         directions.forEach(direction => {
@@ -72,4 +84,7 @@ function debug_locationDirection() {
             }
         });
     });
+    const LoadTime = format_time(new Date() - InitialTime);
+	console.log("Elapsed Time: " + LoadTime);
+    console.groupEnd();
 }
