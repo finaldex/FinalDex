@@ -12,6 +12,8 @@ function generate_locationShopItem(parameters = {}) {
     const invalid_text = "Invalid Item Found (Shop)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(index => {
         
         const l = Data.Locations[index];
@@ -27,19 +29,19 @@ function generate_locationShopItem(parameters = {}) {
                     let currency_source = get_directory({FirstMatch: true, File: [d.Currency], Path: [Path.Currency.Icon]});
                     let currency = currency_source !== "" ? `<img src='${currency_source}' title='${d.Currency}' />` : d.Currency.length > 5 ? `<span title='${d.Currency}'>${d.Currency.match(/[A-Z]/g).join('')}</span>` : ` ${d.Currency}`;
                     let text = `Bought for ${d.Cost}${currency}`;
-                    text = text !== "" ? text.replaceAll("  "," ").trim()+`.` : "";
+                    text = text !== "" ? text.replaceAll("  "," ").trim()+`` : "";
             
                     const header = [d.Shop,d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                     let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
                     if (!ol && options.Catalog !== "Item") {
-                        ol = create_element({ Tag: "ol", Class: ["generated_location_shop_item"], Data: { index: header }, Parent: options.Parent });
+                        ol = create_element({ Tag: "ol", Data: { index: header }, Parent: options.Parent });
                         if (header) {
                             const entryHeader = create_element({ Tag: "li", Parent: ol });
                             const entryHeaderText = create_element({ Tag: "h4", HTML: header, Parent: entryHeader });
                         }
                     }
                     
-                    const entry = create_element({ Tag: "li", ...(!ol && {Class: ["generated_location_shop_item"]}), Parent: ol || options.Parent });
+                    const entry = create_element({ Tag: "li", Class: ["generate_location_shop_item"], Parent: ol || options.Parent });
 
                     const leftWrap = create_element({ Tag: "aside", Parent: entry });
                     const centerWrap = create_element({ Tag: "aside", Parent: entry });
@@ -117,6 +119,8 @@ function generate_locationShopPokemon(parameters = {}) {
     const invalid_text = "Invalid Pokemon Found (Shop)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(index => {
         
         const l = Data.Locations[index];
@@ -134,21 +138,21 @@ function generate_locationShopPokemon(parameters = {}) {
                         let currency_source = get_directory({FirstMatch: true, File: [currency_text], Path: [Path.Currency.Icon]});
                         let currency = currency_source !== "" ? `<img src='${currency_source}' title='${currency_text}' />` : currency_text.length > 5 ? `<span title='${currency_text}'>${currency_text.match(/[A-Z]/g).join('')}</span>` : ` ${currency_text}`;
                         let text = Data.Pokemon[pokemon_index].Group === "Fossil" ? `Revived with ${d.Cost} ${currency_text}` : `Bought for ${d.Cost} ${currency}`;
-                        text = text !== "" ? text.replaceAll("  "," ").trim()+`.` : "";
+                        text = text !== "" ? text.replaceAll("  "," ").trim()+`` : "";
             
                         const pokemon_file = [Data.Pokemon[pokemon_index].File,Data.Pokemon[default_index].File];
             
                         const header = [d.Shop,d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                         let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
                         if (!ol && options.Catalog !== "Pokemon") {
-                            ol = create_element({ Tag: "ol", Class: ["generated_location_shop_pokemon"], Data: { index: header }, Parent: options.Parent });
+                            ol = create_element({ Tag: "ol", Data: { index: header }, Parent: options.Parent });
                             if (header) {
                                 const entryHeader = create_element({ Tag: "li", Parent: ol });
                                 const entryHeaderText = create_element({ Tag: "h4", HTML: header, Parent: entryHeader });
                             }
                         }
                         
-                        const entry = create_element({ Tag: "li", ...(!ol && {Class: ["generated_location_shop_pokemon"]}), Parent: ol || options.Parent });
+                        const entry = create_element({ Tag: "li", Class: ["generate_location_shop_pokemon"], Parent: ol || options.Parent });
 
                         const leftWrap = create_element({ Tag: "aside", Parent: entry });
                         const rightWrap = create_element({ Tag: "aside", Parent: entry });
@@ -210,6 +214,8 @@ function generate_locationItem(parameters = {}) {
     const invalid_text = "Invalid Item Found (Item)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(index => {
         
         const l = Data.Locations[index];
@@ -227,14 +233,14 @@ function generate_locationItem(parameters = {}) {
                 const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                 let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
                 if (!ol && options.Catalog !== "Item") {
-                    ol = create_element({ Tag: "ol", Class: ["generated_location_item"], Data: { index: header }, Parent: options.Parent });
+                    ol = create_element({ Tag: "ol", Data: { index: header }, Parent: options.Parent });
                     if (header) {
                         const entryHeader = create_element({ Tag: "li", Parent: ol });
                         const entryHeaderText = create_element({ Tag: "h4", HTML: header, Parent: entryHeader });
                     }
                 }
                 
-                const entry = create_element({ Tag: "li", ...(!ol && {Class:["generated_location_item"]}), Parent: ol || options.Parent });
+                const entry = create_element({ Tag: "li", Class: ["generate_location_item"], Parent: ol || options.Parent });
 
                 const leftWrap = create_element({ Tag: "aside", Parent: entry });
                 const centerWrap = create_element({ Tag: "aside", Parent: entry });
@@ -314,6 +320,8 @@ function generate_locationPokemon(parameters = {}) {
     const invalid_text = "Invalid Pokemon Found (Pokemon)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(index => {
         
         const l = Data.Locations[index];
@@ -335,14 +343,14 @@ function generate_locationPokemon(parameters = {}) {
                     const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                     let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
                     if (!ol && options.Catalog !== "Pokemon") {
-                        ol = create_element({ Tag: "ol", Class:["generated_location_pokemon"], Data: { index: header }, Parent: options.Parent });
+                        ol = create_element({ Tag: "ol", Data: { index: header }, Parent: options.Parent });
                         if (header) {
                             const entryHeader = create_element({ Tag: "li", Parent: ol });
                             const entryHeaderText = create_element({ Tag: "h4", HTML: header, Parent: entryHeader });
                         }
                     }
                     
-                    const entry = create_element({ Tag: "li", ...(!ol && {Class:["generated_location_pokemon"]}), Parent: ol || options.Parent });
+                    const entry = create_element({ Tag: "li", Class:["generate_location_pokemon"], Parent: ol || options.Parent });
 
                     const leftWrap = create_element({ Tag: "aside", Parent: entry });
                     const rightWrap = create_element({ Tag: "aside", Parent: entry });
@@ -471,6 +479,8 @@ function generate_learnset(parameters = {}) {
     const invalid_text = "Invalid Move Found (Learnset)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(index => {
         const d = Data.Pokemon[index];
 
@@ -488,7 +498,7 @@ function generate_learnset(parameters = {}) {
                     const header = l.Type === "Level Up" ? `Level Up` : l.Type === "Machine" ? `` : l.Type === "Breeding" ? `Parent` : l.Type === "Evolution" ? `Previous Evolution` : l.Type === "Tutor" ? `Move Tutor` : "";
                     const text = l.Type === "Level Up" ? `${l.Factor}` : l.Type === "Machine" ? `${l.Machine}` : l.Type === "Breeding" ? `` : l.Type === "Tutor" ? `${l.Location}` : "";
 
-                    const data_entry = create_element({ Tag: "li", Class: ["generated_learnset"], Data: {index: l.Type}, Parent: options.Parent });
+                    const data_entry = create_element({ Tag: "li", Class: ["generate_learnset"], Data: {index: l.Type}, Parent: options.Parent });
 
 
                     if (options.Catalog === "Move") {
@@ -557,6 +567,8 @@ function generate_pickup(parameters = {}) {
     const invalid_text = "Invalid Item Found (Pickup)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(index => {
         const l = Data.Abilities[index];
         const ability_index = index;
@@ -573,14 +585,14 @@ function generate_pickup(parameters = {}) {
                 const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                 let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
                 if (!ol && options.Catalog !== "Item") {
-                    ol = create_element({ Tag: "ol", Class:["generated_pickup"], Data: { index: header }, Parent: options.Parent });
+                    ol = create_element({ Tag: "ol", Data: { index: header }, Parent: options.Parent });
                     if (header) {
                         const entryHeader = create_element({ Tag: "li", Parent: ol });
                         const entryHeaderText = create_element({ Tag: "h4", HTML: header, Parent: entryHeader });
                     }
                 }
                 
-                const entry = create_element({ Tag: "li", ...(!ol && {Class:["generated_pickup"]}), Parent: ol || options.Parent });
+                const entry = create_element({ Tag: "li", Class: ["generate_pickup"], Parent: ol || options.Parent });
 
                 const leftWrap = create_element({ Tag: "aside", Parent: entry });
                 const centerWrap = create_element({ Tag: "aside", Parent: entry });
@@ -648,6 +660,8 @@ function generate_ability(parameters = {}) {
     const invalid_text = "Invalid Pokemon Found (Ability)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(p => {
         const pokemon_index = get_pokemonIndex(p);
 
@@ -659,7 +673,7 @@ function generate_ability(parameters = {}) {
             const pokemon_secondary = Data.Pokemon[p].Ability.Secondary;
             const pokemon_hidden = Data.Pokemon[p].Ability.Hidden;
 
-            const data_entry = create_element({ Tag: "li", Class:["generated_ability"], Parent: options.Parent });
+            const data_entry = create_element({ Tag: "li", Class:["generate_ability"], Parent: options.Parent });
                 
             const pokemonWrap = create_element({ Tag: "div", Class: ["pokemon"], Parent: data_entry });
             const pokemonImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File:[file], Path: [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF,Path.Pokemon.Menu.Default] }), }, Parent: pokemonWrap });
@@ -707,6 +721,8 @@ function generate_tutor(parameters = {}) {
     const invalid_text = "Invalid Pokemon Found (Ability)";
     const invalid = [];
 
+    options.Parent.classList.add("generate")
+
     Object.keys(options.Data).forEach(index => {
 
         const location_index = index;
@@ -730,14 +746,14 @@ function generate_tutor(parameters = {}) {
                     const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                     let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
                     if (!ol && options.Catalog !== "Item") {
-                        ol = create_element({ Tag: "ol", Class:["generated_tutor"], Data: { index: header }, Parent: options.Parent });
+                        ol = create_element({ Tag: "ol", Data: { index: header }, Parent: options.Parent });
                         if (header) {
                             const entryHeader = create_element({ Tag: "li", Parent: ol });
                             const entryHeaderText = create_element({ Tag: "h4", HTML: header, Parent: entryHeader });
                         }
                     }
                     
-                    const entry = create_element({ Tag: "li", ...(!ol && {Class:["generated_tutor"]}), Parent: ol || options.Parent });
+                    const entry = create_element({ Tag: "li", Class: ["generate_tutor"], Parent: ol || options.Parent });
     
                     const leftWrap = create_element({ Tag: "aside", Parent: entry });
                     const rightWrap = create_element({ Tag: "aside", Parent: entry });
