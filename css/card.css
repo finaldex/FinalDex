@@ -210,6 +210,132 @@
     padding: 10px;
     font-size: 0.7rem;
 }
+#card .type > div > *:last-child {
+    padding: 2px 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background:hsl(0,0%,40%);
+    color:white;
+}
+#card .type > div[data-type='Normal'] > *:last-child {
+    background: var(--Type_Normal);
+}
+#card .type > div[data-type='Fighting'] > *:last-child {
+    background: var(--Type_Fighting);
+}
+#card .type > div[data-type='Flying'] > *:last-child {
+    background: var(--Type_Flying);
+}
+#card .type > div[data-type='Poison'] > *:last-child {
+    background: var(--Type_Poison);
+}
+#card .type > div[data-type='Ground'] > *:last-child {
+    background: var(--Type_Ground);
+}
+#card .type > div[data-type='Rock'] > *:last-child {
+    background: var(--Type_Rock);
+}
+#card .type > div[data-type='Bug'] > *:last-child {
+    background: var(--Type_Bug);
+}
+#card .type > div[data-type='Ghost'] > *:last-child {
+    background: var(--Type_Ghost);
+}
+#card .type > div[data-type='Steel'] > *:last-child {
+    background: var(--Type_Steel);
+}
+#card .type > div[data-type='Fire'] > *:last-child {
+    background: var(--Type_Fire);
+}
+#card .type > div[data-type='Water'] > *:last-child {
+    background: var(--Type_Water);
+}
+#card .type > div[data-type='Grass'] > *:last-child {
+    background: var(--Type_Grass);
+}
+#card .type > div[data-type='Electric'] > *:last-child {
+    background: var(--Type_Electric);
+    color:black;
+}
+#card .type > div[data-type='Psychic'] > *:last-child {
+    background: var(--Type_Psychic);
+}
+#card .type > div[data-type='Ice'] > *:last-child {
+    background: var(--Type_Ice);
+    color:black;
+}
+#card .type > div[data-type='Dragon'] > *:last-child {
+    background: var(--Type_Dragon);
+}
+#card .type > div[data-type='Dark'] > *:last-child {
+    background: var(--Type_Dark);
+}
+#card .type > div[data-type='Fairy'] > *:last-child {
+    background: var(--Type_Fairy);
+    color:black;
+}
+#card .type > div[data-type='Unknown'] > *:last-child {
+    background: var(--Type_Unknown);
+}
+
+#card .egggroup div[data-group] > *:last-child {
+    padding: 2px 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background:hsl(0,0%,40%);
+    color:white;
+    margin: 2px;
+    font-weight:bold;
+}
+
+    
+#card .egggroup div[data-group='Monster'] > *:last-child { 
+    background: var(--Egg_Monster); 
+}
+#card .egggroup div[data-group='Water 1'] > *:last-child { 
+    background: var(--Egg_Water1); 
+}
+#card .egggroup div[data-group='Bug'] > *:last-child { 
+    background: var(--Egg_Bug); 
+}
+#card .egggroup div[data-group='Flying'] > *:last-child { 
+    background: var(--Egg_Flying); 
+}
+#card .egggroup div[data-group='Field'] > *:last-child { 
+    background: var(--Egg_Field); 
+}
+#card .egggroup div[data-group='Fairy'] > *:last-child { 
+    background: var(--Egg_Fairy);
+    color: black;
+}
+#card .egggroup div[data-group='Grass'] > *:last-child { 
+    background: var(--Egg_Grass);
+}
+#card .egggroup div[data-group='Human-Like'] > *:last-child { 
+    background: var(--Egg_Human-like); 
+}
+#card .egggroup div[data-group='Water 3'] > *:last-child { 
+    background: var(--Egg_Water3); 
+}
+#card .egggroup div[data-group='Mineral'] > *:last-child { 
+    background: var(--Egg_Mineral); 
+}
+#card .egggroup div[data-group='Amorphous'] > *:last-child { 
+    background: var(--Egg_Amorphous); 
+}
+#card .egggroup div[data-group='Water 2'] > *:last-child { 
+    background: var(--Egg_Water2); 
+}
+#card .egggroup div[data-group='Ditto'] > *:last-child { 
+    background: var(--Egg_Ditto); 
+}
+#card .egggroup div[data-group='Dragon'] > *:last-child { 
+    background: var(--Egg_Dragon); 
+}
+#card .egggroup div[data-group='Undiscovered'] > *:last-child { 
+    background: var(--Egg_Undiscovered); 
+}
+
 
 #card > aside:first-child > header .name {
     width: 100%;
