@@ -312,6 +312,8 @@
 .layout1 > header .game img {
     max-width: 90%;
     max-height: 50%;
+    aspect-ratio: 3 / 1;
+    object-fit: scale-down;
 }
 
 .layout1 > header .price > *[title] {
