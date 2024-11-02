@@ -56,8 +56,9 @@
     --Background_Load: repeating-linear-gradient(0deg, hsl(0,0%,40%) 0px, hsl(0,0%,40%) 20%, transparent 0px, transparent 50%) 0% 0% / 1em 1em, repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.025) 0px, rgba(0, 0, 0, 0.025) 10%, transparent 0px, transparent 50%) 0% 0% / 1em 1em hsl(0,0%,40%);
     --Background_Load_Item: hsl(0,0%,90%);
     --Color_Load: hsl(0,0%,100%);
-    --Color_Load_Title: hsl(0,0%,50%);
-    --Color_Load_Title_Selected: LightSlateGray;
+    --Color_Load_Title: hsl(170,20%,25%);
+	--Stroke_Load_Title: hsl(170,20%,20%);
+    --Color_Load_Title_Selected: hsl(170,40%,40%);
 
     /* Body */
     --Background_Body: var(--Background_Load);
