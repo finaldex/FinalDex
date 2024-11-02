@@ -16,7 +16,7 @@ function get_applicable(value, game) {
             const generation_check = parseInt(v.replaceAll("+", "").replaceAll("-", ""));
             
             // Example: 6+ --> Generation: 6+, if generation of current game is 6 or higher then give true
-            if (operator === "-" || operator === "+") {
+            if (!isNaN(generation_check) && (operator === "-" || operator === "+")) {
                 if ((operator === "-" && game_generation <= generation_check) || 
                     (operator === "+" && game_generation >= generation_check)) {
                     return true;
@@ -31,7 +31,7 @@ function get_applicable(value, game) {
                     }
                 } else { // Example: Ruby-Sun --> Ruby (id: 7) to Sun (id: 27), if game id of current game is between 7 and 27 then give true
                     const [gameId1, gameId2] = [get_gameid(start), get_gameid(end)];
-                    if (game_id >= Math.min(gameId1, gameId2) && game_id <= Math.max(gameId1, gameId2)) {
+                    if (gameId1 > 0 && gameId2 > 0 && (game_id >= Math.min(gameId1, gameId2) && game_id <= Math.max(gameId1, gameId2))) {
                         return true;
                     }
                 }
