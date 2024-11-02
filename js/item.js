@@ -32,7 +32,7 @@ const create_item = function() {
             const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].Image,...Data.Items[idx].Item], Path: [Path.Item.Bag]});
             const machineType = machineMove ? Data.Moves[get_moveIndex(machineMove)].Type : null;
 
-            const item_catalogEntry = create_element({ Tag: "li",  Data: {index: idx, search: [...Data.Items[idx].Item,...(machineMove != null ? [machineMove] : [])].join(",") }, Parent: item_catalogList });
+            const item_catalogEntry = create_element({ Tag: "li", Data: {index: idx, search: [...Data.Items[idx].Item,...(machineMove != null ? [machineMove] : [])].join(",") }, Parent: item_catalogList });
             const item_catalogEntryLabel = create_element({ Tag: "label", Parent: item_catalogEntry });
             const item_catalogEntryInput = create_element({ Tag: "input", Attribute: { type: "radio", name: "item_entry", id: `item_entry-${idx}`, ...(i === 0 && {checked: ""}) }, Event: {change: () => item_data() }, Parent: item_catalogEntryLabel });
             const item_catalogEntryImage = create_element({ Tag: "img", Attribute: { src: item_src }, Parent: item_catalogEntryLabel });
