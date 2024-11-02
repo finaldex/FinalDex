@@ -127,7 +127,7 @@ function card_display() {
             Object.keys(pokemon_type).forEach(i => {
                 const type_src = get_directory({FirstMatch: true, Exact: true, File: [pokemon_type[i]], Path: [Path.Type.Icon]})
                 
-                const type = create_element({Tag: "div", Class:[i.replaceAll(" ","").toLowerCase()], Parent: typeWrap });
+                const type = create_element({Tag: "div", Class:[i.replaceAll(" ","").toLowerCase()], Data: { type: pokemon_type[i] }, Parent: typeWrap });
                 const typeImage = create_element({Tag: "img", Attribute: { src: type_src, title: pokemon_type[i], }, Parent: type });
                 const typeText = create_element({Tag: "strong", Text: pokemon_type[i], Parent: type });
             });
@@ -205,6 +205,10 @@ function card_display() {
                         const data_valueWrap = create_element({Tag: "div", ...(k.Header && { Class: [k.Header.replaceAll(" ","").toLowerCase()]} ), Parent: data_value });
                         const data_valueHeader = k.Header ? create_element({Tag: "strong", Text: k.Header, Parent: data_valueWrap }) : null;
                         const data_valueText = k.Value ? create_element({Tag: "span", Text: k.Value, Parent: data_valueWrap }) : null;
+
+                        if (d === "Egg Group") {
+                            data_valueWrap.dataset.group = k.Value;
+                        }
                     });
                 }
             })
