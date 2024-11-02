@@ -25,6 +25,9 @@
     flex-wrap: wrap;
     overflow: auto;
 }
+#location .panel > div > div > * {
+    padding: 0 5px
+}
 
 #location .panel > div:not(:has(> div > *)) {
     display: none;
@@ -89,10 +92,20 @@
 
 #location .map > button {
     transition: .5s ease color;
+    font-size: 1.1rem;
+}
+#location .map > button > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#location .map > button:not(:hover) > * {
+    animation: transformScale2 2s ease-in-out infinite;
 }
 
+
 #location .map > button:active {
-    font-size: 0.5rem;
+    font-size: 0.9rem;
 }
 
 #location .map > button[title=''] {
@@ -374,6 +387,9 @@
 #location .sidebar > main > div[class].trainer > ul {
     height: 65%;
 }
+#location .sidebar > main > div[class].trainer > ul ol {
+    width: 100%;
+}
 
 #location .sidebar > main > .trainer header > section > div {
     display: flex;
@@ -559,6 +575,8 @@
 
 #location .sidebar > main > .trainer .search ol > * {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     padding: 5px 0;
     cursor: pointer;
