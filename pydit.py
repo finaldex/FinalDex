@@ -30,7 +30,7 @@ def rename_files(directory_path, location_array):
                 #os.rename(old_file_path, new_file_path)
 
 # Directory to rename files in
-directory_path = './media/Images/Location/Overview/'
+directory_path = './media/Images/Location/Load/'
 
 # Call the function to rename files
 rename_files(directory_path, location_array)
