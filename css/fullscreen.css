@@ -73,7 +73,7 @@
 	position: absolute;
 	left: calc(var(--x) * 1px);
 	top: calc(var(--y) * 1px);
-	min-width: 100px;
+	min-width: 200px;
 	min-height: 60px;
 	max-width: 80%;
 	max-height: 80%;
