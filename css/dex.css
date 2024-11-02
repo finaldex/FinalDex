@@ -233,7 +233,7 @@
     max-height: 70%;
     max-width: 90%;
     object-fit: scale-down;
-    width: 90%;
+    aspect-ratio: 3 / 1;
 }
 
 #dex header .count div {
