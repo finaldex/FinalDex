@@ -1,0 +1,537 @@
+.generate_location_pokemon .held_image[src=''] {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    visibility: hidden;
+}
+
+.generate_location_pokemon .held_image[src='']::after {
+    content: '?';
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    font-size: 1rem;
+}
+.generate ol > li:first-child:not(:has(> aside)) {
+    background: hsl(0, 0%, 25%);
+    border: 1px solid hsl(0, 0%, 0%);
+    border-right: none;
+    border-left: none;
+    color: unset;
+    padding: 10px;
+}
+
+.generate_pickup aside .item,
+[class*='generate_location_shop'] aside .pokemon,
+[class*='generate_location_shop'] aside .item,
+.generate_location_item aside .item,
+.generate_location_pokemon aside .pokemon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    font-size: 0.7em;
+}
+
+.generate [data-type='Normal'] {
+    color: var(--Type_Normal);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Fighting'] {
+    color: var(--Type_Fighting);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Flying'] {
+    color: var(--Type_Flying);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Poison'] {
+    color: var(--Type_Poison);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Ground'] {
+    color: var(--Type_Ground);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Rock'] {
+    color: var(--Type_Rock);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Bug'] {
+    color: var(--Type_Bug);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Ghost'] {
+    color: var(--Type_Ghost);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Steel'] {
+    color: var(--Type_Steel);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Fire'] {
+    color: var(--Type_Fire);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Water'] {
+    color: var(--Type_Water);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Grass'] {
+    color: var(--Type_Grass);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Electric'] {
+    color: var(--Type_Electric);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Psychic'] {
+    color: var(--Type_Psychic);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Ice'] {
+    color: var(--Type_Ice);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Dragon'] {
+    color: var(--Type_Dragon);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Dark'] {
+    color: var(--Type_Dark);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Fairy'] {
+    color: var(--Type_Fairy);
+    text-shadow: 1px 1px 1px black;
+}
+.generate [data-type='Unknown'] {
+    color: var(--Type_Unknown);
+    text-shadow: 1px 1px 1px black;
+}
+
+
+.generate ol:first-child > li:first-child {
+    border-top: none;
+}
+
+.generate_pickup aside,
+[class*='generate_location_shop'] aside,
+.generate_location_item aside,
+.generate_location_pokemon aside {
+    width: 100%;
+}
+.generate_location_pokemon aside:first-child:has(.pokemon) {
+    width:50%;
+}
+
+.generate_tutor aside:last-child,
+[class*='generate_location_shop'] aside:nth-of-type(2),
+.generate_location_item aside:nth-of-type(2),
+.generate_location_pokemon aside:nth-of-type(2),
+.generate_pickup aside:nth-of-type(2) {
+    width: 200%;
+}
+
+[class*='generate_location_shop']:has(aside:nth-of-type(2) ~ aside:empty) aside:nth-of-type(2),
+.generate_location_item:has(aside:nth-of-type(2) ~ aside:empty) aside:nth-of-type(2),
+.generate_location_pokemon:has(aside:nth-of-type(2) ~ aside:empty) aside:nth-of-type(2) {
+    width: 300%;
+}
+
+.generate aside:empty {
+    display: none;
+}
+
+.generate_tutor main > .description,
+[class*='generate_location_shop'] main > .description,
+.generate_location_item main > .description {
+    align-items: flex-start;
+    text-align: left;
+}
+
+[class*='generate_location_shop'] main > .description span[title],
+.generate_location_item main > .description span[title],
+.generate_tutor main > .description span[title] {
+    cursor: help;
+}
+
+.generate_tutor main > *,
+[class*='generate_location_shop'] main > *,
+.generate_location_item main > *,
+.generate_location_pokemon main > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+
+.generate_tutor main,
+[class*='generate_location_shop'] main,
+.generate_location_item main,
+.generate_location_pokemon main {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 5px;
+}
+
+.generate_tutor header,
+[class*='generate_location_shop'] header,
+.generate_location_item header,
+.generate_location_pokemon header {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    text-align: left;
+    flex-wrap: wrap;
+    padding: 10px 5px;
+}
+
+.generate_tutor header > *,
+[class*='generate_location_shop'] header > *,
+.generate_location_item header > *,
+.generate_location_pokemon header > * {
+    list-style: circle;
+    list-style-position: inside;
+    font-size: 0.8rem;
+}
+
+.generate_tutor header:empty,
+[class*='generate_location_shop'] header:empty,
+.generate_location_item header:empty,
+.generate_location_pokemon header:empty {
+    display: none;
+}
+
+.generate_location_pokemon main > .required:not(:has( > div img[src=''])) > *:first-child {
+    display: none;
+}
+
+.generate_location_pokemon main > .tile > div:not(:has(img[src=''])) > *:last-child,
+.generate_location_pokemon main > .required > div:not(:has(img[src=''])) > *:last-child {
+    display: none;
+}
+
+.generate_tutor main > * span,
+[class*='generate_location_shop'] main > * span,
+.generate_location_item main > * span,
+.generate_location_pokemon main > * span,
+.generate_pickup main > * span {
+    font-size: 0.75rem;
+}
+
+.generate_location_pokemon [data-spoiler='true'] {
+    position: relative;
+}
+
+.generate_location_pokemon [data-spoiler='true']::after {
+    content: "Click to display";
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, hsl(0, 0%, 20%), hsl(0, 0%, 20%) 8.5px, hsl(0, 0%, 25%) 7.5px, hsl(0, 0%, 30%) 15.5px);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    opacity: 1;
+    transition: .5s ease opacity;
+    cursor: pointer;
+}
+
+.generate_location_pokemon[data-spoiler='true'].active::after {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.generate_location_pokemon main > .tile img[src=''],
+.generate_location_pokemon main > .tile img:not([src]),
+.generate_location_pokemon main > .required img[src=''],
+.generate_location_pokemon main > .required img:not([src]) {
+    display: none;
+}
+
+.generate_location_pokemon .item img,
+.generate_location_pokemon .tile img {
+    max-height: 32px;
+    max-width: 32px;
+    object-fit: scale-down;
+}
+
+.generate_location_pokemon .tile > div,
+.generate_location_pokemon .required > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+[class*='generate_location_shop'] main > .description img {
+    max-height: 20px;
+    margin-left: 2px;
+}
+
+.generate_location_item aside .item[title]:not([title='']) {
+    cursor: help;
+}
+
+.generate_learnset .summary > div > * {
+    padding: 2px 2px;
+}
+
+.generate_learnset > div,
+.generate_location_item > aside > div,
+.generate_location_pokemon > aside > div,
+.generate_pickup > aside > div,
+[class*='generate_location_shop'] > aside > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.generate_learnset > div.move,
+.generate_learnset > div.pokemon {
+    width: 100%;
+}
+
+.generate_learnset > div.pokemon > *:last-child {
+    font-size: 0.7rem;
+}
+
+.generate_learnset > div.summary {
+    width: 300%;
+}
+
+.generate_learnset .summary > div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.generate ol {
+    width: 100%;
+}
+
+[class*='generate_'] {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    background: initial;
+    border: 1px dashed hsl(0, 0%, 0%);
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    color: unset;
+    font-size: 0.9rem;
+    padding: 5px 5px;
+}
+
+.generate img[title] {
+    cursor: help;
+}
+
+[class*='generate_location'] .season span[data-text='Spring'] {
+    color: #B0F858;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .season span[data-text='Summer'] {
+    color: #78D0F8;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .season span[data-text='Autumn'] {
+    color: #F89058;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .season span[data-text='Winter'] {
+    color: #F0D8F8;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .day span[data-text='Monday'] {
+    color: #DD3;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .day span[data-text='Tuesday'] {
+    color: #D33;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .day span[data-text='Wednesday'] {
+    color: #33D;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .day span[data-text='Thursday'] {
+    color: #3D3;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .day span[data-text='Friday'] {
+    color: #FFD700;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .day span[data-text='Saturday'] {
+    color: #852;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .day span[data-text='Sunday'] {
+    color: #AAA;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .time span[data-text='Morning'] {
+    color: #ffffc8;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .time span[data-text='Day'] {
+    color: #96e0ff;
+    text-shadow: 1px 1px 1px black;
+}
+
+[class*='generate_location'] .time span[data-text='Night'] {
+    color: #597a9b;
+    text-shadow: 1px 1px 1px black;
+}
+
+.generate img:not([src])[title],
+.generate img[src=''][title] {
+    visibility: hidden;
+    position: relative;
+}
+
+.generate img:not([src])[title]::after,
+.generate img[src=''][title]::after {
+    content: attr(title);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+}
+
+.generate ol:has(~ ol) > li:last-child {
+    border-bottom: none;
+}
+
+.generate .item[title='Hidden'] img {
+    filter: brightness(0.7);
+    opacity: 0.4;
+}
+
+.generate .item[title='Hidden'] > *:not(:first-child) {
+    opacity: 0.4;
+}
+
+.generate .item .image > *[title]:hover {
+    filter: invert(1);
+}
+
+.generate aside:first-child > div > * {
+    padding: 1px 0;
+}
+
+.generate .location > span {
+    font-size: 0.7rem;
+}
+
+.generate .item:has(img ~ img) img {
+    margin: 0 -5px;
+}
+
+.generate .item .image {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.generate .item .extend {
+    font-size: 1.2rem;
+    cursor: help;
+}
+
+.generate .item:has(img[src='']) .image,
+.generate .item:not(:has(img[src])) .image {
+    display: none;
+}
+
+.generate .location strong,
+.generate_pickup .pickup strong {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.generate .item:has(img[src]):not(:has(img[src=''])) > *:nth-child(2),
+.generate aside:last-child .item:has(img[src]):not(:has(img[src=''])) > *:last-child {
+    display: none;
+}
+
+.generate_ability > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 5px 0;
+}
+
+.generate_ability .pokemon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.generate_ability .pokemon > *:last-child {
+    font-size: 0.7rem;
+}
+
+.generate_ability > div[title] {
+    cursor: help;
+}
+
+.generate_ability > div[title][class*='redirect']:hover {
+    filter: brightness(1.2);
+}
+
+.generate_ability > div:not(.pokemon) strong {
+    text-decoration: underline;
+}
+
+.generate_ability .none {
+    opacity: 0.3;
+    font-style: italic;
+    user-select: none;
+}
