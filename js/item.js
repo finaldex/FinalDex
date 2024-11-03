@@ -29,7 +29,7 @@ const create_item = function() {
     entries.forEach((idx, i) => {
         if (Data.Items[idx] && Data.Items[idx].Item) { 
             const machineMove = Object.keys(Data.Moves).find(key => Data.Items[idx].Item.includes(Data.Moves[key].Machine));
-            const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].Image,...Data.Items[idx].Item], Path: [Path.Item.Bag]});
+            const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].File,...Data.Items[idx].Item], Path: [Path.Item.Bag]});
             const machineType = machineMove ? Data.Moves[get_moveIndex(machineMove)].Type : null;
 
             const item_catalogEntry = create_element({ Tag: "li", Data: {index: idx, search: [...Data.Items[idx].Item,...(machineMove != null ? [machineMove] : [])].join(",") }, Parent: item_catalogList });
