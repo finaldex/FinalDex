@@ -111,7 +111,7 @@ function debug_gameProperty() {
     list.innerHTML = "";
     const InitialTime = new Date();
 
-    const reference_array = [...(Data.Games),"Green","1","2","3","4","5","6","7","8","9","Battle Revolution","Stadium","Stadium 2","Legend Arceus","Scarlet","Violet","Shining Pearl","Brilliant Diamond","All"];
+    const reference_array = [...(Data.Games),"Isle of Armor","Crown Tundra","Green","1","2","3","4","5","6","7","8","9","Battle Revolution","Stadium","Stadium 2","Legend Arceus","Scarlet","Violet","Shining Pearl","Brilliant Diamond","All"];
     
     console.group("Game Properties");
 
