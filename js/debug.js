@@ -17,12 +17,12 @@ async function start_debug(event,debug) {
 
 
 
-function debug_pokemonImagesBattle() {
+function debug_imagePokemonBattle() {
 
     list.innerHTML = "";
     const InitialTime = new Date();
 
-    console.group("Missing Pokémon Images");
+    console.group("Missing Pokémon Battle Images");
     Data.Games.forEach(g => {
         const invalid = [];
         finaldata.Pokemon.File.forEach(d => {
@@ -42,11 +42,79 @@ function debug_pokemonImagesBattle() {
             invalid.forEach(i => {
                 list.innerText += `${i}:\n`
             });
-            return
         }
     });
 
     const LoadTime = format_time(new Date() - InitialTime);
+    list.innerText += "\nElapsed Time: " + LoadTime;
+	console.log("Elapsed Time: " + LoadTime);
+    console.groupEnd();
+
+}
+
+function debug_imagePokemonBox() {
+
+    list.innerHTML = "";
+    const InitialTime = new Date();
+
+    console.group("Missing Pokémon Box Images");
+    Data.Games.forEach(g => {
+        const invalid = [];
+        finaldata.Pokemon.File.forEach(d => {
+            finaldata.Pokemon.Overview.forEach(v => {
+                if (v.Active && v.Pokemon === d.Pokemon && get_applicable(v.Game,g)) {
+                    const directory = get_directory({FirstMatch: true, Exact: true, File: [String(d.File)], Path: [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF], Game: [g]})
+                    if (directory === "") {
+                        invalid.push(`${d.Pokemon} (${d.File})`);
+                    }
+                }
+            });
+        });
+        if (invalid.length > 0) {
+            console.log(`${g}:`)
+            console.log(invalid)
+            list.innerText += `\n${g}:\n`
+            invalid.forEach(i => {
+                list.innerText += `${i}:\n`
+            });
+        }
+    });
+
+    const LoadTime = format_time(new Date() - InitialTime);
+    list.innerText += "\nElapsed Time: " + LoadTime;
+	console.log("Elapsed Time: " + LoadTime);
+    console.groupEnd();
+
+}
+
+function debug_imageItem() {
+
+    list.innerHTML = "";
+    const InitialTime = new Date();
+
+    console.group("Missing Item Images");
+    Data.Games.forEach(g => {
+        const invalid = [];
+        finaldata.Items.Overview.forEach(d => {
+            if (d.Active && get_applicable(d.Game,g)) {
+                const directory = get_directory({FirstMatch: true, Exact: true, File: [String(d.File),String(d.Item)], Path: [Path.Item.Bag], Game: [g]})
+                if (directory === "") {
+                    invalid.push(`${d.Item} (${d.File})`);
+                }
+            }
+        });
+        if (invalid.length > 0) {
+            console.log(`${g}:`)
+            console.log(invalid)
+            list.innerText += `\n${g}:\n`
+            invalid.forEach(i => {
+                list.innerText += `${i}:\n`
+            });
+        }
+    });
+
+    const LoadTime = format_time(new Date() - InitialTime);
+    list.innerText += "\nElapsed Time: " + LoadTime;
 	console.log("Elapsed Time: " + LoadTime);
     console.groupEnd();
 
@@ -82,18 +150,18 @@ function debug_locationDirection() {
                             if (connected[oppositeDirection]) {
                                 const oppositeLocations = connected[oppositeDirection].split(",");
                                 if (!oppositeLocations.includes(location.Location)) {
-                                    const txt = `${location.Location}:\n${direction} -> ${connectedLocation}\n${connectedLocation} has no ${oppositeDirection}`
+                                    const txt = `${location.Location}\n${direction} -> ${connectedLocation}\n${connectedLocation} has no ${oppositeDirection}\n${location.Game}`
                                     list.innerText += "\n"+txt+"\n"
                                     console.log(txt);
                                 }
                             } else {
-                                const txt = `${location.Location}:\n${direction} -> ${connectedLocation}\n${connectedLocation} has no ${oppositeDirection}`
+                                const txt = `${location.Location}\n${direction} -> ${connectedLocation}\n${connectedLocation} has no ${oppositeDirection}\n${location.Game}`
                                 list.innerText += "\n"+txt+"\n"
                                 console.log(txt);
                             }
                         }
                     } else {
-                        const txt = `${location.Location}:\n${direction} -> ${connectedLocation}\n${connectedLocation} not found`
+                        const txt = `${location.Location}\n${direction} -> ${connectedLocation}\n${connectedLocation} not found\n${location.Game}`
                         list.innerText += "\n"+txt+"\n"
                         console.log(txt); 
                     }
@@ -101,7 +169,11 @@ function debug_locationDirection() {
             }
         });
     });
+
+    
+
     const LoadTime = format_time(new Date() - InitialTime);
+    list.innerText += "\nElapsed Time: " + LoadTime;
 	console.log("Elapsed Time: " + LoadTime);
     console.groupEnd();
 }
@@ -138,6 +210,7 @@ function debug_gameProperty() {
         console.log(i);
     })
     const LoadTime = format_time(new Date() - InitialTime);
+    list.innerText += "\nElapsed Time: " + LoadTime;
 	console.log("Elapsed Time: " + LoadTime);
     console.groupEnd();
 
