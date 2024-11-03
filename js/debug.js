@@ -11,8 +11,10 @@ async function start_debug(event) {
     document.body.style.height = "100vh";
     await new Promise(resolve => setTimeout(resolve, 1000));
     //await debug_locationDirection()
-    await debug_pokemonImagesBattle();
-    document.body.style.style.removeProperty("cursor");
+    //await debug_pokemonImagesBattle();
+    await debug_gameProperty();
+    document.body.style.removeProperty("cursor");
+    event.target.innerText = "Debug";
 }
 
 function debug_pokemonImagesBattle() {
@@ -87,4 +89,32 @@ function debug_locationDirection() {
     const LoadTime = format_time(new Date() - InitialTime);
 	console.log("Elapsed Time: " + LoadTime);
     console.groupEnd();
+}
+
+function debug_gameProperty() {
+    const InitialTime = new Date();
+
+    const reference_array = [...(Data.Games),"1","2","3","4","5","6","7","8","9","Battle Revolution","Stadium","Stadium 2","Legend Arceus","Scarlet","Violet","Shining Pearl","Brilliant Diamond","All"];
+    
+    console.group("Game Properties");
+    Object.keys(finaldata).forEach(dataKey => {
+        Object.keys(finaldata[dataKey]).forEach(subKey => {
+            if (Array.isArray(finaldata[dataKey][subKey])) {
+                finaldata[dataKey][subKey].forEach(entry => {
+                    if (entry.hasOwnProperty('Game')) {
+                        const gameValues = String(entry.Game).split(/[,]/);
+                        gameValues.forEach(game => {
+                            if (!reference_array.includes(game.replace(/-.*/,''))) {
+                                console.log(`${dataKey} -> ${subKey}:\n${game}`);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+    const LoadTime = format_time(new Date() - InitialTime);
+	console.log("Elapsed Time: " + LoadTime);
+    console.groupEnd();
+
 }
