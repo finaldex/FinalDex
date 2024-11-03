@@ -388,8 +388,6 @@ function configure_game(id) {
 
 function load_data() {
 
-
-
     // Scope for current game only to reduce load
     var arr = finaldata["Pokemon Learnset"]; Object.keys(arr).forEach(key => Array.isArray(arr[key]) && arr[key].some(entry => entry.hasOwnProperty('Game')) && (arr[key] = arr[key].filter(entry => get_applicable(entry.Game))));
     var arr = finaldata["Location Pokemon"]; Object.keys(arr).forEach(key => Array.isArray(arr[key]) && arr[key].some(entry => entry.hasOwnProperty('Game')) && (arr[key] = arr[key].filter(entry => get_applicable(entry.Game))));
@@ -832,7 +830,7 @@ function load_data() {
     });
 
 
-    finaldata["Items"]["Overview"].forEach(({ Game, Index, Item, ID, Image, Alias, Pocket }) => {
+    finaldata["Items"]["Overview"].forEach(({ Game, Index, Item, ID, File, Alias, Pocket }) => {
         if (get_applicable(Game)) {
             const item_index = Index ? Index : get_itemIndex(Pokemon);
 
@@ -841,7 +839,7 @@ function load_data() {
                 ...(Index !== undefined && { Index }),
                 ...(Item !== undefined && { Item: [Item] }),
                 ...(ID !== undefined && { ID }),
-                ...(Image !== undefined && { Image }),
+                ...(File !== undefined && { File }),
                 ...(Alias !== undefined && { Alias }),
                 ...(Pocket !== undefined && { Pocket }),
             }); 
