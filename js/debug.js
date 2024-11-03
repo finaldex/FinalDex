@@ -1,23 +1,25 @@
+const list = document.querySelector("ul");
+
 async function load_debug() {
     for (const json of Object.keys(json_url)) {
         await load_dataset(json_url[json]);
     }
-    document.querySelector("button").style.removeProperty("display");
+    document.body.classList.add("active")
 }
-async function start_debug(event) {
-    event.target.innerText = "Debugging";
+async function start_debug(event,debug) {
+    event.target.classList.add("active");
     document.body.style.cursor = "wait";
-    document.body.style.width = "100vw";
-    document.body.style.height = "100vh";
     await new Promise(resolve => setTimeout(resolve, 1000));
-    //await debug_locationDirection()
-    //await debug_pokemonImagesBattle();
-    await debug_gameProperty();
+    await debug();
     document.body.style.removeProperty("cursor");
-    event.target.innerText = "Debug";
+    event.target.classList.remove("active");
 }
 
+
+
 function debug_pokemonImagesBattle() {
+
+    list.innerHTML = "";
     const InitialTime = new Date();
 
     console.group("Missing Pokémon Images");
@@ -36,6 +38,11 @@ function debug_pokemonImagesBattle() {
         if (invalid.length > 0) {
             console.log(`${g}:`)
             console.log(invalid)
+            list.innerText += `\n${g}:\n`
+            invalid.forEach(i => {
+                list.innerText += `${i}:\n`
+            });
+            return
         }
     });
 
@@ -46,6 +53,8 @@ function debug_pokemonImagesBattle() {
 }
 
 function debug_locationDirection() {
+
+    list.innerHTML = "";
     const InitialTime = new Date();
 
     const directions = ["North", "South", "East", "West"];
@@ -63,7 +72,7 @@ function debug_locationDirection() {
             if (location[direction]) {
                 const connectedLocations = location[direction].split(",");
                 connectedLocations.forEach(connectedLocation => {
-                    const connected = locations.find(loc => loc.Location === connectedLocation.trim());
+                    const connected = locations.find(loc => loc.Location === connectedLocation);
                     if (connected) {
                         const oppositeDirection = oppositeDirections[direction];
                         const locationGames = location.Game.split(",");
@@ -73,14 +82,20 @@ function debug_locationDirection() {
                             if (connected[oppositeDirection]) {
                                 const oppositeLocations = connected[oppositeDirection].split(",");
                                 if (!oppositeLocations.includes(location.Location)) {
-                                    console.log(`Mismatch: ${location.Location} ${direction} -> ${connectedLocation.trim()} but ${connectedLocation.trim()} ${oppositeDirection} -> ${connected[oppositeDirection]}`);
+                                    const txt = `${location.Location}:\n${direction} -> ${connectedLocation}\n${connectedLocation} has no ${oppositeDirection}`
+                                    list.innerText += "\n"+txt+"\n"
+                                    console.log(txt);
                                 }
                             } else {
-                                console.log(`Mismatch: ${location.Location} ${direction} -> ${connectedLocation.trim()} but ${connectedLocation.trim()} has no ${oppositeDirection}`);
+                                const txt = `${location.Location}:\n${direction} -> ${connectedLocation}\n${connectedLocation} has no ${oppositeDirection}`
+                                list.innerText += "\n"+txt+"\n"
+                                console.log(txt);
                             }
                         }
                     } else {
-                        console.log(`Mismatch: ${location.Location} ${direction} -> ${connectedLocation.trim()} but ${connectedLocation.trim()} not found`);
+                        const txt = `${location.Location}:\n${direction} -> ${connectedLocation}\n${connectedLocation} not found`
+                        list.innerText += "\n"+txt+"\n"
+                        console.log(txt); 
                     }
                 });
             }
@@ -92,11 +107,15 @@ function debug_locationDirection() {
 }
 
 function debug_gameProperty() {
+
+    list.innerHTML = "";
     const InitialTime = new Date();
 
-    const reference_array = [...(Data.Games),"1","2","3","4","5","6","7","8","9","Battle Revolution","Stadium","Stadium 2","Legend Arceus","Scarlet","Violet","Shining Pearl","Brilliant Diamond","All"];
+    const reference_array = [...(Data.Games),"Green","1","2","3","4","5","6","7","8","9","Battle Revolution","Stadium","Stadium 2","Legend Arceus","Scarlet","Violet","Shining Pearl","Brilliant Diamond","All"];
     
     console.group("Game Properties");
+
+    const invalid = [];
     Object.keys(finaldata).forEach(dataKey => {
         Object.keys(finaldata[dataKey]).forEach(subKey => {
             if (Array.isArray(finaldata[dataKey][subKey])) {
@@ -105,7 +124,7 @@ function debug_gameProperty() {
                         const gameValues = String(entry.Game).split(/[,]/);
                         gameValues.forEach(game => {
                             if (!reference_array.includes(game.replace(/-.*/,''))) {
-                                console.log(`${dataKey} -> ${subKey}:\n${game}`);
+                                invalid.push(`${dataKey} -> ${subKey}\n${game}`);
                             }
                         });
                     }
@@ -113,6 +132,11 @@ function debug_gameProperty() {
             }
         });
     });
+    invalid.sort();
+    [...new Set(invalid)].forEach(i => {
+        list.innerText += `\n${i}\n`
+        console.log(i);
+    })
     const LoadTime = format_time(new Date() - InitialTime);
 	console.log("Elapsed Time: " + LoadTime);
     console.groupEnd();
