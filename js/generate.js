@@ -57,7 +57,7 @@ function generate_locationShopItem(parameters = {}) {
                         const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
                 
                         Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                            const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].Image,...Data.Items[item_index].Item], Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
+                            const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item], Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
                             options.Catalog !== "Item" && (add_redirect(itemImage,{catalog:"item", entry:item_index, style:"brightness"}));
                         });
                         const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
@@ -228,7 +228,7 @@ function generate_locationItem(parameters = {}) {
 
                 const item_index = d.Index ? d.Index : get_itemIndex(d.Item);
 
-                const item_file = item_index && Data.Items[item_index] ? [d.Image, Data.Items[item_index]?.Image, ...(Data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
+                const item_file = item_index && Data.Items[item_index] ? [d.Image, Data.Items[item_index]?.File, ...(Data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
 
                 const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                 let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
@@ -255,7 +255,7 @@ function generate_locationItem(parameters = {}) {
                     const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
             
                     Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                        const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].Image,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
+                        const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
                         options.Catalog !== "Item" && (add_redirect(itemImage,{catalog:"item", entry:item_index, style:"brightness"}));
                     });
                     const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
@@ -338,7 +338,7 @@ function generate_locationPokemon(parameters = {}) {
                     const held_index = d.Held ? get_itemIndex(d.Held) : null;
 
                     const pokemon_file = [Data.Pokemon[pokemon_index].File,Data.Pokemon[default_index].File];
-                    const held_file = [d.Held, ...(held_index ? [Data.Items[held_index].Image, ...Data.Items[held_index].Item] : [])];
+                    const held_file = [d.Held, ...(held_index ? [Data.Items[held_index].File, ...Data.Items[held_index].Item] : [])];
                     
                     const header = [d.Area,d.Title,d.Header].filter(v => v !== undefined && v !== null).join('<br>');
                     let ol = options.Parent.querySelector(`ol[data-index="${header}"]`);
@@ -429,7 +429,7 @@ function generate_locationPokemon(parameters = {}) {
                     d.Item && d.Item.forEach(it => {
                         it.forEach(i => {
                             const item_index = i ? get_itemIndex(i) : null;
-                            const item_file = [i, ...(item_index && Data.Items[item_index] ? [Data.Items[item_index].Image, ...Data.Items[item_index].Item] : [])];
+                            const item_file = [i, ...(item_index && Data.Items[item_index] ? [Data.Items[item_index].File, ...Data.Items[item_index].Item] : [])];
 
                             const itemContent = create_element({ Tag: "div", Parent: itemWrap });
                             const itemImage = create_element({ Tag: "img", Attribute: { title: `Required Item\n${i}`, src: get_directory({FirstMatch: true, Exact: true, File: item_file, Path: [Path.Item.Bag]}), }, Parent: itemContent });
@@ -578,7 +578,7 @@ function generate_pickup(parameters = {}) {
                 d.Quantity = d.Quantity === undefined ? 1 : d.Quantity;
                 const item_index = d.Index ? d.Index : get_itemIndex(d.Item);
             
-                const item_file = item_index && Data.Items[item_index] ? [d.Image, Data.Items[item_index]?.Image, ...(Data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
+                const item_file = item_index && Data.Items[item_index] ? [d.Image, Data.Items[item_index]?.File, ...(Data.Items[item_index]?.Item || []), d.Item].filter(part => part !== undefined && part !== null) : [null];
 
                 const text = `${d.Rate} chance to be held by a${d.Level ? ` Level ${unparse_levels(d.Level)} ` : ''} Pokemon with the ability Pickup after a battle${d.Location ? ` while in the location ${d.Location}` : ''}${d.Area ? ` (${d.Area})` : ''}.`;
 
@@ -606,7 +606,7 @@ function generate_pickup(parameters = {}) {
                 const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
 
                 Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                    const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].Image,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
+                    const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
                 });
                 const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
 
