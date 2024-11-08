@@ -14,7 +14,7 @@ try:
     # Walk through the media directory and build the directory structure
     for path, subdirs, files in os.walk(media_dir):
         if 'Images_old' not in path:
-            relative_path = "../"+os.path.relpath(path, root).replace('\\', '/')
+            relative_path = "./"+os.path.relpath(path, root).replace('\\', '/')
             for name in files:
                 if relative_path not in dir_structure:
                     dir_structure[relative_path] = []
