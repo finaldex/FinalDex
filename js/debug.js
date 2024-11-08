@@ -23,12 +23,12 @@ function debug_imagePokemonBattle() {
     const InitialTime = new Date();
 
     console.group("Missing Pokémon Battle Images");
-    Data.Games.forEach(g => {
+    Object.keys(Games).forEach(g => {
         const invalid = [];
         finaldata.Pokemon.File.forEach(d => {
             finaldata.Pokemon.Overview.forEach(v => {
                 if (v.Active && v.Pokemon === d.Pokemon && get_applicable(v.Game,g)) {
-                    const directory = get_directory({FirstMatch: true, Exact: true, File: [String(d.File)], Path: [Path.Pokemon.Battle.Default.Front.GIF, Path.Pokemon.Battle.Default.Front.PNG, Path.Pokemon.Menu.Default], Game: [g]})
+                    const directory = get_directory({FirstMatch: true, Exact: true, File: [String(d.File)], Path: [Path.Pokemon.Battle.Default.Front.GIF, Path.Pokemon.Battle.Default.Front.PNG,Path.Pokemon.Menu.Default], Game: [g]})
                     if (directory === "") {
                         invalid.push(`${d.Pokemon} (${d.File})`);
                     }
@@ -58,7 +58,7 @@ function debug_imagePokemonBox() {
     const InitialTime = new Date();
 
     console.group("Missing Pokémon Box Images");
-    Data.Games.forEach(g => {
+    Object.keys(Games).forEach(g => {
         const invalid = [];
         finaldata.Pokemon.File.forEach(d => {
             finaldata.Pokemon.Overview.forEach(v => {
@@ -93,10 +93,10 @@ function debug_imageItem() {
     const InitialTime = new Date();
 
     console.group("Missing Item Images");
-    Data.Games.forEach(g => {
+    Object.keys(Games).forEach(g => {
         const invalid = [];
         finaldata.Items.Overview.forEach(d => {
-            if (d.Active && get_applicable(d.Game,g)) {
+            if (d.Active && get_applicable(d.Game,g) && d.File) {
                 const directory = get_directory({FirstMatch: true, Exact: true, File: [String(d.File),String(d.Item)], Path: [Path.Item.Bag], Game: [g]})
                 if (directory === "") {
                     invalid.push(`${d.Item} (${d.File})`);
@@ -183,7 +183,7 @@ function debug_gameProperty() {
     list.innerHTML = "";
     const InitialTime = new Date();
 
-    const reference_array = [...(Data.Games),"Isle of Armor","Crown Tundra","Green","1","2","3","4","5","6","7","8","9","Battle Revolution","Stadium","Stadium 2","Legend Arceus","Scarlet","Violet","Shining Pearl","Brilliant Diamond","All"];
+    const reference_array = [...(Object.Keys(Games)),"Isle of Armor","Crown Tundra","Green","1","2","3","4","5","6","7","8","9","Battle Revolution","Stadium","Stadium 2","Legend Arceus","Scarlet","Violet","Shining Pearl","Brilliant Diamond","All"];
     
     console.group("Game Properties");
 
