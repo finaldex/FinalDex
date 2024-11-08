@@ -12,7 +12,7 @@ from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseDownload
 
 
-data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir, 'data')
+json_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir, 'json')
 
 def convert_value(value):
     if value is None:
@@ -104,13 +104,13 @@ def gdrive(sheets=None):
                                 if arr:  # Only add non-empty arrays
                                     data[sheet_title] = arr
                             file_name = item['name'].replace("FinalDex – ", "").replace("é","e")
-                            json_file_path = os.path.join(data_dir, f"{file_name}.json")
+                            json_file_path = os.path.join(json_dir, f"{file_name}.json")
                             with open(json_file_path, 'w', encoding='utf-8') as json_file:
                                 json.dump(data, json_file, separators=(',', ':'), ensure_ascii=False)
                         else:
                             request = drive_service.files().get_media(fileId=item['id'])
                             file_name = item['name'].replace("FinalDex – ", "").replace("é","e")
-                            file_path = os.path.join(data_dir, f"{file_name}.json")
+                            file_path = os.path.join(json_dir, f"{file_name}.json")
                             with open(file_path, 'wb') as f:
                                 downloader = MediaIoBaseDownload(f, request)
                                 done = False
@@ -133,13 +133,13 @@ def gdrive(sheets=None):
                             if arr:  # Only add non-empty arrays
                                 data[sheet_title] = arr
                         file_name = item['name'].replace("FinalDex – ", "").replace("é","e")
-                        json_file_path = os.path.join(data_dir, f"{file_name}.json")
+                        json_file_path = os.path.join(json_dir, f"{file_name}.json")
                         with open(json_file_path, 'w', encoding='utf-8') as json_file:
                             json.dump(data, json_file, separators=(',', ':'), ensure_ascii=False)
                     else:
                         request = drive_service.files().get_media(fileId=item['id'])
                         file_name = item['name'].replace("FinalDex – ", "").replace("é","e")
-                        file_path = os.path.join(data_dir, f"{file_name}.json")
+                        file_path = os.path.join(json_dir, f"{file_name}.json")
                         with open(file_path, 'wb') as f:
                             downloader = MediaIoBaseDownload(f, request)
                             done = False
