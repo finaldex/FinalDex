@@ -25,13 +25,15 @@ function game_image() {
     games.forEach(g => {
         const game = g.dataset.game.split(/[,]/);
         const game_art = get_directory({ Path: [Path.Game.Art.base], Game: game});
+        const region_art = get_directory({ Path: [Path.Region.Art.Official], Game: game});
         const location_art = get_directory({ Path: [Path.Location.Art.Official], Game: game});
         const location_load = get_directory({ Path: [Path.Location.Load], Game: game});
         const location_overview = get_directory({ Path: [Path.Location.Overview], Game: game});
         const pokemon_art = get_directory({ Path: [Path.Pokemon.Art.Default.Front.Official], Game: game});
-
+        
         let source = [];
 
+        source = adjustArrayLength(source, region_art, 16);
         source = adjustArrayLength(source, location_art, 12);    
         source = adjustArrayLength(source, location_load, 8);
         source = adjustArrayLength(source, game_art, 4);
