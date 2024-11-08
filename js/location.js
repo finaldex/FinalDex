@@ -13,7 +13,7 @@ const create_location = function() {
     const location_catalogList = create_element({ Tag: "ol",  Parent: location_catalog });
 
     // Entry
-    const locations = Object.keys(Data.Locations).sort((a, b) => (nA = a.match(/\d+/), nB = b.match(/\d+/), c = a.replace(/\d+/, '').trim().localeCompare(b.replace(/\d+/, '').trim()), c !== 0 ? c : (nA ? (nB ? parseInt(nA[0]) - parseInt(nB[0]) : 1) : -1)));
+    const locations = Data.Locations ? Object.keys(Data.Locations).sort((a, b) => (nA = a.match(/\d+/), nB = b.match(/\d+/), c = a.replace(/\d+/, '').trim().localeCompare(b.replace(/\d+/, '').trim()), c !== 0 ? c : (nA ? (nB ? parseInt(nA[0]) - parseInt(nB[0]) : 1) : -1))) : [];
 
     locations.forEach((l, i) => {
         const location_catalogEntry = create_element({ Tag: "li", Data: {index: l, search: Data.Locations[l].Location.join(",") }, Parent: location_catalogList });
@@ -153,13 +153,13 @@ const create_location = function() {
     const location_fullscreenButton = create_element({ Tag: "button", Text: "⛶", Class: ["fullscreen"], Parent: location_mapWrap });
     */
 
-    const location_suspendButton = create_element({ Tag: "button", Class: ["suspend"], Event: { click: handleMapSuspendButtonClick }, Parent: location_mapWrap });
-    const location_pauseText = create_element({ Tag: "span", Text: "▶", Parent: location_suspendButton });
-    const location_playText = create_element({ Tag: "span", Text: "❙❙", Parent: location_suspendButton });
-
-    const location_mapImageWrap = create_element({ Tag: "div", Data: { scale: 1, suspend: false }, Event: { click: handleMapImageWrapClick }, Parent: location_mapWrap });
+    const location_mapImageWrap = create_element({ Tag: "div", Data: { scale: 1 }, Parent: location_mapWrap });
     const location_mapImage = create_element({ Tag: "img", Attribute: { src: get_directory({ FirstMatch: true, Exact: true, File: ["Map"], Path: [Path.Region.Map] }) }, Parent: location_mapImageWrap });
-    const location_mapArea = create_element({ Tag: "map", Parent: location_mapWrap });
+
+    location_mapImage.addEventListener('load', function() {
+        svgmap(location_mapImage, Config.Map);
+        map_select(document.querySelector("#location .map svg"),[document.querySelector("#location .catalog ol li:has(input:checked)") && (document.querySelector("#location .catalog ol li:has(input:checked)").dataset.index)])
+    });
 
     let directions = {West: "⮜", North: "⮝", East: "⮞", South: "⮟"};
     Object.keys(directions).forEach(direction => {
@@ -195,7 +195,6 @@ const create_location = function() {
     }
 
     function handleMapResetButtonClick(event) {
-       
         if (location_mapImageWrap) {
             location_mapImageWrap.dataset.scale = 1;
             zoom_move(location_mapImageWrap, event);
@@ -206,24 +205,12 @@ const create_location = function() {
         zoom_scale(location_mapImageWrap, true, event);
     }
 
-    function handleMapSuspendButtonClick() {
-        if (location_mapImageWrap.dataset.suspend === "true") {
-            location_mapImageWrap.dataset.suspend = "false";
-        }
-    }
-
-    function handleMapImageWrapClick() {
-        if (location_mapImageWrap.dataset.scale !== "1" &&  location_mapImageWrap.dataset.suspend !== "true") {
-            location_mapImageWrap.dataset.suspend = "true";
-        }
-    }
 
     // Initial call to toggleVisibility based on the checked radio input
     const checkedInput = document.querySelector('#location .sidebar > header input:checked');
     const elShow = document.querySelectorAll(`#location .sidebar > main > .${checkedInput.value}`);
     const elHide = document.querySelectorAll(`#location .sidebar > main > div:not(.${checkedInput.value})`);
     toggleVisibility(elShow, elHide)
-
 
     location_data();
 }
@@ -281,6 +268,7 @@ function location_data() {
     if (!active_entry || !active_entry.dataset.index) { return }
     
     const location_index = active_entry.dataset.index;
+    const location = Data.Locations[location_index].Location;
 
     const titleText = document.querySelector("#location > header .title > *")
     titleText.innerText = Data.Locations[location_index].Location[0];
@@ -402,6 +390,8 @@ function location_data() {
     const elHide = header_input ? document.querySelectorAll(`#location .sidebar > main > div:not(.${header_input.value})`) : document.querySelectorAll(`#location .sidebar > main > div:not(.${checkedInput.value})`);
     header_input && (document.querySelector(`#location .sidebar > header input[value='${header_input.value}']`).checked = true);
     toggleVisibility(elShow, elHide);
+
+    map_select(document.querySelector("#location .map svg"),location)
 }
 
 
@@ -456,7 +446,7 @@ function trainer_populate(location_index) {
 
     trainer_data[index].Reward && (trainer_data[index].Reward.Quantity = trainer_data[index].Reward.Quantity ? trainer_data[index].Reward.Quantity : 1 );  
     const reward_index = trainer_data[index].Reward ? get_itemIndex(trainer_data[index].Reward.Reward) : null;
-    const reward_src = reward_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[reward_index].File,...(Data.Items[reward_index].Item)], Path: [Path.Item.Bag]}) : trainer_data[index].Reward ? get_directory({FirstMatch: true, Exact: true, File: [trainer_data[index].Reward.Reward], Path: [Path.Currency.Icon]}) : "";
+    const reward_src = reward_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[reward_index].File,...(Data.Items[reward_index].Item)], Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }) : trainer_data[index].Reward ? get_directory({FirstMatch: true, Exact: true, File: [trainer_data[index].Reward.Reward], Path: [Path.Currency.Icon]}) : "";
     
     const reward_text = trainer_data[index].Reward ? (reward_index ? `${trainer_data[index].Reward.Quantity}x<br>${trainer_data[index].Reward.Reward}` : reward_src !== "" ? `${trainer_data[index].Reward.Quantity}<img src='${reward_src}' title='${trainer_data[index].Reward.Reward}' />` : trainer_data[index].Reward.Reward.length > 5 ? `${trainer_data[index].Reward.Quantity} <span title='${trainer_data[index].Reward.Reward}'>${trainer_data[index].Reward.Reward.match(/[A-Z]/g).join('')}</span>` : `${trainer_data[index].Reward.Quantity} <span title='${trainer_data[index].Reward.Reward}'>${trainer_data[index].Reward.Reward.match(/[A-Z]/g).join('')}</span>`) : "";
     rewardText.innerHTML = reward_text;
@@ -485,7 +475,7 @@ function trainer_populate(location_index) {
 
     trainer_data[index].Item && (trainer_data[index].Item.Quantity = trainer_data[index].Item.Quantity ? trainer_data[index].Item.Quantity : 1 );  
     const item_index = trainer_data[index].Item ? get_itemIndex(trainer_data[index].Item.Item) : null;
-    const item_src = item_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[item_index].File,...(Data.Items[item_index].Item)], Path: [Path.Item.Bag]}) : "";
+    const item_src = item_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[item_index].File,...(Data.Items[item_index].Item)], Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }) : "";
     itemText.innerHTML = trainer_data[index].Item ? (item_index ? `${trainer_data[index].Item.Quantity}x<br>${trainer_data[index].Item.Item}` : "") : "";
 
     item_index && item_src !== "" && (Array(Math.min(trainer_data[index].Item.Quantity, 5)).fill().forEach(i => {
@@ -544,11 +534,11 @@ function trainer_populate(location_index) {
             
             const pokemonWrap = create_element({ Tag: "div", Class: ["pokemon"], Parent: leftWrap });
 
-            const heldImage = p.Item ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${p.Item}`, src: get_directory({FirstMatch: true, Exact: true, File: held_file, Path: [Path.Item.Bag]}), }, Parent: pokemonWrap }) : null;
+            const heldImage = p.Item ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${p.Item}`, src: get_directory({FirstMatch: true, Exact: true, File: held_file, Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }), }, Parent: pokemonWrap }) : null;
             p.Item && held_index && (add_redirect(heldImage, { catalog: "item", entry: held_index, style: "brightness" }));
             const genderText = p.Gender ? create_element({ Tag: "strong", Class: ["gender"], Text: p.Gender, Attribute: {title: p.Gender === "♂" ? "Male" : p.Gender === "♀" ? "Female" : ""}, Data: {gender: p.Gender}, Parent: pokemonWrap }) : null;
             
-            const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: [Path.Pokemon.Battle.Default.Front.GIF,Path.Pokemon.Battle.Default.Front.PNG,Path.Pokemon.Box.Default.GIF,Path.Pokemon.Box.Default.PNG,Path.Pokemon.Menu.Default] }) }, Parent: pokemonWrap });
+            const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: Config.Image.Pokemon.Battle.Path }) }, Parent: pokemonWrap });
             const pokemonText = create_element({ Tag: "strong", Class: ["pokemon_name"], Text: p.Pokemon, Parent: pokemonWrap });
 
             const abilityWrap = p.Ability ? create_element({ Tag: "div", Class: ["ability"], Parent: lowerRightWrap }) : null;
