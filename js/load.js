@@ -18,37 +18,55 @@ const json_url = {
 let InitialTime = 0;
 let LoadProgress = 0;
 
+
 function load_start() {
 	const href_match = location.href.match(/#(.*)/) ? location.href.match(/#(.*)/)[1].replace("%20"," ").replace("_"," ") : "Red";
-    const ID = get_gameid(href_match) || 1;
-    const Game = get_game(ID) || "N/A";
-    document.title = `${Game}`
-    load_game(ID);
+    const ID = href_match ? (href_match.toLowerCase() == "random" ? Games[Object.keys(Games)[Math.floor(Math.random() * Object.keys(Games).length)]].ID : get_game(href_match) ) : 1;
+    const Game = get_game(ID) || null;
+    document.title = `${Games[Game].Title}`
+
+    if (Game !== null) {
+        load_game(ID)
+    }
+    else {
+        console.error(`Error Occured: ${ID}`);
+    }
 }
 
 
-async function load_game(ID) {
+async function load_game(id) {
     load_clear();
-
-    ID = typeof(ID) === "string" ? (get_gameid(ID) !== null ? get_gameid(ID) : 1) : ID;
 
     const totalDatasets = Object.keys(json_url).length; // Total number of datasets
     let datasetsLoaded = 0; // Track how many datasets have been loaded
     InitialTime = new Date();
 
-    document.querySelector("#load").className = "active";
-    document.querySelector("#load .description > *").innerHTML = "Building Databases<span>.</span><span>.</span><span>.</span>";
+    document.querySelector("#load .description > *").innerHTML = "Loading Data<span>.</span><span>.</span><span>.</span>";
 
-    for (const json of Object.keys(json_url)) {
-        datasetsLoaded++;
-        LoadProgress = Math.min(100, (datasetsLoaded / totalDatasets) * 100); // Calculate progress
-        document.querySelector("#load").style.setProperty("--progress", LoadProgress + "%");
+    await load_dataset(json_url["Directory"])
+    await load_data(get_game(id))
 
-        await load_dataset(json_url[json]); // Load the dataset
-        //await new Promise(resolve => setTimeout(resolve, 400)); // Makes start animation smoother but increases load time by ~5 seconds
-    }
+    document.querySelector("#load .description > *").innerHTML = "Configuring Game<span>.</span><span>.</span><span>.</span>";
 
-    configure_game(ID);
+    configure_game(id);
+}
+
+async function load_data(game) {
+    return new Promise((resolve, reject) => {
+        let script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = `./data/${game}_data.js`;
+
+        script.onload = () => {
+            resolve();
+        };
+
+        script.onerror = () => {
+            reject(new Error(`Failed to load script: ${script.src}`));
+        };
+
+        document.head.appendChild(script);
+    });
 }
 
 async function load_dataset(url) {
@@ -60,7 +78,6 @@ async function load_dataset(url) {
         const json = url.match(/([^\/]+)\.json$/)[1].replace(" Dataset", "");
 
 		finaldata[json] = data;
-        
 
     } catch (error) {
         console.error('Error loading dataset:', error);
@@ -89,10 +106,6 @@ function load_initialize() {
 
     const LoadTime = format_time(new Date() - InitialTime);
 	console.log("Load Time: " + LoadTime);
-
-	//console.group("finaldata");
-	//console.log(finaldata);
-    //console.groupEnd();
 
     console.group("Data");
     console.log(Data);
