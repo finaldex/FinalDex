@@ -1,48 +1,70 @@
 function get_applicable(value, game) {
-
     const values = Array.isArray(value) ? value : String(value).split(/[,_]/);
     const games = game !== undefined ? (Array.isArray(game) ? game : String(game).split(/[,_]/)) : [Config.Game];
 
+    const checkRange = (start, end, target) => {
+        const [gameId1, gameId2] = [get_game(start), get_game(end)];
+        const targetId = get_game(target);
+        return gameId1 > 0 && gameId2 > 0 && targetId > 0 && (targetId >= Math.min(gameId1, gameId2) && targetId <= Math.max(gameId1, gameId2));
+    };
+
     for (const g of games) {
-        const game_generation = !parseInt(g) ? get_generation(g) : g;
-        const game_id = !parseInt(g) ? get_gameid(g) : null;
+        if (g === "All") { return true; }
+
+        const game_generation = !parseInt(g) ? get_generation(g) : parseInt(g);
+        const game_id = !parseInt(g) ? get_game(g) : null;
 
         for (const v of values) {
-            if (v === "All" || g === "All" || String(v) === String(g) || String(v) == game_generation || (parseInt(g) && String(v) == g) || (parseInt(g) && get_generation(v) == g)) {
-                return true;
-            }
+            if (v === "All") { return true; }
 
-            const operator = v[v.length - 1];
-            const generation_check = parseInt(v.replaceAll("+", "").replaceAll("-", ""));
-            
-            // Example: 6+ --> Generation: 6+, if generation of current game is 6 or higher then give true
-            if (!isNaN(generation_check) && (operator === "-" || operator === "+")) {
-                if ((operator === "-" && game_generation <= generation_check) || 
-                    (operator === "+" && game_generation >= generation_check)) {
-                    return true;
-                }
-            } else if (v.includes("-")) {
+            const value_generation = !parseInt(v) ? get_generation(v) : parseInt(v);
+            const value_id = !parseInt(v) ? get_game(v) : null;
+
+            // Check if the value is a range
+            if (String(v).includes("-")) {
                 const [start, end] = v.split("-");
-                const [generation_start, generation_end] = [Math.min(start, end), Math.max(start, end)].map(Number);
+                const [generation_start, generation_end] = [Math.min(start, end), Math.max(start, end)];
 
-                if (!isNaN(generation_start) && !isNaN(generation_end)) { // Example: 5-6 --> Generation 5 to 6, if generation of current game is either 5 or 6 then give true
+                if (!isNaN(generation_start) && !isNaN(generation_end)) {
+                    // Example: 5-6 --> Generation 5 to 6
                     if (game_generation >= generation_start && game_generation <= generation_end) {
                         return true;
                     }
-                } else { // Example: Ruby-Sun --> Ruby (id: 7) to Sun (id: 27), if game id of current game is between 7 and 27 then give true
-                    const [gameId1, gameId2] = [get_gameid(start), get_gameid(end)];
-                    if (gameId1 > 0 && gameId2 > 0 && (game_id >= Math.min(gameId1, gameId2) && game_id <= Math.max(gameId1, gameId2))) {
+                } else {
+                    // Example: Ruby-Sun --> Ruby (id: 7) to Sun (id: 27)
+                    if (checkRange(start, end, g)) {
                         return true;
                     }
                 }
+            } else if (String(g).includes("-")) {
+                const [start, end] = g.split("-");
+                const [generation_start, generation_end] = [Math.min(start, end), Math.max(start, end)];
+
+                if (!isNaN(generation_start) && !isNaN(generation_end)) {
+                    // Example: 5-6 --> Generation 5 to 6
+                    if (value_generation >= generation_start && value_generation <= generation_end) {
+                        return true;
+                    }
+                } else {
+                    // Example: Ruby-Sun --> Ruby (id: 7) to Sun (id: 27)
+                    if (checkRange(start, end, v)) {
+                        return true;
+                    }
+                }
+            } else {
+                // Check if the value is a single generation or game
+                if (value_id && game_id && value_id === game_id || g === v) {
+                    return true;
+                }
+                if (parseInt(g) && game_generation == value_generation || parseInt(v) && game_generation == value_generation) {
+                    return true;
+                }
             }
         }
-
     }
 
     return false;
 }
-
 
 
 function get_directory(parameters = {}) {
@@ -56,6 +78,8 @@ function get_directory(parameters = {}) {
         Game: [Config.Game],
         ...parameters // Spread operator to merge
     };
+
+    if (!finaldata["Directory"]) { return options.FirstMatch ? "" : [] }
 
     const results = [];
 
@@ -79,7 +103,7 @@ function get_directory(parameters = {}) {
                 const baseKey = comparisonKey.substring(0, comparisonKey.lastIndexOf('/') + 1);
 
                 // Check if the path matches
-                const matchesPath = options.Exact ? baseKey === comparisonPath : baseKey.includes(comparisonPath);
+                const matchesPath = baseKey.includes(comparisonPath);
                 if (!matchesPath) continue;
 
                 const comparisonFile = options.Case ? file : file.toLowerCase();
@@ -108,64 +132,40 @@ function get_directory(parameters = {}) {
 }
 
 
-function get_arraykey(arr) {
 
-    let res = [];
 
-    for (let i = 0; i < arr.length; i++) {
-        let keys = Object.keys(arr[i])
-     
-        for (let k = 0; k < keys.length; k++) {
-            if (keys[k].includes("\n")) {
-                res.push(keys[k])
+
+function get_game(value) {
+    if (typeof value === 'string') {
+        for (const [key, val] of Object.entries(Games)) {
+            if (key.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() === value.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()) {
+                return val.ID;
+            }
+        }
+    } else if (typeof value === 'number') {
+        for (const [key, val] of Object.entries(Games)) {
+            if (val.ID === value) {
+                return key;
             }
         }
     }
-
-    res = [...new Set(res)];
-
-    let result = [];
-    for (let i = 0; i < res.length; i++) {
-        if (get_applicable(res[i].split("\n")[1])) {
-            result[res[i].split("\n")[0]] = res[i]
-        }
-    }
-    return result;
-
-}
-
-
-
-function get_gameid(name) {
-
-    if (name.toLowerCase() === "random") {
-        return Math.floor(Math.random() * Data.Games.length) + 1;
-    }
-
-    const index = Data.Games.map(game => game.toLowerCase().replace(/[^a-zA-Z0-9]/g, '')).indexOf(name.toLowerCase().replace(/[^a-zA-Z0-9]/g, ''));
-    if (index !== 0) {
-        return index+1;
-    }
-
     return null;
 }
-
-function get_game(id) {
-    return Data.Games[id - 1] != undefined ? Data.Games[id - 1] : null;
-}
-function get_generation(game) {
-    
-    const index = typeof game === 'string' ? get_gameid(game) : game;
-
-    if (index >= 1 && index <= 3) return 1;
-	else if (index >= 4 && index <= 6) return 2;
-	else if (index >= 7 && index <= 13) return 3;
-	else if (index >= 14 && index <= 18) return 4;
-	else if (index >= 19 && index <= 22) return 5;
-	else if (index >= 23 && index <= 26) return 6;
-	else if (index >= 27 && index <= 32) return 7;
-	else if (index >= 33 && index <= 34) return 8;
-    
+function get_generation(value) {
+    if (typeof value === 'string') {
+        for (const [key, val] of Object.entries(Games)) {
+            if (key.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() === value.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()) {
+                return val.Generation;
+            }
+        }
+    } else if (typeof value === 'number') {
+        for (const [key, val] of Object.entries(Games)) {
+            if (val.ID === value) {
+                return val.Generation;
+            }
+        }
+    }
+    return null;
 }
 
 
