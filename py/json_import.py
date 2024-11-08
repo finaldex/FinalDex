@@ -153,7 +153,13 @@ def gdrive(sheets=None):
 def format_duration(seconds):
     hours, remainder = divmod(seconds, 3600)
     minutes, seconds = divmod(remainder, 60)
-    return f"{int(hours):02}:{int(minutes):02}:{seconds:05.2f}"
+    
+    if hours > 0:
+        return f"{int(hours)}:{int(minutes):02}:{seconds:05.2f}"
+    elif minutes > 0:
+        return f"{int(minutes)}:{seconds:05.2f}"
+    else:
+        return f"{seconds:05.2f}"
 
 def sheet_to_json():
     try:
