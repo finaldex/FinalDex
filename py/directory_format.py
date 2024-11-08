@@ -21,12 +21,12 @@ try:
                 dir_structure[relative_path].append(name)
 
     # Ensure the data directory exists within the script's directory
-    data_dir = os.path.join(root, 'data')
-    if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
+    json_dir = os.path.join(root, 'json')
+    if not os.path.exists(json_dir):
+        os.makedirs(json_dir)
 
     # Change to the data directory
-    os.chdir(data_dir)
+    os.chdir(json_dir)
 
     # Minimize and write the directory structure to Directory.json
     json_object = json.dumps(dir_structure, separators=(',', ':'))
