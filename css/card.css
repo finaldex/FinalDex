@@ -210,12 +210,13 @@
     padding: 10px;
     font-size: 0.7rem;
 }
-#card .type > div > *:last-child {
+#card .type > div[data-type] > *:last-child {
     padding: 2px 5px;
     border: 1px solid black;
     border-radius: 4px;
     background:hsl(0,0%,40%);
     color:white;
+    text-shadow: 1px 1px 0px black;
 }
 #card .type > div[data-type='Normal'] > *:last-child {
     background: var(--Type_Normal);
