@@ -65,6 +65,7 @@
 	max-width: 80vw;
 	max-height: 80vh;
 	outline: 8px groove hsl(0, 0%, 70%);
+	background: black;
 }
 #fullscreen li div > * {
 	pointer-events: all;
