@@ -103,6 +103,23 @@
     animation: transformScale2 2s ease-in-out infinite;
 }
 
+@keyframes transformScale2 {
+    0% {
+        transform: scale(1);
+    }
+    48% {
+        transform: scale(0.6);
+    }
+    52% {
+        transform: scale(0.6);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
 
 #location .map > button:active {
     font-size: 0.9rem;
