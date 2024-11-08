@@ -16,7 +16,7 @@ const create_ability = function() {
     const ability_catalogList = create_element({ Tag: "ol",  Parent: ability_catalog });
 
     // Entry
-    const abilities = Object.keys(Data.Abilities);
+    const abilities = Data.Abilities ? Object.keys(Data.Abilities) : [];
     abilities.forEach((a, i) => {
         const ability_catalogEntry = create_element({ Tag: "li", Data: { index: a, search: Data.Abilities[a].Ability.join(",") },  Parent: ability_catalogList });
         const ability_catalogEntryLabel = create_element({ Tag: "label", Parent: ability_catalogEntry });
