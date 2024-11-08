@@ -1,0 +1,89 @@
+.svgmap {
+    width: 100%;
+    height: 100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.svgmap img {
+    user-select: none;
+    user-drag: auto;
+    -webkit-user-drag: auto
+}
+.svgmap .container {
+    position: absolute;
+}
+.svgmap .popup {
+    display: flex;
+    position: absolute;
+    background-color: cadetblue;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 3px;
+    z-index: 200;
+    transition: .5s ease opacity 0.1s, 0s linear visibility 0s;
+    font-size: 0.8rem;
+    color: black;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.svgmap .popup > *:first-child {
+    font-weight: bold;
+}
+.svgmap .redirect_event:active {
+    color:white;
+}
+.svgmap .popup:not(.active) {
+    visibility:hidden;
+    opacity: 0;
+}
+.svgmap svg {
+    z-index: 100;
+}
+.svgmap path.disable {
+    display: none;
+}
+.svgmap path {
+    fill: rgba(255, 255, 255, 0);
+    stroke: rgba(255, 255, 255, 0);
+    transition: fill 0.3s;
+    stroke-width: 2px;
+}
+
+
+.svgmap path:hover,
+.svgmap path.active,
+.svgmap path.selected {
+    fill: rgba(255,230,0,1);
+    stroke: rgba(0, 0, 0, 0.5);
+}
+
+.svgmap div:has(svg path.active) > .popup.active {
+    border-color: slateblue;
+    background-color: steelblue;
+}
+
+
+.svgmap path.selected {
+    animation: 1.5s infinite ease-in-out map_highlight;
+}
+
+.svgmap path:hover {
+    fill: rgba(255,230,0,1) !important;
+}
+.svgmap .redirect_event {
+    user-select: none;
+}
+
+
+@keyframes map_highlight {
+    0% {
+        fill:rgba(255,230,0,1);
+    }
+    50% {
+        fill:rgba(255,230,0,0.2);
+    }
+    100% {
+        fill:rgba(255,230,0,1);
+    }
+}
