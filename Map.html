@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Map</title>
+    <link rel="icon" href="./media/Images/FinalDex/Icon/FinalDex.png" type="image/gif" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+
+    <script src="./js/lib/jquery-1.10.2.js"></script>
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Bebas+Neue" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="./css/theme.css">
+    <link rel="stylesheet" type="text/css" href="./css/default.css">
+    
+    <link rel="stylesheet" type="text/css" href="./css/map.css">
+
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+        #content {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            max-width: 100vw;
+            overflow:hidden;
+            margin: 50px 0;
+        }
+   
+        #content > div {
+            width: 100%;
+            height: 100%;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: scale-down;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/1/Map.png' data-map='Kanto 1'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/2/Map.png' data-map='Johto Kanto 1'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Ruby_Sapphire_Emerald/Map.png' data-map='Hoenn 1'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Ruby_Sapphire_Emerald/Map.png' data-map='Hoenn 2'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/FireRed_LeafGreen/Map.png' data-map='Kanto Sevii 1'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Colosseum/Map.png' data-map='Orre 1'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/XD/Map.png' data-map='Orre 2'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Diamond_Pearl_Platinum/Map.png' data-map='Sinnoh 1'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Diamond_Pearl_Platinum/Map.png' data-map='Sinnoh 2'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/HeartGold_SoulSilver/Map.png' data-map='Johto Kanto 2'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Black_White/Map.png' data-map='Unova 1'>
+        </div>
+    </div>
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Black 2_White 2/Map.png' data-map='Unova 2'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/X_Y/Map.png' data-map='Kalos 1'>
+        </div>
+    </div>
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Omega Ruby_Alpha Sapphire/Map.png' data-map='Hoenn 3'>
+        </div>
+    </div>
+
+
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Sun_Moon/Map.png' data-map='Alola 1'>
+        </div>
+    </div>
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Sun_Moon/Map.png' data-map='Alola 2'>
+        </div>
+    </div>
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Ultra Sun_Ultra Moon/Map.png' data-map='Alola 3'>
+        </div>
+    </div>
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Ultra Sun_Ultra Moon/Map.png' data-map='Alola 4'>
+        </div>
+    </div>
+    
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Lets Go Pikachu_Lets Go Eevee/Map.png' data-map='Kanto 2'>
+        </div>
+    </div>
+
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Sword/Map.png' data-map='Galar 1'>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <img src='./media/Images/Region/Map/Shield/Map.png' data-map='Galar 1'>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+  
+  
+
+   
+   
+   
+  
+    <script src="./map/data.js"></script>
+    <script src="./js/function.js"></script>
+    <script src="./js/load.js"></script>
+    <script src="./js/query.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/map.js"></script>
+    <script src="./js/redirect.js"></script>
+    <script>
+        const imgs = document.querySelectorAll("img[data-map]");
+        imgs.forEach(i => {
+            svgmap(i,map_data[i.dataset.map])
+        });
+    </script>
+</body>
+</html>
