@@ -14,7 +14,7 @@ const create_move = function() {
     const move_catalogList = create_element({ Tag: "ol",  Parent: move_catalog });
 
     // Move
-    const moves = Object.keys(Data.Moves);
+    const moves = Data.Moves ? Object.keys(Data.Moves) : [];
     moves.forEach((m, i) => {
         const move_type = Data.Moves[m].Type ? Data.Moves[m].Type : "";
         const move_catalogMove = create_element({ Tag: "li", Data: {index: m, search: Data.Moves[m].Move.join(","), type: move_type}, Parent: move_catalogList });
@@ -149,6 +149,9 @@ function move_data() {
     const typeText = document.querySelector("#move .panel .type > *:last-child")
     typeText.innerText = Data.Moves[index].Type ? Data.Moves[index].Type : "N/A";
 
+    const typeElement =  document.querySelector("#move .panel .type")
+    typeElement.dataset.type = Data.Moves[index].Type ? Data.Moves[index].Type : "";
+
     const typeImage = document.querySelector("#move .panel .type > img");
     const typeSrc = Data.Moves[index].Type ? get_directory({FirstMatch: true, Exact: true, File: [Data.Moves[index].Type], Path: [Path.Type.Icon]}) : "";
     typeImage.src = typeSrc;
@@ -181,7 +184,7 @@ function move_data() {
 
     matchedTutors.forEach(d => {
         let cost_text = d.Cost ? d.Cost.map(({ Cost, Currency }) => {
-            const dir = get_directory({ FirstMatch: true, Exact: true, File: [Currency], Path: [Path.Item.Bag, Path.Currency.Icon] });
+            const dir = get_directory({ FirstMatch: true, Exact: true, File: [Currency], Path: [...Config.Image.Item.Bag.Path, Path.Currency.Icon], Game: [Config.Game, ...Config.Image.Item.Bag.Game] });
             return dir !== "" ? `${Cost} <img src='${dir}' title='${Currency}' />` : Currency.length > 5 ? `${Cost} <span title='${Currency}'>${Currency.match(/[A-Z]/g).join('')}</span>` : `${Cost} ${Currency}`;
         }).join(', ') : null;
         let text = `${move[0]} can be taught at <b>${d.Location}</b> ${d.Area ? `(${d.Area})` : ''}${d.Pokemon ? ` to ${d.Pokemon}` : ''}${d.Rate ? ` ${d.Rate}` : ''}${d.Character ? ` by ${d.Character}` : ''}${cost_text ? ` for ${cost_text}` : ''}`.replaceAll("  ", " ").trim() + '.';
