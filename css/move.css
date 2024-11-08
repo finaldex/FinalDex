@@ -87,6 +87,7 @@
     width: 80%;
     padding: 10px 0;
     line-break: anywhere;
+    text-shadow: 1px 1px 0px black;
 }
 
 #move .panel .affect li[data-boolean='true'] {
@@ -254,7 +255,114 @@
     animation: rangeAnimation3 2s infinite, rangeAnimation2 2s infinite, rangeAnimation3 2s infinite;
 }
 
+@keyframes rangeAnimation1 {
+    0% {
+        background-color: hsl(0, 0%, 40%);
+    }
+    50% {
+        background-color: hsl(0, 0%, 20%);
+    }
+    100% {
+        background-color: hsl(0, 0%, 40%);
+    }
+}
+
+@keyframes rangeAnimation2 {
+    from {
+        background-color: hsl(0, 0%, 20%);
+    }
+    to {
+        background-color: hsl(0, 0%, 20%);
+    }
+}
+
+
+
+
+@keyframes rangeAnimation3 {
+    from {
+        border-color: hsl(130, 70%, 50%);
+    }
+    to {
+        border-color: hsl(130, 70%, 50%);
+    }
+}
+
+
+
 #move .sidebar > header > *:first-child {
     padding: 10px 0;
     font-size: 1.1rem;
+}
+
+#move .panel .type[data-type] > *:last-child {
+    padding: 2px 5px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background: hsl(0, 0%, 40%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-shadow: 1px 1px 0px black;
+}
+
+#move .panel .type[data-type='Normal'] > *:last-child {
+    background: var(--Type_Normal);
+}
+#move .panel .type[data-type='Fighting'] > *:last-child {
+    background: var(--Type_Fighting);
+}
+#move .panel .type[data-type='Flying'] > *:last-child {
+    background: var(--Type_Flying);
+}
+#move .panel .type[data-type='Poison'] > *:last-child {
+    background: var(--Type_Poison);
+}
+#move .panel .type[data-type='Ground'] > *:last-child {
+    background: var(--Type_Ground);
+}
+#move .panel .type[data-type='Rock'] > *:last-child {
+    background: var(--Type_Rock);
+}
+#move .panel .type[data-type='Bug'] > *:last-child {
+    background: var(--Type_Bug);
+}
+#move .panel .type[data-type='Ghost'] > *:last-child {
+    background: var(--Type_Ghost);
+}
+#move .panel .type[data-type='Steel'] > *:last-child {
+    background: var(--Type_Steel);
+}
+#move .panel .type[data-type='Fire'] > *:last-child {
+    background: var(--Type_Fire);
+}
+#move .panel .type[data-type='Water'] > *:last-child {
+    background: var(--Type_Water);
+}
+#move .panel .type[data-type='Grass'] > *:last-child {
+    background: var(--Type_Grass);
+}
+#move .panel .type[data-type='Electric'] > *:last-child {
+    background: var(--Type_Electric);
+    color:black;
+}
+#move .panel .type[data-type='Psychic'] > *:last-child {
+    background: var(--Type_Psychic);
+}
+#move .panel .type[data-type='Ice'] > *:last-child {
+    background: var(--Type_Ice);
+    color:black;
+}
+#move .panel .type[data-type='Dragon'] > *:last-child {
+    background: var(--Type_Dragon);
+}
+#move .panel .type[data-type='Dark'] > *:last-child {
+    background: var(--Type_Dark);
+}
+#move .panel .type[data-type='Fairy'] > *:last-child {
+    background: var(--Type_Fairy);
+    color:black;
+}
+#move .panel .type[data-type='Unknown'] > *:last-child {
+    background: var(--Type_Unknown);
 }
