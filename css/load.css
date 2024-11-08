@@ -79,6 +79,16 @@
     animation: fade 1.3s infinite;
 }
 
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
 #load .description span:nth-of-type(1) {
     animation-delay: 0.0s;
 }
@@ -99,6 +109,20 @@
     border-radius: 2px;
     animation: stretch_delay 1.2s infinite ease;
 }
+
+@keyframes stretch_delay {
+    0%,
+    40%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    20% {
+        transform: scaleY(0.2);
+    }
+}
+
+
 
 #load .rect:nth-child(2) {
     animation-delay: -1.1s;
