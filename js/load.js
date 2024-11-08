@@ -1,18 +1,18 @@
 const finaldata = {};
 
 const json_url = {
-    ["Game"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Game Dataset.json",
-    ["Pokemon"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Dataset.json",
-    ["Pokemon Learnset"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Pokemon Learnset Dataset.json",
-    ["Locations"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Locations Dataset.json",
-    ["Location Pokemon"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Pokemon Dataset.json",
-    ["Location Item"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Items Dataset.json",
-    ["Location Trainers"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Location Trainers Dataset.json",
-    ["Moves"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Moves Dataset.json",
-    ["Abilities"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Abilities Dataset.json",
-    ["Items"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Items Dataset.json",
-    ["Trainers"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Trainers Dataset.json",
-    ["Directory"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/data/Directory.json"
+    ["Game"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Game Dataset.json",
+    ["Pokemon"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Pokemon Dataset.json",
+    ["Pokemon Learnset"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Pokemon Learnset Dataset.json",
+    ["Locations"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Locations Dataset.json",
+    ["Location Pokemon"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Location Pokemon Dataset.json",
+    ["Location Item"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Location Items Dataset.json",
+    ["Location Trainers"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Location Trainers Dataset.json",
+    ["Moves"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Moves Dataset.json",
+    ["Abilities"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Abilities Dataset.json",
+    ["Items"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Items Dataset.json",
+    ["Trainers"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Trainers Dataset.json",
+    ["Directory"]: "https://raw.githubusercontent.com/finaldex/FinalDex/main/json/Directory.json"
 };
 
 let InitialTime = 0;
@@ -55,7 +55,7 @@ async function load_data(game) {
     return new Promise((resolve, reject) => {
         let script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = `./data/${game}_data.js`;
+        script.src = `./data/${game}.js`;
 
         script.onload = () => {
             resolve();
