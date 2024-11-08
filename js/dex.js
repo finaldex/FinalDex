@@ -12,7 +12,7 @@ const create_dex = function() {
     const translateValue = -100 * (header_SwitchContent.dataset.index - 1);
     header_SwitchWrap.style.setProperty('--translate-value', `${translateValue}%`);
 
-    const Pokedex = Array.from(new Set(Object.keys(Data.Pokemon).flatMap(p => Data.Pokemon[p].Pokedex ? Object.keys(Data.Pokemon[p].Pokedex) : [])));
+    const Pokedex = Data && Data.Pokemon ? Array.from(new Set(Object.keys(Data.Pokemon).flatMap(p => Data.Pokemon[p].Pokedex ? Object.keys(Data.Pokemon[p].Pokedex) : []))) : [];
     if (Pokedex.includes("National Pokédex")) { Pokedex.unshift(Pokedex.splice(Pokedex.indexOf("National Pokédex"), 1)[0]); }
 
     header_SwitchContent.dataset.index = Pokedex.length > 1 ? 2 : 1;
@@ -36,7 +36,7 @@ const create_dex = function() {
     const header_GameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: header_Game });
 
     const dex_List = create_element({ Tag: "ol", Class: ["dex_list"], Parent: dex});
-    const Pokemon = Array.from(new Set(Object.values(Data.Pokemon).map(p => p.Pokemon)));
+    const Pokemon = Data && Data.Pokemon ? Array.from(new Set(Object.values(Data.Pokemon).map(p => p.Pokemon))) : [];
 
     Pokemon.forEach((poke, i) => {
         const index = get_pokemonIndex(poke);
@@ -106,7 +106,7 @@ function dex_update() {
     const elements = dexSwitch.querySelectorAll(":scope label");
     const index = dexSwitch.dataset.index ? dexSwitch.dataset.index : 1;
 
-    Config.Pokedex = elements[index - 1].getAttribute("name");
+    Config.Pokedex = elements[index - 1] ? elements[index - 1].getAttribute("name") : undefined;
 
     const translateValue = -100 * (index - 1);
     dexSwitch.querySelector(":scope span").style.setProperty('--translate-value', `${translateValue}%`);
@@ -202,23 +202,16 @@ function image_types() {
 
 
 function image_update() {
-
-    // Temporary
-    Config.Image = { Pokemon: [], Icon: [], };
-    Config.Image.Pokemon = [Path.Pokemon.Battle.Default.Front.GIF, Path.Pokemon.Battle.Default.Front.PNG];
-    Config.Image.Icon = [];
-
     const dex_entries = document.querySelectorAll(".dex_list li");
     
     const img_errors = [];
 
     dex_entries.forEach((entry) => {
         const img = entry.querySelector(":scope img");
-        const path = Config.Image.Pokemon;
         const index = get_pokemonIndex(entry.dataset.index);
         const file = Data.Pokemon[index] ? (Data.Pokemon[index].File ? String(Data.Pokemon[index].File) : null) : null;
         
-        const source = get_directory({FirstMatch: true, Exact: true, File:[file], Path: path });
+        const source = get_directory({FirstMatch: true, Exact: true, File: [file], Path: Config.Image.Pokemon.Battle.Path, });
 
         img.src = source;
 
