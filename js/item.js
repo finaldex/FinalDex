@@ -13,7 +13,7 @@ const create_item = function() {
     // Pocket
     const item_pocketWrap = create_element({ Tag: "div", Class: ["pocket"], Parent: item_catalogHeader });
 
-    const pockets = [...new Set(Object.values(Data.Items).map(item => item.Pocket).filter(Boolean))];
+    const pockets = [...new Set(Data.Items && (Object.values(Data.Items).map(item => item.Pocket).filter(Boolean)))];
     pockets.forEach(pocket => {
         const item_pocketLabel = create_element({ Tag: "label", Parent: item_pocketWrap });
         const item_pocketInput = create_element({ Tag: "input", Attribute: { type: "checkbox", name: "item_pocket", id: `item_pocket-${pocket}`, value: pocket, checked: "" }, Event: {change: () => pocket_filter() }, Parent: item_pocketLabel });
@@ -25,11 +25,11 @@ const create_item = function() {
     const item_catalogList = create_element({ Tag: "ol",  Parent: item_catalog });
 
     // Item
-    const entries = Object.keys(Data.Items);
+    const entries = Data.Items ? Object.keys(Data.Items) : [];
     entries.forEach((idx, i) => {
         if (Data.Items[idx] && Data.Items[idx].Item) { 
             const machineMove = Object.keys(Data.Moves).find(key => Data.Items[idx].Item.includes(Data.Moves[key].Machine));
-            const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].File,...Data.Items[idx].Item], Path: [Path.Item.Bag]});
+            const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].File,...Data.Items[idx].Item], Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game });
             const machineType = machineMove ? Data.Moves[get_moveIndex(machineMove)].Type : null;
 
             const item_catalogEntry = create_element({ Tag: "li", Data: {index: idx, search: [...Data.Items[idx].Item,...(machineMove != null ? [machineMove] : [])].join(",") }, Parent: item_catalogList });
