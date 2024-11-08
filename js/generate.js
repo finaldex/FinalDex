@@ -57,7 +57,7 @@ function generate_locationShopItem(parameters = {}) {
                         const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
                 
                         Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                            const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item], Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
+                            const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item], Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }) }, Parent: itemImageWrap });
                             options.Catalog !== "Item" && (add_redirect(itemImage,{catalog:"item", entry:item_index, style:"brightness"}));
                         });
                         const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
@@ -162,7 +162,7 @@ function generate_locationShopPokemon(parameters = {}) {
             
                         if (options.Catalog === "Location") {
                             const pokemonWrap = create_element({ Tag: "div", Class: ["pokemon"], Parent: leftWrap });
-                            const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF,Path.Pokemon.Menu.Default] }),}, Parent: pokemonWrap });
+                            const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: Config.Image.Pokemon.Box.Path, Game: Config.Image.Pokemon.Box.Game }),}, Parent: pokemonWrap });
                             const pokemonText = create_element({ Tag: "strong", Text: d.Pokemon, Parent: pokemonWrap });
                             add_card(pokemonImage, {catalog: "Pokemon", entry: d.Pokemon, style: "brightness"});
                             add_card(pokemonText, {catalog: "Pokemon", entry: d.Pokemon, style: "invert"});
@@ -255,7 +255,7 @@ function generate_locationItem(parameters = {}) {
                     const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
             
                     Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                        const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
+                        const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }) }, Parent: itemImageWrap });
                         options.Catalog !== "Item" && (add_redirect(itemImage,{catalog:"item", entry:item_index, style:"brightness"}));
                     });
                     const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
@@ -360,8 +360,8 @@ function generate_locationPokemon(parameters = {}) {
 
                     if (options.Catalog == "Location") {
                         const pokemonWrap = create_element({ Tag: "div", Class: ["pokemon"], Parent: leftWrap });
-                        const heldImage = d.Held ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${d.Held}`, src: get_directory({FirstMatch: true, Exact: true, File: held_file, Path: [Path.Item.Bag]}), }, Parent: pokemonWrap }) : null;
-                        const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF,Path.Pokemon.Menu.Default] }),}, Parent: pokemonWrap });
+                        const heldImage = d.Held ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${d.Held}`, src: get_directory({FirstMatch: true, Exact: true, File: held_file, Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }), }, Parent: pokemonWrap }) : null;
+                        const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: Config.Image.Pokemon.Box.Path, Game: Config.Image.Pokemon.Box.Game }),}, Parent: pokemonWrap });
                         const pokemonText = create_element({ Tag: "strong", Text: d.Pokemon, Parent: pokemonWrap });
                         d.Held && (add_redirect(heldImage,{catalog:"item",entry:d.Held,style:"brightness"}));
                         
@@ -379,7 +379,7 @@ function generate_locationPokemon(parameters = {}) {
                         const titleText = d.Title ? create_element({ Tag: "span", Class: ["title"], Text: d.Title, Parent: locationWrap }) : null;
                         add_redirect(locationText,{catalog:"location",entry:location_index,style:"invert"});
 
-                        //const heldImage = d.Held ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${d.Held}`, src: get_directory({FirstMatch: true, Exact: true, File: held_file, Path: [Path.Item.Bag]}), }, Parent: pokemonWrap }) : null;
+                        //const heldImage = d.Held ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${d.Held}`, src: get_directory({FirstMatch: true, Exact: true, File: held_file, Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }), }, Parent: pokemonWrap }) : null;
                         //d.Held && (add_redirect(heldImage,{catalog:"item",entry:d.Held,style:"brightness"}));
                     }    
                     const weatherText = d.Weather ? create_element({ Tag: "li", HTML: format_conjunctionSplit(d.Weather).replace(/(\d{2}:\d{2}-\d{2}:\d{2})|(\w+(?: \w+)?)|([^,\s/]+)/g, "<span data-text='$&'>$&</span>"), Class: ["weather"], Parent: upperWrap }) : null;
@@ -432,7 +432,7 @@ function generate_locationPokemon(parameters = {}) {
                             const item_file = [i, ...(item_index && Data.Items[item_index] ? [Data.Items[item_index].File, ...Data.Items[item_index].Item] : [])];
 
                             const itemContent = create_element({ Tag: "div", Parent: itemWrap });
-                            const itemImage = create_element({ Tag: "img", Attribute: { title: `Required Item\n${i}`, src: get_directory({FirstMatch: true, Exact: true, File: item_file, Path: [Path.Item.Bag]}), }, Parent: itemContent });
+                            const itemImage = create_element({ Tag: "img", Attribute: { title: `Required Item\n${i}`, src: get_directory({FirstMatch: true, Exact: true, File: item_file, Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }), }, Parent: itemContent });
                             const itemText = create_element({ Tag: "span", Text: i, Parent: itemContent });
 
                             add_redirect(itemImage,{catalog:"item",entry:i,style:"brightness"});
@@ -503,7 +503,7 @@ function generate_learnset(parameters = {}) {
 
                     if (options.Catalog === "Move") {
                         const pokemonWrap = create_element({ Tag: "div", Class: ["pokemon"], Parent: data_entry });
-                        const pokemonImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF,Path.Pokemon.Menu.Default] }), }, Parent: pokemonWrap });
+                        const pokemonImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: Config.Image.Pokemon.Box.Path, Game: Config.Image.Pokemon.Box.Game }), }, Parent: pokemonWrap });
                         const pokemonText = create_element({ Tag: "strong", Text: d.Pokemon, Parent: pokemonWrap });
                         add_card(pokemonImage, {catalog: "Pokemon", entry: d.Pokemon, style: "brightness"});
                         add_card(pokemonText, {catalog: "Pokemon", entry: d.Pokemon, style: "invert"});
@@ -530,7 +530,7 @@ function generate_learnset(parameters = {}) {
                         const def_index = get_defaultPokemon(poke_index);
                         const pok_file = [Data.Pokemon[poke_index].File,Data.Pokemon[def_index].File];
                 
-                        const summaryImage = create_element({ Tag: "img", Attribute: { title: p, src: get_directory({FirstMatch: true, Exact: true, File: pok_file, Path: [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF,Path.Pokemon.Menu.Default] }), }, Parent: summaryImageWrap });
+                        const summaryImage = create_element({ Tag: "img", Attribute: { title: p, src: get_directory({FirstMatch: true, Exact: true, File: pok_file, Path: Config.Image.Pokemon.Box.Path, Game: Config.Image.Pokemon.Box.Game }), }, Parent: summaryImageWrap });
                         add_card(summaryImage, {catalog: "Pokemon", entry: p, ...(options.Catalog === "Pokemon" && {select: "area"}), style: "brightness"});
                     });
                 }
@@ -606,7 +606,7 @@ function generate_pickup(parameters = {}) {
                 const itemImageWrap = create_element({ Tag: "div", Class: ["image"], Parent: itemWrap });
 
                 Array.from({ length: (d.Quantity > 5 ? 5 : d.Quantity) }).forEach(q => {
-                    const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: [Path.Item.Bag]}) }, Parent: itemImageWrap });
+                    const itemImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: [d.Image,Data.Items[item_index].File,...Data.Items[item_index].Item].filter(value => value !== undefined), Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }) }, Parent: itemImageWrap });
                 });
                 const quantityExtend = d.Quantity > 5 ? create_element({ Tag: "span", Text: `...`, Class:["extend"], Attribute: {  title: `${d.Quantity}x ${d.Item}` }, Parent: itemImageWrap }) : null;
 
@@ -676,7 +676,7 @@ function generate_ability(parameters = {}) {
             const data_entry = create_element({ Tag: "li", Class:["generate_ability"], Parent: options.Parent });
                 
             const pokemonWrap = create_element({ Tag: "div", Class: ["pokemon"], Parent: data_entry });
-            const pokemonImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File:[file], Path: [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF,Path.Pokemon.Menu.Default] }), }, Parent: pokemonWrap });
+            const pokemonImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File:[file], Path: Config.Image.Pokemon.Box.Path, Game: Config.Image.Pokemon.Box.Game }), }, Parent: pokemonWrap });
             const pokemonText = create_element({ Tag: "strong", Text: p, Parent: pokemonWrap });
 
             add_card(pokemonImage, {catalog: "Pokemon", entry: p, style: "brightness"});
@@ -736,7 +736,7 @@ function generate_tutor(parameters = {}) {
                 if (move_index) {
 
                     let cost_text = d.Cost ? d.Cost.map(({ Cost, Currency }) => {
-                        const dir = get_directory({ FirstMatch: true, Exact: true, File: [Currency], Path: [Path.Item.Bag, Path.Currency.Icon] });
+                        const dir = get_directory({ FirstMatch: true, Exact: true, File: [Currency], Path: [...Config.Image.Item.Bag.Path, Path.Currency.Icon], Game: [Config.Game,...Config.Image.Item.Bag.Game] });
                         return dir !== "" ? `${Cost} <img src='${dir}' title='${Currency}' />` : Currency.length > 5 ? `${Cost} <span title='${Currency}'>${Currency.match(/[A-Z]/g).join('')}</span>` : `${Cost} ${Currency}`;
                     }).join(', ') : null;
 
