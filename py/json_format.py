@@ -8,7 +8,7 @@ import time
 start_time = time.time()
 
 # Directory containing the JSON files
-data_directory = '../data/'
+data_directory = '../json/'
 
 # List of dataset files to load
 dataset_files = [
@@ -1994,7 +1994,7 @@ for game in Games.keys():
 
     data_convert(game)
 
-    output_file = '../data/'+game+'_data.js'
+    output_file = '../data/'+game+'.js'
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write('const json_data = ')
         json.dump(Data, f, separators=(',', ':'), ensure_ascii=False)
