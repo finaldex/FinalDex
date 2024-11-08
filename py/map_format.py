@@ -31,4 +31,4 @@ def convert_svg_to_js(directory, output_file):
         f.write(';')
 
 if __name__ == '__main__':
-    convert_svg_to_js('../map', '../js/map_data.js')
+    convert_svg_to_js('../map', '../data/map.js')
