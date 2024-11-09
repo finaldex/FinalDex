@@ -15,7 +15,7 @@ def convert_svg_to_js(directory, output_file):
             paths = []
             for path in root.findall('.//{http://www.w3.org/2000/svg}path'):
                 path_data = {
-                    'entry': re.sub(r'_.*', '', path.get('id')),
+                    'entry': path.get('id'),
                     'd': path.get('d')
                 }
                 paths.append(path_data)
