@@ -27,9 +27,7 @@
     flex-direction: column;
     align-items: flex-start;
 }
-.svgmap .popup > *:first-child {
-    font-weight: bold;
-}
+
 .svgmap .redirect_event:active {
     color:white;
 }
