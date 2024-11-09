@@ -357,12 +357,16 @@ function configure_game(id) {
 			Config.Map = map_data["Johto Kanto 2"] || [];
 			break;
         case 19: // Black
+            Config.Map = map_data["Unova 1"] || [];
+            break
         case 20: // White
-			Config.Map = map_data["Unova 1"] || [];
+			Config.Map = map_data["Unova 2"] || [];
 			break;
         case 21: // Black 2
+            Config.Map = map_data["Unova 3"] || [];
+			break;
         case 22: // White 2
-			Config.Map = map_data["Unova 2"] || [];
+			Config.Map = map_data["Unova 4"] || [];
 			break;
         case 23: // X
         case 24: // Y
