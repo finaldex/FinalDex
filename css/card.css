@@ -205,10 +205,17 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: center;
     text-align: right;
     padding: 10px;
     font-size: 0.7rem;
+}
+#card .type > * {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
 }
 #card .type > div[data-type] > *:last-child {
     padding: 2px 5px;
