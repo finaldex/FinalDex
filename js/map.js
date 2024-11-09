@@ -14,7 +14,7 @@ function svgmap(image,svgdata) {
     wrap.appendChild(image)
 
     const container = create_element({ Tag: "div", Class: ['container'], Parent: wrap });
-    const popup = create_element({ Tag: "div", Class: ['popup'], Event:{ mouseover: () => {popup_show()}, mouseout: () => {popup_hide()}}, Parent: container });
+    const popup = create_element({ Tag: "div", Class: ['popup'], Event: { mouseover: () => {popup_show()}, mouseout: () => {popup_hide()}}, Parent: container });
     const svg = create_element({ Tag: "svg", Attribute: {"preserveAspectRatio": "xMidYMid meet"}, Parent: container });
 
     image.addEventListener('load', function() {svg_update(wrap)});
@@ -22,6 +22,7 @@ function svgmap(image,svgdata) {
 
     svg_update(wrap);
     svg_init();
+
     function popup_position(event,override) {
 
         if (popupLocked && !override) return
@@ -71,14 +72,6 @@ function svgmap(image,svgdata) {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     function popup_hide() {
         if (popupLocked) return;
 
@@ -99,8 +92,14 @@ function svgmap(image,svgdata) {
         popup.innerHTML = "";
         const areas = event.target.dataset.entry ? event.target.dataset.entry.split(/[,]/) : [];
         areas.forEach(a => {
-            const areaText = create_element({ Tag: "span", Text: a, Parent: popup });
-            add_redirect(areaText, { catalog: "location", entry: a });
+            const location_index = get_locationIndex(a.replace("_",""));
+            if (location_index) {
+                const areaText = create_element({ Tag: a.includes("_") ? "strong" : "span", Text: a.replace("_",""), Parent: popup });
+                add_redirect(areaText, { catalog: "location", entry: a.replace("_","") });
+            }
+            else {
+                console.warn(`Found invalid Location: ${a.replace("_","")}`);
+            }
         });
     }
 
@@ -171,14 +170,11 @@ function svgmap(image,svgdata) {
 }
 
 function map_update() {
-
-
     Config.Map.paths.forEach((p,i) => {
-        const location = Config.Map.paths[i].entry;
-        const areas = Data && Data.Locations ? Object.keys(Data.Locations).filter(key => { const area = Data.Locations[key].Connection; return key && area && area.Located && [location].some(l => area.Located.includes(l)); }).filter(area => !Config.Map.paths.some(path => path.entry === area)) : [];
-        Config.Map.paths[i].entry = [location,...areas];
+        const location = Config.Map.paths[i].entry.split(/[_]/);
+        const areas = Data && Data.Locations ? Object.keys(Data.Locations).filter(key => { const area = Data.Locations[key].Connection; return key && area && area.Located && location.some(l => area.Located.includes(l)); }).filter(a => !Config.Map.paths.some(p => { let entries = Array.isArray(p["entry"]) ? p["entry"] : [p["entry"]]; return entries.some(e => e === a); })) : [];
+        Config.Map.paths[i].entry = [...location.map(v => "_"+v),...areas];
     });
-    
 }
 function map_select(map,location) {
     if (!map) { return };
