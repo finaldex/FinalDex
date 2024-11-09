@@ -179,6 +179,38 @@ function card_display() {
             });
 
             // Data
+
+            // Ratio
+            const data_ratio = ["Gender Ratio"];
+            data_ratio.forEach(d => {
+                const index = Data.Pokemon[pokemon_index][d] ? pokemon_index : Data.Pokemon[default_index][d] ? default_index : null;
+
+                if (index) {
+                    const data_entry = create_element({Tag: "li", Class: [d.replaceAll(" ","").toLowerCase()], Parent: data_wrap });
+                    const data_header = create_element({Tag: "section", Parent: data_entry });
+                    const data_headerText = create_element({Tag: "strong", Text:d, Parent: data_header });
+
+                    const data_value = create_element({Tag: "section", Parent: data_entry });
+
+                    const data_valueBarWrap = create_element({Tag: "div", Class: ["bar"], Parent: data_value });
+
+                    const ratio = Data.Pokemon[index][d];
+                    const ratio_total = Object.values(ratio).reduce((sum, value) => sum + value, 0);
+
+                    Object.keys(ratio).forEach(r => {
+                        let ratio_percentage = (ratio[r] / ratio_total) * 100;
+                        ratio_percentage = ratio_percentage ? ratio_percentage : 0;
+
+                        const data_valueBar = create_element({ Tag: "span", Class: [r.replaceAll(" ", "").toLowerCase()], Data: { value: ratio[r] }, ...( ratio_total !== 0 && {Attribute: { title: r }}), Parent: data_valueBarWrap });
+                        const data_valueBarText = create_element({ Tag: "strong", Text: `${ratio_percentage.toFixed(1)}%`,Parent: data_valueBar });
+                        data_valueBar.style.setProperty("--Width", `${ratio_percentage}%`);
+                    });
+                    
+                }
+            });
+            
+
+            // Keys
             const data_keys = ["Group","Category","Catch Rate","Leveling Rate","Weight","Height","Egg Group","Egg Cycle","Effort Value Yield","Experience Yield","Base Friendship","Shape"];
             const data_wrap = create_element({Tag: "ul", Class:["data"], Parent: groupWrap });
 
@@ -213,35 +245,7 @@ function card_display() {
                 }
             })
                 
-            const data_ratio = ["Gender Ratio"];
-            // Ratio
-            data_ratio.forEach(d => {
-                const index = Data.Pokemon[pokemon_index][d] ? pokemon_index : Data.Pokemon[default_index][d] ? default_index : null;
-
-                if (index) {
-                    const data_entry = create_element({Tag: "li", Class: [d.replaceAll(" ","").toLowerCase()], Parent: data_wrap });
-                    const data_header = create_element({Tag: "section", Parent: data_entry });
-                    const data_headerText = create_element({Tag: "strong", Text:d, Parent: data_header });
-
-                    const data_value = create_element({Tag: "section", Parent: data_entry });
-
-                    const data_valueBarWrap = create_element({Tag: "div", Class: ["bar"], Parent: data_value });
-
-                    const ratio = Data.Pokemon[index][d];
-                    const ratio_total = Object.values(ratio).reduce((sum, value) => sum + value, 0);
-
-                    Object.keys(ratio).forEach(r => {
-                        let ratio_percentage = (ratio[r] / ratio_total) * 100;
-                        ratio_percentage = ratio_percentage ? ratio_percentage : 0;
-
-                        const data_valueBar = create_element({ Tag: "span", Class: [r.replaceAll(" ", "").toLowerCase()], Data: { value: ratio[r] }, ...( ratio_total !== 0 && {Attribute: { title: r }}), Parent: data_valueBarWrap });
-                        const data_valueBarText = create_element({ Tag: "strong", Text: `${ratio_percentage.toFixed(1)}%`,Parent: data_valueBar });
-                        data_valueBar.style.setProperty("--Width", `${ratio_percentage}%`);
-                    });
-                    
-                }
-            });
-            
+           
       
 
             // Evolution
