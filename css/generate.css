@@ -230,11 +230,11 @@
     font-size: 0.75rem;
 }
 
-.generate_location_pokemon [data-spoiler='true'] {
+.generate_location_pokemon[data-spoiler='true'] {
     position: relative;
 }
 
-.generate_location_pokemon [data-spoiler='true']::after {
+.generate_location_pokemon[data-spoiler='true']::after {
     content: "Click to display";
     display: flex;
     width: 100%;
