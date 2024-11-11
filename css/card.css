@@ -225,6 +225,10 @@
     color:white;
     text-shadow: 1px 1px 0px black;
 }
+#card .type > div[data-type] > * {
+    margin: 2px 0;
+}
+
 #card .type > div[data-type='Normal'] > *:last-child {
     background: var(--Type_Normal);
 }
@@ -361,6 +365,9 @@
     justify-content: center;
     align-items: center;
 }
+#card .id *[title] {
+    cursor: help;
+}
 
 #card > aside:first-child > header > * {
     padding: 2px 0;
@@ -382,11 +389,14 @@
     justify-content: center;
     text-align: center;
     padding: 10px 0;
-}
-
-#card ul.data li:not(:last-child) {
     border-bottom: 1px dashed hsl(0, 0%, 0%);
 }
+
+#card ul.data .pokedexentry > *:last-child {
+    font-family: monospace;
+    font-size: 0.7rem;
+}
+
 
 #card ul.data li > section {
     display: flex;
