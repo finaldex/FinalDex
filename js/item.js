@@ -52,7 +52,8 @@ const create_item = function() {
     // Sidebar
     const item_sidebar = create_element({ Tag: "aside", Class: ["sidebar"], Parent: item });
     const item_sidebarHeader = create_element({ Tag: "header", Parent: item_sidebar });
-    const item_sidebarHeaderText = create_element({ Tag: "h3", Text: "Item Location", Parent: item_sidebarHeader });
+    const item_sidebarHeaderTitle = create_element({ Tag: "h4", Text: "Item Location:", Parent: item_sidebarHeader });
+    const item_sidebarHeaderText = create_element({ Tag: "h3", Text: "", Parent: item_sidebarHeader });
 
     // Content
     const item_sidebarContent = create_element({ Tag: "main", Parent: item_sidebar });
@@ -90,6 +91,9 @@ function item_data() {
         const currency = d.Currency == "N/A" ? "" : currency_source !== "" ? ` <img src='${currency_source}' title='${d.Currency}' />` : ` ${d.Currency}`;
         const priceText = create_element({ Tag: "strong", HTML: `Sell Price: ${d.Price}${currency}`, Attribute: {title:`Sold for ${d.Price}${d.Currency !== "N/A" ? ` ${d.Currency}` : ''}${d.Shop ? ` (${d.Shop})` : ''}`}, Parent: priceElement });
     });
+
+    const sidebarHeaderText = document.querySelector("#item .sidebar > header > *:last-child")
+    sidebarHeaderText.innerText = item[0];
 
 
     const list = document.querySelector("#item .sidebar > main ul");
