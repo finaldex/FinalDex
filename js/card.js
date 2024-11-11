@@ -125,7 +125,7 @@ function card_display() {
 
             const typeWrap = Object.keys(pokemon_type).length > 0 ? create_element({Tag: "div", Class: ["type"], Parent: card }) : null;
             Object.keys(pokemon_type).forEach(i => {
-                const type_src = get_directory({FirstMatch: true, Exact: true, File: [pokemon_type[i]], Path: [Path.Type.Icon]})
+                const type_src = Config.Images.Types[pokemon_type[i]].Icon;
                 
                 const type = create_element({Tag: "div", Class:[i.replaceAll(" ","").toLowerCase()], Data: { type: pokemon_type[i] }, Parent: typeWrap });
                 const typeImage = create_element({Tag: "img", Attribute: { src: type_src, title: pokemon_type[i], }, Parent: type });
@@ -141,7 +141,7 @@ function card_display() {
             const nameWrap = create_element({Tag: "div", Class:["name"], Parent: leftTopWrap });
             const name = create_element({Tag: "strong", Text: pokemon_index, Parent: nameWrap });
 
-            const pokemon_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Pokemon[pokemon_index].File], Path: Config.Image.Pokemon.Battle.Path });
+            const pokemon_src = Config.Images.Pokemon[pokemon_index].Battle.Default.Front.PNG || Config.Images.Pokemon[pokemon_index].Battle.Default.Front.PNG;
             const pokemonWrap = create_element({Tag: "div", Class:["pokemon"], Parent: leftCenterWrap });
             const pokemonImage = create_element({Tag: "img", Attribute: {src: pokemon_src},  Parent: pokemonWrap });
 
@@ -256,7 +256,7 @@ function card_display() {
 
                     const evolution = create_element({ Tag: "li", Parent: evolution_parent });
                     const wrap = create_element({ Tag: "span", Parent: evolution });
-                    const image = create_element({ Tag: "img", Attribute:{src: get_directory({FirstMatch: true, Exact: true, File: [Data.Pokemon[pokemon].File], Path: Config.Image.Pokemon.Battle.Path })}, Parent: wrap });
+                    const image = Config.Images.Pokemon[pokemon].Battle.Default.Front.PNG || Config.Images.Pokemon[pokemon].Battle.Default.Front.PNG;
                     const name = create_element({ Tag: "strong", Text: pokemon, Parent: wrap });
                     const description = evolution_text ? create_element({ Tag: "p", HTML: evolution_text, Parent: wrap }) : null;
                     const evolutionData = Data.Pokemon[pokemon].Evolution;
@@ -302,7 +302,7 @@ function card_display() {
                 });
                 */
 
-                const form_image = create_element({Tag: "img", Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: [Data.Pokemon[idx].File], Path: Config.Image.Pokemon.Battle.Path })}, Parent: form });
+                const form_image = create_element({Tag: "img", Attribute: { src: Config.Images.Pokemon[idx].Battle.Default.Front.PNG || Config.Images.Pokemon[idx].Battle.Default.Front.PNG }, Parent: form });
                 const form_name = create_element({Tag: "strong", Text: idx, Parent: form });
                 const form_change = Data.Pokemon[idx].Form && Data.Pokemon[idx].Form.Change ? create_element({Tag: "p", Text: Data.Pokemon[idx].Form.Change, Parent: form }) : null;
                 
