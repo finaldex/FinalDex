@@ -29,7 +29,7 @@ const create_move = function() {
     const move_id = create_element({ Tag: "h3", Class: ["id_text"], Parent: move_titleWrap });
     const move_title = create_element({ Tag: "h2", Class: ["title_text"], Parent: move_titleWrap });
     const move_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: move_header });
-    const move_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: move_gameWrap });
+    const move_gameImage = create_element({ Tag: "img", Attribute: { src: Config.Images.Game.Title }, Parent: move_gameWrap });
 
     // Sidebar
     const move_sidebar = create_element({ Tag: "aside",Class: ["sidebar"],  Parent: move });
@@ -153,7 +153,7 @@ function move_data() {
     typeElement.dataset.type = Data.Moves[index].Type ? Data.Moves[index].Type : "";
 
     const typeImage = document.querySelector("#move .panel .type > img");
-    const typeSrc = Data.Moves[index].Type ? get_directory({FirstMatch: true, Exact: true, File: [Data.Moves[index].Type], Path: [Path.Type.Icon]}) : "";
+    const typeSrc = Data.Moves[index].Type ? Config.Images.Types[Data.Moves[index].Type].Icon : "";
     typeImage.src = typeSrc;
 
     const affectList = document.querySelector("#move .panel .affect");
@@ -184,7 +184,7 @@ function move_data() {
 
     matchedTutors.forEach(d => {
         let cost_text = d.Cost ? d.Cost.map(({ Cost, Currency }) => {
-            const dir = get_directory({ FirstMatch: true, Exact: true, File: [Currency], Path: [...Config.Image.Item.Bag.Path, Path.Currency.Icon], Game: [Config.Game, ...Config.Image.Item.Bag.Game] });
+            const dir = get_directory({ FirstMatch: true, Exact: true, File: [Currency], Path: [Path.Item.Bag, Path.Currency.Icon] });
             return dir !== "" ? `${Cost} <img src='${dir}' title='${Currency}' />` : Currency.length > 5 ? `${Cost} <span title='${Currency}'>${Currency.match(/[A-Z]/g).join('')}</span>` : `${Cost} ${Currency}`;
         }).join(', ') : null;
         let text = `${move[0]} can be taught at <b>${d.Location}</b> ${d.Area ? `(${d.Area})` : ''}${d.Pokemon ? ` to ${d.Pokemon}` : ''}${d.Rate ? ` ${d.Rate}` : ''}${d.Character ? ` by ${d.Character}` : ''}${cost_text ? ` for ${cost_text}` : ''}`.replaceAll("  ", " ").trim() + '.';
