@@ -445,16 +445,79 @@ function configure_game(id) {
     }
 
     // Images
-    Config.Image.Pokemon.Battle.Path = [Path.Pokemon.Battle.Default.Front.GIF, Path.Pokemon.Battle.Default.Front.PNG,Path.Pokemon.Menu.Default];
-    Config.Image.Pokemon.Battle.Game = [Config.Game];
-    Config.Image.Pokemon.Box.Path = [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF];
-    Config.Image.Pokemon.Box.Game = Config.Generation >= 1 && Config.Generation <= 2 ? ["3"] : [Config.Game];
+    /*
+    Config.Image.Pokemon.Battle.Default.Path = [Path.Pokemon.Battle.Default.Front.GIF, Path.Pokemon.Battle.Default.Front.PNG,Path.Pokemon.Menu.Default];
+    Config.Image.Pokemon.Battle.Default.Game = [Config.Game];
+    Config.Image.Pokemon.Box.Default.Path = [Path.Pokemon.Box.Default.PNG,Path.Pokemon.Box.Default.GIF];
+    Config.Image.Pokemon.Box.Default.Game = Config.Generation >= 1 && Config.Generation <= 2 ? ["3"] : [Config.Game];
     Config.Image.Item.Bag.Path = [Path.Item.Bag];
     Config.Image.Item.Bag.Game = [Config.Game];
+    */
 
-    
     map_update();
     load_initialize();
 }
 
 
+let Images = {}
+
+function image_configure() {
+
+    // Image lookup table
+    Config.Images = {};
+
+    // Pokemon
+    Config.Images.Pokemon = {};
+
+    Object.keys(Data.Pokemon).forEach(p => {
+        Config.Images.Pokemon[p] = {};
+        Config.Images.Pokemon[p].Battle = {};
+        Config.Images.Pokemon[p].Battle.Default = {};
+        Config.Images.Pokemon[p].Battle.Default.Front = {};
+        Config.Images.Pokemon[p].Battle.Default.Front.PNG = get_directory({ FirstMatch: true, Exact: true, File: [Data.Pokemon[p].File], Path: [Path.Pokemon.Battle.Default.Front.PNG] });
+        Config.Images.Pokemon[p].Battle.Default.Front.GIF = get_directory({ FirstMatch: true, Exact: true, File: [Data.Pokemon[p].File], Path: [Path.Pokemon.Battle.Default.Front.GIF] });
+        Config.Images.Pokemon[p].Box = {};
+        Config.Images.Pokemon[p].Box.Default = {};
+        Config.Images.Pokemon[p].Box.Default.PNG = get_directory({ FirstMatch: true, Exact: true, File: [Data.Pokemon[p].File], Path: [Path.Pokemon.Box.Default.PNG], Game: Config.Generation >= 1 && Config.Generation <= 2 ? ["3"] : [Config.Game] });
+        Config.Images.Pokemon[p].Box.Default.GIF = get_directory({ FirstMatch: true, Exact: true, File: [Data.Pokemon[p].File], Path: [Path.Pokemon.Box.Default.GIF], Game: Config.Generation >= 1 && Config.Generation <= 2 ? ["3"] : [Config.Game] });
+
+        Config.Images.Pokemon[p].Overworld = {};
+        Config.Images.Pokemon[p].Overworld.Default = {};
+        Config.Images.Pokemon[p].Overworld.Default.Front = {};
+        Config.Images.Pokemon[p].Overworld.Default.Front.PNG = get_directory({ FirstMatch: true, Exact: true, File: [Data.Pokemon[p].File], Path: [Path.Pokemon.Overworld.Default.Front.PNG] });
+        Config.Images.Pokemon[p].Overworld.Default.Front.GIF = get_directory({ FirstMatch: true, Exact: true, File: [Data.Pokemon[p].File], Path: [Path.Pokemon.Overworld.Default.Front.GIF] });
+    });
+
+    // Items
+    Config.Images.Items = {};
+
+    Object.keys(Data.Items).forEach(i => {
+        Config.Images.Items[i] = {};
+        Config.Images.Items[i].Bag = get_directory({ FirstMatch: true, Exact: true, File: [Data.Items[i].File,...Data.Items[i].Item], Path: [Path.Item.Bag] });
+    });
+
+    // Locations
+    Config.Images.Locations = {};
+
+    Object.keys(Data.Locations).forEach(l => {
+        Config.Images.Locations[l] = {};
+        Config.Images.Locations[l].Overview = get_directory({ FirstMatch: false, Exact: true, File: [...Data.Locations[l].Location], Path: [Path.Location.Load, Path.Location.Overview]});
+        Config.Images.Locations[l].Overview.sort((a, b) => Data.Locations[l].Location.some(v => a.split('/').pop().startsWith(v) && !a.split('/').pop().includes('_')) && !Data.Locations[l].Location.some(v => b.split('/').pop().startsWith(v) && !b.split('/').pop().includes('_')) ? -1 : !Data.Locations[l].Location.some(v => a.split('/').pop().startsWith(v) && !a.split('/').pop().includes('_')) && Data.Locations[l].Location.some(v => b.split('/').pop().startsWith(v) && !b.split('/').pop().includes('_')) ? 1 : a.localeCompare(b));
+    });
+
+    // Types
+    Config.Images.Types = {};
+
+    Config.Types.forEach(t => {
+        Config.Images.Types[t] = {};
+        Config.Images.Types[t].Icon = get_directory({ FirstMatch: true, Exact: true, File: [t], Path: [Path.Type.Icon] });
+    });
+
+
+    // Game
+    Config.Images.Game = {};
+    Config.Images.Game.Title = get_directory({ FirstMatch: true, Exact: true, File: ["Title"], Path: [Path.Game.Title]});
+
+    //Images.Type["Fire"].Icon
+    //Images.Pokemon["Bulbasaur"].
+}
