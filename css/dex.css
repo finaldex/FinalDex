@@ -127,6 +127,7 @@
 
 .dex_list .data > * {
     font-size: 1.8rem;
+    text-shadow: 0px 0px 2px white;
 }
 
 .dex_list img:not([src])::after,
