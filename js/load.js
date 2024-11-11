@@ -89,6 +89,7 @@ function load_initialize() {
     document.querySelector("#load").style.setProperty("--progress", "100%");
     document.querySelector("#load .description > *").innerHTML = "Complete!";
 
+    image_configure();
     create_card();
     create_console();
     create_fullscreen();
