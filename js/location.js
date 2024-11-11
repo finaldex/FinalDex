@@ -27,7 +27,7 @@ const create_location = function() {
     const location_titleWrap = create_element({ Tag: "div", Class: ["title"], Parent: location_header });
     const location_title = create_element({ Tag: "h2", Parent: location_titleWrap });
     const location_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: location_header });
-    const location_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: location_gameWrap });
+    const location_gameImage = create_element({ Tag: "img", Attribute: { src: Config.Images.Game.Title, }, Parent: location_gameWrap });
     const location_sloganWrap = create_element({ Tag: "div", Class: ["slogan"], Parent: location_header });
     const location_slogan = create_element({ Tag: "h4", Attribute: {title: "Slogan"}, Parent: location_sloganWrap });
 
@@ -280,8 +280,7 @@ function location_data() {
     overviewList.innerHTML = "";
     overviewList.dataset.index = 1;
 
-    const overviewImages = get_directory({Exact: true, File: [...Data.Locations[location_index].Location], Path: [Path.Location.Load,Path.Location.Overview]})
-    overviewImages.sort((a, b) => Data.Locations[location_index].Location.some(v => a.split('/').pop().startsWith(v) && !a.split('/').pop().includes('_')) && !Data.Locations[location_index].Location.some(v => b.split('/').pop().startsWith(v) && !b.split('/').pop().includes('_')) ? -1 : !Data.Locations[location_index].Location.some(v => a.split('/').pop().startsWith(v) && !a.split('/').pop().includes('_')) && Data.Locations[location_index].Location.some(v => b.split('/').pop().startsWith(v) && !b.split('/').pop().includes('_')) ? 1 : a.localeCompare(b));
+    const overviewImages = Config.Images.Locations[location_index].Overview;
     overviewImages.forEach(i => {
         const overviewWrap = create_element({ Tag: "li", Parent: overviewList });
         const overviewImage = create_element({ Tag: "img", Attribute: {src: i, title: i.split('/').pop().replace(/\.[^.]+$/, '').replace(/.*_/, '')}, Parent: overviewWrap });
@@ -446,7 +445,7 @@ function trainer_populate(location_index) {
 
     trainer_data[index].Reward && (trainer_data[index].Reward.Quantity = trainer_data[index].Reward.Quantity ? trainer_data[index].Reward.Quantity : 1 );  
     const reward_index = trainer_data[index].Reward ? get_itemIndex(trainer_data[index].Reward.Reward) : null;
-    const reward_src = reward_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[reward_index].File,...(Data.Items[reward_index].Item)], Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }) : trainer_data[index].Reward ? get_directory({FirstMatch: true, Exact: true, File: [trainer_data[index].Reward.Reward], Path: [Path.Currency.Icon]}) : "";
+    const reward_src = reward_index ? Config.Images.Items[reward_index].Bag : trainer_data[index].Reward ? get_directory({FirstMatch: true, Exact: true, File: [trainer_data[index].Reward.Reward], Path: [Path.Currency.Icon]}) : "";
     
     const reward_text = trainer_data[index].Reward ? (reward_index ? `${trainer_data[index].Reward.Quantity}x<br>${trainer_data[index].Reward.Reward}` : reward_src !== "" ? `${trainer_data[index].Reward.Quantity}<img src='${reward_src}' title='${trainer_data[index].Reward.Reward}' />` : trainer_data[index].Reward.Reward.length > 5 ? `${trainer_data[index].Reward.Quantity} <span title='${trainer_data[index].Reward.Reward}'>${trainer_data[index].Reward.Reward.match(/[A-Z]/g).join('')}</span>` : `${trainer_data[index].Reward.Quantity} <span title='${trainer_data[index].Reward.Reward}'>${trainer_data[index].Reward.Reward.match(/[A-Z]/g).join('')}</span>`) : "";
     rewardText.innerHTML = reward_text;
@@ -475,7 +474,7 @@ function trainer_populate(location_index) {
 
     trainer_data[index].Item && (trainer_data[index].Item.Quantity = trainer_data[index].Item.Quantity ? trainer_data[index].Item.Quantity : 1 );  
     const item_index = trainer_data[index].Item ? get_itemIndex(trainer_data[index].Item.Item) : null;
-    const item_src = item_index ? get_directory({FirstMatch: true, Exact: true, File: [Data.Items[item_index].File,...(Data.Items[item_index].Item)], Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }) : "";
+    const item_src = item_index ? Config.Images.Items[item_index].Bag : "";
     itemText.innerHTML = trainer_data[index].Item ? (item_index ? `${trainer_data[index].Item.Quantity}x<br>${trainer_data[index].Item.Item}` : "") : "";
 
     item_index && item_src !== "" && (Array(Math.min(trainer_data[index].Item.Quantity, 5)).fill().forEach(i => {
@@ -501,9 +500,6 @@ function trainer_populate(location_index) {
         if (Data.Pokemon[pokemon_index]) {
             const default_index = get_defaultPokemon(pokemon_index);
             const held_index = p.Item ? get_itemIndex(p.Item) : null;
-
-            const pokemon_file = [Data.Pokemon[pokemon_index].File,Data.Pokemon[default_index].File].filter(v => v !== undefined && v !== null);
-            const held_file = [p.Item, ...(held_index ? [Data.Items[held_index].File, ...Data.Items[held_index].Item] : [])].filter(v => v !== undefined && v !== null);
 
             const header = p.Header ? p.Header : "";
             const headerElement = pokemonList.querySelector(`:scope ol[data-index="${header}"]`)
@@ -534,11 +530,11 @@ function trainer_populate(location_index) {
             
             const pokemonWrap = create_element({ Tag: "div", Class: ["pokemon"], Parent: leftWrap });
 
-            const heldImage = p.Item ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${p.Item}`, src: get_directory({FirstMatch: true, Exact: true, File: held_file, Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game }), }, Parent: pokemonWrap }) : null;
+            const heldImage = p.Item ? create_element({ Tag: "img", Class: ["held_image"], Attribute: { title: `Held Item\n${p.Item}`, src: held_index ? Config.Images.Items[held_index].Bag : "", }, Parent: pokemonWrap }) : null;
             p.Item && held_index && (add_redirect(heldImage, { catalog: "item", entry: held_index, style: "brightness" }));
             const genderText = p.Gender ? create_element({ Tag: "strong", Class: ["gender"], Text: p.Gender, Attribute: {title: p.Gender === "♂" ? "Male" : p.Gender === "♀" ? "Female" : ""}, Data: {gender: p.Gender}, Parent: pokemonWrap }) : null;
             
-            const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: get_directory({FirstMatch: true, Exact: true, File: pokemon_file, Path: Config.Image.Pokemon.Battle.Path }) }, Parent: pokemonWrap });
+            const pokemonImage = create_element({ Tag: "img", Class: ["pokemon_image"], Attribute: { src: Config.Images.Pokemon[pokemon_index].Battle.Default.Front.PNG || Config.Images.Pokemon[pokemon_index].Battle.Default.Front.GIF, }, Parent: pokemonWrap });
             const pokemonText = create_element({ Tag: "strong", Class: ["pokemon_name"], Text: p.Pokemon, Parent: pokemonWrap });
 
             const abilityWrap = p.Ability ? create_element({ Tag: "div", Class: ["ability"], Parent: lowerRightWrap }) : null;
