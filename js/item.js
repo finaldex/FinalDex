@@ -29,7 +29,7 @@ const create_item = function() {
     entries.forEach((idx, i) => {
         if (Data.Items[idx] && Data.Items[idx].Item) { 
             const machineMove = Object.keys(Data.Moves).find(key => Data.Items[idx].Item.includes(Data.Moves[key].Machine));
-            const item_src = get_directory({FirstMatch: true, Exact: true, File: [Data.Items[idx].File,...Data.Items[idx].Item], Path: Config.Image.Item.Bag.Path, Game: Config.Image.Item.Bag.Game });
+            const item_src = Config.Images.Items[idx].Bag;
             const machineType = machineMove ? Data.Moves[get_moveIndex(machineMove)].Type : null;
 
             const item_catalogEntry = create_element({ Tag: "li", Data: {index: idx, search: [...Data.Items[idx].Item,...(machineMove != null ? [machineMove] : [])].join(",") }, Parent: item_catalogList });
@@ -46,7 +46,7 @@ const create_item = function() {
     const item_id = create_element({ Tag: "h3", Class: ["id_text"], Parent: item_titleWrap });
     const item_title = create_element({ Tag: "h2", Class: ["title_text"], Parent: item_titleWrap });
     const item_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: item_header });
-    const item_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: item_gameWrap });
+    const item_gameImage = create_element({ Tag: "img", Attribute: { src: Config.Images.Game.Title }, Parent: item_gameWrap });
     const item_priceWrap = create_element({ Tag: "div", Class: ["price"], Parent: item_header });
 
     // Sidebar
