@@ -342,3 +342,80 @@
 }
 
 
+
+.layout1 .catalog span[data-type='Normal'] {
+    color: var(--Type_Normal);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Fighting'] {
+    color: var(--Type_Fighting);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Flying'] {
+    color: var(--Type_Flying);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Poison'] {
+    color: var(--Type_Poison);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Ground'] {
+    color: var(--Type_Ground);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Rock'] {
+    color: var(--Type_Rock);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Bug'] {
+    color: var(--Type_Bug);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Ghost'] {
+    color: var(--Type_Ghost);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Steel'] {
+    color: var(--Type_Steel);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Fire'] {
+    color: var(--Type_Fire);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Water'] {
+    color: var(--Type_Water);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Grass'] {
+    color: var(--Type_Grass);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Electric'] {
+    color: var(--Type_Electric);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Psychic'] {
+    color: var(--Type_Psychic);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Ice'] {
+    color: var(--Type_Ice);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Dragon'] {
+    color: var(--Type_Dragon);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Dark'] {
+    color: var(--Type_Dark);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Fairy'] {
+    color: var(--Type_Fairy);
+    text-shadow: 1px 1px 1px black;
+}
+.layout1 .catalog span[data-type='Unknown'] {
+    color: var(--Type_Unknown);
+    text-shadow: 1px 1px 1px black;
+}
