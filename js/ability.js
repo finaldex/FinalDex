@@ -30,7 +30,7 @@ const create_ability = function() {
     const ability_id = create_element({ Tag: "h3", Class: ["id_text"], Parent: ability_titleWrap });
     const ability_title = create_element({ Tag: "h2", Class: ["title_text"], Parent: ability_titleWrap });
     const ability_gameWrap = create_element({ Tag: "div", Class: ["game"], Parent: ability_header });
-    const ability_gameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: ability_gameWrap });
+    const ability_gameImage = create_element({ Tag: "img", Attribute: { src: Config.Images.Game.Title || "" }, Parent: ability_gameWrap });
 
 
     // Sidebar
