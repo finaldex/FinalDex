@@ -188,7 +188,7 @@ def sheet_to_json():
 
         elapsed_time = time.time() - start_time
         print(f"Elapsed time: {format_duration(elapsed_time)}")
-        subprocess.run(["python", "json_format.py"])
+        #subprocess.run(["python", "json_format.py"])
 
     except Exception as e:
         print(f"An error occurred: {e}")
