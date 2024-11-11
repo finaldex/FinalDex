@@ -546,12 +546,6 @@
     padding: 10px;
 }
 
-#location .sidebar > main > .trainer ul ol > li {
-    display: flex;
-    position: relative;
-    background: linear-gradient(90deg, var(--Type1) 30%, var(--Type2) 70%);
-    text-shadow: 1px 1px 1px black;
-}
 
 #location .sidebar > main > .trainer ul ol > li .held_image {
     position: absolute;
@@ -710,6 +704,88 @@
     border-top: none;
     border-right: none;
     font-size: 0.9rem;
+
+    background: linear-gradient(90deg, var(--Type1) 30%, var(--Type2) 70%);
+    text-shadow: 1px 1px 1px black;
+}
+
+
+
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Normal'] {
+    color: var(--Type_Normal);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Fighting'] {
+    color: var(--Type_Fighting);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Flying'] {
+    color: var(--Type_Flying);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Poison'] {
+    color: var(--Type_Poison);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Ground'] {
+    color: var(--Type_Ground);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Rock'] {
+    color: var(--Type_Rock);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Bug'] {
+    color: var(--Type_Bug);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Ghost'] {
+    color: var(--Type_Ghost);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Steel'] {
+    color: var(--Type_Steel);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Fire'] {
+    color: var(--Type_Fire);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Water'] {
+    color: var(--Type_Water);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Grass'] {
+    color: var(--Type_Grass);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Electric'] {
+    color: var(--Type_Electric);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Psychic'] {
+    color: var(--Type_Psychic);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Ice'] {
+    color: var(--Type_Ice);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Dragon'] {
+    color: var(--Type_Dragon);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Dark'] {
+    color: var(--Type_Dark);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Fairy'] {
+    color: var(--Type_Fairy);
+    text-shadow: 1px 1px 1px black;
+}
+#location .sidebar > main > .trainer ul ol > li main > *:first-child > *[data-type='Unknown'] {
+    color: var(--Type_Unknown);
+    text-shadow: 1px 1px 1px black;
 }
 
 #location .sidebar > main > .trainer ul img[title] {
