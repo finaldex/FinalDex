@@ -202,7 +202,7 @@ function convertMultiplePokemonData(jsonStrings) {
 
 function formatPokemonData(data) {
     // Clean up the input data by removing unnecessary line breaks
-    const cleanedData = Data.trim().replace(/\n\s*\n/g, '\n');
+    const cleanedData = data.trim().replace(/\n\s*\n/g, '\n');
 
     // Split the cleaned data into individual Pokémon entries
     const entries = cleanedData.split(/\n(?=Spr)/);
@@ -234,6 +234,8 @@ function formatPokemonData(data) {
     // Join the formatted lines with line breaks and return the result
     return formattedLines.join('\n');
 }
+//var data = ``
+//navigator.clipboard.writeText(formatPokemonData(data))
 
 
 /*
