@@ -135,7 +135,7 @@ function card_display() {
 
             const idWrap = create_element({Tag: "div", Class:["id"], Parent: leftTopWrap });
             Object.keys(pokemon_dex).forEach(i => {
-                const id = create_element({Tag: "strong", Data: { dex: i }, Text: `#${pokemon_dex[i]}`, Parent: idWrap });
+                const id = create_element({Tag: "strong", Attribute: { title: i },Data: { dex: i }, Text: `#${pokemon_dex[i]}`, Parent: idWrap });
             });
 
             const nameWrap = create_element({Tag: "div", Class:["name"], Parent: leftTopWrap });
@@ -179,78 +179,71 @@ function card_display() {
             });
 
             // Data
+            const data_wrap = create_element({Tag: "ul", Class:["data"], Parent: groupWrap });
 
             // Ratio
             const data_ratio = ["Gender Ratio"];
-            data_ratio.forEach(d => {
-                const index = Data.Pokemon[pokemon_index][d] ? pokemon_index : Data.Pokemon[default_index][d] ? default_index : null;
-
-                if (index) {
-                    const data_entry = create_element({Tag: "li", Class: [d.replaceAll(" ","").toLowerCase()], Parent: data_wrap });
-                    const data_header = create_element({Tag: "section", Parent: data_entry });
-                    const data_headerText = create_element({Tag: "strong", Text:d, Parent: data_header });
-
-                    const data_value = create_element({Tag: "section", Parent: data_entry });
-
-                    const data_valueBarWrap = create_element({Tag: "div", Class: ["bar"], Parent: data_value });
-
-                    const ratio = Data.Pokemon[index][d];
-                    const ratio_total = Object.values(ratio).reduce((sum, value) => sum + value, 0);
-
-                    Object.keys(ratio).forEach(r => {
-                        let ratio_percentage = (ratio[r] / ratio_total) * 100;
-                        ratio_percentage = ratio_percentage ? ratio_percentage : 0;
-
-                        const data_valueBar = create_element({ Tag: "span", Class: [r.replaceAll(" ", "").toLowerCase()], Data: { value: ratio[r] }, ...( ratio_total !== 0 && {Attribute: { title: r }}), Parent: data_valueBarWrap });
-                        const data_valueBarText = create_element({ Tag: "strong", Text: `${ratio_percentage.toFixed(1)}%`,Parent: data_valueBar });
-                        data_valueBar.style.setProperty("--Width", `${ratio_percentage}%`);
-                    });
-                    
-                }
-            });
-            
 
             // Keys
-            const data_keys = ["Group","Category","Catch Rate","Leveling Rate","Weight","Height","Egg Group","Egg Cycle","Effort Value Yield","Experience Yield","Base Friendship","Shape"];
-            const data_wrap = create_element({Tag: "ul", Class:["data"], Parent: groupWrap });
-
+            const data_keys = ["Pokedex Entry","Group","Category","Held Item","Catch Rate","Leveling Rate","Gender Ratio","Weight","Height","Egg Group","Egg Cycle","Effort Value Yield","Experience Yield","Base Friendship","Shape"];
+        
             data_keys.forEach(d => {
                 const index = Data.Pokemon[pokemon_index][d] ? pokemon_index : Data.Pokemon[default_index][d] ? default_index : null;
 
                 if (index) {
-        
-                    const data_entry = create_element({Tag: "li", Class: [d.replaceAll(" ","").toLowerCase()], Parent: data_wrap });
-                    const data_header = create_element({Tag: "section", Parent: data_entry });
-                    const data_headerText = create_element({Tag: "strong", Text: d, Parent: data_header });
 
-                    const data_value = create_element({Tag: "section", Parent: data_entry });
+                    if (data_ratio.includes(d)) {
+                        const data_entry = create_element({Tag: "li", Class: [d.replaceAll(" ","").toLowerCase()], Parent: data_wrap });
+                        const data_header = create_element({Tag: "section", Parent: data_entry });
+                        const data_headerText = create_element({Tag: "strong", Text:d, Parent: data_header });
 
-                    const key = Array.isArray(Data.Pokemon[index][d])
-                    ? Data.Pokemon[index][d].map(item => ({ Value: item }))
-                    : typeof Data.Pokemon[index][d] === "object"
-                    ? Object.keys(Data.Pokemon[index][d]).filter(key => !(typeof Data.Pokemon[index][d][key] === "number" && Data.Pokemon[index][d][key] === 0)).map(key => ({ Header: key, Value: Data.Pokemon[index][d][key] }))
-                    : ["string", "number"].includes(typeof Data.Pokemon[index][d])
-                    ? [{ Value: Data.Pokemon[index][d] }]
-                    : [];
+                        const data_value = create_element({Tag: "section", Parent: data_entry });
+                        const data_valueBarWrap = create_element({Tag: "div", Class: ["bar"], Parent: data_value });
 
-                    key.forEach(k => {
-                        const data_valueWrap = create_element({Tag: "div", ...(k.Header && { Class: [k.Header.replaceAll(" ","").toLowerCase()]} ), Parent: data_value });
-                        const data_valueHeader = k.Header ? create_element({Tag: "strong", Text: k.Header, Parent: data_valueWrap }) : null;
-                        const data_valueText = k.Value ? create_element({Tag: "span", Text: k.Value, Parent: data_valueWrap }) : null;
+                        const ratio = Data.Pokemon[index][d];
+                        const ratio_total = Object.values(ratio).reduce((sum, value) => sum + value, 0);
 
-                        if (d === "Egg Group") {
-                            data_valueWrap.dataset.group = k.Value;
-                        }
-                    });
+                        Object.keys(ratio).forEach(r => {
+                            let ratio_percentage = (ratio[r] / ratio_total) * 100;
+                            ratio_percentage = ratio_percentage ? ratio_percentage : 0;
+
+                            const data_valueBar = create_element({ Tag: "span", Class: [r.replaceAll(" ", "").toLowerCase()], Data: { value: ratio[r] }, ...( ratio_total !== 0 && {Attribute: { title: r }}), Parent: data_valueBarWrap });
+                            const data_valueBarText = create_element({ Tag: "strong", Text: `${ratio_percentage.toFixed(1)}%`,Parent: data_valueBar });
+                            data_valueBar.style.setProperty("--Width", `${ratio_percentage}%`);
+                        });
+                    }
+                    else {
+                        const data_entry = create_element({Tag: "li", Class: [d.replaceAll(" ","").toLowerCase()], Parent: data_wrap });
+                        const data_header = create_element({Tag: "section", Parent: data_entry });
+                        const data_headerText = create_element({Tag: "strong", Text: d, Parent: data_header });
+    
+                        const data_value = create_element({Tag: "section", Parent: data_entry });
+    
+                        const key = Array.isArray(Data.Pokemon[index][d])
+                        ? Data.Pokemon[index][d].map(item => ({ Value: item }))
+                        : typeof Data.Pokemon[index][d] === "object"
+                        ? Object.keys(Data.Pokemon[index][d]).filter(key => !(typeof Data.Pokemon[index][d][key] === "number" && Data.Pokemon[index][d][key] === 0)).map(key => ({ Header: key, Value: Data.Pokemon[index][d][key] }))
+                        : ["string", "number"].includes(typeof Data.Pokemon[index][d])
+                        ? [{ Value: Data.Pokemon[index][d] }]
+                        : [];
+    
+                        key.forEach(k => {
+                            const data_valueWrap = create_element({Tag: "div", ...(k.Header && { Class: [k.Header.replaceAll(" ","").toLowerCase()]} ), Parent: data_value });
+                            const data_valueHeader = k.Header ? create_element({Tag: "strong", Text: k.Header, Parent: data_valueWrap }) : null;
+                            const data_valueText = k.Value ? create_element({Tag: "span", Text: k.Value, Parent: data_valueWrap }) : null;
+    
+                            if (d === "Egg Group") {
+                                data_valueWrap.dataset.group = k.Value;
+                            }
+                        });
+                    }
+                   
                 }
-            })
-                
-           
-      
+            });
+            
 
             // Evolution
             const evolution_wrap = create_element({ Tag: "ul", Class: ["evolution"], Parent: groupWrap });
-
     
             if (Data.Pokemon[pokemon_index].Evolution) {
 
@@ -293,7 +286,6 @@ function card_display() {
 
             const forms = Object.fromEntries(Object.entries(Data.Pokemon).filter(([key, value]) => value.Pokemon === Data.Pokemon[pokemon_index].Pokemon));
 
-     
             Object.keys(forms).length > 1 && (Object.keys(forms).forEach(idx => {
                 const form = create_element({Tag: "li", Parent: form_wrap });
                 
