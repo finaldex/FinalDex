@@ -4,10 +4,9 @@
 
 .search input.deep,
 .search input.deep::placeholder {
-    color: Red;
+    color: Red !important;
 }
 
-.search input.filter,
 .search input.filter {
-    border-color: Red;
+    border-color: Red !important;
 }
