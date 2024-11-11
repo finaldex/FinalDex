@@ -2000,6 +2000,7 @@ if args.game:
 else:
     games_to_process = Games.keys()
 
+games_to_process = [game for game in games_to_process if game in Games.keys()]
 
 for game in games_to_process:
     #break
