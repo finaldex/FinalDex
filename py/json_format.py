@@ -3,6 +3,7 @@ import os
 import re
 import copy
 import time
+import argparse
 
 # Start the timer for the entire script
 start_time = time.time()
@@ -1986,7 +1987,21 @@ def data_convert(game):
     data_filter(game)
     data_update(game)
 
-for game in Games.keys():
+
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Process some games.')
+parser.add_argument('--game', type=str, help='Comma-separated list of games to process (e.g., Red,Blue)')
+args = parser.parse_args()
+
+# Determine the list of games to process
+if args.game:
+    games_to_process = re.split(r'[,_]', args.game)
+else:
+    games_to_process = Games.keys()
+
+
+for game in games_to_process:
     #break
 
     iteration_start_time = time.time()
