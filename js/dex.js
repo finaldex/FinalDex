@@ -33,7 +33,7 @@ const create_dex = function() {
     const header_SearchInput = create_element({ Tag: "input", Attribute: { type: "search", name: "search", autocomplete: "off", placeholder: "Search...", onfocus: "this.placeholder=''", onblur: "this.placeholder='Search...'" }, Event: {input: event => {search({ Entries: document.querySelectorAll('.dex_list li'), Data: Data.Pokemon, }, event); dex_count()}, keydown: event => search_filter({ Entries: document.querySelectorAll('.dex_list li') }, event), }, Parent: header_Search });
 
     const header_Game = create_element({ Tag: "li", Class: ["game"], Parent: header_List });
-    const header_GameImage = create_element({ Tag: "img", Attribute: { src: get_directory({FirstMatch: true, File: ["Title"], Path: [Path.Game.Title]}) }, Parent: header_Game });
+    const header_GameImage = create_element({ Tag: "img", Attribute: { src: Config.Images.Game.Title }, Parent: header_Game });
 
     const dex_List = create_element({ Tag: "ol", Class: ["dex_list"], Parent: dex});
     const Pokemon = Data && Data.Pokemon ? Array.from(new Set(Object.values(Data.Pokemon).map(p => p.Pokemon))) : [];
@@ -209,9 +209,7 @@ function image_update() {
     dex_entries.forEach((entry) => {
         const img = entry.querySelector(":scope img");
         const index = get_pokemonIndex(entry.dataset.index);
-        const file = Data.Pokemon[index] ? (Data.Pokemon[index].File ? String(Data.Pokemon[index].File) : null) : null;
-        
-        const source = get_directory({FirstMatch: true, Exact: true, File: [file], Path: Config.Image.Pokemon.Battle.Path, });
+        const source = Config.Images.Pokemon[index].Battle.Default.Front.PNG || Config.Images.Pokemon[index].Battle.Default.Front.PNG;
 
         img.src = source;
 
