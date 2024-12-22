@@ -416,10 +416,16 @@
     text-shadow: 1px 1px 1px black;
 }
 
+[class*='generate_location'] .time span[data-text='Evening'] {
+    color: #ffac59;
+    text-shadow: 1px 1px 1px black;
+}
+
 [class*='generate_location'] .time span[data-text='Night'] {
     color: #597a9b;
     text-shadow: 1px 1px 1px black;
 }
+
 
 .generate img:not([src])[title],
 .generate img[src=''][title] {
