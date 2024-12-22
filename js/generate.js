@@ -518,11 +518,20 @@ function generate_learnset(parameters = {}) {
                     const summaryImageWrap = pokes.length > 0 ? create_element({ Tag: "div", Parent: summaryWrap }) : null;
 
                     pokes.forEach(p => {
-                        const poke_index = get_pokemonIndex(p);
-                        const def_index = get_defaultPokemon(poke_index);
-                
-                        const summaryImage = create_element({ Tag: "img", Attribute: { title: p, src: Config.Images.Pokemon[poke_index].Box.Default.PNG || Config.Images.Pokemon[poke_index].Box.Default.GIF, }, Parent: summaryImageWrap });
-                        add_card(summaryImage, {catalog: "Pokemon", entry: p, ...(options.Catalog === "Pokemon" && {select: "area"}), style: "brightness"});
+                        if (p === "Any") {
+                            const summaryText = create_element({ Tag: "span", Text: p, Parent: summaryImageWrap });
+                        }
+                        else {
+                            const poke_index = get_pokemonIndex(p);
+                            if (poke_index) {
+                                const def_index = get_defaultPokemon(poke_index);
+                                const summaryImage = create_element({ Tag: "img", Attribute: { title: p, src: Config.Images.Pokemon[poke_index].Box.Default.PNG || Config.Images.Pokemon[poke_index].Box.Default.GIF, }, Parent: summaryImageWrap });
+                                add_card(summaryImage, {catalog: "Pokemon", entry: p, ...(options.Catalog === "Pokemon" && {select: "area"}), style: "brightness"});
+                            }
+                            else {
+                                console.warn(`Found invalid Pokemon: ${p}`)
+                            }
+                        }
                     });
                 }
                 else {
