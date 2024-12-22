@@ -256,7 +256,7 @@ function card_display() {
 
                     const evolution = create_element({ Tag: "li", Parent: evolution_parent });
                     const wrap = create_element({ Tag: "span", Parent: evolution });
-                    const image = Config.Images.Pokemon[pokemon].Battle.Default.Front.PNG || Config.Images.Pokemon[pokemon].Battle.Default.Front.PNG;
+                    const image = create_element({ Tag: "img", Attribute: { src: Config.Images.Pokemon[pokemon].Battle.Default.Front.PNG || Config.Images.Pokemon[pokemon].Battle.Default.Front.GIF }, Parent: wrap }); ;
                     const name = create_element({ Tag: "strong", Text: pokemon, Parent: wrap });
                     const description = evolution_text ? create_element({ Tag: "p", HTML: evolution_text, Parent: wrap }) : null;
                     const evolutionData = Data.Pokemon[pokemon].Evolution;
